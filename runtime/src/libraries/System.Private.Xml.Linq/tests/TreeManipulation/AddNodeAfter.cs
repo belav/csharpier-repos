@@ -24,7 +24,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Adding multiple (4) objects into XElement - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { true, 4 },
                         Priority = 1
                     }
@@ -35,7 +36,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Adding single object into XElement - not connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, 1 },
                         Priority = 1
                     }
@@ -46,7 +48,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Adding multiple (4) objects into XElement - not connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, 4 },
                         Priority = 1
                     }
@@ -57,7 +60,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Adding single object into XElement - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { true, 1 },
                         Priority = 1
                     }
@@ -77,7 +81,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument valid add - not connected (multiple)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, 3 },
                         Priority = 1
                     }
@@ -98,7 +103,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument valid add - not connected (single)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, 1 },
                         Priority = 0
                     }
@@ -137,7 +143,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument invalid add - multiple root elements"
-                    ) {
+                    )
+                    {
                         Priority = 1
                     }
                 }
@@ -147,7 +154,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument invalid add - CData, attribute, text (no whitespace)"
-                    ) {
+                    )
+                    {
                         Priority = 1
                     }
                 }

@@ -31,9 +31,8 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(new Collection<HttpParameterDescriptor>(new HttpParameterDescriptor[0]));
 
             _mockParameterDescriptor = new Mock<HttpParameterDescriptor>() { CallBase = true };
-            _mockParameterBinding = new Mock<HttpParameterBinding>(
-                _mockParameterDescriptor.Object
-            ) {
+            _mockParameterBinding = new Mock<HttpParameterBinding>(_mockParameterDescriptor.Object)
+            {
                 CallBase = true
             };
             _actionBinding = new HttpActionBinding(
@@ -118,14 +117,16 @@ namespace System.Web.Http.Tracing.Tracers
                     _actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin
                 },
                 new TraceRecord(
                     _actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.End
                 }
             };
@@ -172,14 +173,16 @@ namespace System.Web.Http.Tracing.Tracers
                     _actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin
                 },
                 new TraceRecord(
                     _actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End
                 }
             };

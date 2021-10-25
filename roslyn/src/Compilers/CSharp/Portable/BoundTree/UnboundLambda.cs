@@ -1003,7 +1003,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 lambdaBodyBinder,
                 delegateType,
                 inferredReturnType: default
-            ) {
+            )
+            {
                 WasCompilerGenerated = _unboundLambda.WasCompilerGenerated
             };
 
@@ -1106,7 +1107,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 lambdaBodyBinder,
                 delegateType,
                 inferredReturnType
-            ) {
+            )
+            {
                 WasCompilerGenerated = _unboundLambda.WasCompilerGenerated
             };
 
@@ -1426,7 +1428,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ImmutableArray<DiagnosticInfo>.Empty,
                         ImmutableArray<AssemblySymbol>.Empty
                     )
-                ) {
+                )
+                {
                     WasCompilerGenerated = _unboundLambda.WasCompilerGenerated
                 };
             }

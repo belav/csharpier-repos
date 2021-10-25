@@ -112,7 +112,8 @@ namespace System.Web.Http.Controllers
 
             ModelBindingContext propertyBindingContext = new ModelBindingContext(
                 parentBindingContext
-            ) {
+            )
+            {
                 ModelMetadata = metadataProvider.GetMetadataForType(null, typeof(TModel)),
                 ModelName = ModelBindingHelper.CreatePropertyModelName(
                     parentBindingContext.ModelName,

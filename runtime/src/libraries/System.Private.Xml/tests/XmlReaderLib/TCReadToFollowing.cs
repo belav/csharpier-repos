@@ -116,7 +116,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Read to Following on one level and again to level below it"
-                        ) {
+                        )
+                        {
                             Pri = 1
                         }
                     }
@@ -130,7 +131,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Read to Following on one level and again to level below it, with namespace"
-                        ) {
+                        )
+                        {
                             Pri = 1
                         }
                     }
@@ -144,7 +146,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Read to Following on one level and again to level below it, with prefix"
-                        ) {
+                        )
+                        {
                             Pri = 1
                         }
                     }
@@ -158,7 +161,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Multiple Reads to children and then next siblings, NNS"
-                        ) {
+                        )
+                        {
                             Pri = 2
                         }
                     }
@@ -172,7 +176,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Multiple Reads to children and then next siblings, DNS"
-                        ) {
+                        )
+                        {
                             Pri = 2
                         }
                     }
@@ -186,7 +191,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Multiple Reads to children and then next siblings, NS"
-                        ) {
+                        )
+                        {
                             Pri = 2
                         }
                     }
@@ -213,7 +219,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Pass null to both arguments throws ArgumentException"
-                        ) {
+                        )
+                        {
                             Pri = 2
                         }
                     }

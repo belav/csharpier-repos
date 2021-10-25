@@ -415,7 +415,8 @@ namespace System.Net.Sockets.Tests
                     AddressFamily.InterNetwork,
                     SocketType.Stream,
                     ProtocolType.Tcp
-                ) {
+                )
+                {
                     Blocking = false
                 }
             )

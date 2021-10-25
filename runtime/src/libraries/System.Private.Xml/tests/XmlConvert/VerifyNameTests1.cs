@@ -222,7 +222,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "VerifyPublicId.multiple non letter characters with :"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 6, false }
                     }
                 }
@@ -232,7 +233,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "VerifyWhitespace.multiple non letter characters with :"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 7, true }
                     }
                 }
@@ -260,7 +262,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "VerifyXmlChars.multiple non letter characters with :"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 5, false }
                     }
                 }

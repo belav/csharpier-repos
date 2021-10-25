@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 isCompleted,
                 getResult,
                 hasErrors: hasGetAwaitableErrors
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }

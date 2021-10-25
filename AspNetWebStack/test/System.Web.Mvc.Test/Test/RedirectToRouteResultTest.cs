@@ -97,7 +97,8 @@ namespace System.Web.Mvc.Test
             var values = new { Controller = "c", Action = "a", Id = "i" };
             RedirectToRouteResult result = new RedirectToRouteResult(
                 new RouteValueDictionary(values)
-            ) {
+            )
+            {
                 Routes = new RouteCollection() { new Route("{controller}/{action}/{id}", null) },
             };
 
@@ -130,7 +131,8 @@ namespace System.Web.Mvc.Test
                 null,
                 new RouteValueDictionary(values),
                 permanent: true
-            ) {
+            )
+            {
                 Routes = new RouteCollection() { new Route("{controller}/{action}/{id}", null) },
             };
 
@@ -165,7 +167,8 @@ namespace System.Web.Mvc.Test
             var values = new { Controller = "c", Action = "a", Id = "i" };
             RedirectToRouteResult result = new RedirectToRouteResult(
                 new RouteValueDictionary(values)
-            ) {
+            )
+            {
                 Routes = new RouteCollection() { new Route("{controller}/{action}/{id}", null) },
             };
 

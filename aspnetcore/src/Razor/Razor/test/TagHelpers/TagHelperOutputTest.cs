@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                 initialTagName,
                 initialAttributes,
                 initialGetChildContentAsync
-            ) {
+            )
+            {
                 TagMode = initialTagMode,
                 Content = initialOutputChildContent,
             };
@@ -1198,7 +1199,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                 attributes,
                 getChildContentAsync: (useCachedContent, encoder) =>
                     Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
-            ) {
+            )
+            {
                 TagMode = tagMode
             };
 

@@ -322,7 +322,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 defaultArguments: default(BitVector),
                 resultKind: LookupResultKind.Viable,
                 type: method.ReturnType
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -375,7 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     defaultArguments: default(BitVector),
                     resultKind: LookupResultKind.Viable,
                     type: userMain.ReturnType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
 
@@ -425,18 +427,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             new BoundExpressionStatement(
                                 syntax: syntax,
                                 expression: _getAwaiterGetResultCall
-                            ) {
+                            )
+                            {
                                 WasCompilerGenerated = true
                             },
                             new BoundReturnStatement(
                                 syntax: syntax,
                                 refKind: RefKind.None,
                                 expressionOpt: null
-                            ) {
+                            )
+                            {
                                 WasCompilerGenerated = true
                             }
                         )
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }
@@ -452,7 +457,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 expressionOpt: _getAwaiterGetResultCall
                             )
                         )
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }
@@ -517,7 +523,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ),
                     null,
                     _containingType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
 
@@ -556,10 +563,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     WasCompilerGenerated = true
                                 },
                                 _containingType
-                            ) {
+                            )
+                            {
                                 WasCompilerGenerated = true
                             }
-                        ) {
+                        )
+                        {
                             WasCompilerGenerated = true
                         },
                         // script.<Initialize>().GetAwaiter().GetResult();
@@ -573,7 +582,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             WasCompilerGenerated = true
                         }
                     )
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
             }
@@ -645,7 +655,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ),
                     null,
                     _containingType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
 
@@ -667,14 +678,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             constantValueOpt: null,
                             initializerExpressionOpt: null,
                             type: _containingType
-                        ) {
+                        )
+                        {
                             WasCompilerGenerated = true
                         },
                         _containingType
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     }
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
 
@@ -695,7 +709,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     syntax,
                     RefKind.None,
                     initializeResult
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
 
@@ -703,7 +718,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     syntax,
                     ImmutableArray.Create<LocalSymbol>(submissionLocal.LocalSymbol),
                     ImmutableArray.Create<BoundStatement>(submissionAssignment, returnStatement)
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
             }

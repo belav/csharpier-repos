@@ -48,7 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
                 new object()
-            ) {
+            )
+            {
                 ContentType = new StringSegment(mediaType),
                 ContentTypeIsServerDefined = isServerDefined,
             };
@@ -113,7 +114,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
                 content
-            ) {
+            )
+            {
                 ContentType = new StringSegment(mediaType.ToString()),
             };
 
@@ -152,7 +154,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
                 content
-            ) {
+            )
+            {
                 ContentType = new StringSegment(mediaType.ToString()),
             };
 
@@ -220,7 +223,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 outputType,
                 outputValue
-            ) {
+            )
+            {
                 ContentType = new StringSegment(contentType),
             };
         }

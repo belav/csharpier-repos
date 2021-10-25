@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
             var headerPropagationMessageHandler = new HeaderPropagationMessageHandler(
                 Configuration,
                 State
-            ) {
+            )
+            {
                 InnerHandler = Handler
             };
 

@@ -110,7 +110,8 @@ namespace System.Buffers.Text.Tests
                     2147483647,
                     'D',
                     expectedSuccess: true
-                ) {
+                )
+                {
                     ExpectedBytesConsumed = TwoGiB
                 };
                 yield return new ParserTestData<int>(
@@ -124,7 +125,8 @@ namespace System.Buffers.Text.Tests
                     12345,
                     'D',
                     expectedSuccess: true
-                ) {
+                )
+                {
                     ExpectedBytesConsumed = TwoGiB - 8
                 };
                 yield return new ParserTestData<int>(
@@ -132,7 +134,8 @@ namespace System.Buffers.Text.Tests
                     0,
                     'D',
                     expectedSuccess: true
-                ) {
+                )
+                {
                     ExpectedBytesConsumed = TwoGiB - 17
                 };
             }

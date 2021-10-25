@@ -59,7 +59,8 @@ namespace System.Threading.Tasks.Tests
                     t = Task.Run(() => { }); // run a task that'll capture EC
                     al.Value = null;
                 }
-            ) {
+            )
+            {
                 IsBackground = true
             };
 

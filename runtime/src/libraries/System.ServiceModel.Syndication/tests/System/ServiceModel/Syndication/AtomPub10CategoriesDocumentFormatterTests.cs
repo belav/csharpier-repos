@@ -155,7 +155,8 @@ namespace System.ServiceModel.Syndication.Tests
 
             var fullInlineCategoriesDocument = new InlineCategoriesDocument(
                 new SyndicationCategory[] { new SyndicationCategory(), fullSyndicationCategory }
-            ) {
+            )
+            {
                 BaseUri = new Uri("http://inlinecategories_url.com"),
                 Language = "inlinecategories_Language",
                 IsFixed = true,
@@ -206,7 +207,8 @@ namespace System.ServiceModel.Syndication.Tests
             // Full ReferencedCategoriesDocument.
             var fullReferenceCategoriesDocument = new ReferencedCategoriesDocument(
                 new Uri("http://referencecategories_link.com")
-            ) {
+            )
+            {
                 BaseUri = new Uri("http://referencecategories_url.com"),
                 Language = "referencecategories_language"
             };

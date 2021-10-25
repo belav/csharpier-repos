@@ -140,7 +140,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
                 modelType,
                 modelBinder
-            ) {
+            )
+            {
                 SuppressPrefixCheck = suppressPrefixCheck
             };
             InsertSimpleProviderAtFront(provider);

@@ -29,7 +29,8 @@ namespace Roslyn.Utilities
             {
                 _globalOptions = new Dictionary<string, ReportDiagnostic>(
                     Section.PropertiesKeyComparer
-                ) {
+                )
+                {
                     { globalOption.key, globalOption.diagnostic }
                 };
             }

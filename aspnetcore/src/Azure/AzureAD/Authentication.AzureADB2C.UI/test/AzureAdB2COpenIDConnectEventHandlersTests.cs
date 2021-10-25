@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
                 ),
                 new OpenIdConnectOptions(),
                 authenticationProperties
-            ) {
+            )
+            {
                 ProtocolMessage = new OpenIdConnectMessage
                 {
                     Scope = OpenIdConnectScope.OpenId,
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
                 ),
                 new OpenIdConnectOptions(),
                 authenticationProperties
-            ) {
+            )
+            {
                 ProtocolMessage = new OpenIdConnectMessage
                 {
                     Scope = OpenIdConnectScope.OpenId,

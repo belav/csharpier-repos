@@ -111,7 +111,8 @@ namespace SslStress
                         }
                     }
                 }
-            ) {
+            )
+            {
                 IsBackground = true
             }.Start();
 

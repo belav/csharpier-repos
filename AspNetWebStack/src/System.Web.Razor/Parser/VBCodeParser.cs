@@ -19,7 +19,8 @@ namespace System.Web.Razor.Parser
     {
         internal static ISet<string> DefaultKeywords = new HashSet<string>(
             StringComparer.OrdinalIgnoreCase
-        ) {
+        )
+        {
             "functions",
             "code",
             "section",
@@ -225,7 +226,8 @@ namespace System.Web.Razor.Parser
                 Language.TokenizeString,
                 Keywords,
                 acceptTrailingDot: DirectParentIsCode
-            ) {
+            )
+            {
                 AcceptedCharacters = AcceptedCharacters.NonWhiteSpace
             };
         }

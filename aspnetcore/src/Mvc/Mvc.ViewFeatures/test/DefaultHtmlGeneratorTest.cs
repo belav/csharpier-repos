@@ -1275,7 +1275,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var viewData = new ViewDataDictionary<TModel>(
                 metadataProvider,
                 actionContext.ModelState
-            ) {
+            )
+            {
                 Model = model,
             };
 

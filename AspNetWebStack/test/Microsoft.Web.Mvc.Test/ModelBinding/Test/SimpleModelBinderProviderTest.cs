@@ -73,7 +73,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
                 typeof(string),
                 new Mock<IExtensibleModelBinder>().Object
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(object));
@@ -120,7 +121,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
                 typeof(string),
                 factory
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(string));
@@ -142,7 +144,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
                 typeof(string),
                 theBinderInstance
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(string));

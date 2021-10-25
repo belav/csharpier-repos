@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     {
         private static readonly ISet<SyntaxKind> s_validMemberModifiers = new HashSet<SyntaxKind>(
             SyntaxFacts.EqualityComparer
-        ) {
+        )
+        {
             SyntaxKind.ExternKeyword,
             SyntaxKind.InternalKeyword,
             SyntaxKind.NewKeyword,
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
         private static readonly ISet<SyntaxKind> s_validTypeModifiers = new HashSet<SyntaxKind>(
             SyntaxFacts.EqualityComparer
-        ) {
+        )
+        {
             SyntaxKind.InternalKeyword,
             SyntaxKind.NewKeyword,
             SyntaxKind.PublicKeyword,

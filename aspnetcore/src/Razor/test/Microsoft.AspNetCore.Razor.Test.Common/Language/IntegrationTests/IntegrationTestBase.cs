@@ -183,7 +183,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 physicalPath: physicalPath,
                 relativePhysicalPath: relativePhysicalPath,
                 cssScope: cssScope
-            ) {
+            )
+            {
                 Content = text,
             };
 
@@ -234,7 +235,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 physicalPath: fullPath,
                 relativePhysicalPath: sourceFileName,
                 fileKind: fileKind
-            ) {
+            )
+            {
                 Content = fileContent,
             };
 
@@ -894,7 +896,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                             import.PhysicalPath,
                             import.RelativePhysicalPath,
                             import.BasePath
-                        ) {
+                        )
+                        {
                             Content = normalizedText
                         };
 

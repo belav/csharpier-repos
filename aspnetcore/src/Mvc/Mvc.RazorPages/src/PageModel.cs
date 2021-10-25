@@ -1147,7 +1147,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 permanent: false,
                 preserveMethod: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }
@@ -1246,7 +1247,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 routeValues,
                 permanent: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }
@@ -1276,7 +1278,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 permanent: true,
                 preserveMethod: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }
@@ -1357,7 +1360,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 permanent: false,
                 preserveMethod: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }
@@ -1426,7 +1430,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 routeValues,
                 permanent: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }
@@ -1452,7 +1457,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 permanent: true,
                 preserveMethod: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }

@@ -72,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 typeof(TestModel).GetTypeInfo(),
                 handlerTypeInfo,
                 new object[0]
-            ) {
+            )
+            {
                 PageType = typeof(TestPage).GetTypeInfo(),
                 ModelType = typeof(TestModel).GetTypeInfo(),
                 Filters = { Mock.Of<IFilterMetadata>(), Mock.Of<IFilterMetadata>(), },
@@ -88,7 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     new PagePropertyModel(
                         handlerTypeInfo.GetProperty(nameof(TestModel.Property)),
                         new object[0]
-                    ) {
+                    )
+                    {
                         BindingInfo = new BindingInfo(),
                     },
                 }
@@ -140,7 +142,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 typeof(TestModel).GetTypeInfo(),
                 handlerTypeInfo,
                 new object[0]
-            ) {
+            )
+            {
                 PageType = typeof(TestPage).GetTypeInfo(),
                 ModelType = typeof(string).GetTypeInfo(),
                 Filters = { Mock.Of<IFilterMetadata>(), Mock.Of<IFilterMetadata>(), },
@@ -156,7 +159,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     new PagePropertyModel(
                         handlerTypeInfo.GetProperty(nameof(TestModel.Property)),
                         new object[0]
-                    ) {
+                    )
+                    {
                         BindingInfo = new BindingInfo(),
                     },
                 }
@@ -187,7 +191,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 actionDescriptor,
                 handlerTypeInfo,
                 new object[0]
-            ) {
+            )
+            {
                 PageType = typeof(TestPage).GetTypeInfo(),
                 ModelType = typeof(TestModel).GetTypeInfo(),
                 Filters = { Mock.Of<IFilterMetadata>(), },
@@ -243,7 +248,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var handlerModel = new PageHandlerModel(
                 handlerTypeInfo.GetMethod(nameof(ModelWithHandler.OnGetCustomerAsync)),
                 new object[0]
-            ) {
+            )
+            {
                 HttpMethod = "GET",
                 HandlerName = "Customer",
             };
@@ -251,7 +257,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 actionDescriptor,
                 handlerTypeInfo,
                 new object[0]
-            ) {
+            )
+            {
                 HandlerMethods = { handlerModel, }
             };
 
@@ -301,7 +308,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 actionDescriptor,
                 handlerTypeInfo,
                 new object[0]
-            ) {
+            )
+            {
                 HandlerMethods = { handlerModel, }
             };
 
@@ -342,7 +350,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var propertyModel = new PagePropertyModel(
                 handlerTypeInfo.GetProperty(nameof(HandlerWithProperty.Property)),
                 new object[0]
-            ) {
+            )
+            {
                 PropertyName = nameof(HandlerWithProperty.Property),
                 BindingInfo = new BindingInfo(),
             };
@@ -350,7 +359,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 actionDescriptor,
                 handlerTypeInfo,
                 new object[0]
-            ) {
+            )
+            {
                 HandlerProperties = { propertyModel, }
             };
 
@@ -387,21 +397,24 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var propertyModel1 = new PagePropertyModel(
                 handlerTypeInfo.GetProperty(nameof(HandlerWithIgnoredProperties.Property)),
                 new object[0]
-            ) {
+            )
+            {
                 PropertyName = nameof(HandlerWithIgnoredProperties.Property),
                 BindingInfo = new BindingInfo(),
             };
             var propertyModel2 = new PagePropertyModel(
                 handlerTypeInfo.GetProperty(nameof(HandlerWithIgnoredProperties.IgnoreMe)),
                 new object[0]
-            ) {
+            )
+            {
                 PropertyName = nameof(HandlerWithIgnoredProperties.IgnoreMe),
             };
             var pageApplicationModel = new PageApplicationModel(
                 actionDescriptor,
                 handlerTypeInfo,
                 new object[0]
-            ) {
+            )
+            {
                 HandlerProperties = { propertyModel1, propertyModel2, }
             };
 

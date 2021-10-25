@@ -117,7 +117,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
                 Context,
                 Scheme,
                 Options
-            ) {
+            )
+            {
                 Exception = error
             };
 
@@ -172,7 +173,8 @@ namespace Microsoft.AspNetCore.Authentication.Certificate
                 Context,
                 Scheme,
                 Options
-            ) {
+            )
+            {
                 ClientCertificate = clientCertificate,
                 Principal = CreatePrincipal(clientCertificate)
             };

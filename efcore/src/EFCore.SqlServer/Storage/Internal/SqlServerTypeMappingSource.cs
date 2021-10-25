@@ -201,7 +201,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
 
             _storeTypeMappings = new Dictionary<string, RelationalTypeMapping>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "bigint", _long },
                 { "binary varying", _variableLengthBinary },
                 { "binary", _fixedLengthBinary },

@@ -222,7 +222,8 @@ namespace Microsoft.AspNetCore.Tests
                 ServerType.IISExpress,
                 RuntimeFlavor.CoreClr,
                 RuntimeArchitecture.x64
-            ) {
+            )
+            {
                 TargetFramework = "net6.0",
                 HostingModel = HostingModel.InProcess
             };
@@ -303,7 +304,8 @@ namespace Microsoft.AspNetCore.Tests
                 ServerType.Kestrel,
                 RuntimeFlavor.CoreClr,
                 RuntimeArchitecture.x64
-            ) {
+            )
+            {
                 TargetFramework = "net6.0",
             };
 

@@ -898,7 +898,8 @@ this should fail";
             var csharpCompiler = new TestCSharpCompiler(
                 referenceManager,
                 Mock.Of<IWebHostEnvironment>()
-            ) {
+            )
+            {
                 EmitOptionsSettable = new EmitOptions(
                     debugInformationFormat: DebugInformationFormat.Embedded
                 ),
@@ -924,7 +925,8 @@ this should fail";
             var csharpCompiler = new TestCSharpCompiler(
                 referenceManager,
                 Mock.Of<IWebHostEnvironment>()
-            ) {
+            )
+            {
                 EmitPdbSettable = false,
             };
 

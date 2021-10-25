@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Microbenchmarks
                 ServerType.IISExpress,
                 RuntimeFlavor.CoreClr,
                 RuntimeArchitecture.x64
-            ) {
+            )
+            {
 #pragma warning restore 0618
                 ServerConfigTemplateContent = File.ReadAllText("IIS.config"),
                 SiteName = "HttpTestSite",

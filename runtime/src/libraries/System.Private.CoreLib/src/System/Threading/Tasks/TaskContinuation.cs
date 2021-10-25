@@ -684,7 +684,8 @@ namespace System.Threading.Tasks
                 TaskCreationOptions.None,
                 InternalTaskOptions.QueuedByRuntime,
                 scheduler
-            ) {
+            )
+            {
                 CapturedContext = m_capturedContext
             };
         }

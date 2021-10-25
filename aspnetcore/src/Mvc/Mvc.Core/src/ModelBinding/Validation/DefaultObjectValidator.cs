@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 validatorCache,
                 metadataProvider,
                 validationState
-            ) {
+            )
+            {
                 MaxValidationDepth = _mvcOptions.MaxValidationDepth,
                 ValidateComplexTypesIfChildValidationFails =
                     _mvcOptions.ValidateComplexTypesIfChildValidationFails,

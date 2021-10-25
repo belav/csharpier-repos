@@ -42,7 +42,8 @@ namespace BuildValidator
                 new Option<string>(
                     "--assembliesPath",
                     "Path to assemblies to rebuild (can be specified one or more times)"
-                ) {
+                )
+                {
                     IsRequired = true,
                     Argument = { Arity = ArgumentArity.OneOrMore }
                 },
@@ -57,7 +58,8 @@ namespace BuildValidator
                 new Option<string>(
                     "--referencesPath",
                     "Path to referenced assemblies (can be specified zero or more times)"
-                ) {
+                )
+                {
                     Argument = { Arity = ArgumentArity.ZeroOrMore }
                 },
                 new Option<bool>("--verbose", "Output verbose log information"),

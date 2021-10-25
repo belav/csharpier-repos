@@ -396,7 +396,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             );
             var middlewareFilterBuilderService = new MiddlewareFilterBuilder(
                 new MiddlewareFilterConfigurationProvider()
-            ) {
+            )
+            {
                 ApplicationBuilder = applicationBuilder
             };
 

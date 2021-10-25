@@ -140,7 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             scopeDesignator,
                             locals,
                             ((BoundStatementList)increment).Statements
-                        ) {
+                        )
+                        {
                             WasCompilerGenerated = true
                         };
                     }
@@ -150,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             increment.Syntax,
                             locals,
                             ImmutableArray.Create(increment)
-                        ) {
+                        )
+                        {
                             WasCompilerGenerated = true
                         };
                     }

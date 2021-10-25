@@ -91,7 +91,8 @@ namespace System.Web.Http.ModelBinding
             HttpConfiguration config = new HttpConfiguration();
             ModelBinderAttribute attr = new ValueProviderAttribute(
                 typeof(CustomValueProviderFactory)
-            ) {
+            )
+            {
                 BinderType = typeof(CustomModelBinderProvider)
             };
             IEnumerable<ValueProviderFactory> vpfs = attr.GetValueProviderFactories(config);

@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
             var pipelineBuilderService = new MiddlewareFilterBuilder(
                 new MiddlewareFilterConfigurationProvider()
-            ) {
+            )
+            {
                 ApplicationBuilder = appBuilder,
             };
 
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
             var pipelineBuilderService = new MiddlewareFilterBuilder(
                 new MiddlewareFilterConfigurationProvider()
-            ) {
+            )
+            {
                 ApplicationBuilder = appBuilder,
             };
 
@@ -87,7 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
             var pipelineBuilderService = new MiddlewareFilterBuilder(
                 new MiddlewareFilterConfigurationProvider()
-            ) {
+            )
+            {
                 ApplicationBuilder = appBuilder,
             };
 
@@ -124,7 +127,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
             var pipelineBuilderService = new MiddlewareFilterBuilder(
                 new MiddlewareFilterConfigurationProvider()
-            ) {
+            )
+            {
                 ApplicationBuilder = appBuilder,
             };
 
@@ -151,7 +155,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     var context = new ResourceExecutedContext(
                         actionContext,
                         new List<IFilterMetadata>()
-                    ) {
+                    )
+                    {
                         Exception = new InvalidOperationException("Error!!!"),
                         ExceptionHandled = true,
                     };
@@ -182,7 +187,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
             var pipelineBuilderService = new MiddlewareFilterBuilder(
                 new MiddlewareFilterConfigurationProvider()
-            ) {
+            )
+            {
                 ApplicationBuilder = appBuilder,
             };
 
@@ -220,7 +226,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     var context = new ResourceExecutedContext(
                         actionContext,
                         new List<IFilterMetadata>()
-                    ) {
+                    )
+                    {
                         Exception = thrownException,
                     };
 
@@ -261,7 +268,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
             var pipelineBuilderService = new MiddlewareFilterBuilder(
                 new MiddlewareFilterConfigurationProvider()
-            ) {
+            )
+            {
                 ApplicationBuilder = appBuilder,
             };
 
@@ -299,7 +307,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     var context = new ResourceExecutedContext(
                         actionContext,
                         new List<IFilterMetadata>()
-                    ) {
+                    )
+                    {
                         ExceptionDispatchInfo = exceptionInfo,
                     };
 

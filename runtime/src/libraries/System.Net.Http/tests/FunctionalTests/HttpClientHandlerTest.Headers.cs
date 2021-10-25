@@ -466,7 +466,8 @@ namespace System.Net.Http.Functional.Tests
             var m = new HttpRequestMessage(
                 HttpMethod.Get,
                 Configuration.Http.SecureRemoteEchoServer
-            ) {
+            )
+            {
                 Version = UseVersion
             };
             m.Headers.Host = withPort
@@ -501,7 +502,8 @@ namespace System.Net.Http.Functional.Tests
             var m = new HttpRequestMessage(
                 HttpMethod.Get,
                 Configuration.Http.SecureRemoteEchoServer
-            ) {
+            )
+            {
                 Version = UseVersion
             };
             m.Headers.Host = "hostheaderthatdoesnotmatch";

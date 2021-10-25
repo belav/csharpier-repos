@@ -22,7 +22,8 @@ namespace System.Web.Http.ModelBinding.Binders
             return new SimpleModelBinderProvider(
                 typeof(ComplexModelDto),
                 new ComplexModelDtoModelBinder()
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
         }

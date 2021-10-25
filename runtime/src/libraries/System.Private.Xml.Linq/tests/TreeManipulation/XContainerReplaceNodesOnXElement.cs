@@ -14,7 +14,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "(BVT)XElement (text content): Replace with multiple nodes"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             2,
@@ -45,7 +46,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement (text content): Replace with single node"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             1,
@@ -61,7 +63,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement (text content): Replace with multiple nodes"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             4,

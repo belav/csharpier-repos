@@ -150,7 +150,8 @@ namespace Microsoft.AspNetCore.Mvc.Cors
                 corsService,
                 policyProvider.Object,
                 Mock.Of<ILoggerFactory>()
-            ) {
+            )
+            {
                 PolicyName = string.Empty
             };
         }

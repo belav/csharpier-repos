@@ -115,7 +115,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                     url,
                     ReadSni(endpointConfig.GetSection(SniKey), endpointConfig.Key),
                     endpointConfig
-                ) {
+                )
+                {
                     Protocols = ParseProtocols(endpointConfig[ProtocolsKey]),
                     SslProtocols = ParseSslProcotols(endpointConfig.GetSection(SslProtocolsKey)),
                     ClientCertificateMode = ParseClientCertificateMode(

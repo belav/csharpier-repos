@@ -166,7 +166,8 @@ namespace System.Web.Http.Dispatcher
                 exceptionInfo.SourceException,
                 ExceptionCatchBlocks.HttpControllerDispatcher,
                 request
-            ) {
+            )
+            {
                 ControllerContext = controllerContext,
             };
 

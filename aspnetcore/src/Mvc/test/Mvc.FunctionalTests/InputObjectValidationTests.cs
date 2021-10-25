@@ -332,7 +332,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var requestMessage = new HttpRequestMessage(
                 HttpMethod.Post,
                 "Validation/ValidationThrowsError_WhenValidationExceedsMaxValidationDepth"
-            ) {
+            )
+            {
                 Content = new StringContent(
                     @"{ ""Id"": ""S-1-5-21-1004336348-1177238915-682003330-512"" }",
                     Encoding.UTF8,
@@ -359,7 +360,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var requestMessage = new HttpRequestMessage(
                 HttpMethod.Post,
                 "TestApi/PostBookWithNoValidation"
-            ) {
+            )
+            {
                 Content = new StringContent(input, Encoding.UTF8, "application/json"),
             };
 
@@ -399,7 +401,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var requestMessage = new HttpRequestMessage(
                 HttpMethod.Post,
                 "TestApi/PostBookWithNoValidation"
-            ) {
+            )
+            {
                 Content = new StringContent(input, Encoding.UTF8, "application/json"),
             };
 
@@ -443,7 +446,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var requestMessage = new HttpRequestMessage(
                 HttpMethod.Post,
                 "TestApi/PostBookWithNoValidation"
-            ) {
+            )
+            {
                 Content = new StringContent(input, Encoding.UTF8, "application/xml"),
             };
 

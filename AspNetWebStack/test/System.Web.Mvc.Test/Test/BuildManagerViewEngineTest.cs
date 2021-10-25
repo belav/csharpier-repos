@@ -141,7 +141,8 @@ namespace System.Web.Mvc.Test
             string nonMatchingPath = "/PathOther.txt";
             var engine = new TestableBuildManagerViewEngine(
                 pathProvider: CreatePathProvider(matchingPath)
-            ) {
+            )
+            {
                 BuildManager = new MockBuildManager(nonMatchingPath, fileExists: false)
             };
 

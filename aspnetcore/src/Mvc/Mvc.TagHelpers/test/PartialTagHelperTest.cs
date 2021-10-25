@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelper = new PartialTagHelper(
                 Mock.Of<ICompositeViewEngine>(),
                 Mock.Of<IViewBufferScope>()
-            ) {
+            )
+            {
                 Model = expectedModel,
             };
 
@@ -49,13 +50,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewData = new ViewDataDictionary(
                 new EmptyModelMetadataProvider(),
                 new ModelStateDictionary()
-            ) {
+            )
+            {
                 Model = new object(),
             };
             var tagHelper = new PartialTagHelper(
                 Mock.Of<ICompositeViewEngine>(),
                 Mock.Of<IViewBufferScope>()
-            ) {
+            )
+            {
                 Model = null,
                 ViewData = viewData,
             };
@@ -84,7 +87,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelper = new PartialTagHelper(
                 Mock.Of<ICompositeViewEngine>(),
                 Mock.Of<IViewBufferScope>()
-            ) {
+            )
+            {
                 For = new ModelExpression("Property", propertyModelExplorer),
             };
 
@@ -105,7 +109,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelper = new PartialTagHelper(
                 Mock.Of<ICompositeViewEngine>(),
                 Mock.Of<IViewBufferScope>()
-            ) {
+            )
+            {
                 ViewContext = viewContext
             };
 
@@ -132,7 +137,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelper = new PartialTagHelper(
                 Mock.Of<ICompositeViewEngine>(),
                 Mock.Of<IViewBufferScope>()
-            ) {
+            )
+            {
                 Model = new object(),
                 For = new ModelExpression("Property", propertyModelExplorer),
             };
@@ -165,7 +171,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var tagHelper = new PartialTagHelper(
                 Mock.Of<ICompositeViewEngine>(),
                 Mock.Of<IViewBufferScope>()
-            ) {
+            )
+            {
                 Model = null,
                 For = new ModelExpression("Property", propertyModelExplorer),
             };

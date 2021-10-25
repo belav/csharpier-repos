@@ -191,7 +191,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                         MacOSFindCertificateCommandLineArgumentsFormat,
                         subject
                     )
-                ) {
+                )
+                {
                     RedirectStandardOutput = true
                 }
             );
@@ -288,7 +289,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                     certificate.Thumbprint.ToUpperInvariant(),
                     keyChain
                 )
-            ) {
+            )
+            {
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
             };
@@ -339,7 +341,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                     certificatePath,
                     password
                 )
-            ) {
+            )
+            {
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
             };

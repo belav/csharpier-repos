@@ -68,8 +68,10 @@ namespace System.Text.Json.Serialization.Tests
 
             MyDictionaryWrapper<float?> dictWrapperWithFloatValue =
                 new MyDictionaryWrapper<float?>() { { "key", 42.0f } };
-            MyDictionaryWrapper<float?> dictWrapperWithFloatNull =
-                new MyDictionaryWrapper<float?>() { { "key", null } };
+            MyDictionaryWrapper<float?> dictWrapperWithFloatNull = new MyDictionaryWrapper<float?>()
+            {
+                { "key", null }
+            };
             TestDictionaryWithNullableValue<
                 MyDictionaryWrapper<float?>,
                 MyDictionaryWrapper<MyDictionaryWrapper<float?>>,

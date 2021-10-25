@@ -49,7 +49,8 @@ namespace System.CommandLine.Tests.Help
                 ),
                 new Option<string>(
                     aliases: new string[] { "--the-root-option-no-default-arg", "-tronda" }
-                ) {
+                )
+                {
                     Description = "the-root-option-no-default-description",
                     ArgumentHelpName = "the-root-option-arg-no-default-arg",
                     IsRequired = true
@@ -57,28 +58,32 @@ namespace System.CommandLine.Tests.Help
                 new Option<string>(
                     aliases: new string[] { "--the-root-option-default-arg", "-troda" },
                     () => "the-root-option-arg-value"
-                ) {
+                )
+                {
                     Description = "the-root-option-default-arg-description",
                     ArgumentHelpName = "the-root-option-arg",
                 },
                 new Option<FileAccess>(
                     aliases: new string[] { "--the-root-option-enum-arg", "-troea" },
                     () => FileAccess.Read
-                ) {
+                )
+                {
                     Description = "the-root-option-description",
                     ArgumentHelpName = "the-root-option-arg",
                 },
                 new Option<FileAccess>(
                     aliases: new string[] { "--the-root-option-required-enum-arg", "-trorea" },
                     () => FileAccess.Read
-                ) {
+                )
+                {
                     Description = "the-root-option-description",
                     ArgumentHelpName = "the-root-option-arg",
                     IsRequired = true
                 },
                 new Option(
                     aliases: new string[] { "--the-root-option-multi-line-description", "-tromld" }
-                ) {
+                )
+                {
                     Description = "the-root-option\r\nmulti-line\ndescription"
                 }
             };

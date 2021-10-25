@@ -31,7 +31,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToContent on Read through All invalid Content Node(PI, Comment and whitespace)"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

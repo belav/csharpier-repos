@@ -38,7 +38,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MaxSettings: set negative, get default values, set 10 and get 10"
-                        ) {
+                        )
+                        {
                             Pri = 2
                         }
                     }
@@ -52,7 +53,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MaxCharactersFromEntities: set negative values, get default"
-                        ) {
+                        )
+                        {
                             Param = 1,
                             Pri = 2
                         }
@@ -63,7 +65,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MaxCharactersFromEntities: set max negative values, get default"
-                        ) {
+                        )
+                        {
                             Param = 2,
                             Pri = 2
                         }
@@ -78,7 +81,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MaxCharactersInDocument: set negative values, get default"
-                        ) {
+                        )
+                        {
                             Param = 1,
                             Pri = 2
                         }
@@ -89,7 +93,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MaxCharactersInDocument: set huge negative values, get default"
-                        ) {
+                        )
+                        {
                             Param = 2,
                             Pri = 2
                         }

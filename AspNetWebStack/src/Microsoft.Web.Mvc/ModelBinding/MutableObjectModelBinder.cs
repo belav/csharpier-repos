@@ -103,7 +103,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             );
             ExtensibleModelBindingContext dtoBindingContext = new ExtensibleModelBindingContext(
                 bindingContext
-            ) {
+            )
+            {
                 ModelMetadata = MetadataProvider.GetMetadataForType(
                     () => originalDto,
                     typeof(ComplexModelDto)

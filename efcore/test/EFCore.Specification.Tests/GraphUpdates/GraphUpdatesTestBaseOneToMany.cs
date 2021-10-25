@@ -1406,7 +1406,8 @@ namespace Microsoft.EntityFrameworkCore
                             Parent = context.Set<Root>().Single(IsTheRoot),
                             CompositeChildren = new ObservableHashSet<OptionalOverlapping2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new() { Id = 5 },
                                 new() { Id = 6 }
                             }

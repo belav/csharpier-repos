@@ -2122,7 +2122,8 @@ namespace System.Net.Http.Functional.Tests
                         HttpRequestMessage initialMessage = new HttpRequestMessage(
                             HttpMethod.Post,
                             uri
-                        ) {
+                        )
+                        {
                             Version = UseVersion
                         };
                         initialMessage.Content = new StringContent(TestString);
@@ -2233,7 +2234,8 @@ namespace System.Net.Http.Functional.Tests
                         HttpRequestMessage initialMessage = new HttpRequestMessage(
                             HttpMethod.Post,
                             uri
-                        ) {
+                        )
+                        {
                             Version = UseVersion
                         };
                         initialMessage.Content = new StringContent(TestString);
@@ -2297,7 +2299,8 @@ namespace System.Net.Http.Functional.Tests
                         HttpRequestMessage initialMessage = new HttpRequestMessage(
                             HttpMethod.Post,
                             uri
-                        ) {
+                        )
+                        {
                             Version = UseVersion
                         };
                         initialMessage.Content = new StringContent(TestString);
@@ -2366,7 +2369,8 @@ namespace System.Net.Http.Functional.Tests
                         HttpRequestMessage initialMessage = new HttpRequestMessage(
                             HttpMethod.Post,
                             uri
-                        ) {
+                        )
+                        {
                             Version = UseVersion
                         };
                         initialMessage.Content = new ThrowingContent(
@@ -2423,7 +2427,8 @@ namespace System.Net.Http.Functional.Tests
                         HttpRequestMessage initialMessage = new HttpRequestMessage(
                             HttpMethod.Post,
                             uri
-                        ) {
+                        )
+                        {
                             Version = UseVersion
                         };
                         initialMessage.Content = new StringContent(RequestString);

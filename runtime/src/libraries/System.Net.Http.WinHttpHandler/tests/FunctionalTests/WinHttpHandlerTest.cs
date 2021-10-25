@@ -174,7 +174,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Post,
                 Configuration.Http.Http2RemoteEchoServer
-            ) {
+            )
+            {
                 Version = HttpVersion20.Value
             };
             request.Content = new StringContent(payload);
@@ -228,7 +229,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 HttpRequestMessage request = new HttpRequestMessage(
                     HttpMethod.Post,
                     Configuration.Http.Http2RemoteEchoServer
-                ) {
+                )
+                {
                     Version = HttpVersion20.Value
                 };
                 byte[] payloadBytes = Encoding.UTF8.GetBytes(payloadText);
@@ -242,7 +244,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             HttpRequestMessage aboveLimitRequest = new HttpRequestMessage(
                 HttpMethod.Post,
                 Configuration.Http.Http2RemoteEchoServer
-            ) {
+            )
+            {
                 Version = HttpVersion20.Value
             };
             aboveLimitRequest.Content = new StringContent(

@@ -155,9 +155,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             try
             {
-                var routeValues = new Dictionary<string, string?>(
-                    StringComparer.OrdinalIgnoreCase
-                ) {
+                var routeValues = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase)
+                {
                     { "action", action.ActionName },
                     { "controller", controller.ControllerName },
                 };

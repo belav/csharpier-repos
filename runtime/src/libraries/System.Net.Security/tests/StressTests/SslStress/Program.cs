@@ -154,7 +154,8 @@ namespace SslStress
                 new Option(
                     new[] { "--mode", "-m" },
                     "Stress suite execution mode. Defaults to 'both'."
-                ) {
+                )
+                {
                     Argument = new Argument<RunMode>("runMode", RunMode.both)
                 }
             );
@@ -162,7 +163,8 @@ namespace SslStress
                 new Option(
                     new[] { "--cancellation-probability", "-p" },
                     "Cancellation probability 0 <= p <= 1 for a given connection. Defaults to 0.1"
-                ) {
+                )
+                {
                     Argument = new Argument<double>("probability", 0.1)
                 }
             );
@@ -170,7 +172,8 @@ namespace SslStress
                 new Option(
                     new[] { "--num-connections", "-n" },
                     "Max number of connections to open concurrently."
-                ) {
+                )
+                {
                     Argument = new Argument<int>("connections", Environment.ProcessorCount)
                 }
             );
@@ -178,7 +181,8 @@ namespace SslStress
                 new Option(
                     new[] { "--server-endpoint", "-e" },
                     "Endpoint to bind to if server, endpoint to listen to if client."
-                ) {
+                )
+                {
                     Argument = new Argument<string>("ipEndpoint", "127.0.0.1:5002")
                 }
             );
@@ -186,7 +190,8 @@ namespace SslStress
                 new Option(
                     new[] { "--max-execution-time", "-t" },
                     "Maximum stress suite execution time, in minutes. Defaults to infinity."
-                ) {
+                )
+                {
                     Argument = new Argument<double?>("minutes", null)
                 }
             );
@@ -194,7 +199,8 @@ namespace SslStress
                 new Option(
                     new[] { "--max-buffer-length", "-b" },
                     "Maximum buffer length to write on ssl stream. Defaults to 8192."
-                ) {
+                )
+                {
                     Argument = new Argument<int>("bytes", 8192)
                 }
             );
@@ -202,7 +208,8 @@ namespace SslStress
                 new Option(
                     new[] { "--min-connection-lifetime", "-l" },
                     "Minimum duration for a single connection, in seconds. Defaults to 5 seconds."
-                ) {
+                )
+                {
                     Argument = new Argument<double>("seconds", 5)
                 }
             );
@@ -210,7 +217,8 @@ namespace SslStress
                 new Option(
                     new[] { "--max-connection-lifetime", "-L" },
                     "Maximum duration for a single connection, in seconds. Defaults to 120 seconds."
-                ) {
+                )
+                {
                     Argument = new Argument<double>("seconds", 120)
                 }
             );
@@ -218,7 +226,8 @@ namespace SslStress
                 new Option(
                     new[] { "--display-interval", "-i" },
                     "Client stats display interval, in seconds. Defaults to 5 seconds."
-                ) {
+                )
+                {
                     Argument = new Argument<double>("seconds", 5)
                 }
             );
@@ -229,7 +238,8 @@ namespace SslStress
                 new Option(
                     new[] { "--seed", "-s" },
                     "Seed for generating pseudo-random parameters. Also depends on the -n argument."
-                ) {
+                )
+                {
                     Argument = new Argument<int>("seed", (new Random().Next()))
                 }
             );

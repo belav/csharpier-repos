@@ -116,7 +116,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadOuterXml with multiple level of elements, text and attributes"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -130,7 +131,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadOuterXml on element with complex content (CDATA, PIs, Comments)"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -188,7 +190,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadOuterXml on attribute with entities, EntityHandling = ExpandEntities"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

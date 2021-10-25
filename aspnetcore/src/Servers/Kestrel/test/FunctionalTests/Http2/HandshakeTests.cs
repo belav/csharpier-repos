@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2
                     ServerCertificateCustomValidationCallback =
                         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
                 }
-            ) {
+            )
+            {
                 DefaultRequestVersion = HttpVersion.Version20,
             };
         }

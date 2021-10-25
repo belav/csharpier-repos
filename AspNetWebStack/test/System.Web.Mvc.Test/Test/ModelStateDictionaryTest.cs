@@ -115,10 +115,7 @@ namespace System.Web.Mvc.Test
         public void DictionaryInterface()
         {
             // Arrange
-            DictionaryHelper<string, ModelState> helper = new DictionaryHelper<
-                string,
-                ModelState
-            >()
+            DictionaryHelper<string, ModelState> helper = new DictionaryHelper<string, ModelState>()
             {
                 Creator = () => new ModelStateDictionary(),
                 Comparer = StringComparer.OrdinalIgnoreCase,

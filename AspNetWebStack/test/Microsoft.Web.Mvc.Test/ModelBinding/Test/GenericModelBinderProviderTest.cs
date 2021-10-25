@@ -184,7 +184,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             GenericModelBinderProvider provider = new GenericModelBinderProvider(
                 typeof(IEnumerable<>),
                 typeof(CollectionModelBinder<>)
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(object));
@@ -203,7 +204,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             GenericModelBinderProvider provider = new GenericModelBinderProvider(
                 typeof(List<>),
                 typeof(CollectionModelBinder<>)
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(object));
@@ -250,7 +252,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             GenericModelBinderProvider provider = new GenericModelBinderProvider(
                 typeof(IList<>),
                 binderFactory
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
 
@@ -272,7 +275,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             GenericModelBinderProvider provider = new GenericModelBinderProvider(
                 typeof(List<>),
                 binderInstance
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
 
@@ -292,7 +296,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             GenericModelBinderProvider provider = new GenericModelBinderProvider(
                 typeof(List<>),
                 typeof(CollectionModelBinder<>)
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
 
@@ -332,7 +337,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             GenericModelBinderProvider provider = new GenericModelBinderProvider(
                 typeof(List<>),
                 typeof(NoParameterlessCtorBinder<>)
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true,
             };
 

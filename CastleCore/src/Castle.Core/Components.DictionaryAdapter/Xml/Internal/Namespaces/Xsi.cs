@@ -71,7 +71,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         internal static readonly XmlNamespaceAttribute Namespace = new XmlNamespaceAttribute(
             NamespaceUri,
             Prefix
-        ) {
+        )
+        {
             Root = true
         };
     }

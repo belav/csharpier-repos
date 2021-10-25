@@ -109,7 +109,8 @@ namespace Microsoft.AspNetCore.CookiePolicy
             var setCookieHeaderValue = new Net.Http.Headers.SetCookieHeaderValue(
                 Uri.EscapeDataString(key),
                 Uri.EscapeDataString(value)
-            ) {
+            )
+            {
                 Domain = options.Domain,
                 Path = options.Path,
                 Expires = options.Expires,

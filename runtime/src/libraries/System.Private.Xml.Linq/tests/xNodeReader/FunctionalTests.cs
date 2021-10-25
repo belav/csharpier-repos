@@ -513,7 +513,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Namespace test within a scope (no nested element)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -523,7 +524,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Namespace test within a scope (with nested element)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -541,7 +543,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Namespace test Attribute should has no default namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -551,7 +554,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Namespace test with multiple Namespace declaration"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -594,7 +598,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "LookupNamespace test with Default namespace within EmptyTag"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -604,7 +609,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "LookupNamespace test within a scope (no nested element)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -614,7 +620,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "LookupNamespace test within a scope (with nested element)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -632,7 +639,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "LookupNamespace test with multiple Namespace declaration"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -650,7 +658,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "LookupNamespace on whitespace node PreserveWhitespaces = true"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -660,7 +669,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Different prefix on inner element for the same namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -670,7 +680,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "LookupNamespace when Namespaces = false"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -759,7 +770,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "HasValue On Whitespace PreserveWhitespaces = true"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -813,7 +825,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Set and Get an element that ends with />"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -823,7 +836,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Set and Get an element with an attribute that ends with />"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -833,7 +847,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Set and Get an element that ends without />"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -843,7 +858,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Set and Get an element with an attribute that ends with />"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -940,7 +956,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Xmlspace test within a scope (no nested element)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -950,7 +967,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Xmlspace test within a scope (with nested element)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -990,7 +1008,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XmlLang test within a scope (no nested element)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1000,7 +1019,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XmlLang test within a scope (with nested element)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1076,7 +1096,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call Skip on text node (leave node)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1129,7 +1150,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call Skip on Processing Instruction"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1263,7 +1285,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Attribute Access test using ordinal (Ascending Order)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1281,7 +1304,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Attribute Access test using ordinal (Odd number)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1315,7 +1339,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "This[Name] Verify with GetAttribute(Name)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1341,7 +1366,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "This[Name, NamespaceURI] Verify with GetAttribute(Name, NamespaceURI)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1367,7 +1393,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "This[Name] Verify with MoveToAttribute(Name)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1393,7 +1420,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "This[Name, NamespaceURI] Verify not the same as MoveToAttribute(Name, null)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1431,7 +1459,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "This[QName] Verify with GetAttribute(Name, NamespaceURI)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1477,7 +1506,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "GetAttribute(i) Verify with This[i] - Double Quote"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1495,7 +1525,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "GetAttribute(i) Verify with MoveToAttribute[i] - Double Quote"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1521,7 +1552,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "GetAttribute(Name) Verify with This[Name]"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1547,7 +1579,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "GetAttribute(Name, NamespaceURI) Verify with This[Name, NamespaceURI]"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1581,7 +1614,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "GetAttribute(Name,null) Verify with MoveToAttribute(Name)"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -1591,7 +1625,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "GetAttribute(Name) Verify with MoveToAttribute(Name,null)"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -1647,7 +1682,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "This[i] Verify with GetAttribute[i] - Double Quote"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1673,7 +1709,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "This[i] Verify with MoveToAttribute[i] - Double Quote"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1691,7 +1728,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "MoveToAttribute(i) Verify with This[i] - Double Quote"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1709,7 +1747,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "MoveToAttribute(i) Verify with GetAttribute(i) - Double Quote"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1727,7 +1766,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "MoveToAttribute(i) NegativeOneOrdinal"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1768,7 +1808,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "MoveToFirstAttribute() When AttributeCount=0, <EMPTY1/> "
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -1842,7 +1883,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "MoveToNextAttribute() When AttributeCount=0, <EMPTY1/> "
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2004,7 +2046,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Name, LocalName, Prefix and Value with xmlns=ns attribute"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2069,7 +2112,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NamespaceURI of element/attribute with xmlns attribute"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2085,7 +2129,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Define prefix for 'www.w3.org/2000/xmlns'"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2182,7 +2227,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadInnerXml on non Empty Tag with text content"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2200,7 +2246,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadInnerXml with multiple Level of elements, text and attributes"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2227,7 +2274,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadInnerXml on attribute node with entity reference in value"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2278,7 +2326,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Current node after ReadInnerXml on element"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2330,7 +2379,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "MoveToContent on Skip XmlDeclaration"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2340,7 +2390,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "MoveToContent on Read through All valid Content Node(Element, Text, CDATA, and EndElement)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2350,7 +2401,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "MoveToContent on Read through All invalid Content Node(PI, Comment and whitespace)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2385,7 +2437,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "IsStartElement on Regular Element, no namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2395,7 +2448,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "IsStartElement on Empty Element, no namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2405,7 +2459,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "IsStartElement on regular Element, with namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2415,7 +2470,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "IsStartElement on Empty Tag, with default namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2497,7 +2553,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadStartElement on Regular Element, no namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2507,7 +2564,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadStartElement on Empty Element, no namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2517,7 +2575,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadStartElement on regular Element, with namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2527,7 +2586,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Passing ns=String.EmptyErrorCase: ReadStartElement on regular Element, with namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2537,7 +2597,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Passing no ns: ReadStartElement on regular Element, with namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2649,7 +2710,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadEndElement on Empty Element, no namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2659,7 +2721,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadEndElement on regular Element, with namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -2669,7 +2732,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadEndElement on Empty Tag, with namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -3285,7 +3349,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadBase64 Element with all valid Num value"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -3475,7 +3540,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadBase64 Element with all valid Num value"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -3616,7 +3682,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "105376: ReadBase64 runs into an Overflow"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "10000000" }
                             }
                         }
@@ -3626,7 +3693,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "105376: ReadBase64 runs into an Overflow"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "1000000" }
                             }
                         }
@@ -3636,7 +3704,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "105376: ReadBase64 runs into an Overflow"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "10000" }
                             }
                         }
@@ -3644,7 +3713,8 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(
                             SubtreeReaderInsertedAttributesWontWorkWithReadContentAsBase64
-                        ) {
+                        )
+                        {
                             Attribute = new VariationAttribute(
                                 "430329: SubtreeReader inserted attributes don't work with ReadContentAsBase64"
                             )
@@ -3671,7 +3741,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadBinHex Element with all valid Num value"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -3840,7 +3911,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadBinHex Element with all valid Num value"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -3858,7 +3930,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadBinHex Element with Comments and PIs"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -4042,7 +4115,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadOuterXml on empty element w/o attributes"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -4052,7 +4126,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadOuterXml on empty element w/ attributes"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -4078,7 +4153,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadOuterXml on element with text content"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -4088,7 +4164,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadOuterXml on element with attributes"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -4114,7 +4191,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadOuterXml with multiple level of elements, text and attributes"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -4124,7 +4202,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadOuterXml on element with complex content (CDATA, PIs, Comments)"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -4159,7 +4238,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadOuterXml on attribute with entities, EntityHandling = ExpandEntities"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -4203,7 +4283,8 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(
                             ReadOuterXmlWhenNamespacesEqualsToFalseAndHasAnAttributeXmlns
-                        ) {
+                        )
+                        {
                             Attribute = new VariationAttribute(
                                 "Read OuterXml when Namespaces=false and has an attribute xmlns"
                             )
@@ -4294,7 +4375,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadSubtree Test Comment after element"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "elem",
@@ -4349,7 +4431,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadSubtree Test empty element before root"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "elem6",
@@ -4422,7 +4505,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Close on inner reader with CloseInput should not close the outer reader"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "true" },
                                 Priority = 1
                             }
@@ -4433,7 +4517,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Close on inner reader with CloseInput should not close the outer reader"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "false" },
                                 Priority = 1
                             }
@@ -4453,7 +4538,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadSubtree for element depth more than 4K chars"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4463,7 +4549,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple Namespaces on Subtree reader"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -4471,10 +4558,12 @@ namespace CoreXml.Test.XLinq
                     this.AddChild(
                         new TestVariation(
                             SubtreeReaderCachesNodeTypeAndReportsNodeTypeOfAttributeOnSubsequentReads
-                        ) {
+                        )
+                        {
                             Attribute = new VariationAttribute(
                                 "Subtree Reader caches the NodeType and reports node type of Attribute on subsequent reads."
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -4522,7 +4611,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read on a deep tree at least more than 4K boundary"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4562,7 +4652,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "If name not found, stop at end element of the subtree"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -4572,7 +4663,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Positioning on a level and try to find the name which is on a level higher"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -4582,7 +4674,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read to Descendant on one level and again to level below it"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -4592,7 +4685,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read to Descendant on one level and again to level below it, with namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -4602,7 +4696,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read to Descendant on one level and again to level below it, with prefix"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -4612,7 +4707,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple Reads to children and then next siblings, NNS"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4622,7 +4718,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple Reads to children and then next siblings, DNS"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4632,7 +4729,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple Reads to children and then next siblings, NS"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4651,7 +4749,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Only child has namespaces and read to it"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4661,7 +4760,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass null to both arguments throws ArgumentException"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4671,7 +4771,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Different names, same uri works correctly"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4711,7 +4812,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "427176	Assertion failed when call XmlReader.ReadToDescendant() for non-existing node"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -4816,7 +4918,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read to Following on one level and again to level below it"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -4826,7 +4929,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read to Following on one level and again to level below it, with namespace"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -4836,7 +4940,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read to Following on one level and again to level below it, with prefix"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -4846,7 +4951,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple Reads to children and then next siblings, NNS"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4856,7 +4962,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple Reads to children and then next siblings, DNS"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4866,7 +4973,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple Reads to children and then next siblings, NS"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4876,7 +4984,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Only child has namespaces and read to it"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4886,7 +4995,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass null to both arguments throws ArgumentException"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4896,7 +5006,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Different names, same uri works correctly"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4944,7 +5055,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read on a deep tree at least more than 4K boundary"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -4954,7 +5066,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read to next sibling with same names 1"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "NNS",
@@ -4969,7 +5082,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read on next sibling with same names 2"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "DNS",
@@ -4984,7 +5098,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read on next sibling with same names 3"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "NS",
@@ -4999,7 +5114,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "If name not found, stop at end element of the subtree"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -5009,7 +5125,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Positioning on a level and try to find the name which is on a level higher"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -5019,7 +5136,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Read to next sibling on one level and again to level below it"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -5038,7 +5156,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass null to both arguments throws ArgumentException"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -5048,7 +5167,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Different names, same uri works correctly"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -5090,7 +5210,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadValue on Attribute after ReadAttributeValue"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -5127,7 +5248,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadValue with buffer = element content / 2"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -5164,7 +5286,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "ReadValue for value more than 4K and invalid element"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -5252,7 +5375,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call on invalid element content after 4k boundary"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -5384,7 +5508,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Open on node type: Text (root level)"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     XmlNodeType.Text,
@@ -5433,7 +5558,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Open on node type: Comment (root level)"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     XmlNodeType.Comment,
@@ -5450,7 +5576,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Open on node type: XElement (in the mIddle)"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     XmlNodeType.Element,
@@ -5467,7 +5594,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Open on node type: XElement (leaf I.)"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     XmlNodeType.Element,
@@ -5484,7 +5612,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Open on node type: XElement (leaf II.)"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     XmlNodeType.Element,
@@ -5545,7 +5674,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Namespaces - element, def. ns redef"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     XmlNodeType.Element,
@@ -5579,7 +5709,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Adjacent text nodes (sanity II.) : ReadElementContent"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -5589,7 +5720,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Adjacent text nodes (sanity IV.) : ReadInnerXml"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -5599,7 +5731,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Adjacent text nodes (sanity III.) : ReadContent"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }

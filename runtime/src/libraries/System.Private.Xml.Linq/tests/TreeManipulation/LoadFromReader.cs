@@ -121,7 +121,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Read XDocument with namespace and attributes"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />"
@@ -135,7 +136,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Read XDocument with string content and empty node"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<X>t0<A />t00</X>" },
                         Priority = 0
                     }
@@ -159,7 +161,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Read XDocument with string content and non-empty node"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<X>t0<A>truck</A>t00</X>" },
                         Priority = 0
                     }
@@ -216,7 +219,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Read XElement with string content and empty node"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<X>t0<A />t00</X>" },
                         Priority = 0
                     }
@@ -240,7 +244,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Read XElement with namespace and attributes"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />"
@@ -287,7 +292,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Read XElement with string content and non-empty node"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<X>t0<A>truck</A>t00</X>" },
                         Priority = 0
                     }
@@ -491,7 +497,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument: Call Read after ReadState = Closed"
-                    ) {
+                    )
+                    {
                         Priority = 2
                     }
                 }
@@ -501,7 +508,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement: Call Read after ReadState = Closed"
-                    ) {
+                    )
+                    {
                         Priority = 2
                     }
                 }
@@ -529,7 +537,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument: Null parameters for Parse, ReadFrom and ReadContentFrom"
-                    ) {
+                    )
+                    {
                         Priority = 1
                     }
                 }
@@ -539,7 +548,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement: Null parameters for Parse, ReadFrom and ReadContentFrom"
-                    ) {
+                    )
+                    {
                         Priority = 1
                     }
                 }

@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var context = new PageApplicationModelProviderContext(
                 new PageActionDescriptor(),
                 typeof(object).GetTypeInfo()
-            ) {
+            )
+            {
                 PageApplicationModel = applicationModel,
             };
 
@@ -53,12 +54,14 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var context = new PageApplicationModelProviderContext(
                 descriptor,
                 typeof(object).GetTypeInfo()
-            ) {
+            )
+            {
                 PageApplicationModel = new PageApplicationModel(
                     descriptor,
                     typeof(object).GetTypeInfo(),
                     Array.Empty<object>()
-                ) {
+                )
+                {
                     Filters = { expected },
                 },
             };
@@ -84,12 +87,14 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var context = new PageApplicationModelProviderContext(
                 descriptor,
                 typeof(object).GetTypeInfo()
-            ) {
+            )
+            {
                 PageApplicationModel = new PageApplicationModel(
                     descriptor,
                     typeof(object).GetTypeInfo(),
                     Array.Empty<object>()
-                ) {
+                )
+                {
                     Filters = { expected },
                 },
             };

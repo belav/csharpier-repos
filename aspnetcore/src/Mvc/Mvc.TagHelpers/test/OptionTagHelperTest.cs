@@ -559,7 +559,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     Assert.True(false);
                     return Task.FromResult<TagHelperContent>(null);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.StartTagAndEndTag
             };
 
@@ -634,7 +635,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.SetContent(originalContent);
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.StartTagAndEndTag,
             };
             output.PreContent.SetContent(originalPreContent);
@@ -703,7 +705,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.SetContent(originalContent);
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.StartTagAndEndTag,
             };
             output.PreContent.SetContent(originalPreContent);

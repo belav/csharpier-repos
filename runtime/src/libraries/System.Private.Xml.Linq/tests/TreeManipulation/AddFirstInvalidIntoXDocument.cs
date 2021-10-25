@@ -29,7 +29,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument invalid add - multiple root elements"
-                    ) {
+                    )
+                    {
                         Priority = 1
                     }
                 }
@@ -39,7 +40,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument invalid add - CData, attribute, text (no whitespace)"
-                    ) {
+                    )
+                    {
                         Priority = 1
                     }
                 }

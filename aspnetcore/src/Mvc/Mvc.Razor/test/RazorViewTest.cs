@@ -178,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     paths.Add(v.ViewContext.ExecutingFilePath);
                     Assert.Equal(pagePath, v.ViewContext.View.Path);
                 }
-            ) {
+            )
+            {
                 Path = pagePath
             };
 
@@ -189,7 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     paths.Add(v.ViewContext.ExecutingFilePath);
                     Assert.Equal(pagePath, v.ViewContext.View.Path);
                 }
-            ) {
+            )
+            {
                 Path = "_ViewStart"
             };
 
@@ -200,7 +202,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     paths.Add(v.ViewContext.ExecutingFilePath);
                     Assert.Equal(pagePath, v.ViewContext.View.Path);
                 }
-            ) {
+            )
+            {
                 Path = LayoutPath
             };
 
@@ -490,7 +493,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     layoutExecuted = true;
                     p.RenderBodyPublic();
                 }
-            ) {
+            )
+            {
                 Path = layoutPath,
             };
 
@@ -539,7 +543,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     layoutExecuted = true;
                     p.RenderBodyPublic();
                 }
-            ) {
+            )
+            {
                 Path = layoutPath,
             };
 
@@ -842,7 +847,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 {
                     v.RenderBodyPublic();
                 }
-            ) {
+            )
+            {
                 Path = LayoutPath
             };
             var viewEngine = new Mock<IRazorViewEngine>(MockBehavior.Strict);
@@ -917,7 +923,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                         }
                     );
                 }
-            ) {
+            )
+            {
                 Path = "/Shared/Layout1.cshtml"
             };
             var baseLayout = new TestableRazorPage(
@@ -927,7 +934,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     v.RenderBodyPublic();
                     v.RenderSection("foo");
                 }
-            ) {
+            )
+            {
                 Path = "/Shared/Layout2.cshtml"
             };
 
@@ -1086,7 +1094,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                         }
                     );
                 }
-            ) {
+            )
+            {
                 Path = "/Shared/Layout1.cshtml"
             };
             var baseLayout = new TestableRazorPage(
@@ -1096,7 +1105,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     v.Write("BaseLayout" + Environment.NewLine);
                     v.RenderBodyPublic();
                 }
-            ) {
+            )
+            {
                 Path = "/Shared/Layout2.cshtml"
             };
 
@@ -1154,7 +1164,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                         }
                     );
                 }
-            ) {
+            )
+            {
                 Path = "Page"
             };
 
@@ -1173,7 +1184,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                         }
                     );
                 }
-            ) {
+            )
+            {
                 Path = "/Shared/Layout1.cshtml"
             };
 
@@ -1185,7 +1197,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     v.RenderBodyPublic();
                     v.RenderSection("foo");
                 }
-            ) {
+            )
+            {
                 Path = "/Shared/Layout2.cshtml"
             };
 
@@ -1376,7 +1389,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     v.Layout = "Layout1.cshtml";
                     v.WriteLiteral("body-content");
                 }
-            ) {
+            )
+            {
                 Path = "~/Shared/Page.cshtml",
             };
 
@@ -1390,7 +1404,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     v.RenderBodyPublic();
                     v.Layout = "Layout2.cshtml";
                 }
-            ) {
+            )
+            {
                 Path = "~/Shared/Layout1.cshtml",
             };
 
@@ -1402,7 +1417,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     v.Write(v.RenderSection("bar"));
                     v.RenderBodyPublic();
                 }
-            ) {
+            )
+            {
                 Path = "~/Shared/Layout2.cshtml",
             };
 
@@ -1962,7 +1978,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 {
                     v.Layout = "_Layout.cshtml";
                 }
-            ) {
+            )
+            {
                 Path = "~/_ViewStart.cshtml",
             };
 
@@ -1972,7 +1989,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     actualViewStart = v.Layout;
                     v.Layout = "_Layout.cshtml";
                 }
-            ) {
+            )
+            {
                 Path = "~/Home/_ViewStart.cshtml",
             };
 
@@ -2150,7 +2168,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 page,
                 new HtmlTestEncoder(),
                 new DiagnosticListener("Microsoft.AspNetCore.Mvc.Razor")
-            ) {
+            )
+            {
                 OnAfterPageActivated = AssertActivated,
             };
             var viewContext = CreateViewContext(view);

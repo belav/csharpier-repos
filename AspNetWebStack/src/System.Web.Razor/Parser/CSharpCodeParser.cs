@@ -277,7 +277,8 @@ namespace System.Web.Razor.Parser
                         Language.TokenizeString,
                         DefaultKeywords,
                         acceptTrailingDot: IsNested
-                    ) {
+                    )
+                    {
                         AcceptedCharacters = AcceptedCharacters.NonWhiteSpace
                     };
                     if (At(CSharpSymbolType.WhiteSpace) || At(CSharpSymbolType.NewLine))

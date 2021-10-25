@@ -141,7 +141,8 @@ namespace Microsoft.AspNetCore.Testing
                 new TestEnvironmentVariable("LinuxFlavor", environmentVariableValue),
                 "LinuxFlavor",
                 "Ubuntu14.04"
-            ) {
+            )
+            {
                 // Example: Run this test on all OSes except on "Ubuntu14.04"
                 RunOnMatch = false
             };
@@ -161,7 +162,8 @@ namespace Microsoft.AspNetCore.Testing
                 new TestEnvironmentVariable("LinuxFlavor", "Ubuntu14.04"),
                 "LinuxFlavor",
                 "Ubuntu14.04"
-            ) {
+            )
+            {
                 // Example: Run this test on all OSes except on "Ubuntu14.04"
                 RunOnMatch = false
             };

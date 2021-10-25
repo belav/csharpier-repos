@@ -2450,7 +2450,8 @@ namespace System.Web.Http.Owin
             environment["owin.RequestScheme"] = scheme;
             environment["owin.RequestHeaders"] = new Dictionary<string, string[]>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "Host", new string[] { hostHeaderValue } }
             };
             environment["owin.RequestPathBase"] = pathBase;

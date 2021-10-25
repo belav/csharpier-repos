@@ -578,7 +578,8 @@ namespace System.Diagnostics
                     OpenStream(stdinFd, PipeDirection.Out),
                     startInfo.StandardInputEncoding ?? Encoding.Default,
                     StreamBufferSize
-                ) {
+                )
+                {
                     AutoFlush = true
                 };
             }

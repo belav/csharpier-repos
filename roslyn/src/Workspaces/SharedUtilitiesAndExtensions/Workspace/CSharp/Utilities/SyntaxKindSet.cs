@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
     {
         public static readonly ISet<SyntaxKind> AllTypeModifiers = new HashSet<SyntaxKind>(
             SyntaxFacts.EqualityComparer
-        ) {
+        )
+        {
             SyntaxKind.AbstractKeyword,
             SyntaxKind.InternalKeyword,
             SyntaxKind.NewKeyword,
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
         public static readonly ISet<SyntaxKind> AllMemberModifiers = new HashSet<SyntaxKind>(
             SyntaxFacts.EqualityComparer
-        ) {
+        )
+        {
             SyntaxKind.AbstractKeyword,
             SyntaxKind.AsyncKeyword,
             SyntaxKind.ExternKeyword,
@@ -49,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
         public static readonly ISet<SyntaxKind> AllGlobalMemberModifiers = new HashSet<SyntaxKind>(
             SyntaxFacts.EqualityComparer
-        ) {
+        )
+        {
             SyntaxKind.ExternKeyword,
             SyntaxKind.InternalKeyword,
             SyntaxKind.NewKeyword,
@@ -64,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
         public static readonly ISet<SyntaxKind> AllLocalFunctionModifiers = new HashSet<SyntaxKind>(
             SyntaxFacts.EqualityComparer
-        ) {
+        )
+        {
             SyntaxKind.AsyncKeyword,
             SyntaxKind.UnsafeKeyword,
             SyntaxKind.ExternKeyword,
@@ -73,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
         public static readonly ISet<SyntaxKind> AllTypeDeclarations = new HashSet<SyntaxKind>(
             SyntaxFacts.EqualityComparer
-        ) {
+        )
+        {
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.ClassDeclaration,
             SyntaxKind.RecordDeclaration,

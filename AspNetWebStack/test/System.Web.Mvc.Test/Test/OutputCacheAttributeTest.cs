@@ -516,7 +516,8 @@ namespace System.Web.Mvc.Test
             MockActionExecutingContext context = new MockActionExecutingContext();
             Dictionary<string, object> dictionary = new Dictionary<string, object>(
                 StringComparer.Ordinal
-            ) {
+            )
+            {
                 { "foo", "foo-value" },
                 { "Bar", "bar-value" }
             };

@@ -469,7 +469,8 @@ namespace Microsoft.Win32
                             SystemEvents systemEvents = new SystemEvents();
                             s_windowThread = new Thread(
                                 new ThreadStart(systemEvents.WindowThreadProc)
-                            ) {
+                            )
+                            {
                                 IsBackground = true,
                                 Name = ".NET System Events"
                             };

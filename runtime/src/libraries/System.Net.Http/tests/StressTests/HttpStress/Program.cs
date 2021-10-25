@@ -60,7 +60,8 @@ public static class Program
             new Option(
                 "-maxExecutionTime",
                 "Maximum stress execution time, in minutes. Defaults to infinity."
-            ) {
+            )
+            {
                 Argument = new Argument<double?>("minutes", null)
             }
         );
@@ -116,7 +117,8 @@ public static class Program
             new Option(
                 "-trace",
                 "Enable System.Net.Http.InternalDiagnostics (client) and/or ASP.NET dignostics (server) tracing."
-            ) {
+            )
+            {
                 Argument = new Argument<bool>("enable", false)
             }
         );
@@ -136,7 +138,8 @@ public static class Program
             new Option(
                 "-seed",
                 "Seed for generating pseudo-random parameters for a given -n argument."
-            ) {
+            )
+            {
                 Argument = new Argument<int?>("seed", null)
             }
         );
@@ -144,7 +147,8 @@ public static class Program
             new Option(
                 "-numParameters",
                 "Max number of query parameters or form fields for a request."
-            ) {
+            )
+            {
                 Argument = new Argument<int>("queryParameters", 1)
             }
         );
@@ -152,7 +156,8 @@ public static class Program
             new Option(
                 "-cancelRate",
                 "Number between 0 and 1 indicating rate of client-side request cancellation attempts. Defaults to 0.1."
-            ) {
+            )
+            {
                 Argument = new Argument<double>("probability", 0.1)
             }
         );
@@ -172,7 +177,8 @@ public static class Program
             new Option(
                 "-displayInterval",
                 "Client stats display interval in seconds. Defaults to 5 seconds."
-            ) {
+            )
+            {
                 Argument = new Argument<int>("seconds", 5)
             }
         );
@@ -180,7 +186,8 @@ public static class Program
             new Option(
                 "-clientTimeout",
                 "Default HttpClient timeout in seconds. Defaults to 60 seconds."
-            ) {
+            )
+            {
                 Argument = new Argument<int>("seconds", 60)
             }
         );
@@ -188,7 +195,8 @@ public static class Program
             new Option(
                 "-serverMaxConcurrentStreams",
                 "Overrides kestrel max concurrent streams per connection."
-            ) {
+            )
+            {
                 Argument = new Argument<int?>("streams", null)
             }
         );
@@ -202,7 +210,8 @@ public static class Program
             new Option(
                 "-serverInitialConnectionWindowSize",
                 "Overrides kestrel initial connection window size setting."
-            ) {
+            )
+            {
                 Argument = new Argument<int?>("bytes", null)
             }
         );
@@ -210,7 +219,8 @@ public static class Program
             new Option(
                 "-serverMaxRequestHeaderFieldSize",
                 "Overrides kestrel max request header field size."
-            ) {
+            )
+            {
                 Argument = new Argument<int?>("bytes", null)
             }
         );

@@ -1933,7 +1933,8 @@ namespace Newtonsoft.Json.Tests
 
             JsonReader reader = new JsonValidatingReader(
                 new JsonTextReader(new StringReader(@"""" + Convert.ToBase64String(data) + @""""))
-            ) {
+            )
+            {
                 Schema = s
             };
             byte[] bytes = reader.ReadAsBytes();
@@ -1966,7 +1967,8 @@ namespace Newtonsoft.Json.Tests
 
                     JsonReader reader = new JsonValidatingReader(
                         new JsonTextReader(new StringReader(@"5"))
-                    ) {
+                    )
+                    {
                         Schema = s
                     };
                     reader.ReadAsInt32();
@@ -1982,7 +1984,8 @@ namespace Newtonsoft.Json.Tests
 
             JsonReader reader = new JsonValidatingReader(
                 new JsonTextReader(new StringReader(@"1.5"))
-            ) {
+            )
+            {
                 Schema = s
             };
             decimal? d = reader.ReadAsDecimal();
@@ -2001,7 +2004,8 @@ namespace Newtonsoft.Json.Tests
 
                     JsonReader reader = new JsonValidatingReader(
                         new JsonTextReader(new StringReader(@"5.5"))
-                    ) {
+                    )
+                    {
                         Schema = s
                     };
                     reader.ReadAsDecimal();

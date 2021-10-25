@@ -340,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 fieldSymbol.IsStatic ? null : rewrittenReceiver,
                 fieldSymbol,
                 constantValueOpt: null
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 

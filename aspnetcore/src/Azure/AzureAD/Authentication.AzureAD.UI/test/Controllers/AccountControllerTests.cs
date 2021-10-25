@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
                         CookieSchemeName = AzureADDefaults.CookieScheme
                     }
                 )
-            ) {
+            )
+            {
                 Url = new TestUrlHelper("~/", "https://localhost/")
             };
 
@@ -122,7 +123,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Int
             };
             var controller = new AccountController(
                 new OptionsMonitor(AzureADDefaults.AuthenticationScheme, options)
-            ) {
+            )
+            {
                 Url = new TestUrlHelper(
                     controllerContext.HttpContext,
                     new RouteData(),

@@ -317,7 +317,8 @@ namespace Microsoft.Extensions.Http
                 LoggerFactory,
                 Options,
                 EmptyFilters
-            ) {
+            )
+            {
                 EnableExpiryTimer = true,
                 EnableCleanupTimer = true,
             };
@@ -365,7 +366,8 @@ namespace Microsoft.Extensions.Http
                 LoggerFactory,
                 Options,
                 EmptyFilters
-            ) {
+            )
+            {
                 EnableExpiryTimer = true,
                 EnableCleanupTimer = true,
             };
@@ -433,7 +435,8 @@ namespace Microsoft.Extensions.Http
                 LoggerFactory,
                 Options,
                 EmptyFilters
-            ) {
+            )
+            {
                 EnableExpiryTimer = true,
                 EnableCleanupTimer = true,
             };
@@ -516,7 +519,8 @@ namespace Microsoft.Extensions.Http
                 LoggerFactory,
                 Options,
                 EmptyFilters
-            ) {
+            )
+            {
                 EnableExpiryTimer = true,
                 EnableCleanupTimer = true,
             };

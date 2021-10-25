@@ -60,7 +60,8 @@ namespace AutoMapper.Configuration
             var config = new ValueResolverConfiguration(
                 typeof(TValueResolver),
                 typeof(IMemberValueResolver<TSource, TDestination, TSourceMember, TMember>)
-            ) {
+            )
+            {
                 SourceMember = sourceMember
             };
 
@@ -78,7 +79,8 @@ namespace AutoMapper.Configuration
             var config = new ValueResolverConfiguration(
                 typeof(TValueResolver),
                 typeof(IMemberValueResolver<TSource, TDestination, TSourceMember, TMember>)
-            ) {
+            )
+            {
                 SourceMemberName = sourceMemberName
             };
 
@@ -103,7 +105,8 @@ namespace AutoMapper.Configuration
             var config = new ValueResolverConfiguration(
                 valueResolver,
                 typeof(IMemberValueResolver<TSource, TDestination, TSourceMember, TMember>)
-            ) {
+            )
+            {
                 SourceMember = sourceMember
             };
 
@@ -402,7 +405,8 @@ namespace AutoMapper.Configuration
             var config = new ValueResolverConfiguration(
                 typeof(TValueConverter),
                 typeof(IValueConverter<TSourceMember, TMember>)
-            ) {
+            )
+            {
                 SourceMember = sourceMember,
                 SourceMemberName = sourceMemberName
             };
@@ -420,7 +424,8 @@ namespace AutoMapper.Configuration
             var config = new ValueResolverConfiguration(
                 valueConverter,
                 typeof(IValueConverter<TSourceMember, TMember>)
-            ) {
+            )
+            {
                 SourceMember = sourceMember,
                 SourceMemberName = sourceMemberName
             };

@@ -139,7 +139,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Post,
                 Test.Common.Configuration.Http.Http2RemoteEchoServer
-            ) {
+            )
+            {
                 Version = HttpVersion20.Value
             };
             request.Content = new StringContent(payload);

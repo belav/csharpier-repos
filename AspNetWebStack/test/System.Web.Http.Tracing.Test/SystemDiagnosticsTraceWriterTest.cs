@@ -546,7 +546,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request: null,
                 category: null,
                 level: TraceLevel.Info
-            ) {
+            )
+            {
                 Message = null,
                 Operation = null,
                 Operator = null,
@@ -583,7 +584,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request,
                 "System.Web.Http.Request",
                 TraceLevel.Info
-            ) {
+            )
+            {
                 Kind = TraceKind.Begin,
             };
 
@@ -618,7 +620,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request,
                 "System.Web.Http.Request",
                 TraceLevel.Info
-            ) {
+            )
+            {
                 Kind = TraceKind.End,
             };
 
@@ -667,7 +670,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request,
                 "System.Web.Http.Request",
                 TraceLevel.Info
-            ) {
+            )
+            {
                 Kind = TraceKind.Begin,
             };
 
@@ -713,7 +717,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request,
                 "System.Web.Http.Request",
                 TraceLevel.Info
-            ) {
+            )
+            {
                 Kind = TraceKind.Begin,
                 Message = "EnvelopeMessage",
                 Exception = exception
@@ -746,7 +751,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request: null,
                 category: null,
                 level: TraceLevel.Info
-            ) {
+            )
+            {
                 Kind = TraceKind.Begin,
             };
 
@@ -782,7 +788,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request,
                 "System.Web.Http.Request",
                 TraceLevel.Info
-            ) {
+            )
+            {
                 Kind = TraceKind.End,
                 Status = HttpStatusCode.Accepted
             };
@@ -829,7 +836,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request,
                 "System.Web.Http.Request",
                 TraceLevel.Info
-            ) {
+            )
+            {
                 Kind = TraceKind.End,
                 Status = HttpStatusCode.Accepted,
                 Message = "EnvelopeMessage",
@@ -864,7 +872,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request: null,
                 category: null,
                 level: TraceLevel.Info
-            ) {
+            )
+            {
                 Kind = TraceKind.End,
             };
 
@@ -1132,7 +1141,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request,
                 "System.Web.Http.Request",
                 TraceLevel.Error
-            ) {
+            )
+            {
                 Exception = new HttpResponseException(errorResponse)
             };
 
@@ -1191,7 +1201,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request,
                 "System.Web.Http.Request",
                 TraceLevel.Error
-            ) {
+            )
+            {
                 Exception = new HttpResponseException(errorResponse)
             };
 
@@ -1235,7 +1246,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request,
                 "System.Web.Http.Request",
                 TraceLevel.Error
-            ) {
+            )
+            {
                 Exception = new HttpResponseException(errorResponse)
             };
 
@@ -1288,7 +1300,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 request,
                 "System.Web.Http.Request",
                 TraceLevel.Error
-            ) {
+            )
+            {
                 Exception = new HttpResponseException(errorResponse)
             };
 

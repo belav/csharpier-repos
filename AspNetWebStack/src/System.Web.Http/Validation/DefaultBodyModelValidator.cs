@@ -69,7 +69,8 @@ namespace System.Web.Http.Validation
             ModelMetadata metadata = metadataProvider.GetMetadataForType(() => model, type);
             BodyModelValidatorContext validationContext = new BodyModelValidatorContext(
                 actionContext.ModelState
-            ) {
+            )
+            {
                 MetadataProvider = metadataProvider,
                 ActionContext = actionContext,
                 ValidatorCache = actionContext.GetValidatorCache(),

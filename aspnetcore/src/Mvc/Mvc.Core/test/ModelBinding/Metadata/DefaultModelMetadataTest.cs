@@ -344,7 +344,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var cache = new DefaultMetadataDetails(
                 key,
                 new ModelAttributes(new object[0], null, null)
-            ) {
+            )
+            {
                 BindingMetadata = new BindingMetadata()
                 {
                     IsBindingAllowed = false, // Will be ignored.
@@ -373,7 +374,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var cache = new DefaultMetadataDetails(
                 key,
                 new ModelAttributes(new object[0], null, null)
-            ) {
+            )
+            {
                 BindingMetadata = new BindingMetadata()
                 {
                     IsBindingRequired = true, // Will be ignored.
@@ -658,7 +660,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
                     ModelMetadataIdentity.ForProperty(typeof(int), kvp.Key, typeof(string)),
 #pragma warning restore CS0618 // Type or member is obsolete
                     attributes: new ModelAttributes(new object[0], new object[0], null)
-                ) {
+                )
+                {
                     DisplayMetadata = new DisplayMetadata(),
                 };
 
@@ -748,7 +751,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var cache = new DefaultMetadataDetails(
                 key,
                 new ModelAttributes(new object[0], null, null)
-            ) {
+            )
+            {
                 BindingMetadata = new BindingMetadata()
                 {
                     IsReadOnly = true, // Will be ignored.
@@ -913,7 +917,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var cache = new DefaultMetadataDetails(
                 key,
                 new ModelAttributes(new object[0], null, null)
-            ) {
+            )
+            {
                 ValidationMetadata = new ValidationMetadata { PropertyValidationFilter = value, },
             };
 
@@ -937,7 +942,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var cache = new DefaultMetadataDetails(
                 key,
                 new ModelAttributes(new object[0], null, null)
-            ) {
+            )
+            {
                 ValidationMetadata = new ValidationMetadata() { ValidateChildren = true, },
             };
 
@@ -961,7 +967,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             var cache = new DefaultMetadataDetails(
                 key,
                 new ModelAttributes(new object[0], null, null)
-            ) {
+            )
+            {
                 ValidationMetadata = new ValidationMetadata() { ValidateChildren = false, },
             };
 

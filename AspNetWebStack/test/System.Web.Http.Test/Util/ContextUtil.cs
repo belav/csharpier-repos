@@ -63,7 +63,8 @@ namespace System.Web.Http
             HttpActionExecutedContext actionExecutedContext = new HttpActionExecutedContext(
                 actionContext,
                 null
-            ) {
+            )
+            {
                 Response = response
             };
             return actionExecutedContext;

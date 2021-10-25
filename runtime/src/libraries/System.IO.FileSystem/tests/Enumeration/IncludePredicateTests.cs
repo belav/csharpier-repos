@@ -20,7 +20,8 @@ namespace System.IO.Tests.Enumeration
                 directory,
                 (ref FileSystemEntry entry) => entry.ToFullPath(),
                 new EnumerationOptions() { RecurseSubdirectories = recursive }
-            ) {
+            )
+            {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
                 {
                     if (entry.IsDirectory)

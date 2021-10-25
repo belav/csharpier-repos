@@ -1098,7 +1098,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var viewData = new ViewDataDictionary<ModelContainingListOfSources>(
                 provider,
                 modelState
-            ) {
+            )
+            {
                 ["Property1"] = new[] { SelectSources.ViewDataEntry },
                 ["Prefix.Property1"] = new[] { SelectSources.ViewDataEntryWithPrefix },
                 ["Prefix"] = new ModelContainingListOfSources
@@ -1146,7 +1147,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             var viewData = new ViewDataDictionary<ModelContainingListOfSources>(
                 provider,
                 modelState
-            ) {
+            )
+            {
                 ["Property1"] = new[] { SelectSources.ViewDataEntry },
                 ["Prefix.Property1"] = new[] { SelectSources.ViewDataEntryWithPrefix },
                 ["Prefix"] = new ModelContainingListOfSources

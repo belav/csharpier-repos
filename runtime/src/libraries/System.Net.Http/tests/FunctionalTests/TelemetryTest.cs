@@ -101,7 +101,8 @@ namespace System.Net.Http.Functional.Tests
                                             var request = new HttpRequestMessage(
                                                 HttpMethod.Get,
                                                 uri
-                                            ) {
+                                            )
+                                            {
                                                 Version = version
                                             };
 
@@ -317,7 +318,8 @@ namespace System.Net.Http.Functional.Tests
                                             var request = new HttpRequestMessage(
                                                 HttpMethod.Get,
                                                 uri
-                                            ) {
+                                            )
+                                            {
                                                 Version = version
                                             };
 
@@ -515,7 +517,8 @@ namespace System.Net.Http.Functional.Tests
                                             var request = new HttpRequestMessage(
                                                 HttpMethod.Get,
                                                 uri
-                                            ) {
+                                            )
+                                            {
                                                 Version = version
                                             };
 

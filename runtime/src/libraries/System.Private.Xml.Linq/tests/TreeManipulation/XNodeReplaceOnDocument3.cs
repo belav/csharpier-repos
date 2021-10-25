@@ -14,7 +14,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "(BVT)XDocument: Replace with multiple nodes"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             2,

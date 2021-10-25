@@ -223,7 +223,8 @@ namespace JitBench
                     var scenarioConfiguration = new ScenarioTestConfiguration(
                         TimeSpan.FromMinutes(60),
                         startInfo
-                    ) {
+                    )
+                    {
                         //XUnitPerformanceHarness writes files to disk starting with {runid}-{ScenarioBenchmarkName}-{TestName}
                         TestName = (Name + "-" + config.Name).Replace(' ', '_'),
                         Scenario = new ScenarioBenchmark("JitBench"),

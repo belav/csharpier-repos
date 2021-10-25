@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     {
         private static readonly string DefaultContentType = new MediaTypeHeaderValue(
             "application/json"
-        ) {
+        )
+        {
             Encoding = Encoding.UTF8
         }.ToString();
 

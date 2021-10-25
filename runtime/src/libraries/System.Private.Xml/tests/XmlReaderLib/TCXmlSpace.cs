@@ -28,7 +28,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Xmlspace test within a scope (no nested element)"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -42,7 +43,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Xmlspace test within a scope (with nested element)"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

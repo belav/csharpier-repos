@@ -277,7 +277,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             return new ResponseCachingContext(
                 new DefaultHttpContext(),
                 new TestLogger("ResponseCachingTests", testSink, true)
-            ) {
+            )
+            {
                 ResponseTime = DateTimeOffset.UtcNow
             };
         }

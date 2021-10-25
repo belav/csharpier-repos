@@ -44,7 +44,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "IsStartElement on regular Element, with namespace"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -58,7 +59,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "IsStartElement on Empty Tag, with default namespace"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

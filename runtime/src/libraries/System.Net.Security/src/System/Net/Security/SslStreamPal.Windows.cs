@@ -375,7 +375,8 @@ namespace System.Net.Security
                 stackalloc Interop.SspiCli.SecBuffer[NumSecBuffers];
             Interop.SspiCli.SecBufferDesc sdcInOut = new Interop.SspiCli.SecBufferDesc(
                 NumSecBuffers
-            ) {
+            )
+            {
                 pBuffers = unmanagedBuffer
             };
             fixed (byte* outputPtr = output)
@@ -461,7 +462,8 @@ namespace System.Net.Security
 
                 Interop.SspiCli.SecBufferDesc sdcInOut = new Interop.SspiCli.SecBufferDesc(
                     NumSecBuffers
-                ) {
+                )
+                {
                     pBuffers = unmanagedBuffer
                 };
                 Interop.SECURITY_STATUS errorCode =

@@ -158,7 +158,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
             output.Content.SetContent("original content");

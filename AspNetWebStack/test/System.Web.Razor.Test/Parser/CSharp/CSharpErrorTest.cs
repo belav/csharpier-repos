@@ -58,7 +58,8 @@ namespace System.Web.Razor.Test.Parser.CSharp
                         .With(
                             new AutoCompleteEditHandler(
                                 CSharpLanguageCharacteristics.Instance.TokenizeString
-                            ) {
+                            )
+                            {
                                 AutoCompleteString = "}"
                             }
                         )

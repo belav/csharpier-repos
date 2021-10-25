@@ -446,7 +446,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                     ServerCertificateValidationCallback =
                         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
                 }
-            ) {
+            )
+            {
                 BaseAddress = new Uri(address)
             };
         }
@@ -469,7 +470,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                     ServerCertificateCustomValidationCallback =
                         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
                 }
-            ) {
+            )
+            {
                 BaseAddress = new Uri(address)
             };
         }

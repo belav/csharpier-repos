@@ -31,7 +31,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Set and Get an element with an attribute that ends with />"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -58,7 +59,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Set and Get an element with an attribute that ends with />"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

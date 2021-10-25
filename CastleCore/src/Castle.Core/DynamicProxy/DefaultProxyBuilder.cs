@@ -71,7 +71,8 @@ namespace Castle.DynamicProxy
                 classToProxy,
                 additionalInterfacesToProxy,
                 options
-            ) {
+            )
+            {
                 Logger = logger
             };
             return generator.GetProxyType();
@@ -92,7 +93,8 @@ namespace Castle.DynamicProxy
                 classToProxy,
                 additionalInterfacesToProxy,
                 options
-            ) {
+            )
+            {
                 Logger = logger
             };
             return generator.GetProxyType();
@@ -115,7 +117,8 @@ namespace Castle.DynamicProxy
                 additionalInterfacesToProxy,
                 targetType,
                 options
-            ) {
+            )
+            {
                 Logger = logger
             };
             return generator.GetProxyType();
@@ -137,7 +140,8 @@ namespace Castle.DynamicProxy
                 additionalInterfacesToProxy,
                 interfaceToProxy,
                 options
-            ) {
+            )
+            {
                 Logger = logger
             };
             return generator.GetProxyType();
@@ -159,7 +163,8 @@ namespace Castle.DynamicProxy
                 additionalInterfacesToProxy,
                 typeof(object),
                 options
-            ) {
+            )
+            {
                 Logger = logger
             };
             return generator.GetProxyType();

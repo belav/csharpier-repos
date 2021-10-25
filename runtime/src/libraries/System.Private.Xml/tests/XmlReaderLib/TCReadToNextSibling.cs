@@ -52,7 +52,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Read on a deep tree at least more than 4K boundary"
-                        ) {
+                        )
+                        {
                             Pri = 2
                         }
                     }
@@ -125,7 +126,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "If name not found, stop at end element of the subtree"
-                        ) {
+                        )
+                        {
                             Pri = 1
                         }
                     }
@@ -139,7 +141,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Positioning on a level and try to find the name which is on a level higher"
-                        ) {
+                        )
+                        {
                             Pri = 1
                         }
                     }
@@ -153,7 +156,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Read to next sibling on one level and again to level below it"
-                        ) {
+                        )
+                        {
                             Pri = 1
                         }
                     }
@@ -177,7 +181,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Pass null to both arguments throws ArgumentException"
-                        ) {
+                        )
+                        {
                             Pri = 2
                         }
                     }

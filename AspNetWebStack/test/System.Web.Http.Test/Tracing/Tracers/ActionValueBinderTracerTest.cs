@@ -31,7 +31,8 @@ namespace System.Web.Http.Tracing.Tracers
                 new Mock<HttpParameterDescriptor>() { CallBase = true };
             Mock<HttpParameterBinding> mockParameterBinding = new Mock<HttpParameterBinding>(
                 mockParameterDescriptor.Object
-            ) {
+            )
+            {
                 CallBase = true
             };
             HttpActionBinding actionBinding = new HttpActionBinding(
@@ -89,7 +90,8 @@ namespace System.Web.Http.Tracing.Tracers
                 new Mock<HttpParameterDescriptor>() { CallBase = true };
             Mock<HttpParameterBinding> mockParameterBinding = new Mock<HttpParameterBinding>(
                 mockParameterDescriptor.Object
-            ) {
+            )
+            {
                 CallBase = true
             };
             HttpActionBinding actionBinding = new HttpActionBinding(
@@ -149,7 +151,8 @@ namespace System.Web.Http.Tracing.Tracers
                     mockParameterDescriptor.Object,
                     new MediaTypeFormatterCollection(),
                     null
-                ) {
+                )
+                {
                     CallBase = true
                 };
             HttpActionBinding actionBinding = new HttpActionBinding(
@@ -206,7 +209,8 @@ namespace System.Web.Http.Tracing.Tracers
                     mockParameterDescriptor.Object,
                     new MediaTypeFormatterCollection(),
                     null
-                ) {
+                )
+                {
                     CallBase = true
                 };
             HttpActionBinding actionBinding = new HttpActionBinding(

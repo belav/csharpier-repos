@@ -62,7 +62,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument.Load() Encodings: UTF8, UTF16, UTF16BE"
-                    ) {
+                    )
+                    {
                         Priority = 0
                     }
                 }
@@ -72,7 +73,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement.Load() Encodings: UTF8, UTF16, UTF16BE"
-                    ) {
+                    )
+                    {
                         Priority = 0
                     }
                 }
@@ -82,7 +84,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument.Load(), Load options, preserveWhitespace, Stream"
-                    ) {
+                    )
+                    {
                         Param = "Stream",
                         Priority = 0
                     }
@@ -93,7 +96,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument.Load(), Load options, preserveWhitespace, Uri"
-                    ) {
+                    )
+                    {
                         Param = "Uri",
                         Priority = 0
                     }
@@ -104,7 +108,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument.Load(), Load options, BaseUri, Uri"
-                    ) {
+                    )
+                    {
                         Param = "Uri",
                         Priority = 0
                     }
@@ -115,7 +120,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument.Load(), Load options, LineInfo, Uri"
-                    ) {
+                    )
+                    {
                         Param = "Uri",
                         Priority = 0
                     }
@@ -126,7 +132,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument.Load(), Load options, LineInfo, Stream"
-                    ) {
+                    )
+                    {
                         Param = "Stream",
                         Priority = 0
                     }
@@ -137,7 +144,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement.Load(), Load options, preserveWhitespace, Uri"
-                    ) {
+                    )
+                    {
                         Param = "Uri",
                         Priority = 0
                     }
@@ -148,7 +156,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement.Load(), Load options, preserveWhitespace, Stream"
-                    ) {
+                    )
+                    {
                         Param = "Stream",
                         Priority = 0
                     }
@@ -159,7 +168,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement.Load(), Load options, BaseUri, Uri"
-                    ) {
+                    )
+                    {
                         Param = "Uri",
                         Priority = 0
                     }
@@ -170,7 +180,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement.Load(), Load options, LineInfo, Stream"
-                    ) {
+                    )
+                    {
                         Param = "Stream",
                         Priority = 0
                     }
@@ -181,7 +192,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement.Load(), Load options, LineInfo, Uri"
-                    ) {
+                    )
+                    {
                         Param = "Uri",
                         Priority = 0
                     }
@@ -192,7 +204,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument.Save(), SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces"
-                    ) {
+                    )
+                    {
                         Param = 3,
                         Priority = 1
                     }
@@ -203,7 +216,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument.Save(), SaveOptions.OmitDuplicateNamespaces"
-                    ) {
+                    )
+                    {
                         Param = 2,
                         Priority = 1
                     }
@@ -224,7 +238,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument.Save(), SaveOptions.DisableFormatting "
-                    ) {
+                    )
+                    {
                         Param = 1,
                         Priority = 1
                     }
@@ -235,7 +250,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement.Save(), SaveOptions.OmitDuplicateNamespaces"
-                    ) {
+                    )
+                    {
                         Param = 2,
                         Priority = 1
                     }
@@ -256,7 +272,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement.Save(), SaveOptions.DisableFormatting "
-                    ) {
+                    )
+                    {
                         Param = 1,
                         Priority = 1
                     }
@@ -267,7 +284,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement.Save(), SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces"
-                    ) {
+                    )
+                    {
                         Param = 3,
                         Priority = 1
                     }
@@ -306,7 +324,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument.Save(), Encoding hints - No hint, Fallback to UTF8"
-                    ) {
+                    )
+                    {
                         Priority = 1
                     }
                 }

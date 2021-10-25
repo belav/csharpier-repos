@@ -39,7 +39,8 @@ namespace System.Net.Http
         // Set of header fields that only support single values such as Set-Cookie.
         private static readonly HashSet<string> _singleValueHeaderFields = new HashSet<string>(
             StringComparer.OrdinalIgnoreCase
-        ) {
+        )
+        {
             "Cookie",
             "Set-Cookie",
             "X-Powered-By",

@@ -502,7 +502,8 @@ namespace System.Buffers.Text.Tests
                 convertedValue,
                 testData.FormatSymbol,
                 testData.ExpectedSuccess
-            ) {
+            )
+            {
                 ExpectedBytesConsumed = testData.ExpectedBytesConsumed
             };
         }

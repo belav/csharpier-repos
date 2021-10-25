@@ -220,7 +220,8 @@ namespace System.CommandLine.Tests
             {
                 var argument = new Argument<int>(
                     result => result.Tokens.Select(t => int.Parse(t.Value)).Sum()
-                ) {
+                )
+                {
                     Arity = ArgumentArity.ZeroOrMore
                 };
 
@@ -375,7 +376,8 @@ namespace System.CommandLine.Tests
                             return null;
                         },
                         true
-                    ) {
+                    )
+                    {
                         Arity = new ArgumentArity(0, 2)
                     },
                     new Argument<DirectoryInfo>(
@@ -386,7 +388,8 @@ namespace System.CommandLine.Tests
                             return null;
                         },
                         true
-                    ) {
+                    )
+                    {
                         Arity = ArgumentArity.ExactlyOne
                     }
                 };

@@ -1725,7 +1725,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         syntax,
                         methodSymbol,
                         unknownArgument
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }
@@ -1751,7 +1752,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         syntax,
                         methodSymbol,
                         dispatchArgument
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }
@@ -1774,7 +1776,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         null,
                         fieldSymbol,
                         ConstantValue.NotAvailable
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }
@@ -1962,7 +1965,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         syntax,
                         ConstantValue.Create(line),
                         Compilation.GetSpecialType(SpecialType.System_Int32)
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }
@@ -1976,7 +1980,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         syntax,
                         ConstantValue.Create(path),
                         Compilation.GetSpecialType(SpecialType.System_String)
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }
@@ -1987,7 +1992,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         syntax,
                         ConstantValue.Create(memberName),
                         Compilation.GetSpecialType(SpecialType.System_String)
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }

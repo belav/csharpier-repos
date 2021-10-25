@@ -25,7 +25,8 @@ namespace System.Net.Http.Functional.Tests
                         HttpRequestMessage request = new HttpRequestMessage(
                             new HttpMethod("CONNECT"),
                             url
-                        ) {
+                        )
+                        {
                             Version = UseVersion
                         };
                         request.Headers.Host = "foo.com:345";
@@ -82,7 +83,8 @@ namespace System.Net.Http.Functional.Tests
                                     TextWriter serverWriter = new StreamWriter(
                                         connection.Stream,
                                         leaveOpen: true
-                                    ) {
+                                    )
+                                    {
                                         AutoFlush = true
                                     };
 
@@ -118,7 +120,8 @@ namespace System.Net.Http.Functional.Tests
                         HttpRequestMessage request = new HttpRequestMessage(
                             new HttpMethod("CONNECT"),
                             url
-                        ) {
+                        )
+                        {
                             Version = UseVersion
                         };
                         request.Headers.Host = "foo.com:345";

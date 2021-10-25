@@ -20,7 +20,8 @@ namespace Microsoft.Web.Mvc.Test
             // Arrange
             Dictionary<string, object> backingStore = new Dictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "foo", "fooValue" },
                 { "bar.baz", "barBazValue" }
             };

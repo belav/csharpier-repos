@@ -45,7 +45,8 @@ namespace System.Net.Http
                     "requests-started",
                     this,
                     () => Interlocked.Read(ref _startedRequests)
-                ) {
+                )
+                {
                     DisplayName = "Requests Started",
                 };
 
@@ -54,7 +55,8 @@ namespace System.Net.Http
                     "requests-started-rate",
                     this,
                     () => Interlocked.Read(ref _startedRequests)
-                ) {
+                )
+                {
                     DisplayName = "Requests Started Rate",
                     DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                 };
@@ -67,7 +69,8 @@ namespace System.Net.Http
                     "requests-failed",
                     this,
                     () => Interlocked.Read(ref _failedRequests)
-                ) {
+                )
+                {
                     DisplayName = "Requests Failed"
                 };
 
@@ -76,7 +79,8 @@ namespace System.Net.Http
                     "requests-failed-rate",
                     this,
                     () => Interlocked.Read(ref _failedRequests)
-                ) {
+                )
+                {
                     DisplayName = "Requests Failed Rate",
                     DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                 };
@@ -90,7 +94,8 @@ namespace System.Net.Http
                     () =>
                         -Interlocked.Read(ref _stoppedRequests)
                         + Interlocked.Read(ref _startedRequests)
-                ) {
+                )
+                {
                     DisplayName = "Current Requests"
                 };
 
@@ -98,7 +103,8 @@ namespace System.Net.Http
                     "http11-connections-current-total",
                     this,
                     () => Interlocked.Read(ref _openedHttp11Connections)
-                ) {
+                )
+                {
                     DisplayName = "Current Http 1.1 Connections"
                 };
 
@@ -106,14 +112,16 @@ namespace System.Net.Http
                     "http20-connections-current-total",
                     this,
                     () => Interlocked.Read(ref _openedHttp20Connections)
-                ) {
+                )
+                {
                     DisplayName = "Current Http 2.0 Connections"
                 };
 
                 _http11RequestsQueueDurationCounter ??= new EventCounter(
                     "http11-requests-queue-duration",
                     this
-                ) {
+                )
+                {
                     DisplayName = "HTTP 1.1 Requests Queue Duration",
                     DisplayUnits = "ms"
                 };
@@ -121,7 +129,8 @@ namespace System.Net.Http
                 _http20RequestsQueueDurationCounter ??= new EventCounter(
                     "http20-requests-queue-duration",
                     this
-                ) {
+                )
+                {
                     DisplayName = "HTTP 2.0 Requests Queue Duration",
                     DisplayUnits = "ms"
                 };

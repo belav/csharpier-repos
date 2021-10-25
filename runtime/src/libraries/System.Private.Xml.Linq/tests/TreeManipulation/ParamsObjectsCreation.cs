@@ -35,7 +35,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument - combination off allowed types in correct order, without decl"
-                    ) {
+                    )
+                    {
                         Param = "Mix2",
                         Priority = 1
                     }
@@ -76,7 +77,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument - combination off allowed types in correct order"
-                    ) {
+                    )
+                    {
                         Param = "Mix1",
                         Priority = 1
                     }
@@ -87,7 +89,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument - combination off allowed types in correct order,  cloned"
-                    ) {
+                    )
+                    {
                         Param = "Mix1",
                         Priority = 1
                     }
@@ -128,7 +131,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument - combination off allowed types in correct order, without decl;  cloned"
-                    ) {
+                    )
+                    {
                         Param = "Mix2",
                         Priority = 1
                     }
@@ -177,7 +181,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument - Invalid case - Mix with attribute"
-                    ) {
+                    )
+                    {
                         Param = "MixAttr",
                         Priority = 2
                     }
@@ -198,7 +203,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument - Invalid case with clone - double root - sanity"
-                    ) {
+                    )
+                    {
                         Priority = 1
                     }
                 }
@@ -208,7 +214,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument - the same node instance, connected - sanity"
-                    ) {
+                    )
+                    {
                         Param = true,
                         Priority = 1
                     }
@@ -219,7 +226,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument - the same node instance - sanity"
-                    ) {
+                    )
+                    {
                         Param = false,
                         Priority = 1
                     }

@@ -253,8 +253,10 @@ namespace System.Net.Security.Tests
                 Assert.Equal(string.Empty, client.TargetHostName);
                 Assert.Equal(string.Empty, server.TargetHostName);
 
-                SslClientAuthenticationOptions clientOptions =
-                    new SslClientAuthenticationOptions() { TargetHost = targetName };
+                SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions()
+                {
+                    TargetHost = targetName
+                };
                 clientOptions.RemoteCertificateValidationCallback = (
                     sender,
                     certificate,

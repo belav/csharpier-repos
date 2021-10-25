@@ -576,7 +576,8 @@ namespace System.Web.Mvc.Async
                             _actionDescriptor,
                             canceled: false,
                             exception: null
-                        ) {
+                        )
+                        {
                             Result = _invoker.EndInvokeActionMethod(InnerAsyncResult)
                         };
                 }
@@ -592,7 +593,8 @@ namespace System.Web.Mvc.Async
                         preContext.ActionDescriptor,
                         canceled: true,
                         exception: null
-                    ) {
+                    )
+                    {
                         Result = preContext.Result
                     };
                     return () => shortCircuitedPostContext;

@@ -41,7 +41,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlLang test within a scope (with nested element)"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

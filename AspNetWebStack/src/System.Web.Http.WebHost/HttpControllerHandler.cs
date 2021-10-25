@@ -678,7 +678,8 @@ namespace System.Web.Http.WebHost
                     exception,
                     catchBlock,
                     request
-                ) {
+                )
+                {
                     Response = response
                 };
                 await exceptionLogger.LogAsync(exceptionContext, cancellationToken);

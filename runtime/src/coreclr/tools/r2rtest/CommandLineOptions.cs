@@ -220,7 +220,8 @@ namespace R2RTest
                 new Option<DirectoryInfo>(
                     new[] { "--core-root-directory", "-cr" },
                     "Location of the CoreCLR CORE_ROOT folder"
-                ) {
+                )
+                {
                     Required = true
                 }.ExistingOnly();
 
@@ -228,7 +229,8 @@ namespace R2RTest
                 new Option<DirectoryInfo[]>(
                     new[] { "--reference-path", "-r" },
                     "Folder containing assemblies to reference during compilation"
-                ) {
+                )
+                {
                     Argument = new Argument<DirectoryInfo[]>()
                     {
                         Arity = ArgumentArity.ZeroOrMore
@@ -239,7 +241,8 @@ namespace R2RTest
                 new Option<FileInfo[]>(
                     new[] { "--mibc-path", "-m" },
                     "Mibc files to use in compilation"
-                ) {
+                )
+                {
                     Argument = new Argument<FileInfo[]>()
                     {
                         Arity = ArgumentArity.ZeroOrMore

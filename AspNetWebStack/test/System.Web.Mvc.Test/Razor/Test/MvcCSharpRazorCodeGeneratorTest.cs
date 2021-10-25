@@ -80,7 +80,8 @@ namespace System.Web.Mvc.Razor.Test
             Mock<MvcWebPageRazorHost> mockHost = new Mock<MvcWebPageRazorHost>(
                 "SomeSourceFile.cshtml",
                 "SomeSourceFile.cshtml"
-            ) {
+            )
+            {
                 CallBase = true
             };
             mockHost.SetupGet(h => h.NamespaceImports).Returns(new HashSet<string>());

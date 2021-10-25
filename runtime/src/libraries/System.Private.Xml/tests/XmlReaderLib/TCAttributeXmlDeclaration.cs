@@ -28,7 +28,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToFirstAttribute/MoveToNextAttribute navigation"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

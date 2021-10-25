@@ -349,7 +349,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 displayTextSuffix: newDisplayTextSuffix,
                 inlineDescription: newInlineDescription,
                 isComplexTextEdit: newIsComplexTextEdit
-            ) {
+            )
+            {
                 AutomationText = AutomationText,
                 ProviderName = ProviderName,
                 Flags = Flags,

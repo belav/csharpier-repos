@@ -391,7 +391,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ConstantValue.NotAvailable,
                 LookupResultKind.Viable,
                 f.Type
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -774,7 +775,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 left,
                 right,
                 type
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -787,7 +789,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Type(type),
                 Conversion.ExplicitReference,
                 type
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -808,7 +811,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Type(type),
                 c,
                 SpecialType(Microsoft.CodeAnalysis.SpecialType.System_Boolean)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -916,7 +920,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Syntax,
                 ConstantValue.Create(value),
                 SpecialType(Microsoft.CodeAnalysis.SpecialType.System_Int32)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -927,7 +932,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Syntax,
                 ConstantValue.Create(value),
                 SpecialType(Microsoft.CodeAnalysis.SpecialType.System_UInt32)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1163,7 +1169,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 resultKind: LookupResultKind.Viable,
                 type: method.ReturnType,
                 hasErrors: method.OriginalDefinition is ErrorMethodSymbol
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1190,7 +1197,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 defaultArguments: default(BitVector),
                 resultKind: LookupResultKind.Viable,
                 type: method.ReturnType
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1212,7 +1220,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 type,
                 wasTargetTyped: false,
                 type
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1235,7 +1244,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 valueTypeReceiver,
                 referenceTypeReceiver,
                 valueTypeReceiver.Type
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1258,7 +1268,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Conversion.Identity,
                 BoundNullCoalescingOperatorResultKind.LeftType,
                 left.Type
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1399,7 +1410,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 sideEffects.AsImmutableOrNull(),
                 result,
                 resultType
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1508,7 +1520,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 caseBuilder.ToImmutableAndFree(),
                 breakLabel,
                 null
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
             return Block(statements.ToImmutableAndFree());
@@ -1548,7 +1561,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Syntax,
                 ConstantValue.Create(value),
                 SpecialType(Microsoft.CodeAnalysis.SpecialType.System_Boolean)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1566,7 +1580,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Syntax,
                 stringConst,
                 SpecialType(Microsoft.CodeAnalysis.SpecialType.System_String)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1708,7 +1723,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Type(type),
                 WellKnownMethod(CodeAnalysis.WellKnownMember.System_Type__GetTypeFromHandle),
                 WellKnownType(CodeAnalysis.WellKnownType.System_Type)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1738,7 +1754,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Type(type),
                 Binder.GetConstantSizeOf(type),
                 SpecialType(Microsoft.CodeAnalysis.SpecialType.System_Int32)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1752,7 +1769,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 WellKnownType(
                     Microsoft.CodeAnalysis.WellKnownType.System_Reflection_ConstructorInfo
                 )
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1763,7 +1781,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Syntax,
                 method,
                 SpecialType(Microsoft.CodeAnalysis.SpecialType.System_Int32)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1777,7 +1796,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new BoundModuleVersionId(
                 Syntax,
                 WellKnownType(Microsoft.CodeAnalysis.WellKnownType.System_Guid)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1787,7 +1807,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new BoundModuleVersionIdString(
                 Syntax,
                 SpecialType(Microsoft.CodeAnalysis.SpecialType.System_String)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1805,7 +1826,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new BoundMaximumMethodDefIndex(
                 Syntax,
                 SpecialType(Microsoft.CodeAnalysis.SpecialType.System_Int32)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1819,7 +1841,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Syntax,
                 document,
                 SpecialType(Microsoft.CodeAnalysis.SpecialType.System_Int32)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1848,7 +1871,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 method,
                 GetMethodFromHandleMethod(method.ContainingType),
                 WellKnownType(Microsoft.CodeAnalysis.WellKnownType.System_Reflection_MethodInfo)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1860,7 +1884,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 field,
                 GetFieldFromHandleMethod(field.ContainingType),
                 WellKnownType(Microsoft.CodeAnalysis.WellKnownType.System_Reflection_FieldInfo)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1966,7 +1991,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 conversionGroupOpt: null,
                 null,
                 type
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -2024,7 +2050,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray.Create<BoundExpression>(length),
                 null,
                 Compilation.CreateArrayTypeSymbol(elementType)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }

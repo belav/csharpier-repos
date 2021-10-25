@@ -105,7 +105,8 @@ namespace System.Data.Common
             DataColumn assemblyQualifiedNameColumn = new DataColumn(
                 AssemblyQualifiedNameColumnName,
                 typeof(string)
-            ) {
+            )
+            {
                 ReadOnly = true
             };
 

@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc
                 null,
                 new { id = 10, test = "value" },
                 permanentRedirect
-            ) {
+            )
+            {
                 UrlHelper = urlHelper,
             };
 
@@ -110,7 +111,8 @@ namespace Microsoft.AspNetCore.Mvc
                 values,
                 true,
                 "test-fragment"
-            ) {
+            )
+            {
                 UrlHelper = urlHelper.Object,
                 Protocol = "ftp",
             };
@@ -169,7 +171,8 @@ namespace Microsoft.AspNetCore.Mvc
                 values,
                 true,
                 "test-fragment"
-            ) {
+            )
+            {
                 UrlHelper = urlHelper.Object,
                 Protocol = "ftp",
             };

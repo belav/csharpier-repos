@@ -87,7 +87,8 @@ namespace System.Web.WebPages.Razor
                 DefineSectionMethodName,
                 BeginContextMethodName,
                 EndContextMethodName
-            ) {
+            )
+            {
                 ResolveUrlMethodName = ResolveUrlMethodName
             };
             DefaultPageBaseClass = PageBaseClass;

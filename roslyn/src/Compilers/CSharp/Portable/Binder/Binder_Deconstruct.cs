@@ -246,7 +246,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 constantValueOpt: null,
                 type: returnType,
                 hasErrors: hasErrors
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 

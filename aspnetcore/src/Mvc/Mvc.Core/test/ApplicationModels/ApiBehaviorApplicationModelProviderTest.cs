@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var controllerModel = new ControllerModel(
                 typeof(TestApiController).GetTypeInfo(),
                 new[] { new ApiControllerAttribute() }
-            ) {
+            )
+            {
                 Selectors =
                 {
                     new SelectorModel { AttributeRouteModel = new AttributeRouteModel() }

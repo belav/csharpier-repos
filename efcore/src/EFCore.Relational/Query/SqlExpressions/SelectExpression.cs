@@ -1487,7 +1487,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 _tableReferences.ToList(),
                 _groupBy.ToList(),
                 _orderings.ToList()
-            ) {
+            )
+            {
                 IsDistinct = IsDistinct,
                 Predicate = Predicate,
                 Having = Having,
@@ -3126,7 +3127,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 _tableReferences.ToList(),
                 _groupBy.ToList(),
                 _orderings.ToList()
-            ) {
+            )
+            {
                 IsDistinct = IsDistinct,
                 Predicate = Predicate,
                 Having = Having,
@@ -3837,7 +3839,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     newTableReferences,
                     newGroupBy,
                     newOrderings
-                ) {
+                )
+                {
                     _projectionMapping = newProjectionMapping,
                     Predicate = predicate,
                     Having = havingExpression,
@@ -3915,7 +3918,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 newTableReferences,
                 groupBy.ToList(),
                 orderings.ToList()
-            ) {
+            )
+            {
                 _projectionMapping = projectionMapping,
                 Predicate = predicate,
                 Having = having,

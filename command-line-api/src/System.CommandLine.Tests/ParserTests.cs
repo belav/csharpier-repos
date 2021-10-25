@@ -1018,7 +1018,8 @@ namespace System.CommandLine.Tests
             {
                 new Argument<DirectoryInfo>(
                     () => new DirectoryInfo(Directory.GetCurrentDirectory())
-                ) {
+                )
+                {
                     Name = "the-arg"
                 }
             };

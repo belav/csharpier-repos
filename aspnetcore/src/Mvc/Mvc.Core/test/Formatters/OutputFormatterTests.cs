@@ -69,7 +69,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
                 "Hello, world!"
-            ) {
+            )
+            {
                 ContentType = new StringSegment(formatter.SupportedMediaTypes[0].ToString()),
             };
 
@@ -100,7 +101,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
                 "Hello, world!"
-            ) {
+            )
+            {
                 ContentType = new StringSegment(requestedContentType),
                 ContentTypeIsServerDefined = contentTypeProvidedByServer,
             };

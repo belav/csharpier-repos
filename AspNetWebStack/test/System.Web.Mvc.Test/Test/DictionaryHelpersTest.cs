@@ -15,7 +15,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             Dictionary<string, object> dict = new Dictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "FOOBAR", 42 }
             };
 
@@ -32,7 +33,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             Dictionary<string, object> dict = new Dictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "FOO.BAR", 42 }
             };
 
@@ -49,7 +51,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             Dictionary<string, string> dict = new Dictionary<string, string>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "FOO", "fooValue" },
                 { "FOOBAR", "foobarValue" },
                 { "FOO.BAR", "foo.barValue" },

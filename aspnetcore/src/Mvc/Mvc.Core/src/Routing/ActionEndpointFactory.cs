@@ -122,7 +122,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                         requestDelegate,
                         updatedRoutePattern,
                         route.Order
-                    ) {
+                    )
+                    {
                         DisplayName = action.DisplayName,
                     };
                     AddActionDataToBuilder(
@@ -177,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     requestDelegate,
                     updatedRoutePattern,
                     action.AttributeRouteInfo.Order
-                ) {
+                )
+                {
                     DisplayName = action.DisplayName,
                 };
                 AddActionDataToBuilder(
@@ -254,7 +256,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 context => Task.CompletedTask,
                 pattern,
                 route.Order
-            ) {
+            )
+            {
                 DisplayName = "Route: " + route.Pattern.RawText,
                 Metadata = { new SuppressMatchingMetadata(), },
             };

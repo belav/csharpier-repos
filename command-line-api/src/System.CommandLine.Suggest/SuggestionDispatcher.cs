@@ -31,7 +31,8 @@ namespace System.CommandLine.Suggest
             CompleteScriptCommand = new Command(
                 "script",
                 "Print complete script for specific shell"
-            ) {
+            )
+            {
                 new Argument<ShellType> { Name = nameof(ShellType) }
             };
             CompleteScriptCommand.Handler = CommandHandler.Create<IConsole, ShellType>(

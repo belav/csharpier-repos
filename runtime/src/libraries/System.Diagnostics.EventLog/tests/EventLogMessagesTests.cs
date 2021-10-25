@@ -69,7 +69,8 @@ namespace System.Diagnostics.Tests
             EventSourceCreationData log = new EventSourceCreationData(
                 $"TestEventMessageSource {Guid.NewGuid()}",
                 "Application"
-            ) {
+            )
+            {
                 MessageResourceFile = messageDllPath
             };
             try

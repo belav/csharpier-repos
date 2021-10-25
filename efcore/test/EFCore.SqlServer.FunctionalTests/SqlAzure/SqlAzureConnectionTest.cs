@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.SqlAzure
         {
             var connectionStringBuilder = new SqlConnectionStringBuilder(
                 SqlServerTestStore.CreateConnectionString("adventureworks")
-            ) {
+            )
+            {
                 Encrypt = encryptionEnabled
             };
             var options = new DbContextOptionsBuilder();

@@ -437,7 +437,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parsing xml with DTD and 200 attributes and 1 duplicate"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -447,7 +448,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parsing xml with DTD and 200 attributes with ns and 1 duplicate"
-                        ) {
+                        )
+                        {
                             Param = 2
                         }
                     }
@@ -505,7 +507,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader should fail on ENTITY name with colons in it"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -515,7 +518,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader should fail on ENTITY name with colons in it"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }

@@ -134,7 +134,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadValue for value more than 4K and invalid element"
-                        ) {
+                        )
+                        {
                             Pri = 1
                         }
                     }
@@ -252,7 +253,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Call on invalid element content after 4k boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { false, 4096 },
                             Pri = 1
                         }
@@ -263,7 +265,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Call on invalid element content after 64k boundary for Async"
-                        ) {
+                        )
+                        {
                             Params = new object[] { true, 65536 },
                             Pri = 1
                         }

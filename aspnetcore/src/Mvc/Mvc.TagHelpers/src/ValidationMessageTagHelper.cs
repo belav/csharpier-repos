@@ -78,7 +78,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 {
                     htmlAttributes = new Dictionary<string, object>(
                         StringComparer.OrdinalIgnoreCase
-                    ) {
+                    )
+                    {
                         { DataValidationForAttributeName, "-non-empty-value-" },
                     };
                 }

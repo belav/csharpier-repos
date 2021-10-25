@@ -20,7 +20,8 @@ namespace System.Buffers.Text.Tests
                     testData.ExpectedValue,
                     testData.FormatSymbol,
                     expectedSuccess: true
-                ) {
+                )
+                {
                     ExpectedBytesConsumed = testData.ExpectedBytesConsumed
                 };
                 ValidateParserHelper(testDataWithExtraCharacter);

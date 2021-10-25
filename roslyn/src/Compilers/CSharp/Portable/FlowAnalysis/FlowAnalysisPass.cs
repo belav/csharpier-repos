@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         block.Syntax,
                         ImmutableArray<LocalSymbol>.Empty,
                         newStatements
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
 #if DEBUG

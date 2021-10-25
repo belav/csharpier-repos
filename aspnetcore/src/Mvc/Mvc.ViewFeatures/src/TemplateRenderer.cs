@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Func<IHtmlHelper, IHtmlContent>
         > _defaultDisplayActions = new Dictionary<string, Func<IHtmlHelper, IHtmlContent>>(
             StringComparer.OrdinalIgnoreCase
-        ) {
+        )
+        {
             { "Collection", DefaultDisplayTemplates.CollectionTemplate },
             { "EmailAddress", DefaultDisplayTemplates.EmailAddressTemplate },
             { "HiddenInput", DefaultDisplayTemplates.HiddenInputTemplate },
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             Func<IHtmlHelper, IHtmlContent>
         > _defaultEditorActions = new Dictionary<string, Func<IHtmlHelper, IHtmlContent>>(
             StringComparer.OrdinalIgnoreCase
-        ) {
+        )
+        {
             { "Collection", DefaultEditorTemplates.CollectionTemplate },
             { "EmailAddress", DefaultEditorTemplates.EmailAddressInputTemplate },
             { "HiddenInput", DefaultEditorTemplates.HiddenInputTemplate },

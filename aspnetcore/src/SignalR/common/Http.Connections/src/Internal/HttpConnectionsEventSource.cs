@@ -91,28 +91,32 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                     "connections-started",
                     this,
                     () => Volatile.Read(ref _connectionsStarted)
-                ) {
+                )
+                {
                     DisplayName = "Total Connections Started",
                 };
                 _connectionsStoppedCounter ??= new PollingCounter(
                     "connections-stopped",
                     this,
                     () => Volatile.Read(ref _connectionsStopped)
-                ) {
+                )
+                {
                     DisplayName = "Total Connections Stopped",
                 };
                 _connectionsTimedOutCounter ??= new PollingCounter(
                     "connections-timed-out",
                     this,
                     () => Volatile.Read(ref _connectionsTimedOut)
-                ) {
+                )
+                {
                     DisplayName = "Total Connections Timed Out",
                 };
                 _currentConnectionsCounter ??= new PollingCounter(
                     "current-connections",
                     this,
                     () => Volatile.Read(ref _currentConnections)
-                ) {
+                )
+                {
                     DisplayName = "Current Connections",
                 };
 

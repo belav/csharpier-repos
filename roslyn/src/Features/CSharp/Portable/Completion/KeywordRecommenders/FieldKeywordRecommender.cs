@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         // interfaces don't have members that you can put a [field:] attribute on
         private static readonly ISet<SyntaxKind> s_validTypeDeclarations = new HashSet<SyntaxKind>(
             SyntaxFacts.EqualityComparer
-        ) {
+        )
+        {
             SyntaxKind.StructDeclaration,
             SyntaxKind.ClassDeclaration,
             SyntaxKind.RecordDeclaration,

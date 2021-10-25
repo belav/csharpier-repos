@@ -170,7 +170,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "OnAuthorizationAsync"
                 },
@@ -178,7 +179,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "OnAuthorizationAsync"
                 },
@@ -234,7 +236,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "OnAuthorizationAsync"
                 },
@@ -242,7 +245,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "OnAuthorizationAsync"
                 }

@@ -427,7 +427,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                                             syntax,
                                             RefKind.None,
                                             expression
-                                        ) {
+                                        )
+                                        {
                                             WasCompilerGenerated = true
                                         };
                                     }

@@ -234,7 +234,8 @@ namespace System
                         encoding: OutputEncoding.RemovePreamble(), // This ensures no prefix is written to the stream.
                         bufferSize: WriteBufferSize,
                         leaveOpen: true
-                    ) {
+                    )
+                    {
                         AutoFlush = true
                     }
             );

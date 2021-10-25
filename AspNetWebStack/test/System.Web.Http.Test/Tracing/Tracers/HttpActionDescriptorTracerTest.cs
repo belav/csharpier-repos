@@ -485,7 +485,8 @@ namespace System.Web.Http.Tracing.Tracers
                     controllerContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "ExecuteAsync"
                 },
@@ -493,7 +494,8 @@ namespace System.Web.Http.Tracing.Tracers
                     controllerContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.End
                 }
             };
@@ -548,14 +550,16 @@ namespace System.Web.Http.Tracing.Tracers
                     controllerContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin
                 },
                 new TraceRecord(
                     controllerContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End
                 }
             };

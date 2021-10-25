@@ -46,7 +46,8 @@ namespace Castle.DynamicProxy.Contributors
                     @interface,
                     true,
                     targetType.GetInterfaceMap(@interface)
-                ) {
+                )
+                {
                     Logger = Logger
                 };
                 yield return item;

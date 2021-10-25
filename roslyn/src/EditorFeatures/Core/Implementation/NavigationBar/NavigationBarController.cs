@@ -349,7 +349,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                     oldRight.ChildItems,
                     oldRight.Bolded,
                     oldRight.Grayed || selectedItems.ShowMemberItemGrayed
-                ) {
+                )
+                {
                     TrackingSpans = oldRight.TrackingSpans
                 };
                 listOfRight.Add(newRight);
@@ -364,7 +365,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                     listOfRight.ToImmutable(),
                     oldLeft.Bolded,
                     oldLeft.Grayed || selectedItems.ShowTypeItemGrayed
-                ) {
+                )
+                {
                     TrackingSpans = oldLeft.TrackingSpans
                 };
                 listOfLeft.Add(newLeft);

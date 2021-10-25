@@ -94,7 +94,8 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
                     "requests-rejected",
                     this,
                     () => Volatile.Read(ref _rejectedRequests)
-                ) {
+                )
+                {
                     DisplayName = "Rejected Requests",
                 };
 
@@ -102,7 +103,8 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
                     "queue-length",
                     this,
                     () => Volatile.Read(ref _queueLength)
-                ) {
+                )
+                {
                     DisplayName = "Queue Length",
                 };
 

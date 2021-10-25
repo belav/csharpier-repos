@@ -125,7 +125,8 @@ namespace ResetInteractiveTestsDocument
                 CreateReplReferenceCommand,
                 CreateImport,
                 buildSucceeds: buildSucceeds
-            ) {
+            )
+            {
                 References = ImmutableArray.CreateRange(GetProjectReferences(workspace, project)),
                 ReferenceSearchPaths = ImmutableArray.Create("rsp1", "rsp2"),
                 SourceSearchPaths = ImmutableArray.Create("ssp1", "ssp2"),

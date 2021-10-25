@@ -1261,7 +1261,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         methodSymbol.GetNonNullSyntaxNode(),
                         ImmutableArray<LocalSymbol>.Empty,
                         ImmutableArray<BoundStatement>.Empty
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }
@@ -2493,7 +2494,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var constructorInitializer = new BoundExpressionStatement(
                         initializerInvocation.Syntax,
                         initializerInvocation
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = method.IsImplicitlyDeclared
                     };
                     Debug.Assert(
@@ -2743,7 +2745,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 resultKind: resultKind,
                 type: baseConstructor.ReturnType,
                 hasErrors: hasErrors
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -2806,7 +2809,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 resultKind: LookupResultKind.Viable,
                 type: baseConstructor.ReturnType,
                 hasErrors: false
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }

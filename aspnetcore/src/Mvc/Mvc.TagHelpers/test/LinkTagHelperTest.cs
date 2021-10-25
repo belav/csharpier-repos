@@ -1012,7 +1012,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new HtmlTestEncoder(),
                 new JavaScriptTestEncoder(),
                 urlHelperFactory
-            ) {
+            )
+            {
                 ViewContext = viewContext,
             };
         }
@@ -1069,7 +1070,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 attributes,
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
         }

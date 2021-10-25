@@ -88,7 +88,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 pageAdapter,
                 _htmlEncoder,
                 _diagnosticListener
-            ) {
+            )
+            {
                 OnAfterPageActivated = (page, currentViewContext) =>
                 {
                     if (page != pageAdapter)

@@ -51,7 +51,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadAttributeValue where Attribute count = 1 and value is empty String"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

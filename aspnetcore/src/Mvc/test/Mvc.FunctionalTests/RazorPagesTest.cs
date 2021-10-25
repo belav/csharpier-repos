@@ -764,7 +764,8 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "Pages/PropertyBinding/PagePropertyBinding/10"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new KeyValuePair<string, string>[]
                     {
@@ -797,7 +798,8 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "Pages/PropertyBinding/PagePropertyBinding/27"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new KeyValuePair<string, string>[]
                     {
@@ -827,7 +829,8 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "Pages/PropertyBinding/PageModelWithPropertyBinding/10?PropertyWithSupportGetsTrue=foo"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new KeyValuePair<string, string>[]
                     {
@@ -893,7 +896,8 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "Pages/PropertyBinding/PolymorphicBinding"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new Dictionary<string, string>
                     {
@@ -922,7 +926,8 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "Pages/PropertyBinding/PolymorphicBinding"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new Dictionary<string, string>
                     {
@@ -958,7 +963,8 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "Pages/PropertyBinding/PageWithPropertyAndArgumentBinding?id=11"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new KeyValuePair<string, string>[]
                     {
@@ -987,7 +993,8 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
                 "Pages/PropertyBinding/PageWithPropertyAndArgumentBinding?id=11"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new KeyValuePair<string, string>[]
                     {
@@ -1445,7 +1452,8 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "/Pages/PropertyBinding/BindPropertiesOnModel?Property1=123"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new Dictionary<string, string> { { "Property2", "25" }, }
                 ),
@@ -1485,7 +1493,8 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary`1[AspNetCoreGeneratedDo
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "/Pages/PropertyBinding/BindPropertiesOnModel?Property1=123"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new[]
                     {

@@ -442,7 +442,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     localSymbol,
                     constantValueOpt: null,
                     type: outputPlaceholder.Type
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
 

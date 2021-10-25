@@ -65,7 +65,8 @@ namespace System.Diagnostics.Tracing
                     "cpu-usage",
                     this,
                     () => RuntimeEventSourceHelper.GetCpuUsage()
-                ) {
+                )
+                {
                     DisplayName = "CPU Usage",
                     DisplayUnits = "%"
                 };
@@ -73,7 +74,8 @@ namespace System.Diagnostics.Tracing
                     "working-set",
                     this,
                     () => (double)(Environment.WorkingSet / 1_000_000)
-                ) {
+                )
+                {
                     DisplayName = "Working Set",
                     DisplayUnits = "MB"
                 };
@@ -81,7 +83,8 @@ namespace System.Diagnostics.Tracing
                     "gc-heap-size",
                     this,
                     () => (double)(GC.GetTotalMemory(false) / 1_000_000)
-                ) {
+                )
+                {
                     DisplayName = "GC Heap Size",
                     DisplayUnits = "MB"
                 };
@@ -89,7 +92,8 @@ namespace System.Diagnostics.Tracing
                     "gen-0-gc-count",
                     this,
                     () => GC.CollectionCount(0)
-                ) {
+                )
+                {
                     DisplayName = "Gen 0 GC Count",
                     DisplayRateTimeScale = new TimeSpan(0, 1, 0)
                 };
@@ -97,7 +101,8 @@ namespace System.Diagnostics.Tracing
                     "gen-1-gc-count",
                     this,
                     () => GC.CollectionCount(1)
-                ) {
+                )
+                {
                     DisplayName = "Gen 1 GC Count",
                     DisplayRateTimeScale = new TimeSpan(0, 1, 0)
                 };
@@ -105,7 +110,8 @@ namespace System.Diagnostics.Tracing
                     "gen-2-gc-count",
                     this,
                     () => GC.CollectionCount(2)
-                ) {
+                )
+                {
                     DisplayName = "Gen 2 GC Count",
                     DisplayRateTimeScale = new TimeSpan(0, 1, 0)
                 };
@@ -113,14 +119,16 @@ namespace System.Diagnostics.Tracing
                     "threadpool-thread-count",
                     this,
                     () => ThreadPool.ThreadCount
-                ) {
+                )
+                {
                     DisplayName = "ThreadPool Thread Count"
                 };
                 _monitorContentionCounter ??= new IncrementingPollingCounter(
                     "monitor-lock-contention-count",
                     this,
                     () => Monitor.LockContentionCount
-                ) {
+                )
+                {
                     DisplayName = "Monitor Lock Contention Count",
                     DisplayRateTimeScale = new TimeSpan(0, 0, 1)
                 };
@@ -128,14 +136,16 @@ namespace System.Diagnostics.Tracing
                     "threadpool-queue-length",
                     this,
                     () => ThreadPool.PendingWorkItemCount
-                ) {
+                )
+                {
                     DisplayName = "ThreadPool Queue Length"
                 };
                 _completedItemsCounter ??= new IncrementingPollingCounter(
                     "threadpool-completed-items-count",
                     this,
                     () => ThreadPool.CompletedWorkItemCount
-                ) {
+                )
+                {
                     DisplayName = "ThreadPool Completed Work Item Count",
                     DisplayRateTimeScale = new TimeSpan(0, 0, 1)
                 };
@@ -143,7 +153,8 @@ namespace System.Diagnostics.Tracing
                     "alloc-rate",
                     this,
                     () => GC.GetTotalAllocatedBytes()
-                ) {
+                )
+                {
                     DisplayName = "Allocation Rate",
                     DisplayUnits = "B",
                     DisplayRateTimeScale = new TimeSpan(0, 0, 1)
@@ -152,7 +163,8 @@ namespace System.Diagnostics.Tracing
                     "active-timer-count",
                     this,
                     () => Timer.ActiveCount
-                ) {
+                )
+                {
                     DisplayName = "Number of Active Timers"
                 };
                 _fragmentationCounter ??= new PollingCounter(
@@ -165,7 +177,8 @@ namespace System.Diagnostics.Tracing
                           ? gcInfo.FragmentedBytes * 100d / gcInfo.HeapSizeBytes
                           : 0;
                     }
-                ) {
+                )
+                {
                     DisplayName = "GC Fragmentation",
                     DisplayUnits = "%"
                 };
@@ -173,7 +186,8 @@ namespace System.Diagnostics.Tracing
                     "gc-committed",
                     this,
                     () => (double)(GC.GetGCMemoryInfo().TotalCommittedBytes / 1_000_000)
-                ) {
+                )
+                {
                     DisplayName = "GC Committed Bytes",
                     DisplayUnits = "MB"
                 };
@@ -182,7 +196,8 @@ namespace System.Diagnostics.Tracing
                     "exception-count",
                     this,
                     () => Exception.GetExceptionCount()
-                ) {
+                )
+                {
                     DisplayName = "Exception Count",
                     DisplayRateTimeScale = new TimeSpan(0, 0, 1)
                 };
@@ -190,7 +205,8 @@ namespace System.Diagnostics.Tracing
                     "time-in-gc",
                     this,
                     () => GC.GetLastGCPercentTimeInGC()
-                ) {
+                )
+                {
                     DisplayName = "% Time in GC since last GC",
                     DisplayUnits = "%"
                 };
@@ -198,7 +214,8 @@ namespace System.Diagnostics.Tracing
                     "gen-0-size",
                     this,
                     () => GC.GetGenerationSize(0)
-                ) {
+                )
+                {
                     DisplayName = "Gen 0 Size",
                     DisplayUnits = "B"
                 };
@@ -206,7 +223,8 @@ namespace System.Diagnostics.Tracing
                     "gen-1-size",
                     this,
                     () => GC.GetGenerationSize(1)
-                ) {
+                )
+                {
                     DisplayName = "Gen 1 Size",
                     DisplayUnits = "B"
                 };
@@ -214,7 +232,8 @@ namespace System.Diagnostics.Tracing
                     "gen-2-size",
                     this,
                     () => GC.GetGenerationSize(2)
-                ) {
+                )
+                {
                     DisplayName = "Gen 2 Size",
                     DisplayUnits = "B"
                 };
@@ -222,7 +241,8 @@ namespace System.Diagnostics.Tracing
                     "loh-size",
                     this,
                     () => GC.GetGenerationSize(3)
-                ) {
+                )
+                {
                     DisplayName = "LOH Size",
                     DisplayUnits = "B"
                 };
@@ -230,7 +250,8 @@ namespace System.Diagnostics.Tracing
                     "poh-size",
                     this,
                     () => GC.GetGenerationSize(4)
-                ) {
+                )
+                {
                     DisplayName = "POH (Pinned Object Heap) Size",
                     DisplayUnits = "B"
                 };
@@ -238,14 +259,16 @@ namespace System.Diagnostics.Tracing
                     "assembly-count",
                     this,
                     () => System.Reflection.Assembly.GetAssemblyCount()
-                ) {
+                )
+                {
                     DisplayName = "Number of Assemblies Loaded"
                 };
                 _ilBytesJittedCounter ??= new PollingCounter(
                     "il-bytes-jitted",
                     this,
                     () => System.Runtime.CompilerServices.RuntimeHelpers.GetILBytesJitted()
-                ) {
+                )
+                {
                     DisplayName = "IL Bytes Jitted",
                     DisplayUnits = "B"
                 };
@@ -253,7 +276,8 @@ namespace System.Diagnostics.Tracing
                     "methods-jitted-count",
                     this,
                     () => System.Runtime.CompilerServices.RuntimeHelpers.GetMethodsJittedCount()
-                ) {
+                )
+                {
                     DisplayName = "Number of Methods Jitted"
                 };
 #endif

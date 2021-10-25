@@ -508,7 +508,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Missing EndAttr, followed by element"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 1
                             }
@@ -519,7 +520,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Missing EndAttr, followed by comment"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -530,7 +532,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write EndDocument with unclosed element tag"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -541,7 +544,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteStartDocument - WriteEndDocument"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -552,7 +556,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteEndElement without WriteStartElement"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -563,7 +568,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteFullEndElement without WriteStartElement"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -582,7 +588,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "StartDocument-EndDocument Sanity Test"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 0
                             }
@@ -593,7 +600,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple StartDocument should error"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -604,7 +612,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Missing StartDocument should be fixed"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -625,7 +634,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Missing EndDocument should be fixed"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -636,7 +646,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call Start-EndDocument multiple times, should error"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 2
                             }
@@ -647,7 +658,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple root elements should error"
-                            ) {
+                            )
+                            {
                                 Id = 7,
                                 Priority = 1
                             }
@@ -658,7 +670,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Start-EndDocument without any element should error"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 2
                             }
@@ -669,7 +682,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Top level text should error - PROLOG"
-                            ) {
+                            )
+                            {
                                 Id = 9,
                                 Priority = 1
                             }
@@ -680,7 +694,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Top level text should error - EPILOG"
-                            ) {
+                            )
+                            {
                                 Id = 10,
                                 Priority = 1
                             }
@@ -691,7 +706,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Top level atomic value should error - PROLOG"
-                            ) {
+                            )
+                            {
                                 Id = 11,
                                 Priority = 1
                             }
@@ -702,7 +718,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Top level atomic value should error - EPILOG"
-                            ) {
+                            )
+                            {
                                 Id = 12,
                                 Priority = 1
                             }
@@ -721,7 +738,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteDocType with name value = null"
-                            ) {
+                            )
+                            {
                                 Param = "null",
                                 Id = 5,
                                 Priority = 1
@@ -733,7 +751,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteDocType with name value = String.Empty"
-                            ) {
+                            )
+                            {
                                 Param = "String.Empty",
                                 Id = 4,
                                 Priority = 1
@@ -745,7 +764,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteDocType in the root element"
-                            ) {
+                            )
+                            {
                                 Id = 7,
                                 Priority = 1
                             }
@@ -756,7 +776,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteDocType following root element"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 1
                             }
@@ -775,7 +796,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "StartElement-EndElement Sanity Test"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 0
                             }
@@ -786,7 +808,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Sanity test for overload WriteStartElement(string prefix, string name, string ns)"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 0
                             }
@@ -797,7 +820,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Sanity test for overload WriteStartElement(string name, string ns)"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 0
                             }
@@ -808,7 +832,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Element name = String.Empty should error"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -877,7 +902,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Missing EndAttribute should be fixed"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 0
                             }
@@ -888,7 +914,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteStartAttribute followed by WriteStartAttribute"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 0
                             }
@@ -909,7 +936,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteStartAttribute followed by WriteString"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 0
                             }
@@ -920,7 +948,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Sanity test for overload WriteStartAttribute(name, ns)"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -931,7 +960,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Sanity test for overload WriteStartAttribute(prefix, name, ns)"
-                            ) {
+                            )
+                            {
                                 Id = 7,
                                 Priority = 0
                             }
@@ -962,7 +992,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Attribute name = String.Empty should error"
-                            ) {
+                            )
+                            {
                                 Id = 10,
                                 Priority = 1
                             }
@@ -983,7 +1014,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute with names Foo, fOo, foO, FOO"
-                            ) {
+                            )
+                            {
                                 Id = 12,
                                 Priority = 1
                             }
@@ -1004,7 +1036,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SingleQuote in attribute value should be allowed"
-                            ) {
+                            )
+                            {
                                 Id = 14
                             }
                         }
@@ -1014,7 +1047,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "DoubleQuote in attribute value should be escaped"
-                            ) {
+                            )
+                            {
                                 Id = 15
                             }
                         }
@@ -1024,7 +1058,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute with value = &, #65, #x20"
-                            ) {
+                            )
+                            {
                                 Id = 16,
                                 Priority = 1
                             }
@@ -1035,7 +1070,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttributeString followed by WriteString"
-                            ) {
+                            )
+                            {
                                 Id = 17,
                                 Priority = 1
                             }
@@ -1046,7 +1082,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute followed by WriteString"
-                            ) {
+                            )
+                            {
                                 Id = 18,
                                 Priority = 1
                             }
@@ -1057,7 +1094,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute with all whitespace characters"
-                            ) {
+                            )
+                            {
                                 Id = 19,
                                 Priority = 1
                             }
@@ -1068,7 +1106,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "< > & chars should be escaped in attribute value"
-                            ) {
+                            )
+                            {
                                 Id = 20,
                                 Priority = 1
                             }
@@ -1079,7 +1118,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "testcase: Redefine auto generated prefix n1"
-                            ) {
+                            )
+                            {
                                 Id = 21
                             }
                         }
@@ -1089,7 +1129,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "testcase: Reuse and redefine existing prefix"
-                            ) {
+                            )
+                            {
                                 Id = 22
                             }
                         }
@@ -1099,7 +1140,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteStartAttribute(attr) sanity test"
-                            ) {
+                            )
+                            {
                                 Id = 23
                             }
                         }
@@ -1109,7 +1151,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteStartAttribute(attr) inside an element with changed default namespace"
-                            ) {
+                            )
+                            {
                                 Id = 24
                             }
                         }
@@ -1119,7 +1162,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteStartAttribute(attr) and duplicate attrs"
-                            ) {
+                            )
+                            {
                                 Id = 25
                             }
                         }
@@ -1129,7 +1173,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteStartAttribute(attr) when element has ns:attr"
-                            ) {
+                            )
+                            {
                                 Id = 26
                             }
                         }
@@ -1139,7 +1184,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XmlCharCheckingWriter should not normalize newLines in attribute values when NewLinesHandling = Replace"
-                            ) {
+                            )
+                            {
                                 Id = 27
                             }
                         }
@@ -1149,7 +1195,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttributeString doesn't fail on invalid surrogate pair sequences"
-                            ) {
+                            )
+                            {
                                 Id = 29
                             }
                         }
@@ -1167,7 +1214,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes with default DTD attributes = true"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 1
                             }
@@ -1178,7 +1226,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes with default DTD attributes = false"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -1189,7 +1238,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes with XmlReader = null"
-                            ) {
+                            )
+                            {
                                 Id = 3
                             }
                         }
@@ -1199,7 +1249,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes when reader is located on element"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -1210,7 +1261,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes when reader is located in the mIddle attribute"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -1221,7 +1273,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes when reader is located in the last attribute"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -1232,7 +1285,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes with reader on XmlDeclaration"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 1
                             }
@@ -1243,7 +1297,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes with reader on Text"
-                            ) {
+                            )
+                            {
                                 Param = "Text",
                                 Id = 11,
                                 Priority = 1
@@ -1255,7 +1310,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes with reader on PI"
-                            ) {
+                            )
+                            {
                                 Param = "ProcessingInstruction",
                                 Id = 12,
                                 Priority = 1
@@ -1267,7 +1323,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes with reader on Comment"
-                            ) {
+                            )
+                            {
                                 Param = "Comment",
                                 Id = 13,
                                 Priority = 1
@@ -1279,7 +1336,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes with reader on CDATA"
-                            ) {
+                            )
+                            {
                                 Param = "CDATA",
                                 Id = 10,
                                 Priority = 1
@@ -1291,7 +1349,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes with 100 attributes"
-                            ) {
+                            )
+                            {
                                 Id = 19,
                                 Priority = 1
                             }
@@ -1302,7 +1361,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttributes with different builtin entities in attribute value"
-                            ) {
+                            )
+                            {
                                 Id = 20,
                                 Priority = 1
                             }
@@ -1313,7 +1373,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttributes tries to duplicate attribute"
-                            ) {
+                            )
+                            {
                                 Id = 21,
                                 Priority = 1
                             }
@@ -1342,7 +1403,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode with reader positioned on attribute, no operation"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -1363,7 +1425,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode after first reader.Read()"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -1374,7 +1437,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode when reader is positioned on mIddle of an element node"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -1395,7 +1459,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode when reader state is Closed"
-                            ) {
+                            )
+                            {
                                 Id = 7,
                                 Priority = 1
                             }
@@ -1406,7 +1471,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode with reader on empty element node"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 1
                             }
@@ -1427,7 +1493,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode with reader on node with mixed content"
-                            ) {
+                            )
+                            {
                                 Id = 10,
                                 Priority = 1
                             }
@@ -1438,7 +1505,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode with reader on node with declared namespace in parent"
-                            ) {
+                            )
+                            {
                                 Id = 11,
                                 Priority = 1
                             }
@@ -1449,7 +1517,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode with element that has different prefix"
-                            ) {
+                            )
+                            {
                                 Id = 14,
                                 Priority = 1
                             }
@@ -1460,7 +1529,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNode with default attributes = true and DTD"
-                            ) {
+                            )
+                            {
                                 Id = 15,
                                 Priority = 1
                             }
@@ -1471,7 +1541,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNode with default attributes = false and DTD"
-                            ) {
+                            )
+                            {
                                 Id = 16,
                                 Priority = 1
                             }
@@ -1482,7 +1553,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode with reader on empty element with attributes"
-                            ) {
+                            )
+                            {
                                 Id = 17,
                                 Priority = 1
                             }
@@ -1493,7 +1565,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode with document containing just empty element with attributes"
-                            ) {
+                            )
+                            {
                                 Id = 18,
                                 Priority = 1
                             }
@@ -1504,7 +1577,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNode with special entity references as attribute value"
-                            ) {
+                            )
+                            {
                                 Id = 19,
                                 Priority = 1
                             }
@@ -1515,7 +1589,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNode with full end element"
-                            ) {
+                            )
+                            {
                                 Id = 21,
                                 Priority = 1
                             }
@@ -1526,7 +1601,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNode with reader on element with 100 attributes"
-                            ) {
+                            )
+                            {
                                 Id = 22,
                                 Priority = 1
                             }
@@ -1537,7 +1613,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNode with reader on text node"
-                            ) {
+                            )
+                            {
                                 Id = 23,
                                 Priority = 1
                             }
@@ -1548,7 +1625,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNode with reader on CDATA node"
-                            ) {
+                            )
+                            {
                                 Id = 24,
                                 Priority = 1
                             }
@@ -1559,7 +1637,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNode with reader on PI node"
-                            ) {
+                            )
+                            {
                                 Id = 25,
                                 Priority = 1
                             }
@@ -1570,7 +1649,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNode with reader on Comment node"
-                            ) {
+                            )
+                            {
                                 Id = 26,
                                 Priority = 1
                             }
@@ -1581,7 +1661,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode should only write required namespaces"
-                            ) {
+                            )
+                            {
                                 Id = 27,
                                 Priority = 1
                             }
@@ -1592,7 +1673,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode should only write required namespaces, include xmlns:xml"
-                            ) {
+                            )
+                            {
                                 Id = 28,
                                 Priority = 1
                             }
@@ -1603,7 +1685,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode should only write required namespaces, exclude xmlns:xml"
-                            ) {
+                            )
+                            {
                                 Id = 29,
                                 Priority = 1
                             }
@@ -1614,7 +1697,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode should only write required namespaces, change default ns at top level"
-                            ) {
+                            )
+                            {
                                 Id = 30,
                                 Priority = 1
                             }
@@ -1625,7 +1709,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode should only write required namespaces, change default ns at same level"
-                            ) {
+                            )
+                            {
                                 Id = 31,
                                 Priority = 1
                             }
@@ -1636,7 +1721,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode should only write required namespaces, change default ns at both levels"
-                            ) {
+                            )
+                            {
                                 Id = 32,
                                 Priority = 1
                             }
@@ -1647,7 +1733,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode should only write required namespaces, change ns uri for same prefix"
-                            ) {
+                            )
+                            {
                                 Id = 33,
                                 Priority = 1
                             }
@@ -1658,7 +1745,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode should only write required namespaces, reuse prefix from top level"
-                            ) {
+                            )
+                            {
                                 Id = 34,
                                 Priority = 1
                             }
@@ -1678,7 +1766,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Sanity test for WriteFullEndElement()"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 0
                             }
@@ -1689,7 +1778,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteFullEndElement before calling WriteStartElement"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 2
                             }
@@ -1700,7 +1790,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteFullEndElement after WriteEndElement"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 2
                             }
@@ -1711,7 +1802,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteFullEndElement without closing attributes"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -1722,7 +1814,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteFullEndElement after WriteStartAttribute"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -1733,7 +1826,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteFullEndElement for 100 nested elements"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -1752,7 +1846,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple NS decl for same prefix on an element"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 1
                             }
@@ -1763,7 +1858,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple NS decl for same prefix (same NS value) on an element"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -1774,7 +1870,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Element and attribute have same prefix, but different namespace value"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 2
                             }
@@ -1785,7 +1882,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Nested elements have same prefix, but different namespace"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -1796,7 +1894,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Mapping reserved prefix xml to invalid namespace"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -1807,7 +1906,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Mapping reserved prefix xml to correct namespace"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -1818,7 +1918,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write element with prefix beginning with xml"
-                            ) {
+                            )
+                            {
                                 Id = 7,
                                 Priority = 1
                             }
@@ -1829,7 +1930,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Reuse prefix that refers the same as default namespace"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 2
                             }
@@ -1840,7 +1942,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Should throw error for prefix=xmlns"
-                            ) {
+                            )
+                            {
                                 Id = 9,
                                 Priority = 2
                             }
@@ -1851,7 +1954,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Create nested element without prefix but with namespace of parent element with a defined prefix"
-                            ) {
+                            )
+                            {
                                 Id = 10,
                                 Priority = 2
                             }
@@ -1862,7 +1966,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Create different prefix for element and attribute that have same namespace"
-                            ) {
+                            )
+                            {
                                 Id = 11,
                                 Priority = 2
                             }
@@ -1873,7 +1978,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Create same prefix for element and attribute that have same namespace"
-                            ) {
+                            )
+                            {
                                 Id = 12,
                                 Priority = 2
                             }
@@ -1884,7 +1990,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Try to re-define NS prefix on attribute which is already defined on an element"
-                            ) {
+                            )
+                            {
                                 Id = 13,
                                 Priority = 2
                             }
@@ -1895,7 +2002,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Namespace string contains surrogates, reuse at different levels"
-                            ) {
+                            )
+                            {
                                 Id = 14,
                                 Priority = 1
                             }
@@ -1906,7 +2014,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Namespace containing entities, use at multiple levels"
-                            ) {
+                            )
+                            {
                                 Id = 15,
                                 Priority = 1
                             }
@@ -1917,7 +2026,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify it resets default namespace when redefined earlier in the stack"
-                            ) {
+                            )
+                            {
                                 Id = 16,
                                 Priority = 1
                             }
@@ -1928,7 +2038,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "The default namespace for an element can not be changed once it is written out"
-                            ) {
+                            )
+                            {
                                 Id = 17,
                                 Priority = 1
                             }
@@ -1939,7 +2050,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Map XML NS 'http://www.w3.org/XML/1998/namaespace' to another prefix"
-                            ) {
+                            )
+                            {
                                 Id = 18,
                                 Priority = 1
                             }
@@ -1950,7 +2062,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass NULL as NS to WriteStartElement"
-                            ) {
+                            )
+                            {
                                 Id = 19,
                                 Priority = 1
                             }
@@ -1961,7 +2074,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write element in reserved XML namespace, should error"
-                            ) {
+                            )
+                            {
                                 Id = 20,
                                 Priority = 1
                             }
@@ -1972,7 +2086,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write element in reserved XMLNS namespace, should error"
-                            ) {
+                            )
+                            {
                                 Id = 21,
                                 Priority = 1
                             }
@@ -1983,7 +2098,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Mapping a prefix to empty ns should error"
-                            ) {
+                            )
+                            {
                                 Id = 22,
                                 Priority = 1
                             }
@@ -1994,7 +2110,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass null prefix to WriteStartElement()"
-                            ) {
+                            )
+                            {
                                 Id = 23,
                                 Priority = 1
                             }
@@ -2005,7 +2122,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass String.Empty prefix to WriteStartElement()"
-                            ) {
+                            )
+                            {
                                 Id = 24,
                                 Priority = 1
                             }
@@ -2016,7 +2134,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass null ns to WriteStartElement()"
-                            ) {
+                            )
+                            {
                                 Id = 25,
                                 Priority = 1
                             }
@@ -2027,7 +2146,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass String.Empty ns to WriteStartElement()"
-                            ) {
+                            )
+                            {
                                 Id = 26,
                                 Priority = 1
                             }
@@ -2038,7 +2158,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass null prefix to WriteStartElement() when namespace is in scope"
-                            ) {
+                            )
+                            {
                                 Id = 27,
                                 Priority = 1
                             }
@@ -2049,7 +2170,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass String.Empty prefix to WriteStartElement() when namespace is in scope"
-                            ) {
+                            )
+                            {
                                 Id = 28,
                                 Priority = 1
                             }
@@ -2060,7 +2182,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass null ns to WriteStartElement() when prefix is in scope"
-                            ) {
+                            )
+                            {
                                 Id = 29,
                                 Priority = 1
                             }
@@ -2071,7 +2194,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass String.Empty ns to WriteStartElement() when prefix is in scope"
-                            ) {
+                            )
+                            {
                                 Id = 30,
                                 Priority = 1
                             }
@@ -2082,7 +2206,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass String.Empty ns to WriteStartElement() when prefix is in scope"
-                            ) {
+                            )
+                            {
                                 Id = 31,
                                 Priority = 1
                             }
@@ -2093,7 +2218,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Mapping empty ns uri to a prefix should error"
-                            ) {
+                            )
+                            {
                                 Id = 31,
                                 Priority = 1
                             }
@@ -2112,7 +2238,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Define prefix 'xml' with invalid namespace URI 'foo'"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 1
                             }
@@ -2123,7 +2250,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Bind NS prefix 'xml' with valid namespace URI"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -2134,7 +2262,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Bind NS prefix 'xmlA' with namespace URI 'foo'"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -2145,7 +2274,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write attribute xml:space with correct namespace"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -2156,7 +2286,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write attribute xml:space with incorrect namespace"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -2167,7 +2298,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write attribute xml:lang with incorrect namespace"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -2178,7 +2310,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute, define namespace attribute before value attribute"
-                            ) {
+                            )
+                            {
                                 Id = 7,
                                 Priority = 1
                             }
@@ -2189,7 +2322,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute, define namespace attribute after value attribute"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 1
                             }
@@ -2200,7 +2334,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute, redefine prefix at different scope and use both of them"
-                            ) {
+                            )
+                            {
                                 Id = 9,
                                 Priority = 1
                             }
@@ -2211,7 +2346,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute, redefine namespace at different scope and use both of them"
-                            ) {
+                            )
+                            {
                                 Id = 10,
                                 Priority = 1
                             }
@@ -2222,7 +2358,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute with collIding prefix with element"
-                            ) {
+                            )
+                            {
                                 Id = 11,
                                 Priority = 1
                             }
@@ -2233,7 +2370,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute with collIding namespace with element"
-                            ) {
+                            )
+                            {
                                 Id = 12,
                                 Priority = 1
                             }
@@ -2244,7 +2382,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute with namespace but no prefix"
-                            ) {
+                            )
+                            {
                                 Id = 13,
                                 Priority = 1
                             }
@@ -2255,7 +2394,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute for 2 attributes with same prefix but different namespace"
-                            ) {
+                            )
+                            {
                                 Id = 14,
                                 Priority = 1
                             }
@@ -2266,7 +2406,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute with String.Empty and null as namespace and prefix values"
-                            ) {
+                            )
+                            {
                                 Id = 15,
                                 Priority = 1
                             }
@@ -2277,7 +2418,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute to manually create attribute of xmlns:x"
-                            ) {
+                            )
+                            {
                                 Id = 16,
                                 Priority = 1
                             }
@@ -2288,7 +2430,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute with namespace value = null while a prefix exists"
-                            ) {
+                            )
+                            {
                                 Id = 17,
                                 Priority = 1
                             }
@@ -2299,7 +2442,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute with namespace value = String.Empty while a prefix exists"
-                            ) {
+                            )
+                            {
                                 Id = 18,
                                 Priority = 1
                             }
@@ -2310,7 +2454,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribe in nested elements with same namespace but different prefix"
-                            ) {
+                            )
+                            {
                                 Id = 19,
                                 Priority = 1
                             }
@@ -2321,7 +2466,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute for x:a and xmlns:a diff namespace"
-                            ) {
+                            )
+                            {
                                 Id = 20,
                                 Priority = 1
                             }
@@ -2332,7 +2478,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute for x:a and xmlns:a same namespace"
-                            ) {
+                            )
+                            {
                                 Id = 21,
                                 Priority = 1
                             }
@@ -2343,7 +2490,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute with collIding NS and prefix for 2 attributes"
-                            ) {
+                            )
+                            {
                                 Id = 22,
                                 Priority = 1
                             }
@@ -2354,7 +2502,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttribute with DQ in namespace"
-                            ) {
+                            )
+                            {
                                 Id = 23,
                                 Priority = 2
                             }
@@ -2375,7 +2524,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Explicitly write namespace attribute that maps XML NS 'http://www.w3.org/XML/1998/namaespace' to another prefix"
-                            ) {
+                            )
+                            {
                                 Id = 25,
                                 Priority = 1
                             }
@@ -2386,7 +2536,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Map XML NS 'http://www.w3.org/XML/1998/namaespace' to another prefix"
-                            ) {
+                            )
+                            {
                                 Id = 26,
                                 Priority = 1
                             }
@@ -2397,7 +2548,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass empty namespace to WriteAttributeString(prefix, name, ns, value)"
-                            ) {
+                            )
+                            {
                                 Id = 27,
                                 Priority = 1
                             }
@@ -2408,7 +2560,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write attribute with prefix = xmlns"
-                            ) {
+                            )
+                            {
                                 Id = 28,
                                 Priority = 1
                             }
@@ -2419,7 +2572,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write attribute in reserved XML namespace, should error"
-                            ) {
+                            )
+                            {
                                 Id = 29,
                                 Priority = 1
                             }
@@ -2430,7 +2584,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write attribute in reserved XMLNS namespace, should error"
-                            ) {
+                            )
+                            {
                                 Id = 30,
                                 Priority = 1
                             }
@@ -2441,7 +2596,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteAttributeString with no namespace under element with empty prefix"
-                            ) {
+                            )
+                            {
                                 Id = 31,
                                 Priority = 1
                             }
@@ -2452,7 +2608,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass null prefix to WriteAttributeString()"
-                            ) {
+                            )
+                            {
                                 Id = 32,
                                 Priority = 1
                             }
@@ -2463,7 +2620,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass String.Empty prefix to WriteAttributeString()"
-                            ) {
+                            )
+                            {
                                 Id = 33,
                                 Priority = 1
                             }
@@ -2474,7 +2632,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass null ns to WriteAttributeString()"
-                            ) {
+                            )
+                            {
                                 Id = 34,
                                 Priority = 1
                             }
@@ -2485,7 +2644,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass String.Empty ns to WriteAttributeString()"
-                            ) {
+                            )
+                            {
                                 Id = 35,
                                 Priority = 1
                             }
@@ -2496,7 +2656,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass null prefix to WriteAttributeString() when namespace is in scope"
-                            ) {
+                            )
+                            {
                                 Id = 36,
                                 Priority = 1
                             }
@@ -2507,7 +2668,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass String.Empty prefix to WriteAttributeString() when namespace is in scope"
-                            ) {
+                            )
+                            {
                                 Id = 37,
                                 Priority = 1
                             }
@@ -2518,7 +2680,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass null ns to WriteAttributeString() when prefix is in scope"
-                            ) {
+                            )
+                            {
                                 Id = 38,
                                 Priority = 1
                             }
@@ -2529,7 +2692,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Pass String.Empty ns to WriteAttributeString() when prefix is in scope"
-                            ) {
+                            )
+                            {
                                 Id = 39,
                                 Priority = 1
                             }
@@ -2540,7 +2704,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Mapping empty ns uri to a prefix should error"
-                            ) {
+                            )
+                            {
                                 Id = 40,
                                 Priority = 1
                             }
@@ -2551,7 +2716,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteStartAttribute with prefix = null, localName = xmlns - case 1"
-                            ) {
+                            )
+                            {
                                 Id = 41,
                                 Priority = 1
                             }
@@ -2562,7 +2728,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteStartAttribute with prefix = null, localName = xmlns - case 2"
-                            ) {
+                            )
+                            {
                                 Id = 42,
                                 Priority = 1
                             }
@@ -2611,7 +2778,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteCData with valid surrogate pair"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -2622,7 +2790,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteCData with & < > chars, they should not be escaped"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 2
                             }
@@ -2653,7 +2822,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteCData with invalid surrogate pair"
-                            ) {
+                            )
+                            {
                                 Id = 9,
                                 Priority = 1
                             }
@@ -2673,7 +2843,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteCData twice - that should write two CData blocks"
-                            ) {
+                            )
+                            {
                                 Id = 11,
                                 Priority = 1
                             }
@@ -2722,7 +2893,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteComment with valid surrogate pair"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -2733,7 +2905,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteComment with invalid surrogate pair"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -2752,7 +2925,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteEntityRef with invalid value SQ"
-                            ) {
+                            )
+                            {
                                 Param = "test'test",
                                 Id = 7,
                                 Priority = 1
@@ -2764,7 +2938,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteEntityRef with invalid value <;"
-                            ) {
+                            )
+                            {
                                 Param = "test<test",
                                 Id = 3,
                                 Priority = 1
@@ -2776,7 +2951,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteEntityRef with invalid value & and ;"
-                            ) {
+                            )
+                            {
                                 Param = "&test;",
                                 Id = 6,
                                 Priority = 1
@@ -2799,7 +2975,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteEntityRef with invalid value DQ"
-                            ) {
+                            )
+                            {
                                 Param = "test\"test",
                                 Id = 8,
                                 Priority = 1
@@ -2822,7 +2999,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteEntityRef with invalid value &"
-                            ) {
+                            )
+                            {
                                 Param = "test&test",
                                 Id = 5,
                                 Priority = 1
@@ -2834,7 +3012,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteEntityRef with value = String.Empty"
-                            ) {
+                            )
+                            {
                                 Param = "String.Empty",
                                 Id = 2,
                                 Priority = 1
@@ -2868,7 +3047,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteEntityRef with invalid value >"
-                            ) {
+                            )
+                            {
                                 Param = "test>test",
                                 Id = 4,
                                 Priority = 1
@@ -2938,7 +3118,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteCharEntity with valid Unicode character"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 0
                             }
@@ -2949,7 +3130,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteCharEntity after WriteStartElement/WriteEndElement"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 0
                             }
@@ -2960,7 +3142,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteCharEntity after WriteStartAttribute/WriteEndAttribute"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 0
                             }
@@ -2981,7 +3164,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Character from high surrogate range"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -3002,7 +3186,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteCharEntity for special attributes"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 1
                             }
@@ -3021,7 +3206,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SurrogateCharEntity after WriteStartElement/WriteEndElement"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 1
                             }
@@ -3032,7 +3218,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SurrogateCharEntity after WriteStartAttribute/WriteEndAttribute"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -3043,7 +3230,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test with limits of surrogate range"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -3094,7 +3282,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteSurrogateCharEntity for special attributes"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 1
                             }
@@ -3153,7 +3342,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "PI name = String.Empty should error"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -3164,7 +3354,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WritePI with xmlns as the name value"
-                            ) {
+                            )
+                            {
                                 Id = 6
                             }
                         }
@@ -3193,7 +3384,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WritePI (after StartDocument) with name = 'xml' text = 'version = 1.0' should error"
-                            ) {
+                            )
+                            {
                                 Id = 9,
                                 Priority = 1
                             }
@@ -3204,7 +3396,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WritePI (before StartDocument) with name = 'xml' text = 'version = 1.0' should error"
-                            ) {
+                            )
+                            {
                                 Id = 10,
                                 Priority = 1
                             }
@@ -3215,7 +3408,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteProcessingInstruction with valid surrogate pair"
-                            ) {
+                            )
+                            {
                                 Id = 12,
                                 Priority = 1
                             }
@@ -3226,7 +3420,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WritePI with invalid surrogate pair"
-                            ) {
+                            )
+                            {
                                 Id = 13,
                                 Priority = 1
                             }
@@ -3277,7 +3472,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Name contains letters, digits, . _ - : chars"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -3444,7 +3640,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteQName when NS is auto-generated"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -3455,7 +3652,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "QName = foo:bar when foo is not in scope"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -3496,7 +3694,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteChars with valid buffer, number, count"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 0
                             }
@@ -3517,7 +3716,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteChars following WriteStartAttribute"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -3528,7 +3728,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteChars with entity ref included"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -3549,7 +3750,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteChars with count > buffer size"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -3570,7 +3772,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteChars with index > buffer size"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 1
                             }
@@ -3591,7 +3794,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteChars with index + count exceeds buffer"
-                            ) {
+                            )
+                            {
                                 Id = 10,
                                 Priority = 1
                             }
@@ -3602,7 +3806,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteChars for xml:lang attribute, index = count = 0"
-                            ) {
+                            )
+                            {
                                 Id = 11,
                                 Priority = 1
                             }
@@ -3641,7 +3846,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteString with valid surrogate pair"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -3652,7 +3858,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteString with invalid surrogate pair"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -3673,7 +3880,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteString with single/double quote, &, <, >"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -3684,7 +3892,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteString for value greater than x1F"
-                            ) {
+                            )
+                            {
                                 Id = 9,
                                 Priority = 1
                             }
@@ -3695,7 +3904,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteString with CR, LF, CR LF inside attribute value"
-                            ) {
+                            )
+                            {
                                 Id = 11,
                                 Priority = 1
                             }
@@ -3706,7 +3916,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteString for LF inside attribute"
-                            ) {
+                            )
+                            {
                                 Id = 12,
                                 Priority = 1
                             }
@@ -3717,7 +3928,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Surrogate characters in text nodes, range limits"
-                            ) {
+                            )
+                            {
                                 Id = 13,
                                 Priority = 1
                             }
@@ -3766,7 +3978,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteWhitespace before and after root element"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -3952,7 +4165,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write multiple atomic values inside element"
-                            ) {
+                            )
+                            {
                                 Id = 11,
                                 Priority = 1
                             }
@@ -3963,7 +4177,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write multiple atomic values inside attribute"
-                            ) {
+                            )
+                            {
                                 Id = 12,
                                 Priority = 1
                             }
@@ -3974,7 +4189,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write multiple atomic values inside element, separate by WriteWhitespace(' ')"
-                            ) {
+                            )
+                            {
                                 Id = 13,
                                 Priority = 1
                             }
@@ -3985,7 +4201,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write multiple atomic values inside element, separate by WriteString(' ')"
-                            ) {
+                            )
+                            {
                                 Id = 14,
                                 Priority = 1
                             }
@@ -3996,7 +4213,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write multiple atomic values inside attribute, separate by WriteWhitespace(' ')"
-                            ) {
+                            )
+                            {
                                 Id = 15,
                                 Priority = 1
                             }
@@ -4007,7 +4225,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write multiple atomic values inside attribute, seperate by WriteString(' ')"
-                            ) {
+                            )
+                            {
                                 Id = 16,
                                 Priority = 1
                             }
@@ -4046,7 +4265,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "LookupPrefix with String.Empty should if (!String.Empty"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -4057,7 +4277,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "LookupPrefix with generated namespace used for attributes"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -4068,7 +4289,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "LookupPrefix for namespace used with element"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 0
                             }
@@ -4079,7 +4301,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "LookupPrefix for namespace used with attribute"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 0
                             }
@@ -4090,7 +4313,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Lookup prefix for a default namespace"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -4101,7 +4325,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Lookup prefix for nested element with same namespace but different prefix"
-                            ) {
+                            )
+                            {
                                 Id = 7,
                                 Priority = 1
                             }
@@ -4112,7 +4337,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Lookup prefix for multiple prefix associated with the same namespace"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 1
                             }
@@ -4123,7 +4349,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Lookup prefix for namespace defined outside the scope of an empty element and also defined in its parent"
-                            ) {
+                            )
+                            {
                                 Id = 9,
                                 Priority = 1
                             }
@@ -4134,7 +4361,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Lookup prefix for namespace declared as default and also with a prefix"
-                            ) {
+                            )
+                            {
                                 Id = 10,
                                 Priority = 1
                             }
@@ -4183,7 +4411,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify XmlSpace within an empty element"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -4194,7 +4423,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify XmlSpace - scope with nested elements (both PROLOG and EPILOG)"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -4205,7 +4435,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify XmlSpace - outside defined scope"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -4216,7 +4447,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify XmlSpace with invalid space value"
-                            ) {
+                            )
+                            {
                                 Id = 7,
                                 Priority = 0
                             }
@@ -4227,7 +4459,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Duplicate xml:space attr should error"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 1
                             }
@@ -4238,7 +4471,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify XmlSpace value when received through WriteString"
-                            ) {
+                            )
+                            {
                                 Id = 9,
                                 Priority = 1
                             }
@@ -4267,7 +4501,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify that default value of XmlLang is NULL"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -4278,7 +4513,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify XmlLang scope inside nested elements (both PROLOG and EPILOG)"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -4289,7 +4525,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Duplicate xml:lang attr should error"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -4300,7 +4537,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify XmlLang value when received through WriteAttributes"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -4311,7 +4549,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify XmlLang value when received through WriteString"
-                            ) {
+                            )
+                            {
                                 Id = 6
                             }
                         }
@@ -4359,7 +4598,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteRaw to write the value of xml:space"
-                            ) {
+                            )
+                            {
                                 Id = 4
                             }
                         }
@@ -4369,7 +4609,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteRaw to write the value of xml:lang"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -4420,7 +4661,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteRaw with index + count exceeds buffer"
-                            ) {
+                            )
+                            {
                                 Id = 10,
                                 Priority = 1
                             }
@@ -4451,7 +4693,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteRaw with invalid surrogate pair"
-                            ) {
+                            )
+                            {
                                 Id = 13,
                                 Priority = 1
                             }
@@ -4480,7 +4723,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteBase64 with count > buffer size"
-                            ) {
+                            )
+                            {
                                 Id = 20,
                                 Priority = 1
                             }
@@ -4501,7 +4745,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteBase64 with index > buffer size"
-                            ) {
+                            )
+                            {
                                 Id = 40,
                                 Priority = 1
                             }
@@ -4522,7 +4767,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteBase64 with index + count exceeds buffer"
-                            ) {
+                            )
+                            {
                                 Id = 60,
                                 Priority = 1
                             }
@@ -4543,7 +4789,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Base64 should not be allowed inside namespace decl"
-                            ) {
+                            )
+                            {
                                 Param = "ns",
                                 Id = 92,
                                 Priority = 1
@@ -4555,7 +4802,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Base64 should not be allowed inside xml:lang value"
-                            ) {
+                            )
+                            {
                                 Param = "lang",
                                 Id = 90,
                                 Priority = 1
@@ -4567,7 +4815,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Base64 should not be allowed inside xml:space value"
-                            ) {
+                            )
+                            {
                                 Param = "space",
                                 Id = 91,
                                 Priority = 1
@@ -4587,7 +4836,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify WriteState.Start when nothing has been written yet"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 0
                             }
@@ -4598,7 +4848,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify correct state when writing in Prolog"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -4609,7 +4860,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify correct state when writing an attribute"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -4620,7 +4872,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify correct state when writing element content"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -4631,7 +4884,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify correct state after Close has been called"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -4642,7 +4896,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Verify WriteState = Error after an exception"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 1
                             }
@@ -4653,7 +4908,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNmToken after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteNmToken",
                                 Id = 25,
                                 Priority = 1
@@ -4665,7 +4921,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteBinHex after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteBinHex",
                                 Id = 23,
                                 Priority = 1
@@ -4677,7 +4934,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call LookupPrefix after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "LookupPrefix",
                                 Id = 24,
                                 Priority = 1
@@ -4689,7 +4947,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteComment after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteComment",
                                 Id = 13,
                                 Priority = 1
@@ -4701,7 +4960,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteWhitespace after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteWhitespace",
                                 Id = 18,
                                 Priority = 1
@@ -4713,7 +4973,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WritePI after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WritePI",
                                 Id = 14,
                                 Priority = 1
@@ -4725,7 +4986,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteName after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteName",
                                 Id = 26,
                                 Priority = 1
@@ -4737,7 +4999,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteString after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteString",
                                 Id = 19,
                                 Priority = 1
@@ -4749,7 +5012,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteQualifiedName after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteQualifiedName",
                                 Id = 27,
                                 Priority = 1
@@ -4761,7 +5025,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteValue after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteValue",
                                 Id = 28,
                                 Priority = 1
@@ -4773,7 +5038,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteAttributes after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteAttributes",
                                 Id = 29,
                                 Priority = 1
@@ -4785,7 +5051,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNode(reader) after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteNodeReader",
                                 Id = 31,
                                 Priority = 1
@@ -4797,7 +5064,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call Flush after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "Flush",
                                 Id = 32,
                                 Priority = 1
@@ -4809,7 +5077,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteRaw after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteRaw",
                                 Id = 21,
                                 Priority = 1
@@ -4821,7 +5090,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteSurrogateCharEntity after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteSurrogateCharEntity",
                                 Id = 17,
                                 Priority = 1
@@ -4833,7 +5103,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteEntityRef after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteEntityRef",
                                 Id = 15,
                                 Priority = 1
@@ -4845,7 +5116,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteCharEntiry after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteCharEntity",
                                 Id = 16,
                                 Priority = 1
@@ -4857,7 +5129,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteBase64 after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteBase64",
                                 Id = 22,
                                 Priority = 1
@@ -4869,7 +5142,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteChars after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteChars",
                                 Id = 20,
                                 Priority = 1
@@ -4881,7 +5155,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteStartDocument after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteStartDocument",
                                 Id = 7,
                                 Priority = 1
@@ -4893,7 +5168,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteStartElement after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteStartElement",
                                 Id = 8,
                                 Priority = 1
@@ -4905,7 +5181,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteEndElement after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteEndElement",
                                 Id = 9,
                                 Priority = 1
@@ -4917,7 +5194,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteStartAttribute after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteStartAttribute",
                                 Id = 10,
                                 Priority = 1
@@ -4929,7 +5207,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteEndAttribute after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteEndAttribute",
                                 Id = 11,
                                 Priority = 1
@@ -4941,7 +5220,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteCData after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "WriteCData",
                                 Id = 12,
                                 Priority = 1
@@ -4953,7 +5233,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XmlSpace property after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "XmlSpace",
                                 Id = 33,
                                 Priority = 1
@@ -4965,7 +5246,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XmlLang property after WriteState = Error"
-                            ) {
+                            )
+                            {
                                 Param = "XmlSpace",
                                 Id = 34,
                                 Priority = 1
@@ -5021,7 +5303,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteSurrogateCharEntity after Close()"
-                            ) {
+                            )
+                            {
                                 Param = "WriteSurrogateCharEntity",
                                 Id = 16,
                                 Priority = 1
@@ -5132,7 +5415,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteQualifiedName after Close()"
-                            ) {
+                            )
+                            {
                                 Param = "WriteQualifiedName",
                                 Id = 26,
                                 Priority = 1
@@ -5144,7 +5428,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteStartDocument after Close()"
-                            ) {
+                            )
+                            {
                                 Param = "WriteStartDocument",
                                 Id = 6,
                                 Priority = 1
@@ -5167,7 +5452,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteNode(reader) after Close()"
-                            ) {
+                            )
+                            {
                                 Param = "WriteNodeReader",
                                 Id = 30,
                                 Priority = 1
@@ -5190,7 +5476,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteStartElement after Close()"
-                            ) {
+                            )
+                            {
                                 Param = "WriteStartElement",
                                 Id = 7,
                                 Priority = 1
@@ -5213,7 +5500,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteStartAttribute after Close()"
-                            ) {
+                            )
+                            {
                                 Param = "WriteStartAttribute",
                                 Id = 9,
                                 Priority = 1
@@ -5225,7 +5513,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Call WriteEndAttribute after Close()"
-                            ) {
+                            )
+                            {
                                 Param = "WriteEndAttribute",
                                 Id = 10,
                                 Priority = 1
@@ -5267,7 +5556,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteElementString(prefix, name, ns, value) sanity test"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 0
                             }
@@ -5278,7 +5568,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteElementString(prefix = xml, ns = XML namespace)"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -5289,7 +5580,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteStartAttribute(string name) sanity test"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 0
                             }
@@ -5300,7 +5592,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteElementString followed by attribute should error"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -5311,7 +5604,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "429445: XmlWellformedWriter wrapping another XmlWriter should check the duplicate attributes first"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -5330,7 +5624,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Characters between 0xdfff and 0xfffe are valid Unicode characters"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 1
                             }
@@ -5341,7 +5636,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XmlWriter using UTF-16BE encoding writes out wrong encoding name value in the xml decl"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -5360,7 +5656,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Closing an XmlWriter should close all opened elements"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 1
                             }
@@ -5371,7 +5668,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Disposing an XmlWriter should close all opened elements"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -5382,7 +5680,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Dispose() shouldn't throw when a tag is not closed and inner stream is closed"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 1
                             }
@@ -5393,7 +5692,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Close() should be allowed when XML doesn't have content"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 1
                             }
@@ -5412,7 +5712,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLineHandling Default value - NewLineHandling.Replace"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 0
                             }
@@ -5423,7 +5724,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XmlWriter creation with NewLineHandling.Entitize"
-                            ) {
+                            )
+                            {
                                 Param = 1,
                                 Id = 2,
                                 Priority = 0
@@ -5435,7 +5737,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XmlWriter creation with NewLineHandling.None"
-                            ) {
+                            )
+                            {
                                 Param = 2,
                                 Id = 4,
                                 Priority = 0
@@ -5447,7 +5750,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XmlWriter creation with NewLineHandling.Replace"
-                            ) {
+                            )
+                            {
                                 Param = 0,
                                 Id = 3,
                                 Priority = 0
@@ -5459,7 +5763,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for tab character in element with 'Replace'"
-                            ) {
+                            )
+                            {
                                 Param = 0,
                                 Id = 15,
                                 Priority = 0
@@ -5471,7 +5776,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for tab character in element with 'Entitize'"
-                            ) {
+                            )
+                            {
                                 Param = 1,
                                 Id = 14,
                                 Priority = 0
@@ -5483,7 +5789,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for tab character in element with 'None'"
-                            ) {
+                            )
+                            {
                                 Param = 2,
                                 Id = 16,
                                 Priority = 0
@@ -5495,7 +5802,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for combinations of NewLine characters in attribute with 'Entitize'"
-                            ) {
+                            )
+                            {
                                 Param = 1,
                                 Id = 17,
                                 Priority = 0
@@ -5507,7 +5815,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for combinations of NewLine characters in attribute with 'Replace'"
-                            ) {
+                            )
+                            {
                                 Param = 0,
                                 Id = 18,
                                 Priority = 0
@@ -5519,7 +5828,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for combinations of entities in attribute with 'None'"
-                            ) {
+                            )
+                            {
                                 Param = 2,
                                 Id = 22,
                                 Priority = 0
@@ -5531,7 +5841,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for combinations of entities in attribute with 'Entitize'"
-                            ) {
+                            )
+                            {
                                 Param = 1,
                                 Id = 20,
                                 Priority = 0
@@ -5543,7 +5854,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for combinations of entities in attribute with 'Replace'"
-                            ) {
+                            )
+                            {
                                 Param = 0,
                                 Id = 21,
                                 Priority = 0
@@ -5555,7 +5867,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for combinations of NewLine characters and entities in element with 'Entitize'"
-                            ) {
+                            )
+                            {
                                 Param = 1,
                                 Id = 23,
                                 Priority = 0
@@ -5567,7 +5880,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for combinations of NewLine characters and entities in element with 'Replace'"
-                            ) {
+                            )
+                            {
                                 Param = 0,
                                 Id = 24,
                                 Priority = 0
@@ -5579,7 +5893,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for tab character in attribute with 'Replace'"
-                            ) {
+                            )
+                            {
                                 Param = 0,
                                 Id = 27,
                                 Priority = 0
@@ -5591,7 +5906,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Check for tab character in attribute with 'Entitize'"
-                            ) {
+                            )
+                            {
                                 Param = 1,
                                 Id = 26,
                                 Priority = 0
@@ -5603,7 +5919,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLineChars and IndentChars Default values and test for proper indentation, None"
-                            ) {
+                            )
+                            {
                                 Param = 2,
                                 Id = 31,
                                 Priority = 1
@@ -5615,7 +5932,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLineChars and IndentChars Default values and test for proper indentation, Replace"
-                            ) {
+                            )
+                            {
                                 Param = 0,
                                 Id = 30,
                                 Priority = 1
@@ -5627,7 +5945,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLineChars and IndentChars Default values and test for proper indentation, Entitize"
-                            ) {
+                            )
+                            {
                                 Param = 1,
                                 Id = 29,
                                 Priority = 1
@@ -5639,7 +5958,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Replace, '\\r', '  '"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Replace, "\r", "  " },
                                 Id = 33,
                                 Priority = 2
@@ -5651,7 +5971,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; None, '\\r', '  '"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.None, "\r", "  " },
                                 Id = 34,
                                 Priority = 2
@@ -5663,7 +5984,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Entitize, '&#xA;', '  '"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Entitize, "&#xA;", "  " },
                                 Id = 35,
                                 Priority = 2
@@ -5675,7 +5997,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; None, '\\r', '\\n'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.None, "\r", "\n" },
                                 Id = 40,
                                 Priority = 2
@@ -5687,7 +6010,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Entitize, '\\r', '  '"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Entitize, "\r", "  " },
                                 Id = 32,
                                 Priority = 2
@@ -5699,7 +6023,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Replace, '&#xA;', '  '"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Replace, "&#xA;", "  " },
                                 Id = 36,
                                 Priority = 2
@@ -5711,7 +6036,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; None, '&#xA;', '  '"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.None, "&#xA;", "  " },
                                 Id = 37,
                                 Priority = 2
@@ -5723,7 +6049,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Entitize, '\\r', '\\n'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Entitize, "\r", "\n" },
                                 Id = 38,
                                 Priority = 2
@@ -5735,7 +6062,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; Replace, '\\r', '\\n'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Replace, "\r", "\n" },
                                 Id = 39,
                                 Priority = 2
@@ -5747,7 +6075,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling in attribute when Indent=true; Entitize, '\\r'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Entitize, "\r" },
                                 Id = 53,
                                 Priority = 2
@@ -5759,7 +6088,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling in attribute when Indent=true; Replace, '\\r\\n'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Replace, "\r\n" },
                                 Id = 51,
                                 Priority = 1
@@ -5771,7 +6101,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling in attribute when Indent=true; Replace, '\\r'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Replace, "\r" },
                                 Id = 54,
                                 Priority = 2
@@ -5783,7 +6114,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling in attribute when Indent=true; Replace, '---'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Replace, "---" },
                                 Id = 55,
                                 Priority = 2
@@ -5795,7 +6127,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling in attribute when Indent=true; Entitize, '---'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Entitize, "---" },
                                 Id = 54,
                                 Priority = 2
@@ -5807,7 +6140,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling in attribute when Indent=true; Entitize, '\\r\\n'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Entitize, "\r\n" },
                                 Id = 50,
                                 Priority = 1
@@ -5819,7 +6153,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling between attributes when NewLineOnAttributes=true; None, '\\r\\n'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.None, "\r\n" },
                                 Id = 58,
                                 Priority = 1
@@ -5831,7 +6166,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling between attributes when NewLineOnAttributes=true; None, '\\r'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.None, "\r" },
                                 Id = 61,
                                 Priority = 2
@@ -5843,7 +6179,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling between attributes when NewLineOnAttributes=true; Replace, '\\r'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Replace, "\r" },
                                 Id = 60,
                                 Priority = 2
@@ -5855,7 +6192,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling between attributes when NewLineOnAttributes=true; Entitize, '\\r'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Entitize, "\r" },
                                 Id = 59,
                                 Priority = 2
@@ -5867,7 +6205,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling between attributes when NewLineOnAttributes=true; Entitize, '\\r\\n'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Entitize, "\r\n" },
                                 Id = 56,
                                 Priority = 1
@@ -5879,7 +6218,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "NewLine handling between attributes when NewLineOnAttributes=true; Replace, '\\r\\n'"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { NewLineHandling.Replace, "\r\n" },
                                 Id = 57,
                                 Priority = 1
@@ -6155,7 +6495,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteProcessingInstruction(null, null)"
-                            ) {
+                            )
+                            {
                                 Param = null,
                                 Priority = 2
                             }
@@ -6325,7 +6666,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "EntityRef after Document should error - PROLOG"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6335,7 +6677,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "EntityRef after Document should error - EPILOG"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6345,7 +6688,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CharEntity after Document should error - PROLOG"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6355,7 +6699,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CharEntity after Document should error - EPILOG"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6365,7 +6710,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SurrogateCharEntity after Document should error - PROLOG"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6375,7 +6721,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SurrogateCharEntity after Document should error - EPILOG"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6385,7 +6732,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Attribute after Document should error - PROLOG"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6395,7 +6743,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Attribute after Document should error - EPILOG"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6405,7 +6754,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CDATA after Document should error - PROLOG"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6415,7 +6765,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CDATA after Document should error - EPILOG"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6425,7 +6776,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Element followed by Document should error"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6435,7 +6787,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Element followed by DocType should error"
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         }
@@ -6643,7 +6996,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Conflicts: NS undeclaration, default NS"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<A xmlns='nsp'><B xmlns=''><C xmlns='nsp'><D xmlns='nsp'/></C></B></A>",
@@ -6672,7 +7026,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Conflicts: NS redefinition, default NS"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<A xmlns='nsp'><B xmlns='ns-other'><C xmlns='nsp'><D xmlns='nsp'/></C></B></A>",
@@ -6687,7 +7042,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Conflicts: NS redefinition, default NS II."
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<A xmlns=''><B xmlns='ns-other'><C xmlns=''><D xmlns=''/></C></B></A>",
@@ -6771,7 +7127,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write into used reader I. (def. ns.)"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<A xmlns='nsp'/>",
@@ -6786,7 +7143,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write into used reader II. (def. ns.)"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<A xmlns='ns-other'><B xmlns='nsp'><C xmlns='nsp'/></B></A>",
@@ -6801,7 +7159,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write into used reader (Xlinq lookup + existing hint in the Writer; different prefix)"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<p1:root xmlns:p1='nsp'><p2:B xmlns:p2='nsp'/></p1:root>"
@@ -6815,7 +7174,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Write into used reader (Xlinq lookup + existing hint in the Writer; same prefix)"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<p1:root xmlns:p1='nsp'><p1:B /></p1:root>"
@@ -6857,7 +7217,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Annotation on document without omit - DisableFormating"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     typeof(XDocument),
@@ -6873,7 +7234,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Annotation on element without omit - None"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     typeof(XElement),
@@ -6889,7 +7251,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Annotation on element without omit - DisableFormating"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     typeof(XElement),
@@ -6905,7 +7268,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Annotation on document without omit - None"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     typeof(XDocument),
@@ -6921,7 +7285,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Annotation on document - Omit + Disable"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     typeof(XDocument),
@@ -6938,7 +7303,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Annotation on element - Omit + Disable"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     typeof(XElement),
@@ -6985,7 +7351,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Annotation on the parent nodes, XDocument"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { typeof(XDocument), "simple.xml" },
                                 Priority = 0
                             }
@@ -6996,7 +7363,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Annotation on the parent nodes, XElement"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { typeof(XElement), "simple.xml" },
                                 Priority = 0
                             }
@@ -7007,7 +7375,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple annotations in the tree - both up - XDocument"
-                            ) {
+                            )
+                            {
                                 Param = typeof(XDocument),
                                 Priority = 0
                             }
@@ -7018,7 +7387,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple annotations in the tree - both up - XElement"
-                            ) {
+                            )
+                            {
                                 Param = typeof(XElement),
                                 Priority = 0
                             }
@@ -7029,7 +7399,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple annotations in the tree - up/down - XDocument"
-                            ) {
+                            )
+                            {
                                 Param = typeof(XDocument),
                                 Priority = 0
                             }
@@ -7040,7 +7411,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple annotations in the tree - up/down - XElement"
-                            ) {
+                            )
+                            {
                                 Param = typeof(XElement),
                                 Priority = 0
                             }
@@ -7051,7 +7423,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple annotations on node - XElement"
-                            ) {
+                            )
+                            {
                                 Param = typeof(XElement),
                                 Priority = 0
                             }
@@ -7062,7 +7435,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Multiple annotations on node - XDocument"
-                            ) {
+                            )
+                            {
                                 Param = typeof(XDocument),
                                 Priority = 0
                             }
@@ -7125,7 +7499,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XElement - ReaderOptions.OmitDuplicateNamespaces"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     typeof(XElement),
@@ -7156,7 +7531,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XDocument - ReaderOptions.OmitDuplicateNamespaces"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     typeof(XDocument),
@@ -7437,7 +7813,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=true, invalid XML test WriteEntityRef"
-                            ) {
+                            )
+                            {
                                 Param = "EntityRef",
                                 Id = 1,
                                 Priority = 1
@@ -7449,7 +7826,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=true, invalid XML test WriteWhitespace"
-                            ) {
+                            )
+                            {
                                 Param = "Whitespace",
                                 Id = 3,
                                 Priority = 1
@@ -7461,7 +7839,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=true, invalid name chars WriteDocType(name)"
-                            ) {
+                            )
+                            {
                                 Param = "WriteDocTypeName",
                                 Id = 4,
                                 Priority = 1
@@ -7473,7 +7852,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=true, invalid XML test WriteSurrogateCharEntity"
-                            ) {
+                            )
+                            {
                                 Param = "SurrogateCharEntity",
                                 Id = 2,
                                 Priority = 1
@@ -7485,7 +7865,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=true, invalid XML characters in WriteEntityRef should error"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "EntityRef", true },
                                 Id = 46,
                                 Priority = 1
@@ -7497,7 +7878,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=false, invalid XML characters in WriteSurrogateCharEntity should error"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "Surrogate", false },
                                 Id = 41,
                                 Priority = 1
@@ -7509,7 +7891,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=true, invalid XML characters in WriteQualifiedName should error"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "QName", true },
                                 Id = 47,
                                 Priority = 1
@@ -7521,7 +7904,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=true, invalid XML characters in WriteSurrogateCharEntity should error"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "Surrogate", true },
                                 Id = 45,
                                 Priority = 1
@@ -7533,7 +7917,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=false, invalid XML characters in WriteWhitespace should error"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "Whitespace", false },
                                 Id = 40,
                                 Priority = 1
@@ -7545,7 +7930,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=false, invalid XML characters in WriteEntityRef should error"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "EntityRef", false },
                                 Id = 42,
                                 Priority = 1
@@ -7557,7 +7943,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=false, invalid XML characters in WriteQualifiedName should error"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "QName", false },
                                 Id = 43,
                                 Priority = 1
@@ -7569,7 +7956,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "CheckChars=true, invalid XML characters in WriteWhitespace should error"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "Whitespace", true },
                                 Id = 44,
                                 Priority = 1
@@ -7589,7 +7977,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test for CR (xD) inside attr when NewLineHandling = Replace"
-                            ) {
+                            )
+                            {
                                 Id = 7,
                                 Priority = 0
                             }
@@ -7600,7 +7989,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test for LF (xA) inside attr when NewLineHandling = Replace"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 0
                             }
@@ -7611,7 +8001,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test for CR LF (xD xA) inside attr when NewLineHandling = Replace"
-                            ) {
+                            )
+                            {
                                 Id = 9,
                                 Priority = 0
                             }
@@ -7622,7 +8013,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test for CR (xD) inside attr when NewLineHandling = Entitize"
-                            ) {
+                            )
+                            {
                                 Id = 10,
                                 Priority = 0
                             }
@@ -7633,7 +8025,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test for LF (xA) inside attr when NewLineHandling = Entitize"
-                            ) {
+                            )
+                            {
                                 Id = 11,
                                 Priority = 0
                             }
@@ -7644,7 +8037,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Test for CR LF (xD xA) inside attr when NewLineHandling = Entitize"
-                            ) {
+                            )
+                            {
                                 Id = 12,
                                 Priority = 0
                             }
@@ -7655,7 +8049,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Factory-created writers do not entitize 0xD character in text content when NewLineHandling=Entitize"
-                            ) {
+                            )
+                            {
                                 Id = 13
                             }
                         }
@@ -7693,7 +8088,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Indent = false, element content is empty"
-                            ) {
+                            )
+                            {
                                 Id = 3,
                                 Priority = 0
                             }
@@ -7704,7 +8100,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Indent = false, element content is empty, FullEndElement"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 0
                             }
@@ -7715,7 +8112,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Indent = true, element content is empty, FullEndElement"
-                            ) {
+                            )
+                            {
                                 Id = 6,
                                 Priority = 0
                             }
@@ -7736,7 +8134,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Indent = true, mixed content, FullEndElement"
-                            ) {
+                            )
+                            {
                                 Id = 8,
                                 Priority = 0
                             }
@@ -7755,7 +8154,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Make sure the setting has no effect when Indent is false"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 0
                             }
@@ -7784,7 +8184,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "StartDocument(bool standalone = true)"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 0
                             }
@@ -7795,7 +8196,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "StartDocument(bool standalone = false)"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 0
                             }
@@ -7814,7 +8216,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteDocType should error when CL=fragment"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 1
                             }
@@ -7825,7 +8228,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteStartDocument() should error when CL=fragment"
-                            ) {
+                            )
+                            {
                                 Id = 2,
                                 Priority = 1
                             }
@@ -7844,7 +8248,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Document after WriteStartDocument()"
-                            ) {
+                            )
+                            {
                                 Id = 1,
                                 Priority = 0
                             }
@@ -7855,7 +8260,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Document after WriteStartDocument(standalone = true)"
-                            ) {
+                            )
+                            {
                                 Param = "true",
                                 Id = 2,
                                 Priority = 0
@@ -7867,7 +8273,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Document after WriteStartDocument(standalone = false)"
-                            ) {
+                            )
+                            {
                                 Param = "false",
                                 Id = 3,
                                 Priority = 0
@@ -7879,7 +8286,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Document when you write DocType decl"
-                            ) {
+                            )
+                            {
                                 Id = 4,
                                 Priority = 0
                             }
@@ -7890,7 +8298,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Fragment when you write a root element"
-                            ) {
+                            )
+                            {
                                 Id = 5,
                                 Priority = 1
                             }
@@ -7901,7 +8310,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Fragment for WriteCData at top level"
-                            ) {
+                            )
+                            {
                                 Param = "CData",
                                 Id = 7,
                                 Priority = 1
@@ -7913,7 +8323,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Fragment for WriteCharEntity at top level"
-                            ) {
+                            )
+                            {
                                 Param = "CharEntity",
                                 Id = 9,
                                 Priority = 1
@@ -7925,7 +8336,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Fragment for WriteSurrogateCharEntity at top level"
-                            ) {
+                            )
+                            {
                                 Param = "SurrogateCharEntity",
                                 Id = 10,
                                 Priority = 1
@@ -7937,7 +8349,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Fragment for WriteString at top level"
-                            ) {
+                            )
+                            {
                                 Param = "String",
                                 Id = 6,
                                 Priority = 1
@@ -7949,7 +8362,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Fragment for WriteRaw at top level"
-                            ) {
+                            )
+                            {
                                 Param = "Raw",
                                 Id = 12,
                                 Priority = 1
@@ -7961,7 +8375,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Fragment for WriteBinHex at top level"
-                            ) {
+                            )
+                            {
                                 Param = "BinHex",
                                 Id = 14,
                                 Priority = 1
@@ -7973,7 +8388,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Change to CL Fragment for WriteChars at top level"
-                            ) {
+                            )
+                            {
                                 Param = "Chars",
                                 Id = 11,
                                 Priority = 1
@@ -7985,7 +8401,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WritePI at top level, followed by DTD, expected CL = Document"
-                            ) {
+                            )
+                            {
                                 Param = "PI",
                                 Id = 15,
                                 Priority = 2
@@ -7997,7 +8414,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteWhitespace at top level, followed by DTD, expected CL = Document"
-                            ) {
+                            )
+                            {
                                 Param = "WS",
                                 Id = 17,
                                 Priority = 2
@@ -8009,7 +8427,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteComment at top level, followed by DTD, expected CL = Document"
-                            ) {
+                            )
+                            {
                                 Param = "Comment",
                                 Id = 16,
                                 Priority = 2
@@ -8021,7 +8440,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteComment at top level, followed by text, expected CL = Fragment"
-                            ) {
+                            )
+                            {
                                 Param = "Comment",
                                 Id = 19,
                                 Priority = 2
@@ -8033,7 +8453,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteWhitespace at top level, followed by text, expected CL = Fragment"
-                            ) {
+                            )
+                            {
                                 Param = "WS",
                                 Id = 20,
                                 Priority = 2
@@ -8045,7 +8466,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WritePI at top level, followed by text, expected CL = Fragment"
-                            ) {
+                            )
+                            {
                                 Param = "PI",
                                 Id = 18,
                                 Priority = 2
@@ -8057,7 +8479,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode(XmlReader) when reader positioned on DocType node, expected CL = Document"
-                            ) {
+                            )
+                            {
                                 Id = 21,
                                 Priority = 2
                             }
@@ -8068,7 +8491,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "WriteNode(XmlReader) when reader positioned on text node, expected CL = Fragment"
-                            ) {
+                            )
+                            {
                                 Id = 22,
                                 Priority = 2
                             }

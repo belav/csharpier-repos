@@ -18,7 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToFirstAttribute() When AttributeCount=0, <EMPTY1/> "
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

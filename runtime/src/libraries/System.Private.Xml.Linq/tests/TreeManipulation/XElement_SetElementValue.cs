@@ -27,7 +27,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Delete Element (non existing, text only, full)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A></A>", "X", null },
                         Priority = 1
                     }

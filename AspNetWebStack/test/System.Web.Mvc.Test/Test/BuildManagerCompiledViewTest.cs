@@ -95,7 +95,8 @@ namespace System.Web.Mvc.Test
                 controllerContext,
                 "view path",
                 activator.Object
-            ) {
+            )
+            {
                 BuildManager = buildManager
             };
 
@@ -122,7 +123,8 @@ namespace System.Web.Mvc.Test
                 controllerContext,
                 "view path",
                 dependencyResolver: dependencyResolver.Object
-            ) {
+            )
+            {
                 BuildManager = buildManager
             };
 
@@ -144,7 +146,8 @@ namespace System.Web.Mvc.Test
                 controllerContext,
                 "view path",
                 dependencyResolver: dependencyResolver.Object
-            ) {
+            )
+            {
                 BuildManager = buildManager
             };
 

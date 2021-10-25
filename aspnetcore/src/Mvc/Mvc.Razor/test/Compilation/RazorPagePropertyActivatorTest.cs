@@ -118,7 +118,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var original = new ViewDataDictionary<object>(
                 modelMetadataProvider,
                 new ModelStateDictionary()
-            ) {
+            )
+            {
                 { "test-key", "test-value" },
             };
             var viewContext = new ViewContext { ViewData = original, };
@@ -147,7 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var original = new ViewDataDictionary<TestModel>(
                 modelMetadataProvider,
                 new ModelStateDictionary()
-            ) {
+            )
+            {
                 { "test-key", "test-value" },
             };
             var viewContext = new ViewContext { ViewData = original, };
@@ -176,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var original = new ViewDataDictionary<TestModel>(
                 modelMetadataProvider,
                 new ModelStateDictionary()
-            ) {
+            )
+            {
                 { "test-key", "test-value" },
             };
             var viewContext = new ViewContext { ViewData = original, };

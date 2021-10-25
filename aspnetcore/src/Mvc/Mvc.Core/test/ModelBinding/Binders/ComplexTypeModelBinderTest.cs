@@ -371,7 +371,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             var testableBinder = new Mock<TestableComplexTypeModelBinder>(
                 allowValidatingTopLevelNodes
-            ) {
+            )
+            {
                 CallBase = true
             };
             testableBinder

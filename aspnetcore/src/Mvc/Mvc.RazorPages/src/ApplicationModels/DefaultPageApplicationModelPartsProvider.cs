@@ -53,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var handlerModel = new PageHandlerModel(
                 method,
                 method.GetCustomAttributes(inherit: true)
-            ) {
+            )
+            {
                 Name = method.Name,
                 HandlerName = handlerName,
                 HttpMethod = httpMethod,

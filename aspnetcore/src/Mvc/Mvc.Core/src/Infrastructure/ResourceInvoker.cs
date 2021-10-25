@@ -549,7 +549,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         _resourceExecutedContext = new ResourceExecutedContextSealed(
                             _resourceExecutingContext,
                             _filters
-                        ) {
+                        )
+                        {
                             Canceled = true,
                             Result = _resourceExecutingContext.Result,
                         };
@@ -603,7 +604,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         _resourceExecutedContext = new ResourceExecutedContextSealed(
                             resourceExecutingContext,
                             _filters
-                        ) {
+                        )
+                        {
                             Canceled = true,
                             Result = _resourceExecutingContext.Result,
                         };
@@ -932,7 +934,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         _resourceExecutedContext = new ResourceExecutedContextSealed(
                             _actionContext,
                             _filters
-                        ) {
+                        )
+                        {
                             Result = _result,
                         };
 
@@ -1030,7 +1033,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 _resourceExecutedContext = new ResourceExecutedContextSealed(
                     _resourceExecutingContext!,
                     _filters
-                ) {
+                )
+                {
                     ExceptionDispatchInfo = ExceptionDispatchInfo.Capture(exception),
                 };
             }
@@ -1061,7 +1065,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     invoker._resourceExecutedContext = new ResourceExecutedContextSealed(
                         invoker._resourceExecutingContext!,
                         invoker._filters
-                    ) {
+                    )
+                    {
                         ExceptionDispatchInfo = ExceptionDispatchInfo.Capture(exception),
                     };
                 }
@@ -1120,7 +1125,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     invoker._exceptionContext = new ExceptionContextSealed(
                         invoker._actionContext,
                         invoker._filters
-                    ) {
+                    )
+                    {
                         ExceptionDispatchInfo = ExceptionDispatchInfo.Capture(exception),
                     };
                 }
@@ -1345,7 +1351,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                             _filters,
                             resultExecutingContext.Result,
                             _instance!
-                        ) {
+                        )
+                        {
                             Canceled = true,
                         };
                     }
@@ -1394,7 +1401,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                             _filters,
                             resultExecutingContext.Result,
                             _instance!
-                        ) {
+                        )
+                        {
                             Canceled = true,
                         };
 
@@ -1523,7 +1531,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     _filters,
                     _result!,
                     _instance!
-                ) {
+                )
+                {
                     ExceptionDispatchInfo = ExceptionDispatchInfo.Capture(exception),
                 };
             }
@@ -1562,7 +1571,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         invoker._filters,
                         invoker._result!,
                         invoker._instance!
-                    ) {
+                    )
+                    {
                         ExceptionDispatchInfo = ExceptionDispatchInfo.Capture(exception),
                     };
                 }

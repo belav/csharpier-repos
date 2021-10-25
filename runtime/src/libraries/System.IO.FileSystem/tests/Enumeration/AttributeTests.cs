@@ -144,7 +144,8 @@ namespace System.IO.Tests.Enumeration
                 testDirectory.FullName,
                 (ref FileSystemEntry entry) => entry.ToFullPath(),
                 new EnumerationOptions() { AttributesToSkip = 0 }
-            ) {
+            )
+            {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) => entry.IsHidden
             };
 

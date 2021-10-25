@@ -228,7 +228,8 @@ namespace System.Net.NetworkInformation
                                 AddressFamily.InterNetwork,
                                 SocketType.Dgram,
                                 0
-                            ) {
+                            )
+                            {
                                 Blocking = false
                             };
                             s_ipv4WaitHandle = new AutoResetEvent(false);
@@ -240,7 +241,8 @@ namespace System.Net.NetworkInformation
                                 AddressFamily.InterNetworkV6,
                                 SocketType.Dgram,
                                 0
-                            ) {
+                            )
+                            {
                                 Blocking = false
                             };
                             s_ipv6WaitHandle = new AutoResetEvent(false);

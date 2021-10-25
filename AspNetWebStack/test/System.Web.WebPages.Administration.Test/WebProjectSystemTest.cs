@@ -293,9 +293,8 @@ namespace System.Web.WebPages.Administration.Test
         public void ResolveAssemblyPartialNameForCommonAssemblies()
         {
             // Arrange
-            var commonAssemblies = new Dictionary<string, string>(
-                StringComparer.OrdinalIgnoreCase
-            ) {
+            var commonAssemblies = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
                 {
                     "System.Data",
                     "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"

@@ -57,7 +57,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     document,
                     builder,
                     syntaxTree.Options.FeatureFlags
-                ) {
+                )
+                {
                     SourceDocument = syntaxTree.Source,
                 };
 
@@ -72,7 +73,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     document,
                     builder,
                     syntaxTree.Options.FeatureFlags
-                ) {
+                )
+                {
                     SourceDocument = syntaxTree.Source,
                 };
 
@@ -85,7 +87,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     builder,
                     tagHelperContext?.Prefix,
                     syntaxTree.Options.FeatureFlags
-                ) {
+                )
+                {
                     SourceDocument = syntaxTree.Source,
                 };
 

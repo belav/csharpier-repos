@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static readonly ISet<SyntaxKind> s_validStructModifiers = new HashSet<SyntaxKind>(
             s_validClassInterfaceRecordModifiers,
             SyntaxFacts.EqualityComparer
-        ) {
+        )
+        {
             SyntaxKind.ReadOnlyKeyword,
         };
 

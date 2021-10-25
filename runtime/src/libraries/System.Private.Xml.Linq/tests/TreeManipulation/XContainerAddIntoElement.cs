@@ -21,7 +21,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Single node - XElement empty (isEmpty=False) - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'></A>", 1, true },
                         Priority = 0
                     }
@@ -42,7 +43,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement empty (isEmpty=False) - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'></A>", 3, true },
                         Priority = 1
                     }
@@ -53,7 +55,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement with text - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'>tralala</A>", 3, true, "tralala" },
                         Priority = 1
                     }
@@ -64,7 +67,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement with text/CDATA - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'><![CDATA[tralala]]></A>", 3, true },
                         Priority = 1
                     }
@@ -75,7 +79,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Single node - XElement with text - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'>tralala</A>", 1, true, "tralala" },
                         Priority = 0
                     }
@@ -86,7 +91,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Single node - XElement with text/CDATA - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'><![CDATA[tralala]]></A>", 1, true },
                         Priority = 1
                     }
@@ -97,7 +103,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement with content II - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A xmlns='ns0'>tteexxtt<?PI?><X/>text<Y/></A>",
@@ -113,7 +120,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement with single child element - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'><X/></A>", 3, true },
                         Priority = 1
                     }
@@ -124,7 +132,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement with content III - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X/>text<Y/></A>",
@@ -140,7 +149,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Single node - XElement with single child element - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'><X/></A>", 1, true },
                         Priority = 0
                     }
@@ -151,7 +161,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Single node - XElement with content I - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'><?PI?><X/>text<Y/></A>", 1, true },
                         Priority = 0
                     }
@@ -162,7 +173,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement with content I - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'><?PI?><X/>text<Y/></A>", 3, true },
                         Priority = 1
                     }
@@ -173,7 +185,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Single node - XElement with content II - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A xmlns='ns0'>tteexxtt<?PI?><X/>text<Y/></A>",
@@ -189,7 +202,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Single node - XElement with content III - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X/>text<Y/></A>",
@@ -205,7 +219,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement empty - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'/>", 3, true },
                         Priority = 1
                     }
@@ -226,7 +241,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Single node - XElement empty (isEmpty=False)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'></A>", 1, false },
                         Priority = 0
                     }
@@ -262,7 +278,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Single node - XElement with single child element"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'><X/></A>", 1, false },
                         Priority = 0
                     }
@@ -323,7 +340,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement empty (isEmpty=False)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'></A>", 3, false },
                         Priority = 1
                     }
@@ -344,7 +362,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement with text/CDATA"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A xmlns='ns0'><![CDATA[tralala]]></A>",
@@ -360,7 +379,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement with single child element"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'><X/></A>", 3, false },
                         Priority = 1
                     }
@@ -371,7 +391,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement with content I"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A xmlns='ns0'><?PI?><X/>text<Y/></A>", 3, false },
                         Priority = 1
                     }
@@ -382,7 +403,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement with content II"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A xmlns='ns0'>tteexxtt<?PI?><X/>text<Y/></A>",
@@ -398,7 +420,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Multiple (3) nodes - XElement with content III"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X/>text<Y/></A>",

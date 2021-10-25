@@ -35,7 +35,8 @@ namespace System.Net
                     "dns-lookups-requested",
                     this,
                     () => Interlocked.Read(ref _lookupsRequested)
-                ) {
+                )
+                {
                     DisplayName = "DNS Lookups Requested"
                 };
 
@@ -44,7 +45,8 @@ namespace System.Net
                     "current-dns-lookups",
                     this,
                     () => Interlocked.Read(ref _currentLookups)
-                ) {
+                )
+                {
                     DisplayName = "Current DNS Lookups"
                 };
 

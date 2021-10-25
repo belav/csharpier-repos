@@ -120,7 +120,8 @@ namespace System.Web.Http.ExceptionHandling
                         exception: expectedException,
                         catchBlock: CreateTopLevelCatchBlock(),
                         request: expectedRequest
-                    ) {
+                    )
+                    {
                         RequestContext = new HttpRequestContext
                         {
                             Configuration = configuration,
@@ -159,7 +160,8 @@ namespace System.Web.Http.ExceptionHandling
                     exception,
                     CreateNonTopLevelCatchBlock(),
                     request
-                ) {
+                )
+                {
                     RequestContext = new HttpRequestContext { Configuration = configuration },
                 };
 
@@ -189,7 +191,8 @@ namespace System.Web.Http.ExceptionHandling
                 ExceptionContext context = new ExceptionContext(
                     exception,
                     CreateTopLevelCatchBlock()
-                ) {
+                )
+                {
                     RequestContext = new HttpRequestContext { Configuration = configuration },
                     Request = null
                 };
@@ -210,7 +213,8 @@ namespace System.Web.Http.ExceptionHandling
                 ExceptionContext context = new ExceptionContext(
                     exception,
                     CreateTopLevelCatchBlock()
-                ) {
+                )
+                {
                     RequestContext = null,
                     Request = request
                 };
@@ -231,7 +235,8 @@ namespace System.Web.Http.ExceptionHandling
                 ExceptionContext context = new ExceptionContext(
                     exception,
                     CreateTopLevelCatchBlock()
-                ) {
+                )
+                {
                     RequestContext = new HttpRequestContext { Configuration = null },
                     Request = request
                 };
@@ -255,7 +260,8 @@ namespace System.Web.Http.ExceptionHandling
                 ExceptionContext context = new ExceptionContext(
                     exception,
                     CreateTopLevelCatchBlock()
-                ) {
+                )
+                {
                     RequestContext = new HttpRequestContext { Configuration = configuration },
                     Request = request
                 };

@@ -85,7 +85,8 @@ namespace Microsoft.AspNetCore.Hosting
                     "requests-per-second",
                     this,
                     () => Volatile.Read(ref _totalRequests)
-                ) {
+                )
+                {
                     DisplayName = "Request Rate",
                     DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                 };
@@ -94,7 +95,8 @@ namespace Microsoft.AspNetCore.Hosting
                     "total-requests",
                     this,
                     () => Volatile.Read(ref _totalRequests)
-                ) {
+                )
+                {
                     DisplayName = "Total Requests",
                 };
 
@@ -102,7 +104,8 @@ namespace Microsoft.AspNetCore.Hosting
                     "current-requests",
                     this,
                     () => Volatile.Read(ref _currentRequests)
-                ) {
+                )
+                {
                     DisplayName = "Current Requests"
                 };
 
@@ -110,7 +113,8 @@ namespace Microsoft.AspNetCore.Hosting
                     "failed-requests",
                     this,
                     () => Volatile.Read(ref _failedRequests)
-                ) {
+                )
+                {
                     DisplayName = "Failed Requests"
                 };
             }

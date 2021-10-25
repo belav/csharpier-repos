@@ -169,42 +169,48 @@ namespace System.Net.Sockets
                     "outgoing-connections-established",
                     this,
                     () => Interlocked.Read(ref _outgoingConnectionsEstablished)
-                ) {
+                )
+                {
                     DisplayName = "Outgoing Connections Established",
                 };
                 _incomingConnectionsEstablishedCounter ??= new PollingCounter(
                     "incoming-connections-established",
                     this,
                     () => Interlocked.Read(ref _incomingConnectionsEstablished)
-                ) {
+                )
+                {
                     DisplayName = "Incoming Connections Established",
                 };
                 _bytesReceivedCounter ??= new PollingCounter(
                     "bytes-received",
                     this,
                     () => Interlocked.Read(ref _bytesReceived)
-                ) {
+                )
+                {
                     DisplayName = "Bytes Received",
                 };
                 _bytesSentCounter ??= new PollingCounter(
                     "bytes-sent",
                     this,
                     () => Interlocked.Read(ref _bytesSent)
-                ) {
+                )
+                {
                     DisplayName = "Bytes Sent",
                 };
                 _datagramsReceivedCounter ??= new PollingCounter(
                     "datagrams-received",
                     this,
                     () => Interlocked.Read(ref _datagramsReceived)
-                ) {
+                )
+                {
                     DisplayName = "Datagrams Received",
                 };
                 _datagramsSentCounter ??= new PollingCounter(
                     "datagrams-sent",
                     this,
                     () => Interlocked.Read(ref _datagramsSent)
-                ) {
+                )
+                {
                     DisplayName = "Datagrams Sent",
                 };
             }

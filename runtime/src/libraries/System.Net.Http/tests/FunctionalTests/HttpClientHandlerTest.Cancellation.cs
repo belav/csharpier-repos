@@ -42,7 +42,8 @@ namespace System.Net.Http.Functional.Tests
                                     new HttpRequestMessage(
                                         HttpMethod.Get,
                                         new UriBuilder(uri) { Scheme = "https" }.ToString()
-                                    ) {
+                                    )
+                                    {
                                         Version = UseVersion
                                     },
                                     default

@@ -24,7 +24,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.Create((Stream)null, null, (XmlParserContext)null)"
-                        ) {
+                        )
+                        {
                             Param = 9
                         }
                     }
@@ -43,7 +44,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.Create((TextReader)null, null, (string)null)"
-                        ) {
+                        )
+                        {
                             Param = 11
                         }
                     }
@@ -53,7 +55,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.Create((TextReader)null, null, (XmlParserContext)null)"
-                        ) {
+                        )
+                        {
                             Param = 12
                         }
                     }
@@ -150,7 +153,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.Create((Stream)null, null, (string) null)"
-                        ) {
+                        )
+                        {
                             Param = 8
                         }
                     }
@@ -179,7 +183,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.Create(String.Empty, null, (XmlParserContext)null)"
-                        ) {
+                        )
+                        {
                             Param = 3
                         }
                     }
@@ -193,7 +198,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.Create(TextReader, XmlReaderSettings, XmlParserContext)"
-                        ) {
+                        )
+                        {
                             Param = 12
                         }
                     }
@@ -242,7 +248,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.Create(String, XmlReaderSettings, XmlParserContext)"
-                        ) {
+                        )
+                        {
                             Param = 10
                         }
                     }
@@ -252,7 +259,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.Create(TextReader, XmlReaderSettings, string)"
-                        ) {
+                        )
+                        {
                             Param = 11
                         }
                     }
@@ -284,7 +292,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsObject(null, null)"
-                        ) {
+                        )
+                        {
                             Param = 27
                         }
                     }
@@ -303,7 +312,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsString(null, null)"
-                        ) {
+                        )
+                        {
                             Param = 29
                         }
                     }
@@ -424,7 +434,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAs(null, null, null, null)"
-                        ) {
+                        )
+                        {
                             Param = 9
                         }
                     }
@@ -434,7 +445,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAs(null, null, 'a', null)"
-                        ) {
+                        )
+                        {
                             Param = 10
                         }
                     }
@@ -444,7 +456,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsBase64(null, 0, 0)"
-                        ) {
+                        )
+                        {
                             Param = 11
                         }
                     }
@@ -454,7 +467,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsBinHex(null, 0, 0)"
-                        ) {
+                        )
+                        {
                             Param = 12
                         }
                     }
@@ -464,7 +478,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsBoolean(null, null)"
-                        ) {
+                        )
+                        {
                             Param = 13
                         }
                     }
@@ -474,7 +489,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsBoolean('a', null)"
-                        ) {
+                        )
+                        {
                             Param = 14
                         }
                     }
@@ -484,7 +500,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsDecimal(null, null)"
-                        ) {
+                        )
+                        {
                             Param = 17
                         }
                     }
@@ -494,7 +511,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsDecimal('a', null)"
-                        ) {
+                        )
+                        {
                             Param = 18
                         }
                     }
@@ -504,7 +522,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsDouble(null, null)"
-                        ) {
+                        )
+                        {
                             Param = 19
                         }
                     }
@@ -730,7 +749,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAs(String.Empty, String.Empty, String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 9
                         }
                     }
@@ -740,7 +760,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsString('a', String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 30
                         }
                     }
@@ -759,7 +780,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadToDescendant(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 32
                         }
                     }
@@ -787,7 +809,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadToFollowing(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 35
                         }
                     }
@@ -815,7 +838,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadToNextSibling(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 38
                         }
                     }
@@ -834,7 +858,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsString(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 29
                         }
                     }
@@ -862,7 +887,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.GetAttribute(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 4
                         }
                     }
@@ -881,7 +907,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.MoveToAttribute(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 6
                         }
                     }
@@ -897,7 +924,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAs(String.Empty, String.Empty, 'a', String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 10
                         }
                     }
@@ -907,7 +935,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsBoolean(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 13
                         }
                     }
@@ -917,7 +946,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsBoolean('a', String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 14
                         }
                     }
@@ -927,7 +957,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsDecimal(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 17
                         }
                     }
@@ -937,7 +968,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsDecimal('a', String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 18
                         }
                     }
@@ -947,7 +979,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsDouble(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 19
                         }
                     }
@@ -957,7 +990,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsDouble('a', String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 20
                         }
                     }
@@ -967,7 +1001,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsFloat(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 21
                         }
                     }
@@ -977,7 +1012,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsFloat('a', String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 22
                         }
                     }
@@ -987,7 +1023,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsInt(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 23
                         }
                     }
@@ -997,7 +1034,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsInt('a', String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 24
                         }
                     }
@@ -1007,7 +1045,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsLong(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 25
                         }
                     }
@@ -1017,7 +1056,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsLong('a', String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 26
                         }
                     }
@@ -1027,7 +1067,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsObject(String.Empty, String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 27
                         }
                     }
@@ -1037,7 +1078,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAsObject('a', String.Empty)"
-                        ) {
+                        )
+                        {
                             Param = 28
                         }
                     }
@@ -1051,7 +1093,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReaderSettings.LineNumberOffset - invalid values"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -1061,7 +1104,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReaderSettings.LinePositionOffset - invalid values"
-                        ) {
+                        )
+                        {
                             Param = 2
                         }
                     }
@@ -1223,7 +1267,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "DataReader.Settings.MaxCharactersFromEntities - readonly"
-                        ) {
+                        )
+                        {
                             Param = 12
                         }
                     }
@@ -1251,7 +1296,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "DataReader.Settings.MaxCharactersInDocument - readonly"
-                        ) {
+                        )
+                        {
                             Param = 9
                         }
                     }
@@ -1270,7 +1316,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "DataReader.Settings.IgnoreProcessingInstructions - readonly"
-                        ) {
+                        )
+                        {
                             Param = 7
                         }
                     }
@@ -1289,7 +1336,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "DataReader.Settings.LinePositionOffset - readonly"
-                        ) {
+                        )
+                        {
                             Param = 2
                         }
                     }
@@ -1384,7 +1432,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Readcontentas in close state and call ReadContentAsBase64"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -1451,7 +1500,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAs(typeof(String), null)"
-                        ) {
+                        )
+                        {
                             Param = 12
                         }
                     }
@@ -1479,7 +1529,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Readcontentas in close state and call ReadElementContentAsBase64"
-                        ) {
+                        )
+                        {
                             Param = 3
                         }
                     }
@@ -1489,7 +1540,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Readcontentas in close state and call ReadElementContentAsBinHex"
-                        ) {
+                        )
+                        {
                             Param = 4
                         }
                     }
@@ -1499,7 +1551,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Readcontentas in close state and call ReadValueChunk"
-                        ) {
+                        )
+                        {
                             Param = 5
                         }
                     }
@@ -1542,7 +1595,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader.ReadElementContentAs(typeof(String), null)"
-                        ) {
+                        )
+                        {
                             Param = 18
                         }
                     }
@@ -1591,7 +1645,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Readcontentas in close state and call ReadContentAsBinHex"
-                        ) {
+                        )
+                        {
                             Param = 2
                         }
                     }

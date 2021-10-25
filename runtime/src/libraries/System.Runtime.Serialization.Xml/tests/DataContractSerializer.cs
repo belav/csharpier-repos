@@ -2943,7 +2943,8 @@ public static partial class DataContractSerializerTests
     public static void DCS_TypeWithNestedGenericClassImplementingIXmlSerialiable()
     {
         TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool> value =
-            new TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool>() {
+            new TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool>()
+            {
                 StringValue = "Foo"
             };
         var deserializedValue =

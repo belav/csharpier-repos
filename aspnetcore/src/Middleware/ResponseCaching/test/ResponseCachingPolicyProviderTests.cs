@@ -499,8 +499,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.ResponseTime = DateTimeOffset.MaxValue;
             context.CachedEntryAge = TimeSpan.MaxValue;
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue() { Public = true }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                Public = true
+            }.ToString();
 
             Assert.True(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
             Assert.Empty(sink.Writes);
@@ -515,8 +517,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.ResponseTime = utcNow;
             context.CachedEntryAge = TimeSpan.Zero;
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue() { Public = true }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                Public = true
+            }.ToString();
             context.CachedResponseHeaders[HeaderNames.Expires] = HeaderUtilities.FormatDate(utcNow);
 
             Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
@@ -532,12 +536,11 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.CachedEntryAge = TimeSpan.FromSeconds(9);
             context.ResponseTime = utcNow + context.CachedEntryAge;
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue()
-                {
-                    Public = true,
-                    MaxAge = TimeSpan.FromSeconds(10)
-                }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                Public = true,
+                MaxAge = TimeSpan.FromSeconds(10)
+            }.ToString();
             context.HttpContext.Response.Headers[HeaderNames.Expires] = HeaderUtilities.FormatDate(
                 utcNow
             );
@@ -555,12 +558,11 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.CachedEntryAge = TimeSpan.FromSeconds(10);
             context.ResponseTime = utcNow + context.CachedEntryAge;
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue()
-                {
-                    Public = true,
-                    MaxAge = TimeSpan.FromSeconds(10)
-                }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                Public = true,
+                MaxAge = TimeSpan.FromSeconds(10)
+            }.ToString();
             context.HttpContext.Response.Headers[HeaderNames.Expires] = HeaderUtilities.FormatDate(
                 utcNow
             );
@@ -578,13 +580,12 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.CachedEntryAge = TimeSpan.FromSeconds(11);
             context.ResponseTime = utcNow + context.CachedEntryAge;
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue()
-                {
-                    Public = true,
-                    MaxAge = TimeSpan.FromSeconds(10),
-                    SharedMaxAge = TimeSpan.FromSeconds(15)
-                }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                Public = true,
+                MaxAge = TimeSpan.FromSeconds(10),
+                SharedMaxAge = TimeSpan.FromSeconds(15)
+            }.ToString();
             context.CachedResponseHeaders[HeaderNames.Expires] = HeaderUtilities.FormatDate(utcNow);
 
             Assert.True(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
@@ -600,13 +601,12 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.CachedEntryAge = TimeSpan.FromSeconds(5);
             context.ResponseTime = utcNow + context.CachedEntryAge;
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue()
-                {
-                    Public = true,
-                    MaxAge = TimeSpan.FromSeconds(10),
-                    SharedMaxAge = TimeSpan.FromSeconds(5)
-                }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                Public = true,
+                MaxAge = TimeSpan.FromSeconds(10),
+                SharedMaxAge = TimeSpan.FromSeconds(5)
+            }.ToString();
             context.CachedResponseHeaders[HeaderNames.Expires] = HeaderUtilities.FormatDate(utcNow);
 
             Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
@@ -624,12 +624,11 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.HttpContext.Request.Headers[HeaderNames.CacheControl] =
                 new CacheControlHeaderValue() { MinFresh = TimeSpan.FromSeconds(2) }.ToString();
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue()
-                {
-                    MaxAge = TimeSpan.FromSeconds(10),
-                    SharedMaxAge = TimeSpan.FromSeconds(5)
-                }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                MaxAge = TimeSpan.FromSeconds(10),
+                SharedMaxAge = TimeSpan.FromSeconds(5)
+            }.ToString();
             context.CachedEntryAge = TimeSpan.FromSeconds(3);
 
             Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
@@ -648,8 +647,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.HttpContext.Request.Headers[HeaderNames.CacheControl] =
                 new CacheControlHeaderValue() { MaxAge = TimeSpan.FromSeconds(5) }.ToString();
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue() { MaxAge = TimeSpan.FromSeconds(10), }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                MaxAge = TimeSpan.FromSeconds(10),
+            }.ToString();
             context.CachedEntryAge = TimeSpan.FromSeconds(5);
 
             Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
@@ -669,8 +670,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                     MaxStaleLimit = TimeSpan.FromSeconds(2)
                 }.ToString();
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue() { MaxAge = TimeSpan.FromSeconds(5), }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                MaxAge = TimeSpan.FromSeconds(5),
+            }.ToString();
             context.CachedEntryAge = TimeSpan.FromSeconds(6);
 
             Assert.True(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
@@ -689,8 +692,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                     MaxStale = true // No value specified means a MaxStaleLimit of infinity
                 }.ToString();
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue() { MaxAge = TimeSpan.FromSeconds(5), }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                MaxAge = TimeSpan.FromSeconds(5),
+            }.ToString();
             context.CachedEntryAge = TimeSpan.FromSeconds(6);
 
             Assert.True(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
@@ -713,8 +718,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                     MaxStaleLimit = TimeSpan.FromSeconds(1)
                 }.ToString();
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue() { MaxAge = TimeSpan.FromSeconds(5), }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                MaxAge = TimeSpan.FromSeconds(5),
+            }.ToString();
             context.CachedEntryAge = TimeSpan.FromSeconds(6);
 
             Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
@@ -734,12 +741,11 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                     MaxStaleLimit = TimeSpan.FromSeconds(2)
                 }.ToString();
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue()
-                {
-                    MaxAge = TimeSpan.FromSeconds(5),
-                    MustRevalidate = true
-                }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                MaxAge = TimeSpan.FromSeconds(5),
+                MustRevalidate = true
+            }.ToString();
             context.CachedEntryAge = TimeSpan.FromSeconds(6);
 
             Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
@@ -759,12 +765,11 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                     MaxStaleLimit = TimeSpan.FromSeconds(2)
                 }.ToString();
             context.CachedResponseHeaders = new HeaderDictionary();
-            context.CachedResponseHeaders[HeaderNames.CacheControl] =
-                new CacheControlHeaderValue()
-                {
-                    MaxAge = TimeSpan.FromSeconds(5),
-                    MustRevalidate = true
-                }.ToString();
+            context.CachedResponseHeaders[HeaderNames.CacheControl] = new CacheControlHeaderValue()
+            {
+                MaxAge = TimeSpan.FromSeconds(5),
+                MustRevalidate = true
+            }.ToString();
             context.CachedEntryAge = TimeSpan.FromSeconds(6);
 
             Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));

@@ -92,7 +92,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                             {
                                 RequireHttps = options.RequireHttpsMetadata
                             }
-                        ) {
+                        )
+                        {
                             RefreshInterval = options.RefreshInterval,
                             AutomaticRefreshInterval = options.AutomaticRefreshInterval,
                         };

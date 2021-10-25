@@ -92,7 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 instance: container ?? validationContext.Model ?? _emptyValidationContextInstance,
                 serviceProvider: validationContext.ActionContext?.HttpContext?.RequestServices,
                 items: null
-            ) {
+            )
+            {
                 DisplayName = metadata.GetDisplayName(),
                 MemberName = memberName
             };

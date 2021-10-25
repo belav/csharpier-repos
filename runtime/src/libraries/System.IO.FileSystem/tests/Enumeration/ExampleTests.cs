@@ -25,7 +25,8 @@ namespace System.IO.Tests.Enumeration
             IEnumerable<string> fileNames = new FileSystemEnumerable<string>(
                 testDirectory.FullName,
                 (ref FileSystemEntry entry) => entry.FileName.ToString()
-            ) {
+            )
+            {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
             };
 
@@ -42,7 +43,8 @@ namespace System.IO.Tests.Enumeration
                 directory,
                 (ref FileSystemEntry entry) => (FileInfo)entry.ToFileSystemInfo(),
                 new EnumerationOptions() { RecurseSubdirectories = recursive }
-            ) {
+            )
+            {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
                 {
                     if (entry.IsDirectory)
@@ -88,7 +90,8 @@ namespace System.IO.Tests.Enumeration
                     directory,
                     (ref FileSystemEntry entry) => 1,
                     new EnumerationOptions() { RecurseSubdirectories = recursive }
-                ) {
+                )
+                {
                     ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
                 }
             ).Count();
@@ -117,7 +120,8 @@ namespace System.IO.Tests.Enumeration
                     directory,
                     (ref FileSystemEntry entry) => entry.Length,
                     new EnumerationOptions() { RecurseSubdirectories = recursive }
-                ) {
+                )
+                {
                     ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
                 }
             ).Sum();

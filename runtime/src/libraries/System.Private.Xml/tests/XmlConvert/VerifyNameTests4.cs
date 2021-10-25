@@ -119,7 +119,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "13.Test for VerifyXmlChars(\uffffabcd\ud801\udc01dcba)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 13, typeof(XmlException) }
                     }
                 }
@@ -129,7 +130,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "14.Test for VerifyXmlChars(abcd\uffff\ud801\udc01dcba)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 14, typeof(XmlException) }
                     }
                 }
@@ -139,7 +141,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "15.Test for VerifyXmlChars(abcd\ud801\udc01dcba\uffff)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 15, typeof(XmlException) }
                     }
                 }
@@ -239,7 +242,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "Test for VerifyPublicId (a-zA-Z0-9-'( )+,./:=?;!*#\n@$_%\\r)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "a-zA-Z0-9-'( )+,./:=?;!*#\n@$_%\r", null }
                     }
                 }
@@ -537,7 +541,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "Test for VerifyWhitespace(\\n\\r\\ud801\\udc01\\t\\n)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "\n\r\ud801\udc01\t\n", typeof(XmlException) }
                     }
                 }
@@ -547,7 +552,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "Test for VerifyWhitespace(\\udc01\\ud801\\n\\r\\t\\n)"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "\ufffd\ufffd\ufffd\ufffd\n\r\t\n",
@@ -561,7 +567,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "Test for VerifyWhitespace(\\n\\r\\t\\n\\udc01\\ud801)"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "\n\r\t\n\ufffd\ufffd\ufffd\ufffd",
@@ -575,7 +582,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "Test for VerifyWhitespace(\\n\\r\\udc01\\ud801\\t\n)"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "\n\r\ufffd\ufffd\ufffd\ufffd\t\n",

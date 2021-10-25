@@ -135,10 +135,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ),
                     fieldInit.Value,
                     fieldInit.Field.Type
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 }
-            ) {
+            )
+            {
                 WasCompilerGenerated = !fieldInit.Locals.IsEmpty || fieldInit.WasCompilerGenerated
             };
 
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     syntax,
                     fieldInit.Locals,
                     ImmutableArray.Create(boundStatement)
-                ) {
+                )
+                {
                     WasCompilerGenerated = fieldInit.WasCompilerGenerated
                 };
             }

@@ -70,7 +70,8 @@ namespace System.Web.Mvc
                 runViewStartPages: false,
                 viewStartFileExtensions: FileExtensions,
                 viewPageActivator: ViewPageActivator
-            ) {
+            )
+            {
                 DisplayModeProvider = DisplayModeProvider
             };
         }
@@ -88,7 +89,8 @@ namespace System.Web.Mvc
                 runViewStartPages: true,
                 viewStartFileExtensions: FileExtensions,
                 viewPageActivator: ViewPageActivator
-            ) {
+            )
+            {
                 DisplayModeProvider = DisplayModeProvider
             };
             return view;

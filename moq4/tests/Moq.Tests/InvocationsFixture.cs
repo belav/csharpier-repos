@@ -83,9 +83,7 @@ namespace Moq.Tests
         [Fact]
         public void MockInvocationsIncludeReturnValue_BaseCall()
         {
-            var mock = new Mock<Random>(
-                1
-            ) // seed: 1
+            var mock = new Mock<Random>(1) // seed: 1
             {
                 CallBase = true,
             };

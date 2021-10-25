@@ -481,7 +481,8 @@ Hello from /Pages/Shared/";
             var message = new HttpRequestMessage(
                 HttpMethod.Post,
                 "/CustomModelTypeModel?Attempts=3"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new Dictionary<string, string>
                     {

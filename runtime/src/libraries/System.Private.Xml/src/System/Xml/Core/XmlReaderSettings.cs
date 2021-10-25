@@ -12,8 +12,10 @@ namespace System.Xml
     // XmlReaderSettings class specifies basic features of an XmlReader.
     public sealed class XmlReaderSettings
     {
-        internal static readonly XmlReaderSettings s_defaultReaderSettings =
-            new XmlReaderSettings() { ReadOnly = true };
+        internal static readonly XmlReaderSettings s_defaultReaderSettings = new XmlReaderSettings()
+        {
+            ReadOnly = true
+        };
 
         //
         // Fields

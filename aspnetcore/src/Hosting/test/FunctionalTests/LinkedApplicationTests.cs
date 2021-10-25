@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
                     ServerType.Kestrel,
                     RuntimeFlavor.CoreClr,
                     RuntimeArchitecture.x64
-                ) {
+                )
+                {
                     TargetFramework = Tfm.Default,
                     RuntimeArchitecture = RuntimeArchitecture.x64,
                     ApplicationType = ApplicationType.Standalone,

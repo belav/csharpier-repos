@@ -907,7 +907,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new HtmlTestEncoder(),
                 new JavaScriptTestEncoder(),
                 urlHelperFactory
-            ) {
+            )
+            {
                 ViewContext = viewContext,
             };
         }

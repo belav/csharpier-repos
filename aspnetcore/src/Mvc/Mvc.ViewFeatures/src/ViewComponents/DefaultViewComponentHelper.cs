@@ -163,7 +163,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                     return new Dictionary<string, object?>(
                         capacity: 1,
                         comparer: StringComparer.OrdinalIgnoreCase
-                    ) {
+                    )
+                    {
                         { descriptor.Parameters[0].Name!, arguments }
                     };
                 }

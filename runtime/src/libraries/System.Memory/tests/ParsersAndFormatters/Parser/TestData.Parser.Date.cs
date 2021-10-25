@@ -38,7 +38,8 @@ namespace System.Buffers.Text.Tests
                                 expectedDateTime,
                                 testData.FormatSymbol,
                                 expectedSuccess: true
-                            ) {
+                            )
+                            {
                                 ExpectedBytesConsumed = testData.ExpectedBytesConsumed
                             };
                         }
@@ -49,7 +50,8 @@ namespace System.Buffers.Text.Tests
                                 testData.ExpectedValue.DateTime,
                                 testData.FormatSymbol,
                                 expectedSuccess: true
-                            ) {
+                            )
+                            {
                                 ExpectedBytesConsumed = testData.ExpectedBytesConsumed
                             };
                         }

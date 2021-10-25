@@ -1159,7 +1159,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray.Create(arraySize),
                 new BoundArrayInitialization(syntax, arrayArgs) { WasCompilerGenerated = true },
                 paramArrayType
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }

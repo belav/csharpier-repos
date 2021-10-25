@@ -343,7 +343,8 @@ namespace Microsoft.AspNetCore.Authentication.Google
                                     ["prompt"] = "login",
                                     ["login_hint"] = "this-will-be-overwritten@example.com",
                                 }
-                            ) {
+                            )
+                            {
                                 Prompt = "consent",
                                 LoginHint = "test@example.com",
                             }

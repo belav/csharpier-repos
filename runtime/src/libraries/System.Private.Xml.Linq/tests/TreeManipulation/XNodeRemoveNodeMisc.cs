@@ -22,7 +22,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Removing nodes from mixed content throws InvalIdOperationException"
-                    ) {
+                    )
+                    {
                         Priority = 2
                     }
                 }

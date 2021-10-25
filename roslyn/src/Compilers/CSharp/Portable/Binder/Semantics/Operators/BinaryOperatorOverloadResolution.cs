@@ -693,7 +693,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 enumType,
                                 enumType,
                                 underlying
-                            ) {
+                            )
+                            {
                                 Priority = 2
                             }
                         );
@@ -703,7 +704,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 enumType,
                                 underlying,
                                 enumType
-                            ) {
+                            )
+                            {
                                 Priority = isExactSubtraction ? 1 : 3
                             }
                         );
@@ -713,7 +715,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 nullableEnum,
                                 nullableEnum,
                                 nullableUnderlying
-                            ) {
+                            )
+                            {
                                 Priority = 12
                             }
                         );
@@ -723,7 +726,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 nullableEnum,
                                 nullableUnderlying,
                                 nullableEnum
-                            ) {
+                            )
+                            {
                                 Priority = isExactSubtraction ? 11 : 13
                             }
                         );
@@ -735,7 +739,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 underlying,
                                 enumType,
                                 enumType
-                            ) {
+                            )
+                            {
                                 Priority = 4
                             }
                         );
@@ -745,7 +750,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 nullableUnderlying,
                                 nullableEnum,
                                 nullableEnum
-                            ) {
+                            )
+                            {
                                 Priority = 14
                             }
                         );

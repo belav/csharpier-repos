@@ -983,7 +983,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 return new MetadataDefinition(
                     MetadataDefinitionKind.Namespace,
                     reader.GetString(definition.Name)
-                ) {
+                )
+                {
                     Namespace = definition
                 };
             }

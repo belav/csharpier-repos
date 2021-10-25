@@ -445,12 +445,14 @@ namespace Microsoft.EntityFrameworkCore
                     AlternateId = RootAK,
                     RequiredChildren = new ObservableHashSet<Required1>(
                         LegacyReferenceEqualityComparer.Instance
-                    ) {
+                    )
+                    {
                         new()
                         {
                             Children = new ObservableHashSet<Required2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new(),
                                 new()
                             }
@@ -459,7 +461,8 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             Children = new ObservableHashSet<Required2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new(),
                                 new()
                             }
@@ -467,12 +470,14 @@ namespace Microsoft.EntityFrameworkCore
                     },
                     OptionalChildren = new ObservableHashSet<Optional1>(
                         LegacyReferenceEqualityComparer.Instance
-                    ) {
+                    )
+                    {
                         new()
                         {
                             Children = new ObservableHashSet<Optional2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new(),
                                 new()
                             },
@@ -484,7 +489,8 @@ namespace Microsoft.EntityFrameworkCore
                         {
                             Children = new ObservableHashSet<Optional2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new(),
                                 new()
                             },
@@ -520,19 +526,22 @@ namespace Microsoft.EntityFrameworkCore
                     },
                     RequiredChildrenAk = new ObservableHashSet<RequiredAk1>(
                         LegacyReferenceEqualityComparer.Instance
-                    ) {
+                    )
+                    {
                         new()
                         {
                             AlternateId = Guid.NewGuid(),
                             Children = new ObservableHashSet<RequiredAk2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new() { AlternateId = Guid.NewGuid() },
                                 new() { AlternateId = Guid.NewGuid() }
                             },
                             CompositeChildren = new ObservableHashSet<RequiredComposite2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new(),
                                 new()
                             }
@@ -542,13 +551,15 @@ namespace Microsoft.EntityFrameworkCore
                             AlternateId = Guid.NewGuid(),
                             Children = new ObservableHashSet<RequiredAk2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new() { AlternateId = Guid.NewGuid() },
                                 new() { AlternateId = Guid.NewGuid() }
                             },
                             CompositeChildren = new ObservableHashSet<RequiredComposite2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new(),
                                 new()
                             }
@@ -556,19 +567,22 @@ namespace Microsoft.EntityFrameworkCore
                     },
                     OptionalChildrenAk = new ObservableHashSet<OptionalAk1>(
                         LegacyReferenceEqualityComparer.Instance
-                    ) {
+                    )
+                    {
                         new()
                         {
                             AlternateId = Guid.NewGuid(),
                             Children = new ObservableHashSet<OptionalAk2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new() { AlternateId = Guid.NewGuid() },
                                 new() { AlternateId = Guid.NewGuid() }
                             },
                             CompositeChildren = new ObservableHashSet<OptionalComposite2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new(),
                                 new()
                             }
@@ -578,13 +592,15 @@ namespace Microsoft.EntityFrameworkCore
                             AlternateId = Guid.NewGuid(),
                             Children = new ObservableHashSet<OptionalAk2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new() { AlternateId = Guid.NewGuid() },
                                 new() { AlternateId = Guid.NewGuid() }
                             },
                             CompositeChildren = new ObservableHashSet<OptionalComposite2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new(),
                                 new()
                             }
@@ -635,13 +651,15 @@ namespace Microsoft.EntityFrameworkCore
                     },
                     RequiredCompositeChildren = new ObservableHashSet<RequiredComposite1>(
                         LegacyReferenceEqualityComparer.Instance
-                    ) {
+                    )
+                    {
                         new()
                         {
                             Id = 1,
                             CompositeChildren = new ObservableHashSet<OptionalOverlapping2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new() { Id = 1 },
                                 new() { Id = 2 }
                             }
@@ -651,7 +669,8 @@ namespace Microsoft.EntityFrameworkCore
                             Id = 2,
                             CompositeChildren = new ObservableHashSet<OptionalOverlapping2>(
                                 LegacyReferenceEqualityComparer.Instance
-                            ) {
+                            )
+                            {
                                 new() { Id = 3 },
                                 new() { Id = 4 }
                             }

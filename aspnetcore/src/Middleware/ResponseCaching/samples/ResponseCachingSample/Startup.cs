@@ -26,12 +26,11 @@ namespace ResponseCachingSample
             app.Run(
                 async (context) =>
                 {
-                    context.Response.GetTypedHeaders().CacheControl =
-                        new CacheControlHeaderValue()
-                        {
-                            Public = true,
-                            MaxAge = TimeSpan.FromSeconds(10)
-                        };
+                    context.Response.GetTypedHeaders().CacheControl = new CacheControlHeaderValue()
+                    {
+                        Public = true,
+                        MaxAge = TimeSpan.FromSeconds(10)
+                    };
                     context.Response.Headers[HeaderNames.Vary] = new string[] { "Accept-Encoding" };
 
                     await context.Response.WriteAsync("Hello World! " + DateTime.UtcNow);

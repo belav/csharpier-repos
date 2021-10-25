@@ -265,7 +265,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 entityType,
                 defaultTable,
                 includesDerivedTypes: true
-            ) {
+            )
+            {
                 IsSharedTablePrincipal = true,
                 IsSplitEntityTypePrincipal = true
             };
@@ -387,7 +388,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         entityType,
                         table,
                         includesDerivedTypes: mappedType == entityType
-                    ) {
+                    )
+                    {
                         IsSplitEntityTypePrincipal = true
                     };
                     foreach (var property in mappedType.GetProperties())
@@ -498,7 +500,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     entityType,
                     view,
                     includesDerivedTypes: mappedType == entityType
-                ) {
+                )
+                {
                     IsSplitEntityTypePrincipal = true
                 };
                 foreach (var property in mappedType.GetProperties())
@@ -621,7 +624,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     entityType,
                     sqlQuery,
                     includesDerivedTypes: true
-                ) {
+                )
+                {
                     IsDefaultSqlQueryMapping = true,
                     IsSharedTablePrincipal = true,
                     IsSplitEntityTypePrincipal = true
@@ -820,7 +824,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 storeFunction,
                 dbFunction,
                 includesDerivedTypes: true
-            ) {
+            )
+            {
                 IsDefaultFunctionMapping = @default,
                 // See Issue #19970
                 IsSharedTablePrincipal = true,

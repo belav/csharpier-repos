@@ -1020,7 +1020,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ImmutableArray<BoundExpression>.Empty,
                     expression,
                     getType()
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
 
@@ -1069,7 +1070,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 locals,
                 localFunctions,
                 ImmutableArray.Create(statement)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }

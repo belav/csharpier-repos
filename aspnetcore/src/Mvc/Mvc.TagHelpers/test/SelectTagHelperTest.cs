@@ -281,7 +281,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
             output.PreContent.SetContent(expectedPreContent);
@@ -374,7 +375,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.AppendHtml("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
             output.PreContent.AppendHtml(expectedPreContent);
@@ -473,7 +475,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.AppendHtml("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
             output.PreContent.AppendHtml(expectedPreContent);
@@ -570,7 +573,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.AppendHtml("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
             output.PreContent.AppendHtml(expectedPreContent);

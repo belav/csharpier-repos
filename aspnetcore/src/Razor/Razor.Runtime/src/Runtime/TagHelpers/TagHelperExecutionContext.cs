@@ -79,7 +79,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 tagName,
                 new TagHelperAttributeList(),
                 GetChildContentAsync
-            ) {
+            )
+            {
                 TagMode = tagMode
             };
 

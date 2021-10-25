@@ -911,7 +911,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ImmutableArray<Symbol>.Empty,
                         ImmutableArray.Create(collectionExpr),
                         collectionExprType.GetNullableUnderlyingType()
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     }; // Don't affect the type in the SemanticModel.
                 }

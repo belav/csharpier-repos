@@ -393,7 +393,8 @@ namespace System.Net.Http.Functional.Tests
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Get,
                 remoteServer.EchoUri
-            ) {
+            )
+            {
                 Version = remoteServer.HttpVersion
             };
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer))
@@ -758,7 +759,8 @@ namespace System.Net.Http.Functional.Tests
                     version.Major == 2
                       ? Configuration.Http.Http2RemoteEchoServer
                       : Configuration.Http.RemoteEchoServer
-                ) {
+                )
+                {
                     Content = new StringContent("Test String", Encoding.UTF8),
                     Version = version
                 };

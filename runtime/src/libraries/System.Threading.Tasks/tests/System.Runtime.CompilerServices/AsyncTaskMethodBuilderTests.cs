@@ -800,7 +800,8 @@ namespace System.Threading.Tasks.Tests
                     t = YieldOnceAsync(state); // ensure the object is stored in the state machine
                     al.Value = null;
                 }
-            ) {
+            )
+            {
                 IsBackground = true
             };
 

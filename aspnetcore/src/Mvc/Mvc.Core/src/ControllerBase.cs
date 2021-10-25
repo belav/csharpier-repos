@@ -634,7 +634,8 @@ namespace Microsoft.AspNetCore.Mvc
                 permanent: false,
                 preserveMethod: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }
@@ -739,7 +740,8 @@ namespace Microsoft.AspNetCore.Mvc
                 routeValues,
                 permanent: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }
@@ -770,7 +772,8 @@ namespace Microsoft.AspNetCore.Mvc
                 permanent: true,
                 preserveMethod: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }
@@ -857,7 +860,8 @@ namespace Microsoft.AspNetCore.Mvc
                 permanent: false,
                 preserveMethod: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }
@@ -931,7 +935,8 @@ namespace Microsoft.AspNetCore.Mvc
                 routeValues,
                 permanent: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }
@@ -958,7 +963,8 @@ namespace Microsoft.AspNetCore.Mvc
                 permanent: true,
                 preserveMethod: true,
                 fragment: fragment
-            ) {
+            )
+            {
                 UrlHelper = Url,
             };
         }

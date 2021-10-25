@@ -46,7 +46,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Remove from XDocument - the only node (no decl)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 1, false },
                         Priority = 2
                     }
@@ -57,7 +58,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Remove from XDocument - the only node (with decl)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 1, true },
                         Priority = 1
                     }

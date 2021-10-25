@@ -18,7 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Name, LocalName, Prefix and Value with xmlns=ns attribute"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

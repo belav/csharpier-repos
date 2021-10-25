@@ -721,7 +721,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 constantValueOpt: null,
                 type: type,
                 hasErrors: !conversion.IsValid
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -1537,7 +1538,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     rewrittenOperand,
                     conversion.Method,
                     rewrittenType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
             }

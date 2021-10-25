@@ -66,14 +66,16 @@ namespace System.Web.Http.Tracing.Tracers
                     _actionContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin
                 },
                 new TraceRecord(
                     _actionContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.End
                 }
             };
@@ -131,14 +133,16 @@ namespace System.Web.Http.Tracing.Tracers
                     _actionContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin
                 },
                 new TraceRecord(
                     _actionContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Warn
-                ) {
+                )
+                {
                     Kind = TraceKind.End
                 }
             };
@@ -228,14 +232,16 @@ namespace System.Web.Http.Tracing.Tracers
                     _actionContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin
                 },
                 new TraceRecord(
                     _actionContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End
                 }
             };
@@ -338,14 +344,16 @@ namespace System.Web.Http.Tracing.Tracers
                     _actionContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin
                 },
                 new TraceRecord(
                     _actionContext.Request,
                     TraceCategories.ActionCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End
                 }
             };

@@ -84,7 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
                 "someValue"
-            ) {
+            )
+            {
                 ContentType = new StringSegment(httpRequest.Headers[HeaderNames.Accept]),
             };
 
@@ -114,7 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
                 @object: null
-            ) {
+            )
+            {
                 ContentType = new StringSegment(contentType),
             };
 
@@ -136,7 +138,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
                 @object: null
-            ) {
+            )
+            {
                 ContentType = new StringSegment("application/json"),
             };
 
@@ -167,7 +170,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
                 @object: null
-            ) {
+            )
+            {
                 ContentType = new StringSegment("application/json; charset=utf-7"),
             };
 
@@ -196,7 +200,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
                 @object: null
-            ) {
+            )
+            {
                 ContentType = new StringSegment(contentType),
             };
 
@@ -227,7 +232,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
                 @object: null
-            ) {
+            )
+            {
                 ContentType = testContentType,
             };
 
@@ -259,7 +265,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
                 @object: null
-            ) {
+            )
+            {
                 ContentType = testContentType,
             };
 

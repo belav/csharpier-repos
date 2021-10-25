@@ -43,8 +43,10 @@ public static partial class XmlSerializerTests
     public static void Xml_TypeWithDateTimePropertyAsXmlTime()
     {
         DateTime localTime = new DateTime(549269870000L, DateTimeKind.Local);
-        TypeWithDateTimePropertyAsXmlTime localTimeOjbect =
-            new TypeWithDateTimePropertyAsXmlTime() { Value = localTime };
+        TypeWithDateTimePropertyAsXmlTime localTimeOjbect = new TypeWithDateTimePropertyAsXmlTime()
+        {
+            Value = localTime
+        };
 
         // This is how we convert DateTime from time to string.
         var localTimeDateTime = DateTime.MinValue + localTime.TimeOfDay;

@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ImmutableArray.Create(SiteInitialization),
                     SiteInvocation,
                     _resultType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
             }

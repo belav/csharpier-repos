@@ -83,7 +83,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                     );
                     var developmentKey = new RsaSecurityKey(
                         SigningKeysLoader.LoadDevelopment(developmentKeyPath, createIfMissing)
-                    ) {
+                    )
+                    {
                         KeyId = "Development"
                     };
                     return new SigningCredentials(developmentKey, "RS256");

@@ -118,7 +118,8 @@ namespace System.Web.Helpers.Test
                 elementType: typeof(Person),
                 canSort: true,
                 canPage: false
-            ) {
+            )
+            {
                 DefaultSort = defaultSort
             };
 
@@ -147,7 +148,8 @@ namespace System.Web.Helpers.Test
                 elementType: typeof(Person),
                 canSort: true,
                 canPage: false
-            ) {
+            )
+            {
                 DefaultSort = defaultSort
             };
 
@@ -185,7 +187,8 @@ namespace System.Web.Helpers.Test
                 elementType: typeof(Person),
                 canSort: true,
                 canPage: false
-            ) {
+            )
+            {
                 DefaultSort = defaultSort
             };
 
@@ -329,7 +332,8 @@ namespace System.Web.Helpers.Test
                 elementType: typeof(Person),
                 canSort: false,
                 canPage: true
-            ) {
+            )
+            {
                 RowsPerPage = 2
             };
 
@@ -353,7 +357,8 @@ namespace System.Web.Helpers.Test
                 elementType: typeof(Person),
                 canSort: true,
                 canPage: true
-            ) {
+            )
+            {
                 RowsPerPage = 2
             };
 
@@ -380,7 +385,8 @@ namespace System.Web.Helpers.Test
                 elementType: typeof(Person),
                 canSort: true,
                 canPage: true
-            ) {
+            )
+            {
                 RowsPerPage = 3
             };
 
@@ -404,7 +410,8 @@ namespace System.Web.Helpers.Test
                 elementType: typeof(object),
                 canSort: true,
                 canPage: true
-            ) {
+            )
+            {
                 RowsPerPage = 2
             };
 

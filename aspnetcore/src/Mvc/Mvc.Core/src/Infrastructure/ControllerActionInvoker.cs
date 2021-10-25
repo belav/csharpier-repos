@@ -178,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                             _controllerContext,
                             _filters,
                             _instance!
-                        ) {
+                        )
+                        {
                             Canceled = true,
                             Result = _actionExecutingContext.Result,
                         };
@@ -227,7 +228,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                             _actionExecutingContext,
                             _filters,
                             _instance!
-                        ) {
+                        )
+                        {
                             Canceled = true,
                             Result = _actionExecutingContext.Result,
                         };
@@ -295,7 +297,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                                 _controllerContext,
                                 _filters,
                                 _instance!
-                            ) {
+                            )
+                            {
                                 Result = _result,
                             };
                         }
@@ -344,7 +347,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     _controllerContext,
                     _filters,
                     _instance!
-                ) {
+                )
+                {
                     ExceptionDispatchInfo = ExceptionDispatchInfo.Capture(exception),
                 };
             }
@@ -376,7 +380,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         invoker._controllerContext,
                         invoker._filters,
                         invoker._instance!
-                    ) {
+                    )
+                    {
                         ExceptionDispatchInfo = ExceptionDispatchInfo.Capture(exception),
                     };
                 }

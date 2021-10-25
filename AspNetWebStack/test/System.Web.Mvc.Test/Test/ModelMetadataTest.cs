@@ -371,7 +371,8 @@ namespace System.Web.Mvc.Test
                 null,
                 typeof(object),
                 null
-            ) {
+            )
+            {
                 NullDisplayText = nullText
             };
 
@@ -1307,7 +1308,8 @@ namespace System.Web.Mvc.Test
                 null,
                 typeof(object),
                 "PropertyName"
-            ) {
+            )
+            {
                 DisplayName = "Display Name"
             };
 

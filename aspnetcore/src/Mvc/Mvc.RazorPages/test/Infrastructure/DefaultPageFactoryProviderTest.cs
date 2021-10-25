@@ -222,7 +222,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 ViewData = new ViewDataDictionary<TestPage>(
                     modelMetadataProvider,
                     new ModelStateDictionary()
-                ) {
+                )
+                {
                     { "test-key", "test-value" },
                 }
             };

@@ -459,7 +459,8 @@ namespace System.Web.Mvc
                     true /* canceled */
                     ,
                     null /* exception */
-                ) {
+                )
+                {
                     Result = preContext.Result
                 };
             }
@@ -526,7 +527,8 @@ namespace System.Web.Mvc
                     false /* canceled */
                     ,
                     null /* exception */
-                ) {
+                )
+                {
                     Result = InvokeActionMethod(controllerContext, actionDescriptor, parameters)
                 };
 

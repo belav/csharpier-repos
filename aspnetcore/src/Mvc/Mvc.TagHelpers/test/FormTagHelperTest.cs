@@ -1151,7 +1151,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             // Arrange
             var formTagHelper = new FormTagHelper(
                 new TestableHtmlGenerator(new EmptyModelMetadataProvider())
-            ) {
+            )
+            {
                 Route = "Default",
             };
             typeof(FormTagHelper).GetProperty(propertyName).SetValue(formTagHelper, "Home");
@@ -1190,7 +1191,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             // Arrange
             var formTagHelper = new FormTagHelper(
                 new TestableHtmlGenerator(new EmptyModelMetadataProvider())
-            ) {
+            )
+            {
                 Route = "Default",
                 Page = "Page",
             };
@@ -1229,7 +1231,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             // Arrange
             var formTagHelper = new FormTagHelper(
                 new TestableHtmlGenerator(new EmptyModelMetadataProvider())
-            ) {
+            )
+            {
                 Action = "Default",
                 Page = "Page",
             };

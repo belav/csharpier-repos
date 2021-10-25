@@ -216,7 +216,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
                         new Node("keyB1", "D1") { IsNew = true }, // Matches an old key, but treated as new because we don't move between parents
                         new Node("keyD2", "D2") { IsNew = true },
                         new Node(null, "D3 unkeyed") { IsNew = true }
-                    ) {
+                    )
+                    {
                         IsNew = true
                     },
                     new Node(

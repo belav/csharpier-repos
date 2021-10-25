@@ -143,7 +143,8 @@ namespace System.Web.Http.Filters
             HttpActionExecutedContext executedContext = new HttpActionExecutedContext(
                 actionContext,
                 exception
-            ) {
+            )
+            {
                 Response = response
             };
 

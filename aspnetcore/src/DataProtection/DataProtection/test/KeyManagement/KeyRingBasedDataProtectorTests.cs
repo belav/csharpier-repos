@@ -313,7 +313,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyManagementOptions: Options.Create(options),
                 defaultKeyResolver: null,
                 loggerFactory: NullLoggerFactory.Instance
-            ) {
+            )
+            {
                 CacheableKeyRingProvider = cacheableKeyRingProvider
             };
         }

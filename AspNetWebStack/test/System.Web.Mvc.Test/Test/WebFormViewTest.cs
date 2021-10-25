@@ -154,7 +154,8 @@ namespace System.Web.Mvc.Test
                 "view path",
                 null,
                 activator.Object
-            ) {
+            )
+            {
                 BuildManager = buildManager
             };
 

@@ -57,7 +57,8 @@ namespace System.Web.Http.ModelBinding.Binders
             SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
                 typeof(string),
                 new Mock<IModelBinder>().Object
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
             ModelBindingContext bindingContext = GetBindingContext(typeof(object));
@@ -105,7 +106,8 @@ namespace System.Web.Http.ModelBinding.Binders
             SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
                 typeof(string),
                 factory
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
             ModelBindingContext bindingContext = GetBindingContext(typeof(string));
@@ -129,7 +131,8 @@ namespace System.Web.Http.ModelBinding.Binders
             SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
                 typeof(string),
                 theBinderInstance
-            ) {
+            )
+            {
                 SuppressPrefixCheck = true
             };
             ModelBindingContext bindingContext = GetBindingContext(typeof(string));

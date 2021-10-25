@@ -1067,7 +1067,8 @@ namespace System.Web.Http
                 config,
                 "MyMock",
                 typeof(ApiController)
-            ) {
+            )
+            {
                 CallBase = true
             };
             mockDescriptor

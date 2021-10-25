@@ -62,7 +62,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Replace attribute (empty elem, only one attr.)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A a1='original' />", "a1", "a1" },
                         Priority = 0
                     }
@@ -73,7 +74,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Replace attribute (empty elem, multiple attr., namespaces)"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A p:a1='x' a1='original' xmlns:p='ns'/>",
@@ -104,7 +106,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Replace attribute (multiple attr. (mIddle))"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A x='x' a1='original' y='y'>text</A>",
@@ -155,7 +158,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Remove attribute (from multiple attribs, namespace)"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A a1='original' p:a1='o' xmlns:p='A' ></A>",
@@ -171,7 +175,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Remove attribute (from multiple attribs, content)"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<A x='t' a1='original' y='r'>trt</A>",

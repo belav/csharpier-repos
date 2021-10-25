@@ -64,7 +64,8 @@ namespace System.Diagnostics.Tests
                         counter.Signal();
                         mre.Wait();
                     }
-                ) {
+                )
+                {
                     IsBackground = true
                 }.Start();
             }

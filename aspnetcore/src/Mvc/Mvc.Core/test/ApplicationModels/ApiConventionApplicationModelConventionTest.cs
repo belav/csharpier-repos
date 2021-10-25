@@ -188,7 +188,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var actionModel = new ActionModel(
                 typeof(TestController).GetMethod(actionName),
                 actionAttributes
-            ) {
+            )
+            {
                 Controller = controllerModel,
             };
 

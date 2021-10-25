@@ -12,7 +12,8 @@ namespace System.Collections.ObjectModel.Tests
         {
             var collection = new TestKeyedCollectionOfIKeyedItem<string, int>(
                 System.StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 new KeyedItem<string, int>("foo", 0),
                 new KeyedItem<string, int>("bar", 1)
             };

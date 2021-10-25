@@ -299,7 +299,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     "connections-per-second",
                     this,
                     () => Volatile.Read(ref _totalConnections)
-                ) {
+                )
+                {
                     DisplayName = "Connection Rate",
                     DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                 };
@@ -308,7 +309,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     "total-connections",
                     this,
                     () => Volatile.Read(ref _totalConnections)
-                ) {
+                )
+                {
                     DisplayName = "Total Connections",
                 };
 
@@ -316,7 +318,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     "tls-handshakes-per-second",
                     this,
                     () => Volatile.Read(ref _totalTlsHandshakes)
-                ) {
+                )
+                {
                     DisplayName = "TLS Handshake Rate",
                     DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                 };
@@ -325,7 +328,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     "total-tls-handshakes",
                     this,
                     () => Volatile.Read(ref _totalTlsHandshakes)
-                ) {
+                )
+                {
                     DisplayName = "Total TLS Handshakes",
                 };
 
@@ -333,7 +337,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     "current-tls-handshakes",
                     this,
                     () => Volatile.Read(ref _currentTlsHandshakes)
-                ) {
+                )
+                {
                     DisplayName = "Current TLS Handshakes"
                 };
 
@@ -341,7 +346,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     "failed-tls-handshakes",
                     this,
                     () => Volatile.Read(ref _failedTlsHandshakes)
-                ) {
+                )
+                {
                     DisplayName = "Failed TLS Handshakes"
                 };
 
@@ -349,7 +355,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     "current-connections",
                     this,
                     () => Volatile.Read(ref _currentConnections)
-                ) {
+                )
+                {
                     DisplayName = "Current Connections"
                 };
 
@@ -357,7 +364,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     "connection-queue-length",
                     this,
                     () => Volatile.Read(ref _connectionQueueLength)
-                ) {
+                )
+                {
                     DisplayName = "Connection Queue Length"
                 };
 
@@ -365,7 +373,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     "request-queue-length",
                     this,
                     () => Volatile.Read(ref _httpRequestQueueLength)
-                ) {
+                )
+                {
                     DisplayName = "Request Queue Length"
                 };
 
@@ -373,7 +382,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     "current-upgraded-requests",
                     this,
                     () => Volatile.Read(ref _currentUpgradedHttpRequests)
-                ) {
+                )
+                {
                     DisplayName = "Current Upgraded Requests (WebSockets)"
                 };
             }

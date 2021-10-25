@@ -28,7 +28,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "NamespaceURI of element/attribute with xmlns attribute"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -75,7 +76,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "False duplicates and non-duplicates possible in the XmlReader during attribute normalization"
-                        ) {
+                        )
+                        {
                             Param = false
                         }
                     }
@@ -85,7 +87,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "False duplicates and non-duplicates possible in the XmlReader during attribute normalization"
-                        ) {
+                        )
+                        {
                             Param = true
                         }
                     }

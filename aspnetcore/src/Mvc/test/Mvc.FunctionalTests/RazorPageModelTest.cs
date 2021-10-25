@@ -118,7 +118,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "Pages/TryUpdateModelPageModel/10"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new KeyValuePair<string, string>[]
                     {
@@ -147,7 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "Pages/TryValidateModelPageModel/10"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new KeyValuePair<string, string>[]
                     {
@@ -176,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "Pages/TryValidateModelPageModel/10"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(
                     new KeyValuePair<string, string>[]
                     {

@@ -2404,7 +2404,8 @@ namespace System
             {
                 cachedData._systemTimeZones ??= new Dictionary<string, TimeZoneInfo>(
                     StringComparer.OrdinalIgnoreCase
-                ) {
+                )
+                {
                     { UtcId, s_utcTimeZone }
                 };
 

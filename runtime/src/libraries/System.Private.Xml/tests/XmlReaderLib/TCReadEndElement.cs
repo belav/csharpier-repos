@@ -67,7 +67,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadEndElement on regular Element, with namespace"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

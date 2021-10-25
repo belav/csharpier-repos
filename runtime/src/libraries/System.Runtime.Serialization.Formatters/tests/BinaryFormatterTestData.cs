@@ -8946,7 +8946,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
 
             var listDictionary = new System.Collections.Specialized.ListDictionary(
                 StringComparer.Create(CultureInfo.InvariantCulture, false)
-            ) {
+            )
+            {
                 { "key1", "value1" },
                 { "keyx", "valuex" }
             };

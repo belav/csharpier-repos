@@ -1726,7 +1726,8 @@ namespace System.Web.Mvc.Html.Test
             };
             ViewDataDictionary<FooContainerModel> vdd = new ViewDataDictionary<FooContainerModel>(
                 model
-            ) {
+            )
+            {
                 { "foo", new SelectList(MultiSelectListTest.GetSampleStrings()) }
             };
 
@@ -2335,7 +2336,8 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<EnumWithDisplay> viewData = new ViewDataDictionary<EnumWithDisplay>(
                 EnumWithDisplay.Two
-            ) {
+            )
+            {
                 TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyExpression", },
             };
             HtmlHelper<EnumWithDisplay> helper = MvcHelper.GetHtmlHelper(viewData);
@@ -3080,7 +3082,8 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<EnumModel> viewData = new ViewDataDictionary<EnumModel>(
                 _enumDropDownListViewData
-            ) {
+            )
+            {
                 TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyPrefix", },
             };
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(viewData);
@@ -3113,7 +3116,8 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<EnumWithDisplay> viewData = new ViewDataDictionary<EnumWithDisplay>(
                 EnumWithDisplay.Two
-            ) {
+            )
+            {
                 TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyPrefix", },
             };
             HtmlHelper<EnumWithDisplay> helper = MvcHelper.GetHtmlHelper(viewData);

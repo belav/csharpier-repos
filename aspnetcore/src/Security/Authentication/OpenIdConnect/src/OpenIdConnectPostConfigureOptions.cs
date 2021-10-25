@@ -139,7 +139,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                             {
                                 RequireHttps = options.RequireHttpsMetadata
                             }
-                        ) {
+                        )
+                        {
                             RefreshInterval = options.RefreshInterval,
                             AutomaticRefreshInterval = options.AutomaticRefreshInterval,
                         };

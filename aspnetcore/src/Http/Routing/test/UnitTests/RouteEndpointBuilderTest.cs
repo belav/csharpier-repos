@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Routing
                 requestDelegate,
                 RoutePatternFactory.Parse("/"),
                 defaultOrder
-            ) {
+            )
+            {
                 DisplayName = "Display name!",
                 Metadata = { metadata }
             };

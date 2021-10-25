@@ -51,7 +51,8 @@ namespace System.Net.Security
                     "tls-handshake-rate",
                     this,
                     () => Interlocked.Read(ref _finishedTlsHandshakes)
-                ) {
+                )
+                {
                     DisplayName = "TLS handshakes completed",
                     DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                 };
@@ -60,7 +61,8 @@ namespace System.Net.Security
                     "total-tls-handshakes",
                     this,
                     () => Interlocked.Read(ref _finishedTlsHandshakes)
-                ) {
+                )
+                {
                     DisplayName = "Total TLS handshakes completed"
                 };
 
@@ -70,7 +72,8 @@ namespace System.Net.Security
                     () =>
                         -Interlocked.Read(ref _finishedTlsHandshakes)
                         + Interlocked.Read(ref _startedTlsHandshakes)
-                ) {
+                )
+                {
                     DisplayName = "Current TLS handshakes"
                 };
 
@@ -78,7 +81,8 @@ namespace System.Net.Security
                     "failed-tls-handshakes",
                     this,
                     () => Interlocked.Read(ref _failedTlsHandshakes)
-                ) {
+                )
+                {
                     DisplayName = "Total TLS handshakes failed"
                 };
 
@@ -86,7 +90,8 @@ namespace System.Net.Security
                     "all-tls-sessions-open",
                     this,
                     () => Interlocked.Read(ref _sessionsOpen)
-                ) {
+                )
+                {
                     DisplayName = "All TLS Sessions Active"
                 };
 
@@ -94,7 +99,8 @@ namespace System.Net.Security
                     "tls10-sessions-open",
                     this,
                     () => Interlocked.Read(ref _sessionsOpenTls10)
-                ) {
+                )
+                {
                     DisplayName = "TLS 1.0 Sessions Active"
                 };
 
@@ -102,7 +108,8 @@ namespace System.Net.Security
                     "tls11-sessions-open",
                     this,
                     () => Interlocked.Read(ref _sessionsOpenTls11)
-                ) {
+                )
+                {
                     DisplayName = "TLS 1.1 Sessions Active"
                 };
 
@@ -110,7 +117,8 @@ namespace System.Net.Security
                     "tls12-sessions-open",
                     this,
                     () => Interlocked.Read(ref _sessionsOpenTls12)
-                ) {
+                )
+                {
                     DisplayName = "TLS 1.2 Sessions Active"
                 };
 
@@ -118,7 +126,8 @@ namespace System.Net.Security
                     "tls13-sessions-open",
                     this,
                     () => Interlocked.Read(ref _sessionsOpenTls13)
-                ) {
+                )
+                {
                     DisplayName = "TLS 1.3 Sessions Active"
                 };
 
@@ -131,7 +140,8 @@ namespace System.Net.Security
                 _handshakeDurationTls10Counter ??= new EventCounter(
                     "tls10-handshake-duration",
                     this
-                ) {
+                )
+                {
                     DisplayName = "TLS 1.0 Handshake Duration",
                     DisplayUnits = "ms"
                 };
@@ -139,7 +149,8 @@ namespace System.Net.Security
                 _handshakeDurationTls11Counter ??= new EventCounter(
                     "tls11-handshake-duration",
                     this
-                ) {
+                )
+                {
                     DisplayName = "TLS 1.1 Handshake Duration",
                     DisplayUnits = "ms"
                 };
@@ -147,7 +158,8 @@ namespace System.Net.Security
                 _handshakeDurationTls12Counter ??= new EventCounter(
                     "tls12-handshake-duration",
                     this
-                ) {
+                )
+                {
                     DisplayName = "TLS 1.2 Handshake Duration",
                     DisplayUnits = "ms"
                 };
@@ -155,7 +167,8 @@ namespace System.Net.Security
                 _handshakeDurationTls13Counter ??= new EventCounter(
                     "tls13-handshake-duration",
                     this
-                ) {
+                )
+                {
                     DisplayName = "TLS 1.3 Handshake Duration",
                     DisplayUnits = "ms"
                 };

@@ -588,7 +588,8 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new TestVirtualFileResult(
                 "FilePathResultTestFile_ASCII.txt",
                 expectedContentType
-            ) {
+            )
+            {
                 FileProvider = GetFileProvider("FilePathResultTestFile_ASCII.txt"),
             };
 

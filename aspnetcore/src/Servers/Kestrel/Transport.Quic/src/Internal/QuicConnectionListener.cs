@@ -44,8 +44,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
             var quicListenerOptions = new QuicListenerOptions();
 
             // TODO Should HTTP/3 specific ALPN still be global? Revisit whether it can be statically set once HTTP/3 is finalized.
-            sslServerAuthenticationOptions.ApplicationProtocols =
-                new List<SslApplicationProtocol>() { new SslApplicationProtocol(options.Alpn) };
+            sslServerAuthenticationOptions.ApplicationProtocols = new List<SslApplicationProtocol>()
+            {
+                new SslApplicationProtocol(options.Alpn)
+            };
 
             quicListenerOptions.ServerAuthenticationOptions = sslServerAuthenticationOptions;
             quicListenerOptions.ListenEndPoint = endpoint as IPEndPoint;

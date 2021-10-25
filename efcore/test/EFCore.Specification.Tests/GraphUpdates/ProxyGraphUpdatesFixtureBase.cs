@@ -399,13 +399,15 @@ namespace Microsoft.EntityFrameworkCore
 
                         e.RequiredChildren = new ObservableHashSet<Required1>(
                             LegacyReferenceEqualityComparer.Instance
-                        ) {
+                        )
+                        {
                             context.CreateProxy<Required1>(
                                 e =>
                                 {
                                     e.Children = new ObservableHashSet<Required2>(
                                         LegacyReferenceEqualityComparer.Instance
-                                    ) {
+                                    )
+                                    {
                                         context.Set<Required2>().CreateProxy(),
                                         context.Set<Required2>().CreateProxy()
                                     };
@@ -416,7 +418,8 @@ namespace Microsoft.EntityFrameworkCore
                                 {
                                     e.Children = new ObservableHashSet<Required2>(
                                         LegacyReferenceEqualityComparer.Instance
-                                    ) {
+                                    )
+                                    {
                                         context.Set<Required2>().CreateProxy(),
                                         context.Set<Required2>().CreateProxy()
                                     };
@@ -426,7 +429,8 @@ namespace Microsoft.EntityFrameworkCore
 
                         e.OptionalChildren = new ObservableHashSet<Optional1>(
                             LegacyReferenceEqualityComparer.Instance
-                        ) {
+                        )
+                        {
                             context
                                 .Set<Optional1>()
                                 .CreateProxy(
@@ -434,7 +438,8 @@ namespace Microsoft.EntityFrameworkCore
                                     {
                                         e.Children = new ObservableHashSet<Optional2>(
                                             LegacyReferenceEqualityComparer.Instance
-                                        ) {
+                                        )
+                                        {
                                             context.Set<Optional2>().CreateProxy(),
                                             context.Set<Optional2>().CreateProxy()
                                         };
@@ -452,7 +457,8 @@ namespace Microsoft.EntityFrameworkCore
                                     {
                                         e.Children = new ObservableHashSet<Optional2>(
                                             LegacyReferenceEqualityComparer.Instance
-                                        ) {
+                                        )
+                                        {
                                             context.Set<Optional2>().CreateProxy(),
                                             context.Set<Optional2>().CreateProxy()
                                         };
@@ -514,7 +520,8 @@ namespace Microsoft.EntityFrameworkCore
 
                         e.RequiredChildrenAk = new ObservableHashSet<RequiredAk1>(
                             LegacyReferenceEqualityComparer.Instance
-                        ) {
+                        )
+                        {
                             context
                                 .Set<RequiredAk1>()
                                 .CreateProxy(
@@ -524,7 +531,8 @@ namespace Microsoft.EntityFrameworkCore
 
                                         e.Children = new ObservableHashSet<RequiredAk2>(
                                             LegacyReferenceEqualityComparer.Instance
-                                        ) {
+                                        )
+                                        {
                                             context
                                                 .Set<RequiredAk2>()
                                                 .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
@@ -536,7 +544,8 @@ namespace Microsoft.EntityFrameworkCore
                                         e.CompositeChildren =
                                             new ObservableHashSet<RequiredComposite2>(
                                                 LegacyReferenceEqualityComparer.Instance
-                                            ) {
+                                            )
+                                            {
                                                 context.Set<RequiredComposite2>().CreateProxy(),
                                                 context.Set<RequiredComposite2>().CreateProxy()
                                             };
@@ -551,7 +560,8 @@ namespace Microsoft.EntityFrameworkCore
 
                                         e.Children = new ObservableHashSet<RequiredAk2>(
                                             LegacyReferenceEqualityComparer.Instance
-                                        ) {
+                                        )
+                                        {
                                             context
                                                 .Set<RequiredAk2>()
                                                 .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
@@ -563,7 +573,8 @@ namespace Microsoft.EntityFrameworkCore
                                         e.CompositeChildren =
                                             new ObservableHashSet<RequiredComposite2>(
                                                 LegacyReferenceEqualityComparer.Instance
-                                            ) {
+                                            )
+                                            {
                                                 context.Set<RequiredComposite2>().CreateProxy(),
                                                 context.Set<RequiredComposite2>().CreateProxy()
                                             };
@@ -573,7 +584,8 @@ namespace Microsoft.EntityFrameworkCore
 
                         e.OptionalChildrenAk = new ObservableHashSet<OptionalAk1>(
                             LegacyReferenceEqualityComparer.Instance
-                        ) {
+                        )
+                        {
                             context
                                 .Set<OptionalAk1>()
                                 .CreateProxy(
@@ -583,7 +595,8 @@ namespace Microsoft.EntityFrameworkCore
 
                                         e.Children = new ObservableHashSet<OptionalAk2>(
                                             LegacyReferenceEqualityComparer.Instance
-                                        ) {
+                                        )
+                                        {
                                             context
                                                 .Set<OptionalAk2>()
                                                 .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
@@ -594,7 +607,8 @@ namespace Microsoft.EntityFrameworkCore
                                         e.CompositeChildren =
                                             new ObservableHashSet<OptionalComposite2>(
                                                 LegacyReferenceEqualityComparer.Instance
-                                            ) {
+                                            )
+                                            {
                                                 context.Set<OptionalComposite2>().CreateProxy(),
                                                 context.Set<OptionalComposite2>().CreateProxy()
                                             };
@@ -609,7 +623,8 @@ namespace Microsoft.EntityFrameworkCore
 
                                         e.Children = new ObservableHashSet<OptionalAk2>(
                                             LegacyReferenceEqualityComparer.Instance
-                                        ) {
+                                        )
+                                        {
                                             context
                                                 .Set<OptionalAk2>()
                                                 .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
@@ -621,7 +636,8 @@ namespace Microsoft.EntityFrameworkCore
                                         e.CompositeChildren =
                                             new ObservableHashSet<OptionalComposite2>(
                                                 LegacyReferenceEqualityComparer.Instance
-                                            ) {
+                                            )
+                                            {
                                                 context.Set<OptionalComposite2>().CreateProxy(),
                                                 context.Set<OptionalComposite2>().CreateProxy()
                                             };
@@ -710,7 +726,8 @@ namespace Microsoft.EntityFrameworkCore
 
                         e.RequiredCompositeChildren = new ObservableHashSet<RequiredComposite1>(
                             LegacyReferenceEqualityComparer.Instance
-                        ) {
+                        )
+                        {
                             context
                                 .Set<RequiredComposite1>()
                                 .CreateProxy(
@@ -721,7 +738,8 @@ namespace Microsoft.EntityFrameworkCore
                                         e.CompositeChildren =
                                             new ObservableHashSet<OptionalOverlapping2>(
                                                 LegacyReferenceEqualityComparer.Instance
-                                            ) {
+                                            )
+                                            {
                                                 context.CreateProxy<OptionalOverlapping2>(
                                                     e => e.Id = 1
                                                 ),
@@ -741,7 +759,8 @@ namespace Microsoft.EntityFrameworkCore
                                         e.CompositeChildren =
                                             new ObservableHashSet<OptionalOverlapping2>(
                                                 LegacyReferenceEqualityComparer.Instance
-                                            ) {
+                                            )
+                                            {
                                                 context.CreateProxy<OptionalOverlapping2>(
                                                     e => e.Id = 3
                                                 ),

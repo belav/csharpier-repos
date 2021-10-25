@@ -18,7 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after Read and NodeType = Element"
-                        ) {
+                        )
+                        {
                             Priority = 0
                         }
                     }
@@ -32,7 +33,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after Read and NodeType = CDATA"
-                        ) {
+                        )
+                        {
                             Priority = 0
                         }
                     }
@@ -46,7 +48,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after Read and NodeType = Comment"
-                        ) {
+                        )
+                        {
                             Priority = 0
                         }
                     }
@@ -60,7 +63,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after Read and NodeType = EndElement"
-                        ) {
+                        )
+                        {
                             Priority = 0
                         }
                     }
@@ -74,7 +78,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after Read and NodeType = EntityReference, not expanded"
-                        ) {
+                        )
+                        {
                             Priority = 0
                         }
                     }
@@ -88,7 +93,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after Read and NodeType = ProcessingInstruction"
-                        ) {
+                        )
+                        {
                             Priority = 0
                         }
                     }
@@ -102,7 +108,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after Read and NodeType = SignificantWhitespace"
-                        ) {
+                        )
+                        {
                             Priority = 0
                         }
                     }
@@ -116,7 +123,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after Read and NodeType = Text"
-                        ) {
+                        )
+                        {
                             Priority = 0
                         }
                     }
@@ -130,7 +138,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after Read and NodeType = Whitespace"
-                        ) {
+                        )
+                        {
                             Priority = 0
                         }
                     }
@@ -144,7 +153,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after Read and NodeType = XmlDeclaration"
-                        ) {
+                        )
+                        {
                             Priority = 0
                         }
                     }
@@ -359,7 +369,8 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(
                         XmlExceptionAndXmlTextReaderLineNumberShouldBeSameAfterExceptionIsThrown
-                    ) {
+                    )
+                    {
                         Attribute = new Variation(
                             "When an XmlException is thrown both XmlException.LineNumber and XmlTextReader.LineNumber should be same"
                         )

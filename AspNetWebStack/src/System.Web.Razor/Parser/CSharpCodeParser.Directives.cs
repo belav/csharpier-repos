@@ -416,7 +416,8 @@ namespace System.Web.Razor.Parser
             // Set up edit handler
             AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(
                 Language.TokenizeString
-            ) {
+            )
+            {
                 AutoCompleteAtEndOfSpan = true
             };
 

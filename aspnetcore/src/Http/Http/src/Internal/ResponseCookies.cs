@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Http
             var setCookieHeaderValue = new SetCookieHeaderValue(
                 _enableCookieNameEncoding ? Uri.EscapeDataString(key) : key,
                 Uri.EscapeDataString(value)
-            ) {
+            )
+            {
                 Path = "/"
             };
             var cookieValue = setCookieHeaderValue.ToString();
@@ -79,7 +80,8 @@ namespace Microsoft.AspNetCore.Http
             var setCookieHeaderValue = new SetCookieHeaderValue(
                 _enableCookieNameEncoding ? Uri.EscapeDataString(key) : key,
                 Uri.EscapeDataString(value)
-            ) {
+            )
+            {
                 Domain = options.Domain,
                 Path = options.Path,
                 Expires = options.Expires,

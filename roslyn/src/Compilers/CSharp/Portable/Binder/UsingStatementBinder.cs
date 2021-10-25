@@ -205,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         getAwaiter: null,
                         isCompleted: null,
                         getResult: null
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }

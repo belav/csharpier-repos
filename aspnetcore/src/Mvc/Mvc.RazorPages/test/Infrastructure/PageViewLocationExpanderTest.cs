@@ -207,7 +207,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 areaName: null,
                 pageName: pageName,
                 isMainPage: true
-            ) {
+            )
+            {
                 Values = new Dictionary<string, string>(),
             };
         }

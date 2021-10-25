@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
     {
         private static readonly string DefaultContentType = new MediaTypeHeaderValue(
             "application/json"
-        ) {
+        )
+        {
             Encoding = Encoding.UTF8
         }.ToString();
 

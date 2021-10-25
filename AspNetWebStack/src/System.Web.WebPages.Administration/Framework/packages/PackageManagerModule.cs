@@ -24,7 +24,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             new WebPackageSource(
                 name: PackageManagerResources.DefaultPackageSourceName,
                 source: DefaultSourceUrl
-            ) {
+            )
+            {
                 FilterPreferredPackages = true
             },
             new WebPackageSource(name: PackageManagerResources.NuGetFeed, source: NuGetSourceUrl)

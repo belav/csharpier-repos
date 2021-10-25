@@ -141,7 +141,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
                 () =>
                     new AdaptiveCapacityDictionary<string, object?>(
                         StringComparer.OrdinalIgnoreCase
-                    ) {
+                    )
+                    {
                         { "name", "Billy" },
                         { "Name", "Joey" }
                     },
@@ -261,7 +262,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Arrange
             var dict = new AdaptiveCapacityDictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "key", "value" },
             };
 
@@ -548,7 +550,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Arrange
             var dict = new AdaptiveCapacityDictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "key", "value" },
             };
 
@@ -648,7 +651,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Arrange
             var dict = new AdaptiveCapacityDictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "key", "value" },
             };
 
@@ -755,7 +759,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Arrange
             var dict = new AdaptiveCapacityDictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "key", "value" },
             };
 
@@ -813,7 +818,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Arrange
             var dict = new AdaptiveCapacityDictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "key", "value" },
             };
 
@@ -946,7 +952,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Arrange
             var dict = new AdaptiveCapacityDictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "key", "value" },
             };
 
@@ -1034,7 +1041,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
             object value = "value";
             var dict = new AdaptiveCapacityDictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "key", value }
             };
 
@@ -1278,7 +1286,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Arrange
             var dict = new AdaptiveCapacityDictionary<string, object>(
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "key", "value" },
             };
 

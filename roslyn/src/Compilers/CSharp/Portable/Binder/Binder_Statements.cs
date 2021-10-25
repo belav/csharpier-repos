@@ -3294,7 +3294,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     null,
                     LookupResultKind.Viable,
                     boolean
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
             }
@@ -3408,7 +3409,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 resultKind,
                 originalUserDefinedOperators,
                 signature.ReturnType
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }

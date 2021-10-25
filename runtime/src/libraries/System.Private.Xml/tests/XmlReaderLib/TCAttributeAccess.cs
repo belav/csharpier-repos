@@ -18,7 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Attribute Access test using ordinal (Ascending Order)"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -44,7 +45,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Attribute Access test using ordinal (Odd number)"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

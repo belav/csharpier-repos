@@ -18,7 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "GetAttribute(i) Verify with This[i] - Double Quote"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -44,7 +45,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "GetAttribute(i) Verify with MoveToAttribute[i] - Double Quote"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

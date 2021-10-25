@@ -350,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 constantValueOpt: constantValue,
                 type: destination,
                 hasErrors: hasErrors
-            ) {
+            )
+            {
                 WasCompilerGenerated = wasCompilerGenerated
             };
         }
@@ -652,7 +653,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     constantValueOpt: ConstantValue.NotAvailable,
                     type: destination,
                     hasErrors: true
-                ) {
+                )
+                {
                     WasCompilerGenerated = source.WasCompilerGenerated
                 };
             }
@@ -760,7 +762,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     conversionGroup,
                     constantValueOpt: ConstantValue.NotAvailable,
                     type: conversionReturnType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
 
@@ -816,7 +819,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     conversionGroup,
                     constantValueOpt: ConstantValue.NotAvailable,
                     type: conversionToType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
             }
@@ -870,7 +874,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 conversionGroup,
                 constantValueOpt: ConstantValue.NotAvailable,
                 type: destination
-            ) {
+            )
+            {
                 WasCompilerGenerated = source.WasCompilerGenerated
             };
         }
@@ -923,7 +928,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 constantValueOpt: ConstantValue.NotAvailable,
                 type: destination,
                 hasErrors: hasErrors
-            ) {
+            )
+            {
                 WasCompilerGenerated = source.WasCompilerGenerated
             };
         }

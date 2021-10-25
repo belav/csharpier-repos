@@ -614,7 +614,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     SubjectIdentifierType.SubjectKeyIdentifier,
                     pubCert,
                     key
-                ) {
+                )
+                {
                     IncludeOption = X509IncludeOption.EndCertOnly,
                     DigestAlgorithm = new Oid(Oids.Sha1, Oids.Sha1)
                 };
@@ -649,7 +650,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     SubjectIdentifierType.SubjectKeyIdentifier,
                     pubCert,
                     key
-                ) {
+                )
+                {
                     IncludeOption = X509IncludeOption.EndCertOnly,
                     DigestAlgorithm = new Oid(Oids.Sha1, Oids.Sha1)
                 };
@@ -658,7 +660,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     SubjectIdentifierType.SubjectKeyIdentifier,
                     counterSignerPubCert,
                     counterSignerKey
-                ) {
+                )
+                {
                     IncludeOption = X509IncludeOption.EndCertOnly,
                     DigestAlgorithm = new Oid(Oids.Sha1, Oids.Sha1)
                 };

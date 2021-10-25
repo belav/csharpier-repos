@@ -41,7 +41,8 @@ namespace System.Globalization
         internal static readonly TextInfo Invariant = new TextInfo(
             CultureData.Invariant,
             readOnly: true
-        ) {
+        )
+        {
             _isAsciiCasingSameAsInvariant = Tristate.True
         };
 

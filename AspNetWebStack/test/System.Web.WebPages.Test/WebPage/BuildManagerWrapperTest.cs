@@ -335,7 +335,8 @@ namespace System.Web.WebPages.Test
             return new BuildManagerWrapper(
                 new Mock<VirtualPathProvider>().Object,
                 GetVirtualPathUtility()
-            ) {
+            )
+            {
                 SupportedExtensions = supportedExtensions ?? new[] { "cshtml", "vbhtml" }
             };
         }

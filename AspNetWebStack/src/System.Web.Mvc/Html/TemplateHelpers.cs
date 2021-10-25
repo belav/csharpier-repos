@@ -29,7 +29,8 @@ namespace System.Web.Mvc.Html
             Func<HtmlHelper, string>
         > _defaultDisplayActions = new Dictionary<string, Func<HtmlHelper, string>>(
             StringComparer.OrdinalIgnoreCase
-        ) {
+        )
+        {
             { "EmailAddress", DefaultDisplayTemplates.EmailAddressTemplate },
             { "HiddenInput", DefaultDisplayTemplates.HiddenInputTemplate },
             { "Html", DefaultDisplayTemplates.HtmlTemplate },

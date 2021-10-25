@@ -133,7 +133,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 declaredModelType,
                 handlerType,
                 handlerTypeAttributes
-            ) {
+            )
+            {
                 PageType = pageTypeInfo,
                 ModelType = modelTypeInfo,
             };

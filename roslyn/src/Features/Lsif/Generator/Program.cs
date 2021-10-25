@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 new Option(
                     "--compiler-invocation",
                     "path to a .json file that contains the information for a csc/vbc invocation"
-                ) {
+                )
+                {
                     Argument = new Argument<FileInfo>().ExistingOnly()
                 },
                 new Option("--output", "file to write the LSIF output to, instead of the console")

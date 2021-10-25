@@ -16,7 +16,8 @@ namespace System.Buffers.Text.Tests
                 testData.Format,
                 testData.Precision,
                 testData.ExpectedOutput
-            ) {
+            )
+            {
                 PassedInBufferLength = testData.ExpectedOutput.Length + 200,
             };
             ValidateFormatterHelper(oversizedTestData);
@@ -36,7 +37,8 @@ namespace System.Buffers.Text.Tests
                     testData.Format,
                     testData.Precision,
                     testData.ExpectedOutput
-                ) {
+                )
+                {
                     PassedInBufferLength = truncatedBufferLength,
                 };
 

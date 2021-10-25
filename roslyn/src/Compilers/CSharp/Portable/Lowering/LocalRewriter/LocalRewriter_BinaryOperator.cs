@@ -1112,7 +1112,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         MethodSymbol.None,
                         LookupResultKind.Viable,
                         boolean
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }

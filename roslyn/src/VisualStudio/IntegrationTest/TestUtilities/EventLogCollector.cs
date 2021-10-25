@@ -92,7 +92,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// </summary>
         internal static HashSet<string> VsRelatedExes = new HashSet<string>(
             StringComparer.OrdinalIgnoreCase
-        ) {
+        )
+        {
             "devenv.exe",
             "csc.exe",
             "csi.exe",

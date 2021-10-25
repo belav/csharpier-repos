@@ -270,7 +270,8 @@ namespace System.Web.Razor
             return new RazorParser(
                 Host.DecorateCodeParser(codeParser),
                 Host.DecorateMarkupParser(markupParser)
-            ) {
+            )
+            {
                 DesignTimeMode = Host.DesignTimeMode
             };
         }

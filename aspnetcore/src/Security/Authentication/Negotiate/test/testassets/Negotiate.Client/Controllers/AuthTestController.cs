@@ -465,7 +465,8 @@ namespace Negotiate.Client.Controllers
                     ServerCertificateCustomValidationCallback =
                         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
                 }
-            ) {
+            )
+            {
                 BaseAddress = new Uri(remote),
             };
         }
@@ -481,7 +482,8 @@ namespace Negotiate.Client.Controllers
                     ServerCertificateValidationCallback =
                         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
                 }
-            ) {
+            )
+            {
                 BaseAddress = new Uri(remote)
             };
         }

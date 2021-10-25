@@ -177,7 +177,8 @@ namespace Castle.DynamicProxy.Generators
                 var additionalInterfacesContributor = new InterfaceProxyWithoutTargetContributor(
                     namingScope,
                     (c, m) => NullExpression.Instance
-                ) {
+                )
+                {
                     Logger = Logger
                 };
                 contributorsList.Add(additionalInterfacesContributor);

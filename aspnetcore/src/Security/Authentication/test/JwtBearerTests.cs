@@ -1034,7 +1034,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 {
                     throw new SecurityTokenInvalidAudienceException(
                         "SecurityTokenInvalidAudienceException"
-                    ) {
+                    )
+                    {
                         InvalidAudience = "Bad Audience"
                     };
                 }
@@ -1042,7 +1043,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 {
                     throw new SecurityTokenInvalidIssuerException(
                         "SecurityTokenInvalidIssuerException"
-                    ) {
+                    )
+                    {
                         InvalidIssuer = "Bad Issuer"
                     };
                 }
@@ -1050,7 +1052,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 {
                     throw new SecurityTokenInvalidLifetimeException(
                         "SecurityTokenInvalidLifetimeException"
-                    ) {
+                    )
+                    {
                         NotBefore = new DateTime(2001, 1, 15),
                         Expires = new DateTime(2000, 2, 20),
                     };

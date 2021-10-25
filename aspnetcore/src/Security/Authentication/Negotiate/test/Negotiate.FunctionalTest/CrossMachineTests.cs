@@ -164,7 +164,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                     ServerCertificateCustomValidationCallback =
                         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
                 }
-            ) {
+            )
+            {
                 BaseAddress = new Uri(address),
                 DefaultRequestVersion = new Version(2, 0),
             };

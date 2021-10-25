@@ -506,7 +506,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     projections,
                     fromExpression,
                     orderings
-                ) {
+                )
+                {
                     _projectionMapping = projectionMapping,
                     Predicate = predicate,
                     Offset = offset,

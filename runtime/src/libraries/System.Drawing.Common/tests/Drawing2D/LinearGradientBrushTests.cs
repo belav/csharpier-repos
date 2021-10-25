@@ -866,7 +866,8 @@ namespace System.Drawing.Drawing2D.Tests
                     Color.Red,
                     45,
                     true
-                ) {
+                )
+                {
                     GammaCorrection = gammaCorrection
                 }
             )
@@ -929,7 +930,8 @@ namespace System.Drawing.Drawing2D.Tests
                     Color.Red,
                     45,
                     true
-                ) {
+                )
+                {
                     InterpolationColors = new ColorBlend
                     {
                         Colors = new Color[] { Color.Wheat, Color.Yellow },
@@ -1105,7 +1107,8 @@ namespace System.Drawing.Drawing2D.Tests
                 Color.Red,
                 45,
                 true
-            ) {
+            )
+            {
                 InterpolationColors = new ColorBlend
                 {
                     Colors = new Color[] { Color.Red, Color.PeachPuff, Color.PowderBlue },
@@ -1136,7 +1139,8 @@ namespace System.Drawing.Drawing2D.Tests
                     Color.Red,
                     45,
                     true
-                ) {
+                )
+                {
                     InterpolationColors = new ColorBlend
                     {
                         Colors = new Color[] { Color.Red, Color.PeachPuff, Color.PowderBlue },
@@ -1162,7 +1166,8 @@ namespace System.Drawing.Drawing2D.Tests
                     Color.Red,
                     45,
                     true
-                ) {
+                )
+                {
                     InterpolationColors = new ColorBlend
                     {
                         Colors = new Color[] { Color.Red, Color.PeachPuff, Color.PowderBlue },
@@ -1189,7 +1194,8 @@ namespace System.Drawing.Drawing2D.Tests
                     Color.Red,
                     45,
                     true
-                ) {
+                )
+                {
                     LinearColors = colors
                 }
             )
@@ -1284,7 +1290,8 @@ namespace System.Drawing.Drawing2D.Tests
                     Color.Red,
                     45,
                     true
-                ) {
+                )
+                {
                     Transform = transform
                 }
             )
@@ -1344,7 +1351,8 @@ namespace System.Drawing.Drawing2D.Tests
                     Color.Red,
                     45,
                     true
-                ) {
+                )
+                {
                     WrapMode = wrapMode
                 }
             )

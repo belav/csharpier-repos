@@ -15,7 +15,8 @@ namespace System.IO.Tests.Enumeration
                 directory,
                 (ref FileSystemEntry entry) => entry.ToFullPath(),
                 options
-            ) {
+            )
+            {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
                 {
                     return !entry.IsDirectory;

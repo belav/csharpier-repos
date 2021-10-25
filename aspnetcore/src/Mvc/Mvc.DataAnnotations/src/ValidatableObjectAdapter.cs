@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 instance: validatable,
                 serviceProvider: context.ActionContext?.HttpContext?.RequestServices,
                 items: null
-            ) {
+            )
+            {
                 DisplayName = context.ModelMetadata.GetDisplayName(),
                 MemberName = context.ModelMetadata.Name,
             };

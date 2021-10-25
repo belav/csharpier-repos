@@ -555,10 +555,7 @@ namespace Microsoft.Net.Http.Headers
         public static TheoryData<
             string,
             ContentDispositionHeaderValue
-        > ValidContentDispositionTestCases = new TheoryData<
-            string,
-            ContentDispositionHeaderValue
-        >()
+        > ValidContentDispositionTestCases = new TheoryData<string, ContentDispositionHeaderValue>()
         {
             { "inline", new ContentDispositionHeaderValue("inline") }, // @"This should be equivalent to not including the header at all."
             { "inline;", new ContentDispositionHeaderValue("inline") },

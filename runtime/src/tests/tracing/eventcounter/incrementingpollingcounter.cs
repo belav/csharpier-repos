@@ -25,7 +25,8 @@ namespace BasicEventSourceTests
                     "failureCount",
                     this,
                     getMockedCount
-                ) {
+                )
+                {
                     DisplayName = "Failure Count",
                     DisplayUnits = "Count",
                     DisplayRateTimeScale = new TimeSpan(0, 0, 1)

@@ -3455,7 +3455,8 @@ namespace Newtonsoft.Json.Serialization
 
                         CreatorPropertyContext creatorPropertyContext = new CreatorPropertyContext(
                             memberName
-                        ) {
+                        )
+                        {
                             ConstructorProperty =
                                 contract.CreatorParameters.GetClosestMatchProperty(memberName),
                             Property = contract.Properties.GetClosestMatchProperty(memberName)

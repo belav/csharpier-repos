@@ -255,7 +255,8 @@ namespace AutoMapper
                     "Missing type map configuration or unsupported mapping.",
                     null,
                     mapRequest.RuntimeTypes
-                ) {
+                )
+                {
                     MemberMap = mapRequest.MemberMap
                 };
                 fullExpression = Throw(Constant(exception), runtimeDestinationType);

@@ -160,7 +160,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Attribute and element in default NS."
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -170,7 +171,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Attribute and element in default NS II."
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -180,7 +182,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Attribute and element in default NS (mix of all)"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }
@@ -255,7 +258,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XName.Get: Invalid name (empty string)"
-                            ) {
+                            )
+                            {
                                 Priority = 1
                             }
                         }

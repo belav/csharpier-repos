@@ -23,8 +23,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void ErrorMessage_Calls_Inner()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<FormatterParameterBinding> mockBinding = new Mock<FormatterParameterBinding>(
@@ -47,8 +49,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void WillReadBody_Calls_Inner()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<FormatterParameterBinding> mockBinding = new Mock<FormatterParameterBinding>(
@@ -71,15 +75,18 @@ namespace System.Web.Http.Tracing.Tracers
         public void Descriptor_Uses_Inners()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<FormatterParameterBinding> mockBinding = new Mock<FormatterParameterBinding>(
                 mockParamDescriptor.Object,
                 new MediaTypeFormatterCollection(),
                 null
-            ) {
+            )
+            {
                 CallBase = true
             };
             FormatterParameterBindingTracer tracer = new FormatterParameterBindingTracer(
@@ -95,15 +102,18 @@ namespace System.Web.Http.Tracing.Tracers
         public void Formatters_Uses_Inners()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<FormatterParameterBinding> mockBinding = new Mock<FormatterParameterBinding>(
                 mockParamDescriptor.Object,
                 new MediaTypeFormatterCollection(),
                 null
-            ) {
+            )
+            {
                 CallBase = true
             };
             FormatterParameterBindingTracer tracer = new FormatterParameterBindingTracer(
@@ -119,8 +129,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void BodyModelValidator_Uses_Inners()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<IBodyModelValidator> mockValidator = new Mock<IBodyModelValidator>();
@@ -128,7 +140,8 @@ namespace System.Web.Http.Tracing.Tracers
                 mockParamDescriptor.Object,
                 new MediaTypeFormatterCollection(),
                 mockValidator.Object
-            ) {
+            )
+            {
                 CallBase = true
             };
             FormatterParameterBindingTracer tracer = new FormatterParameterBindingTracer(
@@ -149,8 +162,10 @@ namespace System.Web.Http.Tracing.Tracers
         public async Task ExecuteBindingAsync_Traces_And_Invokes_Inner_ReadAsync()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             FormatterParameterBinding binding = new FormatterParameterBinding(
@@ -176,7 +191,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "ExecuteBindingAsync"
                 },
@@ -184,7 +200,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "ExecuteBindingAsync"
                 }
@@ -210,15 +227,18 @@ namespace System.Web.Http.Tracing.Tracers
         public void ExecuteBindingAsync_Traces_And_Throws_When_Inner_Throws()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<FormatterParameterBinding> mockBinding = new Mock<FormatterParameterBinding>(
                 mockParamDescriptor.Object,
                 new MediaTypeFormatterCollection(),
                 null
-            ) {
+            )
+            {
                 CallBase = true
             };
             InvalidOperationException exception = new InvalidOperationException("test");
@@ -247,7 +267,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "ExecuteBindingAsync"
                 },
@@ -255,7 +276,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "ExecuteBindingAsync"
                 }
@@ -286,15 +308,18 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
 
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<FormatterParameterBinding> mockBinding = new Mock<FormatterParameterBinding>(
                 mockParamDescriptor.Object,
                 new MediaTypeFormatterCollection(),
                 null
-            ) {
+            )
+            {
                 CallBase = true
             };
             InvalidOperationException exception = new InvalidOperationException("test");
@@ -326,7 +351,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "ExecuteBindingAsync"
                 },
@@ -334,7 +360,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "ExecuteBindingAsync"
                 }

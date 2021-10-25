@@ -1040,7 +1040,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     builder.EditHandler.Tokenizer,
                     CSharpCodeParser.DefaultKeywords,
                     acceptTrailingDot: true
-                ) {
+                )
+                {
                     AcceptedCharacters = AcceptedCharactersInternal.AnyExceptNewline
                 };
 

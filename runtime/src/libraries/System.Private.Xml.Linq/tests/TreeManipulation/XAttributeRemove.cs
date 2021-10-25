@@ -212,7 +212,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Remove standalone attribute - def namespace"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "xmlns", "value" },
                         Priority = 2
                     }

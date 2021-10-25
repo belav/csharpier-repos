@@ -5117,7 +5117,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         nonNullSyntax,
                         ConstantValue.Create(knownSizes[i] ?? 0),
                         GetSpecialType(SpecialType.System_Int32, diagnostics, nonNullSyntax)
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
                 }
@@ -5135,7 +5136,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 initializer,
                 type,
                 hasErrors: hasErrors
-            ) {
+            )
+            {
                 WasCompilerGenerated =
                     !hasCreationSyntax
                     && (
@@ -5422,7 +5424,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node,
                     ConstantValue.Create(boundInitExprOpt.Length),
                     GetSpecialType(SpecialType.System_Int32, diagnostics, node)
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
             }
@@ -5834,7 +5837,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         resultKind: LookupResultKind.Viable,
                         type: constructorReturnType,
                         hasErrors: hasErrors
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = initializerArgumentListOpt == null
                     };
                 }
@@ -6458,7 +6462,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 typeSyntax,
                 isForNewInstance,
                 type
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -7368,7 +7373,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     boundCall.ResultKind,
                     boundCall.Type,
                     boundCall.HasAnyErrors
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
             }
@@ -8391,7 +8397,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         boundLeft,
                         pointedAtType,
                         hasErrors
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true, // don't interfere with the type info for exprSyntax.
                     };
                 }
@@ -12233,7 +12240,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 0,
                 receiverType ?? CreateErrorType(),
                 hasErrors: receiver.HasErrors
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
             return receiver;

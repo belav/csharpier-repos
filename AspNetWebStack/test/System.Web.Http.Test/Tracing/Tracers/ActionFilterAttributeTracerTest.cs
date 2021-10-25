@@ -162,7 +162,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "OnActionExecutingAsync"
                 },
@@ -170,7 +171,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "OnActionExecutingAsync"
                 },
@@ -178,7 +180,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "OnActionExecutedAsync"
                 },
@@ -186,7 +189,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "OnActionExecutedAsync"
                 }
@@ -241,7 +245,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "OnActionExecutingAsync"
                 },
@@ -249,7 +254,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "OnActionExecutingAsync"
                 }
@@ -308,7 +314,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "OnActionExecutingAsync"
                 },
@@ -316,7 +323,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "OnActionExecutingAsync"
                 },
@@ -324,7 +332,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "OnActionExecutedAsync"
                 },
@@ -332,7 +341,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.FiltersCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "OnActionExecutedAsync"
                 }

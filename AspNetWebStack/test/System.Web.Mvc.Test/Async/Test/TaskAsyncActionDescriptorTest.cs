@@ -467,7 +467,8 @@ namespace System.Web.Mvc.Async.Test
                 "someName",
                 new Mock<ControllerDescriptor>().Object,
                 validateMethod: false
-            ) {
+            )
+            {
                 DispatcherCache = new ActionMethodDispatcherCache()
             };
 
@@ -492,7 +493,8 @@ namespace System.Web.Mvc.Async.Test
                 "someName",
                 new Mock<ControllerDescriptor>().Object,
                 validateMethod: false
-            ) {
+            )
+            {
                 DispatcherCache = new ActionMethodDispatcherCache()
             };
 
@@ -550,7 +552,8 @@ namespace System.Web.Mvc.Async.Test
                 "someName",
                 new Mock<ControllerDescriptor>().Object,
                 validateMethod: false
-            ) {
+            )
+            {
                 DispatcherCache = new ActionMethodDispatcherCache()
             };
 
@@ -607,7 +610,8 @@ namespace System.Web.Mvc.Async.Test
                 taskMethod,
                 "someName",
                 new Mock<ControllerDescriptor>().Object
-            ) {
+            )
+            {
                 DispatcherCache = new ActionMethodDispatcherCache()
             };
         }

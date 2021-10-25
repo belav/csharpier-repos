@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             {
                 foreignKey.ReferencingSkipNavigations = new SortedSet<SlimSkipNavigation>(
                     SkipNavigationComparer.Instance
-                ) {
+                )
+                {
                     this
                 };
             }

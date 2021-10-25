@@ -37,10 +37,7 @@ namespace System.Web.Mvc.Test
         public void DictionaryInterface()
         {
             // Arrange
-            DictionaryHelper<Type, IModelBinder> helper = new DictionaryHelper<
-                Type,
-                IModelBinder
-            >()
+            DictionaryHelper<Type, IModelBinder> helper = new DictionaryHelper<Type, IModelBinder>()
             {
                 Creator = () => new ModelBinderDictionary(),
                 SampleKeys = new Type[]

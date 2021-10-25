@@ -151,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 constantValueOpt: null,
                 type: baseType,
                 hasErrors: !conversion.IsValid
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }

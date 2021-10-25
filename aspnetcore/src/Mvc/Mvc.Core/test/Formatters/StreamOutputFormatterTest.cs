@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 type,
                 new MemoryStream()
-            ) {
+            )
+            {
                 ContentType = contentTypeHeader,
             };
 
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 type,
                 new SimplePOCO()
-            ) {
+            )
+            {
                 ContentType = contentTypeHeader,
             };
 

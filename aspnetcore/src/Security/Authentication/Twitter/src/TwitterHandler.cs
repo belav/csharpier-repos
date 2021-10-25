@@ -266,7 +266,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
         {
             var authorizationParts = new SortedDictionary<string, string>(
                 extraOAuthPairs ?? new Dictionary<string, string>()
-            ) {
+            )
+            {
                 { "oauth_consumer_key", Options.ConsumerKey! },
                 { "oauth_nonce", Guid.NewGuid().ToString("N") },
                 { "oauth_signature_method", "HMAC-SHA1" },

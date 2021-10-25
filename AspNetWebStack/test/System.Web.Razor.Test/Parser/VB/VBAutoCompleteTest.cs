@@ -28,7 +28,8 @@ namespace System.Web.Razor.Test.Parser.VB
                         .With(
                             new AutoCompleteEditHandler(
                                 CSharpLanguageCharacteristics.Instance.TokenizeString
-                            ) {
+                            )
+                            {
                                 AutoCompleteString = SyntaxConstants.VB.EndFunctionsKeyword
                             }
                         )
@@ -65,7 +66,8 @@ namespace System.Web.Razor.Test.Parser.VB
                         .With(
                             new AutoCompleteEditHandler(
                                 CSharpLanguageCharacteristics.Instance.TokenizeString
-                            ) {
+                            )
+                            {
                                 AutoCompleteString = SyntaxConstants.VB.EndHelperKeyword
                             }
                         ),
@@ -97,7 +99,8 @@ namespace System.Web.Razor.Test.Parser.VB
                         .With(
                             new AutoCompleteEditHandler(
                                 CSharpLanguageCharacteristics.Instance.TokenizeString
-                            ) {
+                            )
+                            {
                                 AutoCompleteString = SyntaxConstants.VB.EndSectionKeyword
                             }
                         ),
@@ -133,7 +136,8 @@ namespace System.Web.Razor.Test.Parser.VB
                         .With(
                             new AutoCompleteEditHandler(
                                 CSharpLanguageCharacteristics.Instance.TokenizeString
-                            ) {
+                            )
+                            {
                                 AutoCompleteString = SyntaxConstants.VB.EndCodeKeyword
                             }
                         )
@@ -161,7 +165,8 @@ namespace System.Web.Razor.Test.Parser.VB
                         .With(
                             new AutoCompleteEditHandler(
                                 CSharpLanguageCharacteristics.Instance.TokenizeString
-                            ) {
+                            )
+                            {
                                 AutoCompleteString = SyntaxConstants.VB.EndFunctionsKeyword
                             }
                         )
@@ -198,7 +203,8 @@ namespace System.Web.Razor.Test.Parser.VB
                         .With(
                             new AutoCompleteEditHandler(
                                 CSharpLanguageCharacteristics.Instance.TokenizeString
-                            ) {
+                            )
+                            {
                                 AutoCompleteString = SyntaxConstants.VB.EndHelperKeyword
                             }
                         ),
@@ -230,7 +236,8 @@ namespace System.Web.Razor.Test.Parser.VB
                         .With(
                             new AutoCompleteEditHandler(
                                 CSharpLanguageCharacteristics.Instance.TokenizeString
-                            ) {
+                            )
+                            {
                                 AutoCompleteString = SyntaxConstants.VB.EndSectionKeyword
                             }
                         ),
@@ -263,7 +270,8 @@ namespace System.Web.Razor.Test.Parser.VB
                         .With(
                             new AutoCompleteEditHandler(
                                 CSharpLanguageCharacteristics.Instance.TokenizeString
-                            ) {
+                            )
+                            {
                                 AutoCompleteString = SyntaxConstants.VB.EndCodeKeyword
                             }
                         )

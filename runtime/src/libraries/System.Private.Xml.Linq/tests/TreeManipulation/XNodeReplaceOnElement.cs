@@ -42,7 +42,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement: Replace with single nodes - text node only"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 1, "<A>I_am_the_text</A>" },
                         Priority = 1
                     }
@@ -53,7 +54,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "(BVT)XElement (in document II.): Replace with multiple nodes"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             2,
@@ -69,7 +71,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement: Replace with multiple nodes - text node only"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 4, "<A>I_am_the_text</A>" },
                         Priority = 1
                     }
@@ -80,7 +83,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement: Replace with single nodes - one child"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 1, "<A><x/></A>" },
                         Priority = 2
                     }
@@ -91,7 +95,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement (in document II.): Replace with multiple nodes"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             4,
@@ -107,7 +112,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "(BVT)XElement (in document): Replace with multiple nodes"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             2,
@@ -123,7 +129,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement: Replace with multiple nodes - one child"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 4, "<A><?Pi data?></A>" },
                         Priority = 2
                     }
@@ -134,7 +141,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement (in document): Replace with multiple nodes"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             4,

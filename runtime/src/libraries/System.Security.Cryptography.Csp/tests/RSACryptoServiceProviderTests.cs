@@ -455,7 +455,8 @@ namespace System.Security.Cryptography.Csp.Tests
                     cspParameters.ProviderType,
                     cspParameters.ProviderName,
                     cspParameters.KeyContainerName
-                ) {
+                )
+                {
                     // If the test failed before creating the key, don't bother recreating it.
                     Flags = (cspParameters.Flags & CopyableFlags) | CspProviderFlags.UseExistingKey,
                 };

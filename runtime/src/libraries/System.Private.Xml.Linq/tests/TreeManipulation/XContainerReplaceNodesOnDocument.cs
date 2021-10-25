@@ -14,7 +14,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument(whitespace only): Replace with multiple nodes"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 4, "\t", true },
                         Priority = 1
                     }
@@ -35,7 +36,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument(regular): Replace with multiple nodes"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             4,
@@ -51,7 +53,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument(empty): Replace with multiple nodes"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 4, "", true },
                         Priority = 2
                     }
@@ -62,7 +65,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "(BVT)XDocument(regular): Replace with multiple nodes"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             2,
@@ -78,7 +82,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument(whitespace only): Replace with single node"
-                    ) {
+                    )
+                    {
                         Params = new object[] { 1, "\t", true },
                         Priority = 1
                     }
@@ -89,7 +94,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument(regular): Replace with single node"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             1,

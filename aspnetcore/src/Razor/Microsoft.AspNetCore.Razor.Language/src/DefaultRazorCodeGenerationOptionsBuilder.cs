@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 SuppressPrimaryMethodBody,
                 SuppressNullabilityEnforcement,
                 OmitMinimizedComponentAttributeValues
-            ) {
+            )
+            {
                 SuppressMetadataSourceChecksumAttributes = SuppressMetadataSourceChecksumAttributes,
             };
         }

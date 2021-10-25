@@ -1126,7 +1126,8 @@ namespace System.CommandLine.Tests.Help
                 new Option<List<int>>(
                     "--filter-size",
                     getDefaultValue: () => new List<int>() { 0, 2, 4 }
-                ) {
+                )
+                {
 
                 }
             };
@@ -1147,7 +1148,8 @@ namespace System.CommandLine.Tests.Help
                 new Option<string[]>(
                     "--prefixes",
                     getDefaultValue: () => new[] { "^(TODO|BUG)", "^HACK" }
-                ) {
+                )
+                {
 
                 }
             };

@@ -153,7 +153,8 @@ namespace System.Web.Http.Tracing.Tracers
                                 request,
                                 TraceCategories.FormattingCategory,
                                 TraceLevel.Info
-                            ) {
+                            )
+                            {
                                 Kind = TraceKind.Begin,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Type='SampleType', content-type='application/json'",
@@ -163,7 +164,8 @@ namespace System.Web.Http.Tracing.Tracers
                                 request,
                                 TraceCategories.FormattingCategory,
                                 TraceLevel.Info
-                            ) {
+                            )
+                            {
                                 Kind = TraceKind.End,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Value read='System.Net.Http.Formatting.SampleType'",
@@ -181,7 +183,8 @@ namespace System.Web.Http.Tracing.Tracers
                                 request,
                                 TraceCategories.FormattingCategory,
                                 TraceLevel.Info
-                            ) {
+                            )
+                            {
                                 Kind = TraceKind.Begin,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Type='SampleType', content-type='application/json'",
@@ -191,7 +194,8 @@ namespace System.Web.Http.Tracing.Tracers
                                 request,
                                 TraceCategories.FormattingCategory,
                                 TraceLevel.Error
-                            ) {
+                            )
+                            {
                                 Kind = TraceKind.Trace,
                                 Operation = "ReadFromStreamAsync",
                                 Operator = "JsonMediaTypeFormatter",
@@ -203,7 +207,8 @@ namespace System.Web.Http.Tracing.Tracers
                                 request,
                                 TraceCategories.FormattingCategory,
                                 TraceLevel.Info
-                            ) {
+                            )
+                            {
                                 Kind = TraceKind.End,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Value read='null'",

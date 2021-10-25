@@ -288,7 +288,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             Language.TokenizeString,
                             CurrentKeywords,
                             acceptTrailingDot: IsNested
-                        ) {
+                        )
+                        {
                             AcceptedCharacters = AcceptedCharactersInternal.NonWhitespace
                         };
 

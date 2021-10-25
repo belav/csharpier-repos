@@ -1988,21 +1988,20 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void PropertyItemTypeNameHandlingNestedDictionaries()
         {
-            PropertyItemTypeNameHandlingDictionary c1 =
-                new PropertyItemTypeNameHandlingDictionary()
+            PropertyItemTypeNameHandlingDictionary c1 = new PropertyItemTypeNameHandlingDictionary()
+            {
+                Data = new Dictionary<string, object>
                 {
-                    Data = new Dictionary<string, object>
+                    { "one", new TestComponentSimple { MyProperty = 1 } },
                     {
-                        { "one", new TestComponentSimple { MyProperty = 1 } },
+                        "two",
+                        new Dictionary<string, object>
                         {
-                            "two",
-                            new Dictionary<string, object>
-                            {
-                                { "one", new Dictionary<string, object> { { "one", 1 } } }
-                            }
+                            { "one", new Dictionary<string, object> { { "one", 1 } } }
                         }
                     }
-                };
+                }
+            };
 
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
 

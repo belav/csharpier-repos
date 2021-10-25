@@ -174,7 +174,8 @@ bar",
                                 autoComplete
                                     ? new AutoCompleteEditHandler(
                                           CSharpLanguageCharacteristics.Instance.TokenizeString
-                                      ) {
+                                      )
+                                      {
                                           AutoCompleteString = expectedTerminator
                                       }
                                     : SpanEditHandler.CreateDefault()
@@ -191,7 +192,8 @@ bar",
                                 autoComplete
                                     ? new AutoCompleteEditHandler(
                                           CSharpLanguageCharacteristics.Instance.TokenizeString
-                                      ) {
+                                      )
+                                      {
                                           AutoCompleteString = expectedTerminator
                                       }
                                     : SpanEditHandler.CreateDefault()

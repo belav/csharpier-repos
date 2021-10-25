@@ -156,7 +156,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                             Context,
                             Scheme,
                             Options
-                        ) {
+                        )
+                        {
                             Principal = principal,
                             SecurityToken = validatedToken
                         };
@@ -188,7 +189,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                         Context,
                         Scheme,
                         Options
-                    ) {
+                    )
+                    {
                         Exception =
                             (validationFailures.Count == 1)
                                 ? validationFailures[0]
@@ -216,7 +218,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                     Context,
                     Scheme,
                     Options
-                ) {
+                )
+                {
                     Exception = ex
                 };
 

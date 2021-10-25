@@ -63,7 +63,8 @@ namespace Templates.Test.Helpers
                         (certificate.Subject != "CN=localhost" && errors == SslPolicyErrors.None)
                         || certificate?.Thumbprint == _developmentCertificate.CertificateThumbprint,
                 }
-            ) {
+            )
+            {
                 Timeout = TimeSpan.FromMinutes(2)
             };
 

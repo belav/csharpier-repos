@@ -135,7 +135,8 @@ namespace System.ServiceModel.Syndication.Tests
                 "title",
                 "mediaType",
                 10
-            ) {
+            )
+            {
                 BaseUri = new Uri("http://baseuri.com")
             };
             original.AttributeExtensions.Add(new XmlQualifiedName("name"), "value");
@@ -208,7 +209,8 @@ namespace System.ServiceModel.Syndication.Tests
                 "title",
                 "mediaType",
                 10
-            ) {
+            )
+            {
                 BaseUri = new Uri("http://baseuri.com")
             };
             original.AttributeExtensions.Add(new XmlQualifiedName("name"), "value");

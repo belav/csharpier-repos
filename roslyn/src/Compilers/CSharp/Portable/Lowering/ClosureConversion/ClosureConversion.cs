@@ -320,7 +320,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     body.Syntax,
                     _addedLocals.ToImmutableAndFree(),
                     _addedStatements.ToImmutableAndFree()
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
                 _addedLocals = null;

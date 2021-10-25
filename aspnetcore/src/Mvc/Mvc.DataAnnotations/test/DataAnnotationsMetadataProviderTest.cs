@@ -180,11 +180,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             var dataType = new DataTypeAttribute(DataType.Time); // Has a non-null DisplayFormat.
-            var displayFormat =
-                new DisplayFormatAttribute() // But these values override the values from DataType
-                {
-                    DataFormatString = "Cool {0}",
-                };
+            var displayFormat = new DisplayFormatAttribute() // But these values override the values from DataType
+            {
+                DataFormatString = "Cool {0}",
+            };
 
             var attributes = new Attribute[] { dataType, displayFormat, };
             var key = ModelMetadataIdentity.ForType(typeof(string));

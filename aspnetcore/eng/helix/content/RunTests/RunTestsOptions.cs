@@ -20,56 +20,64 @@ namespace RunTests
                 new Option(
                     aliases: new string[] { "--target", "-t" },
                     description: "The test dll to run"
-                ) {
+                )
+                {
                     Argument = new Argument<string>(),
                     Required = true
                 },
                 new Option(
                     aliases: new string[] { "--runtime" },
                     description: "The version of the ASP.NET runtime being installed and used"
-                ) {
+                )
+                {
                     Argument = new Argument<string>(),
                     Required = true
                 },
                 new Option(
                     aliases: new string[] { "--queue" },
                     description: "The name of the Helix queue being run on"
-                ) {
+                )
+                {
                     Argument = new Argument<string>(),
                     Required = true
                 },
                 new Option(
                     aliases: new string[] { "--arch" },
                     description: "The architecture being run on"
-                ) {
+                )
+                {
                     Argument = new Argument<string>(),
                     Required = true
                 },
                 new Option(
                     aliases: new string[] { "--quarantined" },
                     description: "Whether quarantined tests should run or not"
-                ) {
+                )
+                {
                     Argument = new Argument<bool>(),
                     Required = true
                 },
                 new Option(
                     aliases: new string[] { "--ef" },
                     description: "The version of the EF tool to use"
-                ) {
+                )
+                {
                     Argument = new Argument<string>(),
                     Required = true
                 },
                 new Option(
                     aliases: new string[] { "--helixTimeout" },
                     description: "The timeout duration of the Helix job"
-                ) {
+                )
+                {
                     Argument = new Argument<string>(),
                     Required = true
                 },
                 new Option(
                     aliases: new string[] { "--source" },
                     description: "The restore sources to use during testing"
-                ) {
+                )
+                {
                     Argument = new Argument<string>() { Arity = ArgumentArity.ZeroOrMore },
                     Required = true
                 }

@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(Person),
                 person
-            ) {
+            )
+            {
                 ContentType = new StringSegment(mediaType.ToString()),
             };
 
@@ -82,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(Person),
                 new ThrowingFormatterModel()
-            ) {
+            )
+            {
                 ContentType = new StringSegment(mediaType.ToString()),
             };
 

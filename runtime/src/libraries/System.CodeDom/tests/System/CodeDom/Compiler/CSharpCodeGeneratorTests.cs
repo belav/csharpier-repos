@@ -376,7 +376,8 @@ namespace System.CodeDom.Compiler.Tests
                         new CodePrimitiveExpression(1),
                         new CodePrimitiveExpression(2)
                     }
-                ) {
+                )
+                {
                     SizeExpression = new CodeExpression()
                 },
                 null,

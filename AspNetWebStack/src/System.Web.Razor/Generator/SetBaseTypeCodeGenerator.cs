@@ -47,7 +47,8 @@ namespace System.Web.Razor.Generator
                         generatedCodeStart,
                         out paddingCharCount
                     )
-                ) {
+                )
+                {
                     LinePragma = context.GenerateLinePragma(
                         target,
                         generatedCodeStart + paddingCharCount

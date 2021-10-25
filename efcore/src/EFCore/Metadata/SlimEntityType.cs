@@ -271,7 +271,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             {
                 principalKey.ReferencingForeignKeys = new SortedSet<SlimForeignKey>(
                     ForeignKeyComparer.Instance
-                ) {
+                )
+                {
                     foreignKey
                 };
             }
@@ -284,7 +285,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             {
                 principalEntityType.DeclaredReferencingForeignKeys = new SortedSet<SlimForeignKey>(
                     ForeignKeyComparer.Instance
-                ) {
+                )
+                {
                     foreignKey
                 };
             }

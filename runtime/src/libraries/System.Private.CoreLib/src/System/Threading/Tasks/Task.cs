@@ -308,12 +308,11 @@ namespace System.Threading.Tasks
             {
                 m_stateFlags =
                     TASK_STATE_CANCELED | TASK_STATE_CANCELLATIONACKNOWLEDGED | optionFlags;
-                m_contingentProperties =
-                    new ContingentProperties() // can't have children, so just instantiate directly
-                    {
-                        m_cancellationToken = ct,
-                        m_internalCancellationRequested = CANCELLATION_REQUESTED,
-                    };
+                m_contingentProperties = new ContingentProperties() // can't have children, so just instantiate directly
+                {
+                    m_cancellationToken = ct,
+                    m_internalCancellationRequested = CANCELLATION_REQUESTED,
+                };
             }
             else
             {

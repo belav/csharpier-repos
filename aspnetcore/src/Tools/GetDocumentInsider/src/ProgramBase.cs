@@ -40,7 +40,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool
                 var app = new CommandLineApplication(
                     throwOnUnexpectedArg,
                     continueAfterUnexpectedArg: true
-                ) {
+                )
+                {
                     AllowArgumentSeparator = !throwOnUnexpectedArg,
                     Error = _console.Error,
                     FullName = Resources.CommandFullName,

@@ -703,7 +703,8 @@ namespace Microsoft.EntityFrameworkCore
                                 e.Parent = context.Set<Root>().Single(IsTheRoot);
                                 e.CompositeChildren = new ObservableHashSet<OptionalOverlapping2>(
                                     LegacyReferenceEqualityComparer.Instance
-                                ) {
+                                )
+                                {
                                     context.CreateProxy<OptionalOverlapping2>(e => e.Id = 5),
                                     context.CreateProxy<OptionalOverlapping2>(e => e.Id = 6)
                                 };

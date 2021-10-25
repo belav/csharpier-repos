@@ -78,7 +78,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Wrap with Prohibit, change RS, xml w/o DTD.Prohibit"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }
@@ -88,7 +89,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Wrap with Prohibit, change RS, xml w/o DTD.Ignore"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -111,7 +113,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Wrap with Ignore, change RS, xml w/o DTD.Prohibit"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }
@@ -198,7 +201,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Changing DtdProcessing to Parse, Prohibit.Prohibit"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }
@@ -208,7 +212,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Changing DtdProcessing to Parse, Prohibit.Ignore"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -231,7 +236,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Changing DtdProcessing to Prohibit,Parse.Prohibit"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }
@@ -254,7 +260,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Changing DtdProcessing to Parse, Ignore.Prohibit"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }
@@ -268,7 +275,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Changing DtdProcessing to Prohibit,Ignore.Prohibit"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }
@@ -278,7 +286,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Changing DtdProcessing to Prohibit,Ignore.Ignore"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -336,7 +345,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parse a valid xml with predefined entities with no DTD.Ignore"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -346,7 +356,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parse a valid xml with predefined entities with no DTD.Prohibit"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }
@@ -382,7 +393,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parse a valid xml with entity in attribute and DTD.Prohibit"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }
@@ -392,7 +404,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parse a valid xml with entity in attribute and DTD.Ignore"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -406,7 +419,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parse a invalid xml with entity in attribute and DTD.Prohibit"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }
@@ -416,7 +430,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parse a invalid xml with entity in attribute and DTD.Ignore"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -430,7 +445,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Set value to Reader.Settings.DtdProcessing.Ignore"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -440,7 +456,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Set value to Reader.Settings.DtdProcessing.Prohibit"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }
@@ -464,7 +481,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "DtdProcessing - ArgumentOutOfRangeException.Ignore"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -474,7 +492,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "DtdProcessing - ArgumentOutOfRangeException.Prohibit"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }

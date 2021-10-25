@@ -539,7 +539,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
             public static readonly DerivedValidationResult SomeError = new DerivedValidationResult(
                 "Some Error"
-            ) {
+            )
+            {
                 AdditionalData = "Additional Data"
             };
 

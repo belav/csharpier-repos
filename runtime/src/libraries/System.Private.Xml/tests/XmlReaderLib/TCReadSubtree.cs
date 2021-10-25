@@ -216,7 +216,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Close on inner reader with CloseInput should not close the outer reader"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "false" },
                             Pri = 1
                         }
@@ -227,7 +228,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Close on inner reader with CloseInput should not close the outer reader"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "true" },
                             Pri = 1
                         }
@@ -252,7 +254,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadSubtree for element depth more than 4K chars"
-                        ) {
+                        )
+                        {
                             Pri = 2
                         }
                     }
@@ -279,7 +282,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Subtree Reader caches the NodeType and reports node type of Attribute on subsequent reads."
-                        ) {
+                        )
+                        {
                             Pri = 1
                         }
                     }
@@ -329,7 +333,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "0. XmlReader.Name inconsistent when reading namespace node attribute"
-                        ) {
+                        )
+                        {
                             Param = 0
                         }
                     }
@@ -339,7 +344,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "2. XmlReader.Name inconsistent when reading namespace node attribute"
-                        ) {
+                        )
+                        {
                             Param = 2
                         }
                     }
@@ -349,7 +355,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "1. XmlReader.Name inconsistent when reading namespace node attribute"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -359,7 +366,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "3. XmlReader.Name inconsistent when reading namespace node attribute"
-                        ) {
+                        )
+                        {
                             Param = 3
                         }
                     }
@@ -369,7 +377,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "4. XmlReader.Name inconsistent when reading namespace node attribute"
-                        ) {
+                        )
+                        {
                             Param = 4
                         }
                     }
@@ -379,7 +388,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "5. XmlReader.Name inconsistent when reading namespace node attribute"
-                        ) {
+                        )
+                        {
                             Param = 5
                         }
                     }
@@ -405,7 +415,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "2. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 2
                         }
                     }
@@ -415,7 +426,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "13. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 13
                         }
                     }
@@ -425,7 +437,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "16. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 16
                         }
                     }
@@ -435,7 +448,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "17. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 17
                         }
                     }
@@ -445,7 +459,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "18. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 18
                         }
                     }
@@ -455,7 +470,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "19. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 19
                         }
                     }
@@ -465,7 +481,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "20. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 20
                         }
                     }
@@ -475,7 +492,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "21. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 21
                         }
                     }
@@ -485,7 +503,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "22. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 22
                         }
                     }
@@ -495,7 +514,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "23. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 23
                         }
                     }
@@ -505,7 +525,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "24. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 24
                         }
                     }
@@ -515,7 +536,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "6. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 6
                         }
                     }
@@ -525,7 +547,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "12. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 12
                         }
                     }
@@ -535,7 +558,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "15. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 15
                         }
                     }
@@ -545,7 +569,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "3. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 3
                         }
                     }
@@ -555,7 +580,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "5. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 5
                         }
                     }
@@ -565,7 +591,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "1. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 1
                         }
                     }
@@ -575,7 +602,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "7. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 7
                         }
                     }
@@ -585,7 +613,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "8. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 8
                         }
                     }
@@ -595,7 +624,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "9. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 9
                         }
                     }
@@ -605,7 +635,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "10. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 10
                         }
                     }
@@ -615,7 +646,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "11. Close on a subtree reader that is in error state doesn't get it into in infinite loop"
-                        ) {
+                        )
+                        {
                             Param = 11
                         }
                     }

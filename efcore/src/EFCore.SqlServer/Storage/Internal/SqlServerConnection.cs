@@ -80,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         {
             var connectionStringBuilder = new SqlConnectionStringBuilder(
                 GetValidatedConnectionString()
-            ) {
+            )
+            {
                 InitialCatalog = "master"
             };
             connectionStringBuilder.Remove("AttachDBFilename");

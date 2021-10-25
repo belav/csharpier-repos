@@ -262,7 +262,8 @@ UnicodeDataTypes.StringUnicode ---> [nullable varbinary] [MaxLength = -1]
             {
                 _storeTypeMappings = new Dictionary<string, RelationalTypeMapping>(
                     StringComparer.OrdinalIgnoreCase
-                ) {
+                )
+                {
                     { "binary varying", _variableLengthBinary },
                     { "binary", _fixedLengthBinary },
                     { "image", _variableLengthBinary },

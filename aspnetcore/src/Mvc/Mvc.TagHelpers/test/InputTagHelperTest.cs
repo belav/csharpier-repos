@@ -86,7 +86,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 outputAttributes,
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -136,7 +137,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 attributes,
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
             output.Content.AppendHtml(content);
@@ -187,7 +189,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 attributes,
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
             output.Content.AppendHtml(content);
@@ -235,7 +238,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 attributes,
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
             output.Content.AppendHtml(content);
@@ -301,7 +305,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -360,7 +365,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -427,7 +433,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -496,7 +503,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -562,7 +570,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -630,7 +639,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -765,7 +775,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.StartTagOnly,
             };
             output.PreContent.SetContent(expectedPreContent);
@@ -842,7 +853,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 {
                     throw new Exception("getChildContentAsync should not be called.");
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.StartTagOnly,
             };
 
@@ -920,7 +932,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 {
                     throw new Exception("getChildContentAsync should not be called.");
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.StartTagOnly,
             };
 
@@ -1005,7 +1018,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -1080,7 +1094,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -1156,7 +1171,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -1239,7 +1255,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(result: null)
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -1285,7 +1302,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
             output.PreContent.AppendHtml(expectedPreContent);
@@ -1390,7 +1408,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.StartTagOnly,
             };
             output.PreContent.SetContent(expectedPreContent);
@@ -1497,7 +1516,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.StartTagOnly,
             };
             output.PreContent.SetContent(expectedPreContent);
@@ -1604,7 +1624,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.StartTagOnly,
             };
             output.PreContent.SetContent(expectedPreContent);
@@ -1717,7 +1738,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
                 }
-            ) {
+            )
+            {
                 TagMode = TagMode.StartTagOnly,
             };
             output.PreContent.SetContent(expectedPreContent);
@@ -1844,7 +1866,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 attributes: new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -1919,7 +1942,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 attributes: new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -2035,7 +2059,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 attributes: new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -2118,7 +2143,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 attributes: new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -2194,7 +2220,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 attributes: new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 
@@ -2260,7 +2287,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 attributes: new TagHelperAttributeList(),
                 getChildContentAsync: (useCachedResult, encoder) =>
                     Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
-            ) {
+            )
+            {
                 TagMode = TagMode.SelfClosing,
             };
 

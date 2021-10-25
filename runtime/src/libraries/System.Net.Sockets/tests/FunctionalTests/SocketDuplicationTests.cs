@@ -81,7 +81,8 @@ namespace System.Net.Sockets.Tests
                 AddressFamily.InterNetwork,
                 SocketType.Stream,
                 ProtocolType.Tcp
-            ) {
+            )
+            {
                 Blocking = blocking
             };
             Assert.Equal(blocking, original.Blocking);

@@ -862,7 +862,8 @@ namespace Microsoft.AspNetCore.Session
                                     services.AddSingleton<IDistributedCache>(
                                         new UnreliableCache(
                                             new MemoryCache(new MemoryCacheOptions())
-                                        ) {
+                                        )
+                                        {
                                             DisableGet = true
                                         }
                                     );
@@ -926,7 +927,8 @@ namespace Microsoft.AspNetCore.Session
                                     services.AddSingleton<IDistributedCache>(
                                         new UnreliableCache(
                                             new MemoryCache(new MemoryCacheOptions())
-                                        ) {
+                                        )
+                                        {
                                             DisableGet = true
                                         }
                                     );
@@ -992,7 +994,8 @@ namespace Microsoft.AspNetCore.Session
                                     services.AddSingleton<IDistributedCache>(
                                         new UnreliableCache(
                                             new MemoryCache(new MemoryCacheOptions())
-                                        ) {
+                                        )
+                                        {
                                             DelayGetAsync = true
                                         }
                                     );
@@ -1055,7 +1058,8 @@ namespace Microsoft.AspNetCore.Session
                                     services.AddSingleton<IDistributedCache>(
                                         new UnreliableCache(
                                             new MemoryCache(new MemoryCacheOptions())
-                                        ) {
+                                        )
+                                        {
                                             DelayGetAsync = true
                                         }
                                     );
@@ -1120,7 +1124,8 @@ namespace Microsoft.AspNetCore.Session
                                     services.AddSingleton<IDistributedCache>(
                                         new UnreliableCache(
                                             new MemoryCache(new MemoryCacheOptions())
-                                        ) {
+                                        )
+                                        {
                                             DisableSetAsync = true
                                         }
                                     );
@@ -1217,7 +1222,8 @@ namespace Microsoft.AspNetCore.Session
                                     services.AddSingleton<IDistributedCache>(
                                         new UnreliableCache(
                                             new MemoryCache(new MemoryCacheOptions())
-                                        ) {
+                                        )
+                                        {
                                             DelaySetAsync = true
                                         }
                                     );
@@ -1320,7 +1326,8 @@ namespace Microsoft.AspNetCore.Session
                                     services.AddSingleton<IDistributedCache>(
                                         new UnreliableCache(
                                             new MemoryCache(new MemoryCacheOptions())
-                                        ) {
+                                        )
+                                        {
                                             DelaySetAsync = true
                                         }
                                     );
@@ -1414,7 +1421,8 @@ namespace Microsoft.AspNetCore.Session
                                     services.AddSingleton<IDistributedCache>(
                                         new UnreliableCache(
                                             new MemoryCache(new MemoryCacheOptions())
-                                        ) {
+                                        )
+                                        {
                                             DelaySetAsync = true
                                         }
                                     );
@@ -1495,7 +1503,8 @@ namespace Microsoft.AspNetCore.Session
                                     services.AddSingleton<IDistributedCache>(
                                         new UnreliableCache(
                                             new MemoryCache(new MemoryCacheOptions())
-                                        ) {
+                                        )
+                                        {
                                             DisableRefreshAsync = true
                                         }
                                     );

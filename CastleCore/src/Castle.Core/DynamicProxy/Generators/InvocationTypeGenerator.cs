@@ -119,7 +119,8 @@ namespace Castle.DynamicProxy.Generators
                 new AsTypeReference(targetField, callbackMethod.DeclaringType),
                 callbackMethod,
                 args
-            ) {
+            )
+            {
                 VirtualCall = true
             };
             return methodOnTargetInvocationExpression;
@@ -395,7 +396,8 @@ namespace Castle.DynamicProxy.Generators
                     localProxy,
                     dynSetProxy,
                     changeProxyTarget.Arguments[0]
-                ) {
+                )
+                {
                     VirtualCall = true
                 }
             );

@@ -221,7 +221,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
             var builder = new UriBuilder(
                 schemeName: incomingRequest.IsHttps ? "wss" : "ws",
                 hostName: incomingRequest.Host.Host
-            ) {
+            )
+            {
                 Path = $"{incomingRequest.PathBase}/ws-proxy",
                 Query = $"browser={WebUtility.UrlEncode(browserEndpoint)}"
             };

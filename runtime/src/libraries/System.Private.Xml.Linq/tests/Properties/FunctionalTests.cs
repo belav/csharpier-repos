@@ -266,7 +266,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Conversion to bool overloads (0,False,false)"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     false,
@@ -280,7 +281,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "Conversion to bool overloads (1,True,true)"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     true,
@@ -400,7 +402,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XProcessingInstruction - Valid Name"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -410,7 +413,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "XProcessingInstruction - Invalid Name"
-                            ) {
+                            )
+                            {
                                 Priority = 0
                             }
                         }
@@ -613,7 +617,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET: String content, Empty string content"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "<X>t0<A>orig</A>t00</X>", "" },
                                 Priority = 1
                             }
@@ -634,7 +639,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET: Empty element, Empty string content"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "<X>t0<A/>t00</X>", "" },
                                 Priority = 1
                             }
@@ -645,7 +651,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET: Empty string content, String content"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "<X>t0<A></A>t00</X>", "\nt1 " },
                                 Priority = 1
                             }
@@ -656,7 +663,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET: Empty string content, Empty string content"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "<X>t0<A></A>t00</X>", "" },
                                 Priority = 1
                             }
@@ -667,7 +675,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET: String content, String content"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "<X>t0<A>orig</A>t00</X>", "\nt1 " },
                                 Priority = 1
                             }
@@ -678,7 +687,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET:  XText content, string content"
-                            ) {
+                            )
+                            {
                                 Params = new object[] { "<X>t0<A>orig</A>t00</X>", "\tt1 " },
                                 Priority = 1
                             }
@@ -689,7 +699,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET:  Mixed content (PI only), string content"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<X>t0<A is='is'><?PI aaa?></A>t00</X>",
@@ -704,7 +715,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET:  XText content, Empty string content"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<X>t0<A xml:space='preserve'>orig</A>t00</X>",
@@ -719,7 +731,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET:  CDATA content, Empty string content"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<X>t0<A><![CDATA[cdata]]></A>t00</X>",
@@ -734,7 +747,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET:  CDATA content, string content"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<X>t0<A><![CDATA[cdata]]></A>t00</X>",
@@ -749,7 +763,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET:  Mixed content, Empty string content"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<X>t0<A xmlns:p='p'>t1<p:Y/></A>t00</X>",
@@ -764,7 +779,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET:  Mixed content, string content"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<X>t0<A is='is'><![CDATA[cdata]]>orig<C/><!--comment--></A>t00</X>",
@@ -779,7 +795,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute(
                                 "SET:  Mixed content (comment only), string content"
-                            ) {
+                            )
+                            {
                                 Params = new object[]
                                 {
                                     "<X>t0<A is='is'><!--comment--></A>t00</X>",

@@ -57,7 +57,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var context = new PageApplicationModelProviderContext(
                 descriptor,
                 typeof(TestPage).GetTypeInfo()
-            ) {
+            )
+            {
                 PageApplicationModel = new PageApplicationModel(
                     descriptor,
                     handlerType.GetTypeInfo(),

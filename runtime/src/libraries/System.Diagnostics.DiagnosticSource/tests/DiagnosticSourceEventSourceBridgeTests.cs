@@ -1807,7 +1807,8 @@ namespace System.Diagnostics.Tests
                                         }
                                         ce.Signal();
                                     }
-                                ) {
+                                )
+                                {
                                     IsBackground = true
                                 }.Start();
                             }

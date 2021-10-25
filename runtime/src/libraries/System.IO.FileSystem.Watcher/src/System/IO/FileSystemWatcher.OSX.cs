@@ -239,7 +239,8 @@ namespace System.IO
                                     (SafeEventStreamHandle)inputArgs[1]
                                 );
                             }
-                        ) {
+                        )
+                        {
                             IsBackground = true,
                             Name = ".NET File Watcher"
                         }.UnsafeStart(new object[] { runLoopStarted, eventStream });

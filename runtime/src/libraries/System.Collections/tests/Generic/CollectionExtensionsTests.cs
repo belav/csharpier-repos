@@ -11,10 +11,7 @@ namespace System.Collections.Tests
         [Fact]
         public void GetValueOrDefault_KeyExistsInIReadOnlyDictionary_ReturnsValue()
         {
-            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<
-                string,
-                string
-            >()
+            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>()
             {
                 { "key", "value" }
             };
@@ -25,10 +22,7 @@ namespace System.Collections.Tests
         [Fact]
         public void GetValueOrDefault_KeyDoesntExistInIReadOnlyDictionary_ReturnsDefaultValue()
         {
-            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<
-                string,
-                string
-            >()
+            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>()
             {
                 { "key", "value" }
             };
@@ -42,10 +36,7 @@ namespace System.Collections.Tests
         [Fact]
         public void GetValueOrDefault_NullKeyIReadOnlyDictionary_ThrowsArgumentNullException()
         {
-            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<
-                string,
-                string
-            >()
+            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>()
             {
                 { "key", "value" }
             };

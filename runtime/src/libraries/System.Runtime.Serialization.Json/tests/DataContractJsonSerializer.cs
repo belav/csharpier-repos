@@ -2232,7 +2232,8 @@ public static partial class DataContractJsonSerializerTests
     public static void DCJS_TypeWithNestedGenericClassImplementingIXmlSerialiable()
     {
         TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool> value =
-            new TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool>() {
+            new TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool>()
+            {
                 StringValue = "Foo"
             };
         var deserializedValue =

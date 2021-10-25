@@ -101,7 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     "active-db-contexts",
                     this,
                     () => Interlocked.Read(ref _activeDbContexts)
-                ) {
+                )
+                {
                     DisplayName = "Active DbContexts"
                 };
 
@@ -109,7 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     "total-queries",
                     this,
                     () => Interlocked.Read(ref _totalQueries)
-                ) {
+                )
+                {
                     DisplayName = "Queries (Total)"
                 };
 
@@ -117,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     "queries-per-second",
                     this,
                     () => Interlocked.Read(ref _totalQueries)
-                ) {
+                )
+                {
                     DisplayName = "Queries",
                     DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                 };
@@ -126,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     "total-save-changes",
                     this,
                     () => Interlocked.Read(ref _totalSaveChanges)
-                ) {
+                )
+                {
                     DisplayName = "SaveChanges (Total)"
                 };
 
@@ -134,7 +138,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     "save-changes-per-second",
                     this,
                     () => Interlocked.Read(ref _totalSaveChanges)
-                ) {
+                )
+                {
                     DisplayName = "SaveChanges",
                     DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                 };
@@ -143,7 +148,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     "compiled-query-cache-hit-rate",
                     this,
                     () => _compiledQueryCacheInfo.CalculateAndReset()
-                ) {
+                )
+                {
                     DisplayName = "Query Cache Hit Rate",
                     DisplayUnits = "%"
                 };
@@ -152,7 +158,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     "total-execution-strategy-operation-failures",
                     this,
                     () => Interlocked.Read(ref _totalExecutionStrategyOperationFailures)
-                ) {
+                )
+                {
                     DisplayName = "Execution Strategy Operation Failures (Total)"
                 };
 
@@ -161,7 +168,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                         "execution-strategy-operation-failures-per-second",
                         this,
                         () => Interlocked.Read(ref _totalExecutionStrategyOperationFailures)
-                    ) {
+                    )
+                    {
                         DisplayName = "Execution Strategy Operation Failures",
                         DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                     };
@@ -170,7 +178,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     "total-optimistic-concurrency-failures",
                     this,
                     () => Interlocked.Read(ref _totalOptimisticConcurrencyFailures)
-                ) {
+                )
+                {
                     DisplayName = "Optimistic Concurrency Failures (Total)"
                 };
 
@@ -178,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     "optimistic-concurrency-failures-per-second",
                     this,
                     () => Interlocked.Read(ref _totalOptimisticConcurrencyFailures)
-                ) {
+                )
+                {
                     DisplayName = "Optimistic Concurrency Failures",
                     DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                 };

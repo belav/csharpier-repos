@@ -265,7 +265,8 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
             {
                 _storeTypeMappings = new Dictionary<string, RelationalTypeMapping>(
                     StringComparer.OrdinalIgnoreCase
-                ) {
+                )
+                {
                     { "char varying", _variableLengthAnsiString },
                     { "char", _fixedLengthAnsiString },
                     { "character varying", _variableLengthAnsiString },

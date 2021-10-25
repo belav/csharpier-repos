@@ -51,7 +51,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "GetAttribute(Name, NamespaceURI) Verify with This[Name, NamespaceURI]"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -101,7 +102,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "GetAttribute(Name,null) Verify with MoveToAttribute(Name)"
-                        ) {
+                        )
+                        {
                             Pri = 1
                         }
                     }
@@ -115,7 +117,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "GetAttribute(Name) Verify with MoveToAttribute(Name,null)"
-                        ) {
+                        )
+                        {
                             Pri = 1
                         }
                     }

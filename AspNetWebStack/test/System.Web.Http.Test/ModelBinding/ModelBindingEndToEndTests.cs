@@ -45,7 +45,8 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "http://localhost/ModelBinding/SimpleType"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(bodyParameters)
             };
 
@@ -71,7 +72,8 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Put,
                 "http://localhost/ModelBinding/CollectionType"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(bodyParameters)
             };
 
@@ -100,7 +102,8 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Put,
                 "http://localhost/ModelBinding/CollectionType"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(bodyParameters)
             };
 
@@ -129,7 +132,8 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "http://localhost/ModelBinding/NestedCollection"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(bodyParameters)
             };
 
@@ -162,7 +166,8 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "http://localhost/ModelBinding/NestedCollection"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(bodyParameters)
             };
 
@@ -191,7 +196,8 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "http://localhost/ModelBinding/NestedCollectionOfRecursiveTypes"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(bodyParameters)
             };
 
@@ -228,7 +234,8 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "http://localhost/ModelBinding/NestedCollectionOfRecursiveTypes"
-            ) {
+            )
+            {
                 Content = new FormUrlEncodedContent(bodyParameters)
             };
 

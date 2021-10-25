@@ -128,7 +128,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     new SocketsHttpHandler(),
                     _loggerFactory.CreateLogger<TestServer>()
                 )
-            ) {
+            )
+            {
                 BaseAddress = BaseUri
             };
         }

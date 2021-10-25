@@ -180,7 +180,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 basePath: WorkingDirectory,
                 fileKind: fileKind ?? FileKind,
                 cssScope: cssScope
-            ) {
+            )
+            {
                 Content = cshtmlContent.TrimStart(),
             };
         }

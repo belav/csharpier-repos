@@ -735,7 +735,8 @@ namespace System.Web.Mvc.Html.Test
                 null,
                 typeof(string),
                 "Property1"
-            ) {
+            )
+            {
                 DisplayName = String.Empty
             };
             ModelMetadata prop2Metadata = new ModelMetadata(
@@ -744,7 +745,8 @@ namespace System.Web.Mvc.Html.Test
                 null,
                 typeof(string),
                 "Property2"
-            ) {
+            )
+            {
                 DisplayName = "Custom display name"
             };
             html.ViewData.ModelMetadata = metadata.Object;
@@ -784,7 +786,8 @@ namespace System.Web.Mvc.Html.Test
                 null,
                 typeof(string),
                 "Property1"
-            ) {
+            )
+            {
                 ShowForEdit = true
             };
             ModelMetadata prop2Metadata = new ModelMetadata(
@@ -793,7 +796,8 @@ namespace System.Web.Mvc.Html.Test
                 null,
                 typeof(string),
                 "Property2"
-            ) {
+            )
+            {
                 ShowForEdit = false
             };
             html.ViewData.ModelMetadata = metadata.Object;
@@ -1087,7 +1091,8 @@ namespace System.Web.Mvc.Html.Test
                 () => "propValue1",
                 typeof(string),
                 "Property1"
-            ) {
+            )
+            {
                 HideSurroundingHtml = true
             };
             html.ViewData.ModelMetadata = metadata.Object;
@@ -1894,7 +1899,8 @@ namespace System.Web.Mvc.Html.Test
                 viewData,
                 new TempDataDictionary(),
                 new StringWriter()
-            ) {
+            )
+            {
                 HttpContext = mockHttpContext.Object
             };
 

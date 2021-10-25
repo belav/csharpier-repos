@@ -949,7 +949,8 @@ namespace System.Web.Mvc.Test
                 false /* canceled */
                 ,
                 null /* exception */
-            ) {
+            )
+            {
                 Result = actionResult
             };
             ActionResult challengeResult = new EmptyResult();
@@ -1862,7 +1863,8 @@ namespace System.Web.Mvc.Test
                 false /* canceled */
                 ,
                 null /* exception */
-            ) {
+            )
+            {
                 Result = actionResult
             };
             AuthenticationContext authenticationContext = new AuthenticationContext();
@@ -2027,7 +2029,8 @@ namespace System.Web.Mvc.Test
                 false /* canceled */
                 ,
                 null /* exception */
-            ) {
+            )
+            {
                 Result = actionResult
             };
             ExceptionContext exContext = new ExceptionContext(context, exception)

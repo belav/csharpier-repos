@@ -44,7 +44,8 @@ namespace Castle.DynamicProxy.Generators
                 proxyTargetType,
                 AllowChangeTarget,
                 namingScope
-            ) {
+            )
+            {
                 Logger = Logger
             };
         }

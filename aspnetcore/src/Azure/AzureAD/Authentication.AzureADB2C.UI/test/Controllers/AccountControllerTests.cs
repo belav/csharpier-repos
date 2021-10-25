@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI.AzureADB2C.Controlle
                         CookieSchemeName = AzureADB2CDefaults.CookieScheme
                     }
                 )
-            ) {
+            )
+            {
                 Url = new TestUrlHelper("~/", "https://localhost/")
             };
 
@@ -75,7 +76,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI.AzureADB2C.Controlle
                     AzureADB2CDefaults.AuthenticationScheme,
                     new AzureADB2COptions() { ResetPasswordPolicyId = "Reset" }
                 )
-            ) {
+            )
+            {
                 Url = new TestUrlHelper("~/", "https://localhost/")
             };
             controller.ControllerContext = CreateControllerContext(
@@ -104,7 +106,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI.AzureADB2C.Controlle
                     "Custom",
                     new AzureADB2COptions() { ResetPasswordPolicyId = "CustomReset" }
                 )
-            ) {
+            )
+            {
                 Url = new TestUrlHelper("~/", "https://localhost/")
             };
             controller.ControllerContext = CreateControllerContext(
@@ -133,7 +136,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI.AzureADB2C.Controlle
                     AzureADB2CDefaults.AuthenticationScheme,
                     new AzureADB2COptions() { EditProfilePolicyId = "EditProfile" }
                 )
-            ) {
+            )
+            {
                 Url = new TestUrlHelper("~/", "https://localhost/")
             };
             controller.ControllerContext = CreateControllerContext(
@@ -198,7 +202,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI.AzureADB2C.Controlle
                     "Custom",
                     new AzureADB2COptions() { EditProfilePolicyId = "CustomEditProfile" }
                 )
-            ) {
+            )
+            {
                 Url = new TestUrlHelper("~/", "https://localhost/")
             };
             controller.ControllerContext = CreateControllerContext(
@@ -240,7 +245,8 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI.AzureADB2C.Controlle
             };
             var controller = new AccountController(
                 new OptionsMonitor(AzureADB2CDefaults.AuthenticationScheme, options)
-            ) {
+            )
+            {
                 Url = new TestUrlHelper(
                     controllerContext.HttpContext,
                     new RouteData(),

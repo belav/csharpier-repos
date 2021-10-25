@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
 
         private static readonly OptionsCollection s_disabled = new OptionsCollection(
             LanguageNames.CSharp
-        ) {
+        )
+        {
             {
                 CSharpCodeStyleOptions.PreferPatternMatching,
                 new CodeStyleOption2<bool>(false, NotificationOption2.None)

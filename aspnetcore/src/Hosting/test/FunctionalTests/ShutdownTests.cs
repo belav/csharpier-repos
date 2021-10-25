@@ -61,7 +61,8 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
                     ServerType.Kestrel,
                     RuntimeFlavor.CoreClr,
                     RuntimeArchitecture.x64
-                ) {
+                )
+                {
                     EnvironmentName = "Shutdown",
                     TargetFramework = Tfm.Default,
                     ApplicationType = ApplicationType.Portable,

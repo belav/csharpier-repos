@@ -18,7 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Namespace test within a scope (no nested element)"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -32,7 +33,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Namespace test within a scope (with nested element)"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -58,7 +60,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Namespace test Attribute should has no default namespace"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -72,7 +75,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Namespace test with multiple Namespace declaration"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

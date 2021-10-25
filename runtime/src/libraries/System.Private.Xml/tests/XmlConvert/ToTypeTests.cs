@@ -164,7 +164,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "ToDateTimeOffset(String s, String[] formats) - valid cases"
-                    ) {
+                    )
+                    {
                         Param = "datetimeOffset.formats"
                     }
                 }
@@ -174,7 +175,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "ToDateTimeOffset(String s, String format) - valid cases"
-                    ) {
+                    )
+                    {
                         Param = "datetimeOffset.format"
                     }
                 }
@@ -193,7 +195,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "ToDateTimeOffset(String s) with offset = hh:60 - valid"
-                    ) {
+                    )
+                    {
                         Param = "datetimeOffset"
                     }
                 }
@@ -203,7 +206,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "ToDateTimeOffset(String s, String format) with offset = hh:60 - invalid"
-                    ) {
+                    )
+                    {
                         Param = "datetimeOffset.format"
                     }
                 }
@@ -213,7 +217,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "ToDateTimeOffset(String s, String format) - invalid cases"
-                    ) {
+                    )
+                    {
                         Param = "datetimeOffset.format"
                     }
                 }
@@ -232,7 +237,8 @@ namespace System.Xml.Tests
                 {
                     Attribute = new Variation(
                         "ToDateTimeOffset(String s, String[] formats) - invalid cases"
-                    ) {
+                    )
+                    {
                         Param = "datetimeOffset.formats"
                     }
                 }

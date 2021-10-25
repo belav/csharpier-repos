@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         /// </summary>
         private static readonly ISet<SyntaxKind> RefMemberModifiers = new HashSet<SyntaxKind>(
             SyntaxFacts.EqualityComparer
-        ) {
+        )
+        {
             SyntaxKind.AbstractKeyword,
             // SyntaxKind.AsyncKeyword,    // async methods cannot be byref
             SyntaxKind.ExternKeyword,
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         /// </summary>
         private static readonly ISet<SyntaxKind> RefGlobalMemberModifiers = new HashSet<SyntaxKind>(
             SyntaxFacts.EqualityComparer
-        ) {
+        )
+        {
             // SyntaxKind.AsyncKeyword,    // async local functions cannot be byref
             SyntaxKind.ExternKeyword,
             SyntaxKind.InternalKeyword,

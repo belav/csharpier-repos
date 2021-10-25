@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 type,
                 value
-            ) {
+            )
+            {
                 ContentType = contentType,
             };
 
@@ -74,7 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 declaredType,
                 "Something non null."
-            ) {
+            )
+            {
                 ContentType = new StringSegment("text/plain"),
             };
 
@@ -103,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
                 value
-            ) {
+            )
+            {
                 ContentType = new StringSegment("text/plain"),
             };
 

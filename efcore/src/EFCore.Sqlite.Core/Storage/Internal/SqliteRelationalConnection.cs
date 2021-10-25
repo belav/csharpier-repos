@@ -98,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         {
             var connectionStringBuilder = new SqliteConnectionStringBuilder(
                 GetValidatedConnectionString()
-            ) {
+            )
+            {
                 Mode = SqliteOpenMode.ReadOnly
             };
 

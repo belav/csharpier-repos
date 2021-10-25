@@ -1442,7 +1442,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                 Options,
                 user,
                 properties
-            ) {
+            )
+            {
                 ProtocolMessage = message,
                 TokenEndpointResponse = tokenEndpointResponse,
             };
@@ -1478,7 +1479,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                 Options,
                 principal,
                 properties
-            ) {
+            )
+            {
                 ProtocolMessage = message,
                 User = user,
             };

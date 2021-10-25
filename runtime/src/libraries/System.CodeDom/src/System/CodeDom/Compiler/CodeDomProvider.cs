@@ -26,7 +26,8 @@ namespace System.CodeDom.Compiler
                 new CompilerInfo(
                     new CompilerParameters() { WarningLevel = 4 },
                     typeof(CSharpCodeProvider).FullName
-                ) {
+                )
+                {
                     _compilerLanguages = new string[] { "c#", "cs", "csharp" },
                     _compilerExtensions = new string[] { ".cs", "cs" }
                 }
@@ -37,7 +38,8 @@ namespace System.CodeDom.Compiler
                 new CompilerInfo(
                     new CompilerParameters() { WarningLevel = 4 },
                     typeof(VBCodeProvider).FullName
-                ) {
+                )
+                {
                     _compilerLanguages = new string[] { "vb", "vbs", "visualbasic", "vbscript" },
                     _compilerExtensions = new string[] { ".vb", "vb" }
                 }

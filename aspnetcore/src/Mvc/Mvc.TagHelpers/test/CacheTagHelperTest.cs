@@ -57,7 +57,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache.Object),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = false
             };
@@ -91,7 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true
             };
@@ -121,7 +123,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper1 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 VaryByQuery = "key1,key2",
                 ViewContext = GetViewContext(),
             };
@@ -147,7 +150,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper2 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 VaryByQuery = "key1,key2",
                 ViewContext = GetViewContext(),
             };
@@ -179,7 +183,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper1 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 VaryByCookie = "cookie1,cookie2",
                 ViewContext = GetViewContext(),
             };
@@ -204,7 +209,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper2 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 VaryByCookie = "cookie1,cookie2",
                 ViewContext = GetViewContext(),
             };
@@ -230,7 +236,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ExpiresOn = expiresOn
             };
 
@@ -275,7 +282,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper1 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(mockCache.Object),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
             };
 
@@ -318,7 +326,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ExpiresAfter = expiresAfter
             };
 
@@ -338,7 +347,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ExpiresSliding = expiresSliding
             };
 
@@ -358,7 +368,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 Priority = priority
             };
 
@@ -386,7 +397,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper1 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 ExpiresAfter = TimeSpan.FromMinutes(10)
             };
@@ -409,7 +421,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper2 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 ExpiresAfter = TimeSpan.FromMinutes(10)
             };
@@ -442,7 +455,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper1 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 ExpiresOn = currentTime.AddMinutes(5)
             };
@@ -466,7 +480,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper2 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 ExpiresOn = currentTime.AddMinutes(5)
             };
@@ -498,7 +513,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper1 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 ExpiresSliding = TimeSpan.FromSeconds(30)
             };
@@ -522,7 +538,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper2 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 ExpiresSliding = TimeSpan.FromSeconds(30)
             };
@@ -574,7 +591,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
             };
 
@@ -650,7 +668,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper1 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true
             };
@@ -658,7 +677,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper2 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true
             };
@@ -749,7 +769,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper1 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true
             };
@@ -757,7 +778,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper2 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true
             };
@@ -856,7 +878,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true,
                 ExpiresAfter = TimeSpan.FromHours(1.0)
@@ -925,7 +948,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper1 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 encoder
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true
             };
@@ -933,7 +957,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper2 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 encoder
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true
             };
@@ -978,14 +1003,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper1 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true
             };
             var cacheTagHelper2 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 new HtmlTestEncoder()
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true
             };
@@ -1026,7 +1053,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper1 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 encoder
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true
             };
@@ -1034,7 +1062,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var cacheTagHelper2 = new CacheTagHelper(
                 new CacheTagHelperMemoryCacheFactory(cache),
                 encoder
-            ) {
+            )
+            {
                 ViewContext = GetViewContext(),
                 Enabled = true
             };

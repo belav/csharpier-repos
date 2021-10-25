@@ -151,7 +151,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Default Reader, Check Characters On and pass invalid characters"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "CoreValidatingReader" },
                             Pri = 0
                         }
@@ -162,7 +163,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Default Reader, Check Characters On and pass invalid characters"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "CoreReader" },
                             Pri = 0
                         }
@@ -177,7 +179,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Default Reader, Check Characters Off and pass invalid characters in text"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "CoreReader" },
                             Pri = 0
                         }
@@ -188,7 +191,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Default Reader, Check Characters Off and pass invalid characters in text"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "CoreValidatingReader" },
                             Pri = 0
                         }
@@ -203,7 +207,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Default Reader, Check Characters Off and pass invalid characters in element"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "CoreReader" },
                             Pri = 0
                         }
@@ -214,7 +219,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Default Reader, Check Characters Off and pass invalid characters in element"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "CoreValidatingReader" },
                             Pri = 0
                         }
@@ -229,7 +235,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Default Reader, Check Characters On and pass invalid characters in text"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "CoreReader" },
                             Pri = 0
                         }
@@ -240,7 +247,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Default Reader, Check Characters On and pass invalid characters in text"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "CoreValidatingReader" },
                             Pri = 0
                         }
@@ -255,7 +263,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Conformance Level to Auto and test various scenarios from test plan"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -269,7 +278,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Conformance Level to Fragment and test various scenarios from test plan"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -283,7 +293,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Conformance Level to Document and test various scenarios from test plan"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

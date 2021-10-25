@@ -87,7 +87,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Get Atomized String with front and end multi-padded"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -222,7 +223,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Get valid string, invalid length, length = Length+1"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -236,7 +238,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Get valid string, invalid length, length = max_int"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

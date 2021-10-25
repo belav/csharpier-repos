@@ -22,8 +22,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void ErrorMessage_Calls_Inner()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<HttpParameterBinding> mockBinding = new Mock<HttpParameterBinding>(
@@ -44,8 +46,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void WillReadBody_Calls_Inner()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<HttpParameterBinding> mockBinding = new Mock<HttpParameterBinding>(
@@ -66,13 +70,16 @@ namespace System.Web.Http.Tracing.Tracers
         public void Descriptor_Uses_Inners()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<HttpParameterBinding> mockBinding = new Mock<HttpParameterBinding>(
                 mockParamDescriptor.Object
-            ) {
+            )
+            {
                 CallBase = true
             };
             HttpParameterBindingTracer tracer = new HttpParameterBindingTracer(
@@ -88,8 +95,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void ValueProviderFactories_Calls_Inner()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<IModelBinder> mockModelBinder = new Mock<IModelBinder>() { CallBase = true };
@@ -124,8 +133,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void ValueProviderFactories_Returns_Empty_Enumerable_When_Not_IValueProviderParameterBinding()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<HttpParameterBinding> mockBinding = new Mock<HttpParameterBinding>(
@@ -147,13 +158,16 @@ namespace System.Web.Http.Tracing.Tracers
         public async Task ExecuteBindingAsync_Traces_And_Invokes_Inner()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<HttpParameterBinding> mockBinding = new Mock<HttpParameterBinding>(
                 mockParamDescriptor.Object
-            ) {
+            )
+            {
                 CallBase = true
             };
             bool innerInvoked = false;
@@ -183,7 +197,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "ExecuteBindingAsync"
                 },
@@ -191,7 +206,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "ExecuteBindingAsync"
                 }
@@ -217,13 +233,16 @@ namespace System.Web.Http.Tracing.Tracers
         public void ExecuteBindingAsync_Traces_And_Throws_When_Inner_Throws()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<HttpParameterBinding> mockBinding = new Mock<HttpParameterBinding>(
                 mockParamDescriptor.Object
-            ) {
+            )
+            {
                 CallBase = true
             };
             InvalidOperationException exception = new InvalidOperationException("test");
@@ -252,7 +271,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "ExecuteBindingAsync"
                 },
@@ -260,7 +280,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "ExecuteBindingAsync"
                 }
@@ -291,13 +312,16 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
 
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             Mock<HttpParameterBinding> mockBinding = new Mock<HttpParameterBinding>(
                 mockParamDescriptor.Object
-            ) {
+            )
+            {
                 CallBase = true
             };
             InvalidOperationException exception = new InvalidOperationException("test");
@@ -329,7 +353,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin,
                     Operation = "ExecuteBindingAsync"
                 },
@@ -337,7 +362,8 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ModelBindingCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End,
                     Operation = "ExecuteBindingAsync"
                 }
@@ -365,8 +391,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void Inner_Property_On_HttpParameterBindingTracer_Returns_HttpParameterBinding()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             HttpParameterBinding expectedInner =
@@ -387,8 +415,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void Decorator_GetInner_On_HttpParameterBindingTracer_Returns_HttpParameterBinding()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> mockParamDescriptor =
-                new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> mockParamDescriptor = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true
+            };
             mockParamDescriptor.Setup(d => d.ParameterName).Returns("paramName");
             mockParamDescriptor.Setup(d => d.ParameterType).Returns(typeof(string));
             HttpParameterBinding expectedInner =

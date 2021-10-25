@@ -70,7 +70,8 @@ namespace System.Buffers
                     ) /* just before trailing poison page */
                 ,
                 elementCount: elementCount
-            ) {
+            )
+            {
                 Protection = VirtualAllocProtection.PAGE_READWRITE
             };
         }

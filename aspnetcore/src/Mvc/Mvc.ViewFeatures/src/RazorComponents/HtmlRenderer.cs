@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
     {
         private static readonly HashSet<string> SelfClosingElements = new HashSet<string>(
             StringComparer.OrdinalIgnoreCase
-        ) {
+        )
+        {
             "area",
             "base",
             "br",

@@ -376,7 +376,8 @@ namespace System.Web.Mvc.Async.Test
                 "someName",
                 new Mock<ControllerDescriptor>().Object,
                 false /* validateMethod */
-            ) {
+            )
+            {
                 DispatcherCache = new ActionMethodDispatcherCache()
             };
         }

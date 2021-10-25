@@ -144,7 +144,8 @@ namespace System.Web.Razor.Test.Generator
                 "DefineSection",
                 "BeginContext",
                 "EndContext"
-            ) {
+            )
+            {
                 LayoutPropertyName = "Layout",
                 ResolveUrlMethodName = "Href"
             };

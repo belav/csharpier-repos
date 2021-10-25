@@ -119,7 +119,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var viewData = new ViewDataDictionary<object>(
                 MetadataProvider,
                 new ModelStateDictionary()
-            ) {
+            )
+            {
                 { "key", "value" },
             };
             var viewContext = CreateViewContext(viewData);
@@ -184,7 +185,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var viewData = new ViewDataDictionary<object>(
                 MetadataProvider,
                 new ModelStateDictionary()
-            ) {
+            )
+            {
                 { "key", "value" },
             };
             var viewContext = CreateViewContext(viewData);

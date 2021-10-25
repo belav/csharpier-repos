@@ -76,7 +76,8 @@ namespace System.Web.Http.Cors.Test
                 origins: "*",
                 headers: "*",
                 methods: "*"
-            ) {
+            )
+            {
                 SupportsCredentials = true
             };
 
@@ -95,7 +96,8 @@ namespace System.Web.Http.Cors.Test
                 origins: "*",
                 headers: "*",
                 methods: "*"
-            ) {
+            )
+            {
                 PreflightMaxAge = 20
             };
 

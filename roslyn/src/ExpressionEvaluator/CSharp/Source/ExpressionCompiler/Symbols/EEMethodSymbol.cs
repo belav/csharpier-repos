@@ -610,7 +610,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         syntax,
                         localsBuilder.ToImmutableAndFree(),
                         statementsBuilder.ToImmutableAndFree()
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     };
 

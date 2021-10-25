@@ -169,7 +169,8 @@ namespace Microsoft.AspNetCore.Builder
                 RequestDelegateFactory.Create(action),
                 pattern,
                 defaultOrder
-            ) {
+            )
+            {
                 DisplayName = pattern.RawText ?? pattern.DebuggerToString(),
             };
 

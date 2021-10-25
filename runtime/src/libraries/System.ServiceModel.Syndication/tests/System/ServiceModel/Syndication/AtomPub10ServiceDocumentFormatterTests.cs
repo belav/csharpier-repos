@@ -130,7 +130,8 @@ namespace System.ServiceModel.Syndication.Tests
 
             var fullInlineCategoriesDocument = new InlineCategoriesDocument(
                 new SyndicationCategory[] { new SyndicationCategory(), fullSyndicationCategory }
-            ) {
+            )
+            {
                 BaseUri = new Uri("http://inlinecategories_url.com"),
                 Language = "inlinecategories_Language",
                 IsFixed = true,
@@ -157,7 +158,8 @@ namespace System.ServiceModel.Syndication.Tests
 
             var fullReferenceCategoriesDocument = new ReferencedCategoriesDocument(
                 new Uri("http://referencecategories_link.com")
-            ) {
+            )
+            {
                 BaseUri = new Uri("http://referencecategories_url.com"),
                 Language = "referencecategories_language"
             };
@@ -220,7 +222,8 @@ namespace System.ServiceModel.Syndication.Tests
                     fullReferenceCategoriesDocument
                 },
                 new string[] { "text/html", "image/*", "" }
-            ) {
+            )
+            {
                 BaseUri = new Uri("http://resourcecollectioninfo_url.com")
             };
             fullResourceCollectionInfo.AttributeExtensions.Add(
@@ -276,7 +279,8 @@ namespace System.ServiceModel.Syndication.Tests
                     new ResourceCollectionInfo(),
                     fullResourceCollectionInfo,
                 }
-            ) {
+            )
+            {
                 BaseUri = new Uri("http://workspace_url.com"),
             };
             fullWorkspace.AttributeExtensions.Add(new XmlQualifiedName("workspace_name1"), null);

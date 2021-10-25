@@ -263,7 +263,8 @@ public class Test
                     PathUtilities.CombineAbsoluteAndRelativePaths(keyFileDir, @"TempSubDir\")
                 ),
                 new VirtualizedStrongNameFileSystem()
-            ) {
+            )
+            {
                 GetStrongNameInterfaceFunc = () =>
                     throw new DllNotFoundException("aaa.dll not found.")
             };
@@ -3524,7 +3525,8 @@ class B
         {
             var provider = new TestDesktopStrongNameProvider(
                 fileSystem: new VirtualizedStrongNameFileSystem()
-            ) {
+            )
+            {
                 SignBuilderFunc = delegate
                 {
                     throw null;

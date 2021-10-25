@@ -95,7 +95,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "(BVT)XElement - multiple nodes, not connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, 2 },
                         Priority = 0
                     }
@@ -116,7 +117,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement - Not allowed - duplicate attributes"
-                    ) {
+                    )
+                    {
                         Priority = 2
                     }
                 }

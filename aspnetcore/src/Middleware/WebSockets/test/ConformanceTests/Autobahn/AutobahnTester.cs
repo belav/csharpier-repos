@@ -190,7 +190,8 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
                 server,
                 RuntimeFlavor.CoreClr,
                 RuntimeArchitecture.x64
-            ) {
+            )
+            {
                 Scheme = (ssl ? Uri.UriSchemeHttps : Uri.UriSchemeHttp),
                 ApplicationType = ApplicationType.Portable,
                 TargetFramework = "Net6.0",

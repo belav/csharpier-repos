@@ -262,7 +262,8 @@ namespace RunTests
                 testResultsDirectory: resultFileDirectory,
                 logFilesDirectory: logFileDirectory,
                 platform: platform
-            ) {
+            )
+            {
                 TargetFrameworks = targetFrameworks,
                 IncludeFilter = includeFilter,
                 ExcludeFilter = excludeFilter,

@@ -523,7 +523,8 @@ namespace System.Web.Mvc.Test
                 "someName",
                 new Mock<ControllerDescriptor>().Object,
                 false /* validateMethod */
-            ) {
+            )
+            {
                 DispatcherCache = new ActionMethodDispatcherCache()
             };
         }

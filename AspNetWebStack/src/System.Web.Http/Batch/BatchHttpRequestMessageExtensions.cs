@@ -62,7 +62,8 @@ namespace System.Web.Http.Batch
             {
                 BatchHttpRequestContext subRequestContext = new BatchHttpRequestContext(
                     originalContext
-                ) {
+                )
+                {
                     Url = new UrlHelper(subRequest)
                 };
 

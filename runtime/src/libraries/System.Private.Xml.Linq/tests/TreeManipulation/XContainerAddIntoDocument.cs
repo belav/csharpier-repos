@@ -64,7 +64,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "(Multiple) XDocument with DTD and Root Elem"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>",
@@ -111,7 +112,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XDocument with DTD and Root Elem - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>",
@@ -138,7 +140,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "(Multiple) XDocument whitespace only - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { " ", 3, false, true, " " },
                         Priority = 1
                     }
@@ -149,7 +152,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "(Multiple) XDocument with Root Elem - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "<A/>", 3, true, true },
                         Priority = 1
                     }
@@ -186,7 +190,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "(Multiple) XDocument with DTD and Root Elem - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>",

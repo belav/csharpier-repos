@@ -48,7 +48,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "All non-namespace attributes in one element"
-                    ) {
+                    )
+                    {
                         Priority = 1
                     }
                 }

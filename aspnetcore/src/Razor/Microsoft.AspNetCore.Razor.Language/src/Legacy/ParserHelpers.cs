@@ -112,7 +112,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         // From http://dev.w3.org/html5/spec/Overview.html#elements-0
         public static readonly HashSet<string> VoidElements = new HashSet<string>(
             StringComparer.OrdinalIgnoreCase
-        ) {
+        )
+        {
             "area",
             "base",
             "br",

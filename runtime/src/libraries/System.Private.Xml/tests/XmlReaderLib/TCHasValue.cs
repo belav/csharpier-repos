@@ -100,7 +100,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "HasValue On Whitespace PreserveWhitespaces = true"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

@@ -316,7 +316,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 originalMethodsOpt: default,
                 type: method.ReturnType,
                 hasErrors: method.OriginalDefinition is ErrorMethodSymbol
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -468,7 +469,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 constantValueOpt: constantValueOpt,
                 originalUserDefinedConversionsOpt: default,
                 type: type
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -500,7 +502,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 constantValueOpt,
                 type,
                 hasErrors || !conversion.IsValid
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -917,7 +920,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 syntax,
                 ImmutableArray<LocalSymbol>.Empty,
                 ImmutableArray.Create(statement)
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -942,7 +946,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 syntax,
                 ImmutableArray<LocalSymbol>.Empty,
                 statements.AsImmutableOrNull()
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }

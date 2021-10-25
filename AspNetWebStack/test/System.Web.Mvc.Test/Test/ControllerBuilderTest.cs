@@ -41,7 +41,8 @@ namespace System.Web.Mvc.Test
                     reqContext.RouteData.Values["controller"] = "foo";
                     MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(
                         reqContext
-                    ) {
+                    )
+                    {
                         ControllerBuilder = cb
                     };
                     handler.ProcessRequest(reqContext.HttpContext);
@@ -68,7 +69,8 @@ namespace System.Web.Mvc.Test
                     reqContext.RouteData.Values["controller"] = "boo";
                     MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(
                         reqContext
-                    ) {
+                    )
+                    {
                         ControllerBuilder = cb
                     };
                     handler.ProcessRequest(reqContext.HttpContext);
@@ -95,7 +97,8 @@ namespace System.Web.Mvc.Test
                     reqContext.RouteData.Values["controller"] = "foo";
                     MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(
                         reqContext
-                    ) {
+                    )
+                    {
                         ControllerBuilder = cb
                     };
                     handler.ProcessRequest(reqContext.HttpContext);

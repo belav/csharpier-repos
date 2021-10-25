@@ -65,10 +65,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     defaultArguments: BitVector.Empty,
                     resultKind: LookupResultKind.Viable,
                     type: objectType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 }
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var submissionArrayReference = new BoundParameter(
                 syntax,
                 submissionConstructor.Parameters[0]
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -143,16 +146,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 }
                             ),
                             objectType
-                        ) {
+                        )
+                        {
                             WasCompilerGenerated = true
                         },
                         thisReference,
                         false,
                         thisReference.Type
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     }
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 }
             );
@@ -171,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 thisReference,
                                 hostObjectField,
                                 ConstantValue.NotAvailable
-                            ) {
+                            )
+                            {
                                 WasCompilerGenerated = true
                             },
                             BoundConversion.Synthesized(
@@ -195,10 +202,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 hostObjectField.Type
                             ),
                             hostObjectField.Type
-                        ) {
+                        )
+                        {
                             WasCompilerGenerated = true
                         }
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     }
                 );
@@ -222,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 thisReference,
                                 field,
                                 ConstantValue.NotAvailable
-                            ) {
+                            )
+                            {
                                 WasCompilerGenerated = true
                             },
                             BoundConversion.Synthesized(
@@ -235,12 +245,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                                             syntax,
                                             ConstantValue.Create(targetSubmissionIndex),
                                             intType
-                                        ) {
+                                        )
+                                        {
                                             WasCompilerGenerated = true
                                         }
                                     ),
                                     objectType
-                                ) {
+                                )
+                                {
                                     WasCompilerGenerated = true
                                 },
                                 Conversion.ExplicitReference,
@@ -251,10 +263,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 targetScriptType
                             ),
                             targetScriptType
-                        ) {
+                        )
+                        {
                             WasCompilerGenerated = true
                         }
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     }
                 );
@@ -291,7 +305,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 thisReference,
                 field,
                 ConstantValue.NotAvailable
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
             BoundStatement statement;
@@ -315,7 +330,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         fieldAccess,
                         new BoundParameter(syntax, parameter) { WasCompilerGenerated = true },
                         property.Type
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     }
                 );
@@ -417,7 +433,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 field.IsStatic ? null : new BoundThisReference(syntax, accessor.ThisParameter.Type),
                 field,
                 constantValueOpt: null
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -515,7 +532,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 syntax,
                 refKind: RefKind.None,
                 expressionOpt: null
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -550,14 +568,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 receiver: fieldReceiver,
                 fieldSymbol: eventSymbol.AssociatedField,
                 constantValueOpt: null
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
             BoundParameter boundParameter = new BoundParameter(
                 syntax,
                 parameterSymbol: accessor.Parameters[0]
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -593,10 +613,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         left: boundBackingField,
                         right: delegateUpdate,
                         type: delegateType
-                    ) {
+                    )
+                    {
                         WasCompilerGenerated = true
                     }
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
 
@@ -640,10 +662,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     left: boundTmps[0],
                     right: boundBackingField,
                     type: delegateType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 }
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -661,10 +685,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     left: boundTmps[1],
                     right: boundTmps[0],
                     type: delegateType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 }
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -689,10 +715,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     left: boundTmps[2],
                     right: delegateUpdate,
                     type: delegateType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 }
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -716,10 +744,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     left: boundTmps[0],
                     right: compareExchange,
                     type: delegateType
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 }
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -733,7 +763,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 methodOpt: null,
                 resultKind: LookupResultKind.Viable,
                 type: boolType
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -743,7 +774,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 condition: loopExitCondition,
                 jumpIfTrue: false,
                 label: loopLabel
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
 
@@ -759,7 +791,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     loopEnd,
                     @return
                 )
-            ) {
+            )
+            {
                 WasCompilerGenerated = true
             };
         }
@@ -791,7 +824,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         },
                         baseTypeFinalize
                     )
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
 
@@ -817,10 +851,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 syntax,
                                 ImmutableArray<LocalSymbol>.Empty,
                                 ImmutableArray.Create<BoundStatement>(baseFinalizeCall)
-                            ) {
+                            )
+                            {
                                 WasCompilerGenerated = true
                             }
-                        ) {
+                        )
+                        {
                             WasCompilerGenerated = true
                         }
                     )

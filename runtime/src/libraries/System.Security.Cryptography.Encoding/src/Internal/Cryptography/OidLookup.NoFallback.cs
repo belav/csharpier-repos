@@ -58,7 +58,8 @@ namespace Internal.Cryptography
             new Dictionary<string, string>(
                 ExtraFriendlyNameToOidCount,
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "pkcs7-data", "1.2.840.113549.1.7.1" },
                 { "contentType", "1.2.840.113549.1.9.3" },
                 { "messageDigest", "1.2.840.113549.1.9.4" },

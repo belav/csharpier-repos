@@ -18,7 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadStartElement on Regular Element, no namespace"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -45,7 +46,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadStartElement on regular Element, with namespace"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -59,7 +61,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Passing ns=String.EmptyErrorCase: ReadStartElement on regular Element, with namespace"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -73,7 +76,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Passing no ns: ReadStartElement on regular Element, with namespace"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

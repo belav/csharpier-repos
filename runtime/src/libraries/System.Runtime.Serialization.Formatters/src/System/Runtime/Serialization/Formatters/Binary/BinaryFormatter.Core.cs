@@ -45,7 +45,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 _context,
                 formatterEnums,
                 _binder
-            ) {
+            )
+            {
                 _crossAppDomainArray = _crossAppDomainArray
             };
             try

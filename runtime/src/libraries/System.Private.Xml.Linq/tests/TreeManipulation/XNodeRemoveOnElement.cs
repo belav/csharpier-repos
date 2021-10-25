@@ -26,7 +26,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Remove from XElement, with siblings (in XDocument)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { true, true, 4 },
                         Priority = 1
                     }
@@ -47,7 +48,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Remove from XElement (in XDocument) - Remove the only node"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, true, 1 },
                         Priority = 1
                     }
@@ -58,7 +60,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Remove from XElement (standalone) - Remove the only node"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, false, 1 },
                         Priority = 1
                     }
@@ -69,7 +72,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "(BVT)Remove from XElement, with siblings (in XDocument)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { true, true, 2 },
                         Priority = 0
                     }
@@ -80,7 +84,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Remove from XElement, with siblings (standalone)"
-                    ) {
+                    )
+                    {
                         Params = new object[] { true, false, 4 },
                         Priority = 1
                     }
@@ -91,7 +96,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Remove from XElement, with siblings (in XDocument) - Remove the only node"
-                    ) {
+                    )
+                    {
                         Params = new object[] { true, true, 1 },
                         Priority = 1
                     }
@@ -102,7 +108,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "Remove from XElement, with siblings (standalone) - Remove the only node"
-                    ) {
+                    )
+                    {
                         Params = new object[] { true, false, 1 },
                         Priority = 1
                     }

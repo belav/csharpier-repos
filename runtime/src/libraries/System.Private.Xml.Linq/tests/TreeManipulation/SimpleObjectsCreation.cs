@@ -144,7 +144,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement - copy: not connected, in XDocument"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, true },
                         Priority = 0
                     }
@@ -155,7 +156,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement - copy: connected, not in XDocument"
-                    ) {
+                    )
+                    {
                         Params = new object[] { true, false },
                         Priority = 0
                     }
@@ -166,7 +168,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement - copy: not connected, not in XDocument"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, false },
                         Priority = 0
                     }
@@ -186,7 +189,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement - from reader - from inner element"
-                    ) {
+                    )
+                    {
                         Priority = 0
                     }
                 }
@@ -196,7 +200,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement - from reader - from inner empty element"
-                    ) {
+                    )
+                    {
                         Priority = 0
                     }
                 }
@@ -206,7 +211,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement - from reader - from inner element, namespaces"
-                    ) {
+                    )
+                    {
                         Priority = 0
                     }
                 }
@@ -216,7 +222,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement - from reader - not allowed nodes - endElement"
-                    ) {
+                    )
+                    {
                         Param = 4,
                         Priority = 2
                     }
@@ -227,7 +234,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement - from reader - not allowed nodes - initial"
-                    ) {
+                    )
+                    {
                         Param = 0,
                         Priority = 2
                     }
@@ -238,7 +246,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement - from reader - not allowed nodes - decl"
-                    ) {
+                    )
+                    {
                         Param = 1,
                         Priority = 2
                     }
@@ -249,7 +258,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XElement - from reader - not allowed nodes - attribute"
-                    ) {
+                    )
+                    {
                         Param = false,
                         Priority = 2
                     }
@@ -269,7 +279,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - xname - namespace decl - default"
-                    ) {
+                    )
+                    {
                         Param = "xmlns",
                         Priority = 1
                     }
@@ -280,7 +291,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - xname - namespace decl - normal"
-                    ) {
+                    )
+                    {
                         Param = "p",
                         Priority = 1
                     }
@@ -291,7 +303,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - copy - not namespace decl - connected"
-                    ) {
+                    )
+                    {
                         Param = true,
                         Priority = 0
                     }
@@ -302,7 +315,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - copy - not namespace decl - not connected"
-                    ) {
+                    )
+                    {
                         Param = false,
                         Priority = 0
                     }
@@ -313,7 +327,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - copy - default namespace decl - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { true, "xmlns" },
                         Priority = 1
                     }
@@ -324,7 +339,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - copy - default namespace decl - not connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, "xmlns" },
                         Priority = 1
                     }
@@ -335,7 +351,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - copy - namespace decl - connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { true, "p" },
                         Priority = 1
                     }
@@ -346,7 +363,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - copy - namespace decl - not connected"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, "p" },
                         Priority = 1
                     }
@@ -357,7 +375,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - default namespace decl & empty value"
-                    ) {
+                    )
+                    {
                         Params = new object[] { false, "xmlns" },
                         Priority = 1
                     }
@@ -368,7 +387,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - prefixed namespace decl & empty value"
-                    ) {
+                    )
+                    {
                         Params = new object[] { true, "p" },
                         Priority = 1
                     }
@@ -379,7 +399,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - xml namespace - redeclared (positive)."
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             "xml",
@@ -405,7 +426,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - xml namespace - bound to diff. prefix"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "p", "http://www.w3.org/XML/1998/namespace", true },
                         Priority = 1
                     }
@@ -416,7 +438,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XAttribute - xmlns namespace - bound to diff. prefix"
-                    ) {
+                    )
+                    {
                         Params = new object[] { "p", "http://www.w3.org/2000/xmlns/", true },
                         Priority = 1
                     }
@@ -445,7 +468,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - invalid name (invalid char)"
-                    ) {
+                    )
+                    {
                         Param = "?>",
                         Priority = 1
                     }
@@ -456,7 +480,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - invalid name (XmL)"
-                    ) {
+                    )
+                    {
                         Param = "XmL",
                         Priority = 2
                     }
@@ -467,7 +492,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - invalid name (XmL)"
-                    ) {
+                    )
+                    {
                         Param = "XmL",
                         Priority = 2
                     }
@@ -478,7 +504,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - invalid name (xML)"
-                    ) {
+                    )
+                    {
                         Param = "xML",
                         Priority = 2
                     }
@@ -489,7 +516,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - invalid name (xmL)"
-                    ) {
+                    )
+                    {
                         Param = "xmL",
                         Priority = 2
                     }
@@ -500,7 +528,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - invalid name (Xml)"
-                    ) {
+                    )
+                    {
                         Param = "Xml",
                         Priority = 2
                     }
@@ -511,7 +540,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - invalid name (xmL)"
-                    ) {
+                    )
+                    {
                         Param = "xmL",
                         Priority = 2
                     }
@@ -522,7 +552,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - invalid name (XML)"
-                    ) {
+                    )
+                    {
                         Param = "XML",
                         Priority = 2
                     }
@@ -533,7 +564,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - invalid name (empty string)"
-                    ) {
+                    )
+                    {
                         Param = "",
                         Priority = 2
                     }
@@ -544,7 +576,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - invalid name (xml)"
-                    ) {
+                    )
+                    {
                         Param = "xml",
                         Priority = 2
                     }
@@ -555,7 +588,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - from reader - target & data"
-                    ) {
+                    )
+                    {
                         Param = 2,
                         Priority = 1
                     }
@@ -566,7 +600,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XProcessingInstruction - from reader - target only"
-                    ) {
+                    )
+                    {
                         Param = 4,
                         Priority = 1
                     }
@@ -663,7 +698,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute(
                         "XText - Text - from reader/ significant whitespace"
-                    ) {
+                    )
+                    {
                         Params = new object[]
                         {
                             2,

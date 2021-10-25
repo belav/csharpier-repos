@@ -155,7 +155,8 @@ namespace System.Globalization
                 257 /* prime */
                 ,
                 StringComparer.OrdinalIgnoreCase
-            ) {
+            )
+            {
                 { "001", "en-001" },
                 { "029", "en-029" },
                 { "150", "en-150" },

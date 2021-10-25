@@ -217,7 +217,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                     Scheme,
                     Options,
                     properties
-                ) {
+                )
+                {
                     ProtocolMessage = wsFederationMessage
                 };
                 await Events.MessageReceived(messageReceivedContext);
@@ -261,7 +262,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                     Scheme,
                     Options,
                     properties
-                ) {
+                )
+                {
                     ProtocolMessage = wsFederationMessage
                 };
                 await Events.SecurityTokenReceived(securityTokenReceivedContext);
@@ -329,7 +331,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                     Options,
                     principal,
                     properties
-                ) {
+                )
+                {
                     ProtocolMessage = wsFederationMessage,
                     SecurityToken = parsedToken,
                 };
@@ -365,7 +368,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                     Context,
                     Scheme,
                     Options
-                ) {
+                )
+                {
                     ProtocolMessage = wsFederationMessage,
                     Exception = exception
                 };

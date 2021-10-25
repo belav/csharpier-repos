@@ -113,7 +113,8 @@ namespace AutoMapper.Configuration
                 var config = new ValueResolverConfiguration(
                     valueResolverType,
                     valueResolverType.GetGenericInterface(typeof(IMemberValueResolver<, , , >))
-                ) {
+                )
+                {
                     SourceMemberName = sourceMemberName
                 };
 
@@ -128,7 +129,8 @@ namespace AutoMapper.Configuration
                 var config = new ValueResolverConfiguration(
                     resolver,
                     typeof(IMemberValueResolver<TSource, TDestination, TSourceMember, TDestMember>)
-                ) {
+                )
+                {
                     SourceMemberName = sourceMemberName
                 };
 
@@ -154,7 +156,8 @@ namespace AutoMapper.Configuration
                         var config = new ValueResolverConfiguration(
                             valueConverter,
                             typeof(IValueConverter<TSourceMember, TDestinationMember>)
-                        ) {
+                        )
+                        {
                             SourceMemberName = sourceMemberName
                         };
 
@@ -172,7 +175,8 @@ namespace AutoMapper.Configuration
                 var config = new ValueResolverConfiguration(
                     valueConverterType,
                     valueConverterType.GetGenericInterface(typeof(IValueConverter<, >))
-                ) {
+                )
+                {
                     SourceMemberName = sourceMemberName
                 };
 
@@ -334,7 +338,8 @@ namespace AutoMapper.Configuration
                 MemberList.None,
                 DestinationType,
                 SourceType
-            ) {
+            )
+            {
                 IsReverseMap = true
             };
             ReverseMapCore(reverseMap);

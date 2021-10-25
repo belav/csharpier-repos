@@ -146,7 +146,8 @@ namespace Microsoft.AspNetCore.Mvc
                 false,
                 true,
                 "test"
-            ) {
+            )
+            {
                 UrlHelper = urlHelper,
             };
 

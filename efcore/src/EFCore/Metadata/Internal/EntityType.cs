@@ -1115,7 +1115,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 principalKey.ReferencingForeignKeys = new SortedSet<ForeignKey>(
                     ForeignKeyComparer.Instance
-                ) {
+                )
+                {
                     foreignKey
                 };
             }
@@ -1130,7 +1131,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 principalEntityType.DeclaredReferencingForeignKeys = new SortedSet<ForeignKey>(
                     ForeignKeyComparer.Instance
-                ) {
+                )
+                {
                     foreignKey
                 };
             }
@@ -1843,7 +1845,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 targetEntityType.DeclaredReferencingSkipNavigations = new SortedSet<SkipNavigation>(
                     SkipNavigationComparer.Instance
-                ) {
+                )
+                {
                     skipNavigation
                 };
             }

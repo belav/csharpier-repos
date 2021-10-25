@@ -273,7 +273,8 @@ namespace Castle.DynamicProxy.Generators
                 targetTypeExpression,
                 proxiedMethodTokenExpression,
                 interceptors
-            ) {
+            )
+            {
                 VirtualCall = true
             };
 

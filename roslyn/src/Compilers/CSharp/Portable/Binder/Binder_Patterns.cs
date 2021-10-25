@@ -536,7 +536,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     conversionGroupOpt: null,
                     type: CreateErrorType(),
                     hasErrors: true
-                ) {
+                )
+                {
                     WasCompilerGenerated = true
                 };
             }

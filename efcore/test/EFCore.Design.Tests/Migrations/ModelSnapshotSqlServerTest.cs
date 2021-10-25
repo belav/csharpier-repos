@@ -5602,7 +5602,8 @@ namespace RootNamespace
                     new Coordinate(2.2, 1.1),
                     new Coordinate(7.1, 7.2)
                 }
-            ) {
+            )
+            {
                 SRID = 4326
             };
 
@@ -5614,13 +5615,15 @@ namespace RootNamespace
                     new Coordinate(20.20, 1.1),
                     new Coordinate(70.1, 70.2)
                 }
-            ) {
+            )
+            {
                 SRID = 4326
             };
 
             var multiPoint = new MultiPoint(
                 new[] { new Point(1.1, 2.2), new Point(2.2, 2.2), new Point(2.2, 1.1) }
-            ) {
+            )
+            {
                 SRID = 4326
             };
 
@@ -5634,7 +5637,8 @@ namespace RootNamespace
                         new Coordinate(1.1, 2.2)
                     }
                 )
-            ) {
+            )
+            {
                 SRID = 4326
             };
 
@@ -5648,7 +5652,8 @@ namespace RootNamespace
                         new Coordinate(10.1, 20.2)
                     }
                 )
-            ) {
+            )
+            {
                 SRID = 4326
             };
 
@@ -5673,7 +5678,8 @@ namespace RootNamespace
                     multiLineString,
                     multiPolygon
                 }
-            ) {
+            )
+            {
                 SRID = 4326
             };
 

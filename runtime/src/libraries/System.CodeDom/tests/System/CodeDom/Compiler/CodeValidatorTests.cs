@@ -1483,7 +1483,8 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeArrayCreateExpression(
                     new CodeTypeReference("name"),
                     new CodeExpression[] { new CodePrimitiveExpression() }
-                ) {
+                )
+                {
                     SizeExpression = new CodePrimitiveExpression(1)
                 }
             };
@@ -1499,7 +1500,8 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeArrayCreateExpression(
                     new CodeTypeReference("name"),
                     new CodeExpression[] { new CodePrimitiveExpression(1) }
-                ) {
+                )
+                {
                     SizeExpression = new CodeExpression()
                 }
             };

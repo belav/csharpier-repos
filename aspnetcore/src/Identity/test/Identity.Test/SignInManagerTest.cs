@@ -869,7 +869,8 @@ namespace Microsoft.AspNetCore.Identity.Test
                 null,
                 new Mock<IAuthenticationSchemeProvider>().Object,
                 null
-            ) {
+            )
+            {
                 CallBase = true
             };
             //signInManager.Setup(s => s.SignInAsync(user, It.Is<AuthenticationProperties>(p => p.IsPersistent == isPersistent),

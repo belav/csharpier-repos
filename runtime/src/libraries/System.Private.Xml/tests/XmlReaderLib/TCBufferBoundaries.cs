@@ -18,7 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4090", "4096" }
                         }
                     }
@@ -28,7 +29,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4093", "4096" }
                         }
                     }
@@ -38,7 +40,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4101", "4096" }
                         }
                     }
@@ -48,7 +51,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4092", "4096" }
                         }
                     }
@@ -58,7 +62,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4102", "4096" }
                         }
                     }
@@ -68,7 +73,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4088", "4096" }
                         }
                     }
@@ -78,7 +84,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4089", "4096" }
                         }
                     }
@@ -88,7 +95,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4091", "4096" }
                         }
                     }
@@ -98,7 +106,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4000", "4096" }
                         }
                     }
@@ -108,7 +117,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4096", "4096" }
                         }
                     }
@@ -118,7 +128,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4097", "4096" }
                         }
                     }
@@ -128,7 +139,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4098", "4096" }
                         }
                     }
@@ -138,7 +150,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Test PI Buffer Boundaries with variable byte boundary"
-                        ) {
+                        )
+                        {
                             Params = new object[] { "4099", "4096" }
                         }
                     }

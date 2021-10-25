@@ -603,7 +603,8 @@ namespace System.ServiceModel.Syndication.Tests
             XmlDiffProcessingInstruction pi = new XmlDiffProcessingInstruction(
                 reader.Name,
                 reader.Value
-            ) {
+            )
+            {
                 LineNumber = pInfo.LineNumber,
                 LinePosition = pInfo.LinePosition
             };

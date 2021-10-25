@@ -373,7 +373,8 @@ namespace System.Web.Razor.Tokenizer
                 CurrentStart,
                 Buffer.ToString(),
                 keyword == null ? VBSymbolType.Identifier : VBSymbolType.Keyword
-            ) {
+            )
+            {
                 Keyword = keyword
             };
 

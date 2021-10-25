@@ -31,18 +31,12 @@ namespace System.Text.Json.Serialization.Tests
                     ["key"] = null
                 },
                 MyObjectDictionary = new Dictionary<string, object>() { ["key"] = null },
-                MyStringDictionaryDictionary = new Dictionary<
-                    string,
-                    Dictionary<string, string>
-                >()
+                MyStringDictionaryDictionary = new Dictionary<string, Dictionary<string, string>>()
                 {
                     ["key"] = null
                 },
                 MyListDictionary = new Dictionary<string, List<object>>() { ["key"] = null },
-                MyObjectDictionaryDictionary = new Dictionary<
-                    string,
-                    Dictionary<string, object>
-                >()
+                MyObjectDictionaryDictionary = new Dictionary<string, Dictionary<string, object>>()
                 {
                     ["key"] = null
                 }
@@ -92,10 +86,7 @@ namespace System.Text.Json.Serialization.Tests
                     ["key"] = null
                 },
                 MyObjectDictionary = new Dictionary<string, object>() { ["key"] = null },
-                MyStringDictionaryDictionary = new Dictionary<
-                    string,
-                    Dictionary<string, string>
-                >()
+                MyStringDictionaryDictionary = new Dictionary<string, Dictionary<string, string>>()
                 {
                     ["key"] = new Dictionary<string, string>() { ["key"] = null }
                 },
@@ -103,10 +94,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     ["key"] = new List<object> { null }
                 },
-                MyObjectDictionaryDictionary = new Dictionary<
-                    string,
-                    Dictionary<string, object>
-                >()
+                MyObjectDictionaryDictionary = new Dictionary<string, Dictionary<string, object>>()
                 {
                     ["key"] = new Dictionary<string, object>() { ["key"] = null }
                 }

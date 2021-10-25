@@ -90,7 +90,8 @@ class Helpers
                     new UTF8Encoding(false),
                     0x1000,
                     leaveOpen: true
-                ) {
+                )
+                {
                     AutoFlush = true
                 }
             );

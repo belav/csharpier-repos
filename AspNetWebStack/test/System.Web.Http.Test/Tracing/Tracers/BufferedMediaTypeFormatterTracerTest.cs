@@ -28,8 +28,10 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            Mock<BufferedMediaTypeFormatter> mockFormatter =
-                new Mock<BufferedMediaTypeFormatter>() { CallBase = true };
+            Mock<BufferedMediaTypeFormatter> mockFormatter = new Mock<BufferedMediaTypeFormatter>()
+            {
+                CallBase = true
+            };
             BufferedMediaTypeFormatter innerFormatter = mockFormatter.Object;
             innerFormatter.BufferSize = innerFormatter.BufferSize + 1;
             BufferedMediaTypeFormatterTracer tracer = new BufferedMediaTypeFormatterTracer(
@@ -46,8 +48,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void ReadFromStream_Traces()
         {
             // Arrange
-            Mock<BufferedMediaTypeFormatter> mockFormatter =
-                new Mock<BufferedMediaTypeFormatter>() { CallBase = true };
+            Mock<BufferedMediaTypeFormatter> mockFormatter = new Mock<BufferedMediaTypeFormatter>()
+            {
+                CallBase = true
+            };
             mockFormatter
                 .Setup(
                     f =>
@@ -99,8 +103,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void ReadFromStreamWithCancellationToken_Traces()
         {
             // Arrange
-            Mock<BufferedMediaTypeFormatter> mockFormatter =
-                new Mock<BufferedMediaTypeFormatter>() { CallBase = true };
+            Mock<BufferedMediaTypeFormatter> mockFormatter = new Mock<BufferedMediaTypeFormatter>()
+            {
+                CallBase = true
+            };
             mockFormatter
                 .Setup(
                     f =>
@@ -158,8 +164,10 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             InvalidOperationException exception = new InvalidOperationException("test");
-            Mock<BufferedMediaTypeFormatter> mockFormatter =
-                new Mock<BufferedMediaTypeFormatter>() { CallBase = true };
+            Mock<BufferedMediaTypeFormatter> mockFormatter = new Mock<BufferedMediaTypeFormatter>()
+            {
+                CallBase = true
+            };
             mockFormatter
                 .Setup(
                     f =>
@@ -214,8 +222,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void WriteToStream_Traces()
         {
             // Arrange
-            Mock<BufferedMediaTypeFormatter> mockFormatter =
-                new Mock<BufferedMediaTypeFormatter>() { CallBase = true };
+            Mock<BufferedMediaTypeFormatter> mockFormatter = new Mock<BufferedMediaTypeFormatter>()
+            {
+                CallBase = true
+            };
             mockFormatter.Setup(
                 f =>
                     f.WriteToStream(
@@ -267,8 +277,10 @@ namespace System.Web.Http.Tracing.Tracers
         public void WriteToStreamWithCancellationToken_Traces()
         {
             // Arrange
-            Mock<BufferedMediaTypeFormatter> mockFormatter =
-                new Mock<BufferedMediaTypeFormatter>() { CallBase = true };
+            Mock<BufferedMediaTypeFormatter> mockFormatter = new Mock<BufferedMediaTypeFormatter>()
+            {
+                CallBase = true
+            };
             mockFormatter.Setup(
                 f =>
                     f.WriteToStream(
@@ -322,8 +334,10 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             InvalidOperationException exception = new InvalidOperationException("test");
-            Mock<BufferedMediaTypeFormatter> mockFormatter =
-                new Mock<BufferedMediaTypeFormatter>() { CallBase = true };
+            Mock<BufferedMediaTypeFormatter> mockFormatter = new Mock<BufferedMediaTypeFormatter>()
+            {
+                CallBase = true
+            };
             mockFormatter
                 .Setup(
                     f =>

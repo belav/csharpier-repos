@@ -193,7 +193,8 @@ namespace HttpStress
                         }
                     }
                 }
-            ) {
+            )
+            {
                 IsBackground = true
             }.Start();
 

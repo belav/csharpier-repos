@@ -215,7 +215,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 new ControllerModel(
                     typeof(HelloController).GetTypeInfo(),
                     new[] { controllerModelConvention }
-                ) {
+                )
+                {
                     Application = applicationModel
                 }
             );
@@ -240,7 +241,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 new ActionModel(
                     controllerType.GetMethod(nameof(HelloController.GetHello)),
                     Array.Empty<object>()
-                ) {
+                )
+                {
                     Controller = controllerModel
                 }
             );
@@ -268,7 +270,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 new PropertyModel(
                     controllerType.GetProperty(nameof(HelloController.Property1)),
                     Array.Empty<object>()
-                ) {
+                )
+                {
                     Controller = controllerModel
                 }
             );
@@ -297,7 +300,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 new PropertyModel(
                     controllerType.GetProperty(nameof(HelloController.Property1)),
                     new[] { propertyModelConvention }
-                ) {
+                )
+                {
                     Controller = controllerModel
                 }
             );
@@ -323,14 +327,16 @@ namespace Microsoft.Extensions.DependencyInjection
             var actionModel = new ActionModel(
                 controllerType.GetMethod(nameof(HelloController.GetInfo)),
                 Array.Empty<object>()
-            ) {
+            )
+            {
                 Controller = controllerModel
             };
             controllerModel.Actions.Add(actionModel);
             var parameterModel = new ParameterModel(
                 controllerType.GetMethod(nameof(HelloController.GetInfo)).GetParameters()[0],
                 Array.Empty<object>()
-            ) {
+            )
+            {
                 Action = actionModel
             };
             actionModel.Parameters.Add(parameterModel);
@@ -358,14 +364,16 @@ namespace Microsoft.Extensions.DependencyInjection
             var actionModel = new ActionModel(
                 controllerType.GetMethod(nameof(HelloController.GetInfo)),
                 Array.Empty<object>()
-            ) {
+            )
+            {
                 Controller = controllerModel
             };
             controllerModel.Actions.Add(actionModel);
             var parameterModel = new ParameterModel(
                 controllerType.GetMethod(nameof(HelloController.GetInfo)).GetParameters()[0],
                 new[] { parameterModelConvention }
-            ) {
+            )
+            {
                 Action = actionModel
             };
             actionModel.Parameters.Add(parameterModel);

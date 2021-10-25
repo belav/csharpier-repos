@@ -155,14 +155,16 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ControllersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin
                 },
                 new TraceRecord(
                     actionContext.Request,
                     TraceCategories.ControllersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.End
                 }
             };
@@ -227,14 +229,16 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ControllersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin
                 },
                 new TraceRecord(
                     actionContext.Request,
                     TraceCategories.ControllersCategory,
                     TraceLevel.Error
-                ) {
+                )
+                {
                     Kind = TraceKind.End
                 }
             };
@@ -298,14 +302,16 @@ namespace System.Web.Http.Tracing.Tracers
                     actionContext.Request,
                     TraceCategories.ControllersCategory,
                     TraceLevel.Info
-                ) {
+                )
+                {
                     Kind = TraceKind.Begin
                 },
                 new TraceRecord(
                     actionContext.Request,
                     TraceCategories.ControllersCategory,
                     TraceLevel.Warn
-                ) {
+                )
+                {
                     Kind = TraceKind.End
                 }
             };

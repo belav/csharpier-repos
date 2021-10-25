@@ -64,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var request = new HttpRequestMessage(
                 HttpMethod.Post,
                 "http://localhost/SerializableError/LogErrors"
-            ) {
+            )
+            {
                 Content = new StringContent(expectedXml, Encoding.UTF8, acceptHeader)
             };
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptHeader));

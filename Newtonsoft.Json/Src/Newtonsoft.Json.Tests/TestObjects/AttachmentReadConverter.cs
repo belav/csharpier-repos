@@ -50,7 +50,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     ? new System.Net.Mail.Attachment(
                           new MemoryStream(Convert.FromBase64String(info.ContentBase64)),
                           "application/octet-stream"
-                      ) {
+                      )
+                      {
                           ContentDisposition = { FileName = info.FileName }
                       }
                     : null;

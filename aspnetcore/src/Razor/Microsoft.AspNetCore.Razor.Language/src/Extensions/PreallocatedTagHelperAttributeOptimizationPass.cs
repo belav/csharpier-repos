@@ -183,7 +183,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
                 var setPreallocatedProperty = new PreallocatedTagHelperPropertyIntermediateNode(
                     node
-                ) {
+                )
+                {
                     VariableName = declaration.VariableName,
                 };
 

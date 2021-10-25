@@ -190,7 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var handlerModel = new PageHandlerModel(
                 methodInfo,
                 new[] { handlerModelConvention.Object }
-            ) {
+            )
+            {
                 Page = applicationModel,
             };
 
@@ -326,7 +327,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var parameterModel = new PageParameterModel(
                 parameterInfo,
                 new[] { parameterModelConvention.Object }
-            ) {
+            )
+            {
                 Handler = handlerModel,
             };
 
@@ -467,7 +469,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var propertyModel = new PagePropertyModel(
                 propertyInfo,
                 new[] { propertyModelConvention.Object }
-            ) {
+            )
+            {
                 Page = applicationModel,
             };
 

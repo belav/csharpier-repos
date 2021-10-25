@@ -18,7 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlTextReader Normalization - CRLF in Attribute value"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -56,7 +57,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlTextReader Normalization - multiple spaces in Attribute value"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -70,7 +72,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlTextReader Normalization - tab in Attribute value"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }
@@ -117,7 +120,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlTextReader Normalization = true with invalid chars"
-                        ) {
+                        )
+                        {
                             Pri = 0
                         }
                     }

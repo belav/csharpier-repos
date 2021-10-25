@@ -86,7 +86,8 @@ public class Program
             new Option(
                 "-seed",
                 "Seed for generating pseudo-random parameters for a given -n argument."
-            ) {
+            )
+            {
                 Argument = new Argument<int?>("seed", null)
             }
         );
@@ -840,7 +841,8 @@ public class Program
                         }
                     }
                 }
-            ) {
+            )
+            {
                 IsBackground = true
             }.Start();
 

@@ -347,7 +347,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                                 _pageContext,
                                 _filters,
                                 _instance
-                            ) {
+                            )
+                            {
                                 HandlerMethod = _handler,
                             };
                         }
@@ -363,7 +364,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                                 _pageContext,
                                 _filters,
                                 _instance
-                            ) {
+                            )
+                            {
                                 HandlerMethod = _handler,
                             };
                         }
@@ -556,7 +558,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                             _filters,
                             _handler,
                             _instance
-                        ) {
+                        )
+                        {
                             Canceled = true,
                             Result = _handlerExecutingContext.Result,
                         };
@@ -615,7 +618,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                             _filters,
                             _handler,
                             _instance
-                        ) {
+                        )
+                        {
                             Canceled = true,
                             Result = _handlerExecutingContext.Result,
                         };
@@ -684,7 +688,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                                 _filters,
                                 _handler,
                                 _instance
-                            ) {
+                            )
+                            {
                                 Result = _result,
                             };
                         }
@@ -730,7 +735,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     _filters,
                     _handler,
                     _instance
-                ) {
+                )
+                {
                     ExceptionDispatchInfo = ExceptionDispatchInfo.Capture(exception),
                 };
             }

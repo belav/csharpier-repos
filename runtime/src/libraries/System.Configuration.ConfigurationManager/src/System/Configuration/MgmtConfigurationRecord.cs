@@ -847,7 +847,8 @@ namespace System.Configuration
                 false,
                 ConfigStreamInfo.StreamName,
                 -1
-            ) {
+            )
+            {
                 Factory = TypeUtil.GetConstructor(
                     configSection.GetType(),
                     typeof(ConfigurationSection),
