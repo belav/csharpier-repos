@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<string> namespaceInScope,
             ImmutableArray<string> targetTypesSymbolKeyData,
             bool forceIndexCreation,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

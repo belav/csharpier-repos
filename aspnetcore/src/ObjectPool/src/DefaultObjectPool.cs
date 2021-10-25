@@ -29,9 +29,7 @@ namespace Microsoft.Extensions.ObjectPool
         /// </summary>
         /// <param name="policy">The pooling policy to use.</param>
         public DefaultObjectPool(IPooledObjectPolicy<T> policy)
-            : this(policy, Environment.ProcessorCount * 2)
-        {
-        }
+            : this(policy, Environment.ProcessorCount * 2) { }
 
         /// <summary>
         /// Creates an instance of <see cref="DefaultObjectPool{T}"/>.
@@ -51,7 +49,8 @@ namespace Microsoft.Extensions.ObjectPool
             {
                 var type = policy.GetType();
 
-                return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(DefaultPooledObjectPolicy<>);
+                return type.IsGenericType
+                    && type.GetGenericTypeDefinition() == typeof(DefaultPooledObjectPolicy<>);
             }
         }
 
@@ -65,7 +64,10 @@ namespace Microsoft.Extensions.ObjectPool
                 for (var i = 0; i < items.Length; i++)
                 {
                     item = items[i].Element;
-                    if (item != null && Interlocked.CompareExchange(ref items[i].Element, null, item) == item)
+                    if (
+                        item != null
+                        && Interlocked.CompareExchange(ref items[i].Element, null, item) == item
+                    )
                     {
                         return item;
                     }
@@ -86,12 +88,18 @@ namespace Microsoft.Extensions.ObjectPool
         {
             if (_isDefaultPolicy || (_fastPolicy?.Return(obj) ?? _policy.Return(obj)))
             {
-                if (_firstItem != null || Interlocked.CompareExchange(ref _firstItem, obj, null) != null)
+                if (
+                    _firstItem != null
+                    || Interlocked.CompareExchange(ref _firstItem, obj, null) != null
+                )
                 {
                     var items = _items;
-                    for (var i = 0; i < items.Length && Interlocked.CompareExchange(ref items[i].Element, obj, null) != null; ++i)
-                    {
-                    }
+                    for (
+                        var i = 0;
+                        i < items.Length
+                            && Interlocked.CompareExchange(ref items[i].Element, obj, null) != null;
+                        ++i
+                    ) { }
                 }
             }
         }

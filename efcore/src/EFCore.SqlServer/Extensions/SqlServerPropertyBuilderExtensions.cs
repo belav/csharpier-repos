@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder UseHiLo(
             this PropertyBuilder propertyBuilder,
             string? name = null,
-            string? schema = null)
+            string? schema = null
+        )
         {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
             Check.NullButNotEmpty(name, nameof(name));
@@ -63,8 +64,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder<TProperty> UseHiLo<TProperty>(
             this PropertyBuilder<TProperty> propertyBuilder,
             string? name = null,
-            string? schema = null)
-            => (PropertyBuilder<TProperty>)UseHiLo((PropertyBuilder)propertyBuilder, name, schema);
+            string? schema = null
+        ) => (PropertyBuilder<TProperty>)UseHiLo((PropertyBuilder)propertyBuilder, name, schema);
 
         /// <summary>
         ///     Configures the database sequence used for the hi-lo pattern to generate values for the key property,
@@ -79,7 +80,8 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             string? name,
             string? schema,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (!propertyBuilder.CanSetHiLoSequence(name, schema, fromDataAnnotation))
             {
@@ -90,8 +92,12 @@ namespace Microsoft.EntityFrameworkCore
             propertyBuilder.Metadata.SetHiLoSequenceSchema(schema, fromDataAnnotation);
 
             return name == null
-                ? null
-                : propertyBuilder.Metadata.DeclaringEntityType.Model.Builder.HasSequence(name, schema, fromDataAnnotation);
+              ? null
+              : propertyBuilder.Metadata.DeclaringEntityType.Model.Builder.HasSequence(
+                    name,
+                    schema,
+                    fromDataAnnotation
+                );
         }
 
         /// <summary>
@@ -106,14 +112,23 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionPropertyBuilder propertyBuilder,
             string? name,
             string? schema,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
             Check.NullButNotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
 
-            return propertyBuilder.CanSetAnnotation(SqlServerAnnotationNames.HiLoSequenceName, name, fromDataAnnotation)
-                && propertyBuilder.CanSetAnnotation(SqlServerAnnotationNames.HiLoSequenceSchema, schema, fromDataAnnotation);
+            return propertyBuilder.CanSetAnnotation(
+                    SqlServerAnnotationNames.HiLoSequenceName,
+                    name,
+                    fromDataAnnotation
+                )
+                && propertyBuilder.CanSetAnnotation(
+                    SqlServerAnnotationNames.HiLoSequenceSchema,
+                    schema,
+                    fromDataAnnotation
+                );
         }
 
         /// <summary>
@@ -127,7 +142,8 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder UseIdentityColumn(
             this PropertyBuilder propertyBuilder,
             int seed = 1,
-            int increment = 1)
+            int increment = 1
+        )
         {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
@@ -153,8 +169,13 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder<TProperty> UseIdentityColumn<TProperty>(
             this PropertyBuilder<TProperty> propertyBuilder,
             int seed = 1,
-            int increment = 1)
-            => (PropertyBuilder<TProperty>)UseIdentityColumn((PropertyBuilder)propertyBuilder, seed, increment);
+            int increment = 1
+        ) =>
+            (PropertyBuilder<TProperty>)UseIdentityColumn(
+                (PropertyBuilder)propertyBuilder,
+                seed,
+                increment
+            );
 
         /// <summary>
         ///     Configures the seed for SQL Server IDENTITY.
@@ -169,7 +190,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionPropertyBuilder? HasIdentityColumnSeed(
             this IConventionPropertyBuilder propertyBuilder,
             int? seed,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (propertyBuilder.CanSetIdentityColumnSeed(seed, fromDataAnnotation))
             {
@@ -190,11 +212,16 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetIdentityColumnSeed(
             this IConventionPropertyBuilder propertyBuilder,
             int? seed,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
-            return propertyBuilder.CanSetAnnotation(SqlServerAnnotationNames.IdentitySeed, seed, fromDataAnnotation);
+            return propertyBuilder.CanSetAnnotation(
+                SqlServerAnnotationNames.IdentitySeed,
+                seed,
+                fromDataAnnotation
+            );
         }
 
         /// <summary>
@@ -210,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionPropertyBuilder? HasIdentityColumnIncrement(
             this IConventionPropertyBuilder propertyBuilder,
             int? increment,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (propertyBuilder.CanSetIdentityColumnIncrement(increment, fromDataAnnotation))
             {
@@ -231,11 +259,16 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetIdentityColumnIncrement(
             this IConventionPropertyBuilder propertyBuilder,
             int? increment,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
-            return propertyBuilder.CanSetAnnotation(SqlServerAnnotationNames.IdentityIncrement, increment, fromDataAnnotation);
+            return propertyBuilder.CanSetAnnotation(
+                SqlServerAnnotationNames.IdentityIncrement,
+                increment,
+                fromDataAnnotation
+            );
         }
 
         /// <summary>
@@ -251,12 +284,21 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionPropertyBuilder? HasValueGenerationStrategy(
             this IConventionPropertyBuilder propertyBuilder,
             SqlServerValueGenerationStrategy? valueGenerationStrategy,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
-            if (propertyBuilder.CanSetAnnotation(
-                SqlServerAnnotationNames.ValueGenerationStrategy, valueGenerationStrategy, fromDataAnnotation))
+            if (
+                propertyBuilder.CanSetAnnotation(
+                    SqlServerAnnotationNames.ValueGenerationStrategy,
+                    valueGenerationStrategy,
+                    fromDataAnnotation
+                )
+            )
             {
-                propertyBuilder.Metadata.SetValueGenerationStrategy(valueGenerationStrategy, fromDataAnnotation);
+                propertyBuilder.Metadata.SetValueGenerationStrategy(
+                    valueGenerationStrategy,
+                    fromDataAnnotation
+                );
                 if (valueGenerationStrategy != SqlServerValueGenerationStrategy.IdentityColumn)
                 {
                     propertyBuilder.HasIdentityColumnSeed(null, fromDataAnnotation);
@@ -284,14 +326,22 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetValueGenerationStrategy(
             this IConventionPropertyBuilder propertyBuilder,
             SqlServerValueGenerationStrategy? valueGenerationStrategy,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
-            return (valueGenerationStrategy == null
-                    || SqlServerPropertyExtensions.IsCompatibleWithValueGeneration(propertyBuilder.Metadata))
+            return (
+                    valueGenerationStrategy == null
+                    || SqlServerPropertyExtensions.IsCompatibleWithValueGeneration(
+                        propertyBuilder.Metadata
+                    )
+                )
                 && propertyBuilder.CanSetAnnotation(
-                    SqlServerAnnotationNames.ValueGenerationStrategy, valueGenerationStrategy, fromDataAnnotation);
+                    SqlServerAnnotationNames.ValueGenerationStrategy,
+                    valueGenerationStrategy,
+                    fromDataAnnotation
+                );
         }
 
         /// <summary>
@@ -301,7 +351,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="sparse"> A value indicating whether the property's column is created as sparse. </param>
         /// <returns> A builder to further configure the property. </returns>
         /// <remarks> See https://docs.microsoft.com/sql/relational-databases/tables/use-sparse-columns. </remarks>
-        public static PropertyBuilder IsSparse(this PropertyBuilder propertyBuilder, bool sparse = true)
+        public static PropertyBuilder IsSparse(
+            this PropertyBuilder propertyBuilder,
+            bool sparse = true
+        )
         {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
 
@@ -319,8 +372,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <remarks> See https://docs.microsoft.com/sql/relational-databases/tables/use-sparse-columns. </remarks>
         public static PropertyBuilder<TProperty> IsSparse<TProperty>(
             this PropertyBuilder<TProperty> propertyBuilder,
-            bool sparse = true)
-            => (PropertyBuilder<TProperty>)IsSparse((PropertyBuilder)propertyBuilder, sparse);
+            bool sparse = true
+        ) => (PropertyBuilder<TProperty>)IsSparse((PropertyBuilder)propertyBuilder, sparse);
 
         /// <summary>
         ///     Configures whether the property's column is created as sparse when targeting SQL Server.
@@ -333,7 +386,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionPropertyBuilder? IsSparse(
             this IConventionPropertyBuilder propertyBuilder,
             bool? sparse,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (propertyBuilder.CanSetIsSparse(sparse, fromDataAnnotation))
             {
@@ -359,11 +413,16 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetIsSparse(
             this IConventionPropertyBuilder property,
             bool? sparse,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             Check.NotNull(property, nameof(property));
 
-            return property.CanSetAnnotation(SqlServerAnnotationNames.Sparse, sparse, fromDataAnnotation);
+            return property.CanSetAnnotation(
+                SqlServerAnnotationNames.Sparse,
+                sparse,
+                fromDataAnnotation
+            );
         }
     }
 }

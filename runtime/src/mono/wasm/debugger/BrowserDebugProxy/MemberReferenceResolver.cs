@@ -22,7 +22,13 @@ namespace Microsoft.WebAssembly.Diagnostics
         private ILogger logger;
         private bool locals_fetched;
 
-        public MemberReferenceResolver(MonoProxy proxy, ExecutionContext ctx, SessionId session_id, int scope_id, ILogger logger)
+        public MemberReferenceResolver(
+            MonoProxy proxy,
+            ExecutionContext ctx,
+            SessionId session_id,
+            int scope_id,
+            ILogger logger
+        )
         {
             sessionId = session_id;
             scopeId = scope_id;
@@ -39,7 +45,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             {
                 Result scope_res = await proxy.GetScopeProperties(sessionId, scopeId, token);
                 if (scope_res.IsErr)
-                    throw new Exception($"BUG: Unable to get properties for scope: {scopeId}. {scope_res}");
+                    throw new Exception(
+                        $"BUG: Unable to get properties for scope: {scopeId}. {scope_res}"
+                    );
                 locals_fetched = true;
             }
 
@@ -57,7 +65,11 @@ namespace Microsoft.WebAssembly.Diagnostics
                 varIds = scope.Method.GetLiveVarsAt(scope.Location.CliLocation.Offset);
             }
 
-            Result res = await proxy.SendMonoCommand(sessionId, MonoCommands.EvaluateMemberAccess(scopeId, var_name, varIds), token);
+            Result res = await proxy.SendMonoCommand(
+                sessionId,
+                MonoCommands.EvaluateMemberAccess(scopeId, var_name, varIds),
+                token
+            );
             if (res.IsOk)
             {
                 ret = res.Value?["result"]?["value"]?["value"]?.Value<JObject>();
@@ -70,6 +82,5 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             return ret;
         }
-
     }
 }

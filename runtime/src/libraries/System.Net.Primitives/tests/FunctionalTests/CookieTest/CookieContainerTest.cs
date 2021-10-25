@@ -19,7 +19,11 @@ namespace System.Net.Primitives.Functional.Tests
             const string OriginalDomain = "contoso.com";
 
             var container = new CookieContainer();
-            var cookie = new Cookie(CookieName1, CookieValue1) { Version = 1, Domain = OriginalDomain };
+            var cookie = new Cookie(CookieName1, CookieValue1)
+            {
+                Version = 1,
+                Domain = OriginalDomain
+            };
             var uri = new Uri(SchemePrefix + OriginalDomain);
             container.Add(uri, cookie);
             Assert.Equal(1, container.GetCookies(uri).Count);
@@ -100,7 +104,11 @@ namespace System.Net.Primitives.Functional.Tests
             const string OriginalDomainWithLeadingDot = "." + OriginalDomain;
 
             var container = new CookieContainer();
-            var cookie1 = new Cookie(CookieName1, CookieValue1) { Domain = OriginalDomainWithLeadingDot, Version = 1 };
+            var cookie1 = new Cookie(CookieName1, CookieValue1)
+            {
+                Domain = OriginalDomainWithLeadingDot,
+                Version = 1
+            };
             container.Add(new Uri(SchemePrefix + OriginalDomain), cookie1);
 
             var uri = new Uri(SchemePrefix + OriginalDomain);

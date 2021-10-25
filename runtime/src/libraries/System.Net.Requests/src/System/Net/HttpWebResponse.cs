@@ -26,7 +26,10 @@ namespace System.Net
         private string? _characterSet;
         private readonly bool _isVersionHttp11 = true;
 
-        [Obsolete("This API supports the .NET infrastructure and is not intended to be used directly from your code.", true)]
+        [Obsolete(
+            "This API supports the .NET infrastructure and is not intended to be used directly from your code.",
+            true
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public HttpWebResponse()
         {
@@ -34,23 +37,38 @@ namespace System.Net
             _cookies = null!;
         }
 
-        [ObsoleteAttribute("Serialization is obsoleted for this type.  https://go.microsoft.com/fwlink/?linkid=14202")]
-        protected HttpWebResponse(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
+        [ObsoleteAttribute(
+            "Serialization is obsoleted for this type.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        protected HttpWebResponse(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) : base(serializationInfo, streamingContext)
         {
             throw new PlatformNotSupportedException();
         }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        protected override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        internal HttpWebResponse(HttpResponseMessage _message, Uri requestUri, CookieContainer? cookieContainer)
+        internal HttpWebResponse(
+            HttpResponseMessage _message,
+            Uri requestUri,
+            CookieContainer? cookieContainer
+        )
         {
             _httpResponseMessage = _message;
             _requestUri = requestUri;
@@ -67,10 +85,7 @@ namespace System.Net
         }
         public override bool IsMutuallyAuthenticated
         {
-            get
-            {
-                return base.IsMutuallyAuthenticated;
-            }
+            get { return base.IsMutuallyAuthenticated; }
         }
 
         public override long ContentLength
@@ -92,7 +107,13 @@ namespace System.Net
                 // We use TryGetValues() instead of the strongly type Headers.ContentType property so that
                 // we return a string regardless of it being fully RFC conformant. This matches current
                 // .NET Framework behavior.
-                if (_httpResponseMessage.Content != null && _httpResponseMessage.Content.Headers.TryGetValues("Content-Type", out IEnumerable<string>? values))
+                if (
+                    _httpResponseMessage.Content != null
+                    && _httpResponseMessage.Content.Headers.TryGetValues(
+                        "Content-Type",
+                        out IEnumerable<string>? values
+                    )
+                )
                 {
                     // In most cases, there is only one media type value as per RFC. But for completeness, we
                     // return all values in cases of overly malformed strings.
@@ -112,7 +133,9 @@ namespace System.Net
                 CheckDisposed();
                 if (_httpResponseMessage.Content != null)
                 {
-                    return GetHeaderValueAsString(_httpResponseMessage.Content.Headers.ContentEncoding);
+                    return GetHeaderValueAsString(
+                        _httpResponseMessage.Content.Headers.ContentEncoding
+                    );
                 }
 
                 return string.Empty;
@@ -126,7 +149,6 @@ namespace System.Net
                 CheckDisposed();
                 return _cookies;
             }
-
             set
             {
                 CheckDisposed();
@@ -282,7 +304,9 @@ namespace System.Net
                     if (i > 0)
                     {
                         //search the parameters
-                        while ((i = srchString.IndexOf("charset", i, StringComparison.Ordinal)) >= 0)
+                        while (
+                            (i = srchString.IndexOf("charset", i, StringComparison.Ordinal)) >= 0
+                        )
                         {
                             i += 7;
 
@@ -307,10 +331,12 @@ namespace System.Net
                                     //length. since j points to the next ; the operation j -i
                                     //gives the length of the charset
                                     if (j > i)
-                                        _characterSet = contentType.AsSpan(i, j - i).Trim().ToString();
+                                        _characterSet = contentType
+                                            .AsSpan(i, j - i)
+                                            .Trim()
+                                            .ToString();
                                     else
                                         _characterSet = contentType.AsSpan(i).Trim().ToString();
-
                                     //done
                                     break;
                                 }
@@ -324,10 +350,7 @@ namespace System.Net
 
         public override bool SupportsHeaders
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override Stream GetResponseStream()
@@ -371,6 +394,7 @@ namespace System.Net
             }
         }
 
-        private string GetHeaderValueAsString(IEnumerable<string> values) => string.Join(", ", values);
+        private string GetHeaderValueAsString(IEnumerable<string> values) =>
+            string.Join(", ", values);
     }
 }

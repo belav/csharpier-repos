@@ -24,35 +24,42 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.HttpContext.Request.PathBase = "/pathBase";
             context.HttpContext.Request.QueryString = new QueryString("?query.Key=a&query.Value=b");
 
-            Assert.Equal($"HEAD{KeyDelimiter}HTTPS{KeyDelimiter}EXAMPLE.COM:80/PATHBASE/PATH/SUBPATH", cacheKeyProvider.CreateBaseKey(context));
+            Assert.Equal(
+                $"HEAD{KeyDelimiter}HTTPS{KeyDelimiter}EXAMPLE.COM:80/PATHBASE/PATH/SUBPATH",
+                cacheKeyProvider.CreateBaseKey(context)
+            );
         }
 
         [Fact]
         public void ResponseCachingKeyProvider_CreateStorageBaseKey_CaseInsensitivePath_NormalizesPath()
         {
-            var cacheKeyProvider = TestUtils.CreateTestKeyProvider(new ResponseCachingOptions()
-            {
-                UseCaseSensitivePaths = false
-            });
+            var cacheKeyProvider = TestUtils.CreateTestKeyProvider(
+                new ResponseCachingOptions() { UseCaseSensitivePaths = false }
+            );
             var context = TestUtils.CreateTestContext();
             context.HttpContext.Request.Method = HttpMethods.Get;
             context.HttpContext.Request.Path = "/Path";
 
-            Assert.Equal($"{HttpMethods.Get}{KeyDelimiter}{KeyDelimiter}/PATH", cacheKeyProvider.CreateBaseKey(context));
+            Assert.Equal(
+                $"{HttpMethods.Get}{KeyDelimiter}{KeyDelimiter}/PATH",
+                cacheKeyProvider.CreateBaseKey(context)
+            );
         }
 
         [Fact]
         public void ResponseCachingKeyProvider_CreateStorageBaseKey_CaseSensitivePath_PreservesPathCase()
         {
-            var cacheKeyProvider = TestUtils.CreateTestKeyProvider(new ResponseCachingOptions()
-            {
-                UseCaseSensitivePaths = true
-            });
+            var cacheKeyProvider = TestUtils.CreateTestKeyProvider(
+                new ResponseCachingOptions() { UseCaseSensitivePaths = true }
+            );
             var context = TestUtils.CreateTestContext();
             context.HttpContext.Request.Method = HttpMethods.Get;
             context.HttpContext.Request.Path = "/Path";
 
-            Assert.Equal($"{HttpMethods.Get}{KeyDelimiter}{KeyDelimiter}/Path", cacheKeyProvider.CreateBaseKey(context));
+            Assert.Equal(
+                $"{HttpMethods.Get}{KeyDelimiter}{KeyDelimiter}/Path",
+                cacheKeyProvider.CreateBaseKey(context)
+            );
         }
 
         [Fact]
@@ -61,7 +68,9 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var cacheKeyProvider = TestUtils.CreateTestKeyProvider();
             var context = TestUtils.CreateTestContext();
 
-            Assert.Throws<InvalidOperationException>(() => cacheKeyProvider.CreateStorageVaryByKey(context));
+            Assert.Throws<InvalidOperationException>(
+                () => cacheKeyProvider.CreateStorageVaryByKey(context)
+            );
         }
 
         [Fact]
@@ -74,7 +83,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                 VaryByKeyPrefix = FastGuid.NewGuid().IdString
             };
 
-            Assert.Equal($"{context.CachedVaryByRules.VaryByKeyPrefix}", cacheKeyProvider.CreateStorageVaryByKey(context));
+            Assert.Equal(
+                $"{context.CachedVaryByRules.VaryByKeyPrefix}",
+                cacheKeyProvider.CreateStorageVaryByKey(context)
+            );
         }
 
         [Fact]
@@ -89,8 +101,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                 Headers = new string[] { "HeaderA", "HeaderC" }
             };
 
-            Assert.Equal($"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}H{KeyDelimiter}HeaderA=ValueA{KeyDelimiter}HeaderC=",
-                cacheKeyProvider.CreateStorageVaryByKey(context));
+            Assert.Equal(
+                $"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}H{KeyDelimiter}HeaderA=ValueA{KeyDelimiter}HeaderC=",
+                cacheKeyProvider.CreateStorageVaryByKey(context)
+            );
         }
 
         [Fact]
@@ -105,8 +119,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                 Headers = new string[] { "HeaderA", "HeaderC" }
             };
 
-            Assert.Equal($"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}H{KeyDelimiter}HeaderA=ValueAValueB{KeyDelimiter}HeaderC=",
-                cacheKeyProvider.CreateStorageVaryByKey(context));
+            Assert.Equal(
+                $"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}H{KeyDelimiter}HeaderA=ValueAValueB{KeyDelimiter}HeaderC=",
+                cacheKeyProvider.CreateStorageVaryByKey(context)
+            );
         }
 
         [Fact]
@@ -114,15 +130,19 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         {
             var cacheKeyProvider = TestUtils.CreateTestKeyProvider();
             var context = TestUtils.CreateTestContext();
-            context.HttpContext.Request.QueryString = new QueryString("?QueryA=ValueA&QueryB=ValueB");
+            context.HttpContext.Request.QueryString = new QueryString(
+                "?QueryA=ValueA&QueryB=ValueB"
+            );
             context.CachedVaryByRules = new CachedVaryByRules()
             {
                 VaryByKeyPrefix = FastGuid.NewGuid().IdString,
                 QueryKeys = new string[] { "QueryA", "QueryC" }
             };
 
-            Assert.Equal($"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}Q{KeyDelimiter}QueryA=ValueA{KeyDelimiter}QueryC=",
-                cacheKeyProvider.CreateStorageVaryByKey(context));
+            Assert.Equal(
+                $"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}Q{KeyDelimiter}QueryA=ValueA{KeyDelimiter}QueryC=",
+                cacheKeyProvider.CreateStorageVaryByKey(context)
+            );
         }
 
         [Fact]
@@ -130,15 +150,19 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         {
             var cacheKeyProvider = TestUtils.CreateTestKeyProvider();
             var context = TestUtils.CreateTestContext();
-            context.HttpContext.Request.QueryString = new QueryString("?queryA=ValueA&queryB=ValueB");
+            context.HttpContext.Request.QueryString = new QueryString(
+                "?queryA=ValueA&queryB=ValueB"
+            );
             context.CachedVaryByRules = new CachedVaryByRules()
             {
                 VaryByKeyPrefix = FastGuid.NewGuid().IdString,
-                QueryKeys = new string[] { "QueryA",  "QueryC" }
+                QueryKeys = new string[] { "QueryA", "QueryC" }
             };
 
-            Assert.Equal($"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}Q{KeyDelimiter}QueryA=ValueA{KeyDelimiter}QueryC=",
-                cacheKeyProvider.CreateStorageVaryByKey(context));
+            Assert.Equal(
+                $"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}Q{KeyDelimiter}QueryA=ValueA{KeyDelimiter}QueryC=",
+                cacheKeyProvider.CreateStorageVaryByKey(context)
+            );
         }
 
         [Fact]
@@ -146,7 +170,9 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         {
             var cacheKeyProvider = TestUtils.CreateTestKeyProvider();
             var context = TestUtils.CreateTestContext();
-            context.HttpContext.Request.QueryString = new QueryString("?QueryA=ValueA&QueryB=ValueB");
+            context.HttpContext.Request.QueryString = new QueryString(
+                "?QueryA=ValueA&QueryB=ValueB"
+            );
             context.CachedVaryByRules = new CachedVaryByRules()
             {
                 VaryByKeyPrefix = FastGuid.NewGuid().IdString,
@@ -155,8 +181,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
 
             // To support case insensitivity, all query keys are converted to upper case.
             // Explicit query keys uses the casing specified in the setting.
-            Assert.Equal($"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}Q{KeyDelimiter}QUERYA=ValueA{KeyDelimiter}QUERYB=ValueB",
-                cacheKeyProvider.CreateStorageVaryByKey(context));
+            Assert.Equal(
+                $"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}Q{KeyDelimiter}QUERYA=ValueA{KeyDelimiter}QUERYB=ValueB",
+                cacheKeyProvider.CreateStorageVaryByKey(context)
+            );
         }
 
         [Fact]
@@ -164,7 +192,9 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         {
             var cacheKeyProvider = TestUtils.CreateTestKeyProvider();
             var context = TestUtils.CreateTestContext();
-            context.HttpContext.Request.QueryString = new QueryString("?QueryA=ValueA&QueryA=ValueB");
+            context.HttpContext.Request.QueryString = new QueryString(
+                "?QueryA=ValueA&QueryA=ValueB"
+            );
             context.CachedVaryByRules = new CachedVaryByRules()
             {
                 VaryByKeyPrefix = FastGuid.NewGuid().IdString,
@@ -173,8 +203,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
 
             // To support case insensitivity, all query keys are converted to upper case.
             // Explicit query keys uses the casing specified in the setting.
-            Assert.Equal($"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}Q{KeyDelimiter}QUERYA=ValueA{KeySubDelimiter}ValueB",
-                cacheKeyProvider.CreateStorageVaryByKey(context));
+            Assert.Equal(
+                $"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}Q{KeyDelimiter}QUERYA=ValueA{KeySubDelimiter}ValueB",
+                cacheKeyProvider.CreateStorageVaryByKey(context)
+            );
         }
 
         [Fact]
@@ -182,7 +214,9 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         {
             var cacheKeyProvider = TestUtils.CreateTestKeyProvider();
             var context = TestUtils.CreateTestContext();
-            context.HttpContext.Request.QueryString = new QueryString("?QueryA=ValueB&QueryA=ValueA");
+            context.HttpContext.Request.QueryString = new QueryString(
+                "?QueryA=ValueB&QueryA=ValueA"
+            );
             context.CachedVaryByRules = new CachedVaryByRules()
             {
                 VaryByKeyPrefix = FastGuid.NewGuid().IdString,
@@ -191,8 +225,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
 
             // To support case insensitivity, all query keys are converted to upper case.
             // Explicit query keys uses the casing specified in the setting.
-            Assert.Equal($"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}Q{KeyDelimiter}QUERYA=ValueA{KeySubDelimiter}ValueB",
-                cacheKeyProvider.CreateStorageVaryByKey(context));
+            Assert.Equal(
+                $"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}Q{KeyDelimiter}QUERYA=ValueA{KeySubDelimiter}ValueB",
+                cacheKeyProvider.CreateStorageVaryByKey(context)
+            );
         }
 
         [Fact]
@@ -202,7 +238,9 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var context = TestUtils.CreateTestContext();
             context.HttpContext.Request.Headers["HeaderA"] = "ValueA";
             context.HttpContext.Request.Headers["HeaderB"] = "ValueB";
-            context.HttpContext.Request.QueryString = new QueryString("?QueryA=ValueA&QueryB=ValueB");
+            context.HttpContext.Request.QueryString = new QueryString(
+                "?QueryA=ValueA&QueryB=ValueB"
+            );
             context.CachedVaryByRules = new CachedVaryByRules()
             {
                 VaryByKeyPrefix = FastGuid.NewGuid().IdString,
@@ -210,8 +248,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                 QueryKeys = new string[] { "QueryA", "QueryC" }
             };
 
-            Assert.Equal($"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}H{KeyDelimiter}HeaderA=ValueA{KeyDelimiter}HeaderC={KeyDelimiter}Q{KeyDelimiter}QueryA=ValueA{KeyDelimiter}QueryC=",
-                cacheKeyProvider.CreateStorageVaryByKey(context));
+            Assert.Equal(
+                $"{context.CachedVaryByRules.VaryByKeyPrefix}{KeyDelimiter}H{KeyDelimiter}HeaderA=ValueA{KeyDelimiter}HeaderC={KeyDelimiter}Q{KeyDelimiter}QueryA=ValueA{KeyDelimiter}QueryC=",
+                cacheKeyProvider.CreateStorageVaryByKey(context)
+            );
         }
     }
 }

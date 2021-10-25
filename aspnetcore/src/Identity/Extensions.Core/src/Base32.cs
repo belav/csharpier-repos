@@ -21,8 +21,26 @@ namespace Microsoft.AspNetCore.Identity
             StringBuilder sb = new StringBuilder();
             for (int offset = 0; offset < input.Length;)
             {
-                byte a, b, c, d, e, f, g, h;
-                int numCharsToOutput = GetNextGroup(input, ref offset, out a, out b, out c, out d, out e, out f, out g, out h);
+                byte a,
+                    b,
+                    c,
+                    d,
+                    e,
+                    f,
+                    g,
+                    h;
+                int numCharsToOutput = GetNextGroup(
+                    input,
+                    ref offset,
+                    out a,
+                    out b,
+                    out c,
+                    out d,
+                    out e,
+                    out f,
+                    out g,
+                    out h
+                );
 
                 sb.Append((numCharsToOutput >= 1) ? _base32Chars[a] : '=');
                 sb.Append((numCharsToOutput >= 2) ? _base32Chars[b] : '=');
@@ -84,18 +102,43 @@ namespace Microsoft.AspNetCore.Identity
         }
 
         // returns the number of bytes that were output
-        private static int GetNextGroup(byte[] input, ref int offset, out byte a, out byte b, out byte c, out byte d, out byte e, out byte f, out byte g, out byte h)
+        private static int GetNextGroup(
+            byte[] input,
+            ref int offset,
+            out byte a,
+            out byte b,
+            out byte c,
+            out byte d,
+            out byte e,
+            out byte f,
+            out byte g,
+            out byte h
+        )
         {
-            uint b1, b2, b3, b4, b5;
+            uint b1,
+                b2,
+                b3,
+                b4,
+                b5;
 
             int retVal;
             switch (input.Length - offset)
             {
-                case 1: retVal = 2; break;
-                case 2: retVal = 4; break;
-                case 3: retVal = 5; break;
-                case 4: retVal = 7; break;
-                default: retVal = 8; break;
+                case 1:
+                    retVal = 2;
+                    break;
+                case 2:
+                    retVal = 4;
+                    break;
+                case 3:
+                    retVal = 5;
+                    break;
+                case 4:
+                    retVal = 7;
+                    break;
+                default:
+                    retVal = 8;
+                    break;
             }
 
             b1 = (offset < input.Length) ? input[offset++] : 0U;

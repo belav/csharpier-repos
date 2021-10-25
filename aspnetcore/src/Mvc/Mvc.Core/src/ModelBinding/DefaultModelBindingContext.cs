@@ -180,14 +180,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <inheritdoc />
         public override ModelBindingResult Result
         {
-            get
-            {
-                return _state.Result;
-            }
-            set
-            {
-                _state.Result = value;
-            }
+            get { return _state.Result; }
+            set { _state.Result = value; }
         }
 
         private int MaxModelBindingRecursionDepth
@@ -198,15 +192,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 {
                     // Ignore incomplete initialization. This must be a test scenario because CreateBindingContext(...)
                     // has not been called or was called without MvcOptions in the service provider.
-                    _maxModelBindingRecursionDepth = MvcOptions.DefaultMaxModelBindingRecursionDepth;
+                    _maxModelBindingRecursionDepth =
+                        MvcOptions.DefaultMaxModelBindingRecursionDepth;
                 }
 
                 return _maxModelBindingRecursionDepth.Value;
             }
-            set
-            {
-                _maxModelBindingRecursionDepth = value;
-            }
+            set { _maxModelBindingRecursionDepth = value; }
         }
 
         /// <summary>
@@ -225,7 +217,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             IValueProvider valueProvider,
             ModelMetadata metadata,
             BindingInfo? bindingInfo,
-            string modelName)
+            string modelName
+        )
         {
             if (actionContext == null)
             {
@@ -249,7 +242,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             var binderModelName = bindingInfo?.BinderModelName ?? metadata.BinderModelName;
             var bindingSource = bindingInfo?.BindingSource ?? metadata.BindingSource;
-            var propertyFilterProvider = bindingInfo?.PropertyFilterProvider ?? metadata.PropertyFilterProvider;
+            var propertyFilterProvider =
+                bindingInfo?.PropertyFilterProvider ?? metadata.PropertyFilterProvider;
 
             var bindingContext = new DefaultModelBindingContext()
             {
@@ -258,25 +252,25 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 BindingSource = bindingSource,
                 PropertyFilter = propertyFilterProvider?.PropertyFilter,
                 ValidationState = new ValidationStateDictionary(),
-
                 // Because this is the top-level context, FieldName and ModelName should be the same.
                 FieldName = binderModelName ?? modelName,
                 ModelName = binderModelName ?? modelName,
                 OriginalModelName = binderModelName ?? modelName,
-
                 IsTopLevelObject = true,
                 ModelMetadata = metadata,
                 ModelState = actionContext.ModelState,
-
                 OriginalValueProvider = valueProvider,
                 ValueProvider = FilterValueProvider(valueProvider, bindingSource),
             };
 
             // mvcOptions may be null when this method is called in test scenarios.
-            var mvcOptions = actionContext.HttpContext.RequestServices?.GetService<IOptions<MvcOptions>>();
+            var mvcOptions = actionContext.HttpContext.RequestServices?.GetService<
+                IOptions<MvcOptions>
+            >();
             if (mvcOptions != null)
             {
-                bindingContext.MaxModelBindingRecursionDepth = mvcOptions.Value.MaxModelBindingRecursionDepth;
+                bindingContext.MaxModelBindingRecursionDepth =
+                    mvcOptions.Value.MaxModelBindingRecursionDepth;
             }
 
             return bindingContext;
@@ -287,7 +281,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             ModelMetadata modelMetadata,
             string fieldName,
             string modelName,
-            object? model)
+            object? model
+        )
         {
             if (modelMetadata == null)
             {
@@ -310,7 +305,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             // to preserve the current state.
             if (modelMetadata.BindingSource != null && !modelMetadata.BindingSource.IsGreedy)
             {
-                ValueProvider = FilterValueProvider(OriginalValueProvider, modelMetadata.BindingSource);
+                ValueProvider = FilterValueProvider(
+                    OriginalValueProvider,
+                    modelMetadata.BindingSource
+                );
             }
 
             Model = model;
@@ -339,11 +337,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 var states = _stack.ToArray();
                 var rootModelType = states[states.Length - 1].ModelMetadata.ModelType;
 
-                throw new InvalidOperationException(Resources.FormatModelBinding_ExceededMaxModelBindingRecursionDepth(
-                    nameof(MvcOptions),
-                    nameof(MvcOptions.MaxModelBindingRecursionDepth),
-                    MaxModelBindingRecursionDepth,
-                    rootModelType));
+                throw new InvalidOperationException(
+                    Resources.FormatModelBinding_ExceededMaxModelBindingRecursionDepth(
+                        nameof(MvcOptions),
+                        nameof(MvcOptions.MaxModelBindingRecursionDepth),
+                        MaxModelBindingRecursionDepth,
+                        rootModelType
+                    )
+                );
             }
 
             Result = default;
@@ -357,7 +358,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             _state = _stack.Pop();
         }
 
-        private static IValueProvider FilterValueProvider(IValueProvider valueProvider, BindingSource? bindingSource)
+        private static IValueProvider FilterValueProvider(
+            IValueProvider valueProvider,
+            BindingSource? bindingSource
+        )
         {
             if (bindingSource == null || bindingSource.IsGreedy)
             {

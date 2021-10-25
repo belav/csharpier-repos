@@ -52,13 +52,16 @@ namespace System.Net.WebSockets.Client.Tests
         {
             for (int i = 0; i < 3; i++) // Connect and disconnect multiple times to exercise shared handler on netcoreapp
             {
-                var ws = await WebSocketHelper.Retry(_output, async () =>
-                {
-                    var cws = new ClientWebSocket();
-                    cws.Options.Proxy = null;
-                    await cws.ConnectAsync(server, default);
-                    return cws;
-                });
+                var ws = await WebSocketHelper.Retry(
+                    _output,
+                    async () =>
+                    {
+                        var cws = new ClientWebSocket();
+                        cws.Options.Proxy = null;
+                        await cws.ConnectAsync(server, default);
+                        return cws;
+                    }
+                );
                 await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, default);
                 ws.Dispose();
             }
@@ -79,12 +82,15 @@ namespace System.Net.WebSockets.Client.Tests
             _output.WriteLine($"ProxyServer: {proxyServerUri}");
 
             IWebProxy proxy = new WebProxy(new Uri(proxyServerUri));
-            using (ClientWebSocket cws = await WebSocketHelper.GetConnectedWebSocket(
-                server,
-                TimeOutMilliseconds,
-                _output,
-                default(TimeSpan),
-                proxy))
+            using (
+                ClientWebSocket cws = await WebSocketHelper.GetConnectedWebSocket(
+                    server,
+                    TimeOutMilliseconds,
+                    _output,
+                    default(TimeSpan),
+                    proxy
+                )
+            )
             {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
                 Assert.Equal(WebSocketState.Open, cws.State);
@@ -113,14 +119,54 @@ namespace System.Net.WebSockets.Client.Tests
 
             var cws = new ClientWebSocket();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () => cws.Options.SetBuffer(0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () => cws.Options.SetBuffer(0, minSendBufferSize));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sendBufferSize", () => cws.Options.SetBuffer(minReceiveBufferSize, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () => cws.Options.SetBuffer(0, 0, new ArraySegment<byte>(new byte[1])));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () => cws.Options.SetBuffer(0, minSendBufferSize, new ArraySegment<byte>(new byte[1])));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sendBufferSize", () => cws.Options.SetBuffer(minReceiveBufferSize, 0, new ArraySegment<byte>(new byte[1])));
-            AssertExtensions.Throws<ArgumentNullException>("buffer.Array", () => cws.Options.SetBuffer(minReceiveBufferSize, minSendBufferSize, default(ArraySegment<byte>)));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(bufferName, () => cws.Options.SetBuffer(minReceiveBufferSize, minSendBufferSize, new ArraySegment<byte>(new byte[0])));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "receiveBufferSize",
+                () => cws.Options.SetBuffer(0, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "receiveBufferSize",
+                () => cws.Options.SetBuffer(0, minSendBufferSize)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sendBufferSize",
+                () => cws.Options.SetBuffer(minReceiveBufferSize, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "receiveBufferSize",
+                () => cws.Options.SetBuffer(0, 0, new ArraySegment<byte>(new byte[1]))
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "receiveBufferSize",
+                () =>
+                    cws.Options.SetBuffer(0, minSendBufferSize, new ArraySegment<byte>(new byte[1]))
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sendBufferSize",
+                () =>
+                    cws.Options.SetBuffer(
+                        minReceiveBufferSize,
+                        0,
+                        new ArraySegment<byte>(new byte[1])
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "buffer.Array",
+                () =>
+                    cws.Options.SetBuffer(
+                        minReceiveBufferSize,
+                        minSendBufferSize,
+                        default(ArraySegment<byte>)
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                bufferName,
+                () =>
+                    cws.Options.SetBuffer(
+                        minReceiveBufferSize,
+                        minSendBufferSize,
+                        new ArraySegment<byte>(new byte[0])
+                    )
+            );
         }
 
         [ConditionalFact(nameof(WebSocketsSupported))]
@@ -139,7 +185,10 @@ namespace System.Net.WebSockets.Client.Tests
             cws.Options.KeepAliveInterval = Timeout.InfiniteTimeSpan;
             Assert.Equal(Timeout.InfiniteTimeSpan, cws.Options.KeepAliveInterval);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => cws.Options.KeepAliveInterval = TimeSpan.MinValue);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => cws.Options.KeepAliveInterval = TimeSpan.MinValue
+            );
         }
 
         [ConditionalFact(nameof(WebSocketsSupported))]
@@ -150,7 +199,10 @@ namespace System.Net.WebSockets.Client.Tests
             {
                 Assert.Null(cws.Options.RemoteCertificateValidationCallback);
 
-                RemoteCertificateValidationCallback callback = delegate { return true; };
+                RemoteCertificateValidationCallback callback = delegate
+                {
+                    return true;
+                };
                 cws.Options.RemoteCertificateValidationCallback = callback;
                 Assert.Same(callback, cws.Options.RemoteCertificateValidationCallback);
 
@@ -164,7 +216,9 @@ namespace System.Net.WebSockets.Client.Tests
         [InlineData(false)]
         [InlineData(true)]
         [SkipOnPlatform(TestPlatforms.Browser, "Certificates not supported on browser")]
-        public async Task RemoteCertificateValidationCallback_PassedRemoteCertificateInfo(bool secure)
+        public async Task RemoteCertificateValidationCallback_PassedRemoteCertificateInfo(
+            bool secure
+        )
         {
             if (PlatformDetection.IsWindows7)
             {
@@ -173,27 +227,40 @@ namespace System.Net.WebSockets.Client.Tests
 
             bool callbackInvoked = false;
 
-            await LoopbackServer.CreateClientAndServerAsync(async uri =>
-            {
-                using (var cws = new ClientWebSocket())
-                using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
+            await LoopbackServer.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    cws.Options.RemoteCertificateValidationCallback = (source, cert, chain, errors) =>
+                    using (var cws = new ClientWebSocket())
+                    using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
                     {
-                        Assert.NotNull(source);
-                        Assert.NotNull(cert);
-                        Assert.NotNull(chain);
-                        Assert.NotEqual(SslPolicyErrors.None, errors);
-                        callbackInvoked = true;
-                        return true;
-                    };
-                    await cws.ConnectAsync(uri, cts.Token);
-                }
-            }, server => server.AcceptConnectionAsync(async connection =>
-            {
-                Assert.NotNull(await LoopbackHelper.WebSocketHandshakeAsync(connection));
-            }),
-            new LoopbackServer.Options { UseSsl = secure, WebSocketEndpoint = true });
+                        cws.Options.RemoteCertificateValidationCallback = (
+                            source,
+                            cert,
+                            chain,
+                            errors
+                        ) =>
+                        {
+                            Assert.NotNull(source);
+                            Assert.NotNull(cert);
+                            Assert.NotNull(chain);
+                            Assert.NotEqual(SslPolicyErrors.None, errors);
+                            callbackInvoked = true;
+                            return true;
+                        };
+                        await cws.ConnectAsync(uri, cts.Token);
+                    }
+                },
+                server =>
+                    server.AcceptConnectionAsync(
+                        async connection =>
+                        {
+                            Assert.NotNull(
+                                await LoopbackHelper.WebSocketHandshakeAsync(connection)
+                            );
+                        }
+                    ),
+                new LoopbackServer.Options { UseSsl = secure, WebSocketEndpoint = true }
+            );
 
             Assert.Equal(secure, callbackInvoked);
         }
@@ -208,34 +275,57 @@ namespace System.Net.WebSockets.Client.Tests
                 return; // see https://github.com/dotnet/runtime/issues/1491#issuecomment-376392057 for more details
             }
 
-            using (X509Certificate2 clientCert = Test.Common.Configuration.Certificates.GetClientCertificate())
+            using (
+                X509Certificate2 clientCert =
+                    Test.Common.Configuration.Certificates.GetClientCertificate()
+            )
             {
-                await LoopbackServer.CreateClientAndServerAsync(async uri =>
-                {
-                    using (var clientSocket = new ClientWebSocket())
-                    using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
+                await LoopbackServer.CreateClientAndServerAsync(
+                    async uri =>
                     {
-                        clientSocket.Options.ClientCertificates.Add(clientCert);
-                        clientSocket.Options.RemoteCertificateValidationCallback = delegate { return true; };
-                        await clientSocket.ConnectAsync(uri, cts.Token);
-                    }
-                }, server => server.AcceptConnectionAsync(async connection =>
-                {
-                    // Validate that the client certificate received by the server matches the one configured on
-                    // the client-side socket.
-                    SslStream sslStream = Assert.IsType<SslStream>(connection.Stream);
-                    Assert.NotNull(sslStream.RemoteCertificate);
-                    Assert.Equal(clientCert, new X509Certificate2(sslStream.RemoteCertificate));
+                        using (var clientSocket = new ClientWebSocket())
+                        using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
+                        {
+                            clientSocket.Options.ClientCertificates.Add(clientCert);
+                            clientSocket.Options.RemoteCertificateValidationCallback = delegate
+                            {
+                                return true;
+                            };
+                            await clientSocket.ConnectAsync(uri, cts.Token);
+                        }
+                    },
+                    server =>
+                        server.AcceptConnectionAsync(
+                            async connection =>
+                            {
+                                // Validate that the client certificate received by the server matches the one configured on
+                                // the client-side socket.
+                                SslStream sslStream = Assert.IsType<SslStream>(connection.Stream);
+                                Assert.NotNull(sslStream.RemoteCertificate);
+                                Assert.Equal(
+                                    clientCert,
+                                    new X509Certificate2(sslStream.RemoteCertificate)
+                                );
 
-                    // Complete the WebSocket upgrade over the secure channel. After this is done, the client-side
-                    // ConnectAsync should complete.
-                    Assert.NotNull(await LoopbackHelper.WebSocketHandshakeAsync(connection));
-                }), new LoopbackServer.Options { UseSsl = true, WebSocketEndpoint = true });
+                                // Complete the WebSocket upgrade over the secure channel. After this is done, the client-side
+                                // ConnectAsync should complete.
+                                Assert.NotNull(
+                                    await LoopbackHelper.WebSocketHandshakeAsync(connection)
+                                );
+                            }
+                        ),
+                    new LoopbackServer.Options { UseSsl = true, WebSocketEndpoint = true }
+                );
             }
         }
 
         [ConditionalTheory(nameof(WebSocketsSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34690", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34690",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [InlineData("ws://")]
         [InlineData("wss://")]
         [SkipOnPlatform(TestPlatforms.Browser, "Credentials not supported on browser")]
@@ -248,18 +338,31 @@ namespace System.Net.WebSockets.Client.Tests
 
             bool connectionAccepted = false;
 
-            await LoopbackServer.CreateClientAndServerAsync(async proxyUri =>
-            {
-                using (var cws = new ClientWebSocket())
+            await LoopbackServer.CreateClientAndServerAsync(
+                async proxyUri =>
                 {
-                    cws.Options.Proxy = new WebProxy(proxyUri);
-                    try { await cws.ConnectAsync(new Uri(connectionType + Guid.NewGuid().ToString("N")), default); } catch { }
-                }
-            }, server => server.AcceptConnectionAsync(async connection =>
-            {
-                Assert.Contains("CONNECT", await connection.ReadLineAsync());
-                connectionAccepted = true;
-            }));
+                    using (var cws = new ClientWebSocket())
+                    {
+                        cws.Options.Proxy = new WebProxy(proxyUri);
+                        try
+                        {
+                            await cws.ConnectAsync(
+                                new Uri(connectionType + Guid.NewGuid().ToString("N")),
+                                default
+                            );
+                        }
+                        catch { }
+                    }
+                },
+                server =>
+                    server.AcceptConnectionAsync(
+                        async connection =>
+                        {
+                            Assert.Contains("CONNECT", await connection.ReadLineAsync());
+                            connectionAccepted = true;
+                        }
+                    )
+            );
 
             Assert.True(connectionAccepted);
         }

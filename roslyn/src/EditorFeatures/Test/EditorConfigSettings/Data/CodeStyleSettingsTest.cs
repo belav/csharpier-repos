@@ -25,7 +25,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
             var option = CreateBoolOption(defaultValue);
             var editorConfigOptions = new TestAnalyzerConfigOptions();
             var visualStudioOptions = new TestOptionSet<bool>(option.DefaultValue);
-            var setting = CodeStyleSetting.Create(option, description: "TestDesciption", editorConfigOptions, visualStudioOptions, updater: null!);
+            var setting = CodeStyleSetting.Create(
+                option,
+                description: "TestDesciption",
+                editorConfigOptions,
+                visualStudioOptions,
+                updater: null!
+            );
             Assert.Equal(string.Empty, setting.Category);
             Assert.Equal("TestDesciption", setting.Description);
             Assert.False(setting.IsDefinedInEditorConfig);
@@ -41,13 +47,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
             var option = CreateEnumOption(defaultValue);
             var editorConfigOptions = new TestAnalyzerConfigOptions();
             var visualStudioOptions = new TestOptionSet<DayOfWeek>(option.DefaultValue);
-            var setting = CodeStyleSetting.Create(option,
-                                                  description: "TestDesciption",
-                                                  enumValues: (DayOfWeek[])Enum.GetValues(typeof(DayOfWeek)),
-                                                  valueDescriptions: Enum.GetNames(typeof(DayOfWeek)),
-                                                  editorConfigOptions,
-                                                  visualStudioOptions,
-                                                  updater: null!);
+            var setting = CodeStyleSetting.Create(
+                option,
+                description: "TestDesciption",
+                enumValues: (DayOfWeek[])Enum.GetValues(typeof(DayOfWeek)),
+                valueDescriptions: Enum.GetNames(typeof(DayOfWeek)),
+                editorConfigOptions,
+                visualStudioOptions,
+                updater: null!
+            );
             Assert.Equal(string.Empty, setting.Category);
             Assert.Equal("TestDesciption", setting.Description);
             Assert.False(setting.IsDefinedInEditorConfig);
@@ -59,9 +67,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
         {
             var option = CodeStyleOption2<bool>.Default;
             option.Value = @default;
-            return new Option2<CodeStyleOption2<bool>>(feature: "TestFeature",
-                                                       name: "TestOption",
-                                                       defaultValue: option);
+            return new Option2<CodeStyleOption2<bool>>(
+                feature: "TestFeature",
+                name: "TestOption",
+                defaultValue: option
+            );
         }
 
         private static Option2<CodeStyleOption2<T>> CreateEnumOption<T>(T @default)
@@ -69,26 +79,34 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
         {
             var option = CodeStyleOption2<T>.Default;
             option.Value = @default;
-            return new Option2<CodeStyleOption2<T>>(feature: "TestFeature",
-                                                    name: "TestOption",
-                                                    defaultValue: option);
+            return new Option2<CodeStyleOption2<T>>(
+                feature: "TestFeature",
+                name: "TestOption",
+                defaultValue: option
+            );
         }
 
         private class TestAnalyzerConfigOptions : AnalyzerConfigOptions
         {
             private readonly IDictionary<string, string> _dictionary;
-            public TestAnalyzerConfigOptions((string, string)[]? options = null)
-                => _dictionary = options?.ToDictionary(x => x.Item1, x => x.Item2) ?? new Dictionary<string, string>();
-            public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
-                => _dictionary.TryGetValue(key, out value);
+            public TestAnalyzerConfigOptions((string, string)[]? options = null) =>
+                _dictionary =
+                    options?.ToDictionary(x => x.Item1, x => x.Item2)
+                    ?? new Dictionary<string, string>();
+            public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>
+                _dictionary.TryGetValue(key, out value);
         }
 
         private class TestOptionSet<T> : OptionSet
         {
             private readonly object? _value;
             public TestOptionSet(CodeStyleOption2<T> value) => _value = value;
-            public override OptionSet WithChangedOption(OptionKey optionAndLanguage, object? value) => this;
-            internal override IEnumerable<OptionKey> GetChangedOptions(OptionSet optionSet) => Array.Empty<OptionKey>();
+            public override OptionSet WithChangedOption(
+                OptionKey optionAndLanguage,
+                object? value
+            ) => this;
+            internal override IEnumerable<OptionKey> GetChangedOptions(OptionSet optionSet) =>
+                Array.Empty<OptionKey>();
             private protected override object? GetOptionCore(OptionKey optionKey) => _value;
         }
     }

@@ -10,10 +10,10 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos
 {
-    public class CustomConvertersCosmosTest : CustomConvertersTestBase<CustomConvertersCosmosTest.CustomConvertersCosmosFixture>
+    public class CustomConvertersCosmosTest
+        : CustomConvertersTestBase<CustomConvertersCosmosTest.CustomConvertersCosmosFixture>
     {
-        public CustomConvertersCosmosTest(CustomConvertersCosmosFixture fixture)
-            : base(fixture)
+        public CustomConvertersCosmosTest(CustomConvertersCosmosFixture fixture) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
         }
@@ -109,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND (c[""IsVisible""] = ""Y""))");
+WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND (c[""IsVisible""] = ""Y""))"
+            );
         }
 
         [ConditionalFact]
@@ -120,7 +121,8 @@ WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND (c[""IsVisible""] = "
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND NOT((c[""IsVisible""] = ""Y"")))");
+WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND NOT((c[""IsVisible""] = ""Y"")))"
+            );
         }
 
         [ConditionalFact]
@@ -131,7 +133,8 @@ WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND NOT((c[""IsVisible""]
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND (c[""IsVisible""] = ""Y""))");
+WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND (c[""IsVisible""] = ""Y""))"
+            );
         }
 
         [ConditionalFact]
@@ -142,7 +145,8 @@ WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND (c[""IsVisible""] = "
             AssertSql(
                 @"SELECT c
 FROM root c
-WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND NOT((c[""IndexerVisible""] = ""Aye"")))");
+WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND NOT((c[""IndexerVisible""] = ""Aye"")))"
+            );
         }
 
         [ConditionalFact(Skip = "Issue#27678")]
@@ -151,48 +155,44 @@ WHERE (c[""Discriminator""] IN (""Blog"", ""RssBlog"") AND NOT((c[""IndexerVisib
             base.Optional_owned_with_converter_reading_non_nullable_column();
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
         public class CustomConvertersCosmosFixture : CustomConvertersFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => CosmosTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                CosmosTestStoreFactory.Instance;
 
-            public override bool StrictEquality
-                => true;
+            public override bool StrictEquality => true;
 
-            public override int IntegerPrecision
-                => 53;
+            public override int IntegerPrecision => 53;
 
-            public override bool SupportsAnsi
-                => false;
+            public override bool SupportsAnsi => false;
 
-            public override bool SupportsUnicodeToAnsiConversion
-                => false;
+            public override bool SupportsUnicodeToAnsiConversion => false;
 
-            public override bool SupportsLargeStringComparisons
-                => true;
+            public override bool SupportsLargeStringComparisons => true;
 
-            public override bool SupportsBinaryKeys
-                => true;
+            public override bool SupportsBinaryKeys => true;
 
-            public override bool SupportsDecimalComparisons
-                => true;
+            public override bool SupportsDecimalComparisons => true;
 
-            public override DateTime DefaultDateTime
-                => new();
+            public override DateTime DefaultDateTime => new();
 
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
                 base.OnModelCreating(modelBuilder, context);
 
-                var shadowJObject = (Property)modelBuilder.Entity<BuiltInDataTypesShadow>().Property("__jObject").Metadata;
+                var shadowJObject = (Property)modelBuilder
+                    .Entity<BuiltInDataTypesShadow>()
+                    .Property("__jObject").Metadata;
                 shadowJObject.SetConfigurationSource(ConfigurationSource.Convention);
-                var nullableShadowJObject = (Property)modelBuilder.Entity<BuiltInNullableDataTypesShadow>().Property("__jObject").Metadata;
+                var nullableShadowJObject = (Property)modelBuilder
+                    .Entity<BuiltInNullableDataTypesShadow>()
+                    .Property("__jObject").Metadata;
                 nullableShadowJObject.SetConfigurationSource(ConfigurationSource.Convention);
 
                 modelBuilder.Entity<SimpleCounter>(b => b.ToContainer("SimpleCounters"));

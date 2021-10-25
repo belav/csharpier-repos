@@ -53,8 +53,11 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
         /// Callers of this method may choose to ignore the returned <see cref="Task"/> if they do not
         /// want to await the rendering of the added component.
         /// </remarks>
-        public Task AddComponentAsync<[DynamicallyAccessedMembers(Component)] TComponent>(string domElementSelector, ParameterView parameters) where TComponent : IComponent
-            => AddComponentAsync(typeof(TComponent), domElementSelector, parameters);
+        public Task AddComponentAsync<[DynamicallyAccessedMembers(Component)] TComponent>(
+            string domElementSelector,
+            ParameterView parameters
+        ) where TComponent : IComponent =>
+            AddComponentAsync(typeof(TComponent), domElementSelector, parameters);
 
         /// <summary>
         /// Associates the <see cref="IComponent"/> with the <see cref="WebAssemblyRenderer"/>,
@@ -68,7 +71,11 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
         /// Callers of this method may choose to ignore the returned <see cref="Task"/> if they do not
         /// want to await the rendering of the added component.
         /// </remarks>
-        public Task AddComponentAsync([DynamicallyAccessedMembers(Component)] Type componentType, string domElementSelector, ParameterView parameters)
+        public Task AddComponentAsync(
+            [DynamicallyAccessedMembers(Component)] Type componentType,
+            string domElementSelector,
+            ParameterView parameters
+        )
         {
             var component = InstantiateComponent(componentType);
             var componentId = AssignRootComponentId(component);
@@ -83,7 +90,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
                 "Blazor._internal.attachRootComponentToElement",
                 domElementSelector,
                 componentId,
-                _webAssemblyRendererId);
+                _webAssemblyRendererId
+            );
 
             return RenderRootComponentAsync(componentId, parameters);
         }
@@ -101,7 +109,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
             DefaultWebAssemblyJSRuntime.Instance.InvokeUnmarshalled<int, RenderBatch, object>(
                 "Blazor._internal.renderBatch",
                 _webAssemblyRendererId,
-                batch);
+                batch
+            );
 
             if (deferredIncomingEvents.Count == 0)
             {
@@ -139,7 +148,11 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
         }
 
         /// <inheritdoc />
-        public override Task DispatchEventAsync(ulong eventHandlerId, EventFieldInfo? eventFieldInfo, EventArgs eventArgs)
+        public override Task DispatchEventAsync(
+            ulong eventHandlerId,
+            EventFieldInfo? eventFieldInfo,
+            EventArgs eventArgs
+        )
         {
             // Be sure we only run one event handler at once. Although they couldn't run
             // simultaneously anyway (there's only one thread), they could run nested on
@@ -190,7 +203,11 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
 
             try
             {
-                var handlerTask = DispatchEventAsync(info.EventHandlerId, info.EventFieldInfo, info.EventArgs);
+                var handlerTask = DispatchEventAsync(
+                    info.EventHandlerId,
+                    info.EventFieldInfo,
+                    info.EventArgs
+                );
                 info.StartHandlerCompletionSource.SetResult();
                 await handlerTask;
                 info.FinishHandlerCompletionSource.SetResult();
@@ -212,23 +229,38 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
             public readonly TaskCompletionSource StartHandlerCompletionSource;
             public readonly TaskCompletionSource FinishHandlerCompletionSource;
 
-            public IncomingEventInfo(ulong eventHandlerId, EventFieldInfo? eventFieldInfo, EventArgs eventArgs)
+            public IncomingEventInfo(
+                ulong eventHandlerId,
+                EventFieldInfo? eventFieldInfo,
+                EventArgs eventArgs
+            )
             {
                 EventHandlerId = eventHandlerId;
                 EventFieldInfo = eventFieldInfo;
                 EventArgs = eventArgs;
-                StartHandlerCompletionSource = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-                FinishHandlerCompletionSource = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                StartHandlerCompletionSource = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
+                FinishHandlerCompletionSource = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
             }
         }
 
         private static class Log
         {
-            private static readonly Action<ILogger, string, Exception> _unhandledExceptionRenderingComponent;
+            private static readonly Action<
+                ILogger,
+                string,
+                Exception
+            > _unhandledExceptionRenderingComponent;
 
             private static class EventIds
             {
-                public static readonly EventId UnhandledExceptionRenderingComponent = new EventId(100, "ExceptionRenderingComponent");
+                public static readonly EventId UnhandledExceptionRenderingComponent = new EventId(
+                    100,
+                    "ExceptionRenderingComponent"
+                );
             }
 
             static Log()
@@ -236,15 +268,16 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
                 _unhandledExceptionRenderingComponent = LoggerMessage.Define<string>(
                     LogLevel.Critical,
                     EventIds.UnhandledExceptionRenderingComponent,
-                    "Unhandled exception rendering component: {Message}");
+                    "Unhandled exception rendering component: {Message}"
+                );
             }
 
-            public static void UnhandledExceptionRenderingComponent(ILogger logger, Exception exception)
+            public static void UnhandledExceptionRenderingComponent(
+                ILogger logger,
+                Exception exception
+            )
             {
-                _unhandledExceptionRenderingComponent(
-                    logger,
-                    exception.Message,
-                    exception);
+                _unhandledExceptionRenderingComponent(logger, exception.Message, exception);
             }
         }
 

@@ -77,12 +77,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                     destinationX: 0,
                     destinationY: 0,
                     blockRegionSize: bitmap.Size,
-                    copyPixelOperation: CopyPixelOperation.SourceCopy);
+                    copyPixelOperation: CopyPixelOperation.SourceCopy
+                );
 
                 var bitmapData = bitmap.LockBits(
                     new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                     ImageLockMode.ReadOnly,
-                    PixelFormat.Format32bppArgb);
+                    PixelFormat.Format32bppArgb
+                );
                 try
                 {
                     return BitmapSource.Create(
@@ -94,7 +96,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                         null,
                         bitmapData.Scan0,
                         bitmapData.Stride * bitmapData.Height,
-                        bitmapData.Stride);
+                        bitmapData.Stride
+                    );
                 }
                 finally
                 {

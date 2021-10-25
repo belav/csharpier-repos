@@ -23,32 +23,34 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Fact]
         public void Muxer_activation_of_Build_Output_Portable_DLL_with_DepsJson_and_RuntimeConfig_Local_Succeeds()
         {
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
 
-            dotnet.Exec("exec", appDll)
+            dotnet
+                .Exec("exec", appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
         [Fact]
         public void Muxer_activation_of_Build_Output_Portable_DLL_with_DepsJson_having_Assembly_with_Different_File_Extension_Fails()
         {
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             var dotnet = fixture.BuiltDotnet;
 
@@ -58,55 +60,67 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             File.Copy(appDll, appExe, true);
             File.Delete(appDll);
 
-            dotnet.Exec("exec", appExe)
+            dotnet
+                .Exec("exec", appExe)
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining("has already been found but with a different file extension");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    "has already been found but with a different file extension"
+                );
         }
 
         [Fact]
         public void Muxer_activation_of_Apps_with_AltDirectorySeparatorChar()
         {
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             var dotnet = fixture.BuiltDotnet;
-            var appDll = fixture.TestProject.AppDll.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            var appDll = fixture.TestProject.AppDll.Replace(
+                Path.DirectorySeparatorChar,
+                Path.AltDirectorySeparatorChar
+            );
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
         // https://github.com/dotnet/core-setup/issues/6914
-        [Fact(Skip = "The 3.0 SDK copies NuGet references to the output by default now for executable projects, so this no longer fails.")]
+        [Fact(
+            Skip = "The 3.0 SDK copies NuGet references to the output by default now for executable projects, so this no longer fails."
+        )]
         public void Muxer_Exec_activation_of_Build_Output_Portable_DLL_with_DepsJson_Local_and_RuntimeConfig_Remote_Without_AdditionalProbingPath_Fails()
         {
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             var runtimeConfig = MoveRuntimeConfigToSubdirectory(fixture);
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec("exec", "--runtimeconfig", runtimeConfig, appDll)
+            dotnet
+                .Exec("exec", "--runtimeconfig", runtimeConfig, appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail();
+                .Should()
+                .Fail();
         }
 
         // https://github.com/dotnet/core-setup/issues/6914
-        [Fact(Skip = "The 3.0 SDK copies NuGet references to the output by default now for executable projects, so this no longer fails.")]
+        [Fact(
+            Skip = "The 3.0 SDK copies NuGet references to the output by default now for executable projects, so this no longer fails."
+        )]
         public void Muxer_Exec_activation_of_Build_Output_Portable_DLL_with_DepsJson_Local_and_RuntimeConfig_Remote_With_AdditionalProbingPath_Succeeds()
         {
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             var runtimeConfig = MoveRuntimeConfigToSubdirectory(fixture);
 
@@ -114,24 +128,30 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var appDll = fixture.TestProject.AppDll;
             var additionalProbingPath = sharedTestState.RepoDirectories.NugetPackages;
 
-            dotnet.Exec(
+            dotnet
+                .Exec(
                     "exec",
-                    "--runtimeconfig", runtimeConfig,
-                    "--additionalprobingpath", additionalProbingPath,
-                    appDll)
+                    "--runtimeconfig",
+                    runtimeConfig,
+                    "--additionalprobingpath",
+                    additionalProbingPath,
+                    appDll
+                )
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
         // https://github.com/dotnet/core-setup/issues/6914
-        [Fact(Skip = "The 3.0 SDK copies NuGet references to the output by default now for executable projects, so the additional probing path is no longer needed.")]
+        [Fact(
+            Skip = "The 3.0 SDK copies NuGet references to the output by default now for executable projects, so the additional probing path is no longer needed."
+        )]
         public void Muxer_Activation_With_Templated_AdditionalProbingPath_Succeeds()
         {
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             var store_path = CreateAStore(fixture);
             var dotnet = fixture.BuiltDotnet;
@@ -145,104 +165,108 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             var additionalProbingPath = store_path + "/|arch|/|tfm|";
 
-            dotnet.Exec(
-                    "exec",
-                    "--additionalprobingpath", additionalProbingPath,
-                    appDll)
+            dotnet
+                .Exec("exec", "--additionalprobingpath", additionalProbingPath, appDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdErrContaining($"Adding tpa entry: {Path.Combine(store_path, fixture.RepoDirProvider.BuildArchitecture, fixture.Framework)}");
+                .And.HaveStdErrContaining(
+                    $"Adding tpa entry: {Path.Combine(store_path, fixture.RepoDirProvider.BuildArchitecture, fixture.Framework)}"
+                );
         }
 
         [Fact]
         public void Muxer_Exec_activation_of_Build_Output_Portable_DLL_with_DepsJson_Remote_and_RuntimeConfig_Local_Succeeds()
         {
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             var depsJson = MoveDepsJsonToSubdirectory(fixture);
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec("exec", "--depsfile", depsJson, appDll)
+            dotnet
+                .Exec("exec", "--depsfile", depsJson, appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
-
         }
 
         [Fact]
         public void Muxer_activation_of_Publish_Output_Portable_DLL_with_DepsJson_and_RuntimeConfig_Local_Succeeds()
         {
-            var fixture = sharedTestState.PortableAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Published.Copy();
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
 
-            dotnet.Exec("exec", appDll)
+            dotnet
+                .Exec("exec", appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
-
 
         [Fact]
         public void Muxer_Exec_activation_of_Publish_Output_Portable_DLL_with_DepsJson_Local_and_RuntimeConfig_Remote_Succeeds()
         {
-            var fixture = sharedTestState.PortableAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Published.Copy();
 
             var runtimeConfig = MoveRuntimeConfigToSubdirectory(fixture);
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec("exec", "--runtimeconfig", runtimeConfig, appDll)
+            dotnet
+                .Exec("exec", "--runtimeconfig", runtimeConfig, appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
         [Fact]
         public void Muxer_Exec_activation_of_Publish_Output_Portable_DLL_with_DepsJson_Remote_and_RuntimeConfig_Local_Fails()
         {
-            var fixture = sharedTestState.PortableAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Published.Copy();
 
             var depsJson = MoveDepsJsonToSubdirectory(fixture);
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec("exec", "--depsfile", depsJson, appDll)
+            dotnet
+                .Exec("exec", "--depsfile", depsJson, appDll)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail();
+                .Should()
+                .Fail();
         }
 
         [Fact]
         public void AppHost_FrameworkDependent_Succeeds()
         {
-            var fixture = sharedTestState.PortableAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Published.Copy();
 
             // Since SDK doesn't support building framework dependent apphost yet, emulate that behavior
             // by creating the executable from apphost.exe
@@ -254,28 +278,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string builtDotnet = fixture.BuiltDotnet.BinPath;
 
             // Verify running with the default working directory
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .DotNetRoot(builtDotnet)
                 .MultilevelLookup(false)
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
-
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
 
             // Verify running from within the working directory
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .WorkingDirectory(fixture.TestProject.OutputDirectory)
                 .DotNetRoot(builtDotnet)
                 .MultilevelLookup(false)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
         }
 
         [Theory]
@@ -283,8 +314,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [InlineData(false)]
         public void AppHost_FrameworkDependent_GlobalLocation_Succeeds(bool useRegisteredLocation)
         {
-            var fixture = sharedTestState.PortableAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Published.Copy();
 
             // Since SDK doesn't support building framework dependent apphost yet, emulate that behavior
             // by creating the executable from apphost.exe
@@ -295,7 +325,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Get the framework location that was built
             string builtDotnet = fixture.BuiltDotnet.BinPath;
 
-            using (var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(appExe))
+            using (
+                var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(
+                    appExe
+                )
+            )
             {
                 string architecture = fixture.CurrentRid.Split('-')[1];
                 if (useRegisteredLocation)
@@ -304,48 +338,66 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 }
 
                 // Verify running with the default working directory
-                Command.Create(appExe)
+                Command
+                    .Create(appExe)
                     .CaptureStdErr()
                     .CaptureStdOut()
                     .MultilevelLookup(false)
                     .ApplyRegisteredInstallLocationOverride(registeredInstallLocationOverride)
-                    .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.DefaultInstallPath, useRegisteredLocation ? null : builtDotnet)
+                    .EnvironmentVariable(
+                        Constants.TestOnlyEnvironmentVariables.DefaultInstallPath,
+                        useRegisteredLocation ? null : builtDotnet
+                    )
                     .DotNetRoot(null)
                     .Execute()
-                    .Should().Pass()
+                    .Should()
+                    .Pass()
                     .And.HaveStdOutContaining("Hello World")
-                    .And.HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                    .And.HaveStdOutContaining(
+                        sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                    );
 
                 // Verify running from within the working directory
-                Command.Create(appExe)
+                Command
+                    .Create(appExe)
                     .CaptureStdErr()
                     .CaptureStdOut()
                     .MultilevelLookup(false)
                     .WorkingDirectory(fixture.TestProject.OutputDirectory)
                     .ApplyRegisteredInstallLocationOverride(registeredInstallLocationOverride)
-                    .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.DefaultInstallPath, useRegisteredLocation ? null : builtDotnet)
+                    .EnvironmentVariable(
+                        Constants.TestOnlyEnvironmentVariables.DefaultInstallPath,
+                        useRegisteredLocation ? null : builtDotnet
+                    )
                     .DotNetRoot(null)
                     .Execute()
-                    .Should().Pass()
+                    .Should()
+                    .Pass()
                     .And.HaveStdOutContaining("Hello World")
-                    .And.HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                    .And.HaveStdOutContaining(
+                        sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                    );
             }
         }
 
         [Fact]
         public void ComputedTPADoesntEndWithPathSeparator()
         {
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             var dotnet = fixture.BuiltDotnet;
             var appDll = fixture.TestProject.AppDll;
 
-            dotnet.Exec(appDll)
+            dotnet
+                .Exec(appDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrMatching($"Property TRUSTED_PLATFORM_ASSEMBLIES = .*[^{Path.PathSeparator}]$", System.Text.RegularExpressions.RegexOptions.Multiline);
+                .Should()
+                .Pass()
+                .And.HaveStdErrMatching(
+                    $"Property TRUSTED_PLATFORM_ASSEMBLIES = .*[^{Path.PathSeparator}]$",
+                    System.Text.RegularExpressions.RegexOptions.Multiline
+                );
         }
 
         [Theory]
@@ -356,7 +408,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             Command command;
             if (useAppHost)
             {
-                command = Command.Create(sharedTestState.MockApp.AppExe)
+                command = Command
+                    .Create(sharedTestState.MockApp.AppExe)
                     .DotNetRoot(sharedTestState.BuiltDotNet.BinPath);
             }
             else
@@ -364,14 +417,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 command = sharedTestState.BuiltDotNet.Exec(sharedTestState.MockApp.AppDll);
             }
 
-            string hostPolicyName = RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostpolicy");
-            command.EnableTracingAndCaptureOutputs()
+            string hostPolicyName =
+                RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                    "hostpolicy"
+                );
+            command
+                .EnableTracingAndCaptureOutputs()
                 .MultilevelLookup(false)
                 .Execute()
-                .Should().Fail()
-                .And.HaveStdErrContaining($"The library '{hostPolicyName}' required to execute the application was not found")
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    $"The library '{hostPolicyName}' required to execute the application was not found"
+                )
                 .And.HaveStdErrContaining("Failed to run as a self-contained app")
-                .And.HaveStdErrContaining($"'{sharedTestState.MockApp.RuntimeConfigJson}' was not found");
+                .And.HaveStdErrContaining(
+                    $"'{sharedTestState.MockApp.RuntimeConfigJson}' was not found"
+                );
         }
 
         [Theory]
@@ -385,7 +447,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             Command command;
             if (useAppHost)
             {
-                command = Command.Create(app.AppExe)
+                command = Command
+                    .Create(app.AppExe)
                     .DotNetRoot(sharedTestState.BuiltDotNet.BinPath);
             }
             else
@@ -393,12 +456,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 command = sharedTestState.BuiltDotNet.Exec(app.AppDll);
             }
 
-            string hostPolicyName = RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostpolicy");
-            command.EnableTracingAndCaptureOutputs()
+            string hostPolicyName =
+                RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                    "hostpolicy"
+                );
+            command
+                .EnableTracingAndCaptureOutputs()
                 .MultilevelLookup(false)
                 .Execute()
-                .Should().Fail()
-                .And.HaveStdErrContaining($"The library '{hostPolicyName}' required to execute the application was not found")
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    $"The library '{hostPolicyName}' required to execute the application was not found"
+                )
                 .And.HaveStdErrContaining("Failed to run as a self-contained app")
                 .And.HaveStdErrContaining($"'{app.RuntimeConfigJson}' did not specify a framework");
         }
@@ -406,16 +476,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void AppHost_CLI_FrameworkDependent_MissingRuntimeFramework_ErrorReportedInDialog(bool missingHostfxr)
+        public void AppHost_CLI_FrameworkDependent_MissingRuntimeFramework_ErrorReportedInDialog(
+            bool missingHostfxr
+        )
         {
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             string appExe = fixture.TestProject.AppExe;
             File.Copy(sharedTestState.BuiltAppHost, appExe, overwrite: true);
             AppHostExtensions.BindAppHost(appExe);
 
-            string invalidDotNet = SharedFramework.CalculateUniqueTestDirectory(Path.Combine(TestArtifact.TestArtifactsPath, "cliErrors"));
+            string invalidDotNet = SharedFramework.CalculateUniqueTestDirectory(
+                Path.Combine(TestArtifact.TestArtifactsPath, "cliErrors")
+            );
             using (new TestArtifact(invalidDotNet))
             {
                 Directory.CreateDirectory(invalidDotNet);
@@ -427,27 +500,34 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 {
                     expectedErrorCode = Constants.ErrorCode.CoreHostLibMissingFailure.ToString("x");
                     expectedUrlQuery = "missing_runtime=true&";
-                    expectedUrlParameter = $"&apphost_version={sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}";
+                    expectedUrlParameter =
+                        $"&apphost_version={sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}";
                 }
                 else
                 {
-                    invalidDotNet = new DotNetBuilder(invalidDotNet, sharedTestState.RepoDirectories.BuiltDotnet, "missingFramework")
-                        .Build()
-                        .BinPath;
+                    invalidDotNet =
+                        new DotNetBuilder(
+                            invalidDotNet,
+                            sharedTestState.RepoDirectories.BuiltDotnet,
+                            "missingFramework"
+                        ).Build().BinPath;
                     expectedErrorCode = Constants.ErrorCode.FrameworkMissingFailure.ToString("x");
-                    expectedUrlQuery = $"framework={Constants.MicrosoftNETCoreApp}&framework_version={sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}";
+                    expectedUrlQuery =
+                        $"framework={Constants.MicrosoftNETCoreApp}&framework_version={sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}";
                 }
 
-                Command command = Command.Create(appExe)
+                Command command = Command
+                    .Create(appExe)
                     .EnableTracingAndCaptureOutputs()
                     .DotNetRoot(invalidDotNet)
                     .MultilevelLookup(false)
                     .Start();
 
-                var result = command.WaitForExit(true)
-                    .Should().Fail();
+                var result = command.WaitForExit(true).Should().Fail();
 
-                result.And.HaveStdErrContaining($"- https://aka.ms/dotnet-core-applaunch?{expectedUrlQuery}");
+                result.And.HaveStdErrContaining(
+                    $"- https://aka.ms/dotnet-core-applaunch?{expectedUrlQuery}"
+                );
                 if (expectedUrlParameter != null)
                 {
                     result.And.HaveStdErrContaining(expectedUrlParameter);
@@ -458,7 +538,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void AppHost_GUI_FrameworkDependent_MissingRuntimeFramework_ErrorReportedInDialog(bool missingHostfxr)
+        public void AppHost_GUI_FrameworkDependent_MissingRuntimeFramework_ErrorReportedInDialog(
+            bool missingHostfxr
+        )
         {
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -466,15 +548,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 return;
             }
 
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             string appExe = fixture.TestProject.AppExe;
             File.Copy(sharedTestState.BuiltAppHost, appExe, overwrite: true);
             AppHostExtensions.BindAppHost(appExe);
             AppHostExtensions.SetWindowsGraphicalUserInterfaceBit(appExe);
 
-            string invalidDotNet = SharedFramework.CalculateUniqueTestDirectory(Path.Combine(TestArtifact.TestArtifactsPath, "guiErrors"));
+            string invalidDotNet = SharedFramework.CalculateUniqueTestDirectory(
+                Path.Combine(TestArtifact.TestArtifactsPath, "guiErrors")
+            );
             using (new TestArtifact(invalidDotNet))
             {
                 Directory.CreateDirectory(invalidDotNet);
@@ -486,18 +569,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 {
                     expectedErrorCode = Constants.ErrorCode.CoreHostLibMissingFailure.ToString("x");
                     expectedUrlQuery = "missing_runtime=true&";
-                    expectedUrlParameter = $"&apphost_version={sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}";
+                    expectedUrlParameter =
+                        $"&apphost_version={sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}";
                 }
                 else
                 {
-                    invalidDotNet = new DotNetBuilder(invalidDotNet, sharedTestState.RepoDirectories.BuiltDotnet, "missingFramework")
-                        .Build()
-                        .BinPath;
+                    invalidDotNet =
+                        new DotNetBuilder(
+                            invalidDotNet,
+                            sharedTestState.RepoDirectories.BuiltDotnet,
+                            "missingFramework"
+                        ).Build().BinPath;
                     expectedErrorCode = Constants.ErrorCode.FrameworkMissingFailure.ToString("x");
-                    expectedUrlQuery = $"framework={Constants.MicrosoftNETCoreApp}&framework_version={sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}";
+                    expectedUrlQuery =
+                        $"framework={Constants.MicrosoftNETCoreApp}&framework_version={sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}";
                 }
 
-                Command command = Command.Create(appExe)
+                Command command = Command
+                    .Create(appExe)
                     .EnableTracingAndCaptureOutputs()
                     .DotNetRoot(invalidDotNet)
                     .MultilevelLookup(false)
@@ -506,11 +595,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 WaitForPopupFromProcess(command.Process);
                 command.Process.Kill();
 
-                var result = command.WaitForExit(true)
-                    .Should().Fail();
+                var result = command.WaitForExit(true).Should().Fail();
 
-                result.And.HaveStdErrContaining($"Showing error dialog for application: '{Path.GetFileName(appExe)}' - error code: 0x{expectedErrorCode}")
-                    .And.HaveStdErrContaining($"url: 'https://aka.ms/dotnet-core-applaunch?{expectedUrlQuery}")
+                result.And
+                    .HaveStdErrContaining(
+                        $"Showing error dialog for application: '{Path.GetFileName(appExe)}' - error code: 0x{expectedErrorCode}"
+                    )
+                    .And.HaveStdErrContaining(
+                        $"url: 'https://aka.ms/dotnet-core-applaunch?{expectedUrlQuery}"
+                    )
                     .And.HaveStdErrContaining("&gui=true");
 
                 if (expectedUrlParameter != null)
@@ -528,26 +621,34 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 return;
             }
 
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             string appExe = fixture.TestProject.AppExe;
             File.Copy(sharedTestState.BuiltAppHost, appExe, overwrite: true);
             AppHostExtensions.BindAppHost(appExe);
             AppHostExtensions.SetWindowsGraphicalUserInterfaceBit(appExe);
 
-            string dotnetWithMockHostFxr = SharedFramework.CalculateUniqueTestDirectory(Path.Combine(TestArtifact.TestArtifactsPath, "guiErrors"));
+            string dotnetWithMockHostFxr = SharedFramework.CalculateUniqueTestDirectory(
+                Path.Combine(TestArtifact.TestArtifactsPath, "guiErrors")
+            );
             using (new TestArtifact(dotnetWithMockHostFxr))
             {
                 Directory.CreateDirectory(dotnetWithMockHostFxr);
-                string expectedErrorCode = Constants.ErrorCode.FrameworkMissingFailure.ToString("x");
+                string expectedErrorCode = Constants.ErrorCode.FrameworkMissingFailure.ToString(
+                    "x"
+                );
 
-                var dotnetBuilder = new DotNetBuilder(dotnetWithMockHostFxr, sharedTestState.RepoDirectories.BuiltDotnet, "hostfxrFrameworkMissingFailure")
+                var dotnetBuilder = new DotNetBuilder(
+                    dotnetWithMockHostFxr,
+                    sharedTestState.RepoDirectories.BuiltDotnet,
+                    "hostfxrFrameworkMissingFailure"
+                )
                     .RemoveHostFxr()
                     .AddMockHostFxr(new Version(2, 2, 0));
                 var dotnet = dotnetBuilder.Build();
 
-                Command command = Command.Create(appExe)
+                Command command = Command
+                    .Create(appExe)
                     .EnableTracingAndCaptureOutputs()
                     .DotNetRoot(dotnet.BinPath)
                     .MultilevelLookup(false)
@@ -556,10 +657,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 WaitForPopupFromProcess(command.Process);
                 command.Process.Kill();
 
-                command.WaitForExit(true)
-                    .Should().Fail()
-                    .And.HaveStdErrContaining($"Showing error dialog for application: '{Path.GetFileName(appExe)}' - error code: 0x{expectedErrorCode}")
-                    .And.HaveStdErrContaining("To run this application, you need to install a newer version of .NET");
+                command
+                    .WaitForExit(true)
+                    .Should()
+                    .Fail()
+                    .And.HaveStdErrContaining(
+                        $"Showing error dialog for application: '{Path.GetFileName(appExe)}' - error code: 0x{expectedErrorCode}"
+                    )
+                    .And.HaveStdErrContaining(
+                        "To run this application, you need to install a newer version of .NET"
+                    );
             }
         }
 
@@ -572,25 +679,28 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 return;
             }
 
-            var fixture = sharedTestState.PortableAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.PortableAppFixture_Built.Copy();
 
             string appExe = fixture.TestProject.AppExe;
             File.Copy(sharedTestState.BuiltAppHost, appExe, overwrite: true);
             AppHostExtensions.BindAppHost(appExe);
             AppHostExtensions.SetWindowsGraphicalUserInterfaceBit(appExe);
 
-            string invalidDotNet = SharedFramework.CalculateUniqueTestDirectory(Path.Combine(TestArtifact.TestArtifactsPath, "guiErrors"));
+            string invalidDotNet = SharedFramework.CalculateUniqueTestDirectory(
+                Path.Combine(TestArtifact.TestArtifactsPath, "guiErrors")
+            );
             using (new TestArtifact(invalidDotNet))
             {
                 Directory.CreateDirectory(invalidDotNet);
-                Command.Create(appExe)
+                Command
+                    .Create(appExe)
                     .EnableTracingAndCaptureOutputs()
                     .DotNetRoot(invalidDotNet)
                     .MultilevelLookup(false)
                     .EnvironmentVariable(Constants.DisableGuiErrors.EnvironmentVariable, "1")
                     .Execute()
-                    .Should().Fail()
+                    .Should()
+                    .Fail()
                     .And.NotHaveStdErrContaining("Showing error dialog for application");
             }
         }
@@ -603,7 +713,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 Directory.CreateDirectory(subdirectory);
             }
 
-            var destDepsJson = Path.Combine(subdirectory, Path.GetFileName(testProjectFixture.TestProject.DepsJson));
+            var destDepsJson = Path.Combine(
+                subdirectory,
+                Path.GetFileName(testProjectFixture.TestProject.DepsJson)
+            );
 
             if (File.Exists(destDepsJson))
             {
@@ -622,7 +735,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 Directory.CreateDirectory(subdirectory);
             }
 
-            var destRuntimeConfig = Path.Combine(subdirectory, Path.GetFileName(testProjectFixture.TestProject.RuntimeConfigJson));
+            var destRuntimeConfig = Path.Combine(
+                subdirectory,
+                Path.GetFileName(testProjectFixture.TestProject.RuntimeConfigJson)
+            );
 
             if (File.Exists(destRuntimeConfig))
             {
@@ -635,7 +751,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
         private string CreateAStore(TestProjectFixture testProjectFixture)
         {
-            var storeoutputDirectory = Path.Combine(testProjectFixture.TestProject.ProjectDirectory, "store");
+            var storeoutputDirectory = Path.Combine(
+                testProjectFixture.TestProject.ProjectDirectory,
+                "store"
+            );
             if (!Directory.Exists(storeoutputDirectory))
             {
                 Directory.CreateDirectory(storeoutputDirectory);
@@ -650,7 +769,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         private delegate bool EnumThreadWindowsDelegate(IntPtr hWnd, IntPtr lParam);
 
         [DllImport("user32.dll")]
-        private static extern bool EnumThreadWindows(int dwThreadId, EnumThreadWindowsDelegate plfn, IntPtr lParam);
+        private static extern bool EnumThreadWindows(
+            int dwThreadId,
+            EnumThreadWindowsDelegate plfn,
+            IntPtr lParam
+        );
 
         private IntPtr WaitForPopupFromProcess(Process process, int timeout = 60000)
         {
@@ -661,12 +784,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 foreach (ProcessThread thread in process.Threads)
                 {
                     // We take the last window we find. There really should only be one at most anyways.
-                    EnumThreadWindows(thread.Id,
-                        (hWnd, lParam) => {
+                    EnumThreadWindows(
+                        thread.Id,
+                        (hWnd, lParam) =>
+                        {
                             windowHandle = hWnd;
                             return true;
                         },
-                        IntPtr.Zero);
+                        IntPtr.Zero
+                    );
                 }
 
                 if (windowHandle != IntPtr.Zero)
@@ -704,18 +830,29 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             public SharedTestState()
             {
                 RepoDirectories = new RepoDirectoriesProvider();
-                BuiltAppHost = Path.Combine(RepoDirectories.HostArtifacts, RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("apphost"));
+                BuiltAppHost = Path.Combine(
+                    RepoDirectories.HostArtifacts,
+                    RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("apphost")
+                );
                 BuiltDotNet = new DotNetCli(RepoDirectories.BuiltDotnet);
 
                 PortableAppFixture_Built = new TestProjectFixture("PortableApp", RepoDirectories)
                     .EnsureRestored()
                     .BuildProject();
 
-                PortableAppFixture_Published = new TestProjectFixture("PortableApp", RepoDirectories)
+                PortableAppFixture_Published = new TestProjectFixture(
+                    "PortableApp",
+                    RepoDirectories
+                )
                     .EnsureRestored()
                     .PublishProject();
 
-                MockApp = new TestApp(SharedFramework.CalculateUniqueTestDirectory(Path.Combine(TestArtifact.TestArtifactsPath, "portableAppActivation")), "App");
+                MockApp = new TestApp(
+                    SharedFramework.CalculateUniqueTestDirectory(
+                        Path.Combine(TestArtifact.TestArtifactsPath, "portableAppActivation")
+                    ),
+                    "App"
+                );
                 Directory.CreateDirectory(MockApp.Location);
                 File.WriteAllText(MockApp.AppDll, string.Empty);
                 File.Copy(BuiltAppHost, MockApp.AppExe);

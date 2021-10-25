@@ -80,7 +80,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             // Always strip the outer tag name as we never want <environment> to render
             output.TagName = null;
 
-            if (string.IsNullOrWhiteSpace(Names) && string.IsNullOrWhiteSpace(Include) && string.IsNullOrWhiteSpace(Exclude))
+            if (
+                string.IsNullOrWhiteSpace(Names)
+                && string.IsNullOrWhiteSpace(Include)
+                && string.IsNullOrWhiteSpace(Exclude)
+            )
             {
                 // No names specified, do nothing
                 return;
@@ -101,7 +105,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     var environment = item.Trim();
                     if (environment.HasValue && environment.Length > 0)
                     {
-                        if (environment.Equals(currentEnvironmentName, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            environment.Equals(
+                                currentEnvironmentName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             // Matching environment name found, suppress output
                             output.SuppressOutput();
@@ -121,7 +130,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     if (environment.HasValue && environment.Length > 0)
                     {
                         hasEnvironments = true;
-                        if (environment.Equals(currentEnvironmentName, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            environment.Equals(
+                                currentEnvironmentName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             // Matching environment name found, do nothing
                             return;
@@ -139,7 +153,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     if (environment.HasValue && environment.Length > 0)
                     {
                         hasEnvironments = true;
-                        if (environment.Equals(currentEnvironmentName, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            environment.Equals(
+                                currentEnvironmentName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             // Matching environment name found, do nothing
                             return;

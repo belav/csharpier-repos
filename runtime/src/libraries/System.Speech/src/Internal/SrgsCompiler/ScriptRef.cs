@@ -65,7 +65,6 @@ namespace System.Speech.Internal.SrgsCompiler
         internal RuleMethodScript _method;
 
         internal int _idSymbol;
-
         #endregion
     }
 }

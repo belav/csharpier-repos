@@ -27,7 +27,6 @@ namespace System.Speech.Recognition
         #region Private Fields
 
         private AudioState _audioState;
-
         #endregion
     }
 }

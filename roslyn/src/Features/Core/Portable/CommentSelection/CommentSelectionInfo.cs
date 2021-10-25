@@ -8,7 +8,13 @@ namespace Microsoft.CodeAnalysis.CommentSelection
 {
     internal readonly struct CommentSelectionInfo
     {
-        public CommentSelectionInfo(bool supportsSingleLineComment, bool supportsBlockComment, string singleLineCommentString, string blockCommentStartString, string blockCommentEndString) : this()
+        public CommentSelectionInfo(
+            bool supportsSingleLineComment,
+            bool supportsBlockComment,
+            string singleLineCommentString,
+            string blockCommentStartString,
+            string blockCommentEndString
+        ) : this()
         {
             SupportsSingleLineComment = supportsSingleLineComment;
             SupportsBlockComment = supportsBlockComment;

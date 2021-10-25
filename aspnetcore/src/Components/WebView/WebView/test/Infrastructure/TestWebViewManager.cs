@@ -13,9 +13,13 @@ namespace Microsoft.AspNetCore.Components.WebView
         private List<string> _sentIpcMessages = new();
 
         public TestWebViewManager(IServiceProvider provider, IFileProvider fileProvider)
-            : base(provider, Dispatcher.CreateDefault(), AppBaseUri, fileProvider, hostPageRelativePath: "index.html")
-        {
-        }
+            : base(
+                provider,
+                Dispatcher.CreateDefault(),
+                AppBaseUri,
+                fileProvider,
+                hostPageRelativePath: "index.html"
+            ) { }
 
         public IReadOnlyList<string> SentIpcMessages => _sentIpcMessages;
 
@@ -29,7 +33,10 @@ namespace Microsoft.AspNetCore.Components.WebView
             throw new NotImplementedException();
         }
 
-        internal void ReceiveIpcMessage(IpcCommon.IncomingMessageType messageType, params object[] args)
+        internal void ReceiveIpcMessage(
+            IpcCommon.IncomingMessageType messageType,
+            params object[] args
+        )
         {
             // Same serialization convention as used by blazor.webview.js
             MessageReceived(new Uri(AppBaseUri, "/page"), IpcCommon.Serialize(messageType, args));
@@ -37,7 +44,11 @@ namespace Microsoft.AspNetCore.Components.WebView
 
         public void ReceiveAttachPageMessage()
         {
-            ReceiveIpcMessage(IpcCommon.IncomingMessageType.AttachPage, "http://example/", "http://example/testStartUrl");
+            ReceiveIpcMessage(
+                IpcCommon.IncomingMessageType.AttachPage,
+                "http://example/",
+                "http://example/testStartUrl"
+            );
         }
     }
 }

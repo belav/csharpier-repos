@@ -18,11 +18,21 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             // Arrange
             bool? isCancelled = null;
             var clientProxy = new Mock<IClientProxy>();
-            clientProxy.Setup(c => c.SendCoreAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()))
-                .Callback((string _, object[] __, CancellationToken token) =>
-                {
-                    isCancelled = token.IsCancellationRequested;
-                })
+            clientProxy
+                .Setup(
+                    c =>
+                        c.SendCoreAsync(
+                            It.IsAny<string>(),
+                            It.IsAny<object[]>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Callback(
+                    (string _, object[] __, CancellationToken token) =>
+                    {
+                        isCancelled = token.IsCancellationRequested;
+                    }
+                )
                 .Returns(Task.CompletedTask);
             var circuitClient = new CircuitClientProxy(clientProxy.Object, "connection0");
 
@@ -39,7 +49,13 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         {
             // Arrange
             var clientProxy = Mock.Of<IClientProxy>(
-                c => c.SendCoreAsync(It.IsAny<string>(), It.IsAny<object[]>(), It.IsAny<CancellationToken>()) == Task.CompletedTask);
+                c =>
+                    c.SendCoreAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<object[]>(),
+                        It.IsAny<CancellationToken>()
+                    ) == Task.CompletedTask
+            );
             var circuitClient = new CircuitClientProxy(clientProxy, "connection0");
             circuitClient.SetDisconnected();
 

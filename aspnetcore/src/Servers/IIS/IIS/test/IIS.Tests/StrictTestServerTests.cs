@@ -11,13 +11,16 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 {
-    public class StrictTestServerTests: LoggedTest
+    public class StrictTestServerTests : LoggedTest
     {
         public override void Dispose()
         {
             base.Dispose();
 
-            if (TestSink.Writes.FirstOrDefault(w => w.LogLevel > LogLevel.Information) is WriteContext writeContext)
+            if (
+                TestSink.Writes.FirstOrDefault(w => w.LogLevel > LogLevel.Information)
+                is WriteContext writeContext
+            )
             {
                 throw new XunitException($"Unexpected log: {writeContext}");
             }
@@ -25,7 +28,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         protected static TaskCompletionSource<bool> CreateTaskCompletionSource()
         {
-            return new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            return new TaskCompletionSource<bool>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
         }
     }
 }

@@ -32,7 +32,11 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             try
             {
                 HandshakeProtocol.WriteResponseMessage(HandshakeResponseMessage.Empty, writer);
-                var handshakeResponseResult = new ReadResult(new ReadOnlySequence<byte>(writer.ToArray()), false, false);
+                var handshakeResponseResult = new ReadResult(
+                    new ReadOnlySequence<byte>(writer.ToArray()),
+                    false,
+                    false
+                );
 
                 _pipe = new TestDuplexPipe();
                 _pipe.AddReadResult(new ValueTask<ReadResult>(handshakeResponseResult));
@@ -57,15 +61,21 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
 
             hubConnectionBuilder.WithUrl("http://doesntmatter");
 
-            var delegateConnectionFactory = new DelegateConnectionFactory(endPoint =>
-            {
-                var connection = new DefaultConnectionContext();
-                // prevents keep alive time being activated
-                connection.Features.Set<IConnectionInherentKeepAliveFeature>(new TestConnectionInherentKeepAliveFeature());
-                connection.Transport = _pipe;
-                return new ValueTask<ConnectionContext>(connection);
-            });
-            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
+            var delegateConnectionFactory = new DelegateConnectionFactory(
+                endPoint =>
+                {
+                    var connection = new DefaultConnectionContext();
+                    // prevents keep alive time being activated
+                    connection.Features.Set<IConnectionInherentKeepAliveFeature>(
+                        new TestConnectionInherentKeepAliveFeature()
+                    );
+                    connection.Transport = _pipe;
+                    return new ValueTask<ConnectionContext>(connection);
+                }
+            );
+            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(
+                delegateConnectionFactory
+            );
 
             _hubConnection = hubConnectionBuilder.Build();
             _hubConnection.StartAsync().GetAwaiter().GetResult();

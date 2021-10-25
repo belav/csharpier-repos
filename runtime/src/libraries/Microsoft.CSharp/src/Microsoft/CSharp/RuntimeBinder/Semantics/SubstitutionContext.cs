@@ -20,20 +20,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             DenormMeth = denormMeth;
         }
 
-        public SubstContext(AggregateType type)
-            : this(type, null, false)
-        {
-        }
+        public SubstContext(AggregateType type) : this(type, null, false) { }
 
         public SubstContext(AggregateType type, TypeArray typeArgsMeth)
-            : this(type, typeArgsMeth, false)
-        {
-        }
+            : this(type, typeArgsMeth, false) { }
 
         private SubstContext(AggregateType type, TypeArray typeArgsMeth, bool denormMeth)
-            : this(type?.TypeArgsAll, typeArgsMeth, denormMeth)
-        {
-        }
+            : this(type?.TypeArgsAll, typeArgsMeth, denormMeth) { }
 
         public bool IsNop => ClassTypes.Length == 0 & MethodTypes.Length == 0;
     }

@@ -21,12 +21,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     {
         private readonly NodeFactory _factory;
 
-        public InstanceEntryPointTableNode(NodeFactory factory)
-            : base(factory.Target)
+        public InstanceEntryPointTableNode(NodeFactory factory) : base(factory.Target)
         {
             _factory = factory;
         }
-        
+
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append(nameMangler.CompilationUnitPrefix);
@@ -37,7 +36,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (relocsOnly)
             {
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, Array.Empty<ISymbolDefinitionNode>());
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    Array.Empty<ISymbolDefinitionNode>()
+                );
             }
 
             NativeWriter hashtableWriter = new NativeWriter();
@@ -46,26 +50,49 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             VertexHashtable vertexHashtable = new VertexHashtable();
             hashtableSection.Place(vertexHashtable);
 
-            Dictionary<byte[], BlobVertex> uniqueFixups = new Dictionary<byte[], BlobVertex>(ByteArrayComparer.Instance);
-            Dictionary<byte[], BlobVertex> uniqueSignatures = new Dictionary<byte[], BlobVertex>(ByteArrayComparer.Instance);
+            Dictionary<byte[], BlobVertex> uniqueFixups = new Dictionary<byte[], BlobVertex>(
+                ByteArrayComparer.Instance
+            );
+            Dictionary<byte[], BlobVertex> uniqueSignatures = new Dictionary<byte[], BlobVertex>(
+                ByteArrayComparer.Instance
+            );
 
-            foreach (MethodWithGCInfo method in factory.EnumerateCompiledMethods(null, CompiledMethodCategory.Instantiated))
+            foreach (
+                MethodWithGCInfo method in factory.EnumerateCompiledMethods(
+                    null,
+                    CompiledMethodCategory.Instantiated
+                )
+            )
             {
-                Debug.Assert(method.Method.HasInstantiation || method.Method.OwningType.HasInstantiation);
+                Debug.Assert(
+                    method.Method.HasInstantiation || method.Method.OwningType.HasInstantiation
+                );
 
                 int methodIndex = factory.RuntimeFunctionsTable.GetIndex(method);
 
                 // In composite R2R format, always enforce owning type to let us share generic instantiations among modules
                 EcmaMethod typicalMethod = (EcmaMethod)method.Method.GetTypicalMethodDefinition();
-                ModuleToken moduleToken = new ModuleToken(typicalMethod.Module, typicalMethod.Handle);
+                ModuleToken moduleToken = new ModuleToken(
+                    typicalMethod.Module,
+                    typicalMethod.Handle
+                );
 
                 ArraySignatureBuilder signatureBuilder = new ArraySignatureBuilder();
                 signatureBuilder.EmitMethodSignature(
-                    new MethodWithToken(method.Method, moduleToken, constrainedType: null, unboxing: false, context: null),
+                    new MethodWithToken(
+                        method.Method,
+                        moduleToken,
+                        constrainedType: null,
+                        unboxing: false,
+                        context: null
+                    ),
                     enforceDefEncoding: true,
-                    enforceOwningType: _factory.CompilationModuleGroup.EnforceOwningType(moduleToken.Module),
+                    enforceOwningType: _factory.CompilationModuleGroup.EnforceOwningType(
+                        moduleToken.Module
+                    ),
                     factory.SignatureContext,
-                    isInstantiatingStub: false);
+                    isInstantiatingStub: false
+                );
                 byte[] signature = signatureBuilder.ToArray();
                 BlobVertex signatureBlob;
                 if (!uniqueSignatures.TryGetValue(signature, out signatureBlob))
@@ -82,9 +109,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     uniqueFixups.Add(fixup, fixupBlob);
                 }
 
-                EntryPointVertex entryPointVertex = new EntryPointWithBlobVertex((uint)methodIndex, fixupBlob, signatureBlob);
+                EntryPointVertex entryPointVertex = new EntryPointWithBlobVertex(
+                    (uint)methodIndex,
+                    fixupBlob,
+                    signatureBlob
+                );
                 hashtableSection.Place(entryPointVertex);
-                vertexHashtable.Append(unchecked((uint)ReadyToRunHashCode.MethodHashCode(method.Method)), entryPointVertex);
+                vertexHashtable.Append(
+                    unchecked((uint)ReadyToRunHashCode.MethodHashCode(method.Method)),
+                    entryPointVertex
+                );
             }
 
             MemoryStream hashtableContent = new MemoryStream();
@@ -93,7 +127,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 data: hashtableContent.ToArray(),
                 relocs: null,
                 alignment: 8,
-                definedSymbols: new ISymbolDefinitionNode[] { this });
+                definedSymbols: new ISymbolDefinitionNode[] { this }
+            );
         }
 
         public override int ClassCode => -348722540;

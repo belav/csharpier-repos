@@ -136,7 +136,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
                 context.Add(customer);
 
-                storeId = entry.Property<string>(StoreKeyConvention.DefaultIdPropertyName).CurrentValue;
+                storeId =
+                    entry.Property<string>(StoreKeyConvention.DefaultIdPropertyName).CurrentValue;
             }
 
             Assert.Equal("Customer|42", storeId);
@@ -154,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 customer.Name = "Theon Greyjoy";
 
                 var entry = context.Entry(customer);
-                entry.Property<string>(StoreKeyConvention.DefaultIdPropertyName).CurrentValue = storeId;
+                entry.Property<string>(StoreKeyConvention.DefaultIdPropertyName).CurrentValue =
+                    storeId;
 
                 entry.State = EntityState.Modified;
 
@@ -172,7 +174,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             using (var context = new CustomerContext(options))
             {
                 var entry = context.Entry(customer);
-                entry.Property<string>(StoreKeyConvention.DefaultIdPropertyName).CurrentValue = storeId;
+                entry.Property<string>(StoreKeyConvention.DefaultIdPropertyName).CurrentValue =
+                    storeId;
                 entry.State = EntityState.Deleted;
 
                 await context.SaveChangesAsync();
@@ -214,7 +217,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
                 var entry = context.Add(customer);
 
-                entry.Property<JObject>("__jObject").CurrentValue = new JObject { ["key1"] = "value1" };
+                entry.Property<JObject>("__jObject").CurrentValue = new JObject
+                {
+                    ["key1"] = "value1"
+                };
 
                 context.SaveChanges();
 
@@ -298,7 +304,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
                 var entry = context.Add(customer);
 
-                entry.Property<JObject>("__jObject").CurrentValue = new JObject { ["key1"] = "value1" };
+                entry.Property<JObject>("__jObject").CurrentValue = new JObject
+                {
+                    ["key1"] = "value1"
+                };
 
                 await context.SaveChangesAsync();
 
@@ -432,10 +441,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
         private class CustomerContext : DbContext
         {
-            public CustomerContext(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+            public CustomerContext(DbContextOptions dbContextOptions) : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -445,10 +451,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
         private class CustomerContextGuid : DbContext
         {
-            public CustomerContextGuid(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+            public CustomerContextGuid(DbContextOptions dbContextOptions) : base(dbContextOptions)
+            { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -456,9 +460,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                     cb =>
                     {
                         cb.Property(c => c.Id).HasConversion<string>().ToJsonProperty("id");
-                        cb.Property(c => c.PartitionKey).HasConversion<string>().ToJsonProperty("pk");
+                        cb.Property(c => c.PartitionKey)
+                            .HasConversion<string>()
+                            .ToJsonProperty("pk");
                         cb.HasPartitionKey(c => c.PartitionKey);
-                    });
+                    }
+                );
             }
         }
 
@@ -481,8 +488,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                 await context.Database.EnsureCreatedAsync();
 
                 Assert.Null(
-                    context.Model.FindEntityType(typeof(CustomerWithResourceId))
-                        .FindProperty(StoreKeyConvention.DefaultIdPropertyName));
+                    context.Model
+                        .FindEntityType(typeof(CustomerWithResourceId))
+                        .FindProperty(StoreKeyConvention.DefaultIdPropertyName)
+                );
 
                 context.Add(customer);
                 context.Add(
@@ -491,14 +500,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                         id = "42",
                         Name = "Theon Twin",
                         PartitionKey = pk2
-                    });
+                    }
+                );
 
                 await context.SaveChangesAsync();
             }
 
             await using (var context = new PartitionKeyContextWithResourceId(options))
             {
-                var customerFromStore = await context.Set<CustomerWithResourceId>()
+                var customerFromStore = await context
+                    .Set<CustomerWithResourceId>()
                     .FindAsync(pk1, "42");
 
                 Assert.Equal("42", customerFromStore.id);
@@ -513,7 +524,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             await using (var context = new PartitionKeyContextWithResourceId(options))
             {
-                var customerFromStore = await context.Set<CustomerWithResourceId>()
+                var customerFromStore = await context
+                    .Set<CustomerWithResourceId>()
                     .WithPartitionKey(partitionKey: pk1.ToString())
                     .FirstAsync();
 
@@ -548,15 +560,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                         id = "42",
                         Name = "Theon Twin",
                         PartitionKey = pk2
-                    });
+                    }
+                );
 
                 context.SaveChanges();
             }
 
             using (var context = new PartitionKeyContextWithResourceId(options))
             {
-                var customerFromStore = context.Set<CustomerWithResourceId>()
-                    .Find(pk1, "42");
+                var customerFromStore = context.Set<CustomerWithResourceId>().Find(pk1, "42");
 
                 Assert.Equal("42", customerFromStore.id);
                 Assert.Equal("Theon", customerFromStore.Name);
@@ -570,7 +582,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             using (var context = new PartitionKeyContextWithResourceId(options))
             {
-                var customerFromStore = context.Set<CustomerWithResourceId>()
+                var customerFromStore = context
+                    .Set<CustomerWithResourceId>()
                     .WithPartitionKey(partitionKey: pk1.ToString())
                     .First();
 
@@ -590,7 +603,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
                 Assert.Equal(
                     CosmosStrings.InvalidResourceId,
-                    Assert.Throws<InvalidOperationException>(() => context.Set<CustomerWithResourceId>().Find(1, "")).Message);
+                    Assert.Throws<InvalidOperationException>(
+                        () => context.Set<CustomerWithResourceId>().Find(1, "")
+                    ).Message
+                );
             }
         }
 
@@ -601,33 +617,21 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             const int pk1 = 1;
             const int pk2 = 2;
 
-            var customer = new Customer
-            {
-                Id = 42,
-                Name = "Theon",
-                PartitionKey = pk1
-            };
+            var customer = new Customer { Id = 42, Name = "Theon", PartitionKey = pk1 };
 
             await using (var context = new PartitionKeyContextCustomValueGenerator(options))
             {
                 await context.Database.EnsureCreatedAsync();
 
                 context.Add(customer);
-                context.Add(
-                    new Customer
-                    {
-                        Id = 42,
-                        Name = "Theon Twin",
-                        PartitionKey = pk2
-                    });
+                context.Add(new Customer { Id = 42, Name = "Theon Twin", PartitionKey = pk2 });
 
                 await context.SaveChangesAsync();
             }
 
             await using (var context = new PartitionKeyContextCustomValueGenerator(options))
             {
-                var customerFromStore = await context.Set<Customer>()
-                    .FindAsync(pk1, 42);
+                var customerFromStore = await context.Set<Customer>().FindAsync(pk1, 42);
 
                 Assert.Equal(42, customerFromStore.Id);
                 Assert.Equal("Theon", customerFromStore.Name);
@@ -640,7 +644,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             await using (var context = new PartitionKeyContextCustomValueGenerator(options))
             {
-                var customerFromStore = await context.Set<Customer>()
+                var customerFromStore = await context
+                    .Set<Customer>()
                     .WithPartitionKey(partitionKey: pk1.ToString())
                     .FirstAsync();
 
@@ -657,33 +662,21 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             const int pk1 = 1;
             const int pk2 = 2;
 
-            var customer = new Customer
-            {
-                Id = 42,
-                Name = "Theon",
-                PartitionKey = pk1
-            };
+            var customer = new Customer { Id = 42, Name = "Theon", PartitionKey = pk1 };
 
             using (var context = new PartitionKeyContextCustomValueGenerator(options))
             {
                 context.Database.EnsureCreated();
 
                 context.Add(customer);
-                context.Add(
-                    new Customer
-                    {
-                        Id = 42,
-                        Name = "Theon Twin",
-                        PartitionKey = pk2
-                    });
+                context.Add(new Customer { Id = 42, Name = "Theon Twin", PartitionKey = pk2 });
 
                 context.SaveChanges();
             }
 
             using (var context = new PartitionKeyContextCustomValueGenerator(options))
             {
-                var customerFromStore = context.Set<Customer>()
-                    .Find(pk1, 42);
+                var customerFromStore = context.Set<Customer>().Find(pk1, 42);
 
                 Assert.Equal(42, customerFromStore.Id);
                 Assert.Equal("Theon", customerFromStore.Name);
@@ -697,7 +690,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             using (var context = new PartitionKeyContextCustomValueGenerator(options))
             {
-                var customerFromStore = context.Set<Customer>()
+                var customerFromStore = context
+                    .Set<Customer>()
                     .WithPartitionKey(partitionKey: pk1.ToString())
                     .First();
 
@@ -713,19 +707,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             var options = Fixture.CreateOptions();
             const int pk1 = 1;
 
-            var customer = new Customer
-            {
-                Id = 42,
-                Name = "Theon",
-                PartitionKey = pk1
-            };
+            var customer = new Customer { Id = 42, Name = "Theon", PartitionKey = pk1 };
 
             using (var context = new PartitionKeyContextNoValueGenerator(options))
             {
                 context.Database.EnsureCreated();
 
                 var customerEntry = context.Entry(customer);
-                customerEntry.Property(StoreKeyConvention.DefaultIdPropertyName).CurrentValue = "42";
+                customerEntry.Property(StoreKeyConvention.DefaultIdPropertyName).CurrentValue =
+                    "42";
                 customerEntry.State = EntityState.Added;
 
                 context.SaveChanges();
@@ -733,19 +723,20 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             using (var context = new PartitionKeyContextNoValueGenerator(options))
             {
-                var customerFromStore = context.Set<Customer>()
-                    .Find(pk1, 42);
+                var customerFromStore = context.Set<Customer>().Find(pk1, 42);
 
                 Assert.Equal(42, customerFromStore.Id);
                 Assert.Equal("Theon", customerFromStore.Name);
                 Assert.Equal(pk1, customerFromStore.PartitionKey);
                 AssertSql(
-                    context, @"@__p_1='42'
+                    context,
+                    @"@__p_1='42'
 
 SELECT c
 FROM root c
 WHERE ((c[""Discriminator""] = ""Customer"") AND (c[""Id""] = @__p_1))
-OFFSET 0 LIMIT 1");
+OFFSET 0 LIMIT 1"
+                );
 
                 customerFromStore.Name = "Theon Greyjoy";
 
@@ -754,7 +745,8 @@ OFFSET 0 LIMIT 1");
 
             using (var context = new PartitionKeyContextNoValueGenerator(options))
             {
-                var customerFromStore = context.Set<Customer>()
+                var customerFromStore = context
+                    .Set<Customer>()
                     .WithPartitionKey(partitionKey: pk1.ToString())
                     .First();
 
@@ -769,12 +761,7 @@ OFFSET 0 LIMIT 1");
         {
             var options = Fixture.CreateOptions();
 
-            var customer = new Customer
-            {
-                Id = 42,
-                Name = "Theon",
-                PartitionKey = 1
-            };
+            var customer = new Customer { Id = 42, Name = "Theon", PartitionKey = 1 };
 
             await using (var context = new PartitionKeyContextNonPrimaryKey(options))
             {
@@ -870,21 +857,21 @@ OFFSET 0 LIMIT 1");
                 Assert.Equal("42", customerFromStore.id);
                 Assert.Equal("Theon", customerFromStore.Name);
                 AssertSql(
-                    context, @"@__p_0='42'
+                    context,
+                    @"@__p_0='42'
 
 SELECT c
 FROM root c
 WHERE ((c[""Discriminator""] = ""CustomerWithResourceId"") AND (c[""id""] = @__p_0))
-OFFSET 0 LIMIT 1");
+OFFSET 0 LIMIT 1"
+                );
             }
         }
 
         private class PartitionKeyContext : DbContext
         {
-            public PartitionKeyContext(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+            public PartitionKeyContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+            { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -894,16 +881,15 @@ OFFSET 0 LIMIT 1");
                         cb.HasPartitionKey(c => c.PartitionKey);
                         cb.Property(c => c.PartitionKey).HasConversion<string>();
                         cb.HasKey(c => new { c.Id, c.PartitionKey });
-                    });
+                    }
+                );
             }
         }
 
         private class PartitionKeyContextEntityWithNoPartitionKey : DbContext
         {
             public PartitionKeyContextEntityWithNoPartitionKey(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -914,9 +900,7 @@ OFFSET 0 LIMIT 1");
         private class PartitionKeyContextCustomValueGenerator : DbContext
         {
             public PartitionKeyContextCustomValueGenerator(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -932,16 +916,15 @@ OFFSET 0 LIMIT 1");
 
                         cb.HasPartitionKey(c => c.PartitionKey);
                         cb.HasKey(c => new { c.PartitionKey, c.Id });
-                    });
+                    }
+                );
             }
         }
 
         private class PartitionKeyContextNoValueGenerator : DbContext
         {
             public PartitionKeyContextNoValueGenerator(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -950,22 +933,22 @@ OFFSET 0 LIMIT 1");
                     {
                         var valueGeneratorFactory = new CustomPartitionKeyIdValueGeneratorFactory();
 
-                        cb.Property(StoreKeyConvention.DefaultIdPropertyName).HasValueGenerator((Type)null);
+                        cb.Property(StoreKeyConvention.DefaultIdPropertyName)
+                            .HasValueGenerator((Type)null);
 
                         cb.Property(c => c.PartitionKey).HasConversion<string>();
 
                         cb.HasPartitionKey(c => c.PartitionKey);
                         cb.HasKey(c => new { c.PartitionKey, c.Id });
-                    });
+                    }
+                );
             }
         }
 
         private class PartitionKeyContextNonPrimaryKey : DbContext
         {
             public PartitionKeyContextNonPrimaryKey(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -976,9 +959,7 @@ OFFSET 0 LIMIT 1");
         private class PartitionKeyContextPrimaryKey : DbContext
         {
             public PartitionKeyContextPrimaryKey(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -990,16 +971,15 @@ OFFSET 0 LIMIT 1");
                         cb.HasNoDiscriminator();
                         cb.Property(c => c.Id).HasConversion<string>();
                         cb.HasPartitionKey(c => c.Id);
-                    });
+                    }
+                );
             }
         }
 
         private class PartitionKeyContextWithPrimaryKeyResourceId : DbContext
         {
             public PartitionKeyContextWithPrimaryKeyResourceId(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -1010,16 +990,15 @@ OFFSET 0 LIMIT 1");
                         cb.Property(c => c.PartitionKey).HasConversion<string>();
                         cb.Property(c => c.id).HasConversion<string>();
                         cb.HasKey(c => new { c.id });
-                    });
+                    }
+                );
             }
         }
 
         private class PartitionKeyContextWithResourceId : DbContext
         {
             public PartitionKeyContextWithResourceId(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -1029,7 +1008,8 @@ OFFSET 0 LIMIT 1");
                         cb.HasPartitionKey(c => c.PartitionKey);
                         cb.Property(c => c.PartitionKey).HasConversion<string>();
                         cb.HasKey(c => new { c.PartitionKey, c.id });
-                    });
+                    }
+                );
             }
         }
 
@@ -1079,9 +1059,7 @@ OFFSET 0 LIMIT 1");
         private class NoDiscriminatorCustomerContext : CustomerContext
         {
             public NoDiscriminatorCustomerContext(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -1126,7 +1104,10 @@ OFFSET 0 LIMIT 1");
                 Assert.Equal("Theon Greyjoy", customerFromStore.Name);
 
                 var entry = context.Entry(customerFromStore);
-                Assert.Equal("theon.g@winterfell.com", entry.Property<string>("EMail").CurrentValue);
+                Assert.Equal(
+                    "theon.g@winterfell.com",
+                    entry.Property<string>("EMail").CurrentValue
+                );
 
                 var json = entry.Property<JObject>("__jObject").CurrentValue;
                 Assert.Equal("theon.g@winterfell.com", json["e-mail"]);
@@ -1144,10 +1125,8 @@ OFFSET 0 LIMIT 1");
 
         private class ExtraCustomerContext : CustomerContext
         {
-            public ExtraCustomerContext(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+            public ExtraCustomerContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+            { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -1189,9 +1168,7 @@ OFFSET 0 LIMIT 1");
         private class UnmappedCustomerContext : CustomerContext
         {
             public UnmappedCustomerContext(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -1202,7 +1179,9 @@ OFFSET 0 LIMIT 1");
         [ConditionalFact]
         public async Task Add_update_delete_query_throws_if_no_container()
         {
-            await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName + "Empty");
+            await using var testDatabase = CosmosTestStore.CreateInitialized(
+                DatabaseName + "Empty"
+            );
             var options = Fixture.CreateOptions(testDatabase);
 
             var customer = new Customer { Id = 42, Name = "Theon" };
@@ -1212,7 +1191,10 @@ OFFSET 0 LIMIT 1");
 
                 Assert.StartsWith(
                     "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                    (await Assert.ThrowsAsync<CosmosException>(() => context.SaveChangesAsync())).Message);
+                    (
+                        await Assert.ThrowsAsync<CosmosException>(() => context.SaveChangesAsync())
+                    ).Message
+                );
             }
 
             using (var context = new CustomerContext(options))
@@ -1221,7 +1203,10 @@ OFFSET 0 LIMIT 1");
 
                 Assert.StartsWith(
                     "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                    (await Assert.ThrowsAsync<CosmosException>(() => context.SaveChangesAsync())).Message);
+                    (
+                        await Assert.ThrowsAsync<CosmosException>(() => context.SaveChangesAsync())
+                    ).Message
+                );
             }
 
             using (var context = new CustomerContext(options))
@@ -1230,14 +1215,22 @@ OFFSET 0 LIMIT 1");
 
                 Assert.StartsWith(
                     "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                    (await Assert.ThrowsAsync<CosmosException>(() => context.SaveChangesAsync())).Message);
+                    (
+                        await Assert.ThrowsAsync<CosmosException>(() => context.SaveChangesAsync())
+                    ).Message
+                );
             }
 
             using (var context = new CustomerContext(options))
             {
                 Assert.StartsWith(
                     "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                    (await Assert.ThrowsAsync<CosmosException>(() => context.Set<Customer>().SingleAsync())).Message);
+                    (
+                        await Assert.ThrowsAsync<CosmosException>(
+                            () => context.Set<Customer>().SingleAsync()
+                        )
+                    ).Message
+                );
             }
         }
 
@@ -1255,7 +1248,8 @@ OFFSET 0 LIMIT 1");
                     context.Add(new ConflictingIncompatibleId { id = 42 });
 
                     await context.SaveChangesAsync();
-                });
+                }
+            );
         }
 
         private class ConflictingIncompatibleId
@@ -1268,9 +1262,7 @@ OFFSET 0 LIMIT 1");
         public class ConflictingIncompatibleIdContext : DbContext
         {
             public ConflictingIncompatibleIdContext(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -1340,10 +1332,8 @@ OFFSET 0 LIMIT 1");
 
         public class ConflictingIdContext : DbContext
         {
-            public ConflictingIdContext(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+            public ConflictingIdContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+            { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -1360,7 +1350,9 @@ OFFSET 0 LIMIT 1");
             context.Add(new NonStringDiscriminator { Id = 1 });
             await context.SaveChangesAsync();
 
-            Assert.NotNull(await context.Set<NonStringDiscriminator>().OrderBy(e => e.Id).FirstOrDefaultAsync());
+            Assert.NotNull(
+                await context.Set<NonStringDiscriminator>().OrderBy(e => e.Id).FirstOrDefaultAsync()
+            );
         }
 
         private class NonStringDiscriminator
@@ -1378,9 +1370,7 @@ OFFSET 0 LIMIT 1");
         public class NonStringDiscriminatorContext : DbContext
         {
             public NonStringDiscriminatorContext(DbContextOptions dbContextOptions)
-                : base(dbContextOptions)
-            {
-            }
+                : base(dbContextOptions) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -1401,8 +1391,8 @@ OFFSET 0 LIMIT 1");
                 TestStore = CosmosTestStore.Create(DatabaseName);
             }
 
-            protected override ITestStoreFactory TestStoreFactory
-                => CosmosTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                CosmosTestStoreFactory.Instance;
 
             public virtual CosmosTestStore TestStore { get; }
 
@@ -1413,11 +1403,9 @@ OFFSET 0 LIMIT 1");
                 return CreateOptions(TestStore);
             }
 
-            public Task InitializeAsync()
-                => Task.CompletedTask;
+            public Task InitializeAsync() => Task.CompletedTask;
 
-            public Task DisposeAsync()
-                => TestStore.DisposeAsync();
+            public Task DisposeAsync() => TestStore.DisposeAsync();
         }
     }
 }

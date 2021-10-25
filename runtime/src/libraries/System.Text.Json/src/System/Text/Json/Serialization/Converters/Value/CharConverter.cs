@@ -7,7 +7,11 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class CharConverter : JsonConverter<char>
     {
-        public override char Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override char Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             string? str = reader.GetString();
             if (string.IsNullOrEmpty(str) || str.Length > 1)
@@ -25,13 +29,18 @@ namespace System.Text.Json.Serialization.Converters
 #else
                 value.ToString()
 #endif
-                );
+            );
         }
 
-        internal override char ReadWithQuotes(ref Utf8JsonReader reader)
-            => Read(ref reader, default!, default!);
+        internal override char ReadWithQuotes(ref Utf8JsonReader reader) =>
+            Read(ref reader, default!, default!);
 
-        internal override void WriteWithQuotes(Utf8JsonWriter writer, char value, JsonSerializerOptions options, ref WriteStack state)
+        internal override void WriteWithQuotes(
+            Utf8JsonWriter writer,
+            char value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             writer.WritePropertyName(
 #if BUILDING_INBOX_LIBRARY
@@ -39,7 +48,7 @@ namespace System.Text.Json.Serialization.Converters
 #else
                 value.ToString()
 #endif
-                );
+            );
         }
     }
 }

@@ -22,7 +22,9 @@ namespace TestServer
         {
             services.AddMvc();
             services.AddServerSideBlazor();
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,32 +39,42 @@ namespace TestServer
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Map("/Client/multiple-components", app =>
-            {
-                app.UseBlazorFrameworkFiles();
-                app.UseStaticFiles();
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
+            app.Map(
+                "/Client/multiple-components",
+                app =>
                 {
-                    endpoints.MapRazorPages();
-                    endpoints.MapFallbackToPage("/Client/MultipleComponents");
-                });
-            });
+                    app.UseBlazorFrameworkFiles();
+                    app.UseStaticFiles();
+                    app.UseRouting();
+                    app.UseEndpoints(
+                        endpoints =>
+                        {
+                            endpoints.MapRazorPages();
+                            endpoints.MapFallbackToPage("/Client/MultipleComponents");
+                        }
+                    );
+                }
+            );
 
-            app.Map("/multiple-components", app =>
-            {
-                app.UseStaticFiles();
-
-                app.UseAuthentication();
-
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
+            app.Map(
+                "/multiple-components",
+                app =>
                 {
-                    endpoints.MapRazorPages();
-                    endpoints.MapFallbackToPage("/MultipleComponents");
-                    endpoints.MapBlazorHub();
-                });
-            });
+                    app.UseStaticFiles();
+
+                    app.UseAuthentication();
+
+                    app.UseRouting();
+                    app.UseEndpoints(
+                        endpoints =>
+                        {
+                            endpoints.MapRazorPages();
+                            endpoints.MapFallbackToPage("/MultipleComponents");
+                            endpoints.MapBlazorHub();
+                        }
+                    );
+                }
+            );
         }
     }
 }

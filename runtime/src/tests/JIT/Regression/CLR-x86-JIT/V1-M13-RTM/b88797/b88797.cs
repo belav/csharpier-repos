@@ -6,7 +6,10 @@ using System;
 
 public class CC
 {
-    public static bool Method2() { return true; }
+    public static bool Method2()
+    {
+        return true;
+    }
     public static int Main()
     {
         try

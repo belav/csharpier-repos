@@ -24,8 +24,7 @@ namespace System.Security.Cryptography
         protected sealed override void HashCore(ReadOnlySpan<byte> source) =>
             _hashProvider.AppendHashData(source);
 
-        protected sealed override byte[] HashFinal() =>
-            _hashProvider.FinalizeHashAndReset();
+        protected sealed override byte[] HashFinal() => _hashProvider.FinalizeHashAndReset();
 
         protected sealed override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
             _hashProvider.TryFinalizeHashAndReset(destination, out bytesWritten);

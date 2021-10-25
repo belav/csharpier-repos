@@ -7,9 +7,12 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class TagHelpersFromServicesTest : IClassFixture<MvcTestFixture<ControllersFromServicesWebSite.Startup>>
+    public class TagHelpersFromServicesTest
+        : IClassFixture<MvcTestFixture<ControllersFromServicesWebSite.Startup>>
     {
-        public TagHelpersFromServicesTest(MvcTestFixture<ControllersFromServicesWebSite.Startup> fixture)
+        public TagHelpersFromServicesTest(
+            MvcTestFixture<ControllersFromServicesWebSite.Startup> fixture
+        )
         {
             Client = fixture.CreateDefaultClient();
         }
@@ -21,7 +24,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var expected = "3";
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/another/inservicestaghelper");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/another/inservicestaghelper"
+            );
 
             // Act
             var response = await Client.SendAsync(request);

@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.Identity
         /// A <see cref="Task{TResult}"/> that represents the result of the asynchronous query, a <see cref="DateTimeOffset"/> containing the last time
         /// a user's lockout expired, if any.
         /// </returns>
-        Task<DateTimeOffset?> GetLockoutEndDateAsync(TUser user, CancellationToken cancellationToken);
+        Task<DateTimeOffset?> GetLockoutEndDateAsync(
+            TUser user,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Locks out a user until the specified end date has passed. Setting a end date in the past immediately unlocks a user.
@@ -33,7 +36,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="lockoutEnd">The <see cref="DateTimeOffset"/> after which the <paramref name="user"/>'s lockout should end.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        Task SetLockoutEndDateAsync(TUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken);
+        Task SetLockoutEndDateAsync(
+            TUser user,
+            DateTimeOffset? lockoutEnd,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Records that a failed access has occurred, incrementing the failed access count.

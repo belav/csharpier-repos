@@ -36,18 +36,18 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             DefaultKeyId = defaultKey.KeyId;
             _defaultKeyHolder = _keyIdToKeyHolderMap[DefaultKeyId];
         }
-        
+
         public IAuthenticatedEncryptor? DefaultAuthenticatedEncryptor
         {
-            get
-            {
-                return _defaultKeyHolder.GetEncryptorInstance(out _);
-            }
+            get { return _defaultKeyHolder.GetEncryptorInstance(out _); }
         }
 
         public Guid DefaultKeyId { get; }
 
-        public IAuthenticatedEncryptor? GetAuthenticatedEncryptorByKeyId(Guid keyId, out bool isRevoked)
+        public IAuthenticatedEncryptor? GetAuthenticatedEncryptorByKeyId(
+            Guid keyId,
+            out bool isRevoked
+        )
         {
             isRevoked = false;
             _keyIdToKeyHolderMap.TryGetValue(keyId, out var holder);

@@ -8,7 +8,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints
     public class NonFileNameRouteConstraintTest
     {
         [Theory]
-        [MemberData(nameof(FileNameRouteConstraintTest.FileNameData), MemberType = typeof(FileNameRouteConstraintTest))]
+        [MemberData(
+            nameof(FileNameRouteConstraintTest.FileNameData),
+            MemberType = typeof(FileNameRouteConstraintTest)
+        )]
         public void Match_RouteValue_IsNotNonFileName(object value)
         {
             // Arrange
@@ -18,14 +21,23 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             values.Add("path", value);
 
             // Act
-            var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+            var result = constraint.Match(
+                httpContext: null,
+                route: null,
+                "path",
+                values,
+                RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.False(result);
         }
 
         [Theory]
-        [MemberData(nameof(FileNameRouteConstraintTest.NonFileNameData), MemberType = typeof(FileNameRouteConstraintTest))]
+        [MemberData(
+            nameof(FileNameRouteConstraintTest.NonFileNameData),
+            MemberType = typeof(FileNameRouteConstraintTest)
+        )]
         public void Match_RouteValue_IsNonFileName(object value)
         {
             // Arrange
@@ -35,7 +47,13 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             values.Add("path", value);
 
             // Act
-            var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+            var result = constraint.Match(
+                httpContext: null,
+                route: null,
+                "path",
+                values,
+                RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.True(result);
@@ -50,7 +68,13 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             var values = new RouteValueDictionary();
 
             // Act
-            var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+            var result = constraint.Match(
+                httpContext: null,
+                route: null,
+                "path",
+                values,
+                RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.True(result);

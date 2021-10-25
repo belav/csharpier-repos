@@ -23,15 +23,26 @@ namespace ILCompiler.PEWriter
 
         public void SavePdb(string pdbPath, string dllFileName)
         {
-            Console.WriteLine("Emitting PDB file: {0}", Path.Combine(pdbPath, Path.GetFileNameWithoutExtension(dllFileName) + ".ni.pdb"));
+            Console.WriteLine(
+                "Emitting PDB file: {0}",
+                Path.Combine(pdbPath, Path.GetFileNameWithoutExtension(dllFileName) + ".ni.pdb")
+            );
 
-            new PdbWriter(pdbPath, PDBExtraData.None).WritePDBData(dllFileName, _outputInfoBuilder.EnumerateMethods());
+            new PdbWriter(pdbPath, PDBExtraData.None).WritePDBData(
+                dllFileName,
+                _outputInfoBuilder.EnumerateMethods()
+            );
         }
 
         public void SavePerfMap(string perfMapPath, string dllFileName, Guid? perfMapMvid)
         {
-            string mvidComponent = (perfMapMvid.HasValue ? perfMapMvid.Value.ToString() : "composite");
-            string perfMapFileName = Path.Combine(perfMapPath, Path.GetFileNameWithoutExtension(dllFileName) + ".ni.{" + mvidComponent + "}.map");
+            string mvidComponent = (
+                perfMapMvid.HasValue ? perfMapMvid.Value.ToString() : "composite"
+            );
+            string perfMapFileName = Path.Combine(
+                perfMapPath,
+                Path.GetFileNameWithoutExtension(dllFileName) + ".ni.{" + mvidComponent + "}.map"
+            );
             Console.WriteLine("Emitting PerfMap file: {0}", perfMapFileName);
             PerfMapWriter.Write(perfMapFileName, _outputInfoBuilder.EnumerateMethods());
         }

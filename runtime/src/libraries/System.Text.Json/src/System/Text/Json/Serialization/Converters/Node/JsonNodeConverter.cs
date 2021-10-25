@@ -13,7 +13,11 @@ namespace System.Text.Json.Serialization.Converters
         public JsonObjectConverter ObjectConverter { get; } = new JsonObjectConverter();
         public JsonValueConverter ValueConverter { get; } = new JsonValueConverter();
 
-        public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            object value,
+            JsonSerializerOptions options
+        )
         {
             if (value == null)
             {
@@ -37,7 +41,11 @@ namespace System.Text.Json.Serialization.Converters
             }
         }
 
-        public override object? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override object? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             switch (reader.TokenType)
             {

@@ -27,30 +27,43 @@ namespace Microsoft.AspNetCore.Tests
         [Fact]
         public void WebHostConfiguration_IncludesCommandLineArguments()
         {
-            var builder = WebHost.CreateDefaultBuilder(new string[] { "--urls", "http://localhost:5001" });
-            Assert.Equal("http://localhost:5001", builder.GetSetting(WebHostDefaults.ServerUrlsKey));
+            var builder = WebHost.CreateDefaultBuilder(
+                new string[] { "--urls", "http://localhost:5001" }
+            );
+            Assert.Equal(
+                "http://localhost:5001",
+                builder.GetSetting(WebHostDefaults.ServerUrlsKey)
+            );
         }
 
         [Fact]
         public async Task WebHostConfiguration_HostFilterOptionsAreReloadable()
         {
-            var host = WebHost.CreateDefaultBuilder()
+            var host = WebHost
+                .CreateDefaultBuilder()
                 .Configure(app => { })
-                .ConfigureAppConfiguration(configBuilder =>
-                {
-                    configBuilder.Add(new ReloadableMemorySource());
-                }).Build();
+                .ConfigureAppConfiguration(
+                    configBuilder =>
+                    {
+                        configBuilder.Add(new ReloadableMemorySource());
+                    }
+                )
+                .Build();
             var config = host.Services.GetRequiredService<IConfiguration>();
             var monitor = host.Services.GetRequiredService<IOptionsMonitor<HostFilteringOptions>>();
             var options = monitor.CurrentValue;
 
             Assert.Contains("*", options.AllowedHosts);
 
-            var changed = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            monitor.OnChange(newOptions =>
-            {
-                changed.SetResult(0);
-            });
+            var changed = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            monitor.OnChange(
+                newOptions =>
+                {
+                    changed.SetResult(0);
+                }
+            );
 
             config["AllowedHosts"] = "NewHost";
 
@@ -62,24 +75,40 @@ namespace Microsoft.AspNetCore.Tests
         [Fact]
         public async Task WebHostConfiguration_EnablesForwardedHeadersFromConfig()
         {
-            using var host = WebHost.CreateDefaultBuilder()
-                .ConfigureAppConfiguration(configBuilder =>
-                {
-                    configBuilder.AddInMemoryCollection(new[]
+            using var host = WebHost
+                .CreateDefaultBuilder()
+                .ConfigureAppConfiguration(
+                    configBuilder =>
                     {
-                        new KeyValuePair<string, string>("FORWARDEDHEADERS_ENABLED", "true" ),
-                    });
-                })
+                        configBuilder.AddInMemoryCollection(
+                            new[]
+                            {
+                                new KeyValuePair<string, string>(
+                                    "FORWARDEDHEADERS_ENABLED",
+                                    "true"
+                                ),
+                            }
+                        );
+                    }
+                )
                 .UseTestServer()
-                .Configure(app =>
-                {
-                    Assert.True(app.Properties.ContainsKey("ForwardedHeadersAdded"), "Forwarded Headers");
-                    app.Run(context =>
+                .Configure(
+                    app =>
                     {
-                        Assert.Equal("https", context.Request.Scheme);
-                        return Task.CompletedTask;
-                    });
-                }).Build();
+                        Assert.True(
+                            app.Properties.ContainsKey("ForwardedHeadersAdded"),
+                            "Forwarded Headers"
+                        );
+                        app.Run(
+                            context =>
+                            {
+                                Assert.Equal("https", context.Request.Scheme);
+                                return Task.CompletedTask;
+                            }
+                        );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
             var client = host.GetTestClient();
@@ -91,9 +120,7 @@ namespace Microsoft.AspNetCore.Tests
         [Fact]
         public void CreateDefaultBuilder_RegistersRouting()
         {
-            var host = WebHost.CreateDefaultBuilder()
-                .Configure(_ => { })
-                .Build();
+            var host = WebHost.CreateDefaultBuilder().Configure(_ => { }).Build();
 
             var linkGenerator = host.Services.GetService(typeof(LinkGenerator));
             Assert.NotNull(linkGenerator);
@@ -103,24 +130,26 @@ namespace Microsoft.AspNetCore.Tests
         public void CreateDefaultBuilder_RegistersEventSourceLogger()
         {
             var listener = new TestEventListener();
-            var host = WebHost.CreateDefaultBuilder()
-                .Configure(_ => { })
-                .Build();
+            var host = WebHost.CreateDefaultBuilder().Configure(_ => { }).Build();
 
             var logger = host.Services.GetRequiredService<ILogger<WebHostTests>>();
             logger.LogInformation("Request starting");
 
             var events = listener.EventData.ToArray();
-            Assert.Contains(events, args =>
-                args.EventSource.Name == "Microsoft-Extensions-Logging" &&
-                args.Payload.OfType<string>().Any(p => p.Contains("Request starting")));
+            Assert.Contains(
+                events,
+                args =>
+                    args.EventSource.Name == "Microsoft-Extensions-Logging"
+                    && args.Payload.OfType<string>().Any(p => p.Contains("Request starting"))
+            );
         }
 
         private class TestEventListener : EventListener
         {
             private volatile bool _disposed;
 
-            private ConcurrentQueue<EventWrittenEventArgs> _events = new ConcurrentQueue<EventWrittenEventArgs>();
+            private ConcurrentQueue<EventWrittenEventArgs> _events =
+                new ConcurrentQueue<EventWrittenEventArgs>();
 
             public IEnumerable<EventWrittenEventArgs> EventData => _events;
 

@@ -15,6 +15,5 @@ namespace Microsoft.NET.HostModel.AppHost
         {
             LongName = name;
         }
-
     }
 }

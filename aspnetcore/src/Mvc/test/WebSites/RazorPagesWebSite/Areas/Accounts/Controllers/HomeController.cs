@@ -10,5 +10,4 @@ namespace RazorPagesWebSite
     {
         public IActionResult Index() => View();
     }
-
 }

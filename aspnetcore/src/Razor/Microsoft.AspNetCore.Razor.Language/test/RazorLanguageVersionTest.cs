@@ -140,7 +140,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var v = RazorLanguageVersion.Parse("latest");
-            var versions = typeof(RazorLanguageVersion).GetFields(BindingFlags.Public | BindingFlags.Static)
+            var versions = typeof(RazorLanguageVersion)
+                .GetFields(BindingFlags.Public | BindingFlags.Static)
                 .Where(f => f.Name.StartsWith("Version_", StringComparison.Ordinal))
                 .Select(f => f.GetValue(obj: null))
                 .Cast<RazorLanguageVersion>();
@@ -149,7 +150,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             Assert.NotEmpty(versions);
             foreach (var version in versions)
             {
-                Assert.True(version.CompareTo(v) <= 0, $"RazorLanguageVersion {version} has a higher version than RazorLanguageVersion.Latest");
+                Assert.True(
+                    version.CompareTo(v) <= 0,
+                    $"RazorLanguageVersion {version} has a higher version than RazorLanguageVersion.Latest"
+                );
             }
         }
     }

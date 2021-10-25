@@ -18,12 +18,16 @@ namespace SecurityWebSite
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAntiforgery();
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
-            {
-                options.LoginPath = "/Home/Login";
-                options.LogoutPath = "/Home/Logout";
-            })
-            .AddCookie("Cookie2");
+            services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(
+                    options =>
+                    {
+                        options.LoginPath = "/Home/Login";
+                        options.LogoutPath = "/Home/Logout";
+                    }
+                )
+                .AddCookie("Cookie2");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,11 +38,13 @@ namespace SecurityWebSite
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages().RequireAuthorization();
-                endpoints.MapDefaultControllerRoute().RequireAuthorization();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapRazorPages().RequireAuthorization();
+                    endpoints.MapDefaultControllerRoute().RequireAuthorization();
+                }
+            );
         }
     }
 }

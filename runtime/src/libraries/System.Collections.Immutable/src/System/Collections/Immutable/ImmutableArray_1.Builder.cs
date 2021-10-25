@@ -40,10 +40,7 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Initializes a new instance of the <see cref="Builder"/> class.
             /// </summary>
-            internal Builder()
-                : this(8)
-            {
-            }
+            internal Builder() : this(8) { }
 
             /// <summary>
             /// Get and sets the length of the internal array.  When set the internal array is
@@ -56,7 +53,10 @@ namespace System.Collections.Immutable
                 {
                     if (value < _count)
                     {
-                        throw new ArgumentException(SR.CapacityMustBeGreaterThanOrEqualToCount, paramName: nameof(value));
+                        throw new ArgumentException(
+                            SR.CapacityMustBeGreaterThanOrEqualToCount,
+                            paramName: nameof(value)
+                        );
                     }
 
                     if (value != _elements.Length)
@@ -88,11 +88,7 @@ namespace System.Collections.Immutable
             /// </remarks>
             public int Count
             {
-                get
-                {
-                    return _count;
-                }
-
+                get { return _count; }
                 set
                 {
                     Requires.Range(value >= 0, nameof(value));
@@ -125,7 +121,8 @@ namespace System.Collections.Immutable
                 }
             }
 
-            private static void ThrowIndexOutOfRangeException() => throw new IndexOutOfRangeException();
+            private static void ThrowIndexOutOfRangeException() =>
+                throw new IndexOutOfRangeException();
 
             /// <summary>
             /// Gets or sets the element at the specified index.
@@ -145,7 +142,6 @@ namespace System.Collections.Immutable
 
                     return _elements[index];
                 }
-
                 set
                 {
                     if (index >= this.Count)
@@ -373,7 +369,8 @@ namespace System.Collections.Immutable
             /// Adds the specified items to the end of the array.
             /// </summary>
             /// <param name="items">The items.</param>
-            public void AddRange<TDerived>(ImmutableArray<TDerived>.Builder items) where TDerived : T
+            public void AddRange<TDerived>(ImmutableArray<TDerived>.Builder items)
+                where TDerived : T
             {
                 Requires.NotNull(items, nameof(items));
                 this.AddRange(items._elements, items.Count);
@@ -484,7 +481,12 @@ namespace System.Collections.Immutable
             /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be found.</returns>
             public int IndexOf(T item, int startIndex)
             {
-                return this.IndexOf(item, startIndex, this.Count - startIndex, EqualityComparer<T>.Default);
+                return this.IndexOf(
+                    item,
+                    startIndex,
+                    this.Count - startIndex,
+                    EqualityComparer<T>.Default
+                );
             }
 
             /// <summary>
@@ -510,7 +512,12 @@ namespace System.Collections.Immutable
             /// If <c>null</c>, <see cref="EqualityComparer{T}.Default"/> is used.
             /// </param>
             /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be found.</returns>
-            public int IndexOf(T item, int startIndex, int count, IEqualityComparer<T>? equalityComparer)
+            public int IndexOf(
+                T item,
+                int startIndex,
+                int count,
+                IEqualityComparer<T>? equalityComparer
+            )
             {
                 if (count == 0 && startIndex == 0)
                 {
@@ -551,7 +558,12 @@ namespace System.Collections.Immutable
                     return -1;
                 }
 
-                return this.LastIndexOf(item, this.Count - 1, this.Count, EqualityComparer<T>.Default);
+                return this.LastIndexOf(
+                    item,
+                    this.Count - 1,
+                    this.Count,
+                    EqualityComparer<T>.Default
+                );
             }
 
             /// <summary>
@@ -569,7 +581,12 @@ namespace System.Collections.Immutable
 
                 Requires.Range(startIndex >= 0 && startIndex < this.Count, nameof(startIndex));
 
-                return this.LastIndexOf(item, startIndex, startIndex + 1, EqualityComparer<T>.Default);
+                return this.LastIndexOf(
+                    item,
+                    startIndex,
+                    startIndex + 1,
+                    EqualityComparer<T>.Default
+                );
             }
 
             /// <summary>
@@ -592,7 +609,12 @@ namespace System.Collections.Immutable
             /// <param name="count">The number of elements to search.</param>
             /// <param name="equalityComparer">The equality comparer to use in the search.</param>
             /// <returns>The 0-based index into the array where the item was found; or -1 if it could not be found.</returns>
-            public int LastIndexOf(T item, int startIndex, int count, IEqualityComparer<T>? equalityComparer)
+            public int LastIndexOf(
+                T item,
+                int startIndex,
+                int count,
+                IEqualityComparer<T>? equalityComparer
+            )
             {
                 if (count == 0 && startIndex == 0)
                 {

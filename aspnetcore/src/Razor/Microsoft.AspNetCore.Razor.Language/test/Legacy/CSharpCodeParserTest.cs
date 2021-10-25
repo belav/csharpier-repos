@@ -21,75 +21,34 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy
                 RazorDiagnostic InvalidPrefixError(int length, char character, string prefix)
                 {
                     return RazorDiagnosticFactory.CreateParsing_InvalidTagHelperPrefixValue(
-                        new SourceSpan(directiveLocation, length), SyntaxConstants.CSharp.TagHelperPrefixKeyword, character, prefix);
+                        new SourceSpan(directiveLocation, length),
+                        SyntaxConstants.CSharp.TagHelperPrefixKeyword,
+                        character,
+                        prefix
+                    );
                 }
 
                 return new TheoryData<string, SourceLocation, IEnumerable<RazorDiagnostic>>
                 {
-                    {
-                        "th ",
-                        directiveLocation,
-                        new[]
-                        {
-                            InvalidPrefixError(3, ' ', "th "),
-                        }
-                    },
-                    {
-                        "th\t",
-                        directiveLocation,
-                        new[]
-                        {
-                            InvalidPrefixError(3, '\t', "th\t"),
-                        }
-                    },
+                    { "th ", directiveLocation, new[] { InvalidPrefixError(3, ' ', "th "), } },
+                    { "th\t", directiveLocation, new[] { InvalidPrefixError(3, '\t', "th\t"), } },
                     {
                         "th" + Environment.NewLine,
                         directiveLocation,
                         new[]
                         {
-                            InvalidPrefixError(2 + Environment.NewLine.Length, Environment.NewLine[0], "th" + Environment.NewLine),
+                            InvalidPrefixError(
+                                2 + Environment.NewLine.Length,
+                                Environment.NewLine[0],
+                                "th" + Environment.NewLine
+                            ),
                         }
                     },
-                    {
-                        " th ",
-                        directiveLocation,
-                        new[]
-                        {
-                            InvalidPrefixError(4, ' ', " th "),
-                        }
-                    },
-                    {
-                        "@",
-                        directiveLocation,
-                        new[]
-                        {
-                            InvalidPrefixError(1, '@', "@"),
-                        }
-                    },
-                    {
-                        "t@h",
-                        directiveLocation,
-                        new[]
-                        {
-                            InvalidPrefixError(3, '@', "t@h"),
-                        }
-                    },
-                    {
-                        "!",
-                        directiveLocation,
-                        new[]
-                        {
-                            InvalidPrefixError(1, '!', "!"),
-                        }
-                    },
-                    {
-                        "!th",
-                        directiveLocation,
-                        new[]
-                        {
-                            InvalidPrefixError(3, '!', "!th"),
-                        }
-                    },
+                    { " th ", directiveLocation, new[] { InvalidPrefixError(4, ' ', " th "), } },
+                    { "@", directiveLocation, new[] { InvalidPrefixError(1, '@', "@"), } },
+                    { "t@h", directiveLocation, new[] { InvalidPrefixError(3, '@', "t@h"), } },
+                    { "!", directiveLocation, new[] { InvalidPrefixError(1, '!', "!"), } },
+                    { "!th", directiveLocation, new[] { InvalidPrefixError(3, '!', "!th"), } },
                 };
             }
         }
@@ -99,7 +58,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy
         public void ValidateTagHelperPrefix_ValidatesPrefix(
             string directiveText,
             SourceLocation directiveLocation,
-            object expectedErrors)
+            object expectedErrors
+        )
         {
             // Arrange
             var expectedDiagnostics = (IEnumerable<RazorDiagnostic>)expectedErrors;
@@ -124,7 +84,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy
         [InlineData("   foo   , assemblyName", 11)]
         [InlineData("foo,    assemblyName", 8)]
         [InlineData("   foo   ,    assemblyName   ", 14)]
-        public void ParseAddOrRemoveDirective_CalculatesAssemblyLocationInLookupText(string text, int assemblyLocation)
+        public void ParseAddOrRemoveDirective_CalculatesAssemblyLocationInLookupText(
+            string text,
+            int assemblyLocation
+        )
         {
             // Arrange
             var source = TestRazorSourceDocument.Create();
@@ -133,16 +96,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy
 
             var parser = new CSharpCodeParser(context);
 
-            var directive = new CSharpCodeParser.ParsedDirective()
-            {
-                DirectiveText = text,
-            };
+            var directive = new CSharpCodeParser.ParsedDirective() { DirectiveText = text, };
 
             var diagnostics = new List<RazorDiagnostic>();
             var expected = new SourceLocation(assemblyLocation, 0, assemblyLocation);
 
             // Act
-            var result = parser.ParseAddOrRemoveDirective(directive, SourceLocation.Zero, diagnostics);
+            var result = parser.ParseAddOrRemoveDirective(
+                directive,
+                SourceLocation.Zero,
+                diagnostics
+            );
 
             // Assert
             Assert.Empty(diagnostics);
@@ -163,7 +127,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy
         [InlineData("SomeType,", 9)]
         [InlineData("SomeAssembly", 12)]
         [InlineData("First,Second,Third", 18)]
-        public void ParseAddOrRemoveDirective_CreatesErrorIfInvalidLookupText_DoesNotThrow(string directiveText, int errorLength)
+        public void ParseAddOrRemoveDirective_CreatesErrorIfInvalidLookupText_DoesNotThrow(
+            string directiveText,
+            int errorLength
+        )
         {
             // Arrange
             var source = TestRazorSourceDocument.Create();
@@ -179,10 +146,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy
 
             var diagnostics = new List<RazorDiagnostic>();
             var expectedError = RazorDiagnosticFactory.CreateParsing_InvalidTagHelperLookupText(
-                new SourceSpan(new SourceLocation(1, 2, 3), errorLength), directiveText);
+                new SourceSpan(new SourceLocation(1, 2, 3), errorLength),
+                directiveText
+            );
 
             // Act
-            var result = parser.ParseAddOrRemoveDirective(directive, new SourceLocation(1, 2, 3), diagnostics);
+            var result = parser.ParseAddOrRemoveDirective(
+                directive,
+                new SourceLocation(1, 2, 3),
+                diagnostics
+            );
 
             // Assert
             Assert.Same(directive, result);
@@ -196,18 +169,28 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy
         {
             // Arrange
             var expectedDiagnostic = RazorDiagnosticFactory.CreateParsing_DuplicateDirective(
-                new SourceSpan(null, 22 + Environment.NewLine.Length, 1, 0, 16), "tagHelperPrefix");
+                new SourceSpan(null, 22 + Environment.NewLine.Length, 1, 0, 16),
+                "tagHelperPrefix"
+            );
             var source = TestRazorSourceDocument.Create(
                 @"@tagHelperPrefix ""th:""
 @tagHelperPrefix ""th""",
-                filePath: null);
+                filePath: null
+            );
 
             // Act
             var document = RazorSyntaxTree.Parse(source);
 
             // Assert
-            var erroredNode = document.Root.DescendantNodes().Last(n => n.GetSpanContext()?.ChunkGenerator is TagHelperPrefixDirectiveChunkGenerator);
-            var chunkGenerator = Assert.IsType<TagHelperPrefixDirectiveChunkGenerator>(erroredNode.GetSpanContext().ChunkGenerator);
+            var erroredNode = document.Root
+                .DescendantNodes()
+                .Last(
+                    n =>
+                        n.GetSpanContext()?.ChunkGenerator is TagHelperPrefixDirectiveChunkGenerator
+                );
+            var chunkGenerator = Assert.IsType<TagHelperPrefixDirectiveChunkGenerator>(
+                erroredNode.GetSpanContext().ChunkGenerator
+            );
             var diagnostic = Assert.Single(chunkGenerator.Diagnostics);
             Assert.Equal(expectedDiagnostic, diagnostic);
         }

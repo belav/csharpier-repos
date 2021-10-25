@@ -13,9 +13,7 @@ namespace System.Data.Common
         private ulong[] _values = default!; // Late-initialized
 
         public UInt64Storage(DataColumn column)
-        : base(column, typeof(ulong), DefaultValue, StorageType.UInt64)
-        {
-        }
+            : base(column, typeof(ulong), DefaultValue, StorageType.UInt64) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -30,7 +28,10 @@ namespace System.Data.Common
                         {
                             if (HasValue(record))
                             {
-                                checked { sum += _values[record]; }
+                                checked
+                                {
+                                    sum += _values[record];
+                                }
                                 hasData = true;
                             }
                         }
@@ -47,7 +48,10 @@ namespace System.Data.Common
                         {
                             if (HasValue(record))
                             {
-                                checked { meanSum += _values[record]; }
+                                checked
+                                {
+                                    meanSum += _values[record];
+                                }
                                 meanCount++;
                                 hasData = true;
                             }
@@ -55,7 +59,10 @@ namespace System.Data.Common
                         if (hasData)
                         {
                             ulong mean;
-                            checked { mean = (ulong)(meanSum / (decimal)meanCount); }
+                            checked
+                            {
+                                mean = (ulong)(meanSum / (decimal)meanCount);
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -259,7 +266,12 @@ namespace System.Data.Common
             return new ulong[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             ulong[] typedStore = (ulong[])store;
             typedStore[storeIndex] = _values[record];

@@ -16,15 +16,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void NewBehavior_Select_ReturnsFuzzyMatchForHead_WhenNoHeadHandlerDefined()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "GET"
-            };
+            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "GET" };
 
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST"
-            };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST" };
 
             var pageContext = new PageContext
             {
@@ -37,13 +31,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     },
                 },
                 RouteData = new RouteData(),
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = "HEAD"
-                    },
-                },
+                HttpContext = new DefaultHttpContext { Request = { Method = "HEAD" }, },
             };
             var selector = CreateSelector();
 
@@ -58,20 +46,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void NewBehavior_Select_PrefersExactMatch()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "GET"
-            };
+            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "GET" };
 
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST"
-            };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST" };
 
-            var descriptor3 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "HEAD"
-            };
+            var descriptor3 = new HandlerMethodDescriptor { HttpMethod = "HEAD" };
 
             var pageContext = new PageContext
             {
@@ -85,13 +64,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     },
                 },
                 RouteData = new RouteData(),
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = "HEAD",
-                    },
-                },
+                HttpContext = new DefaultHttpContext { Request = { Method = "HEAD", }, },
             };
             var selector = CreateSelector();
 
@@ -106,15 +79,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void NewBehavior_Select_PrefersExactMatch_ReturnsNullWhenHandlerNameDoesntMatch()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "GET"
-            };
+            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "GET" };
 
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST"
-            };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST" };
 
             // This will match the HTTP method 'round' of selection, but won't match the
             // handler name.
@@ -136,13 +103,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     },
                 },
                 RouteData = new RouteData(),
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = "HEAD",
-                    },
-                },
+                HttpContext = new DefaultHttpContext { Request = { Method = "HEAD", }, },
             };
             var selector = CreateSelector();
 
@@ -159,15 +120,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void NewBehavior_Select_ReturnsFuzzyMatch_SafeVerbs(string httpMethod)
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "GET"
-            };
+            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "GET" };
 
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST"
-            };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST" };
 
             var pageContext = new PageContext
             {
@@ -180,13 +135,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     },
                 },
                 RouteData = new RouteData(),
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = httpMethod
-                    },
-                },
+                HttpContext = new DefaultHttpContext { Request = { Method = httpMethod }, },
             };
             var selector = CreateSelector();
 
@@ -201,28 +150,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_ReturnsOnlyHandler()
         {
             // Arrange
-            var descriptor = new HandlerMethodDescriptor
-            {
-                HttpMethod = "GET"
-            };
+            var descriptor = new HandlerMethodDescriptor { HttpMethod = "GET" };
 
             var pageContext = new PageContext
             {
                 ActionDescriptor = new CompiledPageActionDescriptor
                 {
-                    HandlerMethods = new List<HandlerMethodDescriptor>()
-                    {
-                        descriptor,
-                    },
+                    HandlerMethods = new List<HandlerMethodDescriptor>() { descriptor, },
                 },
                 RouteData = new RouteData(),
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = "GET"
-                    },
-                },
+                HttpContext = new DefaultHttpContext { Request = { Method = "GET" }, },
             };
             var selector = CreateSelector();
 
@@ -239,14 +176,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_ReturnsHandlerWithMatchingHttpRequestMethod(string httpMethod)
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "PUT",
-            };
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = httpMethod,
-            };
+            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "PUT", };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = httpMethod, };
 
             var pageContext = new PageContext
             {
@@ -259,13 +190,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     },
                 },
                 RouteData = new RouteData(),
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = httpMethod,
-                    },
-                },
+                HttpContext = new DefaultHttpContext { Request = { Method = httpMethod, }, },
             };
             var selector = CreateSelector();
 
@@ -280,17 +205,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_ReturnsNullWhenNoHandlerMatchesHandler()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-                Name = "Add",
-            };
+            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Add", };
 
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-                Name = "Delete",
-            };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
 
             var pageContext = new PageContext
             {
@@ -302,20 +219,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                         descriptor2,
                     },
                 },
-                RouteData = new RouteData
-                {
-                    Values =
-                    {
-                        { "handler", "update" }
-                    }
-                },
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = "POST"
-                    },
-                },
+                RouteData = new RouteData { Values = { { "handler", "update" } } },
+                HttpContext = new DefaultHttpContext { Request = { Method = "POST" }, },
             };
             var selector = CreateSelector();
 
@@ -330,17 +235,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_ReturnsHandlerThatMatchesHandler()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-                Name = "Add",
-            };
+            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Add", };
 
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-                Name = "Delete",
-            };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
 
             var pageContext = new PageContext
             {
@@ -352,20 +249,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                         descriptor2,
                     },
                 },
-                RouteData = new RouteData
-                {
-                    Values =
-                    {
-                        { "handler", "Add" }
-                    }
-                },
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = "Post"
-                    },
-                },
+                RouteData = new RouteData { Values = { { "handler", "Add" } } },
+                HttpContext = new DefaultHttpContext { Request = { Method = "Post" }, },
             };
             var selector = CreateSelector();
 
@@ -387,11 +272,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 Name = "10/31/2018 07:37:38 -07:00",
             };
 
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-                Name = "Delete",
-            };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
 
             var pageContext = new PageContext
             {
@@ -407,16 +288,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 {
                     Values =
                     {
-                        { "handler", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)) },
+                        {
+                            "handler",
+                            new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7))
+                        },
                     }
                 },
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = "Post"
-                    },
-                },
+                HttpContext = new DefaultHttpContext { Request = { Method = "Post" }, },
             };
             var selector = CreateSelector();
 
@@ -431,17 +309,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_HandlerFromQueryString()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-                Name = "Add",
-            };
+            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Add", };
 
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-                Name = "Delete",
-            };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
 
             var pageContext = new PageContext
             {
@@ -476,17 +346,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_HandlerConsidersRouteDataFirst()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-                Name = "Add",
-            };
+            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Add", };
 
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-                Name = "Delete",
-            };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
 
             var pageContext = new PageContext
             {
@@ -498,13 +360,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                         descriptor2,
                     },
                 },
-                RouteData = new RouteData
-                {
-                    Values =
-                    {
-                        { "handler", "Add" }
-                    }
-                },
+                RouteData = new RouteData { Values = { { "handler", "Add" } } },
                 HttpContext = new DefaultHttpContext
                 {
                     Request =
@@ -527,17 +383,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Select_HandlerMultipleTimesInQueryString_UsesFirst()
         {
             // Arrange
-            var descriptor1 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-                Name = "Add",
-            };
+            var descriptor1 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Add", };
 
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-                Name = "Delete",
-            };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", Name = "Delete", };
 
             var pageContext = new PageContext
             {
@@ -578,10 +426,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 Name = "Subscribe",
             };
 
-            var descriptor2 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "POST",
-            };
+            var descriptor2 = new HandlerMethodDescriptor { HttpMethod = "POST", };
 
             var pageContext = new PageContext
             {
@@ -593,20 +438,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                         descriptor2,
                     },
                 },
-                RouteData = new RouteData
-                {
-                    Values =
-                    {
-                        { "handler", "Add" }
-                    }
-                },
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = "Post"
-                    },
-                },
+                RouteData = new RouteData { Values = { { "handler", "Add" } } },
+                HttpContext = new DefaultHttpContext { Request = { Method = "Post" }, },
             };
             var selector = CreateSelector();
 
@@ -633,10 +466,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 HttpMethod = "POST",
             };
 
-            var descriptor3 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "GET",
-            };
+            var descriptor3 = new HandlerMethodDescriptor { HttpMethod = "GET", };
 
             var pageContext = new PageContext
             {
@@ -650,21 +480,18 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     },
                 },
                 RouteData = new RouteData(),
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = "Post"
-                    },
-                },
+                HttpContext = new DefaultHttpContext { Request = { Method = "Post" }, },
             };
             var selector = CreateSelector();
 
             // Act & Assert
             var ex = Assert.Throws<InvalidOperationException>(() => selector.Select(pageContext));
             var methods = descriptor1.MethodInfo + ", " + descriptor2.MethodInfo;
-            var message = "Multiple handlers matched. The following handlers matched route data and had all constraints satisfied:" +
-                Environment.NewLine + Environment.NewLine + methods;
+            var message =
+                "Multiple handlers matched. The following handlers matched route data and had all constraints satisfied:"
+                + Environment.NewLine
+                + Environment.NewLine
+                + methods;
 
             Assert.Equal(message, ex.Message);
         }
@@ -687,10 +514,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 Name = "Add",
             };
 
-            var descriptor3 = new HandlerMethodDescriptor
-            {
-                HttpMethod = "GET",
-            };
+            var descriptor3 = new HandlerMethodDescriptor { HttpMethod = "GET", };
 
             var pageContext = new PageContext
             {
@@ -703,39 +527,26 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                         descriptor3,
                     },
                 },
-                RouteData = new RouteData
-                {
-                    Values =
-                    {
-                        { "handler", "Add" }
-                    }
-                },
-                HttpContext = new DefaultHttpContext
-                {
-                    Request =
-                    {
-                        Method = "Post"
-                    },
-                },
+                RouteData = new RouteData { Values = { { "handler", "Add" } } },
+                HttpContext = new DefaultHttpContext { Request = { Method = "Post" }, },
             };
             var selector = CreateSelector();
 
             // Act & Assert
             var ex = Assert.Throws<InvalidOperationException>(() => selector.Select(pageContext));
             var methods = descriptor1.MethodInfo + ", " + descriptor2.MethodInfo;
-            var message = "Multiple handlers matched. The following handlers matched route data and had all constraints satisfied:" +
-                Environment.NewLine + Environment.NewLine + methods;
+            var message =
+                "Multiple handlers matched. The following handlers matched route data and had all constraints satisfied:"
+                + Environment.NewLine
+                + Environment.NewLine
+                + methods;
 
             Assert.Equal(message, ex.Message);
         }
 
-        protected void Post()
-        {
-        }
+        protected void Post() { }
 
-        protected void PostAsync()
-        {
-        }
+        protected void PostAsync() { }
 
         private static DefaultPageHandlerMethodSelector CreateSelector()
         {

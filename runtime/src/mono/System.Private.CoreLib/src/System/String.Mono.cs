@@ -157,7 +157,6 @@ namespace System
         {
             ((long*)dest)[0] = ((long*)src)[0];
         }
-
         #endregion
     }
 }

@@ -147,7 +147,6 @@ namespace Microsoft.AspNetCore.Identity
         /// <summary>
         /// Returns the username for this user.
         /// </summary>
-        public override string ToString()
-            => UserName;
+        public override string ToString() => UserName;
     }
 }

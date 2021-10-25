@@ -31,12 +31,13 @@ namespace Microsoft.AspNetCore.Builder
         /// Gets or sets the <see cref="CookieBuilder"/> that is used to track if the user consented to the
         /// cookie use policy.
         /// </summary>
-        public CookieBuilder ConsentCookie { get; set; } = new CookieBuilder()
-        {
-            Name = ".AspNet.Consent",
-            Expiration = TimeSpan.FromDays(365),
-            IsEssential = true,
-        };
+        public CookieBuilder ConsentCookie { get; set; } =
+            new CookieBuilder()
+            {
+                Name = ".AspNet.Consent",
+                Expiration = TimeSpan.FromDays(365),
+                IsEssential = true,
+            };
 
         /// <summary>
         /// Checks if consent policies should be evaluated on this request. The default is false.

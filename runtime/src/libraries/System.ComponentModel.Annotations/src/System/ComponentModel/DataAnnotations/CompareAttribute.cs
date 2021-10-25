@@ -11,7 +11,9 @@ namespace System.ComponentModel.DataAnnotations
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class CompareAttribute : ValidationAttribute
     {
-        [RequiresUnreferencedCode("The property referenced by 'otherProperty' may be trimmed. Ensure it is preserved.")]
+        [RequiresUnreferencedCode(
+            "The property referenced by 'otherProperty' may be trimmed. Ensure it is preserved."
+        )]
         public CompareAttribute(string otherProperty) : base(SR.CompareAttribute_MustMatch)
         {
             OtherProperty = otherProperty ?? throw new ArgumentNullException(nameof(otherProperty));
@@ -25,23 +27,44 @@ namespace System.ComponentModel.DataAnnotations
 
         public override string FormatErrorMessage(string name) =>
             string.Format(
-                CultureInfo.CurrentCulture, ErrorMessageString, name, OtherPropertyDisplayName ?? OtherProperty);
+                CultureInfo.CurrentCulture,
+                ErrorMessageString,
+                name,
+                OtherPropertyDisplayName ?? OtherProperty
+            );
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072:UnrecognizedReflectionPattern",
-            Justification = "The ctor is marked with RequiresUnreferencedCode informing the caller to preserve the other property.")]
-        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2072:UnrecognizedReflectionPattern",
+            Justification = "The ctor is marked with RequiresUnreferencedCode informing the caller to preserve the other property."
+        )]
+        protected override ValidationResult? IsValid(
+            object? value,
+            ValidationContext validationContext
+        )
         {
             var otherPropertyInfo = validationContext.ObjectType.GetRuntimeProperty(OtherProperty);
             if (otherPropertyInfo == null)
             {
-                return new ValidationResult(SR.Format(SR.CompareAttribute_UnknownProperty, OtherProperty));
+                return new ValidationResult(
+                    SR.Format(SR.CompareAttribute_UnknownProperty, OtherProperty)
+                );
             }
             if (otherPropertyInfo.GetIndexParameters().Any())
             {
-                throw new ArgumentException(SR.Format(SR.Common_PropertyNotFound, validationContext.ObjectType.FullName, OtherProperty));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Common_PropertyNotFound,
+                        validationContext.ObjectType.FullName,
+                        OtherProperty
+                    )
+                );
             }
 
-            object? otherPropertyValue = otherPropertyInfo.GetValue(validationContext.ObjectInstance, null);
+            object? otherPropertyValue = otherPropertyInfo.GetValue(
+                validationContext.ObjectInstance,
+                null
+            );
             if (!Equals(value, otherPropertyValue))
             {
                 if (OtherPropertyDisplayName == null)
@@ -49,10 +72,14 @@ namespace System.ComponentModel.DataAnnotations
                     OtherPropertyDisplayName = GetDisplayNameForProperty(otherPropertyInfo);
                 }
 
-                string[]? memberNames = validationContext.MemberName != null
-                   ? new[] { validationContext.MemberName }
-                   : null;
-                return new ValidationResult(FormatErrorMessage(validationContext.DisplayName), memberNames);
+                string[]? memberNames =
+                    validationContext.MemberName != null
+                        ? new[] { validationContext.MemberName }
+                        : null;
+                return new ValidationResult(
+                    FormatErrorMessage(validationContext.DisplayName),
+                    memberNames
+                );
             }
 
             return null;

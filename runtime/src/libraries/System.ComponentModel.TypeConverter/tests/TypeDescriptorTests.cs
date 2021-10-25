@@ -17,18 +17,10 @@ namespace System.ComponentModel.Tests
         {
             var instance = new object();
             var mockProvider1 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider1
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider1.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider2 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider2
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
-            mockProvider2
-                .Setup(p => p.GetCache(instance))
-                .Returns(new Dictionary<int, string>());
+            mockProvider2.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
+            mockProvider2.Setup(p => p.GetCache(instance)).Returns(new Dictionary<int, string>());
 
             TypeDescriptor.AddProvider(mockProvider1.Object, instance);
             TypeDescriptionProvider actualProvider1 = TypeDescriptor.GetProvider(instance);
@@ -60,7 +52,7 @@ namespace System.ComponentModel.Tests
                 .Setup(p => p.GetCache(instance))
                 .Returns(new Dictionary<int, string>())
                 .Verifiable();
-            
+
             int callCount = 0;
             RefreshEventHandler handler = (e) =>
             {
@@ -100,18 +92,10 @@ namespace System.ComponentModel.Tests
         {
             Type type = typeof(AddProvider_InvokeType_GetProviderReturnsExpectedType);
             var mockProvider1 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider1
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider1.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider2 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider2
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
-            mockProvider2
-                .Setup(p => p.GetCache(type))
-                .Returns(new Dictionary<int, string>());
+            mockProvider2.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
+            mockProvider2.Setup(p => p.GetCache(type)).Returns(new Dictionary<int, string>());
 
             TypeDescriptor.AddProvider(mockProvider1.Object, type);
             TypeDescriptionProvider actualProvider1 = TypeDescriptor.GetProvider(type);
@@ -131,7 +115,6 @@ namespace System.ComponentModel.Tests
 
         private class AddProvider_InvokeType_GetProviderReturnsExpectedType { }
 
-
         [Fact]
         public void AddProvider_InvokeTypeMultipleTimes_Refreshes()
         {
@@ -146,7 +129,7 @@ namespace System.ComponentModel.Tests
                 .Setup(p => p.GetCache(type))
                 .Returns(new Dictionary<int, string>())
                 .Verifiable();
-            
+
             int callCount = 0;
             RefreshEventHandler handler = (e) =>
             {
@@ -186,22 +169,34 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void AddProvider_NullProvider_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>("provider", () => TypeDescriptor.AddProvider(null, new object()));
-            Assert.Throws<ArgumentNullException>("provider", () => TypeDescriptor.AddProvider(null, typeof(int)));
+            Assert.Throws<ArgumentNullException>(
+                "provider",
+                () => TypeDescriptor.AddProvider(null, new object())
+            );
+            Assert.Throws<ArgumentNullException>(
+                "provider",
+                () => TypeDescriptor.AddProvider(null, typeof(int))
+            );
         }
 
         [Fact]
         public void AddProvider_NullInstance_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>("instance", () => TypeDescriptor.AddProvider(mockProvider.Object, (object)null));
+            Assert.Throws<ArgumentNullException>(
+                "instance",
+                () => TypeDescriptor.AddProvider(mockProvider.Object, (object)null)
+            );
         }
 
         [Fact]
         public void AddProvider_NullType_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>("type", () => TypeDescriptor.AddProvider(mockProvider.Object, null));
+            Assert.Throws<ArgumentNullException>(
+                "type",
+                () => TypeDescriptor.AddProvider(mockProvider.Object, null)
+            );
         }
 
         [Fact]
@@ -209,18 +204,10 @@ namespace System.ComponentModel.Tests
         {
             var instance = new object();
             var mockProvider1 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider1
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider1.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider2 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider2
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
-            mockProvider2
-                .Setup(p => p.GetCache(instance))
-                .Returns(new Dictionary<int, string>());
+            mockProvider2.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
+            mockProvider2.Setup(p => p.GetCache(instance)).Returns(new Dictionary<int, string>());
 
             TypeDescriptor.AddProviderTransparent(mockProvider1.Object, instance);
             TypeDescriptionProvider actualProvider1 = TypeDescriptor.GetProvider(instance);
@@ -252,7 +239,7 @@ namespace System.ComponentModel.Tests
                 .Setup(p => p.GetCache(instance))
                 .Returns(new Dictionary<int, string>())
                 .Verifiable();
-            
+
             int callCount = 0;
             RefreshEventHandler handler = (e) =>
             {
@@ -292,18 +279,10 @@ namespace System.ComponentModel.Tests
         {
             Type type = typeof(AddProviderTransparent_InvokeType_GetProviderReturnsExpectedType);
             var mockProvider1 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider1
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider1.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider2 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider2
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
-            mockProvider2
-                .Setup(p => p.GetCache(type))
-                .Returns(new Dictionary<int, string>());
+            mockProvider2.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
+            mockProvider2.Setup(p => p.GetCache(type)).Returns(new Dictionary<int, string>());
 
             TypeDescriptor.AddProviderTransparent(mockProvider1.Object, type);
             TypeDescriptionProvider actualProvider1 = TypeDescriptor.GetProvider(type);
@@ -337,7 +316,7 @@ namespace System.ComponentModel.Tests
                 .Setup(p => p.GetCache(type))
                 .Returns(new Dictionary<int, string>())
                 .Verifiable();
-            
+
             int callCount = 0;
             RefreshEventHandler handler = (e) =>
             {
@@ -377,22 +356,34 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void AddProviderTransparent_NullProvider_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>("provider", () => TypeDescriptor.AddProviderTransparent(null, new object()));
-            Assert.Throws<ArgumentNullException>("provider", () => TypeDescriptor.AddProviderTransparent(null, typeof(int)));
+            Assert.Throws<ArgumentNullException>(
+                "provider",
+                () => TypeDescriptor.AddProviderTransparent(null, new object())
+            );
+            Assert.Throws<ArgumentNullException>(
+                "provider",
+                () => TypeDescriptor.AddProviderTransparent(null, typeof(int))
+            );
         }
 
         [Fact]
         public void AddProviderTransparent_NullInstance_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>("instance", () => TypeDescriptor.AddProviderTransparent(mockProvider.Object, (object)null));
+            Assert.Throws<ArgumentNullException>(
+                "instance",
+                () => TypeDescriptor.AddProviderTransparent(mockProvider.Object, (object)null)
+            );
         }
 
         [Fact]
         public void AddProviderTransparent_NullType_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>("type", () => TypeDescriptor.AddProviderTransparent(mockProvider.Object, null));
+            Assert.Throws<ArgumentNullException>(
+                "type",
+                () => TypeDescriptor.AddProviderTransparent(mockProvider.Object, null)
+            );
         }
 
         [Fact]
@@ -411,7 +402,12 @@ namespace System.ComponentModel.Tests
         public void CreateInstancePassesCtorParameters()
         {
             var expectedString = "expected string";
-            var component = TypeDescriptor.CreateInstance(null, typeof(DescriptorTestComponent), new[] { expectedString.GetType() }, new[] { expectedString });
+            var component = TypeDescriptor.CreateInstance(
+                null,
+                typeof(DescriptorTestComponent),
+                new[] { expectedString.GetType() },
+                new[] { expectedString }
+            );
 
             Assert.NotNull(component);
             Assert.IsType<DescriptorTestComponent>(component);
@@ -425,7 +421,10 @@ namespace System.ComponentModel.Tests
             var secondaryObject = new MockEventDescriptor();
             TypeDescriptor.CreateAssociation(primaryObject, secondaryObject);
 
-            var associatedObject = TypeDescriptor.GetAssociation(secondaryObject.GetType(), primaryObject);
+            var associatedObject = TypeDescriptor.GetAssociation(
+                secondaryObject.GetType(),
+                primaryObject
+            );
 
             Assert.IsType(secondaryObject.GetType(), associatedObject);
             Assert.Equal(secondaryObject, associatedObject);
@@ -510,7 +509,8 @@ namespace System.ComponentModel.Tests
         public static void GetConverter_NotAvailable()
         {
             Assert.Throws<MissingMethodException>(
-                 () => TypeDescriptor.GetConverter(typeof(ClassWithInvalidConverter)));
+                () => TypeDescriptor.GetConverter(typeof(ClassWithInvalidConverter))
+            );
             // GetConverter should throw MissingMethodException because parameterless constructor is missing in the InvalidConverter class.
         }
 
@@ -528,7 +528,10 @@ namespace System.ComponentModel.Tests
         public void GetEventsFiltersByAttribute()
         {
             var defaultValueAttribute = new DefaultValueAttribute(null);
-            EventDescriptorCollection events = TypeDescriptor.GetEvents(typeof(DescriptorTestComponent), new[] { defaultValueAttribute });
+            EventDescriptorCollection events = TypeDescriptor.GetEvents(
+                typeof(DescriptorTestComponent),
+                new[] { defaultValueAttribute }
+            );
 
             Assert.Equal(1, events.Count);
         }
@@ -536,8 +539,13 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void GetPropertiesFiltersByAttribute()
         {
-            var defaultValueAttribute = new DefaultValueAttribute(DescriptorTestComponent.DefaultPropertyValue);
-            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(DescriptorTestComponent), new[] { defaultValueAttribute });
+            var defaultValueAttribute = new DefaultValueAttribute(
+                DescriptorTestComponent.DefaultPropertyValue
+            );
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(
+                typeof(DescriptorTestComponent),
+                new[] { defaultValueAttribute }
+            );
 
             Assert.Equal(1, properties.Count);
         }
@@ -547,29 +555,14 @@ namespace System.ComponentModel.Tests
         {
             var instance = new object();
             var mockProvider1 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider1
-                .Setup(p => p.GetCache(instance))
-                .Returns(new Dictionary<int, string>());
-            mockProvider1
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider1.Setup(p => p.GetCache(instance)).Returns(new Dictionary<int, string>());
+            mockProvider1.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider2 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider2
-                .Setup(p => p.GetCache(instance))
-                .Returns(new Dictionary<int, string>());
-            mockProvider2
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider2.Setup(p => p.GetCache(instance)).Returns(new Dictionary<int, string>());
+            mockProvider2.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider3 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider3
-                .Setup(p => p.GetCache(instance))
-                .Returns(new Dictionary<int, string>());
-            mockProvider3
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider3.Setup(p => p.GetCache(instance)).Returns(new Dictionary<int, string>());
+            mockProvider3.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
 
             TypeDescriptor.AddProvider(mockProvider1.Object, instance);
             TypeDescriptor.AddProvider(mockProvider2.Object, instance);
@@ -664,29 +657,14 @@ namespace System.ComponentModel.Tests
         {
             Type type = typeof(RemoveProvider_InvokeType_RemovesProviderType);
             var mockProvider1 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider1
-                .Setup(p => p.GetCache(type))
-                .Returns(new Dictionary<int, string>());
-            mockProvider1
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider1.Setup(p => p.GetCache(type)).Returns(new Dictionary<int, string>());
+            mockProvider1.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider2 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider2
-                .Setup(p => p.GetCache(type))
-                .Returns(new Dictionary<int, string>());
-            mockProvider2
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider2.Setup(p => p.GetCache(type)).Returns(new Dictionary<int, string>());
+            mockProvider2.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider3 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider3
-                .Setup(p => p.GetCache(type))
-                .Returns(new Dictionary<int, string>());
-            mockProvider3
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider3.Setup(p => p.GetCache(type)).Returns(new Dictionary<int, string>());
+            mockProvider3.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
 
             TypeDescriptor.AddProvider(mockProvider1.Object, type);
             TypeDescriptor.AddProvider(mockProvider2.Object, type);
@@ -785,53 +763,49 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void RemoveProvider_NullProvider_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>("provider", () => TypeDescriptor.RemoveProvider(null, new object()));
-            Assert.Throws<ArgumentNullException>("provider", () => TypeDescriptor.RemoveProvider(null, typeof(int)));
+            Assert.Throws<ArgumentNullException>(
+                "provider",
+                () => TypeDescriptor.RemoveProvider(null, new object())
+            );
+            Assert.Throws<ArgumentNullException>(
+                "provider",
+                () => TypeDescriptor.RemoveProvider(null, typeof(int))
+            );
         }
 
         [Fact]
         public void RemoveProvider_NullInstance_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>("instance", () => TypeDescriptor.RemoveProvider(mockProvider.Object, (object)null));
+            Assert.Throws<ArgumentNullException>(
+                "instance",
+                () => TypeDescriptor.RemoveProvider(mockProvider.Object, (object)null)
+            );
         }
 
         [Fact]
         public void RemoveProvider_NullType_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>("type", () => TypeDescriptor.RemoveProvider(mockProvider.Object, null));
+            Assert.Throws<ArgumentNullException>(
+                "type",
+                () => TypeDescriptor.RemoveProvider(mockProvider.Object, null)
+            );
         }
-
 
         [Fact]
         public void RemoveProviderTransparent_InvokeObject_RemovesProvider()
         {
             var instance = new object();
             var mockProvider1 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider1
-                .Setup(p => p.GetCache(instance))
-                .Returns(new Dictionary<int, string>());
-            mockProvider1
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider1.Setup(p => p.GetCache(instance)).Returns(new Dictionary<int, string>());
+            mockProvider1.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider2 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider2
-                .Setup(p => p.GetCache(instance))
-                .Returns(new Dictionary<int, string>());
-            mockProvider2
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider2.Setup(p => p.GetCache(instance)).Returns(new Dictionary<int, string>());
+            mockProvider2.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider3 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider3
-                .Setup(p => p.GetCache(instance))
-                .Returns(new Dictionary<int, string>());
-            mockProvider3
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider3.Setup(p => p.GetCache(instance)).Returns(new Dictionary<int, string>());
+            mockProvider3.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
 
             TypeDescriptor.AddProvider(mockProvider1.Object, instance);
             TypeDescriptor.AddProvider(mockProvider2.Object, instance);
@@ -926,29 +900,14 @@ namespace System.ComponentModel.Tests
         {
             Type type = typeof(RemoveProviderTransparent_InvokeType_RemovesProviderType);
             var mockProvider1 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider1
-                .Setup(p => p.GetCache(type))
-                .Returns(new Dictionary<int, string>());
-            mockProvider1
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider1.Setup(p => p.GetCache(type)).Returns(new Dictionary<int, string>());
+            mockProvider1.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider2 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider2
-                .Setup(p => p.GetCache(type))
-                .Returns(new Dictionary<int, string>());
-            mockProvider2
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider2.Setup(p => p.GetCache(type)).Returns(new Dictionary<int, string>());
+            mockProvider2.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
             var mockProvider3 = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            mockProvider3
-                .Setup(p => p.GetCache(type))
-                .Returns(new Dictionary<int, string>());
-            mockProvider3
-                .Setup(p => p.IsSupportedType(typeof(int)))
-                .Returns(true)
-                .Verifiable();
+            mockProvider3.Setup(p => p.GetCache(type)).Returns(new Dictionary<int, string>());
+            mockProvider3.Setup(p => p.IsSupportedType(typeof(int))).Returns(true).Verifiable();
 
             TypeDescriptor.AddProvider(mockProvider1.Object, type);
             TypeDescriptor.AddProvider(mockProvider2.Object, type);
@@ -1047,22 +1006,34 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void RemoveProviderTransparent_NullProvider_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>("provider", () => TypeDescriptor.RemoveProviderTransparent(null, new object()));
-            Assert.Throws<ArgumentNullException>("provider", () => TypeDescriptor.RemoveProviderTransparent(null, typeof(int)));
+            Assert.Throws<ArgumentNullException>(
+                "provider",
+                () => TypeDescriptor.RemoveProviderTransparent(null, new object())
+            );
+            Assert.Throws<ArgumentNullException>(
+                "provider",
+                () => TypeDescriptor.RemoveProviderTransparent(null, typeof(int))
+            );
         }
 
         [Fact]
         public void RemoveProviderTransparent_NullInstance_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>("instance", () => TypeDescriptor.RemoveProviderTransparent(mockProvider.Object, (object)null));
+            Assert.Throws<ArgumentNullException>(
+                "instance",
+                () => TypeDescriptor.RemoveProviderTransparent(mockProvider.Object, (object)null)
+            );
         }
 
         [Fact]
         public void RemoveProviderTransparent_NullType_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>("type", () => TypeDescriptor.RemoveProviderTransparent(mockProvider.Object, null));
+            Assert.Throws<ArgumentNullException>(
+                "type",
+                () => TypeDescriptor.RemoveProviderTransparent(mockProvider.Object, null)
+            );
         }
 
         [Fact]
@@ -1079,9 +1050,15 @@ namespace System.ComponentModel.Tests
             // GetAssociation never returns null. The default implementation returns the
             // primary object when an association doesn't exist. This isn't documented,
             // however, so here we only verify that the formerly associated objects aren't returned.
-            var firstAssociation = TypeDescriptor.GetAssociation(firstAssociatedObject.GetType(), primaryObject);
+            var firstAssociation = TypeDescriptor.GetAssociation(
+                firstAssociatedObject.GetType(),
+                primaryObject
+            );
             Assert.NotEqual(firstAssociatedObject, firstAssociation);
-            var secondAssociation = TypeDescriptor.GetAssociation(secondAssociatedObject.GetType(), primaryObject);
+            var secondAssociation = TypeDescriptor.GetAssociation(
+                secondAssociatedObject.GetType(),
+                primaryObject
+            );
             Assert.NotEqual(secondAssociatedObject, secondAssociation);
         }
 
@@ -1097,11 +1074,17 @@ namespace System.ComponentModel.Tests
             TypeDescriptor.RemoveAssociation(primaryObject, firstAssociatedObject);
 
             // the second association should remain
-            var secondAssociation = TypeDescriptor.GetAssociation(secondAssociatedObject.GetType(), primaryObject);
+            var secondAssociation = TypeDescriptor.GetAssociation(
+                secondAssociatedObject.GetType(),
+                primaryObject
+            );
             Assert.Equal(secondAssociatedObject, secondAssociation);
 
             // the first association should not
-            var firstAssociation = TypeDescriptor.GetAssociation(firstAssociatedObject.GetType(), primaryObject);
+            var firstAssociation = TypeDescriptor.GetAssociation(
+                firstAssociatedObject.GetType(),
+                primaryObject
+            );
             Assert.NotEqual(firstAssociatedObject, firstAssociation);
         }
 
@@ -1110,24 +1093,47 @@ namespace System.ComponentModel.Tests
         {
             var notADescriptor1 = new object();
             var notADescriptor2 = new object();
-            var mockDescriptor1 = new Mock<EventDescriptor>(MockBehavior.Strict, "Name1", new Attribute[0]);
-            mockDescriptor1
-                .Setup(d => d.Name)
-                .Returns("Name1");
-            var mockDescriptor2 = new Mock<EventDescriptor>(MockBehavior.Strict, "Name2", new Attribute[0]);
-            mockDescriptor2
-                .Setup(d => d.Name)
-                .Returns("Name2");
-            var mockDescriptor3 = new Mock<EventDescriptor>(MockBehavior.Strict, "Name3", new Attribute[0]);
-            mockDescriptor3
-                .Setup(d => d.Name)
-                .Returns("Name3");
-            var infos = new object[] { null, mockDescriptor3.Object, notADescriptor2, mockDescriptor1.Object, mockDescriptor2.Object, null, notADescriptor1 };
+            var mockDescriptor1 = new Mock<EventDescriptor>(
+                MockBehavior.Strict,
+                "Name1",
+                new Attribute[0]
+            );
+            mockDescriptor1.Setup(d => d.Name).Returns("Name1");
+            var mockDescriptor2 = new Mock<EventDescriptor>(
+                MockBehavior.Strict,
+                "Name2",
+                new Attribute[0]
+            );
+            mockDescriptor2.Setup(d => d.Name).Returns("Name2");
+            var mockDescriptor3 = new Mock<EventDescriptor>(
+                MockBehavior.Strict,
+                "Name3",
+                new Attribute[0]
+            );
+            mockDescriptor3.Setup(d => d.Name).Returns("Name3");
+            var infos = new object[]
+            {
+                null,
+                mockDescriptor3.Object,
+                notADescriptor2,
+                mockDescriptor1.Object,
+                mockDescriptor2.Object,
+                null,
+                notADescriptor1
+            };
             TypeDescriptor.SortDescriptorArray(infos);
-            Assert.True(infos[0] == null || infos[0] == notADescriptor1 || infos[0] == notADescriptor2);
-            Assert.True(infos[1] == null || infos[1] == notADescriptor1 || infos[1] == notADescriptor2);
-            Assert.True(infos[2] == null || infos[2] == notADescriptor1 || infos[2] == notADescriptor2);
-            Assert.True(infos[3] == null || infos[3] == notADescriptor1 || infos[3] == notADescriptor2);
+            Assert.True(
+                infos[0] == null || infos[0] == notADescriptor1 || infos[0] == notADescriptor2
+            );
+            Assert.True(
+                infos[1] == null || infos[1] == notADescriptor1 || infos[1] == notADescriptor2
+            );
+            Assert.True(
+                infos[2] == null || infos[2] == notADescriptor1 || infos[2] == notADescriptor2
+            );
+            Assert.True(
+                infos[3] == null || infos[3] == notADescriptor1 || infos[3] == notADescriptor2
+            );
             Assert.Same(mockDescriptor1.Object, infos[4]);
             Assert.Same(mockDescriptor2.Object, infos[5]);
             Assert.Same(mockDescriptor3.Object, infos[6]);
@@ -1136,21 +1142,34 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void SortDescriptorArray_NullInfos_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>("infos", () => TypeDescriptor.SortDescriptorArray(null));
+            Assert.Throws<ArgumentNullException>(
+                "infos",
+                () => TypeDescriptor.SortDescriptorArray(null)
+            );
         }
 
         [Fact]
         public void DerivedPropertyAttribute()
         {
-            PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(FooBarDerived))["Value"];
-            var descriptionAttribute = (DescriptionAttribute)property.Attributes[typeof(DescriptionAttribute)];
+            PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(FooBarDerived))[
+                "Value"
+            ];
+            var descriptionAttribute = (DescriptionAttribute)property.Attributes[
+                typeof(DescriptionAttribute)
+            ];
             Assert.Equal("Derived", descriptionAttribute.Description);
         }
 
         [Fact]
         public void PropertyFilterAttributeMatch()
         {
-            Assert.Equal(3, TypeDescriptor.GetProperties(typeof(PropertyFilterAttributeMatchPoco), new[] { new PropertyFilterAttribute() }).Count);
+            Assert.Equal(
+                3,
+                TypeDescriptor.GetProperties(
+                    typeof(PropertyFilterAttributeMatchPoco),
+                    new[] { new PropertyFilterAttribute() }
+                ).Count
+            );
         }
 
         public class PropertyFilterAttribute : Attribute
@@ -1206,9 +1225,7 @@ namespace System.ComponentModel.Tests
 
         class DerivedUri : Uri
         {
-            protected DerivedUri() : base("https://hello")
-            {
-            }
+            protected DerivedUri() : base("https://hello") { }
         }
 
         class TwiceDerivedUri : DerivedUri
@@ -1217,9 +1234,7 @@ namespace System.ComponentModel.Tests
 
         class DerivedCultureInfo : CultureInfo
         {
-            protected DerivedCultureInfo() : base("hello")
-            {
-            }
+            protected DerivedCultureInfo() : base("hello") { }
         }
 
         class TwiceDerivedCultureInfo : DerivedCultureInfo

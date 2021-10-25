@@ -10,7 +10,9 @@ using Xunit;
 
 namespace AppHost.Bundle.Tests
 {
-    public class BundledAppWithSubDirs : BundleTestBase, IClassFixture<BundledAppWithSubDirs.SharedTestState>
+    public class BundledAppWithSubDirs
+        : BundleTestBase,
+          IClassFixture<BundledAppWithSubDirs.SharedTestState>
     {
         private SharedTestState sharedTestState;
 
@@ -21,7 +23,8 @@ namespace AppHost.Bundle.Tests
 
         private void RunTheApp(string path, TestProjectFixture fixture)
         {
-            Command.Create(path)
+            Command
+                .Create(path)
                 .EnvironmentVariable("COREHOST_TRACE", "1")
                 .CaptureStdErr()
                 .CaptureStdOut()
@@ -31,8 +34,7 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Wow! We now say hello to the big world and you.");
+                .And.HaveStdOutContaining("Wow! We now say hello to the big world and you.");
         }
 
         [InlineData(BundleOptions.None)]
@@ -123,7 +125,9 @@ namespace AppHost.Bundle.Tests
             // compression must be off when targeting 5.0
             var options = BundleOptions.EnableCompression;
 
-            Assert.Throws<ArgumentException>(()=>BundleHelper.BundleApp(fixture, options, new Version(5, 0)));
+            Assert.Throws<ArgumentException>(
+                () => BundleHelper.BundleApp(fixture, options, new Version(5, 0))
+            );
         }
 
         [InlineData(BundleOptions.None)]
@@ -147,28 +151,43 @@ namespace AppHost.Bundle.Tests
 
             public SharedTestState()
             {
-                TestFrameworkDependentFixture = new TestProjectFixture("AppWithSubDirs", RepoDirectories);
+                TestFrameworkDependentFixture = new TestProjectFixture(
+                    "AppWithSubDirs",
+                    RepoDirectories
+                );
                 BundleHelper.AddLongNameContentToAppWithSubDirs(TestFrameworkDependentFixture);
                 TestFrameworkDependentFixture
                     .EnsureRestoredForRid(TestFrameworkDependentFixture.CurrentRid)
-                    .PublishProject(runtime: TestFrameworkDependentFixture.CurrentRid,
-                                    selfContained: false,
-                                    outputDirectory: BundleHelper.GetPublishPath(TestFrameworkDependentFixture));
+                    .PublishProject(
+                        runtime: TestFrameworkDependentFixture.CurrentRid,
+                        selfContained: false,
+                        outputDirectory: BundleHelper.GetPublishPath(TestFrameworkDependentFixture)
+                    );
 
-                TestSelfContainedFixture = new TestProjectFixture("AppWithSubDirs", RepoDirectories);
+                TestSelfContainedFixture = new TestProjectFixture(
+                    "AppWithSubDirs",
+                    RepoDirectories
+                );
                 BundleHelper.AddLongNameContentToAppWithSubDirs(TestSelfContainedFixture);
                 TestSelfContainedFixture
                     .EnsureRestoredForRid(TestSelfContainedFixture.CurrentRid)
-                    .PublishProject(runtime: TestSelfContainedFixture.CurrentRid,
-                                    outputDirectory: BundleHelper.GetPublishPath(TestSelfContainedFixture));
+                    .PublishProject(
+                        runtime: TestSelfContainedFixture.CurrentRid,
+                        outputDirectory: BundleHelper.GetPublishPath(TestSelfContainedFixture)
+                    );
 
-                TestAppWithEmptyFileFixture = new TestProjectFixture("AppWithSubDirs", RepoDirectories);
+                TestAppWithEmptyFileFixture = new TestProjectFixture(
+                    "AppWithSubDirs",
+                    RepoDirectories
+                );
                 BundleHelper.AddLongNameContentToAppWithSubDirs(TestAppWithEmptyFileFixture);
                 BundleHelper.AddEmptyContentToApp(TestAppWithEmptyFileFixture);
                 TestAppWithEmptyFileFixture
                     .EnsureRestoredForRid(TestAppWithEmptyFileFixture.CurrentRid)
-                    .PublishProject(runtime: TestAppWithEmptyFileFixture.CurrentRid,
-                                    outputDirectory: BundleHelper.GetPublishPath(TestAppWithEmptyFileFixture));
+                    .PublishProject(
+                        runtime: TestAppWithEmptyFileFixture.CurrentRid,
+                        outputDirectory: BundleHelper.GetPublishPath(TestAppWithEmptyFileFixture)
+                    );
             }
 
             public void Dispose()

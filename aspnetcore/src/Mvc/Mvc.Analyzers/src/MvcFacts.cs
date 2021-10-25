@@ -9,11 +9,18 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
 {
     internal static class MvcFacts
     {
-        public static bool IsController(INamedTypeSymbol type, INamedTypeSymbol controllerAttribute, INamedTypeSymbol nonControllerAttribute)
+        public static bool IsController(
+            INamedTypeSymbol type,
+            INamedTypeSymbol controllerAttribute,
+            INamedTypeSymbol nonControllerAttribute
+        )
         {
             type = type ?? throw new ArgumentNullException(nameof(type));
-            controllerAttribute = controllerAttribute ?? throw new ArgumentNullException(nameof(controllerAttribute));
-            nonControllerAttribute = nonControllerAttribute ?? throw new ArgumentNullException(nameof(nonControllerAttribute));
+            controllerAttribute =
+                controllerAttribute ?? throw new ArgumentNullException(nameof(controllerAttribute));
+            nonControllerAttribute =
+                nonControllerAttribute
+                ?? throw new ArgumentNullException(nameof(nonControllerAttribute));
 
             if (type.TypeKind != TypeKind.Class)
             {
@@ -46,8 +53,10 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 return false;
             }
 
-            if (!type.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase) &&
-                !type.HasAttribute(controllerAttribute, inherit: true))
+            if (
+                !type.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
+                && !type.HasAttribute(controllerAttribute, inherit: true)
+            )
             {
                 return false;
             }
@@ -55,10 +64,15 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             return true;
         }
 
-        public static bool IsControllerAction(IMethodSymbol method, INamedTypeSymbol nonActionAttribute, IMethodSymbol disposableDispose)
+        public static bool IsControllerAction(
+            IMethodSymbol method,
+            INamedTypeSymbol nonActionAttribute,
+            IMethodSymbol disposableDispose
+        )
         {
             method = method ?? throw new ArgumentNullException(nameof(method));
-            nonActionAttribute = nonActionAttribute ?? throw new ArgumentNullException(nameof(nonActionAttribute));
+            nonActionAttribute =
+                nonActionAttribute ?? throw new ArgumentNullException(nameof(nonActionAttribute));
 
             if (method.MethodKind != MethodKind.Ordinary)
             {
@@ -114,7 +128,10 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             return method.ContainingType;
         }
 
-        private static bool IsIDisposableDispose(IMethodSymbol method, IMethodSymbol disposableDispose)
+        private static bool IsIDisposableDispose(
+            IMethodSymbol method,
+            IMethodSymbol disposableDispose
+        )
         {
             if (method.Name != disposableDispose.Name)
             {
@@ -134,13 +151,18 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             // Explicit implementation
             for (var i = 0; i < method.ExplicitInterfaceImplementations.Length; i++)
             {
-                if (method.ExplicitInterfaceImplementations[i].ContainingType.SpecialType == SpecialType.System_IDisposable)
+                if (
+                    method.ExplicitInterfaceImplementations[i].ContainingType.SpecialType
+                    == SpecialType.System_IDisposable
+                )
                 {
                     return true;
                 }
             }
 
-            var implementedMethod = method.ContainingType.FindImplementationForInterfaceMember(disposableDispose);
+            var implementedMethod = method.ContainingType.FindImplementationForInterfaceMember(
+                disposableDispose
+            );
             return SymbolEqualityComparer.Default.Equals(implementedMethod, method);
         }
     }

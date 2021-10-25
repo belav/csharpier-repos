@@ -21,31 +21,43 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 {
     using static SyntaxFactory;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseNotPattern), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseNotPattern
+        ),
+        Shared
+    ]
     internal partial class CSharpUseNotPatternCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUseNotPatternCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUseNotPatternCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseNotPatternDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UseNotPatternDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
@@ -59,28 +71,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         private static void ProcessDiagnostic(
             SyntaxEditor editor,
             Diagnostic diagnostic,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var notExpressionLocation = diagnostic.AdditionalLocations[0];
 
-            var notExpression = (PrefixUnaryExpressionSyntax)notExpressionLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
+            var notExpression = (PrefixUnaryExpressionSyntax)notExpressionLocation.FindNode(
+                getInnermostNodeForTie: true,
+                cancellationToken
+            );
             var parenthesizedExpression = (ParenthesizedExpressionSyntax)notExpression.Operand;
             var isPattern = (IsPatternExpressionSyntax)parenthesizedExpression.Expression;
 
-            var updatedPattern = isPattern.WithPattern(UnaryPattern(Token(SyntaxKind.NotKeyword), isPattern.Pattern));
+            var updatedPattern = isPattern.WithPattern(
+                UnaryPattern(Token(SyntaxKind.NotKeyword), isPattern.Pattern)
+            );
             editor.ReplaceNode(
                 notExpression,
-                updatedPattern.WithPrependedLeadingTrivia(notExpression.GetLeadingTrivia())
-                              .WithAppendedTrailingTrivia(notExpression.GetTrailingTrivia()));
-
+                updatedPattern
+                    .WithPrependedLeadingTrivia(notExpression.GetLeadingTrivia())
+                    .WithAppendedTrailingTrivia(notExpression.GetTrailingTrivia())
+            );
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument, CSharpAnalyzersResources.Use_pattern_matching)
-            {
-            }
+                : base(
+                    CSharpAnalyzersResources.Use_pattern_matching,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Use_pattern_matching
+                ) { }
         }
     }
 }

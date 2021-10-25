@@ -17,7 +17,9 @@ namespace System.Reflection.Tests
         public static int GetMark(this MemberInfo m)
         {
             Type markAttributeType = typeof(MarkAttribute).Project();
-            CustomAttributeData cad = m.CustomAttributes.Single(ca => ca.AttributeType == markAttributeType);
+            CustomAttributeData cad = m.CustomAttributes.Single(
+                ca => ca.AttributeType == markAttributeType
+            );
             return (int)(cad.ConstructorArguments[0].Value);
         }
 
@@ -27,7 +29,11 @@ namespace System.Reflection.Tests
             private readonly IList<CustomAttributeTypedArgument> _cats;
             private readonly IList<CustomAttributeNamedArgument> _cans;
 
-            public TestCustomAttributeData(ConstructorInfo constructor, IList<CustomAttributeTypedArgument> cats, IList<CustomAttributeNamedArgument> cans)
+            public TestCustomAttributeData(
+                ConstructorInfo constructor,
+                IList<CustomAttributeTypedArgument> cats,
+                IList<CustomAttributeNamedArgument> cans
+            )
             {
                 _constructor = constructor;
                 _cats = cats;
@@ -35,7 +41,8 @@ namespace System.Reflection.Tests
             }
 
             public sealed override ConstructorInfo Constructor => _constructor;
-            public sealed override IList<CustomAttributeTypedArgument> ConstructorArguments => _cats;
+            public sealed override IList<CustomAttributeTypedArgument> ConstructorArguments =>
+                _cats;
             public sealed override IList<CustomAttributeNamedArgument> NamedArguments => _cans;
         }
 
@@ -53,18 +60,33 @@ namespace System.Reflection.Tests
             Type runtimeAttributeType = cad.AttributeType.ProjectBackToRuntime();
 
             ConstructorInfo ecmaConstructor = cad.Constructor;
-            Type[] parameterTypes = ecmaConstructor.GetParameters().Select(p => p.ParameterType.ProjectBackToRuntime()).ToArray();
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.Instance | BindingFlags.ExactBinding;
-            ConstructorInfo runtimeConstructor = runtimeAttributeType.GetConstructor(bf, null, parameterTypes, null);
+            Type[] parameterTypes = ecmaConstructor
+                .GetParameters()
+                .Select(p => p.ParameterType.ProjectBackToRuntime())
+                .ToArray();
+            const BindingFlags bf =
+                BindingFlags.Public | BindingFlags.Instance | BindingFlags.ExactBinding;
+            ConstructorInfo runtimeConstructor = runtimeAttributeType.GetConstructor(
+                bf,
+                null,
+                parameterTypes,
+                null
+            );
             Assert.NotNull(runtimeConstructor);
 
-            IList<CustomAttributeTypedArgument> runtimeCats = cad.ConstructorArguments.Select(ct => ct.ProjectBackToRuntime()).ToArray();
-            IList<CustomAttributeNamedArgument> runtimeCans = cad.NamedArguments.Select(cn => cn.ProjectBackToRuntime()).ToArray();
+            IList<CustomAttributeTypedArgument> runtimeCats = cad.ConstructorArguments
+                .Select(ct => ct.ProjectBackToRuntime())
+                .ToArray();
+            IList<CustomAttributeNamedArgument> runtimeCans = cad.NamedArguments
+                .Select(cn => cn.ProjectBackToRuntime())
+                .ToArray();
 
             return new TestCustomAttributeData(runtimeConstructor, runtimeCats, runtimeCans);
         }
 
-        private static CustomAttributeTypedArgument ProjectBackToRuntime(this CustomAttributeTypedArgument cat)
+        private static CustomAttributeTypedArgument ProjectBackToRuntime(
+            this CustomAttributeTypedArgument cat
+        )
         {
             Type ecmaArgumentType = cat.ArgumentType;
             if (ecmaArgumentType.IsImplementedByRuntime())
@@ -72,7 +94,10 @@ namespace System.Reflection.Tests
 
             Type runtimeArgumentType = ecmaArgumentType.ProjectBackToRuntime();
             if (runtimeArgumentType == typeof(Type))
-                return new CustomAttributeTypedArgument(typeof(Type), cat.Value == null ? null : ((Type)cat.Value).ProjectBackToRuntime());
+                return new CustomAttributeTypedArgument(
+                    typeof(Type),
+                    cat.Value == null ? null : ((Type)cat.Value).ProjectBackToRuntime()
+                );
 
             if (runtimeArgumentType.IsArray)
                 throw new Exception("Arrays not supported."); // Add if it's useful.
@@ -80,14 +105,20 @@ namespace System.Reflection.Tests
             return new CustomAttributeTypedArgument(runtimeArgumentType, cat.Value);
         }
 
-        private static CustomAttributeNamedArgument ProjectBackToRuntime(this CustomAttributeNamedArgument can)
+        private static CustomAttributeNamedArgument ProjectBackToRuntime(
+            this CustomAttributeNamedArgument can
+        )
         {
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly;
+            const BindingFlags bf =
+                BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly;
             Type runtimeDeclaringType = can.MemberInfo.DeclaringType.ProjectBackToRuntime();
-            MemberInfo runtimeMember = can.IsField ?
-                (MemberInfo)runtimeDeclaringType.GetField(can.MemberName, bf) :
-                (MemberInfo)runtimeDeclaringType.GetProperty(can.MemberName, bf);
-            return new CustomAttributeNamedArgument(runtimeMember, can.TypedValue.ProjectBackToRuntime());
+            MemberInfo runtimeMember = can.IsField
+                ? (MemberInfo)runtimeDeclaringType.GetField(can.MemberName, bf)
+                : (MemberInfo)runtimeDeclaringType.GetProperty(can.MemberName, bf);
+            return new CustomAttributeNamedArgument(
+                runtimeMember,
+                can.TypedValue.ProjectBackToRuntime()
+            );
         }
 
         private static Type ProjectBackToRuntime(this Type type)
@@ -100,7 +131,10 @@ namespace System.Reflection.Tests
             else
             {
                 // Assume it's from SampleMetadata.
-                return typeof(SampleMetadata.Base1).Assembly.GetType(type.FullName, throwOnError: true);
+                return typeof(SampleMetadata.Base1).Assembly.GetType(
+                    type.FullName,
+                    throwOnError: true
+                );
             }
         }
 
@@ -150,9 +184,11 @@ namespace System.Reflection.Tests
             return t.GetGenericArguments();
         }
 
-        public static bool IsImplementedByRuntime(this MemberInfo m) => m.GetType().Assembly == typeof(object).Assembly;
+        public static bool IsImplementedByRuntime(this MemberInfo m) =>
+            m.GetType().Assembly == typeof(object).Assembly;
 
-        public static void AssertNewObjectReturnedEachTime<T>(Func<IEnumerable<T>> action) where T : class
+        public static void AssertNewObjectReturnedEachTime<T>(Func<IEnumerable<T>> action)
+            where T : class
         {
             IEnumerable<T> r1 = action();
             IEnumerable<T> r2 = action();
@@ -201,14 +237,25 @@ namespace System.Reflection.Tests
         {
             string si = new string(' ', indent);
             Console.WriteLine(si + "AttributeType...: " + cad.AttributeType.FullName);
-            Console.WriteLine(si + "Constructor.....: " + cad.Constructor.ToString() + " (" + cad.Constructor.DeclaringType.Name + ")");
+            Console.WriteLine(
+                si
+                    + "Constructor.....: "
+                    + cad.Constructor.ToString()
+                    + " ("
+                    + cad.Constructor.DeclaringType.Name
+                    + ")"
+            );
             Console.WriteLine(si + "Constructor Arguments...:");
             foreach (CustomAttributeTypedArgument cta in cad.ConstructorArguments)
             {
                 cta.Dump(indent + 4);
             }
             Console.WriteLine(si + "Named Arguments.........:");
-            foreach (CustomAttributeNamedArgument cna in cad.NamedArguments.OrderBy(can => can.MemberName))
+            foreach (
+                CustomAttributeNamedArgument cna in cad.NamedArguments.OrderBy(
+                    can => can.MemberName
+                )
+            )
             {
                 Console.WriteLine(si + "   MemberName....: " + cna.MemberName);
                 Console.WriteLine(si + "    IsField.......: " + cna.IsField);
@@ -245,30 +292,38 @@ namespace System.Reflection.Tests
         // The assumptions are that our test metadata only references the basic System.Runtime types. To keep test environment issues
         // from being a road block, we'll redirect any reference to "mscorlib", "System.Runtime", etc. to our designed core assembly.
         //
-        private static MetadataLoadContext TestMetadataLoadContext => s_lazyTestMetadataLoadContext.Value;
-        private static readonly Lazy<MetadataLoadContext> s_lazyTestMetadataLoadContext = new Lazy<MetadataLoadContext>(() =>
-        {
-            return new MetadataLoadContext(new SimpleAssemblyResolver());
-        });
+        private static MetadataLoadContext TestMetadataLoadContext =>
+            s_lazyTestMetadataLoadContext.Value;
+        private static readonly Lazy<MetadataLoadContext> s_lazyTestMetadataLoadContext =
+            new Lazy<MetadataLoadContext>(
+                () =>
+                {
+                    return new MetadataLoadContext(new SimpleAssemblyResolver());
+                }
+            );
 
-        private static readonly Lazy<bool> s_useRuntimeTypesForTests = new Lazy<bool>(() =>
-        {
-            if (PlatformDetection.IsBrowser)
-                return false;
-
-            var loc = AssemblyPathHelper.GetAssemblyLocation(typeof(TestUtils).Assembly);
-
-            if (File.Exists(Path.Combine(loc, "UseRuntimeTypes.txt")))
+        private static readonly Lazy<bool> s_useRuntimeTypesForTests = new Lazy<bool>(
+            () =>
             {
-                // Disable projection so that are Reflection tests run against the runtime types. This is used primarily to verify
-                // the *test* code for correctness.
-                Console.BackgroundColor = ConsoleColor.Red;
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("! Running Reflection tests on runtime types. They should pass but the results say nothing about MetadataLoadContext correctness.");
-                Console.ResetColor();
-                return true;
+                if (PlatformDetection.IsBrowser)
+                    return false;
+
+                var loc = AssemblyPathHelper.GetAssemblyLocation(typeof(TestUtils).Assembly);
+
+                if (File.Exists(Path.Combine(loc, "UseRuntimeTypes.txt")))
+                {
+                    // Disable projection so that are Reflection tests run against the runtime types. This is used primarily to verify
+                    // the *test* code for correctness.
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(
+                        "! Running Reflection tests on runtime types. They should pass but the results say nothing about MetadataLoadContext correctness."
+                    );
+                    Console.ResetColor();
+                    return true;
+                }
+                return false;
             }
-            return false;
-        });
+        );
     }
 }

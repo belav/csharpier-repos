@@ -22,20 +22,20 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// pool that uses default constructor with 100 elements pooled
         /// </summary>
-        public static ObjectPool<T> BigDefault<T>() where T : class, new()
-            => DefaultBigPool<T>.Instance;
+        public static ObjectPool<T> BigDefault<T>() where T : class, new() =>
+            DefaultBigPool<T>.Instance;
 
         /// <summary>
         /// pool that uses default constructor with 20 elements pooled
         /// </summary>
-        public static ObjectPool<T> Default<T>() where T : class, new()
-            => DefaultNormalPool<T>.Instance;
+        public static ObjectPool<T> Default<T>() where T : class, new() =>
+            DefaultNormalPool<T>.Instance;
 
         /// <summary>
         /// pool that uses string as key with StringComparer.OrdinalIgnoreCase as key comparer
         /// </summary>
-        public static ObjectPool<Dictionary<string, T>> StringIgnoreCaseDictionary<T>()
-            => StringIgnoreCaseDictionaryNormalPool<T>.Instance;
+        public static ObjectPool<Dictionary<string, T>> StringIgnoreCaseDictionary<T>() =>
+            StringIgnoreCaseDictionaryNormalPool<T>.Instance;
 
         /// <summary>
         /// pool that uses string as element with StringComparer.OrdinalIgnoreCase as element comparer
@@ -53,8 +53,10 @@ namespace Microsoft.CodeAnalysis
         /// Used to reduce the # of temporary byte[]s created to satisfy serialization and
         /// other I/O requests
         /// </summary>
-        public static readonly ObjectPool<byte[]> ByteArray = new(() => new byte[ByteBufferSize], ByteBufferCount);
-        public static readonly ObjectPool<char[]> CharArray = new(() => new char[ByteBufferSize], CharBufferCount);
+        public static readonly ObjectPool<byte[]> ByteArray =
+            new(() => new byte[ByteBufferSize], ByteBufferCount);
+        public static readonly ObjectPool<char[]> CharArray =
+            new(() => new char[ByteBufferSize], CharBufferCount);
 
         // byte pooled memory : 4K * 512 = 4MB
         public const int ByteBufferSize = 4 * 1024;

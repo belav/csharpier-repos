@@ -12,8 +12,7 @@ namespace Microsoft.CodeAnalysis.Formatting
     {
         private class Node : TreeData
         {
-            public Node(SyntaxNode root)
-                : base(root)
+            public Node(SyntaxNode root) : base(root)
             {
                 Contract.ThrowIfFalse(root.GetFirstToken(includeZeroWidth: true).RawKind != 0);
             }

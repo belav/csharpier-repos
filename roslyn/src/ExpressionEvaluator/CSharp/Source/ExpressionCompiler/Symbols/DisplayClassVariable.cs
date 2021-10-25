@@ -31,7 +31,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal readonly DisplayClassInstance DisplayClassInstance;
         internal readonly ConsList<FieldSymbol> DisplayClassFields;
 
-        internal DisplayClassVariable(string name, DisplayClassVariableKind kind, DisplayClassInstance displayClassInstance, ConsList<FieldSymbol> displayClassFields)
+        internal DisplayClassVariable(
+            string name,
+            DisplayClassVariableKind kind,
+            DisplayClassInstance displayClassInstance,
+            ConsList<FieldSymbol> displayClassFields
+        )
         {
             Debug.Assert(displayClassFields.Any());
 
@@ -68,13 +73,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             fields.ReverseContents();
             foreach (var field in fields)
             {
-                expr = new BoundFieldAccess(syntax, expr, field, constantValueOpt: null) { WasCompilerGenerated = true };
+                expr = new BoundFieldAccess(syntax, expr, field, constantValueOpt: null)
+                {
+                    WasCompilerGenerated = true
+                };
             }
             fields.Free();
             return expr;
         }
 
-        internal DisplayClassVariable SubstituteFields(DisplayClassInstance otherInstance, TypeMap typeMap)
+        internal DisplayClassVariable SubstituteFields(
+            DisplayClassInstance otherInstance,
+            TypeMap typeMap
+        )
         {
             var otherFields = SubstituteFields(this.DisplayClassFields, typeMap);
             return new DisplayClassVariable(this.Name, this.Kind, otherInstance, otherFields);
@@ -85,7 +96,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return DisplayClassInstance.GetDebuggerDisplay(DisplayClassFields);
         }
 
-        private static ConsList<FieldSymbol> SubstituteFields(ConsList<FieldSymbol> fields, TypeMap typeMap)
+        private static ConsList<FieldSymbol> SubstituteFields(
+            ConsList<FieldSymbol> fields,
+            TypeMap typeMap
+        )
         {
             if (!fields.Any())
             {
@@ -100,10 +114,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private static FieldSymbol SubstituteField(FieldSymbol field, TypeMap typeMap)
         {
             Debug.Assert(!field.IsStatic);
-            Debug.Assert(!field.IsReadOnly || GeneratedNames.GetKind(field.Name) == GeneratedNameKind.AnonymousTypeField);
+            Debug.Assert(
+                !field.IsReadOnly
+                    || GeneratedNames.GetKind(field.Name) == GeneratedNameKind.AnonymousTypeField
+            );
             // CONSIDER: Instead of digging fields out of the unsubstituted type and then performing substitution
             // on each one individually, we could dig fields out of the substituted type.
-            return new EEDisplayClassFieldSymbol(typeMap.SubstituteNamedType(field.ContainingType), field.Name, typeMap.SubstituteType(field.TypeWithAnnotations));
+            return new EEDisplayClassFieldSymbol(
+                typeMap.SubstituteNamedType(field.ContainingType),
+                field.Name,
+                typeMap.SubstituteType(field.TypeWithAnnotations)
+            );
         }
 
         private sealed class EEDisplayClassFieldSymbol : FieldSymbol
@@ -112,7 +133,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             private readonly string _name;
             private readonly TypeWithAnnotations _type;
 
-            internal EEDisplayClassFieldSymbol(NamedTypeSymbol container, string name, TypeWithAnnotations type)
+            internal EEDisplayClassFieldSymbol(
+                NamedTypeSymbol container,
+                string name,
+                TypeWithAnnotations type
+            )
             {
                 _container = container;
                 _name = name;
@@ -204,12 +229,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 get { throw ExceptionUtilities.Unreachable; }
             }
 
-            internal override ConstantValue GetConstantValue(ConstantFieldsInProgress inProgress, bool earlyDecodingWellKnownAttributes)
+            internal override ConstantValue GetConstantValue(
+                ConstantFieldsInProgress inProgress,
+                bool earlyDecodingWellKnownAttributes
+            )
             {
                 throw ExceptionUtilities.Unreachable;
             }
 
-            internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
+            internal override TypeWithAnnotations GetFieldType(
+                ConsList<FieldSymbol> fieldsBeingBound
+            )
             {
                 return _type;
             }

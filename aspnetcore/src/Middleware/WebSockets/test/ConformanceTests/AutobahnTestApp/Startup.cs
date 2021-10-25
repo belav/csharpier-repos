@@ -17,36 +17,55 @@ namespace AutobahnTestApp
             app.UseWebSockets();
 
             var logger = loggerFactory.CreateLogger<Startup>();
-            app.Use(async (context, next) =>
-            {
-                if (context.WebSockets.IsWebSocketRequest)
+            app.Use(
+                async (context, next) =>
                 {
-                    logger.LogInformation("Received WebSocket request");
-                    using (var webSocket = await context.WebSockets.AcceptWebSocketAsync())
+                    if (context.WebSockets.IsWebSocketRequest)
                     {
-                        await Echo(webSocket, context.RequestAborted);
+                        logger.LogInformation("Received WebSocket request");
+                        using (var webSocket = await context.WebSockets.AcceptWebSocketAsync())
+                        {
+                            await Echo(webSocket, context.RequestAborted);
+                        }
+                    }
+                    else
+                    {
+                        var wsScheme = context.Request.IsHttps ? "wss" : "ws";
+                        var wsUrl =
+                            $"{wsScheme}://{context.Request.Host.Host}:{context.Request.Host.Port}{context.Request.Path}";
+                        await context.Response.WriteAsync(
+                            $"Ready to accept a WebSocket request at: {wsUrl}"
+                        );
                     }
                 }
-                else
-                {
-                    var wsScheme = context.Request.IsHttps ? "wss" : "ws";
-                    var wsUrl = $"{wsScheme}://{context.Request.Host.Host}:{context.Request.Host.Port}{context.Request.Path}";
-                    await context.Response.WriteAsync($"Ready to accept a WebSocket request at: {wsUrl}");
-                }
-            });
-
+            );
         }
 
         private async Task Echo(WebSocket webSocket, CancellationToken cancellationToken)
         {
             var buffer = new byte[1024 * 4];
-            var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellationToken);
+            var result = await webSocket.ReceiveAsync(
+                new ArraySegment<byte>(buffer),
+                cancellationToken
+            );
             while (!result.CloseStatus.HasValue)
             {
-                await webSocket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, cancellationToken);
-                result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellationToken);
+                await webSocket.SendAsync(
+                    new ArraySegment<byte>(buffer, 0, result.Count),
+                    result.MessageType,
+                    result.EndOfMessage,
+                    cancellationToken
+                );
+                result = await webSocket.ReceiveAsync(
+                    new ArraySegment<byte>(buffer),
+                    cancellationToken
+                );
             }
-            await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, cancellationToken);
+            await webSocket.CloseAsync(
+                result.CloseStatus.Value,
+                result.CloseStatusDescription,
+                cancellationToken
+            );
         }
     }
 }

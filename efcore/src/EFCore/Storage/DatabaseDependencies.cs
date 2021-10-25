@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [EntityFrameworkInternal]
         public DatabaseDependencies(
             IQueryCompilationContextFactory queryCompilationContextFactory,
-            IUpdateAdapterFactory updateAdapterFactory)
+            IUpdateAdapterFactory updateAdapterFactory
+        )
         {
             Check.NotNull(queryCompilationContextFactory, nameof(queryCompilationContextFactory));
             Check.NotNull(updateAdapterFactory, nameof(updateAdapterFactory));

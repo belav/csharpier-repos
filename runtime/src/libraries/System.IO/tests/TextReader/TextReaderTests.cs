@@ -117,7 +117,7 @@ namespace System.IO.Tests
         [Fact]
         public void EmptyInput()
         {
-            using (CharArrayTextReader tr = new CharArrayTextReader(new char[] { }))
+            using (CharArrayTextReader tr = new CharArrayTextReader(new char[] {  }))
             {
                 char[] buffer = new char[10];
                 int read = tr.Read(buffer, 0, 1);

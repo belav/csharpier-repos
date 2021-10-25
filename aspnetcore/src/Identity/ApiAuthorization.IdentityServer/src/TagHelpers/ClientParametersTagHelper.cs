@@ -20,7 +20,9 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         /// Initializes a new instance of <see cref="ClientParametersTagHelper"/>.
         /// </summary>
         /// <param name="clientRequestParametersProvider">The <see cref="IClientRequestParametersProvider"/>.</param>
-        public ClientParametersTagHelper(IClientRequestParametersProvider clientRequestParametersProvider)
+        public ClientParametersTagHelper(
+            IClientRequestParametersProvider clientRequestParametersProvider
+        )
         {
             _clientRequestParametersProvider = clientRequestParametersProvider;
         }
@@ -40,10 +42,15 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         /// <inheritdoc />
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            var parameters = _clientRequestParametersProvider.GetClientParameters(ViewContext.HttpContext, ClientId);
+            var parameters = _clientRequestParametersProvider.GetClientParameters(
+                ViewContext.HttpContext,
+                ClientId
+            );
             if (parameters == null)
             {
-                throw new InvalidOperationException($"Parameters for client '{ClientId}' not found.");
+                throw new InvalidOperationException(
+                    $"Parameters for client '{ClientId}' not found."
+                );
             }
 
             foreach (var parameter in parameters)

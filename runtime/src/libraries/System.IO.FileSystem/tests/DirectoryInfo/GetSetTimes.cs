@@ -7,7 +7,8 @@ namespace System.IO.Tests
 {
     public class DirectoryInfo_GetSetTimes : InfoGetSetTimes<DirectoryInfo>
     {
-        protected override DirectoryInfo GetExistingItem() => Directory.CreateDirectory(GetTestFilePath());
+        protected override DirectoryInfo GetExistingItem() =>
+            Directory.CreateDirectory(GetTestFilePath());
 
         protected override DirectoryInfo GetMissingItem() => new DirectoryInfo(GetTestFilePath());
 
@@ -17,45 +18,102 @@ namespace System.IO.Tests
 
         public override IEnumerable<TimeFunction> TimeFunctions(bool requiresRoundtripping = false)
         {
-            if (IOInputs.SupportsGettingCreationTime && (!requiresRoundtripping || IOInputs.SupportsSettingCreationTime))
+            if (
+                IOInputs.SupportsGettingCreationTime
+                && (!requiresRoundtripping || IOInputs.SupportsSettingCreationTime)
+            )
             {
                 yield return TimeFunction.Create(
-                    ((testDir, time) => {testDir.CreationTime = time; }),
+                    (
+                        (testDir, time) =>
+                        {
+                            testDir.CreationTime = time;
+                        }
+                    ),
                     ((testDir) => testDir.CreationTime),
-                    DateTimeKind.Local);
+                    DateTimeKind.Local
+                );
                 yield return TimeFunction.Create(
-                    ((testDir, time) => {testDir.CreationTimeUtc = time; }),
+                    (
+                        (testDir, time) =>
+                        {
+                            testDir.CreationTimeUtc = time;
+                        }
+                    ),
                     ((testDir) => testDir.CreationTimeUtc),
-                    DateTimeKind.Unspecified);
+                    DateTimeKind.Unspecified
+                );
                 yield return TimeFunction.Create(
-                     ((testDir, time) => { testDir.CreationTimeUtc = time; }),
-                     ((testDir) => testDir.CreationTimeUtc),
-                     DateTimeKind.Utc);
+                    (
+                        (testDir, time) =>
+                        {
+                            testDir.CreationTimeUtc = time;
+                        }
+                    ),
+                    ((testDir) => testDir.CreationTimeUtc),
+                    DateTimeKind.Utc
+                );
             }
             yield return TimeFunction.Create(
-                ((testDir, time) => {testDir.LastAccessTime = time; }),
+                (
+                    (testDir, time) =>
+                    {
+                        testDir.LastAccessTime = time;
+                    }
+                ),
                 ((testDir) => testDir.LastAccessTime),
-                DateTimeKind.Local);
+                DateTimeKind.Local
+            );
             yield return TimeFunction.Create(
-                ((testDir, time) => {testDir.LastAccessTimeUtc = time; }),
+                (
+                    (testDir, time) =>
+                    {
+                        testDir.LastAccessTimeUtc = time;
+                    }
+                ),
                 ((testDir) => testDir.LastAccessTimeUtc),
-                DateTimeKind.Unspecified);
+                DateTimeKind.Unspecified
+            );
             yield return TimeFunction.Create(
-                ((testDir, time) => { testDir.LastAccessTimeUtc = time; }),
+                (
+                    (testDir, time) =>
+                    {
+                        testDir.LastAccessTimeUtc = time;
+                    }
+                ),
                 ((testDir) => testDir.LastAccessTimeUtc),
-                DateTimeKind.Utc);
+                DateTimeKind.Utc
+            );
             yield return TimeFunction.Create(
-                ((testDir, time) => {testDir.LastWriteTime = time; }),
+                (
+                    (testDir, time) =>
+                    {
+                        testDir.LastWriteTime = time;
+                    }
+                ),
                 ((testDir) => testDir.LastWriteTime),
-                DateTimeKind.Local);
+                DateTimeKind.Local
+            );
             yield return TimeFunction.Create(
-                ((testDir, time) => {testDir.LastWriteTimeUtc = time; }),
+                (
+                    (testDir, time) =>
+                    {
+                        testDir.LastWriteTimeUtc = time;
+                    }
+                ),
                 ((testDir) => testDir.LastWriteTimeUtc),
-                DateTimeKind.Unspecified);
+                DateTimeKind.Unspecified
+            );
             yield return TimeFunction.Create(
-                ((testDir, time) => { testDir.LastWriteTimeUtc = time; }),
+                (
+                    (testDir, time) =>
+                    {
+                        testDir.LastWriteTimeUtc = time;
+                    }
+                ),
                 ((testDir) => testDir.LastWriteTimeUtc),
-                DateTimeKind.Utc);
+                DateTimeKind.Utc
+            );
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.DependencyModel.Resolution
 {
-    public class CompositeCompilationAssemblyResolver: ICompilationAssemblyResolver
+    public class CompositeCompilationAssemblyResolver : ICompilationAssemblyResolver
     {
         private readonly ICompilationAssemblyResolver[] _resolvers;
 

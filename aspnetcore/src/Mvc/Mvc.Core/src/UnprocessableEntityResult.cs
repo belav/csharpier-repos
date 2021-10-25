@@ -18,9 +18,6 @@ namespace Microsoft.AspNetCore.Mvc
         /// <summary>
         /// Creates a new <see cref="UnprocessableEntityResult"/> instance.
         /// </summary>
-        public UnprocessableEntityResult()
-            : base(DefaultStatusCode)
-        {
-        }
+        public UnprocessableEntityResult() : base(DefaultStatusCode) { }
     }
 }

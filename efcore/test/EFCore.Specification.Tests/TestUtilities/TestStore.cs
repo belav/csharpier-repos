@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             IServiceProvider serviceProvider,
             Func<DbContext> createContext,
             Action<DbContext> seed = null,
-            Action<DbContext> clean = null)
+            Action<DbContext> clean = null
+        )
         {
             ServiceProvider = serviceProvider;
             if (createContext == null)
@@ -38,11 +39,19 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             if (Shared)
             {
-                GetTestStoreIndex(serviceProvider).CreateShared(GetType().Name + Name, () => Initialize(createContext, seed, clean));
+                GetTestStoreIndex(serviceProvider)
+                    .CreateShared(
+                        GetType().Name + Name,
+                        () => Initialize(createContext, seed, clean)
+                    );
             }
             else
             {
-                GetTestStoreIndex(serviceProvider).CreateNonShared(GetType().Name + Name, () => Initialize(createContext, seed, clean));
+                GetTestStoreIndex(serviceProvider)
+                    .CreateNonShared(
+                        GetType().Name + Name,
+                        () => Initialize(createContext, seed, clean)
+                    );
             }
 
             return this;
@@ -52,22 +61,27 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             IServiceProvider serviceProvider,
             Func<TestStore, DbContext> createContext,
             Action<DbContext> seed = null,
-            Action<DbContext> clean = null)
-            => Initialize(serviceProvider, () => createContext(this), seed, clean);
+            Action<DbContext> clean = null
+        ) => Initialize(serviceProvider, () => createContext(this), seed, clean);
 
         public virtual TestStore Initialize<TContext>(
             IServiceProvider serviceProvider,
             Func<TestStore, TContext> createContext,
             Action<TContext> seed = null,
-            Action<TContext> clean = null)
-            where TContext : DbContext
-            => Initialize(
+            Action<TContext> clean = null
+        ) where TContext : DbContext =>
+            Initialize(
                 serviceProvider,
                 createContext,
                 seed == null ? (Action<DbContext>)null : c => seed((TContext)c),
-                clean == null ? (Action<DbContext>)null : c => clean((TContext)c));
+                clean == null ? (Action<DbContext>)null : c => clean((TContext)c)
+            );
 
-        protected virtual void Initialize(Func<DbContext> createContext, Action<DbContext> seed, Action<DbContext> clean)
+        protected virtual void Initialize(
+            Func<DbContext> createContext,
+            Action<DbContext> seed,
+            Action<DbContext> clean
+        )
         {
             using var context = createContext();
             clean?.Invoke(context);
@@ -86,15 +100,17 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             return Task.CompletedTask;
         }
 
-        protected virtual DbContext CreateDefaultContext()
-            => new(AddProviderOptions(new DbContextOptionsBuilder().EnableServiceProviderCaching(false)).Options);
+        protected virtual DbContext CreateDefaultContext() =>
+            new(
+                AddProviderOptions(
+                    new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                ).Options
+            );
 
-        protected virtual TestStoreIndex GetTestStoreIndex(IServiceProvider serviceProvider)
-            => _globalTestStoreIndex;
+        protected virtual TestStoreIndex GetTestStoreIndex(IServiceProvider serviceProvider) =>
+            _globalTestStoreIndex;
 
-        public virtual void Dispose()
-        {
-        }
+        public virtual void Dispose() { }
 
         public virtual Task DisposeAsync()
         {
@@ -116,10 +132,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return new CompositeDisposable(
                     listener,
                     transaction,
-                    new TransactionScope(transaction, TimeSpan.FromMinutes(10), TransactionScopeAsyncFlowOption.Enabled));
+                    new TransactionScope(
+                        transaction,
+                        TimeSpan.FromMinutes(10),
+                        TransactionScopeAsyncFlowOption.Enabled
+                    )
+                );
             }
 
-            return new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
+            return new TransactionScope(
+                TransactionScopeOption.Suppress,
+                TransactionScopeAsyncFlowOption.Enabled
+            );
         }
 
         private class DistributedTransactionListener : IDisposable

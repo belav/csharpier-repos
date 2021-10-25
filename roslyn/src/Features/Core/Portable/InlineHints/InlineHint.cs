@@ -15,12 +15,21 @@ namespace Microsoft.CodeAnalysis.InlineHints
     {
         public readonly TextSpan Span;
         public readonly ImmutableArray<TaggedText> DisplayParts;
-        private readonly Func<Document, CancellationToken, Task<ImmutableArray<TaggedText>>>? _getDescriptionAsync;
+        private readonly Func<
+            Document,
+            CancellationToken,
+            Task<ImmutableArray<TaggedText>>
+        >? _getDescriptionAsync;
 
         public InlineHint(
             TextSpan span,
             ImmutableArray<TaggedText> displayParts,
-            Func<Document, CancellationToken, Task<ImmutableArray<TaggedText>>>? getDescriptionAsync = null)
+            Func<
+                Document,
+                CancellationToken,
+                Task<ImmutableArray<TaggedText>>
+            >? getDescriptionAsync = null
+        )
         {
             if (displayParts.Length == 0)
                 throw new ArgumentException($"{nameof(displayParts)} must be non-empty");
@@ -34,7 +43,11 @@ namespace Microsoft.CodeAnalysis.InlineHints
         /// Gets a description for the inline hint, suitable to show when a user hovers over the editor adornment.  The
         /// <paramref name="document"/> will represent the file at the time this hint was created.
         /// </summary>
-        public Task<ImmutableArray<TaggedText>> GetDescriptionAsync(Document document, CancellationToken cancellationToken)
-            => _getDescriptionAsync?.Invoke(document, cancellationToken) ?? SpecializedTasks.EmptyImmutableArray<TaggedText>();
+        public Task<ImmutableArray<TaggedText>> GetDescriptionAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) =>
+            _getDescriptionAsync?.Invoke(document, cancellationToken)
+            ?? SpecializedTasks.EmptyImmutableArray<TaggedText>();
     }
 }

@@ -14,10 +14,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Global_options_may_be_added_with_aliases_that_conflict_with_local_options()
         {
-            var command = new Command("the-command")
-            {
-                new Option("--same")
-            };
+            var command = new Command("the-command") { new Option("--same") };
 
             command
                 .Invoking(c => c.AddGlobalOption(new Option("--same")))
@@ -36,9 +33,7 @@ namespace System.CommandLine.Tests
                 .Invoking(c => c.AddGlobalOption(new Option("--same")))
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Be("Alias '--same' is already in use.");
         }
 
@@ -53,9 +48,7 @@ namespace System.CommandLine.Tests
                 .Invoking(c => c.Add(new Option("--same")))
                 .Should()
                 .Throw<ArgumentException>()
-                .And
-                .Message
-                .Should()
+                .And.Message.Should()
                 .Be("Alias '--same' is already in use.");
         }
 
@@ -97,23 +90,23 @@ namespace System.CommandLine.Tests
         public void Subcommands_with_global_option_should_propagate_option_to_children()
         {
             var root = new Command("parent");
-            
+
             var firstChild = new Command("first");
-            
+
             root.AddCommand(firstChild);
-            
+
             var option = new Option<int>("--global");
-            
+
             firstChild.AddGlobalOption(option);
-            
+
             var secondChild = new Command("second");
-            
+
             firstChild.AddCommand(secondChild);
-            
+
             root.Parse("first second --global 123").ValueForOption(option).Should().Be(123);
-            
+
             firstChild.Parse("second --global 123").ValueForOption(option).Should().Be(123);
-            
+
             secondChild.Parse("--global 123").ValueForOption(option).Should().Be(123);
         }
     }

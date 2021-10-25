@@ -1180,7 +1180,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void Qualified1()
         {
-            // NOTE: since int.A won't fit into a TypeSyntax, it is represented as 
+            // NOTE: since int.A won't fit into a TypeSyntax, it is represented as
             // a qualified cref member instead.
             UsingNode("int.A");
 
@@ -1573,7 +1573,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
         }
-
         #endregion Non-simple-type constructors
     }
 }

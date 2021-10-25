@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void AsSingleton()
         {
-            Assert.Equal(0, new int[] { }.AsSingleton());
+            Assert.Equal(0, new int[] {  }.AsSingleton());
             Assert.Equal(1, new int[] { 1 }.AsSingleton());
             Assert.Equal(0, new int[] { 1, 2 }.AsSingleton());
 
@@ -55,7 +55,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(-1, Enumerable.Range(1, 5).IndexOf(6));
             Assert.Equal(2, Enumerable.Range(1, 5).IndexOf(3));
 
-            Assert.Equal(-1, ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(6));
+            Assert.Equal(
+                -1,
+                ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(6)
+            );
             Assert.Equal(0, ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(5));
 
             Assert.Equal(-1, ((IEnumerable<int>)new ReadOnlyList<int>(5)).IndexOf(6));
@@ -70,8 +73,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(-1, Enumerable.Range(1, 5).IndexOf(-6, comparer));
             Assert.Equal(2, Enumerable.Range(1, 5).IndexOf(-3, comparer));
 
-            Assert.Equal(-1, ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(-6, comparer));
-            Assert.Equal(0, ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(-5, comparer));
+            Assert.Equal(
+                -1,
+                ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(-6, comparer)
+            );
+            Assert.Equal(
+                0,
+                ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(-5, comparer)
+            );
 
             Assert.Equal(-1, ((IEnumerable<int>)new ReadOnlyList<int>(5)).IndexOf(-6, comparer));
             Assert.Equal(0, ((IEnumerable<int>)new ReadOnlyList<int>(5)).IndexOf(-5, comparer));

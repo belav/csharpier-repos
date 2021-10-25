@@ -13,8 +13,6 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// </summary>
         public static readonly PingMessage Instance = new PingMessage();
 
-        private PingMessage()
-        {
-        }
+        private PingMessage() { }
     }
 }

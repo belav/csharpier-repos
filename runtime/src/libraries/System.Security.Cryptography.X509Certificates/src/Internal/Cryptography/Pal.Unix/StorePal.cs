@@ -18,14 +18,20 @@ namespace Internal.Cryptography.Pal
             throw new PlatformNotSupportedException();
         }
 
-        public static ILoaderPal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ILoaderPal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
             ICertificatePal? singleCert;
 
-            if (OpenSslX509CertificateReader.TryReadX509Der(rawData, out singleCert) ||
-                OpenSslX509CertificateReader.TryReadX509Pem(rawData, out singleCert))
+            if (
+                OpenSslX509CertificateReader.TryReadX509Der(rawData, out singleCert)
+                || OpenSslX509CertificateReader.TryReadX509Pem(rawData, out singleCert)
+            )
             {
                 // The single X509 structure methods shouldn't return true and out null, only empty
                 // collections have that behavior.
@@ -37,9 +43,16 @@ namespace Internal.Cryptography.Pal
             List<ICertificatePal>? certPals;
             Exception? openSslException;
 
-            if (PkcsFormatReader.TryReadPkcs7Der(rawData, out certPals) ||
-                PkcsFormatReader.TryReadPkcs7Pem(rawData, out certPals) ||
-                PkcsFormatReader.TryReadPkcs12(rawData, password, out certPals, out openSslException))
+            if (
+                PkcsFormatReader.TryReadPkcs7Der(rawData, out certPals)
+                || PkcsFormatReader.TryReadPkcs7Pem(rawData, out certPals)
+                || PkcsFormatReader.TryReadPkcs12(
+                    rawData,
+                    password,
+                    out certPals,
+                    out openSslException
+                )
+            )
             {
                 Debug.Assert(certPals != null);
 
@@ -50,7 +63,11 @@ namespace Internal.Cryptography.Pal
             throw openSslException;
         }
 
-        public static ILoaderPal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ILoaderPal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             using (SafeBioHandle bio = Interop.Crypto.BioNewFile(fileName, "rb"))
             {
@@ -60,7 +77,11 @@ namespace Internal.Cryptography.Pal
             }
         }
 
-        private static ILoaderPal FromBio(string fileName, SafeBioHandle bio, SafePasswordHandle password)
+        private static ILoaderPal FromBio(
+            string fileName,
+            SafeBioHandle bio,
+            SafePasswordHandle password
+        )
         {
             int bioPosition = Interop.Crypto.BioTell(bio);
             Debug.Assert(bioPosition >= 0);
@@ -128,16 +149,27 @@ namespace Internal.Cryptography.Pal
             return new ExportProvider(cert);
         }
 
-        public static IExportPal LinkFromCertificateCollection(X509Certificate2Collection certificates)
+        public static IExportPal LinkFromCertificateCollection(
+            X509Certificate2Collection certificates
+        )
         {
             return new ExportProvider(certificates);
         }
 
-        public static IStorePal FromSystemStore(string storeName, StoreLocation storeLocation, OpenFlags openFlags)
+        public static IStorePal FromSystemStore(
+            string storeName,
+            StoreLocation storeLocation,
+            OpenFlags openFlags
+        )
         {
             if (storeLocation == StoreLocation.CurrentUser)
             {
-                if (X509Store.DisallowedStoreName.Equals(storeName, StringComparison.OrdinalIgnoreCase))
+                if (
+                    X509Store.DisallowedStoreName.Equals(
+                        storeName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return DirectoryBasedStoreProvider.OpenDisallowedStore(openFlags);
                 }
@@ -151,7 +183,10 @@ namespace Internal.Cryptography.Pal
             {
                 throw new CryptographicException(
                     SR.Cryptography_Unix_X509_MachineStoresReadOnly,
-                    new PlatformNotSupportedException(SR.Cryptography_Unix_X509_MachineStoresReadOnly));
+                    new PlatformNotSupportedException(
+                        SR.Cryptography_Unix_X509_MachineStoresReadOnly
+                    )
+                );
             }
 
             // The static store approach here is making an optimization based on not
@@ -163,14 +198,20 @@ namespace Internal.Cryptography.Pal
                 return CachedSystemStoreProvider.MachineRoot;
             }
 
-            if (X509Store.IntermediateCAStoreName.Equals(storeName, StringComparison.OrdinalIgnoreCase))
+            if (
+                X509Store.IntermediateCAStoreName.Equals(
+                    storeName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return CachedSystemStoreProvider.MachineIntermediate;
             }
 
             throw new CryptographicException(
                 SR.Cryptography_Unix_X509_MachineStoresRootOnly,
-                new PlatformNotSupportedException(SR.Cryptography_Unix_X509_MachineStoresRootOnly));
+                new PlatformNotSupportedException(SR.Cryptography_Unix_X509_MachineStoresRootOnly)
+            );
         }
 
         private static ILoaderPal SingleCertToLoaderPal(ICertificatePal singleCert)

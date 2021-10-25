@@ -100,7 +100,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         if (currentValues.ValuesAndEncodedValues == null)
                         {
                             // Include encoded versions of all selected values when comparing with body.
-                            var allValues = new HashSet<string>(currentValues.Values, StringComparer.OrdinalIgnoreCase);
+                            var allValues = new HashSet<string>(
+                                currentValues.Values,
+                                StringComparer.OrdinalIgnoreCase
+                            );
                             foreach (var selectedValue in currentValues.Values)
                             {
                                 allValues.Add(Generator.Encode(selectedValue));
@@ -120,7 +123,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                             childContent = await output.GetChildContentAsync();
                         }
 
-                        selected = currentValues.ValuesAndEncodedValues.Contains(childContent.GetContent());
+                        selected = currentValues.ValuesAndEncodedValues.Contains(
+                            childContent.GetContent()
+                        );
                     }
 
                     if (selected)

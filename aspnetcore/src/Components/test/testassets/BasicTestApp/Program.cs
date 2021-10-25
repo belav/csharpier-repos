@@ -28,20 +28,37 @@ namespace BasicTestApp
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<Index>("root");
 
-            builder.Services.AddSingleton(new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            builder.Services.AddSingleton<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
-            builder.Services.AddAuthorizationCore(options =>
-            {
-                options.AddPolicy("NameMustStartWithB", policy =>
-                    policy.RequireAssertion(ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false));
-            });
+            builder.Services.AddSingleton(
+                new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }
+            );
+            builder.Services.AddSingleton<
+                AuthenticationStateProvider,
+                ServerAuthenticationStateProvider
+            >();
+            builder.Services.AddAuthorizationCore(
+                options =>
+                {
+                    options.AddPolicy(
+                        "NameMustStartWithB",
+                        policy =>
+                            policy.RequireAssertion(
+                                ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false
+                            )
+                    );
+                }
+            );
 
             builder.Services.AddScoped<PreserveStateService>();
 
             builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
-            builder.Logging.Services.AddSingleton<ILoggerProvider, PrependMessageLoggerProvider>(s =>
-                new PrependMessageLoggerProvider(builder.Configuration["Logging:PrependMessage:Message"], s.GetService<IJSRuntime>()));
+            builder.Logging.Services.AddSingleton<ILoggerProvider, PrependMessageLoggerProvider>(
+                s =>
+                    new PrependMessageLoggerProvider(
+                        builder.Configuration["Logging:PrependMessage:Message"],
+                        s.GetService<IJSRuntime>()
+                    )
+            );
 
             var host = builder.Build();
             ConfigureCulture(host);
@@ -64,7 +81,10 @@ namespace BasicTestApp
                 // Some of our tests set this application up incorrectly so that querying NavigationManager.Uri throws.
             }
 
-            if (uri != null && HttpUtility.ParseQueryString(uri.Query)["culture"] is string cultureName)
+            if (
+                uri != null
+                && HttpUtility.ParseQueryString(uri.Query)["culture"] is string cultureName
+            )
             {
                 culture = new CultureInfo(cultureName);
             }

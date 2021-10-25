@@ -10,6 +10,11 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [DllImport(Libraries.Kernel32, SetLastError = true)]
-        internal static extern bool CreatePipe(out SafePipeHandle hReadPipe, out SafePipeHandle hWritePipe, ref SECURITY_ATTRIBUTES lpPipeAttributes, int nSize);
+        internal static extern bool CreatePipe(
+            out SafePipeHandle hReadPipe,
+            out SafePipeHandle hWritePipe,
+            ref SECURITY_ATTRIBUTES lpPipeAttributes,
+            int nSize
+        );
     }
 }

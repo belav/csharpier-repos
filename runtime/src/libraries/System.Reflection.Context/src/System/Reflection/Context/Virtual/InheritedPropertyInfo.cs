@@ -26,10 +26,7 @@ namespace System.Reflection.Context.Virtual
 
         public override Type ReflectedType
         {
-            get
-            {
-                return _reflectedType;
-            }
+            get { return _reflectedType; }
         }
 
         public override MethodInfo GetGetMethod(bool nonPublic)
@@ -52,9 +49,9 @@ namespace System.Reflection.Context.Virtual
 
         public override bool Equals(object o)
         {
-            return o is InheritedPropertyInfo other &&
-                UnderlyingProperty.Equals(other.UnderlyingProperty) &&
-                ReflectedType.Equals(other.ReflectedType);
+            return o is InheritedPropertyInfo other
+                && UnderlyingProperty.Equals(other.UnderlyingProperty)
+                && ReflectedType.Equals(other.ReflectedType);
         }
 
         public override int GetHashCode()

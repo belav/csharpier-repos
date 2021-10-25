@@ -13,15 +13,10 @@ namespace System.Speech.Internal.GrammarBuilding
     {
         #region Constructors
 
-        internal ItemElement(GrammarBuilderBase builder)
-            : this(builder, 1, 1)
-        {
-        }
+        internal ItemElement(GrammarBuilderBase builder) : this(builder, 1, 1) { }
 
         internal ItemElement(int minRepeat, int maxRepeat)
-            : this((GrammarBuilderBase)null, minRepeat, maxRepeat)
-        {
-        }
+            : this((GrammarBuilderBase)null, minRepeat, maxRepeat) { }
 
         internal ItemElement(GrammarBuilderBase builder, int minRepeat, int maxRepeat)
         {
@@ -83,7 +78,12 @@ namespace System.Speech.Internal.GrammarBuilding
             return item;
         }
 
-        internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
+        internal override IElement CreateElement(
+            IElementFactory elementFactory,
+            IElement parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        )
         {
             // Create and return the real item (the item including the grammar)
             // for the current grammar
@@ -101,7 +101,6 @@ namespace System.Speech.Internal.GrammarBuilding
 
         private readonly int _minRepeat = 1;
         private readonly int _maxRepeat = 1;
-
         #endregion
     }
 }

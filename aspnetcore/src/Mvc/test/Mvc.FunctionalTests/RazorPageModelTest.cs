@@ -11,11 +11,16 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class RazorPageModelTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
+    public class RazorPageModelTest
+        : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
     {
-        public RazorPageModelTest(MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture)
+        public RazorPageModelTest(
+            MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture
+        )
         {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = factory.CreateDefaultClient();
         }
 
@@ -30,11 +35,13 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Arrange
             var request = new HttpRequestMessage(HttpMethod.Post, "Pages/TryUpdateModel/10")
             {
-                Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-                {
-                    new KeyValuePair<string, string>("Name", "Overriden"),
-                    new KeyValuePair<string, string>("Age", "25"),
-                })
+                Content = new FormUrlEncodedContent(
+                    new KeyValuePair<string, string>[]
+                    {
+                        new KeyValuePair<string, string>("Name", "Overriden"),
+                        new KeyValuePair<string, string>("Age", "25"),
+                    }
+                )
             };
 
             await AddAntiforgeryHeaders(request);
@@ -55,11 +62,13 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Arrange
             var request = new HttpRequestMessage(HttpMethod.Post, "Pages/TryValidateModel/10")
             {
-                Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-                {
-                    new KeyValuePair<string, string>("Name", "Foo"),
-                    new KeyValuePair<string, string>("Age", "25"),
-                })
+                Content = new FormUrlEncodedContent(
+                    new KeyValuePair<string, string>[]
+                    {
+                        new KeyValuePair<string, string>("Name", "Foo"),
+                        new KeyValuePair<string, string>("Age", "25"),
+                    }
+                )
             };
 
             await AddAntiforgeryHeaders(request);
@@ -80,11 +89,13 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Arrange
             var request = new HttpRequestMessage(HttpMethod.Post, "Pages/TryValidateModel/10")
             {
-                Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-                {
-                    new KeyValuePair<string, string>("Name", "Foo"),
-                    new KeyValuePair<string, string>("Age", "200"),
-                })
+                Content = new FormUrlEncodedContent(
+                    new KeyValuePair<string, string>[]
+                    {
+                        new KeyValuePair<string, string>("Name", "Foo"),
+                        new KeyValuePair<string, string>("Age", "200"),
+                    }
+                )
             };
 
             await AddAntiforgeryHeaders(request);
@@ -104,13 +115,17 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task PageModel_TryUpdateModelAsync_Success()
         {
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Post, "Pages/TryUpdateModelPageModel/10")
-            {
-                Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-                {
-                    new KeyValuePair<string, string>("Name", "Overriden"),
-                    new KeyValuePair<string, string>("Age", "25"),
-                })
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "Pages/TryUpdateModelPageModel/10"
+            ) {
+                Content = new FormUrlEncodedContent(
+                    new KeyValuePair<string, string>[]
+                    {
+                        new KeyValuePair<string, string>("Name", "Overriden"),
+                        new KeyValuePair<string, string>("Age", "25"),
+                    }
+                )
             };
 
             await AddAntiforgeryHeaders(request);
@@ -129,13 +144,17 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task PageModel_TryValidateModel_Success()
         {
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Post, "Pages/TryValidateModelPageModel/10")
-            {
-                Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-                {
-                    new KeyValuePair<string, string>("Name", "Foo"),
-                    new KeyValuePair<string, string>("Age", "25"),
-                })
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "Pages/TryValidateModelPageModel/10"
+            ) {
+                Content = new FormUrlEncodedContent(
+                    new KeyValuePair<string, string>[]
+                    {
+                        new KeyValuePair<string, string>("Name", "Foo"),
+                        new KeyValuePair<string, string>("Age", "25"),
+                    }
+                )
             };
 
             await AddAntiforgeryHeaders(request);
@@ -154,13 +173,17 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task PageModel_TryValidateModel_TooLong()
         {
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Post, "Pages/TryValidateModelPageModel/10")
-            {
-                Content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
-                {
-                    new KeyValuePair<string, string>("Name", "Foo"),
-                    new KeyValuePair<string, string>("Age", "200"),
-                })
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "Pages/TryValidateModelPageModel/10"
+            ) {
+                Content = new FormUrlEncodedContent(
+                    new KeyValuePair<string, string>[]
+                    {
+                        new KeyValuePair<string, string>("Name", "Foo"),
+                        new KeyValuePair<string, string>("Age", "200"),
+                    }
+                )
             };
 
             await AddAntiforgeryHeaders(request);

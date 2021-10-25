@@ -28,11 +28,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     new RelationalCommandBuilderDependencies(
                         new TestRelationalTypeMappingSource(
                             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()))),
-                new RelationalSqlGenerationHelper(
-                    new RelationalSqlGenerationHelperDependencies()),
-                new ParameterNameGeneratorFactory(
-                    new ParameterNameGeneratorDependencies()));
+                            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                        )
+                    )
+                ),
+                new RelationalSqlGenerationHelper(new RelationalSqlGenerationHelperDependencies()),
+                new ParameterNameGeneratorFactory(new ParameterNameGeneratorDependencies())
+            );
         }
 
         [ConditionalFact]
@@ -52,9 +54,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var builder = CreateBuilder();
 
-            var rawSqlCommand = builder.Build("SQL COMMAND TEXT {0} {1} {2}", new object[] { 1, 2L, "three" });
+            var rawSqlCommand = builder.Build(
+                "SQL COMMAND TEXT {0} {1} {2}",
+                new object[] { 1, 2L, "three" }
+            );
 
-            Assert.Equal("SQL COMMAND TEXT @p0 @p1 @p2", rawSqlCommand.RelationalCommand.CommandText);
+            Assert.Equal(
+                "SQL COMMAND TEXT @p0 @p1 @p2",
+                rawSqlCommand.RelationalCommand.CommandText
+            );
             Assert.Equal(3, rawSqlCommand.RelationalCommand.Parameters.Count);
             Assert.Equal("p0", rawSqlCommand.RelationalCommand.Parameters[0].InvariantName);
             Assert.Equal("p1", rawSqlCommand.RelationalCommand.Parameters[1].InvariantName);

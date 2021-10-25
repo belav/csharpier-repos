@@ -39,13 +39,14 @@ namespace System.CommandLine.Benchmarks.DragonFruit
         }
 
         [Benchmark(Description = "--help")]
-        public async Task SearchForStartingPointWhenGivenEntryPointClass_Help()
-            => await System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
+        public async Task SearchForStartingPointWhenGivenEntryPointClass_Help() =>
+            await System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
                 _testAssembly,
                 new[] { "--help" },
                 null,
                 _testAssemblyXmlDocsFilePath,
-                _nullConsole);
+                _nullConsole
+            );
 
         [GlobalCleanup]
         public void Cleanup()

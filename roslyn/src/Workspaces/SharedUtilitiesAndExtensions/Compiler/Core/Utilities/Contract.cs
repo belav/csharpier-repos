@@ -12,9 +12,9 @@ namespace Roslyn.Utilities
     internal static class Contract
     {
         // Guidance on inlining:
-        // ThrowXxx methods are used heavily across the code base. 
+        // ThrowXxx methods are used heavily across the code base.
         // Inline their implementation of condition checking but don't inline the code that is only executed on failure.
-        // This approach makes the common path efficient (both execution time and code size) 
+        // This approach makes the common path efficient (both execution time and code size)
         // while keeping the rarely executed code in a separate method.
 
         /// <summary>
@@ -61,7 +61,10 @@ namespace Roslyn.Utilities
         /// in all builds
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ThrowIfFalse([DoesNotReturnIf(parameterValue: false)] bool condition, string message)
+        public static void ThrowIfFalse(
+            [DoesNotReturnIf(parameterValue: false)] bool condition,
+            string message
+        )
         {
             if (!condition)
             {
@@ -87,7 +90,10 @@ namespace Roslyn.Utilities
         /// all builds.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ThrowIfTrue([DoesNotReturnIf(parameterValue: true)] bool condition, string message)
+        public static void ThrowIfTrue(
+            [DoesNotReturnIf(parameterValue: true)] bool condition,
+            string message
+        )
         {
             if (condition)
             {
@@ -98,7 +104,7 @@ namespace Roslyn.Utilities
         [DebuggerHidden]
         [DoesNotReturn]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void Fail(string message = "Unexpected")
-            => throw new InvalidOperationException(message);
+        public static void Fail(string message = "Unexpected") =>
+            throw new InvalidOperationException(message);
     }
 }

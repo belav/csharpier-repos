@@ -34,8 +34,12 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             if (!typeof(IXmlDecryptor).IsAssignableFrom(decryptorType))
             {
                 throw new ArgumentException(
-                    Resources.FormatTypeExtensions_BadCast(decryptorType.FullName, typeof(IXmlDecryptor).FullName),
-                    nameof(decryptorType));
+                    Resources.FormatTypeExtensions_BadCast(
+                        decryptorType.FullName,
+                        typeof(IXmlDecryptor).FullName
+                    ),
+                    nameof(decryptorType)
+                );
             }
 
             EncryptedElement = encryptedElement;

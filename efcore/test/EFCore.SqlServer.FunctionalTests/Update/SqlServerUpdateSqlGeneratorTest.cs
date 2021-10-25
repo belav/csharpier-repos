@@ -14,17 +14,20 @@ namespace Microsoft.EntityFrameworkCore.Update
 {
     public class SqlServerUpdateSqlGeneratorTest : UpdateSqlGeneratorTestBase
     {
-        protected override IUpdateSqlGenerator CreateSqlGenerator()
-            => new SqlServerUpdateSqlGenerator(
+        protected override IUpdateSqlGenerator CreateSqlGenerator() =>
+            new SqlServerUpdateSqlGenerator(
                 new UpdateSqlGeneratorDependencies(
                     new SqlServerSqlGenerationHelper(
-                        new RelationalSqlGenerationHelperDependencies()),
+                        new RelationalSqlGenerationHelperDependencies()
+                    ),
                     new SqlServerTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>())));
+                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                    )
+                )
+            );
 
-        protected override TestHelpers TestHelpers
-            => SqlServerTestHelpers.Instance;
+        protected override TestHelpers TestHelpers => SqlServerTestHelpers.Instance;
 
         [ConditionalFact]
         public void AppendBatchHeader_should_append_SET_NOCOUNT_ON()
@@ -37,43 +40,48 @@ namespace Microsoft.EntityFrameworkCore.Update
         }
 
         protected override void AppendInsertOperation_appends_insert_and_select_store_generated_columns_but_no_identity_verification(
-            StringBuilder stringBuilder)
+            StringBuilder stringBuilder
+        )
         {
             Assert.Equal(
                 "INSERT INTO [dbo].[Ducks] ([Id], [Name], [Quacks], [ConcurrencyToken])"
-                + Environment.NewLine
-                + "VALUES (@p0, @p1, @p2, @p3);"
-                + Environment.NewLine
-                + "SELECT [Computed]"
-                + Environment.NewLine
-                + "FROM [dbo].[Ducks]"
-                + Environment.NewLine
-                + "WHERE @@ROWCOUNT = 1 AND [Id] = @p0;"
-                + Environment.NewLine
-                + Environment.NewLine,
-                stringBuilder.ToString());
+                    + Environment.NewLine
+                    + "VALUES (@p0, @p1, @p2, @p3);"
+                    + Environment.NewLine
+                    + "SELECT [Computed]"
+                    + Environment.NewLine
+                    + "FROM [dbo].[Ducks]"
+                    + Environment.NewLine
+                    + "WHERE @@ROWCOUNT = 1 AND [Id] = @p0;"
+                    + Environment.NewLine
+                    + Environment.NewLine,
+                stringBuilder.ToString()
+            );
         }
 
         protected override void AppendInsertOperation_appends_insert_and_select_and_where_if_store_generated_columns_exist_verification(
-            StringBuilder stringBuilder)
+            StringBuilder stringBuilder
+        )
         {
             Assert.Equal(
                 "INSERT INTO [dbo].[Ducks] ([Name], [Quacks], [ConcurrencyToken])"
-                + Environment.NewLine
-                + "VALUES (@p0, @p1, @p2);"
-                + Environment.NewLine
-                + "SELECT [Id], [Computed]"
-                + Environment.NewLine
-                + "FROM [dbo].[Ducks]"
-                + Environment.NewLine
-                + "WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
-                + Environment.NewLine
-                + Environment.NewLine,
-                stringBuilder.ToString());
+                    + Environment.NewLine
+                    + "VALUES (@p0, @p1, @p2);"
+                    + Environment.NewLine
+                    + "SELECT [Id], [Computed]"
+                    + Environment.NewLine
+                    + "FROM [dbo].[Ducks]"
+                    + Environment.NewLine
+                    + "WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+                    + Environment.NewLine
+                    + Environment.NewLine,
+                stringBuilder.ToString()
+            );
         }
 
         protected override void AppendInsertOperation_appends_insert_and_select_for_only_single_identity_columns_verification(
-            StringBuilder stringBuilder)
+            StringBuilder stringBuilder
+        )
         {
             AssertBaseline(
                 @"INSERT INTO [dbo].[Ducks]
@@ -83,10 +91,13 @@ FROM [dbo].[Ducks]
 WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
 
 ",
-                stringBuilder.ToString());
+                stringBuilder.ToString()
+            );
         }
 
-        protected override void AppendInsertOperation_appends_insert_and_select_for_only_identity_verification(StringBuilder stringBuilder)
+        protected override void AppendInsertOperation_appends_insert_and_select_for_only_identity_verification(
+            StringBuilder stringBuilder
+        )
         {
             AssertBaseline(
                 @"INSERT INTO [dbo].[Ducks] ([Name], [Quacks], [ConcurrencyToken])
@@ -96,11 +107,13 @@ FROM [dbo].[Ducks]
 WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
 
 ",
-                stringBuilder.ToString());
+                stringBuilder.ToString()
+            );
         }
 
         protected override void AppendInsertOperation_appends_insert_and_select_for_all_store_generated_columns_verification(
-            StringBuilder stringBuilder)
+            StringBuilder stringBuilder
+        )
         {
             AssertBaseline(
                 @"INSERT INTO [dbo].[Ducks]
@@ -110,7 +123,8 @@ FROM [dbo].[Ducks]
 WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
 
 ",
-                stringBuilder.ToString());
+                stringBuilder.ToString()
+            );
         }
 
         [ConditionalFact]
@@ -120,7 +134,11 @@ WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
             var command = CreateInsertCommand();
 
             var sqlGenerator = (ISqlServerUpdateSqlGenerator)CreateSqlGenerator();
-            var grouping = sqlGenerator.AppendBulkInsertOperation(stringBuilder, new[] { command, command }, 0);
+            var grouping = sqlGenerator.AppendBulkInsertOperation(
+                stringBuilder,
+                new[] { command, command },
+                0
+            );
 
             AssertBaseline(
                 @"DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
@@ -138,7 +156,8 @@ INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
 ORDER BY [i].[_Position];
 
 ",
-                stringBuilder.ToString());
+                stringBuilder.ToString()
+            );
             Assert.Equal(ResultSetMapping.NotLastInResultSet, grouping);
         }
 
@@ -149,14 +168,19 @@ ORDER BY [i].[_Position];
             var command = CreateInsertCommand(identityKey: false, isComputed: false);
 
             var sqlGenerator = (ISqlServerUpdateSqlGenerator)CreateSqlGenerator();
-            var grouping = sqlGenerator.AppendBulkInsertOperation(stringBuilder, new[] { command, command }, 0);
+            var grouping = sqlGenerator.AppendBulkInsertOperation(
+                stringBuilder,
+                new[] { command, command },
+                0
+            );
 
             AssertBaseline(
                 @"INSERT INTO [dbo].[Ducks] ([Id], [Name], [Quacks], [ConcurrencyToken])
 VALUES (@p0, @p1, @p2, @p3),
 (@p0, @p1, @p2, @p3);
 ",
-                stringBuilder.ToString());
+                stringBuilder.ToString()
+            );
             Assert.Equal(ResultSetMapping.NoResultSet, grouping);
         }
 
@@ -164,10 +188,18 @@ VALUES (@p0, @p1, @p2, @p3),
         public void AppendBulkInsertOperation_appends_insert_if_store_generated_columns_exist_default_values_only()
         {
             var stringBuilder = new StringBuilder();
-            var command = CreateInsertCommand(identityKey: true, isComputed: true, defaultsOnly: true);
+            var command = CreateInsertCommand(
+                identityKey: true,
+                isComputed: true,
+                defaultsOnly: true
+            );
 
             var sqlGenerator = (ISqlServerUpdateSqlGenerator)CreateSqlGenerator();
-            var grouping = sqlGenerator.AppendBulkInsertOperation(stringBuilder, new[] { command, command }, 0);
+            var grouping = sqlGenerator.AppendBulkInsertOperation(
+                stringBuilder,
+                new[] { command, command },
+                0
+            );
 
             AssertBaseline(
                 @"DECLARE @inserted0 TABLE ([Id] int);
@@ -180,7 +212,8 @@ SELECT [t].[Id], [t].[Computed] FROM [dbo].[Ducks] t
 INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
 
 ",
-                stringBuilder.ToString());
+                stringBuilder.ToString()
+            );
             Assert.Equal(ResultSetMapping.NotLastInResultSet, grouping);
         }
 
@@ -188,31 +221,34 @@ INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id]);
         public void AppendBulkInsertOperation_appends_insert_if_no_store_generated_columns_exist_default_values_only()
         {
             var stringBuilder = new StringBuilder();
-            var command = CreateInsertCommand(identityKey: false, isComputed: false, defaultsOnly: true);
+            var command = CreateInsertCommand(
+                identityKey: false,
+                isComputed: false,
+                defaultsOnly: true
+            );
 
             var sqlGenerator = (ISqlServerUpdateSqlGenerator)CreateSqlGenerator();
-            var grouping = sqlGenerator.AppendBulkInsertOperation(stringBuilder, new[] { command, command }, 0);
+            var grouping = sqlGenerator.AppendBulkInsertOperation(
+                stringBuilder,
+                new[] { command, command },
+                0
+            );
 
-            var expectedText = @"INSERT INTO [dbo].[Ducks]
+            var expectedText =
+                @"INSERT INTO [dbo].[Ducks]
 DEFAULT VALUES;
 ";
-            AssertBaseline(
-                expectedText + expectedText,
-                stringBuilder.ToString());
+            AssertBaseline(expectedText + expectedText, stringBuilder.ToString());
             Assert.Equal(ResultSetMapping.NoResultSet, grouping);
         }
 
-        protected override string RowsAffected
-            => "@@ROWCOUNT";
+        protected override string RowsAffected => "@@ROWCOUNT";
 
-        protected override string Identity
-            => throw new NotImplementedException();
+        protected override string Identity => throw new NotImplementedException();
 
-        protected override string OpenDelimiter
-            => "[";
+        protected override string OpenDelimiter => "[";
 
-        protected override string CloseDelimiter
-            => "]";
+        protected override string CloseDelimiter => "]";
 
         private void AssertBaseline(string expected, string actual)
         {

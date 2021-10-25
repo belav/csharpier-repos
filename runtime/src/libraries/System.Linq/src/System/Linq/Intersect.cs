@@ -7,9 +7,16 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> Intersect<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second) => Intersect(first, second, null);
+        public static IEnumerable<TSource> Intersect<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second
+        ) => Intersect(first, second, null);
 
-        public static IEnumerable<TSource> Intersect<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource>? comparer)
+        public static IEnumerable<TSource> Intersect<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource>? comparer
+        )
         {
             if (first == null)
             {
@@ -24,9 +31,18 @@ namespace System.Linq
             return IntersectIterator(first, second, comparer);
         }
 
-        public static IEnumerable<TSource> IntersectBy<TSource, TKey>(this IEnumerable<TSource> first, IEnumerable<TKey> second, Func<TSource, TKey> keySelector) => IntersectBy(first, second, keySelector, null);
+        public static IEnumerable<TSource> IntersectBy<TSource, TKey>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TKey> second,
+            Func<TSource, TKey> keySelector
+        ) => IntersectBy(first, second, keySelector, null);
 
-        public static IEnumerable<TSource> IntersectBy<TSource, TKey>(this IEnumerable<TSource> first, IEnumerable<TKey> second, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
+        public static IEnumerable<TSource> IntersectBy<TSource, TKey>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TKey> second,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             if (first is null)
             {
@@ -44,7 +60,11 @@ namespace System.Linq
             return IntersectByIterator(first, second, keySelector, comparer);
         }
 
-        private static IEnumerable<TSource> IntersectIterator<TSource>(IEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource>? comparer)
+        private static IEnumerable<TSource> IntersectIterator<TSource>(
+            IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource>? comparer
+        )
         {
             var set = new HashSet<TSource>(second, comparer);
 
@@ -57,7 +77,12 @@ namespace System.Linq
             }
         }
 
-        private static IEnumerable<TSource> IntersectByIterator<TSource, TKey>(IEnumerable<TSource> first, IEnumerable<TKey> second, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
+        private static IEnumerable<TSource> IntersectByIterator<TSource, TKey>(
+            IEnumerable<TSource> first,
+            IEnumerable<TKey> second,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             var set = new HashSet<TKey>(second, comparer);
 

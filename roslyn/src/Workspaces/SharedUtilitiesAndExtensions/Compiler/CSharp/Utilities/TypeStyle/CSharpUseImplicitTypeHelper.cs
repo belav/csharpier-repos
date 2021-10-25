@@ -27,13 +27,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
     {
         public static readonly CSharpUseImplicitTypeHelper Instance = new();
 
-        private CSharpUseImplicitTypeHelper()
-        {
-        }
+        private CSharpUseImplicitTypeHelper() { }
 
         public override TypeStyleResult AnalyzeTypeName(
-            TypeSyntax typeName, SemanticModel semanticModel,
-            OptionSet optionSet, CancellationToken cancellationToken)
+            TypeSyntax typeName,
+            SemanticModel semanticModel,
+            OptionSet optionSet,
+            CancellationToken cancellationToken
+        )
         {
             if (typeName.StripRefIfNeeded().IsVar)
             {
@@ -45,11 +46,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 return default;
             }
 
-            return base.AnalyzeTypeName(
-                typeName, semanticModel, optionSet, cancellationToken);
+            return base.AnalyzeTypeName(typeName, semanticModel, optionSet, cancellationToken);
         }
 
-        public override bool ShouldAnalyzeVariableDeclaration(VariableDeclarationSyntax variableDeclaration, CancellationToken cancellationToken)
+        public override bool ShouldAnalyzeVariableDeclaration(
+            VariableDeclarationSyntax variableDeclaration,
+            CancellationToken cancellationToken
+        )
         {
             var type = variableDeclaration.Type.StripRefIfNeeded();
             if (type.IsVar)
@@ -62,17 +65,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             return base.ShouldAnalyzeVariableDeclaration(variableDeclaration, cancellationToken);
         }
 
-        protected override bool ShouldAnalyzeForEachStatement(ForEachStatementSyntax forEachStatement, SemanticModel semanticModel, CancellationToken cancellationToken)
+        protected override bool ShouldAnalyzeForEachStatement(
+            ForEachStatementSyntax forEachStatement,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             var type = forEachStatement.Type;
-            if (type.IsVar || (type.Kind() == SyntaxKind.RefType && ((RefTypeSyntax)type).Type.IsVar))
+            if (
+                type.IsVar
+                || (type.Kind() == SyntaxKind.RefType && ((RefTypeSyntax)type).Type.IsVar)
+            )
             {
                 // If the type is already 'var', this analyze has no work to do
                 return false;
             }
 
             // The base analyzer may impose further limitations
-            return base.ShouldAnalyzeForEachStatement(forEachStatement, semanticModel, cancellationToken);
+            return base.ShouldAnalyzeForEachStatement(
+                forEachStatement,
+                semanticModel,
+                cancellationToken
+            );
         }
 
         protected override bool IsStylePreferred(in State state)
@@ -94,25 +108,47 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         }
 
         internal override bool TryAnalyzeVariableDeclaration(
-            TypeSyntax typeName, SemanticModel semanticModel,
-            OptionSet optionSet, CancellationToken cancellationToken)
+            TypeSyntax typeName,
+            SemanticModel semanticModel,
+            OptionSet optionSet,
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(!typeName.StripRefIfNeeded().IsVar, "'var' special case should have prevented analysis of this variable.");
+            Debug.Assert(
+                !typeName.StripRefIfNeeded().IsVar,
+                "'var' special case should have prevented analysis of this variable."
+            );
 
             var candidateReplacementNode = SyntaxFactory.IdentifierName("var");
 
             // If there exists a type named var, return.
-            var conflict = semanticModel.GetSpeculativeSymbolInfo(typeName.SpanStart, candidateReplacementNode, SpeculativeBindingOption.BindAsTypeOrNamespace).Symbol;
+            var conflict =
+                semanticModel.GetSpeculativeSymbolInfo(
+                    typeName.SpanStart,
+                    candidateReplacementNode,
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                ).Symbol;
             if (conflict?.IsKind(SymbolKind.NamedType) == true)
             {
                 return false;
             }
 
-            if (typeName.Parent.IsKind(SyntaxKind.VariableDeclaration, out VariableDeclarationSyntax? variableDeclaration) &&
-                typeName.Parent.IsParentKind(SyntaxKind.LocalDeclarationStatement, SyntaxKind.ForStatement, SyntaxKind.UsingStatement))
+            if (
+                typeName.Parent.IsKind(
+                    SyntaxKind.VariableDeclaration,
+                    out VariableDeclarationSyntax? variableDeclaration
+                )
+                && typeName.Parent.IsParentKind(
+                    SyntaxKind.LocalDeclarationStatement,
+                    SyntaxKind.ForStatement,
+                    SyntaxKind.UsingStatement
+                )
+            )
             {
                 // implicitly typed variables cannot be constants.
-                if ((variableDeclaration.Parent as LocalDeclarationStatementSyntax)?.IsConst == true)
+                if (
+                    (variableDeclaration.Parent as LocalDeclarationStatementSyntax)?.IsConst == true
+                )
                 {
                     return false;
                 }
@@ -135,7 +171,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 if (!variableDeclaration.Type.IsKind(SyntaxKind.PointerType))
                 {
                     var containsStackAlloc = initializer
-                        .DescendantNodesAndSelf(descendIntoChildren: node => !node.IsAnyLambdaOrAnonymousMethod())
+                        .DescendantNodesAndSelf(
+                            descendIntoChildren: node => !node.IsAnyLambdaOrAnonymousMethod()
+                        )
                         .Any(node => node.IsKind(SyntaxKind.StackAllocArrayCreationExpression));
 
                     if (containsStackAlloc)
@@ -144,15 +182,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     }
                 }
 
-                if (AssignmentSupportsStylePreference(
-                        variable.Identifier, typeName, initializer,
-                        semanticModel, optionSet, cancellationToken))
+                if (
+                    AssignmentSupportsStylePreference(
+                        variable.Identifier,
+                        typeName,
+                        initializer,
+                        semanticModel,
+                        optionSet,
+                        cancellationToken
+                    )
+                )
                 {
                     return true;
                 }
             }
-            else if (typeName.Parent is ForEachStatementSyntax foreachStatement &&
-                     foreachStatement.Type == typeName)
+            else if (
+                typeName.Parent is ForEachStatementSyntax foreachStatement
+                && foreachStatement.Type == typeName
+            )
             {
                 var foreachStatementInfo = semanticModel.GetForEachStatementInfo(foreachStatement);
                 if (foreachStatementInfo.ElementConversion.IsIdentity)
@@ -160,8 +207,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                     return true;
                 }
             }
-            else if (typeName.Parent is DeclarationExpressionSyntax declarationExpression &&
-                     TryAnalyzeDeclarationExpression(declarationExpression, semanticModel, cancellationToken))
+            else if (
+                typeName.Parent is DeclarationExpressionSyntax declarationExpression
+                && TryAnalyzeDeclarationExpression(
+                    declarationExpression,
+                    semanticModel,
+                    cancellationToken
+                )
+            )
             {
                 return true;
             }
@@ -172,12 +225,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         private static bool TryAnalyzeDeclarationExpression(
             DeclarationExpressionSyntax declarationExpression,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // First try to do the cheap check to see if we could replace this decl-expression with
             // "var".  If not, we'll fall out below to the much more expensive case where we change
             // the actual type to "var" and see if semantics stay the same.
-            if (IsSafeToSwitchToVarWithoutNeedingSpeculation(declarationExpression, semanticModel, cancellationToken))
+            if (
+                IsSafeToSwitchToVarWithoutNeedingSpeculation(
+                    declarationExpression,
+                    semanticModel,
+                    cancellationToken
+                )
+            )
                 return true;
 
             if (!semanticModel.SyntaxTree.HasCompilationUnitRoot)
@@ -194,23 +254,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             var annotation = new SyntaxAnnotation();
 
             var declarationTypeNode = declarationExpression.Type;
-            var declarationType = semanticModel.GetTypeInfo(declarationTypeNode, cancellationToken).Type;
+            var declarationType =
+                semanticModel.GetTypeInfo(declarationTypeNode, cancellationToken).Type;
 
             var newRoot = root.ReplaceNode(
                 declarationTypeNode,
-                SyntaxFactory.IdentifierName("var").WithTriviaFrom(declarationTypeNode).WithAdditionalAnnotations(annotation));
+                SyntaxFactory
+                    .IdentifierName("var")
+                    .WithTriviaFrom(declarationTypeNode)
+                    .WithAdditionalAnnotations(annotation)
+            );
 
             var newTree = tree.WithRootAndOptions(newRoot, tree.Options);
-            var newSemanticModel = semanticModel.Compilation.ReplaceSyntaxTree(tree, newTree).GetSemanticModel(newTree);
+            var newSemanticModel = semanticModel.Compilation
+                .ReplaceSyntaxTree(tree, newTree)
+                .GetSemanticModel(newTree);
 
-            var newDeclarationTypeNode = newTree.GetRoot(cancellationToken).GetAnnotatedNodes(annotation).Single();
-            var newDeclarationType = newSemanticModel.GetTypeInfo(newDeclarationTypeNode, cancellationToken).Type;
+            var newDeclarationTypeNode = newTree
+                .GetRoot(cancellationToken)
+                .GetAnnotatedNodes(annotation)
+                .Single();
+            var newDeclarationType =
+                newSemanticModel.GetTypeInfo(newDeclarationTypeNode, cancellationToken).Type;
 
             return SymbolEquivalenceComparer.TupleNamesMustMatchInstance.Equals(
-                declarationType, newDeclarationType);
+                declarationType,
+                newDeclarationType
+            );
         }
 
-        private static bool IsSafeToSwitchToVarWithoutNeedingSpeculation(DeclarationExpressionSyntax declarationExpression, SemanticModel semanticModel, CancellationToken cancellationToken)
+        private static bool IsSafeToSwitchToVarWithoutNeedingSpeculation(
+            DeclarationExpressionSyntax declarationExpression,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             // It's not always safe to convert a decl expression like "Method(out int i)" to
             // "Method(out var i)".  Changing to 'var' may cause overload resolution errors.
@@ -222,14 +299,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             // If there was only one member in the group, and it was non-generic itself, then this
             // change is commonly safe to make without having to actually change to `var` and
             // speculatively determine if the change is ok or not.
-            if (!(declarationExpression.Parent is ArgumentSyntax argument) ||
-                !(argument.Parent is ArgumentListSyntax argumentList) ||
-                !(argumentList.Parent is InvocationExpressionSyntax invocationExpression))
+            if (
+                !(declarationExpression.Parent is ArgumentSyntax argument)
+                || !(argument.Parent is ArgumentListSyntax argumentList)
+                || !(argumentList.Parent is InvocationExpressionSyntax invocationExpression)
+            )
             {
                 return false;
             }
 
-            var memberGroup = semanticModel.GetMemberGroup(invocationExpression.Expression, cancellationToken);
+            var memberGroup = semanticModel.GetMemberGroup(
+                invocationExpression.Expression,
+                cancellationToken
+            );
             if (memberGroup.Length != 1)
                 return false;
 
@@ -245,7 +327,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             // different names for those tuple elements.  Check and make sure the types are the
             // same before proceeding.
 
-            var invocationOp = semanticModel.GetOperation(invocationExpression, cancellationToken) as IInvocationOperation;
+            var invocationOp =
+                semanticModel.GetOperation(invocationExpression, cancellationToken)
+                as IInvocationOperation;
             if (invocationOp == null)
                 return false;
 
@@ -275,7 +359,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ExpressionSyntax initializer,
             SemanticModel semanticModel,
             OptionSet optionSet,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var expression = GetInitializerExpression(initializer);
 
@@ -292,33 +377,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             // cannot use implicit typing on method group or on dynamic
-            var declaredType = semanticModel.GetTypeInfo(typeName.StripRefIfNeeded(), cancellationToken).Type;
+            var declaredType =
+                semanticModel.GetTypeInfo(typeName.StripRefIfNeeded(), cancellationToken).Type;
             if (declaredType != null && declaredType.TypeKind == TypeKind.Dynamic)
             {
                 return false;
             }
 
             // variables declared using var cannot be used further in the same initialization expression.
-            if (initializer.DescendantNodesAndSelf()
-                .Where(n => n is IdentifierNameSyntax id && id.Identifier.ValueText.Equals(identifier.ValueText))
-                .Any(n =>
-                {
-                    // case of variable direct use: int x = x * 2;
-                    if (semanticModel.GetSymbolInfo(n, cancellationToken).Symbol.IsKind(SymbolKind.Local) == true)
-                    {
-                        return true;
-                    }
+            if (
+                initializer
+                    .DescendantNodesAndSelf()
+                    .Where(
+                        n =>
+                            n is IdentifierNameSyntax id
+                            && id.Identifier.ValueText.Equals(identifier.ValueText)
+                    )
+                    .Any(
+                        n =>
+                        {
+                            // case of variable direct use: int x = x * 2;
+                            if (
+                                semanticModel
+                                    .GetSymbolInfo(n, cancellationToken)
+                                    .Symbol.IsKind(SymbolKind.Local) == true
+                            )
+                            {
+                                return true;
+                            }
 
-                    // case of qualification starting with the variable name: SomeEnum SomeEnum = SomeEnum.EnumVal1;
-                    // note that: SomeEnum SomeEnum = global::SomeEnum.EnumVal1; // is ok and 'var' can be offered
-                    // https://github.com/dotnet/roslyn/issues/26894
-                    if (n.Parent is MemberAccessExpressionSyntax memberAccessParent && memberAccessParent.Expression == n)
-                    {
-                        return true;
-                    }
+                            // case of qualification starting with the variable name: SomeEnum SomeEnum = SomeEnum.EnumVal1;
+                            // note that: SomeEnum SomeEnum = global::SomeEnum.EnumVal1; // is ok and 'var' can be offered
+                            // https://github.com/dotnet/roslyn/issues/26894
+                            if (
+                                n.Parent is MemberAccessExpressionSyntax memberAccessParent
+                                && memberAccessParent.Expression == n
+                            )
+                            {
+                                return true;
+                            }
 
-                    return false;
-                }))
+                            return false;
+                        }
+                    )
+            )
             {
                 return false;
             }
@@ -345,7 +447,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             return current.WalkDownParentheses();
         }
 
-        protected override bool ShouldAnalyzeDeclarationExpression(DeclarationExpressionSyntax declaration, SemanticModel semanticModel, CancellationToken cancellationToken)
+        protected override bool ShouldAnalyzeDeclarationExpression(
+            DeclarationExpressionSyntax declaration,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             if (declaration.Type.IsVar)
             {
@@ -354,7 +460,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             // The base analyzer may impose further limitations
-            return base.ShouldAnalyzeDeclarationExpression(declaration, semanticModel, cancellationToken);
+            return base.ShouldAnalyzeDeclarationExpression(
+                declaration,
+                semanticModel,
+                cancellationToken
+            );
         }
     }
 }

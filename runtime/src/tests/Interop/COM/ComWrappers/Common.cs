@@ -23,8 +23,15 @@ namespace ComWrappersTests.Common
 
         private int id;
         private int value = -1;
-        public Test() { id = Interlocked.Increment(ref InstanceCount); }
-        ~Test() { Interlocked.Decrement(ref InstanceCount); id = -1; }
+        public Test()
+        {
+            id = Interlocked.Increment(ref InstanceCount);
+        }
+        ~Test()
+        {
+            Interlocked.Decrement(ref InstanceCount);
+            id = -1;
+        }
 
         public void SetValue(int i) => this.value = i;
         public int GetValue() => this.value;
@@ -72,7 +79,9 @@ namespace ComWrappersTests.Common
             {
                 try
                 {
-                    ComWrappers.ComInterfaceDispatch.GetInstance<ITest>((ComWrappers.ComInterfaceDispatch*)dispatchPtr).SetValue(i);
+                    ComWrappers.ComInterfaceDispatch
+                        .GetInstance<ITest>((ComWrappers.ComInterfaceDispatch*)dispatchPtr)
+                        .SetValue(i);
                 }
                 catch (Exception e)
                 {
@@ -88,7 +97,9 @@ namespace ComWrappersTests.Common
     //
     sealed class MockReferenceTrackerRuntime
     {
-        private static readonly ReaderWriterLockSlim AllocLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
+        private static readonly ReaderWriterLockSlim AllocLock = new ReaderWriterLockSlim(
+            LockRecursionPolicy.SupportsRecursion
+        );
 
         public static IntPtr CreateTrackerObject()
         {
@@ -194,7 +205,13 @@ namespace ComWrappersTests.Common
 
         protected unsafe ITrackerObjectWrapper(ComWrappers cw, bool aggregateRefTracker)
         {
-            ComWrappersHelper.Init<ITrackerObjectWrapper>(ref this.classNative, this, aggregateRefTracker, cw, &CreateInstance);
+            ComWrappersHelper.Init<ITrackerObjectWrapper>(
+                ref this.classNative,
+                this,
+                aggregateRefTracker,
+                cw,
+                &CreateInstance
+            );
 
             var inst = Marshal.PtrToStructure<VtblPtr>(this.classNative.Instance);
             this.vtable = Marshal.PtrToStructure<ITrackerObjectWrapperVtbl>(inst.Vtbl);
@@ -249,14 +266,16 @@ namespace ComWrappersTests.Common
             }
 
             return hr == E_NOINTERFACE
-                ? CustomQueryInterfaceResult.NotHandled
-                : CustomQueryInterfaceResult.Failed;
+              ? CustomQueryInterfaceResult.NotHandled
+              : CustomQueryInterfaceResult.Failed;
         }
     }
 
     class ComWrappersHelper
     {
-        private static Guid IID_IReferenceTracker = new Guid("11d3b13a-180e-4789-a8be-7712882893e6");
+        private static Guid IID_IReferenceTracker = new Guid(
+            "11d3b13a-180e-4789-a8be-7712882893e6"
+        );
 
         [Flags]
         public enum ReleaseFlags
@@ -280,7 +299,8 @@ namespace ComWrappersTests.Common
             object thisInstance,
             bool aggregateRefTracker,
             ComWrappers cw,
-            delegate*<IntPtr, out IntPtr, IntPtr> CreateInstance)
+            delegate* <IntPtr, out IntPtr, IntPtr> CreateInstance
+        )
         {
             bool isAggregation = typeof(T) != thisInstance.GetType();
 
@@ -293,7 +313,10 @@ namespace ComWrappersTests.Common
                     // IReferenceTracker support is possible.
                     //
                     // The outer is now owned in this context.
-                    outer = cw.GetOrCreateComInterfaceForObject(thisInstance, CreateComInterfaceFlags.TrackerSupport);
+                    outer = cw.GetOrCreateComInterfaceForObject(
+                        thisInstance,
+                        CreateComInterfaceFlags.TrackerSupport
+                    );
                 }
 
                 // Create an instance of the COM/WinRT type.
@@ -319,7 +342,11 @@ namespace ComWrappersTests.Common
                 // it should answer immediately without going through the outer. Either way
                 // the reference count will go to the new instance.
                 IntPtr queryForTracker = isAggregation ? classNative.Inner : classNative.Instance;
-                int hr = Marshal.QueryInterface(queryForTracker, ref IID_IReferenceTracker, out classNative.ReferenceTracker);
+                int hr = Marshal.QueryInterface(
+                    queryForTracker,
+                    ref IID_IReferenceTracker,
+                    out classNative.ReferenceTracker
+                );
                 if (hr != 0)
                 {
                     classNative.ReferenceTracker = default;
@@ -367,7 +394,11 @@ namespace ComWrappersTests.Common
                 // therefore it is important that the enclosing CCW forwards to its inner
                 // if aggregation is involved. This is typically accomplished through an
                 // implementation of ICustomQueryInterface.
-                cw.GetOrRegisterObjectForComInstance(instanceToWrap, createObjectFlags, thisInstance);
+                cw.GetOrRegisterObjectForComInstance(
+                    instanceToWrap,
+                    createObjectFlags,
+                    thisInstance
+                );
             }
 
             if (isAggregation)
@@ -383,7 +414,10 @@ namespace ComWrappersTests.Common
                 // reference tracker is involved, we release the inner.
                 //
                 // .NET 5 limitation - see logic above.
-                if (classNative.Inner != default(IntPtr) && classNative.ReferenceTracker != default(IntPtr))
+                if (
+                    classNative.Inner != default(IntPtr)
+                    && classNative.ReferenceTracker != default(IntPtr)
+                )
                 {
                     Marshal.Release(classNative.Inner);
                 }

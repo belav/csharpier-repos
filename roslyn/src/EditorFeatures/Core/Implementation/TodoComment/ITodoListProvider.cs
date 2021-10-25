@@ -24,6 +24,10 @@ namespace Microsoft.CodeAnalysis.Editor
         /// </summary>
         event EventHandler<TodoItemsUpdatedArgs> TodoListUpdated;
 
-        ImmutableArray<TodoCommentData> GetTodoItems(Workspace workspace, DocumentId documentId, CancellationToken cancellationToken);
+        ImmutableArray<TodoCommentData> GetTodoItems(
+            Workspace workspace,
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        );
     }
 }

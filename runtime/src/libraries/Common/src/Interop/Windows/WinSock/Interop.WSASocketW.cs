@@ -14,11 +14,12 @@ internal static partial class Interop
     {
         [DllImport(Interop.Libraries.Ws2_32, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern IntPtr WSASocketW(
-                                        [In] AddressFamily addressFamily,
-                                        [In] SocketType socketType,
-                                        [In] int protocolType,
-                                        [In] IntPtr protocolInfo,
-                                        [In] int group,
-                                        [In] int flags);
+            [In] AddressFamily addressFamily,
+            [In] SocketType socketType,
+            [In] int protocolType,
+            [In] IntPtr protocolInfo,
+            [In] int group,
+            [In] int flags
+        );
     }
 }

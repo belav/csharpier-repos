@@ -17,11 +17,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
 
         private readonly HttpListener _listener;
 
-        private readonly Dictionary<string, CertificateAuthority> _aiaPaths =
-            new Dictionary<string, CertificateAuthority>();
+        private readonly Dictionary<string, CertificateAuthority> _aiaPaths = new Dictionary<
+            string,
+            CertificateAuthority
+        >();
 
-        private readonly Dictionary<string, CertificateAuthority> _crlPaths
-            = new Dictionary<string, CertificateAuthority>();
+        private readonly Dictionary<string, CertificateAuthority> _crlPaths = new Dictionary<
+            string,
+            CertificateAuthority
+        >();
 
         private readonly List<(string, CertificateAuthority)> _ocspAuthorities =
             new List<(string, CertificateAuthority)>();
@@ -79,7 +83,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                     }
                 },
                 this,
-                true);
+                true
+            );
         }
 
         internal void HandleRequest()
@@ -90,16 +95,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             {
                 context = _listener.GetContext();
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
 
             if (context != null)
             {
-                ThreadPool.QueueUserWorkItem(
-                    state => HandleRequest(state),
-                    context,
-                    true);
+                ThreadPool.QueueUserWorkItem(state => HandleRequest(state), context, true);
             }
         }
 
@@ -111,16 +111,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             {
                 context = await _listener.GetContextAsync();
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
 
             if (context != null)
             {
-                ThreadPool.QueueUserWorkItem(
-                    state => HandleRequest(state),
-                    context,
-                    true);
+                ThreadPool.QueueUserWorkItem(state => HandleRequest(state), context, true);
             }
         }
 
@@ -129,7 +124,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
             bool responded = false;
             try
             {
-                Trace($"{context.Request.HttpMethod} {context.Request.RawUrl} (HTTP {context.Request.ProtocolVersion})");
+                Trace(
+                    $"{context.Request.HttpMethod} {context.Request.RawUrl} (HTTP {context.Request.ProtocolVersion})"
+                );
                 HandleRequest(context, ref responded);
             }
             catch (Exception e)
@@ -142,13 +139,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                         context.Response.StatusDescription = "Internal Server Error";
                         context.Response.Close();
 
-                        Trace($"Sent 500 due to exception on {context.Request.HttpMethod} {context.Request.RawUrl}");
+                        Trace(
+                            $"Sent 500 due to exception on {context.Request.HttpMethod} {context.Request.RawUrl}"
+                        );
                         Trace(e.ToString());
                     }
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
 
                 return;
             }
@@ -162,9 +159,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                     context.Response.StatusCode = 404;
                     context.Response.Close();
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
         }
 
@@ -187,7 +182,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                 context.Response.StatusCode = 200;
                 context.Response.ContentType = "application/pkix-cert";
                 context.Response.Close(certData, willBlock: true);
-                Trace($"Responded with {certData.Length}-byte certificate from {authority.SubjectName}.");
+                Trace(
+                    $"Responded with {certData.Length}-byte certificate from {authority.SubjectName}."
+                );
                 return;
             }
 
@@ -234,7 +231,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                             return;
                         }
 
-                        byte[] ocspResponse = RespondEmpty ? Array.Empty<byte>() : authority.BuildOcspResponse(certId, nonce);
+                        byte[] ocspResponse = RespondEmpty
+                            ? Array.Empty<byte>()
+                            : authority.BuildOcspResponse(certId, nonce);
 
                         if (DelayedActions.HasFlag(DelayedActionsFlag.Ocsp))
                         {
@@ -250,11 +249,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
 
                         if (authority.HasOcspDelegation)
                         {
-                            Trace($"OCSP Response: {ocspResponse.Length} bytes from {authority.SubjectName} delegated to {authority.OcspResponderSubjectName}");
+                            Trace(
+                                $"OCSP Response: {ocspResponse.Length} bytes from {authority.SubjectName} delegated to {authority.OcspResponderSubjectName}"
+                            );
                         }
                         else
                         {
-                            Trace($"OCSP Response: {ocspResponse.Length} bytes from {authority.SubjectName}");
+                            Trace(
+                                $"OCSP Response: {ocspResponse.Length} bytes from {authority.SubjectName}"
+                            );
                         }
 
                         return;
@@ -289,24 +292,31 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
                     Trace($"Listening at {uriPrefix}");
                     return listener;
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 
-        private static bool TryGetOcspRequestBytes(HttpListenerRequest request, string prefix, out byte[] requestBytes)
+        private static bool TryGetOcspRequestBytes(
+            HttpListenerRequest request,
+            string prefix,
+            out byte[] requestBytes
+        )
         {
             requestBytes = null;
             try
             {
                 if (request.HttpMethod == "GET")
                 {
-                    string base64 = HttpUtility.UrlDecode(request.RawUrl.Substring(prefix.Length + 1));
+                    string base64 = HttpUtility.UrlDecode(
+                        request.RawUrl.Substring(prefix.Length + 1)
+                    );
                     requestBytes = Convert.FromBase64String(base64);
                     return true;
                 }
-                else if (request.HttpMethod == "POST" && request.ContentType == "application/ocsp-request")
+                else if (
+                    request.HttpMethod == "POST"
+                    && request.ContentType == "application/ocsp-request"
+                )
                 {
                     using (System.IO.Stream stream = request.InputStream)
                     {
@@ -328,7 +338,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
         private static void DecodeOcspRequest(
             byte[] requestBytes,
             out ReadOnlyMemory<byte> certId,
-            out ReadOnlyMemory<byte> nonceExtension)
+            out ReadOnlyMemory<byte> nonceExtension
+        )
         {
             Asn1Tag context0 = new Asn1Tag(TagClass.ContextSpecific, 0);
             Asn1Tag context1 = new Asn1Tag(TagClass.ContextSpecific, 1);
@@ -370,7 +381,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
 
             if (tbsRequest.HasData)
             {
-                AsnReader requestExtensionsWrapper = tbsRequest.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 2));
+                AsnReader requestExtensionsWrapper = tbsRequest.ReadSequence(
+                    new Asn1Tag(TagClass.ContextSpecific, 2)
+                );
                 requestExtensions = requestExtensionsWrapper.ReadSequence();
                 requestExtensionsWrapper.ThrowIfNotEmpty();
             }

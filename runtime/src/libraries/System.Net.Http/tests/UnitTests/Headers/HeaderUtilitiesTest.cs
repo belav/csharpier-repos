@@ -41,7 +41,10 @@ namespace System.Net.Http.Tests
             ObjectCollection<NameValueHeaderValue> x = new ObjectCollection<NameValueHeaderValue>();
             ObjectCollection<NameValueHeaderValue> y = new ObjectCollection<NameValueHeaderValue>();
 
-            Assert.True(HeaderUtilities.AreEqualCollections(x, y), "Expected '<empty>' == '<empty>'");
+            Assert.True(
+                HeaderUtilities.AreEqualCollections(x, y),
+                "Expected '<empty>' == '<empty>'"
+            );
 
             x.Add(new NameValueHeaderValue("a"));
             x.Add(new NameValueHeaderValue("c"));
@@ -86,20 +89,54 @@ namespace System.Net.Http.Tests
             HeaderUtilities.CheckValidQuotedString("\"x\"", "param");
             HeaderUtilities.CheckValidQuotedString("\"x y\"", "param");
 
-            AssertExtensions.Throws<ArgumentException>("param", () => { HeaderUtilities.CheckValidQuotedString(null, "param"); });
-            AssertExtensions.Throws<ArgumentException>("param", () => { HeaderUtilities.CheckValidQuotedString("", "param"); });
-            Assert.Throws<FormatException>(() => { HeaderUtilities.CheckValidQuotedString("\"x", "param"); });
-            Assert.Throws<FormatException>(() => { HeaderUtilities.CheckValidQuotedString("\"x\"y", "param"); });
+            AssertExtensions.Throws<ArgumentException>(
+                "param",
+                () =>
+                {
+                    HeaderUtilities.CheckValidQuotedString(null, "param");
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "param",
+                () =>
+                {
+                    HeaderUtilities.CheckValidQuotedString("", "param");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    HeaderUtilities.CheckValidQuotedString("\"x", "param");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    HeaderUtilities.CheckValidQuotedString("\"x\"y", "param");
+                }
+            );
         }
 
         #region Helper methods
 
-        private static void CheckGetNextNonEmptyOrWhitespaceIndex(string input, int startIndex,
-            bool supportsEmptyValues, int expectedIndex, bool expectedSeparatorFound)
+        private static void CheckGetNextNonEmptyOrWhitespaceIndex(
+            string input,
+            int startIndex,
+            bool supportsEmptyValues,
+            int expectedIndex,
+            bool expectedSeparatorFound
+        )
         {
             bool separatorFound = false;
-            Assert.Equal(expectedIndex, HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(input, startIndex,
-                supportsEmptyValues, out separatorFound));
+            Assert.Equal(
+                expectedIndex,
+                HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                    input,
+                    startIndex,
+                    supportsEmptyValues,
+                    out separatorFound
+                )
+            );
             Assert.Equal(expectedSeparatorFound, separatorFound);
         }
         #endregion

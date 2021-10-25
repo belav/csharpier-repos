@@ -49,12 +49,22 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 }
                 catch (Exception e)
                 {
-                    Log.LogMessageFromResources(MessageImportance.High, "CopyRefAssembly_BadSource3", SourcePath, e.Message, e.StackTrace);
+                    Log.LogMessageFromResources(
+                        MessageImportance.High,
+                        "CopyRefAssembly_BadSource3",
+                        SourcePath,
+                        e.Message,
+                        e.StackTrace
+                    );
                 }
 
                 if (source.Equals(Guid.Empty))
                 {
-                    Log.LogMessageFromResources(MessageImportance.High, "CopyRefAssembly_SourceNotRef1", SourcePath);
+                    Log.LogMessageFromResources(
+                        MessageImportance.High,
+                        "CopyRefAssembly_SourceNotRef1",
+                        SourcePath
+                    );
                 }
                 else
                 {
@@ -64,13 +74,21 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
                         if (!source.Equals(Guid.Empty) && source.Equals(destination))
                         {
-                            Log.LogMessageFromResources(MessageImportance.Low, "CopyRefAssembly_SkippingCopy1", DestinationPath);
+                            Log.LogMessageFromResources(
+                                MessageImportance.Low,
+                                "CopyRefAssembly_SkippingCopy1",
+                                DestinationPath
+                            );
                             return true;
                         }
                     }
                     catch (Exception)
                     {
-                        Log.LogMessageFromResources(MessageImportance.High, "CopyRefAssembly_BadDestination1", DestinationPath);
+                        Log.LogMessageFromResources(
+                            MessageImportance.High,
+                            "CopyRefAssembly_BadDestination1",
+                            DestinationPath
+                        );
                     }
                 }
             }

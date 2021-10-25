@@ -12,12 +12,10 @@ namespace System.Runtime.Serialization
         /// Dummy documentation
         /// </summary>
         AsNeeded,
-
         /// <summary>
         /// Dummy documentation
         /// </summary>
         Always,
-
         /// <summary>
         /// Dummy documentation
         /// </summary>

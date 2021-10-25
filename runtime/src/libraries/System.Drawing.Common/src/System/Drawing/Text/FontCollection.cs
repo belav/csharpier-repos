@@ -36,16 +36,26 @@ namespace System.Drawing.Text
             get
             {
                 int numSought = 0;
-                int status = Gdip.GdipGetFontCollectionFamilyCount(new HandleRef(this, _nativeFontCollection), out numSought);
+                int status = Gdip.GdipGetFontCollectionFamilyCount(
+                    new HandleRef(this, _nativeFontCollection),
+                    out numSought
+                );
                 Gdip.CheckStatus(status);
 
                 var gpfamilies = new IntPtr[numSought];
                 int numFound = 0;
-                status = Gdip.GdipGetFontCollectionFamilyList(new HandleRef(this, _nativeFontCollection), numSought, gpfamilies,
-                                                             out numFound);
+                status = Gdip.GdipGetFontCollectionFamilyList(
+                    new HandleRef(this, _nativeFontCollection),
+                    numSought,
+                    gpfamilies,
+                    out numFound
+                );
                 Gdip.CheckStatus(status);
 
-                Debug.Assert(numSought == numFound, "GDI+ can't give a straight answer about how many fonts there are");
+                Debug.Assert(
+                    numSought == numFound,
+                    "GDI+ can't give a straight answer about how many fonts there are"
+                );
                 var families = new FontFamily[numFound];
                 for (int f = 0; f < numFound; f++)
                 {

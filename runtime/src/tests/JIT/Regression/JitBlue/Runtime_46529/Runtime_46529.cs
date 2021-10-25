@@ -20,7 +20,7 @@ public unsafe class Test
         }
         else
         {
-            Console.WriteLine("Failed: {0:x}",result);
+            Console.WriteLine("Failed: {0:x}", result);
             return 101;
         }
     }

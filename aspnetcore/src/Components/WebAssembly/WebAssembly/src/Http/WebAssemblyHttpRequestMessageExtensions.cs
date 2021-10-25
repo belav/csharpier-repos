@@ -12,8 +12,13 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
     /// </summary>
     public static class WebAssemblyHttpRequestMessageExtensions
     {
-        private static readonly HttpRequestOptionsKey<IDictionary<string, object>> FetchRequestOptionsKey = new HttpRequestOptionsKey<IDictionary<string, object>>("WebAssemblyFetchOptions");
-        private static readonly HttpRequestOptionsKey<bool> WebAssemblyEnableStreamingResponseKey = new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingResponse");
+        private static readonly HttpRequestOptionsKey<
+            IDictionary<string, object>
+        > FetchRequestOptionsKey = new HttpRequestOptionsKey<IDictionary<string, object>>(
+            "WebAssemblyFetchOptions"
+        );
+        private static readonly HttpRequestOptionsKey<bool> WebAssemblyEnableStreamingResponseKey =
+            new HttpRequestOptionsKey<bool>("WebAssemblyEnableStreamingResponse");
 
         /// <summary>
         /// Configures a value for the 'credentials' option for the HTTP request.
@@ -24,7 +29,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
         /// <remarks>
         /// See https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials
         /// </remarks>
-        public static HttpRequestMessage SetBrowserRequestCredentials(this HttpRequestMessage requestMessage, BrowserRequestCredentials requestCredentials)
+        public static HttpRequestMessage SetBrowserRequestCredentials(
+            this HttpRequestMessage requestMessage,
+            BrowserRequestCredentials requestCredentials
+        )
         {
             if (requestMessage is null)
             {
@@ -36,7 +44,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
                 BrowserRequestCredentials.Omit => "omit",
                 BrowserRequestCredentials.SameOrigin => "same-origin",
                 BrowserRequestCredentials.Include => "include",
-                _ => throw new InvalidOperationException($"Unsupported enum value {requestCredentials}.")
+                _
+                  => throw new InvalidOperationException(
+                      $"Unsupported enum value {requestCredentials}."
+                  )
             };
 
             return SetBrowserRequestOption(requestMessage, "credentials", stringOption);
@@ -51,7 +62,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
         /// <remarks>
         /// See https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
         /// </remarks>
-        public static HttpRequestMessage SetBrowserRequestCache(this HttpRequestMessage requestMessage, BrowserRequestCache requestCache)
+        public static HttpRequestMessage SetBrowserRequestCache(
+            this HttpRequestMessage requestMessage,
+            BrowserRequestCache requestCache
+        )
         {
             if (requestMessage is null)
             {
@@ -81,7 +95,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
         /// <remarks>
         /// See https://developer.mozilla.org/en-US/docs/Web/API/Request/mode
         /// </remarks>
-        public static HttpRequestMessage SetBrowserRequestMode(this HttpRequestMessage requestMessage, BrowserRequestMode requestMode)
+        public static HttpRequestMessage SetBrowserRequestMode(
+            this HttpRequestMessage requestMessage,
+            BrowserRequestMode requestMode
+        )
         {
             if (requestMessage is null)
             {
@@ -109,8 +126,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
         /// <remarks>
         /// See https://developer.mozilla.org/en-US/docs/Web/API/Request/integrity
         /// </remarks>
-        public static HttpRequestMessage SetBrowserRequestIntegrity(this HttpRequestMessage requestMessage, string integrity)
-            => SetBrowserRequestOption(requestMessage, "integrity", integrity);
+        public static HttpRequestMessage SetBrowserRequestIntegrity(
+            this HttpRequestMessage requestMessage,
+            string integrity
+        ) => SetBrowserRequestOption(requestMessage, "integrity", integrity);
 
         /// <summary>
         /// Configures a value for the HTTP request.
@@ -122,7 +141,11 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
         /// <remarks>
         /// See https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
         /// </remarks>
-        public static HttpRequestMessage SetBrowserRequestOption(this HttpRequestMessage requestMessage, string name, object value)
+        public static HttpRequestMessage SetBrowserRequestOption(
+            this HttpRequestMessage requestMessage,
+            string name,
+            object value
+        )
         {
             if (requestMessage is null)
             {
@@ -155,7 +178,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Http
         /// This API is only effective when the browser HTTP Fetch supports streaming.
         /// See https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream.
         /// </remarks>
-        public static HttpRequestMessage SetBrowserResponseStreamingEnabled(this HttpRequestMessage requestMessage, bool streamingEnabled)
+        public static HttpRequestMessage SetBrowserResponseStreamingEnabled(
+            this HttpRequestMessage requestMessage,
+            bool streamingEnabled
+        )
         {
             if (requestMessage is null)
             {

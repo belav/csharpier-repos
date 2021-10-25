@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
 
         public RegexEmbeddedLanguage(
             AbstractEmbeddedLanguageFeaturesProvider provider,
-            EmbeddedLanguageInfo info)
+            EmbeddedLanguageInfo info
+        )
         {
             Info = info;
             Classifier = new RegexSyntaxClassifier(info);
@@ -41,7 +42,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         }
 
         internal async Task<(RegexTree tree, SyntaxToken token)> TryGetTreeAndTokenAtPositionAsync(
-            Document document, int position, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(position);
@@ -49,21 +53,33 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             if (!RegexPatternDetector.IsPossiblyPatternToken(token, syntaxFacts))
                 return default;
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var detector = RegexPatternDetector.TryGetOrCreate(semanticModel.Compilation, this.Info);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var detector = RegexPatternDetector.TryGetOrCreate(
+                semanticModel.Compilation,
+                this.Info
+            );
             var tree = detector?.TryParseRegexPattern(token, semanticModel, cancellationToken);
             return tree == null ? default : (tree, token);
         }
 
         internal async Task<RegexTree> TryGetTreeAtPositionAsync(
-            Document document, int position, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var (tree, _) = await TryGetTreeAndTokenAtPositionAsync(
-                document, position, cancellationToken).ConfigureAwait(false);
+                    document,
+                    position,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return tree;
         }
 
-        public string EscapeText(string text, SyntaxToken token)
-            => _provider.EscapeText(text, token);
+        public string EscapeText(string text, SyntaxToken token) =>
+            _provider.EscapeText(text, token);
     }
 }

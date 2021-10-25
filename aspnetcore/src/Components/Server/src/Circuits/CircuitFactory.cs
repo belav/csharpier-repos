@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             IServiceScopeFactory scopeFactory,
             ILoggerFactory loggerFactory,
             CircuitIdFactory circuitIdFactory,
-            IOptions<CircuitOptions> options)
+            IOptions<CircuitOptions> options
+        )
         {
             _scopeFactory = scopeFactory;
             _loggerFactory = loggerFactory;
@@ -43,14 +44,17 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             string baseUri,
             string uri,
             ClaimsPrincipal user,
-            IComponentApplicationStateStore store)
+            IComponentApplicationStateStore store
+        )
         {
             var scope = _scopeFactory.CreateScope();
             var jsRuntime = (RemoteJSRuntime)scope.ServiceProvider.GetRequiredService<IJSRuntime>();
             jsRuntime.Initialize(client);
 
-            var navigationManager = (RemoteNavigationManager)scope.ServiceProvider.GetRequiredService<NavigationManager>();
-            var navigationInterception = (RemoteNavigationInterception)scope.ServiceProvider.GetRequiredService<INavigationInterception>();
+            var navigationManager =
+                (RemoteNavigationManager)scope.ServiceProvider.GetRequiredService<NavigationManager>();
+            var navigationInterception =
+                (RemoteNavigationInterception)scope.ServiceProvider.GetRequiredService<INavigationInterception>();
             if (client.Connected)
             {
                 navigationManager.AttachJsRuntime(jsRuntime);
@@ -63,7 +67,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 navigationManager.Initialize(baseUri, uri);
             }
 
-            var appLifetime = scope.ServiceProvider.GetRequiredService<ComponentApplicationLifetime>();
+            var appLifetime =
+                scope.ServiceProvider.GetRequiredService<ComponentApplicationLifetime>();
             await appLifetime.RestoreStateAsync(store);
 
             var renderer = new RemoteRenderer(
@@ -72,9 +77,11 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 _options,
                 client,
                 _loggerFactory.CreateLogger<RemoteRenderer>(),
-                jsRuntime.ElementReferenceContext);
+                jsRuntime.ElementReferenceContext
+            );
 
-            var circuitHandlers = scope.ServiceProvider.GetServices<CircuitHandler>()
+            var circuitHandlers = scope.ServiceProvider
+                .GetServices<CircuitHandler>()
                 .OrderBy(h => h.Order)
                 .ToArray();
 
@@ -87,11 +94,15 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 components,
                 jsRuntime,
                 circuitHandlers,
-                _loggerFactory.CreateLogger<CircuitHost>());
+                _loggerFactory.CreateLogger<CircuitHost>()
+            );
             Log.CreatedCircuit(_logger, circuitHost);
 
             // Initialize per - circuit data that services need
-            (circuitHost.Services.GetRequiredService<ICircuitAccessor>() as DefaultCircuitAccessor).Circuit = circuitHost.Circuit;
+            (
+                circuitHost.Services.GetRequiredService<ICircuitAccessor>()
+                as DefaultCircuitAccessor
+            ).Circuit = circuitHost.Circuit;
             circuitHost.SetCircuitUser(user);
 
             return circuitHost;
@@ -100,10 +111,19 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         private static class Log
         {
             private static readonly Action<ILogger, string, string, Exception> _createdCircuit =
-                LoggerMessage.Define<string, string>(LogLevel.Debug, new EventId(1, "CreatedCircuit"), "Created circuit {CircuitId} for connection {ConnectionId}");
+                LoggerMessage.Define<string, string>(
+                    LogLevel.Debug,
+                    new EventId(1, "CreatedCircuit"),
+                    "Created circuit {CircuitId} for connection {ConnectionId}"
+                );
 
             internal static void CreatedCircuit(ILogger logger, CircuitHost circuitHost) =>
-                _createdCircuit(logger, circuitHost.CircuitId.Id, circuitHost.Client.ConnectionId, null);
+                _createdCircuit(
+                    logger,
+                    circuitHost.CircuitId.Id,
+                    circuitHost.Client.ConnectionId,
+                    null
+                );
         }
     }
 }

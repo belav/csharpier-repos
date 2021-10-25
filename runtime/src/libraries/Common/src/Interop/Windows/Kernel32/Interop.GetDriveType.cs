@@ -7,8 +7,13 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [DllImport(Libraries.Kernel32, EntryPoint = "GetDriveTypeW", CharSet = CharSet.Unicode, SetLastError = true, BestFitMapping = false)]
+        [DllImport(
+            Libraries.Kernel32,
+            EntryPoint = "GetDriveTypeW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            BestFitMapping = false
+        )]
         internal static extern int GetDriveType(string drive);
-
     }
 }

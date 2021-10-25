@@ -59,13 +59,15 @@ namespace BenchmarksGame
             int lineLen = (width - 1) / 8 + 1;
             byte[] bytes = null;
 
-            Benchmark.Iterate(() =>
-            {
-                bytes = new byte[width * lineLen];
-                var memStream = new MemoryStream(bytes);
+            Benchmark.Iterate(
+                () =>
+                {
+                    bytes = new byte[width * lineLen];
+                    var memStream = new MemoryStream(bytes);
 
-                DoBench(width, memStream, false);
-            });
+                    DoBench(width, memStream, false);
+                }
+            );
 
             Assert.True(MatchesChecksum(bytes, checksum));
         }

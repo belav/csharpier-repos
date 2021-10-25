@@ -10,16 +10,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that ignores entity types that have the <see cref="NotMappedAttribute" />.
     /// </summary>
-    public class NotMappedEntityTypeAttributeConvention : EntityTypeAttributeConventionBase<NotMappedAttribute>
+    public class NotMappedEntityTypeAttributeConvention
+        : EntityTypeAttributeConventionBase<NotMappedAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="NotMappedEntityTypeAttributeConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public NotMappedEntityTypeAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public NotMappedEntityTypeAttributeConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Called after an entity type is added to the model if it has an attribute.
@@ -30,9 +30,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected override void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             NotMappedAttribute attribute,
-            IConventionContext<IConventionEntityTypeBuilder> context)
+            IConventionContext<IConventionEntityTypeBuilder> context
+        )
         {
-            if (entityTypeBuilder.ModelBuilder.Ignore(entityTypeBuilder.Metadata.Name, fromDataAnnotation: true) != null)
+            if (
+                entityTypeBuilder.ModelBuilder.Ignore(
+                    entityTypeBuilder.Metadata.Name,
+                    fromDataAnnotation: true
+                ) != null
+            )
             {
                 context.StopProcessing();
             }

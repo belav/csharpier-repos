@@ -20,12 +20,13 @@ namespace System.Web.Mvc
         private ModelMetadata _modelMetadata;
         private TemplateInfo _templateMetadata;
 
-        public ViewDataDictionary()
-            : this((object)null)
-        {
-        }
+        public ViewDataDictionary() : this((object)null) { }
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "See note on SetModel() method.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "See note on SetModel() method."
+        )]
         public ViewDataDictionary(object model)
         {
             Model = model;
@@ -33,7 +34,11 @@ namespace System.Web.Mvc
             _modelState = new ModelStateDictionary();
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "See note on SetModel() method.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "See note on SetModel() method."
+        )]
         public ViewDataDictionary(ViewDataDictionary dictionary)
         {
             if (dictionary == null)
@@ -41,7 +46,10 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("dictionary");
             }
 
-            _innerDictionary = new CopyOnWriteDictionary<string, object>(dictionary, StringComparer.OrdinalIgnoreCase);
+            _innerDictionary = new CopyOnWriteDictionary<string, object>(
+                dictionary,
+                StringComparer.OrdinalIgnoreCase
+            );
             _modelState = new ModelStateDictionary(dictionary.ModelState);
 
             Model = dictionary.Model;
@@ -82,7 +90,10 @@ namespace System.Web.Mvc
             {
                 if (_modelMetadata == null && _model != null)
                 {
-                    _modelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => _model, _model.GetType());
+                    _modelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                        () => _model,
+                        _model.GetType()
+                    );
                 }
                 return _modelMetadata;
             }
@@ -244,7 +255,10 @@ namespace System.Web.Mvc
                 return evaluated;
             }
 
-            private static ViewDataInfo EvalComplexExpression(object indexableObject, string expression)
+            private static ViewDataInfo EvalComplexExpression(
+                object indexableObject,
+                string expression
+            )
             {
                 foreach (ExpressionPair expressionPair in GetRightToLeftExpressions(expression))
                 {
@@ -261,7 +275,10 @@ namespace System.Web.Mvc
 
                         if (subTargetInfo.Value != null)
                         {
-                            ViewDataInfo potential = EvalComplexExpression(subTargetInfo.Value, postExpression);
+                            ViewDataInfo potential = EvalComplexExpression(
+                                subTargetInfo.Value,
+                                postExpression
+                            );
                             if (potential != null)
                             {
                                 return potential;
@@ -307,7 +324,9 @@ namespace System.Web.Mvc
                 }
                 else
                 {
-                    TryGetValueDelegate tgvDel = TypeHelpers.CreateTryGetValueDelegate(indexableObject.GetType());
+                    TryGetValueDelegate tgvDel = TypeHelpers.CreateTryGetValueDelegate(
+                        indexableObject.GetType()
+                    );
                     if (tgvDel != null)
                     {
                         success = tgvDel(indexableObject, key, out value);
@@ -316,11 +335,7 @@ namespace System.Web.Mvc
 
                 if (success)
                 {
-                    return new ViewDataInfo()
-                    {
-                        Container = indexableObject,
-                        Value = value
-                    };
+                    return new ViewDataInfo() { Container = indexableObject, Value = value };
                 }
 
                 return null;
@@ -354,7 +369,9 @@ namespace System.Web.Mvc
                 }
 
                 // Second, we try to use PropertyDescriptors and treat the expression as a property name
-                PropertyDescriptor descriptor = TypeDescriptor.GetProperties(container).Find(propertyName, true);
+                PropertyDescriptor descriptor = TypeDescriptor
+                    .GetProperties(container)
+                    .Find(propertyName, true);
                 if (descriptor == null)
                 {
                     return null;
@@ -386,7 +403,6 @@ namespace System.Web.Mvc
         {
             return _innerDictionary.GetEnumerator();
         }
-
         #endregion
     }
 }

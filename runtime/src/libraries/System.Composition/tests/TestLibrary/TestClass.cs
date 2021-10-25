@@ -27,23 +27,17 @@ namespace TestLibrary
         }
     }
 
-
     [Export]
     [Export(typeof(IDependency))]
     public class TestDependency : IDependency
     {
-        public TestDependency()
-        {
-        }
+        public TestDependency() { }
     }
 
     public class NotRealDependency : IDependency
     {
-        public NotRealDependency()
-        {
-        }
+        public NotRealDependency() { }
     }
-
 
     public interface IDependency
     {

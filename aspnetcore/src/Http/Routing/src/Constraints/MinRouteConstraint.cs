@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             IRouter? route,
             string routeKey,
             RouteValueDictionary values,
-            RouteDirection routeDirection)
+            RouteDirection routeDirection
+        )
         {
             if (routeKey == null)
             {
@@ -47,7 +48,14 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             if (values.TryGetValue(routeKey, out var value) && value != null)
             {
                 var valueString = Convert.ToString(value, CultureInfo.InvariantCulture);
-                if (long.TryParse(valueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var longValue))
+                if (
+                    long.TryParse(
+                        valueString,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out var longValue
+                    )
+                )
                 {
                     return longValue >= Min;
                 }

@@ -84,21 +84,28 @@ namespace Microsoft.EntityFrameworkCore
             return Create_checks_for_existence_and_retries_until_it_passes(5120, async: true);
         }
 
-        private async Task Create_checks_for_existence_and_retries_until_it_passes(int errorNumber, bool async)
+        private async Task Create_checks_for_existence_and_retries_until_it_passes(
+            int errorNumber,
+            bool async
+        )
         {
             var customServices = new ServiceCollection()
                 .AddScoped<ISqlServerConnection, FakeSqlServerConnection>()
                 .AddScoped<IRelationalCommandBuilderFactory, FakeRelationalCommandBuilderFactory>()
                 .AddScoped<IExecutionStrategyFactory, ExecutionStrategyFactory>();
 
-            var contextServices = SqlServerTestHelpers.Instance.CreateContextServices(customServices);
+            var contextServices = SqlServerTestHelpers.Instance.CreateContextServices(
+                customServices
+            );
 
-            var connection = (FakeSqlServerConnection)contextServices.GetRequiredService<ISqlServerConnection>();
+            var connection =
+                (FakeSqlServerConnection)contextServices.GetRequiredService<ISqlServerConnection>();
 
             connection.ErrorNumber = errorNumber;
             connection.FailureCount = 2;
 
-            var creator = (SqlServerDatabaseCreator)contextServices.GetRequiredService<IRelationalDatabaseCreator>();
+            var creator =
+                (SqlServerDatabaseCreator)contextServices.GetRequiredService<IRelationalDatabaseCreator>();
 
             creator.RetryDelay = TimeSpan.FromMilliseconds(1);
             creator.RetryTimeout = TimeSpan.FromMinutes(5);
@@ -127,22 +134,28 @@ namespace Microsoft.EntityFrameworkCore
             return Create_checks_for_existence_and_ultimately_gives_up_waiting_test(async: true);
         }
 
-        private async Task Create_checks_for_existence_and_ultimately_gives_up_waiting_test(bool async)
+        private async Task Create_checks_for_existence_and_ultimately_gives_up_waiting_test(
+            bool async
+        )
         {
             var customServices = new ServiceCollection()
                 .AddScoped<ISqlServerConnection, FakeSqlServerConnection>()
                 .AddScoped<IRelationalCommandBuilderFactory, FakeRelationalCommandBuilderFactory>()
                 .AddScoped<IExecutionStrategyFactory, ExecutionStrategyFactory>();
 
-            var contextServices = SqlServerTestHelpers.Instance.CreateContextServices(customServices);
+            var contextServices = SqlServerTestHelpers.Instance.CreateContextServices(
+                customServices
+            );
 
-            var connection = (FakeSqlServerConnection)contextServices.GetRequiredService<ISqlServerConnection>();
+            var connection =
+                (FakeSqlServerConnection)contextServices.GetRequiredService<ISqlServerConnection>();
 
             connection.ErrorNumber = 233;
             connection.FailureCount = 100;
             connection.FailDelay = 50;
 
-            var creator = (SqlServerDatabaseCreator)contextServices.GetRequiredService<IRelationalDatabaseCreator>();
+            var creator =
+                (SqlServerDatabaseCreator)contextServices.GetRequiredService<IRelationalDatabaseCreator>();
 
             creator.RetryDelay = TimeSpan.FromMilliseconds(5);
             creator.RetryTimeout = TimeSpan.FromMilliseconds(100);
@@ -161,8 +174,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             private readonly IDbContextOptions _options;
 
-            public FakeSqlServerConnection(IDbContextOptions options, RelationalConnectionDependencies dependencies)
-                : base(dependencies)
+            public FakeSqlServerConnection(
+                IDbContextOptions options,
+                RelationalConnectionDependencies dependencies
+            ) : base(dependencies)
             {
                 _options = options;
             }
@@ -183,7 +198,10 @@ namespace Microsoft.EntityFrameworkCore
                 return true;
             }
 
-            public override async Task<bool> OpenAsync(CancellationToken cancellationToken, bool errorsExpected = false)
+            public override async Task<bool> OpenAsync(
+                CancellationToken cancellationToken,
+                bool errorsExpected = false
+            )
             {
                 if (++OpenCount < FailureCount)
                 {
@@ -194,14 +212,13 @@ namespace Microsoft.EntityFrameworkCore
                 return await Task.FromResult(true);
             }
 
-            public override ISqlServerConnection CreateMasterConnection()
-                => new FakeSqlServerConnection(_options, Dependencies);
+            public override ISqlServerConnection CreateMasterConnection() =>
+                new FakeSqlServerConnection(_options, Dependencies);
         }
 
         private class FakeRelationalCommandBuilderFactory : IRelationalCommandBuilderFactory
         {
-            public IRelationalCommandBuilder Create()
-                => new FakeRelationalCommandBuilder();
+            public IRelationalCommandBuilder Create() => new FakeRelationalCommandBuilder();
         }
 
         private class FakeRelationalCommandBuilder : IRelationalCommandBuilder
@@ -209,8 +226,7 @@ namespace Microsoft.EntityFrameworkCore
             private readonly List<IRelationalParameter> _parameters = new();
             public IndentedStringBuilder Instance { get; } = new();
 
-            public IReadOnlyList<IRelationalParameter> Parameters
-                => _parameters;
+            public IReadOnlyList<IRelationalParameter> Parameters => _parameters;
 
             public IRelationalCommandBuilder AddParameter(IRelationalParameter parameter)
             {
@@ -219,11 +235,9 @@ namespace Microsoft.EntityFrameworkCore
                 return this;
             }
 
-            public IRelationalTypeMappingSource TypeMappingSource
-                => null;
+            public IRelationalTypeMappingSource TypeMappingSource => null;
 
-            public IRelationalCommand Build()
-                => new FakeRelationalCommand();
+            public IRelationalCommand Build() => new FakeRelationalCommand();
 
             public IRelationalCommandBuilder Append(string value)
             {
@@ -253,8 +267,7 @@ namespace Microsoft.EntityFrameworkCore
                 return this;
             }
 
-            public int CommandTextLength
-                => Instance.Length;
+            public int CommandTextLength => Instance.Length;
         }
 
         private class FakeRelationalCommand : IRelationalCommand
@@ -263,38 +276,41 @@ namespace Microsoft.EntityFrameworkCore
 
             public IReadOnlyList<IRelationalParameter> Parameters { get; }
 
-            public IReadOnlyDictionary<string, object> ParameterValues
-                => throw new NotImplementedException();
+            public IReadOnlyDictionary<string, object> ParameterValues =>
+                throw new NotImplementedException();
 
-            public int ExecuteNonQuery(RelationalCommandParameterObject parameterObject)
-                => 0;
+            public int ExecuteNonQuery(RelationalCommandParameterObject parameterObject) => 0;
 
             public Task<int> ExecuteNonQueryAsync(
                 RelationalCommandParameterObject parameterObject,
-                CancellationToken cancellationToken = default)
-                => Task.FromResult(0);
+                CancellationToken cancellationToken = default
+            ) => Task.FromResult(0);
 
-            public RelationalDataReader ExecuteReader(RelationalCommandParameterObject parameterObject)
-                => throw new NotImplementedException();
+            public RelationalDataReader ExecuteReader(
+                RelationalCommandParameterObject parameterObject
+            ) => throw new NotImplementedException();
 
             public Task<RelationalDataReader> ExecuteReaderAsync(
                 RelationalCommandParameterObject parameterObject,
-                CancellationToken cancellationToken = default)
-                => throw new NotImplementedException();
+                CancellationToken cancellationToken = default
+            ) => throw new NotImplementedException();
 
-            public DbCommand CreateDbCommand(RelationalCommandParameterObject parameterObject, Guid commandId, DbCommandMethod commandMethod)
-                => throw new NotImplementedException();
+            public DbCommand CreateDbCommand(
+                RelationalCommandParameterObject parameterObject,
+                Guid commandId,
+                DbCommandMethod commandMethod
+            ) => throw new NotImplementedException();
 
-            public object ExecuteScalar(RelationalCommandParameterObject parameterObject)
-                => throw new NotImplementedException();
+            public object ExecuteScalar(RelationalCommandParameterObject parameterObject) =>
+                throw new NotImplementedException();
 
             public Task<object> ExecuteScalarAsync(
                 RelationalCommandParameterObject parameterObject,
-                CancellationToken cancellationToken = default)
-                => throw new NotImplementedException();
+                CancellationToken cancellationToken = default
+            ) => throw new NotImplementedException();
 
-            public void PopulateFromTemplate(IRelationalCommand templateCommand)
-                => throw new NotImplementedException();
+            public void PopulateFromTemplate(IRelationalCommand templateCommand) =>
+                throw new NotImplementedException();
         }
     }
 }

@@ -183,7 +183,10 @@ namespace System.Collections.Immutable.Tests
         public void SymmetricExceptWith()
         {
             var builder = ImmutableHashSet.Create(1, 2, 3).ToBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("other", () => builder.SymmetricExceptWith(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "other",
+                () => builder.SymmetricExceptWith(null)
+            );
             builder.SymmetricExceptWith(new[] { 2, 3, 4 });
             Assert.Equal(new[] { 1, 4 }, builder);
         }
@@ -192,7 +195,10 @@ namespace System.Collections.Immutable.Tests
         public void IntersectWith()
         {
             var builder = ImmutableHashSet.Create(1, 2, 3).ToBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("other", () => builder.IntersectWith(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "other",
+                () => builder.IntersectWith(null)
+            );
             builder.IntersectWith(new[] { 2, 3, 4 });
             Assert.Equal(new[] { 2, 3 }, builder);
         }
@@ -201,7 +207,10 @@ namespace System.Collections.Immutable.Tests
         public void IsProperSubsetOf()
         {
             var builder = ImmutableHashSet.CreateRange(Enumerable.Range(1, 3)).ToBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("other", () => builder.IsProperSubsetOf(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "other",
+                () => builder.IsProperSubsetOf(null)
+            );
             Assert.False(builder.IsProperSubsetOf(Enumerable.Range(1, 3)));
             Assert.True(builder.IsProperSubsetOf(Enumerable.Range(1, 5)));
         }
@@ -210,7 +219,10 @@ namespace System.Collections.Immutable.Tests
         public void IsProperSupersetOf()
         {
             var builder = ImmutableHashSet.CreateRange(Enumerable.Range(1, 3)).ToBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("other", () => builder.IsProperSupersetOf(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "other",
+                () => builder.IsProperSupersetOf(null)
+            );
             Assert.False(builder.IsProperSupersetOf(Enumerable.Range(1, 3)));
             Assert.True(builder.IsProperSupersetOf(Enumerable.Range(1, 2)));
         }
@@ -229,7 +241,10 @@ namespace System.Collections.Immutable.Tests
         public void IsSupersetOf()
         {
             var builder = ImmutableHashSet.CreateRange(Enumerable.Range(1, 3)).ToBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("other", () => builder.IsSupersetOf(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "other",
+                () => builder.IsSupersetOf(null)
+            );
             Assert.False(builder.IsSupersetOf(Enumerable.Range(1, 4)));
             Assert.True(builder.IsSupersetOf(Enumerable.Range(1, 3)));
             Assert.True(builder.IsSupersetOf(Enumerable.Range(1, 2)));
@@ -304,7 +319,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void DebuggerAttributesValid()
         {
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableHashSet.CreateBuilder<int>());
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                ImmutableHashSet.CreateBuilder<int>()
+            );
         }
 
         [Fact]
@@ -329,7 +346,10 @@ namespace System.Collections.Immutable.Tests
             Assert.False(set.IsEmpty);
 
             ImmutableHashSet<int>.Builder nullBuilder = null;
-            AssertExtensions.Throws<ArgumentNullException>("builder", () => nullBuilder.ToImmutableHashSet());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "builder",
+                () => nullBuilder.ToImmutableHashSet()
+            );
         }
 
         [Fact]
@@ -338,7 +358,9 @@ namespace System.Collections.Immutable.Tests
             var builder = ImmutableHashSet.Create(1, 2, 3).ToBuilder();
             Assert.True(builder.TryGetValue(2, out _));
 
-            builder = ImmutableHashSet.Create(CustomEqualityComparer.Instance, 1, 2, 3, 4).ToBuilder();
+            builder = ImmutableHashSet
+                .Create(CustomEqualityComparer.Instance, 1, 2, 3, 4)
+                .ToBuilder();
             var existing = 0;
             Assert.True(builder.TryGetValue(5, out existing));
             Assert.Equal(4, existing);
@@ -346,9 +368,7 @@ namespace System.Collections.Immutable.Tests
 
         private class CustomEqualityComparer : IEqualityComparer<int>
         {
-            private CustomEqualityComparer()
-            {
-            }
+            private CustomEqualityComparer() { }
 
             public static CustomEqualityComparer Instance { get; } = new CustomEqualityComparer();
 

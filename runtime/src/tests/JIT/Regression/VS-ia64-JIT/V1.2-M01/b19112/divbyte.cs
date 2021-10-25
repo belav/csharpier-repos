@@ -4,14 +4,14 @@
 
 class foo
 {
-
 #pragma warning disable 0414
-    public static sbyte a, b, c;
+    public static sbyte a,
+        b,
+        c;
 #pragma warning restore 0414
 
     public static int Main()
     {
-
         a = 19;
         b = 3;
 
@@ -22,10 +22,8 @@ class foo
 
     public static void div()
     {
-
         sbyte b = 3;
 
         c = (sbyte)(a / b);
     }
-
 }

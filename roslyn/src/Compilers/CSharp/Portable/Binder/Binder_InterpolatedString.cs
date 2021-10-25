@@ -12,7 +12,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal partial class Binder
     {
-        private BoundExpression BindInterpolatedString(InterpolatedStringExpressionSyntax node, BindingDiagnosticBag diagnostics)
+        private BoundExpression BindInterpolatedString(
+            InterpolatedStringExpressionSyntax node,
+            BindingDiagnosticBag diagnostics
+        )
         {
             var builder = ArrayBuilder<BoundExpression>.GetInstance();
             var stringType = GetSpecialType(SpecialType.System_String, diagnostics, node);
@@ -32,94 +35,156 @@ namespace Microsoft.CodeAnalysis.CSharp
                     switch (content.Kind())
                     {
                         case SyntaxKind.Interpolation:
+                        {
+                            var interpolation = (InterpolationSyntax)content;
+                            var value = BindValue(
+                                interpolation.Expression,
+                                diagnostics,
+                                BindValueKind.RValue
+                            );
+                            if (value.Type is null)
                             {
-                                var interpolation = (InterpolationSyntax)content;
-                                var value = BindValue(interpolation.Expression, diagnostics, BindValueKind.RValue);
-                                if (value.Type is null)
+                                value = GenerateConversionForAssignment(
+                                    objectType,
+                                    value,
+                                    diagnostics
+                                );
+                            }
+                            else
+                            {
+                                value = BindToNaturalType(value, diagnostics);
+                                _ = GenerateConversionForAssignment(objectType, value, diagnostics);
+                            }
+
+                            // We need to ensure the argument is not a lambda, method group, etc. It isn't nice to wait until lowering,
+                            // when we perform overload resolution, to report a problem. So we do that check by calling
+                            // GenerateConversionForAssignment with objectType. However we want to preserve the original expression's
+                            // natural type so that overload resolution may select a specialized implementation of string.Format,
+                            // so we discard the result of that call and only preserve its diagnostics.
+                            BoundExpression? alignment = null;
+                            BoundLiteral? format = null;
+                            if (interpolation.AlignmentClause != null)
+                            {
+                                alignment = GenerateConversionForAssignment(
+                                    intType,
+                                    BindValue(
+                                        interpolation.AlignmentClause.Value,
+                                        diagnostics,
+                                        Binder.BindValueKind.RValue
+                                    ),
+                                    diagnostics
+                                );
+                                var alignmentConstant = alignment.ConstantValue;
+                                if (alignmentConstant != null && !alignmentConstant.IsBad)
                                 {
-                                    value = GenerateConversionForAssignment(objectType, value, diagnostics);
+                                    const int magnitudeLimit = 32767;
+                                    // check that the magnitude of the alignment is "in range".
+                                    int alignmentValue = alignmentConstant.Int32Value;
+                                    //  We do the arithmetic using negative numbers because the largest negative int has no corresponding positive (absolute) value.
+                                    alignmentValue =
+                                        (alignmentValue > 0) ? -alignmentValue : alignmentValue;
+                                    if (alignmentValue < -magnitudeLimit)
+                                    {
+                                        diagnostics.Add(
+                                            ErrorCode.WRN_AlignmentMagnitude,
+                                            alignment.Syntax.Location,
+                                            alignmentConstant.Int32Value,
+                                            magnitudeLimit
+                                        );
+                                    }
                                 }
-                                else
+                                else if (!alignment.HasErrors)
                                 {
-                                    value = BindToNaturalType(value, diagnostics);
-                                    _ = GenerateConversionForAssignment(objectType, value, diagnostics);
+                                    diagnostics.Add(
+                                        ErrorCode.ERR_ConstantExpected,
+                                        interpolation.AlignmentClause.Value.Location
+                                    );
+                                }
+                            }
+
+                            if (interpolation.FormatClause != null)
+                            {
+                                var text = interpolation.FormatClause.FormatStringToken.ValueText;
+                                char lastChar;
+                                bool hasErrors = false;
+                                if (text.Length == 0)
+                                {
+                                    diagnostics.Add(
+                                        ErrorCode.ERR_EmptyFormatSpecifier,
+                                        interpolation.FormatClause.Location
+                                    );
+                                    hasErrors = true;
+                                }
+                                else if (
+                                    SyntaxFacts.IsWhitespace(lastChar = text[text.Length - 1])
+                                    || SyntaxFacts.IsNewLine(lastChar)
+                                )
+                                {
+                                    diagnostics.Add(
+                                        ErrorCode.ERR_TrailingWhitespaceInFormatSpecifier,
+                                        interpolation.FormatClause.Location
+                                    );
+                                    hasErrors = true;
                                 }
 
-                                // We need to ensure the argument is not a lambda, method group, etc. It isn't nice to wait until lowering,
-                                // when we perform overload resolution, to report a problem. So we do that check by calling
-                                // GenerateConversionForAssignment with objectType. However we want to preserve the original expression's
-                                // natural type so that overload resolution may select a specialized implementation of string.Format,
-                                // so we discard the result of that call and only preserve its diagnostics.
-                                BoundExpression? alignment = null;
-                                BoundLiteral? format = null;
-                                if (interpolation.AlignmentClause != null)
-                                {
-                                    alignment = GenerateConversionForAssignment(intType, BindValue(interpolation.AlignmentClause.Value, diagnostics, Binder.BindValueKind.RValue), diagnostics);
-                                    var alignmentConstant = alignment.ConstantValue;
-                                    if (alignmentConstant != null && !alignmentConstant.IsBad)
-                                    {
-                                        const int magnitudeLimit = 32767;
-                                        // check that the magnitude of the alignment is "in range".
-                                        int alignmentValue = alignmentConstant.Int32Value;
-                                        //  We do the arithmetic using negative numbers because the largest negative int has no corresponding positive (absolute) value.
-                                        alignmentValue = (alignmentValue > 0) ? -alignmentValue : alignmentValue;
-                                        if (alignmentValue < -magnitudeLimit)
-                                        {
-                                            diagnostics.Add(ErrorCode.WRN_AlignmentMagnitude, alignment.Syntax.Location, alignmentConstant.Int32Value, magnitudeLimit);
-                                        }
-                                    }
-                                    else if (!alignment.HasErrors)
-                                    {
-                                        diagnostics.Add(ErrorCode.ERR_ConstantExpected, interpolation.AlignmentClause.Value.Location);
-                                    }
-                                }
+                                format = new BoundLiteral(
+                                    interpolation.FormatClause,
+                                    ConstantValue.Create(text),
+                                    stringType,
+                                    hasErrors
+                                );
+                            }
 
-                                if (interpolation.FormatClause != null)
-                                {
-                                    var text = interpolation.FormatClause.FormatStringToken.ValueText;
-                                    char lastChar;
-                                    bool hasErrors = false;
-                                    if (text.Length == 0)
-                                    {
-                                        diagnostics.Add(ErrorCode.ERR_EmptyFormatSpecifier, interpolation.FormatClause.Location);
-                                        hasErrors = true;
-                                    }
-                                    else if (SyntaxFacts.IsWhitespace(lastChar = text[text.Length - 1]) || SyntaxFacts.IsNewLine(lastChar))
-                                    {
-                                        diagnostics.Add(ErrorCode.ERR_TrailingWhitespaceInFormatSpecifier, interpolation.FormatClause.Location);
-                                        hasErrors = true;
-                                    }
-
-                                    format = new BoundLiteral(interpolation.FormatClause, ConstantValue.Create(text), stringType, hasErrors);
-                                }
-
-                                builder.Add(new BoundStringInsert(interpolation, value, alignment, format, null));
-                                if (!isResultConstant ||
-                                    value.ConstantValue == null ||
-                                    !(interpolation is { FormatClause: null, AlignmentClause: null }) ||
-                                    !(value.ConstantValue is { IsString: true, IsBad: false }))
-                                {
-                                    isResultConstant = false;
-                                    continue;
-                                }
-                                resultConstant = (resultConstant is null)
+                            builder.Add(
+                                new BoundStringInsert(interpolation, value, alignment, format, null)
+                            );
+                            if (
+                                !isResultConstant
+                                || value.ConstantValue == null
+                                || !(interpolation is { FormatClause: null, AlignmentClause: null })
+                                || !(value.ConstantValue is { IsString: true, IsBad: false })
+                            )
+                            {
+                                isResultConstant = false;
+                                continue;
+                            }
+                            resultConstant =
+                                (resultConstant is null)
                                     ? value.ConstantValue
-                                    : FoldStringConcatenation(BinaryOperatorKind.StringConcatenation, resultConstant, value.ConstantValue);
-                                continue;
-                            }
+                                    : FoldStringConcatenation(
+                                          BinaryOperatorKind.StringConcatenation,
+                                          resultConstant,
+                                          value.ConstantValue
+                                      );
+                            continue;
+                        }
                         case SyntaxKind.InterpolatedStringText:
+                        {
+                            var text = ((InterpolatedStringTextSyntax)content).TextToken.ValueText;
+                            builder.Add(
+                                new BoundLiteral(
+                                    content,
+                                    ConstantValue.Create(text, SpecialType.System_String),
+                                    stringType
+                                )
+                            );
+                            if (isResultConstant)
                             {
-                                var text = ((InterpolatedStringTextSyntax)content).TextToken.ValueText;
-                                builder.Add(new BoundLiteral(content, ConstantValue.Create(text, SpecialType.System_String), stringType));
-                                if (isResultConstant)
-                                {
-                                    var constantVal = ConstantValue.Create(ConstantValueUtils.UnescapeInterpolatedStringLiteral(text), SpecialType.System_String);
-                                    resultConstant = (resultConstant is null)
+                                var constantVal = ConstantValue.Create(
+                                    ConstantValueUtils.UnescapeInterpolatedStringLiteral(text),
+                                    SpecialType.System_String
+                                );
+                                resultConstant =
+                                    (resultConstant is null)
                                         ? constantVal
-                                        : FoldStringConcatenation(BinaryOperatorKind.StringConcatenation, resultConstant, constantVal);
-                                }
-                                continue;
+                                        : FoldStringConcatenation(
+                                              BinaryOperatorKind.StringConcatenation,
+                                              resultConstant,
+                                              constantVal
+                                          );
                             }
+                            continue;
+                        }
                         default:
                             throw ExceptionUtilities.UnexpectedValue(content.Kind());
                     }
@@ -132,7 +197,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             Debug.Assert(isResultConstant == (resultConstant != null));
-            return new BoundUnconvertedInterpolatedString(node, builder.ToImmutableAndFree(), resultConstant, stringType);
+            return new BoundUnconvertedInterpolatedString(
+                node,
+                builder.ToImmutableAndFree(),
+                resultConstant,
+                stringType
+            );
         }
     }
 }

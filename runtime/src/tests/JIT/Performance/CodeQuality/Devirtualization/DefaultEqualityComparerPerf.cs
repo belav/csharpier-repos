@@ -100,7 +100,6 @@ namespace Devirtualization
 
     public class EqualityComparer
     {
-
 #if DEBUG
         public const int Iterations = 1;
 #else
@@ -127,7 +126,10 @@ namespace Devirtualization
             {
                 using (iteration.StartMeasurement())
                 {
-                    result &= valueTupleFixture.BenchCompareNoOpt(ref v0, Benchmark.InnerIterationCount);
+                    result &= valueTupleFixture.BenchCompareNoOpt(
+                        ref v0,
+                        Benchmark.InnerIterationCount
+                    );
                 }
             }
 
@@ -163,7 +165,10 @@ namespace Devirtualization
             {
                 using (iteration.StartMeasurement())
                 {
-                    result &= valueTupleFixture.BenchCompareCached(ref v0, Benchmark.InnerIterationCount);
+                    result &= valueTupleFixture.BenchCompareCached(
+                        ref v0,
+                        Benchmark.InnerIterationCount
+                    );
                 }
             }
 
@@ -181,7 +186,10 @@ namespace Devirtualization
             {
                 using (iteration.StartMeasurement())
                 {
-                    result &= valueTupleFixture.BenchCompareWrapped(ref v0, Benchmark.InnerIterationCount);
+                    result &= valueTupleFixture.BenchCompareWrapped(
+                        ref v0,
+                        Benchmark.InnerIterationCount
+                    );
                 }
             }
 

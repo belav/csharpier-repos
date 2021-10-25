@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Razor.Microbenchmarks
         public RazorTagHelperParsingBenchmark()
         {
             var current = new DirectoryInfo(AppContext.BaseDirectory);
-            while  (current != null && !File.Exists(Path.Combine(current.FullName, "taghelpers.json")))
+            while (
+                current != null && !File.Exists(Path.Combine(current.FullName, "taghelpers.json"))
+            )
             {
                 current = current.Parent;
             }
@@ -26,13 +28,27 @@ namespace Microsoft.AspNetCore.Razor.Microbenchmarks
             var root = current;
 
             var tagHelpers = ReadTagHelpers(Path.Combine(root.FullName, "taghelpers.json"));
-            var blazorServerTagHelpersFilePath = Path.Combine(root.FullName, "BlazorServerTagHelpers.razor");
+            var blazorServerTagHelpersFilePath = Path.Combine(
+                root.FullName,
+                "BlazorServerTagHelpers.razor"
+            );
 
             var fileSystem = RazorProjectFileSystem.Create(root.FullName);
-            ProjectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, fileSystem, b => RazorExtensions.Register(b));
-            BlazorServerTagHelpersDemoFile = fileSystem.GetItem(Path.Combine(blazorServerTagHelpersFilePath), FileKinds.Legacy);
+            ProjectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                fileSystem,
+                b => RazorExtensions.Register(b)
+            );
+            BlazorServerTagHelpersDemoFile = fileSystem.GetItem(
+                Path.Combine(blazorServerTagHelpersFilePath),
+                FileKinds.Legacy
+            );
 
-            ComponentDirectiveVisitor = new ComponentDirectiveVisitor(blazorServerTagHelpersFilePath, tagHelpers, currentNamespace: null);
+            ComponentDirectiveVisitor = new ComponentDirectiveVisitor(
+                blazorServerTagHelpersFilePath,
+                tagHelpers,
+                currentNamespace: null
+            );
             var codeDocument = ProjectEngine.ProcessDesignTime(BlazorServerTagHelpersDemoFile);
             SyntaxTree = codeDocument.GetSyntaxTree();
         }

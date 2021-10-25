@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         public async Task MergedOnMiddleIfMergableWithNextOnly()
         {
             const string Initial =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
     }
 }";
             const string Expected =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         public async Task MergedOnMiddleIfMergableWithPreviousOnly()
         {
             const string Initial =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -60,7 +60,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
     }
 }";
             const string Expected =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -79,7 +79,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         public async Task MergedOnMiddleIfMergableWithBoth()
         {
             const string Initial =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -92,7 +92,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
     }
 }";
             const string Expected1 =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -103,7 +103,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
     }
 }";
             const string Expected2 =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {

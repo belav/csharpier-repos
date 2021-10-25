@@ -14,16 +14,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public partial class IOperationTests : SemanticModelTestBase
     {
-        private const string RangeCtorSignature = "System.Range..ctor(System.Index start, System.Index end)";
-        private const string RangeStartAtSignature = "System.Range System.Range.StartAt(System.Index start)";
-        private const string RangeEndAtSignature = "System.Range System.Range.EndAt(System.Index end)";
+        private const string RangeCtorSignature =
+            "System.Range..ctor(System.Index start, System.Index end)";
+        private const string RangeStartAtSignature =
+            "System.Range System.Range.StartAt(System.Index start)";
+        private const string RangeEndAtSignature =
+            "System.Range System.Range.EndAt(System.Index end)";
         private const string RangeAllSignature = "System.Range System.Range.All.get";
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void VerifyLiftedBinaryOperators1()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? x, int? y)
@@ -33,7 +37,7 @@ class C
 }";
 
             string expectedOperationTree =
-@"
+                @"
 IBinaryOperation (BinaryOperatorKind.Add, IsLifted) (OperationKind.Binary, Type: System.Int32?) (Syntax: 'x + y')
   Left: 
     IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'x')
@@ -48,7 +52,8 @@ IBinaryOperation (BinaryOperatorKind.Add, IsLifted) (OperationKind.Binary, Type:
         [Fact]
         public void VerifyLiftedBinaryOperators2()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? x, int? y)
@@ -58,7 +63,7 @@ class C
 }";
 
             string expectedOperationTree =
-@"
+                @"
 IBinaryOperation (BinaryOperatorKind.Equals, IsLifted) (OperationKind.Binary, Type: System.Boolean) (Syntax: 'x == y')
   Left: 
     IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'x')
@@ -73,7 +78,8 @@ IBinaryOperation (BinaryOperatorKind.Equals, IsLifted) (OperationKind.Binary, Ty
         [Fact]
         public void VerifyLiftedBinaryOperators3()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? x, int? y)
@@ -84,7 +90,7 @@ class C
 }";
 
             string expectedOperationTree =
-@"
+                @"
 IBinaryOperation (BinaryOperatorKind.Equals, IsLifted) (OperationKind.Binary, Type: System.Boolean) (Syntax: 'x == y')
   Left: 
     IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'x')
@@ -99,7 +105,8 @@ IBinaryOperation (BinaryOperatorKind.Equals, IsLifted) (OperationKind.Binary, Ty
         [Fact]
         public void VerifyLiftedBinaryOperators4()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? x, int? y)
@@ -110,7 +117,7 @@ class C
 }";
 
             string expectedOperationTree =
-@"
+                @"
 IBinaryOperation (BinaryOperatorKind.Equals, IsLifted) (OperationKind.Binary, Type: System.Boolean) (Syntax: 'x == 1')
   Left: 
     IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'x')
@@ -128,7 +135,8 @@ IBinaryOperation (BinaryOperatorKind.Equals, IsLifted) (OperationKind.Binary, Ty
         [Fact]
         public void VerifyNonLiftedBinaryOperators2()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? x, int? y)
@@ -139,7 +147,7 @@ class C
 }";
 
             string expectedOperationTree =
-@"
+                @"
 IBinaryOperation (BinaryOperatorKind.Equals) (OperationKind.Binary, Type: System.Boolean) (Syntax: 'x == null')
   Left: 
     IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'x')
@@ -154,7 +162,8 @@ IBinaryOperation (BinaryOperatorKind.Equals) (OperationKind.Binary, Type: System
         [Fact]
         public void VerifyNonLiftedBinaryOperators1()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int x, int y)
@@ -164,7 +173,7 @@ class C
 }";
 
             string expectedOperationTree =
-@"
+                @"
 IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: System.Int32) (Syntax: 'x + y')
   Left: 
     IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'x')
@@ -179,7 +188,8 @@ IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: System.In
         [Fact]
         public void VerifyLiftedCheckedBinaryOperators1()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void F(int? x, int? y)
@@ -191,7 +201,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBinaryOperation (BinaryOperatorKind.Add, IsLifted, Checked) (OperationKind.Binary, Type: System.Int32?) (Syntax: 'x + y')
   Left: 
     IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'x')
@@ -200,14 +211,19 @@ IBinaryOperation (BinaryOperatorKind.Add, IsLifted, Checked) (OperationKind.Bina
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void VerifyNonLiftedCheckedBinaryOperators1()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void F(int x, int y)
@@ -219,7 +235,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBinaryOperation (BinaryOperatorKind.Add, Checked) (OperationKind.Binary, Type: System.Int32) (Syntax: 'x + y')
   Left: 
     IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'x')
@@ -228,14 +245,19 @@ IBinaryOperation (BinaryOperatorKind.Add, Checked) (OperationKind.Binary, Type: 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void VerifyLiftedUserDefinedBinaryOperators1()
         {
-            var source = @"
+            var source =
+                @"
 struct C
 {
     public static C operator +(C c1, C c2) { }
@@ -246,7 +268,7 @@ struct C
 }";
 
             string expectedOperationTree =
-@"
+                @"
 IBinaryOperation (BinaryOperatorKind.Add, IsLifted) (OperatorMethod: C C.op_Addition(C c1, C c2)) (OperationKind.Binary, Type: C?) (Syntax: 'x + y')
   Left: 
     IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: C?) (Syntax: 'x')
@@ -261,7 +283,8 @@ IBinaryOperation (BinaryOperatorKind.Add, IsLifted) (OperatorMethod: C C.op_Addi
         [Fact]
         public void VerifyNonLiftedUserDefinedBinaryOperators1()
         {
-            var source = @"
+            var source =
+                @"
 struct C
 {
     public static C operator +(C c1, C c2) { }
@@ -272,7 +295,7 @@ struct C
 }";
 
             string expectedOperationTree =
-@"
+                @"
 IBinaryOperation (BinaryOperatorKind.Add) (OperatorMethod: C C.op_Addition(C c1, C c2)) (OperationKind.Binary, Type: C) (Syntax: 'x + y')
   Left: 
     IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: C) (Syntax: 'x')
@@ -287,7 +310,8 @@ IBinaryOperation (BinaryOperatorKind.Add) (OperatorMethod: C C.op_Addition(C c1,
         [Fact]
         public void TestBinaryOperators()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -299,7 +323,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void System.Console.WriteLine(System.Int32 value)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'Console.Wri ... ) ? 1 : 0))')
   Instance Receiver: 
     null
@@ -411,14 +436,19 @@ IInvocationOperation (void System.Console.WriteLine(System.Int32 value)) (Operat
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestBinaryOperators_Checked()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -433,7 +463,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void System.Console.WriteLine(System.Int32 value)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'Console.Wri ... ) ? 1 : 0))')
   Instance Receiver: 
     null
@@ -545,14 +576,19 @@ IInvocationOperation (void System.Console.WriteLine(System.Int32 value)) (Operat
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool a, bool b)
@@ -563,7 +599,8 @@ class P
     static bool[] GetArray() => null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -627,14 +664,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool a, bool b, bool c)
@@ -645,7 +687,8 @@ class P
     static bool[] GetArray() => null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -724,14 +767,19 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool a, bool b, bool c)
@@ -742,7 +790,8 @@ class P
     static bool[] GetArray() => null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -813,14 +862,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool a, bool b, bool c)
@@ -831,7 +885,8 @@ class P
     static bool[] GetArray() => null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -902,14 +957,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool a, bool b, bool c, bool d, bool e)
@@ -920,7 +980,8 @@ class P
     static bool[] GetArray() => null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1013,14 +1074,19 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool a, bool b, bool c, bool d)
@@ -1029,7 +1095,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1095,14 +1162,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool a, bool b, bool c, bool d)
@@ -1111,7 +1183,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1185,14 +1258,19 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalFlow_08()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool a, bool b, bool c, bool d)
@@ -1201,7 +1279,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1275,14 +1354,19 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -1296,7 +1380,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1384,14 +1469,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -1404,7 +1494,8 @@ class C
 }
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1496,14 +1587,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -1517,7 +1613,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1647,14 +1744,19 @@ Block[B9] - Exit
     Predecessors: [B8]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -1670,7 +1772,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1794,14 +1897,19 @@ Block[B9] - Exit
     Predecessors: [B8]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -1815,7 +1923,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1907,14 +2016,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -1928,7 +2042,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2020,14 +2135,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -2041,7 +2161,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2133,14 +2254,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_08()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -2154,7 +2280,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2246,14 +2373,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_09()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -2267,7 +2399,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2359,14 +2492,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_10()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -2378,7 +2516,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2463,14 +2602,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_12()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -2482,7 +2626,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2567,14 +2712,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_13()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -2586,7 +2736,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2671,14 +2822,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_14()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -2690,7 +2846,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2775,14 +2932,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_15()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -2794,7 +2956,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2879,14 +3042,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_16()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -2898,7 +3066,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2983,14 +3152,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_17()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -3002,7 +3176,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3087,14 +3262,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_18()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -3106,7 +3286,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3191,14 +3372,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NonLogicalFlow_19()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -3210,7 +3396,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3295,14 +3482,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalNullableFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool? a, bool? b, bool? result)
@@ -3311,7 +3503,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3339,20 +3532,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0019: Operator '||' cannot be applied to operands of type 'bool?' and 'bool?'
                 //         result = a || b;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "a || b").WithArguments("||", "bool?", "bool?").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "a || b")
+                    .WithArguments("||", "bool?", "bool?")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalNullableFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool? a, bool? b, bool? result)
@@ -3361,7 +3562,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3389,20 +3591,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0019: Operator '&&' cannot be applied to operands of type 'bool?' and 'bool?'
                 //         result = a && b;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "a && b").WithArguments("&&", "bool?", "bool?").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "a && b")
+                    .WithArguments("&&", "bool?", "bool?")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalNullableFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool? a, P b, P c, bool? result)
@@ -3413,7 +3623,8 @@ class P
     bool? F = null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3501,20 +3712,28 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0019: Operator '||' cannot be applied to operands of type 'bool?' and 'bool?'
                 //         result = a && (b ?? c).F;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "a || (b ?? c).F").WithArguments("||", "bool?", "bool?").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "a || (b ?? c).F")
+                    .WithArguments("||", "bool?", "bool?")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalNullableFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(bool? a, P b, P c, bool? result)
@@ -3525,7 +3744,8 @@ class P
     bool? F = null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3609,20 +3829,28 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0019: Operator '&&' cannot be applied to operands of type 'bool?' and 'bool?'
                 //         result = (b ?? c).F && a;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(b ?? c).F && a").WithArguments("&&", "bool?", "bool?").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(b ?? c).F && a")
+                    .WithArguments("&&", "bool?", "bool?")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C a, C b, C result)
@@ -3636,7 +3864,8 @@ class C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3716,14 +3945,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C a, C b, C result)
@@ -3737,7 +3971,8 @@ class C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3817,14 +4052,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C a, C b, C c, C result)
@@ -3838,7 +4078,8 @@ class C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3950,14 +4191,19 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C a, C b, C c, C result)
@@ -3971,7 +4217,8 @@ class C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4093,14 +4340,19 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C a, C b, C result)
@@ -4109,7 +4361,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4137,20 +4390,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0019: Operator '||' cannot be applied to operands of type 'C' and 'C'
                 //         result = a || b;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "a || b").WithArguments("||", "C", "C").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "a || b")
+                    .WithArguments("||", "C", "C")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 class B {}
 class C : B
 {
@@ -4165,7 +4426,8 @@ class C : B
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4193,20 +4455,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(7,18): error CS0217: In order to be applicable as a short circuit operator a user-defined logical operator ('C.operator |(C, C)') must have the same return type and parameter types
                 //         result = a || b;
-                Diagnostic(ErrorCode.ERR_BadBoolOp, "a || b").WithArguments("C.operator |(C, C)").WithLocation(7, 18)
+                Diagnostic(ErrorCode.ERR_BadBoolOp, "a || b")
+                    .WithArguments("C.operator |(C, C)")
+                    .WithLocation(7, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(C a, C b, C result)
@@ -4218,7 +4488,8 @@ class C
     public static C operator |(C x, C y) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4246,20 +4517,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0218: In order for 'C.operator &(C, C)' to be applicable as a short circuit operator, its declaring type 'C' must define operator true and operator false
                 //         result = a && b;
-                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "a && b").WithArguments("C.operator &(C, C)", "C").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "a && b")
+                    .WithArguments("C.operator &(C, C)", "C")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_08()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(B3 a, B2 b, object result)
@@ -4279,7 +4558,8 @@ class C
     }
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4307,20 +4587,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0034: Operator '&&' is ambiguous on operands of type 'C.B3' and 'C.B2'
                 //         result = a && b;
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "a && b").WithArguments("&&", "C.B3", "C.B2").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "a && b")
+                    .WithArguments("&&", "C.B3", "C.B2")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_09()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C? a, C? b, C? result)
@@ -4334,7 +4622,8 @@ struct C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4362,20 +4651,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0218: In order for 'C.operator |(C, C)' to be applicable as a short circuit operator, its declaring type 'C' must define operator true and operator false
                 //         result = a || b;
-                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "a || b").WithArguments("C.operator |(C, C)", "C").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "a || b")
+                    .WithArguments("C.operator |(C, C)", "C")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_10()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C? a, C? b, C? result)
@@ -4389,7 +4686,8 @@ struct C
     public static bool operator false(C? c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4469,14 +4767,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_11()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C? a, C? b, C? result)
@@ -4488,7 +4791,8 @@ struct C
     public static C operator |(C x, C y) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4516,20 +4820,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0218: In order for 'C.operator &(C, C)' to be applicable as a short circuit operator, its declaring type 'C' must define operator true and operator false
                 //         result = a && b;
-                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "a && b").WithArguments("C.operator &(C, C)", "C").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "a && b")
+                    .WithArguments("C.operator &(C, C)", "C")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_12()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C a, C b, C? result)
@@ -4543,7 +4855,8 @@ struct C
     public static bool operator false(C? c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4631,14 +4944,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_13()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C a, C b, C result)
@@ -4652,7 +4970,8 @@ struct C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4680,13 +4999,20 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0217: In order to be applicable as a short circuit operator a user-defined logical operator ('C.operator |(C?, C?)') must have the same return type and parameter types
                 //         result = a || b;
-                Diagnostic(ErrorCode.ERR_BadBoolOp, "a || b").WithArguments("C.operator |(C?, C?)").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_BadBoolOp, "a || b")
+                    .WithArguments("C.operator |(C?, C?)")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -4694,7 +5020,8 @@ Block[B2] - Exit
         [Fact]
         public void LogicalUserDefinedFlow_14()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C a, C b, C result)
@@ -4710,7 +5037,8 @@ struct C
 ";
             // Even though there is no error, compiler emits an invalid IL (https://github.com/dotnet/roslyn/issues/27044)
             // Treating this case as an error case for now.
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4792,14 +5120,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_15()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C? a, C? b, C? result)
@@ -4813,7 +5146,8 @@ struct C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4841,20 +5175,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0218: In order for 'C.operator |(C?, C?)' to be applicable as a short circuit operator, its declaring type 'C' must define operator true and operator false
                 //         result = a || b;
-                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "a || b").WithArguments("C.operator |(C?, C?)", "C").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "a || b")
+                    .WithArguments("C.operator |(C?, C?)", "C")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_16()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C? a, C? b, C? result)
@@ -4870,7 +5212,8 @@ struct C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4898,20 +5241,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS0019: Operator '||' cannot be applied to operands of type 'C?' and 'C?'
                 //         result = a || b;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "a || b").WithArguments("||", "C?", "C?").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "a || b")
+                    .WithArguments("||", "C?", "C?")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_17()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C? a, C? b, C? result)
@@ -4925,7 +5276,8 @@ struct C
     public static bool? operator false(C? c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5003,7 +5355,8 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(11,34): error CS0215: The return type of operator True or False must be bool
                 //     public static bool? operator true(C? c) => throw null;
                 Diagnostic(ErrorCode.ERR_OpTFRetType, "true").WithLocation(11, 34),
@@ -5012,14 +5365,19 @@ Block[B6] - Exit
                 Diagnostic(ErrorCode.ERR_OpTFRetType, "false").WithLocation(12, 34)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_18()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static bool operator true(B c) => throw null;
@@ -5036,7 +5394,8 @@ class C : B
     public static C operator |(C x, C y) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5116,14 +5475,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_19()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static B operator &(B x, B y) => throw null;
@@ -5140,7 +5504,8 @@ class C : B
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5168,20 +5533,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(11,18): error CS0218: In order for 'B.operator |(B, B)' to be applicable as a short circuit operator, its declaring type 'B' must define operator true and operator false
                 //         result = a || b;
-                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "a || b").WithArguments("B.operator |(B, B)", "B").WithLocation(11, 18)
+                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "a || b")
+                    .WithArguments("B.operator |(B, B)", "B")
+                    .WithLocation(11, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalUserDefinedFlow_20()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C? a, C? b, C? result)
@@ -5195,7 +5568,8 @@ struct C
     public static bool operator false(C? c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5275,14 +5649,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(dynamic a, dynamic b, dynamic result)
@@ -5291,7 +5670,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5371,14 +5751,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(dynamic a, dynamic b, dynamic result)
@@ -5387,7 +5772,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5467,14 +5853,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(dynamic a, dynamic b, dynamic c, dynamic result)
@@ -5483,7 +5874,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5595,14 +5987,19 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(dynamic a, dynamic b, dynamic c, dynamic result)
@@ -5611,7 +6008,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5733,14 +6131,19 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(dynamic a, bool b, dynamic result)
@@ -5749,7 +6152,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5829,14 +6233,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(bool a, dynamic b, dynamic result)
@@ -5845,7 +6254,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5927,14 +6337,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(bool a, dynamic b, dynamic result)
@@ -5943,7 +6358,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6025,14 +6441,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_08()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(dynamic a, C b, dynamic result)
@@ -6041,7 +6462,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6121,14 +6543,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_09()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C a, dynamic b, dynamic result)
@@ -6137,7 +6564,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6221,20 +6649,28 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS7083: Expression must be implicitly convertible to Boolean or its type 'C' must define operator 'false'.
                 //         result = a && b;
-                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "a").WithArguments("C", "false").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "a")
+                    .WithArguments("C", "false")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_10()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(dynamic a, C b, dynamic result)
@@ -6245,7 +6681,8 @@ struct C
     public static implicit operator bool (C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6325,14 +6762,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_11()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C a, dynamic b, dynamic result)
@@ -6343,7 +6785,8 @@ struct C
     public static implicit operator bool (C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6429,14 +6872,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_12()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C a, dynamic b, dynamic result)
@@ -6447,7 +6895,8 @@ struct C
     public static implicit operator bool (C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6533,14 +6982,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_13()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(dynamic a, C? b, dynamic result)
@@ -6551,7 +7005,8 @@ struct C
     public static implicit operator bool (C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6631,14 +7086,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_14()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C? a, dynamic b, dynamic result)
@@ -6649,7 +7109,8 @@ struct C
     public static implicit operator bool (C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6733,20 +7194,28 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS7083: Expression must be implicitly convertible to Boolean or its type 'C?' must define operator 'false'.
                 //         result = a && b;
-                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "a").WithArguments("C?", "false").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "a")
+                    .WithArguments("C?", "false")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_15()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C? a, dynamic b, dynamic result)
@@ -6757,7 +7226,8 @@ struct C
     public static implicit operator bool (C? c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6843,14 +7313,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_16()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C a, dynamic b, dynamic result)
@@ -6861,7 +7336,8 @@ struct C
     public static implicit operator bool (C? c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6947,14 +7423,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_17()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(dynamic a, C b, dynamic result)
@@ -6966,7 +7447,8 @@ struct C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7046,14 +7528,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_18()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C a, dynamic b, dynamic result)
@@ -7065,7 +7552,8 @@ struct C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7149,14 +7637,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_19()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C a, dynamic b, dynamic result)
@@ -7168,7 +7661,8 @@ struct C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7252,14 +7746,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_20()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(dynamic a, C? b, dynamic result)
@@ -7271,7 +7770,8 @@ struct C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7351,14 +7851,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_21()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C? a, dynamic b, dynamic result)
@@ -7370,7 +7875,8 @@ struct C
     public static bool operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7454,20 +7960,28 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS7083: Expression must be implicitly convertible to Boolean or its type 'C?' must define operator 'false'.
                 //         result = a && b;
-                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "a").WithArguments("C?", "false").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "a")
+                    .WithArguments("C?", "false")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_22()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C? a, dynamic b, dynamic result)
@@ -7479,7 +7993,8 @@ struct C
     public static bool operator false(C? c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7563,20 +8078,28 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS7083: Expression must be implicitly convertible to Boolean or its type 'C?' must define operator 'false'.
                 //         result = a && b;
-                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "a").WithArguments("C?", "false").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "a")
+                    .WithArguments("C?", "false")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_23()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C a, dynamic b, dynamic result)
@@ -7591,7 +8114,8 @@ struct C
 
             // Even though no error is reported, an invalid IL is emitted, see https://github.com/dotnet/roslyn/issues/27135.
             // Treating this case as an error case for now.
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7675,14 +8199,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_24()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(C a, dynamic b, dynamic result)
@@ -7694,7 +8223,8 @@ struct C
     public static bool? operator false(C c) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7776,7 +8306,8 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(9,34): error CS0215: The return type of operator True or False must be bool
                 //     public static bool? operator true(C c) => throw null;
                 Diagnostic(ErrorCode.ERR_OpTFRetType, "true").WithLocation(9, 34),
@@ -7785,14 +8316,19 @@ Block[B6] - Exit
                 Diagnostic(ErrorCode.ERR_OpTFRetType, "false").WithLocation(10, 34)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LogicalDynamicFlow_25()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(bool? a, dynamic b, dynamic result)
@@ -7801,7 +8337,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7885,29 +8422,40 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,18): error CS7083: Expression must be implicitly convertible to Boolean or its type 'bool?' must define operator 'false'.
                 //         result = a && b;
-                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "a").WithArguments("bool?", "false").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_InvalidDynamicCondition, "a")
+                    .WithArguments("bool?", "false")
+                    .WithLocation(6, 18)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         [CompilerTrait(CompilerFeature.IOperation)]
         public void VerifyRangeOperator_Int_Create()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                    @"
 class Test
 {
     void M()
     {
         var x = /*<bind>*/1..2/*</bind>*/;
     }
-}").VerifyDiagnostics();
+}"
+                )
+                .VerifyDiagnostics();
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '1..2')
   LeftOperand: 
     IConversionOperation (TryCast: False, Unchecked) (OperatorMethod: System.Index System.Index.op_Implicit(System.Int32 value)) (OperationKind.Conversion, Type: System.Index, IsImplicit) (Syntax: '1')
@@ -7921,7 +8469,10 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '1..2')
         ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2) (Syntax: '2')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(compilation, expectedOperationTree);
+            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                compilation,
+                expectedOperationTree
+            );
             Assert.Equal(RangeCtorSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -7929,16 +8480,20 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '1..2')
         [CompilerTrait(CompilerFeature.IOperation)]
         public void VerifyRangeOperator_Int_Create_WithHat()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                    @"
 class Test
 {
     void M(int arg)
     {
         var x = /*<bind>*/0..^1/*</bind>*/;
     }
-}").VerifyDiagnostics();
+}"
+                )
+                .VerifyDiagnostics();
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '0..^1')
   LeftOperand: 
     IConversionOperation (TryCast: False, Unchecked) (OperatorMethod: System.Index System.Index.op_Implicit(System.Int32 value)) (OperationKind.Conversion, Type: System.Index, IsImplicit) (Syntax: '0')
@@ -7951,7 +8506,10 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '0..^1')
         ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(compilation, expectedOperationTree);
+            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                compilation,
+                expectedOperationTree
+            );
             Assert.Equal(RangeCtorSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -7959,16 +8517,20 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '0..^1')
         [CompilerTrait(CompilerFeature.IOperation)]
         public void VerifyRangeOperator_Int_ToEnd()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                    @"
 class Test
 {
     void M()
     {
         var x = /*<bind>*/..2/*</bind>*/;
     }
-}").VerifyDiagnostics();
+}"
+                )
+                .VerifyDiagnostics();
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '..2')
   LeftOperand: 
     null
@@ -7979,7 +8541,10 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '..2')
         ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2) (Syntax: '2')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(compilation, expectedOperationTree);
+            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                compilation,
+                expectedOperationTree
+            );
             Assert.Equal(RangeEndAtSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -7987,16 +8552,20 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '..2')
         [CompilerTrait(CompilerFeature.IOperation)]
         public void VerifyRangeOperator_Int_FromStart()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                    @"
 class Test
 {
     void M()
     {
         var x = /*<bind>*/1../*</bind>*/;
     }
-}").VerifyDiagnostics();
+}"
+                )
+                .VerifyDiagnostics();
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '1..')
   LeftOperand: 
     IConversionOperation (TryCast: False, Unchecked) (OperatorMethod: System.Index System.Index.op_Implicit(System.Int32 value)) (OperationKind.Conversion, Type: System.Index, IsImplicit) (Syntax: '1')
@@ -8007,7 +8576,10 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '1..')
     null
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(compilation, expectedOperationTree);
+            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                compilation,
+                expectedOperationTree
+            );
             Assert.Equal(RangeStartAtSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8015,16 +8587,20 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '1..')
         [CompilerTrait(CompilerFeature.IOperation)]
         public void VerifyRangeOperator_Int_All()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                    @"
 class Test
 {
     void M()
     {
         var x = /*<bind>*/../*</bind>*/;
     }
-}").VerifyDiagnostics();
+}"
+                )
+                .VerifyDiagnostics();
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '..')
   LeftOperand: 
     null
@@ -8032,7 +8608,10 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '..')
     null
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(compilation, expectedOperationTree);
+            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                compilation,
+                expectedOperationTree
+            );
             Assert.Equal(RangeAllSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8040,16 +8619,20 @@ IRangeOperation (OperationKind.Range, Type: System.Range) (Syntax: '..')
         [CompilerTrait(CompilerFeature.IOperation)]
         public void VerifyRangeOperator_NullableInt_Create()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                    @"
 class Test
 {
     void M(int? start, int? end)
     {
         var x = /*<bind>*/start..end/*</bind>*/;
     }
-}").VerifyDiagnostics();
+}"
+                )
+                .VerifyDiagnostics();
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: 'start..end')
   LeftOperand: 
     IConversionOperation (TryCast: False, Unchecked) (OperatorMethod: System.Index System.Index.op_Implicit(System.Int32 value)) (OperationKind.Conversion, Type: System.Index?, IsImplicit) (Syntax: 'start')
@@ -8063,7 +8646,10 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         IParameterReferenceOperation: end (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'end')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(compilation, expectedOperationTree);
+            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                compilation,
+                expectedOperationTree
+            );
             Assert.Equal(RangeCtorSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8071,16 +8657,20 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         [CompilerTrait(CompilerFeature.IOperation)]
         public void VerifyRangeOperator_NullableInt_Create_WithHat()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                    @"
 class Test
 {
     void M(int? start, int? end)
     {
         var x = /*<bind>*/start..^end/*</bind>*/;
     }
-}").VerifyDiagnostics();
+}"
+                )
+                .VerifyDiagnostics();
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: 'start..^end')
   LeftOperand: 
     IConversionOperation (TryCast: False, Unchecked) (OperatorMethod: System.Index System.Index.op_Implicit(System.Int32 value)) (OperationKind.Conversion, Type: System.Index?, IsImplicit) (Syntax: 'start')
@@ -8093,7 +8683,10 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         IParameterReferenceOperation: end (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'end')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(compilation, expectedOperationTree);
+            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                compilation,
+                expectedOperationTree
+            );
             Assert.Equal(RangeCtorSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8101,16 +8694,20 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         [CompilerTrait(CompilerFeature.IOperation)]
         public void VerifyRangeOperator_NullableInt_ToEnd()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                    @"
 class Test
 {
     void M(int? end)
     {
         var x = /*<bind>*/..end/*</bind>*/;
     }
-}").VerifyDiagnostics();
+}"
+                )
+                .VerifyDiagnostics();
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '..end')
   LeftOperand: 
     null
@@ -8121,7 +8718,10 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         IParameterReferenceOperation: end (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'end')
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(compilation, expectedOperationTree);
+            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                compilation,
+                expectedOperationTree
+            );
             Assert.Equal(RangeEndAtSignature, operation.Method.ToTestDisplayString());
         }
 
@@ -8129,16 +8729,20 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
         [CompilerTrait(CompilerFeature.IOperation)]
         public void VerifyRangeOperator_NullableInt_FromStart()
         {
-            var compilation = CreateCompilationWithIndexAndRange(@"
+            var compilation = CreateCompilationWithIndexAndRange(
+                    @"
 class Test
 {
     void M(int? start)
     {
         var x = /*<bind>*/start../*</bind>*/;
     }
-}").VerifyDiagnostics();
+}"
+                )
+                .VerifyDiagnostics();
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: 'start..')
   LeftOperand: 
     IConversionOperation (TryCast: False, Unchecked) (OperatorMethod: System.Index System.Index.op_Implicit(System.Int32 value)) (OperationKind.Conversion, Type: System.Index?, IsImplicit) (Syntax: 'start')
@@ -8149,7 +8753,10 @@ IRangeOperation (IsLifted) (OperationKind.Range, Type: System.Range?) (Syntax: '
     null
 ";
 
-            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(compilation, expectedOperationTree);
+            var operation = (IRangeOperation)VerifyOperationTreeForTest<RangeExpressionSyntax>(
+                compilation,
+                expectedOperationTree
+            );
             Assert.Equal(RangeStartAtSignature, operation.Method.ToTestDisplayString());
         }
     }

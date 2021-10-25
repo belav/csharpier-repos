@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
 {
     public class AttributesShouldNotBeAppliedToPageModelAnalyzerTest
     {
-        private MvcDiagnosticAnalyzerRunner Executor { get; } = new MvcDiagnosticAnalyzerRunner(new AttributesShouldNotBeAppliedToPageModelAnalyzer());
+        private MvcDiagnosticAnalyzerRunner Executor { get; } =
+            new MvcDiagnosticAnalyzerRunner(new AttributesShouldNotBeAppliedToPageModelAnalyzer());
 
         [Fact]
         public async Task NoDiagnosticsAreReturned_FoEmptyScenarios()
@@ -24,64 +25,80 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         }
 
         [Fact]
-        public Task NoDiagnosticsAreReturned_ForControllerBaseActions()
-            => VerifyNoDiagnosticsAreReturned();
+        public Task NoDiagnosticsAreReturned_ForControllerBaseActions() =>
+            VerifyNoDiagnosticsAreReturned();
 
         [Fact]
-        public Task NoDiagnosticsAreReturned_ForControllerActions()
-            => VerifyNoDiagnosticsAreReturned();
+        public Task NoDiagnosticsAreReturned_ForControllerActions() =>
+            VerifyNoDiagnosticsAreReturned();
 
         [Fact]
-        public Task NoDiagnosticsAreReturned_ForPageHandlersWithNonFilterAttributes()
-            => VerifyNoDiagnosticsAreReturned();
+        public Task NoDiagnosticsAreReturned_ForPageHandlersWithNonFilterAttributes() =>
+            VerifyNoDiagnosticsAreReturned();
 
         [Fact]
-        public Task NoDiagnosticsAreReturned_IfFiltersAreAppliedToPageModel()
-            => VerifyNoDiagnosticsAreReturned();
+        public Task NoDiagnosticsAreReturned_IfFiltersAreAppliedToPageModel() =>
+            VerifyNoDiagnosticsAreReturned();
 
         [Fact]
-        public Task NoDiagnosticsAreReturned_IfAuthorizeAttributeIsAppliedToPageModel()
-            => VerifyNoDiagnosticsAreReturned();
+        public Task NoDiagnosticsAreReturned_IfAuthorizeAttributeIsAppliedToPageModel() =>
+            VerifyNoDiagnosticsAreReturned();
 
         [Fact]
-        public Task NoDiagnosticsAreReturned_IfAllowAnonymousIsAppliedToPageModel()
-           => VerifyNoDiagnosticsAreReturned();
+        public Task NoDiagnosticsAreReturned_IfAllowAnonymousIsAppliedToPageModel() =>
+            VerifyNoDiagnosticsAreReturned();
 
         [Fact]
-        public Task NoDiagnosticsAreReturned_ForNonHandlerMethodsWithAttributes()
-            => VerifyNoDiagnosticsAreReturned();
+        public Task NoDiagnosticsAreReturned_ForNonHandlerMethodsWithAttributes() =>
+            VerifyNoDiagnosticsAreReturned();
 
         [Fact]
-        public Task DiagnosticsAreReturned_IfFiltersAreAppliedToPageHandlerMethod()
-            => VerifyDefault(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods);
+        public Task DiagnosticsAreReturned_IfFiltersAreAppliedToPageHandlerMethod() =>
+            VerifyDefault(
+                DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+            );
 
         [Fact]
-        public Task DiagnosticsAreReturned_IfFiltersAreAppliedToPageHandlerMethodDerivingFromCustomModel()
-            => VerifyDefault(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods);
+        public Task DiagnosticsAreReturned_IfFiltersAreAppliedToPageHandlerMethodDerivingFromCustomModel() =>
+            VerifyDefault(
+                DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+            );
 
         [Fact]
-        public Task DiagnosticsAreReturned_IfAuthorizeAttributeIsAppliedToPageHandlerMethod()
-            => VerifyDefault(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods);
+        public Task DiagnosticsAreReturned_IfAuthorizeAttributeIsAppliedToPageHandlerMethod() =>
+            VerifyDefault(
+                DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+            );
 
         [Fact]
-        public Task DiagnosticsAreReturned_IfFiltersAreAppliedToPageHandlerMethodForTypeWithPageModelAttribute()
-            => VerifyDefault(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods);
+        public Task DiagnosticsAreReturned_IfFiltersAreAppliedToPageHandlerMethodForTypeWithPageModelAttribute() =>
+            VerifyDefault(
+                DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+            );
 
         [Fact]
-        public Task DiagnosticsAreReturned_IfAttributeIsAppliedToBaseType()
-            => VerifyDefault(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods);
+        public Task DiagnosticsAreReturned_IfAttributeIsAppliedToBaseType() =>
+            VerifyDefault(
+                DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+            );
 
         [Fact]
-        public Task DiagnosticsAreReturned_IfRouteAttributesAreAppliedToPageHandlerMethod()
-            => VerifyDefault(DiagnosticDescriptors.MVC1002_RouteAttributesShouldNotBeAppliedToPageHandlerMethods);
+        public Task DiagnosticsAreReturned_IfRouteAttributesAreAppliedToPageHandlerMethod() =>
+            VerifyDefault(
+                DiagnosticDescriptors.MVC1002_RouteAttributesShouldNotBeAppliedToPageHandlerMethods
+            );
 
         [Fact]
-        public Task DiagnosticsAreReturned_IfAllowAnonymousIsAppliedToPageHandlerMethod()
-            => VerifyDefault(DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods);
+        public Task DiagnosticsAreReturned_IfAllowAnonymousIsAppliedToPageHandlerMethod() =>
+            VerifyDefault(
+                DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods
+            );
 
         [Fact]
-        public Task DiagnosticsAreReturned_IfRouteAttribute_IsAppliedToPageModel()
-            => VerifyDefault(DiagnosticDescriptors.MVC1003_RouteAttributesShouldNotBeAppliedToPageModels);
+        public Task DiagnosticsAreReturned_IfRouteAttribute_IsAppliedToPageModel() =>
+            VerifyDefault(
+                DiagnosticDescriptors.MVC1003_RouteAttributesShouldNotBeAppliedToPageModels
+            );
 
         private async Task VerifyNoDiagnosticsAreReturned([CallerMemberName] string testMethod = "")
         {
@@ -95,7 +112,10 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             Assert.Empty(result);
         }
 
-        private async Task VerifyDefault(DiagnosticDescriptor descriptor, [CallerMemberName] string testMethod = "")
+        private async Task VerifyDefault(
+            DiagnosticDescriptor descriptor,
+            [CallerMemberName] string testMethod = ""
+        )
         {
             // Arrange
             var testSource = MvcTestSource.Read(GetType().Name, testMethod);
@@ -109,11 +129,11 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 result,
                 diagnostic =>
                 {
-
                     Assert.Equal(descriptor.Id, diagnostic.Id);
                     Assert.Same(descriptor, diagnostic.Descriptor);
                     AnalyzerAssert.DiagnosticLocation(expectedLocation, diagnostic.Location);
-                });
+                }
+            );
         }
     }
 }

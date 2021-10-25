@@ -21,11 +21,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
 {
-    internal abstract class AbstractRemoveUnusedMembersCodeFixProvider<TFieldDeclarationSyntax> : SyntaxEditorBasedCodeFixProvider
-        where TFieldDeclarationSyntax : SyntaxNode
+    internal abstract class AbstractRemoveUnusedMembersCodeFixProvider<TFieldDeclarationSyntax>
+        : SyntaxEditorBasedCodeFixProvider where TFieldDeclarationSyntax : SyntaxNode
     {
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.RemoveUnusedMembersDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.RemoveUnusedMembersDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeQuality;
 
@@ -35,13 +35,17 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
         /// i.e. if all the fields declared within a field declaration are unused,
         /// we can remove the entire field declaration instead of individual variable declarators.
         /// </summary>
-        protected abstract void AdjustAndAddAppropriateDeclaratorsToRemove(HashSet<TFieldDeclarationSyntax> fieldDeclarators, HashSet<SyntaxNode> declarators);
+        protected abstract void AdjustAndAddAppropriateDeclaratorsToRemove(
+            HashSet<TFieldDeclarationSyntax> fieldDeclarators,
+            HashSet<SyntaxNode> declarators
+        );
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics[0], c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics[0], c)),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
@@ -49,25 +53,33 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var declarators = new HashSet<SyntaxNode>();
             var fieldDeclarators = new HashSet<TFieldDeclarationSyntax>();
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var declarationService = document.GetLanguageService<ISymbolDeclarationService>();
 
             // Compute declarators to remove, and also track common field declarators.
             foreach (var diagnostic in diagnostics)
             {
                 // Get symbol to be removed.
-                var diagnosticNode = diagnostic.Location.FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var diagnosticNode = diagnostic.Location.FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken
+                );
                 var symbol = semanticModel.GetDeclaredSymbol(diagnosticNode, cancellationToken);
                 Debug.Assert(symbol != null);
 
                 // Get symbol declarations to be removed.
                 foreach (var declReference in declarationService.GetDeclarations(symbol))
                 {
-                    var node = await declReference.GetSyntaxAsync(cancellationToken).ConfigureAwait(false);
+                    var node = await declReference
+                        .GetSyntaxAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     declarators.Add(node);
 
                     // For fields, the declaration node is the variable declarator.
@@ -99,7 +111,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
         /// the removes the <paramref name="childDeclarators"/> from <paramref name="declarators"/>, and
         /// adds the <paramref name="parentDeclaration"/> to the <paramref name="declarators"/>.
         /// </summary>
-        protected static void AdjustAndAddAppropriateDeclaratorsToRemove(SyntaxNode parentDeclaration, IEnumerable<SyntaxNode> childDeclarators, HashSet<SyntaxNode> declarators)
+        protected static void AdjustAndAddAppropriateDeclaratorsToRemove(
+            SyntaxNode parentDeclaration,
+            IEnumerable<SyntaxNode> childDeclarators,
+            HashSet<SyntaxNode> declarators
+        )
         {
             if (declarators.Contains(parentDeclaration))
             {
@@ -128,9 +144,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Remove_unused_member, createChangedDocument)
-            {
-            }
+                : base(AnalyzersResources.Remove_unused_member, createChangedDocument) { }
         }
     }
 }

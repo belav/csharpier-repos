@@ -8,7 +8,10 @@ namespace ControllersFromServicesClassLibrary
 {
     public class ConstructorInjectionController
     {
-        public ConstructorInjectionController(IUrlHelperFactory urlHelperFactory, QueryValueService queryService)
+        public ConstructorInjectionController(
+            IUrlHelperFactory urlHelperFactory,
+            QueryValueService queryService
+        )
         {
             UrlHelperFactory = urlHelperFactory;
             QueryService = queryService;
@@ -27,10 +30,11 @@ namespace ControllersFromServicesClassLibrary
             var urlHelper = UrlHelperFactory.GetUrlHelper(ActionContext);
 
             var content = string.Join(
-                " ", 
-                urlHelper.Action(), 
-                QueryService.GetValue(), 
-                ActionContext.HttpContext.Request.Headers["Test-Header"]);
+                " ",
+                urlHelper.Action(),
+                QueryService.GetValue(),
+                ActionContext.HttpContext.Request.Headers["Test-Header"]
+            );
 
             return new ContentResult { Content = content };
         }

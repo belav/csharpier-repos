@@ -14,10 +14,23 @@ namespace System.IO.Tests
         {
             // Open with write sharing
             string fileName = GetTestFilePath();
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.Write))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Write
+                )
+            )
             {
-                using (FileStream reader = CreateFileStream(fileName, FileMode.Open, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete))
-                { }
+                using (
+                    FileStream reader = CreateFileStream(
+                        fileName,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.ReadWrite | FileShare.Delete
+                    )
+                ) { }
             }
         }
 
@@ -26,16 +39,30 @@ namespace System.IO.Tests
         {
             // create the file
             string fileName = GetTestFilePath();
-            using (CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
-            { }
+            using (
+                CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None)
+            ) { }
 
             Assert.True(File.Exists(fileName));
 
             // Open with read sharing
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Write))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.Write
+                )
+            )
             {
-                using (FileStream reader = CreateFileStream(fileName, FileMode.Open, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete))
-                { }
+                using (
+                    FileStream reader = CreateFileStream(
+                        fileName,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.ReadWrite | FileShare.Delete
+                    )
+                ) { }
             }
         }
 
@@ -46,15 +73,40 @@ namespace System.IO.Tests
             string fileName = GetTestFilePath();
 
             // Open without write sharing
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.None
+                )
+            )
             {
-                FSAssert.ThrowsSharingViolation(() => CreateFileStream(fileName, FileMode.Open, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete));
+                FSAssert.ThrowsSharingViolation(
+                    () =>
+                        CreateFileStream(
+                            fileName,
+                            FileMode.Open,
+                            FileAccess.Write,
+                            FileShare.ReadWrite | FileShare.Delete
+                        )
+                );
             }
 
             // Then try the other way around
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite | FileShare.Delete
+                )
+            )
             {
-                FSAssert.ThrowsSharingViolation(() => CreateFileStream(fileName, FileMode.Open, FileAccess.Write, FileShare.None));
+                FSAssert.ThrowsSharingViolation(
+                    () =>
+                        CreateFileStream(fileName, FileMode.Open, FileAccess.Write, FileShare.None)
+                );
             }
         }
     }

@@ -26,11 +26,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             {
                 ["TempDataProperty-Test"] = "Old-Value",
             };
-            var pageModel = new TestPageModel()
-            {
-                Test = "TestString",
-                Test2 = "Test2",
-            };
+            var pageModel = new TestPageModel() { Test = "TestString", Test2 = "Test2", };
 
             var filter = CreatePageSaveTempDataPropertyFilter(tempData, "TempDataProperty-");
             filter.Subject = pageModel;
@@ -69,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 Array.Empty<IFilterMetadata>(),
                 null,
                 new Dictionary<string, object>(),
-                pageModel);
+                pageModel
+            );
 
             // Act
             filter.OnPageHandlerExecuting(context);
@@ -110,7 +107,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 Array.Empty<IFilterMetadata>(),
                 null,
                 new Dictionary<string, object>(),
-                pageModel);
+                pageModel
+            );
 
             // Act
             filter.OnPageHandlerExecuting(context);
@@ -119,7 +117,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             Assert.Collection(
                 filter.Properties.OrderBy(p => p.PropertyInfo.Name),
                 p => Assert.Equal(testProperty, p.PropertyInfo),
-                p => Assert.Equal(test2Property, p.PropertyInfo));
+                p => Assert.Equal(test2Property, p.PropertyInfo)
+            );
         }
 
         [Fact]
@@ -150,7 +149,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 Array.Empty<IFilterMetadata>(),
                 null,
                 new Dictionary<string, object>(),
-                model);
+                model
+            );
 
             // Act
             filter.OnPageHandlerExecuting(context);
@@ -170,10 +170,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             {
                 ["Test"] = "Old-Value",
             };
-            var pageModel = new TestPageModel
-            {
-                Test = "New-Value",
-            };
+            var pageModel = new TestPageModel { Test = "New-Value", };
 
             var filter = CreatePageSaveTempDataPropertyFilter(tempData, string.Empty);
             filter.Subject = pageModel;
@@ -188,15 +185,17 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 {
                     Assert.Equal("Test", item.Key);
                     Assert.Equal("New-Value", item.Value);
-                });
+                }
+            );
         }
 
-        private PageSaveTempDataPropertyFilter CreatePageSaveTempDataPropertyFilter(TempDataDictionary tempData, string prefix)
+        private PageSaveTempDataPropertyFilter CreatePageSaveTempDataPropertyFilter(
+            TempDataDictionary tempData,
+            string prefix
+        )
         {
             var factory = new Mock<ITempDataDictionaryFactory>();
-            factory
-                .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-                .Returns(tempData);
+            factory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Returns(tempData);
 
             var pageModelType = typeof(TestPageModel);
             var property1 = pageModelType.GetProperty(nameof(TestPageModel.Test));

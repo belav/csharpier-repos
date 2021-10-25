@@ -33,34 +33,71 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                 diagnostics,
                 diagnostic =>
                 {
-                    Assert.Same(DiagnosticDescriptors.DoNotUseRenderTreeTypes, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MMBaseClass"], diagnostic.Location);
+                    Assert.Same(
+                        DiagnosticDescriptors.DoNotUseRenderTreeTypes,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MMBaseClass"],
+                        diagnostic.Location
+                    );
                 },
                 diagnostic =>
                 {
-                    Assert.Same(DiagnosticDescriptors.DoNotUseRenderTreeTypes, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MMField"], diagnostic.Location);
+                    Assert.Same(
+                        DiagnosticDescriptors.DoNotUseRenderTreeTypes,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MMField"],
+                        diagnostic.Location
+                    );
                 },
                 diagnostic =>
                 {
-                    Assert.Same(DiagnosticDescriptors.DoNotUseRenderTreeTypes, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MMInvocation"], diagnostic.Location);
+                    Assert.Same(
+                        DiagnosticDescriptors.DoNotUseRenderTreeTypes,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MMInvocation"],
+                        diagnostic.Location
+                    );
                 },
                 diagnostic =>
                 {
-                    Assert.Same(DiagnosticDescriptors.DoNotUseRenderTreeTypes, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MMProperty"], diagnostic.Location);
+                    Assert.Same(
+                        DiagnosticDescriptors.DoNotUseRenderTreeTypes,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MMProperty"],
+                        diagnostic.Location
+                    );
                 },
                 diagnostic =>
                 {
-                    Assert.Same(DiagnosticDescriptors.DoNotUseRenderTreeTypes, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MMParameter"], diagnostic.Location);
+                    Assert.Same(
+                        DiagnosticDescriptors.DoNotUseRenderTreeTypes,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MMParameter"],
+                        diagnostic.Location
+                    );
                 },
                 diagnostic =>
                 {
-                    Assert.Same(DiagnosticDescriptors.DoNotUseRenderTreeTypes, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MMReturnType"], diagnostic.Location);
-                });
+                    Assert.Same(
+                        DiagnosticDescriptors.DoNotUseRenderTreeTypes,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MMReturnType"],
+                        diagnostic.Location
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -77,29 +114,60 @@ namespace Microsoft.AspNetCore.Components.Analyzers
                 diagnostics,
                 diagnostic =>
                 {
-                    Assert.Same(DiagnosticDescriptors.DoNotUseRenderTreeTypes, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MMField"], diagnostic.Location);
+                    Assert.Same(
+                        DiagnosticDescriptors.DoNotUseRenderTreeTypes,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MMField"],
+                        diagnostic.Location
+                    );
                 },
                 diagnostic =>
                 {
-                    Assert.Same(DiagnosticDescriptors.DoNotUseRenderTreeTypes, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MMNewObject"], diagnostic.Location);
+                    Assert.Same(
+                        DiagnosticDescriptors.DoNotUseRenderTreeTypes,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MMNewObject"],
+                        diagnostic.Location
+                    );
                 },
                 diagnostic =>
                 {
-                    Assert.Same(DiagnosticDescriptors.DoNotUseRenderTreeTypes, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MMProperty"], diagnostic.Location);
+                    Assert.Same(
+                        DiagnosticDescriptors.DoNotUseRenderTreeTypes,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MMProperty"],
+                        diagnostic.Location
+                    );
                 },
                 diagnostic =>
                 {
-                    Assert.Same(DiagnosticDescriptors.DoNotUseRenderTreeTypes, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MMNewObject2"], diagnostic.Location);
+                    Assert.Same(
+                        DiagnosticDescriptors.DoNotUseRenderTreeTypes,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MMNewObject2"],
+                        diagnostic.Location
+                    );
                 },
                 diagnostic =>
                 {
-                    Assert.Same(DiagnosticDescriptors.DoNotUseRenderTreeTypes, diagnostic.Descriptor);
-                    AnalyzerAssert.DiagnosticLocation(source.MarkerLocations["MMInvocation"], diagnostic.Location);
-                });
+                    Assert.Same(
+                        DiagnosticDescriptors.DoNotUseRenderTreeTypes,
+                        diagnostic.Descriptor
+                    );
+                    AnalyzerAssert.DiagnosticLocation(
+                        source.MarkerLocations["MMInvocation"],
+                        diagnostic.Location
+                    );
+                }
+            );
         }
     }
 }

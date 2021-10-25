@@ -11,11 +11,11 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
     internal sealed class DynamicServiceProviderEngine : CompiledServiceProviderEngine
     {
         public DynamicServiceProviderEngine(IEnumerable<ServiceDescriptor> serviceDescriptors)
-            : base(serviceDescriptors)
-        {
-        }
+            : base(serviceDescriptors) { }
 
-        protected override Func<ServiceProviderEngineScope, object> RealizeService(ServiceCallSite callSite)
+        protected override Func<ServiceProviderEngineScope, object> RealizeService(
+            ServiceCallSite callSite
+        )
         {
             int callCount = 0;
             return scope =>
@@ -28,18 +28,20 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 {
                     // Don't capture the ExecutionContext when forking to build the compiled version of the
                     // resolve function
-                    ThreadPool.UnsafeQueueUserWorkItem(state =>
-                    {
-                        try
+                    ThreadPool.UnsafeQueueUserWorkItem(
+                        state =>
                         {
-                            base.RealizeService(callSite);
-                        }
-                        catch
-                        {
-                            // Swallow the exception, we should log this via the event source in a non-patched release
-                        }
-                    },
-                    null);
+                            try
+                            {
+                                base.RealizeService(callSite);
+                            }
+                            catch
+                            {
+                                // Swallow the exception, we should log this via the event source in a non-patched release
+                            }
+                        },
+                        null
+                    );
                 }
 
                 return result;

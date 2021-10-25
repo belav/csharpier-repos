@@ -30,10 +30,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             builder.Features.Add(new SectionDirectivePass());
             builder.AddTargetExtension(new LegacySectionTargetExtension());
 
-            builder.AddTargetExtension(new TemplateTargetExtension()
-            {
-                TemplateTypeName = "global::Microsoft.AspNetCore.Mvc.Razor.HelperResult",
-            });
+            builder.AddTargetExtension(
+                new TemplateTargetExtension()
+                {
+                    TemplateTypeName = "global::Microsoft.AspNetCore.Mvc.Razor.HelperResult",
+                }
+            );
 
             builder.Features.Add(new ModelExpressionPass());
             builder.Features.Add(new MvcViewDocumentClassifierPass());
@@ -81,10 +83,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
             builder.Features.Add(new SectionDirectivePass());
             builder.AddTargetExtension(new LegacySectionTargetExtension());
 
-            builder.AddTargetExtension(new TemplateTargetExtension()
-            {
-                TemplateTypeName = "global::Microsoft.AspNetCore.Mvc.Razor.HelperResult",
-            });
+            builder.AddTargetExtension(
+                new TemplateTargetExtension()
+                {
+                    TemplateTypeName = "global::Microsoft.AspNetCore.Mvc.Razor.HelperResult",
+                }
+            );
 
             builder.Features.Add(new ModelExpressionPass());
             builder.Features.Add(new MvcViewDocumentClassifierPass());

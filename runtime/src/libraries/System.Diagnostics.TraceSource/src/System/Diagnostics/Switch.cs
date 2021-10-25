@@ -27,7 +27,9 @@ namespace System.Diagnostics
         private readonly string? _defaultValue;
         private object? _initializedLock;
 
-        private static readonly List<WeakReference<Switch>> s_switches = new List<WeakReference<Switch>>();
+        private static readonly List<WeakReference<Switch>> s_switches = new List<
+            WeakReference<Switch>
+        >();
         private static int s_LastCollectionCount;
         private StringDictionary? _attributes;
 
@@ -49,15 +51,15 @@ namespace System.Diagnostics
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.Switch'/>
         /// class.</para>
         /// </devdoc>
-        protected Switch(string displayName, string? description) : this(displayName, description, "0")
-        {
-        }
+        protected Switch(string displayName, string? description)
+            : this(displayName, description, "0") { }
 
         protected Switch(string displayName, string? description, string? defaultSwitchValue)
         {
             // displayName is used as a hashtable key, so it can never
             // be null.
-            if (displayName == null) displayName = string.Empty;
+            if (displayName == null)
+                displayName = string.Empty;
 
             _displayName = displayName;
             _description = description;
@@ -78,7 +80,9 @@ namespace System.Diagnostics
             {
                 if (s_LastCollectionCount != GC.CollectionCount(2))
                 {
-                    List<WeakReference<Switch>> buffer = new List<WeakReference<Switch>>(s_switches.Count);
+                    List<WeakReference<Switch>> buffer = new List<WeakReference<Switch>>(
+                        s_switches.Count
+                    );
                     for (int i = 0; i < s_switches.Count; i++)
                     {
                         if (s_switches[i].TryGetTarget(out _))
@@ -102,10 +106,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public string DisplayName
         {
-            get
-            {
-                return _displayName;
-            }
+            get { return _displayName; }
         }
 
         /// <devdoc>
@@ -113,10 +114,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public string Description
         {
-            get
-            {
-                return (_description == null) ? string.Empty : _description;
-            }
+            get { return (_description == null) ? string.Empty : _description; }
         }
 
         public StringDictionary Attributes
@@ -219,9 +217,7 @@ namespace System.Diagnostics
         ///     or environment, and then it will be invoked each time the switch's
         ///     value is changed.
         /// </devdoc>
-        protected virtual void OnSwitchSettingChanged()
-        {
-        }
+        protected virtual void OnSwitchSettingChanged() { }
 
         protected virtual void OnValueChanged()
         {

@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
     /// <summary>
     ///     Base class used for configuring an invertible relationship.
     /// </summary>
-    public abstract class InvertibleRelationshipBuilderBase : IInfrastructure<IConventionForeignKeyBuilder>
+    public abstract class InvertibleRelationshipBuilderBase
+        : IInfrastructure<IConventionForeignKeyBuilder>
     {
         private readonly IReadOnlyList<Property>? _foreignKeyProperties;
         private readonly IReadOnlyList<Property>? _principalKeyProperties;
@@ -30,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         protected InvertibleRelationshipBuilderBase(
             IMutableEntityType declaringEntityType,
             IMutableEntityType relatedEntityType,
-            IMutableForeignKey foreignKey)
+            IMutableForeignKey foreignKey
+        )
         {
             Builder = ((ForeignKey)foreignKey).Builder;
 
@@ -51,14 +53,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             bool inverted = false,
             bool foreignKeySet = false,
             bool principalKeySet = false,
-            bool requiredSet = false)
+            bool requiredSet = false
+        )
         {
             Builder = builder;
 
             if (inverted)
             {
-                if (oldBuilder._foreignKeyProperties != null
-                    || oldBuilder._principalKeyProperties != null)
+                if (
+                    oldBuilder._foreignKeyProperties != null
+                    || oldBuilder._principalKeyProperties != null
+                )
                 {
                     throw new InvalidOperationException(CoreStrings.RelationshipCannotBeInverted);
                 }
@@ -73,9 +78,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             _principalKeyProperties = principalKeySet
                 ? builder.Metadata.PrincipalKey.Properties
                 : oldBuilder._principalKeyProperties;
-            _required = requiredSet
-                ? builder.Metadata.IsRequired
-                : oldBuilder._required;
+            _required = requiredSet ? builder.Metadata.IsRequired : oldBuilder._required;
 
             var foreignKey = builder.Metadata;
             ForeignKey.AreCompatible(
@@ -86,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 _foreignKeyProperties,
                 _principalKeyProperties,
                 foreignKey.IsUnique,
-                shouldThrow: true);
+                shouldThrow: true
+            );
         }
 
         /// <summary>
@@ -118,8 +122,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     The foreign key that represents this relationship.
         /// </summary>
-        public virtual IMutableForeignKey Metadata
-            => Builder.Metadata;
+        public virtual IMutableForeignKey Metadata => Builder.Metadata;
 
         #region Hidden System.Object members
 
@@ -128,8 +131,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -137,17 +139,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="obj"> The object to compare with the current object. </param>
         /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
         /// </summary>
         /// <returns> A hash code for the current object. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode()
-            => base.GetHashCode();
-
+        public override int GetHashCode() => base.GetHashCode();
         #endregion
     }
 }

@@ -1,4 +1,3 @@
-
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
@@ -22,13 +21,17 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     {
         private readonly ClientCertificateFixture _certFixture;
 
-        public ClientCertificateTests(PublishedSitesFixture fixture, ClientCertificateFixture certFixture) : base(fixture)
+        public ClientCertificateTests(
+            PublishedSitesFixture fixture,
+            ClientCertificateFixture certFixture
+        ) : base(fixture)
         {
             _certFixture = certFixture;
         }
 
-        public static TestMatrix TestVariants
-            => TestMatrix.ForServers(DeployerSelector.ServerType)
+        public static TestMatrix TestVariants =>
+            TestMatrix
+                .ForServers(DeployerSelector.ServerType)
                 .WithTfms(Tfm.Default)
                 .WithApplicationTypes(ApplicationType.Portable)
                 .WithAllHostingModels();
@@ -44,7 +47,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [ConditionalTheory]
         [MemberData(nameof(TestVariants))]
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8)]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "https://github.com/dotnet/aspnetcore/issues/29068")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "https://github.com/dotnet/aspnetcore/issues/29068"
+        )]
         public Task HttpsClientCert_GetCertInformation(TestVariant variant)
         {
             return ClientCertTest(variant, sendClientCert: true);

@@ -18,32 +18,19 @@ namespace System.Net
 
         public object AsyncState
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
-        internal bool EndCalled
-        {
-            get;
-            set;
-        }
+        internal bool EndCalled { get; set; }
 
         internal object Result
         {
-            get
-            {
-                return _resultFactory?.Invoke();
-            }
+            get { return _resultFactory?.Invoke(); }
         }
 
         public WaitHandle AsyncWaitHandle
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public bool CompletedSynchronously
@@ -57,10 +44,7 @@ namespace System.Net
 
         public bool IsCompleted
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         internal ContextAwareResult(object myObject, object myState, AsyncCallback myCallBack)
@@ -84,7 +68,5 @@ namespace System.Net
         }
 
         internal void InternalWaitForCompletion() { }
-
-
     }
 }

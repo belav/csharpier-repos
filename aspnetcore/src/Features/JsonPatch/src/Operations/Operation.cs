@@ -12,21 +12,14 @@ namespace Microsoft.AspNetCore.JsonPatch.Operations
         [JsonProperty("value")]
         public object value { get; set; }
 
-        public Operation()
-        {
+        public Operation() { }
 
-        }
-
-        public Operation(string op, string path, string from, object value)
-            : base(op, path, from)
+        public Operation(string op, string path, string from, object value) : base(op, path, from)
         {
             this.value = value;
         }
 
-        public Operation(string op, string path, string from)
-            : base(op, path, from)
-        {
-        }
+        public Operation(string op, string path, string from) : base(op, path, from) { }
 
         public void Apply(object objectToApplyTo, IObjectAdapter adapter)
         {
@@ -74,9 +67,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Operations
 
         public bool ShouldSerializevalue()
         {
-            return (OperationType == OperationType.Add
+            return (
+                OperationType == OperationType.Add
                 || OperationType == OperationType.Replace
-                || OperationType == OperationType.Test);
+                || OperationType == OperationType.Test
+            );
         }
     }
 }

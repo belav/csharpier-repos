@@ -15,86 +15,104 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"class C { }
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"class C { }
+$$"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"System.Console.WriteLine();
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"System.Console.WriteLine();
+$$"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"int i = 0;
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"int i = 0;
+$$"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestAfterJoinLeftExpr()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var q = from x in y
-          join a in e on o1 $$"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a in e on o1 $$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestAfterJoinLeftExpr_NotAfterEquals()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in o1 equals $$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in o1 equals $$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestAfterJoinLeftExpr_NotAfterIn1()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in $$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in $$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestAfterJoinLeftExpr_NotAfterIn2()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in y $$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in y $$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestAfterJoinLeftExpr_NotAfterIn3()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in y on $$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in y on $$"
+                )
+            );
         }
     }
 }

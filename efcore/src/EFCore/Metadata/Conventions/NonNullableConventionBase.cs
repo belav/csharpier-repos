@@ -21,8 +21,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         // https://github.com/dotnet/roslyn/blob/master/docs/features/nullable-metadata.md
 
         private const string StateAnnotationName = "NonNullableConventionState";
-        private const string NullableAttributeFullName = "System.Runtime.CompilerServices.NullableAttribute";
-        private const string NullableContextAttributeFullName = "System.Runtime.CompilerServices.NullableContextAttribute";
+        private const string NullableAttributeFullName =
+            "System.Runtime.CompilerServices.NullableAttribute";
+        private const string NullableContextAttributeFullName =
+            "System.Runtime.CompilerServices.NullableContextAttribute";
 
         /// <summary>
         ///     Creates a new instance of <see cref="NonNullableConventionBase" />.
@@ -46,7 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <returns> <see langword="true" /> if the member type is a non-nullable reference type. </returns>
         protected virtual bool IsNonNullableReferenceType(
             IConventionModelBuilder modelBuilder,
-            MemberInfo memberInfo)
+            MemberInfo memberInfo
+        )
         {
             if (memberInfo.GetMemberType().IsValueType)
             {
@@ -60,9 +63,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var isMaybeNull = memberInfo switch
             {
                 FieldInfo f
-                    => f.CustomAttributes.Any(a => a.AttributeType == typeof(MaybeNullAttribute)),
+                  => f.CustomAttributes.Any(a => a.AttributeType == typeof(MaybeNullAttribute)),
                 PropertyInfo p
-                    => p.GetMethod?.ReturnParameter?.CustomAttributes?.Any(a => a.AttributeType == typeof(MaybeNullAttribute)) == true,
+                  => p.GetMethod?.ReturnParameter?.CustomAttributes?.Any(
+                      a => a.AttributeType == typeof(MaybeNullAttribute)
+                  ) == true,
                 _ => false
             };
 
@@ -77,8 +82,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             // Note that this may change - if https://github.com/dotnet/corefx/issues/36222 is done we can remove all of this.
 
             // First look for NullableAttribute on the member itself
-            if (Attribute.GetCustomAttributes(memberInfo)
-                .FirstOrDefault(a => a.GetType().FullName == NullableAttributeFullName) is Attribute attribute)
+            if (
+                Attribute
+                    .GetCustomAttributes(memberInfo)
+                    .FirstOrDefault(a => a.GetType().FullName == NullableAttributeFullName)
+                is Attribute attribute
+            )
             {
                 var attributeType = attribute.GetType();
 
@@ -103,8 +112,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     return cachedTypeNonNullable;
                 }
 
-                if (Attribute.GetCustomAttributes(type)
-                    .FirstOrDefault(a => a.GetType().FullName == NullableContextAttributeFullName) is Attribute contextAttr)
+                if (
+                    Attribute
+                        .GetCustomAttributes(type)
+                        .FirstOrDefault(
+                            a => a.GetType().FullName == NullableContextAttributeFullName
+                        )
+                    is Attribute contextAttr
+                )
                 {
                     var attributeType = contextAttr.GetType();
 
@@ -120,10 +135,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         // (depends on the nullability of generic type argument).
                         // However, we special case Dictionary as it's used for property bags, and specifically don't identify its indexer
                         // as non-nullable.
-                        if (memberInfo is PropertyInfo property
+                        if (
+                            memberInfo is PropertyInfo property
                             && property.IsIndexerProperty()
                             && type.IsGenericType
-                            && type.GetGenericTypeDefinition() == typeof(Dictionary<,>))
+                            && type.GetGenericTypeDefinition() == typeof(Dictionary<, >)
+                        )
                         {
                             return false;
                         }
@@ -138,17 +155,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             return false;
         }
 
-        private NonNullabilityConventionState GetOrInitializeState(IConventionModelBuilder modelBuilder)
-            => (NonNullabilityConventionState)(
+        private NonNullabilityConventionState GetOrInitializeState(
+            IConventionModelBuilder modelBuilder
+        ) =>
+            (NonNullabilityConventionState)(
                 modelBuilder.Metadata.FindAnnotation(StateAnnotationName)
-                ?? modelBuilder.Metadata.AddAnnotation(StateAnnotationName, new NonNullabilityConventionState())
+                ?? modelBuilder.Metadata.AddAnnotation(
+                    StateAnnotationName,
+                    new NonNullabilityConventionState()
+                )
             ).Value!;
 
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
-            => modelBuilder.Metadata.RemoveAnnotation(StateAnnotationName);
+            IConventionContext<IConventionModelBuilder> context
+        ) => modelBuilder.Metadata.RemoveAnnotation(StateAnnotationName);
 
         private sealed class NonNullabilityConventionState
         {

@@ -27,7 +27,7 @@ namespace Microsoft.AspNetCore.Components.WebView
     {
         private readonly Func<string, string, Task> _onAttachMessage;
 
-        public IpcReceiver(Func<string,string,Task> onAttachMessage)
+        public IpcReceiver(Func<string, string, Task> onAttachMessage)
         {
             _onAttachMessage = onAttachMessage;
         }
@@ -46,19 +46,37 @@ namespace Microsoft.AspNetCore.Components.WebView
                 // For any other message, you have to have a page attached already
                 if (pageContext == null)
                 {
-                    throw new InvalidOperationException("Cannot receive IPC messages when no page is attached");
+                    throw new InvalidOperationException(
+                        "Cannot receive IPC messages when no page is attached"
+                    );
                 }
 
                 switch (messageType)
                 {
                     case IpcCommon.IncomingMessageType.BeginInvokeDotNet:
-                        BeginInvokeDotNet(pageContext, args[0].GetString(), args[1].GetString(), args[2].GetString(), args[3].GetInt64(), args[4].GetString());
+                        BeginInvokeDotNet(
+                            pageContext,
+                            args[0].GetString(),
+                            args[1].GetString(),
+                            args[2].GetString(),
+                            args[3].GetInt64(),
+                            args[4].GetString()
+                        );
                         break;
                     case IpcCommon.IncomingMessageType.EndInvokeJS:
-                        EndInvokeJS(pageContext, args[0].GetInt64(), args[1].GetBoolean(), args[2].GetString());
+                        EndInvokeJS(
+                            pageContext,
+                            args[0].GetInt64(),
+                            args[1].GetBoolean(),
+                            args[2].GetString()
+                        );
                         break;
                     case IpcCommon.IncomingMessageType.DispatchBrowserEvent:
-                        await DispatchBrowserEventAsync(pageContext, args[0].GetRawText(), args[1].GetRawText());
+                        await DispatchBrowserEventAsync(
+                            pageContext,
+                            args[0].GetRawText(),
+                            args[1].GetRawText()
+                        );
                         break;
                     case IpcCommon.IncomingMessageType.OnRenderCompleted:
                         OnRenderCompleted(pageContext, args[0].GetInt64(), args[1].GetString());
@@ -67,36 +85,65 @@ namespace Microsoft.AspNetCore.Components.WebView
                         OnLocationChanged(pageContext, args[0].GetString(), args[1].GetBoolean());
                         break;
                     default:
-                        throw new InvalidOperationException($"Unknown message type '{messageType}'.");
+                        throw new InvalidOperationException(
+                            $"Unknown message type '{messageType}'."
+                        );
                 }
             }
         }
 
-        private void BeginInvokeDotNet(PageContext pageContext, string callId, string assemblyName, string methodIdentifier, long dotNetObjectId, string argsJson)
+        private void BeginInvokeDotNet(
+            PageContext pageContext,
+            string callId,
+            string assemblyName,
+            string methodIdentifier,
+            long dotNetObjectId,
+            string argsJson
+        )
         {
             DotNetDispatcher.BeginInvokeDotNet(
                 pageContext.JSRuntime,
                 new DotNetInvocationInfo(assemblyName, methodIdentifier, dotNetObjectId, callId),
-                argsJson);
+                argsJson
+            );
         }
 
-        private void EndInvokeJS(PageContext pageContext, long asyncHandle, bool succeeded, string argumentsOrError)
+        private void EndInvokeJS(
+            PageContext pageContext,
+            long asyncHandle,
+            bool succeeded,
+            string argumentsOrError
+        )
         {
             DotNetDispatcher.EndInvokeJS(pageContext.JSRuntime, argumentsOrError);
         }
 
-        private Task DispatchBrowserEventAsync(PageContext pageContext, string eventDescriptor, string eventArgs)
+        private Task DispatchBrowserEventAsync(
+            PageContext pageContext,
+            string eventDescriptor,
+            string eventArgs
+        )
         {
             var renderer = pageContext.Renderer;
             var jsonSerializerOptions = pageContext.JSRuntime.ReadJsonSerializerOptions();
-            var webEventData = WebEventData.Parse(renderer, jsonSerializerOptions, eventDescriptor, eventArgs);
+            var webEventData = WebEventData.Parse(
+                renderer,
+                jsonSerializerOptions,
+                eventDescriptor,
+                eventArgs
+            );
             return renderer.DispatchEventAsync(
                 webEventData.EventHandlerId,
                 webEventData.EventFieldInfo,
-                webEventData.EventArgs);
+                webEventData.EventArgs
+            );
         }
 
-        private void OnRenderCompleted(PageContext pageContext, long batchId, string errorMessageOrNull)
+        private void OnRenderCompleted(
+            PageContext pageContext,
+            long batchId,
+            string errorMessageOrNull
+        )
         {
             if (errorMessageOrNull != null)
             {

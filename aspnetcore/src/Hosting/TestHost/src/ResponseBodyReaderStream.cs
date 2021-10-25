@@ -48,27 +48,42 @@ namespace Microsoft.AspNetCore.TestHost
             set => throw new NotSupportedException();
         }
 
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
 
         public override void SetLength(long value) => throw new NotSupportedException();
 
         public override void Flush() => throw new NotSupportedException();
 
-        public override Task FlushAsync(CancellationToken cancellationToken) => throw new NotSupportedException();
+        public override Task FlushAsync(CancellationToken cancellationToken) =>
+            throw new NotSupportedException();
 
         // Write with count 0 will still trigger OnFirstWrite
-        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+        public override void Write(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) => throw new NotSupportedException();
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => throw new NotSupportedException();
 
         #endregion NotSupported
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            return ReadAsync(buffer, offset, count, CancellationToken.None).GetAwaiter().GetResult();
+            return ReadAsync(buffer, offset, count, CancellationToken.None)
+                .GetAwaiter()
+                .GetResult();
         }
 
-        public async override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public async override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             VerifyBuffer(buffer, offset, count);
             CheckAborted();

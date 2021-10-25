@@ -18,14 +18,22 @@ namespace System.Net.WebSockets.Client.Tests
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/1895")]
         [OuterLoop("Uses external servers")]
-        [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(UnavailableWebSocketServers))]
-        public async Task ConnectAsync_NotWebSocketServer_ThrowsWebSocketExceptionWithMessage(Uri server, string exceptionMessage, WebSocketError errorCode)
+        [
+            ConditionalTheory(nameof(WebSocketsSupported)),
+            MemberData(nameof(UnavailableWebSocketServers))
+        ]
+        public async Task ConnectAsync_NotWebSocketServer_ThrowsWebSocketExceptionWithMessage(
+            Uri server,
+            string exceptionMessage,
+            WebSocketError errorCode
+        )
         {
             using (var cws = new ClientWebSocket())
             {
                 var cts = new CancellationTokenSource(TimeOutMilliseconds);
-                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(() =>
-                    cws.ConnectAsync(server, cts.Token));
+                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(
+                    () => cws.ConnectAsync(server, cts.Token)
+                );
 
                 if (PlatformDetection.IsNetCore && !PlatformDetection.IsInAppContainer) // bug fix in netcoreapp: https://github.com/dotnet/corefx/pull/35960
                 {
@@ -35,10 +43,18 @@ namespace System.Net.WebSockets.Client.Tests
                 Assert.Equal(exceptionMessage, ex.Message);
 
                 // Other operations throw after failed connect
-                await Assert.ThrowsAsync<ObjectDisposedException>(() => cws.ReceiveAsync(new byte[1], default));
-                await Assert.ThrowsAsync<ObjectDisposedException>(() => cws.SendAsync(new byte[1], WebSocketMessageType.Binary, true, default));
-                await Assert.ThrowsAsync<ObjectDisposedException>(() => cws.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default));
-                await Assert.ThrowsAsync<ObjectDisposedException>(() => cws.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, null, default));
+                await Assert.ThrowsAsync<ObjectDisposedException>(
+                    () => cws.ReceiveAsync(new byte[1], default)
+                );
+                await Assert.ThrowsAsync<ObjectDisposedException>(
+                    () => cws.SendAsync(new byte[1], WebSocketMessageType.Binary, true, default)
+                );
+                await Assert.ThrowsAsync<ObjectDisposedException>(
+                    () => cws.CloseAsync(WebSocketCloseStatus.NormalClosure, null, default)
+                );
+                await Assert.ThrowsAsync<ObjectDisposedException>(
+                    () => cws.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, null, default)
+                );
             }
         }
 
@@ -46,14 +62,24 @@ namespace System.Net.WebSockets.Client.Tests
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task EchoBinaryMessage_Success(Uri server)
         {
-            await WebSocketHelper.TestEcho(server, WebSocketMessageType.Binary, TimeOutMilliseconds, _output);
+            await WebSocketHelper.TestEcho(
+                server,
+                WebSocketMessageType.Binary,
+                TimeOutMilliseconds,
+                _output
+            );
         }
 
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task EchoTextMessage_Success(Uri server)
         {
-            await WebSocketHelper.TestEcho(server, WebSocketMessageType.Text, TimeOutMilliseconds, _output);
+            await WebSocketHelper.TestEcho(
+                server,
+                WebSocketMessageType.Text,
+                TimeOutMilliseconds,
+                _output
+            );
         }
 
         [OuterLoop("Uses external servers")]
@@ -69,10 +95,11 @@ namespace System.Net.WebSockets.Client.Tests
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts.Token);
                     Assert.True(
-                        (cws.State == WebSocketState.None) ||
-                        (cws.State == WebSocketState.Connecting) ||
-                        (cws.State == WebSocketState.Open),
-                        "State immediately after ConnectAsync incorrect: " + cws.State);
+                        (cws.State == WebSocketState.None)
+                            || (cws.State == WebSocketState.Connecting)
+                            || (cws.State == WebSocketState.Open),
+                        "State immediately after ConnectAsync incorrect: " + cws.State
+                    );
                     await taskConnect;
                 }
 
@@ -82,40 +109,63 @@ namespace System.Net.WebSockets.Client.Tests
                 WebSocketReceiveResult recvResult;
                 using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
                 {
-                    recvResult = await ReceiveEntireMessageAsync(cws, new ArraySegment<byte>(buffer), cts.Token);
+                    recvResult = await ReceiveEntireMessageAsync(
+                        cws,
+                        new ArraySegment<byte>(buffer),
+                        cts.Token
+                    );
                 }
 
                 Assert.Equal(WebSocketMessageType.Text, recvResult.MessageType);
-                string headers = WebSocketData.GetTextFromBuffer(new ArraySegment<byte>(buffer, 0, recvResult.Count));
+                string headers = WebSocketData.GetTextFromBuffer(
+                    new ArraySegment<byte>(buffer, 0, recvResult.Count)
+                );
                 Assert.Contains("X-CustomHeader1:Value1", headers);
                 Assert.Contains("X-CustomHeader2:Value2", headers);
 
-                await cws.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None);
+                await cws.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    string.Empty,
+                    CancellationToken.None
+                );
             }
         }
 
         [ConditionalFact(nameof(WebSocketsSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34690", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34690",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/42852", TestPlatforms.Browser)]
         public async Task ConnectAsync_AddHostHeader_Success()
         {
             string expectedHost = null;
-            await LoopbackServer.CreateClientAndServerAsync(async uri =>
-            {
-                expectedHost = "subdomain." + uri.Host;
-                using (var cws = new ClientWebSocket())
-                using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
+            await LoopbackServer.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    cws.Options.SetRequestHeader("Host", expectedHost);
-                    await cws.ConnectAsync(uri, cts.Token);
-                }
-            }, server => server.AcceptConnectionAsync(async connection =>
-            {
-                Dictionary<string, string> headers = await LoopbackHelper.WebSocketHandshakeAsync(connection);
-                Assert.NotNull(headers);
-                Assert.True(headers.TryGetValue("Host", out string host));
-                Assert.Equal(expectedHost, host);
-            }), new LoopbackServer.Options { WebSocketEndpoint = true });
+                    expectedHost = "subdomain." + uri.Host;
+                    using (var cws = new ClientWebSocket())
+                    using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
+                    {
+                        cws.Options.SetRequestHeader("Host", expectedHost);
+                        await cws.ConnectAsync(uri, cts.Token);
+                    }
+                },
+                server =>
+                    server.AcceptConnectionAsync(
+                        async connection =>
+                        {
+                            Dictionary<string, string> headers =
+                                await LoopbackHelper.WebSocketHandshakeAsync(connection);
+                            Assert.NotNull(headers);
+                            Assert.True(headers.TryGetValue("Host", out string host));
+                            Assert.Equal(expectedHost, host);
+                        }
+                    ),
+                new LoopbackServer.Options { WebSocketEndpoint = true }
+            );
         }
 
         [OuterLoop("Uses external servers")]
@@ -141,10 +191,11 @@ namespace System.Net.WebSockets.Client.Tests
                 {
                     Task taskConnect = cws.ConnectAsync(server, cts.Token);
                     Assert.True(
-                        cws.State == WebSocketState.None ||
-                        cws.State == WebSocketState.Connecting ||
-                        cws.State == WebSocketState.Open,
-                        "State immediately after ConnectAsync incorrect: " + cws.State);
+                        cws.State == WebSocketState.None
+                            || cws.State == WebSocketState.Connecting
+                            || cws.State == WebSocketState.Open,
+                        "State immediately after ConnectAsync incorrect: " + cws.State
+                    );
                     await taskConnect;
                 }
 
@@ -154,24 +205,36 @@ namespace System.Net.WebSockets.Client.Tests
                 WebSocketReceiveResult recvResult;
                 using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
                 {
-                    recvResult = await ReceiveEntireMessageAsync(cws, new ArraySegment<byte>(buffer), cts.Token);
+                    recvResult = await ReceiveEntireMessageAsync(
+                        cws,
+                        new ArraySegment<byte>(buffer),
+                        cts.Token
+                    );
                 }
 
                 Assert.Equal(WebSocketMessageType.Text, recvResult.MessageType);
-                string headers = WebSocketData.GetTextFromBuffer(new ArraySegment<byte>(buffer, 0, recvResult.Count));
+                string headers = WebSocketData.GetTextFromBuffer(
+                    new ArraySegment<byte>(buffer, 0, recvResult.Count)
+                );
 
                 Assert.Contains("Cookies=Are Yummy", headers);
                 Assert.Contains("Especially=Chocolate Chip", headers);
                 Assert.Equal(server.Scheme == "wss", headers.Contains("Occasionally=Raisin"));
 
-                await cws.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None);
+                await cws.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    string.Empty,
+                    CancellationToken.None
+                );
             }
         }
 
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/45583", TestPlatforms.Browser)]
-        public async Task ConnectAsync_PassNoSubProtocol_ServerRequires_ThrowsWebSocketException(Uri server)
+        public async Task ConnectAsync_PassNoSubProtocol_ServerRequires_ThrowsWebSocketException(
+            Uri server
+        )
         {
             const string AcceptedProtocol = "CustomProtocol";
 
@@ -182,13 +245,16 @@ namespace System.Net.WebSockets.Client.Tests
                 var ub = new UriBuilder(server);
                 ub.Query = "subprotocol=" + AcceptedProtocol;
 
-                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(() =>
-                    cws.ConnectAsync(ub.Uri, cts.Token));
+                WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(
+                    () => cws.ConnectAsync(ub.Uri, cts.Token)
+                );
                 _output.WriteLine(ex.Message);
                 if (PlatformDetection.IsNetCore) // bug fix in netcoreapp: https://github.com/dotnet/corefx/pull/35960
                 {
-                    Assert.True(ex.WebSocketErrorCode == WebSocketError.Faulted ||
-                        ex.WebSocketErrorCode == WebSocketError.NotAWebSocket);
+                    Assert.True(
+                        ex.WebSocketErrorCode == WebSocketError.Faulted
+                            || ex.WebSocketErrorCode == WebSocketError.NotAWebSocket
+                    );
                 }
                 Assert.Equal(WebSocketState.Closed, cws.State);
             }
@@ -196,7 +262,9 @@ namespace System.Net.WebSockets.Client.Tests
 
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
-        public async Task ConnectAsync_PassMultipleSubProtocols_ServerRequires_ConnectionUsesAgreedSubProtocol(Uri server)
+        public async Task ConnectAsync_PassMultipleSubProtocols_ServerRequires_ConnectionUsesAgreedSubProtocol(
+            Uri server
+        )
         {
             const string AcceptedProtocol = "AcceptedProtocol";
             const string OtherProtocol = "OtherProtocol";
@@ -217,22 +285,39 @@ namespace System.Net.WebSockets.Client.Tests
         }
 
         [ConditionalFact(nameof(WebSocketsSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34690", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34690",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/42852", TestPlatforms.Browser)]
         public async Task ConnectAsync_NonStandardRequestHeaders_HeadersAddedWithoutValidation()
         {
-            await LoopbackServer.CreateClientAndServerAsync(async uri =>
-            {
-                using (var clientSocket = new ClientWebSocket())
-                using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
+            await LoopbackServer.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    clientSocket.Options.SetRequestHeader("Authorization", "AWS4-HMAC-SHA256 Credential=PLACEHOLDER /20190301/us-east-2/neptune-db/aws4_request, SignedHeaders=host;x-amz-date, Signature=b8155de54d9faab00000000000000000000000000a07e0d7dda49902e4d9202");
-                    await clientSocket.ConnectAsync(uri, cts.Token);
-                }
-            }, server => server.AcceptConnectionAsync(async connection =>
-            {
-                Assert.NotNull(await LoopbackHelper.WebSocketHandshakeAsync(connection));
-            }), new LoopbackServer.Options { WebSocketEndpoint = true });
+                    using (var clientSocket = new ClientWebSocket())
+                    using (var cts = new CancellationTokenSource(TimeOutMilliseconds))
+                    {
+                        clientSocket.Options.SetRequestHeader(
+                            "Authorization",
+                            "AWS4-HMAC-SHA256 Credential=PLACEHOLDER /20190301/us-east-2/neptune-db/aws4_request, SignedHeaders=host;x-amz-date, Signature=b8155de54d9faab00000000000000000000000000a07e0d7dda49902e4d9202"
+                        );
+                        await clientSocket.ConnectAsync(uri, cts.Token);
+                    }
+                },
+                server =>
+                    server.AcceptConnectionAsync(
+                        async connection =>
+                        {
+                            Assert.NotNull(
+                                await LoopbackHelper.WebSocketHandshakeAsync(connection)
+                            );
+                        }
+                    ),
+                new LoopbackServer.Options { WebSocketEndpoint = true }
+            );
         }
 
         [OuterLoop("Uses external servers")]
@@ -248,7 +333,11 @@ namespace System.Net.WebSockets.Client.Tests
                 await cws.ConnectAsync(server, cts.Token);
 
                 string expectedCloseStatusDescription = "Client close status";
-                await cws.CloseAsync(WebSocketCloseStatus.NormalClosure, expectedCloseStatusDescription, cts.Token);
+                await cws.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    expectedCloseStatusDescription,
+                    cts.Token
+                );
 
                 Assert.Equal(WebSocketState.Closed, cws.State);
                 Assert.Equal(WebSocketCloseStatus.NormalClosure, cws.CloseStatus);
@@ -263,7 +352,10 @@ namespace System.Net.WebSockets.Client.Tests
             {
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
-                Task t = clientSocket.ConnectAsync(new Uri("ws://" + Guid.NewGuid().ToString("N")), cts.Token);
+                Task t = clientSocket.ConnectAsync(
+                    new Uri("ws://" + Guid.NewGuid().ToString("N")),
+                    cts.Token
+                );
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t);
             }
         }
@@ -274,46 +366,62 @@ namespace System.Net.WebSockets.Client.Tests
             using (var clientSocket = new ClientWebSocket())
             {
                 var cts = new CancellationTokenSource();
-                Task t = clientSocket.ConnectAsync(new Uri("ws://" + Guid.NewGuid().ToString("N")), cts.Token);
+                Task t = clientSocket.ConnectAsync(
+                    new Uri("ws://" + Guid.NewGuid().ToString("N")),
+                    cts.Token
+                );
                 cts.Cancel();
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t);
             }
         }
 
         [ConditionalFact(nameof(WebSocketsSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34690", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34690",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/42852", TestPlatforms.Browser)]
         public async Task ConnectAsync_CancellationRequestedAfterConnect_ThrowsOperationCanceledException()
         {
-            var releaseServer = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            await LoopbackServer.CreateClientAndServerAsync(async uri =>
-            {
-                var clientSocket = new ClientWebSocket();
-                try
+            var releaseServer = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            await LoopbackServer.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    var cts = new CancellationTokenSource();
-                    Task t = clientSocket.ConnectAsync(uri, cts.Token);
-                    Assert.False(t.IsCompleted);
-                    cts.Cancel();
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t);
-                }
-                finally
-                {
-                    releaseServer.SetResult();
-                    clientSocket.Dispose();
-                }
-            }, async server =>
-            {
-                try
-                {
-                    await server.AcceptConnectionAsync(async connection =>
+                    var clientSocket = new ClientWebSocket();
+                    try
                     {
-                        await releaseServer.Task;
-                    });
-                }
-                // Ignore IO exception on server as there are race conditions when client is cancelling.
-                catch (IOException) { }
-            }, new LoopbackServer.Options { WebSocketEndpoint = true });
+                        var cts = new CancellationTokenSource();
+                        Task t = clientSocket.ConnectAsync(uri, cts.Token);
+                        Assert.False(t.IsCompleted);
+                        cts.Cancel();
+                        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t);
+                    }
+                    finally
+                    {
+                        releaseServer.SetResult();
+                        clientSocket.Dispose();
+                    }
+                },
+                async server =>
+                {
+                    try
+                    {
+                        await server.AcceptConnectionAsync(
+                            async connection =>
+                            {
+                                await releaseServer.Task;
+                            }
+                        );
+                    }
+                    // Ignore IO exception on server as there are race conditions when client is cancelling.
+                    catch (IOException) { }
+                },
+                new LoopbackServer.Options { WebSocketEndpoint = true }
+            );
         }
     }
 }

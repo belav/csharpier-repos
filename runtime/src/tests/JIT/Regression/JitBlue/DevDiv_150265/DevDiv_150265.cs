@@ -9,7 +9,7 @@ class Program
     static bool flag;
 
     static int Main(string[] args)
-    {            
+    {
         flag = true;
         return Test();
     }
@@ -23,7 +23,7 @@ class Program
         catch (NullReferenceException)
         {
             Console.WriteLine("Failure");
-            return 101;                 
+            return 101;
         }
         catch (Exception)
         {
@@ -75,6 +75,6 @@ class Program
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static string GetString()
     {
-        return flag ? (string) null : "test";
+        return flag ? (string)null : "test";
     }
 }

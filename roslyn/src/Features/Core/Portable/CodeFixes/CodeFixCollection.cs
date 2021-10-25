@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             ImmutableArray<CodeFix> fixes,
             FixAllState fixAllState,
             ImmutableArray<FixAllScope> supportedScopes,
-            Diagnostic firstDiagnostic)
+            Diagnostic firstDiagnostic
+        )
         {
             Provider = provider;
             TextSpan = span;

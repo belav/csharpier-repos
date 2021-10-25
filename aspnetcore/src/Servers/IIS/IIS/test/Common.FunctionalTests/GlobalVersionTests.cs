@@ -18,9 +18,7 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     [Collection(PublishedSitesCollection.Name)]
     public class GlobalVersionTests : IISFunctionalTestBase
     {
-        public GlobalVersionTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public GlobalVersionTests(PublishedSitesFixture fixture) : base(fixture) { }
 
         private const string _handlerVersion20 = "2.0.0";
         private const string _helloWorldRequest = "HelloWorld";
@@ -41,7 +39,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
         [RequiresNewShim]
         public async Task GlobalVersion_EnvironmentVariableWorks()
@@ -52,10 +54,15 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 var deploymentParameters = GetGlobalVersionBaseDeploymentParameters();
                 CopyShimToOutput(deploymentParameters);
                 deploymentParameters.PublishApplicationBeforeDeployment = true;
-                deploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_OUTOFPROCESS_HANDLER"] = temporaryFile;
+                deploymentParameters.EnvironmentVariables[
+                    "ASPNETCORE_MODULE_OUTOFPROCESS_HANDLER"
+                ] = temporaryFile;
 
                 var deploymentResult = await DeployAsync(deploymentParameters);
-                var requestHandlerPath = Path.Combine(GetANCMRequestHandlerPath(deploymentResult, _handlerVersion20), "aspnetcorev2_outofprocess.dll");
+                var requestHandlerPath = Path.Combine(
+                    GetANCMRequestHandlerPath(deploymentResult, _handlerVersion20),
+                    "aspnetcorev2_outofprocess.dll"
+                );
 
                 File.Delete(temporaryFile);
                 File.Move(requestHandlerPath, temporaryFile);
@@ -88,7 +95,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [InlineData("2.1.0")]
         [InlineData("2.1.0-preview")]
         public async Task GlobalVersion_NewVersionNumber(string version)
@@ -110,7 +121,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [InlineData("2.1.0")]
         [InlineData("2.1.0-preview")]
         public async Task GlobalVersion_MultipleRequestHandlers_PicksHighestOne(string version)
@@ -134,7 +149,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [InlineData("2.1.0")]
         [InlineData("2.1.0-preview")]
         public async Task GlobalVersion_MultipleRequestHandlers_UpgradeWorks(string version)
@@ -199,40 +218,63 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             }
         }
 
-        private string GetANCMRequestHandlerPath(IISDeploymentResult deploymentResult, string version)
+        private string GetANCMRequestHandlerPath(
+            IISDeploymentResult deploymentResult,
+            string version
+        )
         {
-            return Path.Combine(deploymentResult.ContentRoot,
-               deploymentResult.DeploymentParameters.RuntimeArchitecture.ToString(),
-               version);
+            return Path.Combine(
+                deploymentResult.ContentRoot,
+                deploymentResult.DeploymentParameters.RuntimeArchitecture.ToString(),
+                version
+            );
         }
 
         private void AssertLoadedVersion(string version)
         {
             StopServer();
-            Assert.Contains(TestSink.Writes, context => context.Message.Contains(version + @"\aspnetcorev2_outofprocess.dll"));
+            Assert.Contains(
+                TestSink.Writes,
+                context => context.Message.Contains(version + @"\aspnetcorev2_outofprocess.dll")
+            );
         }
 
         private static void CopyShimToOutput(IISDeploymentParameters parameters)
         {
             parameters.AddServerConfigAction(
-                (config, contentRoot) => {
-                    var moduleNodes = config.DescendantNodesAndSelf()
+                (config, contentRoot) =>
+                {
+                    var moduleNodes = config
+                        .DescendantNodesAndSelf()
                         .OfType<XElement>()
-                        .Where(element =>
-                            element.Name == "add" &&
-                            element.Attribute("name")?.Value.StartsWith("AspNetCoreModule", StringComparison.Ordinal) == true &&
-                            element.Attribute("image") != null);
+                        .Where(
+                            element =>
+                                element.Name == "add"
+                                && element.Attribute("name")?.Value.StartsWith(
+                                    "AspNetCoreModule",
+                                    StringComparison.Ordinal
+                                ) == true
+                                && element.Attribute("image") != null
+                        );
 
-                    var sourceDirectory = new DirectoryInfo(Path.GetDirectoryName(moduleNodes.First().Attribute("image").Value));
-                    var destinationDirectory = new DirectoryInfo(Path.Combine(contentRoot, sourceDirectory.Name));
+                    var sourceDirectory = new DirectoryInfo(
+                        Path.GetDirectoryName(moduleNodes.First().Attribute("image").Value)
+                    );
+                    var destinationDirectory = new DirectoryInfo(
+                        Path.Combine(contentRoot, sourceDirectory.Name)
+                    );
                     destinationDirectory.Create();
                     foreach (var element in moduleNodes)
                     {
                         var imageAttribute = element.Attribute("image");
-                        imageAttribute.Value = imageAttribute.Value.Replace(sourceDirectory.FullName, destinationDirectory.FullName);
+                        imageAttribute.Value = imageAttribute.Value.Replace(
+                            sourceDirectory.FullName,
+                            destinationDirectory.FullName
+                        );
                     }
                     CopyFiles(sourceDirectory, destinationDirectory);
-                });
+                }
+            );
         }
 
         private static void CopyFiles(DirectoryInfo source, DirectoryInfo target)
@@ -248,6 +290,5 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 fileInfo.CopyTo(destFileName, overwrite: true);
             }
         }
-
     }
 }

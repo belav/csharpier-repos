@@ -32,12 +32,16 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             };
 
             var metadataProvider = new TestModelMetadataProvider();
-            metadataProvider.ForType<object>().BindingDetails(d =>
-            {
-                d.BindingSource = BindingSource.Custom;
-                d.BinderType = typeof(TestModelBinder);
-                d.BinderModelName = "custom";
-            });
+            metadataProvider
+                .ForType<object>()
+                .BindingDetails(
+                    d =>
+                    {
+                        d.BindingSource = BindingSource.Custom;
+                        d.BinderType = typeof(TestModelBinder);
+                        d.BinderModelName = "custom";
+                    }
+                );
 
             var newModelMetadata = metadataProvider.GetMetadataForType(typeof(object));
 
@@ -50,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 modelMetadata: newModelMetadata,
                 fieldName: "fieldName",
                 modelName: "modelprefix.fieldName",
-                model: null);
+                model: null
+            );
 
             // Assert
             Assert.Same(newModelMetadata.BinderModelName, bindingContext.BinderModelName);
@@ -79,12 +84,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 original,
                 metadataProvider.GetMetadataForType(typeof(object)),
                 new BindingInfo() { BindingSource = BindingSource.Query },
-                "model");
+                "model"
+            );
 
             // Assert
             Assert.Collection(
                 Assert.IsType<CompositeValueProvider>(context.ValueProvider),
-                vp => Assert.Same(original[1], vp));
+                vp => Assert.Same(original[1], vp)
+            );
         }
 
         [Fact]
@@ -102,9 +109,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 original,
                 metadataProvider.GetMetadataForType(typeof(string)),
                 new BindingInfo(),
-                "model");
+                "model"
+            );
 
-            var propertyMetadata = metadataProvider.GetMetadataForProperty(typeof(string), nameof(string.Length));
+            var propertyMetadata = metadataProvider.GetMetadataForProperty(
+                typeof(string),
+                nameof(string.Length)
+            );
 
             // Act
             context.EnterNestedScope(propertyMetadata, "Length", "Length", model: null);
@@ -112,7 +123,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             // Assert
             Assert.Collection(
                 Assert.IsType<CompositeValueProvider>(context.ValueProvider),
-                vp => Assert.Same(original[1], vp));
+                vp => Assert.Same(original[1], vp)
+            );
         }
 
         [Fact]
@@ -131,9 +143,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 original,
                 metadataProvider.GetMetadataForType(typeof(string)),
                 new BindingInfo() { BindingSource = BindingSource.Query },
-                "model");
+                "model"
+            );
 
-            var propertyMetadata = metadataProvider.GetMetadataForProperty(typeof(string), nameof(string.Length));
+            var propertyMetadata = metadataProvider.GetMetadataForProperty(
+                typeof(string),
+                nameof(string.Length)
+            );
 
             // Act
             context.EnterNestedScope(propertyMetadata, "Length", "Length", model: null);
@@ -141,7 +157,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             // Assert
             Assert.Collection(
                 Assert.IsType<CompositeValueProvider>(context.ValueProvider),
-                vp => Assert.Same(original[2], vp));
+                vp => Assert.Same(original[2], vp)
+            );
         }
 
         [Fact]
@@ -175,14 +192,20 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         {
             var result = new CompositeValueProvider();
             result.Add(new RouteValueProvider(BindingSource.Path, new RouteValueDictionary()));
-            result.Add(new QueryStringValueProvider(
-                BindingSource.Query,
-                new QueryCollection(),
-                CultureInfo.InvariantCulture));
-            result.Add(new FormValueProvider(
-                BindingSource.Form,
-                new FormCollection(new Dictionary<string, StringValues>()),
-                CultureInfo.CurrentCulture));
+            result.Add(
+                new QueryStringValueProvider(
+                    BindingSource.Query,
+                    new QueryCollection(),
+                    CultureInfo.InvariantCulture
+                )
+            );
+            result.Add(
+                new FormValueProvider(
+                    BindingSource.Form,
+                    new FormCollection(new Dictionary<string, StringValues>()),
+                    CultureInfo.CurrentCulture
+                )
+            );
             return result;
         }
 

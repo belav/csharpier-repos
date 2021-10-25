@@ -17,17 +17,16 @@ namespace System.CommandLine.Tests.Invocation
         {
             var option = new Option("info");
 
-            var parser =
-                new CommandLineBuilder()
-                    .AddOption(option)
-                    .UseTypoCorrections()
-                    .Build();
+            var parser = new CommandLineBuilder().AddOption(option).UseTypoCorrections().Build();
 
             var result = parser.Parse("niof");
 
             await result.InvokeAsync(_console);
 
-            _console.Out.ToString().Should().Contain("'niof' was not matched. Did you mean 'info'?");
+            _console.Out
+                .ToString()
+                .Should()
+                .Contain("'niof' was not matched. Did you mean 'info'?");
         }
 
         [Fact]
@@ -35,11 +34,7 @@ namespace System.CommandLine.Tests.Invocation
         {
             var option = new Option("info");
 
-            var parser =
-                new CommandLineBuilder()
-                    .AddOption(option)
-                    .UseTypoCorrections()
-                    .Build();
+            var parser = new CommandLineBuilder().AddOption(option).UseTypoCorrections().Build();
 
             var result = parser.Parse("zzzzzzz");
 
@@ -53,48 +48,48 @@ namespace System.CommandLine.Tests.Invocation
         {
             var command = new Command("restore");
 
-            var parser =
-                new CommandLineBuilder()
-                    .AddCommand(command)
-                    .UseTypoCorrections()
-                    .Build();
+            var parser = new CommandLineBuilder().AddCommand(command).UseTypoCorrections().Build();
 
             var result = parser.Parse("sertor");
 
             await result.InvokeAsync(_console);
 
-            _console.Out.ToString().Should().Contain("'sertor' was not matched. Did you mean 'restore'?");
+            _console.Out
+                .ToString()
+                .Should()
+                .Contain("'sertor' was not matched. Did you mean 'restore'?");
         }
 
         [Fact]
         public async Task When_there_are_multiple_matches_it_picks_the_best_matches()
         {
-            var parser =
-                new CommandLineBuilder()
-                    .AddCommand(new Command("from"))
-                    .AddCommand(new Command("seen"))
-                    .AddOption(new Option("a"))
-                    .AddOption(new Option("been"))
-                    .UseTypoCorrections()
-                    .Build();
+            var parser = new CommandLineBuilder()
+                .AddCommand(new Command("from"))
+                .AddCommand(new Command("seen"))
+                .AddOption(new Option("a"))
+                .AddOption(new Option("been"))
+                .UseTypoCorrections()
+                .Build();
 
             var result = parser.Parse("een");
 
             await result.InvokeAsync(_console);
 
-            _console.Out.ToString().Should().Contain("'een' was not matched. Did you mean 'seen', or 'been'?");
+            _console.Out
+                .ToString()
+                .Should()
+                .Contain("'een' was not matched. Did you mean 'seen', or 'been'?");
         }
 
         [Fact]
         public async Task Hidden_commands_are_not_suggested()
         {
-            var parser =
-                new CommandLineBuilder()
-                    .AddCommand(new Command("from"))
-                    .AddCommand(new Command("seen") { IsHidden = true })
-                    .AddCommand(new Command("been"))
-                    .UseTypoCorrections()
-                    .Build();
+            var parser = new CommandLineBuilder()
+                .AddCommand(new Command("from"))
+                .AddCommand(new Command("seen") { IsHidden = true })
+                .AddCommand(new Command("been"))
+                .UseTypoCorrections()
+                .Build();
 
             var result = parser.Parse("een");
 
@@ -106,12 +101,11 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public async Task Arguments_are_not_suggested()
         {
-            var parser =
-                new CommandLineBuilder()
-                    .AddArgument(new Argument("the-argument"))
-                    .AddCommand(new Command("been"))
-                    .UseTypoCorrections()
-                    .Build();
+            var parser = new CommandLineBuilder()
+                .AddArgument(new Argument("the-argument"))
+                .AddCommand(new Command("been"))
+                .UseTypoCorrections()
+                .Build();
 
             var result = parser.Parse("een");
 
@@ -123,13 +117,12 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public async Task Hidden_options_are_not_suggested()
         {
-            var parser =
-                new CommandLineBuilder()
-                    .AddOption(new Option("from"))
-                    .AddOption(new Option("seen") { IsHidden = true })
-                    .AddOption(new Option("been"))
-                    .UseTypoCorrections()
-                    .Build();
+            var parser = new CommandLineBuilder()
+                .AddOption(new Option("from"))
+                .AddOption(new Option("seen") { IsHidden = true })
+                .AddOption(new Option("been"))
+                .UseTypoCorrections()
+                .Build();
             var result = parser.Parse("een");
 
             await result.InvokeAsync(_console);
@@ -140,17 +133,19 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public async Task Suggestions_favor_matches_with_prefix()
         {
-            var parser =
-                new CommandLineBuilder()
-                    .AddOption(new Option(new [] {"/call", "-call", "--call"}))
-                    .AddOption(new Option(new [] {"/email", "-email", "--email"}))
-                    .UseTypoCorrections()
-                    .Build();
+            var parser = new CommandLineBuilder()
+                .AddOption(new Option(new[] { "/call", "-call", "--call" }))
+                .AddOption(new Option(new[] { "/email", "-email", "--email" }))
+                .UseTypoCorrections()
+                .Build();
             var result = parser.Parse("-all");
 
             await result.InvokeAsync(_console);
 
-            _console.Out.ToString().Should().Contain("'-all' was not matched. Did you mean '-call'?");
+            _console.Out
+                .ToString()
+                .Should()
+                .Contain("'-all' was not matched. Did you mean '-call'?");
         }
     }
 }

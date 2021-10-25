@@ -6,18 +6,28 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language
 {
-    internal class DefaultRazorCodeGenerationOptionsFactoryProjectFeature : RazorProjectEngineFeatureBase, IRazorCodeGenerationOptionsFactoryProjectFeature
+    internal class DefaultRazorCodeGenerationOptionsFactoryProjectFeature
+        : RazorProjectEngineFeatureBase,
+          IRazorCodeGenerationOptionsFactoryProjectFeature
     {
         private IConfigureRazorCodeGenerationOptionsFeature[] _configureOptions;
 
         protected override void OnInitialized()
         {
-            _configureOptions = ProjectEngine.EngineFeatures.OfType<IConfigureRazorCodeGenerationOptionsFeature>().ToArray();
+            _configureOptions = ProjectEngine.EngineFeatures
+                .OfType<IConfigureRazorCodeGenerationOptionsFeature>()
+                .ToArray();
         }
 
-        public RazorCodeGenerationOptions Create(string fileKind, Action<RazorCodeGenerationOptionsBuilder> configure)
+        public RazorCodeGenerationOptions Create(
+            string fileKind,
+            Action<RazorCodeGenerationOptionsBuilder> configure
+        )
         {
-            var builder = new DefaultRazorCodeGenerationOptionsBuilder(ProjectEngine.Configuration, fileKind);
+            var builder = new DefaultRazorCodeGenerationOptionsBuilder(
+                ProjectEngine.Configuration,
+                fileKind
+            );
             configure?.Invoke(builder);
 
             for (var i = 0; i < _configureOptions.Length; i++)

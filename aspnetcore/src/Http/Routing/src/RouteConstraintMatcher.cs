@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Routing
             HttpContext httpContext,
             IRouter route,
             RouteDirection routeDirection,
-            ILogger logger)
+            ILogger logger
+        )
         {
             if (routeValues == null)
             {

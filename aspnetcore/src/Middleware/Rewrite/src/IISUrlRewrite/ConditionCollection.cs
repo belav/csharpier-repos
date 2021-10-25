@@ -14,10 +14,7 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
         public LogicalGrouping Grouping { get; }
         public bool TrackAllCaptures { get; }
 
-        public ConditionCollection()
-            :this(LogicalGrouping.MatchAll, trackAllCaptures: false)
-        {
-        }
+        public ConditionCollection() : this(LogicalGrouping.MatchAll, trackAllCaptures: false) { }
 
         public ConditionCollection(LogicalGrouping grouping, bool trackAllCaptures)
         {
@@ -35,7 +32,9 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
                 {
                     return _conditions[index];
                 }
-                throw new IndexOutOfRangeException($"Cannot access condition at index {index}. Only {_conditions.Count} conditions were captured.");
+                throw new IndexOutOfRangeException(
+                    $"Cannot access condition at index {index}. Only {_conditions.Count} conditions were captured."
+                );
             }
         }
 

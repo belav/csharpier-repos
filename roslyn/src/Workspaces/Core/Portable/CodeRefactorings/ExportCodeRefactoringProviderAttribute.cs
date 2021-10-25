@@ -31,8 +31,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// </summary>
         /// <param name="firstLanguage">One language to which the code refactoring provider applies.</param>
         /// <param name="additionalLanguages">Additional languages to which the code refactoring provider applies. See <see cref="LanguageNames"/>.</param>
-        public ExportCodeRefactoringProviderAttribute(string firstLanguage, params string[] additionalLanguages)
-            : base(typeof(CodeRefactoringProvider))
+        public ExportCodeRefactoringProviderAttribute(
+            string firstLanguage,
+            params string[] additionalLanguages
+        ) : base(typeof(CodeRefactoringProvider))
         {
             if (additionalLanguages == null)
             {

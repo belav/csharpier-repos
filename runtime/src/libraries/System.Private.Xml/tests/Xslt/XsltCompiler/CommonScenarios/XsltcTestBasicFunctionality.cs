@@ -34,7 +34,7 @@ namespace System.Xml.Tests
         {
             if (ShouldSkip(englishOnly))
             {
-                return;// TEST_SKIPPED;
+                return; // TEST_SKIPPED;
             }
             string cmdLine = param0.ToString();
             string baselineFile = param1.ToString();

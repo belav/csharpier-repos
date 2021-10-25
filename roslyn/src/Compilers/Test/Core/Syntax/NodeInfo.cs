@@ -14,14 +14,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     {
         private readonly string _className;
         private readonly FieldInfo[] _fieldInfos;
-        private static readonly FieldInfo[] s_emptyFieldInfos = { };
+        private static readonly FieldInfo[] s_emptyFieldInfos = {  };
 
         public string ClassName
         {
-            get
-            {
-                return _className;
-            }
+            get { return _className; }
         }
 
         public FieldInfo[] FieldInfos

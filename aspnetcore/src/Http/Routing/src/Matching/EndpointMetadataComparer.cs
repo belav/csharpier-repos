@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             {
                 if (_comparers == null)
                 {
-                    _comparers = _services.GetServices<MatcherPolicy>()
+                    _comparers = _services
+                        .GetServices<MatcherPolicy>()
                         .OrderBy(p => p.Order)
                         .OfType<IEndpointComparerPolicy>()
                         .Select(p => p.Comparer)
@@ -85,12 +86,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
     /// The type of metadata to compare. Typically this is a type of metadata related
     /// to the application concern being handled.
     /// </typeparam>
-    public abstract class EndpointMetadataComparer<TMetadata> : IComparer<Endpoint> where TMetadata : class
+    public abstract class EndpointMetadataComparer<TMetadata> : IComparer<Endpoint>
+        where TMetadata : class
     {
         /// <summary>
         /// A default instance of the <see cref="EndpointMetadataComparer"/>.
         /// </summary>
-        public static readonly EndpointMetadataComparer<TMetadata> Default = new DefaultComparer<TMetadata>();
+        public static readonly EndpointMetadataComparer<TMetadata> Default =
+            new DefaultComparer<TMetadata>();
 
         /// <summary>
         /// Compares two objects and returns a value indicating whether one is less than, equal to,

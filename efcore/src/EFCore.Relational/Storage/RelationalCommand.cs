@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public RelationalCommand(
             RelationalCommandBuilderDependencies dependencies,
             string commandText,
-            IReadOnlyList<IRelationalParameter> parameters)
+            IReadOnlyList<IRelationalParameter> parameters
+        )
         {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(commandText, nameof(commandText));
@@ -77,7 +78,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The number of rows affected. </returns>
         public virtual int ExecuteNonQuery(RelationalCommandParameterObject parameterObject)
         {
-            var (connection, context, logger) = (parameterObject.Connection, parameterObject.Context, parameterObject.Logger);
+            var (connection, context, logger) = (
+                parameterObject.Connection,
+                parameterObject.Context,
+                parameterObject.Logger
+            );
 
             var startTime = DateTimeOffset.UtcNow;
 
@@ -85,9 +90,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
             // Guid.NewGuid is expensive, do it only if needed
-            var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+            var commandId =
+                shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
-            var command = CreateDbCommand(parameterObject, commandId, DbCommandMethod.ExecuteNonQuery);
+            var command = CreateDbCommand(
+                parameterObject,
+                commandId,
+                DbCommandMethod.ExecuteNonQuery
+            );
 
             connection.Open();
 
@@ -97,14 +107,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     _stopwatch.Restart();
 
-                    var interceptionResult = logger?.CommandNonQueryExecuting(
+                    var interceptionResult =
+                        logger?.CommandNonQueryExecuting(
                             connection,
                             command,
                             context,
                             commandId,
                             connection.ConnectionId,
-                            startTime)
-                        ?? default;
+                            startTime
+                        ) ?? default;
 
                     var nonQueryResult = interceptionResult.HasResult
                         ? interceptionResult.Result
@@ -118,8 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                             connection.ConnectionId,
                             nonQueryResult,
                             startTime,
-                            _stopwatch.Elapsed)
-                        ?? nonQueryResult;
+                            _stopwatch.Elapsed
+                        ) ?? nonQueryResult;
                 }
                 else
                 {
@@ -137,7 +148,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     connection.ConnectionId,
                     exception,
                     startTime,
-                    _stopwatch.Elapsed);
+                    _stopwatch.Elapsed
+                );
 
                 throw;
             }
@@ -158,9 +170,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public virtual async Task<int> ExecuteNonQueryAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            var (connection, context, logger) = (parameterObject.Connection, parameterObject.Context, parameterObject.Logger);
+            var (connection, context, logger) = (
+                parameterObject.Connection,
+                parameterObject.Context,
+                parameterObject.Logger
+            );
 
             var startTime = DateTimeOffset.UtcNow;
 
@@ -168,9 +185,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
             // Guid.NewGuid is expensive, do it only if needed
-            var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+            var commandId =
+                shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
-            var command = CreateDbCommand(parameterObject, commandId, DbCommandMethod.ExecuteNonQuery);
+            var command = CreateDbCommand(
+                parameterObject,
+                commandId,
+                DbCommandMethod.ExecuteNonQuery
+            );
 
             await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
@@ -180,25 +202,31 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     _stopwatch.Restart();
 
-                    var interceptionResult = logger == null
-                        ? default
-                        : await logger.CommandNonQueryExecutingAsync(
-                                connection,
-                                command,
-                                context,
-                                commandId,
-                                connection.ConnectionId,
-                                startTime,
-                                cancellationToken)
-                            .ConfigureAwait(false);
+                    var interceptionResult =
+                        logger == null
+                            ? default
+                            : await logger
+                                  .CommandNonQueryExecutingAsync(
+                                      connection,
+                                      command,
+                                      context,
+                                      commandId,
+                                      connection.ConnectionId,
+                                      startTime,
+                                      cancellationToken
+                                  )
+                                  .ConfigureAwait(false);
 
                     var result = interceptionResult.HasResult
                         ? interceptionResult.Result
-                        : await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+                        : await command
+                              .ExecuteNonQueryAsync(cancellationToken)
+                              .ConfigureAwait(false);
 
                     if (logger != null)
                     {
-                        result = await logger.CommandNonQueryExecutedAsync(
+                        result = await logger
+                            .CommandNonQueryExecutedAsync(
                                 connection,
                                 command,
                                 context,
@@ -207,7 +235,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                                 result,
                                 startTime,
                                 _stopwatch.Elapsed,
-                                cancellationToken)
+                                cancellationToken
+                            )
                             .ConfigureAwait(false);
                     }
 
@@ -215,14 +244,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 }
                 else
                 {
-                    return await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+                    return await command
+                        .ExecuteNonQueryAsync(cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
             catch (Exception exception)
             {
                 if (logger != null)
                 {
-                    await logger.CommandErrorAsync(
+                    await logger
+                        .CommandErrorAsync(
                             connection,
                             command,
                             context,
@@ -232,7 +264,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                             exception,
                             startTime,
                             _stopwatch.Elapsed,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
 
@@ -251,7 +284,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The result of the command. </returns>
         public virtual object? ExecuteScalar(RelationalCommandParameterObject parameterObject)
         {
-            var (connection, context, logger) = (parameterObject.Connection, parameterObject.Context, parameterObject.Logger);
+            var (connection, context, logger) = (
+                parameterObject.Connection,
+                parameterObject.Context,
+                parameterObject.Logger
+            );
 
             var startTime = DateTimeOffset.UtcNow;
 
@@ -259,9 +296,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
             // Guid.NewGuid is expensive, do it only if needed
-            var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+            var commandId =
+                shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
-            var command = CreateDbCommand(parameterObject, commandId, DbCommandMethod.ExecuteScalar);
+            var command = CreateDbCommand(
+                parameterObject,
+                commandId,
+                DbCommandMethod.ExecuteScalar
+            );
 
             connection.Open();
 
@@ -271,14 +313,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     _stopwatch.Restart();
 
-                    var interceptionResult = logger?.CommandScalarExecuting(
+                    var interceptionResult =
+                        logger?.CommandScalarExecuting(
                             connection,
                             command,
                             context,
                             commandId,
                             connection.ConnectionId,
-                            startTime)
-                        ?? default;
+                            startTime
+                        ) ?? default;
 
                     var result = interceptionResult.HasResult
                         ? interceptionResult.Result
@@ -292,8 +335,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                             connection.ConnectionId,
                             result,
                             startTime,
-                            _stopwatch.Elapsed)
-                        ?? result;
+                            _stopwatch.Elapsed
+                        ) ?? result;
                 }
                 else
                 {
@@ -311,7 +354,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     connection.ConnectionId,
                     exception,
                     startTime,
-                    _stopwatch.Elapsed);
+                    _stopwatch.Elapsed
+                );
 
                 throw;
             }
@@ -332,9 +376,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public virtual async Task<object?> ExecuteScalarAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            var (connection, context, logger) = (parameterObject.Connection, parameterObject.Context, parameterObject.Logger);
+            var (connection, context, logger) = (
+                parameterObject.Connection,
+                parameterObject.Context,
+                parameterObject.Logger
+            );
 
             var startTime = DateTimeOffset.UtcNow;
 
@@ -342,9 +391,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
             // Guid.NewGuid is expensive, do it only if needed
-            var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+            var commandId =
+                shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
-            var command = CreateDbCommand(parameterObject, commandId, DbCommandMethod.ExecuteScalar);
+            var command = CreateDbCommand(
+                parameterObject,
+                commandId,
+                DbCommandMethod.ExecuteScalar
+            );
 
             await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
@@ -354,17 +408,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     _stopwatch.Restart();
 
-                    var interceptionResult = logger == null
-                        ? default
-                        : await logger.CommandScalarExecutingAsync(
-                                connection,
-                                command,
-                                context,
-                                commandId,
-                                connection.ConnectionId,
-                                startTime,
-                                cancellationToken)
-                            .ConfigureAwait(false);
+                    var interceptionResult =
+                        logger == null
+                            ? default
+                            : await logger
+                                  .CommandScalarExecutingAsync(
+                                      connection,
+                                      command,
+                                      context,
+                                      commandId,
+                                      connection.ConnectionId,
+                                      startTime,
+                                      cancellationToken
+                                  )
+                                  .ConfigureAwait(false);
 
                     var result = interceptionResult.HasResult
                         ? interceptionResult.Result
@@ -372,30 +429,36 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                     if (logger != null)
                     {
-                        result = await logger.CommandScalarExecutedAsync(
-                            connection,
-                            command,
-                            context,
-                            commandId,
-                            connection.ConnectionId,
-                            result,
-                            startTime,
-                            _stopwatch.Elapsed,
-                            cancellationToken).ConfigureAwait(false);
+                        result = await logger
+                            .CommandScalarExecutedAsync(
+                                connection,
+                                command,
+                                context,
+                                commandId,
+                                connection.ConnectionId,
+                                result,
+                                startTime,
+                                _stopwatch.Elapsed,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
 
                     return result;
                 }
                 else
                 {
-                    return await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false);
+                    return await command
+                        .ExecuteScalarAsync(cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
             catch (Exception exception)
             {
                 if (logger != null)
                 {
-                    await logger.CommandErrorAsync(
+                    await logger
+                        .CommandErrorAsync(
                             connection,
                             command,
                             context,
@@ -405,7 +468,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                             exception,
                             startTime,
                             _stopwatch.Elapsed,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
 
@@ -422,7 +486,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="parameterObject"> Parameters for this method. </param>
         /// <returns> The result of the command. </returns>
-        public virtual RelationalDataReader ExecuteReader(RelationalCommandParameterObject parameterObject)
+        public virtual RelationalDataReader ExecuteReader(
+            RelationalCommandParameterObject parameterObject
+        )
         {
             var connection = parameterObject.Connection;
             var context = parameterObject.Context;
@@ -436,9 +502,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
             // Guid.NewGuid is expensive, do it only if needed
-            var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+            var commandId =
+                shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
-            var command = CreateDbCommand(parameterObject, commandId, DbCommandMethod.ExecuteReader);
+            var command = CreateDbCommand(
+                parameterObject,
+                commandId,
+                DbCommandMethod.ExecuteReader
+            );
 
             connection.Open();
 
@@ -457,7 +528,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         context,
                         commandId,
                         connection.ConnectionId,
-                        startTime);
+                        startTime
+                    );
 
                     reader = interceptionResult.HasResult
                         ? interceptionResult.Result
@@ -471,7 +543,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         connection.ConnectionId,
                         reader,
                         startTime,
-                        _stopwatch.Elapsed);
+                        _stopwatch.Elapsed
+                    );
                 }
                 else
                 {
@@ -489,7 +562,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     connection.ConnectionId,
                     exception,
                     startTime,
-                    _stopwatch.Elapsed);
+                    _stopwatch.Elapsed
+                );
 
                 CleanupCommand(command, connection);
 
@@ -500,10 +574,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 if (readerColumns != null)
                 {
-                    reader = new BufferedDataReader(reader, detailedErrorsEnabled).Initialize(readerColumns);
+                    reader = new BufferedDataReader(reader, detailedErrorsEnabled).Initialize(
+                        readerColumns
+                    );
                 }
 
-                _relationalReader.Initialize(parameterObject.Connection, command, reader, commandId, logger);
+                _relationalReader.Initialize(
+                    parameterObject.Connection,
+                    command,
+                    reader,
+                    commandId,
+                    logger
+                );
 
                 readerOpen = true;
 
@@ -529,7 +611,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public virtual async Task<RelationalDataReader> ExecuteReaderAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var connection = parameterObject.Connection;
             var context = parameterObject.Context;
@@ -543,9 +626,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var shouldLogCommandExecute = logger?.ShouldLogCommandExecute(startTime) == true;
 
             // Guid.NewGuid is expensive, do it only if needed
-            var commandId = shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
+            var commandId =
+                shouldLogCommandCreate || shouldLogCommandExecute ? Guid.NewGuid() : default;
 
-            var command = CreateDbCommand(parameterObject, commandId, DbCommandMethod.ExecuteReader);
+            var command = CreateDbCommand(
+                parameterObject,
+                commandId,
+                DbCommandMethod.ExecuteReader
+            );
 
             await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
@@ -558,21 +646,24 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     _stopwatch.Restart();
 
-                    var interceptionResult = await logger!.CommandReaderExecutingAsync(
+                    var interceptionResult = await logger!
+                        .CommandReaderExecutingAsync(
                             connection,
                             command,
                             context,
                             commandId,
                             connection.ConnectionId,
                             startTime,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
 
                     reader = interceptionResult.HasResult
                         ? interceptionResult.Result
                         : await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-                    reader = await logger!.CommandReaderExecutedAsync(
+                    reader = await logger!
+                        .CommandReaderExecutedAsync(
                             connection,
                             command,
                             context,
@@ -581,19 +672,23 @@ namespace Microsoft.EntityFrameworkCore.Storage
                             reader,
                             startTime,
                             _stopwatch.Elapsed,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
                 else
                 {
-                    reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+                    reader = await command
+                        .ExecuteReaderAsync(cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
             catch (Exception exception)
             {
                 if (logger != null)
                 {
-                    await logger.CommandErrorAsync(
+                    await logger
+                        .CommandErrorAsync(
                             connection,
                             command,
                             context,
@@ -603,7 +698,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                             exception,
                             startTime,
                             DateTimeOffset.UtcNow - startTime,
-                            cancellationToken)
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
                 }
 
@@ -616,11 +712,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 if (readerColumns != null)
                 {
-                    reader = await new BufferedDataReader(reader, detailedErrorsEnabled).InitializeAsync(readerColumns, cancellationToken)
+                    reader = await new BufferedDataReader(reader, detailedErrorsEnabled)
+                        .InitializeAsync(readerColumns, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
-                _relationalReader.Initialize(parameterObject.Connection, command, reader, commandId, logger);
+                _relationalReader.Initialize(
+                    parameterObject.Connection,
+                    command,
+                    reader,
+                    commandId,
+                    logger
+                );
 
                 readerOpen = true;
 
@@ -653,9 +756,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public virtual DbCommand CreateDbCommand(
             RelationalCommandParameterObject parameterObject,
             Guid commandId,
-            DbCommandMethod commandMethod)
+            DbCommandMethod commandMethod
+        )
         {
-            var (connection, context, logger) = (parameterObject.Connection, parameterObject.Context, parameterObject.Logger);
+            var (connection, context, logger) = (
+                parameterObject.Connection,
+                parameterObject.Context,
+                parameterObject.Logger
+            );
             var connectionId = connection.ConnectionId;
 
             var startTime = DateTimeOffset.UtcNow;
@@ -667,14 +775,28 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 _stopwatch.Restart();
 
                 var interceptionResult = logger.CommandCreating(
-                    connection, commandMethod, context, commandId, connectionId, startTime);
+                    connection,
+                    commandMethod,
+                    context,
+                    commandId,
+                    connectionId,
+                    startTime
+                );
 
                 command = interceptionResult.HasResult
                     ? interceptionResult.Result
                     : connection.DbConnection.CreateCommand();
 
                 command = logger.CommandCreated(
-                    connection, command, commandMethod, context, commandId, connectionId, startTime, _stopwatch.Elapsed);
+                    connection,
+                    command,
+                    commandMethod,
+                    context,
+                    commandId,
+                    connectionId,
+                    startTime,
+                    _stopwatch.Elapsed
+                );
             }
             else
             {
@@ -699,8 +821,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 if (parameterValues == null)
                 {
                     throw new InvalidOperationException(
-                        RelationalStrings.MissingParameterValue(
-                            Parameters[0].InvariantName));
+                        RelationalStrings.MissingParameterValue(Parameters[0].InvariantName)
+                    );
                 }
 
                 for (var i = 0; i < Parameters.Count; i++)
@@ -712,9 +834,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             return command;
         }
 
-        private static void CleanupCommand(
-            DbCommand command,
-            IRelationalConnection connection)
+        private static void CleanupCommand(DbCommand command, IRelationalConnection connection)
         {
             command.Parameters.Clear();
             command.Dispose();
@@ -723,7 +843,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
         private static async Task CleanupCommandAsync(
             DbCommand command,
-            IRelationalConnection connection)
+            IRelationalConnection connection
+        )
         {
             command.Parameters.Clear();
             await command.DisposeAsync().ConfigureAwait(false);
@@ -742,8 +863,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     </para>
         /// </summary>
         /// <returns>The created <see cref="RelationalDataReader" />.</returns>
-        protected virtual RelationalDataReader CreateRelationalDataReader()
-             => new(this);
+        protected virtual RelationalDataReader CreateRelationalDataReader() => new(this);
 
         /// <summary>
         ///     Populates this command from the provided <paramref name="templateCommand"/>.

@@ -19,12 +19,19 @@ namespace Microsoft.AspNetCore.JsonPatch.Converters
             return true;
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, 
-            JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             if (objectType != typeof(JsonPatchDocument))
             {
-                throw new ArgumentException(Resources.FormatParameterMustMatchType(nameof(objectType), "JsonPatchDocument"), nameof(objectType));
+                throw new ArgumentException(
+                    Resources.FormatParameterMustMatchType(nameof(objectType), "JsonPatchDocument"),
+                    nameof(objectType)
+                );
             }
 
             try
@@ -33,14 +40,14 @@ namespace Microsoft.AspNetCore.JsonPatch.Converters
                 {
                     return null;
                 }
-                
+
                 // load jObject
                 var jObject = JArray.Load(reader);
 
                 // Create target object for Json => list of operations
                 var targetOperations = new List<Operation>();
 
-                // Create a new reader for this jObject, and set all properties 
+                // Create a new reader for this jObject, and set all properties
                 // to match the original reader.
                 var jObjectReader = jObject.CreateReader();
                 jObjectReader.Culture = reader.Culture;
@@ -51,7 +58,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Converters
                 // Populate the object properties
                 serializer.Populate(jObjectReader, targetOperations);
 
-                // container target: the JsonPatchDocument. 
+                // container target: the JsonPatchDocument.
                 var container = new JsonPatchDocument(targetOperations, DefaultContractResolver);
 
                 return container;

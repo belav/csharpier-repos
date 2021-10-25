@@ -19,17 +19,17 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public TimeSpanToStringConverter(ConverterMappingHints? mappingHints = null)
-            : base(
-                ToString(),
-                ToTimeSpan(),
-                _defaultHints.With(mappingHints))
-        {
-        }
+            : base(ToString(), ToTimeSpan(), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(TimeSpan), typeof(string), i => new TimeSpanToStringConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(TimeSpan),
+                typeof(string),
+                i => new TimeSpanToStringConverter(i.MappingHints),
+                _defaultHints
+            );
     }
 }

@@ -8,16 +8,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     public class TypeWithUnresolvableEnumerableConstructors
     {
-        public TypeWithUnresolvableEnumerableConstructors(IFakeService fakeService)
-        {
-        }
+        public TypeWithUnresolvableEnumerableConstructors(IFakeService fakeService) { }
 
-        public TypeWithUnresolvableEnumerableConstructors(IEnumerable<IFakeService> fakeService)
-        {
-        }
+        public TypeWithUnresolvableEnumerableConstructors(IEnumerable<IFakeService> fakeService) { }
 
-        public TypeWithUnresolvableEnumerableConstructors(IFactoryService factoryService)
-        {
-        }
+        public TypeWithUnresolvableEnumerableConstructors(IFactoryService factoryService) { }
     }
 }

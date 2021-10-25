@@ -21,17 +21,17 @@ namespace System.Text.RegularExpressions
     {
         internal const int MaxOptionShift = 10;
 
-        protected internal string? pattern;                   // The string pattern provided
-        protected internal RegexOptions roptions;             // the top-level options from the options string
+        protected internal string? pattern; // The string pattern provided
+        protected internal RegexOptions roptions; // the top-level options from the options string
         protected internal RegexRunnerFactory? factory;
-        protected internal Hashtable? caps;                   // if captures are sparse, this is the hashtable capnum->index
-        protected internal Hashtable? capnames;               // if named captures are used, this maps names->index
-        protected internal string[]? capslist;                // if captures are sparse or named captures are used, this is the sorted list of names
-        protected internal int capsize;                       // the size of the capture array
+        protected internal Hashtable? caps; // if captures are sparse, this is the hashtable capnum->index
+        protected internal Hashtable? capnames; // if named captures are used, this maps names->index
+        protected internal string[]? capslist; // if captures are sparse or named captures are used, this is the sorted list of names
+        protected internal int capsize; // the size of the capture array
 
-        internal WeakReference<RegexReplacement?>? _replref;  // cached parsed replacement pattern
-        private volatile RegexRunner? _runner;                // cached runner
-        private RegexCode? _code;                             // if interpreted, this is the code for RegexInterpreter
+        internal WeakReference<RegexReplacement?>? _replref; // cached parsed replacement pattern
+        private volatile RegexRunner? _runner; // cached runner
+        private RegexCode? _code; // if interpreted, this is the code for RegexInterpreter
         private bool _refsInitialized;
 
         protected Regex()
@@ -42,23 +42,16 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Creates a regular expression object for the specified regular expression.
         /// </summary>
-        public Regex(string pattern) :
-            this(pattern, culture: null)
-        {
-        }
+        public Regex(string pattern) : this(pattern, culture: null) { }
 
         /// <summary>
         /// Creates a regular expression object for the specified regular expression, with options that modify the pattern.
         /// </summary>
-        public Regex(string pattern, RegexOptions options) :
-            this(pattern, options, s_defaultMatchTimeout, culture: null)
-        {
-        }
+        public Regex(string pattern, RegexOptions options)
+            : this(pattern, options, s_defaultMatchTimeout, culture: null) { }
 
-        public Regex(string pattern, RegexOptions options, TimeSpan matchTimeout) :
-            this(pattern, options, matchTimeout, culture: null)
-        {
-        }
+        public Regex(string pattern, RegexOptions options, TimeSpan matchTimeout)
+            : this(pattern, options, matchTimeout, culture: null) { }
 
         internal Regex(string pattern, CultureInfo? culture)
         {
@@ -68,7 +61,12 @@ namespace System.Text.RegularExpressions
             Init(pattern, RegexOptions.None, s_defaultMatchTimeout, culture);
         }
 
-        internal Regex(string pattern, RegexOptions options, TimeSpan matchTimeout, CultureInfo? culture)
+        internal Regex(
+            string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout,
+            CultureInfo? culture
+        )
         {
             Init(pattern, options, matchTimeout, culture);
 
@@ -86,7 +84,12 @@ namespace System.Text.RegularExpressions
         /// rather than 'new Regex(pattern, options)' can avoid statically referencing the Regex
         /// compiler, such that a tree shaker / linker can trim it away if it's not otherwise used.
         /// </remarks>
-        private void Init(string pattern, RegexOptions options, TimeSpan matchTimeout, CultureInfo? culture)
+        private void Init(
+            string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout,
+            CultureInfo? culture
+        )
         {
             ValidatePattern(pattern);
             ValidateOptions(options);
@@ -99,12 +102,23 @@ namespace System.Text.RegularExpressions
 #if DEBUG
             if (IsDebug)
             {
-                Debug.WriteLine($"Pattern: {pattern}    Options: {options & ~RegexOptions.Debug}    Timeout: {(matchTimeout == InfiniteMatchTimeout ? "infinite" : matchTimeout.ToString())}");
+                Debug.WriteLine(
+                    $"Pattern: {pattern}    Options: {options & ~RegexOptions.Debug}    Timeout: {(matchTimeout == InfiniteMatchTimeout ? "infinite" : matchTimeout.ToString())}"
+                );
             }
 #endif
 
             // Parse the input
-            RegexTree tree = RegexParser.Parse(pattern, roptions, culture ?? ((options & RegexOptions.CultureInvariant) != 0 ? CultureInfo.InvariantCulture : CultureInfo.CurrentCulture));
+            RegexTree tree = RegexParser.Parse(
+                pattern,
+                roptions,
+                culture
+                    ?? (
+                        (options & RegexOptions.CultureInvariant) != 0
+                            ? CultureInfo.InvariantCulture
+                            : CultureInfo.CurrentCulture
+                    )
+            );
 
             // Extract the relevant information
             capnames = tree.CapNames;
@@ -126,13 +140,27 @@ namespace System.Text.RegularExpressions
 
         internal static void ValidateOptions(RegexOptions options)
         {
-            if (((((uint)options) >> MaxOptionShift) != 0) ||
-                ((options & RegexOptions.ECMAScript) != 0 &&
-                 (options & ~(RegexOptions.ECMAScript | RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled |
+            if (
+                ((((uint)options) >> MaxOptionShift) != 0)
+                || (
+                    (options & RegexOptions.ECMAScript) != 0
+                    && (
+                        options
+                        & ~(
+                            RegexOptions.ECMAScript
+                            | RegexOptions.IgnoreCase
+                            | RegexOptions.Multiline
+                            | RegexOptions.Compiled
+                            |
 #if DEBUG
-                             RegexOptions.Debug |
+                            RegexOptions.Debug
+                            |
 #endif
-                             RegexOptions.CultureInvariant)) != 0))
+                            RegexOptions.CultureInvariant
+                        )
+                    ) != 0
+                )
+            )
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.options);
             }
@@ -148,7 +176,10 @@ namespace System.Text.RegularExpressions
         {
             // make sure timeout is positive but not longer then Environment.Ticks cycle length
             long matchTimeoutTicks = matchTimeout.Ticks;
-            if (matchTimeoutTicks != InfiniteMatchTimeoutTicks && ((ulong)(matchTimeoutTicks - 1) >= MaximumMatchTimeoutTicks))
+            if (
+                matchTimeoutTicks != InfiniteMatchTimeoutTicks
+                && ((ulong)(matchTimeoutTicks - 1) >= MaximumMatchTimeoutTicks)
+            )
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.matchTimeout);
             }
@@ -196,16 +227,30 @@ namespace System.Text.RegularExpressions
         /// instantiating a non-compiled regex.
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static RegexRunnerFactory Compile(string pattern, RegexCode code, RegexOptions options, bool hasTimeout) =>
-            RegexCompiler.Compile(pattern, code, options, hasTimeout);
+        private static RegexRunnerFactory Compile(
+            string pattern,
+            RegexCode code,
+            RegexOptions options,
+            bool hasTimeout
+        ) => RegexCompiler.Compile(pattern, code, options, hasTimeout);
 
-        public static void CompileToAssembly(RegexCompilationInfo[] regexinfos, AssemblyName assemblyname) =>
-            CompileToAssembly(regexinfos, assemblyname, null, null);
+        public static void CompileToAssembly(
+            RegexCompilationInfo[] regexinfos,
+            AssemblyName assemblyname
+        ) => CompileToAssembly(regexinfos, assemblyname, null, null);
 
-        public static void CompileToAssembly(RegexCompilationInfo[] regexinfos, AssemblyName assemblyname, CustomAttributeBuilder[]? attributes) =>
-            CompileToAssembly(regexinfos, assemblyname, attributes, null);
+        public static void CompileToAssembly(
+            RegexCompilationInfo[] regexinfos,
+            AssemblyName assemblyname,
+            CustomAttributeBuilder[]? attributes
+        ) => CompileToAssembly(regexinfos, assemblyname, attributes, null);
 
-        public static void CompileToAssembly(RegexCompilationInfo[] regexinfos, AssemblyName assemblyname, CustomAttributeBuilder[]? attributes, string? resourceFile)
+        public static void CompileToAssembly(
+            RegexCompilationInfo[] regexinfos,
+            AssemblyName assemblyname,
+            CustomAttributeBuilder[]? attributes,
+            string? resourceFile
+        )
         {
             if (assemblyname is null)
             {
@@ -331,15 +376,15 @@ namespace System.Text.RegularExpressions
         {
             if (capslist is null)
             {
-                return (uint)i < (uint)capsize ?
-                    ((uint)i).ToString() :
-                    string.Empty;
+                return (uint)i < (uint)capsize ? ((uint)i).ToString() : string.Empty;
             }
             else
             {
-                return caps != null && !caps.TryGetValue(i, out i) ? string.Empty :
-                    (uint)i < (uint)capslist.Length ? capslist[i] :
-                    string.Empty;
+                return caps != null && !caps.TryGetValue(i, out i)
+                  ? string.Empty
+                  : (uint)i < (uint)capslist.Length
+                      ? capslist[i]
+                      : string.Empty;
             }
         }
 
@@ -361,7 +406,11 @@ namespace System.Text.RegularExpressions
             else
             {
                 // Otherwise, try to parse it as a number.
-                return uint.TryParse(name, NumberStyles.None, provider: null, out uint result) && result < capsize ? (int)result : -1;
+                return
+                    uint.TryParse(name, NumberStyles.None, provider: null, out uint result)
+                    && result < capsize
+                  ? (int)result
+                  : -1;
             }
         }
 
@@ -377,24 +426,47 @@ namespace System.Text.RegularExpressions
         }
 
         /// <summary>Internal worker called by the public APIs</summary>
-        internal Match? Run(bool quick, int prevlen, string input, int beginning, int length, int startat)
+        internal Match? Run(
+            bool quick,
+            int prevlen,
+            string input,
+            int beginning,
+            int length,
+            int startat
+        )
         {
             if ((uint)startat > (uint)input.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startat, ExceptionResource.BeginIndexNotNegative);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.startat,
+                    ExceptionResource.BeginIndexNotNegative
+                );
             }
             if ((uint)length > (uint)input.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.length, ExceptionResource.LengthNotNegative);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.length,
+                    ExceptionResource.LengthNotNegative
+                );
             }
 
             RegexRunner runner = RentRunner();
             try
             {
                 // Do the scan starting at the requested position
-                Match? match = runner.Scan(this, input, beginning, beginning + length, startat, prevlen, quick, internalMatchTimeout);
+                Match? match = runner.Scan(
+                    this,
+                    input,
+                    beginning,
+                    beginning + length,
+                    startat,
+                    prevlen,
+                    quick,
+                    internalMatchTimeout
+                );
 #if DEBUG
-                if (IsDebug) match?.Dump();
+                if (IsDebug)
+                    match?.Dump();
 #endif
                 return match;
             }
@@ -404,13 +476,27 @@ namespace System.Text.RegularExpressions
             }
         }
 
-        internal void Run<TState>(string input, int startat, ref TState state, MatchCallback<TState> callback, bool reuseMatchObject)
+        internal void Run<TState>(
+            string input,
+            int startat,
+            ref TState state,
+            MatchCallback<TState> callback,
+            bool reuseMatchObject
+        )
         {
             Debug.Assert((uint)startat <= (uint)input.Length);
             RegexRunner runner = RentRunner();
             try
             {
-                runner.Scan(this, input, startat, ref state, callback, reuseMatchObject, internalMatchTimeout);
+                runner.Scan(
+                    this,
+                    input,
+                    startat,
+                    ref state,
+                    callback,
+                    reuseMatchObject,
+                    internalMatchTimeout
+                );
             }
             finally
             {
@@ -421,9 +507,19 @@ namespace System.Text.RegularExpressions
         /// <summary>Gets a runner from the cache, or creates a new one.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // factored out to be used by only two call sites
         private RegexRunner RentRunner() =>
-            Interlocked.Exchange(ref _runner, null) ?? // use a cached runner if there is one
-            (factory != null ? factory.CreateInstance() : // use the compiled RegexRunner factory if there is one
-            new RegexInterpreter(_code!, UseOptionInvariant() ? CultureInfo.InvariantCulture : CultureInfo.CurrentCulture));
+            Interlocked.Exchange(ref _runner, null)
+            ?? // use a cached runner if there is one
+            (
+                factory != null
+                    ? factory.CreateInstance()
+                    : // use the compiled RegexRunner factory if there is one
+                      new RegexInterpreter(
+                          _code!,
+                          UseOptionInvariant()
+                            ? CultureInfo.InvariantCulture
+                            : CultureInfo.CurrentCulture
+                      )
+            );
 
         /// <summary>Release the runner back to the cache.</summary>
         internal void ReturnRunner(RegexRunner runner) => _runner = runner;

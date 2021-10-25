@@ -56,7 +56,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         public void SetValue_NoopsIfNullIsBeingAssignedToValueType()
         {
             // Arrange
-            var propertyInfo = typeof(TestSubject).GetProperty(nameof(TestSubject.ValueTypeProperty));
+            var propertyInfo = typeof(TestSubject).GetProperty(
+                nameof(TestSubject.ValueTypeProperty)
+            );
             var lifecycleProperty = new LifecycleProperty(propertyInfo, "test-key");
             var subject = new TestSubject { ValueTypeProperty = 42 };
 
@@ -71,7 +73,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         public void SetValue_SetsNullValue_ForNullableProperties()
         {
             // Arrange
-            var propertyInfo = typeof(TestSubject).GetProperty(nameof(TestSubject.NullableProperty));
+            var propertyInfo = typeof(TestSubject).GetProperty(
+                nameof(TestSubject.NullableProperty)
+            );
             var lifecycleProperty = new LifecycleProperty(propertyInfo, "test-key");
             var subject = new TestSubject { NullableProperty = 42 };
 

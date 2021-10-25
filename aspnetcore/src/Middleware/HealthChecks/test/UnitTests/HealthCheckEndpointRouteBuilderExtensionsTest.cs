@@ -23,31 +23,41 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         public void ThrowFriendlyErrorWhenServicesNotRegistered()
         {
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .Configure(app =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        app.UseRouting();
-                        app.UseEndpoints(endpoints =>
-                        {
-                            endpoints.MapHealthChecks("/healthz");
-                        });
-                    })
-                    .ConfigureServices(services =>
-                    {
-                        services.AddRouting();
-                    });
-                }).Build();
+                        webHostBuilder
+                            .UseTestServer()
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseRouting();
+                                    app.UseEndpoints(
+                                        endpoints =>
+                                        {
+                                            endpoints.MapHealthChecks("/healthz");
+                                        }
+                                    );
+                                }
+                            )
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddRouting();
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             var ex = Assert.Throws<InvalidOperationException>(() => host.Start());
 
             Assert.Equal(
-                "Unable to find the required services. Please add all the required services by calling " +
-                "'IServiceCollection.AddHealthChecks' inside the call to 'ConfigureServices(...)' " +
-                "in the application startup code.",
-                ex.Message);
+                "Unable to find the required services. Please add all the required services by calling "
+                    + "'IServiceCollection.AddHealthChecks' inside the call to 'ConfigureServices(...)' "
+                    + "in the application startup code.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -55,24 +65,33 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         {
             // Arrange
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .Configure(app =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        app.UseRouting();
-                        app.UseEndpoints(endpoints =>
-                        {
-                            endpoints.MapHealthChecks("/healthz");
-                        });
-                    })
-                    .ConfigureServices(services =>
-                    {
-                        services.AddRouting();
-                        services.AddHealthChecks();
-                    });
-                }).Build();
+                        webHostBuilder
+                            .UseTestServer()
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseRouting();
+                                    app.UseEndpoints(
+                                        endpoints =>
+                                        {
+                                            endpoints.MapHealthChecks("/healthz");
+                                        }
+                                    );
+                                }
+                            )
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddRouting();
+                                    services.AddHealthChecks();
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
@@ -93,31 +112,45 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks
         {
             // Arrange
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .Configure(app =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        app.UseRouting();
-                        app.UseEndpoints(endpoints =>
-                        {
-                            endpoints.MapHealthChecks("/healthz", new HealthCheckOptions
-                            {
-                                ResponseWriter = async (context, report) =>
+                        webHostBuilder
+                            .UseTestServer()
+                            .Configure(
+                                app =>
                                 {
-                                    context.Response.ContentType = "text/plain";
-                                    await context.Response.WriteAsync("Custom!");
+                                    app.UseRouting();
+                                    app.UseEndpoints(
+                                        endpoints =>
+                                        {
+                                            endpoints.MapHealthChecks(
+                                                "/healthz",
+                                                new HealthCheckOptions
+                                                {
+                                                    ResponseWriter = async (context, report) =>
+                                                    {
+                                                        context.Response.ContentType = "text/plain";
+                                                        await context.Response.WriteAsync(
+                                                            "Custom!"
+                                                        );
+                                                    }
+                                                }
+                                            );
+                                        }
+                                    );
                                 }
-                            });
-                        });
-                    })
-                    .ConfigureServices(services =>
-                    {
-                        services.AddRouting();
-                        services.AddHealthChecks();
-                    });
-                }).Build();
+                            )
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddRouting();
+                                    services.AddHealthChecks();
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 

@@ -36,13 +36,17 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
                 return null;
             }
 
-            return CreateAuthenticatedEncryptorInstance(descriptor.MasterKey, descriptor.Configuration);
+            return CreateAuthenticatedEncryptorInstance(
+                descriptor.MasterKey,
+                descriptor.Configuration
+            );
         }
 
         [return: NotNullIfNotNull("configuration")]
         internal ManagedAuthenticatedEncryptor? CreateAuthenticatedEncryptorInstance(
             ISecret secret,
-            ManagedAuthenticatedEncryptorConfiguration? configuration)
+            ManagedAuthenticatedEncryptorConfiguration? configuration
+        )
         {
             if (configuration == null)
             {
@@ -53,15 +57,20 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
                 keyDerivationKey: new Secret(secret),
                 symmetricAlgorithmFactory: GetSymmetricBlockCipherAlgorithmFactory(configuration),
                 symmetricAlgorithmKeySizeInBytes: configuration.EncryptionAlgorithmKeySize / 8,
-                validationAlgorithmFactory: GetKeyedHashAlgorithmFactory(configuration));
+                validationAlgorithmFactory: GetKeyedHashAlgorithmFactory(configuration)
+            );
         }
 
-        private Func<KeyedHashAlgorithm> GetKeyedHashAlgorithmFactory(ManagedAuthenticatedEncryptorConfiguration configuration)
+        private Func<KeyedHashAlgorithm> GetKeyedHashAlgorithmFactory(
+            ManagedAuthenticatedEncryptorConfiguration configuration
+        )
         {
             // basic argument checking
             if (configuration.ValidationAlgorithmType == null)
             {
-                throw Error.Common_PropertyCannotBeNullOrEmpty(nameof(configuration.ValidationAlgorithmType));
+                throw Error.Common_PropertyCannotBeNullOrEmpty(
+                    nameof(configuration.ValidationAlgorithmType)
+                );
             }
 
             _logger.UsingManagedKeyedHashAlgorithm(configuration.ValidationAlgorithmType.FullName!);
@@ -75,21 +84,31 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
             }
             else
             {
-                return AlgorithmActivator.CreateFactory<KeyedHashAlgorithm>(configuration.ValidationAlgorithmType);
+                return AlgorithmActivator.CreateFactory<KeyedHashAlgorithm>(
+                    configuration.ValidationAlgorithmType
+                );
             }
         }
 
-        private Func<SymmetricAlgorithm> GetSymmetricBlockCipherAlgorithmFactory(ManagedAuthenticatedEncryptorConfiguration configuration)
+        private Func<SymmetricAlgorithm> GetSymmetricBlockCipherAlgorithmFactory(
+            ManagedAuthenticatedEncryptorConfiguration configuration
+        )
         {
             // basic argument checking
             if (configuration.EncryptionAlgorithmType == null)
             {
-                throw Error.Common_PropertyCannotBeNullOrEmpty(nameof(configuration.EncryptionAlgorithmType));
+                throw Error.Common_PropertyCannotBeNullOrEmpty(
+                    nameof(configuration.EncryptionAlgorithmType)
+                );
             }
-            typeof(SymmetricAlgorithm).AssertIsAssignableFrom(configuration.EncryptionAlgorithmType);
+            typeof(SymmetricAlgorithm).AssertIsAssignableFrom(
+                configuration.EncryptionAlgorithmType
+            );
             if (configuration.EncryptionAlgorithmKeySize < 0)
             {
-                throw Error.Common_PropertyMustBeNonNegative(nameof(configuration.EncryptionAlgorithmKeySize));
+                throw Error.Common_PropertyMustBeNonNegative(
+                    nameof(configuration.EncryptionAlgorithmKeySize)
+                );
             }
 
             _logger.UsingManagedSymmetricAlgorithm(configuration.EncryptionAlgorithmType.FullName!);
@@ -107,7 +126,9 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
             }
             else
             {
-                return AlgorithmActivator.CreateFactory<SymmetricAlgorithm>(configuration.EncryptionAlgorithmType);
+                return AlgorithmActivator.CreateFactory<SymmetricAlgorithm>(
+                    configuration.EncryptionAlgorithmType
+                );
             }
         }
 
@@ -121,7 +142,11 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
             /// </summary>
             public static Func<T> CreateFactory<T>(Type implementation)
             {
-                return ((IActivator<T>)Activator.CreateInstance(typeof(AlgorithmActivatorCore<>).MakeGenericType(implementation))!).Creator;
+                return (
+                    (IActivator<T>)Activator.CreateInstance(
+                        typeof(AlgorithmActivatorCore<>).MakeGenericType(implementation)
+                    )!
+                ).Creator;
             }
 
             private interface IActivator<out T>

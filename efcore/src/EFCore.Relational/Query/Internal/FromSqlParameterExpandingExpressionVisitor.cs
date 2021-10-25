@@ -22,8 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class FromSqlParameterExpandingExpressionVisitor : ExpressionVisitor
     {
-        private readonly IDictionary<FromSqlExpression, Expression> _visitedFromSqlExpressions
-            = new Dictionary<FromSqlExpression, Expression>(LegacyReferenceEqualityComparer.Instance);
+        private readonly IDictionary<FromSqlExpression, Expression> _visitedFromSqlExpressions =
+            new Dictionary<FromSqlExpression, Expression>(LegacyReferenceEqualityComparer.Instance);
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
         private readonly IRelationalTypeMappingSource _typeMappingSource;
@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public FromSqlParameterExpandingExpressionVisitor(
-            RelationalParameterBasedSqlProcessorDependencies dependencies)
+            RelationalParameterBasedSqlProcessorDependencies dependencies
+        )
         {
             Check.NotNull(dependencies, nameof(dependencies));
 
@@ -60,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public virtual SelectExpression Expand(
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object?> parameterValues,
-            out bool canCache)
+            out bool canCache
+        )
         {
             Check.NotNull(selectExpression, nameof(selectExpression));
             Check.NotNull(parameterValues, nameof(parameterValues));
@@ -93,10 +95,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     {
                         case ParameterExpression parameterExpression:
                             // parameter value will never be null. It could be empty object[]
-                            var parameterValues = (object[])_parametersValues[parameterExpression.Name!]!;
+                            var parameterValues = (object[])_parametersValues[
+                                parameterExpression.Name!
+                            ]!;
                             _canCache = false;
 
-                            var subParameters = new List<IRelationalParameter>(parameterValues.Length);
+                            var subParameters = new List<IRelationalParameter>(
+                                parameterValues.Length
+                            );
                             // ReSharper disable once ForCanBeConvertedToForeach
                             for (var i = 0; i < parameterValues.Length; i++)
                             {
@@ -112,7 +118,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         parameterName = dbParameter.ParameterName;
                                     }
 
-                                    subParameters.Add(new RawRelationalParameter(parameterName, dbParameter));
+                                    subParameters.Add(
+                                        new RawRelationalParameter(parameterName, dbParameter)
+                                    );
                                 }
                                 else
                                 {
@@ -120,13 +128,23 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         new TypeMappedRelationalParameter(
                                             parameterName,
                                             parameterName,
-                                            _typeMappingSource.GetMappingForValue(parameterValues[i]),
-                                            parameterValues[i]?.GetType().IsNullableType()));
+                                            _typeMappingSource.GetMappingForValue(
+                                                parameterValues[i]
+                                            ),
+                                            parameterValues[i]?.GetType().IsNullableType()
+                                        )
+                                    );
                                 }
                             }
 
                             updatedFromSql = fromSql.Update(
-                                Expression.Constant(new CompositeRelationalParameter(parameterExpression.Name!, subParameters)));
+                                Expression.Constant(
+                                    new CompositeRelationalParameter(
+                                        parameterExpression.Name!,
+                                        subParameters
+                                    )
+                                )
+                            );
 
                             _visitedFromSqlExpressions[fromSql] = updatedFromSql;
                             break;
@@ -149,22 +167,32 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         parameterName = dbParameter.ParameterName;
                                     }
 
-                                    constantValues[i] = new RawRelationalParameter(parameterName, dbParameter);
+                                    constantValues[i] = new RawRelationalParameter(
+                                        parameterName,
+                                        dbParameter
+                                    );
                                 }
                                 else
                                 {
                                     constantValues[i] = _sqlExpressionFactory.Constant(
-                                        value, _typeMappingSource.GetMappingForValue(value));
+                                        value,
+                                        _typeMappingSource.GetMappingForValue(value)
+                                    );
                                 }
                             }
 
-                            updatedFromSql = fromSql.Update(Expression.Constant(constantValues, typeof(object?[])));
+                            updatedFromSql = fromSql.Update(
+                                Expression.Constant(constantValues, typeof(object?[]))
+                            );
 
                             _visitedFromSqlExpressions[fromSql] = updatedFromSql;
                             break;
 
                         default:
-                            Check.DebugAssert(false, "FromSql.Arguments must be Constant/ParameterExpression");
+                            Check.DebugAssert(
+                                false,
+                                "FromSql.Arguments must be Constant/ParameterExpression"
+                            );
                             break;
                     }
                 }

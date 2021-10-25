@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -15,24 +15,28 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     [Collection(PublishedSitesCollection.Name)]
     public class LoggingTests : IISFunctionalTestBase
     {
-        public LoggingTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public LoggingTests(PublishedSitesFixture fixture) : base(fixture) { }
 
-        public static TestMatrix TestVariants
-            => TestMatrix.ForServers(DeployerSelector.ServerType)
+        public static TestMatrix TestVariants =>
+            TestMatrix
+                .ForServers(DeployerSelector.ServerType)
                 .WithTfms(Tfm.Default)
                 .WithApplicationTypes(ApplicationType.Portable)
                 .WithAllHostingModels();
 
-        public static TestMatrix InprocessTestVariants
-            => TestMatrix.ForServers(DeployerSelector.ServerType)
+        public static TestMatrix InprocessTestVariants =>
+            TestMatrix
+                .ForServers(DeployerSelector.ServerType)
                 .WithTfms(Tfm.Default)
                 .WithApplicationTypes(ApplicationType.Portable)
                 .WithHostingModels(HostingModel.InProcess);
 
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [MemberData(nameof(TestVariants))]
         public async Task CheckStdoutLoggingToFile(TestVariant variant)
         {
@@ -40,7 +44,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [MemberData(nameof(TestVariants))]
         public async Task CheckStdoutErrLoggingToFile(TestVariant variant)
         {
@@ -58,7 +66,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             StopServer();
 
-            var contents = Helpers.ReadAllTextFromFile(Helpers.GetExpectedLogName(deploymentResult, LogFolderPath), Logger);
+            var contents = Helpers.ReadAllTextFromFile(
+                Helpers.GetExpectedLogName(deploymentResult, LogFolderPath),
+                Logger
+            );
 
             Assert.Contains("TEST MESSAGE", contents);
             Assert.DoesNotContain("\r\n\r\n", contents);
@@ -67,16 +78,25 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         // Move to separate file
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [MemberData(nameof(TestVariants))]
         public async Task InvalidFilePathForLogs_ServerStillRuns(TestVariant variant)
         {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters(variant);
 
             deploymentParameters.WebConfigActionList.Add(
-                WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true"));
+                WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogEnabled", "true")
+            );
             deploymentParameters.WebConfigActionList.Add(
-                WebConfigHelpers.AddOrModifyAspNetCoreSection("stdoutLogFile", Path.Combine("Q:", "std")));
+                WebConfigHelpers.AddOrModifyAspNetCoreSection(
+                    "stdoutLogFile",
+                    Path.Combine("Q:", "std")
+                )
+            );
 
             var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -86,7 +106,12 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             if (variant.HostingModel == HostingModel.InProcess)
             {
                 // Error is getting logged twice, from shim and handler
-                EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.CouldNotStartStdoutFileRedirection("Q:\\std", deploymentResult), Logger, allowMultiple: true);
+                EventLogHelpers.VerifyEventLogEvent(
+                    deploymentResult,
+                    EventLogHelpers.CouldNotStartStdoutFileRedirection("Q:\\std", deploymentResult),
+                    Logger,
+                    allowMultiple: true
+                );
             }
         }
 
@@ -123,7 +148,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [ConditionalTheory]
         [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
         [MemberData(nameof(InprocessTestVariants))]
-        public async Task StartupMessagesAreLoggedIntoDefaultDebugLogFileWhenEnabledWithEnvVar(TestVariant variant)
+        public async Task StartupMessagesAreLoggedIntoDefaultDebugLogFileWhenEnabledWithEnvVar(
+            TestVariant variant
+        )
         {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters(variant);
             deploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_DEBUG"] = "file";
@@ -137,10 +164,16 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
         [MemberData(nameof(InprocessTestVariants))]
-        public async Task StartupMessagesLogFileSwitchedWhenLogFilePresentInWebConfig(TestVariant variant)
+        public async Task StartupMessagesLogFileSwitchedWhenLogFilePresentInWebConfig(
+            TestVariant variant
+        )
         {
             var firstTempFile = Path.GetTempFileName();
             var secondTempFile = Path.GetTempFileName();
@@ -148,7 +181,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             try
             {
                 var deploymentParameters = Fixture.GetBaseDeploymentParameters(variant);
-                deploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_DEBUG_FILE"] = firstTempFile;
+                deploymentParameters.EnvironmentVariables["ASPNETCORE_MODULE_DEBUG_FILE"] =
+                    firstTempFile;
                 deploymentParameters.AddDebugLogToWebConfig(secondTempFile);
 
                 var deploymentResult = await DeployAsync(deploymentParameters);
@@ -170,7 +204,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [MemberData(nameof(InprocessTestVariants))]
         public async Task DebugLogsAreWrittenToEventLog(TestVariant variant)
         {
@@ -178,17 +216,28 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             deploymentParameters.HandlerSettings["debugLevel"] = "file,eventlog";
             var deploymentResult = await StartAsync(deploymentParameters);
             StopServer();
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult, @"\[aspnetcorev2.dll\] Initializing logs for .*?Description: IIS ASP.NET Core Module V2", Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                @"\[aspnetcorev2.dll\] Initializing logs for .*?Description: IIS ASP.NET Core Module V2",
+                Logger
+            );
         }
 
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [MemberData(nameof(InprocessTestVariants))]
         public async Task CheckUTF8File(TestVariant variant)
         {
             var path = "CheckConsoleFunctions";
 
-            var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite, variant.HostingModel);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                Fixture.InProcessTestSite,
+                variant.HostingModel
+            );
             deploymentParameters.TransformArguments((a, _) => $"{a} {path}"); // For standalone this will need to remove space
 
             var logFolderPath = LogFolderPath + "\\彡⾔";
@@ -202,13 +251,24 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             StopServer();
 
-            var contents = Helpers.ReadAllTextFromFile(Helpers.GetExpectedLogName(deploymentResult, logFolderPath), Logger);
+            var contents = Helpers.ReadAllTextFromFile(
+                Helpers.GetExpectedLogName(deploymentResult, logFolderPath),
+                Logger
+            );
             Assert.Contains("彡⾔", contents);
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.InProcessThreadExitStdOut(deploymentResult, "12", "(.*)彡⾔(.*)"), Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                EventLogHelpers.InProcessThreadExitStdOut(deploymentResult, "12", "(.*)彡⾔(.*)"),
+                Logger
+            );
         }
 
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [MemberData(nameof(InprocessTestVariants))]
         public async Task OnlyOneFileCreatedWithProcessStartTime(TestVariant variant)
         {
@@ -221,14 +281,23 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             StopServer();
 
-            Assert.Single(Directory.GetFiles(LogFolderPath), Helpers.GetExpectedLogName(deploymentResult, LogFolderPath));
+            Assert.Single(
+                Directory.GetFiles(LogFolderPath),
+                Helpers.GetExpectedLogName(deploymentResult, LogFolderPath)
+            );
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         public async Task CaptureLogsForOutOfProcessWhenProcessFailsToStart()
         {
-            var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.OutOfProcess);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                HostingModel.OutOfProcess
+            );
             deploymentParameters.TransformArguments((a, _) => $"{a} ConsoleWriteSingle");
             var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -236,15 +305,25 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             StopServer();
 
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, "Wow!"), Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, "Wow!"),
+                Logger
+            );
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [RequiresNewShim]
         public async Task DisableRedirectionNoLogs()
         {
-            var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.OutOfProcess);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                HostingModel.OutOfProcess
+            );
             deploymentParameters.HandlerSettings["enableOutOfProcessConsoleRedirection"] = "false";
             deploymentParameters.TransformArguments((a, _) => $"{a} ConsoleWriteSingle");
             var deploymentResult = await DeployAsync(deploymentParameters);
@@ -253,14 +332,24 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             StopServer();
 
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, ""), Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, ""),
+                Logger
+            );
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         public async Task CaptureLogsForOutOfProcessWhenProcessFailsToStart30KbMax()
         {
-            var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.OutOfProcess);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                HostingModel.OutOfProcess
+            );
             deploymentParameters.TransformArguments((a, _) => $"{a} ConsoleWrite30Kb");
             var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -268,11 +357,19 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             StopServer();
 
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, new string('a', 30000)), Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                EventLogHelpers.OutOfProcessFailedToStart(deploymentResult, new string('a', 30000)),
+                Logger
+            );
         }
 
         [ConditionalTheory]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [InlineData("ConsoleErrorWriteStartServer")]
         [InlineData("ConsoleWriteStartServer")]
         public async Task CheckStdoutLoggingToPipeWithFirstWrite(string path)
@@ -292,13 +389,18 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             if (deploymentParameters.ServerType == ServerType.IISExpress)
             {
                 // We can't read stdout logs from IIS as they aren't redirected.
-                Assert.Contains(TestSink.Writes, context => context.Message.Contains(firstWriteString));
+                Assert.Contains(
+                    TestSink.Writes,
+                    context => context.Message.Contains(firstWriteString)
+                );
             }
         }
 
         private static string ReadLogs(string logPath)
         {
-            using (var stream = File.Open(logPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (
+                var stream = File.Open(logPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+            )
             using (var streamReader = new StreamReader(stream))
             {
                 return streamReader.ReadToEnd();
@@ -309,9 +411,15 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             var logContents = ReadLogs(logPath);
             Assert.Contains("[aspnetcorev2.dll]", logContents);
-            Assert.True(logContents.Contains("[aspnetcorev2_inprocess.dll]") || logContents.Contains("[aspnetcorev2_outofprocess.dll]"));
+            Assert.True(
+                logContents.Contains("[aspnetcorev2_inprocess.dll]")
+                    || logContents.Contains("[aspnetcorev2_outofprocess.dll]")
+            );
             Assert.Contains("Description: IIS ASP.NET Core Module V2. Commit:", logContents);
-            Assert.Contains("Description: IIS ASP.NET Core Module V2 Request Handler. Commit:", logContents);
+            Assert.Contains(
+                "Description: IIS ASP.NET Core Module V2 Request Handler. Commit:",
+                logContents
+            );
         }
     }
 }

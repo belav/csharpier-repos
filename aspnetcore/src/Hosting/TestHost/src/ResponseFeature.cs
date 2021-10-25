@@ -38,11 +38,17 @@ namespace Microsoft.AspNetCore.TestHost
             {
                 if (HasStarted)
                 {
-                    throw new InvalidOperationException("The status code cannot be set, the response has already started.");
+                    throw new InvalidOperationException(
+                        "The status code cannot be set, the response has already started."
+                    );
                 }
                 if (value < 100)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, "The status code cannot be set to a value less than 100");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        "The status code cannot be set to a value less than 100"
+                    );
                 }
 
                 _statusCode = value;
@@ -56,7 +62,9 @@ namespace Microsoft.AspNetCore.TestHost
             {
                 if (HasStarted)
                 {
-                    throw new InvalidOperationException("The reason phrase cannot be set, the response has already started.");
+                    throw new InvalidOperationException(
+                        "The reason phrase cannot be set, the response has already started."
+                    );
                 }
 
                 _reasonPhrase = value;
@@ -140,11 +148,14 @@ namespace Microsoft.AspNetCore.TestHost
             }
         }
 
-        public void DisableBuffering()
-        {
-        }
+        public void DisableBuffering() { }
 
-        public Task SendFileAsync(string path, long offset, long? count, CancellationToken cancellation)
+        public Task SendFileAsync(
+            string path,
+            long offset,
+            long? count,
+            CancellationToken cancellation
+        )
         {
             return SendFileFallback.SendFileAsync(Stream, path, offset, count, cancellation);
         }

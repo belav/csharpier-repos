@@ -11,8 +11,15 @@ namespace System
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public readonly struct Int32 : IComparable, IConvertible, ISpanFormattable, IComparable<int>, IEquatable<int>
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public readonly struct Int32
+        : IComparable,
+          IConvertible,
+          ISpanFormattable,
+          IComparable<int>,
+          IEquatable<int>
     {
         private readonly int m_value; // Do not rename (binary serialization)
 
@@ -39,8 +46,10 @@ namespace System
             // around in cases where _value - value > MaxValue.
             if (value is int i)
             {
-                if (m_value < i) return -1;
-                if (m_value > i) return 1;
+                if (m_value < i)
+                    return -1;
+                if (m_value > i)
+                    return 1;
                 return 0;
             }
 
@@ -51,8 +60,10 @@ namespace System
         {
             // NOTE: Cannot use return (_value - value) as this causes a wrap
             // around in cases where _value - value > MaxValue.
-            if (m_value < value) return -1;
-            if (m_value > value) return 1;
+            if (m_value < value)
+                return -1;
+            if (m_value > value)
+                return 1;
             return 0;
         }
 
@@ -97,21 +108,35 @@ namespace System
             return Number.FormatInt32(m_value, ~0, format, provider);
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        )
         {
-            return Number.TryFormatInt32(m_value, ~0, format, provider, destination, out charsWritten);
+            return Number.TryFormatInt32(
+                m_value,
+                ~0,
+                format,
+                provider,
+                destination,
+                out charsWritten
+            );
         }
 
         public static int Parse(string s)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseInt32(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         public static int Parse(string s, NumberStyles style)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseInt32(s, style, NumberFormatInfo.CurrentInfo);
         }
 
@@ -121,8 +146,13 @@ namespace System
         //
         public static int Parse(string s, IFormatProvider? provider)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseInt32(s, NumberStyles.Integer, NumberFormatInfo.GetInstance(provider));
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseInt32(
+                s,
+                NumberStyles.Integer,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         // Parses an integer from a String in the given style.  If
@@ -132,11 +162,16 @@ namespace System
         public static int Parse(string s, NumberStyles style, IFormatProvider? provider)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseInt32(s, style, NumberFormatInfo.GetInstance(provider));
         }
 
-        public static int Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        public static int Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Integer,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Number.ParseInt32(s, style, NumberFormatInfo.GetInstance(provider));
@@ -153,18 +188,33 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseInt32IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt32IntegerStyle(
+                    s,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         public static bool TryParse(ReadOnlySpan<char> s, out int result)
         {
-            return Number.TryParseInt32IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt32IntegerStyle(
+                    s,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         // Parses an integer from a String in the given style. Returns false rather
         // than throwing exceptin if input is invalid
         //
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out int result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out int result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
@@ -174,13 +224,28 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseInt32(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt32(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out int result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out int result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            return Number.TryParseInt32(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt32(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         //

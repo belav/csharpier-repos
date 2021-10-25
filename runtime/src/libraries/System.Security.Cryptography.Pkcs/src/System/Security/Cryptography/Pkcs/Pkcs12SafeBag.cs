@@ -28,7 +28,6 @@ namespace System.Security.Cryptography.Pkcs
 
                 return _attributes;
             }
-
             internal set
             {
                 Debug.Assert(value != null);
@@ -36,7 +35,11 @@ namespace System.Security.Cryptography.Pkcs
             }
         }
 
-        protected Pkcs12SafeBag(string bagIdValue, ReadOnlyMemory<byte> encodedBagValue, bool skipCopy = false)
+        protected Pkcs12SafeBag(
+            string bagIdValue,
+            ReadOnlyMemory<byte> encodedBagValue,
+            bool skipCopy = false
+        )
         {
             if (string.IsNullOrEmpty(bagIdValue))
                 throw new ArgumentNullException(nameof(bagIdValue));
@@ -108,9 +111,7 @@ namespace System.Security.Cryptography.Pkcs
         internal sealed class UnknownBag : Pkcs12SafeBag
         {
             internal UnknownBag(string oidValue, ReadOnlyMemory<byte> bagValue)
-                : base(oidValue, bagValue)
-            {
-            }
+                : base(oidValue, bagValue) { }
         }
     }
 }

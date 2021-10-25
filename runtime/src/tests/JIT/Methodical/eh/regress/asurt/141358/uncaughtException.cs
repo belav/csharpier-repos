@@ -5,10 +5,8 @@ using System;
 
 namespace test
 {
-
     class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()

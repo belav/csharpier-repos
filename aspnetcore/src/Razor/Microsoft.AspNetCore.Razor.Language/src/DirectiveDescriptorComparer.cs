@@ -10,11 +10,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 {
     internal class DirectiveDescriptorComparer : IEqualityComparer<DirectiveDescriptor>
     {
-        public static readonly DirectiveDescriptorComparer Default = new DirectiveDescriptorComparer();
+        public static readonly DirectiveDescriptorComparer Default =
+            new DirectiveDescriptorComparer();
 
-        protected DirectiveDescriptorComparer()
-        {
-        }
+        protected DirectiveDescriptorComparer() { }
 
         public bool Equals(DirectiveDescriptor descriptorX, DirectiveDescriptor descriptorY)
         {
@@ -23,13 +22,18 @@ namespace Microsoft.AspNetCore.Razor.Language
                 return true;
             }
 
-            return descriptorX != null &&
-                string.Equals(descriptorX.Directive, descriptorY.Directive, StringComparison.Ordinal) &&
-                descriptorX.Kind == descriptorY.Kind &&
-                Enumerable.SequenceEqual(
+            return descriptorX != null
+                && string.Equals(
+                    descriptorX.Directive,
+                    descriptorY.Directive,
+                    StringComparison.Ordinal
+                )
+                && descriptorX.Kind == descriptorY.Kind
+                && Enumerable.SequenceEqual(
                     descriptorX.Tokens,
                     descriptorY.Tokens,
-                    DirectiveTokenDescriptorComparer.Default);
+                    DirectiveTokenDescriptorComparer.Default
+                );
         }
 
         public int GetHashCode(DirectiveDescriptor descriptor)

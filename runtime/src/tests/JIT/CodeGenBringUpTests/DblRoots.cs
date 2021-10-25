@@ -11,11 +11,11 @@ public class BringUpTest
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void DblRoots(double a, double b, double c, ref double r1, ref double r2) 
-    { 
-       r1 = (-b + Math.Sqrt(b*b - 4*a*c))/(2*a);
-       r2 = (-b - Math.Sqrt(b*b - 4*a*c))/(2*a);
-       return ; 
+    public static void DblRoots(double a, double b, double c, ref double r1, ref double r2)
+    {
+        r1 = (-b + Math.Sqrt(b * b - 4 * a * c)) / (2 * a);
+        r2 = (-b - Math.Sqrt(b * b - 4 * a * c)) / (2 * a);
+        return;
     }
 
     public static int Main()
@@ -24,8 +24,10 @@ public class BringUpTest
         double x2 = 0;
         DblRoots(1d, -5d, 6d, ref x1, ref x2);
         Console.WriteLine(x1 + "," + x2);
-        if (System.Math.Abs(x1-3d) > Double.Epsilon) return Fail;
-        if (System.Math.Abs(x2-2d) > Double.Epsilon) return Fail;
+        if (System.Math.Abs(x1 - 3d) > Double.Epsilon)
+            return Fail;
+        if (System.Math.Abs(x2 - 2d) > Double.Epsilon)
+            return Fail;
         return Pass;
     }
 }

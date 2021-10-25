@@ -12,17 +12,26 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 {
     public class DotNetSdkTests : DotNetSdkTestBase
     {
-        [ConditionalFact(typeof(DotNetSdkAvailable), AlwaysSkip = "https://github.com/dotnet/roslyn/issues/46304")]
+        [ConditionalFact(
+            typeof(DotNetSdkAvailable),
+            AlwaysSkip = "https://github.com/dotnet/roslyn/issues/46304"
+        )]
         [WorkItem(22835, "https://github.com/dotnet/roslyn/issues/22835")]
         public void TestSourceLink()
         {
             var sourcePackageDir = Temp.CreateDirectory().CreateDirectory("a=b, c");
-            var libFile = sourcePackageDir.CreateFile("lib.cs").WriteAllText("class Lib { public void M() { } }");
+            var libFile = sourcePackageDir
+                .CreateFile("lib.cs")
+                .WriteAllText("class Lib { public void M() { } }");
 
             var root1 = Path.GetFullPath(ProjectDir.Path + Path.DirectorySeparatorChar);
             var root2 = Path.GetFullPath(sourcePackageDir.Path + Path.DirectorySeparatorChar);
             var root3 = Environment.GetEnvironmentVariable("NUGET_PACKAGES");
-            root3 ??= Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".nuget", "packages");
+            root3 ??= Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                ".nuget",
+                "packages"
+            );
             root3 += Path.DirectorySeparatorChar;
 
             var escapedRoot1 = root1.Replace(",", ",,").Replace("=", "==");
@@ -31,14 +40,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 
             var sourceLinkJsonPath = Path.Combine(ObjDir.Path, ProjectName + ".sourcelink.json");
 
-            var sourcePackageProps = $@"
+            var sourcePackageProps =
+                $@"
   <ItemGroup>
     <Compile Include=""{libFile.Path}"" Link=""Lib.cs"" />
     <SourceRoot Include=""{root2}"" SourceLinkUrl=""https://raw.githubusercontent.com/Source/Package/*""/>
   </ItemGroup>
 ";
 
-            var sourceLinkPackageTargets = $@"
+            var sourceLinkPackageTargets =
+                $@"
   <PropertyGroup>
     <SourceLink>{sourceLinkJsonPath}</SourceLink>
   </PropertyGroup>
@@ -75,10 +86,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 </PropertyGroup>
 {sourcePackageProps}",
                 customTargets: sourceLinkPackageTargets,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
+                targets: new[] { "CoreCompile" },
                 expressions: new[]
                 {
                     "@(SourceRoot->'%(Identity): %(MappedPath)')",
@@ -96,15 +104,17 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     "true",
                     $@"{escapedRoot3}=/_1/,{escapedRoot2}=/_2/,{escapedRoot1}=/_/,PreviousPathMap",
                     "true"
-                });
+                }
+            );
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                "[/_1/]=[]," +
-                "[/_2/]=[https://raw.githubusercontent.com/Source/Package/*]," +
-                "[/_/]=[https://raw.githubusercontent.com/R1/*]," +
-                "[/_/sub1/]=[https://raw.githubusercontent.com/M1/*]," +
-                "[/_/sub2/]=[https://raw.githubusercontent.com/M2/*]",
-                File.ReadAllText(sourceLinkJsonPath));
+                "[/_1/]=[],"
+                    + "[/_2/]=[https://raw.githubusercontent.com/Source/Package/*],"
+                    + "[/_/]=[https://raw.githubusercontent.com/R1/*],"
+                    + "[/_/sub1/]=[https://raw.githubusercontent.com/M1/*],"
+                    + "[/_/sub2/]=[https://raw.githubusercontent.com/M2/*]",
+                File.ReadAllText(sourceLinkJsonPath)
+            );
 
             // non-deterministic CI build:
             VerifyValues(
@@ -116,10 +126,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 </PropertyGroup>
 {sourcePackageProps}",
                 customTargets: sourceLinkPackageTargets,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
+                targets: new[] { "CoreCompile" },
                 expressions: new[]
                 {
                     "@(SourceRoot->'%(Identity): %(MappedPath)')",
@@ -135,15 +142,17 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     $@"{root1}sub2{Path.DirectorySeparatorChar}: {root1}sub2{Path.DirectorySeparatorChar}",
                     @"",
                     $@""
-                });
+                }
+            );
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                $@"[{root3}]=[]," +
-                $@"[{root2}]=[https://raw.githubusercontent.com/Source/Package/*]," +
-                $@"[{root1}]=[https://raw.githubusercontent.com/R1/*]," +
-                $@"[{root1}sub1{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M1/*]," +
-                $@"[{root1}sub2{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M2/*]",
-                File.ReadAllText(sourceLinkJsonPath));
+                $@"[{root3}]=[],"
+                    + $@"[{root2}]=[https://raw.githubusercontent.com/Source/Package/*],"
+                    + $@"[{root1}]=[https://raw.githubusercontent.com/R1/*],"
+                    + $@"[{root1}sub1{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M1/*],"
+                    + $@"[{root1}sub2{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M2/*]",
+                File.ReadAllText(sourceLinkJsonPath)
+            );
 
             // deterministic local build:
             VerifyValues(
@@ -154,10 +163,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 </PropertyGroup>
 {sourcePackageProps}",
                 customTargets: sourceLinkPackageTargets,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
+                targets: new[] { "CoreCompile" },
                 expressions: new[]
                 {
                     "@(SourceRoot->'%(Identity): %(MappedPath)')",
@@ -173,15 +179,17 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     $@"{root1}sub2{Path.DirectorySeparatorChar}: {root1}sub2{Path.DirectorySeparatorChar}",
                     @"",
                     $@""
-                });
+                }
+            );
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                $@"[{root3}]=[]," +
-                $@"[{root2}]=[https://raw.githubusercontent.com/Source/Package/*]," +
-                $@"[{root1}]=[https://raw.githubusercontent.com/R1/*]," +
-                $@"[{root1}sub1{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M1/*]," +
-                $@"[{root1}sub2{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M2/*]",
-                File.ReadAllText(sourceLinkJsonPath));
+                $@"[{root3}]=[],"
+                    + $@"[{root2}]=[https://raw.githubusercontent.com/Source/Package/*],"
+                    + $@"[{root1}]=[https://raw.githubusercontent.com/R1/*],"
+                    + $@"[{root1}sub1{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M1/*],"
+                    + $@"[{root1}sub2{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M2/*]",
+                File.ReadAllText(sourceLinkJsonPath)
+            );
 
             // DeterministicSourcePaths override:
             VerifyValues(
@@ -192,10 +200,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 </PropertyGroup>
 {sourcePackageProps}",
                 customTargets: sourceLinkPackageTargets,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
+                targets: new[] { "CoreCompile" },
                 expressions: new[]
                 {
                     "@(SourceRoot->'%(Identity): %(MappedPath)')",
@@ -211,15 +216,17 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     $@"{root1}sub2{Path.DirectorySeparatorChar}: {root1}sub2{Path.DirectorySeparatorChar}",
                     @"false",
                     $@""
-                });
+                }
+            );
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                $@"[{root3}]=[]," +
-                $@"[{root2}]=[https://raw.githubusercontent.com/Source/Package/*]," +
-                $@"[{root1}]=[https://raw.githubusercontent.com/R1/*]," +
-                $@"[{root1}sub1{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M1/*]," +
-                $@"[{root1}sub2{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M2/*]",
-                File.ReadAllText(sourceLinkJsonPath));
+                $@"[{root3}]=[],"
+                    + $@"[{root2}]=[https://raw.githubusercontent.com/Source/Package/*],"
+                    + $@"[{root1}]=[https://raw.githubusercontent.com/R1/*],"
+                    + $@"[{root1}sub1{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M1/*],"
+                    + $@"[{root1}sub2{Path.DirectorySeparatorChar}]=[https://raw.githubusercontent.com/M2/*]",
+                File.ReadAllText(sourceLinkJsonPath)
+            );
 
             // SourceControlInformationFeatureSupported = false:
             VerifyValues(
@@ -236,10 +243,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
   <SourceControlInformationFeatureSupported>false</SourceControlInformationFeatureSupported>
 </PropertyGroup>
 {sourceLinkPackageTargets}",
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
+                targets: new[] { "CoreCompile" },
                 expressions: new[]
                 {
                     "@(SourceRoot->'%(Identity): %(MappedPath)')",
@@ -253,13 +257,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     $@"{root2}: /_2/",
                     @"true",
                     $@"{escapedRoot3}=/_/,{escapedRoot1}=/_1/,{escapedRoot2}=/_2/,"
-                });
+                }
+            );
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                $@"[/_/]=[]," +
-                $@"[/_1/]=[https://raw.githubusercontent.com/R1/*]," +
-                $@"[/_2/]=[https://raw.githubusercontent.com/Source/Package/*]",
-                File.ReadAllText(sourceLinkJsonPath));
+                $@"[/_/]=[],"
+                    + $@"[/_1/]=[https://raw.githubusercontent.com/R1/*],"
+                    + $@"[/_2/]=[https://raw.githubusercontent.com/Source/Package/*]",
+                File.ReadAllText(sourceLinkJsonPath)
+            );
 
             // No SourceLink package:
             VerifyValues(
@@ -276,10 +282,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
   <SourceControlInformationFeatureSupported>true</SourceControlInformationFeatureSupported>
 </PropertyGroup>
 ",
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
+                targets: new[] { "CoreCompile" },
                 expressions: new[]
                 {
                     "@(SourceRoot->'%(Identity): %(MappedPath)')",
@@ -293,13 +296,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     $@"{root2}: /_2/",
                     @"true",
                     $@"{escapedRoot3}=/_/,{escapedRoot1}=/_1/,{escapedRoot2}=/_2/,"
-                });
+                }
+            );
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                $@"[/_/]=[]," +
-                $@"[/_1/]=[https://raw.githubusercontent.com/R1/*]," +
-                $@"[/_2/]=[https://raw.githubusercontent.com/Source/Package/*]",
-                File.ReadAllText(sourceLinkJsonPath));
+                $@"[/_/]=[],"
+                    + $@"[/_1/]=[https://raw.githubusercontent.com/R1/*],"
+                    + $@"[/_2/]=[https://raw.githubusercontent.com/Source/Package/*]",
+                File.ReadAllText(sourceLinkJsonPath)
+            );
         }
 
         [ConditionalTheory(typeof(DotNetSdkAvailable))]
@@ -307,7 +312,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         [WorkItem(43476, "https://github.com/dotnet/roslyn/issues/43476")]
         public void InitializeSourceRootMappedPathsReturnsSourceMap(bool deterministicSourcePaths)
         {
-            ProjectDir.CreateFile("Project2.csproj").WriteAllText($@"
+            ProjectDir
+                .CreateFile("Project2.csproj")
+                .WriteAllText(
+                    $@"
 <Project Sdk='Microsoft.NET.Sdk'>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -319,7 +327,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     <SourceRoot Include=""Z\"" ContainingRoot=""X\"" NestedRoot=""B""/>
   </ItemGroup>
 </Project>
-");
+"
+                );
 
             VerifyValues(
                 customProps: $@"
@@ -328,20 +337,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 </ItemGroup>
 ",
                 customTargets: null,
-                targets: new[]
-                {
-                    "ResolveProjectReferences;_BeforeVBCSCoreCompile"
-                },
-                expressions: new[]
-                {
-                    "@(ReferencedProjectSourceRoots)",
-                },
+                targets: new[] { "ResolveProjectReferences;_BeforeVBCSCoreCompile" },
+                expressions: new[] { "@(ReferencedProjectSourceRoots)", },
                 expectedResults: new[]
                 {
                     $"X{Path.DirectorySeparatorChar}",
                     $"Y{Path.DirectorySeparatorChar}",
                     $"Z{Path.DirectorySeparatorChar}",
-                });
+                }
+            );
         }
 
         /// <summary>
@@ -356,18 +360,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     <ReferencePath Include=""A"" />
   </ItemGroup>",
                 customTargets: null,
-                targets: new[]
-                {
-                    "_BeforeVBCSCoreCompile"
-                },
-                expressions: new[]
-                {
-                    "@(ReferencePathWithRefAssemblies)",
-                },
-                expectedResults: new[]
-                {
-                    "A",
-                });
+                targets: new[] { "_BeforeVBCSCoreCompile" },
+                expressions: new[] { "@(ReferencePathWithRefAssemblies)", },
+                expectedResults: new[] { "A", }
+            );
         }
 
         [ConditionalFact(typeof(DotNetSdkAvailable))]
@@ -383,19 +379,13 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
     <ReferencePathWithRefAssemblies Include=""B"" EmbedInteropTypes=""true""/>
   </ItemGroup>",
                 customTargets: null,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
+                targets: new[] { "CoreCompile" },
                 expressions: new[]
                 {
                     "@(ReferencePathWithRefAssemblies->'EmbedInteropTypes=`%(EmbedInteropTypes)`')",
                 },
-                expectedResults: new[]
-                {
-                    "EmbedInteropTypes=``",
-                    "EmbedInteropTypes=``"
-                });
+                expectedResults: new[] { "EmbedInteropTypes=``", "EmbedInteropTypes=``" }
+            );
         }
 
         [ConditionalFact(typeof(DotNetSdkAvailable))]
@@ -404,8 +394,12 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
             var subdir = ProjectDir.CreateDirectory("subdir");
             var srcFile2 = subdir.CreateFile("lib2.cs").WriteAllText("class D { }");
-            var editorConfigFile2 = subdir.CreateFile(".editorconfig").WriteAllText(@"[*.cs]
-some_prop = some_val");
+            var editorConfigFile2 = subdir
+                .CreateFile(".editorconfig")
+                .WriteAllText(
+                    @"[*.cs]
+some_prop = some_val"
+                );
             VerifyValues(
                 customProps: @"
 <PropertyGroup>
@@ -413,19 +407,12 @@ some_prop = some_val");
   <GenerateMSBuildEditorConfigFile>false</GenerateMSBuildEditorConfigFile>
 </PropertyGroup>",
                 customTargets: null,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
-                expressions: new[]
-                {
-                    "@(EditorConfigFiles)"
-                },
-                expectedResults: AppendExtraEditorConfigs(new[]
-                {
-                    Path.Combine(ProjectDir.Path, ".editorconfig"),
-                    editorConfigFile2.Path
-                }));
+                targets: new[] { "CoreCompile" },
+                expressions: new[] { "@(EditorConfigFiles)" },
+                expectedResults: AppendExtraEditorConfigs(
+                    new[] { Path.Combine(ProjectDir.Path, ".editorconfig"), editorConfigFile2.Path }
+                )
+            );
         }
 
         [ConditionalFact(typeof(DotNetSdkAvailable))]
@@ -434,8 +421,12 @@ some_prop = some_val");
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
             var subdir = ProjectDir.CreateDirectory("subdir");
             var srcFile2 = subdir.CreateFile("lib2.cs").WriteAllText("class D { }");
-            var editorConfigFile2 = subdir.CreateFile(".editorconfig").WriteAllText(@"[*.cs]
-some_prop = some_val");
+            var editorConfigFile2 = subdir
+                .CreateFile(".editorconfig")
+                .WriteAllText(
+                    @"[*.cs]
+some_prop = some_val"
+                );
 
             VerifyValues(
                 customProps: @"
@@ -445,27 +436,30 @@ some_prop = some_val");
   <GenerateMSBuildEditorConfigFile>false</GenerateMSBuildEditorConfigFile>
 </PropertyGroup>",
                 customTargets: null,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
-                expressions: new[]
-                {
-                    "@(EditorConfigFiles)"
-                },
-                expectedResults: AppendExtraEditorConfigs(new[] { "" }, findEditorConfigs: false));
+                targets: new[] { "CoreCompile" },
+                expressions: new[] { "@(EditorConfigFiles)" },
+                expectedResults: AppendExtraEditorConfigs(new[] { "" }, findEditorConfigs: false)
+            );
         }
 
         [ConditionalFact(typeof(DotNetSdkAvailable))]
         public void TestDiscoverGlobalConfigFiles()
         {
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
-            var globalConfigFile = ProjectDir.CreateFile(".globalconfig").WriteAllText(@"is_global = true
-some_prop = some_val");
+            var globalConfigFile = ProjectDir
+                .CreateFile(".globalconfig")
+                .WriteAllText(
+                    @"is_global = true
+some_prop = some_val"
+                );
             var subdir = ProjectDir.CreateDirectory("subdir");
             var srcFile2 = subdir.CreateFile("lib2.cs").WriteAllText("class D { }");
-            var globalConfigFile2 = subdir.CreateFile(".globalconfig").WriteAllText(@"is_global = true
-some_prop = some_val");
+            var globalConfigFile2 = subdir
+                .CreateFile(".globalconfig")
+                .WriteAllText(
+                    @"is_global = true
+some_prop = some_val"
+                );
 
             VerifyValues(
                 customProps: @"
@@ -474,32 +468,37 @@ some_prop = some_val");
   <GenerateMSBuildEditorConfigFile>false</GenerateMSBuildEditorConfigFile>
 </PropertyGroup>",
                 customTargets: null,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
-                expressions: new[]
-                {
-                    "@(EditorConfigFiles)"
-                },
-                expectedResults: AppendExtraEditorConfigs(new[]
-                {
-                    Path.Combine(ProjectDir.Path, ".editorconfig"),
-                    globalConfigFile.Path,
-                    globalConfigFile2.Path
-                }));
+                targets: new[] { "CoreCompile" },
+                expressions: new[] { "@(EditorConfigFiles)" },
+                expectedResults: AppendExtraEditorConfigs(
+                    new[]
+                    {
+                        Path.Combine(ProjectDir.Path, ".editorconfig"),
+                        globalConfigFile.Path,
+                        globalConfigFile2.Path
+                    }
+                )
+            );
         }
 
         [ConditionalFact(typeof(DotNetSdkAvailable))]
         public void TestDiscoverGlobalConfigFilesCanBeDisabled()
         {
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
-            var globalConfigFile = ProjectDir.CreateFile(".globalconfig").WriteAllText(@"is_global = true
-some_prop = some_val");
+            var globalConfigFile = ProjectDir
+                .CreateFile(".globalconfig")
+                .WriteAllText(
+                    @"is_global = true
+some_prop = some_val"
+                );
             var subdir = ProjectDir.CreateDirectory("subdir");
             var srcFile2 = subdir.CreateFile("lib2.cs").WriteAllText("class D { }");
-            var globalConfigFile2 = subdir.CreateFile(".globalconfig").WriteAllText(@"is_global = true
-some_prop = some_val");
+            var globalConfigFile2 = subdir
+                .CreateFile(".globalconfig")
+                .WriteAllText(
+                    @"is_global = true
+some_prop = some_val"
+                );
 
             VerifyValues(
                 customProps: @"
@@ -509,30 +508,33 @@ some_prop = some_val");
   <GenerateMSBuildEditorConfigFile>false</GenerateMSBuildEditorConfigFile>
 </PropertyGroup>",
                 customTargets: null,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
-                expressions: new[]
-                {
-                    "@(EditorConfigFiles)"
-                },
-                expectedResults: AppendExtraEditorConfigs(new[]
-                {
-                    Path.Combine(ProjectDir.Path, ".editorconfig"),
-                }, findGlobalConfigs: false));
+                targets: new[] { "CoreCompile" },
+                expressions: new[] { "@(EditorConfigFiles)" },
+                expectedResults: AppendExtraEditorConfigs(
+                    new[] { Path.Combine(ProjectDir.Path, ".editorconfig"), },
+                    findGlobalConfigs: false
+                )
+            );
         }
 
         [ConditionalFact(typeof(DotNetSdkAvailable))]
         public void TestDiscoverGlobalConfigFilesWhenEditorConfigDisabled()
         {
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
-            var globalConfigFile = ProjectDir.CreateFile(".globalconfig").WriteAllText(@"is_global = true
-some_prop = some_val");
+            var globalConfigFile = ProjectDir
+                .CreateFile(".globalconfig")
+                .WriteAllText(
+                    @"is_global = true
+some_prop = some_val"
+                );
             var subdir = ProjectDir.CreateDirectory("subdir");
             var srcFile2 = subdir.CreateFile("lib2.cs").WriteAllText("class D { }");
-            var globalConfigFile2 = subdir.CreateFile(".globalconfig").WriteAllText(@"is_global = true
-some_prop = some_val");
+            var globalConfigFile2 = subdir
+                .CreateFile(".globalconfig")
+                .WriteAllText(
+                    @"is_global = true
+some_prop = some_val"
+                );
 
             VerifyValues(
                 customProps: @"
@@ -542,26 +544,24 @@ some_prop = some_val");
   <GenerateMSBuildEditorConfigFile>false</GenerateMSBuildEditorConfigFile>
 </PropertyGroup>",
                 customTargets: null,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
-                expressions: new[]
-                {
-                    "@(EditorConfigFiles)"
-                },
-                 expectedResults: AppendExtraEditorConfigs(new[]
-                {
-                    globalConfigFile.Path,
-                    globalConfigFile2.Path
-                }, findEditorConfigs: false));
+                targets: new[] { "CoreCompile" },
+                expressions: new[] { "@(EditorConfigFiles)" },
+                expectedResults: AppendExtraEditorConfigs(
+                    new[] { globalConfigFile.Path, globalConfigFile2.Path },
+                    findEditorConfigs: false
+                )
+            );
         }
 
         // when we run these tests, msbuild will find all .editorconfigs up to the root
         // of the drive. We can't control what might be outside the test directories
         // so we emulate that part of msbuild by finding any others and adding them to
         // the expected set of configs
-        private string[] AppendExtraEditorConfigs(string[] expected, bool findEditorConfigs = true, bool findGlobalConfigs = true)
+        private string[] AppendExtraEditorConfigs(
+            string[] expected,
+            bool findEditorConfigs = true,
+            bool findGlobalConfigs = true
+        )
         {
             List<string> foundConfigs = new List<string>();
             var dir = Directory.GetParent(ProjectDir.Path);
@@ -591,11 +591,19 @@ some_prop = some_val");
         public void TestDiscoverEditorAndGlobalConfigFilesCanBeDisabled()
         {
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
-            var globalConfigFile = ProjectDir.CreateFile(".globalconfig").WriteAllText(@"is_global = true
-some_prop = some_val");
+            var globalConfigFile = ProjectDir
+                .CreateFile(".globalconfig")
+                .WriteAllText(
+                    @"is_global = true
+some_prop = some_val"
+                );
             var subdir = ProjectDir.CreateDirectory("subdir");
-            var globalConfigFile2 = subdir.CreateFile(".globalconfig").WriteAllText(@"is_global = true
-some_prop = some_val");
+            var globalConfigFile2 = subdir
+                .CreateFile(".globalconfig")
+                .WriteAllText(
+                    @"is_global = true
+some_prop = some_val"
+                );
 
             VerifyValues(
                 customProps: @"
@@ -606,23 +614,22 @@ some_prop = some_val");
     <GenerateMSBuildEditorConfigFile>false</GenerateMSBuildEditorConfigFile>
   </PropertyGroup>",
                 customTargets: null,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
-                expressions: new[]
-                {
-                    "@(EditorConfigFiles)"
-                },
-                 expectedResults: new[] { "" });
+                targets: new[] { "CoreCompile" },
+                expressions: new[] { "@(EditorConfigFiles)" },
+                expectedResults: new[] { "" }
+            );
         }
 
         [ConditionalFact(typeof(DotNetSdkAvailable))]
         public void TestGlobalConfigsCanBeManuallyAdded()
         {
             var srcFile = ProjectDir.CreateFile("lib1.cs").WriteAllText("class C { }");
-            var globalConfigFile = ProjectDir.CreateFile("mycustom.config").WriteAllText(@"is_global = true
-some_prop = some_val");
+            var globalConfigFile = ProjectDir
+                .CreateFile("mycustom.config")
+                .WriteAllText(
+                    @"is_global = true
+some_prop = some_val"
+                );
 
             VerifyValues(
                 customProps: @"
@@ -634,19 +641,12 @@ some_prop = some_val");
     <GlobalAnalyzerConfigFiles Include=""mycustom.config"" />
   </ItemGroup>",
                 customTargets: null,
-                targets: new[]
-                {
-                    "CoreCompile"
-                },
-                expressions: new[]
-                {
-                    "@(EditorConfigFiles)"
-                },
-                 expectedResults: AppendExtraEditorConfigs(new[]
-                {
-                    Path.Combine(ProjectDir.Path, ".editorconfig"),
-                    "mycustom.config"
-                }));
+                targets: new[] { "CoreCompile" },
+                expressions: new[] { "@(EditorConfigFiles)" },
+                expectedResults: AppendExtraEditorConfigs(
+                    new[] { Path.Combine(ProjectDir.Path, ".editorconfig"), "mycustom.config" }
+                )
+            );
         }
     }
 }

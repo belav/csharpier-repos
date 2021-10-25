@@ -36,18 +36,21 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             object value,
             bool declaredTypeAsString,
             bool expected,
-            bool useNonNullContentType)
+            bool useNonNullContentType
+        )
         {
             // Arrange
             var type = declaredTypeAsString ? typeof(string) : typeof(object);
-            var contentType = useNonNullContentType ? new StringSegment("text/plain") : new StringSegment();
+            var contentType = useNonNullContentType
+                ? new StringSegment("text/plain")
+                : new StringSegment();
 
             var context = new OutputFormatterWriteContext(
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 type,
-                value)
-            {
+                value
+            ) {
                 ContentType = contentType,
             };
 
@@ -70,8 +73,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 declaredType,
-                "Something non null.")
-            {
+                "Something non null."
+            ) {
                 ContentType = new StringSegment("text/plain"),
             };
 
@@ -91,15 +94,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void CanWriteResult_ReturnsTrue_IfReturnValueIsNullAndTreatNullValueAsNoContentIsNotSet(
             string value,
             bool treatNullValueAsNoContent,
-            bool expected)
+            bool expected
+        )
         {
             // Arrange
             var context = new OutputFormatterWriteContext(
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
-                value)
-            {
+                value
+            ) {
                 ContentType = new StringSegment("text/plain"),
             };
 
@@ -123,7 +127,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
-                @object: null);
+                @object: null
+            );
 
             var formatter = new HttpNoContentOutputFormatter();
 
@@ -145,7 +150,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 httpContext,
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
-                @object: null);
+                @object: null
+            );
 
             var formatter = new HttpNoContentOutputFormatter();
 

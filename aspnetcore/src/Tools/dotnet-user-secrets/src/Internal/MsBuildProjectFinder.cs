@@ -30,18 +30,33 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
 
             if (Directory.Exists(projectPath))
             {
-                var projects = Directory.EnumerateFileSystemEntries(projectPath, "*.*proj", SearchOption.TopDirectoryOnly)
-                    .Where(f => !".xproj".Equals(Path.GetExtension(f), StringComparison.OrdinalIgnoreCase))
+                var projects = Directory
+                    .EnumerateFileSystemEntries(
+                        projectPath,
+                        "*.*proj",
+                        SearchOption.TopDirectoryOnly
+                    )
+                    .Where(
+                        f =>
+                            !".xproj".Equals(
+                                Path.GetExtension(f),
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    )
                     .ToList();
 
                 if (projects.Count > 1)
                 {
-                    throw new FileNotFoundException(Resources.FormatError_MultipleProjectsFound(projectPath));
+                    throw new FileNotFoundException(
+                        Resources.FormatError_MultipleProjectsFound(projectPath)
+                    );
                 }
 
                 if (projects.Count == 0)
                 {
-                    throw new FileNotFoundException(Resources.FormatError_NoProjectsFound(projectPath));
+                    throw new FileNotFoundException(
+                        Resources.FormatError_NoProjectsFound(projectPath)
+                    );
                 }
 
                 return projects[0];
@@ -49,7 +64,9 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
 
             if (!File.Exists(projectPath))
             {
-                throw new FileNotFoundException(Resources.FormatError_ProjectPath_NotFound(projectPath));
+                throw new FileNotFoundException(
+                    Resources.FormatError_ProjectPath_NotFound(projectPath)
+                );
             }
 
             return projectPath;

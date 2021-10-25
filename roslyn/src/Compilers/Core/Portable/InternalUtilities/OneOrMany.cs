@@ -14,8 +14,7 @@ namespace Roslyn.Utilities
     /// <remarks>
     /// Used when a collection usually contains a single item but sometimes might contain multiple.
     /// </remarks>
-    internal struct OneOrMany<T>
-        where T : notnull
+    internal struct OneOrMany<T> where T : notnull
     {
         private readonly T? _one;
         private readonly ImmutableArray<T> _many;
@@ -59,10 +58,7 @@ namespace Roslyn.Utilities
 
         public int Count
         {
-            get
-            {
-                return _many.IsDefault ? 1 : _many.Length;
-            }
+            get { return _many.IsDefault ? 1 : _many.Length; }
         }
 
         public OneOrMany<T> Add(T one)
@@ -156,14 +152,12 @@ namespace Roslyn.Utilities
 
     internal static class OneOrMany
     {
-        public static OneOrMany<T> Create<T>(T one)
-            where T : notnull
+        public static OneOrMany<T> Create<T>(T one) where T : notnull
         {
             return new OneOrMany<T>(one);
         }
 
-        public static OneOrMany<T> Create<T>(ImmutableArray<T> many)
-            where T : notnull
+        public static OneOrMany<T> Create<T>(ImmutableArray<T> many) where T : notnull
         {
             return new OneOrMany<T>(many);
         }

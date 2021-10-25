@@ -368,7 +368,8 @@ namespace Microsoft.EntityFrameworkCore
             public PetsContext(
                 string databaseName,
                 InMemoryDatabaseRoot root = null,
-                IServiceProvider internalServiceProvider = null)
+                IServiceProvider internalServiceProvider = null
+            )
             {
                 _databaseName = databaseName;
                 _root = root;
@@ -407,10 +408,8 @@ namespace Microsoft.EntityFrameworkCore
             public PetsContextWithData(
                 string databaseName,
                 InMemoryDatabaseRoot root = null,
-                IServiceProvider internalServiceProvider = null)
-                : base(databaseName, root, internalServiceProvider)
-            {
-            }
+                IServiceProvider internalServiceProvider = null
+            ) : base(databaseName, root, internalServiceProvider) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {

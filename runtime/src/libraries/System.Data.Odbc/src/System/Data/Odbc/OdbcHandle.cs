@@ -14,7 +14,8 @@ namespace System.Data.Odbc
         private readonly ODBC32.SQL_HANDLE _handleType;
         private OdbcHandle? _parentHandle;
 
-        protected OdbcHandle(ODBC32.SQL_HANDLE handleType, OdbcHandle? parentHandle) : base(IntPtr.Zero, true)
+        protected OdbcHandle(ODBC32.SQL_HANDLE handleType, OdbcHandle? parentHandle)
+            : base(IntPtr.Zero, true)
         {
             _handleType = handleType;
 
@@ -28,7 +29,11 @@ namespace System.Data.Odbc
                 {
                     case ODBC32.SQL_HANDLE.ENV:
                         Debug.Assert(null == parentHandle, "did not expect a parent handle");
-                        retcode = Interop.Odbc.SQLAllocHandle(handleType, IntPtr.Zero, out base.handle);
+                        retcode = Interop.Odbc.SQLAllocHandle(
+                            handleType,
+                            IntPtr.Zero,
+                            out base.handle
+                        );
                         break;
                     case ODBC32.SQL_HANDLE.DBC:
                     case ODBC32.SQL_HANDLE.STMT:
@@ -36,7 +41,11 @@ namespace System.Data.Odbc
                         Debug.Assert(null != parentHandle, "expected a parent handle"); // safehandle can't be null
                         parentHandle.DangerousAddRef(ref mustRelease);
 
-                        retcode = Interop.Odbc.SQLAllocHandle(handleType, parentHandle, out base.handle);
+                        retcode = Interop.Odbc.SQLAllocHandle(
+                            handleType,
+                            parentHandle,
+                            out base.handle
+                        );
                         break;
                     //              case ODBC32.SQL_HANDLE.DESC:
                     default:
@@ -75,9 +84,14 @@ namespace System.Data.Odbc
             }
         }
 
-        internal OdbcHandle(OdbcStatementHandle parentHandle, ODBC32.SQL_ATTR attribute) : base(IntPtr.Zero, true)
+        internal OdbcHandle(OdbcStatementHandle parentHandle, ODBC32.SQL_ATTR attribute)
+            : base(IntPtr.Zero, true)
         {
-            Debug.Assert((ODBC32.SQL_ATTR.APP_PARAM_DESC == attribute) || (ODBC32.SQL_ATTR.APP_ROW_DESC == attribute), "invalid attribute");
+            Debug.Assert(
+                (ODBC32.SQL_ATTR.APP_PARAM_DESC == attribute)
+                    || (ODBC32.SQL_ATTR.APP_ROW_DESC == attribute),
+                "invalid attribute"
+            );
             _handleType = ODBC32.SQL_HANDLE.DESC;
 
             int cbActual;
@@ -89,7 +103,11 @@ namespace System.Data.Odbc
                 // must addref before calling native so it won't be released just after
                 parentHandle.DangerousAddRef(ref mustRelease);
 
-                retcode = parentHandle.GetStatementAttribute(attribute, out base.handle, out cbActual);
+                retcode = parentHandle.GetStatementAttribute(
+                    attribute,
+                    out base.handle,
+                    out cbActual
+                );
             }
             finally
             {
@@ -117,10 +135,7 @@ namespace System.Data.Odbc
 
         internal ODBC32.SQL_HANDLE HandleType
         {
-            get
-            {
-                return _handleType;
-            }
+            get { return _handleType; }
         }
 
         public override bool IsInvalid
@@ -186,9 +201,12 @@ namespace System.Data.Odbc
                 ODBC32.SQL_DIAG_SQLSTATE,
                 sb,
                 checked((short)(2 * sb.Capacity)), // expects number of bytes, see \\kbinternal\kb\articles\294\1\69.HTM
-                out cbActual);
+                out cbActual
+            );
             ODBC.TraceODBC(3, "SQLGetDiagFieldW", retcode);
-            if ((retcode == ODBC32.RetCode.SUCCESS) || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO))
+            if (
+                (retcode == ODBC32.RetCode.SUCCESS) || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
+            )
             {
                 sqlState = sb.ToString();
             }
@@ -199,14 +217,31 @@ namespace System.Data.Odbc
             return retcode;
         }
 
-        internal ODBC32.RetCode GetDiagnosticRecord(short record, out string sqlState, StringBuilder message, out int nativeError, out short cchActual)
+        internal ODBC32.RetCode GetDiagnosticRecord(
+            short record,
+            out string sqlState,
+            StringBuilder message,
+            out int nativeError,
+            out short cchActual
+        )
         {
             // ODBC (MSDN) documents it expects a buffer large enough to hold 4(+L'\0') unicode characters
             StringBuilder sb = new StringBuilder(5);
-            ODBC32.RetCode retcode = Interop.Odbc.SQLGetDiagRecW(HandleType, this, record, sb, out nativeError, message, checked((short)message.Capacity), out cchActual);
+            ODBC32.RetCode retcode = Interop.Odbc.SQLGetDiagRecW(
+                HandleType,
+                this,
+                record,
+                sb,
+                out nativeError,
+                message,
+                checked((short)message.Capacity),
+                out cchActual
+            );
             ODBC.TraceODBC(3, "SQLGetDiagRecW", retcode);
 
-            if ((retcode == ODBC32.RetCode.SUCCESS) || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO))
+            if (
+                (retcode == ODBC32.RetCode.SUCCESS) || (retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
+            )
             {
                 sqlState = sb.ToString();
             }
@@ -220,25 +255,46 @@ namespace System.Data.Odbc
 
     internal sealed class OdbcDescriptorHandle : OdbcHandle
     {
-        internal OdbcDescriptorHandle(OdbcStatementHandle statementHandle, ODBC32.SQL_ATTR attribute) : base(statementHandle, attribute)
-        {
-        }
+        internal OdbcDescriptorHandle(
+            OdbcStatementHandle statementHandle,
+            ODBC32.SQL_ATTR attribute
+        ) : base(statementHandle, attribute) { }
 
-        internal ODBC32.RetCode GetDescriptionField(int i, ODBC32.SQL_DESC attribute, CNativeBuffer buffer, out int numericAttribute)
+        internal ODBC32.RetCode GetDescriptionField(
+            int i,
+            ODBC32.SQL_DESC attribute,
+            CNativeBuffer buffer,
+            out int numericAttribute
+        )
         {
-            ODBC32.RetCode retcode = Interop.Odbc.SQLGetDescFieldW(this, checked((short)i), attribute, buffer, buffer.ShortLength, out numericAttribute);
+            ODBC32.RetCode retcode = Interop.Odbc.SQLGetDescFieldW(
+                this,
+                checked((short)i),
+                attribute,
+                buffer,
+                buffer.ShortLength,
+                out numericAttribute
+            );
             ODBC.TraceODBC(3, "SQLGetDescFieldW", retcode);
             return retcode;
         }
 
-        internal ODBC32.RetCode SetDescriptionField1(short ordinal, ODBC32.SQL_DESC type, IntPtr value)
+        internal ODBC32.RetCode SetDescriptionField1(
+            short ordinal,
+            ODBC32.SQL_DESC type,
+            IntPtr value
+        )
         {
             ODBC32.RetCode retcode = Interop.Odbc.SQLSetDescFieldW(this, ordinal, type, value, 0);
             ODBC.TraceODBC(3, "SQLSetDescFieldW", retcode);
             return retcode;
         }
 
-        internal ODBC32.RetCode SetDescriptionField2(short ordinal, ODBC32.SQL_DESC type, HandleRef value)
+        internal ODBC32.RetCode SetDescriptionField2(
+            short ordinal,
+            ODBC32.SQL_DESC type,
+            HandleRef value
+        )
         {
             ODBC32.RetCode retcode = Interop.Odbc.SQLSetDescFieldW(this, ordinal, type, value, 0);
             ODBC.TraceODBC(3, "SQLSetDescFieldW", retcode);

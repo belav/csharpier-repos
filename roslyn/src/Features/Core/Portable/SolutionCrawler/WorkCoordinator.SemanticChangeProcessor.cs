@@ -27,7 +27,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         {
             private sealed class SemanticChangeProcessor : IdleProcessor
             {
-                private static readonly Func<int, DocumentId, bool, string> s_enqueueLogger = (tick, documentId, hint) => $"Tick:{tick}, {documentId}, {documentId.ProjectId}, hint:{hint}";
+                private static readonly Func<int, DocumentId, bool, string> s_enqueueLogger = (
+                    tick,
+                    documentId,
+                    hint
+                ) => $"Tick:{tick}, {documentId}, {documentId.ProjectId}, hint:{hint}";
 
                 private readonly SemaphoreSlim _gate;
 
@@ -43,14 +47,20 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     IncrementalAnalyzerProcessor documentWorkerProcessor,
                     int backOffTimeSpanInMS,
                     int projectBackOffTimeSpanInMS,
-                    CancellationToken cancellationToken)
-                    : base(listener, backOffTimeSpanInMS, cancellationToken)
+                    CancellationToken cancellationToken
+                ) : base(listener, backOffTimeSpanInMS, cancellationToken)
                 {
                     _gate = new SemaphoreSlim(initialCount: 0);
 
                     _registration = registration;
 
-                    _processor = new ProjectProcessor(listener, registration, documentWorkerProcessor, projectBackOffTimeSpanInMS, cancellationToken);
+                    _processor = new ProjectProcessor(
+                        listener,
+                        registration,
+                        documentWorkerProcessor,
+                        projectBackOffTimeSpanInMS,
+                        cancellationToken
+                    );
 
                     _workGate = new NonReentrantLock();
                     _pendingWork = new Dictionary<DocumentId, Data>();
@@ -63,7 +73,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         _ => ClearQueueWorker(_workGate, _pendingWork, data => data.AsyncToken),
                         CancellationToken.None,
                         TaskContinuationOptions.ExecuteSynchronously,
-                        TaskScheduler.Default);
+                        TaskScheduler.Default
+                    );
                 }
 
                 public override Task AsyncProcessorTask
@@ -74,8 +85,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
                 }
 
-                protected override Task WaitAsync(CancellationToken cancellationToken)
-                    => _gate.WaitAsync(cancellationToken);
+                protected override Task WaitAsync(CancellationToken cancellationToken) =>
+                    _gate.WaitAsync(cancellationToken);
 
                 protected override async Task ExecuteAsync()
                 {
@@ -84,7 +95,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     using (data.AsyncToken)
                     {
                         // we have a hint. check whether we can take advantage of it
-                        if (await TryEnqueueFromHintAsync(data.Document, data.ChangedMember).ConfigureAwait(continueOnCapturedContext: false))
+                        if (
+                            await TryEnqueueFromHintAsync(data.Document, data.ChangedMember)
+                                .ConfigureAwait(continueOnCapturedContext: false)
+                        )
                         {
                             return;
                         }
@@ -93,10 +107,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
                 }
 
-                private Data Dequeue()
-                    => DequeueWorker(_workGate, _pendingWork, CancellationToken);
+                private Data Dequeue() => DequeueWorker(_workGate, _pendingWork, CancellationToken);
 
-                private async Task<bool> TryEnqueueFromHintAsync(Document document, SyntaxPath? changedMember)
+                private async Task<bool> TryEnqueueFromHintAsync(
+                    Document document,
+                    SyntaxPath? changedMember
+                )
                 {
                     if (changedMember == null)
                     {
@@ -105,8 +121,15 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     // see whether we already have semantic model. otherwise, use the expansive full project dependency one
                     // TODO: if there is a reliable way to track changed member, we could use GetSemanticModel here which could
                     //       rebuild compilation from scratch
-                    if (!document.TryGetSemanticModel(out var model) ||
-                        !changedMember.TryResolve(await document.GetSyntaxRootAsync(CancellationToken).ConfigureAwait(false), out SyntaxNode? declarationNode))
+                    if (
+                        !document.TryGetSemanticModel(out var model)
+                        || !changedMember.TryResolve(
+                            await document
+                                .GetSyntaxRootAsync(CancellationToken)
+                                .ConfigureAwait(false),
+                            out SyntaxNode? declarationNode
+                        )
+                    )
                     {
                         return false;
                     }
@@ -117,8 +140,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         return false;
                     }
 
-                    return await TryEnqueueFromMemberAsync(document, symbol).ConfigureAwait(false) ||
-                        await TryEnqueueFromTypeAsync(document, symbol).ConfigureAwait(false);
+                    return await TryEnqueueFromMemberAsync(document, symbol).ConfigureAwait(false)
+                        || await TryEnqueueFromTypeAsync(document, symbol).ConfigureAwait(false);
                 }
 
                 private async Task<bool> TryEnqueueFromTypeAsync(Document document, ISymbol symbol)
@@ -132,7 +155,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     {
                         await EnqueueWorkItemAsync(document, symbol).ConfigureAwait(false);
 
-                        Logger.Log(FunctionId.WorkCoordinator_SemanticChange_EnqueueFromType, symbol.Name);
+                        Logger.Log(
+                            FunctionId.WorkCoordinator_SemanticChange_EnqueueFromType,
+                            symbol.Name
+                        );
                         return true;
                     }
 
@@ -146,7 +172,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     return false;
                 }
 
-                private async Task<bool> TryEnqueueFromMemberAsync(Document document, ISymbol symbol)
+                private async Task<bool> TryEnqueueFromMemberAsync(
+                    Document document,
+                    ISymbol symbol
+                )
                 {
                     if (!IsMember(symbol))
                     {
@@ -159,7 +188,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     {
                         await EnqueueWorkItemAsync(document, symbol).ConfigureAwait(false);
 
-                        Logger.Log(FunctionId.WorkCoordinator_SemanticChange_EnqueueFromMember, symbol.Name);
+                        Logger.Log(
+                            FunctionId.WorkCoordinator_SemanticChange_EnqueueFromMember,
+                            symbol.Name
+                        );
                         return true;
                     }
 
@@ -168,13 +200,22 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         return false;
                     }
 
-                    return await TryEnqueueFromTypeAsync(document, typeSymbol).ConfigureAwait(false);
+                    return await TryEnqueueFromTypeAsync(document, typeSymbol)
+                        .ConfigureAwait(false);
                 }
 
-                private Task EnqueueWorkItemAsync(Document document, ISymbol symbol)
-                    => EnqueueWorkItemAsync(document, symbol.ContainingType != null ? symbol.ContainingType.Locations : symbol.Locations);
+                private Task EnqueueWorkItemAsync(Document document, ISymbol symbol) =>
+                    EnqueueWorkItemAsync(
+                        document,
+                        symbol.ContainingType != null
+                          ? symbol.ContainingType.Locations
+                          : symbol.Locations
+                    );
 
-                private async Task EnqueueWorkItemAsync(Document thisDocument, ImmutableArray<Location> locations)
+                private async Task EnqueueWorkItemAsync(
+                    Document thisDocument,
+                    ImmutableArray<Location> locations
+                )
                 {
                     var solution = thisDocument.Project.Solution;
                     var projectId = thisDocument.Id.ProjectId;
@@ -195,27 +236,29 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 private static bool IsInternal(ISymbol symbol)
                 {
-                    return symbol.DeclaredAccessibility == Accessibility.Internal ||
-                           symbol.DeclaredAccessibility == Accessibility.ProtectedAndInternal ||
-                           symbol.DeclaredAccessibility == Accessibility.ProtectedOrInternal;
+                    return symbol.DeclaredAccessibility == Accessibility.Internal
+                        || symbol.DeclaredAccessibility == Accessibility.ProtectedAndInternal
+                        || symbol.DeclaredAccessibility == Accessibility.ProtectedOrInternal;
                 }
 
-                private static bool IsType(ISymbol symbol)
-                    => symbol.Kind == SymbolKind.NamedType;
+                private static bool IsType(ISymbol symbol) => symbol.Kind == SymbolKind.NamedType;
 
                 private static bool IsMember(ISymbol symbol)
                 {
-                    return symbol.Kind == SymbolKind.Event ||
-                           symbol.Kind == SymbolKind.Field ||
-                           symbol.Kind == SymbolKind.Method ||
-                           symbol.Kind == SymbolKind.Property;
+                    return symbol.Kind == SymbolKind.Event
+                        || symbol.Kind == SymbolKind.Field
+                        || symbol.Kind == SymbolKind.Method
+                        || symbol.Kind == SymbolKind.Property;
                 }
 
-                private void EnqueueFullProjectDependency(Document document, IAssemblySymbol? internalVisibleToAssembly = null)
+                private void EnqueueFullProjectDependency(
+                    Document document,
+                    IAssemblySymbol? internalVisibleToAssembly = null
+                )
                 {
                     var self = document.Project.Id;
 
-                    // if there is no hint (this can happen for cases such as solution/project load and etc), 
+                    // if there is no hint (this can happen for cases such as solution/project load and etc),
                     // we can postpone it even further
                     if (internalVisibleToAssembly == null)
                     {
@@ -237,7 +280,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         if (project.TryGetCompilation(out var compilation))
                         {
                             var assembly = compilation.Assembly;
-                            if (assembly != null && !assembly.IsSameAssemblyOrHasFriendAccessTo(internalVisibleToAssembly))
+                            if (
+                                assembly != null
+                                && !assembly.IsSameAssemblyOrHasFriendAccessTo(
+                                    internalVisibleToAssembly
+                                )
+                            )
                             {
                                 continue;
                             }
@@ -246,7 +294,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         _processor.Enqueue(projectId);
                     }
 
-                    Logger.Log(FunctionId.WorkCoordinator_SemanticChange_FullProjects, internalVisibleToAssembly == null ? "full" : "internals");
+                    Logger.Log(
+                        FunctionId.WorkCoordinator_SemanticChange_FullProjects,
+                        internalVisibleToAssembly == null ? "full" : "internals"
+                    );
                 }
 
                 public void Enqueue(Document document, SyntaxPath? changedMember)
@@ -258,22 +309,48 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         if (_pendingWork.TryGetValue(document.Id, out var data))
                         {
                             // create new async token and dispose old one.
-                            var newAsyncToken = Listener.BeginAsyncOperation(nameof(Enqueue), tag: _registration.Workspace);
+                            var newAsyncToken = Listener.BeginAsyncOperation(
+                                nameof(Enqueue),
+                                tag: _registration.Workspace
+                            );
                             data.AsyncToken.Dispose();
 
-                            _pendingWork[document.Id] = new Data(document, data.ChangedMember == changedMember ? changedMember : null, newAsyncToken);
+                            _pendingWork[document.Id] = new Data(
+                                document,
+                                data.ChangedMember == changedMember ? changedMember : null,
+                                newAsyncToken
+                            );
                             return;
                         }
 
-                        _pendingWork.Add(document.Id, new Data(document, changedMember, Listener.BeginAsyncOperation(nameof(Enqueue), tag: _registration.Workspace)));
+                        _pendingWork.Add(
+                            document.Id,
+                            new Data(
+                                document,
+                                changedMember,
+                                Listener.BeginAsyncOperation(
+                                    nameof(Enqueue),
+                                    tag: _registration.Workspace
+                                )
+                            )
+                        );
                         _gate.Release();
                     }
 
-                    Logger.Log(FunctionId.WorkCoordinator_SemanticChange_Enqueue, s_enqueueLogger, Environment.TickCount, document.Id, changedMember != null);
+                    Logger.Log(
+                        FunctionId.WorkCoordinator_SemanticChange_Enqueue,
+                        s_enqueueLogger,
+                        Environment.TickCount,
+                        document.Id,
+                        changedMember != null
+                    );
                 }
 
-                private static TValue DequeueWorker<TKey, TValue>(NonReentrantLock gate, Dictionary<TKey, TValue> map, CancellationToken cancellationToken)
-                    where TKey : notnull
+                private static TValue DequeueWorker<TKey, TValue>(
+                    NonReentrantLock gate,
+                    Dictionary<TKey, TValue> map,
+                    CancellationToken cancellationToken
+                ) where TKey : notnull
                 {
                     using (gate.DisposableWait(cancellationToken))
                     {
@@ -292,8 +369,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
                 }
 
-                private static void ClearQueueWorker<TKey, TValue>(NonReentrantLock gate, Dictionary<TKey, TValue> map, Func<TValue, IDisposable> disposerSelector)
-                    where TKey : notnull
+                private static void ClearQueueWorker<TKey, TValue>(
+                    NonReentrantLock gate,
+                    Dictionary<TKey, TValue> map,
+                    Func<TValue, IDisposable> disposerSelector
+                ) where TKey : notnull
                 {
                     using (gate.DisposableWait(CancellationToken.None))
                     {
@@ -306,18 +386,29 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
                 }
 
-                private static IEnumerable<ProjectId> GetProjectsToAnalyze(Solution solution, ProjectId projectId)
+                private static IEnumerable<ProjectId> GetProjectsToAnalyze(
+                    Solution solution,
+                    ProjectId projectId
+                )
                 {
                     var graph = solution.GetProjectDependencyGraph();
 
-                    if (solution.Workspace.Options.GetOption(InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly))
+                    if (
+                        solution.Workspace.Options.GetOption(
+                            InternalSolutionCrawlerOptions.DirectDependencyPropagationOnly
+                        )
+                    )
                     {
-                        return graph.GetProjectsThatDirectlyDependOnThisProject(projectId).Concat(projectId);
+                        return graph
+                            .GetProjectsThatDirectlyDependOnThisProject(projectId)
+                            .Concat(projectId);
                     }
 
                     // re-analyzing all transitive dependencies is very expensive. by default we will only
                     // re-analyze direct dependency for now. and consider flipping the default only if we must.
-                    return graph.GetProjectsThatTransitivelyDependOnThisProject(projectId).Concat(projectId);
+                    return graph
+                        .GetProjectsThatTransitivelyDependOnThisProject(projectId)
+                        .Concat(projectId);
                 }
 
                 private readonly struct Data
@@ -326,7 +417,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     public readonly SyntaxPath? ChangedMember;
                     public readonly IAsyncToken AsyncToken;
 
-                    public Data(Document document, SyntaxPath? changedMember, IAsyncToken asyncToken)
+                    public Data(
+                        Document document,
+                        SyntaxPath? changedMember,
+                        IAsyncToken asyncToken
+                    )
                     {
                         AsyncToken = asyncToken;
                         Document = document;
@@ -336,7 +431,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 private class ProjectProcessor : IdleProcessor
                 {
-                    private static readonly Func<int, ProjectId, string> s_enqueueLogger = (t, i) => string.Format("[{0}] {1}", t, i.ToString());
+                    private static readonly Func<int, ProjectId, string> s_enqueueLogger = (t, i) =>
+                        string.Format("[{0}] {1}", t, i.ToString());
 
                     private readonly SemaphoreSlim _gate;
 
@@ -351,8 +447,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         Registration registration,
                         IncrementalAnalyzerProcessor processor,
                         int backOffTimeSpanInMS,
-                        CancellationToken cancellationToken)
-                        : base(listener, backOffTimeSpanInMS, cancellationToken)
+                        CancellationToken cancellationToken
+                    ) : base(listener, backOffTimeSpanInMS, cancellationToken)
                     {
                         _registration = registration;
                         _processor = processor;
@@ -370,7 +466,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             _ => ClearQueueWorker(_workGate, _pendingWork, data => data.AsyncToken),
                             CancellationToken.None,
                             TaskContinuationOptions.ExecuteSynchronously,
-                            TaskScheduler.Default);
+                            TaskScheduler.Default
+                        );
                     }
 
                     public void Enqueue(ProjectId projectId, bool needDependencyTracking = false)
@@ -385,13 +482,25 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 return;
                             }
 
-                            var data = new Data(projectId, needDependencyTracking, Listener.BeginAsyncOperation(nameof(Enqueue), tag: _registration.Workspace));
+                            var data = new Data(
+                                projectId,
+                                needDependencyTracking,
+                                Listener.BeginAsyncOperation(
+                                    nameof(Enqueue),
+                                    tag: _registration.Workspace
+                                )
+                            );
 
                             _pendingWork.Add(projectId, data);
                             _gate.Release();
                         }
 
-                        Logger.Log(FunctionId.WorkCoordinator_Project_Enqueue, s_enqueueLogger, Environment.TickCount, projectId);
+                        Logger.Log(
+                            FunctionId.WorkCoordinator_Project_Enqueue,
+                            s_enqueueLogger,
+                            Environment.TickCount,
+                            projectId
+                        );
                     }
 
                     public async Task EnqueueWorkItemAsync(Document document)
@@ -400,16 +509,31 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         CancellationToken.ThrowIfCancellationRequested();
 
                         // call to this method is serialized. and only this method does the writing.
-                        var priorityService = document.GetLanguageService<IWorkCoordinatorPriorityService>();
-                        var isLowPriority = priorityService != null && await priorityService.IsLowPriorityAsync(document, CancellationToken).ConfigureAwait(false);
+                        var priorityService =
+                            document.GetLanguageService<IWorkCoordinatorPriorityService>();
+                        var isLowPriority =
+                            priorityService != null
+                            && await priorityService
+                                .IsLowPriorityAsync(document, CancellationToken)
+                                .ConfigureAwait(false);
 
                         _processor.Enqueue(
-                            new WorkItem(document.Id, document.Project.Language, InvocationReasons.SemanticChanged,
-                                isLowPriority, activeMember: null, Listener.BeginAsyncOperation(nameof(EnqueueWorkItemAsync), tag: EnqueueItem)));
+                            new WorkItem(
+                                document.Id,
+                                document.Project.Language,
+                                InvocationReasons.SemanticChanged,
+                                isLowPriority,
+                                activeMember: null,
+                                Listener.BeginAsyncOperation(
+                                    nameof(EnqueueWorkItemAsync),
+                                    tag: EnqueueItem
+                                )
+                            )
+                        );
                     }
 
-                    protected override Task WaitAsync(CancellationToken cancellationToken)
-                        => _gate.WaitAsync(cancellationToken);
+                    protected override Task WaitAsync(CancellationToken cancellationToken) =>
+                        _gate.WaitAsync(cancellationToken);
 
                     protected override async Task ExecuteAsync()
                     {
@@ -431,7 +555,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                             // do dependency tracking here with current solution
                             var solution = _registration.CurrentSolution;
-                            foreach (var projectId in GetProjectsToAnalyze(solution, data.ProjectId))
+                            foreach (
+                                var projectId in GetProjectsToAnalyze(solution, data.ProjectId)
+                            )
                             {
                                 project = solution.GetProject(projectId);
                                 await EnqueueWorkItemAsync(project).ConfigureAwait(false);
@@ -439,8 +565,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         }
                     }
 
-                    private Data Dequeue()
-                        => DequeueWorker(_workGate, _pendingWork, CancellationToken);
+                    private Data Dequeue() =>
+                        DequeueWorker(_workGate, _pendingWork, CancellationToken);
 
                     private async Task EnqueueWorkItemAsync(Project? project)
                     {
@@ -461,7 +587,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         public readonly ProjectId ProjectId;
                         public readonly bool NeedDependencyTracking;
 
-                        public Data(ProjectId projectId, bool needDependencyTracking, IAsyncToken asyncToken)
+                        public Data(
+                            ProjectId projectId,
+                            bool needDependencyTracking,
+                            IAsyncToken asyncToken
+                        )
                         {
                             AsyncToken = asyncToken;
                             ProjectId = projectId;

@@ -13,15 +13,9 @@ namespace Internal.Cryptography.Pal
     {
         private sealed class AppleCertificateExporter : UnixExportProvider
         {
-            public AppleCertificateExporter(ICertificatePalCore cert)
-                : base(cert)
-            {
-            }
+            public AppleCertificateExporter(ICertificatePalCore cert) : base(cert) { }
 
-            public AppleCertificateExporter(X509Certificate2Collection certs)
-                : base(certs)
-            {
-            }
+            public AppleCertificateExporter(X509Certificate2Collection certs) : base(certs) { }
 
             protected override byte[] ExportPkcs7()
             {
@@ -29,7 +23,10 @@ namespace Internal.Cryptography.Pal
 
                 if (_singleCertPal != null)
                 {
-                    certHandles = new[] { ((AppleCertificatePal)_singleCertPal).CertificateHandle.DangerousGetHandle() };
+                    certHandles = new[]
+                    {
+                        ((AppleCertificatePal)_singleCertPal).CertificateHandle.DangerousGetHandle()
+                    };
                 }
                 else
                 {
@@ -45,7 +42,10 @@ namespace Internal.Cryptography.Pal
                 return Interop.AppleCrypto.X509ExportPkcs7(certHandles);
             }
 
-            protected override byte[] ExportPkcs8(ICertificatePalCore certificatePal, ReadOnlySpan<char> password)
+            protected override byte[] ExportPkcs8(
+                ICertificatePalCore certificatePal,
+                ReadOnlySpan<char> password
+            )
             {
                 AppleCertificatePal pal = (AppleCertificatePal)certificatePal;
                 return pal.ExportPkcs8(password);

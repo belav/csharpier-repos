@@ -19,33 +19,44 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class SubqueryMemberPushdownExpressionVisitor : ExpressionVisitor
     {
-        private static readonly List<MethodInfo> _supportedMethods = new()
-        {
-            QueryableMethods.FirstWithPredicate,
-            QueryableMethods.FirstWithoutPredicate,
-            QueryableMethods.FirstOrDefaultWithPredicate,
-            QueryableMethods.FirstOrDefaultWithoutPredicate,
-            QueryableMethods.SingleWithPredicate,
-            QueryableMethods.SingleWithoutPredicate,
-            QueryableMethods.SingleOrDefaultWithPredicate,
-            QueryableMethods.SingleOrDefaultWithoutPredicate,
-            QueryableMethods.LastWithPredicate,
-            QueryableMethods.LastWithoutPredicate,
-            QueryableMethods.LastOrDefaultWithPredicate,
-            QueryableMethods.LastOrDefaultWithoutPredicate
-            //QueryableMethodProvider.ElementAtMethodInfo,
-            //QueryableMethodProvider.ElementAtOrDefaultMethodInfo
-        };
+        private static readonly List<MethodInfo> _supportedMethods =
+            new()
+            {
+                QueryableMethods.FirstWithPredicate,
+                QueryableMethods.FirstWithoutPredicate,
+                QueryableMethods.FirstOrDefaultWithPredicate,
+                QueryableMethods.FirstOrDefaultWithoutPredicate,
+                QueryableMethods.SingleWithPredicate,
+                QueryableMethods.SingleWithoutPredicate,
+                QueryableMethods.SingleOrDefaultWithPredicate,
+                QueryableMethods.SingleOrDefaultWithoutPredicate,
+                QueryableMethods.LastWithPredicate,
+                QueryableMethods.LastWithoutPredicate,
+                QueryableMethods.LastOrDefaultWithPredicate,
+                QueryableMethods.LastOrDefaultWithoutPredicate
+                //QueryableMethodProvider.ElementAtMethodInfo,
+                //QueryableMethodProvider.ElementAtOrDefaultMethodInfo
+            };
 
-        private static readonly IDictionary<MethodInfo, MethodInfo> _predicateLessMethodInfo = new Dictionary<MethodInfo, MethodInfo>
-        {
-            { QueryableMethods.FirstWithPredicate, QueryableMethods.FirstWithoutPredicate },
-            { QueryableMethods.FirstOrDefaultWithPredicate, QueryableMethods.FirstOrDefaultWithoutPredicate },
-            { QueryableMethods.SingleWithPredicate, QueryableMethods.SingleWithoutPredicate },
-            { QueryableMethods.SingleOrDefaultWithPredicate, QueryableMethods.SingleOrDefaultWithoutPredicate },
-            { QueryableMethods.LastWithPredicate, QueryableMethods.LastWithoutPredicate },
-            { QueryableMethods.LastOrDefaultWithPredicate, QueryableMethods.LastOrDefaultWithoutPredicate }
-        };
+        private static readonly IDictionary<MethodInfo, MethodInfo> _predicateLessMethodInfo =
+            new Dictionary<MethodInfo, MethodInfo>
+            {
+                { QueryableMethods.FirstWithPredicate, QueryableMethods.FirstWithoutPredicate },
+                {
+                    QueryableMethods.FirstOrDefaultWithPredicate,
+                    QueryableMethods.FirstOrDefaultWithoutPredicate
+                },
+                { QueryableMethods.SingleWithPredicate, QueryableMethods.SingleWithoutPredicate },
+                {
+                    QueryableMethods.SingleOrDefaultWithPredicate,
+                    QueryableMethods.SingleOrDefaultWithoutPredicate
+                },
+                { QueryableMethods.LastWithPredicate, QueryableMethods.LastWithoutPredicate },
+                {
+                    QueryableMethods.LastOrDefaultWithPredicate,
+                    QueryableMethods.LastOrDefaultWithoutPredicate
+                }
+            };
 
         private readonly IModel _model;
 
@@ -71,21 +82,32 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             Check.NotNull(memberExpression, nameof(memberExpression));
 
             var innerExpression = Visit(memberExpression.Expression);
-            if (innerExpression is MethodCallExpression methodCallExpression
+            if (
+                innerExpression is MethodCallExpression methodCallExpression
                 && methodCallExpression.Method.IsGenericMethod
-                && _supportedMethods.Contains(methodCallExpression.Method.GetGenericMethodDefinition()))
+                && _supportedMethods.Contains(
+                    methodCallExpression.Method.GetGenericMethodDefinition()
+                )
+            )
             {
                 return PushdownMember(
                     methodCallExpression,
                     (target, nullable) =>
                     {
-                        var memberAccessExpression = Expression.MakeMemberAccess(target, memberExpression.Member);
+                        var memberAccessExpression = Expression.MakeMemberAccess(
+                            target,
+                            memberExpression.Member
+                        );
 
                         return nullable && !memberAccessExpression.Type.IsNullableType()
-                            ? Expression.Convert(memberAccessExpression, memberAccessExpression.Type.MakeNullable())
-                            : (Expression)memberAccessExpression;
+                          ? Expression.Convert(
+                                memberAccessExpression,
+                                memberAccessExpression.Type.MakeNullable()
+                            )
+                          : (Expression)memberAccessExpression;
                     },
-                    memberExpression.Type);
+                    memberExpression.Type
+                );
             }
 
             return memberExpression.Update(innerExpression);
@@ -105,9 +127,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 source = Visit(source);
 
-                if (source is MethodCallExpression innerMethodCall
+                if (
+                    source is MethodCallExpression innerMethodCall
                     && innerMethodCall.Method.IsGenericMethod
-                    && _supportedMethods.Contains(innerMethodCall.Method.GetGenericMethodDefinition()))
+                    && _supportedMethods.Contains(
+                        innerMethodCall.Method.GetGenericMethodDefinition()
+                    )
+                )
                 {
                     return PushdownMember(
                         innerMethodCall,
@@ -122,9 +148,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             return Expression.Call(
                                 EF.PropertyMethod.MakeGenericMethod(propertyType),
                                 target,
-                                methodCallExpression.Arguments[1]);
+                                methodCallExpression.Arguments[1]
+                            );
                         },
-                        methodCallExpression.Type);
+                        methodCallExpression.Type
+                    );
                 }
             }
 
@@ -132,9 +160,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 source = Visit(source);
 
-                if (source is MethodCallExpression innerMethodCall
+                if (
+                    source is MethodCallExpression innerMethodCall
                     && innerMethodCall.Method.IsGenericMethod
-                    && _supportedMethods.Contains(innerMethodCall.Method.GetGenericMethodDefinition()))
+                    && _supportedMethods.Contains(
+                        innerMethodCall.Method.GetGenericMethodDefinition()
+                    )
+                )
                 {
                     return PushdownMember(
                         innerMethodCall,
@@ -148,26 +180,40 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                             var indexerExpression = Expression.Call(
                                 target,
-                                methodCallExpression.Method, methodCallExpression.Arguments[0]);
+                                methodCallExpression.Method,
+                                methodCallExpression.Arguments[0]
+                            );
 
                             return nullable && !indexerExpression.Type.IsNullableType()
-                                ? Expression.Convert(indexerExpression, indexerExpression.Type.MakeNullable())
-                                : (Expression)indexerExpression;
+                              ? Expression.Convert(
+                                    indexerExpression,
+                                    indexerExpression.Type.MakeNullable()
+                                )
+                              : (Expression)indexerExpression;
                         },
-                        methodCallExpression.Type);
+                        methodCallExpression.Type
+                    );
                 }
             }
 
             // Avoid pushing down a collection navigation which is followed by AsQueryable
-            if (methodCallExpression.Method.IsGenericMethod
-                && methodCallExpression.Method.GetGenericMethodDefinition() == QueryableMethods.AsQueryable
-                && methodCallExpression.Arguments[0] is MemberExpression memberExpression)
+            if (
+                methodCallExpression.Method.IsGenericMethod
+                && methodCallExpression.Method.GetGenericMethodDefinition()
+                    == QueryableMethods.AsQueryable
+                && methodCallExpression.Arguments[0] is MemberExpression memberExpression
+            )
             {
-                var updatedMemberExpression = memberExpression.Update(Visit(memberExpression.Expression));
+                var updatedMemberExpression = memberExpression.Update(
+                    Visit(memberExpression.Expression)
+                );
 
                 return Expression.Call(
-                    QueryableMethods.AsQueryable.MakeGenericMethod(updatedMemberExpression.Type.GetSequenceType()),
-                    updatedMemberExpression);
+                    QueryableMethods.AsQueryable.MakeGenericMethod(
+                        updatedMemberExpression.Type.GetSequenceType()
+                    ),
+                    updatedMemberExpression
+                );
             }
 
             return base.VisitMethodCall(methodCallExpression);
@@ -176,7 +222,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         private Expression PushdownMember(
             MethodCallExpression methodCallExpression,
             Func<Expression, bool, Expression> createSelector,
-            Type returnType)
+            Type returnType
+        )
         {
             var source = methodCallExpression.Arguments[0];
             var queryableType = source.Type.GetSequenceType();
@@ -187,25 +234,36 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 source = Expression.Call(
                     QueryableMethods.Where.MakeGenericMethod(queryableType),
                     source,
-                    methodCallExpression.Arguments[1]);
+                    methodCallExpression.Arguments[1]
+                );
 
                 genericMethod = _predicateLessMethodInfo[genericMethod];
             }
 
-            if (source is MethodCallExpression sourceMethodCallExpression
+            if (
+                source is MethodCallExpression sourceMethodCallExpression
                 && sourceMethodCallExpression.Method.IsGenericMethod
-                && sourceMethodCallExpression.Method.GetGenericMethodDefinition() == QueryableMethods.Select)
+                && sourceMethodCallExpression.Method.GetGenericMethodDefinition()
+                    == QueryableMethods.Select
+            )
             {
                 var selector = sourceMethodCallExpression.Arguments[1].UnwrapLambdaFromQuote();
                 var selectorBody = selector.Body;
                 var memberAccessExpression = createSelector(
-                    selectorBody, methodCallExpression.Method.Name.EndsWith("OrDefault", StringComparison.Ordinal));
+                    selectorBody,
+                    methodCallExpression.Method.Name.EndsWith("OrDefault", StringComparison.Ordinal)
+                );
 
                 source = Expression.Call(
                     QueryableMethods.Select.MakeGenericMethod(
-                        sourceMethodCallExpression.Arguments[0].Type.GetSequenceType(), memberAccessExpression.Type),
+                        sourceMethodCallExpression.Arguments[0].Type.GetSequenceType(),
+                        memberAccessExpression.Type
+                    ),
                     sourceMethodCallExpression.Arguments[0],
-                    Expression.Quote(Expression.Lambda(memberAccessExpression, selector.Parameters[0])));
+                    Expression.Quote(
+                        Expression.Lambda(memberAccessExpression, selector.Parameters[0])
+                    )
+                );
 
                 source = Visit(source);
             }
@@ -213,19 +271,26 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 var parameter = Expression.Parameter(queryableType, "s");
                 var memberAccessExpression = createSelector(
-                    parameter, methodCallExpression.Method.Name.EndsWith("OrDefault", StringComparison.Ordinal));
+                    parameter,
+                    methodCallExpression.Method.Name.EndsWith("OrDefault", StringComparison.Ordinal)
+                );
 
                 source = Expression.Call(
-                    QueryableMethods.Select.MakeGenericMethod(queryableType, memberAccessExpression.Type),
+                    QueryableMethods.Select.MakeGenericMethod(
+                        queryableType,
+                        memberAccessExpression.Type
+                    ),
                     source,
-                    Expression.Quote(Expression.Lambda(memberAccessExpression, parameter)));
+                    Expression.Quote(Expression.Lambda(memberAccessExpression, parameter))
+                );
             }
 
-            source = Expression.Call(genericMethod.MakeGenericMethod(source.Type.GetSequenceType()), source);
+            source = Expression.Call(
+                genericMethod.MakeGenericMethod(source.Type.GetSequenceType()),
+                source
+            );
 
-            return source.Type != returnType
-                ? Expression.Convert(source, returnType)
-                : source;
+            return source.Type != returnType ? Expression.Convert(source, returnType) : source;
         }
     }
 }

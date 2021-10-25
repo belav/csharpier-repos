@@ -11,7 +11,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void CanParseStuff()
         {
             var parser = new RazorParser();
-            var sourceDocument = TestRazorSourceDocument.CreateResource("TestFiles/Source/BasicMarkup.cshtml", GetType());
+            var sourceDocument = TestRazorSourceDocument.CreateResource(
+                "TestFiles/Source/BasicMarkup.cshtml",
+                GetType()
+            );
             var output = parser.Parse(sourceDocument);
 
             Assert.NotNull(output);
@@ -23,7 +26,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             // Arrange
             var parser = new RazorParser();
             var expected =
-@"RazorDocument - [0..12)::12 - [foo @bar baz]
+                @"RazorDocument - [0..12)::12 - [foo @bar baz]
     MarkupBlock - [0..12)::12
         MarkupTextLiteral - [0..4)::4 - [foo ] - Gen<Markup> - SpanEditHandler;Accepts:Any
             Text;[foo];

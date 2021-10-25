@@ -18,27 +18,51 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal sealed class ImplementsGraphQuery : IGraphQuery
     {
-        public async Task<GraphBuilder> GetGraphAsync(Solution solution, IGraphContext context, CancellationToken cancellationToken)
+        public async Task<GraphBuilder> GetGraphAsync(
+            Solution solution,
+            IGraphContext context,
+            CancellationToken cancellationToken
+        )
         {
-            using (Logger.LogBlock(FunctionId.GraphQuery_Implements, KeyValueLogMessage.Create(LogType.UserAction), cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.GraphQuery_Implements,
+                    KeyValueLogMessage.Create(LogType.UserAction),
+                    cancellationToken
+                )
+            )
             {
-                var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken).ConfigureAwait(false);
+                var graphBuilder = await GraphBuilder
+                    .CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken)
+                    .ConfigureAwait(false);
 
                 foreach (var node in context.InputNodes)
                 {
                     var symbol = graphBuilder.GetSymbol(node);
                     if (symbol is INamedTypeSymbol namedType)
                     {
-                        var implementedSymbols = ImmutableArray<ISymbol>.CastUp(namedType.AllInterfaces);
+                        var implementedSymbols = ImmutableArray<ISymbol>.CastUp(
+                            namedType.AllInterfaces
+                        );
 
-                        await AddImplementedSymbolsAsync(graphBuilder, node, implementedSymbols).ConfigureAwait(false);
+                        await AddImplementedSymbolsAsync(graphBuilder, node, implementedSymbols)
+                            .ConfigureAwait(false);
                     }
-                    else if (symbol is IMethodSymbol ||
-                             symbol is IPropertySymbol ||
-                             symbol is IEventSymbol)
+                    else if (
+                        symbol is IMethodSymbol
+                        || symbol is IPropertySymbol
+                        || symbol is IEventSymbol
+                    )
                     {
-                        var implements = await SymbolFinder.FindImplementedInterfaceMembersArrayAsync(symbol, solution, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        await AddImplementedSymbolsAsync(graphBuilder, node, implements).ConfigureAwait(false);
+                        var implements = await SymbolFinder
+                            .FindImplementedInterfaceMembersArrayAsync(
+                                symbol,
+                                solution,
+                                cancellationToken: cancellationToken
+                            )
+                            .ConfigureAwait(false);
+                        await AddImplementedSymbolsAsync(graphBuilder, node, implements)
+                            .ConfigureAwait(false);
                     }
                 }
 
@@ -47,12 +71,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         }
 
         private static async Task AddImplementedSymbolsAsync(
-            GraphBuilder graphBuilder, GraphNode node,
-            ImmutableArray<ISymbol> implementedSymbols)
+            GraphBuilder graphBuilder,
+            GraphNode node,
+            ImmutableArray<ISymbol> implementedSymbols
+        )
         {
             foreach (var interfaceType in implementedSymbols)
             {
-                var interfaceTypeNode = await graphBuilder.AddNodeAsync(interfaceType, relatedNode: node).ConfigureAwait(false);
+                var interfaceTypeNode = await graphBuilder
+                    .AddNodeAsync(interfaceType, relatedNode: node)
+                    .ConfigureAwait(false);
                 graphBuilder.AddLink(node, CodeLinkCategories.Implements, interfaceTypeNode);
             }
         }

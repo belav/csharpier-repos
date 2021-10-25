@@ -6,16 +6,19 @@ namespace System.Xml.Serialization
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Struct)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Enum
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct
+    )]
     public class SoapTypeAttribute : System.Attribute
     {
         private string? _ns;
         private string? _typeName;
         private bool _includeInSchema = true;
 
-        public SoapTypeAttribute()
-        {
-        }
+        public SoapTypeAttribute() { }
 
         public SoapTypeAttribute(string? typeName)
         {

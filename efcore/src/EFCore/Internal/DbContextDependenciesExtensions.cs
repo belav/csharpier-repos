@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     before the context is initialized
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IDbContextDependencies GetDependencies(this IDbContextDependencies context)
-            => context;
+        public static IDbContextDependencies GetDependencies(this IDbContextDependencies context) =>
+            context;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static IDbContextDependencies GetDependencies(this ICurrentDbContext currentContext)
-            => currentContext.Context;
+        public static IDbContextDependencies GetDependencies(
+            this ICurrentDbContext currentContext
+        ) => currentContext.Context;
     }
 }

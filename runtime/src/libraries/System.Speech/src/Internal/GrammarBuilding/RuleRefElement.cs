@@ -58,10 +58,20 @@ namespace System.Speech.Internal.GrammarBuilding
             _rule.CloneItems(builders._rule);
         }
 
-        internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
+        internal override IElement CreateElement(
+            IElementFactory elementFactory,
+            IElement parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        )
         {
             // Create the new rule and add the reference to the item
-            return elementFactory.CreateRuleRef(parent, new Uri("#" + Rule.RuleName, UriKind.Relative), _semanticKey, null);
+            return elementFactory.CreateRuleRef(
+                parent,
+                new Uri("#" + Rule.RuleName, UriKind.Relative),
+                _semanticKey,
+                null
+            );
         }
 
         #endregion
@@ -70,18 +80,12 @@ namespace System.Speech.Internal.GrammarBuilding
 
         internal RuleElement Rule
         {
-            get
-            {
-                return _rule;
-            }
+            get { return _rule; }
         }
 
         internal override string DebugSummary
         {
-            get
-            {
-                return "#" + Rule.Name + (_semanticKey != null ? ":" + _semanticKey : "");
-            }
+            get { return "#" + Rule.Name + (_semanticKey != null ? ":" + _semanticKey : ""); }
         }
 
         #endregion
@@ -90,7 +94,6 @@ namespace System.Speech.Internal.GrammarBuilding
 
         private readonly RuleElement _rule;
         private readonly string _semanticKey;
-
         #endregion
     }
 }

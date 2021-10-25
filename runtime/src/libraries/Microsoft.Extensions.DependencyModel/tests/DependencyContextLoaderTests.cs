@@ -11,17 +11,21 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     public class DependencyContextLoaderTests
     {
         [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "GetEntryAssembly() returns null")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "GetEntryAssembly() returns null"
+        )]
         public void LoadLoadsExtraPaths()
         {
             string appDepsPath = "appPath.deps.json";
             string fxDepsPath = "fxPath.deps.json";
             string extraDepsPath = "extra1.deps.json";
 
-            var fileSystem = FileSystemMockBuilder.Create()
+            var fileSystem = FileSystemMockBuilder
+                .Create()
                 .AddFile(
                     appDepsPath,
-@"{
+                    @"{
     ""runtimeTarget"": {
         ""name"":"".NETCoreApp,Version=v1.0/osx.10.10-x64"",
         ""signature"":""target-signature""
@@ -29,19 +33,21 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     ""targets"": {
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {}
     }
-}")
+}"
+                )
                 .AddFile(
                     fxDepsPath,
-@"{
+                    @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {
             
         }
     }
-}")
+}"
+                )
                 .AddFile(
                     extraDepsPath,
-@"
+                    @"
  {
      ""targets"": {
          "".NETStandard,Version=v1.5"": {
@@ -63,14 +69,16 @@ namespace Microsoft.Extensions.DependencyModel.Tests
              ""sha512"": ""HASH-System.Banana""
          }
      }
- }")
+ }"
+                )
                 .Build();
 
             var loader = new DependencyContextLoader(
                 appDepsPath,
                 new[] { fxDepsPath, extraDepsPath },
                 fileSystem,
-                () => new DependencyContextJsonReader());
+                () => new DependencyContextJsonReader()
+            );
 
             var context = loader.Load(Assembly.GetEntryAssembly());
             context.RuntimeLibraries.Should().Contain(l => l.Name == "System.Banana");

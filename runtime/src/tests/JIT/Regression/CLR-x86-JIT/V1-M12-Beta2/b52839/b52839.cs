@@ -12,7 +12,10 @@ namespace Test
     }
     struct CC
     {
-        float Method1() { return 0; }
+        float Method1()
+        {
+            return 0;
+        }
         static int Main()
         {
             CC[] cc = new CC[10];

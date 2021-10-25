@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         public ControllerActionDescriptorProvider(
             ApplicationPartManager partManager,
-            ApplicationModelFactory applicationModelFactory)
+            ApplicationModelFactory applicationModelFactory
+        )
         {
             if (partManager == null)
             {

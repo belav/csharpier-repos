@@ -15,22 +15,22 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     public class TestRelationalCommandBuilderFactory : IRelationalCommandBuilderFactory
     {
         public TestRelationalCommandBuilderFactory(
-            RelationalCommandBuilderDependencies dependencies)
+            RelationalCommandBuilderDependencies dependencies
+        )
         {
             Dependencies = dependencies;
         }
 
         public RelationalCommandBuilderDependencies Dependencies { get; }
 
-        public virtual IRelationalCommandBuilder Create()
-            => new TestRelationalCommandBuilder(Dependencies);
+        public virtual IRelationalCommandBuilder Create() =>
+            new TestRelationalCommandBuilder(Dependencies);
 
         private class TestRelationalCommandBuilder : IRelationalCommandBuilder
         {
             private readonly List<IRelationalParameter> _parameters = new();
 
-            public TestRelationalCommandBuilder(
-                RelationalCommandBuilderDependencies dependencies)
+            public TestRelationalCommandBuilder(RelationalCommandBuilderDependencies dependencies)
             {
                 Dependencies = dependencies;
             }
@@ -39,8 +39,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             public RelationalCommandBuilderDependencies Dependencies { get; }
 
-            public IReadOnlyList<IRelationalParameter> Parameters
-                => _parameters;
+            public IReadOnlyList<IRelationalParameter> Parameters => _parameters;
 
             public IRelationalCommandBuilder AddParameter(IRelationalParameter parameter)
             {
@@ -49,14 +48,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return this;
             }
 
-            public IRelationalTypeMappingSource TypeMappingSource
-                => Dependencies.TypeMappingSource;
+            public IRelationalTypeMappingSource TypeMappingSource => Dependencies.TypeMappingSource;
 
-            public IRelationalCommand Build()
-                => new TestRelationalCommand(
-                    Dependencies,
-                    Instance.ToString(),
-                    Parameters);
+            public IRelationalCommand Build() =>
+                new TestRelationalCommand(Dependencies, Instance.ToString(), Parameters);
 
             public IRelationalCommandBuilder Append(string value)
             {
@@ -86,8 +81,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return this;
             }
 
-            public int CommandTextLength
-                => Instance.Length;
+            public int CommandTextLength => Instance.Length;
         }
 
         private class TestRelationalCommand : IRelationalCommand
@@ -97,16 +91,20 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             public TestRelationalCommand(
                 RelationalCommandBuilderDependencies dependencies,
                 string commandText,
-                IReadOnlyList<IRelationalParameter> parameters)
+                IReadOnlyList<IRelationalParameter> parameters
+            )
             {
-                _realRelationalCommand = new RelationalCommand(dependencies, commandText, parameters);
+                _realRelationalCommand = new RelationalCommand(
+                    dependencies,
+                    commandText,
+                    parameters
+                );
             }
 
-            public string CommandText
-                => _realRelationalCommand.CommandText;
+            public string CommandText => _realRelationalCommand.CommandText;
 
-            public IReadOnlyList<IRelationalParameter> Parameters
-                => _realRelationalCommand.Parameters;
+            public IReadOnlyList<IRelationalParameter> Parameters =>
+                _realRelationalCommand.Parameters;
 
             public int ExecuteNonQuery(RelationalCommandParameterObject parameterObject)
             {
@@ -125,12 +123,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             public Task<int> ExecuteNonQueryAsync(
                 RelationalCommandParameterObject parameterObject,
-                CancellationToken cancellationToken = new())
+                CancellationToken cancellationToken = new()
+            )
             {
                 var connection = parameterObject.Connection;
                 var errorNumber = PreExecution(connection);
 
-                var result = _realRelationalCommand.ExecuteNonQueryAsync(parameterObject, cancellationToken);
+                var result = _realRelationalCommand.ExecuteNonQueryAsync(
+                    parameterObject,
+                    cancellationToken
+                );
                 if (errorNumber.HasValue)
                 {
                     connection.DbConnection.Close();
@@ -157,12 +159,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             public async Task<object> ExecuteScalarAsync(
                 RelationalCommandParameterObject parameterObject,
-                CancellationToken cancellationToken = new())
+                CancellationToken cancellationToken = new()
+            )
             {
                 var connection = parameterObject.Connection;
                 var errorNumber = PreExecution(connection);
 
-                var result = await _realRelationalCommand.ExecuteScalarAsync(parameterObject, cancellationToken);
+                var result = await _realRelationalCommand.ExecuteScalarAsync(
+                    parameterObject,
+                    cancellationToken
+                );
                 if (errorNumber.HasValue)
                 {
                     connection.DbConnection.Close();
@@ -172,7 +178,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return result;
             }
 
-            public RelationalDataReader ExecuteReader(RelationalCommandParameterObject parameterObject)
+            public RelationalDataReader ExecuteReader(
+                RelationalCommandParameterObject parameterObject
+            )
             {
                 var connection = parameterObject.Connection;
                 var errorNumber = PreExecution(connection);
@@ -190,12 +198,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             public async Task<RelationalDataReader> ExecuteReaderAsync(
                 RelationalCommandParameterObject parameterObject,
-                CancellationToken cancellationToken = new())
+                CancellationToken cancellationToken = new()
+            )
             {
                 var connection = parameterObject.Connection;
                 var errorNumber = PreExecution(connection);
 
-                var result = await _realRelationalCommand.ExecuteReaderAsync(parameterObject, cancellationToken);
+                var result = await _realRelationalCommand.ExecuteReaderAsync(
+                    parameterObject,
+                    cancellationToken
+                );
                 if (errorNumber.HasValue)
                 {
                     connection.DbConnection.Close();
@@ -206,11 +218,14 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return result;
             }
 
-            public DbCommand CreateDbCommand(RelationalCommandParameterObject parameterObject, Guid commandId, DbCommandMethod commandMethod)
-                => throw new NotSupportedException();
+            public DbCommand CreateDbCommand(
+                RelationalCommandParameterObject parameterObject,
+                Guid commandId,
+                DbCommandMethod commandMethod
+            ) => throw new NotSupportedException();
 
-            public void PopulateFromTemplate(IRelationalCommand templateCommand)
-                => _realRelationalCommand.PopulateFromTemplate(templateCommand);
+            public void PopulateFromTemplate(IRelationalCommand templateCommand) =>
+                _realRelationalCommand.PopulateFromTemplate(templateCommand);
 
             private int? PreExecution(IRelationalConnection connection)
             {
@@ -226,7 +241,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         if (fail.Value)
                         {
                             testConnection.DbConnection.Close();
-                            throw SqlExceptionFactory.CreateSqlException(testConnection.ErrorNumber);
+                            throw SqlExceptionFactory.CreateSqlException(
+                                testConnection.ErrorNumber
+                            );
                         }
 
                         errorNumber = testConnection.ErrorNumber;

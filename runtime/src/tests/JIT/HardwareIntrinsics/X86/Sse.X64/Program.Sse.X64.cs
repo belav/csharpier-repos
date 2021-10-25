@@ -10,9 +10,11 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["ConvertToInt64.Vector128Single"] = ConvertToInt64Vector128Single,
-                ["ConvertToInt64WithTruncation.Vector128Single"] = ConvertToInt64WithTruncationVector128Single,
+                ["ConvertToInt64WithTruncation.Vector128Single"] =
+                    ConvertToInt64WithTruncationVector128Single,
                 ["ConvertScalarToVector128Single.Single"] = ConvertScalarToVector128SingleSingle,
             };
         }

@@ -26,39 +26,36 @@ namespace Microsoft.EntityFrameworkCore.Query
     /// </summary>
     public class ExpressionPrinter : ExpressionVisitor
     {
-        private static readonly List<string> _simpleMethods = new()
-        {
-            "get_Item",
-            "TryReadValue",
-            "ReferenceEquals"
-        };
+        private static readonly List<string> _simpleMethods =
+            new() { "get_Item", "TryReadValue", "ReferenceEquals" };
 
         private readonly IndentedStringBuilder _stringBuilder;
         private readonly Dictionary<ParameterExpression, string?> _parametersInScope;
         private readonly List<ParameterExpression> _namelessParameters;
         private readonly List<ParameterExpression> _encounteredParameters;
 
-        private readonly Dictionary<ExpressionType, string> _binaryOperandMap = new()
-        {
-            { ExpressionType.Assign, " = " },
-            { ExpressionType.Equal, " == " },
-            { ExpressionType.NotEqual, " != " },
-            { ExpressionType.GreaterThan, " > " },
-            { ExpressionType.GreaterThanOrEqual, " >= " },
-            { ExpressionType.LessThan, " < " },
-            { ExpressionType.LessThanOrEqual, " <= " },
-            { ExpressionType.OrElse, " || " },
-            { ExpressionType.AndAlso, " && " },
-            { ExpressionType.Coalesce, " ?? " },
-            { ExpressionType.Add, " + " },
-            { ExpressionType.Subtract, " - " },
-            { ExpressionType.Multiply, " * " },
-            { ExpressionType.Divide, " / " },
-            { ExpressionType.Modulo, " % " },
-            { ExpressionType.And, " & " },
-            { ExpressionType.Or, " | " },
-            { ExpressionType.ExclusiveOr, " ^ " }
-        };
+        private readonly Dictionary<ExpressionType, string> _binaryOperandMap =
+            new()
+            {
+                { ExpressionType.Assign, " = " },
+                { ExpressionType.Equal, " == " },
+                { ExpressionType.NotEqual, " != " },
+                { ExpressionType.GreaterThan, " > " },
+                { ExpressionType.GreaterThanOrEqual, " >= " },
+                { ExpressionType.LessThan, " < " },
+                { ExpressionType.LessThanOrEqual, " <= " },
+                { ExpressionType.OrElse, " || " },
+                { ExpressionType.AndAlso, " && " },
+                { ExpressionType.Coalesce, " ?? " },
+                { ExpressionType.Add, " + " },
+                { ExpressionType.Subtract, " - " },
+                { ExpressionType.Multiply, " * " },
+                { ExpressionType.Divide, " / " },
+                { ExpressionType.Modulo, " % " },
+                { ExpressionType.And, " & " },
+                { ExpressionType.Or, " | " },
+                { ExpressionType.ExclusiveOr, " ^ " }
+            };
 
         /// <summary>
         ///     Creates a new instance of the <see cref="ExpressionPrinter" /> class.
@@ -81,8 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="joinAction"> A join action to use when joining printout of individual item in the collection. </param>
         public virtual void VisitCollection<T>(
             IReadOnlyCollection<T> items,
-            Action<ExpressionPrinter>? joinAction = null)
-            where T : Expression
+            Action<ExpressionPrinter>? joinAction = null
+        ) where T : Expression
         {
             Check.NotNull(items, nameof(items));
 
@@ -141,8 +138,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     Creates a scoped indenter that will increment the indent, then decrement it when disposed.
         /// </summary>
         /// <returns> An indenter. </returns>
-        public virtual IDisposable Indent()
-            => _stringBuilder.Indent();
+        public virtual IDisposable Indent() => _stringBuilder.Indent();
 
         /// <summary>
         ///     Appends the given string to current output being built.
@@ -161,24 +157,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="expression"> The expression to print. </param>
         /// <param name="characterLimit"> An optional limit to the number of characters included. Additional output will be truncated. </param>
         /// <returns> The printable representation. </returns>
-        public virtual string Print(
-            Expression expression,
-            int? characterLimit = null)
-            => PrintCore(expression, characterLimit, verbose: false);
+        public virtual string Print(Expression expression, int? characterLimit = null) =>
+            PrintCore(expression, characterLimit, verbose: false);
 
         /// <summary>
         ///     Creates a printable verbose string representation of the given expression.
         /// </summary>
         /// <param name="expression"> The expression to print. </param>
         /// <returns> The printable representation. </returns>
-        public virtual string PrintDebug(
-            Expression expression)
-            => PrintCore(expression, characterLimit: null, verbose: true);
+        public virtual string PrintDebug(Expression expression) =>
+            PrintCore(expression, characterLimit: null, verbose: true);
 
-        private string PrintCore(
-            Expression expression,
-            int? characterLimit,
-            bool verbose)
+        private string PrintCore(Expression expression, int? characterLimit, bool verbose)
         {
             Check.NotNull(expression, nameof(expression));
 
@@ -194,12 +184,12 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var queryPlan = PostProcess(_stringBuilder.ToString());
 
-            if (characterLimit != null
-                && characterLimit.Value > 0)
+            if (characterLimit != null && characterLimit.Value > 0)
             {
-                queryPlan = queryPlan.Length > characterLimit
-                    ? queryPlan.Substring(0, characterLimit.Value) + "..."
-                    : queryPlan;
+                queryPlan =
+                    queryPlan.Length > characterLimit
+                        ? queryPlan.Substring(0, characterLimit.Value) + "..."
+                        : queryPlan;
             }
 
             return queryPlan;
@@ -224,8 +214,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 return null;
             }
 
-            if (CharacterLimit != null
-                && _stringBuilder.Length > CharacterLimit.Value)
+            if (CharacterLimit != null && _stringBuilder.Length > CharacterLimit.Value)
             {
                 return expression;
             }
@@ -396,9 +385,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     }
                 }
 
-                var expressions = blockExpression.Result != null
-                    ? blockExpression.Expressions.Except(new[] { blockExpression.Result })
-                    : blockExpression.Expressions;
+                var expressions =
+                    blockExpression.Result != null
+                        ? blockExpression.Expressions.Except(new[] { blockExpression.Result })
+                        : blockExpression.Expressions;
 
                 foreach (var expression in expressions)
                 {
@@ -456,8 +446,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private void Print(object? value)
         {
-            if (value is IEnumerable enumerable
-                && !(value is string))
+            if (value is IEnumerable enumerable && !(value is string))
             {
                 _stringBuilder.Append(value.GetType().ShortDisplayName() + " { ");
 
@@ -479,14 +468,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 return;
             }
 
-            var stringValue = value == null
-                ? "null"
-                : value.ToString() != value.GetType().ToString()
-                    ? value.ToString()
-                    : value.GetType().ShortDisplayName();
+            var stringValue =
+                value == null
+                    ? "null"
+                    : value.ToString() != value.GetType().ToString()
+                        ? value.ToString()
+                        : value.GetType().ShortDisplayName();
 
-            if (value != null
-                && value is string)
+            if (value != null && value is string)
             {
                 stringValue = $@"""{stringValue}""";
             }
@@ -499,7 +488,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(gotoExpression, nameof(gotoExpression));
 
-            AppendLine("return (" + gotoExpression.Target.Type.ShortDisplayName() + ")" + gotoExpression.Target + " {");
+            AppendLine(
+                "return ("
+                    + gotoExpression.Target.Type.ShortDisplayName()
+                    + ")"
+                    + gotoExpression.Target
+                    + " {"
+            );
             using (_stringBuilder.Indent())
             {
                 Visit(gotoExpression.Value);
@@ -572,8 +567,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             if (memberExpression.Expression != null)
             {
-                if (memberExpression.Expression.NodeType == ExpressionType.Convert
-                    || memberExpression.Expression is BinaryExpression)
+                if (
+                    memberExpression.Expression.NodeType == ExpressionType.Convert
+                    || memberExpression.Expression is BinaryExpression
+                )
                 {
                     _stringBuilder.Append("(");
                     Visit(memberExpression.Expression);
@@ -587,7 +584,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             else
             {
                 // ReSharper disable once PossibleNullReferenceException
-                _stringBuilder.Append(memberExpression.Member.DeclaringType?.Name ?? "MethodWithoutDeclaringType");
+                _stringBuilder.Append(
+                    memberExpression.Member.DeclaringType?.Name ?? "MethodWithoutDeclaringType"
+                );
             }
 
             _stringBuilder.Append("." + memberExpression.Member.Name);
@@ -602,7 +601,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             _stringBuilder.Append("new " + memberInitExpression.Type.ShortDisplayName());
 
-            var appendAction = memberInitExpression.Bindings.Count > 1 ? (Func<string, ExpressionVisitor>)AppendLine : Append;
+            var appendAction =
+                memberInitExpression.Bindings.Count > 1
+                    ? (Func<string, ExpressionVisitor>)AppendLine
+                    : Append;
             appendAction("{ ");
             using (_stringBuilder.Indent())
             {
@@ -651,7 +653,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             var methodArguments = methodCallExpression.Arguments.ToList();
             var method = methodCallExpression.Method;
 
-            var extensionMethod = !Verbose
+            var extensionMethod =
+                !Verbose
                 && methodCallExpression.Arguments.Count > 0
                 && method.IsDefined(typeof(ExtensionAttribute), inherit: false);
 
@@ -662,8 +665,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _stringBuilder.AppendLine();
                 _stringBuilder.Append($".{method.Name}");
                 methodArguments = methodArguments.Skip(1).ToList();
-                if (method.Name == nameof(Enumerable.Cast)
-                    || method.Name == nameof(Enumerable.OfType))
+                if (
+                    method.Name == nameof(Enumerable.Cast)
+                    || method.Name == nameof(Enumerable.OfType)
+                )
                 {
                     PrintGenericArguments(method, _stringBuilder);
                 }
@@ -681,22 +686,24 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             _stringBuilder.Append("(");
 
-            var isSimpleMethodOrProperty = _simpleMethods.Contains(method.Name)
+            var isSimpleMethodOrProperty =
+                _simpleMethods.Contains(method.Name)
                 || methodArguments.Count < 2
                 || method.IsEFPropertyMethod();
 
-            var appendAction = isSimpleMethodOrProperty ? (Func<string, ExpressionVisitor>)Append : AppendLine;
+            var appendAction = isSimpleMethodOrProperty
+                ? (Func<string, ExpressionVisitor>)Append
+                : AppendLine;
 
             if (methodArguments.Count > 0)
             {
                 appendAction("");
 
-                var argumentNames
-                    = !isSimpleMethodOrProperty
-                        ? extensionMethod
-                            ? method.GetParameters().Skip(1).Select(p => p.Name).ToList()
-                            : method.GetParameters().Select(p => p.Name).ToList()
-                        : new List<string?>();
+                var argumentNames = !isSimpleMethodOrProperty
+                    ? extensionMethod
+                        ? method.GetParameters().Skip(1).Select(p => p.Name).ToList()
+                        : method.GetParameters().Select(p => p.Name).ToList()
+                    : new List<string?>();
 
                 IDisposable? indent = null;
 
@@ -737,7 +744,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             return methodCallExpression;
 
-            static void PrintGenericArguments(MethodInfo method, IndentedStringBuilder stringBuilder)
+            static void PrintGenericArguments(
+                MethodInfo method,
+                IndentedStringBuilder stringBuilder
+            )
             {
                 if (method.IsGenericMethod)
                 {
@@ -822,7 +832,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             var isComplex = newArrayExpression.Expressions.Count > 1;
             var appendAction = isComplex ? s => AppendLine(s) : (Action<string>)(s => Append(s));
 
-            appendAction("new " + newArrayExpression.Type.GetElementType()!.ShortDisplayName() + "[]");
+            appendAction(
+                "new " + newArrayExpression.Type.GetElementType()!.ShortDisplayName() + "[]"
+            );
             appendAction("{ ");
 
             IDisposable? indent = null;
@@ -925,7 +937,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         Visit(unaryExpression.Operand);
                     }
-
                     break;
 
                 case ExpressionType.Throw:
@@ -992,10 +1003,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             Visit(indexExpression.Object);
             _stringBuilder.Append("[");
             VisitArguments(
-                indexExpression.Arguments, s =>
+                indexExpression.Arguments,
+                s =>
                 {
                     _stringBuilder.Append(s);
-                });
+                }
+            );
             _stringBuilder.Append("]");
 
             return indexExpression;
@@ -1008,7 +1021,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             _stringBuilder.Append("(");
             Visit(typeBinaryExpression.Expression);
-            _stringBuilder.Append(" is " + typeBinaryExpression.TypeOperand.ShortDisplayName() + ")");
+            _stringBuilder.Append(
+                " is " + typeBinaryExpression.TypeOperand.ShortDisplayName() + ")"
+            );
 
             return typeBinaryExpression;
         }
@@ -1077,7 +1092,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IReadOnlyList<Expression> arguments,
             Action<string> appendAction,
             string lastSeparator = "",
-            bool areConnected = false)
+            bool areConnected = false
+        )
         {
             for (var i = 0; i < arguments.Count; i++)
             {
@@ -1101,7 +1117,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             return processedPrintedExpression;
         }
 
-        private void UnhandledExpressionType(Expression expression)
-            => AppendLine(expression.ToString());
+        private void UnhandledExpressionType(Expression expression) =>
+            AppendLine(expression.ToString());
     }
 }

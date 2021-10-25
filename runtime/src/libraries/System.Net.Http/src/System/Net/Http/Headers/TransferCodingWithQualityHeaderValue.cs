@@ -10,8 +10,19 @@ namespace System.Net.Http.Headers
     {
         public double? Quality
         {
-            get { return HeaderUtilities.GetQuality((ObjectCollection<NameValueHeaderValue>)Parameters); }
-            set { HeaderUtilities.SetQuality((ObjectCollection<NameValueHeaderValue>)Parameters, value); }
+            get
+            {
+                return HeaderUtilities.GetQuality(
+                    (ObjectCollection<NameValueHeaderValue>)Parameters
+                );
+            }
+            set
+            {
+                HeaderUtilities.SetQuality(
+                    (ObjectCollection<NameValueHeaderValue>)Parameters,
+                    value
+                );
+            }
         }
 
         internal TransferCodingWithQualityHeaderValue()
@@ -19,13 +30,9 @@ namespace System.Net.Http.Headers
             // Used by the parser to create a new instance of this type.
         }
 
-        public TransferCodingWithQualityHeaderValue(string value)
-            : base(value)
-        {
-        }
+        public TransferCodingWithQualityHeaderValue(string value) : base(value) { }
 
-        public TransferCodingWithQualityHeaderValue(string value, double quality)
-            : base(value)
+        public TransferCodingWithQualityHeaderValue(string value, double quality) : base(value)
         {
             Quality = quality;
         }
@@ -44,17 +51,29 @@ namespace System.Net.Http.Headers
         public static new TransferCodingWithQualityHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (TransferCodingWithQualityHeaderValue)TransferCodingHeaderParser.SingleValueWithQualityParser
-                .ParseValue(input, null, ref index);
+            return (TransferCodingWithQualityHeaderValue)TransferCodingHeaderParser.SingleValueWithQualityParser.ParseValue(
+                input,
+                null,
+                ref index
+            );
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out TransferCodingWithQualityHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out TransferCodingWithQualityHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (TransferCodingHeaderParser.SingleValueWithQualityParser.TryParseValue(
-                input, null, ref index, out object? output))
+            if (
+                TransferCodingHeaderParser.SingleValueWithQualityParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (TransferCodingWithQualityHeaderValue)output!;
                 return true;

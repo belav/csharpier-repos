@@ -20,9 +20,7 @@ namespace System.Xml
     {
         internal XmlNode? parentNode; //this pointer is reused to save the userdata information, need to prevent internal user access the pointer directly.
 
-        internal XmlNode()
-        {
-        }
+        internal XmlNode() { }
 
         internal XmlNode(XmlDocument doc)
         {
@@ -94,23 +92,26 @@ namespace System.Xml
         }
 
         // Gets the name of the node.
-        public abstract string Name
-        {
-            get;
-        }
+        public abstract string Name { get; }
 
         // Gets or sets the value of the node.
         public virtual string? Value
         {
             get { return null; }
-            set { throw new InvalidOperationException(SR.Format(CultureInfo.InvariantCulture, SR.Xdom_Node_SetVal, NodeType.ToString())); }
+            set
+            {
+                throw new InvalidOperationException(
+                    SR.Format(
+                        CultureInfo.InvariantCulture,
+                        SR.Xdom_Node_SetVal,
+                        NodeType.ToString()
+                    )
+                );
+            }
         }
 
         // Gets the type of the current node.
-        public abstract XmlNodeType NodeType
-        {
-            get;
-        }
+        public abstract XmlNodeType NodeType { get; }
 
         // Gets the parent of this node (for nodes that can have parents).
         public virtual XmlNode? ParentNode
@@ -137,9 +138,7 @@ namespace System.Xml
                         }
 
                         node = node.next;
-                    }
-                    while (node != null
-                           && node != firstChild);
+                    } while (node != null && node != firstChild);
                 }
 
                 return null;
@@ -288,7 +287,14 @@ namespace System.Xml
             XmlLinkedNode refNode = (XmlLinkedNode)refChild;
 
             string? newChildValue = newChild.Value;
-            XmlNodeChangedEventArgs? args = GetEventArgs(newChild, newChild.ParentNode, this, newChildValue, newChildValue, XmlNodeChangedAction.Insert);
+            XmlNodeChangedEventArgs? args = GetEventArgs(
+                newChild,
+                newChild.ParentNode,
+                this,
+                newChildValue,
+                newChildValue,
+                XmlNodeChangedAction.Insert
+            );
 
             if (args != null)
                 BeforeEvent(args);
@@ -404,7 +410,14 @@ namespace System.Xml
             XmlLinkedNode refNode = (XmlLinkedNode)refChild;
 
             string? newChildValue = newChild.Value;
-            XmlNodeChangedEventArgs? args = GetEventArgs(newChild, newChild.ParentNode, this, newChildValue, newChildValue, XmlNodeChangedAction.Insert);
+            XmlNodeChangedEventArgs? args = GetEventArgs(
+                newChild,
+                newChild.ParentNode,
+                this,
+                newChildValue,
+                newChildValue,
+                XmlNodeChangedAction.Insert
+            );
 
             if (args != null)
                 BeforeEvent(args);
@@ -462,7 +475,6 @@ namespace System.Xml
                 }
             }
 
-
             if (args != null)
                 AfterEvent(args);
 
@@ -490,7 +502,14 @@ namespace System.Xml
             XmlLinkedNode oldNode = (XmlLinkedNode)oldChild;
 
             string? oldNodeValue = oldNode.Value;
-            XmlNodeChangedEventArgs? args = GetEventArgs(oldNode, this, null, oldNodeValue, oldNodeValue, XmlNodeChangedAction.Remove);
+            XmlNodeChangedEventArgs? args = GetEventArgs(
+                oldNode,
+                this,
+                null,
+                oldNodeValue,
+                oldNodeValue,
+                XmlNodeChangedAction.Remove
+            );
 
             if (args != null)
                 BeforeEvent(args);
@@ -610,12 +629,18 @@ namespace System.Xml
             if (!(newChild is XmlLinkedNode) || !IsValidChildType(newChild.NodeType))
                 throw new InvalidOperationException(SR.Xdom_Node_Insert_TypeConflict);
 
-
             if (!CanInsertAfter(newChild, LastChild))
                 throw new InvalidOperationException(SR.Xdom_Node_Insert_Location);
 
             string? newChildValue = newChild.Value;
-            XmlNodeChangedEventArgs? args = GetEventArgs(newChild, newChild.ParentNode, this, newChildValue, newChildValue, XmlNodeChangedAction.Insert);
+            XmlNodeChangedEventArgs? args = GetEventArgs(
+                newChild,
+                newChild.ParentNode,
+                this,
+                newChildValue,
+                newChildValue,
+                XmlNodeChangedAction.Insert
+            );
 
             if (args != null)
                 BeforeEvent(args);
@@ -673,8 +698,7 @@ namespace System.Xml
                 newNode.next = refNode.next;
                 refNode.next = newNode;
                 LastNode = newNode;
-                if (refNode.IsText
-                    && newNode.IsText)
+                if (refNode.IsText && newNode.IsText)
                 {
                     NestTextNodes(refNode, newNode);
                 }
@@ -741,38 +765,37 @@ namespace System.Xml
                     case XmlNodeType.Text:
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
+                    {
+                        sb.Append(crtChild.Value);
+                        XmlNode? winner = NormalizeWinner(firstChildTextLikeNode, crtChild);
+                        if (winner == firstChildTextLikeNode)
                         {
-                            sb.Append(crtChild.Value);
-                            XmlNode? winner = NormalizeWinner(firstChildTextLikeNode, crtChild);
-                            if (winner == firstChildTextLikeNode)
-                            {
-                                this.RemoveChild(crtChild);
-                            }
-                            else
-                            {
-                                if (firstChildTextLikeNode != null)
-                                    this.RemoveChild(firstChildTextLikeNode);
-                                firstChildTextLikeNode = crtChild;
-                            }
-
-                            break;
+                            this.RemoveChild(crtChild);
                         }
-                    case XmlNodeType.Element:
-                        {
-                            crtChild.Normalize();
-                            goto default;
-                        }
-                    default:
+                        else
                         {
                             if (firstChildTextLikeNode != null)
-                            {
-                                firstChildTextLikeNode.Value = sb.ToString();
-                                firstChildTextLikeNode = null;
-                            }
-
-                            sb.Remove(0, sb.Length);
-                            break;
+                                this.RemoveChild(firstChildTextLikeNode);
+                            firstChildTextLikeNode = crtChild;
                         }
+                        break;
+                    }
+                    case XmlNodeType.Element:
+                    {
+                        crtChild.Normalize();
+                        goto default;
+                    }
+                    default:
+                    {
+                        if (firstChildTextLikeNode != null)
+                        {
+                            firstChildTextLikeNode.Value = sb.ToString();
+                            firstChildTextLikeNode = null;
+                        }
+
+                        sb.Remove(0, sb.Length);
+                        break;
+                    }
                 }
                 crtChild = nextChild;
             }
@@ -787,12 +810,14 @@ namespace System.Xml
             //first node has the priority
             if (firstNode == null)
                 return secondNode;
-            Debug.Assert(firstNode.NodeType == XmlNodeType.Text
-                        || firstNode.NodeType == XmlNodeType.SignificantWhitespace
-                        || firstNode.NodeType == XmlNodeType.Whitespace
-                        || secondNode.NodeType == XmlNodeType.Text
-                        || secondNode.NodeType == XmlNodeType.SignificantWhitespace
-                        || secondNode.NodeType == XmlNodeType.Whitespace);
+            Debug.Assert(
+                firstNode.NodeType == XmlNodeType.Text
+                    || firstNode.NodeType == XmlNodeType.SignificantWhitespace
+                    || firstNode.NodeType == XmlNodeType.Whitespace
+                    || secondNode.NodeType == XmlNodeType.Text
+                    || secondNode.NodeType == XmlNodeType.SignificantWhitespace
+                    || secondNode.NodeType == XmlNodeType.Whitespace
+            );
             if (firstNode.NodeType == XmlNodeType.Text)
                 return firstNode;
             if (secondNode.NodeType == XmlNodeType.Text)
@@ -834,20 +859,14 @@ namespace System.Xml
         }
 
         // Gets the name of the node without the namespace prefix.
-        public abstract string LocalName
-        {
-            get;
-        }
+        public abstract string LocalName { get; }
 
         // Microsoft extensions
 
         // Gets a value indicating whether the node is read-only.
         public virtual bool IsReadOnly
         {
-            get
-            {
-                return HasReadOnlyParent(this);
-            }
+            get { return HasReadOnlyParent(this); }
         }
 
         internal static bool HasReadOnlyParent(XmlNode? n)
@@ -901,8 +920,12 @@ namespace System.Xml
             {
                 if (child.FirstChild == null)
                 {
-                    if (child.NodeType == XmlNodeType.Text || child.NodeType == XmlNodeType.CDATA
-                        || child.NodeType == XmlNodeType.Whitespace || child.NodeType == XmlNodeType.SignificantWhitespace)
+                    if (
+                        child.NodeType == XmlNodeType.Text
+                        || child.NodeType == XmlNodeType.CDATA
+                        || child.NodeType == XmlNodeType.Whitespace
+                        || child.NodeType == XmlNodeType.SignificantWhitespace
+                    )
                         builder.Append(child.InnerText);
                 }
                 else
@@ -940,13 +963,14 @@ namespace System.Xml
                 AppendChildText(builder);
                 return StringBuilderCache.GetStringAndRelease(builder);
             }
-
             set
             {
                 XmlNode? firstChild = FirstChild;
-                if (firstChild != null  //there is one child
+                if (
+                    firstChild != null //there is one child
                     && firstChild.NextSibling == null // and exactly one
-                    && firstChild.NodeType == XmlNodeType.Text)//which is a text node
+                    && firstChild.NodeType == XmlNodeType.Text
+                ) //which is a text node
                 {
                     //this branch is for perf reason and event fired when TextNode.Value is changed
                     firstChild.Value = value;
@@ -995,19 +1019,12 @@ namespace System.Xml
                 }
                 return sw.ToString();
             }
-
-            set
-            {
-                throw new InvalidOperationException(SR.Xdom_Set_InnerXml);
-            }
+            set { throw new InvalidOperationException(SR.Xdom_Set_InnerXml); }
         }
 
         public virtual IXmlSchemaInfo SchemaInfo
         {
-            get
-            {
-                return XmlDocument.NotKnownSchemaInfo;
-            }
+            get { return XmlDocument.NotKnownSchemaInfo; }
         }
 
         public virtual string BaseURI
@@ -1022,9 +1039,11 @@ namespace System.Xml
                     //we need to investigate the same thing for entity's children if they are defined in an external dtd file.
                     if (nt == XmlNodeType.EntityReference)
                         return ((XmlEntityReference)curNode).ChildBaseURI;
-                    if (nt == XmlNodeType.Document
+                    if (
+                        nt == XmlNodeType.Document
                         || nt == XmlNodeType.Entity
-                        || nt == XmlNodeType.Attribute)
+                        || nt == XmlNodeType.Attribute
+                    )
                         return curNode.BaseURI;
                     curNode = curNode.ParentNode;
                 }
@@ -1201,7 +1220,7 @@ namespace System.Xml
                                 else if (Ref.Equal(attr.NamespaceURI, namespaceURI))
                                 {
                                     return attr.Prefix; // found prefix:attr
-                                                        // with prefix bound to namespaceURI
+                                    // with prefix bound to namespaceURI
                                 }
                             }
                         }
@@ -1256,7 +1275,11 @@ namespace System.Xml
             {
                 for (XmlNode? n = FirstChild; n != null; n = n.NextSibling)
                 {
-                    if (n.NodeType == XmlNodeType.Element && n.LocalName == localname && n.NamespaceURI == ns)
+                    if (
+                        n.NodeType == XmlNodeType.Element
+                        && n.LocalName == localname
+                        && n.NamespaceURI == ns
+                    )
                         return (XmlElement)n;
                 }
 
@@ -1309,14 +1332,26 @@ namespace System.Xml
             return null;
         }
 
-        internal virtual XmlNodeChangedEventArgs? GetEventArgs(XmlNode node, XmlNode? oldParent, XmlNode? newParent, string? oldValue, string? newValue, XmlNodeChangedAction action)
+        internal virtual XmlNodeChangedEventArgs? GetEventArgs(
+            XmlNode node,
+            XmlNode? oldParent,
+            XmlNode? newParent,
+            string? oldValue,
+            string? newValue,
+            XmlNodeChangedAction action
+        )
         {
             XmlDocument? doc = OwnerDocument;
             if (doc != null)
             {
                 if (!doc.IsLoading)
                 {
-                    if (((newParent != null && newParent.IsReadOnly) || (oldParent != null && oldParent.IsReadOnly)))
+                    if (
+                        (
+                            (newParent != null && newParent.IsReadOnly)
+                            || (oldParent != null && oldParent.IsReadOnly)
+                        )
+                    )
                         throw new InvalidOperationException(SR.Xdom_Node_Modify_ReadOnly);
                 }
 
@@ -1392,18 +1427,12 @@ namespace System.Xml
 
         internal virtual XPathNodeType XPNodeType
         {
-            get
-            {
-                return (XPathNodeType)(-1);
-            }
+            get { return (XPathNodeType)(-1); }
         }
 
         internal virtual string XPLocalName
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
 
         internal virtual string GetXPAttribute(string localName, string namespaceURI)
@@ -1413,18 +1442,12 @@ namespace System.Xml
 
         internal virtual bool IsText
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public virtual XmlNode? PreviousText
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         internal static void NestTextNodes(XmlNode prevNode, XmlNode nextNode)
@@ -1443,7 +1466,10 @@ namespace System.Xml
             nextNode.parentNode = prevNode.ParentNode;
         }
 
-        private object debuggerDisplayProxy { get { return new DebuggerDisplayXmlNodeProxy(this); } }
+        private object debuggerDisplayProxy
+        {
+            get { return new DebuggerDisplayXmlNodeProxy(this); }
+        }
 
         [DebuggerDisplay("{ToString()}")]
         internal readonly struct DebuggerDisplayXmlNodeProxy
@@ -1467,7 +1493,12 @@ namespace System.Xml
                         break;
                     case XmlNodeType.Attribute:
                     case XmlNodeType.ProcessingInstruction:
-                        result += ", Name=\"" + _node.Name + "\", Value=\"" + XmlConvert.EscapeValueForDebuggerDisplay(_node.Value!) + "\"";
+                        result +=
+                            ", Name=\""
+                            + _node.Name
+                            + "\", Value=\""
+                            + XmlConvert.EscapeValueForDebuggerDisplay(_node.Value!)
+                            + "\"";
                         break;
                     case XmlNodeType.Text:
                     case XmlNodeType.CDATA:
@@ -1475,11 +1506,23 @@ namespace System.Xml
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
                     case XmlNodeType.XmlDeclaration:
-                        result += ", Value=\"" + XmlConvert.EscapeValueForDebuggerDisplay(_node.Value!) + "\"";
+                        result +=
+                            ", Value=\""
+                            + XmlConvert.EscapeValueForDebuggerDisplay(_node.Value!)
+                            + "\"";
                         break;
                     case XmlNodeType.DocumentType:
                         XmlDocumentType documentType = (XmlDocumentType)_node;
-                        result += ", Name=\"" + documentType.Name + "\", SYSTEM=\"" + documentType.SystemId + "\", PUBLIC=\"" + documentType.PublicId + "\", Value=\"" + XmlConvert.EscapeValueForDebuggerDisplay(documentType.InternalSubset!) + "\"";
+                        result +=
+                            ", Name=\""
+                            + documentType.Name
+                            + "\", SYSTEM=\""
+                            + documentType.SystemId
+                            + "\", PUBLIC=\""
+                            + documentType.PublicId
+                            + "\", Value=\""
+                            + XmlConvert.EscapeValueForDebuggerDisplay(documentType.InternalSubset!)
+                            + "\"";
                         break;
                     default:
                         break;

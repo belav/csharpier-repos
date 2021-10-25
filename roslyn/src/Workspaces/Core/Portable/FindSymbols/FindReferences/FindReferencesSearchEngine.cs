@@ -17,7 +17,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols
 {
-    using ProjectToDocumentMap = Dictionary<Project, Dictionary<Document, HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)>>>;
+    using ProjectToDocumentMap = Dictionary<
+        Project,
+        Dictionary<Document, HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)>>
+    >;
 
     internal partial class FindReferencesSearchEngine
     {
@@ -34,7 +37,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// run all our tasks concurrently.  Otherwise, we will run them serially using <see cref="s_exclusiveScheduler"/>
         /// </summary>
         private readonly TaskScheduler _scheduler;
-        private static readonly TaskScheduler s_exclusiveScheduler = new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler;
+        private static readonly TaskScheduler s_exclusiveScheduler =
+            new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler;
 
         public FindReferencesSearchEngine(
             Solution solution,
@@ -42,7 +46,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ImmutableArray<IReferenceFinder> finders,
             IStreamingFindReferencesProgress progress,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             _documents = documents;
             _solution = solution;
@@ -65,13 +70,20 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             await _progress.OnStartedAsync().ConfigureAwait(false);
             try
             {
-                await using var _ = await _progressTracker.AddSingleItemAsync().ConfigureAwait(false);
+                await using var _ = await _progressTracker
+                    .AddSingleItemAsync()
+                    .ConfigureAwait(false);
 
                 // For the starting symbol, always cascade up and down the inheritance hierarchy.
-                var symbols = await DetermineAllSymbolsAsync(symbol, FindReferencesCascadeDirection.UpAndDown).ConfigureAwait(false);
+                var symbols = await DetermineAllSymbolsAsync(
+                        symbol,
+                        FindReferencesCascadeDirection.UpAndDown
+                    )
+                    .ConfigureAwait(false);
 
                 var projectMap = await CreateProjectMapAsync(symbols).ConfigureAwait(false);
-                var projectToDocumentMap = await CreateProjectToDocumentMapAsync(projectMap).ConfigureAwait(false);
+                var projectToDocumentMap = await CreateProjectToDocumentMapAsync(projectMap)
+                    .ConfigureAwait(false);
                 ValidateProjectToDocumentMap(projectToDocumentMap);
 
                 await ProcessAsync(projectToDocumentMap).ConfigureAwait(false);
@@ -95,21 +107,30 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // Add a progress item for each (document, symbol, finder) set that we will execute.
                 // We'll mark the item as completed in "ProcessDocumentAsync".
                 var totalFindCount = projectToDocumentMap.Sum(
-                    kvp1 => kvp1.Value.Sum(kvp2 => kvp2.Value.Count));
+                    kvp1 => kvp1.Value.Sum(kvp2 => kvp2.Value.Count)
+                );
                 await _progressTracker.AddItemsAsync(totalFindCount).ConfigureAwait(false);
 
                 using var _ = ArrayBuilder<Task>.GetInstance(out var tasks);
 
                 foreach (var (project, documentMap) in projectToDocumentMap)
-                    tasks.Add(Task.Factory.StartNew(() => ProcessProjectAsync(project, documentMap), _cancellationToken, TaskCreationOptions.None, _scheduler).Unwrap());
+                    tasks.Add(
+                        Task.Factory
+                            .StartNew(
+                                () => ProcessProjectAsync(project, documentMap),
+                                _cancellationToken,
+                                TaskCreationOptions.None,
+                                _scheduler
+                            )
+                            .Unwrap()
+                    );
 
                 await Task.WhenAll(tasks).ConfigureAwait(false);
             }
         }
 
         [Conditional("DEBUG")]
-        private static void ValidateProjectToDocumentMap(
-            ProjectToDocumentMap projectToDocumentMap)
+        private static void ValidateProjectToDocumentMap(ProjectToDocumentMap projectToDocumentMap)
         {
             var set = new HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)>();
 
@@ -125,7 +146,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
         }
 
-        private ValueTask HandleLocationAsync(SymbolGroup group, ISymbol symbol, ReferenceLocation location)
-            => _progress.OnReferenceFoundAsync(group, symbol, location);
+        private ValueTask HandleLocationAsync(
+            SymbolGroup group,
+            ISymbol symbol,
+            ReferenceLocation location
+        ) => _progress.OnReferenceFoundAsync(group, symbol, location);
     }
 }

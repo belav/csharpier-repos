@@ -35,7 +35,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             }
         }
 
-        public override Task<bool> IsPostLogoutRedirectUriValidAsync(string requestedUri, Client client)
+        public override Task<bool> IsPostLogoutRedirectUriValidAsync(
+            string requestedUri,
+            Client client
+        )
         {
             if (IsLocalSPA(client))
             {
@@ -48,8 +51,11 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         }
 
         private static bool IsLocalSPA(Client client) =>
-            client.Properties.TryGetValue(ApplicationProfilesPropertyNames.Profile, out var clientType) &&
-            ApplicationProfiles.IdentityServerSPA == clientType;
+            client.Properties.TryGetValue(
+                ApplicationProfilesPropertyNames.Profile,
+                out var clientType
+            )
+            && ApplicationProfiles.IdentityServerSPA == clientType;
 
         private Task<bool> ValidateRelativeUris(string requestedUri, IEnumerable<string> clientUris)
         {

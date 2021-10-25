@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure
     /// Implements an <see cref="IAuthorizationHandler"/> and <see cref="IAuthorizationRequirement"/>
     /// which requires the current user name must match the specified value.
     /// </summary>
-    public class NameAuthorizationRequirement : AuthorizationHandler<NameAuthorizationRequirement>, IAuthorizationRequirement
+    public class NameAuthorizationRequirement
+        : AuthorizationHandler<NameAuthorizationRequirement>,
+          IAuthorizationRequirement
     {
         /// <summary>
         /// Constructs a new instance of <see cref="NameAuthorizationRequirement"/>.
@@ -37,11 +39,23 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure
         /// </summary>
         /// <param name="context">The authorization context.</param>
         /// <param name="requirement">The requirement to evaluate.</param>
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, NameAuthorizationRequirement requirement)
+        protected override Task HandleRequirementAsync(
+            AuthorizationHandlerContext context,
+            NameAuthorizationRequirement requirement
+        )
         {
             if (context.User != null)
             {
-                if (context.User.Identities.Any(i => string.Equals(i.Name, requirement.RequiredName, StringComparison.Ordinal)))
+                if (
+                    context.User.Identities.Any(
+                        i =>
+                            string.Equals(
+                                i.Name,
+                                requirement.RequiredName,
+                                StringComparison.Ordinal
+                            )
+                    )
+                )
                 {
                     context.Succeed(requirement);
                 }

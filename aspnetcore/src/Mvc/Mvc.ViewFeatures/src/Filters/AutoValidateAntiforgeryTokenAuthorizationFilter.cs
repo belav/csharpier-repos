@@ -9,12 +9,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
 {
-    internal class AutoValidateAntiforgeryTokenAuthorizationFilter : ValidateAntiforgeryTokenAuthorizationFilter
+    internal class AutoValidateAntiforgeryTokenAuthorizationFilter
+        : ValidateAntiforgeryTokenAuthorizationFilter
     {
-        public AutoValidateAntiforgeryTokenAuthorizationFilter(IAntiforgery antiforgery, ILoggerFactory loggerFactory)
-            : base(antiforgery, loggerFactory)
-        {
-        }
+        public AutoValidateAntiforgeryTokenAuthorizationFilter(
+            IAntiforgery antiforgery,
+            ILoggerFactory loggerFactory
+        ) : base(antiforgery, loggerFactory) { }
 
         protected override bool ShouldValidate(AuthorizationFilterContext context)
         {
@@ -24,10 +25,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             }
 
             var method = context.HttpContext.Request.Method;
-            if (HttpMethods.IsGet(method) ||
-                HttpMethods.IsHead(method) ||
-                HttpMethods.IsTrace(method) ||
-                HttpMethods.IsOptions(method))
+            if (
+                HttpMethods.IsGet(method)
+                || HttpMethods.IsHead(method)
+                || HttpMethods.IsTrace(method)
+                || HttpMethods.IsOptions(method)
+            )
             {
                 return false;
             }

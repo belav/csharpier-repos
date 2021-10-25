@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// <summary>
     /// Represents source or metadata assembly.
     /// </summary>
-    internal abstract class MetadataOrSourceAssemblySymbol
-        : NonMissingAssemblySymbol
+    internal abstract class MetadataOrSourceAssemblySymbol : NonMissingAssemblySymbol
     {
         /// <summary>
         /// An array of cached Cor types defined in this assembly.
@@ -49,10 +48,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (_lazySpecialTypes == null || (object)_lazySpecialTypes[(int)type] == null)
             {
-                MetadataTypeName emittedName = MetadataTypeName.FromFullName(type.GetMetadataName(), useCLSCompliantNameArityEncoding: true);
+                MetadataTypeName emittedName = MetadataTypeName.FromFullName(
+                    type.GetMetadataName(),
+                    useCLSCompliantNameArityEncoding: true
+                );
                 ModuleSymbol module = this.Modules[0];
                 NamedTypeSymbol result = module.LookupTopLevelMetadataType(ref emittedName);
-                if (result.Kind != SymbolKind.ErrorType && result.DeclaredAccessibility != Accessibility.Public)
+                if (
+                    result.Kind != SymbolKind.ErrorType
+                    && result.DeclaredAccessibility != Accessibility.Public
+                )
                 {
                     result = new MissingMetadataTypeSymbol.TopLevel(module, ref emittedName, type);
                 }
@@ -76,20 +81,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (_lazySpecialTypes == null)
             {
-                Interlocked.CompareExchange(ref _lazySpecialTypes,
-                    new NamedTypeSymbol[(int)SpecialType.Count + 1], null);
+                Interlocked.CompareExchange(
+                    ref _lazySpecialTypes,
+                    new NamedTypeSymbol[(int)SpecialType.Count + 1],
+                    null
+                );
             }
 
-            if ((object)Interlocked.CompareExchange(ref _lazySpecialTypes[(int)typeId], corType, null) != null)
+            if (
+                (object)Interlocked.CompareExchange(
+                    ref _lazySpecialTypes[(int)typeId],
+                    corType,
+                    null
+                ) != null
+            )
             {
-                Debug.Assert(ReferenceEquals(corType, _lazySpecialTypes[(int)typeId]) ||
-                                        (corType.Kind == SymbolKind.ErrorType &&
-                                        _lazySpecialTypes[(int)typeId].Kind == SymbolKind.ErrorType));
+                Debug.Assert(
+                    ReferenceEquals(corType, _lazySpecialTypes[(int)typeId])
+                        || (
+                            corType.Kind == SymbolKind.ErrorType
+                            && _lazySpecialTypes[(int)typeId].Kind == SymbolKind.ErrorType
+                        )
+                );
             }
             else
             {
                 Interlocked.Increment(ref _cachedSpecialTypes);
-                Debug.Assert(_cachedSpecialTypes > 0 && _cachedSpecialTypes <= (int)SpecialType.Count);
+                Debug.Assert(
+                    _cachedSpecialTypes > 0 && _cachedSpecialTypes <= (int)SpecialType.Count
+                );
             }
         }
 
@@ -101,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                return ReferenceEquals(this.CorLibrary, this) && _cachedSpecialTypes < (int)SpecialType.Count;
+                return ReferenceEquals(this.CorLibrary, this)
+                    && _cachedSpecialTypes < (int)SpecialType.Count;
             }
         }
 
@@ -114,18 +135,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyTypeNames == null)
                 {
-                    Interlocked.CompareExchange(ref _lazyTypeNames, UnionCollection<string>.Create(this.Modules, m => m.TypeNames), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyTypeNames,
+                        UnionCollection<string>.Create(this.Modules, m => m.TypeNames),
+                        null
+                    );
                 }
 
                 return _lazyTypeNames;
             }
         }
 
-        internal sealed override NamedTypeSymbol GetNativeIntegerType(NamedTypeSymbol underlyingType)
+        internal sealed override NamedTypeSymbol GetNativeIntegerType(
+            NamedTypeSymbol underlyingType
+        )
         {
             if (_lazyNativeIntegerTypes == null)
             {
-                Interlocked.CompareExchange(ref _lazyNativeIntegerTypes, new NativeIntegerTypeSymbol[2], null);
+                Interlocked.CompareExchange(
+                    ref _lazyNativeIntegerTypes,
+                    new NativeIntegerTypeSymbol[2],
+                    null
+                );
             }
 
             int index = underlyingType.SpecialType switch
@@ -137,7 +168,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (_lazyNativeIntegerTypes[index] is null)
             {
-                Interlocked.CompareExchange(ref _lazyNativeIntegerTypes[index], new NativeIntegerTypeSymbol(underlyingType), null);
+                Interlocked.CompareExchange(
+                    ref _lazyNativeIntegerTypes[index],
+                    new NativeIntegerTypeSymbol(underlyingType),
+                    null
+                );
             }
 
             return _lazyNativeIntegerTypes[index];
@@ -149,7 +184,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyNamespaceNames == null)
                 {
-                    Interlocked.CompareExchange(ref _lazyNamespaceNames, UnionCollection<string>.Create(this.Modules, m => m.NamespaceNames), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyNamespaceNames,
+                        UnionCollection<string>.Create(this.Modules, m => m.NamespaceNames),
+                        null
+                    );
                 }
 
                 return _lazyNamespaceNames;
@@ -174,7 +213,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 #endif
 
-            if (_lazySpecialTypeMembers == null || ReferenceEquals(_lazySpecialTypeMembers[(int)member], ErrorTypeSymbol.UnknownResultType))
+            if (
+                _lazySpecialTypeMembers == null
+                || ReferenceEquals(
+                    _lazySpecialTypeMembers[(int)member],
+                    ErrorTypeSymbol.UnknownResultType
+                )
+            )
             {
                 if (_lazySpecialTypeMembers == null)
                 {
@@ -185,19 +230,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         specialTypeMembers[i] = ErrorTypeSymbol.UnknownResultType;
                     }
 
-                    Interlocked.CompareExchange(ref _lazySpecialTypeMembers, specialTypeMembers, null);
+                    Interlocked.CompareExchange(
+                        ref _lazySpecialTypeMembers,
+                        specialTypeMembers,
+                        null
+                    );
                 }
 
                 var descriptor = SpecialMembers.GetDescriptor(member);
-                NamedTypeSymbol type = GetDeclaredSpecialType((SpecialType)descriptor.DeclaringTypeId);
+                NamedTypeSymbol type = GetDeclaredSpecialType(
+                    (SpecialType)descriptor.DeclaringTypeId
+                );
                 Symbol result = null;
 
                 if (!type.IsErrorType())
                 {
-                    result = CSharpCompilation.GetRuntimeMember(type, descriptor, CSharpCompilation.SpecialMembersSignatureComparer.Instance, accessWithinOpt: null);
+                    result = CSharpCompilation.GetRuntimeMember(
+                        type,
+                        descriptor,
+                        CSharpCompilation.SpecialMembersSignatureComparer.Instance,
+                        accessWithinOpt: null
+                    );
                 }
 
-                Interlocked.CompareExchange(ref _lazySpecialTypeMembers[(int)member], result, ErrorTypeSymbol.UnknownResultType);
+                Interlocked.CompareExchange(
+                    ref _lazySpecialTypeMembers[(int)member],
+                    result,
+                    ErrorTypeSymbol.UnknownResultType
+                );
             }
 
             return _lazySpecialTypeMembers[(int)member];
@@ -213,17 +273,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected IVTConclusion MakeFinalIVTDetermination(AssemblySymbol potentialGiverOfAccess)
         {
             IVTConclusion result;
-            if (AssembliesToWhichInternalAccessHasBeenDetermined.TryGetValue(potentialGiverOfAccess, out result))
+            if (
+                AssembliesToWhichInternalAccessHasBeenDetermined.TryGetValue(
+                    potentialGiverOfAccess,
+                    out result
+                )
+            )
                 return result;
 
             result = IVTConclusion.NoRelationshipClaimed;
 
             // returns an empty list if there was no IVT attribute at all for the given name
             // A name w/o a key is represented by a list with an entry that is empty
-            IEnumerable<ImmutableArray<byte>> publicKeys = potentialGiverOfAccess.GetInternalsVisibleToPublicKeys(this.Name);
+            IEnumerable<ImmutableArray<byte>> publicKeys =
+                potentialGiverOfAccess.GetInternalsVisibleToPublicKeys(this.Name);
 
-            // We have an easy out here. Suppose the assembly wanting access is 
-            // being compiled as a module. You can only strong-name an assembly. So we are going to optimistically 
+            // We have an easy out here. Suppose the assembly wanting access is
+            // being compiled as a module. You can only strong-name an assembly. So we are going to optimistically
             // assume that it is going to be compiled into an assembly with a matching strong name, if necessary.
             if (publicKeys.Any() && this.IsNetModule())
             {
@@ -250,14 +316,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         //EDMAURER This is a cache mapping from assemblies which we have analyzed whether or not they grant
         //internals access to us to the conclusion reached.
-        private ConcurrentDictionary<AssemblySymbol, IVTConclusion> _assembliesToWhichInternalAccessHasBeenAnalyzed;
+        private ConcurrentDictionary<
+            AssemblySymbol,
+            IVTConclusion
+        > _assembliesToWhichInternalAccessHasBeenAnalyzed;
 
-        private ConcurrentDictionary<AssemblySymbol, IVTConclusion> AssembliesToWhichInternalAccessHasBeenDetermined
+        private ConcurrentDictionary<
+            AssemblySymbol,
+            IVTConclusion
+        > AssembliesToWhichInternalAccessHasBeenDetermined
         {
             get
             {
                 if (_assembliesToWhichInternalAccessHasBeenAnalyzed == null)
-                    Interlocked.CompareExchange(ref _assembliesToWhichInternalAccessHasBeenAnalyzed, new ConcurrentDictionary<AssemblySymbol, IVTConclusion>(), null);
+                    Interlocked.CompareExchange(
+                        ref _assembliesToWhichInternalAccessHasBeenAnalyzed,
+                        new ConcurrentDictionary<AssemblySymbol, IVTConclusion>(),
+                        null
+                    );
                 return _assembliesToWhichInternalAccessHasBeenAnalyzed;
             }
         }

@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Structure
     {
         public abstract Task ProvideBlockStructureAsync(BlockStructureContext context);
 
-        public virtual void ProvideBlockStructure(BlockStructureContext context)
-            => ProvideBlockStructureAsync(context).Wait(context.CancellationToken);
+        public virtual void ProvideBlockStructure(BlockStructureContext context) =>
+            ProvideBlockStructureAsync(context).Wait(context.CancellationToken);
     }
 }

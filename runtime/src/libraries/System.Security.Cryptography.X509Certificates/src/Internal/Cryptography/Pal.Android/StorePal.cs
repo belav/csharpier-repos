@@ -18,7 +18,11 @@ namespace Internal.Cryptography.Pal
             throw new NotImplementedException($"{nameof(StorePal)}.{nameof(FromHandle)}");
         }
 
-        public static ILoaderPal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ILoaderPal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -35,7 +39,11 @@ namespace Internal.Cryptography.Pal
             }
         }
 
-        public static ILoaderPal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ILoaderPal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             byte[] fileBytes = File.ReadAllBytes(fileName);
             return FromBlob(fileBytes, password, keyStorageFlags);
@@ -46,12 +54,18 @@ namespace Internal.Cryptography.Pal
             return new AndroidExportProvider(cert);
         }
 
-        public static IExportPal LinkFromCertificateCollection(X509Certificate2Collection certificates)
+        public static IExportPal LinkFromCertificateCollection(
+            X509Certificate2Collection certificates
+        )
         {
             return new AndroidExportProvider(certificates);
         }
 
-        public static IStorePal FromSystemStore(string storeName, StoreLocation storeLocation, OpenFlags openFlags)
+        public static IStorePal FromSystemStore(
+            string storeName,
+            StoreLocation storeLocation,
+            OpenFlags openFlags
+        )
         {
             bool isReadWrite = (openFlags & OpenFlags.ReadWrite) == OpenFlags.ReadWrite;
             if (isReadWrite && storeLocation == StoreLocation.LocalMachine)
@@ -59,7 +73,10 @@ namespace Internal.Cryptography.Pal
                 // All LocalMachine stores are read-only from an Android application's perspective
                 throw new CryptographicException(
                     SR.Cryptography_Unix_X509_MachineStoresReadOnly,
-                    new PlatformNotSupportedException(SR.Cryptography_Unix_X509_MachineStoresReadOnly));
+                    new PlatformNotSupportedException(
+                        SR.Cryptography_Unix_X509_MachineStoresReadOnly
+                    )
+                );
             }
 
             StringComparer ordinalIgnoreCase = StringComparer.OrdinalIgnoreCase;
@@ -96,7 +113,6 @@ namespace Internal.Cryptography.Pal
                     {
                         return new TrustedStore(storeLocation);
                     }
-
                     break;
                 }
             }
@@ -104,11 +120,18 @@ namespace Internal.Cryptography.Pal
             if ((openFlags & OpenFlags.OpenExistingOnly) == OpenFlags.OpenExistingOnly)
                 throw new CryptographicException(SR.Cryptography_X509_StoreNotFound);
 
-            string message = SR.Format(SR.Cryptography_X509_StoreCannotCreate, storeName, storeLocation);
+            string message = SR.Format(
+                SR.Cryptography_X509_StoreCannotCreate,
+                storeName,
+                storeLocation
+            );
             throw new CryptographicException(message, new PlatformNotSupportedException(message));
         }
 
-        private static ICertificatePal[] ReadPkcs12Collection(ReadOnlySpan<byte> rawData, SafePasswordHandle password)
+        private static ICertificatePal[] ReadPkcs12Collection(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password
+        )
         {
             using (var reader = new AndroidPkcs12Reader(rawData))
             {

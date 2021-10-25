@@ -27,9 +27,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="routeValues">The route data to use for generating the URL.</param>
         /// <param name="value">The value to format in the entity body.</param>
         public CreatedAtRouteResult(object? routeValues, [ActionResultObjectValue] object? value)
-            : this(routeName: null, routeValues: routeValues, value: value)
-        {
-        }
+            : this(routeName: null, routeValues: routeValues, value: value) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatedAtRouteResult"/> class with the values
@@ -41,8 +39,8 @@ namespace Microsoft.AspNetCore.Mvc
         public CreatedAtRouteResult(
             string? routeName,
             object? routeValues,
-            [ActionResultObjectValue] object? value)
-            : base(value)
+            [ActionResultObjectValue] object? value
+        ) : base(value)
         {
             RouteName = routeName;
             RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);

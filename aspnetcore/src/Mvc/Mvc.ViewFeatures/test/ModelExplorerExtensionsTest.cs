@@ -16,28 +16,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 return new TheoryData<object, Type, string>
                 {
                     {
-                        new ComplexClass()
-                        {
-                            Prop1 = new Class1 { Prop1 = "Hello" }
-                        },
+                        new ComplexClass() { Prop1 = new Class1 { Prop1 = "Hello" } },
                         typeof(ComplexClass),
                         "Class1"
                     },
-                    {
-                        new Class1(),
-                        typeof(Class1),
-                        "Class1"
-                    },
-                    {
-                        new ClassWithNoProperties(),
-                        typeof(ClassWithNoProperties),
-                        string.Empty
-                    },
-                    {
-                        null,
-                        typeof(object),
-                        null
-                    },
+                    { new Class1(), typeof(Class1), "Class1" },
+                    { new ClassWithNoProperties(), typeof(ClassWithNoProperties), string.Empty },
+                    { null, typeof(object), null },
                 };
             }
         }
@@ -45,9 +30,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [Theory]
         [MemberData(nameof(SimpleDisplayTextData))]
         public void GetSimpleDisplayText_WithoutSimpleDisplayProperty(
-            object model, 
-            Type modelType, 
-            string expectedResult)
+            object model,
+            Type modelType,
+            string expectedResult
+        )
         {
             // Arrange
             var provider = new EmptyModelMetadataProvider();

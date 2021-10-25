@@ -25,13 +25,13 @@ namespace StaticFieldBug
             get { return StaticField; }
         }
     }
-        
+
     class Program
     {
         static int Main(string[] args)
         {
             Foo<string>("Run me to crash LINQ...");
-            
+
             Console.WriteLine("PASS (we didn't crash)!");
             return 100;
         }
@@ -39,7 +39,7 @@ namespace StaticFieldBug
         {
             Expression<Func<int, T>> lambda;
             StubClass<T> foo = new StubClass<T>((T)value);
-            lambda = i => StubClass<T>.StaticField;            
+            lambda = i => StubClass<T>.StaticField;
         }
     }
 }

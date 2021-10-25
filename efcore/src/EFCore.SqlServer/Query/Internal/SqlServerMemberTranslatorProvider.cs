@@ -23,8 +23,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerMemberTranslatorProvider(
             RelationalMemberTranslatorProviderDependencies dependencies,
-            IRelationalTypeMappingSource typeMappingSource)
-            : base(dependencies)
+            IRelationalTypeMappingSource typeMappingSource
+        ) : base(dependencies)
         {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
 
@@ -36,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     new SqlServerDateTimeMemberTranslator(sqlExpressionFactory, typeMappingSource),
                     new SqlServerStringMemberTranslator(sqlExpressionFactory),
                     new SqlServerTimeSpanMemberTranslator(sqlExpressionFactory)
-                });
+                }
+            );
         }
     }
 }

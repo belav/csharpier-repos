@@ -14,12 +14,18 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
     /// </summary>
     internal class DataTypeAttributeAdapter : AttributeAdapterBase<DataTypeAttribute>
     {
-        public DataTypeAttributeAdapter(DataTypeAttribute attribute, string ruleName, IStringLocalizer? stringLocalizer)
-            : base(attribute, stringLocalizer)
+        public DataTypeAttributeAdapter(
+            DataTypeAttribute attribute,
+            string ruleName,
+            IStringLocalizer? stringLocalizer
+        ) : base(attribute, stringLocalizer)
         {
             if (string.IsNullOrEmpty(ruleName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(ruleName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(ruleName)
+                );
             }
 
             RuleName = ruleName;
@@ -49,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             return GetErrorMessage(
                 validationContext.ModelMetadata,
                 validationContext.ModelMetadata.GetDisplayName(),
-                Attribute.GetDataTypeName());
+                Attribute.GetDataTypeName()
+            );
         }
     }
 }

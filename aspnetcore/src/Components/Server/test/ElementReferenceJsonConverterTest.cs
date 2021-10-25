@@ -50,7 +50,11 @@ namespace Microsoft.AspNetCore.Components
             reader.Read();
 
             // Act
-            var elementReference = Converter.Read(ref reader, typeof(ElementReference), new JsonSerializerOptions());
+            var elementReference = Converter.Read(
+                ref reader,
+                typeof(ElementReference),
+                new JsonSerializerOptions()
+            );
 
             // Assert
             Assert.Equal(id, elementReference.Id);
@@ -62,7 +66,7 @@ namespace Microsoft.AspNetCore.Components
             // Arrange
             var id = ElementReference.CreateWithUniqueId(ElementReferenceContext).Id;
             var json =
-@$"{{
+                @$"{{
     ""__internalId"": ""{id}""
 }}";
             var bytes = Encoding.UTF8.GetBytes(json);
@@ -70,7 +74,11 @@ namespace Microsoft.AspNetCore.Components
             reader.Read();
 
             // Act
-            var elementReference = Converter.Read(ref reader, typeof(ElementReference), new JsonSerializerOptions());
+            var elementReference = Converter.Read(
+                ref reader,
+                typeof(ElementReference),
+                new JsonSerializerOptions()
+            );
 
             // Assert
             Assert.Equal(id, elementReference.Id);
@@ -84,12 +92,18 @@ namespace Microsoft.AspNetCore.Components
             var bytes = Encoding.UTF8.GetBytes(json);
 
             // Act
-            var ex = Assert.Throws<JsonException>(() =>
-            {
-                var reader = new Utf8JsonReader(bytes);
-                reader.Read();
-                Converter.Read(ref reader, typeof(ElementReference), new JsonSerializerOptions());
-            });
+            var ex = Assert.Throws<JsonException>(
+                () =>
+                {
+                    var reader = new Utf8JsonReader(bytes);
+                    reader.Read();
+                    Converter.Read(
+                        ref reader,
+                        typeof(ElementReference),
+                        new JsonSerializerOptions()
+                    );
+                }
+            );
 
             // Assert
             Assert.Equal("Unexpected JSON property 'id'.", ex.Message);
@@ -103,12 +117,18 @@ namespace Microsoft.AspNetCore.Components
             var bytes = Encoding.UTF8.GetBytes(json);
 
             // Act
-            var ex = Assert.Throws<JsonException>(() =>
-            {
-                var reader = new Utf8JsonReader(bytes);
-                reader.Read();
-                Converter.Read(ref reader, typeof(ElementReference), new JsonSerializerOptions());
-            });
+            var ex = Assert.Throws<JsonException>(
+                () =>
+                {
+                    var reader = new Utf8JsonReader(bytes);
+                    reader.Read();
+                    Converter.Read(
+                        ref reader,
+                        typeof(ElementReference),
+                        new JsonSerializerOptions()
+                    );
+                }
+            );
 
             // Assert
             Assert.Equal("__internalId is required.", ex.Message);

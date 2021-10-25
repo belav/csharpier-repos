@@ -30,27 +30,25 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
             private readonly object _gate = new();
             private readonly List<DefinitionItem> _definitions = new();
 
-            public DefinitionTrackingContext(IFindUsagesContext underlyingContext)
-                => _underlyingContext = underlyingContext;
+            public DefinitionTrackingContext(IFindUsagesContext underlyingContext) =>
+                _underlyingContext = underlyingContext;
 
-            public CancellationToken CancellationToken
-                => _underlyingContext.CancellationToken;
+            public CancellationToken CancellationToken => _underlyingContext.CancellationToken;
 
-            public IStreamingProgressTracker ProgressTracker
-                => _underlyingContext.ProgressTracker;
+            public IStreamingProgressTracker ProgressTracker => _underlyingContext.ProgressTracker;
 
-            public ValueTask ReportMessageAsync(string message)
-                => _underlyingContext.ReportMessageAsync(message);
+            public ValueTask ReportMessageAsync(string message) =>
+                _underlyingContext.ReportMessageAsync(message);
 
-            public ValueTask SetSearchTitleAsync(string title)
-                => _underlyingContext.SetSearchTitleAsync(title);
+            public ValueTask SetSearchTitleAsync(string title) =>
+                _underlyingContext.SetSearchTitleAsync(title);
 
-            public ValueTask OnReferenceFoundAsync(SourceReferenceItem reference)
-                => _underlyingContext.OnReferenceFoundAsync(reference);
+            public ValueTask OnReferenceFoundAsync(SourceReferenceItem reference) =>
+                _underlyingContext.OnReferenceFoundAsync(reference);
 
             [Obsolete("Use ProgressTracker instead", error: false)]
-            public ValueTask ReportProgressAsync(int current, int maximum)
-                => _underlyingContext.ReportProgressAsync(current, maximum);
+            public ValueTask ReportProgressAsync(int current, int maximum) =>
+                _underlyingContext.ReportProgressAsync(current, maximum);
 
             public ValueTask OnDefinitionFoundAsync(DefinitionItem definition)
             {

@@ -27,16 +27,21 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// </summary>
         /// <param name="storeFunction"> The <see cref="IStoreFunction" /> associated this function. </param>
         /// <param name="arguments"> The arguments of the function. </param>
-        public TableValuedFunctionExpression(IStoreFunction storeFunction, IReadOnlyList<SqlExpression> arguments)
+        public TableValuedFunctionExpression(
+            IStoreFunction storeFunction,
+            IReadOnlyList<SqlExpression> arguments
+        )
             : this(
                 storeFunction.Name.Substring(0, 1).ToLowerInvariant(),
                 Check.NotNull(storeFunction, nameof(storeFunction)),
-                Check.NotNull(arguments, nameof(arguments)))
-        {
-        }
+                Check.NotNull(arguments, nameof(arguments))
+            ) { }
 
-        private TableValuedFunctionExpression(string alias, IStoreFunction storeFunction, IReadOnlyList<SqlExpression> arguments)
-            : base(alias)
+        private TableValuedFunctionExpression(
+            string alias,
+            IStoreFunction storeFunction,
+            IReadOnlyList<SqlExpression> arguments
+        ) : base(alias)
         {
             StoreFunction = storeFunction;
             Arguments = arguments;
@@ -76,8 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             }
 
             return changed
-                ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments)
-                : this;
+              ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments)
+              : this;
         }
 
         /// <summary>
@@ -91,8 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Check.NotNull(arguments, nameof(arguments));
 
             return !arguments.SequenceEqual(Arguments)
-                ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments)
-                : this;
+              ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments)
+              : this;
         }
 
         /// <inheritdoc />
@@ -111,16 +116,18 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is TableValuedFunctionExpression tableValuedFunctionExpression
-                    && Equals(tableValuedFunctionExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is TableValuedFunctionExpression tableValuedFunctionExpression
+                    && Equals(tableValuedFunctionExpression)
+            );
 
-        private bool Equals(TableValuedFunctionExpression tableValuedFunctionExpression)
-            => base.Equals(tableValuedFunctionExpression)
-                && StoreFunction == tableValuedFunctionExpression.StoreFunction
-                && Arguments.SequenceEqual(tableValuedFunctionExpression.Arguments);
+        private bool Equals(TableValuedFunctionExpression tableValuedFunctionExpression) =>
+            base.Equals(tableValuedFunctionExpression)
+            && StoreFunction == tableValuedFunctionExpression.StoreFunction
+            && Arguments.SequenceEqual(tableValuedFunctionExpression.Arguments);
 
         /// <inheritdoc />
         public override int GetHashCode()

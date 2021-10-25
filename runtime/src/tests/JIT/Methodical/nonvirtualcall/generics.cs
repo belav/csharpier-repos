@@ -136,23 +136,34 @@ namespace Test
             Assert.AreEqual("Child.AbstractFinal", AbstractFinal<object>());
             Assert.AreEqual("Child.AbstractOverrideFinal", base.AbstractOverrideFinal<object>());
             Assert.AreEqual("GrandChild.AbstractOverrideFinal", AbstractOverrideFinal<object>());
-            Assert.AreEqual("Child.AbstractOverrideOverride", base.AbstractOverrideOverride<object>());
-            Assert.AreEqual("GrandChild.AbstractOverrideOverride", AbstractOverrideOverride<object>());
+            Assert.AreEqual(
+                "Child.AbstractOverrideOverride",
+                base.AbstractOverrideOverride<object>()
+            );
+            Assert.AreEqual(
+                "GrandChild.AbstractOverrideOverride",
+                AbstractOverrideOverride<object>()
+            );
             Assert.AreEqual("Child.AbstractOverrideNil", base.AbstractOverrideNil<object>());
             Assert.AreEqual("Child.AbstractOverrideNil", AbstractOverrideNil<object>());
             Assert.AreEqual("Child.VirtualFinal", base.VirtualFinal<object>());
             Assert.AreEqual("Child.VirtualFinal", VirtualFinal<object>());
             Assert.AreEqual("Child.VirtualOverrideFinal", base.VirtualOverrideFinal<object>());
             Assert.AreEqual("GrandChild.VirtualOverrideFinal", VirtualOverrideFinal<object>());
-            Assert.AreEqual("Child.VirtualOverrideOverride", base.VirtualOverrideOverride<object>());
-            Assert.AreEqual("GrandChild.VirtualOverrideOverride", VirtualOverrideOverride<object>());
+            Assert.AreEqual(
+                "Child.VirtualOverrideOverride",
+                base.VirtualOverrideOverride<object>()
+            );
+            Assert.AreEqual(
+                "GrandChild.VirtualOverrideOverride",
+                VirtualOverrideOverride<object>()
+            );
             Assert.AreEqual("Child.VirtualOverrideNil", base.VirtualOverrideNil<object>());
             Assert.AreEqual("Child.VirtualOverrideNil", VirtualOverrideNil<object>());
         }
     }
 
-    public sealed class SealedGrandChild : GrandChild
-    { }
+    public sealed class SealedGrandChild : GrandChild { }
 
     public static class Program
     {
@@ -163,14 +174,20 @@ namespace Test
             SealedGrandChild o = new SealedGrandChild();
             Assert.AreEqual("Child.AbstractFinal", o.AbstractFinal<object>());
             Assert.AreEqual("GrandChild.AbstractOverrideFinal", o.AbstractOverrideFinal<object>());
-            Assert.AreEqual("GrandChild.AbstractOverrideOverride", o.AbstractOverrideOverride<object>());
+            Assert.AreEqual(
+                "GrandChild.AbstractOverrideOverride",
+                o.AbstractOverrideOverride<object>()
+            );
             Assert.AreEqual("Child.AbstractOverrideNil", o.AbstractOverrideNil<object>());
             Assert.AreEqual("Child.VirtualFinal", o.VirtualFinal<object>());
             Assert.AreEqual("GrandChild.VirtualNilFinal", o.VirtualNilFinal<object>());
             Assert.AreEqual("GrandChild.VirtualOverrideFinal", o.VirtualOverrideFinal<object>());
             Assert.AreEqual("GrandChild.VirtualNilOverride", o.VirtualNilOverride<object>());
             Assert.AreEqual("Base.VirtualNilNil", o.VirtualNilNil<object>());
-            Assert.AreEqual("GrandChild.VirtualOverrideOverride", o.VirtualOverrideOverride<object>());
+            Assert.AreEqual(
+                "GrandChild.VirtualOverrideOverride",
+                o.VirtualOverrideOverride<object>()
+            );
             Assert.AreEqual("Child.VirtualOverrideNil", o.VirtualOverrideNil<object>());
         }
 

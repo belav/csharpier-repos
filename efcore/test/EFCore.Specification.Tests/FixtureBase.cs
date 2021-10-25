@@ -9,19 +9,19 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class FixtureBase
     {
-        protected virtual IServiceCollection AddServices(IServiceCollection serviceCollection)
-            => serviceCollection.AddSingleton(TestModelSource.GetFactory(OnModelCreating));
+        protected virtual IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+            serviceCollection.AddSingleton(TestModelSource.GetFactory(OnModelCreating));
 
-        public virtual DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => builder
+        public virtual DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            builder
                 .EnableSensitiveDataLogging()
                 .ConfigureWarnings(
-                    b => b.Default(WarningBehavior.Throw)
-                        .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
-                        .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning));
+                    b =>
+                        b.Default(WarningBehavior.Throw)
+                            .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
+                            .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
+                );
 
-        protected virtual void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
-        {
-        }
+        protected virtual void OnModelCreating(ModelBuilder modelBuilder, DbContext context) { }
     }
 }

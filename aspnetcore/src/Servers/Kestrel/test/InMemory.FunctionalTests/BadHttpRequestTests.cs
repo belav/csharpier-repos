@@ -22,10 +22,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [MemberData(nameof(InvalidRequestLineData))]
         public Task TestInvalidRequestLines(string request, string expectedExceptionMessage)
         {
-            return TestBadRequest(
-                request,
-                "400 Bad Request",
-                expectedExceptionMessage);
+            return TestBadRequest(request, "400 Bad Request", expectedExceptionMessage);
         }
 
         [Theory]
@@ -35,7 +32,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             return TestBadRequest(
                 $"GET / {httpVersion}\r\n",
                 "505 HTTP Version Not Supported",
-                CoreStrings.FormatBadRequest_UnrecognizedHTTPVersion(httpVersion));
+                CoreStrings.FormatBadRequest_UnrecognizedHTTPVersion(httpVersion)
+            );
         }
 
         [Theory]
@@ -45,24 +43,39 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             return TestBadRequest(
                 $"GET / HTTP/1.1\r\n{rawHeaders}",
                 "400 Bad Request",
-                expectedExceptionMessage);
+                expectedExceptionMessage
+            );
         }
 
-        public static Dictionary<string, (string header, string errorMessage)> BadHeaderData => new Dictionary<string, (string, string)>
-        {
-            { "Hea\0der: value".EscapeNonPrintable(), ("Hea\0der: value", "Invalid characters in header name.") },
-            { "Header: va\0lue".EscapeNonPrintable(), ("Header: va\0lue", "Malformed request: invalid headers.") },
-            { "Head\x80r: value".EscapeNonPrintable(), ("Head\x80r: value", "Invalid characters in header name.") },
-            { "Header: valu\x80".EscapeNonPrintable(), ("Header: valu\x80", "Malformed request: invalid headers.") },
-        };
+        public static Dictionary<string, (string header, string errorMessage)> BadHeaderData =>
+            new Dictionary<string, (string, string)>
+            {
+                {
+                    "Hea\0der: value".EscapeNonPrintable(),
+                    ("Hea\0der: value", "Invalid characters in header name.")
+                },
+                {
+                    "Header: va\0lue".EscapeNonPrintable(),
+                    ("Header: va\0lue", "Malformed request: invalid headers.")
+                },
+                {
+                    "Head\x80r: value".EscapeNonPrintable(),
+                    ("Head\x80r: value", "Invalid characters in header name.")
+                },
+                {
+                    "Header: valu\x80".EscapeNonPrintable(),
+                    ("Header: valu\x80", "Malformed request: invalid headers.")
+                },
+            };
 
-        public static TheoryData<string> BadHeaderDataNames => new TheoryData<string>
-        {
-            "Hea\0der: value".EscapeNonPrintable(),
-            "Header: va\0lue".EscapeNonPrintable(),
-            "Head\x80r: value".EscapeNonPrintable(),
-            "Header: valu\x80".EscapeNonPrintable()
-        };
+        public static TheoryData<string> BadHeaderDataNames =>
+            new TheoryData<string>
+            {
+                "Hea\0der: value".EscapeNonPrintable(),
+                "Header: va\0lue".EscapeNonPrintable(),
+                "Head\x80r: value".EscapeNonPrintable(),
+                "Header: valu\x80".EscapeNonPrintable()
+            };
 
         [Theory]
         [MemberData(nameof(BadHeaderDataNames))]
@@ -75,18 +88,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             return TestBadRequest(
                 $"GET / HTTP/1.1\r\n{header}\r\n\r\n",
                 "400 Bad Request",
-                errorMessage);
+                errorMessage
+            );
         }
 
         [Theory]
         [InlineData("POST")]
         [InlineData("PUT")]
-        public Task BadRequestIfMethodRequiresLengthButNoContentLengthOrTransferEncodingInRequest(string method)
+        public Task BadRequestIfMethodRequiresLengthButNoContentLengthOrTransferEncodingInRequest(
+            string method
+        )
         {
             return TestBadRequest(
                 $"{method} / HTTP/1.1\r\nHost:\r\n\r\n",
                 "411 Length Required",
-                CoreStrings.FormatBadRequest_LengthRequired(method));
+                CoreStrings.FormatBadRequest_LengthRequired(method)
+            );
         }
 
         [Theory]
@@ -97,7 +114,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             return TestBadRequest(
                 $"{method} / HTTP/1.0\r\n\r\n",
                 "400 Bad Request",
-                CoreStrings.FormatBadRequest_LengthRequiredHttp10(method));
+                CoreStrings.FormatBadRequest_LengthRequiredHttp10(method)
+            );
         }
 
         [Theory]
@@ -108,7 +126,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             return TestBadRequest(
                 $"POST / HTTP/1.1\r\nHost:\r\nContent-Length: {contentLength}\r\n\r\n",
                 "400 Bad Request",
-                CoreStrings.FormatBadRequest_InvalidContentLength_Detail(contentLength));
+                CoreStrings.FormatBadRequest_InvalidContentLength_Detail(contentLength)
+            );
         }
 
         [Theory]
@@ -120,7 +139,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 $"{request} HTTP/1.1\r\n",
                 "405 Method Not Allowed",
                 CoreStrings.BadRequest_MethodNotAllowed,
-                $"Allow: {allowedMethod}");
+                $"Allow: {allowedMethod}"
+            );
         }
 
         [Fact]
@@ -129,25 +149,32 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             return TestBadRequest(
                 "GET / HTTP/1.1\r\n\r\n",
                 "400 Bad Request",
-                CoreStrings.BadRequest_MissingHostHeader);
+                CoreStrings.BadRequest_MissingHostHeader
+            );
         }
 
         [Fact]
         public Task BadRequestIfMultipleHostHeaders()
         {
-            return TestBadRequest("GET / HTTP/1.1\r\nHost: localhost\r\nHost: localhost\r\n\r\n",
+            return TestBadRequest(
+                "GET / HTTP/1.1\r\nHost: localhost\r\nHost: localhost\r\n\r\n",
                 "400 Bad Request",
-                CoreStrings.BadRequest_MultipleHostHeaders);
+                CoreStrings.BadRequest_MultipleHostHeaders
+            );
         }
 
         [Theory]
         [MemberData(nameof(InvalidHostHeaderData))]
-        public Task BadRequestIfHostHeaderDoesNotMatchRequestTarget(string requestTarget, string host)
+        public Task BadRequestIfHostHeaderDoesNotMatchRequestTarget(
+            string requestTarget,
+            string host
+        )
         {
             return TestBadRequest(
                 $"{requestTarget} HTTP/1.1\r\nHost: {host}\r\n\r\n",
                 "400 Bad Request",
-                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail(host.Trim()));
+                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail(host.Trim())
+            );
         }
 
         [Fact]
@@ -156,7 +183,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             return TestBadRequest(
                 $"GET / HTTP/1.0\r\nHost: a=b\r\n\r\n",
                 "400 Bad Request",
-                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("a=b"));
+                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("a=b")
+            );
         }
 
         [Fact]
@@ -165,73 +193,121 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             return TestBadRequest(
                 $"GET / HTTP/1.1\r\nHost: a=b\r\n\r\n",
                 "400 Bad Request",
-                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("a=b"));
+                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("a=b")
+            );
         }
 
         [Fact]
         public async Task BadRequestLogsAreNotHigherThanDebug()
         {
-            await using (var server = new TestServer(async context =>
-            {
-                await context.Request.Body.ReadAsync(new byte[1], 0, 1);
-            }, new TestServiceContext(LoggerFactory)))
+            await using (
+                var server = new TestServer(
+                    async context =>
+                    {
+                        await context.Request.Body.ReadAsync(new byte[1], 0, 1);
+                    },
+                    new TestServiceContext(LoggerFactory)
+                )
+            )
             {
                 using (var connection = server.CreateConnection())
                 {
-                    await connection.SendAll(
-                        "GET ? HTTP/1.1",
-                        "",
-                        "");
-                    await ReceiveBadRequestResponse(connection, "400 Bad Request", server.Context.DateHeaderValue);
+                    await connection.SendAll("GET ? HTTP/1.1", "", "");
+                    await ReceiveBadRequestResponse(
+                        connection,
+                        "400 Bad Request",
+                        server.Context.DateHeaderValue
+                    );
                 }
             }
 
-            Assert.All(TestSink.Writes.Where(w => w.LoggerName != "Microsoft.Hosting.Lifetime"), w => Assert.InRange(w.LogLevel, LogLevel.Trace, LogLevel.Debug));
+            Assert.All(
+                TestSink.Writes.Where(w => w.LoggerName != "Microsoft.Hosting.Lifetime"),
+                w => Assert.InRange(w.LogLevel, LogLevel.Trace, LogLevel.Debug)
+            );
             Assert.Contains(TestSink.Writes, w => w.EventId.Id == 17);
         }
 
         [Fact]
         public async Task TestRequestSplitting()
         {
-            await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+            await using (
+                var server = new TestServer(
+                    context => Task.CompletedTask,
+                    new TestServiceContext(LoggerFactory)
+                )
+            )
             {
                 using (var client = server.CreateConnection())
                 {
                     await client.SendAll(
                         "GET /\x0D\0x0ALocation:http://www.contoso.com/ HTTP/1.1",
-                        "Host:\r\n\r\n");
+                        "Host:\r\n\r\n"
+                    );
 
                     await client.Receive("HTTP/1.1 400");
                 }
             }
         }
 
-        private async Task TestBadRequest(string request, string expectedResponseStatusCode, string expectedExceptionMessage, string expectedAllowHeader = null)
+        private async Task TestBadRequest(
+            string request,
+            string expectedResponseStatusCode,
+            string expectedExceptionMessage,
+            string expectedAllowHeader = null
+        )
         {
             BadHttpRequestException loggedException = null;
 
             var mockKestrelTrace = new Mock<IKestrelTrace>();
+            mockKestrelTrace.Setup(trace => trace.IsEnabled(LogLevel.Information)).Returns(true);
             mockKestrelTrace
-                .Setup(trace => trace.IsEnabled(LogLevel.Information))
-                .Returns(true);
-            mockKestrelTrace
-                .Setup(trace => trace.ConnectionBadRequest(It.IsAny<string>(), It.IsAny<BadHttpRequestException>()))
-                .Callback<string, BadHttpRequestException>((connectionId, exception) => loggedException = exception);
+                .Setup(
+                    trace =>
+                        trace.ConnectionBadRequest(
+                            It.IsAny<string>(),
+                            It.IsAny<BadHttpRequestException>()
+                        )
+                )
+                .Callback<string, BadHttpRequestException>(
+                    (connectionId, exception) => loggedException = exception
+                );
 
-            await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory, mockKestrelTrace.Object)))
+            await using (
+                var server = new TestServer(
+                    context => Task.CompletedTask,
+                    new TestServiceContext(LoggerFactory, mockKestrelTrace.Object)
+                )
+            )
             {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.SendAll(request);
-                    await ReceiveBadRequestResponse(connection, expectedResponseStatusCode, server.Context.DateHeaderValue, expectedAllowHeader);
+                    await ReceiveBadRequestResponse(
+                        connection,
+                        expectedResponseStatusCode,
+                        server.Context.DateHeaderValue,
+                        expectedAllowHeader
+                    );
                 }
             }
 
-            mockKestrelTrace.Verify(trace => trace.ConnectionBadRequest(It.IsAny<string>(), It.IsAny<BadHttpRequestException>()));
+            mockKestrelTrace.Verify(
+                trace =>
+                    trace.ConnectionBadRequest(
+                        It.IsAny<string>(),
+                        It.IsAny<BadHttpRequestException>()
+                    )
+            );
             Assert.Equal(expectedExceptionMessage, loggedException.Message);
         }
 
-        private async Task ReceiveBadRequestResponse(InMemoryConnection connection, string expectedResponseStatusCode, string expectedDateHeaderValue, string expectedAllowHeader = null)
+        private async Task ReceiveBadRequestResponse(
+            InMemoryConnection connection,
+            string expectedResponseStatusCode,
+            string expectedDateHeaderValue,
+            string expectedAllowHeader = null
+        )
         {
             var lines = new[]
             {
@@ -255,27 +331,45 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
                 foreach (var requestLine in HttpParsingData.RequestLineInvalidData)
                 {
-                    data.Add(requestLine, CoreStrings.FormatBadRequest_InvalidRequestLine_Detail(requestLine[..^1].EscapeNonPrintable()));
+                    data.Add(
+                        requestLine,
+                        CoreStrings.FormatBadRequest_InvalidRequestLine_Detail(
+                            requestLine[..^1].EscapeNonPrintable()
+                        )
+                    );
                 }
 
                 foreach (var target in HttpParsingData.TargetWithEncodedNullCharData)
                 {
-                    data.Add($"GET {target} HTTP/1.1\r\n", CoreStrings.FormatBadRequest_InvalidRequestTarget_Detail(target.EscapeNonPrintable()));
+                    data.Add(
+                        $"GET {target} HTTP/1.1\r\n",
+                        CoreStrings.FormatBadRequest_InvalidRequestTarget_Detail(
+                            target.EscapeNonPrintable()
+                        )
+                    );
                 }
 
                 foreach (var target in HttpParsingData.TargetWithNullCharData)
                 {
-                    data.Add($"GET {target} HTTP/1.1\r\n", CoreStrings.FormatBadRequest_InvalidRequestTarget_Detail(target.EscapeNonPrintable()));
+                    data.Add(
+                        $"GET {target} HTTP/1.1\r\n",
+                        CoreStrings.FormatBadRequest_InvalidRequestTarget_Detail(
+                            target.EscapeNonPrintable()
+                        )
+                    );
                 }
 
                 return data;
             }
         }
 
-        public static TheoryData<string> UnrecognizedHttpVersionData => HttpParsingData.UnrecognizedHttpVersionData;
+        public static TheoryData<string> UnrecognizedHttpVersionData =>
+            HttpParsingData.UnrecognizedHttpVersionData;
 
-        public static IEnumerable<object[]> InvalidRequestHeaderData => HttpParsingData.RequestHeaderInvalidData;
+        public static IEnumerable<object[]> InvalidRequestHeaderData =>
+            HttpParsingData.RequestHeaderInvalidData;
 
-        public static TheoryData<string, string> InvalidHostHeaderData => HttpParsingData.HostHeaderInvalidData;
+        public static TheoryData<string, string> InvalidHostHeaderData =>
+            HttpParsingData.HostHeaderInvalidData;
     }
 }

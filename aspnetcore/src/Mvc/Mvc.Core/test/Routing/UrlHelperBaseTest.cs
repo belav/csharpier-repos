@@ -17,10 +17,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public static TheoryData GeneratePathFromRoute_HandlesLeadingAndTrailingSlashesData =>
             new TheoryData<string, string, string>
             {
-                {  null, "", "/" },
-                {  null, "/", "/"  },
-                {  null, "Hello", "/Hello" },
-                {  null, "/Hello", "/Hello" },
+                { null, "", "/" },
+                { null, "/", "/" },
+                { null, "Hello", "/Hello" },
+                { null, "/Hello", "/Hello" },
                 { "/", "", "/" },
                 { "/", "hello", "/hello" },
                 { "/", "/hello", "/hello" },
@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AppendPathAndFragment_HandlesLeadingAndTrailingSlashes(
             string appBase,
             string virtualPath,
-            string expected)
+            string expected
+        )
         {
             // Arrange
             var services = CreateServices();
@@ -46,7 +47,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var builder = new StringBuilder();
 
             // Act
-            UrlHelperBase.AppendPathAndFragment(builder, httpContext.Request.PathBase, virtualPath, string.Empty);
+            UrlHelperBase.AppendPathAndFragment(
+                builder,
+                httpContext.Request.PathBase,
+                virtualPath,
+                string.Empty
+            );
 
             // Assert
             Assert.Equal(expected, builder.ToString());
@@ -57,7 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void AppendPathAndFragment_AppendsFragments(
             string appBase,
             string virtualPath,
-            string expected)
+            string expected
+        )
         {
             // Arrange
             var fragmentValue = "fragment-value";
@@ -67,7 +74,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var builder = new StringBuilder();
 
             // Act
-            UrlHelperBase.AppendPathAndFragment(builder, httpContext.Request.PathBase, virtualPath, fragmentValue);
+            UrlHelperBase.AppendPathAndFragment(
+                builder,
+                httpContext.Request.PathBase,
+                virtualPath,
+                fragmentValue
+            );
 
             // Assert
             Assert.Equal(expected, builder.ToString());
@@ -79,14 +91,22 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         [InlineData(null, null, null, "Hello", null, "/Hello")]
         [InlineData("/", null, null, "", null, "/")]
         [InlineData("/hello/", null, null, "/world", null, "/hello/world")]
-        [InlineData("/hello/", "https", "myhost", "/world", "fragment-value", "https://myhost/hello/world#fragment-value")]
+        [InlineData(
+            "/hello/",
+            "https",
+            "myhost",
+            "/world",
+            "fragment-value",
+            "https://myhost/hello/world#fragment-value"
+        )]
         public void GenerateUrl_FastAndSlowPathsReturnsExpected(
             string appBase,
             string protocol,
             string host,
             string virtualPath,
             string fragment,
-            string expected)
+            string expected
+        )
         {
             // Arrange
             var services = CreateServices();
@@ -107,17 +127,17 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             services.AddOptions();
             services.AddLogging();
             services.AddRouting();
-            services
-                .AddSingleton<UrlEncoder>(UrlEncoder.Default);
+            services.AddSingleton<UrlEncoder>(UrlEncoder.Default);
 
             return services.BuildServiceProvider();
         }
 
         private static HttpContext CreateHttpContext(
-           IServiceProvider services,
-           string appRoot,
-           string host,
-           string protocol)
+            IServiceProvider services,
+            string appRoot,
+            string host,
+            string protocol
+        )
         {
             appRoot = string.IsNullOrEmpty(appRoot) ? string.Empty : appRoot;
             host = string.IsNullOrEmpty(host) ? "localhost" : host;
@@ -137,10 +157,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private class TestUrlHelper : UrlHelperBase
         {
-            public TestUrlHelper(ActionContext actionContext) :
-                base(actionContext)
-            {
-            }
+            public TestUrlHelper(ActionContext actionContext) : base(actionContext) { }
 
             public override string Action(UrlActionContext actionContext)
             {
@@ -156,13 +173,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 string protocol,
                 string host,
                 string virtualPath,
-                string fragment)
+                string fragment
+            )
             {
-                return base.GenerateUrl(
-                    protocol,
-                    host,
-                    virtualPath,
-                    fragment);
+                return base.GenerateUrl(protocol, host, virtualPath, fragment);
             }
         }
     }

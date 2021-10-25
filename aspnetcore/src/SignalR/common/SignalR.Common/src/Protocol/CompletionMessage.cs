@@ -38,7 +38,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         {
             if (error != null && result != null)
             {
-                throw new ArgumentException($"Expected either '{nameof(error)}' or '{nameof(result)}' to be provided, but not both");
+                throw new ArgumentException(
+                    $"Expected either '{nameof(error)}' or '{nameof(result)}' to be provided, but not both"
+                );
             }
 
             Error = error;
@@ -50,7 +52,9 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         public override string ToString()
         {
             var errorStr = Error == null ? "<<null>>" : $"\"{Error}\"";
-            var resultField = HasResult ? $", {nameof(Result)}: {Result ?? "<<null>>"}" : string.Empty;
+            var resultField = HasResult
+                ? $", {nameof(Result)}: {Result ?? "<<null>>"}"
+                : string.Empty;
             return $"Completion {{ {nameof(InvocationId)}: \"{InvocationId}\", {nameof(Error)}: {errorStr}{resultField} }}";
         }
 
@@ -62,8 +66,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// <param name="invocationId">The ID of the invocation that is being completed.</param>
         /// <param name="error">The error that occurred during the invocation.</param>
         /// <returns>The constructed <see cref="CompletionMessage"/>.</returns>
-        public static CompletionMessage WithError(string invocationId, string? error)
-            => new CompletionMessage(invocationId, error, result: null, hasResult: false);
+        public static CompletionMessage WithError(string invocationId, string? error) =>
+            new CompletionMessage(invocationId, error, result: null, hasResult: false);
 
         /// <summary>
         /// Constructs a <see cref="CompletionMessage"/> with a result.
@@ -71,8 +75,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// <param name="invocationId">The ID of the invocation that is being completed.</param>
         /// <param name="payload">The result from the invocation.</param>
         /// <returns>The constructed <see cref="CompletionMessage"/>.</returns>
-        public static CompletionMessage WithResult(string invocationId, object? payload)
-            => new CompletionMessage(invocationId, error: null, result: payload, hasResult: true);
+        public static CompletionMessage WithResult(string invocationId, object? payload) =>
+            new CompletionMessage(invocationId, error: null, result: payload, hasResult: true);
 
         /// <summary>
         /// Constructs a <see cref="CompletionMessage"/> without an error or result.
@@ -80,7 +84,7 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
         /// </summary>
         /// <param name="invocationId">The ID of the invocation that is being completed.</param>
         /// <returns>The constructed <see cref="CompletionMessage"/>.</returns>
-        public static CompletionMessage Empty(string invocationId)
-            => new CompletionMessage(invocationId, error: null, result: null, hasResult: false);
+        public static CompletionMessage Empty(string invocationId) =>
+            new CompletionMessage(invocationId, error: null, result: null, hasResult: false);
     }
 }

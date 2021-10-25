@@ -26,9 +26,13 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
         public virtual string PopWriterMethod { get; set; } = "PopWriter";
 
-        public string TemplateTypeName { get; set; } = "Microsoft.AspNetCore.Mvc.Razor.HelperResult";
+        public string TemplateTypeName { get; set; } =
+            "Microsoft.AspNetCore.Mvc.Razor.HelperResult";
 
-        public override void WriteUsingDirective(CodeRenderingContext context, UsingDirectiveIntermediateNode node)
+        public override void WriteUsingDirective(
+            CodeRenderingContext context,
+            UsingDirectiveIntermediateNode node
+        )
         {
             if (node.Source.HasValue)
             {
@@ -43,7 +47,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             }
         }
 
-        public override void WriteCSharpExpression(CodeRenderingContext context, CSharpExpressionIntermediateNode node)
+        public override void WriteCSharpExpression(
+            CodeRenderingContext context,
+            CSharpExpressionIntermediateNode node
+        )
         {
             if (context == null)
             {
@@ -59,7 +66,11 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             if (node.Source != null)
             {
                 linePragmaScope = context.CodeWriter.BuildLinePragma(node.Source.Value, context);
-                context.CodeWriter.WritePadding(WriteCSharpExpressionMethod.Length + 1, node.Source, context);
+                context.CodeWriter.WritePadding(
+                    WriteCSharpExpressionMethod.Length + 1,
+                    node.Source,
+                    context
+                );
             }
 
             context.CodeWriter.WriteStartMethodInvocation(WriteCSharpExpressionMethod);
@@ -82,7 +93,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             linePragmaScope?.Dispose();
         }
 
-        public override void WriteCSharpCode(CodeRenderingContext context, CSharpCodeIntermediateNode node)
+        public override void WriteCSharpCode(
+            CodeRenderingContext context,
+            CSharpCodeIntermediateNode node
+        )
         {
             var isWhitespaceStatement = true;
             for (var i = 0; i < node.Children.Count; i++)
@@ -128,18 +142,22 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             linePragmaScope?.Dispose();
         }
 
-        public override void WriteHtmlAttribute(CodeRenderingContext context, HtmlAttributeIntermediateNode node)
+        public override void WriteHtmlAttribute(
+            CodeRenderingContext context,
+            HtmlAttributeIntermediateNode node
+        )
         {
-            var valuePieceCount = node
-                .Children
-                .Count(child =>
-                    child is HtmlAttributeValueIntermediateNode ||
-                    child is CSharpExpressionAttributeValueIntermediateNode ||
-                    child is CSharpCodeAttributeValueIntermediateNode ||
-                    child is ExtensionIntermediateNode);
+            var valuePieceCount = node.Children.Count(
+                child =>
+                    child is HtmlAttributeValueIntermediateNode
+                    || child is CSharpExpressionAttributeValueIntermediateNode
+                    || child is CSharpCodeAttributeValueIntermediateNode
+                    || child is ExtensionIntermediateNode
+            );
 
             var prefixLocation = node.Source.Value.AbsoluteIndex;
-            var suffixLocation = node.Source.Value.AbsoluteIndex + node.Source.Value.Length - node.Suffix.Length;
+            var suffixLocation =
+                node.Source.Value.AbsoluteIndex + node.Source.Value.Length - node.Suffix.Length;
             context.CodeWriter
                 .WriteStartMethodInvocation(BeginWriteAttributeMethod)
                 .WriteStringLiteral(node.AttributeName)
@@ -162,7 +180,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 .WriteEndMethodInvocation();
         }
 
-        public override void WriteHtmlAttributeValue(CodeRenderingContext context, HtmlAttributeValueIntermediateNode node)
+        public override void WriteHtmlAttributeValue(
+            CodeRenderingContext context,
+            HtmlAttributeValueIntermediateNode node
+        )
         {
             var prefixLocation = node.Source.Value.AbsoluteIndex;
             var valueLocation = node.Source.Value.AbsoluteIndex + node.Prefix.Length;
@@ -198,7 +219,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 .WriteEndMethodInvocation();
         }
 
-        public override void WriteCSharpExpressionAttributeValue(CodeRenderingContext context, CSharpExpressionAttributeValueIntermediateNode node)
+        public override void WriteCSharpExpressionAttributeValue(
+            CodeRenderingContext context,
+            CSharpExpressionAttributeValueIntermediateNode node
+        )
         {
             using (context.CodeWriter.BuildLinePragma(node.Source.Value, context))
             {
@@ -236,7 +260,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             }
         }
 
-        public override void WriteCSharpCodeAttributeValue(CodeRenderingContext context, CSharpCodeAttributeValueIntermediateNode node)
+        public override void WriteCSharpCodeAttributeValue(
+            CodeRenderingContext context,
+            CSharpCodeAttributeValueIntermediateNode node
+        )
         {
             const string ValueWriterName = "__razor_attribute_value_writer";
 
@@ -266,7 +293,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                         {
                             if (!isWhitespaceStatement)
                             {
-                                linePragmaScope = context.CodeWriter.BuildLinePragma(token.Source.Value, context);
+                                linePragmaScope = context.CodeWriter.BuildLinePragma(
+                                    token.Source.Value,
+                                    context
+                                );
                             }
 
                             context.CodeWriter.WritePadding(0, token.Source.Value, context);
@@ -310,7 +340,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 .WriteEndMethodInvocation();
         }
 
-        public override void WriteHtmlContent(CodeRenderingContext context, HtmlContentIntermediateNode node)
+        public override void WriteHtmlContent(
+            CodeRenderingContext context,
+            HtmlContentIntermediateNode node
+        )
         {
             const int MaxStringLiteralLength = 1024;
 
@@ -329,7 +362,11 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
         }
 
         // Internal for testing
-        internal void WriteHtmlLiteral(CodeRenderingContext context, int maxStringLiteralLength, string literal)
+        internal void WriteHtmlLiteral(
+            CodeRenderingContext context,
+            int maxStringLiteralLength,
+            string literal
+        )
         {
             if (literal.Length <= maxStringLiteralLength)
             {
@@ -351,13 +388,13 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                     if (charactersRemaining > 1)
                     {
                         // Take one less character this iteration. We're attempting to split inbetween a surrogate pair.
-                        // This can happen when something like an emoji sits on the barrier between splits; if we were to 
+                        // This can happen when something like an emoji sits on the barrier between splits; if we were to
                         // split the emoji we'd end up with invalid bytes in our output.
                         charactersToSubstring--;
                     }
                     else
                     {
-                        // The user has an invalid file with a partial surrogate a the splitting point. 
+                        // The user has an invalid file with a partial surrogate a the splitting point.
                         // We'll let the invalid character flow but we'll explode later on.
                     }
                 }

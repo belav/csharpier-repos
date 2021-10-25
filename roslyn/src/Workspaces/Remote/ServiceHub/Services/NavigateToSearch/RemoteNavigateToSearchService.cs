@@ -12,41 +12,59 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteNavigateToSearchService : BrokeredServiceBase, IRemoteNavigateToSearchService
+    internal sealed class RemoteNavigateToSearchService
+        : BrokeredServiceBase,
+          IRemoteNavigateToSearchService
     {
-        internal sealed class Factory : FactoryBase<IRemoteNavigateToSearchService, IRemoteNavigateToSearchService.ICallback>
+        internal sealed class Factory
+            : FactoryBase<IRemoteNavigateToSearchService, IRemoteNavigateToSearchService.ICallback>
         {
             protected override IRemoteNavigateToSearchService CreateService(
-                in ServiceConstructionArguments arguments, RemoteCallback<IRemoteNavigateToSearchService.ICallback> callback)
-                => new RemoteNavigateToSearchService(arguments, callback);
+                in ServiceConstructionArguments arguments,
+                RemoteCallback<IRemoteNavigateToSearchService.ICallback> callback
+            ) => new RemoteNavigateToSearchService(arguments, callback);
         }
 
         private readonly RemoteCallback<IRemoteNavigateToSearchService.ICallback> _callback;
 
-        public RemoteNavigateToSearchService(in ServiceConstructionArguments arguments, RemoteCallback<IRemoteNavigateToSearchService.ICallback> callback)
-            : base(arguments)
+        public RemoteNavigateToSearchService(
+            in ServiceConstructionArguments arguments,
+            RemoteCallback<IRemoteNavigateToSearchService.ICallback> callback
+        ) : base(arguments)
         {
             _callback = callback;
         }
 
         private Func<RoslynNavigateToItem, Task> GetCallback(
-            RemoteServiceCallbackId callbackId, CancellationToken cancellationToken)
+            RemoteServiceCallbackId callbackId,
+            CancellationToken cancellationToken
+        )
         {
-            return async i => await _callback.InvokeAsync((callback, c) =>
-                callback.OnResultFoundAsync(callbackId, i),
-                cancellationToken).ConfigureAwait(false);
+            return async i =>
+                await _callback
+                    .InvokeAsync(
+                        (callback, c) => callback.OnResultFoundAsync(callbackId, i),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
         }
 
-        public ValueTask HydrateAsync(PinnedSolutionInfo solutionInfo, CancellationToken cancellationToken)
+        public ValueTask HydrateAsync(
+            PinnedSolutionInfo solutionInfo,
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                // All we need to do is request the solution.  This will ensure that all assets are
-                // pulled over from the host side to the remote side.  Once this completes, the next
-                // call to SearchFullyLoadedDocumentAsync or SearchFullyLoadedProjectAsync will be
-                // quick as very little will need to by sync'ed over.
-                await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
-            }, cancellationToken);
+            return RunServiceAsync(
+                async cancellationToken =>
+                {
+                    // All we need to do is request the solution.  This will ensure that all assets are
+                    // pulled over from the host side to the remote side.  Once this completes, the next
+                    // call to SearchFullyLoadedDocumentAsync or SearchFullyLoadedProjectAsync will be
+                    // quick as very little will need to by sync'ed over.
+                    await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
+                },
+                cancellationToken
+            );
         }
 
         public ValueTask SearchFullyLoadedDocumentAsync(
@@ -55,17 +73,29 @@ namespace Microsoft.CodeAnalysis.Remote
             string searchPattern,
             ImmutableArray<string> kinds,
             RemoteServiceCallbackId callbackId,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                var solution = await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
-                var document = solution.GetRequiredDocument(documentId);
-                var callback = GetCallback(callbackId, cancellationToken);
+            return RunServiceAsync(
+                async cancellationToken =>
+                {
+                    var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
+                        .ConfigureAwait(false);
+                    var document = solution.GetRequiredDocument(documentId);
+                    var callback = GetCallback(callbackId, cancellationToken);
 
-                await AbstractNavigateToSearchService.SearchFullyLoadedDocumentInCurrentProcessAsync(
-                    document, searchPattern, kinds.ToImmutableHashSet(), callback, cancellationToken).ConfigureAwait(false);
-            }, cancellationToken);
+                    await AbstractNavigateToSearchService
+                        .SearchFullyLoadedDocumentInCurrentProcessAsync(
+                            document,
+                            searchPattern,
+                            kinds.ToImmutableHashSet(),
+                            callback,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                },
+                cancellationToken
+            );
         }
 
         public ValueTask SearchFullyLoadedProjectAsync(
@@ -75,33 +105,67 @@ namespace Microsoft.CodeAnalysis.Remote
             string searchPattern,
             ImmutableArray<string> kinds,
             RemoteServiceCallbackId callbackId,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                var solution = await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
-                var project = solution.GetRequiredProject(projectId);
-                var callback = GetCallback(callbackId, cancellationToken);
+            return RunServiceAsync(
+                async cancellationToken =>
+                {
+                    var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
+                        .ConfigureAwait(false);
+                    var project = solution.GetRequiredProject(projectId);
+                    var callback = GetCallback(callbackId, cancellationToken);
 
-                var priorityDocuments = priorityDocumentIds.SelectAsArray(d => solution.GetRequiredDocument(d));
+                    var priorityDocuments = priorityDocumentIds.SelectAsArray(
+                        d => solution.GetRequiredDocument(d)
+                    );
 
-                await AbstractNavigateToSearchService.SearchFullyLoadedProjectInCurrentProcessAsync(
-                    project, priorityDocuments, searchPattern, kinds.ToImmutableHashSet(), callback, cancellationToken).ConfigureAwait(false);
-            }, cancellationToken);
+                    await AbstractNavigateToSearchService
+                        .SearchFullyLoadedProjectInCurrentProcessAsync(
+                            project,
+                            priorityDocuments,
+                            searchPattern,
+                            kinds.ToImmutableHashSet(),
+                            callback,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                },
+                cancellationToken
+            );
         }
 
-        public ValueTask SearchCachedDocumentsAsync(ImmutableArray<DocumentKey> documentKeys, ImmutableArray<DocumentKey> priorityDocumentKeys, string searchPattern, ImmutableArray<string> kinds, RemoteServiceCallbackId callbackId, CancellationToken cancellationToken)
+        public ValueTask SearchCachedDocumentsAsync(
+            ImmutableArray<DocumentKey> documentKeys,
+            ImmutableArray<DocumentKey> priorityDocumentKeys,
+            string searchPattern,
+            ImmutableArray<string> kinds,
+            RemoteServiceCallbackId callbackId,
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                // Intentionally do not call GetSolutionAsync here.  We do not want the cost of
-                // synchronizing the solution over to the remote side.  Instead, we just directly
-                // check whatever cached data we have from the previous vs session.
-                var callback = GetCallback(callbackId, cancellationToken);
+            return RunServiceAsync(
+                async cancellationToken =>
+                {
+                    // Intentionally do not call GetSolutionAsync here.  We do not want the cost of
+                    // synchronizing the solution over to the remote side.  Instead, we just directly
+                    // check whatever cached data we have from the previous vs session.
+                    var callback = GetCallback(callbackId, cancellationToken);
 
-                await AbstractNavigateToSearchService.SearchCachedDocumentsInCurrentProcessAsync(
-                    GetWorkspace(), documentKeys, priorityDocumentKeys, searchPattern, kinds.ToImmutableHashSet(), callback, cancellationToken).ConfigureAwait(false);
-            }, cancellationToken);
+                    await AbstractNavigateToSearchService
+                        .SearchCachedDocumentsInCurrentProcessAsync(
+                            GetWorkspace(),
+                            documentKeys,
+                            priorityDocumentKeys,
+                            searchPattern,
+                            kinds.ToImmutableHashSet(),
+                            callback,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                },
+                cancellationToken
+            );
         }
     }
 }

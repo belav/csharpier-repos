@@ -31,9 +31,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             internal static ImmutableArray<Words> GetBaseNames(IAliasSymbol alias)
             {
                 var name = alias.Name;
-                if (alias.Target.IsType &&
-                    ((INamedTypeSymbol)alias.Target).IsInterfaceType() &&
-                    CanRemoveInterfacePrefix(name))
+                if (
+                    alias.Target.IsType
+                    && ((INamedTypeSymbol)alias.Target).IsInterfaceType()
+                    && CanRemoveInterfacePrefix(name)
+                )
                 {
                     name = name.Substring(1);
                 }
@@ -44,7 +46,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 return result;
             }
 
-            private static ImmutableArray<Words> GetInterleavedPatterns(ArrayBuilder<TextSpan> breaks, string baseName, bool pluralize)
+            private static ImmutableArray<Words> GetInterleavedPatterns(
+                ArrayBuilder<TextSpan> breaks,
+                string baseName,
+                bool pluralize
+            )
             {
                 var result = ArrayBuilder<Words>.GetInstance();
                 var breakCount = breaks.Count;
@@ -62,17 +68,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 return result.ToImmutable();
             }
 
-            private static Words GetLongestBackwardSubsequence(int length, ArrayBuilder<TextSpan> breaks, string baseName, bool pluralize)
+            private static Words GetLongestBackwardSubsequence(
+                int length,
+                ArrayBuilder<TextSpan> breaks,
+                string baseName,
+                bool pluralize
+            )
             {
                 var breakCount = breaks.Count;
                 var start = breakCount - length;
                 return GetWords(start, breakCount, breaks, baseName, pluralize);
             }
 
-            private static Words GetLongestForwardSubsequence(int length, ArrayBuilder<TextSpan> breaks, string baseName, bool pluralize)
-                => GetWords(0, length, breaks, baseName, pluralize);
+            private static Words GetLongestForwardSubsequence(
+                int length,
+                ArrayBuilder<TextSpan> breaks,
+                string baseName,
+                bool pluralize
+            ) => GetWords(0, length, breaks, baseName, pluralize);
 
-            private static Words GetWords(int start, int end, ArrayBuilder<TextSpan> breaks, string baseName, bool pluralize)
+            private static Words GetWords(
+                int start,
+                int end,
+                ArrayBuilder<TextSpan> breaks,
+                string baseName,
+                bool pluralize
+            )
             {
                 var result = ArrayBuilder<string>.GetInstance();
                 // Add all the words but the last one
@@ -108,6 +129,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
         }
 
-        private static bool CanRemoveInterfacePrefix(string name) => name.Length > 1 && name[0] == 'I' && char.IsUpper(name[1]);
+        private static bool CanRemoveInterfacePrefix(string name) =>
+            name.Length > 1 && name[0] == 'I' && char.IsUpper(name[1]);
     }
 }

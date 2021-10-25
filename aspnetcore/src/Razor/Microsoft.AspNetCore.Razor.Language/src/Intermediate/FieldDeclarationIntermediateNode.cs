@@ -17,7 +17,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
         public string FieldName { get; set; }
 
         public string FieldType { get; set; }
-        
+
         public override void Accept(IntermediateNodeVisitor visitor)
         {
             if (visitor == null)

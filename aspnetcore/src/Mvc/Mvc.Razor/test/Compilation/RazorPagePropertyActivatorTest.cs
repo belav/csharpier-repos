@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 typeof(TestPage),
                 typeof(TestModel),
                 new EmptyModelMetadataProvider(),
-                propertyValueAccessors: null);
+                propertyValueAccessors: null
+            );
             var viewContext = new ViewContext();
 
             // Act
@@ -37,7 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 typeof(TestPage),
                 declaredModelType: null,
                 metadataProvider: new EmptyModelMetadataProvider(),
-                propertyValueAccessors: null);
+                propertyValueAccessors: null
+            );
             var viewContext = new ViewContext();
 
             // Act
@@ -57,15 +59,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 typeof(TestPage),
                 declaredModelType: typeof(TestModel),
                 metadataProvider: modelMetadataProvider,
-                propertyValueAccessors: null);
+                propertyValueAccessors: null
+            );
             var original = new ViewDataDictionary(modelMetadataProvider, new ModelStateDictionary())
             {
-                {  "test-key", "test-value" },
+                { "test-key", "test-value" },
             };
-            var viewContext = new ViewContext
-            {
-                ViewData = original,
-            };
+            var viewContext = new ViewContext { ViewData = original, };
 
             // Act
             var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);
@@ -86,15 +86,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 typeof(TestPage),
                 declaredModelType: typeof(TestModel),
                 metadataProvider: modelMetadataProvider,
-                propertyValueAccessors: null);
+                propertyValueAccessors: null
+            );
             var original = new ViewDataDictionary(modelMetadataProvider, new ModelStateDictionary())
             {
-                {  "test-key", "test-value" },
+                { "test-key", "test-value" },
             };
-            var viewContext = new ViewContext
-            {
-                ViewData = original,
-            };
+            var viewContext = new ViewContext { ViewData = original, };
 
             // Act
             var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);
@@ -115,15 +113,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 typeof(TestPage),
                 declaredModelType: typeof(TestModel),
                 metadataProvider: modelMetadataProvider,
-                propertyValueAccessors: null);
-            var original = new ViewDataDictionary<object>(modelMetadataProvider, new ModelStateDictionary())
-            {
-                {  "test-key", "test-value" },
+                propertyValueAccessors: null
+            );
+            var original = new ViewDataDictionary<object>(
+                modelMetadataProvider,
+                new ModelStateDictionary()
+            ) {
+                { "test-key", "test-value" },
             };
-            var viewContext = new ViewContext
-            {
-                ViewData = original,
-            };
+            var viewContext = new ViewContext { ViewData = original, };
 
             // Act
             var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);
@@ -144,15 +142,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 typeof(TestPage),
                 declaredModelType: null,
                 metadataProvider: modelMetadataProvider,
-                propertyValueAccessors: null);
-            var original = new ViewDataDictionary<TestModel>(modelMetadataProvider, new ModelStateDictionary())
-            {
-                {  "test-key", "test-value" },
+                propertyValueAccessors: null
+            );
+            var original = new ViewDataDictionary<TestModel>(
+                modelMetadataProvider,
+                new ModelStateDictionary()
+            ) {
+                { "test-key", "test-value" },
             };
-            var viewContext = new ViewContext
-            {
-                ViewData = original,
-            };
+            var viewContext = new ViewContext { ViewData = original, };
 
             // Act
             var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);
@@ -173,15 +171,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 typeof(TestPage),
                 declaredModelType: typeof(TestModel),
                 metadataProvider: modelMetadataProvider,
-                propertyValueAccessors: null);
-            var original = new ViewDataDictionary<TestModel>(modelMetadataProvider, new ModelStateDictionary())
-            {
-                {  "test-key", "test-value" },
+                propertyValueAccessors: null
+            );
+            var original = new ViewDataDictionary<TestModel>(
+                modelMetadataProvider,
+                new ModelStateDictionary()
+            ) {
+                { "test-key", "test-value" },
             };
-            var viewContext = new ViewContext
-            {
-                ViewData = original,
-            };
+            var viewContext = new ViewContext { ViewData = original, };
 
             // Act
             var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);
@@ -200,12 +198,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 typeof(TestPage),
                 declaredModelType: null,
                 metadataProvider: modelMetadataProvider,
-                propertyValueAccessors: null);
-            var original = new ViewDataDictionary<object>(modelMetadataProvider, new ModelStateDictionary());
-            var viewContext = new ViewContext
-            {
-                ViewData = original,
-            };
+                propertyValueAccessors: null
+            );
+            var original = new ViewDataDictionary<object>(
+                modelMetadataProvider,
+                new ModelStateDictionary()
+            );
+            var viewContext = new ViewContext { ViewData = original, };
 
             // Act
             var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);

@@ -6,7 +6,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
     internal enum OperatorKind : uint
     {
         OP_NONE,
-
         // Binary
         OP_ASSIGN,
         OP_ADDEQ,
@@ -41,7 +40,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         OP_MUL,
         OP_DIV,
         OP_MOD,
-
         // Unary
         OP_NOP,
         OP_UPLUS,
@@ -53,16 +51,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         OP_TYPEOF,
         OP_CHECKED,
         OP_UNCHECKED,
-
         OP_MAKEREFANY,
         OP_REFVALUE,
         OP_REFTYPE,
         OP_ARGS,
-
         OP_CAST,
         OP_INDIR,
         OP_ADDR,
-
         OP_COLON,
         OP_THIS,
         OP_BASE,
@@ -77,12 +72,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
         OP_DOT,
         OP_IMPLICIT,
         OP_EXPLICIT,
-
         OP_EQUALS,
         OP_COMPARE,
-
         OP_DEFAULT,
-
         OP_LAST
     }
 }

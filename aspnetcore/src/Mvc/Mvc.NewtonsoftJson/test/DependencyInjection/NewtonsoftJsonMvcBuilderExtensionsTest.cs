@@ -17,14 +17,21 @@ namespace Microsoft.Extensions.DependencyInjection
             var services = new ServiceCollection();
 
             // Act
-            services.AddMvc()
-                .AddNewtonsoftJson((options) =>
-                {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                });
+            services
+                .AddMvc()
+                .AddNewtonsoftJson(
+                    (options) =>
+                    {
+                        options.SerializerSettings.ContractResolver =
+                            new CamelCasePropertyNamesContractResolver();
+                    }
+                );
 
             // Assert
-            Assert.Single(services, d => d.ServiceType == typeof(IConfigureOptions<MvcNewtonsoftJsonOptions>));
+            Assert.Single(
+                services,
+                d => d.ServiceType == typeof(IConfigureOptions<MvcNewtonsoftJsonOptions>)
+            );
         }
     }
 }

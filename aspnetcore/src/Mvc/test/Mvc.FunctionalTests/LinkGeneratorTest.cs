@@ -11,11 +11,14 @@ using Xunit;
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
     // Functional tests for MVC's scenarios with LinkGenerator (2.2+ only)
-    public class LinkGeneratorTest : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForLinkGenerator>>
+    public class LinkGeneratorTest
+        : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForLinkGenerator>>
     {
         public LinkGeneratorTest(MvcTestFixture<RoutingWebSite.StartupForLinkGenerator> fixture)
         {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = factory.CreateDefaultClient();
         }
 
@@ -23,7 +26,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             builder.UseStartup<RoutingWebSite.StartupForLinkGenerator>();
 
         public HttpClient Client { get; }
-        
+
         [Fact]
         public async Task GetPathByAction_CanGeneratePathToSelf()
         {
@@ -102,7 +105,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task GetPathByAction_FailsToGenerateLinkInsideArea()
         {
             // Act
-            var response = await Client.GetAsync("Admin/LG3/LinkInsideOfAreaFail/17?another-value=5");
+            var response = await Client.GetAsync(
+                "Admin/LG3/LinkInsideOfAreaFail/17?another-value=5"
+            );
             var responseContent = await response.Content.ReadAsStringAsync();
 
             // Assert
@@ -227,7 +232,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal("https://www.example.com/Admin/LGAreaPage?handler=a-handler", responseContent);
+            Assert.Equal(
+                "https://www.example.com/Admin/LGAreaPage?handler=a-handler",
+                responseContent
+            );
         }
 
         [Fact]

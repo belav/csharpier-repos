@@ -19,18 +19,11 @@ namespace Microsoft.Win32.SafeHandles
     {
         internal static readonly SafeProcessHandle InvalidHandle = new SafeProcessHandle();
 
-        public SafeProcessHandle()
-            : this(IntPtr.Zero)
-        {
-        }
+        public SafeProcessHandle() : this(IntPtr.Zero) { }
 
-        internal SafeProcessHandle(IntPtr handle)
-            : this(handle, true)
-        {
-        }
+        internal SafeProcessHandle(IntPtr handle) : this(handle, true) { }
 
-        public SafeProcessHandle(IntPtr existingHandle, bool ownsHandle)
-            : base(ownsHandle)
+        public SafeProcessHandle(IntPtr existingHandle, bool ownsHandle) : base(ownsHandle)
         {
             SetHandle(existingHandle);
         }

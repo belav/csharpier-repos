@@ -16,7 +16,8 @@ namespace AuthSamples.FunctionalTests
         public static Task<HttpResponseMessage> SendAsync(
             this HttpClient client,
             IHtmlFormElement form,
-            IEnumerable<KeyValuePair<string, string>> formValues)
+            IEnumerable<KeyValuePair<string, string>> formValues
+        )
         {
             var submitElement = Assert.Single(form.QuerySelectorAll("[type=submit]"));
             var submitButton = Assert.IsAssignableFrom<IHtmlElement>(submitElement);
@@ -29,7 +30,8 @@ namespace AuthSamples.FunctionalTests
             this HttpClient client,
             IHtmlFormElement form,
             IHtmlElement submitButton,
-            IEnumerable<KeyValuePair<string, string>> formValues)
+            IEnumerable<KeyValuePair<string, string>> formValues
+        )
         {
             foreach (var kvp in formValues)
             {

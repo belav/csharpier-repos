@@ -44,7 +44,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        public static readonly ParameterExpression QueryContextParameter = Expression.Parameter(typeof(QueryContext), "queryContext");
+        public static readonly ParameterExpression QueryContextParameter = Expression.Parameter(
+            typeof(QueryContext),
+            "queryContext"
+        );
 
         /// <summary>
         ///     <para>
@@ -55,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///         not used in application code.
         ///     </para>
         /// </summary>
-        public static readonly Expression NotTranslatedExpression = new NotTranslatedExpressionType();
+        public static readonly Expression NotTranslatedExpression =
+            new NotTranslatedExpressionType();
 
         private readonly IQueryTranslationPreprocessorFactory _queryTranslationPreprocessorFactory;
         private readonly IQueryableMethodTranslatingExpressionVisitorFactory _queryableMethodTranslatingExpressionVisitorFactory;
@@ -71,9 +75,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this class. </param>
         /// <param name="async"> A bool value indicating whether it is for async query. </param>
-        public QueryCompilationContext(
-            QueryCompilationContextDependencies dependencies,
-            bool async)
+        public QueryCompilationContext(QueryCompilationContextDependencies dependencies, bool async)
         {
             Check.NotNull(dependencies, nameof(dependencies));
 
@@ -87,9 +89,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             Logger = dependencies.Logger;
 
             _queryTranslationPreprocessorFactory = dependencies.QueryTranslationPreprocessorFactory;
-            _queryableMethodTranslatingExpressionVisitorFactory = dependencies.QueryableMethodTranslatingExpressionVisitorFactory;
-            _queryTranslationPostprocessorFactory = dependencies.QueryTranslationPostprocessorFactory;
-            _shapedQueryCompilingExpressionVisitorFactory = dependencies.ShapedQueryCompilingExpressionVisitorFactory;
+            _queryableMethodTranslatingExpressionVisitorFactory =
+                dependencies.QueryableMethodTranslatingExpressionVisitorFactory;
+            _queryTranslationPostprocessorFactory =
+                dependencies.QueryTranslationPostprocessorFactory;
+            _shapedQueryCompilingExpressionVisitorFactory =
+                dependencies.ShapedQueryCompilingExpressionVisitorFactory;
 
             _expressionPrinter = new ExpressionPrinter();
         }
@@ -123,8 +128,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     A value indicating whether it is tracking query.
         /// </summary>
         [Obsolete("Use " + nameof(QueryTrackingBehavior) + " instead.")]
-        public virtual bool IsTracking
-            => QueryTrackingBehavior == QueryTrackingBehavior.TrackAll;
+        public virtual bool IsTracking => QueryTrackingBehavior == QueryTrackingBehavior.TrackAll;
 
         /// <summary>
         ///     A value indicating whether the underlying server query needs to pre-buffer all data.
@@ -194,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var queryExecutorExpression = Expression.Lambda<Func<QueryContext, TResult>>(
                 query,
-                QueryContextParameter);
+                QueryContextParameter
+            );
 
             try
             {
@@ -211,15 +216,23 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     A lambda must be provided, which will extract the parameter's value from the QueryContext every time
         ///     the query is executed.
         /// </summary>
-        public virtual ParameterExpression RegisterRuntimeParameter(string name, LambdaExpression valueExtractor)
+        public virtual ParameterExpression RegisterRuntimeParameter(
+            string name,
+            LambdaExpression valueExtractor
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(valueExtractor, nameof(valueExtractor));
 
-            if (valueExtractor.Parameters.Count != 1
-                || valueExtractor.Parameters[0] != QueryContextParameter)
+            if (
+                valueExtractor.Parameters.Count != 1
+                || valueExtractor.Parameters[0] != QueryContextParameter
+            )
             {
-                throw new ArgumentException(CoreStrings.RuntimeParameterMissingParameter, nameof(valueExtractor));
+                throw new ArgumentException(
+                    CoreStrings.RuntimeParameterMissingParameter,
+                    nameof(valueExtractor)
+                );
             }
 
             if (_runtimeParameters == null)
@@ -231,22 +244,28 @@ namespace Microsoft.EntityFrameworkCore.Query
             return Expression.Parameter(valueExtractor.ReturnType, name);
         }
 
-        private Expression InsertRuntimeParameters(Expression query)
-            => _runtimeParameters == null
+        private Expression InsertRuntimeParameters(Expression query) =>
+            _runtimeParameters == null
                 ? query
                 : Expression.Block(
-                    _runtimeParameters
-                        .Select(
-                            kv =>
-                                Expression.Call(
-                                    QueryContextParameter,
-                                    _queryContextAddParameterMethodInfo,
-                                    Expression.Constant(kv.Key),
-                                    Expression.Convert(Expression.Invoke(kv.Value, QueryContextParameter), typeof(object))))
-                        .Append(query));
+                      _runtimeParameters
+                          .Select(
+                              kv =>
+                                  Expression.Call(
+                                      QueryContextParameter,
+                                      _queryContextAddParameterMethodInfo,
+                                      Expression.Constant(kv.Key),
+                                      Expression.Convert(
+                                          Expression.Invoke(kv.Value, QueryContextParameter),
+                                          typeof(object)
+                                      )
+                                  )
+                          )
+                          .Append(query)
+                  );
 
-        private static readonly MethodInfo _queryContextAddParameterMethodInfo
-            = typeof(QueryContext).GetRequiredDeclaredMethod(nameof(QueryContext.AddParameter));
+        private static readonly MethodInfo _queryContextAddParameterMethodInfo =
+            typeof(QueryContext).GetRequiredDeclaredMethod(nameof(QueryContext.AddParameter));
 
         private sealed class NotTranslatedExpressionType : Expression
         {

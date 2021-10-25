@@ -18,9 +18,16 @@ namespace Microsoft.CodeAnalysis.Serialization
         private const byte ChecksumKind = 0;
         private const byte ChecksumWithChildrenKind = 1;
 
-        private static readonly ImmutableDictionary<WellKnownSynchronizationKind, Func<object[], ChecksumWithChildren>> s_creatorMap = CreateCreatorMap();
+        private static readonly ImmutableDictionary<
+            WellKnownSynchronizationKind,
+            Func<object[], ChecksumWithChildren>
+        > s_creatorMap = CreateCreatorMap();
 
-        public void SerializeChecksumWithChildren(ChecksumWithChildren checksums, ObjectWriter writer, CancellationToken cancellationToken)
+        public void SerializeChecksumWithChildren(
+            ChecksumWithChildren checksums,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -39,7 +46,11 @@ namespace Microsoft.CodeAnalysis.Serialization
                         continue;
                     case ChecksumCollection checksumCollection:
                         writer.WriteByte(ChecksumWithChildrenKind);
-                        SerializeChecksumWithChildren(checksumCollection, writer, cancellationToken);
+                        SerializeChecksumWithChildren(
+                            checksumCollection,
+                            writer,
+                            cancellationToken
+                        );
                         continue;
                 }
 
@@ -47,7 +58,10 @@ namespace Microsoft.CodeAnalysis.Serialization
             }
         }
 
-        private ChecksumWithChildren DeserializeChecksumWithChildren(ObjectReader reader, CancellationToken cancellationToken)
+        private ChecksumWithChildren DeserializeChecksumWithChildren(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -81,19 +95,55 @@ namespace Microsoft.CodeAnalysis.Serialization
             return checksums;
         }
 
-        private static ImmutableDictionary<WellKnownSynchronizationKind, Func<object[], ChecksumWithChildren>> CreateCreatorMap()
+        private static ImmutableDictionary<
+            WellKnownSynchronizationKind,
+            Func<object[], ChecksumWithChildren>
+        > CreateCreatorMap()
         {
-            return ImmutableDictionary<WellKnownSynchronizationKind, Func<object[], ChecksumWithChildren>>.Empty
-                .Add(WellKnownSynchronizationKind.SolutionState, children => new SolutionStateChecksums(children))
-                .Add(WellKnownSynchronizationKind.ProjectState, children => new ProjectStateChecksums(children))
-                .Add(WellKnownSynchronizationKind.DocumentState, children => new DocumentStateChecksums(children))
-                .Add(WellKnownSynchronizationKind.Projects, children => new ProjectChecksumCollection(children))
-                .Add(WellKnownSynchronizationKind.Documents, children => new DocumentChecksumCollection(children))
-                .Add(WellKnownSynchronizationKind.TextDocuments, children => new TextDocumentChecksumCollection(children))
-                .Add(WellKnownSynchronizationKind.AnalyzerConfigDocuments, children => new AnalyzerConfigDocumentChecksumCollection(children))
-                .Add(WellKnownSynchronizationKind.ProjectReferences, children => new ProjectReferenceChecksumCollection(children))
-                .Add(WellKnownSynchronizationKind.MetadataReferences, children => new MetadataReferenceChecksumCollection(children))
-                .Add(WellKnownSynchronizationKind.AnalyzerReferences, children => new AnalyzerReferenceChecksumCollection(children));
+            return ImmutableDictionary<
+                WellKnownSynchronizationKind,
+                Func<object[], ChecksumWithChildren>
+            >.Empty
+                .Add(
+                    WellKnownSynchronizationKind.SolutionState,
+                    children => new SolutionStateChecksums(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.ProjectState,
+                    children => new ProjectStateChecksums(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.DocumentState,
+                    children => new DocumentStateChecksums(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.Projects,
+                    children => new ProjectChecksumCollection(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.Documents,
+                    children => new DocumentChecksumCollection(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.TextDocuments,
+                    children => new TextDocumentChecksumCollection(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.AnalyzerConfigDocuments,
+                    children => new AnalyzerConfigDocumentChecksumCollection(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.ProjectReferences,
+                    children => new ProjectReferenceChecksumCollection(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.MetadataReferences,
+                    children => new MetadataReferenceChecksumCollection(children)
+                )
+                .Add(
+                    WellKnownSynchronizationKind.AnalyzerReferences,
+                    children => new AnalyzerReferenceChecksumCollection(children)
+                );
         }
     }
 }

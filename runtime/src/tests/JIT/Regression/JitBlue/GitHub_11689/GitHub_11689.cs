@@ -24,7 +24,7 @@ namespace N
         {
             for (int i = 0; i < n; ++i)
             {
-                s += unwrap(WrappedInt.Twenty);  // Loading WrappedInt.Twenty must happen after calling the cctor
+                s += unwrap(WrappedInt.Twenty); // Loading WrappedInt.Twenty must happen after calling the cctor
             }
 
             return s;

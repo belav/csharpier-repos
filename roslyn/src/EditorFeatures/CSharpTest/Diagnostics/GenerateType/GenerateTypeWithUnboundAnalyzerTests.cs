@@ -18,29 +18,29 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateTypeTests
 {
-    public partial class GenerateTypeWithUnboundAnalyzerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class GenerateTypeWithUnboundAnalyzerTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public GenerateTypeWithUnboundAnalyzerTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public GenerateTypeWithUnboundAnalyzerTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUnboundIdentifiersDiagnosticAnalyzer(), new GenerateTypeCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new CSharpUnboundIdentifiersDiagnosticAnalyzer(), new GenerateTypeCodeFixProvider());
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> codeActions)
-            => FlattenActions(codeActions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> codeActions
+        ) => FlattenActions(codeActions);
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
         [WorkItem(13211, "https://github.com/dotnet/roslyn/issues/13211")]
         public async Task TestGenerateOffOfIncompleteMember()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     public [|Goo|]
 }",
-@"class Class
+                @"class Class
 {
     public Goo
 }
@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateTyp
 internal class Goo
 {
 }",
-index: 1);
+                index: 1
+            );
         }
     }
 }

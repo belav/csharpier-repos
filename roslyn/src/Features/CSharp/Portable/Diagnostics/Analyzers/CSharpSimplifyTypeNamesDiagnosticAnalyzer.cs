@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                 SyntaxKind.GenericName,
                 SyntaxKind.IdentifierName,
                 SyntaxKind.SimpleMemberAccessExpression,
-                SyntaxKind.QualifiedCref);
+                SyntaxKind.QualifiedCref
+            );
 
         protected override bool IsIgnoredCodeBlock(SyntaxNode codeBlock)
         {
@@ -41,22 +42,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration,
                 SyntaxKind.DelegateDeclaration,
-                SyntaxKind.EnumDeclaration);
+                SyntaxKind.EnumDeclaration
+            );
         }
 
-        protected override ImmutableArray<Diagnostic> AnalyzeCodeBlock(CodeBlockAnalysisContext context)
+        protected override ImmutableArray<Diagnostic> AnalyzeCodeBlock(
+            CodeBlockAnalysisContext context
+        )
         {
             var semanticModel = context.SemanticModel;
             var cancellationToken = context.CancellationToken;
 
             var syntaxTree = semanticModel.SyntaxTree;
             var optionSet = context.Options.GetAnalyzerOptionSet(syntaxTree, cancellationToken);
-            var simplifier = new TypeSyntaxSimplifierWalker(this, semanticModel, optionSet, ignoredSpans: null, cancellationToken);
+            var simplifier = new TypeSyntaxSimplifierWalker(
+                this,
+                semanticModel,
+                optionSet,
+                ignoredSpans: null,
+                cancellationToken
+            );
             simplifier.Visit(context.CodeBlock);
             return simplifier.Diagnostics;
         }
 
-        protected override ImmutableArray<Diagnostic> AnalyzeSemanticModel(SemanticModelAnalysisContext context, SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? codeBlockIntervalTree)
+        protected override ImmutableArray<Diagnostic> AnalyzeSemanticModel(
+            SemanticModelAnalysisContext context,
+            SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? codeBlockIntervalTree
+        )
         {
             var semanticModel = context.SemanticModel;
             var cancellationToken = context.CancellationToken;
@@ -65,24 +78,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             var optionSet = context.Options.GetAnalyzerOptionSet(syntaxTree, cancellationToken);
             var root = syntaxTree.GetRoot(cancellationToken);
 
-            var simplifier = new TypeSyntaxSimplifierWalker(this, semanticModel, optionSet, ignoredSpans: codeBlockIntervalTree, cancellationToken);
+            var simplifier = new TypeSyntaxSimplifierWalker(
+                this,
+                semanticModel,
+                optionSet,
+                ignoredSpans: codeBlockIntervalTree,
+                cancellationToken
+            );
             simplifier.Visit(root);
             return simplifier.Diagnostics;
         }
 
-        internal override bool IsCandidate(SyntaxNode node)
-            => node != null && s_kindsOfInterest.Contains(node.Kind());
+        internal override bool IsCandidate(SyntaxNode node) =>
+            node != null && s_kindsOfInterest.Contains(node.Kind());
 
         internal override bool CanSimplifyTypeNameExpression(
-            SemanticModel model, SyntaxNode node, OptionSet optionSet,
-            out TextSpan issueSpan, out string diagnosticId, out bool inDeclaration,
-            CancellationToken cancellationToken)
+            SemanticModel model,
+            SyntaxNode node,
+            OptionSet optionSet,
+            out TextSpan issueSpan,
+            out string diagnosticId,
+            out bool inDeclaration,
+            CancellationToken cancellationToken
+        )
         {
             inDeclaration = false;
             issueSpan = default;
             diagnosticId = IDEDiagnosticIds.SimplifyNamesDiagnosticId;
 
-            if (node is MemberAccessExpressionSyntax memberAccess && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+            if (
+                node is MemberAccessExpressionSyntax memberAccess
+                && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression)
+            )
             {
                 // don't bother analyzing "this.Goo" expressions.  They will be analyzed by
                 // the CSharpSimplifyThisOrMeDiagnosticAnalyzer.
@@ -97,26 +124,52 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             SyntaxNode replacementSyntax;
             if (node.IsKind(SyntaxKind.QualifiedCref, out QualifiedCrefSyntax? crefSyntax))
             {
-                if (!QualifiedCrefSimplifier.Instance.TrySimplify(crefSyntax, model, optionSet, out var replacement, out issueSpan, cancellationToken))
+                if (
+                    !QualifiedCrefSimplifier.Instance.TrySimplify(
+                        crefSyntax,
+                        model,
+                        optionSet,
+                        out var replacement,
+                        out issueSpan,
+                        cancellationToken
+                    )
+                )
                     return false;
 
                 replacementSyntax = replacement;
             }
             else
             {
-                if (!ExpressionSimplifier.Instance.TrySimplify((ExpressionSyntax)node, model, optionSet, out var replacement, out issueSpan, cancellationToken))
+                if (
+                    !ExpressionSimplifier.Instance.TrySimplify(
+                        (ExpressionSyntax)node,
+                        model,
+                        optionSet,
+                        out var replacement,
+                        out issueSpan,
+                        cancellationToken
+                    )
+                )
                     return false;
 
                 replacementSyntax = replacement;
             }
 
             // set proper diagnostic ids.
-            if (replacementSyntax.HasAnnotations(nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration)))
+            if (
+                replacementSyntax.HasAnnotations(
+                    nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration)
+                )
+            )
             {
                 inDeclaration = true;
                 diagnosticId = IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId;
             }
-            else if (replacementSyntax.HasAnnotations(nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess)))
+            else if (
+                replacementSyntax.HasAnnotations(
+                    nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess)
+                )
+            )
             {
                 inDeclaration = false;
                 diagnosticId = IDEDiagnosticIds.PreferBuiltInOrFrameworkTypeDiagnosticId;
@@ -129,7 +182,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             return true;
         }
 
-        protected override string GetLanguageName()
-            => LanguageNames.CSharp;
+        protected override string GetLanguageName() => LanguageNames.CSharp;
     }
 }

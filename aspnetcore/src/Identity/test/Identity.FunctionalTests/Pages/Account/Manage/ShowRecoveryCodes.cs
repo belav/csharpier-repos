@@ -12,8 +12,11 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
     {
         private readonly IEnumerable<IHtmlElement> _recoveryCodeElements;
 
-        public ShowRecoveryCodes(HttpClient client, IHtmlDocument showRecoveryCodes, DefaultUIContext context)
-            : base(client, showRecoveryCodes, context)
+        public ShowRecoveryCodes(
+            HttpClient client,
+            IHtmlDocument showRecoveryCodes,
+            DefaultUIContext context
+        ) : base(client, showRecoveryCodes, context)
         {
             _recoveryCodeElements = HtmlAssert.HasElements(".recovery-code", showRecoveryCodes);
             Context.RecoveryCodes = Codes.ToArray();

@@ -9,14 +9,32 @@ namespace System.Net.Http.Headers
 {
     internal sealed class KnownHeader
     {
-        public KnownHeader(string name, int? http2StaticTableIndex = null, int? http3StaticTableIndex = null) :
-            this(name, HttpHeaderType.Custom, parser: null, knownValues: null, http2StaticTableIndex, http3StaticTableIndex)
+        public KnownHeader(
+            string name,
+            int? http2StaticTableIndex = null,
+            int? http3StaticTableIndex = null
+        )
+            : this(
+                name,
+                HttpHeaderType.Custom,
+                parser: null,
+                knownValues: null,
+                http2StaticTableIndex,
+                http3StaticTableIndex
+            )
         {
             Debug.Assert(!string.IsNullOrEmpty(name));
             Debug.Assert(name[0] == ':' || HttpRuleParser.GetTokenLength(name, 0) == name.Length);
         }
 
-        public KnownHeader(string name, HttpHeaderType headerType, HttpHeaderParser? parser, string[]? knownValues = null, int? http2StaticTableIndex = null, int? http3StaticTableIndex = null)
+        public KnownHeader(
+            string name,
+            HttpHeaderType headerType,
+            HttpHeaderParser? parser,
+            string[]? knownValues = null,
+            int? http2StaticTableIndex = null,
+            int? http3StaticTableIndex = null
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(name));
             Debug.Assert(name[0] == ':' || HttpRuleParser.GetTokenLength(name, 0) == name.Length);
@@ -26,13 +44,17 @@ namespace System.Net.Http.Headers
             Parser = parser;
             KnownValues = knownValues;
 
-            Http2EncodedName = http2StaticTableIndex.HasValue ?
-                HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingToAllocatedArray(http2StaticTableIndex.GetValueOrDefault()) :
-                HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewNameToAllocatedArray(name);
+            Http2EncodedName = http2StaticTableIndex.HasValue
+                ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingToAllocatedArray(
+                      http2StaticTableIndex.GetValueOrDefault()
+                  )
+                : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewNameToAllocatedArray(name);
 
-            Http3EncodedName = http3StaticTableIndex.HasValue ?
-                QPack.QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReferenceToArray(http3StaticTableIndex.GetValueOrDefault()) :
-                QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(name);
+            Http3EncodedName = http3StaticTableIndex.HasValue
+                ? QPack.QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReferenceToArray(
+                      http3StaticTableIndex.GetValueOrDefault()
+                  )
+                : QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(name);
 
             var asciiBytesWithColonSpace = new byte[name.Length + 2]; // + 2 for ':' and ' '
             int asciiBytes = Encoding.ASCII.GetBytes(name, asciiBytesWithColonSpace);

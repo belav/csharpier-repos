@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public partial class StartupAnalyzer : DiagnosticAnalyzer
     {
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => Diagnostics.SupportedDiagnostics;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            Diagnostics.SupportedDiagnostics;
 
         public override void Initialize(AnalysisContext context)
         {
@@ -35,57 +36,63 @@ namespace Microsoft.AspNetCore.Analyzers
                 return;
             }
 
-            context.RegisterSymbolStartAction(context =>
-            {
-                var type = (INamedTypeSymbol)context.Symbol;
-                if (!StartupFacts.IsStartupClass(symbols, type))
+            context.RegisterSymbolStartAction(
+                context =>
                 {
-                    // Not a startup class, nothing to do.
-                    return;
-                }
-
-                // This analyzer fans out a bunch of jobs. The context will capture the results of doing analysis
-                // on the startup code, so that other analyzers that run later can examine them.
-                var builder = new StartupAnalysisBuilder(this, symbols);
-
-                var services = new ServicesAnalyzer(builder);
-                var options = new OptionsAnalyzer(builder);
-                var middleware = new MiddlewareAnalyzer(builder);
-
-                context.RegisterOperationBlockStartAction(context =>
-                {
-                    if (context.OwningSymbol.Kind != SymbolKind.Method)
+                    var type = (INamedTypeSymbol)context.Symbol;
+                    if (!StartupFacts.IsStartupClass(symbols, type))
                     {
+                        // Not a startup class, nothing to do.
                         return;
                     }
 
-                    var method = (IMethodSymbol)context.OwningSymbol;
-                    if (StartupFacts.IsConfigureServices(symbols, method))
-                    {
-                        OnConfigureServicesMethodFound(method);
+                    // This analyzer fans out a bunch of jobs. The context will capture the results of doing analysis
+                    // on the startup code, so that other analyzers that run later can examine them.
+                    var builder = new StartupAnalysisBuilder(this, symbols);
 
-                        services.AnalyzeConfigureServices(context);
-                        options.AnalyzeConfigureServices(context);
-                    }
+                    var services = new ServicesAnalyzer(builder);
+                    var options = new OptionsAnalyzer(builder);
+                    var middleware = new MiddlewareAnalyzer(builder);
 
-                    if (StartupFacts.IsConfigure(symbols, method))
-                    {
-                        OnConfigureMethodFound(method);
+                    context.RegisterOperationBlockStartAction(
+                        context =>
+                        {
+                            if (context.OwningSymbol.Kind != SymbolKind.Method)
+                            {
+                                return;
+                            }
 
-                        middleware.AnalyzeConfigureMethod(context);
-                    }
-                });
+                            var method = (IMethodSymbol)context.OwningSymbol;
+                            if (StartupFacts.IsConfigureServices(symbols, method))
+                            {
+                                OnConfigureServicesMethodFound(method);
 
-                // Run after analyses have had a chance to finish to add diagnostics.
-                context.RegisterSymbolEndAction(context =>
-                {
-                    var analysis = builder.Build();
-                    new UseMvcAnalyzer(analysis).AnalyzeSymbol(context);
-                    new BuildServiceProviderAnalyzer(analysis).AnalyzeSymbol(context);
-                    new UseAuthorizationAnalyzer(analysis).AnalyzeSymbol(context);
-                });
+                                services.AnalyzeConfigureServices(context);
+                                options.AnalyzeConfigureServices(context);
+                            }
 
-            }, SymbolKind.NamedType);
+                            if (StartupFacts.IsConfigure(symbols, method))
+                            {
+                                OnConfigureMethodFound(method);
+
+                                middleware.AnalyzeConfigureMethod(context);
+                            }
+                        }
+                    );
+
+                    // Run after analyses have had a chance to finish to add diagnostics.
+                    context.RegisterSymbolEndAction(
+                        context =>
+                        {
+                            var analysis = builder.Build();
+                            new UseMvcAnalyzer(analysis).AnalyzeSymbol(context);
+                            new BuildServiceProviderAnalyzer(analysis).AnalyzeSymbol(context);
+                            new UseAuthorizationAnalyzer(analysis).AnalyzeSymbol(context);
+                        }
+                    );
+                },
+                SymbolKind.NamedType
+            );
         }
     }
 }

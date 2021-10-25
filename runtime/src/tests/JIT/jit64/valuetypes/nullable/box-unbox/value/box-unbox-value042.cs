@@ -9,12 +9,18 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ(ValueType o)
     {
-        return Helper.Compare((ImplementAllInterface<int>)o, Helper.Create(default(ImplementAllInterface<int>)));
+        return Helper.Compare(
+            (ImplementAllInterface<int>)o,
+            Helper.Create(default(ImplementAllInterface<int>))
+        );
     }
 
     private static bool BoxUnboxToQ(ValueType o)
     {
-        return Helper.Compare((ImplementAllInterface<int>?)o, Helper.Create(default(ImplementAllInterface<int>)));
+        return Helper.Compare(
+            (ImplementAllInterface<int>?)o,
+            Helper.Create(default(ImplementAllInterface<int>))
+        );
     }
 
     private static int Main()

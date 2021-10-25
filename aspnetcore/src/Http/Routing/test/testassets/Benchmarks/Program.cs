@@ -27,40 +27,43 @@ namespace Benchmarks
             // Consoler logger has a major impact on perf results, so do not use
             // default builder.
 
-            var hostBuilder = new HostBuilder()
-                    .ConfigureWebHost(webHostBuilder =>
-                    {
-                        webHostBuilder
-                            .UseKestrel()
-                            .UseTestServer()
-                            .UseConfiguration(config);
-                    });
+            var hostBuilder = new HostBuilder().ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseKestrel().UseTestServer().UseConfiguration(config);
+                }
+            );
 
             var scenario = config["scenarios"]?.ToLowerInvariant();
             if (scenario == "plaintextdispatcher" || scenario == "plaintextendpointrouting")
             {
-                hostBuilder.ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseStartup<StartupUsingEndpointRouting>()
-                        // for testing
-                        .UseSetting("Startup", nameof(StartupUsingEndpointRouting));
-                });
+                hostBuilder.ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseStartup<StartupUsingEndpointRouting>()
+                            // for testing
+                            .UseSetting("Startup", nameof(StartupUsingEndpointRouting));
+                    }
+                );
             }
             else if (scenario == "plaintextrouting" || scenario == "plaintextrouter")
             {
-                hostBuilder.ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseStartup<StartupUsingRouter>()
-                        // for testing
-                        .UseSetting("Startup", nameof(StartupUsingRouter));
-                });
+                hostBuilder.ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseStartup<StartupUsingRouter>()
+                            // for testing
+                            .UseSetting("Startup", nameof(StartupUsingRouter));
+                    }
+                );
             }
             else
             {
                 throw new InvalidOperationException(
-                    $"Invalid scenario '{scenario}'. Allowed scenarios are PlaintextEndpointRouting and PlaintextRouter");
+                    $"Invalid scenario '{scenario}'. Allowed scenarios are PlaintextEndpointRouting and PlaintextRouter"
+                );
             }
 
             return hostBuilder;

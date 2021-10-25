@@ -16,9 +16,13 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <typeparam name="TOptions">The options type to be configured.</typeparam>
         /// <param name="optionsBuilder">The options builder to add the services to.</param>
         /// <returns>The <see cref="OptionsBuilder{TOptions}"/> so that additional calls can be chained.</returns>
-        public static OptionsBuilder<TOptions> ValidateDataAnnotations<TOptions>(this OptionsBuilder<TOptions> optionsBuilder) where TOptions : class
+        public static OptionsBuilder<TOptions> ValidateDataAnnotations<TOptions>(
+            this OptionsBuilder<TOptions> optionsBuilder
+        ) where TOptions : class
         {
-            optionsBuilder.Services.AddSingleton<IValidateOptions<TOptions>>(new DataAnnotationValidateOptions<TOptions>(optionsBuilder.Name));
+            optionsBuilder.Services.AddSingleton<IValidateOptions<TOptions>>(
+                new DataAnnotationValidateOptions<TOptions>(optionsBuilder.Name)
+            );
             return optionsBuilder;
         }
     }

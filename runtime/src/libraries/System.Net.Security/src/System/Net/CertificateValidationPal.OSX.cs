@@ -15,7 +15,8 @@ namespace System.Net
             X509Certificate2? remoteCertificate,
             bool checkCertName,
             bool isServer,
-            string? hostName)
+            string? hostName
+        )
         {
             SslPolicyErrors errors = SslPolicyErrors.None;
 
@@ -34,12 +35,22 @@ namespace System.Net
                 {
                     SafeDeleteSslContext sslContext = (SafeDeleteSslContext)securityContext;
 
-                    if (!Interop.AppleCrypto.SslCheckHostnameMatch(sslContext.SslContext, hostName!, remoteCertificate.NotBefore, out int osStatus))
+                    if (
+                        !Interop.AppleCrypto.SslCheckHostnameMatch(
+                            sslContext.SslContext,
+                            hostName!,
+                            remoteCertificate.NotBefore,
+                            out int osStatus
+                        )
+                    )
                     {
                         errors |= SslPolicyErrors.RemoteCertificateNameMismatch;
 
                         if (NetEventSource.Log.IsEnabled())
-                            NetEventSource.Error(sslContext, $"Cert name validation for '{hostName}' failed with status '{osStatus}'");
+                            NetEventSource.Error(
+                                sslContext,
+                                $"Cert name validation for '{hostName}' failed with status '{osStatus}'"
+                            );
                     }
                 }
             }
@@ -57,7 +68,8 @@ namespace System.Net
 
         internal static X509Certificate2? GetRemoteCertificate(
             SafeDeleteContext? securityContext,
-            out X509Certificate2Collection? remoteCertificateStore)
+            out X509Certificate2Collection? remoteCertificateStore
+        )
         {
             if (securityContext == null)
             {
@@ -71,7 +83,8 @@ namespace System.Net
 
         private static X509Certificate2? GetRemoteCertificate(
             SafeDeleteContext securityContext,
-            X509Certificate2Collection? remoteCertificateStore)
+            X509Certificate2Collection? remoteCertificateStore
+        )
         {
             if (securityContext == null)
             {
@@ -87,7 +100,9 @@ namespace System.Net
 
             X509Certificate2? result = null;
 
-            using (SafeX509ChainHandle chainHandle = Interop.AppleCrypto.SslCopyCertChain(sslContext))
+            using (
+                SafeX509ChainHandle chainHandle = Interop.AppleCrypto.SslCopyCertChain(sslContext)
+            )
             {
                 long chainSize = Interop.AppleCrypto.X509ChainGetChainSize(chainHandle);
 
@@ -95,7 +110,10 @@ namespace System.Net
                 {
                     for (int i = 0; i < chainSize; i++)
                     {
-                        IntPtr certHandle = Interop.AppleCrypto.X509ChainGetCertificateAtIndex(chainHandle, i);
+                        IntPtr certHandle = Interop.AppleCrypto.X509ChainGetCertificateAtIndex(
+                            chainHandle,
+                            i
+                        );
                         remoteCertificateStore.Add(new X509Certificate2(certHandle));
                     }
                 }
@@ -104,12 +122,16 @@ namespace System.Net
                 // to match what the Windows and Unix PALs do.
                 if (chainSize > 0)
                 {
-                    IntPtr certHandle = Interop.AppleCrypto.X509ChainGetCertificateAtIndex(chainHandle, 0);
+                    IntPtr certHandle = Interop.AppleCrypto.X509ChainGetCertificateAtIndex(
+                        chainHandle,
+                        0
+                    );
                     result = new X509Certificate2(certHandle);
                 }
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Log.RemoteCertificate(result);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Log.RemoteCertificate(result);
 
             return result;
         }
@@ -126,7 +148,11 @@ namespace System.Net
                 return Array.Empty<string>();
             }
 
-            using (SafeCFArrayHandle dnArray = Interop.AppleCrypto.SslCopyCADistinguishedNames(sslContext))
+            using (
+                SafeCFArrayHandle dnArray = Interop.AppleCrypto.SslCopyCADistinguishedNames(
+                    sslContext
+                )
+            )
             {
                 long size = Interop.CoreFoundation.CFArrayGetCount(dnArray);
 
@@ -141,7 +167,9 @@ namespace System.Net
                 {
                     IntPtr element = Interop.CoreFoundation.CFArrayGetValueAtIndex(dnArray, i);
 
-                    using (SafeCFDataHandle cfData = new SafeCFDataHandle(element, ownsHandle: false))
+                    using (
+                        SafeCFDataHandle cfData = new SafeCFDataHandle(element, ownsHandle: false)
+                    )
                     {
                         byte[] dnData = Interop.CoreFoundation.CFGetData(cfData);
                         X500DistinguishedName dn = new X500DistinguishedName(dnData);

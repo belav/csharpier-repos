@@ -41,16 +41,20 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var actionName = nameof(MultipleFromBodyController.MultipleInferred);
             var expected =
-$@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly.GetName().Name})' " +
-"has more than one parameter that was specified or inferred as bound from request body. Only one parameter per action may be bound from body. Inspect the following parameters, and use 'FromQueryAttribute' to specify bound from query, 'FromRouteAttribute' to specify bound from route, and 'FromBodyAttribute' for parameters to be bound from body:" +
-Environment.NewLine + "TestModel a" +
-Environment.NewLine + "Car b";
+                $@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly.GetName().Name})' "
+                + "has more than one parameter that was specified or inferred as bound from request body. Only one parameter per action may be bound from body. Inspect the following parameters, and use 'FromQueryAttribute' to specify bound from query, 'FromRouteAttribute' to specify bound from route, and 'FromBodyAttribute' for parameters to be bound from body:"
+                + Environment.NewLine
+                + "TestModel a"
+                + Environment.NewLine
+                + "Car b";
 
             var convention = GetConvention();
             var action = GetActionModel(typeof(MultipleFromBodyController), actionName);
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => convention.InferParameterBindingSources(action));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => convention.InferParameterBindingSources(action)
+            );
             Assert.Equal(expected, ex.Message);
         }
 
@@ -60,16 +64,20 @@ Environment.NewLine + "Car b";
             // Arrange
             var actionName = nameof(MultipleFromBodyController.InferredAndSpecified);
             var expected =
-$@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly.GetName().Name})' " +
-"has more than one parameter that was specified or inferred as bound from request body. Only one parameter per action may be bound from body. Inspect the following parameters, and use 'FromQueryAttribute' to specify bound from query, 'FromRouteAttribute' to specify bound from route, and 'FromBodyAttribute' for parameters to be bound from body:" +
-Environment.NewLine + "TestModel a" +
-Environment.NewLine + "int b";
+                $@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly.GetName().Name})' "
+                + "has more than one parameter that was specified or inferred as bound from request body. Only one parameter per action may be bound from body. Inspect the following parameters, and use 'FromQueryAttribute' to specify bound from query, 'FromRouteAttribute' to specify bound from route, and 'FromBodyAttribute' for parameters to be bound from body:"
+                + Environment.NewLine
+                + "TestModel a"
+                + Environment.NewLine
+                + "int b";
 
             var convention = GetConvention();
             var action = GetActionModel(typeof(MultipleFromBodyController), actionName);
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => convention.InferParameterBindingSources(action));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => convention.InferParameterBindingSources(action)
+            );
             Assert.Equal(expected, ex.Message);
         }
 
@@ -79,16 +87,20 @@ Environment.NewLine + "int b";
             // Arrange
             var actionName = nameof(MultipleFromBodyController.MultipleSpecified);
             var expected =
-$@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly.GetName().Name})' " +
-"has more than one parameter that was specified or inferred as bound from request body. Only one parameter per action may be bound from body. Inspect the following parameters, and use 'FromQueryAttribute' to specify bound from query, 'FromRouteAttribute' to specify bound from route, and 'FromBodyAttribute' for parameters to be bound from body:" +
-Environment.NewLine + "decimal a" +
-Environment.NewLine + "int b";
+                $@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly.GetName().Name})' "
+                + "has more than one parameter that was specified or inferred as bound from request body. Only one parameter per action may be bound from body. Inspect the following parameters, and use 'FromQueryAttribute' to specify bound from query, 'FromRouteAttribute' to specify bound from route, and 'FromBodyAttribute' for parameters to be bound from body:"
+                + Environment.NewLine
+                + "decimal a"
+                + Environment.NewLine
+                + "int b";
 
             var convention = GetConvention();
             var action = GetActionModel(typeof(MultipleFromBodyController), actionName);
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => convention.InferParameterBindingSources(action));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => convention.InferParameterBindingSources(action)
+            );
             Assert.Equal(expected, ex.Message);
         }
 
@@ -96,10 +108,16 @@ Environment.NewLine + "int b";
         public void InferParameterBindingSources_InfersSources()
         {
             // Arrange
-            var actionName = nameof(ParameterBindingController.ComplexTypeModelWithCancellationToken);
+            var actionName = nameof(
+                ParameterBindingController.ComplexTypeModelWithCancellationToken
+            );
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var convention = GetConvention(modelMetadataProvider);
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.InferParameterBindingSources(action);
@@ -122,7 +140,8 @@ Environment.NewLine + "int b";
                     var bindingInfo = parameter.BindingInfo;
                     Assert.NotNull(bindingInfo);
                     Assert.Equal(BindingSource.Special, bindingInfo.BindingSource);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -130,9 +149,15 @@ Environment.NewLine + "int b";
         {
             // Arrange
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var actionName = nameof(ModelBinderOnParameterController.ModelBinderAttributeWithExplicitModelName);
+            var actionName = nameof(
+                ModelBinderOnParameterController.ModelBinderAttributeWithExplicitModelName
+            );
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ModelBinderOnParameterController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ModelBinderOnParameterController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -153,7 +178,11 @@ Environment.NewLine + "int b";
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var actionName = nameof(ModelBinderOnParameterController.ModelBinderType);
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ModelBinderOnParameterController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ModelBinderOnParameterController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -172,9 +201,15 @@ Environment.NewLine + "int b";
         {
             // Arrange
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var actionName = nameof(ModelBinderOnParameterController.ModelBinderTypeWithExplicitModelName);
+            var actionName = nameof(
+                ModelBinderOnParameterController.ModelBinderTypeWithExplicitModelName
+            );
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ModelBinderOnParameterController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ModelBinderOnParameterController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -358,7 +393,10 @@ Environment.NewLine + "int b";
         {
             // Arrange
             var actionName = nameof(ParameterBindingNoRoutesOnController.SimpleRoute);
-            var parameter = GetParameterModel(typeof(ParameterBindingNoRoutesOnController), actionName);
+            var parameter = GetParameterModel(
+                typeof(ParameterBindingNoRoutesOnController),
+                actionName
+            );
             var convention = GetConvention();
 
             // Act
@@ -373,7 +411,10 @@ Environment.NewLine + "int b";
         {
             // Arrange
             var actionName = nameof(ParameterBindingNoRoutesOnController.ParameterInMultipleRoutes);
-            var parameter = GetParameterModel(typeof(ParameterBindingNoRoutesOnController), actionName);
+            var parameter = GetParameterModel(
+                typeof(ParameterBindingNoRoutesOnController),
+                actionName
+            );
             var convention = GetConvention();
 
             // Act
@@ -388,7 +429,10 @@ Environment.NewLine + "int b";
         {
             // Arrange
             var actionName = nameof(ParameterBindingNoRoutesOnController.NoRouteTemplate);
-            var parameter = GetParameterModel(typeof(ParameterBindingNoRoutesOnController), actionName);
+            var parameter = GetParameterModel(
+                typeof(ParameterBindingNoRoutesOnController),
+                actionName
+            );
             var convention = GetConvention();
 
             // Act
@@ -417,13 +461,18 @@ Environment.NewLine + "int b";
         public void InferParameterBindingSources_SetsCorrectBindingSourceForComplexTypesWithCancellationToken()
         {
             // Arrange
-            var actionName = nameof(ParameterBindingController.ComplexTypeModelWithCancellationToken);
+            var actionName = nameof(
+                ParameterBindingController.ComplexTypeModelWithCancellationToken
+            );
 
             // Use the default set of ModelMetadataProviders so we get metadata details for CancellationToken.
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var context = GetContext(typeof(ParameterBindingController), modelMetadataProvider);
             var controllerModel = Assert.Single(context.Result.Controllers);
-            var actionModel = Assert.Single(controllerModel.Actions, m => m.ActionName == actionName);
+            var actionModel = Assert.Single(
+                controllerModel.Actions,
+                m => m.ActionName == actionName
+            );
 
             var convention = GetConvention();
 
@@ -490,7 +539,11 @@ Environment.NewLine + "int b";
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var actionName = nameof(ParameterBindingController.FromQuery);
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -511,7 +564,11 @@ Environment.NewLine + "int b";
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var actionName = nameof(ParameterBindingController.FromQueryWithCustomName);
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -532,7 +589,11 @@ Environment.NewLine + "int b";
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var actionName = nameof(ParameterBindingController.FromQueryOnComplexType);
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -550,9 +611,15 @@ Environment.NewLine + "int b";
         {
             // Arrange
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var actionName = nameof(ParameterBindingController.FromQueryOnComplexTypeWithCustomName);
+            var actionName = nameof(
+                ParameterBindingController.FromQueryOnComplexTypeWithCustomName
+            );
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -573,7 +640,11 @@ Environment.NewLine + "int b";
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var actionName = nameof(ParameterBindingController.FromQueryOnCollectionType);
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -594,7 +665,11 @@ Environment.NewLine + "int b";
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var actionName = nameof(ParameterBindingController.FromQueryOnArrayType);
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -615,7 +690,11 @@ Environment.NewLine + "int b";
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var actionName = nameof(ParameterBindingController.FromQueryOnArrayTypeWithCustomName);
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -636,7 +715,11 @@ Environment.NewLine + "int b";
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var actionName = nameof(ParameterBindingController.FromRoute);
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -657,7 +740,11 @@ Environment.NewLine + "int b";
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var actionName = nameof(ParameterBindingController.FromRouteWithCustomName);
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -678,7 +765,11 @@ Environment.NewLine + "int b";
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var actionName = nameof(ParameterBindingController.FromRouteOnComplexType);
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -696,9 +787,15 @@ Environment.NewLine + "int b";
         {
             // Arrange
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var actionName = nameof(ParameterBindingController.FromRouteOnComplexTypeWithCustomName);
+            var actionName = nameof(
+                ParameterBindingController.FromRouteOnComplexTypeWithCustomName
+            );
             var convention = GetConvention();
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
 
             // Act
             convention.Apply(action);
@@ -716,11 +813,19 @@ Environment.NewLine + "int b";
         public void PreservesBindingSourceInference_ForParameterWithRequestPredicateAndPropertyFilterProvider()
         {
             // Arrange
-            var expectedPredicate = CustomRequestPredicateAndPropertyFilterProviderAttribute.RequestPredicateStatic;
-            var expectedPropertyFilter = CustomRequestPredicateAndPropertyFilterProviderAttribute.PropertyFilterStatic;
+            var expectedPredicate =
+                CustomRequestPredicateAndPropertyFilterProviderAttribute.RequestPredicateStatic;
+            var expectedPropertyFilter =
+                CustomRequestPredicateAndPropertyFilterProviderAttribute.PropertyFilterStatic;
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var actionName = nameof(ParameterBindingController.ParameterWithRequestPredicateProvider);
-            var action = GetActionModel(typeof(ParameterBindingController), actionName, modelMetadataProvider);
+            var actionName = nameof(
+                ParameterBindingController.ParameterWithRequestPredicateProvider
+            );
+            var action = GetActionModel(
+                typeof(ParameterBindingController),
+                actionName,
+                modelMetadataProvider
+            );
             var convention = GetConvention();
 
             // Act
@@ -738,7 +843,8 @@ Environment.NewLine + "int b";
         }
 
         private static InferParameterBindingInfoConvention GetConvention(
-            IModelMetadataProvider modelMetadataProvider = null)
+            IModelMetadataProvider modelMetadataProvider = null
+        )
         {
             modelMetadataProvider = modelMetadataProvider ?? new EmptyModelMetadataProvider();
             return new InferParameterBindingInfoConvention(modelMetadataProvider);
@@ -746,7 +852,8 @@ Environment.NewLine + "int b";
 
         private static ApplicationModelProviderContext GetContext(
             Type type,
-            IModelMetadataProvider modelMetadataProvider = null)
+            IModelMetadataProvider modelMetadataProvider = null
+        )
         {
             var context = new ApplicationModelProviderContext(new[] { type.GetTypeInfo() });
             var mvcOptions = Options.Create(new MvcOptions());
@@ -760,7 +867,8 @@ Environment.NewLine + "int b";
         private static ActionModel GetActionModel(
             Type controllerType,
             string actionName,
-            IModelMetadataProvider modelMetadataProvider = null)
+            IModelMetadataProvider modelMetadataProvider = null
+        )
         {
             var context = GetContext(controllerType, modelMetadataProvider);
             var controller = Assert.Single(context.Result.Controllers);
@@ -775,7 +883,9 @@ Environment.NewLine + "int b";
 
         private static ParameterModel GetParameterModel<T>(ActionModel action)
         {
-            return Assert.Single(action.Parameters.Where(x => typeof(T).IsAssignableFrom(x.ParameterType)));
+            return Assert.Single(
+                action.Parameters.Where(x => typeof(T).IsAssignableFrom(x.ParameterType))
+            );
         }
 
         [ApiController]
@@ -829,50 +939,77 @@ Environment.NewLine + "int b";
             public IActionResult ActionWithConsumesAttribute([FromForm] string parameter) => null;
 
             [HttpPut("cancellation")]
-            public IActionResult ComplexTypeModelWithCancellationToken(TestModel model, CancellationToken cancellationToken) => null;
+            public IActionResult ComplexTypeModelWithCancellationToken(
+                TestModel model,
+                CancellationToken cancellationToken
+            ) => null;
 
             [HttpGet("parameter-with-model-binder-attribute")]
-            public IActionResult ModelBinderAttribute([ModelBinder(Name = "top")] int value) => null;
+            public IActionResult ModelBinderAttribute([ModelBinder(Name = "top")] int value) =>
+                null;
 
             [HttpGet("parameter-with-fromquery")]
             public IActionResult FromQuery([FromQuery] int value) => null;
 
             [HttpGet("parameter-with-fromquery-and-customname")]
-            public IActionResult FromQueryWithCustomName([FromQuery(Name = "top")] int value) => null;
+            public IActionResult FromQueryWithCustomName([FromQuery(Name = "top")] int value) =>
+                null;
 
             [HttpGet("parameter-with-fromquery-on-complextype")]
-            public IActionResult FromQueryOnComplexType([FromQuery] GpsCoordinates gpsCoordinates) => null;
+            public IActionResult FromQueryOnComplexType(
+                [FromQuery] GpsCoordinates gpsCoordinates
+            ) => null;
 
             [HttpGet("parameter-with-fromquery-on-complextype-and-customname")]
-            public IActionResult FromQueryOnComplexTypeWithCustomName([FromQuery(Name = "gps")] GpsCoordinates gpsCoordinates) => null;
+            public IActionResult FromQueryOnComplexTypeWithCustomName(
+                [FromQuery(Name = "gps")] GpsCoordinates gpsCoordinates
+            ) => null;
 
             [HttpGet("parameter-with-fromquery-on-collection-type")]
-            public IActionResult FromQueryOnCollectionType([FromQuery] ICollection<int> value) => null;
+            public IActionResult FromQueryOnCollectionType([FromQuery] ICollection<int> value) =>
+                null;
 
             [HttpGet("parameter-with-fromquery-on-array-type")]
             public IActionResult FromQueryOnArrayType([FromQuery] int[] value) => null;
 
             [HttpGet("parameter-with-fromquery-on-array-type-customname")]
-            public IActionResult FromQueryOnArrayTypeWithCustomName([FromQuery(Name = "ids")] int[] value) => null;
+            public IActionResult FromQueryOnArrayTypeWithCustomName(
+                [FromQuery(Name = "ids")] int[] value
+            ) => null;
 
             [HttpGet("parameter-with-fromroute")]
             public IActionResult FromRoute([FromRoute] int value) => null;
 
             [HttpGet("parameter-with-fromroute-and-customname")]
-            public IActionResult FromRouteWithCustomName([FromRoute(Name = "top")] int value) => null;
+            public IActionResult FromRouteWithCustomName([FromRoute(Name = "top")] int value) =>
+                null;
 
             [HttpGet("parameter-with-fromroute-on-complextype")]
-            public IActionResult FromRouteOnComplexType([FromRoute] GpsCoordinates gpsCoordinates) => null;
+            public IActionResult FromRouteOnComplexType(
+                [FromRoute] GpsCoordinates gpsCoordinates
+            ) => null;
 
             [HttpGet("parameter-with-fromroute-on-complextype-and-customname")]
-            public IActionResult FromRouteOnComplexTypeWithCustomName([FromRoute(Name = "gps")] GpsCoordinates gpsCoordinates) => null;
+            public IActionResult FromRouteOnComplexTypeWithCustomName(
+                [FromRoute(Name = "gps")] GpsCoordinates gpsCoordinates
+            ) => null;
 
             [HttpGet]
-            public IActionResult ParameterWithRequestPredicateProvider([CustomRequestPredicateAndPropertyFilterProvider] int value) => null;
+            public IActionResult ParameterWithRequestPredicateProvider(
+                [CustomRequestPredicateAndPropertyFilterProvider] int value
+            ) => null;
 
-            public IActionResult FromFormFormFileParameters([FromForm] IFormFile p1, [FromForm] IFormFile[] p2, [FromForm] IFormFileCollection p3) => null;
+            public IActionResult FromFormFormFileParameters(
+                [FromForm] IFormFile p1,
+                [FromForm] IFormFile[] p2,
+                [FromForm] IFormFileCollection p3
+            ) => null;
 
-            public IActionResult FormFileParameters(IFormFile p1, IFormFile[] p2, IFormFileCollection p3) => null;
+            public IActionResult FormFileParameters(
+                IFormFile p1,
+                IFormFile[] p2,
+                IFormFileCollection p3
+            ) => null;
 
             public IActionResult CollectionOfSimpleTypes(IList<int> parameter) => null;
 
@@ -884,13 +1021,19 @@ Environment.NewLine + "int b";
         private class ModelBinderOnParameterController
         {
             [HttpGet]
-            public IActionResult ModelBinderAttributeWithExplicitModelName([ModelBinder(Name = "top")] int value) => null;
+            public IActionResult ModelBinderAttributeWithExplicitModelName(
+                [ModelBinder(Name = "top")] int value
+            ) => null;
 
             [HttpGet]
-            public IActionResult ModelBinderType([ModelBinder(typeof(TestModelBinder))] string name) => null;
+            public IActionResult ModelBinderType(
+                [ModelBinder(typeof(TestModelBinder))] string name
+            ) => null;
 
             [HttpGet]
-            public IActionResult ModelBinderTypeWithExplicitModelName([ModelBinder(typeof(TestModelBinder), Name = "foo")] string name) => null;
+            public IActionResult ModelBinderTypeWithExplicitModelName(
+                [ModelBinder(typeof(TestModelBinder), Name = "foo")] string name
+            ) => null;
         }
 
         [ApiController]
@@ -937,11 +1080,14 @@ Environment.NewLine + "int b";
 
         private class ConvertibleFromStringConverter : TypeConverter
         {
-            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
-                => sourceType == typeof(string);
+            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) =>
+                sourceType == typeof(string);
         }
 
-        private class CustomRequestPredicateAndPropertyFilterProviderAttribute : Attribute, IRequestPredicateProvider, IPropertyFilterProvider
+        private class CustomRequestPredicateAndPropertyFilterProviderAttribute
+            : Attribute,
+              IRequestPredicateProvider,
+              IPropertyFilterProvider
         {
             public static Func<ActionContext, bool> RequestPredicateStatic => (c) => true;
             public static Func<ModelMetadata, bool> PropertyFilterStatic => (c) => true;
@@ -998,7 +1144,8 @@ Environment.NewLine + "int b";
         private class ParameterWithBindingInfo
         {
             [HttpGet("test")]
-            public IActionResult Action([ModelBinder(typeof(ComplexObjectModelBinder))] Car car) => null;
+            public IActionResult Action([ModelBinder(typeof(ComplexObjectModelBinder))] Car car) =>
+                null;
         }
     }
 }

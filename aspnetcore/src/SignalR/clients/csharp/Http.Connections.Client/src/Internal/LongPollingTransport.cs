@@ -31,21 +31,28 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
         public PipeWriter Output => _transport!.Output;
 
-        public LongPollingTransport(HttpClient httpClient)
-            : this(httpClient, null)
-        { }
+        public LongPollingTransport(HttpClient httpClient) : this(httpClient, null) { }
 
         public LongPollingTransport(HttpClient httpClient, ILoggerFactory? loggerFactory)
         {
             _httpClient = httpClient;
-            _logger = (loggerFactory ?? NullLoggerFactory.Instance).CreateLogger<LongPollingTransport>();
+            _logger = (
+                loggerFactory ?? NullLoggerFactory.Instance
+            ).CreateLogger<LongPollingTransport>();
         }
 
-        public async Task StartAsync(Uri url, TransferFormat transferFormat, CancellationToken cancellationToken = default)
+        public async Task StartAsync(
+            Uri url,
+            TransferFormat transferFormat,
+            CancellationToken cancellationToken = default
+        )
         {
             if (transferFormat != TransferFormat.Binary && transferFormat != TransferFormat.Text)
             {
-                throw new ArgumentException($"The '{transferFormat}' transfer format is not supported by this transport.", nameof(transferFormat));
+                throw new ArgumentException(
+                    $"The '{transferFormat}' transfer format is not supported by this transport.",
+                    nameof(transferFormat)
+                );
             }
 
             Log.StartTransport(_logger, transferFormat);
@@ -166,7 +173,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                         // just want to start a new poll.
                         continue;
                     }
-                    catch (WebException ex) when (!OperatingSystem.IsBrowser() && ex.Status == WebExceptionStatus.RequestCanceled)
+                    catch (WebException ex)
+                        when (!OperatingSystem.IsBrowser()
+                            && ex.Status == WebExceptionStatus.RequestCanceled
+                        )
                     {
                         // SendAsync on .NET Framework doesn't reliably throw OperationCanceledException.
                         // Catch the WebException and test it.
@@ -178,10 +188,12 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
                     response.EnsureSuccessStatusCode();
 
-                    if (response.StatusCode == HttpStatusCode.NoContent || cancellationToken.IsCancellationRequested)
+                    if (
+                        response.StatusCode == HttpStatusCode.NoContent
+                        || cancellationToken.IsCancellationRequested
+                    )
                     {
                         Log.ClosingConnection(_logger);
-
                         // Transport closed or polling stopped, we're done
                         break;
                     }

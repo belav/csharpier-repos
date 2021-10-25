@@ -55,13 +55,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(ModuleDefinitionHandle left, ModuleDefinitionHandle right)
         {
@@ -138,22 +138,26 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
-        public static bool operator ==(AssemblyDefinitionHandle left, AssemblyDefinitionHandle right)
+        public static bool operator ==(
+            AssemblyDefinitionHandle left,
+            AssemblyDefinitionHandle right
+        )
         {
             return left._rowId == right._rowId;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is AssemblyDefinitionHandle && ((AssemblyDefinitionHandle)obj)._rowId == _rowId;
+            return obj is AssemblyDefinitionHandle
+                && ((AssemblyDefinitionHandle)obj)._rowId == _rowId;
         }
 
         public bool Equals(AssemblyDefinitionHandle other)
@@ -166,7 +170,10 @@ namespace System.Reflection.Metadata
             return _rowId.GetHashCode();
         }
 
-        public static bool operator !=(AssemblyDefinitionHandle left, AssemblyDefinitionHandle right)
+        public static bool operator !=(
+            AssemblyDefinitionHandle left,
+            AssemblyDefinitionHandle right
+        )
         {
             return left._rowId != right._rowId;
         }
@@ -221,22 +228,26 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
-        public static bool operator ==(InterfaceImplementationHandle left, InterfaceImplementationHandle right)
+        public static bool operator ==(
+            InterfaceImplementationHandle left,
+            InterfaceImplementationHandle right
+        )
         {
             return left._rowId == right._rowId;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is InterfaceImplementationHandle && ((InterfaceImplementationHandle)obj)._rowId == _rowId;
+            return obj is InterfaceImplementationHandle
+                && ((InterfaceImplementationHandle)obj)._rowId == _rowId;
         }
 
         public bool Equals(InterfaceImplementationHandle other)
@@ -249,7 +260,10 @@ namespace System.Reflection.Metadata
             return _rowId.GetHashCode();
         }
 
-        public static bool operator !=(InterfaceImplementationHandle left, InterfaceImplementationHandle right)
+        public static bool operator !=(
+            InterfaceImplementationHandle left,
+            InterfaceImplementationHandle right
+        )
         {
             return left._rowId != right._rowId;
         }
@@ -304,13 +318,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(MethodDefinitionHandle left, MethodDefinitionHandle right)
         {
@@ -399,22 +413,26 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
-        public static bool operator ==(MethodImplementationHandle left, MethodImplementationHandle right)
+        public static bool operator ==(
+            MethodImplementationHandle left,
+            MethodImplementationHandle right
+        )
         {
             return left._rowId == right._rowId;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is MethodImplementationHandle && ((MethodImplementationHandle)obj)._rowId == _rowId;
+            return obj is MethodImplementationHandle
+                && ((MethodImplementationHandle)obj)._rowId == _rowId;
         }
 
         public bool Equals(MethodImplementationHandle other)
@@ -427,7 +445,10 @@ namespace System.Reflection.Metadata
             return _rowId.GetHashCode();
         }
 
-        public static bool operator !=(MethodImplementationHandle left, MethodImplementationHandle right)
+        public static bool operator !=(
+            MethodImplementationHandle left,
+            MethodImplementationHandle right
+        )
         {
             return left._rowId != right._rowId;
         }
@@ -482,22 +503,26 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
-        public static bool operator ==(MethodSpecificationHandle left, MethodSpecificationHandle right)
+        public static bool operator ==(
+            MethodSpecificationHandle left,
+            MethodSpecificationHandle right
+        )
         {
             return left._rowId == right._rowId;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is MethodSpecificationHandle && ((MethodSpecificationHandle)obj)._rowId == _rowId;
+            return obj is MethodSpecificationHandle
+                && ((MethodSpecificationHandle)obj)._rowId == _rowId;
         }
 
         public bool Equals(MethodSpecificationHandle other)
@@ -510,7 +535,10 @@ namespace System.Reflection.Metadata
             return _rowId.GetHashCode();
         }
 
-        public static bool operator !=(MethodSpecificationHandle left, MethodSpecificationHandle right)
+        public static bool operator !=(
+            MethodSpecificationHandle left,
+            MethodSpecificationHandle right
+        )
         {
             return left._rowId != right._rowId;
         }
@@ -565,13 +593,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(TypeDefinitionHandle left, TypeDefinitionHandle right)
         {
@@ -648,13 +676,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(ExportedTypeHandle left, ExportedTypeHandle right)
         {
@@ -731,13 +759,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(TypeReferenceHandle left, TypeReferenceHandle right)
         {
@@ -814,13 +842,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(TypeSpecificationHandle left, TypeSpecificationHandle right)
         {
@@ -829,7 +857,8 @@ namespace System.Reflection.Metadata
 
         public override bool Equals(object? obj)
         {
-            return obj is TypeSpecificationHandle && ((TypeSpecificationHandle)obj)._rowId == _rowId;
+            return obj is TypeSpecificationHandle
+                && ((TypeSpecificationHandle)obj)._rowId == _rowId;
         }
 
         public bool Equals(TypeSpecificationHandle other)
@@ -897,13 +926,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(MemberReferenceHandle left, MemberReferenceHandle right)
         {
@@ -980,13 +1009,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(FieldDefinitionHandle left, FieldDefinitionHandle right)
         {
@@ -1063,13 +1092,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(EventDefinitionHandle left, EventDefinitionHandle right)
         {
@@ -1146,22 +1175,26 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
-        public static bool operator ==(PropertyDefinitionHandle left, PropertyDefinitionHandle right)
+        public static bool operator ==(
+            PropertyDefinitionHandle left,
+            PropertyDefinitionHandle right
+        )
         {
             return left._rowId == right._rowId;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is PropertyDefinitionHandle && ((PropertyDefinitionHandle)obj)._rowId == _rowId;
+            return obj is PropertyDefinitionHandle
+                && ((PropertyDefinitionHandle)obj)._rowId == _rowId;
         }
 
         public bool Equals(PropertyDefinitionHandle other)
@@ -1174,7 +1207,10 @@ namespace System.Reflection.Metadata
             return _rowId.GetHashCode();
         }
 
-        public static bool operator !=(PropertyDefinitionHandle left, PropertyDefinitionHandle right)
+        public static bool operator !=(
+            PropertyDefinitionHandle left,
+            PropertyDefinitionHandle right
+        )
         {
             return left._rowId != right._rowId;
         }
@@ -1229,22 +1265,26 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
-        public static bool operator ==(StandaloneSignatureHandle left, StandaloneSignatureHandle right)
+        public static bool operator ==(
+            StandaloneSignatureHandle left,
+            StandaloneSignatureHandle right
+        )
         {
             return left._rowId == right._rowId;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is StandaloneSignatureHandle && ((StandaloneSignatureHandle)obj)._rowId == _rowId;
+            return obj is StandaloneSignatureHandle
+                && ((StandaloneSignatureHandle)obj)._rowId == _rowId;
         }
 
         public bool Equals(StandaloneSignatureHandle other)
@@ -1257,7 +1297,10 @@ namespace System.Reflection.Metadata
             return _rowId.GetHashCode();
         }
 
-        public static bool operator !=(StandaloneSignatureHandle left, StandaloneSignatureHandle right)
+        public static bool operator !=(
+            StandaloneSignatureHandle left,
+            StandaloneSignatureHandle right
+        )
         {
             return left._rowId != right._rowId;
         }
@@ -1312,13 +1355,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(ParameterHandle left, ParameterHandle right)
         {
@@ -1395,13 +1438,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(GenericParameterHandle left, GenericParameterHandle right)
         {
@@ -1429,7 +1472,8 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly struct GenericParameterConstraintHandle : IEquatable<GenericParameterConstraintHandle>
+    public readonly struct GenericParameterConstraintHandle
+        : IEquatable<GenericParameterConstraintHandle>
     {
         private const uint tokenType = TokenTypeIds.GenericParamConstraint;
         private const byte tokenTypeSmall = (byte)HandleType.GenericParamConstraint;
@@ -1478,22 +1522,26 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
-        public static bool operator ==(GenericParameterConstraintHandle left, GenericParameterConstraintHandle right)
+        public static bool operator ==(
+            GenericParameterConstraintHandle left,
+            GenericParameterConstraintHandle right
+        )
         {
             return left._rowId == right._rowId;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is GenericParameterConstraintHandle && ((GenericParameterConstraintHandle)obj)._rowId == _rowId;
+            return obj is GenericParameterConstraintHandle
+                && ((GenericParameterConstraintHandle)obj)._rowId == _rowId;
         }
 
         public bool Equals(GenericParameterConstraintHandle other)
@@ -1506,7 +1554,10 @@ namespace System.Reflection.Metadata
             return _rowId.GetHashCode();
         }
 
-        public static bool operator !=(GenericParameterConstraintHandle left, GenericParameterConstraintHandle right)
+        public static bool operator !=(
+            GenericParameterConstraintHandle left,
+            GenericParameterConstraintHandle right
+        )
         {
             return left._rowId != right._rowId;
         }
@@ -1561,13 +1612,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(ModuleReferenceHandle left, ModuleReferenceHandle right)
         {
@@ -1614,7 +1665,6 @@ namespace System.Reflection.Metadata
             System_Runtime_WindowsRuntime,
             System_Runtime_WindowsRuntime_UI_Xaml,
             System_Numerics_Vectors,
-
             Count
         }
 
@@ -1685,7 +1735,10 @@ namespace System.Reflection.Metadata
             get { return (_value & TokenTypeIds.VirtualBit) != 0; }
         }
 
-        internal int RowId { get { return (int)(_value & TokenTypeIds.RIDMask); } }
+        internal int RowId
+        {
+            get { return (int)(_value & TokenTypeIds.RIDMask); }
+        }
 
         public static bool operator ==(AssemblyReferenceHandle left, AssemblyReferenceHandle right)
         {
@@ -1694,7 +1747,8 @@ namespace System.Reflection.Metadata
 
         public override bool Equals(object? obj)
         {
-            return obj is AssemblyReferenceHandle && ((AssemblyReferenceHandle)obj)._value == _value;
+            return obj is AssemblyReferenceHandle
+                && ((AssemblyReferenceHandle)obj)._value == _value;
         }
 
         public bool Equals(AssemblyReferenceHandle other)
@@ -1762,13 +1816,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return _rowId == 0;
-            }
+            get { return _rowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(CustomAttributeHandle left, CustomAttributeHandle right)
         {
@@ -1796,7 +1850,8 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly struct DeclarativeSecurityAttributeHandle : IEquatable<DeclarativeSecurityAttributeHandle>
+    public readonly struct DeclarativeSecurityAttributeHandle
+        : IEquatable<DeclarativeSecurityAttributeHandle>
     {
         private const uint tokenType = TokenTypeIds.DeclSecurity;
         private const byte tokenTypeSmall = (byte)HandleType.DeclSecurity;
@@ -1845,22 +1900,26 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return _rowId == 0;
-            }
+            get { return _rowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
-        public static bool operator ==(DeclarativeSecurityAttributeHandle left, DeclarativeSecurityAttributeHandle right)
+        public static bool operator ==(
+            DeclarativeSecurityAttributeHandle left,
+            DeclarativeSecurityAttributeHandle right
+        )
         {
             return left._rowId == right._rowId;
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is DeclarativeSecurityAttributeHandle && ((DeclarativeSecurityAttributeHandle)obj)._rowId == _rowId;
+            return obj is DeclarativeSecurityAttributeHandle
+                && ((DeclarativeSecurityAttributeHandle)obj)._rowId == _rowId;
         }
 
         public bool Equals(DeclarativeSecurityAttributeHandle other)
@@ -1873,7 +1932,10 @@ namespace System.Reflection.Metadata
             return _rowId.GetHashCode();
         }
 
-        public static bool operator !=(DeclarativeSecurityAttributeHandle left, DeclarativeSecurityAttributeHandle right)
+        public static bool operator !=(
+            DeclarativeSecurityAttributeHandle left,
+            DeclarativeSecurityAttributeHandle right
+        )
         {
             return left._rowId != right._rowId;
         }
@@ -1928,13 +1990,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(ConstantHandle left, ConstantHandle right)
         {
@@ -2011,13 +2073,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(ManifestResourceHandle left, ManifestResourceHandle right)
         {
@@ -2094,13 +2156,13 @@ namespace System.Reflection.Metadata
 
         public bool IsNil
         {
-            get
-            {
-                return RowId == 0;
-            }
+            get { return RowId == 0; }
         }
 
-        internal int RowId { get { return _rowId; } }
+        internal int RowId
+        {
+            get { return _rowId; }
+        }
 
         public static bool operator ==(AssemblyFileHandle left, AssemblyFileHandle right)
         {
@@ -2222,9 +2284,7 @@ namespace System.Reflection.Metadata
             System_Runtime_WindowsRuntime_UI_Xaml,
             System_Runtime_InteropServices_WindowsRuntime,
             System_Numerics_Vectors,
-
             Dispose,
-
             AttributeTargets,
             AttributeUsageAttribute,
             Color,
@@ -2289,16 +2349,17 @@ namespace System.Reflection.Metadata
             Windows_UI_Xaml_Media,
             Windows_UI_Xaml_Media_Animation,
             Windows_UI_Xaml_Media_Media3D,
-
             Count
         }
 
         private StringHandle(uint value)
         {
-            Debug.Assert((value & StringHandleType.TypeMask) == StringHandleType.String ||
-                         (value & StringHandleType.TypeMask) == StringHandleType.VirtualString ||
-                         (value & StringHandleType.TypeMask) == StringHandleType.WinRTPrefixedString ||
-                         (value & StringHandleType.TypeMask) == StringHandleType.DotTerminatedString);
+            Debug.Assert(
+                (value & StringHandleType.TypeMask) == StringHandleType.String
+                    || (value & StringHandleType.TypeMask) == StringHandleType.VirtualString
+                    || (value & StringHandleType.TypeMask) == StringHandleType.WinRTPrefixedString
+                    || (value & StringHandleType.TypeMask) == StringHandleType.DotTerminatedString
+            );
 
             _value = value;
         }
@@ -2342,22 +2403,33 @@ namespace System.Reflection.Metadata
         {
             // VTTx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx -> V111 10TT
             return new Handle(
-                (byte)((handle._value & HeapHandleType.VirtualBit) >> 24 | HandleType.String | (handle._value & StringHandleType.NonVirtualTypeMask) >> HeapHandleType.OffsetBitCount),
-                (int)(handle._value & HeapHandleType.OffsetMask));
+                (byte)(
+                    (handle._value & HeapHandleType.VirtualBit) >> 24
+                    | HandleType.String
+                    | (handle._value & StringHandleType.NonVirtualTypeMask)
+                        >> HeapHandleType.OffsetBitCount
+                ),
+                (int)(handle._value & HeapHandleType.OffsetMask)
+            );
         }
 
         public static explicit operator StringHandle(Handle handle)
         {
-            if ((handle.VType & ~(HandleType.VirtualBit | HandleType.NonVirtualStringTypeMask)) != HandleType.String)
+            if (
+                (handle.VType & ~(HandleType.VirtualBit | HandleType.NonVirtualStringTypeMask))
+                != HandleType.String
+            )
             {
                 Throw.InvalidCast();
             }
 
             // V111 10TT -> VTTx xxxx xxxx xxxx  xxxx xxxx xxxx xxxx
             return new StringHandle(
-                (handle.VType & HandleType.VirtualBit) << 24 |
-                (handle.VType & HandleType.NonVirtualStringTypeMask) << HeapHandleType.OffsetBitCount |
-                (uint)handle.Offset);
+                (handle.VType & HandleType.VirtualBit) << 24
+                    | (handle.VType & HandleType.NonVirtualStringTypeMask)
+                        << HeapHandleType.OffsetBitCount
+                    | (uint)handle.Offset
+            );
         }
 
         internal uint RawValue => _value;
@@ -2473,7 +2545,8 @@ namespace System.Reflection.Metadata
         {
             return new Handle(
                 (byte)((handle._value & HeapHandleType.VirtualBit) >> 24 | HandleType.Namespace),
-                (int)(handle._value & HeapHandleType.OffsetMask));
+                (int)(handle._value & HeapHandleType.OffsetMask)
+            );
         }
 
         public static explicit operator NamespaceDefinitionHandle(Handle handle)
@@ -2484,16 +2557,14 @@ namespace System.Reflection.Metadata
             }
 
             return new NamespaceDefinitionHandle(
-                (handle.VType & HandleType.VirtualBit) << TokenTypeIds.RowIdBitCount |
-                (uint)handle.Offset);
+                (handle.VType & HandleType.VirtualBit) << TokenTypeIds.RowIdBitCount
+                    | (uint)handle.Offset
+            );
         }
 
         public bool IsNil
         {
-            get
-            {
-                return _value == 0;
-            }
+            get { return _value == 0; }
         }
 
         internal bool IsVirtual
@@ -2533,12 +2604,18 @@ namespace System.Reflection.Metadata
             return unchecked((int)_value);
         }
 
-        public static bool operator ==(NamespaceDefinitionHandle left, NamespaceDefinitionHandle right)
+        public static bool operator ==(
+            NamespaceDefinitionHandle left,
+            NamespaceDefinitionHandle right
+        )
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(NamespaceDefinitionHandle left, NamespaceDefinitionHandle right)
+        public static bool operator !=(
+            NamespaceDefinitionHandle left,
+            NamespaceDefinitionHandle right
+        )
         {
             return !left.Equals(right);
         }
@@ -2556,19 +2633,14 @@ namespace System.Reflection.Metadata
         internal enum VirtualIndex : byte
         {
             Nil,
-
             // B0 3F 5F 7F 11 D5 0A 3A
             ContractPublicKeyToken,
-
             // 00, 24, 00, 00, 04, ...
             ContractPublicKey,
-
             // Template for projected AttributeUsage attribute blob
             AttributeUsage_AllowSingle,
-
             // Template for projected AttributeUsage attribute blob with AllowMultiple=true
             AttributeUsage_AllowMultiple,
-
             Count
         }
 
@@ -2585,7 +2657,9 @@ namespace System.Reflection.Metadata
         internal static BlobHandle FromVirtualIndex(VirtualIndex virtualIndex, ushort virtualValue)
         {
             Debug.Assert(virtualIndex < VirtualIndex.Count);
-            return new BlobHandle(TokenTypeIds.VirtualBit | (uint)(virtualValue << 8) | (uint)virtualIndex);
+            return new BlobHandle(
+                TokenTypeIds.VirtualBit | (uint)(virtualValue << 8) | (uint)virtualIndex
+            );
         }
 
         internal const int TemplateParameterOffset_AttributeUsageTarget = 2;
@@ -2605,7 +2679,8 @@ namespace System.Reflection.Metadata
             // V... -> V111 0001
             return new Handle(
                 (byte)((handle._value & HeapHandleType.VirtualBit) >> 24 | HandleType.Blob),
-                (int)(handle._value & HeapHandleType.OffsetMask));
+                (int)(handle._value & HeapHandleType.OffsetMask)
+            );
         }
 
         public static explicit operator BlobHandle(Handle handle)
@@ -2616,8 +2691,9 @@ namespace System.Reflection.Metadata
             }
 
             return new BlobHandle(
-                (handle.VType & HandleType.VirtualBit) << TokenTypeIds.RowIdBitCount |
-                (uint)handle.Offset);
+                (handle.VType & HandleType.VirtualBit) << TokenTypeIds.RowIdBitCount
+                    | (uint)handle.Offset
+            );
         }
 
         internal uint RawValue => _value;

@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ProjectContext
         public async Task SingleDocumentReturnsSingleContext()
         {
             var workspaceXml =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""CSProj"">
         <Document FilePath = ""C:\C.cs"">{|caret:|}</Document>
     </Project>
@@ -32,7 +32,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ProjectContext
             Assert.Equal(0, result!.DefaultIndex);
             var context = Assert.Single(result.ProjectContexts);
 
-            Assert.Equal(ProtocolConversions.ProjectIdToProjectContextId(testLspServer.GetCurrentSolution().ProjectIds.Single()), context.Id);
+            Assert.Equal(
+                ProtocolConversions.ProjectIdToProjectContextId(
+                    testLspServer.GetCurrentSolution().ProjectIds.Single()
+                ),
+                context.Id
+            );
             Assert.Equal(LSP.ProjectContextKind.CSharp, context.Kind);
             Assert.Equal("CSProj", context.Label);
         }
@@ -41,7 +46,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ProjectContext
         public async Task MultipleDocumentsReturnsMultipleContexts()
         {
             var workspaceXml =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""CSProj1"">
         <Document FilePath=""C:\C.cs"">{|caret:|}</Document>
     </Project>
@@ -56,16 +61,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ProjectContext
 
             Assert.NotNull(result);
 
-            Assert.Collection(result!.ProjectContexts.OrderBy(c => c.Label),
+            Assert.Collection(
+                result!.ProjectContexts.OrderBy(c => c.Label),
                 c => Assert.Equal("CSProj1", c.Label),
-                c => Assert.Equal("CSProj2", c.Label));
+                c => Assert.Equal("CSProj2", c.Label)
+            );
         }
 
         [Fact]
         public async Task SwitchingContextsChangesDefaultContext()
         {
             var workspaceXml =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""CSProj1"">
         <Document FilePath=""C:\C.cs"">{|caret:|}</Document>
     </Project>
@@ -89,19 +96,35 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ProjectContext
                 testLspServer.TestWorkspace.SetDocumentContext(project.DocumentIds.Single());
                 var result = await RunGetProjectContext(testLspServer, documentUri);
 
-                Assert.Equal(ProtocolConversions.ProjectIdToProjectContextId(project.Id), result!.ProjectContexts[result.DefaultIndex].Id);
+                Assert.Equal(
+                    ProtocolConversions.ProjectIdToProjectContextId(project.Id),
+                    result!.ProjectContexts[result.DefaultIndex].Id
+                );
                 Assert.Equal(project.Name, result!.ProjectContexts[result.DefaultIndex].Label);
             }
         }
 
-        private static async Task<LSP.ActiveProjectContexts?> RunGetProjectContext(TestLspServer testLspServer, Uri uri)
+        private static async Task<LSP.ActiveProjectContexts?> RunGetProjectContext(
+            TestLspServer testLspServer,
+            Uri uri
+        )
         {
-            return await testLspServer.ExecuteRequestAsync<LSP.GetTextDocumentWithContextParams, LSP.ActiveProjectContexts?>(LSP.MSLSPMethods.ProjectContextsName,
-                           CreateGetProjectContextParams(uri), new LSP.ClientCapabilities(), clientName: null, cancellationToken: CancellationToken.None);
+            return await testLspServer.ExecuteRequestAsync<
+                LSP.GetTextDocumentWithContextParams,
+                LSP.ActiveProjectContexts?
+            >(
+                LSP.MSLSPMethods.ProjectContextsName,
+                CreateGetProjectContextParams(uri),
+                new LSP.ClientCapabilities(),
+                clientName: null,
+                cancellationToken: CancellationToken.None
+            );
         }
 
-        private static LSP.GetTextDocumentWithContextParams CreateGetProjectContextParams(Uri uri)
-            => new LSP.GetTextDocumentWithContextParams()
+        private static LSP.GetTextDocumentWithContextParams CreateGetProjectContextParams(
+            Uri uri
+        ) =>
+            new LSP.GetTextDocumentWithContextParams()
             {
                 TextDocument = new LSP.TextDocumentItem { Uri = uri }
             };

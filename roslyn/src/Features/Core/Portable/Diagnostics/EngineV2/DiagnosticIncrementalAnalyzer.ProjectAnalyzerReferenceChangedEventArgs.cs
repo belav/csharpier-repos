@@ -21,7 +21,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             public readonly ImmutableArray<StateSet> Added;
             public readonly ImmutableArray<StateSet> Removed;
 
-            public ProjectAnalyzerReferenceChangedEventArgs(Project project, ImmutableArray<StateSet> added, ImmutableArray<StateSet> removed)
+            public ProjectAnalyzerReferenceChangedEventArgs(
+                Project project,
+                ImmutableArray<StateSet> added,
+                ImmutableArray<StateSet> removed
+            )
             {
                 Project = project;
                 Added = added;

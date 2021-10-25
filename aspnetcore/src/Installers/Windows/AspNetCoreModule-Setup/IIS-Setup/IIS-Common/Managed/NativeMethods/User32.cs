@@ -25,7 +25,6 @@ namespace Microsoft.Web.Management.PInvoke.User32
         Reboot = 0x02,
         PowerOff = 0x08,
         RestartApps = 0x40,
-
         //
         // plus AT MOST ONE of the following two:
         //
@@ -44,7 +43,6 @@ namespace Microsoft.Web.Management.PInvoke.User32
         MajorPower = 0x00060000,
         MajorSoftware = 0x00030000,
         MajorSystem = 0x00050000,
-
         MinorBlueScreen = 0x0000000F,
         MinorCordUnplugged = 0x0000000b,
         MinorDisk = 0x00000007,
@@ -71,7 +69,6 @@ namespace Microsoft.Web.Management.PInvoke.User32
         MinorUnstable = 0x00000006,
         MinorUpgrade = 0x00000003,
         MinorWMI = 0x00000015,
-
         FlagUserDefined = 0x40000000,
         FlagPlanned = 0x80000000
     }
@@ -79,7 +76,12 @@ namespace Microsoft.Web.Management.PInvoke.User32
     internal static class NativeMethods
     {
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, WindowMessage msg, int wParam, int lParam);
+        public static extern IntPtr SendMessage(
+            IntPtr hWnd,
+            WindowMessage msg,
+            int wParam,
+            int lParam
+        );
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         [return: MarshalAs(UnmanagedType.Bool)]

@@ -22,7 +22,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
 
         internal static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(15);
 
-        internal static HttpSysListener CreateHttpAuthServer(AuthenticationSchemes authType, bool allowAnonymous, out string baseAddress)
+        internal static HttpSysListener CreateHttpAuthServer(
+            AuthenticationSchemes authType,
+            bool allowAnonymous,
+            out string baseAddress
+        )
         {
             var listener = CreateHttpServer(out baseAddress);
             listener.Options.Authentication.Schemes = authType;
@@ -42,7 +46,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             return CreateDynamicHttpServer(path, out root, out baseAddress);
         }
 
-        internal static HttpSysListener CreateDynamicHttpServer(string basePath, out string root, out string baseAddress)
+        internal static HttpSysListener CreateDynamicHttpServer(
+            string basePath,
+            out string root,
+            out string baseAddress
+        )
         {
             lock (PortLock)
             {
@@ -64,9 +72,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                     catch (HttpSysException ex)
                     {
                         listener.Dispose();
-                        if (ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS
-                            && ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SHARING_VIOLATION
-                            && ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ACCESS_DENIED)
+                        if (
+                            ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS
+                            && ex.ErrorCode
+                                != UnsafeNclNativeMethods.ErrorCodes.ERROR_SHARING_VIOLATION
+                            && ex.ErrorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_ACCESS_DENIED
+                        )
                         {
                             throw;
                         }
@@ -82,7 +93,12 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             return CreateServer("https", "localhost", 9090, string.Empty);
         }
 
-        internal static HttpSysListener CreateServer(string scheme, string host, int port, string path)
+        internal static HttpSysListener CreateServer(
+            string scheme,
+            string host,
+            int port,
+            string path
+        )
         {
             var listener = new HttpSysListener(new HttpSysOptions(), new LoggerFactory());
             listener.Options.UrlPrefixes.Add(UrlPrefix.Create(scheme, host, port, path));
@@ -95,7 +111,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             return CreateServerOnExistingQueue(AuthenticationSchemes.None, true, requestQueueName);
         }
 
-        internal static HttpSysListener CreateServerOnExistingQueue(AuthenticationSchemes authScheme, bool allowAnonymos, string requestQueueName)
+        internal static HttpSysListener CreateServerOnExistingQueue(
+            AuthenticationSchemes authScheme,
+            bool allowAnonymos,
+            string requestQueueName
+        )
         {
             var options = new HttpSysOptions();
             options.RequestQueueMode = RequestQueueMode.Attach;
@@ -111,11 +131,14 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         /// AcceptAsync extension with timeout. This extension should be used in all tests to prevent
         /// unexpected hangs when a request does not arrive.
         /// </summary>
-        internal static async Task<RequestContext> AcceptAsync(this HttpSysListener server, TimeSpan timeout)
+        internal static async Task<RequestContext> AcceptAsync(
+            this HttpSysListener server,
+            TimeSpan timeout
+        )
         {
             var factory = new TestRequestContextFactory(server);
             using var acceptContext = new AsyncAcceptContext(server, factory);
-            
+
             async Task<RequestContext> AcceptAsync()
             {
                 while (true)
@@ -148,7 +171,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         }
 
         // Fail if the given response task completes before the given accept task.
-        internal static async Task<RequestContext> Before<T>(this Task<RequestContext> acceptTask, Task<T> responseTask)
+        internal static async Task<RequestContext> Before<T>(
+            this Task<RequestContext> acceptTask,
+            Task<T> responseTask
+        )
         {
             var completedTask = await Task.WhenAny(acceptTask, responseTask);
 
@@ -159,7 +185,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             else
             {
                 var response = await responseTask;
-                throw new InvalidOperationException("The response completed prematurely: " + response.ToString());
+                throw new InvalidOperationException(
+                    "The response completed prematurely: " + response.ToString()
+                );
             }
         }
 

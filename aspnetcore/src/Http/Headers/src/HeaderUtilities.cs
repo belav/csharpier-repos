@@ -35,7 +35,10 @@ namespace Microsoft.Net.Http.Headers
                     throw new ArgumentOutOfRangeException(nameof(value));
                 }
 
-                var qualityString = ((double)value).ToString("0.0##", NumberFormatInfo.InvariantInfo);
+                var qualityString = ((double)value).ToString(
+                    "0.0##",
+                    NumberFormatInfo.InvariantInfo
+                );
                 if (qualityParameter != null)
                 {
                     qualityParameter.Value = qualityString;
@@ -79,7 +82,9 @@ namespace Microsoft.Net.Http.Headers
 
             if (HttpRuleParser.GetTokenLength(value, 0) != value.Length)
             {
-                throw new FormatException(string.Format(CultureInfo.InvariantCulture, "Invalid token '{0}'.", value));
+                throw new FormatException(
+                    string.Format(CultureInfo.InvariantCulture, "Invalid token '{0}'.", value)
+                );
             }
         }
 
@@ -88,7 +93,11 @@ namespace Microsoft.Net.Http.Headers
             return AreEqualCollections(x, y, null);
         }
 
-        internal static bool AreEqualCollections<T>(ICollection<T>? x, ICollection<T>? y, IEqualityComparer<T>? comparer)
+        internal static bool AreEqualCollections<T>(
+            ICollection<T>? x,
+            ICollection<T>? y,
+            IEqualityComparer<T>? comparer
+        )
         {
             if (x == null)
             {
@@ -124,8 +133,10 @@ namespace Microsoft.Net.Http.Headers
                 {
                     if (!alreadyFound[i])
                     {
-                        if (((comparer == null) && xItem.Equals(yItem)) ||
-                            ((comparer != null) && comparer.Equals(xItem, yItem)))
+                        if (
+                            ((comparer == null) && xItem.Equals(yItem))
+                            || ((comparer != null) && comparer.Equals(xItem, yItem))
+                        )
                         {
                             alreadyFound[i] = true;
                             found = true;
@@ -143,8 +154,16 @@ namespace Microsoft.Net.Http.Headers
 
             // Since we never re-use a "found" value in 'y', we expected 'alreadyFound' to have all fields set to 'true'.
             // Otherwise the two collections can't be equal and we should not get here.
-            Contract.Assert(Contract.ForAll(alreadyFound, value => { return value; }),
-                "Expected all values in 'alreadyFound' to be true since collections are considered equal.");
+            Contract.Assert(
+                Contract.ForAll(
+                    alreadyFound,
+                    value =>
+                    {
+                        return value;
+                    }
+                ),
+                "Expected all values in 'alreadyFound' to be true since collections are considered equal."
+            );
 
             return true;
         }
@@ -153,7 +172,8 @@ namespace Microsoft.Net.Http.Headers
             StringSegment input,
             int startIndex,
             bool skipEmptyValues,
-            out bool separatorFound)
+            out bool separatorFound
+        )
         {
             Contract.Requires(startIndex <= input.Length); // it's OK if index == value.Length.
 
@@ -231,7 +251,11 @@ namespace Microsoft.Net.Http.Headers
         /// <see langword="false" />.
         /// </returns>
         // e.g. { "headerValue=10, targetHeaderValue=30" }
-        public static bool TryParseSeconds(StringValues headerValues, string targetValue, [NotNullWhen(true)] out TimeSpan? value)
+        public static bool TryParseSeconds(
+            StringValues headerValues,
+            string targetValue,
+            [NotNullWhen(true)] out TimeSpan? value
+        )
         {
             if (StringValues.IsNullOrEmpty(headerValues) || string.IsNullOrEmpty(targetValue))
             {
@@ -249,9 +273,22 @@ namespace Microsoft.Net.Http.Headers
                     long seconds;
                     var initial = current;
                     var tokenLength = HttpRuleParser.GetTokenLength(headerValues[i], current);
-                    if (tokenLength == targetValue.Length
-                        && string.Compare(headerValues[i], current, targetValue, 0, tokenLength, StringComparison.OrdinalIgnoreCase) == 0
-                        && TryParseNonNegativeInt64FromHeaderValue(current + tokenLength, headerValues[i], out seconds))
+                    if (
+                        tokenLength == targetValue.Length
+                        && string.Compare(
+                            headerValues[i],
+                            current,
+                            targetValue,
+                            0,
+                            tokenLength,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                        && TryParseNonNegativeInt64FromHeaderValue(
+                            current + tokenLength,
+                            headerValues[i],
+                            out seconds
+                        )
+                    )
                     {
                         // Token matches target value and seconds were parsed
                         value = TimeSpan.FromSeconds(seconds);
@@ -263,7 +300,10 @@ namespace Microsoft.Net.Http.Headers
                     // Ensure index was advanced
                     if (current <= initial)
                     {
-                        Debug.Assert(false, $"Index '{nameof(current)}' not advanced, this is a bug.");
+                        Debug.Assert(
+                            false,
+                            $"Index '{nameof(current)}' not advanced, this is a bug."
+                        );
                         value = null;
                         return false;
                     }
@@ -286,9 +326,15 @@ namespace Microsoft.Net.Http.Headers
         /// <see langword="true" /> if <paramref name="targetDirectives"/> is contained in <paramref name="cacheControlDirectives"/>;
         /// otherwise, <see langword="false" />.
         /// </returns>
-        public static bool ContainsCacheDirective(StringValues cacheControlDirectives, string targetDirectives)
+        public static bool ContainsCacheDirective(
+            StringValues cacheControlDirectives,
+            string targetDirectives
+        )
         {
-            if (StringValues.IsNullOrEmpty(cacheControlDirectives) || string.IsNullOrEmpty(targetDirectives))
+            if (
+                StringValues.IsNullOrEmpty(cacheControlDirectives)
+                || string.IsNullOrEmpty(targetDirectives)
+            )
             {
                 return false;
             }
@@ -302,20 +348,38 @@ namespace Microsoft.Net.Http.Headers
                 {
                     var initial = current;
 
-                    var tokenLength = HttpRuleParser.GetTokenLength(cacheControlDirectives[i], current);
-                    if (tokenLength == targetDirectives.Length
-                        && string.Compare(cacheControlDirectives[i], current, targetDirectives, 0, tokenLength, StringComparison.OrdinalIgnoreCase) == 0)
+                    var tokenLength = HttpRuleParser.GetTokenLength(
+                        cacheControlDirectives[i],
+                        current
+                    );
+                    if (
+                        tokenLength == targetDirectives.Length
+                        && string.Compare(
+                            cacheControlDirectives[i],
+                            current,
+                            targetDirectives,
+                            0,
+                            tokenLength,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                     {
                         // Token matches target value
                         return true;
                     }
 
-                    current = AdvanceCacheDirectiveIndex(current + tokenLength, cacheControlDirectives[i]);
+                    current = AdvanceCacheDirectiveIndex(
+                        current + tokenLength,
+                        cacheControlDirectives[i]
+                    );
 
                     // Ensure index was advanced
                     if (current <= initial)
                     {
-                        Debug.Assert(false, $"Index '{nameof(current)}' not advanced, this is a bug.");
+                        Debug.Assert(
+                            false,
+                            $"Index '{nameof(current)}' not advanced, this is a bug."
+                        );
                         return false;
                     }
                 }
@@ -324,7 +388,11 @@ namespace Microsoft.Net.Http.Headers
             return false;
         }
 
-        private static bool TryParseNonNegativeInt64FromHeaderValue(int startIndex, string headerValue, out long result)
+        private static bool TryParseNonNegativeInt64FromHeaderValue(
+            int startIndex,
+            string headerValue,
+            out long result
+        )
         {
             // Trim leading whitespace
             startIndex += HttpRuleParser.GetWhitespaceLength(headerValue, startIndex);
@@ -341,7 +409,16 @@ namespace Microsoft.Net.Http.Headers
             startIndex += HttpRuleParser.GetWhitespaceLength(headerValue, startIndex);
 
             // Try parse the number
-            if (TryParseNonNegativeInt64(new StringSegment(headerValue, startIndex, HttpRuleParser.GetNumberLength(headerValue, startIndex, false)), out result))
+            if (
+                TryParseNonNegativeInt64(
+                    new StringSegment(
+                        headerValue,
+                        startIndex,
+                        HttpRuleParser.GetNumberLength(headerValue, startIndex, false)
+                    ),
+                    out result
+                )
+            )
             {
                 return true;
             }
@@ -373,7 +450,12 @@ namespace Microsoft.Net.Http.Headers
                 return false;
             }
 
-            return int.TryParse(value.AsSpan(), NumberStyles.None, NumberFormatInfo.InvariantInfo, out result);
+            return int.TryParse(
+                value.AsSpan(),
+                NumberStyles.None,
+                NumberFormatInfo.InvariantInfo,
+                out result
+            );
         }
 
         /// <summary>
@@ -398,13 +480,23 @@ namespace Microsoft.Net.Http.Headers
                 result = 0;
                 return false;
             }
-            return long.TryParse(value.AsSpan(), NumberStyles.None, NumberFormatInfo.InvariantInfo, out result);
+            return long.TryParse(
+                value.AsSpan(),
+                NumberStyles.None,
+                NumberFormatInfo.InvariantInfo,
+                out result
+            );
         }
 
         // Strict and fast RFC7231 5.3.1 Quality value parser (and without memory allocation)
         // See https://tools.ietf.org/html/rfc7231#section-5.3.1
         // Check is made to verify if the value is between 0 and 1 (and it returns False if the check fails).
-        internal static bool TryParseQualityDouble(StringSegment input, int startIndex, out double quality, out int length)
+        internal static bool TryParseQualityDouble(
+            StringSegment input,
+            int startIndex,
+            out double quality,
+            out int length
+        )
         {
             quality = 0;
             length = 0;
@@ -505,7 +597,11 @@ namespace Microsoft.Net.Http.Headers
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, "The value to be formatted must be non-negative.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    "The value to be formatted must be non-negative."
+                );
             }
 
             if (value == 0)
@@ -549,11 +645,15 @@ namespace Microsoft.Net.Http.Headers
         {
             if (quoted)
             {
-                return string.Create(31, dateTime, (span, dt) =>
-                {
-                    span[0] = span[30] = '"';
-                    dt.TryFormat(span.Slice(1), out _, "r");
-                });
+                return string.Create(
+                    31,
+                    dateTime,
+                    (span, dt) =>
+                    {
+                        span[0] = span[30] = '"';
+                        dt.TryFormat(span.Slice(1), out _, "r");
+                    }
+                );
             }
 
             return dateTime.ToString("r", CultureInfo.InvariantCulture);
@@ -580,7 +680,10 @@ namespace Microsoft.Net.Http.Headers
         /// <returns><see langword="true"/> if the value is quoted, otherwise <see langword="false"/>.</returns>
         public static bool IsQuoted(StringSegment input)
         {
-            return !StringSegment.IsNullOrEmpty(input) && input.Length >= 2 && input[0] == '"' && input[input.Length - 1] == '"';
+            return !StringSegment.IsNullOrEmpty(input)
+                && input.Length >= 2
+                && input[0] == '"'
+                && input[input.Length - 1] == '"';
         }
 
         /// <summary>
@@ -601,32 +704,36 @@ namespace Microsoft.Net.Http.Headers
                 return input;
             }
 
-            return string.Create(input.Length - backSlashCount, input, (span, segment) =>
-            {
-                var spanIndex = 0;
-                var spanLength = span.Length;
-                for (var i = 0; i < segment.Length && (uint)spanIndex < (uint)spanLength; i++)
+            return string.Create(
+                input.Length - backSlashCount,
+                input,
+                (span, segment) =>
                 {
-                    int nextIndex = i + 1;
-                    if ((uint)nextIndex < (uint)segment.Length && segment[i] == '\\')
+                    var spanIndex = 0;
+                    var spanLength = span.Length;
+                    for (var i = 0; i < segment.Length && (uint)spanIndex < (uint)spanLength; i++)
                     {
-                        // If there is an backslash character as the last character in the string,
-                        // we will assume that it should be included literally in the unescaped string
-                        // Ex: "hello\\" => "hello\\"
-                        // Also, if a sender adds a quoted pair like '\\''n',
-                        // we will assume it is over escaping and just add a n to the string.
-                        // Ex: "he\\llo" => "hello"
-                        span[spanIndex] = segment[nextIndex];
-                        i++;
-                    }
-                    else
-                    {
-                        span[spanIndex] = segment[i];
-                    }
+                        int nextIndex = i + 1;
+                        if ((uint)nextIndex < (uint)segment.Length && segment[i] == '\\')
+                        {
+                            // If there is an backslash character as the last character in the string,
+                            // we will assume that it should be included literally in the unescaped string
+                            // Ex: "hello\\" => "hello\\"
+                            // Also, if a sender adds a quoted pair like '\\''n',
+                            // we will assume it is over escaping and just add a n to the string.
+                            // Ex: "he\\llo" => "hello"
+                            span[spanIndex] = segment[nextIndex];
+                            i++;
+                        }
+                        else
+                        {
+                            span[spanIndex] = segment[i];
+                        }
 
-                    spanIndex++;
+                        spanIndex++;
+                    }
                 }
-            });
+            );
         }
 
         private static int CountBackslashesForDecodingQuotedString(StringSegment input)
@@ -671,30 +778,38 @@ namespace Microsoft.Net.Http.Headers
             var backSlashCount = CountAndCheckCharactersNeedingBackslashesWhenEncoding(input);
 
             // 2 for quotes
-            return string.Create(input.Length + backSlashCount + 2, input, (span, segment) =>
-            {
-                // Helps to elide the bounds check for span[0]
-                span[span.Length - 1] = span[0] = '\"';
-
-                var spanIndex = 1;
-                for (var i = 0; i < segment.Length; i++)
+            return string.Create(
+                input.Length + backSlashCount + 2,
+                input,
+                (span, segment) =>
                 {
-                    if (segment[i] == '\\' || segment[i] == '\"')
+                    // Helps to elide the bounds check for span[0]
+                    span[span.Length - 1] = span[0] = '\"';
+
+                    var spanIndex = 1;
+                    for (var i = 0; i < segment.Length; i++)
                     {
-                        span[spanIndex++] = '\\';
+                        if (segment[i] == '\\' || segment[i] == '\"')
+                        {
+                            span[spanIndex++] = '\\';
+                        }
+                        else if ((segment[i] <= 0x1F || segment[i] == 0x7F) && segment[i] != 0x09)
+                        {
+                            // Control characters are not allowed in a quoted-string, which include all characters
+                            // below 0x1F (except for 0x09 (TAB)) and 0x7F.
+                            throw new FormatException(
+                                $"Invalid control character '{segment[i]}' in input."
+                            );
+                        }
+                        span[spanIndex++] = segment[i];
                     }
-                    else if ((segment[i] <= 0x1F || segment[i] == 0x7F) && segment[i] != 0x09)
-                    {
-                        // Control characters are not allowed in a quoted-string, which include all characters
-                        // below 0x1F (except for 0x09 (TAB)) and 0x7F.
-                        throw new FormatException($"Invalid control character '{segment[i]}' in input.");
-                    }
-                    span[spanIndex++] = segment[i];
                 }
-            });
+            );
         }
 
-        private static int CountAndCheckCharactersNeedingBackslashesWhenEncoding(StringSegment input)
+        private static int CountAndCheckCharactersNeedingBackslashesWhenEncoding(
+            StringSegment input
+        )
         {
             var numberOfCharactersNeedingEscaping = 0;
             for (var i = 0; i < input.Length; i++)
@@ -711,7 +826,9 @@ namespace Microsoft.Net.Http.Headers
         {
             if (isReadOnly)
             {
-                throw new InvalidOperationException("The object cannot be modified because it is read-only.");
+                throw new InvalidOperationException(
+                    "The object cannot be modified because it is read-only."
+                );
             }
         }
     }

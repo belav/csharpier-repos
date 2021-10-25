@@ -15,7 +15,6 @@ public struct Yak
     }
 }
 
-
 internal class Complex2_Array_Test
 {
     public static void test(Yak[,,,,,,] Odd_Variable)
@@ -29,7 +28,13 @@ internal class Complex2_Array_Test
         Int64 sum = 0;
 
         Yak[,,,,,,] foo = new Yak[SIZE, SIZE, SIZE, SIZE, SIZE, SIZE, SIZE];
-        int i, j, k, l, m, n, o;
+        int i,
+            j,
+            k,
+            l,
+            m,
+            n,
+            o;
 
         for (i = 0; i < SIZE; i++)
             for (j = 0; j < SIZE; j++)

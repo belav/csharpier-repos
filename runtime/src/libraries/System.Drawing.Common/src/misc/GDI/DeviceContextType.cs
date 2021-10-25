@@ -10,19 +10,14 @@ namespace System.Drawing.Internal
     {
         // Unknown device
         Unknown = 0x00,
-
         // Window DC including non-client area - obtained from GetWindowDC
         NCWindow = 0x02,
-
         // Printer DC - obtained from CreateDC.
         NamedDevice = 0x03,
-
         // Information context - obtained from CreateIC.
         Information = 0x04,
-
         // Memory dc - obtained from CreateCompatibleDC.
         Memory = 0x05,
-
         // Metafile dc - obtained from CreateEnhMetafile.
         Metafile = 0x06 // currently not supported.
     }

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestCallerInfoAttributesWithSaneDefaultValues()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class Test {
@@ -37,7 +38,8 @@ class Test {
         [Fact]
         public void TestBadCallerInfoAttributesWithoutDefaultValues()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class Test {
@@ -48,24 +50,37 @@ class Test {
     static void LogCallerMemberName([CallerMemberName] string memberName) { }
 }";
 
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (5,38): error CS4020: The CallerLineNumberAttribute may only be applied to parameters with default values
-                //     static void LogCallerLineNumber([CallerLineNumber] int lineNumber) { }
-                Diagnostic(ErrorCode.ERR_BadCallerLineNumberParamWithoutDefaultValue, @"CallerLineNumber").WithLocation(5, 38),
-
-                // (7,36): error CS4021: The CallerFilePathAttribute may only be applied to parameters with default values
-                //     static void LogCallerFilePath([CallerFilePath] string filePath) { }
-                Diagnostic(ErrorCode.ERR_BadCallerFilePathParamWithoutDefaultValue, @"CallerFilePath").WithLocation(7, 36),
-
-                // (9,38): error CS4022: The CallerMemberNameAttribute may only be applied to parameters with default values
-                //     static void LogCallerMemberName([CallerMemberName] string memberName) { }
-                Diagnostic(ErrorCode.ERR_BadCallerMemberNameParamWithoutDefaultValue, @"CallerMemberName").WithLocation(9, 38));
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (5,38): error CS4020: The CallerLineNumberAttribute may only be applied to parameters with default values
+                    //     static void LogCallerLineNumber([CallerLineNumber] int lineNumber) { }
+                    Diagnostic(
+                            ErrorCode.ERR_BadCallerLineNumberParamWithoutDefaultValue,
+                            @"CallerLineNumber"
+                        )
+                        .WithLocation(5, 38),
+                    // (7,36): error CS4021: The CallerFilePathAttribute may only be applied to parameters with default values
+                    //     static void LogCallerFilePath([CallerFilePath] string filePath) { }
+                    Diagnostic(
+                            ErrorCode.ERR_BadCallerFilePathParamWithoutDefaultValue,
+                            @"CallerFilePath"
+                        )
+                        .WithLocation(7, 36),
+                    // (9,38): error CS4022: The CallerMemberNameAttribute may only be applied to parameters with default values
+                    //     static void LogCallerMemberName([CallerMemberName] string memberName) { }
+                    Diagnostic(
+                            ErrorCode.ERR_BadCallerMemberNameParamWithoutDefaultValue,
+                            @"CallerMemberName"
+                        )
+                        .WithLocation(9, 38)
+                );
         }
 
         [Fact]
         public void TestConversionForCallerLineNumber()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System;
@@ -147,7 +162,8 @@ class Test {
     }
 }";
 
-            string expected = @"
+            string expected =
+                @"
 line: 50
 line: 51
 line: 52
@@ -179,14 +195,19 @@ line: 77
 line: 78
 line: 79
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, new MetadataReference[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new MetadataReference[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestDelegateInvoke()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System;
@@ -207,20 +228,26 @@ class Test {
     }
 }";
 
-            string expected = @"
+            string expected =
+                @"
 line: -1
 line: -1
 line: -1
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, new MetadataReference[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new MetadataReference[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestConversionForCallerInfoAttributes()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System;
@@ -249,7 +276,8 @@ class Test {
     }
 }";
 
-            string expected = @"
+            string expected =
+                @"
 line: 22
 line: 23
 line: 24
@@ -257,14 +285,19 @@ line: 25
 line: 26
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestBadConversionForCallerInfoAttributes()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class Test {
@@ -287,30 +320,94 @@ class Test {
     static void LogCallerMemberName5([CallerMemberName] int? memberName = 0) { }
 }";
 
-            CreateCompilationWithMscorlib45(source, references: new MetadataReference[] { SystemRef }).VerifyDiagnostics(
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(5, 39).WithArguments("int", "string"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(6, 39).WithArguments("int", "char"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(7, 39).WithArguments("int", "bool"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(8, 39).WithArguments("int", "short"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(9, 39).WithArguments("int", "ushort"),
-
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(11, 37).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(12, 37).WithArguments("string", "long"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(13, 37).WithArguments("string", "double"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(14, 37).WithArguments("string", "float"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(15, 37).WithArguments("string", "int?"),
-
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(17, 39).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(18, 39).WithArguments("string", "long"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(19, 39).WithArguments("string", "double"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(20, 39).WithArguments("string", "float"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(21, 39).WithArguments("string", "int?"));
+            CreateCompilationWithMscorlib45(
+                    source,
+                    references: new MetadataReference[] { SystemRef }
+                )
+                .VerifyDiagnostics(
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(5, 39)
+                        .WithArguments("int", "string"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(6, 39)
+                        .WithArguments("int", "char"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(7, 39)
+                        .WithArguments("int", "bool"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(8, 39)
+                        .WithArguments("int", "short"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(9, 39)
+                        .WithArguments("int", "ushort"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(11, 37)
+                        .WithArguments("string", "int"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(12, 37)
+                        .WithArguments("string", "long"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(13, 37)
+                        .WithArguments("string", "double"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(14, 37)
+                        .WithArguments("string", "float"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(15, 37)
+                        .WithArguments("string", "int?"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(17, 39)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(18, 39)
+                        .WithArguments("string", "long"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(19, 39)
+                        .WithArguments("string", "double"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(20, 39)
+                        .WithArguments("string", "float"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(21, 39)
+                        .WithArguments("string", "int?")
+                );
         }
 
         [Fact]
         public void TestCallerLineNumber()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -341,21 +438,26 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 message: something happened
 line: 17
 message: something happened
 line: 21
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerLineNumber_LocalFunctionAttribute()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -386,21 +488,27 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 message: something happened
 line: 9
 message: something happened
 line: 13
 ";
 
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular9);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.Regular9
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerLineNumberImplicitCall()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -424,18 +532,23 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 line: -1
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerLineNumberConstructorCall()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -455,18 +568,23 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 line: 17
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerLineNumberCustomAttributeConstructorCall()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System.Reflection;
 using System;
@@ -539,7 +657,8 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 message: this is a message
 line: 25
 message: this is a message
@@ -548,14 +667,18 @@ line: 47
 line: 55
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerLineNumberMemberCall()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -575,18 +698,23 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 line: 17
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestBadCallerLineNumberMetadata()
         {
-            var iLSource = @"
+            var iLSource =
+                @"
 .class public auto ansi beforefieldinit Test
        extends [mscorlib]System.Object
 {
@@ -652,7 +780,8 @@ line: 17
 } // end of class Test
 ";
 
-            var source = @"
+            var source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -665,21 +794,27 @@ class Driver {
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 line: 7
 line: 42
 line: hello
 ";
 
             MetadataReference libReference = CompileIL(iLSource);
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { libReference }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { libReference },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerLineNumberDuplicateAttribute()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 partial class D
@@ -698,15 +833,24 @@ partial class D
     }
 }";
 
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                Diagnostic(ErrorCode.ERR_DuplicateAttribute, "CallerLineNumber").WithArguments("CallerLineNumber"),
-                Diagnostic(ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation, "CallerLineNumber").WithArguments("x").WithLocation(11, 23));
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.ERR_DuplicateAttribute, "CallerLineNumber")
+                        .WithArguments("CallerLineNumber"),
+                    Diagnostic(
+                            ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation,
+                            "CallerLineNumber"
+                        )
+                        .WithArguments("x")
+                        .WithLocation(11, 23)
+                );
         }
 
         [Fact, WorkItem(531044, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531044")]
         public void TestUnconsumedCallerInfoAttributes()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 partial class D
@@ -726,22 +870,37 @@ partial class D
     }
 }";
 
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (12,10): warning CS4024: The CallerLineNumberAttribute applied to parameter 'line' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
-                //         [CallerLineNumber] int line,
-                Diagnostic(ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation, "CallerLineNumber").WithArguments("line"),
-                // (13,10): warning CS4026: The CallerMemberNameAttribute applied to parameter 'member' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
-                //         [CallerMemberName] string member,
-                Diagnostic(ErrorCode.WRN_CallerMemberNameParamForUnconsumedLocation, "CallerMemberName").WithArguments("member"),
-                // (14,10): warning CS4025: The CallerFilePathAttribute applied to parameter 'path' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
-                //         [CallerFilePath] string path) { }
-                Diagnostic(ErrorCode.WRN_CallerFilePathParamForUnconsumedLocation, "CallerFilePath").WithArguments("path"));
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (12,10): warning CS4024: The CallerLineNumberAttribute applied to parameter 'line' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                    //         [CallerLineNumber] int line,
+                    Diagnostic(
+                            ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation,
+                            "CallerLineNumber"
+                        )
+                        .WithArguments("line"),
+                    // (13,10): warning CS4026: The CallerMemberNameAttribute applied to parameter 'member' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                    //         [CallerMemberName] string member,
+                    Diagnostic(
+                            ErrorCode.WRN_CallerMemberNameParamForUnconsumedLocation,
+                            "CallerMemberName"
+                        )
+                        .WithArguments("member"),
+                    // (14,10): warning CS4025: The CallerFilePathAttribute applied to parameter 'path' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
+                    //         [CallerFilePath] string path) { }
+                    Diagnostic(
+                            ErrorCode.WRN_CallerFilePathParamForUnconsumedLocation,
+                            "CallerFilePath"
+                        )
+                        .WithArguments("path")
+                );
         }
 
         [Fact]
         public void TestCallerLineNumberViaDelegate()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -762,19 +921,24 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 line: 16
 line: 18
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestBadConversionCallerInfoMultipleAttributes()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -812,49 +976,169 @@ class Test
     public static void Log23([CallerMemberName, CallerLineNumber] int x = 1) { Console.WriteLine(""line: "" + x); }
     public static void Log24([CallerLineNumber, CallerMemberName] int x = 1) { Console.WriteLine(""line: "" + x); }
 }";
-            CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseDll.WithWarningLevel(0)).VerifyDiagnostics(
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(7, 48).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(7, 64).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(8, 48).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(8, 66).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(9, 30).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(9, 66).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(10, 30).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(10, 48).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(11, 30).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(11, 46).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(12, 30).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(12, 64).WithArguments("string", "int"),
-
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(14, 30).WithArguments("int", "string"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(15, 30).WithArguments("int", "string"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(16, 48).WithArguments("int", "string"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(17, 65).WithArguments("int", "string"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(18, 65).WithArguments("int", "string"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(19, 47).WithArguments("int", "string"),
-
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(24, 31).WithArguments("int", "string"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(25, 47).WithArguments("int", "string"),
-
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(27, 49).WithArguments("int", "string"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithLocation(28, 31).WithArguments("int", "string"),
-
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(30, 31).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(30, 47).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(31, 31).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(31, 49).WithArguments("string", "int"),
-
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(33, 49).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithLocation(34, 31).WithArguments("string", "int"),
-
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(36, 31).WithArguments("string", "int"),
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithLocation(37, 49).WithArguments("string", "int"));
+            CreateCompilationWithMscorlib45(
+                    source,
+                    options: TestOptions.ReleaseDll.WithWarningLevel(0)
+                )
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(7, 48)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(7, 64)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(8, 48)
+                        .WithArguments("string", "int"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(8, 66)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(9, 30)
+                        .WithArguments("string", "int"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(9, 66)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(10, 30)
+                        .WithArguments("string", "int"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(10, 48)
+                        .WithArguments("string", "int"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(11, 30)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(11, 46)
+                        .WithArguments("string", "int"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(12, 30)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(12, 64)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(14, 30)
+                        .WithArguments("int", "string"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(15, 30)
+                        .WithArguments("int", "string"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(16, 48)
+                        .WithArguments("int", "string"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(17, 65)
+                        .WithArguments("int", "string"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(18, 65)
+                        .WithArguments("int", "string"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(19, 47)
+                        .WithArguments("int", "string"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(24, 31)
+                        .WithArguments("int", "string"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(25, 47)
+                        .WithArguments("int", "string"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(27, 49)
+                        .WithArguments("int", "string"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithLocation(28, 31)
+                        .WithArguments("int", "string"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(30, 31)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(30, 47)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(31, 31)
+                        .WithArguments("string", "int"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(31, 49)
+                        .WithArguments("string", "int"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(33, 49)
+                        .WithArguments("string", "int"),
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithLocation(34, 31)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(36, 31)
+                        .WithArguments("string", "int"),
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithLocation(37, 49)
+                        .WithArguments("string", "int")
+                );
         }
 
         [Fact]
         public void TestCallerInfoMultipleAttributes()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -870,7 +1154,8 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 C:\file.cs
 C:\file.cs
 ";
@@ -878,7 +1163,8 @@ C:\file.cs
             var compilation = CreateCompilationWithMscorlib45(
                 new[] { Parse(source, @"C:\file.cs") },
                 new[] { SystemRef },
-                TestOptions.ReleaseExe);
+                TestOptions.ReleaseExe
+            );
 
             CompileAndVerify(compilation, expectedOutput: expected);
         }
@@ -886,7 +1172,8 @@ C:\file.cs
         [Fact]
         public void TestCallerAttributeBash()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System.Reflection;
 using System;
@@ -913,18 +1200,24 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 line: 15
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, references: new MetadataReference[] { SystemRef }, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                references: new MetadataReference[] { SystemRef },
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerLineNumberUnconsumedBadType()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 partial class D
@@ -943,16 +1236,26 @@ partial class D
     }
 }";
 
-            var compilation = CreateCompilationWithMscorlib45(source, references: new MetadataReference[] { SystemRef });
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                references: new MetadataReference[] { SystemRef }
+            );
             compilation.VerifyDiagnostics(
-                Diagnostic(ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation, "CallerLineNumber").WithArguments("x").WithLocation(11, 23));
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation,
+                        "CallerLineNumber"
+                    )
+                    .WithArguments("x")
+                    .WithLocation(11, 23)
+            );
         }
 
         [WorkItem(689618, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/689618")]
         [Fact]
         public void TestCallerMemberNameUnconsumedBadType()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -974,12 +1277,22 @@ partial class D
     }
 }";
 
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
 
             compilation.VerifyEmitDiagnostics(
                 // (12,23): warning CS4026: The CallerMemberNameAttribute applied to parameter 'x' will have no effect because it applies to a member that is used in contexts that do not allow optional arguments
                 //     partial void Goo([CallerMemberName] string x)
-                Diagnostic(ErrorCode.WRN_CallerMemberNameParamForUnconsumedLocation, "CallerMemberName").WithArguments("x").WithLocation(12, 23));
+                Diagnostic(
+                        ErrorCode.WRN_CallerMemberNameParamForUnconsumedLocation,
+                        "CallerMemberName"
+                    )
+                    .WithArguments("x")
+                    .WithLocation(12, 23)
+            );
 
             CompileAndVerify(compilation, expectedOutput: "");
         }
@@ -988,7 +1301,8 @@ partial class D
         [Fact]
         public void TestCallerMemberNameUnconsumedBadType02()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1010,7 +1324,11 @@ partial class D
     }
 }";
 
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             compilation.VerifyEmitDiagnostics();
             CompileAndVerify(compilation, expectedOutput: "Main");
         }
@@ -1018,7 +1336,8 @@ partial class D
         [Fact]
         public void TestCallerMemberName_Lambda()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1048,18 +1367,24 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: LambdaCaller
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, references: new MetadataReference[] { SystemRef }, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                references: new MetadataReference[] { SystemRef },
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerMemberName_LocalFunction()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1091,18 +1416,24 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: LocalFunctionCaller
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, references: new MetadataReference[] { SystemRef }, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                references: new MetadataReference[] { SystemRef },
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerMemberName_LocalFunctionAttribute_01()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1130,21 +1461,24 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: LocalFunctionCaller
 ";
 
             var compilation = CreateCompilation(
                 source,
                 options: TestOptions.ReleaseExe,
-                parseOptions: TestOptions.Regular9);
+                parseOptions: TestOptions.Regular9
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerMemberName_LocalFunctionAttribute_02()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1176,21 +1510,24 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: LocalFunctionCaller
 ";
 
             var compilation = CreateCompilation(
                 source,
                 options: TestOptions.ReleaseExe,
-                parseOptions: TestOptions.Regular9);
+                parseOptions: TestOptions.Regular9
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerMemberName_LocalFunctionAttribute_03()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1225,21 +1562,24 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: LocalFunctionCaller
 ";
 
             var compilation = CreateCompilation(
                 source,
                 options: TestOptions.ReleaseExe,
-                parseOptions: TestOptions.Regular9);
+                parseOptions: TestOptions.Regular9
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerMemberName_Operator()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1267,18 +1607,24 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: op_Increment
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerMemberName_Property()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1314,19 +1660,25 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: IsTrue
 name: IsTrue
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerMemberName_CustomAttribute()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1353,18 +1705,24 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: MyMethod
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerMemberName_Generic()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1390,14 +1748,16 @@ class A
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: Compare
 ";
 
             var compilation = CreateCompilationWithMscorlib45(
                 source,
                 new[] { SystemRef },
-                TestOptions.ReleaseExe);
+                TestOptions.ReleaseExe
+            );
 
             CompileAndVerify(compilation, expectedOutput: expected);
         }
@@ -1405,7 +1765,8 @@ name: Compare
         [Fact]
         public void TestCallerMemberName_ExplicitInterfaceInstantiation()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1450,19 +1811,25 @@ class A
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: Add
 name: HasThing
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerMemberName_Event()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1492,19 +1859,25 @@ class A
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: ThingHappened
 name: ThingHappened
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         public void TestCallerMemberName_ConstructorDestructor()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1543,20 +1916,26 @@ class A
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: .cctor
 name: .ctor
 name: Finalize
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerMemberName_Indexer()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1616,21 +1995,27 @@ class A
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 name: TheIndexer
 name: TheIndexer
 name: Item
 name: Item
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, references: new MetadataReference[] { SystemRef }, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                references: new MetadataReference[] { SystemRef },
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestCallerFilePath1()
         {
-            string source1 = @"
+            string source1 =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1658,26 +2043,43 @@ partial class A
             var compilation = CreateCompilationWithMscorlib45(
                 new[]
                 {
-                    SyntaxFactory.ParseSyntaxTree(source1, path: @"C:\filename", encoding: Encoding.UTF8),
-                    SyntaxFactory.ParseSyntaxTree(source2, path: @"a\b\..\c\d", encoding: Encoding.UTF8),
+                    SyntaxFactory.ParseSyntaxTree(
+                        source1,
+                        path: @"C:\filename",
+                        encoding: Encoding.UTF8
+                    ),
+                    SyntaxFactory.ParseSyntaxTree(
+                        source2,
+                        path: @"a\b\..\c\d",
+                        encoding: Encoding.UTF8
+                    ),
                     SyntaxFactory.ParseSyntaxTree(source3, path: @"*", encoding: Encoding.UTF8),
-                    SyntaxFactory.ParseSyntaxTree(source4, path: @"       ", encoding: Encoding.UTF8),
+                    SyntaxFactory.ParseSyntaxTree(
+                        source4,
+                        path: @"       ",
+                        encoding: Encoding.UTF8
+                    ),
                 },
                 new[] { SystemRef },
-                TestOptions.ReleaseExe.WithSourceReferenceResolver(SourceFileResolver.Default));
+                TestOptions.ReleaseExe.WithSourceReferenceResolver(SourceFileResolver.Default)
+            );
 
-            CompileAndVerify(compilation, expectedOutput: @"
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"
 1: 'C:\filename'
 2: 'a\b\..\c\d'
 3: '*'
 4: '       '
-");
+"
+            );
         }
 
         [Fact]
         public void TestCallerFilePath_LocalFunctionAttribute()
         {
-            string source1 = @"
+            string source1 =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1700,20 +2102,35 @@ partial class A
             var compilation = CreateCompilation(
                 new[]
                 {
-                    SyntaxFactory.ParseSyntaxTree(source1, options: TestOptions.Regular9, path: @"C:\filename", encoding: Encoding.UTF8)
+                    SyntaxFactory.ParseSyntaxTree(
+                        source1,
+                        options: TestOptions.Regular9,
+                        path: @"C:\filename",
+                        encoding: Encoding.UTF8
+                    )
                 },
-                options: TestOptions.ReleaseExe.WithSourceReferenceResolver(SourceFileResolver.Default));
+                options: TestOptions.ReleaseExe.WithSourceReferenceResolver(
+                    SourceFileResolver.Default
+                )
+            );
 
-            CompileAndVerify(compilation, expectedOutput: @"
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"
 1: 'C:\filename'
 2: 'C:\filename'
-");
+"
+            );
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.TestExecutionHasNewLineDependency)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.TestExecutionHasNewLineDependency
+        )]
         public void TestCallerFilePath2()
         {
-            string source1 = @"
+            string source1 =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1736,16 +2153,19 @@ partial class A
     }
 }";
             string source2 = @"partial class A { static void Main2() { Log(); } }";
-            string source3 = @"
+            string source3 =
+                @"
 #line hidden
 partial class A { static void Main3() { Log(); } }
 ";
 
-            string source4 = @"
+            string source4 =
+                @"
 #line 30 ""abc""
 partial class A { static void Main4() { Log(); } }
 ";
-            string source5 = @"
+            string source5 =
+                @"
 #line 30 ""     ""
 partial class A { static void Main5() { Log(); } }
 ";
@@ -1753,33 +2173,54 @@ partial class A { static void Main5() { Log(); } }
             var compilation = CreateCompilationWithMscorlib45(
                 new[]
                 {
-                    SyntaxFactory.ParseSyntaxTree(source1, path: @"C:\filename", encoding: Encoding.UTF8),
-                    SyntaxFactory.ParseSyntaxTree(source2, path: @"a\b\..\c\d.cs", encoding: Encoding.UTF8),
+                    SyntaxFactory.ParseSyntaxTree(
+                        source1,
+                        path: @"C:\filename",
+                        encoding: Encoding.UTF8
+                    ),
+                    SyntaxFactory.ParseSyntaxTree(
+                        source2,
+                        path: @"a\b\..\c\d.cs",
+                        encoding: Encoding.UTF8
+                    ),
                     SyntaxFactory.ParseSyntaxTree(source3, path: @"*", encoding: Encoding.UTF8),
-                    SyntaxFactory.ParseSyntaxTree(source4, path: @"C:\x.cs", encoding: Encoding.UTF8),
-                    SyntaxFactory.ParseSyntaxTree(source5, path: @"C:\x.cs", encoding: Encoding.UTF8),
+                    SyntaxFactory.ParseSyntaxTree(
+                        source4,
+                        path: @"C:\x.cs",
+                        encoding: Encoding.UTF8
+                    ),
+                    SyntaxFactory.ParseSyntaxTree(
+                        source5,
+                        path: @"C:\x.cs",
+                        encoding: Encoding.UTF8
+                    ),
                 },
                 new[] { SystemRef },
-                TestOptions.ReleaseExe.WithSourceReferenceResolver(new SourceFileResolver(ImmutableArray<string>.Empty, baseDirectory: @"C:\A\B")));
+                TestOptions.ReleaseExe.WithSourceReferenceResolver(
+                    new SourceFileResolver(ImmutableArray<string>.Empty, baseDirectory: @"C:\A\B")
+                )
+            );
 
             // On CoreClr the '*' is a legal path character
             // https://github.com/dotnet/docs/issues/4483
-            var expectedStarPath = ExecutionConditionUtil.IsCoreClr
-                ? @"C:\A\B\*"
-                : "*";
-            CompileAndVerify(compilation, expectedOutput: $@"
+            var expectedStarPath = ExecutionConditionUtil.IsCoreClr ? @"C:\A\B\*" : "*";
+            CompileAndVerify(
+                compilation,
+                expectedOutput: $@"
 1: 'C:\filename'
 2: 'C:\A\B\a\c\d.cs'
 3: '{expectedStarPath}'
 4: 'C:\abc'
 5: '     '
-");
+"
+            );
         }
 
         [Fact]
         public void TestAssemblyAttribute()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 using System.Reflection;
@@ -1820,20 +2261,25 @@ namespace MyNamespace
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 member: MyMethod
 member: 
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
-
 
         [Fact]
         public void TestCallerMemberNameConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 using System.Reflection;
@@ -1865,18 +2311,24 @@ namespace MyNamespace
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 member: MyMethod
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, references: new MetadataReference[] { SystemRef }, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                references: new MetadataReference[] { SystemRef },
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact]
         public void TestRecursiveAttribute()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -1891,7 +2343,11 @@ class Test
     public static void Main() { }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, references: new MetadataReference[] { SystemRef }, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                references: new MetadataReference[] { SystemRef },
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: "");
 
             var ctor = compilation.GetMember<MethodSymbol>("Goo..ctor");
@@ -1906,7 +2362,8 @@ class Test
         [Fact]
         public void TestRecursiveAttribute2()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -1921,7 +2378,11 @@ class Test
     public static void Main() { }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, references: new MetadataReference[] { SystemRef }, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                references: new MetadataReference[] { SystemRef },
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: "");
 
             var ctor = compilation.GetMember<MethodSymbol>("Goo..ctor");
@@ -1933,11 +2394,11 @@ class Test
             Assert.Equal(1, attr.CommonConstructorArguments[0].Value);
         }
 
-
         [Fact]
         public void TestRecursiveAttributeMetadata()
         {
-            var iLSource = @"
+            var iLSource =
+                @"
 .class public auto ansi beforefieldinit Goo
        extends [mscorlib]System.Attribute
 {
@@ -1959,7 +2420,8 @@ class Test
 } // end of class Goo
 ";
 
-            var source = @"
+            var source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -1975,15 +2437,19 @@ class Driver {
             var expected = @"";
 
             MetadataReference libReference = CompileIL(iLSource);
-            var compilation = CreateCompilationWithMscorlib45(source, new[] { libReference }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new[] { libReference },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
-
 
         [Fact]
         public void TestMemberNameLookup()
         {
-            var source = @"
+            var source =
+                @"
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System;
@@ -2011,15 +2477,18 @@ class Driver
 
             var expected = @"Bar";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
-
 
         [Fact]
         public void TestDuplicateCallerInfoMetadata()
         {
-            var iLSource = @"
+            var iLSource =
+                @"
 .class public auto ansi beforefieldinit Goo
        extends [mscorlib]System.Object
 {
@@ -2106,7 +2575,8 @@ class Driver
 } // end of class Goo
 ";
 
-            var source = @"
+            var source =
+                @"
 using System.Runtime.CompilerServices;
 using System;
 
@@ -2119,7 +2589,8 @@ class Driver {
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 name: 7
 name: 
 name: C:\file.cs
@@ -2130,7 +2601,8 @@ name: C:\file.cs
             var compilation = CreateCompilationWithMscorlib45(
                 new[] { Parse(source, @"C:\file.cs") },
                 new[] { libReference },
-                TestOptions.ReleaseExe);
+                TestOptions.ReleaseExe
+            );
 
             CompileAndVerify(compilation, expectedOutput: expected);
         }
@@ -2138,7 +2610,8 @@ name: C:\file.cs
         [Fact, WorkItem(546977, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546977")]
         public void Bug_17433()
         {
-            var source = @"using System.Reflection;
+            var source =
+                @"using System.Reflection;
 using System.Runtime.CompilerServices;
 using System;
 
@@ -2162,14 +2635,18 @@ class Driver
 
             var expected = @"13";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact, WorkItem(531036, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531036")]
         public void Repro_17443()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -2209,18 +2686,23 @@ a.LineNumber, a.MemberName ?? ""<null>"");
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 CallerInfoAttributed: (, 22, Property1)
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact, WorkItem(531036, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531036")]
         public void CallerMemberNameAttributedAttributeOnNonMethodMembers()
         {
-            var source = @"
+            var source =
+                @"
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System;
@@ -2274,7 +2756,8 @@ class Driver
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 <none>
 <none>
 MyProperty
@@ -2283,14 +2766,18 @@ Item
 MyMethod
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact, WorkItem(531040, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531040")]
         public void Repro_17449()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -2312,19 +2799,23 @@ class Program
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 13
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
-
 
         [Fact, WorkItem(531040, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531040")]
         public void TestBadAttributeParameterTypeWithCallerLineNumber()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -2355,20 +2846,24 @@ class Program
 }
 ";
 
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (21,2): error CS0181: Attribute constructor parameter 'lineNumber' has type 'int?', which is not a valid attribute parameter type
-                // [LineNumber2NullableInt, LineNumber2ValueType]
-                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2NullableInt").WithArguments("lineNumber", "int?"),
-                // (21,26): error CS0181: Attribute constructor parameter 'lineNumber' has type 'System.ValueType', which is not a valid attribute parameter type
-                // [LineNumber2NullableInt, LineNumber2ValueType]
-                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2ValueType").WithArguments("lineNumber", "System.ValueType"));
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (21,2): error CS0181: Attribute constructor parameter 'lineNumber' has type 'int?', which is not a valid attribute parameter type
+                    // [LineNumber2NullableInt, LineNumber2ValueType]
+                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2NullableInt")
+                        .WithArguments("lineNumber", "int?"),
+                    // (21,26): error CS0181: Attribute constructor parameter 'lineNumber' has type 'System.ValueType', which is not a valid attribute parameter type
+                    // [LineNumber2NullableInt, LineNumber2ValueType]
+                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2ValueType")
+                        .WithArguments("lineNumber", "System.ValueType")
+                );
         }
-
 
         [Fact, WorkItem(531043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531043")]
         public void Repro_17457()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 public class LineNumber2LongAttribute : Attribute
@@ -2396,20 +2891,24 @@ class Test
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 18
 19
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
-
 
         [Fact, WorkItem(531043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531043")]
         public void InvalidDecimalInCustomAttributeParameterWithCallerLineNumber()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -2431,16 +2930,20 @@ class Test
 }
 ";
 
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (13,2): error CS0181: Attribute constructor parameter 'lineNumber' has type 'decimal', which is not a valid attribute parameter type
-                // [LineNumber2DecimalAttribute]
-                Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2DecimalAttribute").WithArguments("lineNumber", "decimal"));
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (13,2): error CS0181: Attribute constructor parameter 'lineNumber' has type 'decimal', which is not a valid attribute parameter type
+                    // [LineNumber2DecimalAttribute]
+                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "LineNumber2DecimalAttribute")
+                        .WithArguments("lineNumber", "decimal")
+                );
         }
 
         [Fact, WorkItem(531043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531043")]
         public void AllLegalConversionForCallerLineNumber()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -2510,7 +3013,8 @@ class Test
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 61
 61
 61
@@ -2520,14 +3024,18 @@ class Test
 61
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
         [Fact, WorkItem(531046, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531046")]
         public void TestUserDefinedImplicitConversion()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -2559,19 +3067,30 @@ class Test
 }
 ";
 
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (19,38): error CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type 'int' to type 'Test'
-                //     public bool M1(string expected, [CallerLineNumber] Test line = null)
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithArguments("int", "Test"),
-                // (25,38): error CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type 'string' to type 'Test'
-                //     public bool M2(string expected, [CallerMemberName] Test line = null)
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithArguments("string", "Test"));
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (19,38): error CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type 'int' to type 'Test'
+                    //     public bool M1(string expected, [CallerLineNumber] Test line = null)
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithArguments("int", "Test"),
+                    // (25,38): error CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type 'string' to type 'Test'
+                    //     public bool M2(string expected, [CallerMemberName] Test line = null)
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithArguments("string", "Test")
+                );
         }
 
         [Fact, WorkItem(546980, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546980")]
         public void TestBaseCtorInvocation()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -2645,7 +3164,8 @@ class Program
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 name : .ctor
 line : 20
 path : C:\filename
@@ -2667,9 +3187,17 @@ query path : C:\filename
 ";
 
             var compilation = CreateCompilationWithMscorlib45(
-                new[] { SyntaxFactory.ParseSyntaxTree(source, path: @"C:\filename", encoding: Encoding.UTF8) },
+                new[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(
+                        source,
+                        path: @"C:\filename",
+                        encoding: Encoding.UTF8
+                    )
+                },
                 new[] { SystemCoreRef },
-                TestOptions.ReleaseExe);
+                TestOptions.ReleaseExe
+            );
 
             CompileAndVerify(compilation, expectedOutput: expected);
         }
@@ -2677,7 +3205,8 @@ query path : C:\filename
         [Fact, WorkItem(531034, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531034")]
         public void WarnOnCallerInfoCollision()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -2706,7 +3235,8 @@ class Test
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 C:\filename
 C:\filename
 20
@@ -2718,52 +3248,118 @@ C:\filename
 ";
 
             var compilation = CreateCompilationWithMscorlib45(
-                new[] { SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.Regular7, path: @"C:\filename", encoding: Encoding.UTF8) },
-                options: TestOptions.ReleaseExe);
+                new[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(
+                        source,
+                        options: TestOptions.Regular7,
+                        path: @"C:\filename",
+                        encoding: Encoding.UTF8
+                    )
+                },
+                options: TestOptions.ReleaseExe
+            );
 
             compilation.VerifyDiagnostics(
                 // C:\filename(7,21): warning CS7072: The CallerMemberNameAttribute applied to parameter 's' will have no effect. It is overridden by the CallerFilePathAttribute.
                 //     static void M1([CallerMemberName,CallerFilePath] string s = null) { Console.WriteLine(s); }
-                Diagnostic(ErrorCode.WRN_CallerFilePathPreferredOverCallerMemberName, "CallerMemberName").WithArguments("s"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerFilePathPreferredOverCallerMemberName,
+                        "CallerMemberName"
+                    )
+                    .WithArguments("s"),
                 // C:\filename(8,36): warning CS7072: The CallerMemberNameAttribute applied to parameter 's' will have no effect. It is overridden by the CallerFilePathAttribute.
                 //     static void M2([CallerFilePath,CallerMemberName] string s = null) { Console.WriteLine(s); }
-                Diagnostic(ErrorCode.WRN_CallerFilePathPreferredOverCallerMemberName, "CallerMemberName").WithArguments("s"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerFilePathPreferredOverCallerMemberName,
+                        "CallerMemberName"
+                    )
+                    .WithArguments("s"),
                 // C:\filename(9,38): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M3([CallerLineNumber,CallerFilePath,CallerMemberName] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath, "CallerFilePath").WithArguments("o"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                        "CallerFilePath"
+                    )
+                    .WithArguments("o"),
                 // C:\filename(9,53): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M3([CallerLineNumber,CallerFilePath,CallerMemberName] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName, "CallerMemberName").WithArguments("o"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                        "CallerMemberName"
+                    )
+                    .WithArguments("o"),
                 // C:\filename(10,38): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M4([CallerLineNumber,CallerMemberName,CallerFilePath] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName, "CallerMemberName").WithArguments("o"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                        "CallerMemberName"
+                    )
+                    .WithArguments("o"),
                 // C:\filename(10,55): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M4([CallerLineNumber,CallerMemberName,CallerFilePath] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath, "CallerFilePath").WithArguments("o"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                        "CallerFilePath"
+                    )
+                    .WithArguments("o"),
                 // C:\filename(11,21): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M5([CallerFilePath,CallerLineNumber,CallerMemberName] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath, "CallerFilePath").WithArguments("o"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                        "CallerFilePath"
+                    )
+                    .WithArguments("o"),
                 // C:\filename(11,53): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M5([CallerFilePath,CallerLineNumber,CallerMemberName] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName, "CallerMemberName").WithArguments("o"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                        "CallerMemberName"
+                    )
+                    .WithArguments("o"),
                 // C:\filename(12,21): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M6([CallerMemberName,CallerLineNumber,CallerFilePath] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName, "CallerMemberName").WithArguments("o"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                        "CallerMemberName"
+                    )
+                    .WithArguments("o"),
                 // C:\filename(12,55): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M6([CallerMemberName,CallerLineNumber,CallerFilePath] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath, "CallerFilePath").WithArguments("o"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                        "CallerFilePath"
+                    )
+                    .WithArguments("o"),
                 // C:\filename(13,21): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M7([CallerFilePath,CallerMemberName,CallerLineNumber] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath, "CallerFilePath").WithArguments("o"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                        "CallerFilePath"
+                    )
+                    .WithArguments("o"),
                 // C:\filename(13,36): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M7([CallerFilePath,CallerMemberName,CallerLineNumber] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName, "CallerMemberName").WithArguments("o"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                        "CallerMemberName"
+                    )
+                    .WithArguments("o"),
                 // C:\filename(14,21): warning CS7073: The CallerMemberNameAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M8([CallerMemberName,CallerFilePath,CallerLineNumber] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName, "CallerMemberName").WithArguments("o"),
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                        "CallerMemberName"
+                    )
+                    .WithArguments("o"),
                 // C:\filename(14,38): warning CS7074: The CallerFilePathAttribute applied to parameter 'o' will have no effect. It is overridden by the CallerLineNumberAttribute.
                 //     static void M8([CallerMemberName,CallerFilePath,CallerLineNumber] object o = null) { Console.WriteLine(o); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath, "CallerFilePath").WithArguments("o"));
+                Diagnostic(
+                        ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                        "CallerFilePath"
+                    )
+                    .WithArguments("o")
+            );
 
             CompileAndVerify(compilation, expectedOutput: expected);
         }
@@ -2771,7 +3367,8 @@ C:\filename
         [Fact, WorkItem(531034, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531034")]
         public void WarnOnCallerInfoCollisionWithBadType()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -2788,25 +3385,60 @@ class Test
 }
 ";
 
-            var compilation = CreateCompilationWithMscorlib45(new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.Regular7, path: @"C:\filename") }).VerifyDiagnostics(
-                // C:\filename(7,38): error CS4018: CallerFilePathAttribute cannot be applied because there are no standard conversions from type 'string' to type 'int'
-                //     static void M1([CallerLineNumber,CallerFilePath,CallerMemberName] int i = 0) { Console.WriteLine(); }
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath").WithArguments("string", "int").WithLocation(7, 38),
-                // C:\filename(7,53): error CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type 'string' to type 'int'
-                //     static void M1([CallerLineNumber,CallerFilePath,CallerMemberName] int i = 0) { Console.WriteLine(); }
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerMemberNameParam, "CallerMemberName").WithArguments("string", "int").WithLocation(7, 53),
-                // C:\filename(8,21): error CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type 'int' to type 'string'
-                //     static void M2([CallerLineNumber,CallerFilePath,CallerMemberName] string s = null) { Console.WriteLine(s); }
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithArguments("int", "string").WithLocation(8, 21),
-                // C:\filename(8,38): warning CS7082: The CallerFilePathAttribute applied to parameter 's' will have no effect. It is overridden by the CallerLineNumberAttribute.
-                //     static void M2([CallerLineNumber,CallerFilePath,CallerMemberName] string s = null) { Console.WriteLine(s); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath, "CallerFilePath").WithArguments("s").WithLocation(8, 38),
-                // C:\filename(8,53): warning CS7081: The CallerMemberNameAttribute applied to parameter 's' will have no effect. It is overridden by the CallerLineNumberAttribute.
-                //     static void M2([CallerLineNumber,CallerFilePath,CallerMemberName] string s = null) { Console.WriteLine(s); }
-                Diagnostic(ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName, "CallerMemberName").WithArguments("s").WithLocation(8, 53),
-                // C:\filename(13,9): error CS0029: Cannot implicitly convert type 'int' to 'string'
-                //         M2();
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "M2()").WithArguments("int", "string").WithLocation(13, 9));
+            var compilation = CreateCompilationWithMscorlib45(
+                    new SyntaxTree[]
+                    {
+                        SyntaxFactory.ParseSyntaxTree(
+                            source,
+                            options: TestOptions.Regular7,
+                            path: @"C:\filename"
+                        )
+                    }
+                )
+                .VerifyDiagnostics(
+                    // C:\filename(7,38): error CS4018: CallerFilePathAttribute cannot be applied because there are no standard conversions from type 'string' to type 'int'
+                    //     static void M1([CallerLineNumber,CallerFilePath,CallerMemberName] int i = 0) { Console.WriteLine(); }
+                    Diagnostic(ErrorCode.ERR_NoConversionForCallerFilePathParam, "CallerFilePath")
+                        .WithArguments("string", "int")
+                        .WithLocation(7, 38),
+                    // C:\filename(7,53): error CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type 'string' to type 'int'
+                    //     static void M1([CallerLineNumber,CallerFilePath,CallerMemberName] int i = 0) { Console.WriteLine(); }
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerMemberNameParam,
+                            "CallerMemberName"
+                        )
+                        .WithArguments("string", "int")
+                        .WithLocation(7, 53),
+                    // C:\filename(8,21): error CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type 'int' to type 'string'
+                    //     static void M2([CallerLineNumber,CallerFilePath,CallerMemberName] string s = null) { Console.WriteLine(s); }
+                    Diagnostic(
+                            ErrorCode.ERR_NoConversionForCallerLineNumberParam,
+                            "CallerLineNumber"
+                        )
+                        .WithArguments("int", "string")
+                        .WithLocation(8, 21),
+                    // C:\filename(8,38): warning CS7082: The CallerFilePathAttribute applied to parameter 's' will have no effect. It is overridden by the CallerLineNumberAttribute.
+                    //     static void M2([CallerLineNumber,CallerFilePath,CallerMemberName] string s = null) { Console.WriteLine(s); }
+                    Diagnostic(
+                            ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
+                            "CallerFilePath"
+                        )
+                        .WithArguments("s")
+                        .WithLocation(8, 38),
+                    // C:\filename(8,53): warning CS7081: The CallerMemberNameAttribute applied to parameter 's' will have no effect. It is overridden by the CallerLineNumberAttribute.
+                    //     static void M2([CallerLineNumber,CallerFilePath,CallerMemberName] string s = null) { Console.WriteLine(s); }
+                    Diagnostic(
+                            ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
+                            "CallerMemberName"
+                        )
+                        .WithArguments("s")
+                        .WithLocation(8, 53),
+                    // C:\filename(13,9): error CS0029: Cannot implicitly convert type 'int' to 'string'
+                    //         M2();
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "M2()")
+                        .WithArguments("int", "string")
+                        .WithLocation(13, 9)
+                );
         }
 
         [WorkItem(604367, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/604367")]
@@ -2814,7 +3446,7 @@ class Test
         public void TestCallerInfoInQuery()
         {
             string source =
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 
 class Test
@@ -2880,7 +3512,11 @@ class Test
 }";
 
             string expected = @"PASS";
-            var compilation = CreateCompilationWithMscorlib45(source, new MetadataReference[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new MetadataReference[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
@@ -2890,7 +3526,7 @@ class Test
         public void Bug949118_1()
         {
             string source =
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Globalization;
 class Program
@@ -2914,9 +3550,14 @@ public class Goo
 }
 ";
 
-            string expected = @"F1
+            string expected =
+                @"F1
 F2";
-            var compilation = CreateCompilationWithMscorlib45(source, new MetadataReference[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new MetadataReference[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
@@ -2926,7 +3567,7 @@ F2";
         public void Bug949118_2()
         {
             string source =
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Globalization;
 class Program
@@ -2950,9 +3591,14 @@ public class Goo
 }
 ";
 
-            string expected = @"F1
+            string expected =
+                @"F1
 F2";
-            var compilation = CreateCompilationWithMscorlib45(source, new MetadataReference[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new MetadataReference[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
@@ -2962,7 +3608,7 @@ F2";
         public void Bug949118_3()
         {
             string source =
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Globalization;
 class Program
@@ -2991,7 +3637,11 @@ public class Goo : I1
 ";
 
             string expected = @"F2";
-            var compilation = CreateCompilationWithMscorlib45(source, new MetadataReference[] { SystemRef }, TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                new MetadataReference[] { SystemRef },
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
@@ -3006,7 +3656,7 @@ public class Goo : I1
         public void Bug991476_1()
         {
             const string source =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -3045,15 +3695,24 @@ class Program
     }
 }";
 
-            const string expected = @"Caller file path: C:\filename
+            const string expected =
+                @"Caller file path: C:\filename
 C:\filename
 Caller file path: C:\filename
 C:\filename";
 
             var compilation = CreateCompilationWithMscorlib45(
-                new[] { SyntaxFactory.ParseSyntaxTree(source, path: @"C:\filename", encoding: Encoding.UTF8) },
+                new[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(
+                        source,
+                        path: @"C:\filename",
+                        encoding: Encoding.UTF8
+                    )
+                },
                 new[] { SystemCoreRef },
-                TestOptions.ReleaseExe);
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
@@ -3063,7 +3722,7 @@ C:\filename";
         public void Bug991476_2()
         {
             const string source =
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 
@@ -3104,16 +3763,25 @@ static class E
     }
 }";
 
-            const string expected = @"11
+            const string expected =
+                @"11
 12
 17
 Main
 21";
 
             var compilation = CreateCompilationWithMscorlib45(
-                new[] { SyntaxFactory.ParseSyntaxTree(source, path: @"C:\filename", encoding: Encoding.UTF8) },
+                new[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(
+                        source,
+                        path: @"C:\filename",
+                        encoding: Encoding.UTF8
+                    )
+                },
                 new[] { SystemCoreRef },
-                TestOptions.ReleaseExe);
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
@@ -3122,7 +3790,7 @@ Main
         public void Bug1006447_1()
         {
             const string vbSource =
-@"Imports System
+                @"Imports System
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices
 Imports System.Text
@@ -3147,10 +3815,13 @@ Public Class A
     End Property
 End Class";
 
-            var vbReference = BasicCompilationUtils.CompileToMetadata(vbSource, references: new[] { MscorlibRef_v4_0_30316_17626, SystemCoreRef });
+            var vbReference = BasicCompilationUtils.CompileToMetadata(
+                vbSource,
+                references: new[] { MscorlibRef_v4_0_30316_17626, SystemCoreRef }
+            );
 
             const string csSource =
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3166,16 +3837,26 @@ class C
 }
 ";
             var compilation = CreateCompilationWithMscorlib45(
-                new[] { SyntaxFactory.ParseSyntaxTree(csSource, path: @"C:\filename", encoding: Encoding.UTF8) },
+                new[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(
+                        csSource,
+                        path: @"C:\filename",
+                        encoding: Encoding.UTF8
+                    )
+                },
                 new[] { SystemCoreRef, vbReference },
-                TestOptions.ReleaseExe);
+                TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"Set X(""C:\filename"")
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"Set X(""C:\filename"")
 Set X(""C:\filename"")
 Set X(""C:\filename"")
 Get X(""C:\filename"")
-");
+"
+            );
         }
 
         [WorkItem(1006447, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1006447")]
@@ -3183,7 +3864,7 @@ Get X(""C:\filename"")
         public void Bug1006447_2()
         {
             const string source =
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 
 class C
@@ -3207,7 +3888,8 @@ class C
             var compilation = CreateCompilationWithMscorlib45(
                 source,
                 new[] { SystemCoreRef },
-                TestOptions.ReleaseExe);
+                TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: expected);
         }
 
@@ -3216,7 +3898,7 @@ class C
         public void Bug1006447_3()
         {
             const string vbSource =
-@"Imports System
+                @"Imports System
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices
 
@@ -3237,10 +3919,13 @@ Public Class A
     End Property
 End Class";
 
-            var vbReference = BasicCompilationUtils.CompileToMetadata(vbSource, references: new[] { MscorlibRef_v4_0_30316_17626, SystemCoreRef });
+            var vbReference = BasicCompilationUtils.CompileToMetadata(
+                vbSource,
+                references: new[] { MscorlibRef_v4_0_30316_17626, SystemCoreRef }
+            );
 
             const string csSource =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -3253,12 +3938,15 @@ class Program
             var compilation = CreateCompilationWithMscorlib45(
                 csSource,
                 new[] { SystemCoreRef, vbReference },
-                TestOptions.ReleaseExe);
+                TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"Get Select(""Main"")
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"Get Select(""Main"")
 ABC
-");
+"
+            );
         }
     }
 }

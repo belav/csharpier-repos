@@ -18,9 +18,17 @@ namespace System.Numerics
         /// <returns>The new vector with elements selected based on the mask.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<float> ConditionalSelect(Vector<int> condition, Vector<float> left, Vector<float> right)
+        public static Vector<float> ConditionalSelect(
+            Vector<int> condition,
+            Vector<float> left,
+            Vector<float> right
+        )
         {
-            return (Vector<float>)Vector<float>.ConditionalSelect((Vector<float>)condition, left, right);
+            return (Vector<float>)Vector<float>.ConditionalSelect(
+                (Vector<float>)condition,
+                left,
+                right
+            );
         }
 
         /// <summary>Creates a new double-precision vector with elements selected between two specified double-precision source vectors based on an integral mask vector.</summary>
@@ -30,9 +38,17 @@ namespace System.Numerics
         /// <returns>The new vector with elements selected based on the mask.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<double> ConditionalSelect(Vector<long> condition, Vector<double> left, Vector<double> right)
+        public static Vector<double> ConditionalSelect(
+            Vector<long> condition,
+            Vector<double> left,
+            Vector<double> right
+        )
         {
-            return (Vector<double>)Vector<double>.ConditionalSelect((Vector<double>)condition, left, right);
+            return (Vector<double>)Vector<double>.ConditionalSelect(
+                (Vector<double>)condition,
+                left,
+                right
+            );
         }
 
         /// <summary>Creates a new vector of a specified type with elements selected between two specified source vectors of the same type based on an integral mask vector.</summary>
@@ -43,7 +59,11 @@ namespace System.Numerics
         /// <returns>The new vector with elements selected based on the mask.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<T> ConditionalSelect<T>(Vector<T> condition, Vector<T> left, Vector<T> right) where T : struct
+        public static Vector<T> ConditionalSelect<T>(
+            Vector<T> condition,
+            Vector<T> left,
+            Vector<T> right
+        ) where T : struct
         {
             return Vector<T>.ConditionalSelect(condition, left, right);
         }
@@ -373,7 +393,8 @@ namespace System.Numerics
         /// <returns>The resulting vector.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<T> GreaterThanOrEqual<T>(Vector<T> left, Vector<T> right) where T : struct
+        public static Vector<T> GreaterThanOrEqual<T>(Vector<T> left, Vector<T> right)
+            where T : struct
         {
             return Vector<T>.GreaterThanOrEqual(left, right);
         }
@@ -428,7 +449,8 @@ namespace System.Numerics
         /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
         /// <returns><see langword="true" /> if all elements in <paramref name="left" /> are greater than or equal to the corresponding elements in <paramref name="right" />; otherwise, <see langword="false" />.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool GreaterThanOrEqualAll<T>(Vector<T> left, Vector<T> right) where T : struct
+        public static bool GreaterThanOrEqualAll<T>(Vector<T> left, Vector<T> right)
+            where T : struct
         {
             Vector<int> cond = (Vector<int>)Vector<T>.GreaterThanOrEqual(left, right);
             return cond.Equals(Vector<int>.AllBitsSet);
@@ -440,7 +462,8 @@ namespace System.Numerics
         /// <typeparam name="T">The vector type. <typeparamref name="T" /> can be any primitive numeric type.</typeparam>
         /// <returns><see langword="true" /> if any element in <paramref name="left" /> is greater than or equal to the corresponding element in <paramref name="right" />; otherwise,  <see langword="false" />.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool GreaterThanOrEqualAny<T>(Vector<T> left, Vector<T> right) where T : struct
+        public static bool GreaterThanOrEqualAny<T>(Vector<T> left, Vector<T> right)
+            where T : struct
         {
             Vector<int> cond = (Vector<int>)Vector<T>.GreaterThanOrEqual(left, right);
             return !cond.Equals(Vector<int>.Zero);
@@ -802,7 +825,11 @@ namespace System.Numerics
         /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         [CLSCompliant(false)]
         [Intrinsic]
-        public static unsafe void Widen(Vector<byte> source, out Vector<ushort> low, out Vector<ushort> high)
+        public static unsafe void Widen(
+            Vector<byte> source,
+            out Vector<ushort> low,
+            out Vector<ushort> high
+        )
         {
             int elements = Vector<byte>.Count;
             ushort* lowPtr = stackalloc ushort[elements / 2];
@@ -826,7 +853,11 @@ namespace System.Numerics
         /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         [CLSCompliant(false)]
         [Intrinsic]
-        public static unsafe void Widen(Vector<ushort> source, out Vector<uint> low, out Vector<uint> high)
+        public static unsafe void Widen(
+            Vector<ushort> source,
+            out Vector<uint> low,
+            out Vector<uint> high
+        )
         {
             int elements = Vector<ushort>.Count;
             uint* lowPtr = stackalloc uint[elements / 2];
@@ -850,7 +881,11 @@ namespace System.Numerics
         /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         [CLSCompliant(false)]
         [Intrinsic]
-        public static unsafe void Widen(Vector<uint> source, out Vector<ulong> low, out Vector<ulong> high)
+        public static unsafe void Widen(
+            Vector<uint> source,
+            out Vector<ulong> low,
+            out Vector<ulong> high
+        )
         {
             int elements = Vector<uint>.Count;
             ulong* lowPtr = stackalloc ulong[elements / 2];
@@ -874,7 +909,11 @@ namespace System.Numerics
         /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         [CLSCompliant(false)]
         [Intrinsic]
-        public static unsafe void Widen(Vector<sbyte> source, out Vector<short> low, out Vector<short> high)
+        public static unsafe void Widen(
+            Vector<sbyte> source,
+            out Vector<short> low,
+            out Vector<short> high
+        )
         {
             int elements = Vector<sbyte>.Count;
             short* lowPtr = stackalloc short[elements / 2];
@@ -897,7 +936,11 @@ namespace System.Numerics
         /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
         /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         [Intrinsic]
-        public static unsafe void Widen(Vector<short> source, out Vector<int> low, out Vector<int> high)
+        public static unsafe void Widen(
+            Vector<short> source,
+            out Vector<int> low,
+            out Vector<int> high
+        )
         {
             int elements = Vector<short>.Count;
             int* lowPtr = stackalloc int[elements / 2];
@@ -920,7 +963,11 @@ namespace System.Numerics
         /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
         /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         [Intrinsic]
-        public static unsafe void Widen(Vector<int> source, out Vector<long> low, out Vector<long> high)
+        public static unsafe void Widen(
+            Vector<int> source,
+            out Vector<long> low,
+            out Vector<long> high
+        )
         {
             int elements = Vector<int>.Count;
             long* lowPtr = stackalloc long[elements / 2];
@@ -943,7 +990,11 @@ namespace System.Numerics
         /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
         /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         [Intrinsic]
-        public static unsafe void Widen(Vector<float> source, out Vector<double> low, out Vector<double> high)
+        public static unsafe void Widen(
+            Vector<float> source,
+            out Vector<double> low,
+            out Vector<double> high
+        )
         {
             int elements = Vector<float>.Count;
             double* lowPtr = stackalloc double[elements / 2];
@@ -1247,7 +1298,9 @@ namespace System.Numerics
         [DoesNotReturn]
         internal static void ThrowInsufficientNumberOfElementsException(int requiredElementCount)
         {
-            throw new IndexOutOfRangeException(SR.Format(SR.Arg_InsufficientNumberOfElements, requiredElementCount, "values"));
+            throw new IndexOutOfRangeException(
+                SR.Format(SR.Arg_InsufficientNumberOfElements, requiredElementCount, "values")
+            );
         }
 
         /// <summary>

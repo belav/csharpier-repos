@@ -54,7 +54,10 @@ namespace Microsoft.CodeAnalysis
             /// For each assembly referenced by this assembly (<see cref="AssemblyReferences"/>) 
             /// a description of how it binds to one of the input assemblies.
             /// </returns>
-            public abstract AssemblyReferenceBinding[] BindAssemblyReferences(ImmutableArray<AssemblyData> assemblies, AssemblyIdentityComparer assemblyIdentityComparer);
+            public abstract AssemblyReferenceBinding[] BindAssemblyReferences(
+                ImmutableArray<AssemblyData> assemblies,
+                AssemblyIdentityComparer assemblyIdentityComparer
+            );
 
             public abstract bool ContainsNoPiaLocalTypes { get; }
 
@@ -68,7 +71,8 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             public abstract Compilation? SourceCompilation { get; }
 
-            private string GetDebuggerDisplay() => $"{GetType().Name}: [{Identity.GetDisplayName()}]";
+            private string GetDebuggerDisplay() =>
+                $"{GetType().Name}: [{Identity.GetDisplayName()}]";
         }
     }
 }

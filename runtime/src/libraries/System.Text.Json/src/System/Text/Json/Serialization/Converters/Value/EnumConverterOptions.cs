@@ -10,7 +10,6 @@ namespace System.Text.Json.Serialization.Converters
         /// Allow string values.
         /// </summary>
         AllowStrings = 0b0001,
-
         /// <summary>
         /// Allow number values.
         /// </summary>

@@ -16,10 +16,9 @@ namespace Microsoft.AspNetCore.Builder
                 throw new ArgumentNullException(nameof(app));
             }
 
-            return app.UseMiddleware<HelloMiddleware>(Options.Create(new HelloOptions
-            {
-                Greeter = greeter
-            }));
+            return app.UseMiddleware<HelloMiddleware>(
+                Options.Create(new HelloOptions { Greeter = greeter })
+            );
         }
     }
 }

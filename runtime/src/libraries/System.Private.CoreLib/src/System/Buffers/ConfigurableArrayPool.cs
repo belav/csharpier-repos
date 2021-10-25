@@ -15,9 +15,8 @@ namespace System.Buffers
 
         private readonly Bucket[] _buckets;
 
-        internal ConfigurableArrayPool() : this(DefaultMaxArrayLength, DefaultMaxNumberOfArraysPerBucket)
-        {
-        }
+        internal ConfigurableArrayPool()
+            : this(DefaultMaxArrayLength, DefaultMaxNumberOfArraysPerBucket) { }
 
         internal ConfigurableArrayPool(int maxArrayLength, int maxArraysPerBucket)
         {
@@ -32,7 +31,8 @@ namespace System.Buffers
 
             // Our bucketing algorithm has a min length of 2^4 and a max length of 2^30.
             // Constrain the actual max used to those values.
-            const int MinimumArrayLength = 0x10, MaximumArrayLength = 0x40000000;
+            const int MinimumArrayLength = 0x10,
+                MaximumArrayLength = 0x40000000;
             if (maxArrayLength > MaximumArrayLength)
             {
                 maxArrayLength = MaximumArrayLength;
@@ -48,7 +48,11 @@ namespace System.Buffers
             var buckets = new Bucket[maxBuckets + 1];
             for (int i = 0; i < buckets.Length; i++)
             {
-                buckets[i] = new Bucket(Utilities.GetMaxSizeForBucket(i), maxArraysPerBucket, poolId);
+                buckets[i] = new Bucket(
+                    Utilities.GetMaxSizeForBucket(i),
+                    maxArraysPerBucket,
+                    poolId
+                );
             }
             _buckets = buckets;
         }
@@ -90,12 +94,16 @@ namespace System.Buffers
                     {
                         if (log.IsEnabled())
                         {
-                            log.BufferRented(buffer.GetHashCode(), buffer.Length, Id, _buckets[i].Id);
+                            log.BufferRented(
+                                buffer.GetHashCode(),
+                                buffer.Length,
+                                Id,
+                                _buckets[i].Id
+                            );
                         }
                         return buffer;
                     }
-                }
-                while (++i < _buckets.Length && i != index + MaxBucketsToTry);
+                } while (++i < _buckets.Length && i != index + MaxBucketsToTry);
 
                 // The pool was exhausted for this buffer size.  Allocate a new buffer with a size corresponding
                 // to the appropriate bucket.
@@ -112,9 +120,15 @@ namespace System.Buffers
             {
                 int bufferId = buffer.GetHashCode();
                 log.BufferRented(bufferId, buffer.Length, Id, ArrayPoolEventSource.NoBucketId);
-                log.BufferAllocated(bufferId, buffer.Length, Id, ArrayPoolEventSource.NoBucketId, index >= _buckets.Length ?
-                    ArrayPoolEventSource.BufferAllocatedReason.OverMaximumSize :
-                    ArrayPoolEventSource.BufferAllocatedReason.PoolExhausted);
+                log.BufferAllocated(
+                    bufferId,
+                    buffer.Length,
+                    Id,
+                    ArrayPoolEventSource.NoBucketId,
+                    index >= _buckets.Length
+                      ? ArrayPoolEventSource.BufferAllocatedReason.OverMaximumSize
+                      : ArrayPoolEventSource.BufferAllocatedReason.PoolExhausted
+                );
             }
 
             return buffer;
@@ -160,7 +174,13 @@ namespace System.Buffers
                 log.BufferReturned(bufferId, array.Length, Id);
                 if (!haveBucket)
                 {
-                    log.BufferDropped(bufferId, array.Length, Id, ArrayPoolEventSource.NoBucketId, ArrayPoolEventSource.BufferDroppedReason.Full);
+                    log.BufferDropped(
+                        bufferId,
+                        array.Length,
+                        Id,
+                        ArrayPoolEventSource.NoBucketId,
+                        ArrayPoolEventSource.BufferDroppedReason.Full
+                    );
                 }
             }
         }
@@ -199,7 +219,8 @@ namespace System.Buffers
                 // update the index.  We do as little work as possible while holding the spin
                 // lock to minimize contention with other threads.  The try/finally is
                 // necessary to properly handle thread aborts on platforms which have them.
-                bool lockTaken = false, allocateBuffer = false;
+                bool lockTaken = false,
+                    allocateBuffer = false;
                 try
                 {
                     _lock.Enter(ref lockTaken);
@@ -213,7 +234,8 @@ namespace System.Buffers
                 }
                 finally
                 {
-                    if (lockTaken) _lock.Exit(false);
+                    if (lockTaken)
+                        _lock.Exit(false);
                 }
 
                 // While we were holding the lock, we grabbed whatever was at the next available index, if
@@ -226,8 +248,13 @@ namespace System.Buffers
                     ArrayPoolEventSource log = ArrayPoolEventSource.Log;
                     if (log.IsEnabled())
                     {
-                        log.BufferAllocated(buffer.GetHashCode(), _bufferLength, _poolId, Id,
-                            ArrayPoolEventSource.BufferAllocatedReason.Pooled);
+                        log.BufferAllocated(
+                            buffer.GetHashCode(),
+                            _bufferLength,
+                            _poolId,
+                            Id,
+                            ArrayPoolEventSource.BufferAllocatedReason.Pooled
+                        );
                     }
                 }
 
@@ -244,7 +271,10 @@ namespace System.Buffers
                 // Check to see if the buffer is the correct size for this bucket
                 if (array.Length != _bufferLength)
                 {
-                    throw new ArgumentException(SR.ArgumentException_BufferNotFromPool, nameof(array));
+                    throw new ArgumentException(
+                        SR.ArgumentException_BufferNotFromPool,
+                        nameof(array)
+                    );
                 }
 
                 bool returned;
@@ -266,7 +296,8 @@ namespace System.Buffers
                 }
                 finally
                 {
-                    if (lockTaken) _lock.Exit(false);
+                    if (lockTaken)
+                        _lock.Exit(false);
                 }
 
                 if (!returned)
@@ -274,7 +305,13 @@ namespace System.Buffers
                     ArrayPoolEventSource log = ArrayPoolEventSource.Log;
                     if (log.IsEnabled())
                     {
-                        log.BufferDropped(array.GetHashCode(), _bufferLength, _poolId, Id, ArrayPoolEventSource.BufferDroppedReason.Full);
+                        log.BufferDropped(
+                            array.GetHashCode(),
+                            _bufferLength,
+                            _poolId,
+                            Id,
+                            ArrayPoolEventSource.BufferDroppedReason.Full
+                        );
                     }
                 }
             }

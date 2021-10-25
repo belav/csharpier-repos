@@ -51,9 +51,7 @@ namespace System.ComponentModel.Design
         /// <summary>
         /// Default constructor, which creates an attribute with a null HelpKeyword.
         /// </summary>
-        public HelpKeywordAttribute()
-        {
-        }
+        public HelpKeywordAttribute() { }
 
         /// <summary>
         /// Creates a HelpKeywordAttribute with the value being the given keyword string.

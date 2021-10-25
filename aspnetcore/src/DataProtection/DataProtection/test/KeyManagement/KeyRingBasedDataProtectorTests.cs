@@ -31,10 +31,14 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: new Mock<IKeyRingProvider>().Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act & assert
-            ExceptionAssert.ThrowsArgumentNull(() => protector.Protect(plaintext: null), "plaintext");
+            ExceptionAssert.ThrowsArgumentNull(
+                () => protector.Protect(plaintext: null),
+                "plaintext"
+            );
         }
 
         [Fact]
@@ -43,18 +47,30 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             // Arrange
             Guid defaultKey = new Guid("ba73c9ce-d322-4e45-af90-341307e11c38");
             byte[] expectedPlaintext = new byte[] { 0x03, 0x05, 0x07, 0x11, 0x13, 0x17, 0x19 };
-            byte[] expectedAad = BuildAadFromPurposeStrings(defaultKey, "purpose1", "purpose2", "yet another purpose");
-            byte[] expectedProtectedData = BuildProtectedDataFromCiphertext(defaultKey, new byte[] { 0x23, 0x29, 0x31, 0x37 });
+            byte[] expectedAad = BuildAadFromPurposeStrings(
+                defaultKey,
+                "purpose1",
+                "purpose2",
+                "yet another purpose"
+            );
+            byte[] expectedProtectedData = BuildProtectedDataFromCiphertext(
+                defaultKey,
+                new byte[] { 0x23, 0x29, 0x31, 0x37 }
+            );
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor
-                .Setup(o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>()))
-                .Returns<ArraySegment<byte>, ArraySegment<byte>>((actualPlaintext, actualAad) =>
-                {
-                    Assert.Equal(expectedPlaintext, actualPlaintext);
-                    Assert.Equal(expectedAad, actualAad);
-                    return new byte[] { 0x23, 0x29, 0x31, 0x37 }; // ciphertext + tag
-                });
+                .Setup(
+                    o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+                )
+                .Returns<ArraySegment<byte>, ArraySegment<byte>>(
+                    (actualPlaintext, actualAad) =>
+                    {
+                        Assert.Equal(expectedPlaintext, actualPlaintext);
+                        Assert.Equal(expectedAad, actualAad);
+                        return new byte[] { 0x23, 0x29, 0x31, 0x37 }; // ciphertext + tag
+                    }
+                );
 
             var mockKeyRing = new Mock<IKeyRing>(MockBehavior.Strict);
             mockKeyRing.Setup(o => o.DefaultKeyId).Returns(defaultKey);
@@ -66,7 +82,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: mockKeyRingProvider.Object,
                 logger: GetLogger(),
                 originalPurposes: new[] { "purpose1", "purpose2" },
-                newPurpose: "yet another purpose");
+                newPurpose: "yet another purpose"
+            );
 
             // Act
             byte[] retVal = protector.Protect(expectedPlaintext);
@@ -82,17 +99,24 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Guid defaultKey = new Guid("ba73c9ce-d322-4e45-af90-341307e11c38");
             byte[] expectedPlaintext = new byte[] { 0x03, 0x05, 0x07, 0x11, 0x13, 0x17, 0x19 };
             byte[] expectedAad = BuildAadFromPurposeStrings(defaultKey, "single purpose");
-            byte[] expectedProtectedData = BuildProtectedDataFromCiphertext(defaultKey, new byte[] { 0x23, 0x29, 0x31, 0x37 });
+            byte[] expectedProtectedData = BuildProtectedDataFromCiphertext(
+                defaultKey,
+                new byte[] { 0x23, 0x29, 0x31, 0x37 }
+            );
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor
-                .Setup(o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>()))
-                .Returns<ArraySegment<byte>, ArraySegment<byte>>((actualPlaintext, actualAad) =>
-                {
-                    Assert.Equal(expectedPlaintext, actualPlaintext);
-                    Assert.Equal(expectedAad, actualAad);
-                    return new byte[] { 0x23, 0x29, 0x31, 0x37 }; // ciphertext + tag
-                });
+                .Setup(
+                    o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+                )
+                .Returns<ArraySegment<byte>, ArraySegment<byte>>(
+                    (actualPlaintext, actualAad) =>
+                    {
+                        Assert.Equal(expectedPlaintext, actualPlaintext);
+                        Assert.Equal(expectedAad, actualAad);
+                        return new byte[] { 0x23, 0x29, 0x31, 0x37 }; // ciphertext + tag
+                    }
+                );
 
             var mockKeyRing = new Mock<IKeyRing>(MockBehavior.Strict);
             mockKeyRing.Setup(o => o.DefaultKeyId).Returns(defaultKey);
@@ -104,7 +128,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: mockKeyRingProvider.Object,
                 logger: GetLogger(),
                 originalPurposes: new string[0],
-                newPurpose: "single purpose");
+                newPurpose: "single purpose"
+            );
 
             // Act
             byte[] retVal = protector.Protect(expectedPlaintext);
@@ -121,10 +146,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: new Mock<IKeyRingProvider>(MockBehavior.Strict).Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act & assert
-            var ex = ExceptionAssert2.ThrowsCryptographicException(() => protector.Protect(new byte[0]));
+            var ex = ExceptionAssert2.ThrowsCryptographicException(
+                () => protector.Protect(new byte[0])
+            );
             Assert.IsAssignableFrom<MockException>(ex.InnerException);
         }
 
@@ -136,10 +164,14 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: new Mock<IKeyRingProvider>().Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act & assert
-            ExceptionAssert.ThrowsArgumentNull(() => protector.Unprotect(protectedData: null), "protectedData");
+            ExceptionAssert.ThrowsArgumentNull(
+                () => protector.Unprotect(protectedData: null),
+                "protectedData"
+            );
         }
 
         [Fact]
@@ -150,13 +182,21 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: new Mock<IKeyRingProvider>().Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
-            byte[] badProtectedPayload = BuildProtectedDataFromCiphertext(Guid.NewGuid(), new byte[0]);
-            badProtectedPayload = badProtectedPayload.Take(badProtectedPayload.Length - 1).ToArray(); // chop off the last byte
+            byte[] badProtectedPayload = BuildProtectedDataFromCiphertext(
+                Guid.NewGuid(),
+                new byte[0]
+            );
+            badProtectedPayload = badProtectedPayload
+                .Take(badProtectedPayload.Length - 1)
+                .ToArray(); // chop off the last byte
 
             // Act & assert
-            var ex = ExceptionAssert2.ThrowsCryptographicException(() => protector.Unprotect(badProtectedPayload));
+            var ex = ExceptionAssert2.ThrowsCryptographicException(
+                () => protector.Unprotect(badProtectedPayload)
+            );
             Assert.Equal(Resources.ProtectionProvider_BadMagicHeader, ex.Message);
         }
 
@@ -168,13 +208,19 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: new Mock<IKeyRingProvider>().Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
-            byte[] badProtectedPayload = BuildProtectedDataFromCiphertext(Guid.NewGuid(), new byte[0]);
+            byte[] badProtectedPayload = BuildProtectedDataFromCiphertext(
+                Guid.NewGuid(),
+                new byte[0]
+            );
             badProtectedPayload[0]++; // corrupt the magic header
 
             // Act & assert
-            var ex = ExceptionAssert2.ThrowsCryptographicException(() => protector.Unprotect(badProtectedPayload));
+            var ex = ExceptionAssert2.ThrowsCryptographicException(
+                () => protector.Unprotect(badProtectedPayload)
+            );
             Assert.Equal(Resources.ProtectionProvider_BadMagicHeader, ex.Message);
         }
 
@@ -186,13 +232,19 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: new Mock<IKeyRingProvider>().Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
-            byte[] badProtectedPayload = BuildProtectedDataFromCiphertext(Guid.NewGuid(), new byte[0]);
+            byte[] badProtectedPayload = BuildProtectedDataFromCiphertext(
+                Guid.NewGuid(),
+                new byte[0]
+            );
             badProtectedPayload[3]++; // bump the version payload
 
             // Act & assert
-            var ex = ExceptionAssert2.ThrowsCryptographicException(() => protector.Unprotect(badProtectedPayload));
+            var ex = ExceptionAssert2.ThrowsCryptographicException(
+                () => protector.Unprotect(badProtectedPayload)
+            );
             Assert.Equal(Resources.ProtectionProvider_BadVersion, ex.Message);
         }
 
@@ -203,15 +255,25 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Guid notFoundKeyId = new Guid("654057ab-2491-4471-a72a-b3b114afda38");
             byte[] protectedData = BuildProtectedDataFromCiphertext(
                 keyId: notFoundKeyId,
-                ciphertext: new byte[0]);
+                ciphertext: new byte[0]
+            );
 
             var mockDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>();
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
-            mockEncryptorFactory.Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>())).Returns(new Mock<IAuthenticatedEncryptor>().Object);
+            mockEncryptorFactory
+                .Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>()))
+                .Returns(new Mock<IAuthenticatedEncryptor>().Object);
             var encryptorFactory = new AuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
 
             // the keyring has only one key
-            Key key = new Key(Guid.Empty, DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, mockDescriptor.Object, new[] { mockEncryptorFactory.Object });
+            Key key = new Key(
+                Guid.Empty,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                mockDescriptor.Object,
+                new[] { mockEncryptorFactory.Object }
+            );
             var keyRing = new KeyRing(key, new[] { key });
             var mockKeyRingProvider = new Mock<IKeyRingProvider>();
             mockKeyRingProvider.Setup(o => o.GetCurrentKeyRing()).Returns(keyRing);
@@ -220,10 +282,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: mockKeyRingProvider.Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act & assert
-            var ex = ExceptionAssert2.ThrowsCryptographicException(() => protector.Unprotect(protectedData));
+            var ex = ExceptionAssert2.ThrowsCryptographicException(
+                () => protector.Unprotect(protectedData)
+            );
             Assert.Equal(Error.Common_KeyNotFound(notFoundKeyId).Message, ex.Message);
         }
 
@@ -232,10 +297,14 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             return DateTimeOffset.ParseExact(input, "u", CultureInfo.InvariantCulture).UtcDateTime;
         }
 
-        private static KeyRingProvider CreateKeyRingProvider(ICacheableKeyRingProvider cacheableKeyRingProvider)
+        private static KeyRingProvider CreateKeyRingProvider(
+            ICacheableKeyRingProvider cacheableKeyRingProvider
+        )
         {
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
-            mockEncryptorFactory.Setup(m => m.CreateEncryptorInstance(It.IsAny<IKey>())).Returns(new Mock<IAuthenticatedEncryptor>().Object);
+            mockEncryptorFactory
+                .Setup(m => m.CreateEncryptorInstance(It.IsAny<IKey>()))
+                .Returns(new Mock<IAuthenticatedEncryptor>().Object);
             var options = new KeyManagementOptions();
             options.AuthenticatedEncryptorFactories.Add(mockEncryptorFactory.Object);
 
@@ -243,8 +312,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyManager: null,
                 keyManagementOptions: Options.Create(options),
                 defaultKeyResolver: null,
-                loggerFactory: NullLoggerFactory.Instance)
-            {
+                loggerFactory: NullLoggerFactory.Instance
+            ) {
                 CacheableKeyRingProvider = cacheableKeyRingProvider
             };
         }
@@ -256,16 +325,31 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Guid notFoundKeyId = new Guid("654057ab-2491-4471-a72a-b3b114afda38");
             byte[] protectedData = BuildProtectedDataFromCiphertext(
                 keyId: notFoundKeyId,
-                ciphertext: new byte[0]);
+                ciphertext: new byte[0]
+            );
 
             var mockDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>();
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
-            mockEncryptorFactory.Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>())).Returns(new Mock<IAuthenticatedEncryptor>().Object);
+            mockEncryptorFactory
+                .Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>()))
+                .Returns(new Mock<IAuthenticatedEncryptor>().Object);
             var encryptorFactory = new AuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
 
             // the keyring has only one key
-            Key key = new Key(Guid.Empty, DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, mockDescriptor.Object, new[] { mockEncryptorFactory.Object });
-            var keyRing = new CacheableKeyRing(CancellationToken.None, DateTimeOffset.MaxValue, key, new[] { key });
+            Key key = new Key(
+                Guid.Empty,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                mockDescriptor.Object,
+                new[] { mockEncryptorFactory.Object }
+            );
+            var keyRing = new CacheableKeyRing(
+                CancellationToken.None,
+                DateTimeOffset.MaxValue,
+                key,
+                new[] { key }
+            );
 
             var keyRingProvider = CreateKeyRingProvider(new TestKeyRingProvider(keyRing));
 
@@ -273,10 +357,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: keyRingProvider,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act & assert
-            var ex = ExceptionAssert2.ThrowsCryptographicException(() => protector.Unprotect(protectedData));
+            var ex = ExceptionAssert2.ThrowsCryptographicException(
+                () => protector.Unprotect(protectedData)
+            );
             Assert.Equal(Error.Common_KeyNotFound(notFoundKeyId).Message, ex.Message);
         }
 
@@ -287,32 +374,64 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Guid notFoundKeyId = new Guid("654057ab-2491-4471-a72a-b3b114afda38");
             byte[] protectedData = BuildProtectedDataFromCiphertext(
                 keyId: notFoundKeyId,
-                ciphertext: new byte[0]);
+                ciphertext: new byte[0]
+            );
 
             var mockDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>();
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
-            mockEncryptorFactory.Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>())).Returns(new Mock<IAuthenticatedEncryptor>().Object);
+            mockEncryptorFactory
+                .Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>()))
+                .Returns(new Mock<IAuthenticatedEncryptor>().Object);
             var encryptorFactory = new AuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
 
             // the keyring has only one key
-            Key key = new Key(Guid.Empty, DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, mockDescriptor.Object, new[] { mockEncryptorFactory.Object });
-            var keyRing = new CacheableKeyRing(CancellationToken.None, DateTimeOffset.MaxValue, key, new[] { key });
+            Key key = new Key(
+                Guid.Empty,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                mockDescriptor.Object,
+                new[] { mockEncryptorFactory.Object }
+            );
+            var keyRing = new CacheableKeyRing(
+                CancellationToken.None,
+                DateTimeOffset.MaxValue,
+                key,
+                new[] { key }
+            );
 
             // the refresh keyring has the notfound key
-            Key key2 = new Key(notFoundKeyId, DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, mockDescriptor.Object, new[] { mockEncryptorFactory.Object });
-            var keyRing2 = new CacheableKeyRing(CancellationToken.None, DateTimeOffset.MaxValue, key, new[] { key2 });
+            Key key2 = new Key(
+                notFoundKeyId,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                mockDescriptor.Object,
+                new[] { mockEncryptorFactory.Object }
+            );
+            var keyRing2 = new CacheableKeyRing(
+                CancellationToken.None,
+                DateTimeOffset.MaxValue,
+                key,
+                new[] { key2 }
+            );
 
-            var keyRingProvider = CreateKeyRingProvider(new RefreshTestKeyRingProvider(keyRing, keyRing2));
+            var keyRingProvider = CreateKeyRingProvider(
+                new RefreshTestKeyRingProvider(keyRing, keyRing2)
+            );
             keyRingProvider.AutoRefreshWindowEnd = DateTime.UtcNow;
 
             IDataProtector protector = new KeyRingBasedDataProtector(
                 keyRingProvider: keyRingProvider,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act & assert
-            var ex = ExceptionAssert2.ThrowsCryptographicException(() => protector.Unprotect(protectedData));
+            var ex = ExceptionAssert2.ThrowsCryptographicException(
+                () => protector.Unprotect(protectedData)
+            );
             Assert.Equal(Error.Common_KeyNotFound(notFoundKeyId).Message, ex.Message);
         }
 
@@ -323,28 +442,58 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Guid notFoundKeyId = new Guid("654057ab-2491-4471-a72a-b3b114afda38");
             byte[] protectedData = BuildProtectedDataFromCiphertext(
                 keyId: notFoundKeyId,
-                ciphertext: new byte[0]);
+                ciphertext: new byte[0]
+            );
 
             var mockDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>();
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
-            mockEncryptorFactory.Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>())).Returns(new Mock<IAuthenticatedEncryptor>().Object);
+            mockEncryptorFactory
+                .Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>()))
+                .Returns(new Mock<IAuthenticatedEncryptor>().Object);
             var encryptorFactory = new AuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
 
             // the keyring has only one key
-            Key key = new Key(Guid.Empty, DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, mockDescriptor.Object, new[] { mockEncryptorFactory.Object });
-            var keyRing = new CacheableKeyRing(CancellationToken.None, DateTimeOffset.MaxValue, key, new[] { key });
+            Key key = new Key(
+                Guid.Empty,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                mockDescriptor.Object,
+                new[] { mockEncryptorFactory.Object }
+            );
+            var keyRing = new CacheableKeyRing(
+                CancellationToken.None,
+                DateTimeOffset.MaxValue,
+                key,
+                new[] { key }
+            );
 
             // the refresh keyring has the notfound key
-            Key key2 = new Key(notFoundKeyId, DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, mockDescriptor.Object, new[] { mockEncryptorFactory.Object });
-            var keyRing2 = new CacheableKeyRing(CancellationToken.None, DateTimeOffset.MaxValue, key, new[] { key2 });
+            Key key2 = new Key(
+                notFoundKeyId,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                mockDescriptor.Object,
+                new[] { mockEncryptorFactory.Object }
+            );
+            var keyRing2 = new CacheableKeyRing(
+                CancellationToken.None,
+                DateTimeOffset.MaxValue,
+                key,
+                new[] { key2 }
+            );
 
-            var keyRingProvider = CreateKeyRingProvider(new RefreshTestKeyRingProvider(keyRing, keyRing2));
+            var keyRingProvider = CreateKeyRingProvider(
+                new RefreshTestKeyRingProvider(keyRing, keyRing2)
+            );
 
             IDataProtector protector = new KeyRingBasedDataProtector(
                 keyRingProvider: keyRingProvider,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act & assert
             var result = protector.Unprotect(protectedData);
@@ -390,14 +539,24 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Guid keyId = new Guid("654057ab-2491-4471-a72a-b3b114afda38");
             byte[] protectedData = BuildProtectedDataFromCiphertext(
                 keyId: keyId,
-                ciphertext: new byte[0]);
+                ciphertext: new byte[0]
+            );
 
             var mockDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>();
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
-            mockEncryptorFactory.Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>())).Returns(new Mock<IAuthenticatedEncryptor>().Object);
+            mockEncryptorFactory
+                .Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>()))
+                .Returns(new Mock<IAuthenticatedEncryptor>().Object);
 
             // the keyring has only one key
-            Key key = new Key(keyId, DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, mockDescriptor.Object, new[] { mockEncryptorFactory.Object });
+            Key key = new Key(
+                keyId,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                mockDescriptor.Object,
+                new[] { mockEncryptorFactory.Object }
+            );
             key.SetRevoked();
             var keyRing = new KeyRing(key, new[] { key });
             var mockKeyRingProvider = new Mock<IKeyRingProvider>();
@@ -407,10 +566,13 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: mockKeyRingProvider.Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act & assert
-            var ex = ExceptionAssert2.ThrowsCryptographicException(() => protector.Unprotect(protectedData));
+            var ex = ExceptionAssert2.ThrowsCryptographicException(
+                () => protector.Unprotect(protectedData)
+            );
             Assert.Equal(Error.Common_KeyRevoked(keyId).Message, ex.Message);
         }
 
@@ -420,24 +582,40 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             // Arrange
             Guid defaultKeyId = new Guid("ba73c9ce-d322-4e45-af90-341307e11c38");
             byte[] expectedCiphertext = new byte[] { 0x03, 0x05, 0x07, 0x11, 0x13, 0x17, 0x19 };
-            byte[] protectedData = BuildProtectedDataFromCiphertext(defaultKeyId, expectedCiphertext);
+            byte[] protectedData = BuildProtectedDataFromCiphertext(
+                defaultKeyId,
+                expectedCiphertext
+            );
             byte[] expectedAad = BuildAadFromPurposeStrings(defaultKeyId, "purpose");
             byte[] expectedPlaintext = new byte[] { 0x23, 0x29, 0x31, 0x37 };
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor
-                .Setup(o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>()))
-                .Returns<ArraySegment<byte>, ArraySegment<byte>>((actualCiphertext, actualAad) =>
-                {
-                    Assert.Equal(expectedCiphertext, actualCiphertext);
-                    Assert.Equal(expectedAad, actualAad);
-                    return expectedPlaintext;
-                });
+                .Setup(
+                    o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+                )
+                .Returns<ArraySegment<byte>, ArraySegment<byte>>(
+                    (actualCiphertext, actualAad) =>
+                    {
+                        Assert.Equal(expectedCiphertext, actualCiphertext);
+                        Assert.Equal(expectedAad, actualAad);
+                        return expectedPlaintext;
+                    }
+                );
             var mockDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>();
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
-            mockEncryptorFactory.Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>())).Returns(mockEncryptor.Object);
+            mockEncryptorFactory
+                .Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>()))
+                .Returns(mockEncryptor.Object);
 
-            Key defaultKey = new Key(defaultKeyId, DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, mockDescriptor.Object, new[] { mockEncryptorFactory.Object });
+            Key defaultKey = new Key(
+                defaultKeyId,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                mockDescriptor.Object,
+                new[] { mockEncryptorFactory.Object }
+            );
             defaultKey.SetRevoked();
             var keyRing = new KeyRing(defaultKey, new[] { defaultKey });
             var mockKeyRingProvider = new Mock<IKeyRingProvider>();
@@ -447,13 +625,16 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: mockKeyRingProvider.Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act
-            byte[] retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(protectedData,
+            byte[] retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(
+                protectedData,
                 ignoreRevocationErrors: true,
                 requiresMigration: out var requiresMigration,
-                wasRevoked: out var wasRevoked);
+                wasRevoked: out var wasRevoked
+            );
 
             // Assert
             Assert.Equal(expectedPlaintext, retVal);
@@ -467,24 +648,40 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             // Arrange
             Guid defaultKeyId = new Guid("ba73c9ce-d322-4e45-af90-341307e11c38");
             byte[] expectedCiphertext = new byte[] { 0x03, 0x05, 0x07, 0x11, 0x13, 0x17, 0x19 };
-            byte[] protectedData = BuildProtectedDataFromCiphertext(defaultKeyId, expectedCiphertext);
+            byte[] protectedData = BuildProtectedDataFromCiphertext(
+                defaultKeyId,
+                expectedCiphertext
+            );
             byte[] expectedAad = BuildAadFromPurposeStrings(defaultKeyId, "purpose");
             byte[] expectedPlaintext = new byte[] { 0x23, 0x29, 0x31, 0x37 };
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor
-                .Setup(o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>()))
-                .Returns<ArraySegment<byte>, ArraySegment<byte>>((actualCiphertext, actualAad) =>
-                {
-                    Assert.Equal(expectedCiphertext, actualCiphertext);
-                    Assert.Equal(expectedAad, actualAad);
-                    return expectedPlaintext;
-                });
+                .Setup(
+                    o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+                )
+                .Returns<ArraySegment<byte>, ArraySegment<byte>>(
+                    (actualCiphertext, actualAad) =>
+                    {
+                        Assert.Equal(expectedCiphertext, actualCiphertext);
+                        Assert.Equal(expectedAad, actualAad);
+                        return expectedPlaintext;
+                    }
+                );
             var mockDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>();
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
-            mockEncryptorFactory.Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>())).Returns(mockEncryptor.Object);
+            mockEncryptorFactory
+                .Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>()))
+                .Returns(mockEncryptor.Object);
 
-            Key defaultKey = new Key(defaultKeyId, DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, mockDescriptor.Object, new[] { mockEncryptorFactory.Object });
+            Key defaultKey = new Key(
+                defaultKeyId,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                mockDescriptor.Object,
+                new[] { mockEncryptorFactory.Object }
+            );
             var keyRing = new KeyRing(defaultKey, new[] { defaultKey });
             var mockKeyRingProvider = new Mock<IKeyRingProvider>();
             mockKeyRingProvider.Setup(o => o.GetCurrentKeyRing()).Returns(keyRing);
@@ -493,17 +690,20 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: mockKeyRingProvider.Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act & assert - IDataProtector
             byte[] retVal = protector.Unprotect(protectedData);
             Assert.Equal(expectedPlaintext, retVal);
 
             // Act & assert - IPersistedDataProtector
-            retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(protectedData,
+            retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(
+                protectedData,
                 ignoreRevocationErrors: false,
                 requiresMigration: out var requiresMigration,
-                wasRevoked: out var wasRevoked);
+                wasRevoked: out var wasRevoked
+            );
             Assert.Equal(expectedPlaintext, retVal);
             Assert.False(requiresMigration);
             Assert.False(wasRevoked);
@@ -516,25 +716,48 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Guid defaultKeyId = new Guid("ba73c9ce-d322-4e45-af90-341307e11c38");
             Guid embeddedKeyId = new Guid("9b5d2db3-299f-4eac-89e9-e9067a5c1853");
             byte[] expectedCiphertext = new byte[] { 0x03, 0x05, 0x07, 0x11, 0x13, 0x17, 0x19 };
-            byte[] protectedData = BuildProtectedDataFromCiphertext(embeddedKeyId, expectedCiphertext);
+            byte[] protectedData = BuildProtectedDataFromCiphertext(
+                embeddedKeyId,
+                expectedCiphertext
+            );
             byte[] expectedAad = BuildAadFromPurposeStrings(embeddedKeyId, "purpose");
             byte[] expectedPlaintext = new byte[] { 0x23, 0x29, 0x31, 0x37 };
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor
-                .Setup(o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>()))
-                .Returns<ArraySegment<byte>, ArraySegment<byte>>((actualCiphertext, actualAad) =>
-                {
-                    Assert.Equal(expectedCiphertext, actualCiphertext);
-                    Assert.Equal(expectedAad, actualAad);
-                    return expectedPlaintext;
-                });
+                .Setup(
+                    o => o.Decrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+                )
+                .Returns<ArraySegment<byte>, ArraySegment<byte>>(
+                    (actualCiphertext, actualAad) =>
+                    {
+                        Assert.Equal(expectedCiphertext, actualCiphertext);
+                        Assert.Equal(expectedAad, actualAad);
+                        return expectedPlaintext;
+                    }
+                );
             var mockDescriptor = new Mock<IAuthenticatedEncryptorDescriptor>();
             var mockEncryptorFactory = new Mock<IAuthenticatedEncryptorFactory>();
-            mockEncryptorFactory.Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>())).Returns(mockEncryptor.Object);
+            mockEncryptorFactory
+                .Setup(o => o.CreateEncryptorInstance(It.IsAny<IKey>()))
+                .Returns(mockEncryptor.Object);
 
-            Key defaultKey = new Key(defaultKeyId, DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, new Mock<IAuthenticatedEncryptorDescriptor>().Object, new[] { mockEncryptorFactory.Object });
-            Key embeddedKey = new Key(embeddedKeyId, DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, mockDescriptor.Object, new[] { mockEncryptorFactory.Object });
+            Key defaultKey = new Key(
+                defaultKeyId,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                new Mock<IAuthenticatedEncryptorDescriptor>().Object,
+                new[] { mockEncryptorFactory.Object }
+            );
+            Key embeddedKey = new Key(
+                embeddedKeyId,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                mockDescriptor.Object,
+                new[] { mockEncryptorFactory.Object }
+            );
             var keyRing = new KeyRing(defaultKey, new[] { defaultKey, embeddedKey });
             var mockKeyRingProvider = new Mock<IKeyRingProvider>();
             mockKeyRingProvider.Setup(o => o.GetCurrentKeyRing()).Returns(keyRing);
@@ -543,17 +766,20 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: mockKeyRingProvider.Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act & assert - IDataProtector
             byte[] retVal = protector.Unprotect(protectedData);
             Assert.Equal(expectedPlaintext, retVal);
 
             // Act & assert - IPersistedDataProtector
-            retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(protectedData,
+            retVal = ((IPersistedDataProtector)protector).DangerousUnprotect(
+                protectedData,
                 ignoreRevocationErrors: false,
                 requiresMigration: out var requiresMigration,
-                wasRevoked: out var wasRevoked);
+                wasRevoked: out var wasRevoked
+            );
             Assert.Equal(expectedPlaintext, retVal);
             Assert.True(requiresMigration);
             Assert.False(wasRevoked);
@@ -565,7 +791,14 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             // Arrange
             byte[] plaintext = new byte[] { 0x10, 0x20, 0x30, 0x40, 0x50 };
             var encryptorFactory = new AuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
-            Key key = new Key(Guid.NewGuid(), DateTimeOffset.Now, DateTimeOffset.Now, DateTimeOffset.Now, new AuthenticatedEncryptorConfiguration().CreateNewDescriptor(), new[] { encryptorFactory });
+            Key key = new Key(
+                Guid.NewGuid(),
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                DateTimeOffset.Now,
+                new AuthenticatedEncryptorConfiguration().CreateNewDescriptor(),
+                new[] { encryptorFactory }
+            );
             var keyRing = new KeyRing(key, new[] { key });
             var mockKeyRingProvider = new Mock<IKeyRingProvider>();
             mockKeyRingProvider.Setup(o => o.GetCurrentKeyRing()).Returns(keyRing);
@@ -574,7 +807,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: mockKeyRingProvider.Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose");
+                newPurpose: "purpose"
+            );
 
             // Act - protect
             byte[] protectedData = protector.Protect(plaintext);
@@ -593,17 +827,24 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             Guid defaultKey = new Guid("ba73c9ce-d322-4e45-af90-341307e11c38");
             byte[] expectedPlaintext = new byte[] { 0x03, 0x05, 0x07, 0x11, 0x13, 0x17, 0x19 };
             byte[] expectedAad = BuildAadFromPurposeStrings(defaultKey, "purpose1", "purpose2");
-            byte[] expectedProtectedData = BuildProtectedDataFromCiphertext(defaultKey, new byte[] { 0x23, 0x29, 0x31, 0x37 });
+            byte[] expectedProtectedData = BuildProtectedDataFromCiphertext(
+                defaultKey,
+                new byte[] { 0x23, 0x29, 0x31, 0x37 }
+            );
 
             var mockEncryptor = new Mock<IAuthenticatedEncryptor>();
             mockEncryptor
-                .Setup(o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>()))
-                .Returns<ArraySegment<byte>, ArraySegment<byte>>((actualPlaintext, actualAad) =>
-                {
-                    Assert.Equal(expectedPlaintext, actualPlaintext);
-                    Assert.Equal(expectedAad, actualAad);
-                    return new byte[] { 0x23, 0x29, 0x31, 0x37 }; // ciphertext + tag
-                });
+                .Setup(
+                    o => o.Encrypt(It.IsAny<ArraySegment<byte>>(), It.IsAny<ArraySegment<byte>>())
+                )
+                .Returns<ArraySegment<byte>, ArraySegment<byte>>(
+                    (actualPlaintext, actualAad) =>
+                    {
+                        Assert.Equal(expectedPlaintext, actualPlaintext);
+                        Assert.Equal(expectedAad, actualAad);
+                        return new byte[] { 0x23, 0x29, 0x31, 0x37 }; // ciphertext + tag
+                    }
+                );
 
             var mockKeyRing = new Mock<IKeyRing>(MockBehavior.Strict);
             mockKeyRing.Setup(o => o.DefaultKeyId).Returns(defaultKey);
@@ -615,7 +856,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                 keyRingProvider: mockKeyRingProvider.Object,
                 logger: GetLogger(),
                 originalPurposes: null,
-                newPurpose: "purpose1").CreateProtector("purpose2");
+                newPurpose: "purpose1"
+            ).CreateProtector("purpose2");
 
             // Act
             byte[] retVal = protector.Protect(expectedPlaintext);
@@ -633,7 +875,11 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             foreach (string purpose in purposes)
             {
                 var memStream = new MemoryStream();
-                var writer = new BinaryWriter(memStream, encoding: new UTF8Encoding(encoderShouldEmitUTF8Identifier: false), leaveOpen: true);
+                var writer = new BinaryWriter(
+                    memStream,
+                    encoding: new UTF8Encoding(encoderShouldEmitUTF8Identifier: false),
+                    leaveOpen: true
+                );
                 writer.Write(purpose); // also writes 7-bit encoded int length
                 writer.Dispose();
                 expectedAad = expectedAad.Concat(memStream.ToArray());
@@ -645,9 +891,9 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
         private static byte[] BuildProtectedDataFromCiphertext(Guid keyId, byte[] ciphertext)
         {
             return new byte[] { 0x09, 0xF0, 0xC9, 0xF0 } // magic header
-              .Concat(keyId.ToByteArray()) // key id
-              .Concat(ciphertext).ToArray();
-
+                .Concat(keyId.ToByteArray()) // key id
+                .Concat(ciphertext)
+                .ToArray();
         }
 
         private static ILogger GetLogger()

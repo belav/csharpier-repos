@@ -44,8 +44,13 @@ namespace ClientSample
 
         public void OnCompleted(Action continuation)
         {
-            if (ReferenceEquals(_callback, _callbackCompleted) ||
-                ReferenceEquals(Interlocked.CompareExchange(ref _callback, continuation, null), _callbackCompleted))
+            if (
+                ReferenceEquals(_callback, _callbackCompleted)
+                || ReferenceEquals(
+                    Interlocked.CompareExchange(ref _callback, continuation, null),
+                    _callbackCompleted
+                )
+            )
             {
                 Task.Run(continuation);
             }

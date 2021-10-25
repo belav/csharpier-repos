@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
     // Generates strong cryptographic ids for circuits that are protected with authenticated encryption.
     internal class CircuitIdFactory
     {
-        private const string CircuitIdProtectorPurpose = "Microsoft.AspNetCore.Components.Server.CircuitIdFactory,V1";
+        private const string CircuitIdProtectorPurpose =
+            "Microsoft.AspNetCore.Components.Server.CircuitIdFactory,V1";
 
         // We use 64 bytes, where the last 32 are the public version of the id.
         // This way we can always recover the public id from the secret form.
@@ -42,10 +43,14 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 sourceIndex: SecretLength - IdLength,
                 destinationArray: id,
                 destinationIndex: 0,
-                length: IdLength);
+                length: IdLength
+            );
 
             var secret = _protector.Protect(buffer);
-            return new CircuitId(Base64UrlTextEncoder.Encode(secret), Base64UrlTextEncoder.Encode(id));
+            return new CircuitId(
+                Base64UrlTextEncoder.Encode(secret),
+                Base64UrlTextEncoder.Encode(id)
+            );
         }
 
         public bool TryParseCircuitId(string? text, out CircuitId circuitId)
@@ -74,7 +79,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                     sourceIndex: SecretLength - IdLength,
                     destinationArray: id,
                     destinationIndex: 0,
-                    length: IdLength);
+                    length: IdLength
+                );
 
                 circuitId = new CircuitId(text, Base64UrlTextEncoder.Encode(id));
                 return true;

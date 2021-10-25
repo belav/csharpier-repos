@@ -43,11 +43,12 @@ namespace Templates.Test.Helpers
             "Microsoft.AspNetCore.Blazor.Templates",
         };
 
-        public static string CustomHivePath { get; } = (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix")))
-                     ? typeof(TemplatePackageInstaller)
-                         .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-                         .Single(s => s.Key == "CustomTemplateHivePath").Value
-                     : Path.Combine("Hives", ".templateEngine");
+        public static string CustomHivePath { get; } =
+            (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix")))
+                ? typeof(TemplatePackageInstaller).Assembly
+                      .GetCustomAttributes<AssemblyMetadataAttribute>()
+                      .Single(s => s.Key == "CustomTemplateHivePath").Value
+                : Path.Combine("Hives", ".templateEngine");
 
         public static async Task EnsureTemplatingEngineInitializedAsync(ITestOutputHelper output)
         {
@@ -78,7 +79,8 @@ namespace Templates.Test.Helpers
                 output,
                 AppContext.BaseDirectory,
                 DotNetMuxer.MuxerPathOrDefault(),
-                $"new {arguments} --debug:custom-hive \"{CustomHivePath}\"");
+                $"new {arguments} --debug:custom-hive \"{CustomHivePath}\""
+            );
 
             await proc.Exited;
 
@@ -94,13 +96,22 @@ namespace Templates.Test.Helpers
             }
             else
             {
-                packagesDir = typeof(TemplatePackageInstaller).Assembly
-                    .GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .Single(a => a.Key == "ArtifactsShippingPackagesDir").Value;
+                packagesDir =
+                    typeof(TemplatePackageInstaller).Assembly
+                        .GetCustomAttributes<AssemblyMetadataAttribute>()
+                        .Single(a => a.Key == "ArtifactsShippingPackagesDir").Value;
             }
 
-            var builtPackages = Directory.EnumerateFiles(packagesDir, "*Templates*.nupkg")
-                .Where(p => _templatePackages.Any(t => Path.GetFileName(p).StartsWith(t, StringComparison.OrdinalIgnoreCase)))
+            var builtPackages = Directory
+                .EnumerateFiles(packagesDir, "*Templates*.nupkg")
+                .Where(
+                    p =>
+                        _templatePackages.Any(
+                            t =>
+                                Path.GetFileName(p)
+                                    .StartsWith(t, StringComparison.OrdinalIgnoreCase)
+                        )
+                )
                 .ToArray();
 
             Assert.Equal(4, builtPackages.Length);
@@ -147,10 +158,18 @@ namespace Templates.Test.Helpers
                 // Microsoft.DotNet.Web.Spa.ProjectTemplates.3.0.3.0.0-preview7.*.nupkg
                 // Microsoft.DotNet.Web.Spa.ProjectTemplates.3.0.0-preview7.*.nupkg
                 // Error on the side of caution and uninstall all of them
-                foreach (var command in lines.Where(l => l.Contains("dotnet new") && l.Contains(packageName, StringComparison.OrdinalIgnoreCase)))
+                foreach (
+                    var command in lines.Where(
+                        l =>
+                            l.Contains("dotnet new")
+                            && l.Contains(packageName, StringComparison.OrdinalIgnoreCase)
+                    )
+                )
                 {
                     var uninstallCommand = command.TrimStart();
-                    Debug.Assert(uninstallCommand.StartsWith("dotnet new", StringComparison.Ordinal));
+                    Debug.Assert(
+                        uninstallCommand.StartsWith("dotnet new", StringComparison.Ordinal)
+                    );
                     uninstallCommand = uninstallCommand.Substring("dotnet new".Length);
                     await RunDotNetNew(output, uninstallCommand);
                 }
@@ -164,19 +183,31 @@ namespace Templates.Test.Helpers
             await VerifyCannotFindTemplateAsync(output, "angular");
         }
 
-        private static async Task VerifyCanFindTemplate(ITestOutputHelper output, string templateName)
+        private static async Task VerifyCanFindTemplate(
+            ITestOutputHelper output,
+            string templateName
+        )
         {
             var proc = await RunDotNetNew(output, $"");
             if (!proc.Output.Contains($" {templateName} "))
             {
-                throw new InvalidOperationException($"Couldn't find {templateName} as an option in {proc.Output}.");
+                throw new InvalidOperationException(
+                    $"Couldn't find {templateName} as an option in {proc.Output}."
+                );
             }
         }
 
-        private static async Task VerifyCannotFindTemplateAsync(ITestOutputHelper output, string templateName)
+        private static async Task VerifyCannotFindTemplateAsync(
+            ITestOutputHelper output,
+            string templateName
+        )
         {
             // Verify we really did remove the previous templates
-            var tempDir = Path.Combine(AppContext.BaseDirectory, Path.GetRandomFileName(), Guid.NewGuid().ToString("D"));
+            var tempDir = Path.Combine(
+                AppContext.BaseDirectory,
+                Path.GetRandomFileName(),
+                Guid.NewGuid().ToString("D")
+            );
             Directory.CreateDirectory(tempDir);
 
             try
@@ -185,7 +216,9 @@ namespace Templates.Test.Helpers
 
                 if (!proc.Error.Contains("No templates found matching:"))
                 {
-                    throw new InvalidOperationException($"Failed to uninstall previous templates. The template '{templateName}' could still be found.");
+                    throw new InvalidOperationException(
+                        $"Failed to uninstall previous templates. The template '{templateName}' could still be found."
+                    );
                 }
             }
             finally

@@ -14,7 +14,16 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
 {
     internal interface IImplementInterfaceService : ILanguageService
     {
-        Task<Document> ImplementInterfaceAsync(Document document, SyntaxNode node, CancellationToken cancellationToken);
-        ImmutableArray<CodeAction> GetCodeActions(Document document, SemanticModel model, SyntaxNode node, CancellationToken cancellationToken);
+        Task<Document> ImplementInterfaceAsync(
+            Document document,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
+        ImmutableArray<CodeAction> GetCodeActions(
+            Document document,
+            SemanticModel model,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
     }
 }

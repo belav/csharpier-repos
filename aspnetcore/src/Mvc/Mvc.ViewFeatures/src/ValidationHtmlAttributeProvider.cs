@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public abstract void AddValidationAttributes(
             ViewContext viewContext,
             ModelExplorer modelExplorer,
-            IDictionary<string, string> attributes);
+            IDictionary<string, string> attributes
+        );
 
         /// <summary>
         /// Adds validation-related HTML attributes to the <paramref name="attributes" /> if client validation is
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewContext viewContext,
             ModelExplorer modelExplorer,
             string expression,
-            IDictionary<string, string> attributes)
+            IDictionary<string, string> attributes
+        )
         {
             if (viewContext == null)
             {

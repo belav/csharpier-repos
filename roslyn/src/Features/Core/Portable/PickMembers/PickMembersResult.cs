@@ -16,12 +16,12 @@ namespace Microsoft.CodeAnalysis.PickMembers
         public readonly ImmutableArray<ISymbol> Members;
         public readonly ImmutableArray<PickMembersOption> Options;
 
-        private PickMembersResult(bool isCanceled)
-            => IsCanceled = isCanceled;
+        private PickMembersResult(bool isCanceled) => IsCanceled = isCanceled;
 
         public PickMembersResult(
             ImmutableArray<ISymbol> members,
-            ImmutableArray<PickMembersOption> options)
+            ImmutableArray<PickMembersOption> options
+        )
         {
             Members = members;
             Options = options;

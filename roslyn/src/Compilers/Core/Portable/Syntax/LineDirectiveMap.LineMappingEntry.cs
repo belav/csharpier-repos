@@ -19,27 +19,22 @@ namespace Microsoft.CodeAnalysis
             /// following.
             /// </summary>
             Unknown,
-
             /// <summary>
             /// Used in C# for spans outside of #line directives
             /// </summary>
             Unmapped,
-
             /// <summary>
             /// Used in C# for spans inside of "#line linenumber" directive
             /// </summary>
             Remapped,
-
             /// <summary>
             /// Used in VB for spans inside of a "#ExternalSource" directive that followed an unknown span
             /// </summary>
             RemappedAfterUnknown,
-
             /// <summary>
             /// Used in VB for spans inside of a "#ExternalSource" directive that followed a hidden span
             /// </summary>
             RemappedAfterHidden,
-
             /// <summary>
             /// Used in C# and VB for spans that are inside of #line hidden (C#) or outside of #ExternalSource (VB) 
             /// directives
@@ -75,7 +70,8 @@ namespace Microsoft.CodeAnalysis
                 int unmappedLine,
                 int mappedLine,
                 string? mappedPathOpt,
-                PositionState state)
+                PositionState state
+            )
             {
                 this.UnmappedLine = unmappedLine;
                 this.MappedLine = mappedLine;

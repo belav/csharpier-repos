@@ -42,12 +42,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual bool IsAscending { get; }
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
-        public override Type Type
-            => Expression.Type;
+        public override Type Type => Expression.Type;
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -68,8 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Check.NotNull(expression, nameof(expression));
 
             return expression != Expression
-                ? new OrderingExpression(expression, IsAscending)
-                : this;
+              ? new OrderingExpression(expression, IsAscending)
+              : this;
         }
 
         /// <inheritdoc />
@@ -83,18 +81,18 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is OrderingExpression orderingExpression
-                    && Equals(orderingExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is OrderingExpression orderingExpression && Equals(orderingExpression)
+            );
 
-        private bool Equals(OrderingExpression orderingExpression)
-            => Expression.Equals(orderingExpression.Expression)
-                && IsAscending == orderingExpression.IsAscending;
+        private bool Equals(OrderingExpression orderingExpression) =>
+            Expression.Equals(orderingExpression.Expression)
+            && IsAscending == orderingExpression.IsAscending;
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(Expression, IsAscending);
+        public override int GetHashCode() => HashCode.Combine(Expression, IsAscending);
     }
 }

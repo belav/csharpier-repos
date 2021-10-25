@@ -26,11 +26,9 @@ namespace System.Net.Http.Functional.Tests
 
         private Watchdog() { }
 
-        public static Watchdog CreateAsync()
-            => new Watchdog();
+        public static Watchdog CreateAsync() => new Watchdog();
 
-        public IDisposable GetResult()
-            => new WatchdogImpl(_box);
+        public IDisposable GetResult() => new WatchdogImpl(_box);
 
         public Watchdog GetAwaiter() => this;
         public bool IsCompleted => false;
@@ -48,14 +46,16 @@ namespace System.Net.Http.Functional.Tests
 
             public WatchdogImpl(object stateMachineData)
             {
-                _timer = new Timer(s =>
+                _timer = new Timer(
+                    s =>
                     {
                         _passed = false;
                         Console.WriteLine(GetStateMachineData.Describe(s));
                     },
                     stateMachineData,
                     60_000,
-                    60_000);
+                    60_000
+                );
             }
 
             public void Dispose()

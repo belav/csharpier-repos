@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
 {
     internal class ControllerSaveTempDataPropertyFilterFactory : IFilterFactory
     {
-        public ControllerSaveTempDataPropertyFilterFactory(IReadOnlyList<LifecycleProperty> properties)
+        public ControllerSaveTempDataPropertyFilterFactory(
+            IReadOnlyList<LifecycleProperty> properties
+        )
         {
             TempDataProperties = properties;
         }
@@ -26,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 throw new ArgumentNullException(nameof(serviceProvider));
             }
 
-            var service = serviceProvider.GetRequiredService<ControllerSaveTempDataPropertyFilter>();
+            var service =
+                serviceProvider.GetRequiredService<ControllerSaveTempDataPropertyFilter>();
             service.Properties = TempDataProperties;
             return service;
         }

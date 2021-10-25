@@ -14,24 +14,25 @@ namespace Microsoft.AspNetCore.Server.HttpSys
     internal sealed class StandardFeatureCollection : IFeatureCollection
     {
         private static readonly Func<RequestContext, object> _identityFunc = ReturnIdentity;
-        private static readonly Dictionary<Type, Func<RequestContext, object?>> _featureFuncLookup = new()
-        {
-            { typeof(IHttpRequestFeature), _identityFunc },
-            { typeof(IHttpRequestBodyDetectionFeature), _identityFunc },
-            { typeof(IHttpConnectionFeature), _identityFunc },
-            { typeof(IHttpResponseFeature), _identityFunc },
-            { typeof(IHttpResponseBodyFeature), _identityFunc },
-            { typeof(ITlsConnectionFeature), ctx => ctx.GetTlsConnectionFeature() },
-            { typeof(IHttpRequestLifetimeFeature), _identityFunc },
-            { typeof(IHttpAuthenticationFeature), _identityFunc },
-            { typeof(IHttpRequestIdentifierFeature), _identityFunc },
-            { typeof(RequestContext), ctx => ctx },
-            { typeof(IHttpMaxRequestBodySizeFeature), _identityFunc },
-            { typeof(IHttpBodyControlFeature), _identityFunc },
-            { typeof(IHttpSysRequestInfoFeature), _identityFunc },
-            { typeof(IHttpResponseTrailersFeature), ctx => ctx.GetResponseTrailersFeature() },
-            { typeof(IHttpResetFeature), ctx => ctx.GetResetFeature() },
-        };
+        private static readonly Dictionary<Type, Func<RequestContext, object?>> _featureFuncLookup =
+            new()
+            {
+                { typeof(IHttpRequestFeature), _identityFunc },
+                { typeof(IHttpRequestBodyDetectionFeature), _identityFunc },
+                { typeof(IHttpConnectionFeature), _identityFunc },
+                { typeof(IHttpResponseFeature), _identityFunc },
+                { typeof(IHttpResponseBodyFeature), _identityFunc },
+                { typeof(ITlsConnectionFeature), ctx => ctx.GetTlsConnectionFeature() },
+                { typeof(IHttpRequestLifetimeFeature), _identityFunc },
+                { typeof(IHttpAuthenticationFeature), _identityFunc },
+                { typeof(IHttpRequestIdentifierFeature), _identityFunc },
+                { typeof(RequestContext), ctx => ctx },
+                { typeof(IHttpMaxRequestBodySizeFeature), _identityFunc },
+                { typeof(IHttpBodyControlFeature), _identityFunc },
+                { typeof(IHttpSysRequestInfoFeature), _identityFunc },
+                { typeof(IHttpResponseTrailersFeature), ctx => ctx.GetResponseTrailersFeature() },
+                { typeof(IHttpResetFeature), ctx => ctx.GetResetFeature() },
+            };
 
         private readonly RequestContext _featureContext;
 
@@ -44,7 +45,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 // https://github.com/aspnet/HttpSysServer/issues/427
                 _featureFuncLookup[typeof(IHttpUpgradeFeature)] = _identityFunc;
                 // Win8+
-                _featureFuncLookup[typeof(ITlsHandshakeFeature)] = ctx => ctx.GetTlsHandshakeFeature();
+                _featureFuncLookup[typeof(ITlsHandshakeFeature)] = ctx =>
+                    ctx.GetTlsHandshakeFeature();
             }
 
             if (HttpApi.IsFeatureSupported(HttpApiTypes.HTTP_FEATURE_ID.HttpFeatureDelegateEx))
@@ -76,10 +78,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 _featureFuncLookup.TryGetValue(key, out lookupFunc);
                 return lookupFunc?.Invoke(_featureContext);
             }
-            set
-            {
-                throw new InvalidOperationException("The collection is read-only");
-            }
+            set { throw new InvalidOperationException("The collection is read-only"); }
         }
 
         private static object ReturnIdentity(RequestContext featureContext)
@@ -92,7 +91,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             return ((IEnumerable<KeyValuePair<Type, object>>)this).GetEnumerator();
         }
 
-        IEnumerator<KeyValuePair<Type, object>> IEnumerable<KeyValuePair<Type, object>>.GetEnumerator()
+        IEnumerator<KeyValuePair<Type, object>> IEnumerable<
+            KeyValuePair<Type, object>
+        >.GetEnumerator()
         {
             foreach (var featureFunc in _featureFuncLookup)
             {

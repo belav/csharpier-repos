@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             IRouter? route,
             string routeKey,
             RouteValueDictionary values,
-            RouteDirection routeDirection)
+            RouteDirection routeDirection
+        )
         {
             if (routeKey == null)
             {
@@ -38,7 +39,12 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                 }
 
                 var valueString = Convert.ToString(value, CultureInfo.InvariantCulture);
-                return decimal.TryParse(valueString, NumberStyles.Number, CultureInfo.InvariantCulture, out _);
+                return decimal.TryParse(
+                    valueString,
+                    NumberStyles.Number,
+                    CultureInfo.InvariantCulture,
+                    out _
+                );
             }
 
             return false;

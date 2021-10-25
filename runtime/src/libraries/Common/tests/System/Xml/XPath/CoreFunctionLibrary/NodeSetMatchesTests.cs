@@ -69,7 +69,8 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
             var xml = "xp005.xml";
             var startingNodePath = "Doc/Test1";
             var testExpression = @"attribute::*[last() - 1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Attribute,
@@ -77,10 +78,16 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
                     Name = "Attr4",
                     HasNameTable = true,
                     Value = "Fourth"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>

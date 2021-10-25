@@ -10,9 +10,12 @@ namespace VectorWiden
 {
     class Program
     {
-        private static byte[] _asciiBytes = Encoding.ASCII.GetBytes("text/plain,text/html;q=0.9,application/xhtml+xml;q=0.9,application/xml;q=0.8,*/*;q=0.7");
+        private static byte[] _asciiBytes = Encoding.ASCII.GetBytes(
+            "text/plain,text/html;q=0.9,application/xhtml+xml;q=0.9,application/xml;q=0.8,*/*;q=0.7"
+        );
         private static string _asciiString = new string('\0', _asciiBytes.Length);
-        private static string compareString = "text/plain,text/html;q=0.9,application/xhtml+xml;q=0.9,application/xml;q=0.8,*/*;q=0.7";
+        private static string compareString =
+            "text/plain,text/html;q=0.9,application/xhtml+xml;q=0.9,application/xml;q=0.8,*/*;q=0.7";
 
         static unsafe int Main(string[] args)
         {
@@ -33,7 +36,6 @@ namespace VectorWiden
         }
 
         public static unsafe bool TryGetAsciiStringVectorWiden(byte* input, char* output, int count)
-
         {
             // Calcuate end position
             var end = input + count;
@@ -119,12 +121,14 @@ namespace VectorWiden
                     var vector = Unsafe.AsRef<Vector<sbyte>>(input);
                     isValid &= CheckBytesInAsciiRange(vector);
                     // Vectorized widen, byte vector to two short vectors
-                    Vector.Widen(vector, out Unsafe.AsRef<Vector<short>>(output),
-                                 out Unsafe.AsRef<Vector<short>>(output + Vector<short>.Count));
+                    Vector.Widen(
+                        vector,
+                        out Unsafe.AsRef<Vector<short>>(output),
+                        out Unsafe.AsRef<Vector<short>>(output + Vector<short>.Count)
+                    );
                     input += Vector<sbyte>.Count;
                     output += Vector<sbyte>.Count;
                 } while (input <= end - Vector<sbyte>.Count);
-
                 // Vector path done, loop back to do non-Vector
                 // If is a exact multiple of vector size, bail now
             } while (input > end - Vector<sbyte>.Count);
@@ -161,7 +165,6 @@ namespace VectorWiden
             return (((short)(check - 0x0101) | check) & HighBits) == 0;
         }
 
-        private static bool CheckBytesInAsciiRange(sbyte check)
-            => check > 0;
+        private static bool CheckBytesInAsciiRange(sbyte check) => check > 0;
     }
 }

@@ -12,7 +12,6 @@ namespace System.Web.Mvc
         /// Find the controller in the current area.
         /// </summary>
         UseCurrent = 0,
-
         /// <summary>
         /// Find the controller in the root area.
         /// </summary>

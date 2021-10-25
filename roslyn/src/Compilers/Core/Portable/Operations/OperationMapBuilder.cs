@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis
         /// Populates a empty dictionary of SyntaxNode->IOperation, where every key corresponds to an explicit IOperation node.
         /// If there is a SyntaxNode with more than one explicit IOperation, this will throw.
         /// </summary>
-        internal static void AddToMap(IOperation root, Dictionary<SyntaxNode, IOperation> dictionary)
+        internal static void AddToMap(
+            IOperation root,
+            Dictionary<SyntaxNode, IOperation> dictionary
+        )
         {
             Debug.Assert(dictionary.Count == 0);
             Walker.Instance.Visit(root, dictionary);
@@ -25,13 +28,19 @@ namespace Microsoft.CodeAnalysis
         {
             internal static readonly Walker Instance = new Walker();
 
-            public override object? DefaultVisit(IOperation operation, Dictionary<SyntaxNode, IOperation> argument)
+            public override object? DefaultVisit(
+                IOperation operation,
+                Dictionary<SyntaxNode, IOperation> argument
+            )
             {
                 RecordOperation(operation, argument);
                 return base.DefaultVisit(operation, argument);
             }
 
-            public override object? VisitBinaryOperator([DisallowNull] IBinaryOperation? operation, Dictionary<SyntaxNode, IOperation> argument)
+            public override object? VisitBinaryOperator(
+                [DisallowNull] IBinaryOperation? operation,
+                Dictionary<SyntaxNode, IOperation> argument
+            )
             {
                 // In order to handle very large nested operators, we implement manual iteration here. Our operations are not order sensitive,
                 // so we don't need to maintain a stack, just iterate through every level.
@@ -53,14 +62,20 @@ namespace Microsoft.CodeAnalysis
                 return null;
             }
 
-            internal override object? VisitNoneOperation(IOperation operation, Dictionary<SyntaxNode, IOperation> argument)
+            internal override object? VisitNoneOperation(
+                IOperation operation,
+                Dictionary<SyntaxNode, IOperation> argument
+            )
             {
                 // OperationWalker skips these nodes by default, to avoid having public consumers deal with NoneOperation.
                 // we need to deal with it here, however, so delegate to DefaultVisit.
                 return DefaultVisit(operation, argument);
             }
 
-            private static void RecordOperation(IOperation operation, Dictionary<SyntaxNode, IOperation> argument)
+            private static void RecordOperation(
+                IOperation operation,
+                Dictionary<SyntaxNode, IOperation> argument
+            )
             {
                 if (!operation.IsImplicit)
                 {

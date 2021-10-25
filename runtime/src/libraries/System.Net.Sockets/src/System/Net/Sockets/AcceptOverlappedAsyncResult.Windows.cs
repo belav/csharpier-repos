@@ -22,7 +22,8 @@ namespace System.Net.Sockets
             if (errorCode == SocketError.Success)
             {
                 _numBytes = numBytes;
-                if (NetEventSource.Log.IsEnabled()) LogBuffer(numBytes);
+                if (NetEventSource.Log.IsEnabled())
+                    LogBuffer(numBytes);
 
                 // get the endpoint
                 remoteSocketAddress = IPEndPointExtensions.Serialize(_listenSocket._rightEndPoint!);
@@ -48,23 +49,34 @@ namespace System.Net.Sockets
                         out localAddr,
                         out localAddrLength,
                         out remoteAddr,
-                        out remoteSocketAddress.InternalSize);
+                        out remoteSocketAddress.InternalSize
+                    );
 
-                    Marshal.Copy(remoteAddr, remoteSocketAddress.Buffer, 0, remoteSocketAddress.Size);
+                    Marshal.Copy(
+                        remoteAddr,
+                        remoteSocketAddress.Buffer,
+                        0,
+                        remoteSocketAddress.Size
+                    );
 
                     errorCode = Interop.Winsock.setsockopt(
                         _acceptSocket!.SafeHandle,
                         SocketOptionLevel.Socket,
                         SocketOptionName.UpdateAcceptContext,
                         ref handle,
-                        IntPtr.Size);
+                        IntPtr.Size
+                    );
 
                     if (errorCode == SocketError.SocketError)
                     {
                         errorCode = SocketPal.GetLastSocketError();
                     }
 
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"setsockopt handle:{handle}, AcceptSocket:{_acceptSocket}, returns:{errorCode}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(
+                            this,
+                            $"setsockopt handle:{handle}, AcceptSocket:{_acceptSocket}, returns:{errorCode}"
+                        );
                 }
                 catch (ObjectDisposedException)
                 {
@@ -86,7 +98,10 @@ namespace System.Net.Sockets
                 return null;
             }
 
-            return _listenSocket.UpdateAcceptSocket(_acceptSocket!, _listenSocket._rightEndPoint!.Create(remoteSocketAddress!));
+            return _listenSocket.UpdateAcceptSocket(
+                _acceptSocket!,
+                _listenSocket._rightEndPoint!.Create(remoteSocketAddress!)
+            );
         }
 
         // SetUnmanagedStructures
@@ -125,10 +140,7 @@ namespace System.Net.Sockets
 
         internal Socket AcceptSocket
         {
-            set
-            {
-                _acceptSocket = value;
-            }
+            set { _acceptSocket = value; }
         }
     }
 }

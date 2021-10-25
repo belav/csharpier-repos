@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     [ApiController]
-    public class DiagnosticsAreReturned_ForActionResultOfTReturningMethodWithoutAnyAttributes : ControllerBase
+    public class DiagnosticsAreReturned_ForActionResultOfTReturningMethodWithoutAnyAttributes
+        : ControllerBase
     {
         public ActionResult<string> Method(Guid? id)
         {

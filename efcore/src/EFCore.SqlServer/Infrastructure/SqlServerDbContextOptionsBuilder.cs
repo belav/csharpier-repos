@@ -18,16 +18,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///     </para>
     /// </summary>
     public class SqlServerDbContextOptionsBuilder
-        : RelationalDbContextOptionsBuilder<SqlServerDbContextOptionsBuilder, SqlServerOptionsExtension>
+        : RelationalDbContextOptionsBuilder<
+              SqlServerDbContextOptionsBuilder,
+              SqlServerOptionsExtension
+          >
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqlServerDbContextOptionsBuilder" /> class.
         /// </summary>
         /// <param name="optionsBuilder"> The options builder. </param>
         public SqlServerDbContextOptionsBuilder(DbContextOptionsBuilder optionsBuilder)
-            : base(optionsBuilder)
-        {
-        }
+            : base(optionsBuilder) { }
 
         /// <summary>
         ///     <para>
@@ -41,8 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///         Default values of 6 for the maximum retry count and 30 seconds for the maximum default delay are used.
         ///     </para>
         /// </summary>
-        public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure()
-            => ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c));
+        public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure() =>
+            ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c));
 
         /// <summary>
         ///     <para>
@@ -56,8 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///         A default value 30 seconds for the maximum default delay is used.
         ///     </para>
         /// </summary>
-        public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure(int maxRetryCount)
-            => ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c, maxRetryCount));
+        public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure(int maxRetryCount) =>
+            ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c, maxRetryCount));
 
         /// <summary>
         ///     <para>
@@ -74,7 +75,16 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure(
             int maxRetryCount,
             TimeSpan maxRetryDelay,
-            ICollection<int>? errorNumbersToAdd)
-            => ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c, maxRetryCount, maxRetryDelay, errorNumbersToAdd));
+            ICollection<int>? errorNumbersToAdd
+        ) =>
+            ExecutionStrategy(
+                c =>
+                    new SqlServerRetryingExecutionStrategy(
+                        c,
+                        maxRetryCount,
+                        maxRetryDelay,
+                        errorNumbersToAdd
+                    )
+            );
     }
 }

@@ -51,10 +51,7 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
                 {
                     // Set Content-Length to 0 to create "Append Blob"
                     Content = new ByteArrayContent(Array.Empty<byte>()),
-                    Headers =
-                    {
-                        { "If-None-Match", "*" }
-                    }
+                    Headers = { { "If-None-Match", "*" } }
                 };
 
                 AddCommonHeaders(message);
@@ -62,8 +59,10 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
                 response = await _client.SendAsync(message, cancellationToken);
 
                 // If result is 2** or 412 try to append again
-                if (response.IsSuccessStatusCode ||
-                    response.StatusCode == HttpStatusCode.PreconditionFailed)
+                if (
+                    response.IsSuccessStatusCode
+                    || response.StatusCode == HttpStatusCode.PreconditionFailed
+                )
                 {
                     // Retry sending data after blob creation
                     response = await AppendDataAsync();

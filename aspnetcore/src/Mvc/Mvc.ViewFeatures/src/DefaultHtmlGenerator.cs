@@ -27,15 +27,32 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
     {
         private const string HiddenListItem = @"<li style=""display:none""></li>";
         private static readonly MethodInfo ConvertEnumFromStringMethod =
-            typeof(DefaultHtmlGenerator).GetTypeInfo().GetDeclaredMethod(nameof(ConvertEnumFromString));
+            typeof(DefaultHtmlGenerator)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(ConvertEnumFromString));
 
         // See: (http://www.w3.org/TR/html5/forms.html#the-input-element)
-        private static readonly string[] _placeholderInputTypes =
-            new[] { "text", "search", "url", "tel", "email", "password", "number" };
+        private static readonly string[] _placeholderInputTypes = new[]
+        {
+            "text",
+            "search",
+            "url",
+            "tel",
+            "email",
+            "password",
+            "number"
+        };
 
         // See: (http://www.w3.org/TR/html5/sec-forms.html#apply)
-        private static readonly string[] _maxLengthInputTypes =
-            new[] { "text", "search", "url", "tel", "email", "password" };
+        private static readonly string[] _maxLengthInputTypes = new[]
+        {
+            "text",
+            "search",
+            "url",
+            "tel",
+            "email",
+            "password"
+        };
 
         private readonly IAntiforgery _antiforgery;
         private readonly IModelMetadataProvider _metadataProvider;
@@ -59,7 +76,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IModelMetadataProvider metadataProvider,
             IUrlHelperFactory urlHelperFactory,
             HtmlEncoder htmlEncoder,
-            ValidationHtmlAttributeProvider validationAttributeProvider)
+            ValidationHtmlAttributeProvider validationAttributeProvider
+        )
         {
             if (antiforgery == null)
             {
@@ -98,7 +116,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             _validationAttributeProvider = validationAttributeProvider;
 
             // Underscores are fine characters in id's.
-            IdAttributeDotReplacement = optionsAccessor.Value.HtmlHelperOptions.IdAttributeDotReplacement;
+            IdAttributeDotReplacement =
+                optionsAccessor.Value.HtmlHelperOptions.IdAttributeDotReplacement;
         }
 
         /// <summary>
@@ -149,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string hostname,
             string fragment,
             object routeValues,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -162,7 +182,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             var urlHelper = _urlHelperFactory.GetUrlHelper(viewContext);
-            var url = urlHelper.Action(actionName, controllerName, routeValues, protocol, hostname, fragment);
+            var url = urlHelper.Action(
+                actionName,
+                controllerName,
+                routeValues,
+                protocol,
+                hostname,
+                fragment
+            );
             return GenerateLink(linkText, url, htmlAttributes);
         }
 
@@ -176,7 +203,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string hostname,
             string fragment,
             object routeValues,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -189,7 +217,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             var urlHelper = _urlHelperFactory.GetUrlHelper(viewContext);
-            var url = urlHelper.Page(pageName, pageHandler, routeValues, protocol, hostname, fragment);
+            var url = urlHelper.Page(
+                pageName,
+                pageHandler,
+                routeValues,
+                protocol,
+                hostname,
+                fragment
+            );
             return GenerateLink(linkText, url, htmlAttributes);
         }
 
@@ -224,7 +259,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ModelExplorer modelExplorer,
             string expression,
             bool? isChecked,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -264,14 +300,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 setId: true,
                 isExplicitValue: false,
                 format: null,
-                htmlAttributes: htmlAttributeDictionary);
+                htmlAttributes: htmlAttributeDictionary
+            );
         }
 
         /// <inheritdoc />
         public virtual TagBuilder GenerateHiddenForCheckbox(
             ViewContext viewContext,
             ModelExplorer modelExplorer,
-            string expression)
+            string expression
+        )
         {
             if (viewContext == null)
             {
@@ -299,7 +337,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string controllerName,
             object routeValues,
             string method,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -317,7 +356,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             string action;
-            if (actionName == null && controllerName == null && routeValues == null && defaultMethod)
+            if (
+                actionName == null && controllerName == null && routeValues == null && defaultMethod
+            )
             {
                 // Submit to the original URL in the special case that user called the BeginForm() overload without
                 // parameters (except for the htmlAttributes parameter). Also reachable in the even-more-unusual case
@@ -328,7 +369,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             else
             {
                 var urlHelper = _urlHelperFactory.GetUrlHelper(viewContext);
-                action = urlHelper.Action(action: actionName, controller: controllerName, values: routeValues);
+                action = urlHelper.Action(
+                    action: actionName,
+                    controller: controllerName,
+                    values: routeValues
+                );
             }
 
             return GenerateFormCore(viewContext, action, method, htmlAttributes);
@@ -342,7 +387,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             object routeValues,
             string fragment,
             string method,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -350,7 +396,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             var urlHelper = _urlHelperFactory.GetUrlHelper(viewContext);
-            var action = urlHelper.Page(pageName, pageHandler, routeValues, protocol: null, host: null, fragment: fragment);
+            var action = urlHelper.Page(
+                pageName,
+                pageHandler,
+                routeValues,
+                protocol: null,
+                host: null,
+                fragment: fragment
+            );
 
             return GenerateFormCore(viewContext, action, method, htmlAttributes);
         }
@@ -361,7 +414,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string routeName,
             object routeValues,
             string method,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -381,7 +435,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             object value,
             bool useViewData,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -406,7 +461,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 setId: true,
                 isExplicitValue: true,
                 format: null,
-                htmlAttributes: htmlAttributeDictionary);
+                htmlAttributes: htmlAttributeDictionary
+            );
         }
 
         /// <inheritdoc />
@@ -415,7 +471,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ModelExplorer modelExplorer,
             string expression,
             string labelText,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -427,9 +484,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 throw new ArgumentNullException(nameof(modelExplorer));
             }
 
-            var resolvedLabelText = labelText ??
-                modelExplorer.Metadata.DisplayName ??
-                modelExplorer.Metadata.PropertyName;
+            var resolvedLabelText =
+                labelText
+                ?? modelExplorer.Metadata.DisplayName
+                ?? modelExplorer.Metadata.PropertyName;
             if (resolvedLabelText == null && expression != null)
             {
                 var index = expression.LastIndexOf('.');
@@ -446,10 +504,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var tagBuilder = new TagBuilder("label");
             var fullName = NameAndIdProvider.GetFullHtmlFieldName(viewContext, expression);
-            var idString = NameAndIdProvider.CreateSanitizedId(viewContext, fullName, IdAttributeDotReplacement);
+            var idString = NameAndIdProvider.CreateSanitizedId(
+                viewContext,
+                fullName,
+                IdAttributeDotReplacement
+            );
             tagBuilder.Attributes.Add("for", idString);
             tagBuilder.InnerHtml.SetContent(resolvedLabelText);
-            tagBuilder.MergeAttributes(GetHtmlAttributeDictionaryOrNull(htmlAttributes), replaceExisting: true);
+            tagBuilder.MergeAttributes(
+                GetHtmlAttributeDictionaryOrNull(htmlAttributes),
+                replaceExisting: true
+            );
 
             return tagBuilder;
         }
@@ -460,7 +525,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ModelExplorer modelExplorer,
             string expression,
             object value,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -479,7 +545,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 setId: true,
                 isExplicitValue: true,
                 format: null,
-                htmlAttributes: htmlAttributeDictionary);
+                htmlAttributes: htmlAttributeDictionary
+            );
         }
 
         /// <inheritdoc />
@@ -489,7 +556,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             object value,
             bool? isChecked,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -500,8 +568,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (modelExplorer == null)
             {
                 // RadioButton() case. Do not override checked attribute if isChecked is implicit.
-                if (!isChecked.HasValue &&
-                    (htmlAttributeDictionary == null || !htmlAttributeDictionary.ContainsKey("checked")))
+                if (
+                    !isChecked.HasValue
+                    && (
+                        htmlAttributeDictionary == null
+                        || !htmlAttributeDictionary.ContainsKey("checked")
+                    )
+                )
                 {
                     // Note value may be null if isChecked is non-null.
                     if (value == null)
@@ -514,7 +587,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     isChecked = string.Equals(
                         EvalString(viewContext, expression),
                         valueString,
-                        StringComparison.OrdinalIgnoreCase);
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 }
             }
             else
@@ -527,8 +601,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                 var model = modelExplorer.Model;
                 var valueString = Convert.ToString(value, CultureInfo.CurrentCulture);
-                isChecked = model != null &&
-                    string.Equals(model.ToString(), valueString, StringComparison.OrdinalIgnoreCase);
+                isChecked =
+                    model != null
+                    && string.Equals(
+                        model.ToString(),
+                        valueString,
+                        StringComparison.OrdinalIgnoreCase
+                    );
             }
 
             if (isChecked.HasValue && htmlAttributeDictionary != null)
@@ -548,7 +627,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 setId: true,
                 isExplicitValue: true,
                 format: null,
-                htmlAttributes: htmlAttributeDictionary);
+                htmlAttributes: htmlAttributeDictionary
+            );
         }
 
         /// <inheritdoc />
@@ -560,7 +640,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string hostName,
             string fragment,
             object routeValues,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -585,14 +666,20 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             IEnumerable<SelectListItem> selectList,
             bool allowMultiple,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
                 throw new ArgumentNullException(nameof(viewContext));
             }
 
-            var currentValues = GetCurrentValues(viewContext, modelExplorer, expression, allowMultiple);
+            var currentValues = GetCurrentValues(
+                viewContext,
+                modelExplorer,
+                expression,
+                allowMultiple
+            );
             return GenerateSelect(
                 viewContext,
                 modelExplorer,
@@ -601,7 +688,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 selectList,
                 currentValues,
                 allowMultiple,
-                htmlAttributes);
+                htmlAttributes
+            );
         }
 
         /// <inheritdoc />
@@ -613,7 +701,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             IEnumerable<SelectListItem> selectList,
             ICollection<string> currentValues,
             bool allowMultiple,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -630,8 +719,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         nameof(IHtmlHelper.Editor),
                         typeof(IHtmlHelper<>).FullName,
                         nameof(IHtmlHelper<object>.EditorFor),
-                        "htmlFieldName"),
-                    nameof(expression));
+                        "htmlFieldName"
+                    ),
+                    nameof(expression)
+                );
             }
 
             // If we got a null selectList, try to use ViewData to get the list of items.
@@ -640,8 +731,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 selectList = GetSelectListItems(viewContext, expression);
             }
 
-            modelExplorer = modelExplorer ??
-                ExpressionMetadataProvider.FromStringExpression(expression, viewContext.ViewData, _metadataProvider);
+            modelExplorer =
+                modelExplorer
+                ?? ExpressionMetadataProvider.FromStringExpression(
+                    expression,
+                    viewContext.ViewData,
+                    _metadataProvider
+                );
 
             // Convert each ListItem to an <option> tag and wrap them with <optgroup> if requested.
             var listItemBuilder = GenerateGroupsAndOptions(optionLabel, selectList, currentValues);
@@ -649,7 +745,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var tagBuilder = new TagBuilder("select");
             tagBuilder.InnerHtml.SetHtmlContent(listItemBuilder);
             tagBuilder.MergeAttributes(htmlAttributeDictionary);
-            NameAndIdProvider.GenerateId(viewContext, tagBuilder, fullName, IdAttributeDotReplacement);
+            NameAndIdProvider.GenerateId(
+                viewContext,
+                tagBuilder,
+                fullName,
+                IdAttributeDotReplacement
+            );
             if (!string.IsNullOrEmpty(fullName))
             {
                 tagBuilder.MergeAttribute("name", fullName, replaceExisting: true);
@@ -681,7 +782,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             int rows,
             int columns,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -690,14 +792,18 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             if (rows < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(rows), Resources.HtmlHelper_TextAreaParameterOutOfRange);
+                throw new ArgumentOutOfRangeException(
+                    nameof(rows),
+                    Resources.HtmlHelper_TextAreaParameterOutOfRange
+                );
             }
 
             if (columns < 0)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(columns),
-                    Resources.HtmlHelper_TextAreaParameterOutOfRange);
+                    Resources.HtmlHelper_TextAreaParameterOutOfRange
+                );
             }
 
             var fullName = NameAndIdProvider.GetFullHtmlFieldName(viewContext, expression);
@@ -710,8 +816,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         nameof(IHtmlHelper.Editor),
                         typeof(IHtmlHelper<>).FullName,
                         nameof(IHtmlHelper<object>.EditorFor),
-                        "htmlFieldName"),
-                    nameof(expression));
+                        "htmlFieldName"
+                    ),
+                    nameof(expression)
+                );
             }
 
             viewContext.ViewData.ModelState.TryGetValue(fullName, out var entry);
@@ -727,11 +835,20 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             var tagBuilder = new TagBuilder("textarea");
-            NameAndIdProvider.GenerateId(viewContext, tagBuilder, fullName, IdAttributeDotReplacement);
+            NameAndIdProvider.GenerateId(
+                viewContext,
+                tagBuilder,
+                fullName,
+                IdAttributeDotReplacement
+            );
             tagBuilder.MergeAttributes(htmlAttributeDictionary, replaceExisting: true);
             if (rows > 0)
             {
-                tagBuilder.MergeAttribute("rows", rows.ToString(CultureInfo.InvariantCulture), replaceExisting: true);
+                tagBuilder.MergeAttribute(
+                    "rows",
+                    rows.ToString(CultureInfo.InvariantCulture),
+                    replaceExisting: true
+                );
             }
 
             if (columns > 0)
@@ -739,7 +856,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 tagBuilder.MergeAttribute(
                     "cols",
                     columns.ToString(CultureInfo.InvariantCulture),
-                    replaceExisting: true);
+                    replaceExisting: true
+                );
             }
 
             if (!string.IsNullOrEmpty(fullName))
@@ -772,7 +890,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             object value,
             string format,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -791,7 +910,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 setId: true,
                 isExplicitValue: true,
                 format: format,
-                htmlAttributes: htmlAttributeDictionary);
+                htmlAttributes: htmlAttributeDictionary
+            );
         }
 
         /// <inheritdoc />
@@ -801,7 +921,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             string expression,
             string message,
             string tag,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -810,7 +931,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var fullName = NameAndIdProvider.GetFullHtmlFieldName(viewContext, expression);
             var htmlAttributeDictionary = GetHtmlAttributeDictionaryOrNull(htmlAttributes);
-            if (!IsFullNameValid(fullName, htmlAttributeDictionary, fallbackAttributeName: "data-valmsg-for"))
+            if (
+                !IsFullNameValid(
+                    fullName,
+                    htmlAttributeDictionary,
+                    fallbackAttributeName: "data-valmsg-for"
+                )
+            )
             {
                 throw new ArgumentException(
                     Resources.FormatHtmlGenerator_FieldNameCannotBeNullOrEmpty(
@@ -818,8 +945,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         nameof(IHtmlHelper.Editor),
                         typeof(IHtmlHelper<>).FullName,
                         nameof(IHtmlHelper<object>.EditorFor),
-                        "htmlFieldName"),
-                    nameof(expression));
+                        "htmlFieldName"
+                    ),
+                    nameof(expression)
+                );
             }
 
             var formContext = viewContext.ClientValidationEnabled ? viewContext.FormContext : null;
@@ -828,13 +957,18 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 return null;
             }
 
-            var tryGetModelStateResult = viewContext.ViewData.ModelState.TryGetValue(fullName, out var entry);
+            var tryGetModelStateResult = viewContext.ViewData.ModelState.TryGetValue(
+                fullName,
+                out var entry
+            );
             var modelErrors = tryGetModelStateResult ? entry.Errors : null;
 
             ModelError modelError = null;
             if (modelErrors != null && modelErrors.Count != 0)
             {
-                modelError = modelErrors.FirstOrDefault(m => !string.IsNullOrEmpty(m.ErrorMessage)) ?? modelErrors[0];
+                modelError =
+                    modelErrors.FirstOrDefault(m => !string.IsNullOrEmpty(m.ErrorMessage))
+                    ?? modelErrors[0];
             }
 
             if (modelError == null && formContext == null)
@@ -854,9 +988,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             // Only the style of the span is changed according to the errors if message is null or empty.
             // Otherwise the content and style is handled by the client-side validation.
-            var className = (modelError != null) ?
-                HtmlHelper.ValidationMessageCssClassName :
-                HtmlHelper.ValidationMessageValidCssClassName;
+            var className =
+                (modelError != null)
+                    ? HtmlHelper.ValidationMessageCssClassName
+                    : HtmlHelper.ValidationMessageValidCssClassName;
             tagBuilder.AddCssClass(className);
 
             if (!string.IsNullOrEmpty(message))
@@ -865,12 +1000,20 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
             else if (modelError != null)
             {
-                modelExplorer = modelExplorer ?? ExpressionMetadataProvider.FromStringExpression(
-                    expression,
-                    viewContext.ViewData,
-                    _metadataProvider);
+                modelExplorer =
+                    modelExplorer
+                    ?? ExpressionMetadataProvider.FromStringExpression(
+                        expression,
+                        viewContext.ViewData,
+                        _metadataProvider
+                    );
                 tagBuilder.InnerHtml.SetContent(
-                    ValidationHelpers.GetModelErrorMessageOrDefault(modelError, entry, modelExplorer));
+                    ValidationHelpers.GetModelErrorMessageOrDefault(
+                        modelError,
+                        entry,
+                        modelExplorer
+                    )
+                );
             }
 
             if (formContext != null)
@@ -881,8 +1024,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 }
 
                 var replaceValidationMessageContents = string.IsNullOrEmpty(message);
-                tagBuilder.MergeAttribute("data-valmsg-replace",
-                    replaceValidationMessageContents.ToString().ToLowerInvariant());
+                tagBuilder.MergeAttribute(
+                    "data-valmsg-replace",
+                    replaceValidationMessageContents.ToString().ToLowerInvariant()
+                );
             }
 
             return tagBuilder;
@@ -894,7 +1039,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             bool excludePropertyErrors,
             string message,
             string headerTag,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -908,9 +1054,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 return null;
             }
 
-            if (excludePropertyErrors &&
-                (!viewData.ModelState.TryGetValue(viewData.TemplateInfo.HtmlFieldPrefix, out var entryForModel) ||
-                 entryForModel.Errors.Count == 0))
+            if (
+                excludePropertyErrors
+                && (
+                    !viewData.ModelState.TryGetValue(
+                        viewData.TemplateInfo.HtmlFieldPrefix,
+                        out var entryForModel
+                    )
+                    || entryForModel.Errors.Count == 0
+                )
+            )
             {
                 // Client-side validation (if enabled) will not affect the generated element and element will be empty.
                 return null;
@@ -995,7 +1148,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewContext viewContext,
             ModelExplorer modelExplorer,
             string expression,
-            bool allowMultiple)
+            bool allowMultiple
+        )
         {
             if (viewContext == null)
             {
@@ -1040,7 +1194,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 if (rawValues == null || rawValues is string)
                 {
                     throw new InvalidOperationException(
-                        Resources.FormatHtmlHelper_SelectExpressionNotEnumerable(nameof(expression)));
+                        Resources.FormatHtmlHelper_SelectExpressionNotEnumerable(nameof(expression))
+                    );
                 }
             }
             else
@@ -1048,8 +1203,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 rawValues = new[] { rawValue };
             }
 
-            modelExplorer = modelExplorer ??
-                ExpressionMetadataProvider.FromStringExpression(expression, viewContext.ViewData, _metadataProvider);
+            modelExplorer =
+                modelExplorer
+                ?? ExpressionMetadataProvider.FromStringExpression(
+                    expression,
+                    viewContext.ViewData,
+                    _metadataProvider
+                );
             var metadata = modelExplorer.Metadata;
             if (allowMultiple && metadata.IsEnumerableType)
             {
@@ -1069,7 +1229,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             foreach (var value in rawValues)
             {
                 // Add original or converted string.
-                var stringValue = (value as string) ?? Convert.ToString(value, CultureInfo.CurrentCulture);
+                var stringValue =
+                    (value as string) ?? Convert.ToString(value, CultureInfo.CurrentCulture);
 
                 // Do not add simple names of enum properties here because whitespace isn't relevant for their binding.
                 // Will add matching names just below.
@@ -1084,7 +1245,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 if (isTargetEnum && enumValue == null && value != null)
                 {
                     var valueType = value.GetType();
-                    if (typeof(long).IsAssignableFrom(valueType) || typeof(ulong).IsAssignableFrom(valueType))
+                    if (
+                        typeof(long).IsAssignableFrom(valueType)
+                        || typeof(ulong).IsAssignableFrom(valueType)
+                    )
                     {
                         // E.g. user added an int to a ViewData entry and called a string-based HTML helper.
                         enumValue = ConvertEnumFromInteger(value, innerType);
@@ -1093,7 +1257,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     {
                         // E.g. got a string from ModelState.
                         var methodInfo = ConvertEnumFromStringMethod.MakeGenericMethod(innerType);
-                        enumValue = (Enum)methodInfo.Invoke(obj: null, parameters: new[] { stringValue });
+                        enumValue = (Enum)methodInfo.Invoke(
+                            obj: null,
+                            parameters: new[] { stringValue }
+                        );
                     }
                 }
 
@@ -1109,7 +1276,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     {
                         // Add all simple names for this value.
                         var matchingNames = enumNames
-                            .Where(kvp => string.Equals(integerString, kvp.Value, StringComparison.Ordinal))
+                            .Where(
+                                kvp =>
+                                    string.Equals(
+                                        integerString,
+                                        kvp.Value,
+                                        StringComparison.Ordinal
+                                    )
+                            )
                             .Select(kvp => kvp.Key);
                         foreach (var name in matchingNames)
                         {
@@ -1124,7 +1298,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         internal static string EvalString(ViewContext viewContext, string key, string format)
         {
-            return Convert.ToString(viewContext.ViewData.Eval(key, format), CultureInfo.CurrentCulture);
+            return Convert.ToString(
+                viewContext.ViewData.Eval(key, format),
+                CultureInfo.CurrentCulture
+            );
         }
 
         /// <remarks>
@@ -1158,9 +1335,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             return tagBuilder;
         }
 
-        internal static object GetModelStateValue(ViewContext viewContext, string key, Type destinationType)
+        internal static object GetModelStateValue(
+            ViewContext viewContext,
+            string key,
+            Type destinationType
+        )
         {
-            if (viewContext.ViewData.ModelState.TryGetValue(key, out var entry) && entry.RawValue != null)
+            if (
+                viewContext.ViewData.ModelState.TryGetValue(key, out var entry)
+                && entry.RawValue != null
+            )
             {
                 return ModelBindingHelper.ConvertTo(entry.RawValue, destinationType, culture: null);
             }
@@ -1185,7 +1369,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewContext viewContext,
             string action,
             string method,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -1237,7 +1422,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             bool setId,
             bool isExplicitValue,
             string format,
-            IDictionary<string, object> htmlAttributes)
+            IDictionary<string, object> htmlAttributes
+        )
         {
             if (viewContext == null)
             {
@@ -1256,15 +1442,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         nameof(IHtmlHelper.Editor),
                         typeof(IHtmlHelper<>).FullName,
                         nameof(IHtmlHelper<object>.EditorFor),
-                        "htmlFieldName"),
-                    nameof(expression));
+                        "htmlFieldName"
+                    ),
+                    nameof(expression)
+                );
             }
 
             var inputTypeString = GetInputTypeString(inputType);
-            var tagBuilder = new TagBuilder("input")
-            {
-                TagRenderMode = TagRenderMode.SelfClosing,
-            };
+            var tagBuilder = new TagBuilder("input") { TagRenderMode = TagRenderMode.SelfClosing, };
 
             tagBuilder.MergeAttributes(htmlAttributes);
             tagBuilder.MergeAttribute("type", inputTypeString);
@@ -1276,7 +1461,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var suppliedTypeString = tagBuilder.Attributes["type"];
             if (_placeholderInputTypes.Contains(suppliedTypeString))
             {
-                AddPlaceholderAttribute(viewContext.ViewData, tagBuilder, modelExplorer, expression);
+                AddPlaceholderAttribute(
+                    viewContext.ViewData,
+                    tagBuilder,
+                    modelExplorer,
+                    expression
+                );
             }
 
             if (_maxLengthInputTypes.Contains(suppliedTypeString))
@@ -1289,7 +1479,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             switch (inputType)
             {
                 case InputType.CheckBox:
-                    var modelStateWasChecked = GetModelStateValue(viewContext, fullName, typeof(bool)) as bool?;
+                    var modelStateWasChecked =
+                        GetModelStateValue(viewContext, fullName, typeof(bool)) as bool?;
                     if (modelStateWasChecked.HasValue)
                     {
                         isChecked = modelStateWasChecked.Value;
@@ -1301,9 +1492,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 case InputType.Radio:
                     if (!usedModelState)
                     {
-                        if (GetModelStateValue(viewContext, fullName, typeof(string)) is string modelStateValue)
+                        if (
+                            GetModelStateValue(viewContext, fullName, typeof(string))
+                            is string modelStateValue
+                        )
                         {
-                            isChecked = string.Equals(modelStateValue, valueParameter, StringComparison.Ordinal);
+                            isChecked = string.Equals(
+                                modelStateValue,
+                                valueParameter,
+                                StringComparison.Ordinal
+                            );
                             usedModelState = true;
                         }
                     }
@@ -1326,24 +1524,42 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     {
                         tagBuilder.MergeAttribute("value", valueParameter, isExplicitValue);
                     }
-
                     break;
 
                 case InputType.Text:
                 default:
-                    var attributeValue = (string)GetModelStateValue(viewContext, fullName, typeof(string));
+                    var attributeValue = (string)GetModelStateValue(
+                        viewContext,
+                        fullName,
+                        typeof(string)
+                    );
                     if (attributeValue == null)
                     {
-                        attributeValue = useViewData ? EvalString(viewContext, expression, format) : valueParameter;
+                        attributeValue = useViewData
+                            ? EvalString(viewContext, expression, format)
+                            : valueParameter;
                     }
 
                     var addValue = true;
                     object typeAttributeValue;
-                    if (htmlAttributes != null && htmlAttributes.TryGetValue("type", out typeAttributeValue))
+                    if (
+                        htmlAttributes != null
+                        && htmlAttributes.TryGetValue("type", out typeAttributeValue)
+                    )
                     {
                         var typeAttributeString = typeAttributeValue.ToString();
-                        if (string.Equals(typeAttributeString, "file", StringComparison.OrdinalIgnoreCase) ||
-                            string.Equals(typeAttributeString, "image", StringComparison.OrdinalIgnoreCase))
+                        if (
+                            string.Equals(
+                                typeAttributeString,
+                                "file",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                            || string.Equals(
+                                typeAttributeString,
+                                "image",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             // 'value' attribute is not needed for 'file' and 'image' input types.
                             addValue = false;
@@ -1352,19 +1568,30 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                     if (addValue)
                     {
-                        tagBuilder.MergeAttribute("value", attributeValue, replaceExisting: isExplicitValue);
+                        tagBuilder.MergeAttribute(
+                            "value",
+                            attributeValue,
+                            replaceExisting: isExplicitValue
+                        );
                     }
-
                     break;
             }
 
             if (setId)
             {
-                NameAndIdProvider.GenerateId(viewContext, tagBuilder, fullName, IdAttributeDotReplacement);
+                NameAndIdProvider.GenerateId(
+                    viewContext,
+                    tagBuilder,
+                    fullName,
+                    IdAttributeDotReplacement
+                );
             }
 
             // If there are any errors for a named field, we add the CSS attribute.
-            if (viewContext.ViewData.ModelState.TryGetValue(fullName, out var entry) && entry.Errors.Count > 0)
+            if (
+                viewContext.ViewData.ModelState.TryGetValue(fullName, out var entry)
+                && entry.Errors.Count > 0
+            )
             {
                 tagBuilder.AddCssClass(HtmlHelper.ValidationInputCssClassName);
             }
@@ -1384,7 +1611,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         protected virtual TagBuilder GenerateLink(
             string linkText,
             string url,
-            object htmlAttributes)
+            object htmlAttributes
+        )
         {
             if (linkText == null)
             {
@@ -1411,12 +1639,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewDataDictionary viewData,
             TagBuilder tagBuilder,
             ModelExplorer modelExplorer,
-            string expression)
+            string expression
+        )
         {
-            modelExplorer = modelExplorer ?? ExpressionMetadataProvider.FromStringExpression(
-                expression,
-                viewData,
-                _metadataProvider);
+            modelExplorer =
+                modelExplorer
+                ?? ExpressionMetadataProvider.FromStringExpression(
+                    expression,
+                    viewData,
+                    _metadataProvider
+                );
 
             var placeholder = modelExplorer.Metadata.Placeholder;
             if (!string.IsNullOrEmpty(placeholder))
@@ -1436,21 +1668,36 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewDataDictionary viewData,
             TagBuilder tagBuilder,
             ModelExplorer modelExplorer,
-            string expression)
+            string expression
+        )
         {
-            modelExplorer = modelExplorer ?? ExpressionMetadataProvider.FromStringExpression(
-                expression,
-                viewData,
-                _metadataProvider);
+            modelExplorer =
+                modelExplorer
+                ?? ExpressionMetadataProvider.FromStringExpression(
+                    expression,
+                    viewData,
+                    _metadataProvider
+                );
 
             int? maxLengthValue = null;
             foreach (var attribute in modelExplorer.Metadata.ValidatorMetadata)
             {
-                if (attribute is MaxLengthAttribute maxLengthAttribute && (!maxLengthValue.HasValue || maxLengthValue.Value > maxLengthAttribute.Length))
+                if (
+                    attribute is MaxLengthAttribute maxLengthAttribute
+                    && (
+                        !maxLengthValue.HasValue || maxLengthValue.Value > maxLengthAttribute.Length
+                    )
+                )
                 {
                     maxLengthValue = maxLengthAttribute.Length;
                 }
-                else if (attribute is StringLengthAttribute stringLengthAttribute && (!maxLengthValue.HasValue || maxLengthValue.Value > stringLengthAttribute.MaximumLength))
+                else if (
+                    attribute is StringLengthAttribute stringLengthAttribute
+                    && (
+                        !maxLengthValue.HasValue
+                        || maxLengthValue.Value > stringLengthAttribute.MaximumLength
+                    )
+                )
                 {
                     maxLengthValue = stringLengthAttribute.MaximumLength;
                 }
@@ -1458,7 +1705,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             if (maxLengthValue.HasValue)
             {
-                tagBuilder.MergeAttribute("maxlength", maxLengthValue.Value.ToString(CultureInfo.InvariantCulture));
+                tagBuilder.MergeAttribute(
+                    "maxlength",
+                    maxLengthValue.Value.ToString(CultureInfo.InvariantCulture)
+                );
             }
         }
 
@@ -1474,18 +1724,23 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewContext viewContext,
             TagBuilder tagBuilder,
             ModelExplorer modelExplorer,
-            string expression)
+            string expression
+        )
         {
-            modelExplorer = modelExplorer ?? ExpressionMetadataProvider.FromStringExpression(
-                expression,
-                viewContext.ViewData,
-                _metadataProvider);
+            modelExplorer =
+                modelExplorer
+                ?? ExpressionMetadataProvider.FromStringExpression(
+                    expression,
+                    viewContext.ViewData,
+                    _metadataProvider
+                );
 
             _validationAttributeProvider.AddAndTrackValidationAttributes(
                 viewContext,
                 modelExplorer,
                 expression,
-                tagBuilder.Attributes);
+                tagBuilder.Attributes
+            );
         }
 
         private static Enum ConvertEnumFromInteger(object value, Type targetType)
@@ -1495,7 +1750,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 return (Enum)Enum.ToObject(targetType, value);
             }
             catch (Exception exception)
-            when (exception is FormatException || exception.InnerException is FormatException)
+                when (exception is FormatException || exception.InnerException is FormatException)
             {
                 // The integer was too large for this enum type.
                 return null;
@@ -1524,7 +1779,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         }
 
         // Only need a dictionary if htmlAttributes is non-null. TagBuilder.MergeAttributes() is fine with null.
-        private static IDictionary<string, object> GetHtmlAttributeDictionaryOrNull(object htmlAttributes)
+        private static IDictionary<string, object> GetHtmlAttributeDictionaryOrNull(
+            object htmlAttributes
+        )
         {
             IDictionary<string, object> htmlAttributeDictionary = null;
             if (htmlAttributes != null)
@@ -1532,7 +1789,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 htmlAttributeDictionary = htmlAttributes as IDictionary<string, object>;
                 if (htmlAttributeDictionary == null)
                 {
-                    htmlAttributeDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+                    htmlAttributeDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(
+                        htmlAttributes
+                    );
                 }
             }
 
@@ -1560,7 +1819,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private static IEnumerable<SelectListItem> GetSelectListItems(
             ViewContext viewContext,
-            string expression)
+            string expression
+        )
         {
             if (viewContext == null)
             {
@@ -1575,32 +1835,46 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // First check whether above evaluation was successful and did not match ViewData.Model.
             if (value == null || value == viewContext.ViewData.Model)
             {
-                throw new InvalidOperationException(Resources.FormatHtmlHelper_MissingSelectData(
-                    $"IEnumerable<{nameof(SelectListItem)}>",
-                    expression));
+                throw new InvalidOperationException(
+                    Resources.FormatHtmlHelper_MissingSelectData(
+                        $"IEnumerable<{nameof(SelectListItem)}>",
+                        expression
+                    )
+                );
             }
 
             // Second check the Eval() call returned a collection of SelectListItems.
             if (!(value is IEnumerable<SelectListItem> selectList))
             {
-                throw new InvalidOperationException(Resources.FormatHtmlHelper_WrongSelectDataType(
-                    expression,
-                    value.GetType().FullName,
-                    $"IEnumerable<{nameof(SelectListItem)}>"));
+                throw new InvalidOperationException(
+                    Resources.FormatHtmlHelper_WrongSelectDataType(
+                        expression,
+                        value.GetType().FullName,
+                        $"IEnumerable<{nameof(SelectListItem)}>"
+                    )
+                );
             }
 
             return selectList;
         }
 
-        private static bool IsFullNameValid(string fullName, IDictionary<string, object> htmlAttributeDictionary)
+        private static bool IsFullNameValid(
+            string fullName,
+            IDictionary<string, object> htmlAttributeDictionary
+        )
         {
-            return IsFullNameValid(fullName, htmlAttributeDictionary, fallbackAttributeName: "name");
+            return IsFullNameValid(
+                fullName,
+                htmlAttributeDictionary,
+                fallbackAttributeName: "name"
+            );
         }
 
         private static bool IsFullNameValid(
             string fullName,
             IDictionary<string, object> htmlAttributeDictionary,
-            string fallbackAttributeName)
+            string fallbackAttributeName
+        )
         {
             if (string.IsNullOrEmpty(fullName))
             {
@@ -1613,7 +1887,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 // Check if user has provided an explicit name attribute.
                 // Generalized a bit because other attributes e.g. data-valmsg-for refer to element names.
                 htmlAttributeDictionary.TryGetValue(fallbackAttributeName, out var attributeObject);
-                var attributeString = Convert.ToString(attributeObject, CultureInfo.InvariantCulture);
+                var attributeString = Convert.ToString(
+                    attributeObject,
+                    CultureInfo.InvariantCulture
+                );
                 if (string.IsNullOrEmpty(attributeString))
                 {
                     return false;
@@ -1624,7 +1901,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         }
 
         /// <inheritdoc />
-        public IHtmlContent GenerateGroupsAndOptions(string optionLabel, IEnumerable<SelectListItem> selectList)
+        public IHtmlContent GenerateGroupsAndOptions(
+            string optionLabel,
+            IEnumerable<SelectListItem> selectList
+        )
         {
             return GenerateGroupsAndOptions(optionLabel, selectList, currentValues: null);
         }
@@ -1632,7 +1912,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private IHtmlContent GenerateGroupsAndOptions(
             string optionLabel,
             IEnumerable<SelectListItem> selectList,
-            ICollection<string> currentValues)
+            ICollection<string> currentValues
+        )
         {
             if (!(selectList is IList<SelectListItem> itemsList))
             {
@@ -1656,14 +1937,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Make optionLabel the first item that gets rendered.
             if (optionLabel != null)
             {
-                listItemBuilder.AppendLine(GenerateOption(
-                    new SelectListItem()
-                    {
-                        Text = optionLabel,
-                        Value = string.Empty,
-                        Selected = false,
-                    },
-                    currentValues: null));
+                listItemBuilder.AppendLine(
+                    GenerateOption(
+                        new SelectListItem()
+                        {
+                            Text = optionLabel,
+                            Value = string.Empty,
+                            Selected = false,
+                        },
+                        currentValues: null
+                    )
+                );
             }
 
             // Group items in the SelectList if requested.
@@ -1695,10 +1979,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         {
                             var groupItem = itemsList[j];
 
-                            if (!optionGenerated[j] &&
-                                object.ReferenceEquals(optGroup, groupItem.Group))
+                            if (
+                                !optionGenerated[j]
+                                && object.ReferenceEquals(optGroup, groupItem.Group)
+                            )
                             {
-                                groupBuilder.InnerHtml.AppendLine(GenerateOption(groupItem, currentValues));
+                                groupBuilder.InnerHtml.AppendLine(
+                                    GenerateOption(groupItem, currentValues)
+                                );
                                 optionGenerated[j] = true;
                             }
                         }

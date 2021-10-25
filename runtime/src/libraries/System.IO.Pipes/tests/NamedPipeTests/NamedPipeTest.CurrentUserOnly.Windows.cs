@@ -35,7 +35,12 @@ namespace System.IO.Pipes.Tests
             using (var principalCtx = new PrincipalContext(ContextType.Machine))
             {
                 bool needToCreate = false;
-                using (var foundUserPrincipal = UserPrincipal.FindByIdentity(principalCtx, TestAccountName))
+                using (
+                    var foundUserPrincipal = UserPrincipal.FindByIdentity(
+                        principalCtx,
+                        TestAccountName
+                    )
+                )
                 {
                     if (foundUserPrincipal == null)
                     {
@@ -67,10 +72,22 @@ namespace System.IO.Pipes.Tests
             const int LOGON32_PROVIDER_DEFAULT = 0;
             const int LOGON32_LOGON_INTERACTIVE = 2;
 
-            if (!LogonUser(TestAccountName, ".", testAccountPassword, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out _testAccountTokenHandle))
+            if (
+                !LogonUser(
+                    TestAccountName,
+                    ".",
+                    testAccountPassword,
+                    LOGON32_LOGON_INTERACTIVE,
+                    LOGON32_PROVIDER_DEFAULT,
+                    out _testAccountTokenHandle
+                )
+            )
             {
                 _testAccountTokenHandle = null;
-                throw new Exception($"Failed to get SafeAccessTokenHandle for test account {TestAccountName}", new Win32Exception());
+                throw new Exception(
+                    $"Failed to get SafeAccessTokenHandle for test account {TestAccountName}",
+                    new Win32Exception()
+                );
             }
         }
 
@@ -86,7 +103,9 @@ namespace System.IO.Pipes.Tests
             using (var userPrincipal = UserPrincipal.FindByIdentity(principalCtx, TestAccountName))
             {
                 if (userPrincipal == null)
-                    throw new Exception($"Failed to get user principal to delete test account {TestAccountName}");
+                    throw new Exception(
+                        $"Failed to get user principal to delete test account {TestAccountName}"
+                    );
 
                 try
                 {
@@ -104,18 +123,28 @@ namespace System.IO.Pipes.Tests
         {
             using (WindowsIdentity serverIdentity = WindowsIdentity.GetCurrent())
             {
-                WindowsIdentity.RunImpersonated(_testAccountTokenHandle, () =>
-                {
-                    using (WindowsIdentity clientIdentity = WindowsIdentity.GetCurrent())
-                        Assert.NotEqual(serverIdentity.Name, clientIdentity.Name);
+                WindowsIdentity.RunImpersonated(
+                    _testAccountTokenHandle,
+                    () =>
+                    {
+                        using (WindowsIdentity clientIdentity = WindowsIdentity.GetCurrent())
+                            Assert.NotEqual(serverIdentity.Name, clientIdentity.Name);
 
-                    action();
-                });
+                        action();
+                    }
+                );
             }
         }
 
         [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        private static extern bool LogonUser(string userName, string domain, string password, int logonType, int logonProvider, out SafeAccessTokenHandle safeAccessTokenHandle);
+        private static extern bool LogonUser(
+            string userName,
+            string domain,
+            string password,
+            int logonType,
+            int logonProvider,
+            out SafeAccessTokenHandle safeAccessTokenHandle
+        );
     }
 
     /// <summary>
@@ -123,14 +152,17 @@ namespace System.IO.Pipes.Tests
     /// </summary>
     public class NamedPipeTest_CurrentUserOnly_Windows : IClassFixture<TestAccountImpersonator>
     {
-        public static bool IsAdminOnSupportedWindowsVersions => PlatformDetection.IsWindowsAndElevated
+        public static bool IsAdminOnSupportedWindowsVersions =>
+            PlatformDetection.IsWindowsAndElevated
             && !PlatformDetection.IsWindows7
             && !PlatformDetection.IsWindowsNanoServer
             && !PlatformDetection.IsWindowsServerCore;
 
         private TestAccountImpersonator _testAccountImpersonator;
 
-        public NamedPipeTest_CurrentUserOnly_Windows(TestAccountImpersonator testAccountImpersonator)
+        public NamedPipeTest_CurrentUserOnly_Windows(
+            TestAccountImpersonator testAccountImpersonator
+        )
         {
             _testAccountImpersonator = testAccountImpersonator;
         }
@@ -142,25 +174,46 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeOptions.CurrentUserOnly, PipeOptions.None)]
         [InlineData(PipeOptions.CurrentUserOnly, PipeOptions.CurrentUserOnly)]
         public void Connection_UnderDifferentUsers_BehavesAsExpected(
-            PipeOptions serverPipeOptions, PipeOptions clientPipeOptions)
+            PipeOptions serverPipeOptions,
+            PipeOptions clientPipeOptions
+        )
         {
             string name = PipeStreamConformanceTests.GetUniquePipeName();
             using (var cts = new CancellationTokenSource())
-            using (var server = new NamedPipeServerStream(name, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, serverPipeOptions | PipeOptions.Asynchronous))
+            using (
+                var server = new NamedPipeServerStream(
+                    name,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    serverPipeOptions | PipeOptions.Asynchronous
+                )
+            )
             {
                 Task serverTask = server.WaitForConnectionAsync(cts.Token);
 
-                _testAccountImpersonator.RunImpersonated(() =>
-                {
-                    using (var client = new NamedPipeClientStream(".", name, PipeDirection.InOut, clientPipeOptions))
+                _testAccountImpersonator.RunImpersonated(
+                    () =>
                     {
-                        Assert.Throws<UnauthorizedAccessException>(() => client.Connect());
+                        using (
+                            var client = new NamedPipeClientStream(
+                                ".",
+                                name,
+                                PipeDirection.InOut,
+                                clientPipeOptions
+                            )
+                        )
+                        {
+                            Assert.Throws<UnauthorizedAccessException>(() => client.Connect());
+                        }
                     }
-                });
+                );
 
                 // Server is expected to not have received any request.
                 cts.Cancel();
-                AggregateException e = Assert.Throws<AggregateException>(() => serverTask.Wait(10_000));
+                AggregateException e = Assert.Throws<AggregateException>(
+                    () => serverTask.Wait(10_000)
+                );
                 Assert.IsType<TaskCanceledException>(e.InnerException);
             }
         }
@@ -170,18 +223,27 @@ namespace System.IO.Pipes.Tests
         public void Allow_Connection_UnderDifferentUsers_ForClientReading()
         {
             string name = PipeStreamConformanceTests.GetUniquePipeName();
-            using (var server = new NamedPipeServerStream(
-                name, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous))
+            using (
+                var server = new NamedPipeServerStream(
+                    name,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.Asynchronous
+                )
+            )
             {
                 Task serverTask = server.WaitForConnectionAsync(CancellationToken.None);
 
-                _testAccountImpersonator.RunImpersonated(() =>
-                {
-                    using (var client = new NamedPipeClientStream(".", name, PipeDirection.In))
+                _testAccountImpersonator.RunImpersonated(
+                    () =>
                     {
-                        client.Connect(10_000);
+                        using (var client = new NamedPipeClientStream(".", name, PipeDirection.In))
+                        {
+                            client.Connect(10_000);
+                        }
                     }
-                });
+                );
 
                 Assert.True(serverTask.Wait(10_000));
             }

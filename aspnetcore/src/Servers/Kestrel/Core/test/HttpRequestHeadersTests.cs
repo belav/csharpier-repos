@@ -110,12 +110,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             headers["custom"] = v3;
 
             Assert.Equal(
-                new[] {
+                new[]
+                {
                     new KeyValuePair<string, StringValues>("Host", v1),
                     new KeyValuePair<string, StringValues>("Content-Length", v2),
                     new KeyValuePair<string, StringValues>("custom", v3),
                 },
-                headers);
+                headers
+            );
         }
 
         [Fact]
@@ -129,13 +131,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             headers["Content-Length"] = v2;
             headers["custom"] = v3;
 
-            Assert.Equal<string>(
-                new[] { "Host", "Content-Length", "custom" },
-                headers.Keys);
+            Assert.Equal<string>(new[] { "Host", "Content-Length", "custom" }, headers.Keys);
 
-            Assert.Equal<StringValues>(
-                new[] { v1, v2, v3 },
-                headers.Values);
+            Assert.Equal<StringValues>(new[] { v1, v2, v3 }, headers.Values);
         }
 
         [Fact]
@@ -311,7 +309,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 #pragma warning disable CS0618 // Type or member is obsolete
             var exception = Assert.Throws<BadHttpRequestException>(
 #pragma warning restore CS0618 // Type or member is obsolete
-                () => headers.Append(Encoding.Latin1.GetBytes(key), Encoding.ASCII.GetBytes("value")));
+                () =>
+                    headers.Append(Encoding.Latin1.GetBytes(key), Encoding.ASCII.GetBytes("value"))
+            );
             Assert.Equal(StatusCodes.Status400BadRequest, exception.StatusCode);
         }
 
@@ -363,7 +363,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 var prevName = ChangeNameCase(header.Name, variant: i);
                 var nextName = ChangeNameCase(header.Name, variant: i + 1);
 
-                var values = GetHeaderValues(headers, prevName, nextName, HeaderValue1, HeaderValue2);
+                var values = GetHeaderValues(
+                    headers,
+                    prevName,
+                    nextName,
+                    HeaderValue1,
+                    HeaderValue2
+                );
 
                 Assert.Equal(HeaderValue1, values.PrevHeaderValue);
                 Assert.NotSame(HeaderValue1, values.PrevHeaderValue);
@@ -387,7 +393,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 var prevName = ChangeNameCase(header.Name, variant: i);
                 var nextName = ChangeNameCase(header.Name, variant: i + 1);
 
-                var values = GetHeaderValues(headers, prevName, nextName, HeaderValue1, nextValue: null);
+                var values = GetHeaderValues(
+                    headers,
+                    prevName,
+                    nextName,
+                    HeaderValue1,
+                    nextValue: null
+                );
 
                 Assert.Equal(HeaderValue1, values.PrevHeaderValue);
                 Assert.NotSame(HeaderValue1, values.PrevHeaderValue);
@@ -427,7 +439,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         [Theory]
         [MemberData(nameof(KnownRequestHeaders))]
-        public void ValueReuseLatin1NotConfusedForUtf16AndStillRejected(bool reuseValue, KnownHeader header)
+        public void ValueReuseLatin1NotConfusedForUtf16AndStillRejected(
+            bool reuseValue,
+            KnownHeader header
+        )
         {
             var headers = new HttpRequestHeaders(reuseHeaderValues: reuseValue);
 
@@ -453,7 +468,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     else
                     {
                         // Truncated length (to ensure different paths from changing lengths in matching)
-                        headerValueUtf16Latin1CrossOver = new string(headerValue.AsSpan().Slice(0, i + 1));
+                        headerValueUtf16Latin1CrossOver = new string(
+                            headerValue.AsSpan().Slice(0, i + 1)
+                        );
                     }
 
                     headers.Reset();
@@ -470,15 +487,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
                     headers.Reset();
 
-                    Assert.Throws<InvalidOperationException>(() =>
-                    {
-                        var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
-                        var nextSpan = Encoding.Latin1.GetBytes(headerValueUtf16Latin1CrossOver).AsSpan();
+                    Assert.Throws<InvalidOperationException>(
+                        () =>
+                        {
+                            var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
+                            var nextSpan = Encoding.Latin1
+                                .GetBytes(headerValueUtf16Latin1CrossOver)
+                                .AsSpan();
 
-                        Assert.False(nextSpan.SequenceEqual(Encoding.ASCII.GetBytes(headerValueUtf16Latin1CrossOver)));
+                            Assert.False(
+                                nextSpan.SequenceEqual(
+                                    Encoding.ASCII.GetBytes(headerValueUtf16Latin1CrossOver)
+                                )
+                            );
 
-                        headers.Append(headerName, nextSpan);
-                    });
+                            headers.Append(headerName, nextSpan);
+                        }
+                    );
                 }
 
                 // Reset back to Ascii
@@ -488,9 +513,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         [Theory]
         [MemberData(nameof(KnownRequestHeaders))]
-        public void Latin1ValuesAcceptedInLatin1ModeButNotReused(bool reuseValue, KnownHeader header)
+        public void Latin1ValuesAcceptedInLatin1ModeButNotReused(
+            bool reuseValue,
+            KnownHeader header
+        )
         {
-            var headers = new HttpRequestHeaders(reuseHeaderValues: reuseValue, _ => Encoding.Latin1);
+            var headers = new HttpRequestHeaders(
+                reuseHeaderValues: reuseValue,
+                _ => Encoding.Latin1
+            );
 
             var headerValue = new char[127]; // 64 + 32 + 16 + 8 + 4 + 2 + 1
             for (var i = 0; i < headerValue.Length; i++)
@@ -514,13 +545,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     else
                     {
                         // Truncated length (to ensure different paths from changing lengths in matching)
-                        headerValueUtf16Latin1CrossOver = new string(headerValue.AsSpan().Slice(0, i + 1));
+                        headerValueUtf16Latin1CrossOver = new string(
+                            headerValue.AsSpan().Slice(0, i + 1)
+                        );
                     }
 
                     var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
-                    var latinValueSpan = Encoding.Latin1.GetBytes(headerValueUtf16Latin1CrossOver).AsSpan();
+                    var latinValueSpan = Encoding.Latin1
+                        .GetBytes(headerValueUtf16Latin1CrossOver)
+                        .AsSpan();
 
-                    Assert.False(latinValueSpan.SequenceEqual(Encoding.ASCII.GetBytes(headerValueUtf16Latin1CrossOver)));
+                    Assert.False(
+                        latinValueSpan.SequenceEqual(
+                            Encoding.ASCII.GetBytes(headerValueUtf16Latin1CrossOver)
+                        )
+                    );
 
                     headers.Reset();
                     headers.Append(headerName, latinValueSpan);
@@ -546,7 +585,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(KnownRequestHeaders))]
         public void NullCharactersRejectedInUTF8AndLatin1Mode(bool useLatin1, KnownHeader header)
         {
-            var headers = new HttpRequestHeaders(encodingSelector: useLatin1 ? _ => Encoding.Latin1 : (Func<string, Encoding>)null);
+            var headers = new HttpRequestHeaders(
+                encodingSelector: useLatin1 ? _ => Encoding.Latin1 : (Func<string, Encoding>)null
+            );
 
             var valueArray = new char[127]; // 64 + 32 + 16 + 8 + 4 + 2 + 1
             for (var i = 0; i < valueArray.Length; i++)
@@ -562,13 +603,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
                 headers.Reset();
 
-                Assert.Throws<InvalidOperationException>(() =>
-                {
-                    var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
-                    var valueSpan = Encoding.ASCII.GetBytes(valueString).AsSpan();
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
+                        var valueSpan = Encoding.ASCII.GetBytes(valueString).AsSpan();
 
-                    headers.Append(headerName, valueSpan);
-                });
+                        headers.Append(headerName, valueSpan);
+                    }
+                );
 
                 valueArray[i] = 'a';
             }
@@ -582,23 +625,35 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var cookieNameBytes = Encoding.ASCII.GetBytes(HeaderNames.Cookie);
             var headerValueBytes = Encoding.UTF8.GetBytes(headerValue);
 
-            var headers = new HttpRequestHeaders(encodingSelector: headerName =>
-            {
-                // For known headers, the HeaderNames value is passed in.
-                if (ReferenceEquals(headerName, HeaderNames.Accept))
+            var headers = new HttpRequestHeaders(
+                encodingSelector: headerName =>
                 {
-                    return Encoding.GetEncoding("ASCII", EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback);
+                    // For known headers, the HeaderNames value is passed in.
+                    if (ReferenceEquals(headerName, HeaderNames.Accept))
+                    {
+                        return Encoding.GetEncoding(
+                            "ASCII",
+                            EncoderFallback.ExceptionFallback,
+                            DecoderFallback.ExceptionFallback
+                        );
+                    }
+
+                    return Encoding.UTF8;
                 }
+            );
 
-                return Encoding.UTF8;
-            });
-
-            Assert.Throws<InvalidOperationException>(() => headers.Append(acceptNameBytes, headerValueBytes));
+            Assert.Throws<InvalidOperationException>(
+                () => headers.Append(acceptNameBytes, headerValueBytes)
+            );
             headers.Append(cookieNameBytes, headerValueBytes);
             headers.OnHeadersComplete();
 
-            var parsedAcceptHeaderValue = ((IHeaderDictionary)headers)[HeaderNames.Accept].ToString();
-            var parsedCookieHeaderValue = ((IHeaderDictionary)headers)[HeaderNames.Cookie].ToString();
+            var parsedAcceptHeaderValue = ((IHeaderDictionary)headers)[
+                HeaderNames.Accept
+            ].ToString();
+            var parsedCookieHeaderValue = ((IHeaderDictionary)headers)[
+                HeaderNames.Cookie
+            ].ToString();
 
             Assert.Empty(parsedAcceptHeaderValue);
             Assert.Equal(headerValue, parsedCookieHeaderValue);
@@ -617,8 +672,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             Assert.Equal(1337, headers.ContentLength);
 
-            Assert.Throws<InvalidOperationException>(() =>
-                new HttpRequestHeaders().Append(contentLengthNameBytes, contentLengthValueBytes));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    new HttpRequestHeaders().Append(contentLengthNameBytes, contentLengthValueBytes)
+            );
         }
 
         [Fact]
@@ -742,7 +799,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.Equal(0, count);
         }
 
-        private static (string PrevHeaderValue, string NextHeaderValue) GetHeaderValues(HttpRequestHeaders headers, string prevName, string nextName, string prevValue, string nextValue)
+        private static (string PrevHeaderValue, string NextHeaderValue) GetHeaderValues(
+            HttpRequestHeaders headers,
+            string prevName,
+            string nextName,
+            string prevValue,
+            string nextValue
+        )
         {
             headers.Reset();
             var headerName = Encoding.ASCII.GetBytes(prevName).AsSpan();
@@ -787,7 +850,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         // Content-Length is numeric not a string, so we exclude it from the string reuse tests
         public static IEnumerable<object[]> KnownRequestHeaders =>
-            RequestHeaders.Where(h => h.Name != "Content-Length").Select(h => new object[] { true, h }).Concat(
-            RequestHeaders.Where(h => h.Name != "Content-Length").Select(h => new object[] { false, h }));
+            RequestHeaders
+                .Where(h => h.Name != "Content-Length")
+                .Select(h => new object[] { true, h })
+                .Concat(
+                    RequestHeaders
+                        .Where(h => h.Name != "Content-Length")
+                        .Select(h => new object[] { false, h })
+                );
     }
 }

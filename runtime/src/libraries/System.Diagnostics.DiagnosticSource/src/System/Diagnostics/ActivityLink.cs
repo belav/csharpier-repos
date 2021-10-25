@@ -12,7 +12,7 @@ namespace System.Diagnostics
     /// Links can be used to represent batched operations where a Activity was initiated by multiple initiating Activities,
     /// each representing a single incoming item being processed in the batch.
     /// </summary>
-    public readonly partial struct ActivityLink  : IEquatable<ActivityLink>
+    public readonly partial struct ActivityLink : IEquatable<ActivityLink>
     {
         /// <summary>
         /// Construct a new <see cref="ActivityLink"/> object which can be linked to an Activity object.
@@ -35,10 +35,12 @@ namespace System.Diagnostics
         /// </summary>
         public IEnumerable<KeyValuePair<string, object?>>? Tags { get; }
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => (obj is ActivityLink link) && this.Equals(link);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is ActivityLink link) && this.Equals(link);
 
         public bool Equals(ActivityLink value) => Context == value.Context && value.Tags == Tags;
         public static bool operator ==(ActivityLink left, ActivityLink right) => left.Equals(right);
-        public static bool operator !=(ActivityLink left, ActivityLink right) => !left.Equals(right);
+        public static bool operator !=(ActivityLink left, ActivityLink right) =>
+            !left.Equals(right);
     }
 }

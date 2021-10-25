@@ -9,7 +9,13 @@ namespace System.Net.Http.Json
 {
     public static partial class HttpClientJsonExtensions
     {
-        public static Task<HttpResponseMessage> PostAsJsonAsync<TValue>(this HttpClient client, string? requestUri, TValue value, JsonSerializerOptions? options = null, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> PostAsJsonAsync<TValue>(
+            this HttpClient client,
+            string? requestUri,
+            TValue value,
+            JsonSerializerOptions? options = null,
+            CancellationToken cancellationToken = default
+        )
         {
             if (client == null)
             {
@@ -20,7 +26,13 @@ namespace System.Net.Http.Json
             return client.PostAsync(requestUri, content, cancellationToken);
         }
 
-        public static Task<HttpResponseMessage> PostAsJsonAsync<TValue>(this HttpClient client, Uri? requestUri, TValue value, JsonSerializerOptions? options = null, CancellationToken cancellationToken = default)
+        public static Task<HttpResponseMessage> PostAsJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            TValue value,
+            JsonSerializerOptions? options = null,
+            CancellationToken cancellationToken = default
+        )
         {
             if (client == null)
             {
@@ -31,10 +43,18 @@ namespace System.Net.Http.Json
             return client.PostAsync(requestUri, content, cancellationToken);
         }
 
-        public static Task<HttpResponseMessage> PostAsJsonAsync<TValue>(this HttpClient client, string? requestUri, TValue value, CancellationToken cancellationToken)
-            => client.PostAsJsonAsync(requestUri, value, options: null, cancellationToken);
+        public static Task<HttpResponseMessage> PostAsJsonAsync<TValue>(
+            this HttpClient client,
+            string? requestUri,
+            TValue value,
+            CancellationToken cancellationToken
+        ) => client.PostAsJsonAsync(requestUri, value, options: null, cancellationToken);
 
-        public static Task<HttpResponseMessage> PostAsJsonAsync<TValue>(this HttpClient client, Uri? requestUri, TValue value, CancellationToken cancellationToken)
-            => client.PostAsJsonAsync(requestUri, value, options: null, cancellationToken);
+        public static Task<HttpResponseMessage> PostAsJsonAsync<TValue>(
+            this HttpClient client,
+            Uri? requestUri,
+            TValue value,
+            CancellationToken cancellationToken
+        ) => client.PostAsJsonAsync(requestUri, value, options: null, cancellationToken);
     }
 }

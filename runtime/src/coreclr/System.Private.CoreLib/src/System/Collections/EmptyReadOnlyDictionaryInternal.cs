@@ -20,9 +20,7 @@ namespace System.Collections
         // Note that this class must be agile with respect to AppDomains.  See its usage in
         // System.Exception to understand why this is the case.
 
-        public EmptyReadOnlyDictionaryInternal()
-        {
-        }
+        public EmptyReadOnlyDictionaryInternal() { }
 
         // IEnumerable members
 
@@ -42,11 +40,13 @@ namespace System.Collections
                 throw new ArgumentException(SR.Arg_RankMultiDimNotSupported);
 
             if (index < 0)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (array.Length - index < this.Count)
                 throw new ArgumentException(SR.ArgumentOutOfRange_Index, nameof(index));
-
             // the actual copy is a NOP
         }
 
@@ -131,9 +131,7 @@ namespace System.Collections
 
         private sealed class NodeEnumerator : IDictionaryEnumerator
         {
-            public NodeEnumerator()
-            {
-            }
+            public NodeEnumerator() { }
 
             // IEnumerator members
 
@@ -142,19 +140,21 @@ namespace System.Collections
                 return false;
             }
 
-            public object? Current => throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
+            public object? Current =>
+                throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
 
-            public void Reset()
-            {
-            }
+            public void Reset() { }
 
             // IDictionaryEnumerator members
 
-            public object Key => throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
+            public object Key =>
+                throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
 
-            public object? Value => throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
+            public object? Value =>
+                throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
 
-            public DictionaryEntry Entry => throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
+            public DictionaryEntry Entry =>
+                throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
         }
     }
 }

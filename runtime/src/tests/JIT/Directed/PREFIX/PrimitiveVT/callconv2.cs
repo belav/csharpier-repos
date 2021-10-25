@@ -4,28 +4,72 @@
 using System;
 namespace PrimitiveVT
 {
-
     unsafe class CallConv2
     {
         static Random rand = new Random();
         VT2A vt1a;
         static VT2A x;
 
-        static uint f1(VT2B x, VT2B y) { return x.m + y.m; }
-        VT2B f2a(VT2A x, VT2B y) { VT2B z; z.m = x.m + y.m; return z; }
-        VT2B f2b(VT2A x, VT2B y) { return f2a(x, y); }
-        VT2B f2(VT2A x, VT2B y) { return f2b(x, y); }
-        static uint f3(ref VT2B x, VT2B y) { return x.m - y.m; }
-        VT2B f4(VT2A x, VT2B y) { VT2B z; z.m = x.m - y.m; return z; }
-        static uint f5(VT2B x, VT2A y) { return x.m * y.m; }
-        uint f6(VT2B[] x, VT2B y) { return x[0].m * y.m; }
-        VT2B f7(VT2A x, VT2B y) { return f4(x, y); }
-        float f8(VT2A x, VT2B y) { return x.m / y.m; }
+        static uint f1(VT2B x, VT2B y)
+        {
+            return x.m + y.m;
+        }
+        VT2B f2a(VT2A x, VT2B y)
+        {
+            VT2B z;
+            z.m = x.m + y.m;
+            return z;
+        }
+        VT2B f2b(VT2A x, VT2B y)
+        {
+            return f2a(x, y);
+        }
+        VT2B f2(VT2A x, VT2B y)
+        {
+            return f2b(x, y);
+        }
+        static uint f3(ref VT2B x, VT2B y)
+        {
+            return x.m - y.m;
+        }
+        VT2B f4(VT2A x, VT2B y)
+        {
+            VT2B z;
+            z.m = x.m - y.m;
+            return z;
+        }
+        static uint f5(VT2B x, VT2A y)
+        {
+            return x.m * y.m;
+        }
+        uint f6(VT2B[] x, VT2B y)
+        {
+            return x[0].m * y.m;
+        }
+        VT2B f7(VT2A x, VT2B y)
+        {
+            return f4(x, y);
+        }
+        float f8(VT2A x, VT2B y)
+        {
+            return x.m / y.m;
+        }
 
-        static VT2B[,] f9a() { return new VT2B[1, 2]; }
-        static VT2B[,] f9() { return f9a(); }
-        uint f10(params VT2B[] args) { uint sum = 0; for (uint i = 0; i < args.Length; sum += args[i], i++) { }; return sum; }
-
+        static VT2B[,] f9a()
+        {
+            return new VT2B[1, 2];
+        }
+        static VT2B[,] f9()
+        {
+            return f9a();
+        }
+        uint f10(params VT2B[] args)
+        {
+            uint sum = 0;
+            for (uint i = 0; i < args.Length; sum += args[i], i++) { }
+            ;
+            return sum;
+        }
 
         static int Main()
         {
@@ -58,8 +102,19 @@ namespace PrimitiveVT
             yarr[0] = new VT2B(e);
             VT2B y = yarr[0];
             x.m = d;
-            VT2B u = x * y - (new VT2B(f)) + yarr[0] + (VT2B)x + (VT2B)f + y * x + (uint)(x / (d % 2 == 0 ? (VT2B)(d / 2) : (VT2B)(d + 1 / 2)));
-            uint w = f5((VT2B)x, (VT2A)y) + t.f6(yarr, (VT2B)x) + f1(y, d) + (uint)t.f8((VT2A)(VT2B)d, (d % 2 == 0 ? (VT2B)(d / 2) : (VT2B)(d + 1 / 2)));
+            VT2B u =
+                x * y
+                - (new VT2B(f))
+                + yarr[0]
+                + (VT2B)x
+                + (VT2B)f
+                + y * x
+                + (uint)(x / (d % 2 == 0 ? (VT2B)(d / 2) : (VT2B)(d + 1 / 2)));
+            uint w =
+                f5((VT2B)x, (VT2A)y)
+                + t.f6(yarr, (VT2B)x)
+                + f1(y, d)
+                + (uint)t.f8((VT2A)(VT2B)d, (d % 2 == 0 ? (VT2B)(d / 2) : (VT2B)(d + 1 / 2)));
             if (u != w)
             {
                 Console.WriteLine("FAILED, u!=w");
@@ -102,7 +157,9 @@ namespace PrimitiveVT
 
             if ((t.f10(arr[1][0, 0], t.f7((VT2A)(new VT2B(2)), (VT2B)o[0]), 4)) != 6)
             {
-                Console.WriteLine("FAILED (t.f10(arr[1][0,0], t.f7((VT2A)(new VT2B(2)), (VT2B)o[0]), 4))!=6");
+                Console.WriteLine(
+                    "FAILED (t.f10(arr[1][0,0], t.f7((VT2A)(new VT2B(2)), (VT2B)o[0]), 4))!=6"
+                );
                 Console.WriteLine(t.f10(arr[1][0, 0], t.f7((VT2A)(new VT2B(2)), (VT2B)o[0]), 4));
                 return 1;
             }
@@ -110,8 +167,6 @@ namespace PrimitiveVT
             Console.WriteLine("PASSED");
             return 100;
         }
-
     }
-
 }
 

@@ -51,23 +51,14 @@ namespace Internal.TypeSystem
         /// <summary>
         /// Gets the target CPU architecture.
         /// </summary>
-        public TargetArchitecture Architecture
-        {
-            get;
-        }
+        public TargetArchitecture Architecture { get; }
 
         /// <summary>
         /// Gets the target ABI.
         /// </summary>
-        public TargetOS OperatingSystem
-        {
-            get;
-        }
+        public TargetOS OperatingSystem { get; }
 
-        public TargetAbi Abi
-        {
-            get;
-        }
+        public TargetAbi Abi { get; }
 
         /// <summary>
         /// Gets the size of a pointer for the target of the compilation.
@@ -191,10 +182,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public static int MaximumLog2PrimitiveSize
         {
-            get
-            {
-                return 3;
-            }
+            get { return 3; }
         }
 
         /// <summary>
@@ -202,10 +190,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public static int MaximumPrimitiveSize
         {
-            get
-            {
-                return 1 << MaximumLog2PrimitiveSize;
-            }
+            get { return 1 << MaximumLog2PrimitiveSize; }
         }
 
         /// <summary>
@@ -289,10 +274,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsWindows
         {
-            get
-            {
-                return OperatingSystem == TargetOS.Windows;
-            }
+            get { return OperatingSystem == TargetOS.Windows; }
         }
 
         /// <summary>
@@ -300,10 +282,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsOSX
         {
-            get
-            {
-                return OperatingSystem == TargetOS.OSX;
-            }
+            get { return OperatingSystem == TargetOS.OSX; }
         }
 
         /// <summary>
@@ -316,10 +295,12 @@ namespace Internal.TypeSystem
                 // There is a hard limit of 4 elements on an HFA/HVA type, see
                 // https://devblogs.microsoft.com/cppblog/introducing-vector-calling-convention/
                 // and Procedure Call Standard for the Arm 64-bit Architecture.
-                Debug.Assert(Architecture == TargetArchitecture.ARM ||
-                    Architecture == TargetArchitecture.ARM64 ||
-                    Architecture == TargetArchitecture.X64 ||
-                    Architecture == TargetArchitecture.X86);
+                Debug.Assert(
+                    Architecture == TargetArchitecture.ARM
+                        || Architecture == TargetArchitecture.ARM64
+                        || Architecture == TargetArchitecture.X64
+                        || Architecture == TargetArchitecture.X86
+                );
 
                 return 4;
             }

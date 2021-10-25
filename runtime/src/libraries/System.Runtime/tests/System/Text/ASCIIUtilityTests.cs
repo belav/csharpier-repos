@@ -20,16 +20,28 @@ namespace System.Text.Tests
         // We use UIntPtr instead of nuint everywhere here since we don't know what our target arch is.
 
         private delegate UIntPtr FnGetIndexOfFirstNonAsciiByte(byte* pBuffer, UIntPtr bufferLength);
-        private static readonly UnsafeLazyDelegate<FnGetIndexOfFirstNonAsciiByte> _fnGetIndexOfFirstNonAsciiByte = new UnsafeLazyDelegate<FnGetIndexOfFirstNonAsciiByte>("GetIndexOfFirstNonAsciiByte");
+        private static readonly UnsafeLazyDelegate<FnGetIndexOfFirstNonAsciiByte> _fnGetIndexOfFirstNonAsciiByte =
+            new UnsafeLazyDelegate<FnGetIndexOfFirstNonAsciiByte>("GetIndexOfFirstNonAsciiByte");
 
         private delegate UIntPtr FnGetIndexOfFirstNonAsciiChar(char* pBuffer, UIntPtr bufferLength);
-        private static readonly UnsafeLazyDelegate<FnGetIndexOfFirstNonAsciiChar> _fnGetIndexOfFirstNonAsciiChar = new UnsafeLazyDelegate<FnGetIndexOfFirstNonAsciiChar>("GetIndexOfFirstNonAsciiChar");
+        private static readonly UnsafeLazyDelegate<FnGetIndexOfFirstNonAsciiChar> _fnGetIndexOfFirstNonAsciiChar =
+            new UnsafeLazyDelegate<FnGetIndexOfFirstNonAsciiChar>("GetIndexOfFirstNonAsciiChar");
 
-        private delegate UIntPtr FnNarrowUtf16ToAscii(char* pUtf16Buffer, byte* pAsciiBuffer, UIntPtr elementCount);
-        private static readonly UnsafeLazyDelegate<FnNarrowUtf16ToAscii> _fnNarrowUtf16ToAscii = new UnsafeLazyDelegate<FnNarrowUtf16ToAscii>("NarrowUtf16ToAscii");
+        private delegate UIntPtr FnNarrowUtf16ToAscii(
+            char* pUtf16Buffer,
+            byte* pAsciiBuffer,
+            UIntPtr elementCount
+        );
+        private static readonly UnsafeLazyDelegate<FnNarrowUtf16ToAscii> _fnNarrowUtf16ToAscii =
+            new UnsafeLazyDelegate<FnNarrowUtf16ToAscii>("NarrowUtf16ToAscii");
 
-        private delegate UIntPtr FnWidenAsciiToUtf16(byte* pAsciiBuffer, char* pUtf16Buffer, UIntPtr elementCount);
-        private static readonly UnsafeLazyDelegate<FnWidenAsciiToUtf16> _fnWidenAsciiToUtf16 = new UnsafeLazyDelegate<FnWidenAsciiToUtf16>("WidenAsciiToUtf16");
+        private delegate UIntPtr FnWidenAsciiToUtf16(
+            byte* pAsciiBuffer,
+            char* pUtf16Buffer,
+            UIntPtr elementCount
+        );
+        private static readonly UnsafeLazyDelegate<FnWidenAsciiToUtf16> _fnWidenAsciiToUtf16 =
+            new UnsafeLazyDelegate<FnWidenAsciiToUtf16>("WidenAsciiToUtf16");
 
         [Fact]
         public static void GetIndexOfFirstNonAsciiByte_EmptyInput_NullReference()
@@ -167,7 +179,11 @@ namespace System.Text.Tests
             // uses pminuw / pmovmskb incorrectly, U+0123 will incorrectly show up as ASCII,
             // causing our test to produce a false negative.
 
-            using (BoundedMemory<char> mem = BoundedMemory.Allocate<char>(5 * Vector<byte>.Count / sizeof(char)))
+            using (
+                BoundedMemory<char> mem = BoundedMemory.Allocate<char>(
+                    5 * Vector<byte>.Count / sizeof(char)
+                )
+            )
             {
                 Span<char> chars = mem.Span;
 
@@ -231,7 +247,10 @@ namespace System.Text.Tests
 
                 // First, validate that the workhorse saw the incoming data as all-ASCII.
 
-                Assert.Equal(128 - i, CallWidenAsciiToUtf16(asciiSpan.Slice(i), utf16Span.Slice(i)));
+                Assert.Equal(
+                    128 - i,
+                    CallWidenAsciiToUtf16(asciiSpan.Slice(i), utf16Span.Slice(i))
+                );
 
                 // Then, validate that the data was transcoded properly.
 
@@ -328,7 +347,10 @@ namespace System.Text.Tests
 
                 // First, validate that the workhorse saw the incoming data as all-ASCII.
 
-                Assert.Equal(128 - i, CallNarrowUtf16ToAscii(utf16Span.Slice(i), asciiSpan.Slice(i)));
+                Assert.Equal(
+                    128 - i,
+                    CallNarrowUtf16ToAscii(utf16Span.Slice(i), asciiSpan.Slice(i))
+                );
 
                 // Then, validate that the data was transcoded properly.
 
@@ -390,7 +412,9 @@ namespace System.Text.Tests
             fixed (byte* pBuffer = &MemoryMarshal.GetReference(buffer))
             {
                 // Conversions between UIntPtr <-> int are not checked by default.
-                return checked((int)_fnGetIndexOfFirstNonAsciiByte.Delegate(pBuffer, (UIntPtr)buffer.Length));
+                return checked(
+                    (int)_fnGetIndexOfFirstNonAsciiByte.Delegate(pBuffer, (UIntPtr)buffer.Length)
+                );
             }
         }
 
@@ -399,7 +423,9 @@ namespace System.Text.Tests
             fixed (char* pBuffer = &MemoryMarshal.GetReference(buffer))
             {
                 // Conversions between UIntPtr <-> int are not checked by default.
-                return checked((int)_fnGetIndexOfFirstNonAsciiChar.Delegate(pBuffer, (UIntPtr)buffer.Length));
+                return checked(
+                    (int)_fnGetIndexOfFirstNonAsciiChar.Delegate(pBuffer, (UIntPtr)buffer.Length)
+                );
             }
         }
 
@@ -411,7 +437,9 @@ namespace System.Text.Tests
             fixed (byte* pAscii = &MemoryMarshal.GetReference(ascii))
             {
                 // Conversions between UIntPtr <-> int are not checked by default.
-                return checked((int)_fnNarrowUtf16ToAscii.Delegate(pUtf16, pAscii, (UIntPtr)utf16.Length));
+                return checked(
+                    (int)_fnNarrowUtf16ToAscii.Delegate(pUtf16, pAscii, (UIntPtr)utf16.Length)
+                );
             }
         }
 
@@ -423,7 +451,9 @@ namespace System.Text.Tests
             fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16))
             {
                 // Conversions between UIntPtr <-> int are not checked by default.
-                return checked((int)_fnWidenAsciiToUtf16.Delegate(pAscii, pUtf16, (UIntPtr)ascii.Length));
+                return checked(
+                    (int)_fnWidenAsciiToUtf16.Delegate(pAscii, pUtf16, (UIntPtr)ascii.Length)
+                );
             }
         }
 
@@ -438,19 +468,25 @@ namespace System.Text.Tests
 
             public UnsafeLazyDelegate(string methodName)
             {
-                _lazyDelegate = new Lazy<TDelegate>(() =>
-                {
-                    Assert.True(typeof(TDelegate).IsSubclassOf(typeof(MulticastDelegate)));
+                _lazyDelegate = new Lazy<TDelegate>(
+                    () =>
+                    {
+                        Assert.True(typeof(TDelegate).IsSubclassOf(typeof(MulticastDelegate)));
 
-                    // Get the MethodInfo for the target method
+                        // Get the MethodInfo for the target method
 
-                    MethodInfo methodInfo = GetAsciiUtilityType().GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
-                    Assert.NotNull(methodInfo);
+                        MethodInfo methodInfo = GetAsciiUtilityType()
+                            .GetMethod(
+                                methodName,
+                                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                            );
+                        Assert.NotNull(methodInfo);
 
-                    // Construct the TDelegate pointing to this method
+                        // Construct the TDelegate pointing to this method
 
-                    return methodInfo.CreateDelegate<TDelegate>();
-                });
+                        return methodInfo.CreateDelegate<TDelegate>();
+                    }
+                );
             }
 
             public TDelegate Delegate => _lazyDelegate.Value;

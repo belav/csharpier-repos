@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
 {
     public class JQueryQueryStringValueProviderFactoryTest
     {
-        private static readonly Dictionary<string, StringValues> _backingStore = new Dictionary<string, StringValues>
+        private static readonly Dictionary<string, StringValues> _backingStore = new Dictionary<
+            string,
+            StringValues
+        >
         {
             { "[]", new[] { "found" } },
             { "[]property1", new[] { "found" } },
@@ -109,11 +112,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
 
             // Assert
             var valueProvider = Assert.Single(context.ValueProviders);
-            var jqueryQueryStringValueProvider = Assert.IsType<JQueryQueryStringValueProvider>(valueProvider);
+            var jqueryQueryStringValueProvider = Assert.IsType<JQueryQueryStringValueProvider>(
+                valueProvider
+            );
             Assert.Equal(CultureInfo.InvariantCulture, jqueryQueryStringValueProvider.Culture);
         }
 
-        private static ValueProviderFactoryContext CreateContext(Dictionary<string, StringValues> queryStringValues)
+        private static ValueProviderFactoryContext CreateContext(
+            Dictionary<string, StringValues> queryStringValues
+        )
         {
             var context = new DefaultHttpContext();
 

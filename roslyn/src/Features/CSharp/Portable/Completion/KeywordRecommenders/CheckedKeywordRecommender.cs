@@ -11,17 +11,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class CheckedKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public CheckedKeywordRecommender()
-            : base(SyntaxKind.CheckedKeyword)
-        {
-        }
+        public CheckedKeywordRecommender() : base(SyntaxKind.CheckedKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.IsNonAttributeExpressionContext;
+            return context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.IsNonAttributeExpressionContext;
         }
     }
 }

@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite
         [Fact]
         public void RuleRegexParser_ShouldThrowOnEmpty()
         {
-            Assert.Throws<FormatException>(() => new RuleRegexParser().ParseRuleRegex(string.Empty));
+            Assert.Throws<FormatException>(
+                () => new RuleRegexParser().ParseRuleRegex(string.Empty)
+            );
         }
 
         [Fact]

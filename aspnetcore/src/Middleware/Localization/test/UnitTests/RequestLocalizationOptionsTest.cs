@@ -65,8 +65,14 @@ namespace Microsoft.AspNetCore.Localization
             var options = new RequestLocalizationOptions();
 
             // Assert
-            Assert.Collection(options.SupportedCultures, item => Assert.Equal(CultureInfo.CurrentCulture, item));
-            Assert.Collection(options.SupportedUICultures, item => Assert.Equal(CultureInfo.CurrentUICulture, item));
+            Assert.Collection(
+                options.SupportedCultures,
+                item => Assert.Equal(CultureInfo.CurrentCulture, item)
+            );
+            Assert.Collection(
+                options.SupportedUICultures,
+                item => Assert.Equal(CultureInfo.CurrentUICulture, item)
+            );
         }
 
         [Fact]
@@ -81,8 +87,14 @@ namespace Microsoft.AspNetCore.Localization
             var options = new RequestLocalizationOptions();
 
             // Assert
-            Assert.Collection(options.SupportedCultures, item => Assert.Equal(explicitCulture, item));
-            Assert.Collection(options.SupportedUICultures, item => Assert.Equal(explicitCulture, item));
+            Assert.Collection(
+                options.SupportedCultures,
+                item => Assert.Equal(explicitCulture, item)
+            );
+            Assert.Collection(
+                options.SupportedUICultures,
+                item => Assert.Equal(explicitCulture, item)
+            );
         }
 
         [Fact]
@@ -92,8 +104,7 @@ namespace Microsoft.AspNetCore.Localization
             var supportedCultures = new[] { "en-US", "ar-YE" };
 
             // Act
-            var options = new RequestLocalizationOptions()
-                .AddSupportedCultures(supportedCultures);
+            var options = new RequestLocalizationOptions().AddSupportedCultures(supportedCultures);
 
             // Assert
             Assert.Equal(supportedCultures, options.SupportedCultures.Select(c => c.Name));
@@ -106,8 +117,9 @@ namespace Microsoft.AspNetCore.Localization
             var supportedUICultures = new[] { "en-US", "ar-YE" };
 
             // Act
-            var options = new RequestLocalizationOptions()
-                .AddSupportedUICultures(supportedUICultures);
+            var options = new RequestLocalizationOptions().AddSupportedUICultures(
+                supportedUICultures
+            );
 
             // Assert
             Assert.Equal(supportedUICultures, options.SupportedUICultures.Select(c => c.Name));
@@ -120,8 +132,7 @@ namespace Microsoft.AspNetCore.Localization
             var defaultCulture = "ar-YE";
 
             // Act
-            var options = new RequestLocalizationOptions()
-                .SetDefaultCulture(defaultCulture);
+            var options = new RequestLocalizationOptions().SetDefaultCulture(defaultCulture);
 
             // Assert
             Assert.Equal(defaultCulture, options.DefaultRequestCulture.Culture.Name);

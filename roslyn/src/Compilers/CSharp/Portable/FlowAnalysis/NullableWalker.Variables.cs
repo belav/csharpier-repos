@@ -47,7 +47,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             internal readonly ImmutableDictionary<Symbol, TypeWithAnnotations> VariableTypes;
 
-            internal VariablesSnapshot(int id, VariablesSnapshot? container, Symbol? symbol, ImmutableArray<KeyValuePair<VariableIdentifier, int>> variableSlot, ImmutableDictionary<Symbol, TypeWithAnnotations> variableTypes)
+            internal VariablesSnapshot(
+                int id,
+                VariablesSnapshot? container,
+                Symbol? symbol,
+                ImmutableArray<KeyValuePair<VariableIdentifier, int>> variableSlot,
+                ImmutableDictionary<Symbol, TypeWithAnnotations> variableTypes
+            )
             {
                 Id = id;
                 Container = container;
@@ -120,12 +126,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <summary>
             /// A mapping from local variables to the index of their slot in a flow analysis local state.
             /// </summary>
-            private readonly PooledDictionary<VariableIdentifier, int> _variableSlot = PooledDictionary<VariableIdentifier, int>.GetInstance();
+            private readonly PooledDictionary<VariableIdentifier, int> _variableSlot =
+                PooledDictionary<VariableIdentifier, int>.GetInstance();
 
             /// <summary>
             /// The inferred type at the point of declaration of var locals and parameters.
             /// </summary>
-            private readonly PooledDictionary<Symbol, TypeWithAnnotations> _variableTypes = SpecializedSymbolCollections.GetPooledSymbolDictionaryInstance<Symbol, TypeWithAnnotations>();
+            private readonly PooledDictionary<Symbol, TypeWithAnnotations> _variableTypes =
+                SpecializedSymbolCollections.GetPooledSymbolDictionaryInstance<
+                    Symbol,
+                    TypeWithAnnotations
+                >();
 
             /// <summary>
             /// A mapping from the local variable slot to the symbol for the local variable itself.
@@ -135,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// that the variable in VariableIdentifier.Symbol is a root, i.e. not nested within another
             /// tracked variable. Slots less than 0 are illegal.
             /// </summary>
-            private readonly ArrayBuilder<VariableIdentifier> _variableBySlot = ArrayBuilder<VariableIdentifier>.GetInstance(1, default);
+            private readonly ArrayBuilder<VariableIdentifier> _variableBySlot =
+                ArrayBuilder<VariableIdentifier>.GetInstance(1, default);
 
             internal static Variables Create(Symbol? symbol)
             {
@@ -152,9 +164,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private int GetNextId()
             {
-                return Id +
+                return Id
+                    +
 #if DEBUG
-                    _nextIdOffset.Next(maxValue: 7) +
+                    _nextIdOffset.Next(maxValue: 7)
+                    +
 #endif
                     1;
             }
@@ -208,15 +222,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Container?.CreateSnapshot(),
                     Symbol,
                     ImmutableArray.CreateRange(_variableSlot),
-                    ImmutableDictionary.CreateRange(_variableTypes));
+                    ImmutableDictionary.CreateRange(_variableTypes)
+                );
             }
 
             internal Variables CreateNestedMethodScope(MethodSymbol method)
             {
                 Debug.Assert(GetVariablesForMethodScope(method) is null);
-                Debug.Assert(!(method.ContainingSymbol is MethodSymbol containingMethod) ||
-                    ((object?)GetVariablesForMethodScope(containingMethod) == this) ||
-                    Container is null);
+                Debug.Assert(
+                    !(method.ContainingSymbol is MethodSymbol containingMethod)
+                        || ((object?)GetVariablesForMethodScope(containingMethod) == this)
+                        || Container is null
+                );
 
                 return new Variables(id: GetNextId(), this, method);
             }
@@ -259,9 +276,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var variables = GetVariablesForVariable(identifier);
                 int slot = variables.AddInternal(identifier);
                 // ContainingSlot must be from the same Variables collection.
-                Debug.Assert(slot <= 0 ||
-                    identifier.ContainingSlot <= 0 ||
-                    DeconstructSlot(slot).Id == DeconstructSlot(identifier.ContainingSlot).Id);
+                Debug.Assert(
+                    slot <= 0
+                        || identifier.ContainingSlot <= 0
+                        || DeconstructSlot(slot).Id == DeconstructSlot(identifier.ContainingSlot).Id
+                );
                 return slot;
             }
 
@@ -325,7 +344,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return fromContainer + _variableSlot.Count;
             }
 
-            internal void GetMembers(ArrayBuilder<(VariableIdentifier, int)> builder, int containingSlot)
+            internal void GetMembers(
+                ArrayBuilder<(VariableIdentifier, int)> builder,
+                int containingSlot
+            )
             {
                 (int id, int index) = DeconstructSlot(containingSlot);
                 var variables = GetVariablesForId(id)!;
@@ -356,8 +378,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     case LocalSymbol:
                     case ParameterSymbol:
-                        if (symbol.ContainingSymbol is MethodSymbol method &&
-                            GetVariablesForMethodScope(method) is { } variables)
+                        if (
+                            symbol.ContainingSymbol is MethodSymbol method
+                            && GetVariablesForMethodScope(method) is { } variables
+                        )
                         {
                             return variables;
                         }
@@ -389,8 +413,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return variables;
                     }
                     variables = variables.Container;
-                }
-                while (variables is { });
+                } while (variables is { });
                 return null;
             }
 

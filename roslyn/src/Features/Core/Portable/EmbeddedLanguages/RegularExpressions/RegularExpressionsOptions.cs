@@ -18,28 +18,40 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 nameof(RegularExpressionsOptions),
                 nameof(ColorizeRegexPatterns),
                 defaultValue: true,
-                storageLocations: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ColorizeRegexPatterns"));
+                storageLocations: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.ColorizeRegexPatterns"
+                )
+            );
 
         public static PerLanguageOption2<bool> ReportInvalidRegexPatterns =
             new(
                 nameof(RegularExpressionsOptions),
                 nameof(ReportInvalidRegexPatterns),
                 defaultValue: true,
-                storageLocations: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ReportInvalidRegexPatterns"));
+                storageLocations: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.ReportInvalidRegexPatterns"
+                )
+            );
 
         public static PerLanguageOption2<bool> HighlightRelatedRegexComponentsUnderCursor =
             new(
                 nameof(RegularExpressionsOptions),
                 nameof(HighlightRelatedRegexComponentsUnderCursor),
                 defaultValue: true,
-                storageLocations: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.HighlightRelatedRegexComponentsUnderCursor"));
+                storageLocations: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.HighlightRelatedRegexComponentsUnderCursor"
+                )
+            );
 
         public static PerLanguageOption2<bool> ProvideRegexCompletions =
             new(
                 nameof(RegularExpressionsOptions),
                 nameof(ProvideRegexCompletions),
                 defaultValue: true,
-                storageLocations: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ProvideRegexCompletions"));
+                storageLocations: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.ProvideRegexCompletions"
+                )
+            );
     }
 
     [ExportOptionProvider, Shared]
@@ -47,14 +59,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RegularExpressionsOptionsProvider()
-        {
-        }
+        public RegularExpressionsOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<Options.IOption>(
-            RegularExpressionsOptions.ColorizeRegexPatterns,
-            RegularExpressionsOptions.ReportInvalidRegexPatterns,
-            RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor,
-            RegularExpressionsOptions.ProvideRegexCompletions);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<Options.IOption>(
+                RegularExpressionsOptions.ColorizeRegexPatterns,
+                RegularExpressionsOptions.ReportInvalidRegexPatterns,
+                RegularExpressionsOptions.HighlightRelatedRegexComponentsUnderCursor,
+                RegularExpressionsOptions.ProvideRegexCompletions
+            );
     }
 }

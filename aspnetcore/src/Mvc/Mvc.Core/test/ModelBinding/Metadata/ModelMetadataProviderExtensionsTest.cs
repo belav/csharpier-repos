@@ -16,9 +16,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             // Act & Assert
             ExceptionAssert.ThrowsArgument(
-                () => provider.GetMetadataForProperty(typeof(object), propertyName: "BadPropertyName"),
+                () =>
+                    provider.GetMetadataForProperty(
+                        typeof(object),
+                        propertyName: "BadPropertyName"
+                    ),
                 "propertyName",
-                "The property System.Object.BadPropertyName could not be found.");
+                "The property System.Object.BadPropertyName could not be found."
+            );
         }
     }
 }

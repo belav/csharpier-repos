@@ -26,12 +26,15 @@ namespace System.Net
         {
             if (safeHandle.IsInvalid)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Invalid handle: {safeHandle}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"Invalid handle: {safeHandle}");
                 return;
             }
 
-            IntPtr unmanagedAddress = safeHandle.DangerousGetHandle() + (sizeof(SecurityPackageInfo) * index);
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"unmanagedAddress: {unmanagedAddress}");
+            IntPtr unmanagedAddress =
+                safeHandle.DangerousGetHandle() + (sizeof(SecurityPackageInfo) * index);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"unmanagedAddress: {unmanagedAddress}");
 
             SecurityPackageInfo* pSecurityPackageInfo = (SecurityPackageInfo*)unmanagedAddress;
 
@@ -46,27 +49,36 @@ namespace System.Net
             if (unmanagedString != IntPtr.Zero)
             {
                 Name = Marshal.PtrToStringUni(unmanagedString);
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Name: {Name}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"Name: {Name}");
             }
 
             unmanagedString = pSecurityPackageInfo->Comment;
             if (unmanagedString != IntPtr.Zero)
             {
                 Comment = Marshal.PtrToStringUni(unmanagedString);
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Comment: {Comment}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"Comment: {Comment}");
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, this.ToString());
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, this.ToString());
         }
 
         public override string ToString()
         {
-            return "Capabilities:" + string.Format(CultureInfo.InvariantCulture, "0x{0:x}", Capabilities)
-                + " Version:" + Version.ToString(NumberFormatInfo.InvariantInfo)
-                + " RPCID:" + RPCID.ToString(NumberFormatInfo.InvariantInfo)
-                + " MaxToken:" + MaxToken.ToString(NumberFormatInfo.InvariantInfo)
-                + " Name:" + ((Name == null) ? "(null)" : Name)
-                + " Comment:" + ((Comment == null) ? "(null)" : Comment);
+            return "Capabilities:"
+                + string.Format(CultureInfo.InvariantCulture, "0x{0:x}", Capabilities)
+                + " Version:"
+                + Version.ToString(NumberFormatInfo.InvariantInfo)
+                + " RPCID:"
+                + RPCID.ToString(NumberFormatInfo.InvariantInfo)
+                + " MaxToken:"
+                + MaxToken.ToString(NumberFormatInfo.InvariantInfo)
+                + " Name:"
+                + ((Name == null) ? "(null)" : Name)
+                + " Comment:"
+                + ((Comment == null) ? "(null)" : Comment);
         }
     }
 }

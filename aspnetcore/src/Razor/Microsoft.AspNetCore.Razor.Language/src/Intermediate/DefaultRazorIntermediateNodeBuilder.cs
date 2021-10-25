@@ -18,10 +18,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         public override IntermediateNode Current
         {
-            get
-            {
-                return _depth > 0 ? _stack[_depth - 1] : null;
-            }
+            get { return _depth > 0 ? _stack[_depth - 1] : null; }
         }
 
         public override void Add(IntermediateNode node)
@@ -30,7 +27,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             {
                 throw new ArgumentNullException(nameof(node));
             }
-            
+
             Current.Children.Add(node);
         }
 
@@ -40,7 +37,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
-            
+
             if (index == Current.Children.Count)
             {
                 // Allow inserting at 'Children.Count' to be friendlier than List<> typically is.
@@ -67,7 +64,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
         {
             if (_depth == 0)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeBuilder_PopInvalid(nameof(Pop)));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeBuilder_PopInvalid(nameof(Pop))
+                );
             }
 
             var node = _stack[--_depth];

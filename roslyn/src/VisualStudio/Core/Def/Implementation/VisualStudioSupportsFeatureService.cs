@@ -23,14 +23,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SuggestionServi
 {
     internal sealed class VisualStudioSupportsFeatureService
     {
-        [ExportWorkspaceService(typeof(ITextBufferSupportsFeatureService), ServiceLayer.Host), Shared]
-        private class VisualStudioTextBufferSupportsFeatureService : ITextBufferSupportsFeatureService
+        [
+            ExportWorkspaceService(typeof(ITextBufferSupportsFeatureService), ServiceLayer.Host),
+            Shared
+        ]
+        private class VisualStudioTextBufferSupportsFeatureService
+            : ITextBufferSupportsFeatureService
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public VisualStudioTextBufferSupportsFeatureService()
-            {
-            }
+            public VisualStudioTextBufferSupportsFeatureService() { }
 
             public bool SupportsCodeFixes(ITextBuffer textBuffer)
             {
@@ -48,20 +50,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SuggestionServi
                 if (Workspace.TryGetWorkspace(sourceTextContainer, out var workspace))
                 {
                     var documentId = workspace.GetDocumentIdInCurrentContext(sourceTextContainer);
-                    return SupportsRenameWorker(workspace.CurrentSolution.GetRelatedDocumentIds(documentId));
+                    return SupportsRenameWorker(
+                        workspace.CurrentSolution.GetRelatedDocumentIds(documentId)
+                    );
                 }
 
                 return false;
             }
 
-            public bool SupportsNavigationToAnyPosition(ITextBuffer textBuffer)
-                => SupportsNavigationToAnyPositionWorker(GetContainedDocumentId(textBuffer));
+            public bool SupportsNavigationToAnyPosition(ITextBuffer textBuffer) =>
+                SupportsNavigationToAnyPositionWorker(GetContainedDocumentId(textBuffer));
 
             private static DocumentId GetContainedDocumentId(ITextBuffer textBuffer)
             {
                 var sourceTextContainer = textBuffer.AsTextContainer();
-                if (Workspace.TryGetWorkspace(sourceTextContainer, out var workspace)
-                    && workspace is VisualStudioWorkspaceImpl vsWorkspace)
+                if (
+                    Workspace.TryGetWorkspace(sourceTextContainer, out var workspace)
+                    && workspace is VisualStudioWorkspaceImpl vsWorkspace
+                )
                 {
                     return vsWorkspace.GetDocumentIdInCurrentContext(sourceTextContainer);
                 }
@@ -75,36 +81,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SuggestionServi
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public VisualStudioDocumentSupportsFeatureService()
-            {
-            }
+            public VisualStudioDocumentSupportsFeatureService() { }
 
-            public bool SupportsCodeFixes(Document document)
-                => SupportsCodeFixesWorker(document.Id);
+            public bool SupportsCodeFixes(Document document) =>
+                SupportsCodeFixesWorker(document.Id);
 
-            public bool SupportsRefactorings(Document document)
-                => SupportsRefactoringsWorker(document.Id);
+            public bool SupportsRefactorings(Document document) =>
+                SupportsRefactoringsWorker(document.Id);
 
-            public bool SupportsRename(Document document)
-                => SupportsRenameWorker(document.Project.Solution.GetRelatedDocumentIds(document.Id));
+            public bool SupportsRename(Document document) =>
+                SupportsRenameWorker(document.Project.Solution.GetRelatedDocumentIds(document.Id));
 
-            public bool SupportsNavigationToAnyPosition(Document document)
-                => SupportsNavigationToAnyPositionWorker(document.Id);
+            public bool SupportsNavigationToAnyPosition(Document document) =>
+                SupportsNavigationToAnyPositionWorker(document.Id);
         }
 
-        private static bool SupportsCodeFixesWorker(DocumentId id)
-            => ContainedDocument.TryGetContainedDocument(id) == null;
+        private static bool SupportsCodeFixesWorker(DocumentId id) =>
+            ContainedDocument.TryGetContainedDocument(id) == null;
 
-        private static bool SupportsRefactoringsWorker(DocumentId id)
-            => ContainedDocument.TryGetContainedDocument(id) == null;
+        private static bool SupportsRefactoringsWorker(DocumentId id) =>
+            ContainedDocument.TryGetContainedDocument(id) == null;
 
         private static bool SupportsRenameWorker(ImmutableArray<DocumentId> ids)
         {
             return ids.Select(id => ContainedDocument.TryGetContainedDocument(id))
-                    .All(cd => cd == null || cd.SupportsRename);
+                .All(cd => cd == null || cd.SupportsRename);
         }
 
-        private static bool SupportsNavigationToAnyPositionWorker(DocumentId id)
-            => ContainedDocument.TryGetContainedDocument(id) == null;
+        private static bool SupportsNavigationToAnyPositionWorker(DocumentId id) =>
+            ContainedDocument.TryGetContainedDocument(id) == null;
     }
 }

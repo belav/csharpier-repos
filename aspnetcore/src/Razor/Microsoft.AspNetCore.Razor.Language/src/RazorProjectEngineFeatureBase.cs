@@ -24,8 +24,6 @@ namespace Microsoft.AspNetCore.Razor.Language
             }
         }
 
-        protected virtual void OnInitialized()
-        {
-        }
+        protected virtual void OnInitialized() { }
     }
 }

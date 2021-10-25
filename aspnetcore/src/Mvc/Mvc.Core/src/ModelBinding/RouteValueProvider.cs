@@ -23,12 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <param name="bindingSource">The <see cref="BindingSource"/> of the data.</param>
         /// <param name="values">The values.</param>
         /// <remarks>Sets <see cref="Culture"/> to <see cref="CultureInfo.InvariantCulture" />.</remarks>
-        public RouteValueProvider(
-            BindingSource bindingSource,
-            RouteValueDictionary values)
-            : this(bindingSource, values, CultureInfo.InvariantCulture)
-        {
-        }
+        public RouteValueProvider(BindingSource bindingSource, RouteValueDictionary values)
+            : this(bindingSource, values, CultureInfo.InvariantCulture) { }
 
         /// <summary>
         /// Creates a new <see cref="RouteValueProvider"/>.
@@ -36,8 +32,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <param name="bindingSource">The <see cref="BindingSource"/> of the data.</param>
         /// <param name="values">The values.</param>
         /// <param name="culture">The culture for route value.</param>
-        public RouteValueProvider(BindingSource bindingSource, RouteValueDictionary values, CultureInfo culture)
-            : base(bindingSource)
+        public RouteValueProvider(
+            BindingSource bindingSource,
+            RouteValueDictionary values,
+            CultureInfo culture
+        ) : base(bindingSource)
         {
             if (bindingSource == null)
             {
@@ -104,7 +103,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             if (_values.TryGetValue(key, out var value))
             {
-                var stringValue = value as string ?? Convert.ToString(value, Culture) ?? string.Empty;
+                var stringValue =
+                    value as string ?? Convert.ToString(value, Culture) ?? string.Empty;
                 return new ValueProviderResult(stringValue, Culture);
             }
             else

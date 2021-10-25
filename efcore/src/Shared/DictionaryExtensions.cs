@@ -14,8 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
     {
         public static TValue GetOrAddNew<TKey, TValue>(
             this IDictionary<TKey, TValue> source,
-            TKey key)
-            where TValue : new()
+            TKey key
+        ) where TValue : new()
         {
             if (!source.TryGetValue(key, out var value))
             {
@@ -28,18 +28,19 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
         public static TValue? Find<TKey, TValue>(
             this IReadOnlyDictionary<TKey, TValue> source,
-            TKey key)
-            => !source.TryGetValue(key, out var value) ? default : value;
+            TKey key
+        ) => !source.TryGetValue(key, out var value) ? default : value;
 
         public static void Remove<TKey, TValue>(
             this IDictionary<TKey, TValue> source,
-            Func<TKey, TValue, bool> predicate)
-            => source.Remove((k, v, p) => p!(k, v), predicate);
+            Func<TKey, TValue, bool> predicate
+        ) => source.Remove((k, v, p) => p!(k, v), predicate);
 
         public static void Remove<TKey, TValue, TState>(
             this IDictionary<TKey, TValue> source,
             Func<TKey, TValue, TState?, bool> predicate,
-            TState? state)
+            TState? state
+        )
         {
             var found = false;
             var firstRemovedKey = default(TKey);

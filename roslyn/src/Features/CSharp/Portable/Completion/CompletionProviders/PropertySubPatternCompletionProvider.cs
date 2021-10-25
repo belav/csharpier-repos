@@ -29,9 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PropertySubpatternCompletionProvider()
-        {
-        }
+        public PropertySubpatternCompletionProvider() { }
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
         {
@@ -40,13 +38,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var cancellationToken = context.CancellationToken;
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
 
-            var token = TryGetOpenBraceOrCommaInPropertyPatternClause(tree, position, cancellationToken);
+            var token = TryGetOpenBraceOrCommaInPropertyPatternClause(
+                tree,
+                position,
+                cancellationToken
+            );
             if (token == default || !(token.Parent.Parent is PatternSyntax))
             {
                 return;
             }
 
-            var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                .ConfigureAwait(false);
             var pattern = (PatternSyntax)token.Parent.Parent;
             var type = semanticModel.GetTypeInfo(pattern, cancellationToken).ConvertedType;
             if (type == null)
@@ -56,31 +60,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             // Find the members that can be tested.
             IEnumerable<ISymbol> members = semanticModel.LookupSymbols(position, type);
-            members = members.Where(m => m.CanBeReferencedByName &&
-                IsFieldOrReadableProperty(m) &&
-                !m.IsImplicitlyDeclared &&
-                !m.IsStatic);
+            members = members.Where(
+                m =>
+                    m.CanBeReferencedByName
+                    && IsFieldOrReadableProperty(m)
+                    && !m.IsImplicitlyDeclared
+                    && !m.IsStatic
+            );
 
             // Filter out those members that have already been typed
             var propertyPatternClause = (PropertyPatternClauseSyntax)token.Parent;
 
             // List the members that are already tested in this property sub-pattern
-            var alreadyTestedMembers = new HashSet<string>(propertyPatternClause.Subpatterns.Select(
-                p => p.NameColon?.Name.Identifier.ValueText).Where(s => !string.IsNullOrEmpty(s)));
+            var alreadyTestedMembers = new HashSet<string>(
+                propertyPatternClause.Subpatterns
+                    .Select(p => p.NameColon?.Name.Identifier.ValueText)
+                    .Where(s => !string.IsNullOrEmpty(s))
+            );
 
-            var untestedMembers = members.Where(m => !alreadyTestedMembers.Contains(m.Name) &&
-                m.IsEditorBrowsable(document.ShouldHideAdvancedMembers(), semanticModel.Compilation));
+            var untestedMembers = members.Where(
+                m =>
+                    !alreadyTestedMembers.Contains(m.Name)
+                    && m.IsEditorBrowsable(
+                        document.ShouldHideAdvancedMembers(),
+                        semanticModel.Compilation
+                    )
+            );
 
             foreach (var untestedMember in untestedMembers)
             {
                 const string ColonString = ":";
-                context.AddItem(SymbolCompletionItem.CreateWithSymbolId(
-                    displayText: untestedMember.Name.EscapeIdentifier(),
-                    displayTextSuffix: ColonString,
-                    insertionText: null,
-                    symbols: ImmutableArray.Create(untestedMember),
-                    contextPosition: token.GetLocation().SourceSpan.Start,
-                    rules: s_rules));
+                context.AddItem(
+                    SymbolCompletionItem.CreateWithSymbolId(
+                        displayText: untestedMember.Name.EscapeIdentifier(),
+                        displayTextSuffix: ColonString,
+                        insertionText: null,
+                        symbols: ImmutableArray.Create(untestedMember),
+                        contextPosition: token.GetLocation().SourceSpan.Start,
+                        rules: s_rules
+                    )
+                );
             }
         }
 
@@ -99,17 +118,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return false;
         }
 
-        protected override Task<CompletionDescription> GetDescriptionWorkerAsync(Document document, CompletionItem item, CancellationToken cancellationToken)
-            => SymbolCompletionItem.GetDescriptionAsync(item, document, cancellationToken);
+        protected override Task<CompletionDescription> GetDescriptionWorkerAsync(
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        ) => SymbolCompletionItem.GetDescriptionAsync(item, document, cancellationToken);
 
-        private static readonly CompletionItemRules s_rules = CompletionItemRules.Create(enterKeyRule: EnterKeyRule.Never);
+        private static readonly CompletionItemRules s_rules = CompletionItemRules.Create(
+            enterKeyRule: EnterKeyRule.Never
+        );
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, OptionSet options)
-            => CompletionUtilities.IsTriggerCharacter(text, characterPosition, options) || text[characterPosition] == ' ';
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            OptionSet options
+        ) =>
+            CompletionUtilities.IsTriggerCharacter(text, characterPosition, options)
+            || text[characterPosition] == ' ';
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.CommonTriggerCharacters.Add(' ');
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.CommonTriggerCharacters.Add(' ');
 
-        private static SyntaxToken TryGetOpenBraceOrCommaInPropertyPatternClause(SyntaxTree tree, int position, CancellationToken cancellationToken)
+        private static SyntaxToken TryGetOpenBraceOrCommaInPropertyPatternClause(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             if (tree.IsInNonUserCode(position, cancellationToken))
             {

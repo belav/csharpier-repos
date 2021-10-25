@@ -15,7 +15,12 @@ namespace Microsoft.CodeAnalysis.Editor.Options
 {
     internal partial class ExtensionManagerOptions
     {
-        public static readonly Option<bool> DisableCrashingExtensions = new(nameof(ExtensionManagerOptions), nameof(DisableCrashingExtensions), defaultValue: true);
+        public static readonly Option<bool> DisableCrashingExtensions =
+            new(
+                nameof(ExtensionManagerOptions),
+                nameof(DisableCrashingExtensions),
+                defaultValue: true
+            );
     }
 
     [ExportOptionProvider, Shared]
@@ -23,11 +28,9 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExtensionManagerOptionsProvider()
-        {
-        }
+        public ExtensionManagerOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            ExtensionManagerOptions.DisableCrashingExtensions);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(ExtensionManagerOptions.DisableCrashingExtensions);
     }
 }

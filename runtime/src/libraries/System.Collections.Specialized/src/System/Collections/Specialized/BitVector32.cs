@@ -36,10 +36,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public bool this[int bit]
         {
-            get
-            {
-                return (_data & bit) == unchecked((uint)bit);
-            }
+            get { return (_data & bit) == unchecked((uint)bit); }
             set
             {
                 unchecked
@@ -65,7 +62,9 @@ namespace System.Collections.Specialized
             {
                 unchecked
                 {
-                    return (int)((_data & (uint)(section.Mask << section.Offset)) >> section.Offset);
+                    return (int)(
+                        (_data & (uint)(section.Mask << section.Offset)) >> section.Offset
+                    );
                 }
             }
             set
@@ -86,10 +85,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public int Data
         {
-            get
-            {
-                return unchecked((int)_data);
-            }
+            get { return unchecked((int)_data); }
         }
 
         private static short CountBitsSet(short mask)
@@ -169,11 +165,18 @@ namespace System.Collections.Specialized
             return CreateSectionHelper(maxValue, previous.Mask, previous.Offset);
         }
 
-        private static Section CreateSectionHelper(short maxValue, short priorMask, short priorOffset)
+        private static Section CreateSectionHelper(
+            short maxValue,
+            short priorMask,
+            short priorOffset
+        )
         {
             if (maxValue < 1)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_InvalidValue_TooSmall, nameof(maxValue), 1), nameof(maxValue));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_InvalidValue_TooSmall, nameof(maxValue), 1),
+                    nameof(maxValue)
+                );
             }
 
             short offset = (short)(priorOffset + CountBitsSet(priorMask));
@@ -201,20 +204,28 @@ namespace System.Collections.Specialized
 
         public static string ToString(BitVector32 value)
         {
-            return string.Create(/*"BitVector32{".Length*/12 + /*32 bits*/32 + /*"}".Length"*/1, value, (dst, v) =>
-            {
-                ReadOnlySpan<char> prefix = "BitVector32{";
-                prefix.CopyTo(dst);
-                dst[dst.Length - 1] = '}';
-
-                int locdata = unchecked((int)v._data);
-                dst = dst.Slice(prefix.Length, 32);
-                for (int i = 0; i < dst.Length; i++)
+            return string.Create( /*"BitVector32{".Length*/
+                12
+                    + /*32 bits*/
+                    32
+                    + /*"}".Length"*/
+                    1,
+                value,
+                (dst, v) =>
                 {
-                    dst[i] = (locdata & 0x80000000) != 0 ? '1' : '0';
-                    locdata <<= 1;
+                    ReadOnlySpan<char> prefix = "BitVector32{";
+                    prefix.CopyTo(dst);
+                    dst[dst.Length - 1] = '}';
+
+                    int locdata = unchecked((int)v._data);
+                    dst = dst.Slice(prefix.Length, 32);
+                    for (int i = 0; i < dst.Length; i++)
+                    {
+                        dst[i] = (locdata & 0x80000000) != 0 ? '1' : '0';
+                        locdata <<= 1;
+                    }
                 }
-            });
+            );
         }
 
         public override string ToString()
@@ -239,18 +250,12 @@ namespace System.Collections.Specialized
 
             public short Mask
             {
-                get
-                {
-                    return _mask;
-                }
+                get { return _mask; }
             }
 
             public short Offset
             {
-                get
-                {
-                    return _offset;
-                }
+                get { return _offset; }
             }
 
             public override bool Equals(object? o)
@@ -283,7 +288,11 @@ namespace System.Collections.Specialized
 
             public static string ToString(Section value)
             {
-                return "Section{0x" + Convert.ToString(value.Mask, 16) + ", 0x" + Convert.ToString(value.Offset, 16) + "}";
+                return "Section{0x"
+                    + Convert.ToString(value.Mask, 16)
+                    + ", 0x"
+                    + Convert.ToString(value.Offset, 16)
+                    + "}";
             }
 
             public override string ToString()

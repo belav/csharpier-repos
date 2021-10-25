@@ -27,11 +27,14 @@ namespace System.Text.Json
         /// There is no compatible <see cref="System.Text.Json.Serialization.JsonConverter"/>
         /// for <typeparamref name="TValue"/> or its serializable members.
         /// </exception>
-        public static Task SerializeAsync<[DynamicallyAccessedMembers(MembersAccessedOnWrite)] TValue>(
+        public static Task SerializeAsync<
+            [DynamicallyAccessedMembers(MembersAccessedOnWrite)] TValue
+        >(
             Stream utf8Json,
             TValue value,
             JsonSerializerOptions? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json == null)
                 throw new ArgumentNullException(nameof(utf8Json));
@@ -63,7 +66,8 @@ namespace System.Text.Json
             object? value,
             [DynamicallyAccessedMembers(MembersAccessedOnWrite)] Type inputType,
             JsonSerializerOptions? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (utf8Json == null)
             {
@@ -88,7 +92,8 @@ namespace System.Text.Json
             TValue value,
             Type inputType,
             JsonSerializerOptions? options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // We flush the Stream when the buffer is >=90% of capacity.
             // This threshold is a compromise between buffer utilization and minimizing cases where the buffer
@@ -115,7 +120,11 @@ namespace System.Text.Json
                 }
 
                 WriteStack state = new WriteStack { CancellationToken = cancellationToken };
-                JsonConverter converterBase = state.Initialize(inputType, options, supportContinuation: true);
+                JsonConverter converterBase = state.Initialize(
+                    inputType,
+                    options,
+                    supportContinuation: true
+                );
 
                 bool isFinalBlock;
 
@@ -127,7 +136,13 @@ namespace System.Text.Json
 
                         try
                         {
-                            isFinalBlock = WriteCore(converterBase, writer, value, options, ref state);
+                            isFinalBlock = WriteCore(
+                                converterBase,
+                                writer,
+                                value,
+                                options,
+                                ref state
+                            );
                         }
                         finally
                         {
@@ -137,7 +152,9 @@ namespace System.Text.Json
                             }
                         }
 
-                        await bufferWriter.WriteToStreamAsync(utf8Json, cancellationToken).ConfigureAwait(false);
+                        await bufferWriter
+                            .WriteToStreamAsync(utf8Json, cancellationToken)
+                            .ConfigureAwait(false);
                         bufferWriter.Clear();
 
                         if (state.PendingTask is not null)
@@ -152,7 +169,6 @@ namespace System.Text.Json
                                 // TODO https://github.com/dotnet/runtime/issues/22144
                             }
                         }
-
                     } while (!isFinalBlock);
                 }
                 catch

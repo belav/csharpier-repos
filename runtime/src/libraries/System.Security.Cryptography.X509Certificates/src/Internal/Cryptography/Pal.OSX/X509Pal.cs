@@ -17,30 +17,38 @@ namespace Internal.Cryptography.Pal
     {
         public static IX509Pal Instance = new AppleX509Pal();
 
-        private X509Pal()
-        {
-        }
+        private X509Pal() { }
 
         private sealed partial class AppleX509Pal : ManagedX509ExtensionProcessor, IX509Pal
         {
             public ECDsa DecodeECDsaPublicKey(ICertificatePal? certificatePal)
             {
-                return new ECDsaImplementation.ECDsaSecurityTransforms(DecodeECPublicKey(certificatePal));
+                return new ECDsaImplementation.ECDsaSecurityTransforms(
+                    DecodeECPublicKey(certificatePal)
+                );
             }
 
             public ECDiffieHellman DecodeECDiffieHellmanPublicKey(ICertificatePal? certificatePal)
             {
-                return new ECDiffieHellmanImplementation.ECDiffieHellmanSecurityTransforms(DecodeECPublicKey(certificatePal));
+                return new ECDiffieHellmanImplementation.ECDiffieHellmanSecurityTransforms(
+                    DecodeECPublicKey(certificatePal)
+                );
             }
 
-            public AsymmetricAlgorithm DecodePublicKey(Oid oid, byte[] encodedKeyValue, byte[] encodedParameters,
-                ICertificatePal? certificatePal)
+            public AsymmetricAlgorithm DecodePublicKey(
+                Oid oid,
+                byte[] encodedKeyValue,
+                byte[] encodedParameters,
+                ICertificatePal? certificatePal
+            )
             {
                 AppleCertificatePal? applePal = certificatePal as AppleCertificatePal;
 
                 if (applePal != null)
                 {
-                    SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(applePal.CertificateHandle);
+                    SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(
+                        applePal.CertificateHandle
+                    );
 
                     switch (oid.Value)
                     {
@@ -81,7 +89,9 @@ namespace Internal.Cryptography.Pal
                     throw new NotSupportedException(SR.NotSupported_KeyAlgorithm);
 
                 AppleCertificatePal applePal = (AppleCertificatePal)certificatePal;
-                SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(applePal.CertificateHandle);
+                SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(
+                    applePal.CertificateHandle
+                );
 
                 // If X509GetPublicKey uses the new SecCertificateCopyKey API it can return an invalid
                 // key reference for unsupported algorithms. This currently happens for the BrainpoolP160r1
@@ -119,11 +129,18 @@ namespace Internal.Cryptography.Pal
                 }
             }
 
-            private static AsymmetricAlgorithm DecodeDsaPublicKey(byte[] encodedKeyValue, byte[] encodedParameters)
+            private static AsymmetricAlgorithm DecodeDsaPublicKey(
+                byte[] encodedKeyValue,
+                byte[] encodedParameters
+            )
             {
                 SubjectPublicKeyInfoAsn spki = new SubjectPublicKeyInfoAsn
                 {
-                    Algorithm = new AlgorithmIdentifierAsn { Algorithm = Oids.Dsa, Parameters = encodedParameters },
+                    Algorithm = new AlgorithmIdentifierAsn
+                    {
+                        Algorithm = Oids.Dsa,
+                        Parameters = encodedParameters
+                    },
                     SubjectPublicKey = encodedKeyValue,
                 };
 
@@ -143,9 +160,9 @@ namespace Internal.Cryptography.Pal
 
                 try
                 {
-                   dsa.ImportSubjectPublicKeyInfo(rented.AsSpan(0, written), out _);
-                   toDispose = null;
-                   return dsa;
+                    dsa.ImportSubjectPublicKeyInfo(rented.AsSpan(0, written), out _);
+                    toDispose = null;
+                    return dsa;
                 }
                 finally
                 {
@@ -154,23 +171,39 @@ namespace Internal.Cryptography.Pal
                 }
             }
 
-            public string X500DistinguishedNameDecode(byte[] encodedDistinguishedName, X500DistinguishedNameFlags flag)
-            {
-                return X500NameEncoder.X500DistinguishedNameDecode(encodedDistinguishedName, true, flag);
-            }
-
-            public byte[] X500DistinguishedNameEncode(string distinguishedName, X500DistinguishedNameFlags flag)
-            {
-                return X500NameEncoder.X500DistinguishedNameEncode(distinguishedName, flag);
-            }
-
-            public string X500DistinguishedNameFormat(byte[] encodedDistinguishedName, bool multiLine)
+            public string X500DistinguishedNameDecode(
+                byte[] encodedDistinguishedName,
+                X500DistinguishedNameFlags flag
+            )
             {
                 return X500NameEncoder.X500DistinguishedNameDecode(
                     encodedDistinguishedName,
                     true,
-                    multiLine ? X500DistinguishedNameFlags.UseNewLines : X500DistinguishedNameFlags.None,
-                    multiLine);
+                    flag
+                );
+            }
+
+            public byte[] X500DistinguishedNameEncode(
+                string distinguishedName,
+                X500DistinguishedNameFlags flag
+            )
+            {
+                return X500NameEncoder.X500DistinguishedNameEncode(distinguishedName, flag);
+            }
+
+            public string X500DistinguishedNameFormat(
+                byte[] encodedDistinguishedName,
+                bool multiLine
+            )
+            {
+                return X500NameEncoder.X500DistinguishedNameDecode(
+                    encodedDistinguishedName,
+                    true,
+                    multiLine
+                      ? X500DistinguishedNameFlags.UseNewLines
+                      : X500DistinguishedNameFlags.None,
+                    multiLine
+                );
             }
 
             public X509ContentType GetCertContentType(ReadOnlySpan<byte> rawData)
@@ -193,7 +226,12 @@ namespace Internal.Cryptography.Pal
                         {
                             fixed (byte* pin = rawData)
                             {
-                                using (var manager = new PointerMemoryManager<byte>(pin, rawData.Length))
+                                using (
+                                    var manager = new PointerMemoryManager<byte>(
+                                        pin,
+                                        rawData.Length
+                                    )
+                                )
                                 {
                                     PfxAsn.Decode(manager.Memory, AsnEncodingRules.BER);
                                 }
@@ -202,9 +240,7 @@ namespace Internal.Cryptography.Pal
                             }
                         }
                     }
-                    catch (CryptographicException)
-                    {
-                    }
+                    catch (CryptographicException) { }
                 }
 
                 if (contentType == X509ContentType.Unknown)

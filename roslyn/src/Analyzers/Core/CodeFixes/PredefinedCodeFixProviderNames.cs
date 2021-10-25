@@ -9,7 +9,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public const string AddDocCommentNodes = nameof(AddDocCommentNodes);
         public const string AddAsync = nameof(AddAsync);
         public const string AddParameter = nameof(AddParameter);
-        public const string AddParenthesesAroundConditionalExpressionInInterpolatedString = nameof(AddParenthesesAroundConditionalExpressionInInterpolatedString);
+        public const string AddParenthesesAroundConditionalExpressionInInterpolatedString = nameof(
+            AddParenthesesAroundConditionalExpressionInInterpolatedString
+        );
         public const string AliasAmbiguousType = nameof(AliasAmbiguousType);
         public const string ApplyNamingStyle = nameof(ApplyNamingStyle);
         public const string AddBraces = nameof(AddBraces);
@@ -50,8 +52,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public const string DeclareAsNullable = nameof(DeclareAsNullable);
         public const string RemoveAsyncModifier = nameof(RemoveAsyncModifier);
         public const string RemoveUnnecessaryImports = nameof(RemoveUnnecessaryImports);
-        public const string RemoveUnnecessaryAttributeSuppressions = nameof(RemoveUnnecessaryAttributeSuppressions);
-        public const string RemoveUnnecessaryPragmaSuppressions = nameof(RemoveUnnecessaryPragmaSuppressions);
+        public const string RemoveUnnecessaryAttributeSuppressions = nameof(
+            RemoveUnnecessaryAttributeSuppressions
+        );
+        public const string RemoveUnnecessaryPragmaSuppressions = nameof(
+            RemoveUnnecessaryPragmaSuppressions
+        );
         public const string RemoveUnreachableCode = nameof(RemoveUnreachableCode);
         public const string RemoveUnusedValues = nameof(RemoveUnusedValues);
         public const string RemoveUnusedLocalFunction = nameof(RemoveUnusedLocalFunction);
@@ -91,8 +97,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public const string SimplifyInterpolation = nameof(SimplifyInterpolation);
         public const string UseCoalesceExpression = nameof(UseCoalesceExpression);
         public const string UseCompoundAssignment = nameof(UseCompoundAssignment);
-        public const string UseConditionalExpressionForAssignment = nameof(UseConditionalExpressionForAssignment);
-        public const string UseConditionalExpressionForReturn = nameof(UseConditionalExpressionForReturn);
+        public const string UseConditionalExpressionForAssignment = nameof(
+            UseConditionalExpressionForAssignment
+        );
+        public const string UseConditionalExpressionForReturn = nameof(
+            UseConditionalExpressionForReturn
+        );
         public const string UseExplicitTupleName = nameof(UseExplicitTupleName);
         public const string UseInferredMemberName = nameof(UseInferredMemberName);
         public const string UseIsNullCheck = nameof(UseIsNullCheck);
@@ -100,15 +110,23 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public const string UseAutoProperty = nameof(UseAutoProperty);
         public const string ConsecutiveStatementPlacement = nameof(ConsecutiveStatementPlacement);
         public const string UsePatternCombinators = nameof(UsePatternCombinators);
-        public const string ConvertSwitchStatementToExpression = nameof(ConvertSwitchStatementToExpression);
-        public const string InvokeDelegateWithConditionalAccess = nameof(InvokeDelegateWithConditionalAccess);
+        public const string ConvertSwitchStatementToExpression = nameof(
+            ConvertSwitchStatementToExpression
+        );
+        public const string InvokeDelegateWithConditionalAccess = nameof(
+            InvokeDelegateWithConditionalAccess
+        );
         public const string RemoveUnnecessaryByVal = nameof(RemoveUnnecessaryByVal);
         public const string UseIsNotExpression = nameof(UseIsNotExpression);
         public const string UseExpressionBody = nameof(UseExpressionBody);
-        public const string ConstructorInitializerPlacement = nameof(ConstructorInitializerPlacement);
+        public const string ConstructorInitializerPlacement = nameof(
+            ConstructorInitializerPlacement
+        );
         public const string EmbeddedStatementPlacement = nameof(EmbeddedStatementPlacement);
         public const string RemoveConfusingSuppression = nameof(RemoveConfusingSuppression);
-        public const string RemoveUnnecessaryDiscardDesignation = nameof(RemoveUnnecessaryDiscardDesignation);
+        public const string RemoveUnnecessaryDiscardDesignation = nameof(
+            RemoveUnnecessaryDiscardDesignation
+        );
         public const string UseCompoundCoalesceAssignment = nameof(UseCompoundCoalesceAssignment);
         public const string UseDeconstruction = nameof(UseDeconstruction);
         public const string UseDefaultLiteral = nameof(UseDefaultLiteral);
@@ -134,15 +152,27 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public const string MakeMemberStatic = nameof(MakeMemberStatic);
         public const string AssignOutParametersAtStart = nameof(AssignOutParametersAtStart);
         public const string AssignOutParametersAboveReturn = nameof(AssignOutParametersAboveReturn);
-        public const string UseCoalesceExpressionForNullable = nameof(UseCoalesceExpressionForNullable);
+        public const string UseCoalesceExpressionForNullable = nameof(
+            UseCoalesceExpressionForNullable
+        );
         public const string UpdateProjectToAllowUnsafe = nameof(UpdateProjectToAllowUnsafe);
         public const string UseExpressionBodyForLambda = nameof(UseExpressionBodyForLambda);
         public const string PopulateSwitchExpression = nameof(PopulateSwitchExpression);
-        public const string UseIsNullCheckForCastAndEqualityOperator = nameof(UseIsNullCheckForCastAndEqualityOperator);
-        public const string UseIsNullCheckForReferenceEquals = nameof(UseIsNullCheckForReferenceEquals);
-        public const string UsePatternMatchingIsAndCastCheckWithoutName = nameof(UsePatternMatchingIsAndCastCheckWithoutName);
-        public const string UsePatternMatchingIsAndCastCheck = nameof(UsePatternMatchingIsAndCastCheck);
-        public const string UsePatternMatchingAsAndNullCheck = nameof(UsePatternMatchingAsAndNullCheck);
+        public const string UseIsNullCheckForCastAndEqualityOperator = nameof(
+            UseIsNullCheckForCastAndEqualityOperator
+        );
+        public const string UseIsNullCheckForReferenceEquals = nameof(
+            UseIsNullCheckForReferenceEquals
+        );
+        public const string UsePatternMatchingIsAndCastCheckWithoutName = nameof(
+            UsePatternMatchingIsAndCastCheckWithoutName
+        );
+        public const string UsePatternMatchingIsAndCastCheck = nameof(
+            UsePatternMatchingIsAndCastCheck
+        );
+        public const string UsePatternMatchingAsAndNullCheck = nameof(
+            UsePatternMatchingAsAndNullCheck
+        );
         public const string UseNotPattern = nameof(UseNotPattern);
     }
 }

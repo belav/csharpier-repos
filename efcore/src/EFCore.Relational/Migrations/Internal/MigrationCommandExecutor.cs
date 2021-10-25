@@ -34,12 +34,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         /// </summary>
         public virtual void ExecuteNonQuery(
             IEnumerable<MigrationCommand> migrationCommands,
-            IRelationalConnection connection)
+            IRelationalConnection connection
+        )
         {
             Check.NotNull(migrationCommands, nameof(migrationCommands));
             Check.NotNull(connection, nameof(connection));
 
-            using (new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled))
+            using (
+                new TransactionScope(
+                    TransactionScopeOption.Suppress,
+                    TransactionScopeAsyncFlowOption.Enabled
+                )
+            )
             {
                 connection.Open();
 
@@ -51,14 +57,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     {
                         foreach (var command in migrationCommands)
                         {
-                            if (transaction == null
-                                && !command.TransactionSuppressed)
+                            if (transaction == null && !command.TransactionSuppressed)
                             {
                                 transaction = connection.BeginTransaction();
                             }
 
-                            if (transaction != null
-                                && command.TransactionSuppressed)
+                            if (transaction != null && command.TransactionSuppressed)
                             {
                                 transaction.Commit();
                                 transaction.Dispose();
@@ -91,12 +95,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         public virtual async Task ExecuteNonQueryAsync(
             IEnumerable<MigrationCommand> migrationCommands,
             IRelationalConnection connection,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(migrationCommands, nameof(migrationCommands));
             Check.NotNull(connection, nameof(connection));
 
-            var transactionScope = new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
+            var transactionScope = new TransactionScope(
+                TransactionScopeOption.Suppress,
+                TransactionScopeAsyncFlowOption.Enabled
+            );
             try
             {
                 await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
@@ -109,22 +117,27 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     {
                         foreach (var command in migrationCommands)
                         {
-                            if (transaction == null
-                                && !command.TransactionSuppressed)
+                            if (transaction == null && !command.TransactionSuppressed)
                             {
-                                transaction = await connection.BeginTransactionAsync(cancellationToken)
+                                transaction = await connection
+                                    .BeginTransactionAsync(cancellationToken)
                                     .ConfigureAwait(false);
                             }
 
-                            if (transaction != null
-                                && command.TransactionSuppressed)
+                            if (transaction != null && command.TransactionSuppressed)
                             {
-                                await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+                                await transaction
+                                    .CommitAsync(cancellationToken)
+                                    .ConfigureAwait(false);
                                 await transaction.DisposeAsync().ConfigureAwait(false);
                                 transaction = null;
                             }
 
-                            await command.ExecuteNonQueryAsync(connection, cancellationToken: cancellationToken)
+                            await command
+                                .ExecuteNonQueryAsync(
+                                    connection,
+                                    cancellationToken: cancellationToken
+                                )
                                 .ConfigureAwait(false);
                         }
 

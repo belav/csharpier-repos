@@ -24,14 +24,15 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public EventBubblingTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
-            Navigate(ServerPathBase, noReload: _serverFixture.ExecutionMode == ExecutionMode.Client);
+            Navigate(
+                ServerPathBase,
+                noReload: _serverFixture.ExecutionMode == ExecutionMode.Client
+            );
             Browser.MountTestComponent<EventBubblingComponent>();
             Browser.Exists(By.Id("event-bubbling"));
         }
@@ -42,9 +43,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.Exists(By.Id("button-with-onclick")).Click();
 
             // Triggers event on target and ancestors with handler in upwards direction
-            Browser.Equal(
-                new[] { "target onclick", "parent onclick" },
-                GetLogLines);
+            Browser.Equal(new[] { "target onclick", "parent onclick" }, GetLogLines);
         }
 
         [Fact]
@@ -54,9 +53,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.Exists(By.Id("button-without-onclick")).Click();
 
             // Triggers event on ancestors with handler in upwards direction
-            Browser.Equal(
-                new[] { "parent onclick" },
-                GetLogLines);
+            Browser.Equal(new[] { "parent onclick" }, GetLogLines);
         }
 
         [Fact]
@@ -65,9 +62,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             TriggerCustomBubblingEvent("element-with-onsneeze", "sneeze");
 
             // Triggers event on target and ancestors with handler in upwards direction
-            Browser.Equal(
-                new[] { "target onsneeze", "parent onsneeze" },
-                GetLogLines);
+            Browser.Equal(new[] { "target onsneeze", "parent onsneeze" }, GetLogLines);
         }
 
         [Fact]
@@ -76,9 +71,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             TriggerCustomBubblingEvent("element-without-onsneeze", "sneeze");
 
             // Triggers event on ancestors with handler in upwards direction
-            Browser.Equal(
-                new[] { "parent onsneeze" },
-                GetLogLines);
+            Browser.Equal(new[] { "parent onsneeze" }, GetLogLines);
         }
 
         [Fact]
@@ -87,9 +80,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.Exists(By.Id("input-with-onfocus")).Click();
 
             // Triggers event only on target, not other ancestors with event handler
-            Browser.Equal(
-                new[] { "target onfocus" },
-                GetLogLines);
+            Browser.Equal(new[] { "target onfocus" }, GetLogLines);
         }
 
         [Fact]
@@ -130,7 +121,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         {
             // Clicking a checkbox without preventDefault produces both "click" and "change"
             // events, and it becomes checked
-            var checkboxWithoutPreventDefault = Browser.Exists(By.Id("checkbox-with-preventDefault-false"));
+            var checkboxWithoutPreventDefault = Browser.Exists(
+                By.Id("checkbox-with-preventDefault-false")
+            );
             checkboxWithoutPreventDefault.Click();
             Browser.Equal(new[] { "Checkbox click", "Checkbox change" }, GetLogLines);
             Browser.True(() => checkboxWithoutPreventDefault.Selected);
@@ -138,7 +131,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // Clicking a checkbox with preventDefault produces a "click" event, but no "change"
             // event, and it remains unchecked
             ClearLog();
-            var checkboxWithPreventDefault = Browser.Exists(By.Id("checkbox-with-preventDefault-true"));
+            var checkboxWithPreventDefault = Browser.Exists(
+                By.Id("checkbox-with-preventDefault-true")
+            );
             checkboxWithPreventDefault.Click();
             Browser.Equal(new[] { "Checkbox click" }, GetLogLines);
             Browser.False(() => checkboxWithPreventDefault.Selected);
@@ -150,7 +145,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // Even though the checkbox we're clicking this case does *not* have preventDefault,
             // if its ancestor does, then we don't get the "change" event and it remains unchecked
             Browser.Exists(By.Id($"ancestor-prevent-default")).Click();
-            var checkboxWithoutPreventDefault = Browser.Exists(By.Id("checkbox-with-preventDefault-false"));
+            var checkboxWithoutPreventDefault = Browser.Exists(
+                By.Id("checkbox-with-preventDefault-false")
+            );
             checkboxWithoutPreventDefault.Click();
             Browser.Equal(new[] { "Checkbox click" }, GetLogLines);
             Browser.False(() => checkboxWithoutPreventDefault.Selected);
@@ -188,22 +185,23 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.Equal("ac", () => textbox.GetAttribute("value"));
         }
 
-        private string[] GetLogLines()
-            => Browser.Exists(By.TagName("textarea"))
-            .GetAttribute("value")
-            .Replace("\r\n", "\n")
-            .Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        private string[] GetLogLines() =>
+            Browser
+                .Exists(By.TagName("textarea"))
+                .GetAttribute("value")
+                .Replace("\r\n", "\n")
+                .Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
-        void ClearLog()
-            => Browser.Exists(By.Id("clear-log")).Click();
+        void ClearLog() => Browser.Exists(By.Id("clear-log")).Click();
 
         private void TriggerCustomBubblingEvent(string elementId, string eventName)
         {
             var jsExecutor = (IJavaScriptExecutor)Browser;
             jsExecutor.ExecuteScript(
-                $"document.getElementById('{elementId}').dispatchEvent(" +
-                $"    new Event('{eventName}', {{ bubbles: true }})" +
-                $")");
+                $"document.getElementById('{elementId}').dispatchEvent("
+                    + $"    new Event('{eventName}', {{ bubbles: true }})"
+                    + $")"
+            );
         }
     }
 }

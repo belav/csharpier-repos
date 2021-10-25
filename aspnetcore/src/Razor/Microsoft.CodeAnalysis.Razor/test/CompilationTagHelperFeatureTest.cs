@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Razor
             };
             var compilation = CSharpCompilation.Create("Test", references: references);
 
-            // Act 
+            // Act
             var result = CompilationTagHelperFeature.IsValidCompilation(compilation);
 
             // Assert
@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.Razor
             };
             var compilation = CSharpCompilation.Create("Test", references: references);
 
-            // Act 
+            // Act
             var result = CompilationTagHelperFeature.IsValidCompilation(compilation);
 
             // Assert
@@ -57,7 +57,7 @@ namespace Microsoft.CodeAnalysis.Razor
             };
             var compilation = CSharpCompilation.Create("Test", references: references);
 
-            // Act 
+            // Act
             var result = CompilationTagHelperFeature.IsValidCompilation(compilation);
 
             // Assert
@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Razor
             // Arrange
             Compilation compilation = null;
             var provider = new Mock<ITagHelperDescriptorProvider>();
-            provider.Setup(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()))
+            provider
+                .Setup(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()))
                 .Callback<TagHelperDescriptorProviderContext>(c => compilation = c.GetCompilation())
                 .Verifiable();
 
@@ -80,11 +81,12 @@ namespace Microsoft.CodeAnalysis.Razor
                     configure.Features.Add(new DefaultMetadataReferenceFeature());
                     configure.Features.Add(provider.Object);
                     configure.Features.Add(new CompilationTagHelperFeature());
-                });
+                }
+            );
 
             var feature = engine.EngineFeatures.OfType<CompilationTagHelperFeature>().First();
 
-            // Act 
+            // Act
             var result = feature.GetDescriptors();
 
             // Assert
@@ -99,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Razor
             // Arrange
             Compilation compilation = null;
             var provider = new Mock<ITagHelperDescriptorProvider>();
-            provider.Setup(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()))
+            provider
+                .Setup(c => c.Execute(It.IsAny<TagHelperDescriptorProviderContext>()))
                 .Callback<TagHelperDescriptorProviderContext>(c => compilation = c.GetCompilation())
                 .Verifiable();
 
@@ -112,14 +115,17 @@ namespace Microsoft.CodeAnalysis.Razor
             var engine = RazorProjectEngine.Create(
                 configure =>
                 {
-                    configure.Features.Add(new DefaultMetadataReferenceFeature { References = references });
+                    configure.Features.Add(
+                        new DefaultMetadataReferenceFeature { References = references }
+                    );
                     configure.Features.Add(provider.Object);
                     configure.Features.Add(new CompilationTagHelperFeature());
-                });
+                }
+            );
 
             var feature = engine.EngineFeatures.OfType<CompilationTagHelperFeature>().First();
-            
-            // Act 
+
+            // Act
             var result = feature.GetDescriptors();
 
             // Assert

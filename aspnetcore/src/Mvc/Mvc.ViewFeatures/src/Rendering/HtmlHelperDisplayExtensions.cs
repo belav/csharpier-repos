@@ -43,7 +43,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 throw new ArgumentNullException(nameof(htmlHelper));
             }
 
-            return htmlHelper.Display(expression, templateName: null, htmlFieldName: null, additionalViewData: null);
+            return htmlHelper.Display(
+                expression,
+                templateName: null,
+                htmlFieldName: null,
+                additionalViewData: null
+            );
         }
 
         /// <summary>
@@ -79,7 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent Display(
             this IHtmlHelper htmlHelper,
             string expression,
-            object additionalViewData)
+            object additionalViewData
+        )
         {
             if (htmlHelper == null)
             {
@@ -90,7 +96,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression,
                 templateName: null,
                 htmlFieldName: null,
-                additionalViewData: additionalViewData);
+                additionalViewData: additionalViewData
+            );
         }
 
         /// <summary>
@@ -122,14 +129,20 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent Display(
             this IHtmlHelper htmlHelper,
             string expression,
-            string templateName)
+            string templateName
+        )
         {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
             }
 
-            return htmlHelper.Display(expression, templateName, htmlFieldName: null, additionalViewData: null);
+            return htmlHelper.Display(
+                expression,
+                templateName,
+                htmlFieldName: null,
+                additionalViewData: null
+            );
         }
 
         /// <summary>
@@ -167,7 +180,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             string templateName,
-            object additionalViewData)
+            object additionalViewData
+        )
         {
             if (htmlHelper == null)
             {
@@ -178,7 +192,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression,
                 templateName,
                 htmlFieldName: null,
-                additionalViewData: additionalViewData);
+                additionalViewData: additionalViewData
+            );
         }
 
         /// <summary>
@@ -215,14 +230,20 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             string templateName,
-            string htmlFieldName)
+            string htmlFieldName
+        )
         {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
             }
 
-            return htmlHelper.Display(expression, templateName, htmlFieldName, additionalViewData: null);
+            return htmlHelper.Display(
+                expression,
+                templateName,
+                htmlFieldName,
+                additionalViewData: null
+            );
         }
 
         /// <summary>
@@ -246,7 +267,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// </remarks>
         public static IHtmlContent DisplayFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TResult>> expression)
+            Expression<Func<TModel, TResult>> expression
+        )
         {
             if (htmlHelper == null)
             {
@@ -262,7 +284,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression,
                 templateName: null,
                 htmlFieldName: null,
-                additionalViewData: null);
+                additionalViewData: null
+            );
         }
 
         /// <summary>
@@ -293,7 +316,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent DisplayFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
-            object additionalViewData)
+            object additionalViewData
+        )
         {
             if (htmlHelper == null)
             {
@@ -309,7 +333,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression,
                 templateName: null,
                 htmlFieldName: null,
-                additionalViewData: additionalViewData);
+                additionalViewData: additionalViewData
+            );
         }
 
         /// <summary>
@@ -336,7 +361,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent DisplayFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
-            string templateName)
+            string templateName
+        )
         {
             if (htmlHelper == null)
             {
@@ -352,7 +378,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression,
                 templateName,
                 htmlFieldName: null,
-                additionalViewData: null);
+                additionalViewData: null
+            );
         }
 
         /// <summary>
@@ -385,7 +412,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             string templateName,
-            object additionalViewData)
+            object additionalViewData
+        )
         {
             if (htmlHelper == null)
             {
@@ -401,7 +429,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression,
                 templateName,
                 htmlFieldName: null,
-                additionalViewData: additionalViewData);
+                additionalViewData: additionalViewData
+            );
         }
 
         /// <summary>
@@ -433,7 +462,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             string templateName,
-            string htmlFieldName)
+            string htmlFieldName
+        )
         {
             if (htmlHelper == null)
             {
@@ -449,7 +479,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression,
                 templateName: templateName,
                 htmlFieldName: htmlFieldName,
-                additionalViewData: null);
+                additionalViewData: null
+            );
         }
 
         /// <summary>
@@ -479,7 +510,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression: null,
                 templateName: null,
                 htmlFieldName: null,
-                additionalViewData: null);
+                additionalViewData: null
+            );
         }
 
         /// <summary>
@@ -503,7 +535,10 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// case-sensitive file systems.
         /// </para>
         /// </remarks>
-        public static IHtmlContent DisplayForModel(this IHtmlHelper htmlHelper, object additionalViewData)
+        public static IHtmlContent DisplayForModel(
+            this IHtmlHelper htmlHelper,
+            object additionalViewData
+        )
         {
             if (htmlHelper == null)
             {
@@ -514,7 +549,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression: null,
                 templateName: null,
                 htmlFieldName: null,
-                additionalViewData: additionalViewData);
+                additionalViewData: additionalViewData
+            );
         }
 
         /// <summary>
@@ -545,7 +581,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression: null,
                 templateName: templateName,
                 htmlFieldName: null,
-                additionalViewData: null);
+                additionalViewData: null
+            );
         }
 
         /// <summary>
@@ -574,7 +611,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent DisplayForModel(
             this IHtmlHelper htmlHelper,
             string templateName,
-            object additionalViewData)
+            object additionalViewData
+        )
         {
             if (htmlHelper == null)
             {
@@ -585,7 +623,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression: null,
                 templateName: templateName,
                 htmlFieldName: null,
-                additionalViewData: additionalViewData);
+                additionalViewData: additionalViewData
+            );
         }
 
         /// <summary>
@@ -613,7 +652,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent DisplayForModel(
             this IHtmlHelper htmlHelper,
             string templateName,
-            string htmlFieldName)
+            string htmlFieldName
+        )
         {
             if (htmlHelper == null)
             {
@@ -624,7 +664,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression: null,
                 templateName: templateName,
                 htmlFieldName: htmlFieldName,
-                additionalViewData: null);
+                additionalViewData: null
+            );
         }
 
         /// <summary>
@@ -658,7 +699,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string templateName,
             string htmlFieldName,
-            object additionalViewData)
+            object additionalViewData
+        )
         {
             if (htmlHelper == null)
             {
@@ -669,7 +711,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression: null,
                 templateName: templateName,
                 htmlFieldName: htmlFieldName,
-                additionalViewData: additionalViewData);
+                additionalViewData: additionalViewData
+            );
         }
     }
 }

@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         private readonly ILogger<ConfigureIdentityResources> _logger;
         private static readonly char[] ScopesSeparator = new char[] { ' ' };
 
-        public ConfigureIdentityResources(IConfiguration configuration, ILogger<ConfigureIdentityResources> logger)
+        public ConfigureIdentityResources(
+            IConfiguration configuration,
+            ILogger<ConfigureIdentityResources> logger
+        )
         {
             _configuration = configuration;
             _logger = logger;
@@ -35,37 +38,54 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                     switch (scope)
                     {
                         case IdentityServer4.IdentityServerConstants.StandardScopes.OpenId:
-                            options.IdentityResources.Add(IdentityResourceBuilder.OpenId()
-                                .AllowAllClients()
-                                .FromConfiguration()
-                                .Build());
+                            options.IdentityResources.Add(
+                                IdentityResourceBuilder
+                                    .OpenId()
+                                    .AllowAllClients()
+                                    .FromConfiguration()
+                                    .Build()
+                            );
                             break;
                         case IdentityServer4.IdentityServerConstants.StandardScopes.Profile:
-                            options.IdentityResources.Add(IdentityResourceBuilder.Profile()
-                                .AllowAllClients()
-                                .FromConfiguration()
-                                .Build());
+                            options.IdentityResources.Add(
+                                IdentityResourceBuilder
+                                    .Profile()
+                                    .AllowAllClients()
+                                    .FromConfiguration()
+                                    .Build()
+                            );
                             break;
                         case IdentityServer4.IdentityServerConstants.StandardScopes.Address:
-                            options.IdentityResources.Add(IdentityResourceBuilder.Address()
-                                .AllowAllClients()
-                                .FromConfiguration()
-                                .Build());
+                            options.IdentityResources.Add(
+                                IdentityResourceBuilder
+                                    .Address()
+                                    .AllowAllClients()
+                                    .FromConfiguration()
+                                    .Build()
+                            );
                             break;
                         case IdentityServer4.IdentityServerConstants.StandardScopes.Email:
-                            options.IdentityResources.Add(IdentityResourceBuilder.Email()
-                                .AllowAllClients()
-                                .FromConfiguration()
-                                .Build());
+                            options.IdentityResources.Add(
+                                IdentityResourceBuilder
+                                    .Email()
+                                    .AllowAllClients()
+                                    .FromConfiguration()
+                                    .Build()
+                            );
                             break;
                         case IdentityServer4.IdentityServerConstants.StandardScopes.Phone:
-                            options.IdentityResources.Add(IdentityResourceBuilder.Phone()
-                                .AllowAllClients()
-                                .FromConfiguration()
-                                .Build());
+                            options.IdentityResources.Add(
+                                IdentityResourceBuilder
+                                    .Phone()
+                                    .AllowAllClients()
+                                    .FromConfiguration()
+                                    .Build()
+                            );
                             break;
                         default:
-                            throw new InvalidOperationException($"Invalid identity resource name '{scope}'");
+                            throw new InvalidOperationException(
+                                $"Invalid identity resource name '{scope}'"
+                            );
                     }
                 }
             }
@@ -76,8 +96,17 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var allDefault = true;
             foreach (var resource in options.IdentityResources)
             {
-                if (!resource.Properties.TryGetValue(ApplicationProfilesPropertyNames.Source, out var source) ||
-                    !string.Equals(ApplicationProfilesPropertyValues.Default, source, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !resource.Properties.TryGetValue(
+                        ApplicationProfilesPropertyNames.Source,
+                        out var source
+                    )
+                    || !string.Equals(
+                        ApplicationProfilesPropertyValues.Default,
+                        source,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     allDefault = false;
                     break;

@@ -10,7 +10,8 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class AntiforgeryTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+    public class AntiforgeryTests
+        : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
     {
         public AntiforgeryTests(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
         {
@@ -53,16 +54,20 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // this AF token will not work with the first cookie.
             var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
                 responseBody,
-                "/Antiforgery/UseFacebookLogin");
+                "/Antiforgery/UseFacebookLogin"
+            );
             var cookieToken = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(getResponse);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Antiforgery/Login");
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/Antiforgery/Login"
+            );
             request.Headers.Add("Cookie", cookieToken.Key + "=" + cookieToken.Value);
             var nameValueCollection = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string,string>("__RequestVerificationToken", formToken),
-                new KeyValuePair<string,string>("UserName", "abra"),
-                new KeyValuePair<string,string>("Password", "cadabra"),
+                new KeyValuePair<string, string>("__RequestVerificationToken", formToken),
+                new KeyValuePair<string, string>("UserName", "abra"),
+                new KeyValuePair<string, string>("Password", "cadabra"),
             };
 
             request.Content = new FormUrlEncodedContent(nameValueCollection);
@@ -103,16 +108,20 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
                 responseBody,
-                "Antiforgery/FlushAsyncLogin");
+                "Antiforgery/FlushAsyncLogin"
+            );
             var cookieToken = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(getResponse);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Antiforgery/FlushAsyncLogin");
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/Antiforgery/FlushAsyncLogin"
+            );
             request.Headers.Add("Cookie", cookieToken.Key + "=" + cookieToken.Value);
             var nameValueCollection = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string,string>("__RequestVerificationToken", formToken),
-                new KeyValuePair<string,string>("UserName", "test"),
-                new KeyValuePair<string,string>("Password", "password"),
+                new KeyValuePair<string, string>("__RequestVerificationToken", formToken),
+                new KeyValuePair<string, string>("UserName", "test"),
+                new KeyValuePair<string, string>("Password", "password"),
             };
 
             request.Content = new FormUrlEncodedContent(nameValueCollection);
@@ -134,14 +143,18 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             var formToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
                 responseBody,
-                "Antiforgery/Login");
+                "Antiforgery/Login"
+            );
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Antiforgery/Login");
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/Antiforgery/Login"
+            );
             var nameValueCollection = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string,string>("__RequestVerificationToken", formToken),
-                new KeyValuePair<string,string>("UserName", "test"),
-                new KeyValuePair<string,string>("Password", "password"),
+                new KeyValuePair<string, string>("__RequestVerificationToken", formToken),
+                new KeyValuePair<string, string>("UserName", "test"),
+                new KeyValuePair<string, string>("Password", "password"),
             };
 
             request.Content = new FormUrlEncodedContent(nameValueCollection);
@@ -157,7 +170,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task AntiforgeryTokenGeneration_SetsDoNotCacheHeaders_OverridesExistingCachingHeaders()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/Antiforgery/AntiforgeryTokenAndResponseCaching");
+            var response = await Client.GetAsync(
+                "http://localhost/Antiforgery/AntiforgeryTokenAndResponseCaching"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -179,7 +194,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task RequestWithoutAntiforgeryToken_SendsBadRequest()
         {
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Antiforgery/Login");
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/Antiforgery/Login"
+            );
 
             // Act
             var response = await Client.SendAsync(request);
@@ -192,14 +210,20 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task RequestWithoutAntiforgeryToken_ExecutesResultFilter()
         {
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Antiforgery/LoginWithRedirectResultFilter");
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/Antiforgery/LoginWithRedirectResultFilter"
+            );
 
             // Act
             var response = await Client.SendAsync(request);
 
             // Assert
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-            Assert.Equal("http://example.com/antiforgery-redirect", response.Headers.Location.AbsoluteUri);
+            Assert.Equal(
+                "http://example.com/antiforgery-redirect",
+                response.Headers.Location.AbsoluteUri
+            );
         }
     }
 }

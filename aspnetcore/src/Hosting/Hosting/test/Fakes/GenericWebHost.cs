@@ -28,8 +28,10 @@ namespace Microsoft.AspNetCore.Hosting.Tests.Fakes
 
         public void Start() => _host.Start();
 
-        public Task StartAsync(CancellationToken cancellationToken = default) => _host.StartAsync(cancellationToken);
+        public Task StartAsync(CancellationToken cancellationToken = default) =>
+            _host.StartAsync(cancellationToken);
 
-        public Task StopAsync(CancellationToken cancellationToken = default) => _host.StopAsync(cancellationToken);
+        public Task StopAsync(CancellationToken cancellationToken = default) =>
+            _host.StopAsync(cancellationToken);
     }
 }

@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
         {
             var throwStatement = (ThrowStatementSyntax)throwOperation.Syntax;
             RoslynDebug.Assert(throwStatement.Expression != null);
-            return SyntaxFactory.ThrowExpression(throwStatement.ThrowKeyword, throwStatement.Expression);
+            return SyntaxFactory.ThrowExpression(
+                throwStatement.ThrowKeyword,
+                throwStatement.Expression
+            );
         }
     }
 }

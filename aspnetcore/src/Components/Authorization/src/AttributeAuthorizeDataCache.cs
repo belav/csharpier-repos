@@ -10,8 +10,8 @@ namespace Microsoft.AspNetCore.Components.Authorization
 {
     internal static class AttributeAuthorizeDataCache
     {
-        private static ConcurrentDictionary<Type, IAuthorizeData[]> _cache
-            = new ConcurrentDictionary<Type, IAuthorizeData[]>();
+        private static ConcurrentDictionary<Type, IAuthorizeData[]> _cache =
+            new ConcurrentDictionary<Type, IAuthorizeData[]>();
 
         public static IAuthorizeData[] GetAuthorizeDataForType(Type type)
         {

@@ -57,7 +57,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         #region String - Verbatim
 
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.VerbatimStringLiteral)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.VerbatimStringLiteral
+        )]
         [Name(ClassificationTypeNames.VerbatimStringLiteral)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
@@ -74,7 +76,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         }
 
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.StringEscapeCharacter)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.StringEscapeCharacter
+        )]
         [Name(ClassificationTypeNames.StringEscapeCharacter)]
         [Order(After = ClassificationTypeNames.StringLiteral)]
         [Order(After = ClassificationTypeNames.VerbatimStringLiteral)]
@@ -105,8 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public ControlKeywordFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.Keyword_Control;
+            public ControlKeywordFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.Keyword_Control;
         }
         #endregion
         #region Operator - Overloaded
@@ -122,8 +126,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public OperatorOverloadedFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.Operator_Overloaded;
+            public OperatorOverloadedFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.Operator_Overloaded;
         }
         #endregion
 
@@ -337,8 +341,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UserMembersFieldNameFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.User_Members_Fields;
+            public UserMembersFieldNameFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.User_Members_Fields;
         }
         #endregion
         #region User Members - Enum Members
@@ -354,8 +358,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UserMembersEnumMemberNameFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.User_Members_Enum_Members;
+            public UserMembersEnumMemberNameFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.User_Members_Enum_Members;
         }
         #endregion
         #region User Members - Constants
@@ -371,8 +375,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UserMembersConstantNameFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.User_Members_Constants;
+            public UserMembersConstantNameFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.User_Members_Constants;
         }
         #endregion
         #region User Members - Locals
@@ -388,8 +392,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UserMembersLocalNameFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.User_Members_Locals;
+            public UserMembersLocalNameFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.User_Members_Locals;
         }
         #endregion
         #region User Members - Parameters
@@ -405,8 +409,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UserMembersParameterNameFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.User_Members_Parameters;
+            public UserMembersParameterNameFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.User_Members_Parameters;
         }
         #endregion
         #region User Members - Methods
@@ -422,8 +426,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UserMembersMethodNameFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.User_Members_Methods;
+            public UserMembersMethodNameFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.User_Members_Methods;
         }
         #endregion
         #region User Members - Extension Methods
@@ -435,12 +439,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         [Order(Before = ClassificationTypeNames.StaticSymbol)]
         [UserVisible(true)]
         [ExcludeFromCodeCoverage]
-        private class UserMembersExtensionMethodNameFormatDefinition : ClassificationFormatDefinition
+        private class UserMembersExtensionMethodNameFormatDefinition
+            : ClassificationFormatDefinition
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UserMembersExtensionMethodNameFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.User_Members_Extension_Methods;
+            public UserMembersExtensionMethodNameFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.User_Members_Extension_Methods;
         }
         #endregion
         #region User Members - Properties
@@ -456,8 +461,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UserMembersPropertyNameFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.User_Members_Properties;
+            public UserMembersPropertyNameFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.User_Members_Properties;
         }
         #endregion
         #region User Members - Events
@@ -472,8 +477,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UserMembersEventNameFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.User_Members_Events;
+            public UserMembersEventNameFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.User_Members_Events;
         }
         #endregion
         #region User Members - Namespaces
@@ -488,8 +493,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UserMembersNamespaceNameFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.User_Members_Namespaces;
+            public UserMembersNamespaceNameFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.User_Members_Namespaces;
         }
         #endregion
         #region User Members - Labels
@@ -505,14 +510,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public UserMembersLabelNameFormatDefinition()
-                => this.DisplayName = EditorFeaturesResources.User_Members_Labels;
+            public UserMembersLabelNameFormatDefinition() =>
+                this.DisplayName = EditorFeaturesResources.User_Members_Labels;
         }
         #endregion
 
         #region XML Doc Comments - Attribute Name
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentAttributeName)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentAttributeName
+        )]
         [Name(ClassificationTypeNames.XmlDocCommentAttributeName)]
         [Order(After = Priority.Default, Before = Priority.High)]
         [UserVisible(true)]
@@ -530,7 +537,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         #endregion
         #region XML Doc Comments - Attribute Quotes
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentAttributeQuotes)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentAttributeQuotes
+        )]
         [Name(ClassificationTypeNames.XmlDocCommentAttributeQuotes)]
         [Order(After = Priority.Default, Before = Priority.High)]
         [UserVisible(true)]
@@ -550,7 +559,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         // definition of how format is represented in tools options.
         // also specifies the default format.
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentAttributeValue)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentAttributeValue
+        )]
         [Name(ClassificationTypeNames.XmlDocCommentAttributeValue)]
         [Order(After = Priority.Default, Before = Priority.High)]
         [UserVisible(true)]
@@ -568,7 +579,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         #endregion
         #region XML Doc Comments - CData Section
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentCDataSection)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentCDataSection
+        )]
         [Name(ClassificationTypeNames.XmlDocCommentCDataSection)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
@@ -580,7 +593,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public XmlDocCommentCDataSectionFormatDefinition()
             {
                 this.DisplayName = EditorFeaturesResources.XML_Doc_Comments_CData_Section;
-                this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80);    // CIDARKGRAY
+                this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
         #endregion
@@ -598,13 +611,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public XmlDocCommentCommentFormatDefinition()
             {
                 this.DisplayName = EditorFeaturesResources.XML_Doc_Comments_Comment;
-                this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80);    // CIDARKGRAY
+                this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
         #endregion
         #region XML Doc Comments - Delimiter
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentDelimiter)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentDelimiter
+        )]
         [Name(ClassificationTypeNames.XmlDocCommentDelimiter)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
@@ -622,7 +637,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         #endregion
         #region XML Doc Comments - Entity Reference
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentEntityReference)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentEntityReference
+        )]
         [Name(ClassificationTypeNames.XmlDocCommentEntityReference)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
@@ -658,12 +675,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         #endregion
         #region XML Doc Comments - Processing Instruction
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentProcessingInstruction)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlDocCommentProcessingInstruction
+        )]
         [Name(ClassificationTypeNames.XmlDocCommentProcessingInstruction)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
         [ExcludeFromCodeCoverage]
-        private class XmlDocCommentProcessingInstructionFormatDefinition : ClassificationFormatDefinition
+        private class XmlDocCommentProcessingInstructionFormatDefinition
+            : ClassificationFormatDefinition
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -822,7 +842,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         }
 
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.RegexSelfEscapedCharacter)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.RegexSelfEscapedCharacter
+        )]
         [Name(ClassificationTypeNames.RegexSelfEscapedCharacter)]
         [Order(After = ClassificationTypeNames.StringLiteral)]
         [Order(After = ClassificationTypeNames.VerbatimStringLiteral)]
@@ -864,7 +886,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
         #region VB XML Literals - Attribute Name
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlLiteralAttributeName)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlLiteralAttributeName
+        )]
         [Name(ClassificationTypeNames.XmlLiteralAttributeName)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
@@ -881,7 +905,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         #endregion
         #region VB XML Literals - Attribute Quotes
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlLiteralAttributeQuotes)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlLiteralAttributeQuotes
+        )]
         [Name(ClassificationTypeNames.XmlLiteralAttributeQuotes)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
@@ -898,7 +924,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         #endregion
         #region VB XML Literals - Attribute Value
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlLiteralAttributeValue)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlLiteralAttributeValue
+        )]
         [Name(ClassificationTypeNames.XmlLiteralAttributeValue)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
@@ -915,7 +943,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         #endregion
         #region VB XML Literals - CData Section
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlLiteralCDataSection)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlLiteralCDataSection
+        )]
         [Name(ClassificationTypeNames.XmlLiteralCDataSection)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
@@ -926,7 +956,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             public XmlLiteralCDataSectionFormatDefinition()
             {
                 this.DisplayName = EditorFeaturesResources.VB_XML_Literals_CData_Section;
-                this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80);    // CIDARKGRAY
+                this.ForegroundColor = Color.FromRgb(0x80, 0x80, 0x80); // CIDARKGRAY
             }
         }
         #endregion
@@ -966,7 +996,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         #endregion
         #region VB XML Literals - Embedded Expression
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlLiteralEmbeddedExpression)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlLiteralEmbeddedExpression
+        )]
         [Name(ClassificationTypeNames.XmlLiteralEmbeddedExpression)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
@@ -984,7 +1016,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         #endregion
         #region VB XML Literals - Entity Reference
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlLiteralEntityReference)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlLiteralEntityReference
+        )]
         [Name(ClassificationTypeNames.XmlLiteralEntityReference)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
@@ -1018,11 +1052,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         #endregion
         #region VB XML Literals - Processing Instruction
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeNames.XmlLiteralProcessingInstruction)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeNames.XmlLiteralProcessingInstruction
+        )]
         [Name(ClassificationTypeNames.XmlLiteralProcessingInstruction)]
         [Order(After = LanguagePriority.NaturalLanguage, Before = LanguagePriority.FormalLanguage)]
         [UserVisible(true)]
-        private class XmlLiteralProcessingInstructionFormatDefinition : ClassificationFormatDefinition
+        private class XmlLiteralProcessingInstructionFormatDefinition
+            : ClassificationFormatDefinition
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

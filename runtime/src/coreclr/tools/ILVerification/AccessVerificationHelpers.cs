@@ -37,7 +37,10 @@ namespace ILVerify
 #endif
 
             // Check access to class instantiations if generic class
-            if (targetClass.HasInstantiation && !currentClass.CanAccessInstantiation(targetClass.Instantiation))
+            if (
+                targetClass.HasInstantiation
+                && !currentClass.CanAccessInstantiation(targetClass.Instantiation)
+            )
                 return false;
 
             var currentTypeDef = (MetadataType)currentClass.GetTypeDefinition();
@@ -50,7 +53,8 @@ namespace ILVerify
                 if ((targetTypeDef.Attributes & TypeAttributes.Public) != 0)
                     return true;
                 else
-                    return currentTypeDef.Module == targetTypeDef.Module || targetTypeDef.Module.GrantsFriendAccessTo(currentTypeDef.Module);
+                    return currentTypeDef.Module == targetTypeDef.Module
+                        || targetTypeDef.Module.GrantsFriendAccessTo(currentTypeDef.Module);
             }
 
             // Target class is nested
@@ -65,10 +69,17 @@ namespace ILVerify
         /// Returns whether the class '<paramref name="currentClass"/>' can access the method '<paramref name="targetMethod"/>' through
         /// the instance '<paramref name="instance"/>'. The instance can be null, if the method to be accessed is static.
         /// </summary>
-        internal static bool CanAccess(this TypeDesc currentType, MethodDesc targetMethod, TypeDesc instance = null)
+        internal static bool CanAccess(
+            this TypeDesc currentType,
+            MethodDesc targetMethod,
+            TypeDesc instance = null
+        )
         {
             // If generic method, check instantiation access
-            if (targetMethod.HasInstantiation && !currentType.CanAccessInstantiation(targetMethod.Instantiation))
+            if (
+                targetMethod.HasInstantiation
+                && !currentType.CanAccessInstantiation(targetMethod.Instantiation)
+            )
                 return false;
 
             var targetMethodDef = targetMethod.GetTypicalMethodDefinition() as EcmaMethod;
@@ -76,7 +87,13 @@ namespace ILVerify
 
             if (targetMethodDef != null) // Non metadata methods, such as ArrayMethods, may be null at this point
             {
-                if (!currentTypeDef.CanAccessMember(targetMethod.OwningType, targetMethodDef.Attributes & MethodAttributes.MemberAccessMask, instance))
+                if (
+                    !currentTypeDef.CanAccessMember(
+                        targetMethod.OwningType,
+                        targetMethodDef.Attributes & MethodAttributes.MemberAccessMask,
+                        instance
+                    )
+                )
                     return false;
             }
 
@@ -87,7 +104,11 @@ namespace ILVerify
         /// Returns whether the class '<paramref name="currentClass"/>' can access the field '<paramref name="targetField"/>' through
         /// the instance '<paramref name="instance"/>'. The instance can be null, if the field to be accessed is static.
         /// </summary>
-        internal static bool CanAccess(this TypeDesc currentType, FieldDesc targetField, TypeDesc instance = null)
+        internal static bool CanAccess(
+            this TypeDesc currentType,
+            FieldDesc targetField,
+            TypeDesc instance = null
+        )
         {
             // Check access to field owning type
             var targetFieldDef = (EcmaField)targetField.GetTypicalFieldDefinition();
@@ -95,14 +116,21 @@ namespace ILVerify
 
             var targetFieldAccess = FieldToMethodAccessAttribute(targetFieldDef.Attributes);
 
-            if (!currentTypeDef.CanAccessMember(targetField.OwningType, targetFieldAccess, instance))
+            if (
+                !currentTypeDef.CanAccessMember(targetField.OwningType, targetFieldAccess, instance)
+            )
                 return false;
 
             // Check access to field type itself
             return currentType.CanAccess(targetField.FieldType);
         }
 
-        private static bool CanAccessMember(this MetadataType currentType, TypeDesc targetType, MethodAttributes memberVisibility, TypeDesc instance)
+        private static bool CanAccessMember(
+            this MetadataType currentType,
+            TypeDesc targetType,
+            MethodAttributes memberVisibility,
+            TypeDesc instance
+        )
         {
             if (instance == null)
                 instance = currentType;
@@ -121,11 +149,15 @@ namespace ILVerify
                 return currentType.Module == targetTypeDef.Module;
 
             if (memberVisibility == MethodAttributes.Assembly)
-                return currentType.Module == targetTypeDef.Module || targetTypeDef.Module.GrantsFriendAccessTo(currentType.Module);
+                return currentType.Module == targetTypeDef.Module
+                    || targetTypeDef.Module.GrantsFriendAccessTo(currentType.Module);
 
             if (memberVisibility == MethodAttributes.FamANDAssem)
             {
-                if (currentType.Module != targetTypeDef.Module && !targetTypeDef.Module.GrantsFriendAccessTo(currentType.Module))
+                if (
+                    currentType.Module != targetTypeDef.Module
+                    && !targetTypeDef.Module.GrantsFriendAccessTo(currentType.Module)
+                )
                     return false;
             }
 
@@ -139,7 +171,10 @@ namespace ILVerify
                 switch (memberVisibility)
                 {
                     case MethodAttributes.FamORAssem:
-                        if (currentType.Module == targetTypeDef.Module || targetTypeDef.Module.GrantsFriendAccessTo(currentType.Module))
+                        if (
+                            currentType.Module == targetTypeDef.Module
+                            || targetTypeDef.Module.GrantsFriendAccessTo(currentType.Module)
+                        )
                             return true;
 
                         // Check if current class is subclass of target
@@ -169,7 +204,10 @@ namespace ILVerify
             return false;
         }
 
-        private static bool CanAccessInstantiation(this TypeDesc currentType, Instantiation instantiation)
+        private static bool CanAccessInstantiation(
+            this TypeDesc currentType,
+            Instantiation instantiation
+        )
         {
             foreach (var inst in instantiation)
             {
@@ -180,7 +218,10 @@ namespace ILVerify
             return true;
         }
 
-        private static bool CanAccessMethodSignature(this TypeDesc currentType, MethodDesc targetMethod)
+        private static bool CanAccessMethodSignature(
+            this TypeDesc currentType,
+            MethodDesc targetMethod
+        )
         {
             var methodSig = targetMethod.Signature;
 
@@ -189,8 +230,11 @@ namespace ILVerify
             if (returnType.IsParameterizedType)
                 returnType = ((ParameterizedType)returnType).ParameterType;
 
-            if (!returnType.IsGenericParameter && !returnType.IsSignatureVariable // Generic parameters are always accessible
-                && !returnType.IsVoid)
+            if (
+                !returnType.IsGenericParameter
+                && !returnType.IsSignatureVariable // Generic parameters are always accessible
+                && !returnType.IsVoid
+            )
             {
                 if (!currentType.CanAccess(returnType))
                     return false;
@@ -213,7 +257,11 @@ namespace ILVerify
             return true;
         }
 
-        private static bool CanAccessFamily(TypeDesc currentType, TypeDesc targetTypeDef, TypeDesc instanceType)
+        private static bool CanAccessFamily(
+            TypeDesc currentType,
+            TypeDesc targetTypeDef,
+            TypeDesc instanceType
+        )
         {
             // if instanceType is generics and inherit from targetTypeDef members of targetTypeDef are accessible
             if (instanceType.IsGenericParameter)
@@ -258,7 +306,7 @@ namespace ILVerify
         private static EcmaAssembly ToEcmaAssembly(this ModuleDesc module)
         {
             return module.Assembly as EcmaAssembly;
-        }   
+        }
 
         private static bool GrantsFriendAccessTo(this ModuleDesc module, ModuleDesc friendModule)
         {
@@ -272,14 +320,31 @@ namespace ILVerify
                 }
                 var friendName = friendAssembly.GetName();
 
-                foreach (var attribute in assembly.GetDecodedCustomAttributes("System.Runtime.CompilerServices", "InternalsVisibleToAttribute"))
+                foreach (
+                    var attribute in assembly.GetDecodedCustomAttributes(
+                        "System.Runtime.CompilerServices",
+                        "InternalsVisibleToAttribute"
+                    )
+                )
                 {
-                    AssemblyName friendAttributeName = new AssemblyName((string)attribute.FixedArguments[0].Value);
-                    if (!friendName.Name.Equals(friendAttributeName.Name, StringComparison.OrdinalIgnoreCase))
+                    AssemblyName friendAttributeName = new AssemblyName(
+                        (string)attribute.FixedArguments[0].Value
+                    );
+                    if (
+                        !friendName.Name.Equals(
+                            friendAttributeName.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                         continue;
 
                     // Comparing PublicKeyToken, since GetPublicKey returns null due to a bug
-                    if (IsSamePublicKey(friendAttributeName.GetPublicKeyToken(), friendName.GetPublicKeyToken()))
+                    if (
+                        IsSamePublicKey(
+                            friendAttributeName.GetPublicKeyToken(),
+                            friendName.GetPublicKeyToken()
+                        )
+                    )
                         return true;
                 }
             }
@@ -305,7 +370,9 @@ namespace ILVerify
             return true;
         }
 
-        private static MethodAttributes NestedToMethodAccessAttribute(TypeAttributes nestedVisibility)
+        private static MethodAttributes NestedToMethodAccessAttribute(
+            TypeAttributes nestedVisibility
+        )
         {
             switch (nestedVisibility & TypeAttributes.VisibilityMask)
             {

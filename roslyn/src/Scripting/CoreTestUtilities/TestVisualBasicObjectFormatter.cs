@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
         public TestVisualBasicObjectFormatter(
             bool quoteStringsAndCharacters = true,
             int maximumLineLength = int.MaxValue,
-            CultureInfo cultureInfo = null)
+            CultureInfo cultureInfo = null
+        )
         {
             _quoteStringsAndCharacters = quoteStringsAndCharacters;
             _maximumLineLength = maximumLineLength;
@@ -32,14 +33,18 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
                 newLine: Environment.NewLine,
                 ellipsis: printOptions.Ellipsis,
                 maximumLineLength: _maximumLineLength,
-                maximumOutputLength: printOptions.MaximumOutputLength);
+                maximumOutputLength: printOptions.MaximumOutputLength
+            );
 
-        protected override CommonPrimitiveFormatterOptions GetPrimitiveOptions(PrintOptions printOptions) =>
+        protected override CommonPrimitiveFormatterOptions GetPrimitiveOptions(
+            PrintOptions printOptions
+        ) =>
             new CommonPrimitiveFormatterOptions(
                 numberRadix: printOptions.NumberRadix,
                 includeCodePoints: false,
                 escapeNonPrintableCharacters: printOptions.EscapeNonPrintableCharacters,
                 quoteStringsAndCharacters: _quoteStringsAndCharacters,
-                cultureInfo: _cultureInfo);
+                cultureInfo: _cultureInfo
+            );
     }
 }

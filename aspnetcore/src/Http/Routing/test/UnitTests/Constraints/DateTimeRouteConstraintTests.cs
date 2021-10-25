@@ -12,14 +12,7 @@ namespace Microsoft.AspNetCore.Routing.Tests
     {
         public static IEnumerable<object[]> GetDateTimeObject
         {
-            get
-            {
-                yield return new object[]
-                {
-                    DateTime.Now,
-                    true
-                };
-            }
+            get { yield return new object[] { DateTime.Now, true }; }
         }
 
         [Theory]

@@ -48,8 +48,16 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.ChangeTracker
                 _context.ChangeTracker.AutoDetectChangesEnabled = AutoDetectChanges;
 
                 _customers = _fixture.CreateCustomers(5000, setPrimaryKeys: true);
-                _ordersWithoutPk = _fixture.CreateOrders(_customers, ordersPerCustomer: 2, setPrimaryKeys: false);
-                _ordersWithPk = _fixture.CreateOrders(_customers, ordersPerCustomer: 2, setPrimaryKeys: true);
+                _ordersWithoutPk = _fixture.CreateOrders(
+                    _customers,
+                    ordersPerCustomer: 2,
+                    setPrimaryKeys: false
+                );
+                _ordersWithPk = _fixture.CreateOrders(
+                    _customers,
+                    ordersPerCustomer: 2,
+                    setPrimaryKeys: true
+                );
             }
 
             [IterationCleanup]

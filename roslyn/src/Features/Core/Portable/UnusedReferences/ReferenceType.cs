@@ -10,17 +10,14 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
         /// Unknown reference type
         /// </summary>
         Unknown,
-
         /// <summary>
         /// Individual assembly reference `&lt;Reference ... /&gt;`
         /// </summary>
         Assembly,
-
         /// <summary>
         /// NuGet package reference `&lt;PackageReference ... /&gt;`
         /// </summary>
         Package,
-
         /// <summary>
         /// Project reference `&lt;ProjectReference ... /&gt;`
         /// </summary>

@@ -18,7 +18,10 @@ namespace System.Linq
 
             return single!;
         }
-        public static TSource Single<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        public static TSource Single<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate
+        )
         {
             TSource? single = source.TryGetSingle(predicate, out bool found);
             if (!found)
@@ -29,25 +32,37 @@ namespace System.Linq
             return single!;
         }
 
-        public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source)
-            => source.TryGetSingle(out _);
+        public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source) =>
+            source.TryGetSingle(out _);
 
-        public static TSource SingleOrDefault<TSource>(this IEnumerable<TSource> source, TSource defaultValue)
+        public static TSource SingleOrDefault<TSource>(
+            this IEnumerable<TSource> source,
+            TSource defaultValue
+        )
         {
             var single = source.TryGetSingle(out bool found);
             return found ? single! : defaultValue;
         }
 
-        public static TSource? SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-            => source.TryGetSingle(predicate, out _);
+        public static TSource? SingleOrDefault<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate
+        ) => source.TryGetSingle(predicate, out _);
 
-        public static TSource SingleOrDefault<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, TSource defaultValue)
+        public static TSource SingleOrDefault<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate,
+            TSource defaultValue
+        )
         {
             var single = source.TryGetSingle(predicate, out bool found);
             return found ? single! : defaultValue;
         }
 
-        private static TSource? TryGetSingle<TSource>(this IEnumerable<TSource> source, out bool found)
+        private static TSource? TryGetSingle<TSource>(
+            this IEnumerable<TSource> source,
+            out bool found
+        )
         {
             if (source is null)
             {
@@ -90,7 +105,11 @@ namespace System.Linq
             return default;
         }
 
-        private static TSource? TryGetSingle<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, out bool found)
+        private static TSource? TryGetSingle<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate,
+            out bool found
+        )
         {
             if (source == null)
             {

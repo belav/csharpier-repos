@@ -166,16 +166,21 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             viewData.ModelState.SetModelValue(
                 "FieldPrefix.StringProperty",
                 "StringPropertyRawValue",
-                "StringPropertyAttemptedValue");
+                "StringPropertyAttemptedValue"
+            );
 
             viewData.ModelState.SetModelValue(
                 "FieldPrefix",
                 "ModelRawValue",
-                "ModelAttemptedValue");
+                "ModelAttemptedValue"
+            );
 
             // Act & Assert
             Assert.Equal("StringPropertyRawValue", helper.Value("StringProperty", format: null));
-            Assert.Equal("StringPropertyRawValue", helper.ValueFor(m => m.StringProperty, format: null));
+            Assert.Equal(
+                "StringPropertyRawValue",
+                helper.ValueFor(m => m.StringProperty, format: null)
+            );
             Assert.Equal("ModelRawValue", helper.ValueForModel(format: null));
         }
 
@@ -208,7 +213,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Act & Assert
             Assert.Equal(expectedModelValue, helper.ValueForModel("-{0}-"));
             Assert.Equal(expectedObjectPropertyValue, helper.Value("ObjectProperty", "-{0}-"));
-            Assert.Equal(expectedObjectPropertyValue, helper.ValueFor(m => m.ObjectProperty, "-{0}-"));
+            Assert.Equal(
+                expectedObjectPropertyValue,
+                helper.ValueFor(m => m.ObjectProperty, "-{0}-")
+            );
         }
 
         [Fact]
@@ -223,15 +231,23 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             viewData.ModelState.SetModelValue(
                 "ObjectProperty",
                 "ObjectPropertyRawValue <\"\">",
-                "ObjectPropertyAttemptedValue <\"\">");
+                "ObjectPropertyAttemptedValue <\"\">"
+            );
 
             // Act & Assert
             Assert.Equal(
                 "<{ StringProperty = ModelStringPropertyValue <\"\">, ObjectProperty = (null) }>",
-                helper.ValueForModel("<{0}>"));
+                helper.ValueForModel("<{0}>")
+            );
             Assert.Equal("<ViewDataValue <\"\">>", helper.Value("StringProperty", "<{0}>"));
-            Assert.Equal("<ModelStringPropertyValue <\"\">>", helper.ValueFor(m => m.StringProperty, "<{0}>"));
-            Assert.Equal("ObjectPropertyRawValue <\"\">", helper.ValueFor(m => m.ObjectProperty, format: null));
+            Assert.Equal(
+                "<ModelStringPropertyValue <\"\">>",
+                helper.ValueFor(m => m.StringProperty, "<{0}>")
+            );
+            Assert.Equal(
+                "ObjectPropertyRawValue <\"\">",
+                helper.ValueFor(m => m.ObjectProperty, format: null)
+            );
         }
 
         private sealed class TestModel
@@ -245,7 +261,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     CultureInfo.InvariantCulture,
                     "{{ StringProperty = {0}, ObjectProperty = {1} }}",
                     StringProperty ?? "(null)",
-                    ObjectProperty ?? "(null)");
+                    ObjectProperty ?? "(null)"
+                );
             }
         }
 

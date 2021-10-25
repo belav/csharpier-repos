@@ -14,16 +14,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     /// <summary>
     /// A <see cref="IActionResultExecutor{FileContentResult}"/> 
     /// </summary>
-    public class FileContentResultExecutor : FileResultExecutorBase, IActionResultExecutor<FileContentResult>
+    public class FileContentResultExecutor
+        : FileResultExecutorBase,
+          IActionResultExecutor<FileContentResult>
     {
         /// <summary>
         /// Intializes a new <see cref="FileContentResultExecutor"/>.
         /// </summary>
         /// <param name="loggerFactory">The factory used to create loggers.</param>
         public FileContentResultExecutor(ILoggerFactory loggerFactory)
-            : base(CreateLogger<FileContentResultExecutor>(loggerFactory))
-        {
-        }
+            : base(CreateLogger<FileContentResultExecutor>(loggerFactory)) { }
 
         /// <inheritdoc />
         public virtual Task ExecuteAsync(ActionContext context, FileContentResult result)
@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 result.FileContents.Length,
                 result.EnableRangeProcessing,
                 result.LastModified,
-                result.EntityTag);
+                result.EntityTag
+            );
 
             if (!serveBody)
             {
@@ -63,7 +64,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// <param name="result">The <see cref="FileContentResult"/>.</param>
         /// <param name="range">The <see cref="RangeItemHeaderValue"/>.</param>
         /// <param name="rangeLength">The length of the range.</param>
-        protected virtual Task WriteFileAsync(ActionContext context, FileContentResult result, RangeItemHeaderValue? range, long rangeLength)
+        protected virtual Task WriteFileAsync(
+            ActionContext context,
+            FileContentResult result,
+            RangeItemHeaderValue? range,
+            long rangeLength
+        )
         {
             if (context == null)
             {

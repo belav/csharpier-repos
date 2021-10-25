@@ -11,7 +11,19 @@ namespace System.Globalization.Tests
         [Fact]
         public void DayNames_GetInvariantInfo_ReturnsExpected()
         {
-            Assert.Equal(new string[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" }, DateTimeFormatInfo.InvariantInfo.DayNames);
+            Assert.Equal(
+                new string[]
+                {
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+                },
+                DateTimeFormatInfo.InvariantInfo.DayNames
+            );
         }
 
         [Fact]
@@ -53,13 +65,19 @@ namespace System.Globalization.Tests
         public void DayNames_SetNulValueInValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.DayNames = new string[] { "1", "2", "3", null, "5", "6", "7" });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.DayNames = new string[] { "1", "2", "3", null, "5", "6", "7" }
+            );
         }
 
         public static IEnumerable<object[]> DayNames_SetInvalidLength_TestData()
         {
             yield return new object[] { new string[] { "Sun" } };
-            yield return new object[] { new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Additional" } };
+            yield return new object[]
+            {
+                new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Additional" }
+            };
         }
 
         [Theory]
@@ -73,17 +91,26 @@ namespace System.Globalization.Tests
         [Fact]
         public void DayNames_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.DayNames = new string[] { "1", "2", "3", "4", "5", "6", "7" });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    DateTimeFormatInfo.InvariantInfo.DayNames = new string[]
+                    {
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7"
+                    }
+            );
         }
 
         [Fact]
         public void DayNames_FormatWithNull_ThrowsNullReferenceException()
         {
             var value = new string[] { "1", "2", "3", "4", "5", "6", "7" };
-            var format = new DateTimeFormatInfo
-            {
-                DayNames = value
-            };
+            var format = new DateTimeFormatInfo { DayNames = value };
             value[0] = null;
 
             var dateTime = new DateTime(2014, 5, 28);

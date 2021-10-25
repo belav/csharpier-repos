@@ -33,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             IMigrator migrator,
             DbConnection connection,
-            Guid connectionId)
-            : base(eventDefinition, messageGenerator, migrator)
+            Guid connectionId
+        ) : base(eventDefinition, messageGenerator, migrator)
         {
             Connection = connection;
             ConnectionId = connectionId;

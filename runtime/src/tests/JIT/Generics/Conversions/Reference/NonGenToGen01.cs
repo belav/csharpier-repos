@@ -21,14 +21,12 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public class GenBase<T>
 {
     public virtual Type MyVirtType()
     {
         return typeof(GenBase<T>);
     }
-
 }
 
 public class GenInt : GenBase<int>
@@ -125,7 +123,6 @@ public class Test
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -138,7 +135,6 @@ public class Test
         Eval(new Converter<string>().ToGenString(new GenString(), false, typeof(GenString)));
         Eval(new Converter<string>().ToGenString(new GenBase<string>(), true, null));
 
-
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -150,5 +146,4 @@ public class Test
             return 1;
         }
     }
-
 }

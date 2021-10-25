@@ -7,18 +7,20 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 {
-    internal class KestrelConnection<T> : KestrelConnection, IThreadPoolWorkItem where T : BaseConnectionContext
+    internal class KestrelConnection<T> : KestrelConnection, IThreadPoolWorkItem
+        where T : BaseConnectionContext
     {
         private readonly Func<T, Task> _connectionDelegate;
         private readonly T _transportConnection;
 
-        public KestrelConnection(long id,
-                                 ServiceContext serviceContext,
-                                 TransportConnectionManager transportConnectionManager,
-                                 Func<T, Task> connectionDelegate,
-                                 T connectionContext,
-                                 IKestrelTrace logger)
-            : base(id, serviceContext, transportConnectionManager, logger)
+        public KestrelConnection(
+            long id,
+            ServiceContext serviceContext,
+            TransportConnectionManager transportConnectionManager,
+            Func<T, Task> connectionDelegate,
+            T connectionContext,
+            IKestrelTrace logger
+        ) : base(id, serviceContext, transportConnectionManager, logger)
         {
             _connectionDelegate = connectionDelegate;
             _transportConnection = connectionContext;
@@ -53,7 +55,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogError(0, ex, "Unhandled exception while processing {ConnectionId}.", connectionContext.ConnectionId);
+                        Logger.LogError(
+                            0,
+                            ex,
+                            "Unhandled exception while processing {ConnectionId}.",
+                            connectionContext.ConnectionId
+                        );
                     }
                 }
             }

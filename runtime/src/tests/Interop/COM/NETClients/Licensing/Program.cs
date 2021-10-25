@@ -81,8 +81,14 @@ namespace NetClient
             try
             {
                 string licKey = "__TEST__";
-                LicenseManager.CurrentContext = new MockLicenseContext(typeof(LicenseTestingClass), LicenseUsageMode.Designtime);
-                LicenseManager.CurrentContext.SetSavedLicenseKey(typeof(LicenseTestingClass), licKey);
+                LicenseManager.CurrentContext = new MockLicenseContext(
+                    typeof(LicenseTestingClass),
+                    LicenseUsageMode.Designtime
+                );
+                LicenseManager.CurrentContext.SetSavedLicenseKey(
+                    typeof(LicenseTestingClass),
+                    licKey
+                );
 
                 var licenseTesting = (LicenseTesting)new LicenseTestingClass();
 
@@ -90,7 +96,13 @@ namespace NetClient
                 Assert.AreEqual(null, licenseTesting.GetLicense());
 
                 // Verify the value retrieved from the IClassFactory2::RequestLicKey was what was set
-                Assert.AreEqual(DefaultLicKey, LicenseManager.CurrentContext.GetSavedLicenseKey(typeof(LicenseTestingClass), resourceAssembly: null));
+                Assert.AreEqual(
+                    DefaultLicKey,
+                    LicenseManager.CurrentContext.GetSavedLicenseKey(
+                        typeof(LicenseTestingClass),
+                        resourceAssembly: null
+                    )
+                );
             }
             finally
             {
@@ -106,8 +118,14 @@ namespace NetClient
             try
             {
                 string licKey = "__TEST__";
-                LicenseManager.CurrentContext = new MockLicenseContext(typeof(LicenseTestingClass), LicenseUsageMode.Runtime);
-                LicenseManager.CurrentContext.SetSavedLicenseKey(typeof(LicenseTestingClass), licKey);
+                LicenseManager.CurrentContext = new MockLicenseContext(
+                    typeof(LicenseTestingClass),
+                    LicenseUsageMode.Runtime
+                );
+                LicenseManager.CurrentContext.SetSavedLicenseKey(
+                    typeof(LicenseTestingClass),
+                    licKey
+                );
 
                 var licenseTesting = (LicenseTesting)new LicenseTestingClass();
 

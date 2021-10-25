@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
         public DynamicRelationalParameter(
             string invariantName,
             string name,
-            IRelationalTypeMappingSource typeMappingSource)
-            : base(invariantName)
+            IRelationalTypeMappingSource typeMappingSource
+        ) : base(invariantName)
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
@@ -56,10 +56,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
 
             if (value == null)
             {
-                command.Parameters
-                    .Add(
-                        _typeMappingSource.GetMappingForValue(null)
-                            .CreateParameter(command, Name, null));
+                command.Parameters.Add(
+                    _typeMappingSource.GetMappingForValue(null).CreateParameter(command, Name, null)
+                );
 
                 return;
             }
@@ -74,8 +73,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             var type = value.GetType();
 
             command.Parameters.Add(
-                _typeMappingSource.GetMapping(type)
-                    .CreateParameter(command, Name, value, type.IsNullableType()));
+                _typeMappingSource
+                    .GetMapping(type)
+                    .CreateParameter(command, Name, value, type.IsNullableType())
+            );
         }
     }
 }

@@ -48,51 +48,64 @@ namespace MonoTests.System.Runtime.Caching
         public void Constructor_Exceptions()
         {
             string relPath = Path.Combine("relative", "file", "path");
-            var paths = new List<string> {
-                relPath
-            };
+            var paths = new List<string> { relPath };
 
-            Assert.Throws<ArgumentException>(() =>
-            {
-                new HostFileChangeMonitor(paths);
-            });
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    new HostFileChangeMonitor(paths);
+                }
+            );
 
             paths.Clear();
             paths.Add(null);
-            Assert.Throws<ArgumentException>(() =>
-            {
-                new HostFileChangeMonitor(paths);
-            });
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    new HostFileChangeMonitor(paths);
+                }
+            );
 
             paths.Clear();
             paths.Add(string.Empty);
-            Assert.Throws<ArgumentException>(() =>
-            {
-                new HostFileChangeMonitor(paths);
-            });
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    new HostFileChangeMonitor(paths);
+                }
+            );
 
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                new HostFileChangeMonitor(null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    new HostFileChangeMonitor(null);
+                }
+            );
 
             paths.Clear();
-            Assert.Throws<ArgumentException>(() =>
-            {
-                new HostFileChangeMonitor(paths);
-            });
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    new HostFileChangeMonitor(paths);
+                }
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34497", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34497",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public static void Constructor_MissingFiles_Handler()
         {
             HostFileChangeMonitor monitor;
-            string missingFile = Path.GetFullPath(Path.Combine(Guid.NewGuid().ToString("N"), "file", "path"));
+            string missingFile = Path.GetFullPath(
+                Path.Combine(Guid.NewGuid().ToString("N"), "file", "path")
+            );
 
-            var paths = new List<string> {
-                missingFile
-            };
+            var paths = new List<string> { missingFile };
 
             // Actually thrown by FileSystemWatcher constructor - note that the exception message suggests the file's
             // parent directory is being watched, not the file itself:
@@ -105,10 +118,12 @@ namespace MonoTests.System.Runtime.Caching
             // at System.Runtime.Caching.HostFileChangeMonitor.InitDisposableMembers()
             // at System.Runtime.Caching.HostFileChangeMonitor..ctor(IList`1 filePaths)
             // at MonoTests.System.Runtime.Caching.HostFileChangeMonitorTest.Constructor_MissingFiles() in c:\users\grendel\documents\visual studio 2010\Projects\System.Runtime.Caching.Test\System.Runtime.Caching.Test\System.Runtime.Caching\HostFileChangeMonitorTest.cs:line 68
-            Assert.Throws<ArgumentException>(() =>
-            {
-                new HostFileChangeMonitor(paths);
-            });
+            Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    new HostFileChangeMonitor(paths);
+                }
+            );
 
             missingFile = Path.GetFullPath(Guid.NewGuid().ToString("N"));
 
@@ -132,16 +147,18 @@ namespace MonoTests.System.Runtime.Caching
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34497", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34497",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Constructor_Duplicates()
         {
             HostFileChangeMonitor monitor;
             string missingFile = Path.GetFullPath(Guid.NewGuid().ToString("N"));
 
-            var paths = new List<string> {
-                missingFile,
-                missingFile
-            };
+            var paths = new List<string> { missingFile, missingFile };
 
             // Just checks if it doesn't throw any exception for dupes
             monitor = new HostFileChangeMonitor(paths);
@@ -150,7 +167,11 @@ namespace MonoTests.System.Runtime.Caching
 
         private static Tuple<string, string, string, IList<string>> SetupMonitoring()
         {
-            string testPath = Path.Combine(Path.GetTempPath(), "HostFileChangeMonitorTest", "Dispose_Calls_StopMonitoring");
+            string testPath = Path.Combine(
+                Path.GetTempPath(),
+                "HostFileChangeMonitorTest",
+                "Dispose_Calls_StopMonitoring"
+            );
             if (!Directory.Exists(testPath))
                 Directory.CreateDirectory(testPath);
 
@@ -160,12 +181,14 @@ namespace MonoTests.System.Runtime.Caching
             File.WriteAllText(firstFile, "I am the first file.");
             File.WriteAllText(secondFile, "I am the second file.");
 
-            var paths = new List<string> {
-                firstFile,
-                secondFile
-            };
+            var paths = new List<string> { firstFile, secondFile };
 
-            return new Tuple<string, string, string, IList<string>>(testPath, firstFile, secondFile, paths);
+            return new Tuple<string, string, string, IList<string>>(
+                testPath,
+                firstFile,
+                secondFile,
+                paths
+            );
         }
 
         private static void CleanupMonitoring(Tuple<string, string, string, IList<string>> setup)
@@ -201,7 +224,12 @@ namespace MonoTests.System.Runtime.Caching
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34497", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34497",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void UniqueId()
         {
             Tuple<string, string, string, IList<string>> setup = null;
@@ -213,16 +241,10 @@ namespace MonoTests.System.Runtime.Caching
                 var sb = new StringBuilder();
 
                 fi = new FileInfo(setup.Item2);
-                sb.AppendFormat("{0}{1:X}{2:X}",
-                    setup.Item2,
-                    fi.LastWriteTimeUtc.Ticks,
-                    fi.Length);
+                sb.AppendFormat("{0}{1:X}{2:X}", setup.Item2, fi.LastWriteTimeUtc.Ticks, fi.Length);
 
                 fi = new FileInfo(setup.Item3);
-                sb.AppendFormat("{0}{1:X}{2:X}",
-                    setup.Item3,
-                    fi.LastWriteTimeUtc.Ticks,
-                    fi.Length);
+                sb.AppendFormat("{0}{1:X}{2:X}", setup.Item3, fi.LastWriteTimeUtc.Ticks, fi.Length);
 
                 Assert.Equal(sb.ToString(), monitor.UniqueId);
 
@@ -231,10 +253,7 @@ namespace MonoTests.System.Runtime.Caching
 
                 monitor = new HostFileChangeMonitor(list);
                 var di = new DirectoryInfo(setup.Item1);
-                sb.AppendFormat("{0}{1:X}{2:X}",
-                    setup.Item1,
-                    di.LastWriteTimeUtc.Ticks,
-                    -1L);
+                sb.AppendFormat("{0}{1:X}{2:X}", setup.Item1, di.LastWriteTimeUtc.Ticks, -1L);
                 Assert.Equal(sb.ToString(), monitor.UniqueId);
 
                 list.Add(setup.Item1);

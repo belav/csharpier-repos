@@ -12,8 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class InternalPropertyBaseBuilder<TPropertyBase> : AnnotatableBuilder<TPropertyBase, InternalModelBuilder>
-        where TPropertyBase : PropertyBase
+    public class InternalPropertyBaseBuilder<TPropertyBase>
+        : AnnotatableBuilder<TPropertyBase, InternalModelBuilder> where TPropertyBase : PropertyBase
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -21,10 +21,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public InternalPropertyBaseBuilder(TPropertyBase metadata, InternalModelBuilder modelBuilder)
-            : base(metadata, modelBuilder)
-        {
-        }
+        public InternalPropertyBaseBuilder(
+            TPropertyBase metadata,
+            InternalModelBuilder modelBuilder
+        ) : base(metadata, modelBuilder) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalPropertyBaseBuilder<TPropertyBase>? HasField(
             string? fieldName,
-            ConfigurationSource configurationSource)
+            ConfigurationSource configurationSource
+        )
         {
             if (CanSetField(fieldName, configurationSource))
             {
@@ -62,13 +63,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
 
                 var fieldInfo = PropertyBase.GetFieldInfo(
-                    fieldName, Metadata.DeclaringType, Metadata.Name,
-                    shouldThrow: configurationSource == ConfigurationSource.Explicit);
+                    fieldName,
+                    Metadata.DeclaringType,
+                    Metadata.Name,
+                    shouldThrow: configurationSource == ConfigurationSource.Explicit
+                );
 
                 return fieldInfo != null
                     && PropertyBase.IsCompatible(
-                        fieldInfo, Metadata.ClrType, Metadata.DeclaringType.ClrType, Metadata.Name,
-                        shouldThrow: configurationSource == ConfigurationSource.Explicit);
+                        fieldInfo,
+                        Metadata.ClrType,
+                        Metadata.DeclaringType.ClrType,
+                        Metadata.Name,
+                        shouldThrow: configurationSource == ConfigurationSource.Explicit
+                    );
             }
 
             return Metadata.FieldInfo?.GetSimpleMemberName() == fieldName;
@@ -82,7 +90,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalPropertyBaseBuilder<TPropertyBase>? HasField(
             FieldInfo? fieldInfo,
-            ConfigurationSource configurationSource)
+            ConfigurationSource configurationSource
+        )
         {
             if (CanSetField(fieldInfo, configurationSource))
             {
@@ -100,13 +109,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool CanSetField(FieldInfo? fieldInfo, ConfigurationSource? configurationSource)
-            => (configurationSource.Overrides(Metadata.GetFieldInfoConfigurationSource())
-                    && (fieldInfo == null
-                        || PropertyBase.IsCompatible(
-                            fieldInfo, Metadata.ClrType, Metadata.DeclaringType.ClrType, Metadata.Name,
-                            shouldThrow: configurationSource == ConfigurationSource.Explicit)))
-                || Equals(Metadata.FieldInfo, fieldInfo);
+        public virtual bool CanSetField(
+            FieldInfo? fieldInfo,
+            ConfigurationSource? configurationSource
+        ) =>
+            (
+                configurationSource.Overrides(Metadata.GetFieldInfoConfigurationSource())
+                && (
+                    fieldInfo == null
+                    || PropertyBase.IsCompatible(
+                        fieldInfo,
+                        Metadata.ClrType,
+                        Metadata.DeclaringType.ClrType,
+                        Metadata.Name,
+                        shouldThrow: configurationSource == ConfigurationSource.Explicit
+                    )
+                )
+            ) || Equals(Metadata.FieldInfo, fieldInfo);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -116,7 +135,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalPropertyBaseBuilder<TPropertyBase>? UsePropertyAccessMode(
             PropertyAccessMode? propertyAccessMode,
-            ConfigurationSource configurationSource)
+            ConfigurationSource configurationSource
+        )
         {
             if (CanSetPropertyAccessMode(propertyAccessMode, configurationSource))
             {
@@ -136,8 +156,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual bool CanSetPropertyAccessMode(
             PropertyAccessMode? propertyAccessMode,
-            ConfigurationSource? configurationSource)
-            => configurationSource.Overrides(Metadata.GetPropertyAccessModeConfigurationSource())
-                || ((IReadOnlyPropertyBase)Metadata).GetPropertyAccessMode() == propertyAccessMode;
+            ConfigurationSource? configurationSource
+        ) =>
+            configurationSource.Overrides(Metadata.GetPropertyAccessModeConfigurationSource())
+            || ((IReadOnlyPropertyBase)Metadata).GetPropertyAccessMode() == propertyAccessMode;
     }
 }

@@ -30,11 +30,7 @@ namespace BadOverride1
     {
         public override void RunGenericMethod<T1>(T1 value)
         {
-            Console.Write(
-                "DerivedType.RunGenericMethod<{0}>({1})\r\n",
-                typeof(T1),
-                value
-            );
+            Console.Write("DerivedType.RunGenericMethod<{0}>({1})\r\n", typeof(T1), value);
 
             return;
         }

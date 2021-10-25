@@ -31,55 +31,68 @@ namespace Microsoft.AspNetCore.StaticFiles
             _methodNotSupported = LoggerMessage.Define<string>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(1, "MethodNotSupported"),
-                formatString: "{Method} requests are not supported");
+                formatString: "{Method} requests are not supported"
+            );
             _fileServed = LoggerMessage.Define<string, string>(
-               logLevel: LogLevel.Information,
-               eventId: new EventId(2, "FileServed"),
-               formatString: "Sending file. Request path: '{VirtualPath}'. Physical path: '{PhysicalPath}'");
+                logLevel: LogLevel.Information,
+                eventId: new EventId(2, "FileServed"),
+                formatString: "Sending file. Request path: '{VirtualPath}'. Physical path: '{PhysicalPath}'"
+            );
             _pathMismatch = LoggerMessage.Define<string>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(3, "PathMismatch"),
-                formatString: "The request path {Path} does not match the path filter");
+                formatString: "The request path {Path} does not match the path filter"
+            );
             _fileTypeNotSupported = LoggerMessage.Define<string>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(4, "FileTypeNotSupported"),
-                formatString: "The request path {Path} does not match a supported file type");
+                formatString: "The request path {Path} does not match a supported file type"
+            );
             _fileNotFound = LoggerMessage.Define<string>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(5, "FileNotFound"),
-                formatString: "The request path {Path} does not match an existing file");
+                formatString: "The request path {Path} does not match an existing file"
+            );
             _fileNotModified = LoggerMessage.Define<string>(
                 logLevel: LogLevel.Information,
                 eventId: new EventId(6, "FileNotModified"),
-                formatString: "The file {Path} was not modified");
+                formatString: "The file {Path} was not modified"
+            );
             _preconditionFailed = LoggerMessage.Define<string>(
                 logLevel: LogLevel.Information,
                 eventId: new EventId(7, "PreconditionFailed"),
-                formatString: "Precondition for {Path} failed");
+                formatString: "Precondition for {Path} failed"
+            );
             _handled = LoggerMessage.Define<int, string>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(8, "Handled"),
-                formatString: "Handled. Status code: {StatusCode} File: {Path}");
+                formatString: "Handled. Status code: {StatusCode} File: {Path}"
+            );
             _rangeNotSatisfiable = LoggerMessage.Define<string>(
                 logLevel: LogLevel.Warning,
                 eventId: new EventId(9, "RangeNotSatisfiable"),
-                formatString: "Range not satisfiable for {Path}");
+                formatString: "Range not satisfiable for {Path}"
+            );
             _sendingFileRange = LoggerMessage.Define<StringValues, string>(
                 logLevel: LogLevel.Information,
                 eventId: new EventId(10, "SendingFileRange"),
-                formatString: "Sending {Range} of file {Path}");
+                formatString: "Sending {Range} of file {Path}"
+            );
             _copyingFileRange = LoggerMessage.Define<StringValues, string>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(11, "CopyingFileRange"),
-                formatString: "Copying {Range} of file {Path} to the response body");
+                formatString: "Copying {Range} of file {Path} to the response body"
+            );
             _writeCancelled = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(14, "WriteCancelled"),
-                formatString: "The file transmission was cancelled");
+                formatString: "The file transmission was cancelled"
+            );
             _endpointMatched = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(15, "EndpointMatched"),
-                formatString: "Static files was skipped as the request already matched an endpoint.");
+                formatString: "Static files was skipped as the request already matched an endpoint."
+            );
         }
 
         public static void RequestMethodNotSupported(this ILogger logger, string method)

@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             IActionInvokerFactory actionInvokerFactory,
             IActionSelector actionSelector,
             DiagnosticListener diagnosticListener,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory
+        )
         {
             _actionInvokerFactory = actionInvokerFactory;
             _actionSelector = actionSelector;
@@ -56,7 +57,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 var message = Resources.FormatPropertyOfTypeCannotBeNull(
                     nameof(Actions),
-                    nameof(MvcAttributeRouteHandler));
+                    nameof(MvcAttributeRouteHandler)
+                );
                 throw new InvalidOperationException(message);
             }
 
@@ -79,13 +81,19 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 var routeData = c.GetRouteData();
 
-                var actionContext = new ActionContext(context.HttpContext, routeData, actionDescriptor);
+                var actionContext = new ActionContext(
+                    context.HttpContext,
+                    routeData,
+                    actionDescriptor
+                );
                 var invoker = _actionInvokerFactory.CreateInvoker(actionContext);
                 if (invoker == null)
                 {
                     throw new InvalidOperationException(
                         Resources.FormatActionInvokerFactory_CouldNotCreateInvoker(
-                            actionDescriptor.DisplayName));
+                            actionDescriptor.DisplayName
+                        )
+                    );
                 }
 
                 return invoker.InvokeAsync();

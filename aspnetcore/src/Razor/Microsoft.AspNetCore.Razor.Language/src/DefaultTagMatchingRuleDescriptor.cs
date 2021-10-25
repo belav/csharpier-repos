@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             TagStructure tagStructure,
             bool caseSensitive,
             RequiredAttributeDescriptor[] attributes,
-            RazorDiagnostic[] diagnostics)
+            RazorDiagnostic[] diagnostics
+        )
         {
             TagName = tagName;
             ParentTag = parentTag;

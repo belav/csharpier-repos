@@ -42,7 +42,6 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
     {
     }
 
-
     [RestrictChildren("p")]
     public class RestrictChildrenTagHelper
     {
@@ -401,10 +400,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
 
     public class DictionaryWithoutParameterlessConstructor : Dictionary<string, string>
     {
-        public DictionaryWithoutParameterlessConstructor(int count)
-            : base()
-        {
-        }
+        public DictionaryWithoutParameterlessConstructor(int count) : base() { }
     }
 
     public class DictionaryOfIntSubclass : Dictionary<int, string>

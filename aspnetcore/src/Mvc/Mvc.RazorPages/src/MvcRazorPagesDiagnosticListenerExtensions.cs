@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             ActionContext actionContext,
             HandlerMethodDescriptor handlerMethodDescriptor,
             IReadOnlyDictionary<string, object> arguments,
-            object instance)
+            object instance
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionContext != null);
@@ -27,11 +28,23 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
-                BeforeHandlerMethodImpl(diagnosticListener, actionContext, handlerMethodDescriptor, arguments, instance);
+                BeforeHandlerMethodImpl(
+                    diagnosticListener,
+                    actionContext,
+                    handlerMethodDescriptor,
+                    arguments,
+                    instance
+                );
             }
         }
 
-        private static void BeforeHandlerMethodImpl(DiagnosticListener diagnosticListener, ActionContext actionContext, HandlerMethodDescriptor handlerMethodDescriptor, IReadOnlyDictionary<string, object> arguments, object instance)
+        private static void BeforeHandlerMethodImpl(
+            DiagnosticListener diagnosticListener,
+            ActionContext actionContext,
+            HandlerMethodDescriptor handlerMethodDescriptor,
+            IReadOnlyDictionary<string, object> arguments,
+            object instance
+        )
         {
             if (diagnosticListener.IsEnabled(Diagnostics.BeforeHandlerMethodEventData.EventName))
             {
@@ -42,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         arguments,
                         handlerMethodDescriptor,
                         instance
-                    ));
+                    )
+                );
             }
         }
 
@@ -52,7 +66,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             HandlerMethodDescriptor handlerMethodDescriptor,
             IReadOnlyDictionary<string, object> arguments,
             object instance,
-            IActionResult result)
+            IActionResult result
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(actionContext != null);
@@ -63,11 +78,25 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
-                AfterHandlerMethodImpl(diagnosticListener, actionContext, handlerMethodDescriptor, arguments, instance, result);
+                AfterHandlerMethodImpl(
+                    diagnosticListener,
+                    actionContext,
+                    handlerMethodDescriptor,
+                    arguments,
+                    instance,
+                    result
+                );
             }
         }
 
-        private static void AfterHandlerMethodImpl(DiagnosticListener diagnosticListener, ActionContext actionContext, HandlerMethodDescriptor handlerMethodDescriptor, IReadOnlyDictionary<string, object> arguments, object instance, IActionResult result)
+        private static void AfterHandlerMethodImpl(
+            DiagnosticListener diagnosticListener,
+            ActionContext actionContext,
+            HandlerMethodDescriptor handlerMethodDescriptor,
+            IReadOnlyDictionary<string, object> arguments,
+            object instance,
+            IActionResult result
+        )
         {
             if (diagnosticListener.IsEnabled(Diagnostics.AfterHandlerMethodEventData.EventName))
             {
@@ -79,14 +108,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         handlerMethodDescriptor,
                         instance,
                         result
-                    ));
+                    )
+                );
             }
         }
 
         public static void BeforeOnPageHandlerExecution(
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutingContext handlerExecutionContext,
-            IAsyncPageFilter filter)
+            IAsyncPageFilter filter
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutionContext != null);
@@ -95,13 +126,25 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
-                BeforeOnPageHandlerExecutionImpl(diagnosticListener, handlerExecutionContext, filter);
+                BeforeOnPageHandlerExecutionImpl(
+                    diagnosticListener,
+                    handlerExecutionContext,
+                    filter
+                );
             }
         }
 
-        private static void BeforeOnPageHandlerExecutionImpl(DiagnosticListener diagnosticListener, PageHandlerExecutingContext handlerExecutionContext, IAsyncPageFilter filter)
+        private static void BeforeOnPageHandlerExecutionImpl(
+            DiagnosticListener diagnosticListener,
+            PageHandlerExecutingContext handlerExecutionContext,
+            IAsyncPageFilter filter
+        )
         {
-            if (diagnosticListener.IsEnabled(Diagnostics.BeforePageFilterOnPageHandlerExecutionEventData.EventName))
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.BeforePageFilterOnPageHandlerExecutionEventData.EventName
+                )
+            )
             {
                 diagnosticListener.Write(
                     Diagnostics.BeforePageFilterOnPageHandlerExecutionEventData.EventName,
@@ -109,14 +152,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         handlerExecutionContext.ActionDescriptor,
                         handlerExecutionContext,
                         filter
-                    ));
+                    )
+                );
             }
         }
 
         public static void AfterOnPageHandlerExecution(
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutedContext handlerExecutedContext,
-            IAsyncPageFilter filter)
+            IAsyncPageFilter filter
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutedContext != null);
@@ -129,9 +174,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             }
         }
 
-        private static void AfterOnPageHandlerExecutionImpl(DiagnosticListener diagnosticListener, PageHandlerExecutedContext handlerExecutedContext, IAsyncPageFilter filter)
+        private static void AfterOnPageHandlerExecutionImpl(
+            DiagnosticListener diagnosticListener,
+            PageHandlerExecutedContext handlerExecutedContext,
+            IAsyncPageFilter filter
+        )
         {
-            if (diagnosticListener.IsEnabled(Diagnostics.AfterPageFilterOnPageHandlerExecutionEventData.EventName))
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.AfterPageFilterOnPageHandlerExecutionEventData.EventName
+                )
+            )
             {
                 diagnosticListener.Write(
                     Diagnostics.AfterPageFilterOnPageHandlerExecutionEventData.EventName,
@@ -139,14 +192,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         handlerExecutedContext.ActionDescriptor,
                         handlerExecutedContext,
                         filter
-                    ));
+                    )
+                );
             }
         }
 
         public static void BeforeOnPageHandlerExecuting(
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutingContext handlerExecutingContext,
-            IPageFilter filter)
+            IPageFilter filter
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutingContext != null);
@@ -155,13 +210,25 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
-                BeforeOnPageHandlerExecutingImpl(diagnosticListener, handlerExecutingContext, filter);
+                BeforeOnPageHandlerExecutingImpl(
+                    diagnosticListener,
+                    handlerExecutingContext,
+                    filter
+                );
             }
         }
 
-        private static void BeforeOnPageHandlerExecutingImpl(DiagnosticListener diagnosticListener, PageHandlerExecutingContext handlerExecutingContext, IPageFilter filter)
+        private static void BeforeOnPageHandlerExecutingImpl(
+            DiagnosticListener diagnosticListener,
+            PageHandlerExecutingContext handlerExecutingContext,
+            IPageFilter filter
+        )
         {
-            if (diagnosticListener.IsEnabled(Diagnostics.BeforePageFilterOnPageHandlerExecutingEventData.EventName))
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.BeforePageFilterOnPageHandlerExecutingEventData.EventName
+                )
+            )
             {
                 diagnosticListener.Write(
                     Diagnostics.BeforePageFilterOnPageHandlerExecutingEventData.EventName,
@@ -169,14 +236,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         handlerExecutingContext.ActionDescriptor,
                         handlerExecutingContext,
                         filter
-                    ));
+                    )
+                );
             }
         }
 
         public static void AfterOnPageHandlerExecuting(
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutingContext handlerExecutingContext,
-            IPageFilter filter)
+            IPageFilter filter
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutingContext != null);
@@ -185,13 +254,25 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
-                AfterOnPageHandlerExecutingImpl(diagnosticListener, handlerExecutingContext, filter);
+                AfterOnPageHandlerExecutingImpl(
+                    diagnosticListener,
+                    handlerExecutingContext,
+                    filter
+                );
             }
         }
 
-        private static void AfterOnPageHandlerExecutingImpl(DiagnosticListener diagnosticListener, PageHandlerExecutingContext handlerExecutingContext, IPageFilter filter)
+        private static void AfterOnPageHandlerExecutingImpl(
+            DiagnosticListener diagnosticListener,
+            PageHandlerExecutingContext handlerExecutingContext,
+            IPageFilter filter
+        )
         {
-            if (diagnosticListener.IsEnabled(Diagnostics.AfterPageFilterOnPageHandlerExecutingEventData.EventName))
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.AfterPageFilterOnPageHandlerExecutingEventData.EventName
+                )
+            )
             {
                 diagnosticListener.Write(
                     Diagnostics.AfterPageFilterOnPageHandlerExecutingEventData.EventName,
@@ -199,14 +280,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         handlerExecutingContext.ActionDescriptor,
                         handlerExecutingContext,
                         filter
-                    ));
+                    )
+                );
             }
         }
 
         public static void BeforeOnPageHandlerExecuted(
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutedContext handlerExecutedContext,
-            IPageFilter filter)
+            IPageFilter filter
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutedContext != null);
@@ -219,9 +302,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             }
         }
 
-        private static void BeforeOnPageHandlerExecutedImpl(DiagnosticListener diagnosticListener, PageHandlerExecutedContext handlerExecutedContext, IPageFilter filter)
+        private static void BeforeOnPageHandlerExecutedImpl(
+            DiagnosticListener diagnosticListener,
+            PageHandlerExecutedContext handlerExecutedContext,
+            IPageFilter filter
+        )
         {
-            if (diagnosticListener.IsEnabled(Diagnostics.BeforePageFilterOnPageHandlerExecutedEventData.EventName))
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.BeforePageFilterOnPageHandlerExecutedEventData.EventName
+                )
+            )
             {
                 diagnosticListener.Write(
                     Diagnostics.BeforePageFilterOnPageHandlerExecutedEventData.EventName,
@@ -229,14 +320,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         handlerExecutedContext.ActionDescriptor,
                         handlerExecutedContext,
                         filter
-                    ));
+                    )
+                );
             }
         }
 
         public static void AfterOnPageHandlerExecuted(
             this DiagnosticListener diagnosticListener,
             PageHandlerExecutedContext handlerExecutedContext,
-            IPageFilter filter)
+            IPageFilter filter
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerExecutedContext != null);
@@ -249,9 +342,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             }
         }
 
-        private static void AfterOnPageHandlerExecutedImpl(DiagnosticListener diagnosticListener, PageHandlerExecutedContext handlerExecutedContext, IPageFilter filter)
+        private static void AfterOnPageHandlerExecutedImpl(
+            DiagnosticListener diagnosticListener,
+            PageHandlerExecutedContext handlerExecutedContext,
+            IPageFilter filter
+        )
         {
-            if (diagnosticListener.IsEnabled(Diagnostics.AfterPageFilterOnPageHandlerExecutedEventData.EventName))
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.AfterPageFilterOnPageHandlerExecutedEventData.EventName
+                )
+            )
             {
                 diagnosticListener.Write(
                     Diagnostics.AfterPageFilterOnPageHandlerExecutedEventData.EventName,
@@ -259,14 +360,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         handlerExecutedContext.ActionDescriptor,
                         handlerExecutedContext,
                         filter
-                    ));
+                    )
+                );
             }
         }
 
         public static void BeforeOnPageHandlerSelection(
             this DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
-            IAsyncPageFilter filter)
+            IAsyncPageFilter filter
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerSelectedContext != null);
@@ -275,13 +378,25 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             // Inlinable fast-path check if Diagnositcs is enabled
             if (diagnosticListener.IsEnabled())
             {
-                BeforeOnPageHandlerSelectionImpl(diagnosticListener, handlerSelectedContext, filter);
+                BeforeOnPageHandlerSelectionImpl(
+                    diagnosticListener,
+                    handlerSelectedContext,
+                    filter
+                );
             }
         }
 
-        private static void BeforeOnPageHandlerSelectionImpl(DiagnosticListener diagnosticListener, PageHandlerSelectedContext handlerSelectedContext, IAsyncPageFilter filter)
+        private static void BeforeOnPageHandlerSelectionImpl(
+            DiagnosticListener diagnosticListener,
+            PageHandlerSelectedContext handlerSelectedContext,
+            IAsyncPageFilter filter
+        )
         {
-            if (diagnosticListener.IsEnabled(Diagnostics.BeforePageFilterOnPageHandlerSelectionEventData.EventName))
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.BeforePageFilterOnPageHandlerSelectionEventData.EventName
+                )
+            )
             {
                 diagnosticListener.Write(
                     Diagnostics.BeforePageFilterOnPageHandlerSelectionEventData.EventName,
@@ -289,14 +404,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         handlerSelectedContext.ActionDescriptor,
                         handlerSelectedContext,
                         filter
-                    ));
+                    )
+                );
             }
         }
 
         public static void AfterOnPageHandlerSelection(
             this DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
-            IAsyncPageFilter filter)
+            IAsyncPageFilter filter
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerSelectedContext != null);
@@ -309,9 +426,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             }
         }
 
-        private static void AfterOnPageHandlerSelectionImpl(DiagnosticListener diagnosticListener, PageHandlerSelectedContext handlerSelectedContext, IAsyncPageFilter filter)
+        private static void AfterOnPageHandlerSelectionImpl(
+            DiagnosticListener diagnosticListener,
+            PageHandlerSelectedContext handlerSelectedContext,
+            IAsyncPageFilter filter
+        )
         {
-            if (diagnosticListener.IsEnabled(Diagnostics.AfterPageFilterOnPageHandlerSelectionEventData.EventName))
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.AfterPageFilterOnPageHandlerSelectionEventData.EventName
+                )
+            )
             {
                 diagnosticListener.Write(
                     Diagnostics.AfterPageFilterOnPageHandlerSelectionEventData.EventName,
@@ -319,14 +444,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         handlerSelectedContext.ActionDescriptor,
                         handlerSelectedContext,
                         filter
-                    ));
+                    )
+                );
             }
         }
 
         public static void BeforeOnPageHandlerSelected(
             this DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
-            IPageFilter filter)
+            IPageFilter filter
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerSelectedContext != null);
@@ -339,9 +466,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             }
         }
 
-        private static void BeforeOnPageHandlerSelectedImpl(DiagnosticListener diagnosticListener, PageHandlerSelectedContext handlerSelectedContext, IPageFilter filter)
+        private static void BeforeOnPageHandlerSelectedImpl(
+            DiagnosticListener diagnosticListener,
+            PageHandlerSelectedContext handlerSelectedContext,
+            IPageFilter filter
+        )
         {
-            if (diagnosticListener.IsEnabled(Diagnostics.BeforePageFilterOnPageHandlerSelectedEventData.EventName))
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.BeforePageFilterOnPageHandlerSelectedEventData.EventName
+                )
+            )
             {
                 diagnosticListener.Write(
                     Diagnostics.BeforePageFilterOnPageHandlerSelectedEventData.EventName,
@@ -349,14 +484,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         handlerSelectedContext.ActionDescriptor,
                         handlerSelectedContext,
                         filter
-                    ));
+                    )
+                );
             }
         }
 
         public static void AfterOnPageHandlerSelected(
             this DiagnosticListener diagnosticListener,
             PageHandlerSelectedContext handlerSelectedContext,
-            IPageFilter filter)
+            IPageFilter filter
+        )
         {
             Debug.Assert(diagnosticListener != null);
             Debug.Assert(handlerSelectedContext != null);
@@ -369,9 +506,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             }
         }
 
-        private static void AfterOnPageHandlerSelectedImpl(DiagnosticListener diagnosticListener, PageHandlerSelectedContext handlerSelectedContext, IPageFilter filter)
+        private static void AfterOnPageHandlerSelectedImpl(
+            DiagnosticListener diagnosticListener,
+            PageHandlerSelectedContext handlerSelectedContext,
+            IPageFilter filter
+        )
         {
-            if (diagnosticListener.IsEnabled(Diagnostics.AfterPageFilterOnPageHandlerSelectedEventData.EventName))
+            if (
+                diagnosticListener.IsEnabled(
+                    Diagnostics.AfterPageFilterOnPageHandlerSelectedEventData.EventName
+                )
+            )
             {
                 diagnosticListener.Write(
                     Diagnostics.AfterPageFilterOnPageHandlerSelectedEventData.EventName,
@@ -379,7 +524,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                         handlerSelectedContext.ActionDescriptor,
                         handlerSelectedContext,
                         filter
-                    ));
+                    )
+                );
             }
         }
     }

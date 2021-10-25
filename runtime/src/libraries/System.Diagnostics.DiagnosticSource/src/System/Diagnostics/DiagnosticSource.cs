@@ -16,7 +16,8 @@ namespace System.Diagnostics
     /// </summary>
     public abstract partial class DiagnosticSource
     {
-        internal const string WriteRequiresUnreferencedCode = "The type of object being written to DiagnosticSource cannot be discovered statically.";
+        internal const string WriteRequiresUnreferencedCode =
+            "The type of object being written to DiagnosticSource cannot be discovered statically.";
 
         /// <summary>
         /// Write is a generic way of logging complex payloads.  Each notification

@@ -40,8 +40,14 @@ namespace Microsoft.AspNetCore.Owin
             IDictionary<string, object> env = new OwinEnvironment(context);
             Assert.Equal("SomeMethod", Get<string>(env, "owin.RequestMethod"));
             // User property should set both server.User (non-standard) and owin.RequestUser.
-            Assert.Equal("Foo", Get<ClaimsPrincipal>(env, "server.User").Identity.AuthenticationType);
-            Assert.Equal("Foo", Get<ClaimsPrincipal>(env, "owin.RequestUser").Identity.AuthenticationType);
+            Assert.Equal(
+                "Foo",
+                Get<ClaimsPrincipal>(env, "server.User").Identity.AuthenticationType
+            );
+            Assert.Equal(
+                "Foo",
+                Get<ClaimsPrincipal>(env, "owin.RequestUser").Identity.AuthenticationType
+            );
             Assert.Same(Stream.Null, Get<Stream>(env, "owin.RequestBody"));
             var requestHeaders = Get<IDictionary<string, string[]>>(env, "owin.RequestHeaders");
             Assert.NotNull(requestHeaders);

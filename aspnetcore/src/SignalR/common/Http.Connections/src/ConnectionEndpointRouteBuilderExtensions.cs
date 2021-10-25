@@ -23,8 +23,11 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="pattern">The route pattern.</param>
         /// <param name="configure">A callback to configure the connection.</param>
         /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
-        public static ConnectionEndpointRouteBuilder MapConnections(this IEndpointRouteBuilder endpoints, string pattern, Action<IConnectionBuilder> configure) =>
-            endpoints.MapConnections(pattern, new HttpConnectionDispatcherOptions(), configure);
+        public static ConnectionEndpointRouteBuilder MapConnections(
+            this IEndpointRouteBuilder endpoints,
+            string pattern,
+            Action<IConnectionBuilder> configure
+        ) => endpoints.MapConnections(pattern, new HttpConnectionDispatcherOptions(), configure);
 
         /// <summary>
         /// Maps incoming requests with the specified path to the provided connection pipeline.
@@ -33,9 +36,15 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
         /// <param name="pattern">The route pattern.</param>
         /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
-        public static ConnectionEndpointRouteBuilder MapConnectionHandler<TConnectionHandler>(this IEndpointRouteBuilder endpoints, string pattern) where TConnectionHandler : ConnectionHandler
+        public static ConnectionEndpointRouteBuilder MapConnectionHandler<TConnectionHandler>(
+            this IEndpointRouteBuilder endpoints,
+            string pattern
+        ) where TConnectionHandler : ConnectionHandler
         {
-            return endpoints.MapConnectionHandler<TConnectionHandler>(pattern, configureOptions: null);
+            return endpoints.MapConnectionHandler<TConnectionHandler>(
+                pattern,
+                configureOptions: null
+            );
         }
 
         /// <summary>
@@ -46,30 +55,39 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="pattern">The route pattern.</param>
         /// <param name="configureOptions">A callback to configure dispatcher options.</param>
         /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
-        public static ConnectionEndpointRouteBuilder MapConnectionHandler<TConnectionHandler>(this IEndpointRouteBuilder endpoints, string pattern, Action<HttpConnectionDispatcherOptions>? configureOptions) where TConnectionHandler : ConnectionHandler
+        public static ConnectionEndpointRouteBuilder MapConnectionHandler<TConnectionHandler>(
+            this IEndpointRouteBuilder endpoints,
+            string pattern,
+            Action<HttpConnectionDispatcherOptions>? configureOptions
+        ) where TConnectionHandler : ConnectionHandler
         {
             var options = new HttpConnectionDispatcherOptions();
             configureOptions?.Invoke(options);
 
-            var conventionBuilder = endpoints.MapConnections(pattern, options, b =>
-            {
-                b.UseConnectionHandler<TConnectionHandler>();
-            });
+            var conventionBuilder = endpoints.MapConnections(
+                pattern,
+                options,
+                b =>
+                {
+                    b.UseConnectionHandler<TConnectionHandler>();
+                }
+            );
 
             var attributes = typeof(TConnectionHandler).GetCustomAttributes(inherit: true);
-            conventionBuilder.Add(e =>
-            {
-                // Add all attributes on the ConnectionHandler has metadata (this will allow for things like)
-                // auth attributes and cors attributes to work seamlessly
-                foreach (var item in attributes)
+            conventionBuilder.Add(
+                e =>
                 {
-                    e.Metadata.Add(item);
+                    // Add all attributes on the ConnectionHandler has metadata (this will allow for things like)
+                    // auth attributes and cors attributes to work seamlessly
+                    foreach (var item in attributes)
+                    {
+                        e.Metadata.Add(item);
+                    }
                 }
-            });
+            );
 
             return conventionBuilder;
         }
-
 
         /// <summary>
         /// Maps incoming requests with the specified path to the provided connection pipeline.
@@ -79,9 +97,15 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="options">Options used to configure the connection.</param>
         /// <param name="configure">A callback to configure the connection.</param>
         /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
-        public static ConnectionEndpointRouteBuilder MapConnections(this IEndpointRouteBuilder endpoints, string pattern, HttpConnectionDispatcherOptions options, Action<IConnectionBuilder> configure)
+        public static ConnectionEndpointRouteBuilder MapConnections(
+            this IEndpointRouteBuilder endpoints,
+            string pattern,
+            HttpConnectionDispatcherOptions options,
+            Action<IConnectionBuilder> configure
+        )
         {
-            var dispatcher = endpoints.ServiceProvider.GetRequiredService<HttpConnectionDispatcher>();
+            var dispatcher =
+                endpoints.ServiceProvider.GetRequiredService<HttpConnectionDispatcher>();
 
             var connectionBuilder = new ConnectionBuilder(endpoints.ServiceProvider);
             configure(connectionBuilder);
@@ -112,17 +136,21 @@ namespace Microsoft.AspNetCore.Builder
             var executeBuilder = endpoints.Map(pattern, executehandler);
             conventionBuilders.Add(executeBuilder);
 
-            var compositeConventionBuilder = new CompositeEndpointConventionBuilder(conventionBuilders);
+            var compositeConventionBuilder = new CompositeEndpointConventionBuilder(
+                conventionBuilders
+            );
 
             // Add metadata to all of Endpoints
-            compositeConventionBuilder.Add(e =>
-            {
-                // Add the authorization data as metadata
-                foreach (var data in options.AuthorizationData)
+            compositeConventionBuilder.Add(
+                e =>
                 {
-                    e.Metadata.Add(data);
+                    // Add the authorization data as metadata
+                    foreach (var data in options.AuthorizationData)
+                    {
+                        e.Metadata.Add(data);
+                    }
                 }
-            });
+            );
 
             return new ConnectionEndpointRouteBuilder(compositeConventionBuilder);
         }
@@ -131,7 +159,9 @@ namespace Microsoft.AspNetCore.Builder
         {
             private readonly List<IEndpointConventionBuilder> _endpointConventionBuilders;
 
-            public CompositeEndpointConventionBuilder(List<IEndpointConventionBuilder> endpointConventionBuilders)
+            public CompositeEndpointConventionBuilder(
+                List<IEndpointConventionBuilder> endpointConventionBuilders
+            )
             {
                 _endpointConventionBuilders = endpointConventionBuilders;
             }

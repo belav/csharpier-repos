@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public ModelBinderFactory(
             IModelMetadataProvider metadataProvider,
             IOptions<MvcOptions> options,
-            IServiceProvider serviceProvider)
+            IServiceProvider serviceProvider
+        )
         {
             _metadataProvider = metadataProvider;
             _providers = options.Value.ModelBinderProviders.ToArray();
@@ -59,10 +60,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             if (_providers.Length == 0)
             {
-                throw new InvalidOperationException(Resources.FormatModelBinderProvidersAreRequired(
-                    typeof(MvcOptions).FullName,
-                    nameof(MvcOptions.ModelBinderProviders),
-                    typeof(IModelBinderProvider).FullName));
+                throw new InvalidOperationException(
+                    Resources.FormatModelBinderProvidersAreRequired(
+                        typeof(MvcOptions).FullName,
+                        nameof(MvcOptions.ModelBinderProviders),
+                        typeof(IModelBinderProvider).FullName
+                    )
+                );
             }
 
             if (TryGetCachedBinder(context.Metadata, context.CacheToken, out var binder))
@@ -77,7 +81,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             binder = CreateBinderCoreUncached(providerContext, context.CacheToken);
             if (binder == null)
             {
-                var message = Resources.FormatCouldNotCreateIModelBinder(providerContext.Metadata.ModelType);
+                var message = Resources.FormatCouldNotCreateIModelBinder(
+                    providerContext.Metadata.ModelType
+                );
                 throw new InvalidOperationException(message);
             }
 
@@ -89,7 +95,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
         // Called by the DefaultModelBinderProviderContext when we're recursively creating a binder
         // so that all intermediate results can be cached.
-        private IModelBinder CreateBinderCoreCached(DefaultModelBinderProviderContext providerContext, object? token)
+        private IModelBinder CreateBinderCoreCached(
+            DefaultModelBinderProviderContext providerContext,
+            object? token
+        )
         {
             if (TryGetCachedBinder(providerContext.Metadata, token, out var binder))
             {
@@ -108,7 +117,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             return binder;
         }
 
-        private IModelBinder? CreateBinderCoreUncached(DefaultModelBinderProviderContext providerContext, object? token)
+        private IModelBinder? CreateBinderCoreUncached(
+            DefaultModelBinderProviderContext providerContext,
+            object? token
+        )
         {
             if (!providerContext.Metadata.IsBindingAllowed)
             {
@@ -189,7 +201,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             _cache.TryAdd(new Key(metadata, cacheToken), binder);
         }
 
-        private bool TryGetCachedBinder(ModelMetadata metadata, object? cacheToken, [NotNullWhen(true)] out IModelBinder? binder)
+        private bool TryGetCachedBinder(
+            ModelMetadata metadata,
+            object? cacheToken,
+            [NotNullWhen(true)] out IModelBinder? binder
+        )
         {
             Debug.Assert(metadata != null);
 
@@ -208,7 +224,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             public DefaultModelBinderProviderContext(
                 ModelBinderFactory factory,
-                ModelBinderFactoryContext factoryContext)
+                ModelBinderFactoryContext factoryContext
+            )
             {
                 _factory = factory;
                 Metadata = factoryContext.Metadata;
@@ -232,7 +249,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             private DefaultModelBinderProviderContext(
                 DefaultModelBinderProviderContext parent,
                 ModelMetadata metadata,
-                BindingInfo bindingInfo)
+                BindingInfo bindingInfo
+            )
             {
                 Metadata = metadata;
 
@@ -260,7 +278,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 return CreateBinder(metadata, bindingInfo);
             }
 
-            public override IModelBinder CreateBinder(ModelMetadata metadata, BindingInfo bindingInfo)
+            public override IModelBinder CreateBinder(
+                ModelMetadata metadata,
+                BindingInfo bindingInfo
+            )
             {
                 if (metadata == null)
                 {
@@ -277,7 +298,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 // node there's no opportunity to customize binding info like there is for a parameter.
                 var token = metadata;
 
-                var nestedContext = new DefaultModelBinderProviderContext(this, metadata, bindingInfo);
+                var nestedContext = new DefaultModelBinderProviderContext(
+                    this,
+                    metadata,
+                    bindingInfo
+                );
                 return _factory.CreateBinderCoreCached(nestedContext, token);
             }
         }
@@ -302,7 +327,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             public bool Equals(Key other)
             {
-                return _metadata.Equals(other._metadata) && object.ReferenceEquals(_token, other._token);
+                return _metadata.Equals(other._metadata)
+                    && object.ReferenceEquals(_token, other._token);
             }
 
             public override bool Equals(object? obj)
@@ -325,8 +351,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     case ModelMetadataKind.Parameter:
                         return $"{_token} (Parameter: '{_metadata.ParameterName}' Type: '{_metadata.ModelType.Name}')";
                     case ModelMetadataKind.Property:
-                        return $"{_token} (Property: '{_metadata.ContainerType!.Name}.{_metadata.PropertyName}' " +
-                            $"Type: '{_metadata.ModelType.Name}')";
+                        return $"{_token} (Property: '{_metadata.ContainerType!.Name}.{_metadata.PropertyName}' "
+                            + $"Type: '{_metadata.ModelType.Name}')";
                     case ModelMetadataKind.Type:
                         return $"{_token} (Type: '{_metadata.ModelType.Name}')";
                     default:

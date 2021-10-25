@@ -37,7 +37,7 @@ public class Test
     [MethodImpl(MethodImplOptions.NoInlining)]
     static uint rol32comm(uint value, int amount)
     {
-        return  (value >> (32 - amount)) | (value << amount);
+        return (value >> (32 - amount)) | (value << amount);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -51,7 +51,7 @@ public class Test
     {
         uint value = flag() ? (uint)0x12345678 : (uint)0x12345678;
         int amount = 16;
-        return  (value >> (32 - amount)) | (value << amount);
+        return (value >> (32 - amount)) | (value << amount);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -95,7 +95,7 @@ public class Test
     [MethodImpl(MethodImplOptions.NoInlining)]
     static ulong rol64comm(ulong value, int amount)
     {
-        return  (value >> (64 - amount)) | (value << amount);
+        return (value >> (64 - amount)) | (value << amount);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -204,7 +204,7 @@ public class Test
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static uint rol32_and(uint value, int amount)
-    { 
+    {
         return (value << amount) | (value >> ((32 - amount) & 31));
     }
 
@@ -274,7 +274,7 @@ public class Test
         {
             return Fail;
         }
-        
+
         if (ror32const() != 0x67812345)
         {
             return Fail;

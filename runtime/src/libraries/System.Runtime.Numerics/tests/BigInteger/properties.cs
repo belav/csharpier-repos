@@ -38,10 +38,12 @@ namespace System.Numerics.Tests
                 Assert.Equal(bigInteger, bigInteger + BigInteger.Zero);
                 Assert.Equal(bigInteger, BigInteger.Zero + bigInteger);
 
-                Assert.Throws<DivideByZeroException>(() =>
-                {
-                    BigInteger tempBigInteger = bigInteger / BigInteger.Zero;
-                });
+                Assert.Throws<DivideByZeroException>(
+                    () =>
+                    {
+                        BigInteger tempBigInteger = bigInteger / BigInteger.Zero;
+                    }
+                );
 
                 if (!MyBigIntImp.IsZero(tempByteArray))
                 {
@@ -89,7 +91,10 @@ namespace System.Numerics.Tests
             );
             Assert.Equal(new BigInteger((long)(-1)), BigInteger.MinusOne);
             Assert.Equal(new BigInteger((double)(-1)), BigInteger.MinusOne);
-            Assert.Equal(new BigInteger(new byte[] { 0xff, 0xff, 0xff, 0xff }), BigInteger.MinusOne);
+            Assert.Equal(
+                new BigInteger(new byte[] { 0xff, 0xff, 0xff, 0xff }),
+                BigInteger.MinusOne
+            );
             Assert.Equal(BigInteger.Zero - BigInteger.One, BigInteger.MinusOne);
             Assert.Equal((BigInteger)671832 / (BigInteger)(-671832), BigInteger.MinusOne);
 
@@ -101,8 +106,8 @@ namespace System.Numerics.Tests
                 bigInteger = new BigInteger(tempByteArray);
 
                 Assert.Equal(
-                     BigInteger.Negate(new BigInteger(tempByteArray)),
-                     BigInteger.MinusOne * bigInteger
+                    BigInteger.Negate(new BigInteger(tempByteArray)),
+                    BigInteger.MinusOne * bigInteger
                 );
 
                 Assert.Equal(

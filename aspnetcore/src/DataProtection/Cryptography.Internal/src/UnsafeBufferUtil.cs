@@ -90,11 +90,19 @@ namespace Microsoft.AspNetCore.Cryptography
                 to.DangerousAddRef(ref toRefAdded);
                 if (sizeof(IntPtr) == 4)
                 {
-                    BlockCopyCore(from: (byte*)from.DangerousGetHandle(), to: (byte*)to.DangerousGetHandle(), byteCount: (uint)length.ToInt32());
+                    BlockCopyCore(
+                        from: (byte*)from.DangerousGetHandle(),
+                        to: (byte*)to.DangerousGetHandle(),
+                        byteCount: (uint)length.ToInt32()
+                    );
                 }
                 else
                 {
-                    BlockCopyCore(from: (byte*)from.DangerousGetHandle(), to: (byte*)to.DangerousGetHandle(), byteCount: (ulong)length.ToInt64());
+                    BlockCopyCore(
+                        from: (byte*)from.DangerousGetHandle(),
+                        to: (byte*)to.DangerousGetHandle(),
+                        byteCount: (ulong)length.ToInt64()
+                    );
                 }
             }
             finally

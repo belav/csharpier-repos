@@ -11,13 +11,18 @@ public class BringUpTest
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void RightShiftRef(ref int x, int y) { x >>= y; }
+    public static void RightShiftRef(ref int x, int y)
+    {
+        x >>= y;
+    }
 
     public static int Main()
     {
         int x = 36;
         RightShiftRef(ref x, 3);
-        if (x == 4) return Pass;
-        else return Fail;
+        if (x == 4)
+            return Pass;
+        else
+            return Fail;
     }
 }

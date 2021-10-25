@@ -12,10 +12,16 @@ internal static partial class Interop
     internal static partial class Ssl
     {
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxUseCertificate")]
-        internal static extern int SslCtxUseCertificate(SafeSslContextHandle ctx, SafeX509Handle certPtr);
+        internal static extern int SslCtxUseCertificate(
+            SafeSslContextHandle ctx,
+            SafeX509Handle certPtr
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxUsePrivateKey")]
-        internal static extern int SslCtxUsePrivateKey(SafeSslContextHandle ctx, SafeEvpPKeyHandle keyPtr);
+        internal static extern int SslCtxUsePrivateKey(
+            SafeSslContextHandle ctx,
+            SafeEvpPKeyHandle keyPtr
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxCheckPrivateKey")]
         internal static extern int SslCtxCheckPrivateKey(SafeSslContextHandle ctx);
@@ -24,12 +30,22 @@ internal static partial class Interop
         internal static extern void SslCtxSetQuietShutdown(SafeSslContextHandle ctx);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxSetVerify")]
-        internal static extern unsafe void SslCtxSetVerify(SafeSslContextHandle ctx, delegate* unmanaged<int, IntPtr, int> callback);
+        internal static extern unsafe void SslCtxSetVerify(
+            SafeSslContextHandle ctx,
+            delegate* unmanaged<int, IntPtr, int> callback
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SetCiphers")]
-        internal static extern unsafe bool SetCiphers(SafeSslContextHandle ctx, byte* cipherList, byte* cipherSuites);
+        internal static extern unsafe bool SetCiphers(
+            SafeSslContextHandle ctx,
+            byte* cipherList,
+            byte* cipherSuites
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SetEncryptionPolicy")]
-        internal static extern bool SetEncryptionPolicy(SafeSslContextHandle ctx, EncryptionPolicy policy);
+        internal static extern bool SetEncryptionPolicy(
+            SafeSslContextHandle ctx,
+            EncryptionPolicy policy
+        );
     }
 }

@@ -7,8 +7,8 @@ using System.Runtime.CompilerServices;
 class GitHub_10621
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static int F(int x) 
-    { 
+    static int F(int x)
+    {
         return x * x;
     }
 
@@ -17,52 +17,68 @@ class GitHub_10621
     public static int Main()
     {
         int x = 0;
-        try {
+        try
+        {
             // empty
         }
-        finally {
-            try {
-                for (int i = 0; i < 11; i++) {
+        finally
+        {
+            try
+            {
+                for (int i = 0; i < 11; i++)
+                {
                     x += F(i);
                 }
             }
-            finally {
-
+            finally
+            {
                 x -= 81;
 
-                try {
+                try
+                {
                     // empty
                 }
                 finally
                 {
-                    x -= 64; 
-                    try {
+                    x -= 64;
+                    try
+                    {
                         x -= 49;
                     }
-                    finally {
-                        try {
+                    finally
+                    {
+                        try
+                        {
                             // empty
                         }
-                        finally {
+                        finally
+                        {
                             x -= 36;
-                            try {
+                            try
+                            {
                                 x -= 25;
                             }
-                            finally {
-                                try {
+                            finally
+                            {
+                                try
+                                {
                                     // empty
                                 }
                                 finally
                                 {
-                                    x -= 16; 
-                                    try {
+                                    x -= 16;
+                                    try
+                                    {
                                         x -= 9;
                                     }
-                                    finally {
-                                        try {
+                                    finally
+                                    {
+                                        try
+                                        {
                                             // empty
                                         }
-                                        finally {
+                                        finally
+                                        {
                                             x -= 4;
                                         }
                                     }

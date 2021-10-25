@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
     public class CollectionModelBinder<TElement> : ICollectionModelBinder
     {
         private static readonly IValueProvider EmptyValueProvider = new CompositeValueProvider();
-        private readonly int _maxModelBindingCollectionSize = MvcOptions.DefaultMaxModelBindingCollectionSize;
+        private readonly int _maxModelBindingCollectionSize =
+            MvcOptions.DefaultMaxModelBindingCollectionSize;
         private Func<object>? _modelCreator;
 
         /// <summary>
@@ -35,9 +36,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         /// </param>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
         public CollectionModelBinder(IModelBinder elementBinder, ILoggerFactory loggerFactory)
-            : this(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true)
-        {
-        }
+            : this(elementBinder, loggerFactory, allowValidatingTopLevelNodes: true) { }
 
         /// <summary>
         /// Creates a new <see cref="CollectionModelBinder{TElement}"/>.
@@ -54,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public CollectionModelBinder(
             IModelBinder elementBinder,
             ILoggerFactory loggerFactory,
-            bool allowValidatingTopLevelNodes)
+            bool allowValidatingTopLevelNodes
+        )
         {
             if (elementBinder == null)
             {
@@ -89,8 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IModelBinder elementBinder,
             ILoggerFactory loggerFactory,
             bool allowValidatingTopLevelNodes,
-            MvcOptions mvcOptions)
-            : this(elementBinder, loggerFactory, allowValidatingTopLevelNodes)
+            MvcOptions mvcOptions
+        ) : this(elementBinder, loggerFactory, allowValidatingTopLevelNodes)
         {
             if (mvcOptions == null)
             {
@@ -149,7 +149,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 return;
             }
 
-            var valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            var valueProviderResult = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName
+            );
 
             CollectionResult result;
             if (valueProviderResult == ValueProviderResult.None)
@@ -176,10 +178,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             Debug.Assert(model != null);
             if (result.ValidationStrategy != null)
             {
-                bindingContext.ValidationState.Add(model, new ValidationStateEntry()
-                {
-                    Strategy = result.ValidationStrategy,
-                });
+                bindingContext.ValidationState.Add(
+                    model,
+                    new ValidationStateEntry() { Strategy = result.ValidationStrategy, }
+                );
             }
 
             if (valueProviderResult != ValueProviderResult.None)
@@ -188,7 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 // If we did complex binding, there will already be an entry for each index.
                 bindingContext.ModelState.SetModelValue(
                     bindingContext.ModelName,
-                    valueProviderResult);
+                    valueProviderResult
+                );
             }
 
             bindingContext.Result = ModelBindingResult.Success(model);
@@ -204,9 +207,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 return true;
             }
 
-            return targetType.IsClass &&
-                !targetType.IsAbstract &&
-                typeof(ICollection<TElement>).IsAssignableFrom(targetType);
+            return targetType.IsClass
+                && !targetType.IsAbstract
+                && typeof(ICollection<TElement>).IsAssignableFrom(targetType);
         }
 
         /// <summary>
@@ -226,7 +229,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             if (modelMetadata.IsBindingRequired)
             {
                 var messageProvider = modelMetadata.ModelBindingMessageProvider;
-                var message = messageProvider.MissingBindRequiredValueAccessor(bindingContext.FieldName);
+                var message = messageProvider.MissingBindRequiredValueAccessor(
+                    bindingContext.FieldName
+                );
                 bindingContext.ModelState.TryAddModelError(bindingContext.ModelName, message);
             }
         }
@@ -270,7 +275,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         // Internal for testing.
         internal async Task<CollectionResult> BindSimpleCollection(
             ModelBindingContext bindingContext,
-            ValueProviderResult values)
+            ValueProviderResult values
+        )
         {
             var boundCollection = new List<TElement?>();
 
@@ -286,11 +292,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 };
 
                 // Enter new scope to change ModelMetadata and isolate element binding operations.
-                using (bindingContext.EnterNestedScope(
-                    elementMetadata,
-                    fieldName: bindingContext.FieldName,
-                    modelName: bindingContext.ModelName,
-                    model: null))
+                using (
+                    bindingContext.EnterNestedScope(
+                        elementMetadata,
+                        fieldName: bindingContext.FieldName,
+                        modelName: bindingContext.ModelName,
+                        model: null
+                    )
+                )
                 {
                     await ElementBinder.BindModelAsync(bindingContext);
 
@@ -310,7 +319,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         {
             Logger.AttemptingToBindCollectionUsingIndices(bindingContext);
 
-            var indexPropertyName = ModelNames.CreatePropertyModelName(bindingContext.ModelName, "index");
+            var indexPropertyName = ModelNames.CreatePropertyModelName(
+                bindingContext.ModelName,
+                "index"
+            );
 
             // Remove any value provider that may not use indexPropertyName as-is. Don't match e.g. Model[index].
             var valueProvider = bindingContext.ValueProvider;
@@ -328,7 +340,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         // Internal for testing.
         internal async Task<CollectionResult> BindComplexCollectionFromIndexes(
             ModelBindingContext bindingContext,
-            IEnumerable<string>? indexNames)
+            IEnumerable<string>? indexNames
+        )
         {
             bool indexNamesIsFinite;
             if (indexNames != null)
@@ -338,9 +351,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             else
             {
                 indexNamesIsFinite = false;
-                var limit = _maxModelBindingCollectionSize == int.MaxValue ?
-                    int.MaxValue :
-                    _maxModelBindingCollectionSize + 1;
+                var limit =
+                    _maxModelBindingCollectionSize == int.MaxValue
+                        ? int.MaxValue
+                        : _maxModelBindingCollectionSize + 1;
                 indexNames = Enumerable
                     .Range(0, limit)
                     .Select(i => i.ToString(CultureInfo.InvariantCulture));
@@ -352,14 +366,20 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             foreach (var indexName in indexNames)
             {
-                var fullChildName = ModelNames.CreateIndexModelName(bindingContext.ModelName, indexName);
+                var fullChildName = ModelNames.CreateIndexModelName(
+                    bindingContext.ModelName,
+                    indexName
+                );
 
                 ModelBindingResult? result;
-                using (bindingContext.EnterNestedScope(
-                    elementMetadata,
-                    fieldName: indexName,
-                    modelName: fullChildName,
-                    model: null))
+                using (
+                    bindingContext.EnterNestedScope(
+                        elementMetadata,
+                        fieldName: indexName,
+                        modelName: fullChildName,
+                        model: null
+                    )
+                )
                 {
                     await ElementBinder.BindModelAsync(bindingContext);
                     result = bindingContext.Result;
@@ -386,19 +406,25 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             if (boundCollection.Count > _maxModelBindingCollectionSize)
             {
                 // Look for a non-empty name. Both ModelName and OriginalModelName may be empty at the top level.
-                var name = string.IsNullOrEmpty(bindingContext.ModelName) ?
-                    (string.IsNullOrEmpty(bindingContext.OriginalModelName) &&
-                        bindingContext.ModelMetadata.MetadataKind != ModelMetadataKind.Type ?
-                        bindingContext.ModelMetadata.Name :
-                        bindingContext.OriginalModelName) : // This name may unfortunately be empty.
-                    bindingContext.ModelName;
+                var name = string.IsNullOrEmpty(bindingContext.ModelName)
+                    ? (
+                          string.IsNullOrEmpty(bindingContext.OriginalModelName)
+                          && bindingContext.ModelMetadata.MetadataKind != ModelMetadataKind.Type
+                              ? bindingContext.ModelMetadata.Name
+                              : bindingContext.OriginalModelName
+                      )
+                    : // This name may unfortunately be empty.
+                      bindingContext.ModelName;
 
-                throw new InvalidOperationException(Resources.FormatModelBinding_ExceededMaxModelBindingCollectionSize(
-                    name,
-                    nameof(MvcOptions),
-                    nameof(MvcOptions.MaxModelBindingCollectionSize),
-                    _maxModelBindingCollectionSize,
-                    bindingContext.ModelMetadata.ElementType));
+                throw new InvalidOperationException(
+                    Resources.FormatModelBinding_ExceededMaxModelBindingCollectionSize(
+                        name,
+                        nameof(MvcOptions),
+                        nameof(MvcOptions.MaxModelBindingCollectionSize),
+                        _maxModelBindingCollectionSize,
+                        bindingContext.ModelMetadata.ElementType
+                    )
+                );
             }
 
             return new CollectionResult(boundCollection)
@@ -409,9 +435,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 //
                 // We need to provide this data to the validation system so it can 'replay' the keys.
                 // But we can't just set ValidationState here, because it needs the 'real' model.
-                ValidationStrategy = indexNamesIsFinite ?
-                    new ExplicitIndexCollectionValidationStrategy(indexNames) :
-                    null,
+                ValidationStrategy = indexNamesIsFinite
+                    ? new ExplicitIndexCollectionValidationStrategy(indexNames)
+                    : null,
             };
         }
 
@@ -437,7 +463,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         /// Extensibility point that allows the bound collection to be manipulated or transformed before being
         /// returned from the binder.
         /// </remarks>
-        protected virtual object? ConvertToCollectionType(Type targetType, IEnumerable<TElement?> collection)
+        protected virtual object? ConvertToCollectionType(
+            Type targetType,
+            IEnumerable<TElement?> collection
+        )
         {
             if (collection == null)
             {
@@ -472,7 +501,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             }
 
             var targetCollection = target as ICollection<TElement?>;
-            Debug.Assert(targetCollection != null, "This binder is instantiated only for ICollection<T> model types.");
+            Debug.Assert(
+                targetCollection != null,
+                "This binder is instantiated only for ICollection<T> model types."
+            );
 
             if (sourceCollection != null && !targetCollection.IsReadOnly)
             {
@@ -484,7 +516,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             }
         }
 
-        private static IEnumerable<string>? GetIndexNamesFromValueProviderResult(ValueProviderResult valueProviderResult)
+        private static IEnumerable<string>? GetIndexNamesFromValueProviderResult(
+            ValueProviderResult valueProviderResult
+        )
         {
             var indexes = (string[]?)valueProviderResult;
             return (indexes == null || indexes.Length == 0) ? null : indexes;

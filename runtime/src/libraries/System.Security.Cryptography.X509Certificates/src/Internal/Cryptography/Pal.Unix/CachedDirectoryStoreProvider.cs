@@ -48,10 +48,12 @@ namespace Internal.Cryptography.Pal
                     _storeDirectoryInfo.Refresh();
                     DirectoryInfo info = _storeDirectoryInfo;
 
-                    if (ret == null ||
-                        _forceRefresh ||
-                        elapsed >= s_assumeInvalidInterval ||
-                        (info.Exists && info.LastWriteTimeUtc != _loadLastWrite))
+                    if (
+                        ret == null
+                        || _forceRefresh
+                        || elapsed >= s_assumeInvalidInterval
+                        || (info.Exists && info.LastWriteTimeUtc != _loadLastWrite)
+                    )
                     {
                         SafeX509StackHandle newColl = Interop.Crypto.NewX509Stack();
                         Interop.Crypto.CheckValidOpenSslHandle(newColl);
@@ -61,7 +63,6 @@ namespace Internal.Cryptography.Pal
                             Interop.Crypto.X509StackAddDirectoryStore(newColl, info.FullName);
                             _loadLastWrite = info.LastWriteTimeUtc;
                         }
-
 
                         // The existing collection is not Disposed here, intentionally.
                         // It could be in the gap between when they are returned from this method and

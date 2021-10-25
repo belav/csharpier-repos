@@ -18,14 +18,16 @@ internal static partial class Interop
         [DllImport(Libraries.CoreFoundationLibrary)]
         private static extern IntPtr CFStringGetCStringPtr(
             SafeCFStringHandle cfString,
-            CFStringBuiltInEncodings encoding);
+            CFStringBuiltInEncodings encoding
+        );
 
         [DllImport(Libraries.CoreFoundationLibrary)]
         private static extern SafeCFDataHandle CFStringCreateExternalRepresentation(
             IntPtr alloc,
             SafeCFStringHandle theString,
             CFStringBuiltInEncodings encoding,
-            byte lossByte);
+            byte lossByte
+        );
 
         internal static string CFStringToString(SafeCFStringHandle cfString)
         {
@@ -38,7 +40,8 @@ internal static partial class Interop
             // via pointer semantics, avoiding a copy.
             IntPtr interiorPointer = CFStringGetCStringPtr(
                 cfString,
-                CFStringBuiltInEncodings.kCFStringEncodingUTF8);
+                CFStringBuiltInEncodings.kCFStringEncodingUTF8
+            );
 
             if (interiorPointer != IntPtr.Zero)
             {
@@ -49,7 +52,8 @@ internal static partial class Interop
                 IntPtr.Zero,
                 cfString,
                 CFStringBuiltInEncodings.kCFStringEncodingUTF8,
-                0);
+                0
+            );
 
             using (cfData)
             {
@@ -58,7 +62,6 @@ internal static partial class Interop
                 try
                 {
                     cfData.DangerousAddRef(ref addedRef);
-
                     unsafe
                     {
                         // Note that CFDataGetLength(cfData).ToInt32() will throw on
@@ -66,7 +69,8 @@ internal static partial class Interop
                         // that's considered a good thing here.
                         return Encoding.UTF8.GetString(
                             CFDataGetBytePtr(cfData),
-                            CFDataGetLength(cfData).ToInt32());
+                            CFDataGetLength(cfData).ToInt32()
+                        );
                     }
                 }
                 finally
@@ -85,15 +89,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeCFStringHandle : SafeHandle
     {
-        public SafeCFStringHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeCFStringHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
-        internal SafeCFStringHandle(IntPtr handle, bool ownsHandle)
-            : base(handle, ownsHandle)
-        {
-        }
+        internal SafeCFStringHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle) { }
 
         protected override bool ReleaseHandle()
         {

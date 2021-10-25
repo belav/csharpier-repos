@@ -21,40 +21,54 @@ class ForeignThreadExceptionsTest
 
     public static void RunTest()
     {
-        InvokeCallback(() => {
-            try
+        InvokeCallback(
+            () =>
             {
-                MethodThatThrows();
+                try
+                {
+                    MethodThatThrows();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(
+                        "Caught exception thrown in a function called by a delegate called through Reverse PInvoke."
+                    );
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("Caught exception thrown in a function called by a delegate called through Reverse PInvoke.");
-            }
-        });
+        );
 
-        InvokeCallbackOnNewThread(() => {
-            try
+        InvokeCallbackOnNewThread(
+            () =>
             {
-                throw new Exception("Exception from delegate on foreign thread!");
+                try
+                {
+                    throw new Exception("Exception from delegate on foreign thread!");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(
+                        "Caught exception thrown in a delegate called through Reverse PInvoke on a foreign thread."
+                    );
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("Caught exception thrown in a delegate called through Reverse PInvoke on a foreign thread.");
-            }
+        );
 
-        });
-
-        InvokeCallbackOnNewThread(() => {
-            string s = null;
-            try
+        InvokeCallbackOnNewThread(
+            () =>
             {
-                int len = s.Length;
+                string s = null;
+                try
+                {
+                    int len = s.Length;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(
+                        "Caught hardware exception in a delegate called through Reverse PInvoke on a foreign thread."
+                    );
+                }
             }
-            catch(Exception e)
-            {
-                Console.WriteLine("Caught hardware exception in a delegate called through Reverse PInvoke on a foreign thread.");
-            }
-        });
+        );
     }
 
     public static int Main()
@@ -64,10 +78,9 @@ class ForeignThreadExceptionsTest
             RunTest();
             return 100;
         }
-
         catch (Exception ex)
         {
-            Console.WriteLine("Failed to catch an exception! "+ ex.ToString());
+            Console.WriteLine("Failed to catch an exception! " + ex.ToString());
         }
 
         return 1;

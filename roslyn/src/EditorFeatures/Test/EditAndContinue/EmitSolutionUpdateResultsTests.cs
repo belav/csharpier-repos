@@ -31,10 +31,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var sourcePath = Path.Combine(TempRoot.Root, "x", "a.cs");
             var razorPath = Path.Combine(TempRoot.Root, "a.razor");
 
-            var document = workspace.CurrentSolution.
-                AddProject("proj", "proj", LanguageNames.CSharp).
-                WithMetadataReferences(TargetFrameworkUtil.GetReferences(TargetFramework.Standard)).
-                AddDocument(sourcePath, SourceText.From("class C {}", Encoding.UTF8), filePath: Path.Combine(TempRoot.Root, sourcePath));
+            var document = workspace.CurrentSolution
+                .AddProject("proj", "proj", LanguageNames.CSharp)
+                .WithMetadataReferences(TargetFrameworkUtil.GetReferences(TargetFramework.Standard))
+                .AddDocument(
+                    sourcePath,
+                    SourceText.From("class C {}", Encoding.UTF8),
+                    filePath: Path.Combine(TempRoot.Root, sourcePath)
+                );
 
             var solution = document.Project.Solution;
 
@@ -51,11 +55,25 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     customTags: ImmutableArray.Create("Test2"),
                     properties: ImmutableDictionary<string, string?>.Empty,
                     document.Project.Id,
-                    new DiagnosticDataLocation(document.Id, new TextSpan(1, 2), "a.cs", 0, 0, 0, 5, "a.razor", 10, 10, 10, 15),
+                    new DiagnosticDataLocation(
+                        document.Id,
+                        new TextSpan(1, 2),
+                        "a.cs",
+                        0,
+                        0,
+                        0,
+                        5,
+                        "a.razor",
+                        10,
+                        10,
+                        10,
+                        15
+                    ),
                     language: "C#",
                     title: "title",
                     description: "description",
-                    helpLink: "http://link"),
+                    helpLink: "http://link"
+                ),
                 new DiagnosticData(
                     id: "CS0012",
                     category: "Test",
@@ -68,24 +86,71 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     customTags: ImmutableArray.Create("Test2"),
                     properties: ImmutableDictionary<string, string?>.Empty,
                     document.Project.Id,
-                    new DiagnosticDataLocation(document.Id, new TextSpan(1, 2), originalFilePath: sourcePath, 0, 0, 0, 5, mappedFilePath: @"..\a.razor", 10, 10, 10, 15),
+                    new DiagnosticDataLocation(
+                        document.Id,
+                        new TextSpan(1, 2),
+                        originalFilePath: sourcePath,
+                        0,
+                        0,
+                        0,
+                        5,
+                        mappedFilePath: @"..\a.razor",
+                        10,
+                        10,
+                        10,
+                        15
+                    ),
                     language: "C#",
                     title: "title",
                     description: "description",
-                    helpLink: "http://link"));
+                    helpLink: "http://link"
+                )
+            );
 
             var rudeEdits = ImmutableArray.Create(
-                (document.Id, ImmutableArray.Create(new RudeEditDiagnostic(RudeEditKind.Insert, TextSpan.FromBounds(1, 10), 123, new[] { "a" }))),
-                (document.Id, ImmutableArray.Create(new RudeEditDiagnostic(RudeEditKind.Delete, TextSpan.FromBounds(1, 10), 123, new[] { "b" }))));
+                (
+                    document.Id,
+                    ImmutableArray.Create(
+                        new RudeEditDiagnostic(
+                            RudeEditKind.Insert,
+                            TextSpan.FromBounds(1, 10),
+                            123,
+                            new[] { "a" }
+                        )
+                    )
+                ),
+                (
+                    document.Id,
+                    ImmutableArray.Create(
+                        new RudeEditDiagnostic(
+                            RudeEditKind.Delete,
+                            TextSpan.FromBounds(1, 10),
+                            123,
+                            new[] { "b" }
+                        )
+                    )
+                )
+            );
 
-            var actual = await EmitSolutionUpdateResults.GetHotReloadDiagnosticsAsync(solution, diagnosticData, rudeEdits, CancellationToken.None);
+            var actual = await EmitSolutionUpdateResults.GetHotReloadDiagnosticsAsync(
+                solution,
+                diagnosticData,
+                rudeEdits,
+                CancellationToken.None
+            );
 
-            AssertEx.Equal(new[]
-            {
-                $@"Error CS0012: {razorPath} (10,10)-(10,15): error",
-                $@"Error ENC0021: {sourcePath} (0,1)-(0,10): {string.Format(FeaturesResources.Adding_0_will_prevent_the_debug_session_from_continuing, "a")}",
-                $@"Error ENC0033: {sourcePath} (0,1)-(0,10): {string.Format(FeaturesResources.Deleting_0_will_prevent_the_debug_session_from_continuing, "b")}"
-            }, actual.Select(d => $"{d.Severity} {d.Id}: {d.FilePath} {d.Span.GetDebuggerDisplay()}: {d.Message}"));
+            AssertEx.Equal(
+                new[]
+                {
+                    $@"Error CS0012: {razorPath} (10,10)-(10,15): error",
+                    $@"Error ENC0021: {sourcePath} (0,1)-(0,10): {string.Format(FeaturesResources.Adding_0_will_prevent_the_debug_session_from_continuing, "a")}",
+                    $@"Error ENC0033: {sourcePath} (0,1)-(0,10): {string.Format(FeaturesResources.Deleting_0_will_prevent_the_debug_session_from_continuing, "b")}"
+                },
+                actual.Select(
+                    d =>
+                        $"{d.Severity} {d.Id}: {d.FilePath} {d.Span.GetDebuggerDisplay()}: {d.Message}"
+                )
+            );
         }
     }
 }

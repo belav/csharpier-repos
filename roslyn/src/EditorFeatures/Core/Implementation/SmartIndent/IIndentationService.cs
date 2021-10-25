@@ -44,16 +44,24 @@ namespace Microsoft.CodeAnalysis.Editor
             this.Offset = offset;
         }
 
-        public static implicit operator Indentation.IndentationResult(IndentationResult result)
-            => new(result.BasePosition, result.Offset);
+        public static implicit operator Indentation.IndentationResult(IndentationResult result) =>
+            new(result.BasePosition, result.Offset);
     }
 
     // Removal of this interface tracked with https://github.com/dotnet/roslyn/issues/35872
     [Obsolete("Use Microsoft.CodeAnalysis.Indentation.IIndentationService instead.")]
     internal interface IIndentationService : ILanguageService
     {
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "This service is obsolete.")]
-        Task<IndentationResult?> GetDesiredIndentation(Document document, int lineNumber, CancellationToken cancellationToken);
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "This service is obsolete."
+        )]
+        Task<IndentationResult?> GetDesiredIndentation(
+            Document document,
+            int lineNumber,
+            CancellationToken cancellationToken
+        );
     }
 
     // Removal of this interface tracked with https://github.com/dotnet/roslyn/issues/35872
@@ -66,6 +74,10 @@ namespace Microsoft.CodeAnalysis.Editor
         /// <see langword="null"/> if the line in question is not blank and thus indentation should
         /// be deferred to the formatting command handler to handle.
         /// </summary>
-        IndentationResult? GetDesiredIndentation(Document document, int lineNumber, CancellationToken cancellationToken);
+        IndentationResult? GetDesiredIndentation(
+            Document document,
+            int lineNumber,
+            CancellationToken cancellationToken
+        );
     }
 }

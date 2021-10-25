@@ -9,11 +9,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
     {
         internal const string DesignTimeVariable = "__o";
 
-        // This needs to run after other directive classifiers. Any DirectiveToken that is not removed 
+        // This needs to run after other directive classifiers. Any DirectiveToken that is not removed
         // by the previous classifiers will have auto-generated design time support.
         public override int Order => DefaultFeatureOrder;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             // Only supports design time. This pass rewrites directives so they will have the right design time
             // behavior and would break things if it ran for runtime.
@@ -32,39 +35,49 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
             public override void VisitClassDeclaration(ClassDeclarationIntermediateNode node)
             {
-                node.Children.Insert(0, new CSharpCodeIntermediateNode()
-                {
-                    Children =
+                node.Children.Insert(
+                    0,
+                    new CSharpCodeIntermediateNode()
                     {
-                        new IntermediateToken()
+                        Children =
                         {
-                            Kind = TokenKind.CSharp,
-                            Content = "#pragma warning disable 0414",
+                            new IntermediateToken()
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "#pragma warning disable 0414",
+                            }
                         }
                     }
-                });
-                node.Children.Insert(1, new CSharpCodeIntermediateNode()
-                {
-                    Children =
+                );
+                node.Children.Insert(
+                    1,
+                    new CSharpCodeIntermediateNode()
                     {
-                        new IntermediateToken()
+                        Children =
                         {
-                            Kind = TokenKind.CSharp,
-                            Content = $"private static {typeof(object).FullName} {DesignTimeVariable} = null;",
+                            new IntermediateToken()
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content =
+                                    $"private static {typeof(object).FullName} {DesignTimeVariable} = null;",
+                            }
                         }
                     }
-                });
-                node.Children.Insert(2, new CSharpCodeIntermediateNode()
-                {
-                    Children =
+                );
+                node.Children.Insert(
+                    2,
+                    new CSharpCodeIntermediateNode()
                     {
-                        new IntermediateToken()
+                        Children =
                         {
-                            Kind = TokenKind.CSharp,
-                            Content = "#pragma warning restore 0414",
+                            new IntermediateToken()
+                            {
+                                Kind = TokenKind.CSharp,
+                                Content = "#pragma warning restore 0414",
+                            }
                         }
                     }
-                });
+                );
 
                 _directiveNode = new DesignTimeDirectiveIntermediateNode();
 

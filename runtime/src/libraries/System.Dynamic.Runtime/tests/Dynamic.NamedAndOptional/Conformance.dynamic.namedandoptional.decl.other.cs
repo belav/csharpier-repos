@@ -39,8 +39,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.extension02a.extension02a
 {
     // <Area>Declaration of Methods with Optional Parameters</Area>
@@ -77,7 +75,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -87,8 +90,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.extension02b.extension02b
 {
@@ -127,7 +128,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -138,8 +144,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.partial04b.partial04b
 {
     public partial class Parent
@@ -147,8 +151,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
         partial void Foo(int? i = 0);
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.partial04b.partial04b
 {
@@ -164,11 +166,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
             TestOk = false;
         }
 
-        public bool TestOk
-        {
-            get;
-            set;
-        }
+        public bool TestOk { get; set; }
 
         public void FooTest()
         {
@@ -194,8 +192,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.array01.array01
 {
@@ -231,8 +227,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.array01a.array01a
 {
     // <Area>Use of optional Params</Area>
@@ -267,8 +261,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.array01b.array01b
 {
     // <Area>Use of optional Params</Area>
@@ -297,19 +289,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
 
         public static int MainMethod()
         {
-            dynamic d = new int?[]
-            {
-            null, 1
-            }
-
-            ;
+            dynamic d = new int?[] { null, 1 };
             dynamic p = new Parent();
             return p.Foo(d);
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.array03.array03
 {
@@ -340,17 +325,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
         public static int MainMethod()
         {
             Parent p = new Parent();
-            return p.Foo(new object[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(new object[] { 1, 2, 3 });
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.array03a.array03a
 {
@@ -381,18 +359,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
         public static int MainMethod()
         {
             dynamic p = new Parent();
-            dynamic d = new int?[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            dynamic d = new int?[] { 1, 2, 3 };
             return p.Foo(d);
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.array04.array04
 {
@@ -423,17 +394,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
         public static int MainMethod()
         {
             Parent p = new Parent();
-            return p.Foo(i: new object[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(i: new object[] { 1, 2, 3 });
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.other.array04a.array04a
 {
@@ -464,12 +428,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.o
         public static int MainMethod()
         {
             dynamic p = new Parent();
-            dynamic d = new int?[]
-            {
-            1, 2, null
-            }
-
-            ;
+            dynamic d = new int?[] { 1, 2, null };
             return p.Foo(i: d);
         }
     }

@@ -30,9 +30,7 @@ namespace System.CommandLine.Invocation
 
             context.Console.ResetTerminalForegroundColor();
 
-            context.BindingContext
-                   .HelpBuilder
-                   .Write(context.ParseResult.CommandResult.Command);
+            context.BindingContext.HelpBuilder.Write(context.ParseResult.CommandResult.Command);
         }
     }
 }

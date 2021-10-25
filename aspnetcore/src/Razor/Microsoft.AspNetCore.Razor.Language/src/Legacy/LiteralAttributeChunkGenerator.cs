@@ -8,7 +8,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 {
     internal class LiteralAttributeChunkGenerator : SpanChunkGenerator
     {
-        public LiteralAttributeChunkGenerator(LocationTagged<string> prefix, LocationTagged<string> value)
+        public LiteralAttributeChunkGenerator(
+            LocationTagged<string> prefix,
+            LocationTagged<string> value
+        )
         {
             Prefix = prefix;
             Value = value;
@@ -26,9 +29,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public override bool Equals(object obj)
         {
             var other = obj as LiteralAttributeChunkGenerator;
-            return other != null &&
-                Equals(other.Prefix, Prefix) &&
-                Equals(other.Value, Value);
+            return other != null && Equals(other.Prefix, Prefix) && Equals(other.Value, Value);
         }
 
         public override int GetHashCode()

@@ -28,10 +28,7 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
 
         protected abstract int BlockSize { get; }
 
-        protected void VerifyHmac(
-            int testCaseId,
-            string digest,
-            int truncateSize = -1)
+        protected void VerifyHmac(int testCaseId, string digest, int truncateSize = -1)
         {
             byte[] digestBytes = ByteUtils.HexToByteArray(digest);
             byte[] computedDigest;
@@ -64,10 +61,7 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             Assert.Equal(digestBytes, computedDigest);
         }
 
-        protected void VerifyHmac_KeyAlreadySet(
-            HMAC hmac,
-            int testCaseId,
-            string digest)
+        protected void VerifyHmac_KeyAlreadySet(HMAC hmac, int testCaseId, string digest)
         {
             byte[] digestBytes = ByteUtils.HexToByteArray(digest);
             byte[] computedDigest;
@@ -112,8 +106,14 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>("buffer", () => hash.ComputeHash((byte[])null));
-                AssertExtensions.Throws<ArgumentNullException>("buffer", () => hash.ComputeHash(null, 0, 0));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "buffer",
+                    () => hash.ComputeHash((byte[])null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "buffer",
+                    () => hash.ComputeHash(null, 0, 0)
+                );
                 Assert.Throws<NullReferenceException>(() => hash.ComputeHash((Stream)null));
             }
         }
@@ -123,7 +123,10 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => hash.ComputeHash(Array.Empty<byte>(), -1, 0));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "offset",
+                    () => hash.ComputeHash(Array.Empty<byte>(), -1, 0)
+                );
             }
         }
 
@@ -132,7 +135,10 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(Array.Empty<byte>(), 0, -1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(Array.Empty<byte>(), 0, -1)
+                );
             }
         }
 
@@ -141,7 +147,10 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(Array.Empty<byte>(), 1, 0));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(Array.Empty<byte>(), 1, 0)
+                );
             }
         }
 
@@ -152,10 +161,22 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
 
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(nonEmpty, 0, nonEmpty.Length + 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(nonEmpty, 1, nonEmpty.Length));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(nonEmpty, 2, nonEmpty.Length - 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(Array.Empty<byte>(), 0, 1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(nonEmpty, 0, nonEmpty.Length + 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(nonEmpty, 1, nonEmpty.Length)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(nonEmpty, 2, nonEmpty.Length - 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(Array.Empty<byte>(), 0, 1)
+                );
             }
         }
 

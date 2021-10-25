@@ -18,10 +18,13 @@ namespace System.ComponentModel.Composition
             catalog.Dispose();
             var definition = ImportDefinitionFactory.Create();
 
-            ExceptionAssert.ThrowsDisposed(catalog, () =>
-            {
-                catalog.GetExports(definition);
-            });
+            ExceptionAssert.ThrowsDisposed(
+                catalog,
+                () =>
+                {
+                    catalog.GetExports(definition);
+                }
+            );
         }
 
         [Fact]
@@ -29,10 +32,13 @@ namespace System.ComponentModel.Composition
         {
             var catalog = CatalogFactory.Create();
 
-            Assert.Throws<ArgumentNullException>("definition", () =>
-            {
-                catalog.GetExports((ImportDefinition)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "definition",
+                () =>
+                {
+                    catalog.GetExports((ImportDefinition)null);
+                }
+            );
         }
 
         [Fact]
@@ -56,14 +62,15 @@ namespace System.ComponentModel.Composition
         {
             bool finalizerCalled = false;
 
-            var catalog = CatalogFactory.CreateDisposable(disposing =>
-            {
-                if (!disposing)
+            var catalog = CatalogFactory.CreateDisposable(
+                disposing =>
                 {
-                    finalizerCalled = true;
+                    if (!disposing)
+                    {
+                        finalizerCalled = true;
+                    }
                 }
-
-            });
+            );
 
             catalog.Dispose();
 
@@ -77,10 +84,12 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Dispose_CallsDisposeBoolWithTrue()
         {
-            var catalog = CatalogFactory.CreateDisposable(disposing =>
-            {
-                Assert.True(disposing);
-            });
+            var catalog = CatalogFactory.CreateDisposable(
+                disposing =>
+                {
+                    Assert.True(disposing);
+                }
+            );
 
             catalog.Dispose();
         }
@@ -89,10 +98,12 @@ namespace System.ComponentModel.Composition
         public void Dispose_CallsDisposeBoolOnce()
         {
             int disposeCount = 0;
-            var catalog = CatalogFactory.CreateDisposable(disposing =>
-            {
-                disposeCount++;
-            });
+            var catalog = CatalogFactory.CreateDisposable(
+                disposing =>
+                {
+                    disposeCount++;
+                }
+            );
 
             catalog.Dispose();
 
@@ -101,7 +112,12 @@ namespace System.ComponentModel.Composition
 
         private IQueryable<ComposablePartDefinition> GetPartDefinitions(ExportDefinition definition)
         {
-            var partDefinition = PartDefinitionFactory.Create(null, () => null, Enumerable.Empty<ImportDefinition>(), new ExportDefinition[] { definition });
+            var partDefinition = PartDefinitionFactory.Create(
+                null,
+                () => null,
+                Enumerable.Empty<ImportDefinition>(),
+                new ExportDefinition[] { definition }
+            );
 
             return new ComposablePartDefinition[] { partDefinition }.AsQueryable();
         }

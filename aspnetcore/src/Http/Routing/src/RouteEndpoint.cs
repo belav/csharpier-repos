@@ -29,8 +29,8 @@ namespace Microsoft.AspNetCore.Routing
             RoutePattern routePattern,
             int order,
             EndpointMetadataCollection? metadata,
-            string? displayName)
-            : base(requestDelegate, metadata, displayName)
+            string? displayName
+        ) : base(requestDelegate, metadata, displayName)
         {
             if (requestDelegate == null)
             {
@@ -54,7 +54,7 @@ namespace Microsoft.AspNetCore.Routing
         /// of an endpoint. Endpoints with a lower numeric value of order have higher priority.
         /// </remarks>
         public int Order { get; }
-        
+
         /// <summary>
         /// Gets the <see cref="RoutePattern"/> associated with the endpoint.
         /// </summary>

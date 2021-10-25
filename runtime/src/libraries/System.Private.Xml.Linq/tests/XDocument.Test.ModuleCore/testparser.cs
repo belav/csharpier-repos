@@ -39,7 +39,6 @@ namespace Microsoft.Test.ModuleCore
             public string DoubleQuote = "\"";
         }
 
-
         //Methods
         public static Dictionary<string, string> ParseKeywords(string str)
         {
@@ -172,7 +171,9 @@ namespace Microsoft.Test.ModuleCore
                             break;
 
                         default:
-                            throw new TestFailedException("Unhandled State: " + StringEx.ToString(state));
+                            throw new TestFailedException(
+                                "Unhandled State: " + StringEx.ToString(state)
+                            );
                     }
                 }
 
@@ -199,7 +200,9 @@ namespace Microsoft.Test.ModuleCore
                         break;
 
                     default:
-                        throw new TestFailedException("Unhandled State: " + StringEx.ToString(state));
+                        throw new TestFailedException(
+                            "Unhandled State: " + StringEx.ToString(state)
+                        );
                 }
             }
             return keywords;

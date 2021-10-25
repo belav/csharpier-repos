@@ -8,20 +8,35 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace Microsoft.EntityFrameworkCore
 {
     public abstract class AspNetIdentityIntKeyTestBase<TFixture>
-        : AspNetIdentityTestBase<TFixture, IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>,
-            IdentityUser<int>, IdentityRole<int>, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>,
-            IdentityRoleClaim<int>, IdentityUserToken<int>>
-        where TFixture : AspNetIdentityTestBase<TFixture, IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>, IdentityUser<int>,
-            IdentityRole<int>, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>,
-            IdentityUserToken<int>>.AspNetIdentityFixtureBase
+        : AspNetIdentityTestBase<
+              TFixture,
+              IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>,
+              IdentityUser<int>,
+              IdentityRole<int>,
+              int,
+              IdentityUserClaim<int>,
+              IdentityUserRole<int>,
+              IdentityUserLogin<int>,
+              IdentityRoleClaim<int>,
+              IdentityUserToken<int>
+          >
+        where TFixture : AspNetIdentityTestBase<
+                TFixture,
+                IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>,
+                IdentityUser<int>,
+                IdentityRole<int>,
+                int,
+                IdentityUserClaim<int>,
+                IdentityUserRole<int>,
+                IdentityUserLogin<int>,
+                IdentityRoleClaim<int>,
+                IdentityUserToken<int>
+            >.AspNetIdentityFixtureBase
     {
-        protected AspNetIdentityIntKeyTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected AspNetIdentityIntKeyTestBase(TFixture fixture) : base(fixture) { }
 
-        protected override List<EntityTypeMapping> ExpectedMappings
-            => new()
+        protected override List<EntityTypeMapping> ExpectedMappings =>
+            new()
             {
                 new EntityTypeMapping()
                 {
@@ -50,7 +65,10 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: IdentityRoleClaim<int>.RoleId (int) Required FK Index",
                     },
                     Indexes = { "{'RoleId'} ", },
-                    FKs = { "ForeignKey: IdentityRoleClaim<int> {'RoleId'} -> IdentityRole<int> {'Id'} Cascade", },
+                    FKs =
+                    {
+                        "ForeignKey: IdentityRoleClaim<int> {'RoleId'} -> IdentityRole<int> {'Id'} Cascade",
+                    },
                 },
                 new EntityTypeMapping()
                 {
@@ -75,10 +93,7 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: IdentityUser<int>.TwoFactorEnabled (bool) Required",
                         "Property: IdentityUser<int>.UserName (string) MaxLength(256)",
                     },
-                    Indexes =
-                    {
-                        "{'NormalizedEmail'} ", "{'NormalizedUserName'} Unique",
-                    },
+                    Indexes = { "{'NormalizedEmail'} ", "{'NormalizedUserName'} Unique", },
                 },
                 new EntityTypeMapping()
                 {
@@ -93,13 +108,17 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: IdentityUserClaim<int>.UserId (int) Required FK Index",
                     },
                     Indexes = { "{'UserId'} ", },
-                    FKs = { "ForeignKey: IdentityUserClaim<int> {'UserId'} -> IdentityUser<int> {'Id'} Cascade", },
+                    FKs =
+                    {
+                        "ForeignKey: IdentityUserClaim<int> {'UserId'} -> IdentityUser<int> {'Id'} Cascade",
+                    },
                 },
                 new EntityTypeMapping()
                 {
                     Name = "Microsoft.AspNetCore.Identity.IdentityUserLogin<int>",
                     TableName = "AspNetUserLogins",
-                    PrimaryKey = "Key: IdentityUserLogin<int>.LoginProvider, IdentityUserLogin<int>.ProviderKey PK",
+                    PrimaryKey =
+                        "Key: IdentityUserLogin<int>.LoginProvider, IdentityUserLogin<int>.ProviderKey PK",
                     Properties =
                     {
                         "Property: IdentityUserLogin<int>.LoginProvider (string) Required PK AfterSave:Throw",
@@ -108,13 +127,17 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: IdentityUserLogin<int>.UserId (int) Required FK Index",
                     },
                     Indexes = { "{'UserId'} ", },
-                    FKs = { "ForeignKey: IdentityUserLogin<int> {'UserId'} -> IdentityUser<int> {'Id'} Cascade", },
+                    FKs =
+                    {
+                        "ForeignKey: IdentityUserLogin<int> {'UserId'} -> IdentityUser<int> {'Id'} Cascade",
+                    },
                 },
                 new EntityTypeMapping()
                 {
                     Name = "Microsoft.AspNetCore.Identity.IdentityUserRole<int>",
                     TableName = "AspNetUserRoles",
-                    PrimaryKey = "Key: IdentityUserRole<int>.UserId, IdentityUserRole<int>.RoleId PK",
+                    PrimaryKey =
+                        "Key: IdentityUserRole<int>.UserId, IdentityUserRole<int>.RoleId PK",
                     Properties =
                     {
                         "Property: IdentityUserRole<int>.UserId (int) Required PK FK AfterSave:Throw",
@@ -131,7 +154,8 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     Name = "Microsoft.AspNetCore.Identity.IdentityUserToken<int>",
                     TableName = "AspNetUserTokens",
-                    PrimaryKey = "Key: IdentityUserToken<int>.UserId, IdentityUserToken<int>.LoginProvider, IdentityUserToken<int>.Name PK",
+                    PrimaryKey =
+                        "Key: IdentityUserToken<int>.UserId, IdentityUserToken<int>.LoginProvider, IdentityUserToken<int>.Name PK",
                     Properties =
                     {
                         "Property: IdentityUserToken<int>.UserId (int) Required PK FK AfterSave:Throw",
@@ -139,7 +163,10 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: IdentityUserToken<int>.Name (string) Required PK AfterSave:Throw",
                         "Property: IdentityUserToken<int>.Value (string)",
                     },
-                    FKs = { "ForeignKey: IdentityUserToken<int> {'UserId'} -> IdentityUser<int> {'Id'} Cascade", },
+                    FKs =
+                    {
+                        "ForeignKey: IdentityUserToken<int> {'UserId'} -> IdentityUser<int> {'Id'} Cascade",
+                    },
                 },
             };
     }

@@ -14,6 +14,8 @@ public partial class ThreadPoolBoundHandleTests
     {
         long initialCompletedWorkItemCount = ThreadPool.CompletedWorkItemCount;
         MultipleOperationsOverMultipleHandles();
-        ThreadTestHelpers.WaitForCondition(() => ThreadPool.CompletedWorkItemCount - initialCompletedWorkItemCount >= 2);
+        ThreadTestHelpers.WaitForCondition(
+            () => ThreadPool.CompletedWorkItemCount - initialCompletedWorkItemCount >= 2
+        );
     }
 }

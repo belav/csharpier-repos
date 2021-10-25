@@ -18,15 +18,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed class AggregateType : CType
     {
-        private AggregateType _baseType;  // This is the result of calling SubstTypeArray on the aggregate's baseClass.
-        private TypeArray _ifacesAll;  // This is the result of calling SubstTypeArray on the aggregate's ifacesAll.
+        private AggregateType _baseType; // This is the result of calling SubstTypeArray on the aggregate's baseClass.
+        private TypeArray _ifacesAll; // This is the result of calling SubstTypeArray on the aggregate's ifacesAll.
         private TypeArray _winrtifacesAll; //This is the list of collection interfaces implemented by a WinRT object.
         private Type _associatedSystemType;
 
-        public AggregateType(AggregateSymbol parent, TypeArray typeArgsThis, AggregateType outerType)
-            : base(TypeKind.TK_AggregateType)
+        public AggregateType(
+            AggregateSymbol parent,
+            TypeArray typeArgsThis,
+            AggregateType outerType
+        ) : base(TypeKind.TK_AggregateType)
         {
-
             Debug.Assert(typeArgsThis != null);
             OuterType = outerType;
             OwningAggregate = parent;
@@ -60,17 +62,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // Ensure that invariant here.
 
             Debug.Assert(outerType == null || outerType.TypeArgsAll != null);
-            TypeArgsAll = outerType != null ? TypeArray.Concat(outerType.TypeArgsAll, typeArgsThis) : typeArgsThis;
+            TypeArgsAll =
+                outerType != null
+                    ? TypeArray.Concat(outerType.TypeArgsAll, typeArgsThis)
+                    : typeArgsThis;
         }
 
-        public bool? ConstraintError;       // Did the constraints check produce an error?
+        public bool? ConstraintError; // Did the constraints check produce an error?
 
         // These two flags are used to track hiding within interfaces.
         // Their use and validity is always localized. See e.g. MemberLookup::LookupInInterfaces.
-        public bool AllHidden;             // All members are hidden by a derived interface member.
-        public bool DiffHidden;            // Members other than a specific kind are hidden by a derived interface member or class member.
+        public bool AllHidden; // All members are hidden by a derived interface member.
+        public bool DiffHidden; // Members other than a specific kind are hidden by a derived interface member or class member.
 
-        public AggregateType OuterType { get; }         // the outer type if this is a nested type
+        public AggregateType OuterType { get; } // the outer type if this is a nested type
 
         public AggregateSymbol OwningAggregate { get; }
 
@@ -101,7 +106,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     // If we don't have a generic type definition, then we just need to set our base
                     // class. This is so that if we have a base type that's generic, we'll be
                     // getting the correctly instantiated base type.
-                    AggregateType baseClass = SymbolTable.GetCTypeFromType(baseSysType) as AggregateType;
+                    AggregateType baseClass =
+                        SymbolTable.GetCTypeFromType(baseSysType) as AggregateType;
                     Debug.Assert(baseClass != null);
                     _baseType = TypeManager.SubstType(baseClass, TypeArgsAll);
                 }
@@ -127,7 +133,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 }
                 else
                 {
-                    for (AggregateType agg = this; agg != null; agg = agg.BaseClassWithSuppressedMessage)
+                    for (
+                        AggregateType agg = this;
+                        agg != null;
+                        agg = agg.BaseClassWithSuppressedMessage
+                    )
                     {
                         yield return agg;
                     }
@@ -137,13 +147,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         private AggregateType BaseClassWithSuppressedMessage
         {
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "Workarounds https://github.com/mono/linker/issues/1906. All usages are marked as unsafe.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "Workarounds https://github.com/mono/linker/issues/1906. All usages are marked as unsafe."
+            )]
             get => BaseClass;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "Workarounds https://github.com/mono/linker/issues/1906. All usages are marked as unsafe.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Workarounds https://github.com/mono/linker/issues/1906. All usages are marked as unsafe."
+        )]
         private static AggregateType GetPredefinedAggregateGetThisTypeWithSuppressedMessage()
         {
             return PredefinedTypes.GetPredefinedAggregate(PredefinedType.PT_OBJECT).getThisType();
@@ -153,7 +169,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         public TypeArray TypeArgsAll { get; }
 
-        public TypeArray IfacesAll => _ifacesAll ?? (_ifacesAll = TypeManager.SubstTypeArray(OwningAggregate.GetIfacesAll(), TypeArgsAll));
+        public TypeArray IfacesAll =>
+            _ifacesAll
+            ?? (
+                _ifacesAll = TypeManager.SubstTypeArray(OwningAggregate.GetIfacesAll(), TypeArgsAll)
+            );
 
         private bool IsCollectionType
         {
@@ -169,8 +189,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         || genType == typeof(IEnumerable<>)
                         || genType == typeof(IReadOnlyList<>)
                         || genType == typeof(IReadOnlyCollection<>)
-                        || genType == typeof(IDictionary<,>)
-                        || genType == typeof(IReadOnlyDictionary<,>);
+                        || genType == typeof(IDictionary<, >)
+                        || genType == typeof(IReadOnlyDictionary<, >);
                 }
 
                 return sysType == typeof(System.Collections.IList)
@@ -246,7 +266,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             get
             {
                 AggregateSymbol agg = OwningAggregate;
-                return agg.IsPredefined() ? PredefinedTypeFacts.IsSimpleType(agg.GetPredefType()) : agg.IsEnum();
+                return agg.IsPredefined()
+                  ? PredefinedTypeFacts.IsSimpleType(agg.GetPredefType())
+                  : agg.IsEnum();
             }
         }
 
@@ -303,7 +325,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public override Type AssociatedSystemType
         {
             [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-            get => _associatedSystemType ?? (_associatedSystemType = CalculateAssociatedSystemType());
+            get =>
+                _associatedSystemType ?? (_associatedSystemType = CalculateAssociatedSystemType());
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -319,7 +342,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 {
                     // Unnamed type parameter types are just placeholders.
                     CType typeArg = typeArgs[i];
-                    if (typeArg is TypeParameterType typeParamArg && typeParamArg.Symbol.name == null)
+                    if (
+                        typeArg is TypeParameterType typeParamArg
+                        && typeParamArg.Symbol.name == null
+                    )
                     {
                         return null;
                     }
@@ -357,7 +383,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 }
 
                 // Struct type could be predefined (int, long, etc.) or some other struct.
-                return sym.IsPredefined() ? PredefinedTypeFacts.GetFundType(sym.GetPredefType()) : FUNDTYPE.FT_STRUCT;
+                return sym.IsPredefined()
+                  ? PredefinedTypeFacts.GetFundType(sym.GetPredefType())
+                  : FUNDTYPE.FT_STRUCT;
             }
         }
 
@@ -365,7 +393,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             get
             {
-                if (IsPredefType(PredefinedType.PT_INTPTR) || IsPredefType(PredefinedType.PT_UINTPTR))
+                if (
+                    IsPredefType(PredefinedType.PT_INTPTR)
+                    || IsPredefType(PredefinedType.PT_UINTPTR)
+                )
                 {
                     return ConstValKind.IntPtr;
                 }
@@ -381,18 +412,21 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         // Here we can either have a decimal type, or an enum
                         // whose fundamental type is decimal.
                         Debug.Assert(
-                            OwningAggregate.IsEnum() && OwningAggregate.GetUnderlyingType().PredefinedType == PredefinedType.PT_DECIMAL
-                            || IsPredefined && PredefinedType == PredefinedType.PT_DATETIME
-                            || IsPredefined && PredefinedType == PredefinedType.PT_DECIMAL);
+                            OwningAggregate.IsEnum()
+                                && OwningAggregate.GetUnderlyingType().PredefinedType
+                                    == PredefinedType.PT_DECIMAL
+                                || IsPredefined && PredefinedType == PredefinedType.PT_DATETIME
+                                || IsPredefined && PredefinedType == PredefinedType.PT_DECIMAL
+                        );
 
                         return IsPredefined && PredefinedType == PredefinedType.PT_DATETIME
-                            ? ConstValKind.Long
-                            : ConstValKind.Decimal;
+                          ? ConstValKind.Long
+                          : ConstValKind.Decimal;
 
                     case FUNDTYPE.FT_REF:
                         return IsPredefined && PredefinedType == PredefinedType.PT_STRING
-                            ? ConstValKind.String
-                            : ConstValKind.IntPtr;
+                          ? ConstValKind.String
+                          : ConstValKind.IntPtr;
 
                     case FUNDTYPE.FT_R4:
                         return ConstValKind.Float;

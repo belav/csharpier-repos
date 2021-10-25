@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void IUsingStatement_SimpleUsingNewVariable()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -35,7 +36,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (var  ... }')
   Locals: Local_1: C c
   Resources: 
@@ -69,14 +71,19 @@ IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (var  ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.AsyncStreams)]
         [Fact, WorkItem(30362, "https://github.com/dotnet/roslyn/issues/30362")]
         public void IUsingAwaitStatement_SimpleAwaitUsing()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -92,7 +99,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (IsAsynchronous) (OperationKind.Using, Type: null) (Syntax: 'await using ... }')
   Locals: Local_1: System.IAsyncDisposable c
   Resources: 
@@ -123,14 +131,23 @@ IUsingOperation (IsAsynchronous) (OperationKind.Using, Type: null) (Syntax: 'awa
 ";
 
             var expectedDiagnostics = DiagnosticDescription.None;
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source + s_IAsyncEnumerable + s_ValueTask, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source + s_IAsyncEnumerable + s_ValueTask,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.AsyncStreams)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.AsyncStreams
+        )]
         [Fact, WorkItem(30362, "https://github.com/dotnet/roslyn/issues/30362")]
         public void UsingFlow_SimpleAwaitUsing()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -147,7 +164,8 @@ class C
 }
 ";
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -219,14 +237,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + s_IAsyncEnumerable + s_ValueTask, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + s_IAsyncEnumerable + s_ValueTask,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_MultipleNewVariable()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -245,7 +268,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (C c1 ... }')
   Locals: Local_1: C c1
     Local_2: C c2
@@ -287,14 +311,19 @@ IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (C c1 ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_SimpleUsingStatementExistingResource()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -313,7 +342,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (c) ... }')
   Resources: 
     ILocalReferenceOperation: c (OperationKind.LocalReference, Type: C) (Syntax: 'c')
@@ -335,14 +365,19 @@ IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (c) ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_NestedUsingNewResources()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -361,7 +396,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (var  ... }')
   Locals: Local_1: C c1
   Resources: 
@@ -418,14 +454,19 @@ IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (var  ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_NestedUsingExistingResources()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -446,7 +487,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (c1) ... }')
   Resources: 
     ILocalReferenceOperation: c1 (OperationKind.LocalReference, Type: C) (Syntax: 'c1')
@@ -479,14 +521,19 @@ IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (c1) ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_InvalidMultipleVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -504,7 +551,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (var  ... }')
   Locals: Local_1: C c1
     Local_2: C c2
@@ -551,20 +599,30 @@ IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (va
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0819: Implicitly-typed variables cannot have multiple declarators
                 //         /*<bind>*/using (var c1 = new C(), c2 = new C())
-                Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator, "var c1 = new C(), c2 = new C()").WithLocation(12, 26)
+                Diagnostic(
+                        ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
+                        "var c1 = new C(), c2 = new C()"
+                    )
+                    .WithLocation(12, 26)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IOperationTests_MultipleExistingResourcesPassed()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -586,7 +644,8 @@ class C : IDisposable
 ";
             // Capturing the whole block here, to show that the using statement is actually being bound as a using statement, followed by
             // an expression and a separate block, rather than being bound as a using statement with an invalid expression as the resources
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (5 statements, 2 locals) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   Locals: Local_1: C c1
     Local_2: C c2
@@ -647,13 +706,16 @@ IBlockOperation (5 statements, 2 locals) (OperationKind.Block, Type: null, IsInv
                 InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                 OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1026: ) expected
                 //         using (c1, c2)
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, ",").WithLocation(14, 18),
                 // CS1525: Invalid expression term ','
                 //         using (c1, c2)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(14, 18),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(14, 18),
                 // CS1002: ; expected
                 //         using (c1, c2)
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ",").WithLocation(14, 18),
@@ -668,14 +730,19 @@ IBlockOperation (5 statements, 2 locals) (OperationKind.Block, Type: null, IsInv
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(14, 22)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_InvalidNonDisposableNewResource()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -690,7 +757,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (var  ... }')
   Locals: Local_1: C c1
   Resources: 
@@ -722,20 +790,28 @@ IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (va
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1674: 'C': type used in a using statement must be implicitly convertible to 'System.IDisposable'
                 //         /*<bind>*/using (var c1 = new C())
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var c1 = new C()").WithArguments("C").WithLocation(9, 26)
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var c1 = new C()")
+                    .WithArguments("C")
+                    .WithLocation(9, 26)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_InvalidNonDisposableExistingResource()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -751,7 +827,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (c1) ... }')
   Resources: 
     ILocalReferenceOperation: c1 (OperationKind.LocalReference, Type: C, IsInvalid) (Syntax: 'c1')
@@ -771,20 +848,28 @@ IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (c1
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1674: 'C': type used in a using statement must be implicitly convertible to 'System.IDisposable'
                 //         /*<bind>*/using (c1)
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "c1").WithArguments("C").WithLocation(10, 26)
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "c1")
+                    .WithArguments("C")
+                    .WithLocation(10, 26)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_InvalidEmptyUsingResources()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -798,7 +883,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using () ... }')
   Resources: 
     IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
@@ -806,20 +892,28 @@ IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using () 
   Body: 
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term ')'
                 //         /*<bind>*/using ()
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(9, 26)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(9, 26)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_UsingWithoutSavedReference()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -838,7 +932,8 @@ class C : IDisposable
     public static C GetC() => new C();
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (GetC ... }')
   Resources: 
     IInvocationOperation (C C.GetC()) (OperationKind.Invocation, Type: C) (Syntax: 'GetC()')
@@ -850,14 +945,19 @@ IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (GetC ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_DynamicArgument()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -876,7 +976,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (d) ... }')
   Resources: 
     ILocalReferenceOperation: d (OperationKind.LocalReference, Type: dynamic) (Syntax: 'd')
@@ -897,14 +998,19 @@ IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (d) ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_NullResource()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -917,7 +1023,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (null ... }')
   Resources: 
     ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
@@ -926,14 +1033,19 @@ IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (null ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_UsingStatementSyntax_Declaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -951,7 +1063,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'var c = new C()')
   Declarators:
       IVariableDeclaratorOperation (Symbol: C c) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c = new C()')
@@ -966,14 +1079,19 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_UsingStatementSyntax_StatementSyntax()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -991,7 +1109,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'Console.Wri ... oString());')
     Expression: 
@@ -1009,14 +1128,19 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_UsingStatementSyntax_ExpressionSyntax()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -1035,19 +1159,25 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ILocalReferenceOperation: c (OperationKind.LocalReference, Type: C) (Syntax: 'c')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_UsingStatementSyntax_VariableDeclaratorSyntax()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -1066,7 +1196,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclaratorOperation (Symbol: C c1) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'c1 = new C()')
   Initializer: 
     IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= new C()')
@@ -1077,14 +1208,19 @@ IVariableDeclaratorOperation (Symbol: C c1) (OperationKind.VariableDeclarator, T
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_OutVarInResource()
         {
-            string source = @"
+            string source =
+                @"
 class P : System.IDisposable
 {
     public void Dispose()
@@ -1106,7 +1242,8 @@ class P : System.IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (p =  ... }')
   Locals: Local_1: System.Int32 c
   Resources: 
@@ -1135,14 +1272,19 @@ IUsingOperation (OperationKind.Using, Type: null) (Syntax: 'using (p =  ... }')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_DefaultDisposeArguments()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static void M1()
@@ -1158,7 +1300,8 @@ ref struct S
     public void Dispose(int a = 1, bool b = true, params object[] others) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (DisposeMethod: void S.Dispose([System.Int32 a = 1], [System.Boolean b = true], params System.Object[] others)) (OperationKind.Using, Type: null) (Syntax: 'using(var s ... }')
   Locals: Local_1: S s
   Resources: 
@@ -1198,14 +1341,19 @@ IUsingOperation (DisposeMethod: void S.Dispose([System.Int32 a = 1], [System.Boo
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_ExpressionDefaultDisposeArguments()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static void M1()
@@ -1222,7 +1370,8 @@ ref struct S
     public void Dispose(int a = 1, bool b = true, params object[] others) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingOperation (DisposeMethod: void S.Dispose([System.Int32 a = 1], [System.Boolean b = true], params System.Object[] others)) (OperationKind.Using, Type: null) (Syntax: 'using(s) ... }')
   Resources: 
     ILocalReferenceOperation: s (OperationKind.LocalReference, Type: S) (Syntax: 's')
@@ -1250,14 +1399,19 @@ IUsingOperation (DisposeMethod: void S.Dispose([System.Int32 a = 1], [System.Boo
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_DisposalWithDefaultParams()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static void M1()
@@ -1279,7 +1433,8 @@ ref struct S
 }
 ";
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IUsingOperation (DisposeMethod: void S.Dispose(params System.Object[] extras)) (OperationKind.Using, Type: null) (Syntax: 'using(var s ... }')
     Locals: Local_1: S s
@@ -1310,7 +1465,8 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
           OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1369,27 +1525,37 @@ Block[B4] - Exit
             var expectedDiagnostics = new[]
             {
                 // file.cs(19,25): error CS1751: Cannot specify a default value for a parameter array
-                //     public void Dispose(params object[] extras = null) { } 
-                Diagnostic(ErrorCode.ERR_DefaultValueForParamsParameter, "params").WithLocation(19, 25)
+                //     public void Dispose(params object[] extras = null) { }
+                Diagnostic(ErrorCode.ERR_DefaultValueForParamsParameter, "params")
+                    .WithLocation(19, 25)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         //THEORY: we won't ever call a params in normal form, because we ignore the default value in metadata.
         //        So: it's either a valid params parameter, in which case we call it in the extended way.
         //        Or its an invalid params parameter, in which case we can't use it, and we error out.
-        //        Interestingly we check params before we check default, so a params int = 3 will be callable with an 
-        //        argument, but not without. 
+        //        Interestingly we check params before we check default, so a params int = 3 will be callable with an
+        //        argument, but not without.
 
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_DisposalWithDefaultParams_Metadata()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static void M1()
@@ -1407,7 +1573,8 @@ class C
 }
 ";
 
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public sequential ansi sealed beforefieldinit S
     extends [mscorlib]System.ValueType
 {
@@ -1437,7 +1604,9 @@ class C
 
             var verifier = CompileAndVerify(compilation);
 
-            verifier.VerifyIL("C.M2", @"
+            verifier.VerifyIL(
+                "C.M2",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -1449,8 +1618,11 @@ class C
   IL_000f:  call       ""void S.Dispose(params object[])""
   IL_0014:  ret
 }
-");
-            verifier.VerifyIL("C.M1", @"
+"
+            );
+            verifier.VerifyIL(
+                "C.M1",
+                @"
 {
   // Code size       24 (0x18)
   .maxstack  2
@@ -1470,10 +1642,11 @@ class C
   }
   IL_0017:  ret
 }
-");
+"
+            );
 
-
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IUsingOperation (DisposeMethod: void S.Dispose(params System.Object[] extras)) (OperationKind.Using, Type: null) (Syntax: 'using(var s ... }')
     Locals: Local_1: S s
@@ -1504,7 +1677,8 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
           OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1562,16 +1736,25 @@ Block[B4] - Exit
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(compilation, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_DisposalWithNonArrayParams_Metadata()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static void M1()
@@ -1590,7 +1773,8 @@ class C
 }
 ";
 
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public sequential ansi sealed beforefieldinit S
     extends [mscorlib]System.ValueType
 {
@@ -1619,19 +1803,26 @@ class C
             {
                 // (6,15): error CS7036: There is no argument given that corresponds to the required formal parameter 'extras' of 'S.Dispose(params int)'
                 //         using(var s = new S())
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()").WithArguments("extras", "S.Dispose(params int)").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()")
+                    .WithArguments("extras", "S.Dispose(params int)")
+                    .WithLocation(6, 15),
                 // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
                 //         using(var s = new S())
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()").WithArguments("S").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()")
+                    .WithArguments("S")
+                    .WithLocation(6, 15),
                 // (14,11): error CS7036: There is no argument given that corresponds to the required formal parameter 'extras' of 'S.Dispose(params int)'
                 //         s.Dispose();
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose").WithArguments("extras", "S.Dispose(params int)").WithLocation(14, 11)
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
+                    .WithArguments("extras", "S.Dispose(params int)")
+                    .WithLocation(14, 11)
             };
 
             var compilation = CreateCompilationWithIL(source, ilSource);
             compilation.VerifyDiagnostics(expectedDiagnostics);
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using(var s ... }')
     Locals: Local_1: S s
@@ -1652,7 +1843,8 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
 ";
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1703,16 +1895,25 @@ Block[B4] - Exit
     Statements (0)
 ";
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(compilation, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_DisposalWithNonArrayOptionalParams_Metadata()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static void M1()
@@ -1731,7 +1932,8 @@ class C
 }
 ";
 
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public sequential ansi sealed beforefieldinit S
     extends [mscorlib]System.ValueType
 {
@@ -1760,19 +1962,26 @@ class C
             {
                 // (6,15): error CS7036: There is no argument given that corresponds to the required formal parameter 'extras' of 'S.Dispose(params int)'
                 //         using(var s = new S())
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()").WithArguments("extras", "S.Dispose(params int)").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()")
+                    .WithArguments("extras", "S.Dispose(params int)")
+                    .WithLocation(6, 15),
                 // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
                 //         using(var s = new S())
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()").WithArguments("S").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()")
+                    .WithArguments("S")
+                    .WithLocation(6, 15),
                 // (14,11): error CS7036: There is no argument given that corresponds to the required formal parameter 'extras' of 'S.Dispose(params int)'
                 //         s.Dispose();
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose").WithArguments("extras", "S.Dispose(params int)").WithLocation(14, 11)
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
+                    .WithArguments("extras", "S.Dispose(params int)")
+                    .WithLocation(14, 11)
             };
 
             var compilation = CreateCompilationWithIL(source, ilSource);
             compilation.VerifyDiagnostics(expectedDiagnostics);
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using(var s ... }')
     Locals: Local_1: S s
@@ -1793,7 +2002,8 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
 ";
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1844,16 +2054,25 @@ Block[B4] - Exit
     Statements (0)
 ";
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(compilation, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_DisposalWithNonArrayDefaultParams_Metadata()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static void M1()
@@ -1872,7 +2091,8 @@ class C
 }
 ";
 
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public sequential ansi sealed beforefieldinit S
     extends [mscorlib]System.ValueType
 {
@@ -1901,19 +2121,26 @@ class C
             {
                 // (6,15): error CS7036: There is no argument given that corresponds to the required formal parameter 'extras' of 'S.Dispose(params int)'
                 //         using(var s = new S())
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()").WithArguments("extras", "S.Dispose(params int)").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()")
+                    .WithArguments("extras", "S.Dispose(params int)")
+                    .WithLocation(6, 15),
                 // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
                 //         using(var s = new S())
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()").WithArguments("S").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()")
+                    .WithArguments("S")
+                    .WithLocation(6, 15),
                 // (14,11): error CS7036: There is no argument given that corresponds to the required formal parameter 'extras' of 'S.Dispose(params int)'
                 //         s.Dispose();
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose").WithArguments("extras", "S.Dispose(params int)").WithLocation(14, 11)
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
+                    .WithArguments("extras", "S.Dispose(params int)")
+                    .WithLocation(14, 11)
             };
 
             var compilation = CreateCompilationWithIL(source, ilSource);
             compilation.VerifyDiagnostics(expectedDiagnostics);
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using(var s ... }')
     Locals: Local_1: S s
@@ -1934,7 +2161,8 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
 ";
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1985,16 +2213,25 @@ Block[B4] - Exit
     Statements (0)
 ";
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(compilation, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IUsingStatement_DisposalWithDefaultParamsNotLast_Metadata()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static void M1()
@@ -2012,7 +2249,8 @@ class C
 }
 ";
 
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public sequential ansi sealed beforefieldinit S
     extends [mscorlib]System.ValueType
 {
@@ -2043,20 +2281,26 @@ class C
             {
                 // (6,15): error CS7036: There is no argument given that corresponds to the required formal parameter 'extras' of 'S.Dispose(params object[], int)'
                 //         using(var s = new S())
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()").WithArguments("extras", "S.Dispose(params object[], int)").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "var s = new S()")
+                    .WithArguments("extras", "S.Dispose(params object[], int)")
+                    .WithLocation(6, 15),
                 // (6,15): error CS1674: 'S': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
                 //         using(var s = new S())
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()").WithArguments("S").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var s = new S()")
+                    .WithArguments("S")
+                    .WithLocation(6, 15),
                 // (14,11): error CS7036: There is no argument given that corresponds to the required formal parameter 'extras' of 'S.Dispose(params object[], int)'
                 //         s.Dispose();
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose").WithArguments("extras", "S.Dispose(params object[], int)").WithLocation(14, 11)
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
+                    .WithArguments("extras", "S.Dispose(params object[], int)")
+                    .WithLocation(14, 11)
             };
 
             var compilation = CreateCompilationWithIL(source, ilSource);
             compilation.VerifyDiagnostics(expectedDiagnostics);
 
-
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using(var s ... }')
     Locals: Local_1: S s
@@ -2077,9 +2321,14 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
 ";
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2130,14 +2379,19 @@ Block[B4] - Exit
     Statements (0)
 ";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(compilation, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(System.IDisposable input, bool b)
@@ -2151,7 +2405,8 @@ class P
     System.IDisposable GetDisposable() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2252,14 +2507,19 @@ Block[B8] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(MyDisposable input, bool b)
@@ -2278,7 +2538,8 @@ class MyDisposable : System.IDisposable
     public void Dispose() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2383,14 +2644,19 @@ Block[B8] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(MyDisposable input, bool b)
@@ -2409,7 +2675,8 @@ struct MyDisposable : System.IDisposable
     public void Dispose() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2488,14 +2755,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M<MyDisposable>(MyDisposable input, bool b) where MyDisposable : System.IDisposable
@@ -2509,7 +2781,8 @@ class P
     T GetDisposable<T>() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2601,14 +2874,19 @@ Block[B8] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(MyDisposable? input, bool b)
@@ -2627,7 +2905,8 @@ struct MyDisposable : System.IDisposable
     public void Dispose() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2732,14 +3011,19 @@ Block[B8] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(dynamic input, bool b)
@@ -2753,7 +3037,8 @@ class P
     dynamic GetDisposable() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2869,14 +3154,19 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(NotDisposable input, bool b)
@@ -2894,7 +3184,8 @@ class NotDisposable
 {
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2987,20 +3278,28 @@ Block[B8] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,16): error CS1674: 'NotDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'
                 //         using (GetDisposable() ?? input)
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "GetDisposable() ?? input").WithArguments("NotDisposable").WithLocation(6, 16)
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "GetDisposable() ?? input")
+                    .WithArguments("NotDisposable")
+                    .WithLocation(6, 16)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_08()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(MyDisposable input, bool b)
@@ -3018,7 +3317,8 @@ struct MyDisposable
 {
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3087,20 +3387,28 @@ Block[B6] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,16): error CS1674: 'MyDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'
                 //         using (b ? GetDisposable() : input)
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "b ? GetDisposable() : input").WithArguments("MyDisposable").WithLocation(6, 16)
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "b ? GetDisposable() : input")
+                    .WithArguments("MyDisposable")
+                    .WithLocation(6, 16)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_09()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M<MyDisposable>(MyDisposable input, bool b)
@@ -3114,7 +3422,8 @@ class P
     T GetDisposable<T>() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3195,20 +3504,28 @@ Block[B8] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,16): error CS1674: 'MyDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'
                 //         using (b ? GetDisposable<MyDisposable>() : input)
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "b ? GetDisposable<MyDisposable>() : input").WithArguments("MyDisposable").WithLocation(6, 16)
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "b ? GetDisposable<MyDisposable>() : input")
+                    .WithArguments("MyDisposable")
+                    .WithLocation(6, 16)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_10()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(MyDisposable? input, bool b)
@@ -3226,7 +3543,8 @@ struct MyDisposable
 {
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3318,20 +3636,28 @@ Block[B8] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,16): error CS1674: 'MyDisposable?': type used in a using statement must be implicitly convertible to 'System.IDisposable'
                 //         using (GetDisposable() ?? input)
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "GetDisposable() ?? input").WithArguments("MyDisposable?").WithLocation(6, 16)
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "GetDisposable() ?? input")
+                    .WithArguments("MyDisposable?")
+                    .WithLocation(6, 16)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_11()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(MyDisposable input, bool b)
@@ -3350,7 +3676,8 @@ class MyDisposable : System.IDisposable
     public void Dispose() => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3468,14 +3795,19 @@ Block[B9] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_12()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(dynamic input1, dynamic input2, bool b)
@@ -3487,7 +3819,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3634,14 +3967,19 @@ Block[B12] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_13()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(System.IDisposable input, object o)
@@ -3653,7 +3991,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3737,14 +4076,19 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_14()
         {
-            string source = @"
+            string source =
+                @"
 class P : System.IDisposable
 {
     public void Dispose()
@@ -3766,7 +4110,8 @@ class P : System.IDisposable
     }
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3852,14 +4197,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_15()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M(System.IDisposable input, object o)
@@ -3874,7 +4224,8 @@ class P
             var compilation = CreateCompilationWithMscorlib45(source);
             compilation.MakeMemberMissing(SpecialMember.System_IDisposable__Dispose);
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3948,14 +4299,19 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(compilation, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_16()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M()
@@ -3966,7 +4322,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4025,14 +4382,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingFlow_17()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219
 using System.Threading.Tasks;
 
@@ -4055,7 +4417,8 @@ struct S
 }
 ";
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4118,19 +4481,25 @@ Block[B6] - Exit
             {
                 // (9,22): error CS8410: 'S?': type used in an asynchronous using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using (s)
-                Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "s").WithArguments("S?").WithLocation(9, 22)
+                Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "s")
+                    .WithArguments("S?")
+                    .WithLocation(9, 22)
             };
 
             var comp = CreateCompilationWithTasksExtensions(new[] { source, AsyncStreamsTypes });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedGraph, expectedDiagnostics);
-
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_18()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 public class C 
@@ -4143,7 +4512,8 @@ public class C
     Task DisposeAsync(int a = 3, bool b = false) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4208,14 +4578,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + s_IAsyncEnumerable + s_ValueTask, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + s_IAsyncEnumerable + s_ValueTask,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_19()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 public class C 
@@ -4228,7 +4603,8 @@ public class C
     Task DisposeAsync(int a = 3, bool b = false, params int[] extras) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4302,14 +4678,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + s_IAsyncEnumerable + s_ValueTask, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + s_IAsyncEnumerable + s_ValueTask,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_20()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 public class C 
@@ -4322,7 +4703,8 @@ public class C
     Task DisposeAsync(params int[] extras) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4388,14 +4770,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + s_IAsyncEnumerable + s_ValueTask, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + s_IAsyncEnumerable + s_ValueTask,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingFlow_21()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 public class C 
@@ -4408,7 +4795,8 @@ public class C
     Task DisposeAsync(int a = 3, params int[] extras, bool b = false) => throw null;
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4471,23 +4859,32 @@ Block[B6] - Exit
             {
                 // file.cs(8,21): error CS7036: There is no argument given that corresponds to the required formal parameter 'extras' of 'C.DisposeAsync(int, params int[], bool)'
                 //         await using(this){}
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "this").WithArguments("extras", "C.DisposeAsync(int, params int[], bool)").WithLocation(8, 21),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "this")
+                    .WithArguments("extras", "C.DisposeAsync(int, params int[], bool)")
+                    .WithLocation(8, 21),
                 // file.cs(8,21): error CS8410: 'C': type used in an asynchronous using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                 //         await using(this){}
-                Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "this").WithArguments("C").WithLocation(8, 21),
+                Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "this")
+                    .WithArguments("C")
+                    .WithLocation(8, 21),
                 // file.cs(11,34): error CS0231: A params parameter must be the last parameter in a formal parameter list
                 //     Task DisposeAsync(int a = 3, params int[] extras, bool b = false) => throw null;
                 Diagnostic(ErrorCode.ERR_ParamsLast, "params int[] extras").WithLocation(11, 34)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + s_IAsyncEnumerable + s_ValueTask, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + s_IAsyncEnumerable + s_ValueTask,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_Flow_01()
         {
-            string source = @"
+            string source =
+                @"
 
 using System;
 class P : IDisposable
@@ -4500,7 +4897,8 @@ class P : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4564,14 +4962,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_Flow_02()
         {
-            string source = @"
+            string source =
+                @"
 
 using System;
 class P : IDisposable
@@ -4584,7 +4987,8 @@ class P : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4734,14 +5138,19 @@ Block[B14] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_Flow_03()
         {
-            string source = @"
+            string source =
+                @"
 
 using System;
 class P : IDisposable
@@ -4754,7 +5163,8 @@ class P : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4901,14 +5311,19 @@ Block[B13] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_Flow_04()
         {
-            string source = @"
+            string source =
+                @"
 
 using System;
 class P : IDisposable
@@ -4921,7 +5336,8 @@ class P : IDisposable
     public void Dispose() { }
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5068,14 +5484,19 @@ Block[B13] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_Flow_05()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219
 class P : System.IDisposable
 {
@@ -5095,7 +5516,8 @@ class P : System.IDisposable
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5222,14 +5644,19 @@ Block[B10] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_Flow_06()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219
 class P : System.IDisposable
 {
@@ -5250,7 +5677,8 @@ class P : System.IDisposable
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5412,14 +5840,19 @@ Block[B10] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_Flow_07()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219
 class P : System.IDisposable
 {
@@ -5440,7 +5873,8 @@ class P : System.IDisposable
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5577,14 +6011,19 @@ Block[B11] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_Flow_08()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219
 class P : System.IDisposable
 {
@@ -5612,7 +6051,8 @@ class P : System.IDisposable
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5775,14 +6215,19 @@ Block[B14] - Exit [UnReachable]
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_Flow_09()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219
 using System.Threading.Tasks;
 
@@ -5800,7 +6245,8 @@ class C
 }
 ";
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -5863,14 +6309,18 @@ class C
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithTasksExtensions(new[] { source, AsyncStreamsTypes });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedGraph, expectedDiagnostics);
-
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_Flow_10()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219
 using System.Threading.Tasks;
 
@@ -5894,7 +6344,8 @@ class C : System.IDisposable
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
  Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -6084,14 +6535,19 @@ class C : System.IDisposable
             var expectedDiagnostics = DiagnosticDescription.None;
 
             var comp = CreateCompilationWithTasksExtensions(new[] { source, AsyncStreamsTypes });
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_Flow_11()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219
 class P : System.IDisposable
 {
@@ -6110,7 +6566,8 @@ class P : System.IDisposable
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6232,14 +6689,19 @@ Block[B10] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_12()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219, CS0164
 class P : System.IDisposable
 {
@@ -6261,7 +6723,8 @@ label3:
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6383,14 +6846,19 @@ Block[B10] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_13()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219, CS0164
 class P : System.IDisposable
 {
@@ -6411,7 +6879,8 @@ class P : System.IDisposable
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -6539,26 +7008,40 @@ class P : System.IDisposable
         Predecessors: [B7] [B9]
         Statements (0)
 ";
-            var expectedDiagnostics = new[]{
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(12,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             label1:
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, @"label1:
-                using var a = new P();").WithLocation(12, 13),
+                Diagnostic(
+                        ErrorCode.ERR_BadEmbeddedStmt,
+                        @"label1:
+                using var a = new P();"
+                    )
+                    .WithLocation(12, 13),
                 // file.cs(15,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             label2:
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, @"label2:
+                Diagnostic(
+                        ErrorCode.ERR_BadEmbeddedStmt,
+                        @"label2:
             label3:
-                using var b = new P();").WithLocation(15, 13)
+                using var b = new P();"
+                    )
+                    .WithLocation(15, 13)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_14()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219, CS0164
 class P : System.IDisposable
 {
@@ -6576,7 +7059,8 @@ class P : System.IDisposable
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B2]
@@ -6644,20 +7128,26 @@ class P : System.IDisposable
         Predecessors: [B3]
         Statements (0)
 ";
-            var expectedDiagnostics = new[]{
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(12,9): warning CS0162: Unreachable code detected
                 //         int x = 0;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "int").WithLocation(12, 9)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_15()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219, CS0164
 class P : System.IDisposable
 {
@@ -6674,7 +7164,8 @@ class P : System.IDisposable
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
       Block[B0] - Entry
       Statements (0)
         Next (Regular) Block[B1]
@@ -6733,20 +7224,27 @@ class P : System.IDisposable
         Predecessors (0)
         Statements (0)
 ";
-            var expectedDiagnostics = new[]{
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(13,9): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
                 //         goto label1;
-                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;").WithLocation(13, 9)
+                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
+                    .WithLocation(13, 9)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_16()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219, CS0164
 class P : System.IDisposable
 {
@@ -6765,7 +7263,8 @@ class P : System.IDisposable
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B2]
@@ -6833,23 +7332,30 @@ class P : System.IDisposable
         Predecessors (0)
         Statements (0)
 ";
-            var expectedDiagnostics = new[]{
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(12,9): warning CS0162: Unreachable code detected
                 //         int x = 0;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "int").WithLocation(12, 9),
                 // file.cs(15,9): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
                 //         goto label1;
-                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;").WithLocation(15, 9)
+                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
+                    .WithLocation(15, 9)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_17()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219, CS0164
 class P : System.IDisposable
 {
@@ -6868,7 +7374,8 @@ class P : System.IDisposable
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -6944,14 +7451,19 @@ class P : System.IDisposable
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_18()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219, CS0164
 class P : System.IDisposable
 {
@@ -6969,7 +7481,8 @@ class P : System.IDisposable
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -7032,20 +7545,27 @@ class P : System.IDisposable
         Predecessors: [B2]
         Statements (0)
 ";
-            var expectedDiagnostics = new[]{
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(14,13): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
                 //             goto label1;
-                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;").WithLocation(14, 13)
+                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
+                    .WithLocation(14, 13)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_19()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219, CS0164
 class P : System.IDisposable
 {
@@ -7066,7 +7586,8 @@ class P : System.IDisposable
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
     Block[B0] - Entry
         Statements (0)
         Next (Regular) Block[B1]
@@ -7144,20 +7665,27 @@ class P : System.IDisposable
         Predecessors: [B4]
         Statements (0)
 ";
-            var expectedDiagnostics = new[]{
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(17,13): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
                 //             goto label1;
-                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;").WithLocation(17, 13)
+                Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
+                    .WithLocation(17, 13)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_20()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219, CS0164
 ref struct P 
 {
@@ -7172,7 +7700,8 @@ ref struct P
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7220,14 +7749,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_21()
         {
-            string source = @"
+            string source =
+                @"
 ref struct P 
 {
     public object Dispose() => null;
@@ -7239,7 +7773,8 @@ ref struct P
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7291,22 +7826,31 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = new[]
             {
-                    // file.cs(8,13): warning CS0280: 'P' does not implement the 'disposable' pattern. 'P.Dispose()' has the wrong signature.
-                    //             using var x = new P();
-                    Diagnostic(ErrorCode.WRN_PatternBadSignature, "using var x = new P();").WithArguments("P", "disposable", "P.Dispose()").WithLocation(8, 13),
-                    // file.cs(8,13): error CS1674: 'P': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
-                    //             using var x = new P();
-                    Diagnostic(ErrorCode.ERR_NoConvToIDisp, "using var x = new P();").WithArguments("P").WithLocation(8, 13)
+                // file.cs(8,13): warning CS0280: 'P' does not implement the 'disposable' pattern. 'P.Dispose()' has the wrong signature.
+                //             using var x = new P();
+                Diagnostic(ErrorCode.WRN_PatternBadSignature, "using var x = new P();")
+                    .WithArguments("P", "disposable", "P.Dispose()")
+                    .WithLocation(8, 13),
+                // file.cs(8,13): error CS1674: 'P': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                //             using var x = new P();
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "using var x = new P();")
+                    .WithArguments("P")
+                    .WithLocation(8, 13)
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_22()
         {
-            string source = @"
+            string source =
+                @"
 #pragma  warning disable CS0815, CS0219, CS0164
 ref struct P 
 {
@@ -7321,7 +7865,8 @@ ref struct P
 
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7386,14 +7931,19 @@ Block[B4] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_23()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 class P 
 {
@@ -7405,7 +7955,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7467,14 +8018,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + s_IAsyncEnumerable + s_ValueTask, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + s_IAsyncEnumerable + s_ValueTask,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UsingDeclaration_Flow_24()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 class P 
 {
@@ -7486,7 +8042,8 @@ class P
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7565,15 +8122,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + s_IAsyncEnumerable + s_ValueTask, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + s_IAsyncEnumerable + s_ValueTask,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
-
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_SingleDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -7588,7 +8149,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
     IUsingDeclarationOperation(IsAsynchronous: False) (OperationKind.UsingDeclaration, Type: null) (Syntax: 'using var c = new C();')
       DeclarationGroup: 
         IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsImplicit) (Syntax: 'using var c = new C();')
@@ -7607,14 +8169,19 @@ class C : IDisposable
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_MultipleDeclarations()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -7631,7 +8198,8 @@ class C : IDisposable
     }  /*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
     IBlockOperation (3 statements, 3 locals) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
       Locals: Local_1: C c
         Local_2: C d
@@ -7682,14 +8250,19 @@ class C : IDisposable
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_SingleDeclaration_MultipleVariables()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C : IDisposable
@@ -7704,7 +8277,8 @@ class C : IDisposable
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
     IUsingDeclarationOperation(IsAsynchronous: False) (OperationKind.UsingDeclaration, Type: null) (Syntax: 'using C c = ...  = new C();')
       DeclarationGroup: 
         IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsImplicit) (Syntax: 'using C c = ...  = new C();')
@@ -7736,14 +8310,19 @@ class C : IDisposable
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_MultipleDeclaration_WithLabels()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 #pragma warning disable CS0164
 class C : IDisposable
@@ -7762,7 +8341,8 @@ class C : IDisposable
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (2 statements, 2 locals) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   Locals: Local_1: C a
     Local_2: C b
@@ -7804,14 +8384,19 @@ IBlockOperation (2 statements, 2 locals) (OperationKind.Block, Type: null) (Synt
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_SingleDeclaration_Async()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -7830,7 +8415,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingDeclarationOperation(IsAsynchronous: True, DisposeMethod: System.Threading.Tasks.Task C.DisposeAsync()) (OperationKind.UsingDeclaration, Type: null) (Syntax: 'await using ...  = new C();')
   DeclarationGroup: 
     IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsImplicit) (Syntax: 'await using ...  = new C();')
@@ -7849,14 +8435,19 @@ IUsingDeclarationOperation(IsAsynchronous: True, DisposeMethod: System.Threading
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_MultipleDeclarations_Async()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -7877,7 +8468,8 @@ class C
     }  /*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (3 statements, 3 locals) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   Locals: Local_1: C c
     Local_2: C d
@@ -7928,14 +8520,19 @@ IBlockOperation (3 statements, 3 locals) (OperationKind.Block, Type: null) (Synt
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_SingleDeclaration_MultipleVariables_Async()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -7954,7 +8551,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingDeclarationOperation(IsAsynchronous: True, DisposeMethod: System.Threading.Tasks.Task C.DisposeAsync()) (OperationKind.UsingDeclaration, Type: null) (Syntax: 'await using ...  = new C();')
   DeclarationGroup: 
     IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsImplicit) (Syntax: 'await using ...  = new C();')
@@ -7987,14 +8585,19 @@ IUsingDeclarationOperation(IsAsynchronous: True, DisposeMethod: System.Threading
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(32100, "https://github.com/dotnet/roslyn/issues/32100")]
         public void UsingDeclaration_RegularAsync_Mix()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -8020,7 +8623,8 @@ class C : IDisposable
     }  /*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (4 statements, 6 locals) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   Locals: Local_1: C c
     Local_2: C d
@@ -8102,14 +8706,19 @@ IBlockOperation (4 statements, 6 locals) (OperationKind.Block, Type: null) (Synt
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void UsingDeclaration_DefaultDisposeArguments()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     public static void M1()
@@ -8123,7 +8732,8 @@ ref struct S
     public void Dispose(int a = 1, bool b = true, params object[] others) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IUsingDeclarationOperation(IsAsynchronous: False, DisposeMethod: void S.Dispose([System.Int32 a = 1], [System.Boolean b = true], params System.Object[] others)) (OperationKind.UsingDeclaration, Type: null) (Syntax: 'using var s = new S();')
   DeclarationGroup:
     IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsImplicit) (Syntax: 'using var s = new S();')
@@ -8160,13 +8770,18 @@ IUsingDeclarationOperation(IsAsynchronous: False, DisposeMethod: void S.Dispose(
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void UsingDeclaration_LocalFunctionDefinedAfterUsingReferenceBeforeUsing()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 
 class C
@@ -8185,9 +8800,12 @@ class C
         static void localFunc3() {}
     }/*</bind>*/
 }
-");
+"
+            );
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                @"
 IBlockOperation (7 statements, 1 locals) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   Locals: Local_1: System.IDisposable i
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'localFunc2();')
@@ -8237,9 +8855,13 @@ IBlockOperation (7 statements, 1 locals) (OperationKind.Block, Type: null) (Synt
       IReturnOperation (OperationKind.Return, Type: null, IsImplicit) (Syntax: '{}')
         ReturnedValue: 
           null
-", DiagnosticDescription.None);
+",
+                DiagnosticDescription.None
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8346,13 +8968,15 @@ Block[B0] - Entry
 Block[B6] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact]
         public void UsingDeclaration_LocalDefinedAfterUsingReferenceBeforeUsing()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 
 class C
@@ -8364,15 +8988,21 @@ class C
         object local = null;
     }/*</bind>*/
 }
-");
+"
+            );
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (8,13): error CS0841: Cannot use local variable 'local' before it is declared
                 //         _ = local;
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "local").WithArguments("local").WithLocation(8, 13)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "local")
+                    .WithArguments("local")
+                    .WithLocation(8, 13)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                @"
 IBlockOperation (3 statements, 2 locals) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   Locals: Local_1: System.IDisposable i
     Local_2: System.Object local
@@ -8409,9 +9039,13 @@ IBlockOperation (3 statements, 2 locals) (OperationKind.Block, Type: null, IsInv
                     ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
       Initializer: 
         null
-", expectedDiagnostics);
+",
+                expectedDiagnostics
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8485,13 +9119,15 @@ Block[B0] - Entry
 Block[B6] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact]
         public void UsingDeclaration_InsideSwitchCaseEmbeddedStatements()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -8510,13 +9146,16 @@ class C2
     }/*</bind>*/
 }";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
-                // file.cs(14,17): error CS8647: A using variable cannot be used directly within a switch section (consider using braces). 
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
+                // file.cs(14,17): error CS8647: A using variable cannot be used directly within a switch section (consider using braces).
                 //                 using C1 o1 = new C1();
-                Diagnostic(ErrorCode.ERR_UsingVarInSwitchCase, "using C1 o1 = new C1();").WithLocation(14, 17)
+                Diagnostic(ErrorCode.ERR_UsingVarInSwitchCase, "using C1 o1 = new C1();")
+                    .WithLocation(14, 17)
             };
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8602,13 +9241,18 @@ Block[B8] - Exit
     Statements (0)
 ";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void UsingDeclaration_InsideIfEmbeddedStatement()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -8623,13 +9267,16 @@ class C2
     }/*</bind>*/
 }";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(12,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             using C1 o1 = new C1();
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "using C1 o1 = new C1();").WithLocation(12, 13)
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "using C1 o1 = new C1();")
+                    .WithLocation(12, 13)
             };
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8698,13 +9345,18 @@ Block[B7] - Exit
     Statements (0)
 ";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void UsingDeclaration_InsideForEmbeddedStatement()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections;
 class C1 : IDisposable
@@ -8720,13 +9372,16 @@ class C2
     }/*</bind>*/
 }";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(13,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             using C1 o1 = new C1();
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "using C1 o1 = new C1();").WithLocation(13, 13)
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "using C1 o1 = new C1();")
+                    .WithLocation(13, 13)
             };
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8794,13 +9449,18 @@ Block[B7] - Exit [UnReachable]
     Statements (0)
 ";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void UsingDeclaration_InsideForEachEmbeddedStatement()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections;
 class C1 : IDisposable
@@ -8816,13 +9476,16 @@ class C2
     }/*</bind>*/
 }";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(13,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             using C1 o1 = new C1();
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "using C1 o1 = new C1();").WithLocation(13, 13)
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "using C1 o1 = new C1();")
+                    .WithLocation(13, 13)
             };
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -8966,7 +9629,11 @@ Block[B12] - Exit
     Statements (0)
 ";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

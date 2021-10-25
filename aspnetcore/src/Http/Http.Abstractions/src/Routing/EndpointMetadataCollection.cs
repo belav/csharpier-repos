@@ -23,7 +23,9 @@ namespace Microsoft.AspNetCore.Http
         /// <summary>
         /// An empty <see cref="EndpointMetadataCollection"/>.
         /// </summary>
-        public static readonly EndpointMetadataCollection Empty = new EndpointMetadataCollection(Array.Empty<object>());
+        public static readonly EndpointMetadataCollection Empty = new EndpointMetadataCollection(
+            Array.Empty<object>()
+        );
 
         private readonly object[] _items;
         private readonly ConcurrentDictionary<Type, object[]> _cache;
@@ -47,10 +49,8 @@ namespace Microsoft.AspNetCore.Http
         /// Creates a new <see cref="EndpointMetadataCollection"/>.
         /// </summary>
         /// <param name="items">The metadata items.</param>
-        public EndpointMetadataCollection(params object[] items)
-            : this((IEnumerable<object>)items)
-        {
-        }
+        public EndpointMetadataCollection(params object[] items) : this((IEnumerable<object>)items)
+        { }
 
         /// <summary>
         /// Gets the item at <paramref name="index"/>.
@@ -170,9 +170,7 @@ namespace Microsoft.AspNetCore.Http
             /// <summary>
             /// Releases all resources used by the <see cref="Enumerator"/>.
             /// </summary>
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             /// <summary>
             /// Advances the enumerator to the next element of the <see cref="Enumerator"/>.

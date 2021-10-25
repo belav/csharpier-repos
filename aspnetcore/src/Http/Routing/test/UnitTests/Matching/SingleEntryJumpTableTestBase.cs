@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int defaultDestination,
             int exitDestination,
             string text,
-            int destination);
+            int destination
+        );
 
         [Fact]
         public void GetDestination_ZeroLengthSegment_JumpsToExit()

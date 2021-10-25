@@ -24,24 +24,24 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                 Type = typeof(JsonPatchDocument)
             };
 
-            var stringParameterDescription = new ApiParameterDescription
-            {
-                Type = typeof(string),
-            };
+            var stringParameterDescription = new ApiParameterDescription { Type = typeof(string), };
 
             var apiDescription = new ApiDescription();
             apiDescription.ParameterDescriptions.Add(jsonPatchParameterDescription);
             apiDescription.ParameterDescriptions.Add(stringParameterDescription);
 
             var actionDescriptorList = new List<ActionDescriptor>();
-            var apiDescriptionProviderContext = new ApiDescriptionProviderContext(actionDescriptorList);
+            var apiDescriptionProviderContext = new ApiDescriptionProviderContext(
+                actionDescriptorList
+            );
             apiDescriptionProviderContext.Results.Add(apiDescription);
 
             // Act
             provider.OnProvidersExecuting(apiDescriptionProviderContext);
 
             // Assert
-            Assert.Collection(apiDescription.ParameterDescriptions,
+            Assert.Collection(
+                apiDescription.ParameterDescriptions,
                 description =>
                 {
                     Assert.Equal(typeof(Operation[]), description.Type);
@@ -50,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                 description =>
                 {
                     Assert.Equal(typeof(string), description.Type);
-                });
+                }
+            );
         }
     }
 }

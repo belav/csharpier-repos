@@ -31,7 +31,13 @@ namespace Microsoft.CodeAnalysis.PersistentStorage
         [DataMember(Order = 4)]
         public readonly Checksum ParseOptionsChecksum;
 
-        public ProjectKey(SolutionKey solution, ProjectId id, string? filePath, string name, Checksum parseOptionsChecksum)
+        public ProjectKey(
+            SolutionKey solution,
+            ProjectId id,
+            string? filePath,
+            string name,
+            Checksum parseOptionsChecksum
+        )
         {
             Solution = solution;
             Id = id;
@@ -40,10 +46,19 @@ namespace Microsoft.CodeAnalysis.PersistentStorage
             ParseOptionsChecksum = parseOptionsChecksum;
         }
 
-        public static ProjectKey ToProjectKey(Project project)
-            => ToProjectKey(project.Solution.State, project.State);
+        public static ProjectKey ToProjectKey(Project project) =>
+            ToProjectKey(project.Solution.State, project.State);
 
-        public static ProjectKey ToProjectKey(SolutionState solutionState, ProjectState projectState)
-            => new(SolutionKey.ToSolutionKey(solutionState), projectState.Id, projectState.FilePath, projectState.Name, projectState.GetParseOptionsChecksum());
+        public static ProjectKey ToProjectKey(
+            SolutionState solutionState,
+            ProjectState projectState
+        ) =>
+            new(
+                SolutionKey.ToSolutionKey(solutionState),
+                projectState.Id,
+                projectState.FilePath,
+                projectState.Name,
+                projectState.GetParseOptionsChecksum()
+            );
     }
 }

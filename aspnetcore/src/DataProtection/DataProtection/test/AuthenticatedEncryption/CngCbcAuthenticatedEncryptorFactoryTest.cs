@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
         {
             // Arrange
             var key = new Mock<IKey>();
-            key.Setup(k => k.Descriptor).Returns(new Mock<IAuthenticatedEncryptorDescriptor>().Object);
+            key.Setup(k => k.Descriptor)
+                .Returns(new Mock<IAuthenticatedEncryptorDescriptor>().Object);
 
             var factory = new CngCbcAuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
 

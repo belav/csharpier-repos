@@ -100,8 +100,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
             return false;
         }
 
-        public Enumerator GetEnumerator()
-            => new(this);
+        public Enumerator GetEnumerator() => new(this);
 
         public struct Enumerator
         {

@@ -19,7 +19,8 @@ namespace System.Security.Cryptography
             byte[] nonce,
             byte[] plaintext,
             byte[] ciphertext,
-            byte[] tag)
+            byte[] tag
+        )
         {
             if (nonce == null)
                 throw new ArgumentNullException(nameof(nonce));

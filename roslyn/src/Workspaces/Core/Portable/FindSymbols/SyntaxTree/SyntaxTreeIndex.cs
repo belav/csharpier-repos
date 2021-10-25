@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IdentifierInfo identifierInfo,
             ContextInfo contextInfo,
             DeclarationInfo declarationInfo,
-            ExtensionMethodInfo extensionMethodInfo)
+            ExtensionMethodInfo extensionMethodInfo
+        )
         {
             this.Checksum = checksum;
             _literalInfo = literalInfo;
@@ -40,54 +41,84 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             _declaredSymbolInfoSet = new(() => new(this.DeclaredSymbolInfos));
         }
 
-        private static readonly ConditionalWeakTable<Document, SyntaxTreeIndex?> s_documentToIndex = new();
-        private static readonly ConditionalWeakTable<DocumentId, SyntaxTreeIndex?> s_documentIdToIndex = new();
+        private static readonly ConditionalWeakTable<Document, SyntaxTreeIndex?> s_documentToIndex =
+            new();
+        private static readonly ConditionalWeakTable<
+            DocumentId,
+            SyntaxTreeIndex?
+        > s_documentIdToIndex = new();
 
-        public static async Task PrecalculateAsync(Document document, CancellationToken cancellationToken)
+        public static async Task PrecalculateAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             using (Logger.LogBlock(FunctionId.SyntaxTreeIndex_Precalculate, cancellationToken))
             {
                 Debug.Assert(document.IsFromPrimaryBranch());
 
-                var checksum = await GetChecksumAsync(document, cancellationToken).ConfigureAwait(false);
+                var checksum = await GetChecksumAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
 
                 // Check if we've already created and persisted the index for this document.
-                if (await PrecalculatedAsync(document, checksum, cancellationToken).ConfigureAwait(false))
+                if (
+                    await PrecalculatedAsync(document, checksum, cancellationToken)
+                        .ConfigureAwait(false)
+                )
                 {
                     return;
                 }
 
-                using (Logger.LogBlock(FunctionId.SyntaxTreeIndex_Precalculate_Create, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.SyntaxTreeIndex_Precalculate_Create,
+                        cancellationToken
+                    )
+                )
                 {
                     // If not, create and save the index.
-                    var data = await CreateIndexAsync(document, checksum, cancellationToken).ConfigureAwait(false);
+                    var data = await CreateIndexAsync(document, checksum, cancellationToken)
+                        .ConfigureAwait(false);
                     await data.SaveAsync(document, cancellationToken).ConfigureAwait(false);
                 }
             }
         }
 
-        public static async ValueTask<SyntaxTreeIndex> GetRequiredIndexAsync(Document document, CancellationToken cancellationToken)
+        public static async ValueTask<SyntaxTreeIndex> GetRequiredIndexAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var index = await GetIndexAsync(document, cancellationToken).ConfigureAwait(false);
             Contract.ThrowIfNull(index);
             return index;
         }
 
-        public static ValueTask<SyntaxTreeIndex?> GetIndexAsync(Document document, CancellationToken cancellationToken)
-            => GetIndexAsync(document, loadOnly: false, cancellationToken);
+        public static ValueTask<SyntaxTreeIndex?> GetIndexAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => GetIndexAsync(document, loadOnly: false, cancellationToken);
 
-        [PerformanceSensitive("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1224834", OftenCompletesSynchronously = true)]
+        [PerformanceSensitive(
+            "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1224834",
+            OftenCompletesSynchronously = true
+        )]
         public static async ValueTask<SyntaxTreeIndex?> GetIndexAsync(
             Document document,
             bool loadOnly,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // See if we already cached an index with this direct document index.  If so we can just
             // return it with no additional work.
             if (!s_documentToIndex.TryGetValue(document, out var index))
             {
-                index = await GetIndexWorkerAsync(document, loadOnly, cancellationToken).ConfigureAwait(false);
-                Contract.ThrowIfFalse(index != null || loadOnly == true, "Result can only be null if 'loadOnly: true' was passed.");
+                index = await GetIndexWorkerAsync(document, loadOnly, cancellationToken)
+                    .ConfigureAwait(false);
+                Contract.ThrowIfFalse(
+                    index != null || loadOnly == true,
+                    "Result can only be null if 'loadOnly: true' was passed."
+                );
 
                 if (index == null && loadOnly)
                 {
@@ -106,14 +137,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private static async Task<SyntaxTreeIndex?> GetIndexWorkerAsync(
             Document document,
             bool loadOnly,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var checksum = await GetChecksumAsync(document, cancellationToken).ConfigureAwait(false);
+            var checksum = await GetChecksumAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             // Check if we have an index for a previous version of this document.  If our
             // checksums match, we can just use that.
-            if (s_documentIdToIndex.TryGetValue(document.Id, out var index) &&
-                index?.Checksum == checksum)
+            if (
+                s_documentIdToIndex.TryGetValue(document.Id, out var index)
+                && index?.Checksum == checksum
+            )
             {
                 // The previous index we stored with this documentId is still valid.  Just
                 // return that.
@@ -128,7 +163,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
 
             // alright, we don't have cached information, re-calculate them here.
-            index = await CreateIndexAsync(document, checksum, cancellationToken).ConfigureAwait(false);
+            index = await CreateIndexAsync(document, checksum, cancellationToken)
+                .ConfigureAwait(false);
 
             // okay, persist this info
             await index.SaveAsync(document, cancellationToken).ConfigureAwait(false);

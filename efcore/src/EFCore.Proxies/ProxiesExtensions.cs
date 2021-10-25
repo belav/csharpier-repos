@@ -42,16 +42,20 @@ namespace Microsoft.EntityFrameworkCore
         public static DbContextOptionsBuilder UseChangeTrackingProxies(
             this DbContextOptionsBuilder optionsBuilder,
             bool useChangeTrackingProxies = true,
-            bool checkEquality = true)
+            bool checkEquality = true
+        )
         {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
 
-            var extension = optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
+            var extension =
+                optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
                 ?? new ProxiesOptionsExtension();
 
             extension = extension.WithChangeTracking(useChangeTrackingProxies, checkEquality);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                extension
+            );
 
             return optionsBuilder;
         }
@@ -83,10 +87,13 @@ namespace Microsoft.EntityFrameworkCore
         public static DbContextOptionsBuilder<TContext> UseChangeTrackingProxies<TContext>(
             this DbContextOptionsBuilder<TContext> optionsBuilder,
             bool useChangeTrackingProxies = true,
-            bool checkEquality = true)
-            where TContext : DbContext
-            => (DbContextOptionsBuilder<TContext>)UseChangeTrackingProxies(
-                (DbContextOptionsBuilder)optionsBuilder, useChangeTrackingProxies, checkEquality);
+            bool checkEquality = true
+        ) where TContext : DbContext =>
+            (DbContextOptionsBuilder<TContext>)UseChangeTrackingProxies(
+                (DbContextOptionsBuilder)optionsBuilder,
+                useChangeTrackingProxies,
+                checkEquality
+            );
 
         /// <summary>
         ///     <para>
@@ -106,16 +113,20 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder to allow method calls to be chained. </returns>
         public static DbContextOptionsBuilder UseLazyLoadingProxies(
             this DbContextOptionsBuilder optionsBuilder,
-            bool useLazyLoadingProxies = true)
+            bool useLazyLoadingProxies = true
+        )
         {
             Check.NotNull(optionsBuilder, nameof(optionsBuilder));
 
-            var extension = optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
+            var extension =
+                optionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
                 ?? new ProxiesOptionsExtension();
 
             extension = extension.WithLazyLoading(useLazyLoadingProxies);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
+            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                extension
+            );
 
             return optionsBuilder;
         }
@@ -139,9 +150,12 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder to allow method calls to be chained. </returns>
         public static DbContextOptionsBuilder<TContext> UseLazyLoadingProxies<TContext>(
             this DbContextOptionsBuilder<TContext> optionsBuilder,
-            bool useLazyLoadingProxies = true)
-            where TContext : DbContext
-            => (DbContextOptionsBuilder<TContext>)UseLazyLoadingProxies((DbContextOptionsBuilder)optionsBuilder, useLazyLoadingProxies);
+            bool useLazyLoadingProxies = true
+        ) where TContext : DbContext =>
+            (DbContextOptionsBuilder<TContext>)UseLazyLoadingProxies(
+                (DbContextOptionsBuilder)optionsBuilder,
+                useLazyLoadingProxies
+            );
 
         /// <summary>
         ///     Creates a proxy instance for an entity type if proxy creation has been turned on.
@@ -153,7 +167,8 @@ namespace Microsoft.EntityFrameworkCore
         public static object CreateProxy(
             this DbContext context,
             Type entityType,
-            params object[] constructorArguments)
+            params object[] constructorArguments
+        )
         {
             Check.NotNull(context, nameof(context));
             Check.NotNull(entityType, nameof(entityType));
@@ -171,8 +186,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The proxy instance. </returns>
         public static TEntity CreateProxy<TEntity>(
             this DbContext context,
-            params object[] constructorArguments)
-            => CreateProxy<TEntity>(context, null, constructorArguments);
+            params object[] constructorArguments
+        ) => CreateProxy<TEntity>(context, null, constructorArguments);
 
         /// <summary>
         ///     Creates a proxy instance for an entity type if proxy creation has been turned on.
@@ -185,7 +200,8 @@ namespace Microsoft.EntityFrameworkCore
         public static TEntity CreateProxy<TEntity>(
             this DbContext context,
             Action<TEntity>? configureEntity,
-            params object[] constructorArguments)
+            params object[] constructorArguments
+        )
         {
             var entity = (TEntity)context.CreateProxy(typeof(TEntity), constructorArguments);
 
@@ -203,9 +219,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The proxy instance. </returns>
         public static TEntity CreateProxy<TEntity>(
             this DbSet<TEntity> set,
-            params object[] constructorArguments)
-            where TEntity : class
-            => CreateProxy(set, null, constructorArguments);
+            params object[] constructorArguments
+        ) where TEntity : class => CreateProxy(set, null, constructorArguments);
 
         /// <summary>
         ///     Creates a proxy instance for an entity type if proxy creation has been turned on.
@@ -218,13 +233,14 @@ namespace Microsoft.EntityFrameworkCore
         public static TEntity CreateProxy<TEntity>(
             this DbSet<TEntity> set,
             Action<TEntity>? configureEntity,
-            params object[] constructorArguments)
-            where TEntity : class
+            params object[] constructorArguments
+        ) where TEntity : class
         {
             Check.NotNull(set, nameof(set));
             Check.NotNull(constructorArguments, nameof(constructorArguments));
 
-            var entity = (TEntity)set.GetInfrastructure().CreateProxy(set.EntityType, constructorArguments);
+            var entity = (TEntity)set.GetInfrastructure()
+                .CreateProxy(set.EntityType, constructorArguments);
 
             configureEntity?.Invoke(entity);
 
@@ -234,36 +250,51 @@ namespace Microsoft.EntityFrameworkCore
         private static object CreateProxy(
             this IServiceProvider serviceProvider,
             IEntityType entityType,
-            params object[] constructorArguments)
+            params object[] constructorArguments
+        )
         {
             CheckProxyOptions(serviceProvider, entityType.DisplayName());
 
-            return serviceProvider.GetRequiredService<IProxyFactory>().CreateProxy(
-                serviceProvider.GetRequiredService<ICurrentDbContext>().Context,
-                entityType,
-                constructorArguments);
+            return serviceProvider
+                .GetRequiredService<IProxyFactory>()
+                .CreateProxy(
+                    serviceProvider.GetRequiredService<ICurrentDbContext>().Context,
+                    entityType,
+                    constructorArguments
+                );
         }
 
         private static object CreateProxy(
             this IServiceProvider serviceProvider,
             Type entityType,
-            params object[] constructorArguments)
+            params object[] constructorArguments
+        )
         {
             CheckProxyOptions(serviceProvider, entityType.ShortDisplayName());
 
-            return serviceProvider.GetRequiredService<IProxyFactory>().Create(
-                serviceProvider.GetRequiredService<ICurrentDbContext>().Context,
-                entityType,
-                constructorArguments);
+            return serviceProvider
+                .GetRequiredService<IProxyFactory>()
+                .Create(
+                    serviceProvider.GetRequiredService<ICurrentDbContext>().Context,
+                    entityType,
+                    constructorArguments
+                );
         }
 
-        private static void CheckProxyOptions(IServiceProvider serviceProvider, string entityTypeName)
+        private static void CheckProxyOptions(
+            IServiceProvider serviceProvider,
+            string entityTypeName
+        )
         {
-            var options = serviceProvider.GetRequiredService<IDbContextOptions>().FindExtension<ProxiesOptionsExtension>();
+            var options = serviceProvider
+                .GetRequiredService<IDbContextOptions>()
+                .FindExtension<ProxiesOptionsExtension>();
 
             if (options?.UseProxies != true)
             {
-                throw new InvalidOperationException(ProxiesStrings.ProxiesNotEnabled(entityTypeName));
+                throw new InvalidOperationException(
+                    ProxiesStrings.ProxiesNotEnabled(entityTypeName)
+                );
             }
         }
     }

@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.Routing
         /// </summary>
         /// <param name="routeOptions">Accessor for <see cref="RouteOptions"/> containing the constraints of interest.</param>
         /// <param name="serviceProvider">The <see cref="IServiceProvider"/> to get service arguments from.</param>
-        public DefaultInlineConstraintResolver(IOptions<RouteOptions> routeOptions, IServiceProvider serviceProvider)
+        public DefaultInlineConstraintResolver(
+            IOptions<RouteOptions> routeOptions,
+            IServiceProvider serviceProvider
+        )
         {
             if (routeOptions == null)
             {
@@ -60,7 +63,8 @@ namespace Microsoft.AspNetCore.Routing
                 _inlineConstraintMap,
                 _serviceProvider,
                 inlineConstraint,
-                out _);
+                out _
+            );
         }
     }
 }

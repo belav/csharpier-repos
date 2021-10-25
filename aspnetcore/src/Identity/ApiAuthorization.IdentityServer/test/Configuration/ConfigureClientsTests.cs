@@ -17,10 +17,9 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
         public void GetClients_DoesNothingIfThereAreNoConfiguredClients()
         {
             // Arrange
-            var config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
-            {
-
-            }).Build();
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(new Dictionary<string, string> {  })
+                .Build();
 
             var resources = Array.Empty<ApiResource>();
             var clientLoader = new ConfigureClients(config, new TestLogger<ConfigureClients>());
@@ -36,10 +35,11 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
         public void GetClients_ReadsIdentityServerSPAFromConfiguration()
         {
             // Arrange
-            var config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["MyClient:Profile"] = "IdentityServerSPA"
-            }).Build();
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new Dictionary<string, string> { ["MyClient:Profile"] = "IdentityServerSPA" }
+                )
+                .Build();
 
             var resources = Array.Empty<ApiResource>();
             var expectedScopes = new[]
@@ -59,7 +59,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
             Assert.Equal("MyClient", client.ClientName);
             Assert.True(client.AllowAccessTokensViaBrowser);
             Assert.Equal(new[] { "/authentication/login-callback" }, client.RedirectUris.ToArray());
-            Assert.Equal(new[] { "/authentication/logout-callback" }, client.PostLogoutRedirectUris.ToArray());
+            Assert.Equal(
+                new[] { "/authentication/logout-callback" },
+                client.PostLogoutRedirectUris.ToArray()
+            );
             Assert.Empty(client.AllowedCorsOrigins);
             Assert.False(client.RequireConsent);
             Assert.Empty(client.ClientSecrets);
@@ -70,10 +73,11 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
         public void GetClients_ReadsNativeAppFromConfiguration()
         {
             // Arrange
-            var config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["MyClient:Profile"] = "NativeApp"
-            }).Build();
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new Dictionary<string, string> { ["MyClient:Profile"] = "NativeApp" }
+                )
+                .Build();
 
             var resources = Array.Empty<ApiResource>();
             var clientLoader = new ConfigureClients(config, new TestLogger<ConfigureClients>());
@@ -93,7 +97,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
             Assert.Equal("MyClient", client.ClientName);
             Assert.False(client.AllowAccessTokensViaBrowser);
             Assert.Equal(new[] { "urn:ietf:wg:oauth:2.0:oob" }, client.RedirectUris.ToArray());
-            Assert.Equal(new[] { "urn:ietf:wg:oauth:2.0:oob" }, client.PostLogoutRedirectUris.ToArray());
+            Assert.Equal(
+                new[] { "urn:ietf:wg:oauth:2.0:oob" },
+                client.PostLogoutRedirectUris.ToArray()
+            );
             Assert.Empty(client.AllowedCorsOrigins);
             Assert.False(client.RequireConsent);
             Assert.Empty(client.ClientSecrets);
@@ -110,12 +117,16 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
             var expectedLogoutUrl = "https://www.example.com/logout";
             var expectedAllowedOrigins = "https://www.example.com";
 
-            var config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["MyClient:Profile"] = "SPA",
-                ["MyClient:RedirectUri"] = expectedRedirectUrl,
-                ["MyClient:LogoutUri"] = expectedLogoutUrl,
-            }).Build();
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new Dictionary<string, string>
+                    {
+                        ["MyClient:Profile"] = "SPA",
+                        ["MyClient:RedirectUri"] = expectedRedirectUrl,
+                        ["MyClient:LogoutUri"] = expectedLogoutUrl,
+                    }
+                )
+                .Build();
 
             var resources = Array.Empty<ApiResource>();
             var expectedScopes = new[]
@@ -146,10 +157,11 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
         public void Configure_AddsClientsToExistingClientsList()
         {
             // Arrange
-            var config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
-            {
-                ["MyClient:Profile"] = "IdentityServerSPA"
-            }).Build();
+            var config = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new Dictionary<string, string> { ["MyClient:Profile"] = "IdentityServerSPA" }
+                )
+                .Build();
 
             var resources = Array.Empty<ApiResource>();
             var expectedScopes = new[]
@@ -161,7 +173,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
             var clientLoader = new ConfigureClients(config, new TestLogger<ConfigureClients>());
 
             var options = new ApiAuthorizationOptions();
-            
+
             // Act
             clientLoader.Configure(options);
 
@@ -171,7 +183,10 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
             Assert.Equal("MyClient", client.ClientName);
             Assert.True(client.AllowAccessTokensViaBrowser);
             Assert.Equal(new[] { "/authentication/login-callback" }, client.RedirectUris.ToArray());
-            Assert.Equal(new[] { "/authentication/logout-callback" }, client.PostLogoutRedirectUris.ToArray());
+            Assert.Equal(
+                new[] { "/authentication/logout-callback" },
+                client.PostLogoutRedirectUris.ToArray()
+            );
             Assert.Empty(client.AllowedCorsOrigins);
             Assert.False(client.RequireConsent);
             Assert.Empty(client.ClientSecrets);

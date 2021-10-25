@@ -29,8 +29,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     execution should be suppressed and the given result should be used instead.
         /// </summary>
         /// <param name="result"> The result to use. </param>
-        public static InterceptionResult<TResult> SuppressWithResult(TResult result)
-            => new(result);
+        public static InterceptionResult<TResult> SuppressWithResult(TResult result) => new(result);
 
         private InterceptionResult(TResult result)
         {

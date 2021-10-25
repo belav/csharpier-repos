@@ -13,7 +13,10 @@ namespace Microsoft.Web.Mvc.Test
         public void PublicFetchOrCreateItemCreatesItemIfNotAlreadyInCache()
         {
             // Arrange
-            ReaderWriterCacheHelper<int, string> helper = new ReaderWriterCacheHelper<int, string>();
+            ReaderWriterCacheHelper<int, string> helper = new ReaderWriterCacheHelper<
+                int,
+                string
+            >();
             Dictionary<int, string> cache = helper.PublicCache;
 
             // Act
@@ -28,7 +31,10 @@ namespace Microsoft.Web.Mvc.Test
         public void PublicFetchOrCreateItemReturnsExistingItemIfFound()
         {
             // Arrange
-            ReaderWriterCacheHelper<int, string> helper = new ReaderWriterCacheHelper<int, string>();
+            ReaderWriterCacheHelper<int, string> helper = new ReaderWriterCacheHelper<
+                int,
+                string
+            >();
             Dictionary<int, string> cache = helper.PublicCache;
             helper.PublicCache[42] = "original";
 
@@ -44,7 +50,10 @@ namespace Microsoft.Web.Mvc.Test
         public void PublicFetchOrCreateItemReturnsFirstItemIfTwoThreadsUpdateCacheSimultaneously()
         {
             // Arrange
-            ReaderWriterCacheHelper<int, string> helper = new ReaderWriterCacheHelper<int, string>();
+            ReaderWriterCacheHelper<int, string> helper = new ReaderWriterCacheHelper<
+                int,
+                string
+            >();
             Dictionary<int, string> cache = helper.PublicCache;
             Func<string> creator = delegate
             {

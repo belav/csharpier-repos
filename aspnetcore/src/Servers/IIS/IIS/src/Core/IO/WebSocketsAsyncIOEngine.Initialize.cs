@@ -27,7 +27,11 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
             protected override bool InvokeOperation(out int hr, out int bytes)
             {
                 Debug.Assert(_requestHandler != null, "Must initialize first.");
-                hr = NativeMethods.HttpFlushResponseBytes(_requestHandler, fMoreData: true, out var completionExpected);
+                hr = NativeMethods.HttpFlushResponseBytes(
+                    _requestHandler,
+                    fMoreData: true,
+                    out var completionExpected
+                );
                 bytes = 0;
                 return !completionExpected;
             }

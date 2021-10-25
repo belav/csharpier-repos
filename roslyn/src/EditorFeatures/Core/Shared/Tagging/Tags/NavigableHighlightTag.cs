@@ -14,8 +14,6 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
     /// this type.</remarks>
     internal abstract class NavigableHighlightTag : TextMarkerTag
     {
-        protected NavigableHighlightTag(string type) : base(type)
-        {
-        }
+        protected NavigableHighlightTag(string type) : base(type) { }
     }
 }

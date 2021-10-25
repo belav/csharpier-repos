@@ -24,19 +24,30 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
         // TODO: Consider making this configurable? At least for testing?
         private static readonly TimeSpan _heartbeatTickRate = TimeSpan.FromSeconds(1);
 
-        private readonly ConcurrentDictionary<string, (HttpConnectionContext Connection, ValueStopwatch Timer)> _connections =
-            new ConcurrentDictionary<string, (HttpConnectionContext Connection, ValueStopwatch Timer)>(StringComparer.Ordinal);
+        private readonly ConcurrentDictionary<
+            string,
+            (HttpConnectionContext Connection, ValueStopwatch Timer)
+        > _connections = new ConcurrentDictionary<
+            string,
+            (HttpConnectionContext Connection, ValueStopwatch Timer)
+        >(StringComparer.Ordinal);
         private readonly TimerAwaitable _nextHeartbeat;
         private readonly ILogger<HttpConnectionManager> _logger;
         private readonly ILogger<HttpConnectionContext> _connectionLogger;
         private readonly TimeSpan _disconnectTimeout;
 
-        public HttpConnectionManager(ILoggerFactory loggerFactory, IHostApplicationLifetime appLifetime, IOptions<ConnectionOptions> connectionOptions)
+        public HttpConnectionManager(
+            ILoggerFactory loggerFactory,
+            IHostApplicationLifetime appLifetime,
+            IOptions<ConnectionOptions> connectionOptions
+        )
         {
             _logger = loggerFactory.CreateLogger<HttpConnectionManager>();
             _connectionLogger = loggerFactory.CreateLogger<HttpConnectionContext>();
             _nextHeartbeat = new TimerAwaitable(_heartbeatTickRate, _heartbeatTickRate);
-            _disconnectTimeout = connectionOptions.Value.DisconnectTimeout ?? ConnectionOptionsSetup.DefaultDisconectTimeout;
+            _disconnectTimeout =
+                connectionOptions.Value.DisconnectTimeout
+                ?? ConnectionOptionsSetup.DefaultDisconectTimeout;
 
             // Register these last as the callbacks could run immediately
             appLifetime.ApplicationStarted.Register(() => Start());
@@ -51,7 +62,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             _ = ExecuteTimerLoop();
         }
 
-        internal bool TryGetConnection(string id, [NotNullWhen(true)] out HttpConnectionContext? connection)
+        internal bool TryGetConnection(
+            string id,
+            [NotNullWhen(true)] out HttpConnectionContext? connection
+        )
         {
             connection = null;
 
@@ -72,7 +86,11 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
         /// Creates a connection without Pipes setup to allow saving allocations until Pipes are needed.
         /// </summary>
         /// <returns></returns>
-        internal HttpConnectionContext CreateConnection(PipeOptions transportPipeOptions, PipeOptions appPipeOptions, int negotiateVersion = 0)
+        internal HttpConnectionContext CreateConnection(
+            PipeOptions transportPipeOptions,
+            PipeOptions appPipeOptions,
+            int negotiateVersion = 0
+        )
         {
             string connectionToken;
             var id = MakeNewConnectionId();
@@ -88,7 +106,13 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             Log.CreatedNewConnection(_logger, id);
             var connectionTimer = HttpConnectionsEventSource.Log.ConnectionStart(id);
             var pair = DuplexPipe.CreateConnectionPair(transportPipeOptions, appPipeOptions);
-            var connection = new HttpConnectionContext(id, connectionToken, _connectionLogger, pair.Application, pair.Transport);
+            var connection = new HttpConnectionContext(
+                id,
+                connectionToken,
+                _connectionLogger,
+                pair.Application,
+                pair.Transport
+            );
 
             _connections.TryAdd(connectionToken, (connection, connectionTimer));
 
@@ -150,7 +174,11 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 var utcNow = DateTimeOffset.UtcNow;
                 // Once the decision has been made to dispose we don't check the status again
                 // But don't clean up connections while the debugger is attached.
-                if (!Debugger.IsAttached && lastSeenUtc.HasValue && (utcNow - lastSeenUtc.Value).TotalSeconds > _disconnectTimeout.TotalSeconds)
+                if (
+                    !Debugger.IsAttached
+                    && lastSeenUtc.HasValue
+                    && (utcNow - lastSeenUtc.Value).TotalSeconds > _disconnectTimeout.TotalSeconds
+                )
                 {
                     Log.ConnectionTimedOut(_logger, connection.ConnectionId);
                     HttpConnectionsEventSource.Log.ConnectionTimedOut(connection.ConnectionId);
@@ -191,7 +219,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
             Task.WaitAll(tasks.ToArray(), TimeSpan.FromSeconds(5));
         }
 
-        internal async Task DisposeAndRemoveAsync(HttpConnectionContext connection, bool closeGracefully)
+        internal async Task DisposeAndRemoveAsync(
+            HttpConnectionContext connection,
+            bool closeGracefully
+        )
         {
             try
             {

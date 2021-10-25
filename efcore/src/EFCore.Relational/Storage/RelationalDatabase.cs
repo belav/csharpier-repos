@@ -35,8 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this service. </param>
         public RelationalDatabase(
             DatabaseDependencies dependencies,
-            RelationalDatabaseDependencies relationalDependencies)
-            : base(dependencies)
+            RelationalDatabaseDependencies relationalDependencies
+        ) : base(dependencies)
         {
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
 
@@ -60,8 +60,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             return RelationalDependencies.BatchExecutor.Execute(
                 RelationalDependencies.BatchPreparer.BatchCommands(
                     entries,
-                    Dependencies.UpdateAdapterFactory.Create()),
-                RelationalDependencies.Connection);
+                    Dependencies.UpdateAdapterFactory.Create()
+                ),
+                RelationalDependencies.Connection
+            );
         }
 
         /// <summary>
@@ -76,16 +78,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public override Task<int> SaveChangesAsync(
             IList<IUpdateEntry> entries,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(entries, nameof(entries));
 
             return RelationalDependencies.BatchExecutor.ExecuteAsync(
                 RelationalDependencies.BatchPreparer.BatchCommands(
                     entries,
-                    Dependencies.UpdateAdapterFactory.Create()),
+                    Dependencies.UpdateAdapterFactory.Create()
+                ),
                 RelationalDependencies.Connection,
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

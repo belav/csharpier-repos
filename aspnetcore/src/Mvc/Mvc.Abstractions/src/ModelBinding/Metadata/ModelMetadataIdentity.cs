@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             string? name = null,
             Type? containerType = null,
             object? fieldInfo = null,
-            ConstructorInfo? constructorInfo = null)
+            ConstructorInfo? constructorInfo = null
+        )
         {
             ModelType = modelType;
             Name = name;
@@ -48,11 +49,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         /// <param name="name">The name of the property.</param>
         /// <param name="containerType">The container type of the model property.</param>
         /// <returns>A <see cref="ModelMetadataIdentity"/>.</returns>
-        [Obsolete("This API is obsolete and may be removed in a future release. Please use the overload that takes a PropertyInfo object.")] // Remove after .NET 6.
+        [Obsolete(
+            "This API is obsolete and may be removed in a future release. Please use the overload that takes a PropertyInfo object."
+        )] // Remove after .NET 6.
         public static ModelMetadataIdentity ForProperty(
             Type modelType,
             string name,
-            Type containerType)
+            Type containerType
+        )
         {
             if (modelType == null)
             {
@@ -82,7 +86,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public static ModelMetadataIdentity ForProperty(
             PropertyInfo propertyInfo,
             Type modelType,
-            Type containerType)
+            Type containerType
+        )
         {
             if (propertyInfo == null)
             {
@@ -99,7 +104,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
                 throw new ArgumentNullException(nameof(containerType));
             }
 
-            return new ModelMetadataIdentity(modelType, propertyInfo.Name, containerType, fieldInfo: propertyInfo);
+            return new ModelMetadataIdentity(
+                modelType,
+                propertyInfo.Name,
+                containerType,
+                fieldInfo: propertyInfo
+            );
         }
 
         /// <summary>
@@ -107,8 +117,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         /// </summary>
         /// <param name="parameter">The <see cref="ParameterInfo" />.</param>
         /// <returns>A <see cref="ModelMetadataIdentity"/>.</returns>
-        public static ModelMetadataIdentity ForParameter(ParameterInfo parameter)
-            => ForParameter(parameter, parameter.ParameterType);
+        public static ModelMetadataIdentity ForParameter(ParameterInfo parameter) =>
+            ForParameter(parameter, parameter.ParameterType);
 
         /// <summary>
         /// Creates a <see cref="ModelMetadataIdentity"/> for the provided parameter with the specified
@@ -139,7 +149,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         /// <param name="constructor">The <see cref="ConstructorInfo" />.</param>
         /// <param name="modelType">The model type.</param>
         /// <returns>A <see cref="ModelMetadataIdentity"/>.</returns>
-        public static ModelMetadataIdentity ForConstructor(ConstructorInfo constructor, Type modelType)
+        public static ModelMetadataIdentity ForConstructor(
+            ConstructorInfo constructor,
+            Type modelType
+        )
         {
             if (constructor == null)
             {
@@ -151,7 +164,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
                 throw new ArgumentNullException(nameof(modelType));
             }
 
-            return new ModelMetadataIdentity(modelType, constructor.Name, constructorInfo: constructor);
+            return new ModelMetadataIdentity(
+                modelType,
+                constructor.Name,
+                constructorInfo: constructor
+            );
         }
 
         /// <summary>
@@ -220,13 +237,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         /// <inheritdoc />
         public bool Equals(ModelMetadataIdentity other)
         {
-            return
-                ContainerType == other.ContainerType &&
-                ModelType == other.ModelType &&
-                Name == other.Name &&
-                ParameterInfo == other.ParameterInfo &&
-                PropertyInfo == other.PropertyInfo &&
-                ConstructorInfo == other.ConstructorInfo;
+            return ContainerType == other.ContainerType
+                && ModelType == other.ModelType
+                && Name == other.Name
+                && ParameterInfo == other.ParameterInfo
+                && PropertyInfo == other.PropertyInfo
+                && ConstructorInfo == other.ConstructorInfo;
         }
 
         /// <inheritdoc />

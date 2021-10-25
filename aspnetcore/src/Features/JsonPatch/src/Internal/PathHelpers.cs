@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
 
             if (path.Contains("//"))
             {
-                throw new JsonPatchException(Resources.FormatInvalidValueForPath(path), null); 
+                throw new JsonPatchException(Resources.FormatInvalidValueForPath(path), null);
             }
 
             if (!path.StartsWith("/", StringComparison.Ordinal))

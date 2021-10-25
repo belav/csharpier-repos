@@ -15,7 +15,8 @@ namespace System.Text.Json.Node
         ///   Defines an implicit conversion of a given <see cref="bool"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="bool"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(bool? value) => value.HasValue ? new JsonValue<bool>(value.Value) : null;
+        public static implicit operator JsonNode?(bool? value) =>
+            value.HasValue ? new JsonValue<bool>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="byte"/> to a <see cref="JsonNode"/>.
@@ -27,7 +28,8 @@ namespace System.Text.Json.Node
         ///   Defines an implicit conversion of a given <see cref="byte"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="byte"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(byte? value) => value.HasValue ? new JsonValue<byte>(value.Value) : null;
+        public static implicit operator JsonNode?(byte? value) =>
+            value.HasValue ? new JsonValue<byte>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="char"/> to a <see cref="JsonNode"/>.
@@ -39,7 +41,8 @@ namespace System.Text.Json.Node
         ///   Defines an implicit conversion of a given <see cref="char"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="char"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(char? value) => value.HasValue ? new JsonValue<char>(value.Value) : null;
+        public static implicit operator JsonNode?(char? value) =>
+            value.HasValue ? new JsonValue<char>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="DateTime"/> to a <see cref="JsonNode"/>.
@@ -51,19 +54,22 @@ namespace System.Text.Json.Node
         ///   Defines an implicit conversion of a given <see cref="DateTime"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTime"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(DateTime? value) => value.HasValue ? new JsonValue<DateTime>(value.Value) : null;
+        public static implicit operator JsonNode?(DateTime? value) =>
+            value.HasValue ? new JsonValue<DateTime>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="DateTimeOffset"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTimeOffset"/> to implicitly convert.</param>
-        public static implicit operator JsonNode(DateTimeOffset value) => new JsonValue<DateTimeOffset>(value);
+        public static implicit operator JsonNode(DateTimeOffset value) =>
+            new JsonValue<DateTimeOffset>(value);
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="DateTimeOffset"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTimeOffset"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(DateTimeOffset? value) => value.HasValue ? new JsonValue<DateTimeOffset>(value.Value) : null;
+        public static implicit operator JsonNode?(DateTimeOffset? value) =>
+            value.HasValue ? new JsonValue<DateTimeOffset>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="decimal"/> to a <see cref="JsonNode"/>.
@@ -75,7 +81,8 @@ namespace System.Text.Json.Node
         ///   Defines an implicit conversion of a given <see cref="decimal"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="decimal"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(decimal? value) => value.HasValue ? new JsonValue<decimal>(value.Value) : null;
+        public static implicit operator JsonNode?(decimal? value) =>
+            value.HasValue ? new JsonValue<decimal>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="double"/> to a <see cref="JsonNode"/>.
@@ -87,7 +94,8 @@ namespace System.Text.Json.Node
         ///   Defines an implicit conversion of a given <see cref="double"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="double"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(double? value) => value.HasValue ? new JsonValue<double>(value.Value) : null;
+        public static implicit operator JsonNode?(double? value) =>
+            value.HasValue ? new JsonValue<double>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="Guid"/> to a <see cref="JsonNode"/>.
@@ -99,7 +107,8 @@ namespace System.Text.Json.Node
         ///   Defines an implicit conversion of a given <see cref="Guid"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="Guid"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(Guid? value) => value.HasValue ? new JsonValue<Guid>(value.Value) : null;
+        public static implicit operator JsonNode?(Guid? value) =>
+            value.HasValue ? new JsonValue<Guid>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="short"/> to a <see cref="JsonNode"/>.
@@ -111,7 +120,8 @@ namespace System.Text.Json.Node
         ///   Defines an implicit conversion of a given <see cref="short"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="short"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(short? value) => value.HasValue ? new JsonValue<short>(value.Value) : null;
+        public static implicit operator JsonNode?(short? value) =>
+            value.HasValue ? new JsonValue<short>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="int"/> to a <see cref="JsonNode"/>.
@@ -123,7 +133,8 @@ namespace System.Text.Json.Node
         ///   Defines an implicit conversion of a given <see cref="int"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="int"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(int? value) => value.HasValue ? new JsonValue<int>(value.Value) : null;
+        public static implicit operator JsonNode?(int? value) =>
+            value.HasValue ? new JsonValue<int>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="long"/> to a <see cref="JsonNode"/>.
@@ -135,7 +146,8 @@ namespace System.Text.Json.Node
         ///   Defines an implicit conversion of a given <see cref="long"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="long"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(long? value) => value.HasValue ? new JsonValue<long>(value.Value) : null;
+        public static implicit operator JsonNode?(long? value) =>
+            value.HasValue ? new JsonValue<long>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="sbyte"/> to a <see cref="JsonNode"/>.
@@ -149,7 +161,8 @@ namespace System.Text.Json.Node
         /// </summary>
         /// <param name="value">A <see cref="sbyte"/> to implicitly convert.</param>
         [System.CLSCompliantAttribute(false)]
-        public static implicit operator JsonNode?(sbyte? value) => value.HasValue ? new JsonValue<sbyte>(value.Value) : null;
+        public static implicit operator JsonNode?(sbyte? value) =>
+            value.HasValue ? new JsonValue<sbyte>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="float"/> to a <see cref="JsonNode"/>.
@@ -161,13 +174,15 @@ namespace System.Text.Json.Node
         ///   Defines an implicit conversion of a given <see cref="float"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="float"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(float? value) => value.HasValue ? new JsonValue<float>(value.Value) : null;
+        public static implicit operator JsonNode?(float? value) =>
+            value.HasValue ? new JsonValue<float>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="string"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="string"/> to implicitly convert.</param>
-        public static implicit operator JsonNode?(string? value) => (value == null ? null : new JsonValue<string>(value));
+        public static implicit operator JsonNode?(string? value) =>
+            (value == null ? null : new JsonValue<string>(value));
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="ushort"/> to a <see cref="JsonNode"/>.
@@ -181,7 +196,8 @@ namespace System.Text.Json.Node
         /// </summary>
         /// <param name="value">A <see cref="ushort"/> to implicitly convert.</param>
         [System.CLSCompliantAttribute(false)]
-        public static implicit operator JsonNode?(ushort? value) => value.HasValue ? new JsonValue<ushort>(value.Value) : null;
+        public static implicit operator JsonNode?(ushort? value) =>
+            value.HasValue ? new JsonValue<ushort>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="uint"/> to a <see cref="JsonNode"/>.
@@ -195,7 +211,8 @@ namespace System.Text.Json.Node
         /// </summary>
         /// <param name="value">A <see cref="uint"/> to implicitly convert.</param>
         [System.CLSCompliantAttribute(false)]
-        public static implicit operator JsonNode?(uint? value) => value.HasValue ? new JsonValue<uint>(value.Value) : null;
+        public static implicit operator JsonNode?(uint? value) =>
+            value.HasValue ? new JsonValue<uint>(value.Value) : null;
 
         /// <summary>
         ///   Defines an implicit conversion of a given <see cref="ulong"/> to a <see cref="JsonNode"/>.
@@ -209,7 +226,8 @@ namespace System.Text.Json.Node
         /// </summary>
         /// <param name="value">A <see cref="ulong"/> to implicitly convert.</param>
         [System.CLSCompliantAttribute(false)]
-        public static implicit operator JsonNode?(ulong? value) => value.HasValue ? new JsonValue<ulong>(value.Value) : null;
+        public static implicit operator JsonNode?(ulong? value) =>
+            value.HasValue ? new JsonValue<ulong>(value.Value) : null;
 
         /// <summary>
         ///   Defines an explicit conversion of a given <see cref="bool"/> to a <see cref="JsonNode"/>.
@@ -263,13 +281,15 @@ namespace System.Text.Json.Node
         ///   Defines an explicit conversion of a given <see cref="DateTimeOffset"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTimeOffset"/> to implicitly convert.</param>
-        public static explicit operator DateTimeOffset(JsonNode value) => value.GetValue<DateTimeOffset>();
+        public static explicit operator DateTimeOffset(JsonNode value) =>
+            value.GetValue<DateTimeOffset>();
 
         /// <summary>
         ///   Defines an explicit conversion of a given <see cref="DateTimeOffset"/> to a <see cref="JsonNode"/>.
         /// </summary>
         /// <param name="value">A <see cref="DateTimeOffset"/> to implicitly convert.</param>
-        public static explicit operator DateTimeOffset?(JsonNode? value) => value?.GetValue<DateTimeOffset>();
+        public static explicit operator DateTimeOffset?(JsonNode? value) =>
+            value?.GetValue<DateTimeOffset>();
 
         /// <summary>
         ///   Defines an explicit conversion of a given <see cref="decimal"/> to a <see cref="JsonNode"/>.

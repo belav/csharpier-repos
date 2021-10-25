@@ -9,16 +9,30 @@ namespace System.Globalization
 {
     public partial class CompareInfo
     {
-        internal static unsafe int InvariantIndexOf(string source, string value, int startIndex, int count, bool ignoreCase)
+        internal static unsafe int InvariantIndexOf(
+            string source,
+            string value,
+            int startIndex,
+            int count,
+            bool ignoreCase
+        )
         {
             Debug.Assert(source != null);
             Debug.Assert(value != null);
             Debug.Assert(startIndex >= 0 && startIndex < source.Length);
 
-            fixed (char* pSource = source) fixed (char* pValue = value)
+            fixed (char* pSource = source)
+            fixed (char* pValue = value)
             {
                 char* pSrc = &pSource[startIndex];
-                int index = InvariantFindString(pSrc, count, pValue, value.Length, ignoreCase, fromBeginning: true);
+                int index = InvariantFindString(
+                    pSrc,
+                    count,
+                    pValue,
+                    value.Length,
+                    ignoreCase,
+                    fromBeginning: true
+                );
                 if (index >= 0)
                 {
                     return index + startIndex;
@@ -27,7 +41,12 @@ namespace System.Globalization
             }
         }
 
-        internal static unsafe int InvariantIndexOf(ReadOnlySpan<char> source, ReadOnlySpan<char> value, bool ignoreCase, bool fromBeginning = true)
+        internal static unsafe int InvariantIndexOf(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> value,
+            bool ignoreCase,
+            bool fromBeginning = true
+        )
         {
             Debug.Assert(source.Length != 0);
             Debug.Assert(value.Length != 0);
@@ -35,20 +54,41 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             fixed (char* pValue = &MemoryMarshal.GetReference(value))
             {
-                return InvariantFindString(pSource, source.Length, pValue, value.Length, ignoreCase, fromBeginning);
+                return InvariantFindString(
+                    pSource,
+                    source.Length,
+                    pValue,
+                    value.Length,
+                    ignoreCase,
+                    fromBeginning
+                );
             }
         }
 
-        internal static unsafe int InvariantLastIndexOf(string source, string value, int startIndex, int count, bool ignoreCase)
+        internal static unsafe int InvariantLastIndexOf(
+            string source,
+            string value,
+            int startIndex,
+            int count,
+            bool ignoreCase
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(source));
             Debug.Assert(value != null);
             Debug.Assert(startIndex >= 0 && startIndex < source.Length);
 
-            fixed (char* pSource = source) fixed (char* pValue = value)
+            fixed (char* pSource = source)
+            fixed (char* pValue = value)
             {
                 char* pSrc = &pSource[startIndex - count + 1];
-                int index = InvariantFindString(pSrc, count, pValue, value.Length, ignoreCase, fromBeginning: false);
+                int index = InvariantFindString(
+                    pSrc,
+                    count,
+                    pValue,
+                    value.Length,
+                    ignoreCase,
+                    fromBeginning: false
+                );
                 if (index >= 0)
                 {
                     return index + startIndex - count + 1;
@@ -57,12 +97,19 @@ namespace System.Globalization
             }
         }
 
-        private static unsafe int InvariantFindString(char* source, int sourceCount, char* value, int valueCount, bool ignoreCase, bool fromBeginning)
+        private static unsafe int InvariantFindString(
+            char* source,
+            int sourceCount,
+            char* value,
+            int valueCount,
+            bool ignoreCase,
+            bool fromBeginning
+        )
         {
-            int ctrSource = 0;  // index value into source
-            int ctrValue = 0;   // index value into value
-            char sourceChar;    // Character for case lookup in source
-            char valueChar;     // Character for case lookup in value
+            int ctrSource = 0; // index value into source
+            int ctrValue = 0; // index value into value
+            char sourceChar; // Character for case lookup in source
+            char valueChar; // Character for case lookup in value
             int lastSourceStart;
 
             Debug.Assert(source != null);
@@ -215,7 +262,10 @@ namespace System.Globalization
 
         private SortKey InvariantCreateSortKey(string source, CompareOptions options)
         {
-            if (source == null) { throw new ArgumentNullException(nameof(source)); }
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
 
             if ((options & ValidCompareMaskOffFlags) != 0)
             {
@@ -245,7 +295,10 @@ namespace System.Globalization
             return new SortKey(this, source, options, keyData);
         }
 
-        private static void InvariantCreateSortKeyOrdinal(ReadOnlySpan<char> source, Span<byte> sortKey)
+        private static void InvariantCreateSortKeyOrdinal(
+            ReadOnlySpan<char> source,
+            Span<byte> sortKey
+        )
         {
             Debug.Assert(sortKey.Length >= source.Length * sizeof(char));
 
@@ -257,19 +310,29 @@ namespace System.Globalization
             }
         }
 
-        private static void InvariantCreateSortKeyOrdinalIgnoreCase(ReadOnlySpan<char> source, Span<byte> sortKey)
+        private static void InvariantCreateSortKeyOrdinalIgnoreCase(
+            ReadOnlySpan<char> source,
+            Span<byte> sortKey
+        )
         {
             Debug.Assert(sortKey.Length >= source.Length * sizeof(char));
 
             for (int i = 0; i < source.Length; i++)
             {
                 // convert machine-endian to big-endian
-                BinaryPrimitives.WriteUInt16BigEndian(sortKey, (ushort)InvariantCaseFold(source[i]));
+                BinaryPrimitives.WriteUInt16BigEndian(
+                    sortKey,
+                    (ushort)InvariantCaseFold(source[i])
+                );
                 sortKey = sortKey.Slice(sizeof(ushort));
             }
         }
 
-        private static int InvariantGetSortKey(ReadOnlySpan<char> source, Span<byte> destination, CompareOptions options)
+        private static int InvariantGetSortKey(
+            ReadOnlySpan<char> source,
+            Span<byte> destination,
+            CompareOptions options
+        )
         {
             Debug.Assert(GlobalizationMode.Invariant);
             Debug.Assert((options & ValidCompareMaskOffFlags) == 0);
@@ -295,7 +358,10 @@ namespace System.Globalization
             return source.Length * sizeof(char);
         }
 
-        private static int InvariantGetSortKeyLength(ReadOnlySpan<char> source, CompareOptions options)
+        private static int InvariantGetSortKeyLength(
+            ReadOnlySpan<char> source,
+            CompareOptions options
+        )
         {
             Debug.Assert(GlobalizationMode.Invariant);
             Debug.Assert((options & ValidCompareMaskOffFlags) == 0);
@@ -310,7 +376,8 @@ namespace System.Globalization
             {
                 throw new ArgumentException(
                     paramName: nameof(source),
-                    message: SR.ArgumentOutOfRange_GetByteCountOverflow);
+                    message: SR.ArgumentOutOfRange_GetByteCountOverflow
+                );
             }
 
             return byteLength;

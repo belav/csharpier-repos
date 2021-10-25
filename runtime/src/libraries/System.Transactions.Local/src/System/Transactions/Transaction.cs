@@ -58,7 +58,9 @@ namespace System.Transactions
         //
         // Property tells parts of system.transactions if it should use a
         // service domain for current.
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         internal static bool UseServiceDomainForCurrent() => false;
 
         // InteropMode
@@ -78,7 +80,11 @@ namespace System.Transactions
             return EnterpriseServicesInteropOption.None;
         }
 
-        internal static Transaction? FastGetTransaction(TransactionScope? currentScope, ContextData contextData, out Transaction? contextTransaction)
+        internal static Transaction? FastGetTransaction(
+            TransactionScope? currentScope,
+            ContextData contextData,
+            out Transaction? contextTransaction
+        )
         {
             Transaction? current = null;
             contextTransaction = null;
@@ -126,7 +132,6 @@ namespace System.Transactions
             return current;
         }
 
-
         // GetCurrentTransactionAndScope
         //
         // Returns both the current transaction and scope.  This is implemented for optimizations
@@ -135,7 +140,8 @@ namespace System.Transactions
             TxLookup defaultLookup,
             out Transaction? current,
             out TransactionScope? currentScope,
-            out Transaction? contextTransaction)
+            out Transaction? contextTransaction
+        )
         {
             current = null;
             currentScope = null;
@@ -159,7 +165,12 @@ namespace System.Transactions
                     etwLog.MethodEnter(TraceSourceType.TraceSourceBase, "Transaction.get_Current");
                 }
 
-                GetCurrentTransactionAndScope(TxLookup.Default, out Transaction? current, out TransactionScope? currentScope, out Transaction? contextValue);
+                GetCurrentTransactionAndScope(
+                    TxLookup.Default,
+                    out Transaction? current,
+                    out TransactionScope? currentScope,
+                    out Transaction? contextValue
+                );
 
                 if (currentScope != null)
                 {
@@ -178,7 +189,6 @@ namespace System.Transactions
 
                 return current;
             }
-
             set
             {
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
@@ -189,7 +199,10 @@ namespace System.Transactions
 
                 // Bring your own Transaction(BYOT) is supported only for legacy scenarios.
                 // This transaction won't be flown across thread continuations.
-                if (InteropMode(ContextData.TLSCurrentData.CurrentScope) != EnterpriseServicesInteropOption.None)
+                if (
+                    InteropMode(ContextData.TLSCurrentData.CurrentScope)
+                    != EnterpriseServicesInteropOption.None
+                )
                 {
                     if (etwLog.IsEnabled())
                     {
@@ -223,7 +236,10 @@ namespace System.Transactions
         // Storage for a disposed flag
         internal const int _disposedTrueValue = 1;
         internal int _disposed;
-        internal bool Disposed { get { return _disposed == Transaction._disposedTrueValue; } }
+        internal bool Disposed
+        {
+            get { return _disposed == Transaction._disposedTrueValue; }
+        }
 
         internal Guid DistributedTxId
         {
@@ -316,14 +332,15 @@ namespace System.Transactions
             return _internalTransaction.TransactionHash;
         }
 
-
         // Don't allow equals to get the identifier
         //
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             // If we can't cast the object as a Transaction, it must not be equal
             // to this, which is a Transaction. Check the internal transaction object for equality.
-            return obj is Transaction transaction && _internalTransaction.TransactionHash == transaction._internalTransaction.TransactionHash;
+            return obj is Transaction transaction
+                && _internalTransaction.TransactionHash
+                    == transaction._internalTransaction.TransactionHash;
         }
 
         public static bool operator ==(Transaction? x, Transaction? y)
@@ -343,7 +360,6 @@ namespace System.Transactions
             }
             return ((object?)y) != null;
         }
-
 
         #endregion
 
@@ -378,7 +394,6 @@ namespace System.Transactions
                 return txInfo;
             }
         }
-
 
         // Return the Isolation Level for the given transaction
         //
@@ -476,7 +491,9 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                internalPromotedToken = _internalTransaction.State.PromotedToken(_internalTransaction);
+                internalPromotedToken = _internalTransaction.State.PromotedToken(
+                    _internalTransaction
+                );
             }
 
             byte[] toReturn = new byte[internalPromotedToken.Length];
@@ -487,7 +504,8 @@ namespace System.Transactions
         public Enlistment EnlistDurable(
             Guid resourceManagerIdentifier,
             IEnlistmentNotification enlistmentNotification,
-            EnlistmentOptions enlistmentOptions)
+            EnlistmentOptions enlistmentOptions
+        )
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -502,7 +520,10 @@ namespace System.Transactions
 
             if (resourceManagerIdentifier == Guid.Empty)
             {
-                throw new ArgumentException(SR.BadResourceManagerId, nameof(resourceManagerIdentifier));
+                throw new ArgumentException(
+                    SR.BadResourceManagerId,
+                    nameof(resourceManagerIdentifier)
+                );
             }
 
             if (enlistmentNotification == null)
@@ -510,7 +531,10 @@ namespace System.Transactions
                 throw new ArgumentNullException(nameof(enlistmentNotification));
             }
 
-            if (enlistmentOptions != EnlistmentOptions.None && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired)
+            if (
+                enlistmentOptions != EnlistmentOptions.None
+                && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(enlistmentOptions));
             }
@@ -523,8 +547,13 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction.State.EnlistDurable(_internalTransaction,
-                    resourceManagerIdentifier, enlistmentNotification, enlistmentOptions, this);
+                Enlistment enlistment = _internalTransaction.State.EnlistDurable(
+                    _internalTransaction,
+                    resourceManagerIdentifier,
+                    enlistmentNotification,
+                    enlistmentOptions,
+                    this
+                );
 
                 if (etwLog.IsEnabled())
                 {
@@ -535,13 +564,13 @@ namespace System.Transactions
             }
         }
 
-
         // Forward request to the state machine to take the appropriate action.
         //
         public Enlistment EnlistDurable(
             Guid resourceManagerIdentifier,
             ISinglePhaseNotification singlePhaseNotification,
-            EnlistmentOptions enlistmentOptions)
+            EnlistmentOptions enlistmentOptions
+        )
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -556,7 +585,10 @@ namespace System.Transactions
 
             if (resourceManagerIdentifier == Guid.Empty)
             {
-                throw new ArgumentException(SR.BadResourceManagerId, nameof(resourceManagerIdentifier));
+                throw new ArgumentException(
+                    SR.BadResourceManagerId,
+                    nameof(resourceManagerIdentifier)
+                );
             }
 
             if (singlePhaseNotification == null)
@@ -564,7 +596,10 @@ namespace System.Transactions
                 throw new ArgumentNullException(nameof(singlePhaseNotification));
             }
 
-            if (enlistmentOptions != EnlistmentOptions.None && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired)
+            if (
+                enlistmentOptions != EnlistmentOptions.None
+                && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(enlistmentOptions));
             }
@@ -577,8 +612,13 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction.State.EnlistDurable(_internalTransaction,
-                    resourceManagerIdentifier, singlePhaseNotification, enlistmentOptions, this);
+                Enlistment enlistment = _internalTransaction.State.EnlistDurable(
+                    _internalTransaction,
+                    resourceManagerIdentifier,
+                    singlePhaseNotification,
+                    enlistmentOptions,
+                    this
+                );
 
                 if (etwLog.IsEnabled())
                 {
@@ -587,7 +627,6 @@ namespace System.Transactions
                 return enlistment;
             }
         }
-
 
         public void Rollback()
         {
@@ -615,7 +654,6 @@ namespace System.Transactions
             }
         }
 
-
         public void Rollback(Exception? e)
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
@@ -642,10 +680,12 @@ namespace System.Transactions
             }
         }
 
-
         // Forward request to the state machine to take the appropriate action.
         //
-        public Enlistment EnlistVolatile(IEnlistmentNotification enlistmentNotification, EnlistmentOptions enlistmentOptions)
+        public Enlistment EnlistVolatile(
+            IEnlistmentNotification enlistmentNotification,
+            EnlistmentOptions enlistmentOptions
+        )
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -663,7 +703,10 @@ namespace System.Transactions
                 throw new ArgumentNullException(nameof(enlistmentNotification));
             }
 
-            if (enlistmentOptions != EnlistmentOptions.None && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired)
+            if (
+                enlistmentOptions != EnlistmentOptions.None
+                && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(enlistmentOptions));
             }
@@ -676,8 +719,12 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction.State.EnlistVolatile(_internalTransaction,
-                    enlistmentNotification, enlistmentOptions, this);
+                Enlistment enlistment = _internalTransaction.State.EnlistVolatile(
+                    _internalTransaction,
+                    enlistmentNotification,
+                    enlistmentOptions,
+                    this
+                );
 
                 if (etwLog.IsEnabled())
                 {
@@ -687,10 +734,12 @@ namespace System.Transactions
             }
         }
 
-
         // Forward request to the state machine to take the appropriate action.
         //
-        public Enlistment EnlistVolatile(ISinglePhaseNotification singlePhaseNotification, EnlistmentOptions enlistmentOptions)
+        public Enlistment EnlistVolatile(
+            ISinglePhaseNotification singlePhaseNotification,
+            EnlistmentOptions enlistmentOptions
+        )
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -708,7 +757,10 @@ namespace System.Transactions
                 throw new ArgumentNullException(nameof(singlePhaseNotification));
             }
 
-            if (enlistmentOptions != EnlistmentOptions.None && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired)
+            if (
+                enlistmentOptions != EnlistmentOptions.None
+                && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(enlistmentOptions));
             }
@@ -721,8 +773,12 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction.State.EnlistVolatile(_internalTransaction,
-                    singlePhaseNotification, enlistmentOptions, this);
+                Enlistment enlistment = _internalTransaction.State.EnlistVolatile(
+                    _internalTransaction,
+                    singlePhaseNotification,
+                    enlistmentOptions,
+                    this
+                );
 
                 if (etwLog.IsEnabled())
                 {
@@ -774,12 +830,9 @@ namespace System.Transactions
             return clone;
         }
 
-
         // Create a dependent clone of the transaction that forwards requests to this object.
         //
-        public DependentTransaction DependentClone(
-            DependentCloneOption cloneOption
-            )
+        public DependentTransaction DependentClone(DependentCloneOption cloneOption)
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -787,8 +840,10 @@ namespace System.Transactions
                 etwLog.MethodEnter(TraceSourceType.TraceSourceLtm, this);
             }
 
-            if (cloneOption != DependentCloneOption.BlockCommitUntilComplete
-                && cloneOption != DependentCloneOption.RollbackIfNotComplete)
+            if (
+                cloneOption != DependentCloneOption.BlockCommitUntilComplete
+                && cloneOption != DependentCloneOption.RollbackIfNotComplete
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(cloneOption));
             }
@@ -804,7 +859,10 @@ namespace System.Transactions
             }
 
             DependentTransaction clone = new DependentTransaction(
-                _isoLevel, _internalTransaction, cloneOption == DependentCloneOption.BlockCommitUntilComplete);
+                _isoLevel,
+                _internalTransaction,
+                cloneOption == DependentCloneOption.BlockCommitUntilComplete
+            );
 
             if (etwLog.IsEnabled())
             {
@@ -813,7 +871,6 @@ namespace System.Transactions
             }
             return clone;
         }
-
 
         internal TransactionTraceIdentifier TransactionTraceId
         {
@@ -827,7 +884,8 @@ namespace System.Transactions
                         {
                             TransactionTraceIdentifier temp = new TransactionTraceIdentifier(
                                 _internalTransaction.TransactionTraceId.TransactionIdentifier,
-                                _cloneId);
+                                _cloneId
+                            );
                             Interlocked.MemoryBarrier();
                             _traceIdentifier = temp;
                         }
@@ -855,13 +913,15 @@ namespace System.Transactions
                     _internalTransaction.State.AddOutcomeRegistrant(_internalTransaction, value);
                 }
             }
-
             remove
             {
                 lock (_internalTransaction)
                 {
-                    _internalTransaction._transactionCompletedDelegate = (TransactionCompletedEventHandler?)
-                        System.Delegate.Remove(_internalTransaction._transactionCompletedDelegate, value);
+                    _internalTransaction._transactionCompletedDelegate =
+                        (TransactionCompletedEventHandler?)System.Delegate.Remove(
+                            _internalTransaction._transactionCompletedDelegate,
+                            value
+                        );
                 }
             }
         }
@@ -881,7 +941,10 @@ namespace System.Transactions
                 etwLog.MethodEnter(TraceSourceType.TraceSourceLtm, this);
             }
 
-            if (Interlocked.Exchange(ref _disposed, Transaction._disposedTrueValue) == Transaction._disposedTrueValue)
+            if (
+                Interlocked.Exchange(ref _disposed, Transaction._disposedTrueValue)
+                == Transaction._disposedTrueValue
+            )
             {
                 return;
             }
@@ -903,7 +966,8 @@ namespace System.Transactions
         //
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,
-            StreamingContext context)
+            StreamingContext context
+        )
         {
             //TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             //if (etwLog.IsEnabled())
@@ -952,9 +1016,14 @@ namespace System.Transactions
         /// means, such as Transaction.EnlistDurable or retrieve the MSDTC export cookie or propagation token to enlist with MSDTC.
         /// </returns>
         // We apparently didn't spell Promotable like FXCop thinks it should be spelled.
-        public bool EnlistPromotableSinglePhase(IPromotableSinglePhaseNotification promotableSinglePhaseNotification)
+        public bool EnlistPromotableSinglePhase(
+            IPromotableSinglePhaseNotification promotableSinglePhaseNotification
+        )
         {
-            return EnlistPromotableSinglePhase(promotableSinglePhaseNotification, TransactionInterop.PromoterTypeDtc);
+            return EnlistPromotableSinglePhase(
+                promotableSinglePhaseNotification,
+                TransactionInterop.PromoterTypeDtc
+            );
         }
 
         /// <summary>
@@ -978,7 +1047,10 @@ namespace System.Transactions
         /// How the enlistment is created with the distributed transaction manager identified by the Transaction.PromoterType
         /// is defined by that distributed transaction manager.
         /// </returns>
-        public bool EnlistPromotableSinglePhase(IPromotableSinglePhaseNotification promotableSinglePhaseNotification, Guid promoterType)
+        public bool EnlistPromotableSinglePhase(
+            IPromotableSinglePhaseNotification promotableSinglePhaseNotification,
+            Guid promoterType
+        )
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -1011,7 +1083,12 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                succeeded = _internalTransaction.State.EnlistPromotableSinglePhase(_internalTransaction, promotableSinglePhaseNotification, this, promoterType);
+                succeeded = _internalTransaction.State.EnlistPromotableSinglePhase(
+                    _internalTransaction,
+                    promotableSinglePhaseNotification,
+                    this,
+                    promoterType
+                );
             }
 
             if (etwLog.IsEnabled())
@@ -1022,10 +1099,12 @@ namespace System.Transactions
             return succeeded;
         }
 
-        public Enlistment PromoteAndEnlistDurable(Guid resourceManagerIdentifier,
-                                                  IPromotableSinglePhaseNotification promotableNotification,
-                                                  ISinglePhaseNotification enlistmentNotification,
-                                                  EnlistmentOptions enlistmentOptions)
+        public Enlistment PromoteAndEnlistDurable(
+            Guid resourceManagerIdentifier,
+            IPromotableSinglePhaseNotification promotableNotification,
+            ISinglePhaseNotification enlistmentNotification,
+            EnlistmentOptions enlistmentOptions
+        )
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -1040,7 +1119,10 @@ namespace System.Transactions
 
             if (resourceManagerIdentifier == Guid.Empty)
             {
-                throw new ArgumentException(SR.BadResourceManagerId, nameof(resourceManagerIdentifier));
+                throw new ArgumentException(
+                    SR.BadResourceManagerId,
+                    nameof(resourceManagerIdentifier)
+                );
             }
 
             if (promotableNotification == null)
@@ -1053,7 +1135,10 @@ namespace System.Transactions
                 throw new ArgumentNullException(nameof(enlistmentNotification));
             }
 
-            if (enlistmentOptions != EnlistmentOptions.None && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired)
+            if (
+                enlistmentOptions != EnlistmentOptions.None
+                && enlistmentOptions != EnlistmentOptions.EnlistDuringPrepareRequired
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(enlistmentOptions));
             }
@@ -1066,8 +1151,14 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                Enlistment enlistment = _internalTransaction.State.PromoteAndEnlistDurable(_internalTransaction,
-                    resourceManagerIdentifier, promotableNotification, enlistmentNotification, enlistmentOptions, this);
+                Enlistment enlistment = _internalTransaction.State.PromoteAndEnlistDurable(
+                    _internalTransaction,
+                    resourceManagerIdentifier,
+                    promotableNotification,
+                    enlistmentNotification,
+                    enlistmentOptions,
+                    this
+                );
 
                 if (etwLog.IsEnabled())
                 {
@@ -1078,8 +1169,10 @@ namespace System.Transactions
             }
         }
 
-        public void SetDistributedTransactionIdentifier(IPromotableSinglePhaseNotification promotableNotification,
-                                                        Guid distributedTransactionIdentifier)
+        public void SetDistributedTransactionIdentifier(
+            IPromotableSinglePhaseNotification promotableNotification,
+            Guid distributedTransactionIdentifier
+        )
         {
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
@@ -1110,9 +1203,11 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                _internalTransaction.State.SetDistributedTransactionId(_internalTransaction,
+                _internalTransaction.State.SetDistributedTransactionId(
+                    _internalTransaction,
                     promotableNotification,
-                    distributedTransactionIdentifier);
+                    distributedTransactionIdentifier
+                );
 
                 if (etwLog.IsEnabled())
                 {
@@ -1168,11 +1263,13 @@ namespace System.Transactions
     //
     internal static class CallContextCurrentData
     {
-        private static readonly AsyncLocal<ContextKey?> s_currentTransaction = new AsyncLocal<ContextKey?>();
+        private static readonly AsyncLocal<ContextKey?> s_currentTransaction =
+            new AsyncLocal<ContextKey?>();
 
         // ConditionalWeakTable is used to automatically remove the entries that are no longer referenced. This will help prevent leaks in async nested TransactionScope
         // usage and when child nested scopes are not syncronized properly.
-        private static readonly ConditionalWeakTable<ContextKey, ContextData> s_contextDataTable = new ConditionalWeakTable<ContextKey, ContextData>();
+        private static readonly ConditionalWeakTable<ContextKey, ContextData> s_contextDataTable =
+            new ConditionalWeakTable<ContextKey, ContextData>();
 
         //
         //  Set CallContext data with the given contextKey.
@@ -1280,7 +1377,11 @@ namespace System.Transactions
             ContextData? currentData = null;
             if (CallContextCurrentData.TryGetCurrentData(out currentData))
             {
-                if (currentData.CurrentScope == null && currentData.CurrentTransaction == null && defaultLookup != TxLookup.DefaultCallContext)
+                if (
+                    currentData.CurrentScope == null
+                    && currentData.CurrentTransaction == null
+                    && defaultLookup != TxLookup.DefaultCallContext
+                )
                 {
                     // Clear Call Context Data
                     CallContextCurrentData.ClearCurrentData(null, true);

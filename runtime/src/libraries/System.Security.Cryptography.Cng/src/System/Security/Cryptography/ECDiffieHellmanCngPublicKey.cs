@@ -15,7 +15,11 @@ namespace System.Security.Cryptography
         /// <summary>
         /// Wrap a CNG key
         /// </summary>
-        internal ECDiffieHellmanCngPublicKey(byte[] keyBlob, string? curveName, CngKeyBlobFormat format) : base(keyBlob)
+        internal ECDiffieHellmanCngPublicKey(
+            byte[] keyBlob,
+            string? curveName,
+            CngKeyBlobFormat format
+        ) : base(keyBlob)
         {
             _format = format;
             // Can be null for P256, P384, P521, or an explicit blob
@@ -47,16 +51,16 @@ namespace System.Security.Cryptography
         /// </summary>
         public CngKeyBlobFormat BlobFormat
         {
-            get
-            {
-                return _format;
-            }
+            get { return _format; }
         }
 
         /// <summary>
         /// Hydrate a public key from a blob
         /// </summary>
-        public static ECDiffieHellmanPublicKey FromByteArray(byte[] publicKeyBlob, CngKeyBlobFormat format)
+        public static ECDiffieHellmanPublicKey FromByteArray(
+            byte[] publicKeyBlob,
+            CngKeyBlobFormat format
+        )
         {
             if (publicKeyBlob == null)
                 throw new ArgumentNullException(nameof(publicKeyBlob));
@@ -113,7 +117,11 @@ namespace System.Security.Cryptography
             {
                 ECParameters ecparams = default;
                 byte[] blob = ECCng.ExportFullKeyBlob(key, includePrivateParameters: false);
-                ECCng.ExportPrimeCurveParameters(ref ecparams, blob, includePrivateParameters: false);
+                ECCng.ExportPrimeCurveParameters(
+                    ref ecparams,
+                    blob,
+                    includePrivateParameters: false
+                );
                 return ecparams;
             }
         }
@@ -136,13 +144,24 @@ namespace System.Security.Cryptography
 
                 if (string.IsNullOrEmpty(curveName))
                 {
-                    byte[] fullKeyBlob = ECCng.ExportFullKeyBlob(key, includePrivateParameters: false);
-                    ECCng.ExportPrimeCurveParameters(ref ecparams, fullKeyBlob, includePrivateParameters: false);
+                    byte[] fullKeyBlob = ECCng.ExportFullKeyBlob(
+                        key,
+                        includePrivateParameters: false
+                    );
+                    ECCng.ExportPrimeCurveParameters(
+                        ref ecparams,
+                        fullKeyBlob,
+                        includePrivateParameters: false
+                    );
                 }
                 else
                 {
                     byte[] keyBlob = ECCng.ExportKeyBlob(key, includePrivateParameters: false);
-                    ECCng.ExportNamedCurveParameters(ref ecparams, keyBlob, includePrivateParameters: false);
+                    ECCng.ExportNamedCurveParameters(
+                        ref ecparams,
+                        keyBlob,
+                        includePrivateParameters: false
+                    );
                     ecparams.Curve = ECCurve.CreateFromFriendlyName(curveName);
                 }
 

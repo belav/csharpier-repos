@@ -22,19 +22,31 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             public string TestProperty { get; set; }
         }
 
-        private RedisHubLifetimeManager<Hub> CreateLifetimeManager(TestRedisServer server, MessagePackHubProtocolOptions messagePackOptions = null, NewtonsoftJsonHubProtocolOptions jsonOptions = null)
+        private RedisHubLifetimeManager<Hub> CreateLifetimeManager(
+            TestRedisServer server,
+            MessagePackHubProtocolOptions messagePackOptions = null,
+            NewtonsoftJsonHubProtocolOptions jsonOptions = null
+        )
         {
-            var options = new RedisOptions() { ConnectionFactory = async (t) => await Task.FromResult(new TestConnectionMultiplexer(server)) };
+            var options = new RedisOptions()
+            {
+                ConnectionFactory = async (t) =>
+                    await Task.FromResult(new TestConnectionMultiplexer(server))
+            };
             messagePackOptions = messagePackOptions ?? new MessagePackHubProtocolOptions();
             jsonOptions = jsonOptions ?? new NewtonsoftJsonHubProtocolOptions();
             return new RedisHubLifetimeManager<Hub>(
                 NullLogger<RedisHubLifetimeManager<Hub>>.Instance,
                 Options.Create(options),
-                new DefaultHubProtocolResolver(new IHubProtocol[]
-                {
-                    new NewtonsoftJsonHubProtocol(Options.Create(jsonOptions)),
-                    new MessagePackHubProtocol(Options.Create(messagePackOptions)),
-                }, NullLogger<DefaultHubProtocolResolver>.Instance));
+                new DefaultHubProtocolResolver(
+                    new IHubProtocol[]
+                    {
+                        new NewtonsoftJsonHubProtocol(Options.Create(jsonOptions)),
+                        new MessagePackHubProtocol(Options.Create(messagePackOptions)),
+                    },
+                    NullLogger<DefaultHubProtocolResolver>.Instance
+                )
+            );
         }
 
         [Fact(Skip = "https://github.com/aspnet/SignalR/issues/3088")]
@@ -45,7 +57,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
             var messagePackOptions = new MessagePackHubProtocolOptions();
 
             var jsonOptions = new NewtonsoftJsonHubProtocolOptions();
-            jsonOptions.PayloadSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonOptions.PayloadSerializerSettings.ContractResolver =
+                new CamelCasePropertyNamesContractResolver();
 
             using (var client1 = new TestClient())
             using (var client2 = new TestClient())
@@ -62,22 +75,30 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests
                 await manager1.OnConnectedAsync(connection1).DefaultTimeout();
                 await manager2.OnConnectedAsync(connection2).DefaultTimeout();
 
-                await manager1.SendAllAsync("Hello", new object[] { new TestObject { TestProperty = "Foo" } });
+                await manager1.SendAllAsync(
+                    "Hello",
+                    new object[] { new TestObject { TestProperty = "Foo" } }
+                );
 
-                var message = Assert.IsType<InvocationMessage>(await client2.ReadAsync().DefaultTimeout());
+                var message = Assert.IsType<InvocationMessage>(
+                    await client2.ReadAsync().DefaultTimeout()
+                );
                 Assert.Equal("Hello", message.Target);
                 Assert.Collection(
                     message.Arguments,
                     arg0 =>
                     {
                         var dict = Assert.IsType<JObject>(arg0);
-                        Assert.Collection(dict.Properties(),
+                        Assert.Collection(
+                            dict.Properties(),
                             prop =>
                             {
                                 Assert.Equal("testProperty", prop.Name);
                                 Assert.Equal("Foo", prop.Value.Value<string>());
-                            });
-                    });
+                            }
+                        );
+                    }
+                );
             }
         }
     }

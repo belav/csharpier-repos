@@ -20,7 +20,6 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         /// actions as a failed compilation because it was successfully executed and returned to the client.
         /// </summary>
         RequestCompleted,
-
         /// <summary>
         /// The request contained an error that should cause the server to shutdown. This can happen for cases
         /// like:
@@ -37,18 +36,25 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         internal TimeSpan? NewKeepAlive { get; }
         internal bool ShutdownRequest { get; }
 
-        internal CompletionData(CompletionReason reason, TimeSpan? newKeepAlive = null, bool shutdownRequested = false)
+        internal CompletionData(
+            CompletionReason reason,
+            TimeSpan? newKeepAlive = null,
+            bool shutdownRequested = false
+        )
         {
             Reason = reason;
             NewKeepAlive = newKeepAlive;
             ShutdownRequest = shutdownRequested;
         }
 
-        internal static CompletionData RequestCompleted { get; } = new CompletionData(CompletionReason.RequestCompleted);
+        internal static CompletionData RequestCompleted { get; } =
+            new CompletionData(CompletionReason.RequestCompleted);
 
-        internal static CompletionData RequestError { get; } = new CompletionData(CompletionReason.RequestError);
+        internal static CompletionData RequestError { get; } =
+            new CompletionData(CompletionReason.RequestError);
 
-        public override string ToString() => $"{Reason} KeepAlive:{NewKeepAlive} ShutdownRequest:{ShutdownRequest}";
+        public override string ToString() =>
+            $"{Reason} KeepAlive:{NewKeepAlive} ShutdownRequest:{ShutdownRequest}";
     }
 }
 

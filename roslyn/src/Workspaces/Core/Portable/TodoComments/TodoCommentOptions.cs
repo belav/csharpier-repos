@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TodoComments
 {
     internal static class TodoCommentOptions
     {
-        public static readonly Option<string> TokenList = new(nameof(TodoCommentOptions), nameof(TokenList), defaultValue: "");
+        public static readonly Option<string> TokenList =
+            new(nameof(TodoCommentOptions), nameof(TokenList), defaultValue: "");
     }
 
     [ExportOptionProvider, Shared]
@@ -21,11 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TodoComments
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TodoCommentOptionsProvider()
-        {
-        }
+        public TodoCommentOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            TodoCommentOptions.TokenList);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(TodoCommentOptions.TokenList);
     }
 }

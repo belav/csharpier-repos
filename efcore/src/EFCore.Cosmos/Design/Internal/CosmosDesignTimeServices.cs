@@ -4,7 +4,9 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: DesignTimeProviderServices("Microsoft.EntityFrameworkCore.Cosmos.Design.Internal.CosmosDesignTimeServices")]
+[assembly: DesignTimeProviderServices(
+    "Microsoft.EntityFrameworkCore.Cosmos.Design.Internal.CosmosDesignTimeServices"
+)]
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Design.Internal
 {
@@ -25,8 +27,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Design.Internal
         public virtual void ConfigureDesignTimeServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddEntityFrameworkCosmos();
-            new EntityFrameworkDesignServicesBuilder(serviceCollection)
-                .TryAddCoreServices();
+            new EntityFrameworkDesignServicesBuilder(serviceCollection).TryAddCoreServices();
         }
     }
 }

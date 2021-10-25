@@ -25,7 +25,6 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.PatternSegments
 
             // Act
             var results = segment.Evaluate(null, null, null);
-
             // TODO testing dates is hard, could use moq
             // currently just assert that the segment doesn't throw.
         }

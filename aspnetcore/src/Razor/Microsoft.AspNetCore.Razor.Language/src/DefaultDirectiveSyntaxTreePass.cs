@@ -23,7 +23,7 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 throw new ArgumentNullException(nameof(syntaxTree));
             }
-            
+
             var sectionVerifier = new NestedSectionVerifier(syntaxTree);
             return sectionVerifier.Verify();
         }
@@ -43,7 +43,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             public RazorSyntaxTree Verify()
             {
                 var root = Visit(_syntaxTree.Root);
-                var rewrittenTree = new DefaultRazorSyntaxTree(root, _syntaxTree.Source, _diagnostics, _syntaxTree.Options);
+                var rewrittenTree = new DefaultRazorSyntaxTree(
+                    root,
+                    _syntaxTree.Source,
+                    _diagnostics,
+                    _syntaxTree.Options
+                );
                 return rewrittenTree;
             }
 
@@ -57,7 +62,11 @@ namespace Microsoft.AspNetCore.Razor.Language
                 {
                     // We're very close to reaching the stack limit. Let's not go any deeper.
                     // It's okay to not show nested section errors in deeply nested cases instead of crashing.
-                    _diagnostics.Add(RazorDiagnosticFactory.CreateRewriter_InsufficientStack(SourceSpan.Undefined));
+                    _diagnostics.Add(
+                        RazorDiagnosticFactory.CreateRewriter_InsufficientStack(
+                            SourceSpan.Undefined
+                        )
+                    );
 
                     return node;
                 }
@@ -77,8 +86,11 @@ namespace Microsoft.AspNetCore.Razor.Language
                 if (_nestedLevel > 1)
                 {
                     var directiveStart = node.Transition.GetSourceLocation(_syntaxTree.Source);
-                    var errorLength = /* @ */ 1 + SectionDirective.Directive.Directive.Length;
-                    var error = RazorDiagnosticFactory.CreateParsing_SectionsCannotBeNested(new SourceSpan(directiveStart, errorLength));
+                    var errorLength = /* @ */
+                        1 + SectionDirective.Directive.Directive.Length;
+                    var error = RazorDiagnosticFactory.CreateParsing_SectionsCannotBeNested(
+                        new SourceSpan(directiveStart, errorLength)
+                    );
                     result = result.AppendDiagnostic(error);
                 }
 

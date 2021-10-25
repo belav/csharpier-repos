@@ -34,8 +34,13 @@ namespace Microsoft.AspNetCore.Components
             var factory = new ComponentFactory(new DefaultComponentActivator());
 
             // Assert
-            var ex = Assert.Throws<ArgumentException>(() => factory.InstantiateComponent(GetServiceProvider(), componentType));
-            Assert.StartsWith($"The type {componentType.FullName} does not implement {nameof(IComponent)}.", ex.Message);
+            var ex = Assert.Throws<ArgumentException>(
+                () => factory.InstantiateComponent(GetServiceProvider(), componentType)
+            );
+            Assert.StartsWith(
+                $"The type {componentType.FullName} does not implement {nameof(IComponent)}.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -43,7 +48,9 @@ namespace Microsoft.AspNetCore.Components
         {
             // Arrange
             var componentType = typeof(EmptyComponent);
-            var factory = new ComponentFactory(new CustomComponentActivator<ComponentWithInjectProperties>());
+            var factory = new ComponentFactory(
+                new CustomComponentActivator<ComponentWithInjectProperties>()
+            );
 
             // Act
             var instance = factory.InstantiateComponent(GetServiceProvider(), componentType);
@@ -67,8 +74,13 @@ namespace Microsoft.AspNetCore.Components
             var factory = new ComponentFactory(new NullResultComponentActivator());
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => factory.InstantiateComponent(GetServiceProvider(), componentType));
-            Assert.Equal($"The component activator returned a null value for a component of type {componentType.FullName}.", ex.Message);
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => factory.InstantiateComponent(GetServiceProvider(), componentType)
+            );
+            Assert.Equal(
+                $"The component activator returned a null value for a component of type {componentType.FullName}.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -189,7 +201,8 @@ namespace Microsoft.AspNetCore.Components
         public class TestService1 { }
         public class TestService2 { }
 
-        private class CustomComponentActivator<TResult> : IComponentActivator where TResult : IComponent, new()
+        private class CustomComponentActivator<TResult> : IComponentActivator
+            where TResult : IComponent, new()
         {
             public IComponent CreateInstance(Type componentType)
             {

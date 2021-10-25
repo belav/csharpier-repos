@@ -10,8 +10,11 @@ namespace System.Net
 {
     internal sealed class SafeFreeSslCredentials : SafeFreeCredentials
     {
-        public SafeFreeSslCredentials(SslStreamCertificateContext? certificateContext, SslProtocols protocols, EncryptionPolicy policy)
-            : base(IntPtr.Zero, true)
+        public SafeFreeSslCredentials(
+            SslStreamCertificateContext? certificateContext,
+            SslProtocols protocols,
+            EncryptionPolicy policy
+        ) : base(IntPtr.Zero, true)
         {
             if (certificateContext != null)
             {
@@ -22,7 +25,10 @@ namespace System.Net
                 // and cert handle (which get up-reffed) to match the API expectations.
                 certificateContext = certificateContext.Duplicate();
 
-                Debug.Assert(certificateContext.Certificate.HasPrivateKey, "cert clone.HasPrivateKey");
+                Debug.Assert(
+                    certificateContext.Certificate.HasPrivateKey,
+                    "cert clone.HasPrivateKey"
+                );
             }
 
             CertificateContext = certificateContext;

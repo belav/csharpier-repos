@@ -39,9 +39,11 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(source, nameof(source));
 
-            return source.Provider.Execute<IEnumerable>(source.Expression) is IQueryingEnumerable queryingEnumerable
-                ? queryingEnumerable.ToQueryString()
-                : CoreStrings.NotQueryingEnumerable;
+            return
+                source.Provider.Execute<IEnumerable>(source.Expression)
+                    is IQueryingEnumerable queryingEnumerable
+              ? queryingEnumerable.ToQueryString()
+              : CoreStrings.NotQueryingEnumerable;
         }
 
         #region Any/All
@@ -64,11 +66,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<bool> AnyAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<TSource, Task<bool>>(QueryableMethods.AnyWithoutPredicate, source, cancellationToken);
+            return ExecuteAsync<TSource, Task<bool>>(
+                QueryableMethods.AnyWithoutPredicate,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -94,12 +101,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<bool> AnyAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
-            return ExecuteAsync<TSource, Task<bool>>(QueryableMethods.AnyWithPredicate, source, predicate, cancellationToken);
+            return ExecuteAsync<TSource, Task<bool>>(
+                QueryableMethods.AnyWithPredicate,
+                source,
+                predicate,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -125,12 +138,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<bool> AllAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
-            return ExecuteAsync<TSource, Task<bool>>(QueryableMethods.All, source, predicate, cancellationToken);
+            return ExecuteAsync<TSource, Task<bool>>(
+                QueryableMethods.All,
+                source,
+                predicate,
+                cancellationToken
+            );
         }
 
         #endregion
@@ -155,11 +174,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<int> CountAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<TSource, Task<int>>(QueryableMethods.CountWithoutPredicate, source, cancellationToken);
+            return ExecuteAsync<TSource, Task<int>>(
+                QueryableMethods.CountWithoutPredicate,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -185,12 +209,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<int> CountAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
-            return ExecuteAsync<TSource, Task<int>>(QueryableMethods.CountWithPredicate, source, predicate, cancellationToken);
+            return ExecuteAsync<TSource, Task<int>>(
+                QueryableMethods.CountWithPredicate,
+                source,
+                predicate,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -211,11 +241,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<long> LongCountAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<TSource, Task<long>>(QueryableMethods.LongCountWithoutPredicate, source, cancellationToken);
+            return ExecuteAsync<TSource, Task<long>>(
+                QueryableMethods.LongCountWithoutPredicate,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -242,12 +277,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<long> LongCountAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
-            return ExecuteAsync<TSource, Task<long>>(QueryableMethods.LongCountWithPredicate, source, predicate, cancellationToken);
+            return ExecuteAsync<TSource, Task<long>>(
+                QueryableMethods.LongCountWithPredicate,
+                source,
+                predicate,
+                cancellationToken
+            );
         }
 
         #endregion
@@ -273,11 +314,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<TSource> FirstAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<TSource, Task<TSource>>(QueryableMethods.FirstWithoutPredicate, source, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource>>(
+                QueryableMethods.FirstWithoutPredicate,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -314,12 +360,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<TSource> FirstAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
-            return ExecuteAsync<TSource, Task<TSource>>(QueryableMethods.FirstWithPredicate, source, predicate, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource>>(
+                QueryableMethods.FirstWithPredicate,
+                source,
+                predicate,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -341,11 +393,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<TSource?> FirstOrDefaultAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<TSource, Task<TSource?>>(QueryableMethods.FirstOrDefaultWithoutPredicate, source, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource?>>(
+                QueryableMethods.FirstOrDefaultWithoutPredicate,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -373,12 +430,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<TSource?> FirstOrDefaultAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
-            return ExecuteAsync<TSource, Task<TSource?>>(QueryableMethods.FirstOrDefaultWithPredicate, source, predicate, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource?>>(
+                QueryableMethods.FirstOrDefaultWithPredicate,
+                source,
+                predicate,
+                cancellationToken
+            );
         }
 
         #endregion
@@ -404,11 +467,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<TSource> LastAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<TSource, Task<TSource>>(QueryableMethods.LastWithoutPredicate, source, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource>>(
+                QueryableMethods.LastWithoutPredicate,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -445,12 +513,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<TSource> LastAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
-            return ExecuteAsync<TSource, Task<TSource>>(QueryableMethods.LastWithPredicate, source, predicate, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource>>(
+                QueryableMethods.LastWithPredicate,
+                source,
+                predicate,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -472,11 +546,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<TSource?> LastOrDefaultAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<TSource, Task<TSource?>>(QueryableMethods.LastOrDefaultWithoutPredicate, source, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource?>>(
+                QueryableMethods.LastOrDefaultWithoutPredicate,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -504,12 +583,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<TSource?> LastOrDefaultAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
-            return ExecuteAsync<TSource, Task<TSource?>>(QueryableMethods.LastOrDefaultWithPredicate, source, predicate, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource?>>(
+                QueryableMethods.LastOrDefaultWithPredicate,
+                source,
+                predicate,
+                cancellationToken
+            );
         }
 
         #endregion
@@ -546,11 +631,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<TSource> SingleAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<TSource, Task<TSource>>(QueryableMethods.SingleWithoutPredicate, source, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource>>(
+                QueryableMethods.SingleWithoutPredicate,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -594,12 +684,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<TSource> SingleAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
-            return ExecuteAsync<TSource, Task<TSource>>(QueryableMethods.SingleWithPredicate, source, predicate, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource>>(
+                QueryableMethods.SingleWithPredicate,
+                source,
+                predicate,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -624,11 +720,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<TSource?> SingleOrDefaultAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<TSource, Task<TSource?>>(QueryableMethods.SingleOrDefaultWithoutPredicate, source, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource?>>(
+                QueryableMethods.SingleOrDefaultWithoutPredicate,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -659,13 +760,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<TSource?> SingleOrDefaultAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(predicate, nameof(predicate));
 
             return ExecuteAsync<TSource, Task<TSource?>>(
-                QueryableMethods.SingleOrDefaultWithPredicate, source, predicate, cancellationToken);
+                QueryableMethods.SingleOrDefaultWithPredicate,
+                source,
+                predicate,
+                cancellationToken
+            );
         }
 
         #endregion
@@ -691,11 +797,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<TSource> MinAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<TSource, Task<TSource>>(QueryableMethods.MinWithoutSelector, source, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource>>(
+                QueryableMethods.MinWithoutSelector,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -724,12 +835,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<TResult> MinAsync<TSource, TResult>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, TResult>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
-            return ExecuteAsync<TSource, Task<TResult>>(QueryableMethods.MinWithSelector, source, selector, cancellationToken);
+            return ExecuteAsync<TSource, Task<TResult>>(
+                QueryableMethods.MinWithSelector,
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         #endregion
@@ -755,11 +872,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<TSource> MaxAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<TSource, Task<TSource>>(QueryableMethods.MaxWithoutSelector, source, cancellationToken);
+            return ExecuteAsync<TSource, Task<TSource>>(
+                QueryableMethods.MaxWithoutSelector,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -788,12 +910,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<TResult> MaxAsync<TSource, TResult>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, TResult>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
-            return ExecuteAsync<TSource, Task<TResult>>(QueryableMethods.MaxWithSelector, source, selector, cancellationToken);
+            return ExecuteAsync<TSource, Task<TResult>>(
+                QueryableMethods.MaxWithSelector,
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         #endregion
@@ -817,11 +945,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<decimal> SumAsync(
             this IQueryable<decimal> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<decimal, Task<decimal>>(QueryableMethods.GetSumWithoutSelector(typeof(decimal)), source, cancellationToken);
+            return ExecuteAsync<decimal, Task<decimal>>(
+                QueryableMethods.GetSumWithoutSelector(typeof(decimal)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -841,12 +974,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<decimal?> SumAsync(
             this IQueryable<decimal?> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
             return ExecuteAsync<decimal?, Task<decimal?>>(
-                QueryableMethods.GetSumWithoutSelector(typeof(decimal?)), source, cancellationToken);
+                QueryableMethods.GetSumWithoutSelector(typeof(decimal?)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -871,13 +1008,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<decimal> SumAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, decimal>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<decimal>>(
-                QueryableMethods.GetSumWithSelector(typeof(decimal)), source, selector, cancellationToken);
+                QueryableMethods.GetSumWithSelector(typeof(decimal)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -902,13 +1044,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<decimal?> SumAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, decimal?>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<decimal?>>(
-                QueryableMethods.GetSumWithSelector(typeof(decimal?)), source, selector, cancellationToken);
+                QueryableMethods.GetSumWithSelector(typeof(decimal?)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -928,11 +1075,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<int> SumAsync(
             this IQueryable<int> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<int, Task<int>>(QueryableMethods.GetSumWithoutSelector(typeof(int)), source, cancellationToken);
+            return ExecuteAsync<int, Task<int>>(
+                QueryableMethods.GetSumWithoutSelector(typeof(int)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -952,11 +1104,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<int?> SumAsync(
             this IQueryable<int?> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<int?, Task<int?>>(QueryableMethods.GetSumWithoutSelector(typeof(int?)), source, cancellationToken);
+            return ExecuteAsync<int?, Task<int?>>(
+                QueryableMethods.GetSumWithoutSelector(typeof(int?)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -981,12 +1138,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<int> SumAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, int>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
-            return ExecuteAsync<TSource, Task<int>>(QueryableMethods.GetSumWithSelector(typeof(int)), source, selector, cancellationToken);
+            return ExecuteAsync<TSource, Task<int>>(
+                QueryableMethods.GetSumWithSelector(typeof(int)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1011,13 +1174,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<int?> SumAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, int?>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<int?>>(
-                QueryableMethods.GetSumWithSelector(typeof(int?)), source, selector, cancellationToken);
+                QueryableMethods.GetSumWithSelector(typeof(int?)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1037,11 +1205,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<long> SumAsync(
             this IQueryable<long> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<long, Task<long>>(QueryableMethods.GetSumWithoutSelector(typeof(long)), source, cancellationToken);
+            return ExecuteAsync<long, Task<long>>(
+                QueryableMethods.GetSumWithoutSelector(typeof(long)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1061,11 +1234,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<long?> SumAsync(
             this IQueryable<long?> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<long?, Task<long?>>(QueryableMethods.GetSumWithoutSelector(typeof(long?)), source, cancellationToken);
+            return ExecuteAsync<long?, Task<long?>>(
+                QueryableMethods.GetSumWithoutSelector(typeof(long?)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1090,13 +1268,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<long> SumAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, long>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<long>>(
-                QueryableMethods.GetSumWithSelector(typeof(long)), source, selector, cancellationToken);
+                QueryableMethods.GetSumWithSelector(typeof(long)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1121,13 +1304,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<long?> SumAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, long?>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<long?>>(
-                QueryableMethods.GetSumWithSelector(typeof(long?)), source, selector, cancellationToken);
+                QueryableMethods.GetSumWithSelector(typeof(long?)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1147,11 +1335,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<double> SumAsync(
             this IQueryable<double> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<double, Task<double>>(QueryableMethods.GetSumWithoutSelector(typeof(double)), source, cancellationToken);
+            return ExecuteAsync<double, Task<double>>(
+                QueryableMethods.GetSumWithoutSelector(typeof(double)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1171,11 +1364,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<double?> SumAsync(
             this IQueryable<double?> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<double?, Task<double?>>(QueryableMethods.GetSumWithoutSelector(typeof(double?)), source, cancellationToken);
+            return ExecuteAsync<double?, Task<double?>>(
+                QueryableMethods.GetSumWithoutSelector(typeof(double?)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1200,13 +1398,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<double> SumAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, double>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<double>>(
-                QueryableMethods.GetSumWithSelector(typeof(double)), source, selector, cancellationToken);
+                QueryableMethods.GetSumWithSelector(typeof(double)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1231,13 +1434,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<double?> SumAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, double?>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<double?>>(
-                QueryableMethods.GetSumWithSelector(typeof(double?)), source, selector, cancellationToken);
+                QueryableMethods.GetSumWithSelector(typeof(double?)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1257,11 +1465,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<float> SumAsync(
             this IQueryable<float> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<float, Task<float>>(QueryableMethods.GetSumWithoutSelector(typeof(float)), source, cancellationToken);
+            return ExecuteAsync<float, Task<float>>(
+                QueryableMethods.GetSumWithoutSelector(typeof(float)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1281,11 +1494,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<float?> SumAsync(
             this IQueryable<float?> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<float?, Task<float?>>(QueryableMethods.GetSumWithoutSelector(typeof(float?)), source, cancellationToken);
+            return ExecuteAsync<float?, Task<float?>>(
+                QueryableMethods.GetSumWithoutSelector(typeof(float?)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1310,13 +1528,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<float> SumAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, float>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<float>>(
-                QueryableMethods.GetSumWithSelector(typeof(float)), source, selector, cancellationToken);
+                QueryableMethods.GetSumWithSelector(typeof(float)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1341,13 +1564,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<float?> SumAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, float?>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<float?>>(
-                QueryableMethods.GetSumWithSelector(typeof(float?)), source, selector, cancellationToken);
+                QueryableMethods.GetSumWithSelector(typeof(float?)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         #endregion
@@ -1372,12 +1600,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<decimal> AverageAsync(
             this IQueryable<decimal> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
             return ExecuteAsync<decimal, Task<decimal>>(
-                QueryableMethods.GetAverageWithoutSelector(typeof(decimal)), source, cancellationToken);
+                QueryableMethods.GetAverageWithoutSelector(typeof(decimal)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1397,12 +1629,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<decimal?> AverageAsync(
             this IQueryable<decimal?> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
             return ExecuteAsync<decimal?, Task<decimal?>>(
-                QueryableMethods.GetAverageWithoutSelector(typeof(decimal?)), source, cancellationToken);
+                QueryableMethods.GetAverageWithoutSelector(typeof(decimal?)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1429,13 +1665,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<decimal> AverageAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, decimal>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<decimal>>(
-                QueryableMethods.GetAverageWithSelector(typeof(decimal)), source, selector, cancellationToken);
+                QueryableMethods.GetAverageWithSelector(typeof(decimal)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1461,13 +1702,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<decimal?> AverageAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, decimal?>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<decimal?>>(
-                QueryableMethods.GetAverageWithSelector(typeof(decimal?)), source, selector, cancellationToken);
+                QueryableMethods.GetAverageWithSelector(typeof(decimal?)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1488,11 +1734,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<double> AverageAsync(
             this IQueryable<int> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<int, Task<double>>(QueryableMethods.GetAverageWithoutSelector(typeof(int)), source, cancellationToken);
+            return ExecuteAsync<int, Task<double>>(
+                QueryableMethods.GetAverageWithoutSelector(typeof(int)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1512,11 +1763,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<double?> AverageAsync(
             this IQueryable<int?> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<int?, Task<double?>>(QueryableMethods.GetAverageWithoutSelector(typeof(int?)), source, cancellationToken);
+            return ExecuteAsync<int?, Task<double?>>(
+                QueryableMethods.GetAverageWithoutSelector(typeof(int?)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1543,13 +1799,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<double> AverageAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, int>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<double>>(
-                QueryableMethods.GetAverageWithSelector(typeof(int)), source, selector, cancellationToken);
+                QueryableMethods.GetAverageWithSelector(typeof(int)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1575,13 +1836,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<double?> AverageAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, int?>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<double?>>(
-                QueryableMethods.GetAverageWithSelector(typeof(int?)), source, selector, cancellationToken);
+                QueryableMethods.GetAverageWithSelector(typeof(int?)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1602,11 +1868,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<double> AverageAsync(
             this IQueryable<long> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<long, Task<double>>(QueryableMethods.GetAverageWithoutSelector(typeof(long)), source, cancellationToken);
+            return ExecuteAsync<long, Task<double>>(
+                QueryableMethods.GetAverageWithoutSelector(typeof(long)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1626,11 +1897,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<double?> AverageAsync(
             this IQueryable<long?> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<long?, Task<double?>>(QueryableMethods.GetAverageWithoutSelector(typeof(long?)), source, cancellationToken);
+            return ExecuteAsync<long?, Task<double?>>(
+                QueryableMethods.GetAverageWithoutSelector(typeof(long?)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1657,13 +1933,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<double> AverageAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, long>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<double>>(
-                QueryableMethods.GetAverageWithSelector(typeof(long)), source, selector, cancellationToken);
+                QueryableMethods.GetAverageWithSelector(typeof(long)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1689,13 +1970,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<double?> AverageAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, long?>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<double?>>(
-                QueryableMethods.GetAverageWithSelector(typeof(long?)), source, selector, cancellationToken);
+                QueryableMethods.GetAverageWithSelector(typeof(long?)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1716,12 +2002,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<double> AverageAsync(
             this IQueryable<double> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
             return ExecuteAsync<double, Task<double>>(
-                QueryableMethods.GetAverageWithoutSelector(typeof(double)), source, cancellationToken);
+                QueryableMethods.GetAverageWithoutSelector(typeof(double)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1741,12 +2031,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<double?> AverageAsync(
             this IQueryable<double?> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
             return ExecuteAsync<double?, Task<double?>>(
-                QueryableMethods.GetAverageWithoutSelector(typeof(double?)), source, cancellationToken);
+                QueryableMethods.GetAverageWithoutSelector(typeof(double?)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1773,13 +2067,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<double> AverageAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, double>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<double>>(
-                QueryableMethods.GetAverageWithSelector(typeof(double)), source, selector, cancellationToken);
+                QueryableMethods.GetAverageWithSelector(typeof(double)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1805,13 +2104,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<double?> AverageAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, double?>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<double?>>(
-                QueryableMethods.GetAverageWithSelector(typeof(double?)), source, selector, cancellationToken);
+                QueryableMethods.GetAverageWithSelector(typeof(double?)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1832,11 +2136,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<float> AverageAsync(
             this IQueryable<float> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            return ExecuteAsync<float, Task<float>>(QueryableMethods.GetAverageWithoutSelector(typeof(float)), source, cancellationToken);
+            return ExecuteAsync<float, Task<float>>(
+                QueryableMethods.GetAverageWithoutSelector(typeof(float)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1856,12 +2165,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static Task<float?> AverageAsync(
             this IQueryable<float?> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
             return ExecuteAsync<float?, Task<float?>>(
-                QueryableMethods.GetAverageWithoutSelector(typeof(float?)), source, cancellationToken);
+                QueryableMethods.GetAverageWithoutSelector(typeof(float?)),
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1888,13 +2201,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<float> AverageAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, float>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<float>>(
-                QueryableMethods.GetAverageWithSelector(typeof(float)), source, selector, cancellationToken);
+                QueryableMethods.GetAverageWithSelector(typeof(float)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -1920,13 +2238,18 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<float?> AverageAsync<TSource>(
             this IQueryable<TSource> source,
             Expression<Func<TSource, float?>> selector,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(selector, nameof(selector));
 
             return ExecuteAsync<TSource, Task<float?>>(
-                QueryableMethods.GetAverageWithSelector(typeof(float?)), source, selector, cancellationToken);
+                QueryableMethods.GetAverageWithSelector(typeof(float?)),
+                source,
+                selector,
+                cancellationToken
+            );
         }
 
         #endregion
@@ -1954,7 +2277,8 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<bool> ContainsAsync<TSource>(
             this IQueryable<TSource> source,
             TSource item,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
@@ -1962,7 +2286,8 @@ namespace Microsoft.EntityFrameworkCore
                 QueryableMethods.Contains,
                 source,
                 Expression.Constant(item, typeof(TSource)),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         #endregion
@@ -1988,10 +2313,13 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static async Task<List<TSource>> ToListAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var list = new List<TSource>();
-            await foreach (var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken))
+            await foreach (
+                var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken)
+            )
             {
                 list.Add(element);
             }
@@ -2017,30 +2345,42 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static async Task<TSource[]> ToArrayAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
-            => (await source.ToListAsync(cancellationToken).ConfigureAwait(false)).ToArray();
+            CancellationToken cancellationToken = default
+        ) => (await source.ToListAsync(cancellationToken).ConfigureAwait(false)).ToArray();
 
         #endregion
 
         #region Include
 
-        internal static readonly MethodInfo IncludeMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
-                .GetTypeInfo().GetDeclaredMethods(nameof(Include))
+        internal static readonly MethodInfo IncludeMethodInfo =
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
+                .GetDeclaredMethods(nameof(Include))
                 .Single(
                     mi =>
                         mi.GetGenericArguments().Count() == 2
-                        && mi.GetParameters().Any(
-                            pi => pi.Name == "navigationPropertyPath" && pi.ParameterType != typeof(string)));
+                        && mi.GetParameters()
+                            .Any(
+                                pi =>
+                                    pi.Name == "navigationPropertyPath"
+                                    && pi.ParameterType != typeof(string)
+                            )
+                );
 
-        internal static readonly MethodInfo NotQuiteIncludeMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
-                .GetTypeInfo().GetDeclaredMethods(nameof(NotQuiteInclude))
+        internal static readonly MethodInfo NotQuiteIncludeMethodInfo =
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
+                .GetDeclaredMethods(nameof(NotQuiteInclude))
                 .Single(
                     mi =>
                         mi.GetGenericArguments().Count() == 2
-                        && mi.GetParameters().Any(
-                            pi => pi.Name == "navigationPropertyPath" && pi.ParameterType != typeof(string)));
+                        && mi.GetParameters()
+                            .Any(
+                                pi =>
+                                    pi.Name == "navigationPropertyPath"
+                                    && pi.ParameterType != typeof(string)
+                            )
+                );
 
         /// <summary>
         ///     Specifies related entities to include in the query results. The navigation property to be included is specified starting with the
@@ -2091,41 +2431,65 @@ namespace Microsoft.EntityFrameworkCore
         /// </exception>
         public static IIncludableQueryable<TEntity, TProperty> Include<TEntity, TProperty>(
             this IQueryable<TEntity> source,
-            Expression<Func<TEntity, TProperty>> navigationPropertyPath)
-            where TEntity : class
+            Expression<Func<TEntity, TProperty>> navigationPropertyPath
+        ) where TEntity : class
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(navigationPropertyPath, nameof(navigationPropertyPath));
 
             return new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
+                  ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
-                            method: IncludeMethodInfo.MakeGenericMethod(typeof(TEntity), typeof(TProperty)),
-                            arguments: new[] { source.Expression, Expression.Quote(navigationPropertyPath) }))
-                    : source);
+                            method: IncludeMethodInfo.MakeGenericMethod(
+                                typeof(TEntity),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath)
+                            }
+                        )
+                    )
+                  : source
+            );
         }
 
         // A version of Include that doesn't set the navigation as loaded
-        internal static IIncludableQueryable<TEntity, TProperty> NotQuiteInclude<TEntity, TProperty>(
+        internal static IIncludableQueryable<TEntity, TProperty> NotQuiteInclude<
+            TEntity,
+            TProperty
+        >(
             this IQueryable<TEntity> source,
-            Expression<Func<TEntity, TProperty>> navigationPropertyPath)
-            where TEntity : class
+            Expression<Func<TEntity, TProperty>> navigationPropertyPath
+        ) where TEntity : class
         {
             return new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
+                  ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
-                            method: NotQuiteIncludeMethodInfo.MakeGenericMethod(typeof(TEntity), typeof(TProperty)),
-                            arguments: new[] { source.Expression, Expression.Quote(navigationPropertyPath) }))
-                    : source);
+                            method: NotQuiteIncludeMethodInfo.MakeGenericMethod(
+                                typeof(TEntity),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath)
+                            }
+                        )
+                    )
+                  : source
+            );
         }
 
-        internal static readonly MethodInfo ThenIncludeAfterEnumerableMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
-                .GetTypeInfo().GetDeclaredMethods(nameof(ThenInclude))
+        internal static readonly MethodInfo ThenIncludeAfterEnumerableMethodInfo =
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
+                .GetDeclaredMethods(nameof(ThenInclude))
                 .Where(mi => mi.GetGenericArguments().Count() == 3)
                 .Single(
                     mi =>
@@ -2133,14 +2497,20 @@ namespace Microsoft.EntityFrameworkCore
                         var typeInfo = mi.GetParameters()[0].ParameterType.GenericTypeArguments[1];
                         return typeInfo.IsGenericType
                             && typeInfo.GetGenericTypeDefinition() == typeof(IEnumerable<>);
-                    });
+                    }
+                );
 
-        internal static readonly MethodInfo ThenIncludeAfterReferenceMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
-                .GetTypeInfo().GetDeclaredMethods(nameof(ThenInclude))
+        internal static readonly MethodInfo ThenIncludeAfterReferenceMethodInfo =
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
+                .GetDeclaredMethods(nameof(ThenInclude))
                 .Single(
-                    mi => mi.GetGenericArguments().Count() == 3
-                        && mi.GetParameters()[0].ParameterType.GenericTypeArguments[1].IsGenericParameter);
+                    mi =>
+                        mi.GetGenericArguments().Count() == 3
+                        && mi.GetParameters()[0].ParameterType.GenericTypeArguments[
+                            1
+                        ].IsGenericParameter
+                );
 
         /// <summary>
         ///     Specifies additional related data to be further included based on a related type that was just included.
@@ -2184,19 +2554,33 @@ namespace Microsoft.EntityFrameworkCore
         ///     A lambda expression representing the navigation property to be included (<c>t => t.Property1</c>).
         /// </param>
         /// <returns> A new query with the related data included. </returns>
-        public static IIncludableQueryable<TEntity, TProperty> ThenInclude<TEntity, TPreviousProperty, TProperty>(
+        public static IIncludableQueryable<TEntity, TProperty> ThenInclude<
+            TEntity,
+            TPreviousProperty,
+            TProperty
+        >(
             this IIncludableQueryable<TEntity, IEnumerable<TPreviousProperty>> source,
-            Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath)
-            where TEntity : class
-            => new IncludableQueryable<TEntity, TProperty>(
+            Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath
+        ) where TEntity : class =>
+            new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
+                  ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: ThenIncludeAfterEnumerableMethodInfo.MakeGenericMethod(
-                                typeof(TEntity), typeof(TPreviousProperty), typeof(TProperty)),
-                            arguments: new[] { source.Expression, Expression.Quote(navigationPropertyPath) }))
-                    : source);
+                                typeof(TEntity),
+                                typeof(TPreviousProperty),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath)
+                            }
+                        )
+                    )
+                  : source
+            );
 
         /// <summary>
         ///     Specifies additional related data to be further included based on a related type that was just included.
@@ -2236,21 +2620,37 @@ namespace Microsoft.EntityFrameworkCore
         ///     A lambda expression representing the navigation property to be included (<c>t => t.Property1</c>).
         /// </param>
         /// <returns> A new query with the related data included. </returns>
-        public static IIncludableQueryable<TEntity, TProperty> ThenInclude<TEntity, TPreviousProperty, TProperty>(
+        public static IIncludableQueryable<TEntity, TProperty> ThenInclude<
+            TEntity,
+            TPreviousProperty,
+            TProperty
+        >(
             this IIncludableQueryable<TEntity, TPreviousProperty> source,
-            Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath)
-            where TEntity : class
-            => new IncludableQueryable<TEntity, TProperty>(
+            Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath
+        ) where TEntity : class =>
+            new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
+                  ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: ThenIncludeAfterReferenceMethodInfo.MakeGenericMethod(
-                                typeof(TEntity), typeof(TPreviousProperty), typeof(TProperty)),
-                            arguments: new[] { source.Expression, Expression.Quote(navigationPropertyPath) }))
-                    : source);
+                                typeof(TEntity),
+                                typeof(TPreviousProperty),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath)
+                            }
+                        )
+                    )
+                  : source
+            );
 
-        private sealed class IncludableQueryable<TEntity, TProperty> : IIncludableQueryable<TEntity, TProperty>, IAsyncEnumerable<TEntity>
+        private sealed class IncludableQueryable<TEntity, TProperty>
+            : IIncludableQueryable<TEntity, TProperty>,
+              IAsyncEnumerable<TEntity>
         {
             private readonly IQueryable<TEntity> _queryable;
 
@@ -2259,31 +2659,34 @@ namespace Microsoft.EntityFrameworkCore
                 _queryable = queryable;
             }
 
-            public Expression Expression
-                => _queryable.Expression;
+            public Expression Expression => _queryable.Expression;
 
-            public Type ElementType
-                => _queryable.ElementType;
+            public Type ElementType => _queryable.ElementType;
 
-            public IQueryProvider Provider
-                => _queryable.Provider;
+            public IQueryProvider Provider => _queryable.Provider;
 
-            public IAsyncEnumerator<TEntity> GetAsyncEnumerator(CancellationToken cancellationToken = default)
-                => ((IAsyncEnumerable<TEntity>)_queryable).GetAsyncEnumerator(cancellationToken);
+            public IAsyncEnumerator<TEntity> GetAsyncEnumerator(
+                CancellationToken cancellationToken = default
+            ) => ((IAsyncEnumerable<TEntity>)_queryable).GetAsyncEnumerator(cancellationToken);
 
-            public IEnumerator<TEntity> GetEnumerator()
-                => _queryable.GetEnumerator();
+            public IEnumerator<TEntity> GetEnumerator() => _queryable.GetEnumerator();
 
-            IEnumerator IEnumerable.GetEnumerator()
-                => GetEnumerator();
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-        internal static readonly MethodInfo StringIncludeMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
-                .GetTypeInfo().GetDeclaredMethods(nameof(Include))
+        internal static readonly MethodInfo StringIncludeMethodInfo =
+            typeof(EntityFrameworkQueryableExtensions)
+                .GetTypeInfo()
+                .GetDeclaredMethods(nameof(Include))
                 .Single(
-                    mi => mi.GetParameters().Any(
-                        pi => pi.Name == "navigationPropertyPath" && pi.ParameterType == typeof(string)));
+                    mi =>
+                        mi.GetParameters()
+                            .Any(
+                                pi =>
+                                    pi.Name == "navigationPropertyPath"
+                                    && pi.ParameterType == typeof(string)
+                            )
+                );
 
         /// <summary>
         ///     Specifies related entities to include in the query results. The navigation property to be included is
@@ -2318,30 +2721,32 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="ArgumentException"> <paramref name="navigationPropertyPath" /> is empty or whitespace. </exception>
         public static IQueryable<TEntity> Include<TEntity>(
             this IQueryable<TEntity> source,
-            [NotParameterized] string navigationPropertyPath)
-            where TEntity : class
+            [NotParameterized] string navigationPropertyPath
+        ) where TEntity : class
         {
             Check.NotNull(source, nameof(source));
             Check.NotEmpty(navigationPropertyPath, nameof(navigationPropertyPath));
 
-            return
-                source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
-                        Expression.Call(
-                            instance: null,
-                            method: StringIncludeMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                            arg0: source.Expression,
-                            arg1: Expression.Constant(navigationPropertyPath)))
-                    : source;
+            return source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: StringIncludeMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arg0: source.Expression,
+                        arg1: Expression.Constant(navigationPropertyPath)
+                    )
+                )
+              : source;
         }
 
         #endregion
 
         #region Auto included navigations
 
-        internal static readonly MethodInfo IgnoreAutoIncludesMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
-                .GetRequiredDeclaredMethod(nameof(IgnoreAutoIncludes));
+        internal static readonly MethodInfo IgnoreAutoIncludesMethodInfo =
+            typeof(EntityFrameworkQueryableExtensions).GetRequiredDeclaredMethod(
+                nameof(IgnoreAutoIncludes)
+            );
 
         /// <summary>
         ///     Specifies that the current Entity Framework LINQ query should not have any model-level eager loaded navigations applied.
@@ -2350,28 +2755,30 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="source"> The source query. </param>
         /// <returns> A new query that will not apply any model-level eager loaded navigations. </returns>
         public static IQueryable<TEntity> IgnoreAutoIncludes<TEntity>(
-            this IQueryable<TEntity> source)
-            where TEntity : class
+            this IQueryable<TEntity> source
+        ) where TEntity : class
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
-                        Expression.Call(
-                            instance: null,
-                            method: IgnoreAutoIncludesMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                            arguments: source.Expression))
-                    : source;
+            return source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: IgnoreAutoIncludesMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
+              : source;
         }
 
         #endregion
 
         #region Query Filters
 
-        internal static readonly MethodInfo IgnoreQueryFiltersMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
-                .GetRequiredDeclaredMethod(nameof(IgnoreQueryFilters));
+        internal static readonly MethodInfo IgnoreQueryFiltersMethodInfo =
+            typeof(EntityFrameworkQueryableExtensions).GetRequiredDeclaredMethod(
+                nameof(IgnoreQueryFilters)
+            );
 
         /// <summary>
         ///     Specifies that the current Entity Framework LINQ query should not have any model-level entity query filters applied.
@@ -2381,28 +2788,30 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> A new query that will not apply any model-level entity query filters. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="source" /> is <see langword="null" />. </exception>
         public static IQueryable<TEntity> IgnoreQueryFilters<TEntity>(
-            this IQueryable<TEntity> source)
-            where TEntity : class
+            this IQueryable<TEntity> source
+        ) where TEntity : class
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
-                        Expression.Call(
-                            instance: null,
-                            method: IgnoreQueryFiltersMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                            arguments: source.Expression))
-                    : source;
+            return source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: IgnoreQueryFiltersMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
+              : source;
         }
 
         #endregion
 
         #region Tracking
 
-        internal static readonly MethodInfo AsNoTrackingMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
-                .GetRequiredDeclaredMethod(nameof(AsNoTracking));
+        internal static readonly MethodInfo AsNoTrackingMethodInfo =
+            typeof(EntityFrameworkQueryableExtensions).GetRequiredDeclaredMethod(
+                nameof(AsNoTracking)
+            );
 
         /// <summary>
         ///     <para>
@@ -2428,25 +2837,26 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="source"> The source query. </param>
         /// <returns> A new query where the result set will not be tracked by the context. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="source" /> is <see langword="null" />. </exception>
-        public static IQueryable<TEntity> AsNoTracking<TEntity>(
-            this IQueryable<TEntity> source)
+        public static IQueryable<TEntity> AsNoTracking<TEntity>(this IQueryable<TEntity> source)
             where TEntity : class
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
-                        Expression.Call(
-                            instance: null,
-                            method: AsNoTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                            arguments: source.Expression))
-                    : source;
+            return source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: AsNoTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
+              : source;
         }
 
-        internal static readonly MethodInfo AsNoTrackingWithIdentityResolutionMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
-                .GetRequiredDeclaredMethod(nameof(AsNoTrackingWithIdentityResolution));
+        internal static readonly MethodInfo AsNoTrackingWithIdentityResolutionMethodInfo =
+            typeof(EntityFrameworkQueryableExtensions).GetRequiredDeclaredMethod(
+                nameof(AsNoTrackingWithIdentityResolution)
+            );
 
         /// <summary>
         ///     <para>
@@ -2473,23 +2883,26 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> A new query where the result set will not be tracked by the context. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="source" /> is <see langword="null" />. </exception>
         public static IQueryable<TEntity> AsNoTrackingWithIdentityResolution<TEntity>(
-            this IQueryable<TEntity> source)
-            where TEntity : class
+            this IQueryable<TEntity> source
+        ) where TEntity : class
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
-                        Expression.Call(
-                            instance: null,
-                            method: AsNoTrackingWithIdentityResolutionMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                            arguments: source.Expression))
-                    : source;
+            return source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: AsNoTrackingWithIdentityResolutionMethodInfo.MakeGenericMethod(
+                            typeof(TEntity)
+                        ),
+                        arguments: source.Expression
+                    )
+                )
+              : source;
         }
 
-        internal static readonly MethodInfo AsTrackingMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
+        internal static readonly MethodInfo AsTrackingMethodInfo =
+            typeof(EntityFrameworkQueryableExtensions)
                 .GetTypeInfo()
                 .GetDeclaredMethods(nameof(AsTracking))
                 .Single(m => m.GetParameters().Length == 1);
@@ -2508,20 +2921,20 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="source"> The source query. </param>
         /// <returns> A new query where the result set will be tracked by the context. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="source" /> is <see langword="null" />. </exception>
-        public static IQueryable<TEntity> AsTracking<TEntity>(
-            this IQueryable<TEntity> source)
+        public static IQueryable<TEntity> AsTracking<TEntity>(this IQueryable<TEntity> source)
             where TEntity : class
         {
             Check.NotNull(source, nameof(source));
 
-            return
-                source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
-                        Expression.Call(
-                            instance: null,
-                            method: AsTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                            arguments: source.Expression))
-                    : source;
+            return source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: AsTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
+              : source;
         }
 
         /// <summary>
@@ -2550,19 +2963,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="ArgumentNullException"> <paramref name="source" /> is <see langword="null" />. </exception>
         public static IQueryable<TEntity> AsTracking<TEntity>(
             this IQueryable<TEntity> source,
-            QueryTrackingBehavior track)
-            where TEntity : class
-            => track == QueryTrackingBehavior.TrackAll
-                ? source.AsTracking()
-                : source.AsNoTracking();
+            QueryTrackingBehavior track
+        ) where TEntity : class =>
+            track == QueryTrackingBehavior.TrackAll ? source.AsTracking() : source.AsNoTracking();
 
         #endregion
 
         #region Tagging
 
-        internal static readonly MethodInfo TagWithMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
-                .GetRequiredDeclaredMethod(nameof(TagWith));
+        internal static readonly MethodInfo TagWithMethodInfo =
+            typeof(EntityFrameworkQueryableExtensions).GetRequiredDeclaredMethod(nameof(TagWith));
 
         /// <summary>
         ///     Adds a tag to the collection of tags associated with an EF LINQ query. Tags are query annotations
@@ -2578,20 +2988,22 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="ArgumentException"> <paramref name="tag" /> is empty or whitespace. </exception>
         public static IQueryable<T> TagWith<T>(
             this IQueryable<T> source,
-            [NotParameterized] string tag)
+            [NotParameterized] string tag
+        )
         {
             Check.NotNull(source, nameof(source));
             Check.NotEmpty(tag, nameof(tag));
 
-            return
-                source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<T>(
-                        Expression.Call(
-                            instance: null,
-                            method: TagWithMethodInfo.MakeGenericMethod(typeof(T)),
-                            arg0: source.Expression,
-                            arg1: Expression.Constant(tag)))
-                    : source;
+            return source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<T>(
+                    Expression.Call(
+                        instance: null,
+                        method: TagWithMethodInfo.MakeGenericMethod(typeof(T)),
+                        arg0: source.Expression,
+                        arg1: Expression.Constant(tag)
+                    )
+                )
+              : source;
         }
 
         #endregion
@@ -2610,9 +3022,7 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotNull(source, nameof(source));
 
             using var enumerator = source.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-            }
+            while (enumerator.MoveNext()) { }
         }
 
         /// <summary>
@@ -2627,15 +3037,16 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         public static async Task LoadAsync<TSource>(
             this IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(source, nameof(source));
 
-            await using (var enumerator = source.AsAsyncEnumerable().GetAsyncEnumerator(cancellationToken))
+            await using (
+                var enumerator = source.AsAsyncEnumerable().GetAsyncEnumerator(cancellationToken)
+            )
             {
-                while (await enumerator.MoveNextAsync().ConfigureAwait(false))
-                {
-                }
+                while (await enumerator.MoveNextAsync().ConfigureAwait(false)) { }
             }
         }
 
@@ -2668,9 +3079,9 @@ namespace Microsoft.EntityFrameworkCore
         public static Task<Dictionary<TKey, TSource>> ToDictionaryAsync<TSource, TKey>(
             this IQueryable<TSource> source,
             Func<TSource, TKey> keySelector,
-            CancellationToken cancellationToken = default)
-            where TKey : notnull
-            => ToDictionaryAsync(source, keySelector, e => e, comparer: null, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) where TKey : notnull =>
+            ToDictionaryAsync(source, keySelector, e => e, comparer: null, cancellationToken);
 
         /// <summary>
         ///     Creates a <see cref="Dictionary{TKey, TValue}" /> from an <see cref="IQueryable{T}" /> by enumerating it
@@ -2699,9 +3110,9 @@ namespace Microsoft.EntityFrameworkCore
             this IQueryable<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey> comparer,
-            CancellationToken cancellationToken = default)
-            where TKey : notnull
-            => ToDictionaryAsync(source, keySelector, e => e, comparer, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) where TKey : notnull =>
+            ToDictionaryAsync(source, keySelector, e => e, comparer, cancellationToken);
 
         /// <summary>
         ///     Creates a <see cref="Dictionary{TKey, TValue}" /> from an <see cref="IQueryable{T}" /> by enumerating it
@@ -2732,9 +3143,15 @@ namespace Microsoft.EntityFrameworkCore
             this IQueryable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
-            CancellationToken cancellationToken = default)
-            where TKey : notnull
-            => ToDictionaryAsync(source, keySelector, elementSelector, comparer: null, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) where TKey : notnull =>
+            ToDictionaryAsync(
+                source,
+                keySelector,
+                elementSelector,
+                comparer: null,
+                cancellationToken
+            );
 
         /// <summary>
         ///     Creates a <see cref="Dictionary{TKey, TValue}" /> from an <see cref="IQueryable{T}" /> by enumerating it
@@ -2762,20 +3179,26 @@ namespace Microsoft.EntityFrameworkCore
         ///     <paramref name="source" /> or <paramref name="keySelector" /> or <paramref name="elementSelector" /> is <see langword="null" />.
         /// </exception>
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
-        public static async Task<Dictionary<TKey, TElement>> ToDictionaryAsync<TSource, TKey, TElement>(
+        public static async Task<Dictionary<TKey, TElement>> ToDictionaryAsync<
+            TSource,
+            TKey,
+            TElement
+        >(
             this IQueryable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer,
-            CancellationToken cancellationToken = default)
-            where TKey : notnull
+            CancellationToken cancellationToken = default
+        ) where TKey : notnull
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(keySelector, nameof(keySelector));
             Check.NotNull(elementSelector, nameof(elementSelector));
 
             var d = new Dictionary<TKey, TElement>(comparer);
-            await foreach (var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken))
+            await foreach (
+                var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken)
+            )
             {
                 d.Add(keySelector(element), elementSelector(element));
             }
@@ -2806,11 +3229,14 @@ namespace Microsoft.EntityFrameworkCore
         public static async Task ForEachAsync<T>(
             this IQueryable<T> source,
             Action<T> action,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.NotNull(action, nameof(action));
 
-            await foreach (var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken))
+            await foreach (
+                var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken)
+            )
             {
                 action(element);
             }
@@ -2833,7 +3259,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <exception cref="InvalidOperationException"> <paramref name="source" /> is <see langword="null" />. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="source" /> is not a <see cref="IAsyncEnumerable{T}" />. </exception>
         public static IAsyncEnumerable<TSource> AsAsyncEnumerable<TSource>(
-            this IQueryable<TSource> source)
+            this IQueryable<TSource> source
+        )
         {
             Check.NotNull(source, nameof(source));
 
@@ -2853,15 +3280,19 @@ namespace Microsoft.EntityFrameworkCore
             MethodInfo operatorMethodInfo,
             IQueryable<TSource> source,
             Expression? expression,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (source.Provider is IAsyncQueryProvider provider)
             {
                 if (operatorMethodInfo.IsGenericMethod)
                 {
-                    operatorMethodInfo
-                        = operatorMethodInfo.GetGenericArguments().Length == 2
-                            ? operatorMethodInfo.MakeGenericMethod(typeof(TSource), typeof(TResult).GetGenericArguments().Single())
+                    operatorMethodInfo =
+                        operatorMethodInfo.GetGenericArguments().Length == 2
+                            ? operatorMethodInfo.MakeGenericMethod(
+                                  typeof(TSource),
+                                  typeof(TResult).GetGenericArguments().Single()
+                              )
                             : operatorMethodInfo.MakeGenericMethod(typeof(TSource));
                 }
 
@@ -2870,9 +3301,11 @@ namespace Microsoft.EntityFrameworkCore
                         instance: null,
                         method: operatorMethodInfo,
                         arguments: expression == null
-                            ? new[] { source.Expression }
-                            : new[] { source.Expression, expression }),
-                    cancellationToken);
+                          ? new[] { source.Expression }
+                          : new[] { source.Expression, expression }
+                    ),
+                    cancellationToken
+                );
             }
 
             throw new InvalidOperationException(CoreStrings.IQueryableProviderNotAsync);
@@ -2882,17 +3315,26 @@ namespace Microsoft.EntityFrameworkCore
             MethodInfo operatorMethodInfo,
             IQueryable<TSource> source,
             LambdaExpression expression,
-            CancellationToken cancellationToken = default)
-            => ExecuteAsync<TSource, TResult>(
-                operatorMethodInfo, source, Expression.Quote(expression), cancellationToken);
+            CancellationToken cancellationToken = default
+        ) =>
+            ExecuteAsync<TSource, TResult>(
+                operatorMethodInfo,
+                source,
+                Expression.Quote(expression),
+                cancellationToken
+            );
 
         private static TResult ExecuteAsync<TSource, TResult>(
             MethodInfo operatorMethodInfo,
             IQueryable<TSource> source,
-            CancellationToken cancellationToken = default)
-            => ExecuteAsync<TSource, TResult>(
-                operatorMethodInfo, source, (Expression?)null, cancellationToken);
-
+            CancellationToken cancellationToken = default
+        ) =>
+            ExecuteAsync<TSource, TResult>(
+                operatorMethodInfo,
+                source,
+                (Expression?)null,
+                cancellationToken
+            );
         #endregion
     }
 }

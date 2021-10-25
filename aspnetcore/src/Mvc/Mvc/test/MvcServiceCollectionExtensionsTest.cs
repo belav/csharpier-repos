@@ -232,13 +232,26 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Assert
             // Adds controllers
-            Assert.Contains(services, s => s.ServiceType == typeof(IActionInvokerProvider) && s.ImplementationType == typeof(ControllerActionInvokerProvider));
+            Assert.Contains(
+                services,
+                s =>
+                    s.ServiceType == typeof(IActionInvokerProvider)
+                    && s.ImplementationType == typeof(ControllerActionInvokerProvider)
+            );
             // Adds ApiExplorer
-            Assert.Contains(services, s => s.ServiceType == typeof(IApiDescriptionGroupCollectionProvider));
+            Assert.Contains(
+                services,
+                s => s.ServiceType == typeof(IApiDescriptionGroupCollectionProvider)
+            );
             // Adds CORS
             Assert.Contains(services, s => s.ServiceType == typeof(CorsAuthorizationFilter));
             // Adds DataAnnotations
-            Assert.Contains(services, s => s.ServiceType == typeof(IConfigureOptions<MvcOptions>) && s.ImplementationType == typeof(MvcDataAnnotationsMvcOptionsSetup));
+            Assert.Contains(
+                services,
+                s =>
+                    s.ServiceType == typeof(IConfigureOptions<MvcOptions>)
+                    && s.ImplementationType == typeof(MvcDataAnnotationsMvcOptionsSetup)
+            );
             // Adds FormatterMappings
             Assert.Contains(services, s => s.ServiceType == typeof(FormatFilter));
             // Adds Views
@@ -246,10 +259,19 @@ namespace Microsoft.AspNetCore.Mvc
             // Adds Razor
             Assert.Contains(services, s => s.ServiceType == typeof(IRazorViewEngine));
             // Adds CacheTagHelper
-            Assert.Contains(services, s => s.ServiceType == typeof(CacheTagHelperMemoryCacheFactory));
+            Assert.Contains(
+                services,
+                s => s.ServiceType == typeof(CacheTagHelperMemoryCacheFactory)
+            );
 
             // No Razor Pages
-            Assert.Empty(services.Where(s => s.ServiceType == typeof(IActionInvokerProvider) && s.ImplementationType == typeof(PageActionInvokerProvider)));
+            Assert.Empty(
+                services.Where(
+                    s =>
+                        s.ServiceType == typeof(IActionInvokerProvider)
+                        && s.ImplementationType == typeof(PageActionInvokerProvider)
+                )
+            );
         }
 
         private void VerifyAllServices(IServiceCollection services)
@@ -262,7 +284,10 @@ namespace Microsoft.AspNetCore.Mvc
                     // 'single-registration' services should only have one implementation registered.
                     AssertServiceCountEquals(services, service.ServiceType, 1);
                 }
-                else if (service.ImplementationType != null && !service.ImplementationType.Assembly.FullName.Contains("Mvc"))
+                else if (
+                    service.ImplementationType != null
+                    && !service.ImplementationType.Assembly.FullName.Contains("Mvc")
+                )
                 {
                     // Ignore types that don't come from MVC
                 }
@@ -291,14 +316,23 @@ namespace Microsoft.AspNetCore.Mvc
             services.AddMvc();
 
             // Assert
-            var descriptor = Assert.Single(services, d => d.ServiceType == typeof(ApplicationPartManager));
+            var descriptor = Assert.Single(
+                services,
+                d => d.ServiceType == typeof(ApplicationPartManager)
+            );
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
             Assert.NotNull(descriptor.ImplementationInstance);
             var manager = Assert.IsType<ApplicationPartManager>(descriptor.ImplementationInstance);
 
             Assert.Equal(2, manager.ApplicationParts.Count);
-            Assert.Single(manager.ApplicationParts.OfType<AssemblyPart>(), p => p.Assembly == mvcRazorAssembly);
-            Assert.Single(manager.ApplicationParts.OfType<AssemblyPart>(), p => p.Assembly == mvcTagHelpersAssembly);
+            Assert.Single(
+                manager.ApplicationParts.OfType<AssemblyPart>(),
+                p => p.Assembly == mvcRazorAssembly
+            );
+            Assert.Single(
+                manager.ApplicationParts.OfType<AssemblyPart>(),
+                p => p.Assembly == mvcTagHelpersAssembly
+            );
         }
 
         [Fact]
@@ -319,14 +353,23 @@ namespace Microsoft.AspNetCore.Mvc
             services.AddMvc();
 
             // Assert
-            var descriptor = Assert.Single(services, d => d.ServiceType == typeof(ApplicationPartManager));
+            var descriptor = Assert.Single(
+                services,
+                d => d.ServiceType == typeof(ApplicationPartManager)
+            );
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
             Assert.NotNull(descriptor.ImplementationInstance);
             var manager = Assert.IsType<ApplicationPartManager>(descriptor.ImplementationInstance);
 
             Assert.Equal(2, manager.ApplicationParts.Count);
-            Assert.Single(manager.ApplicationParts.OfType<AssemblyPart>(), p => p.Assembly == mvcRazorAssembly);
-            Assert.Single(manager.ApplicationParts.OfType<AssemblyPart>(), p => p.Assembly == mvcTagHelpersAssembly);
+            Assert.Single(
+                manager.ApplicationParts.OfType<AssemblyPart>(),
+                p => p.Assembly == mvcRazorAssembly
+            );
+            Assert.Single(
+                manager.ApplicationParts.OfType<AssemblyPart>(),
+                p => p.Assembly == mvcTagHelpersAssembly
+            );
         }
 
         [Fact]
@@ -345,16 +388,21 @@ namespace Microsoft.AspNetCore.Mvc
             services.AddMvc();
 
             // Assert
-            var descriptor = Assert.Single(services, d => d.ServiceType == typeof(ApplicationPartManager));
+            var descriptor = Assert.Single(
+                services,
+                d => d.ServiceType == typeof(ApplicationPartManager)
+            );
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
             Assert.NotNull(descriptor.ImplementationInstance);
             var manager = Assert.IsType<ApplicationPartManager>(descriptor.ImplementationInstance);
 
-            Assert.Collection(manager.FeatureProviders,
+            Assert.Collection(
+                manager.FeatureProviders,
                 feature => Assert.IsType<ControllerFeatureProvider>(feature),
                 feature => Assert.IsType<ViewComponentFeatureProvider>(feature),
                 feature => Assert.IsType<TagHelperFeatureProvider>(feature),
-                feature => Assert.IsType<RazorCompiledItemFeatureProvider>(feature));
+                feature => Assert.IsType<RazorCompiledItemFeatureProvider>(feature)
+            );
         }
 
         [Fact]
@@ -369,7 +417,10 @@ namespace Microsoft.AspNetCore.Mvc
             services.AddMvc();
 
             // Assert
-            var descriptor = Assert.Single(services, d => d.ServiceType == typeof(ApplicationPartManager));
+            var descriptor = Assert.Single(
+                services,
+                d => d.ServiceType == typeof(ApplicationPartManager)
+            );
             Assert.Same(manager, descriptor.ImplementationInstance);
         }
 
@@ -396,10 +447,17 @@ namespace Microsoft.AspNetCore.Mvc
             // Act & Assert
             using (var scope = scopeFactory.CreateScope())
             {
-                foreach (var serviceType in services.Select(d => d.ServiceType).Where(t => !t.IsGenericTypeDefinition).Distinct())
+                foreach (
+                    var serviceType in services
+                        .Select(d => d.ServiceType)
+                        .Where(t => !t.IsGenericTypeDefinition)
+                        .Distinct()
+                )
                 {
                     // This will throw if something is invalid.
-                    scope.ServiceProvider.GetService(typeof(IEnumerable<>).MakeGenericType(serviceType));
+                    scope.ServiceProvider.GetService(
+                        typeof(IEnumerable<>).MakeGenericType(serviceType)
+                    );
                 }
             }
         }
@@ -414,7 +472,10 @@ namespace Microsoft.AspNetCore.Mvc
             services.AddMvc();
 
             // Assert
-            var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -430,7 +491,8 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.DoesNotContain(
                 services,
-                item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>));
+                item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>)
+            );
         }
 
         private IEnumerable<Type> SingleRegistrationServiceTypes
@@ -474,10 +536,7 @@ namespace Microsoft.AspNetCore.Mvc
                     },
                     {
                         typeof(IConfigureOptions<ApiBehaviorOptions>),
-                        new Type[]
-                        {
-                            typeof(ApiBehaviorOptionsSetup),
-                        }
+                        new Type[] { typeof(ApiBehaviorOptionsSetup), }
                     },
                     {
                         typeof(IConfigureOptions<MvcViewOptions>),
@@ -497,17 +556,11 @@ namespace Microsoft.AspNetCore.Mvc
                     },
                     {
                         typeof(IPostConfigureOptions<MvcOptions>),
-                        new[]
-                        {
-                            typeof(MvcCoreMvcOptionsSetup),
-                        }
+                        new[] { typeof(MvcCoreMvcOptionsSetup), }
                     },
                     {
                         typeof(IActionConstraintProvider),
-                        new Type[]
-                        {
-                            typeof(DefaultActionConstraintProvider),
-                        }
+                        new Type[] { typeof(DefaultActionConstraintProvider), }
                     },
                     {
                         typeof(IActionDescriptorProvider),
@@ -533,13 +586,7 @@ namespace Microsoft.AspNetCore.Mvc
                             typeof(ControllerRequestDelegateFactory)
                         }
                     },
-                    {
-                        typeof(IFilterProvider),
-                        new Type[]
-                        {
-                            typeof(DefaultFilterProvider),
-                        }
-                    },
+                    { typeof(IFilterProvider), new Type[] { typeof(DefaultFilterProvider), } },
                     {
                         typeof(IControllerPropertyActivator),
                         new Type[]
@@ -562,17 +609,11 @@ namespace Microsoft.AspNetCore.Mvc
                     },
                     {
                         typeof(IApiDescriptionProvider),
-                        new Type[]
-                        {
-                            typeof(DefaultApiDescriptionProvider),
-                        }
+                        new Type[] { typeof(DefaultApiDescriptionProvider), }
                     },
                     {
                         typeof(IPageRouteModelProvider),
-                        new[]
-                        {
-                            typeof(CompiledPageRouteModelProvider),
-                        }
+                        new[] { typeof(CompiledPageRouteModelProvider), }
                     },
                     {
                         typeof(IPageApplicationModelProvider),
@@ -593,40 +634,51 @@ namespace Microsoft.AspNetCore.Mvc
         private void AssertServiceCountEquals(
             IServiceCollection services,
             Type serviceType,
-            int expectedServiceRegistrationCount)
+            int expectedServiceRegistrationCount
+        )
         {
-            var serviceDescriptors = services.Where(serviceDescriptor => serviceDescriptor.ServiceType == serviceType);
+            var serviceDescriptors = services.Where(
+                serviceDescriptor => serviceDescriptor.ServiceType == serviceType
+            );
             var actual = serviceDescriptors.Count();
 
             Assert.True(
                 (expectedServiceRegistrationCount == actual),
-                $"Expected service type '{serviceType}' to be registered {expectedServiceRegistrationCount}" +
-                $" time(s) but was actually registered {actual} time(s)." + 
-                string.Join(Environment.NewLine, serviceDescriptors.Select(sd => sd.ImplementationType)));
+                $"Expected service type '{serviceType}' to be registered {expectedServiceRegistrationCount}"
+                    + $" time(s) but was actually registered {actual} time(s)."
+                    + string.Join(
+                        Environment.NewLine,
+                        serviceDescriptors.Select(sd => sd.ImplementationType)
+                    )
+            );
         }
 
         private void AssertContainsSingle(
             IServiceCollection services,
             Type serviceType,
-            Type implementationType)
+            Type implementationType
+        )
         {
             var matches = services
-                .Where(sd =>
-                    sd.ServiceType == serviceType &&
-                    sd.ImplementationType == implementationType)
+                .Where(
+                    sd =>
+                        sd.ServiceType == serviceType && sd.ImplementationType == implementationType
+                )
                 .ToArray();
 
             if (matches.Length == 0)
             {
                 Assert.True(
                     false,
-                    $"Could not find an instance of {implementationType} registered as {serviceType}");
+                    $"Could not find an instance of {implementationType} registered as {serviceType}"
+                );
             }
             else if (matches.Length > 1)
             {
                 Assert.True(
                     false,
-                    $"Found multiple instances of {implementationType} registered as {serviceType}");
+                    $"Found multiple instances of {implementationType} registered as {serviceType}"
+                );
             }
         }
 

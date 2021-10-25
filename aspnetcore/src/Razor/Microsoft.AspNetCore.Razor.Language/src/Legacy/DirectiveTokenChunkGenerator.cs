@@ -21,8 +21,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public override bool Equals(object obj)
         {
             var other = obj as DirectiveTokenChunkGenerator;
-            return base.Equals(other) &&
-                DirectiveTokenDescriptorComparer.Default.Equals(Descriptor, other.Descriptor);
+            return base.Equals(other)
+                && DirectiveTokenDescriptorComparer.Default.Equals(Descriptor, other.Descriptor);
         }
 
         public override int GetHashCode()

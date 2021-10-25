@@ -17,15 +17,72 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         [InlineData(HealthStatus.Unhealthy)]
         public void Status_MatchesWorstStatusInResults(HealthStatus status)
         {
-            var result = new HealthReport(new Dictionary<string, HealthReportEntry>()
-            {
-                {"Foo", new HealthReportEntry(HealthStatus.Healthy, null,TimeSpan.MinValue, null, null) },
-                {"Bar", new HealthReportEntry(HealthStatus.Healthy, null, TimeSpan.MinValue,null, null) },
-                {"Baz", new HealthReportEntry(status, exception: null, description: null,duration:TimeSpan.MinValue, data: null) },
-                {"Quick", new HealthReportEntry(HealthStatus.Healthy, null, TimeSpan.MinValue, null, null) },
-                {"Quack", new HealthReportEntry(HealthStatus.Healthy, null, TimeSpan.MinValue, null, null) },
-                {"Quock", new HealthReportEntry(HealthStatus.Healthy, null, TimeSpan.MinValue, null, null) },
-            }, totalDuration: TimeSpan.MinValue);
+            var result = new HealthReport(
+                new Dictionary<string, HealthReportEntry>()
+                {
+                    {
+                        "Foo",
+                        new HealthReportEntry(
+                            HealthStatus.Healthy,
+                            null,
+                            TimeSpan.MinValue,
+                            null,
+                            null
+                        )
+                    },
+                    {
+                        "Bar",
+                        new HealthReportEntry(
+                            HealthStatus.Healthy,
+                            null,
+                            TimeSpan.MinValue,
+                            null,
+                            null
+                        )
+                    },
+                    {
+                        "Baz",
+                        new HealthReportEntry(
+                            status,
+                            exception: null,
+                            description: null,
+                            duration: TimeSpan.MinValue,
+                            data: null
+                        )
+                    },
+                    {
+                        "Quick",
+                        new HealthReportEntry(
+                            HealthStatus.Healthy,
+                            null,
+                            TimeSpan.MinValue,
+                            null,
+                            null
+                        )
+                    },
+                    {
+                        "Quack",
+                        new HealthReportEntry(
+                            HealthStatus.Healthy,
+                            null,
+                            TimeSpan.MinValue,
+                            null,
+                            null
+                        )
+                    },
+                    {
+                        "Quock",
+                        new HealthReportEntry(
+                            HealthStatus.Healthy,
+                            null,
+                            TimeSpan.MinValue,
+                            null,
+                            null
+                        )
+                    },
+                },
+                totalDuration: TimeSpan.MinValue
+            );
 
             Assert.Equal(status, result.Status);
         }
@@ -36,10 +93,22 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         [InlineData(400)]
         public void TotalDuration_MatchesTotalDurationParameter(int milliseconds)
         {
-            var result = new HealthReport(new Dictionary<string, HealthReportEntry>()
-            {
-                {"Foo", new HealthReportEntry(HealthStatus.Healthy, null,TimeSpan.MinValue, null, null) }
-            }, totalDuration: TimeSpan.FromMilliseconds(milliseconds));
+            var result = new HealthReport(
+                new Dictionary<string, HealthReportEntry>()
+                {
+                    {
+                        "Foo",
+                        new HealthReportEntry(
+                            HealthStatus.Healthy,
+                            null,
+                            TimeSpan.MinValue,
+                            null,
+                            null
+                        )
+                    }
+                },
+                totalDuration: TimeSpan.FromMilliseconds(milliseconds)
+            );
 
             Assert.Equal(TimeSpan.FromMilliseconds(milliseconds), result.TotalDuration);
         }

@@ -14,18 +14,23 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 {
     internal static class ExpressionHelper
     {
-        public static string GetUncachedExpressionText(LambdaExpression expression)
-            => GetExpressionText(expression, expressionTextCache: null);
+        public static string GetUncachedExpressionText(LambdaExpression expression) =>
+            GetExpressionText(expression, expressionTextCache: null);
 
-        public static string GetExpressionText(LambdaExpression expression, ConcurrentDictionary<LambdaExpression, string> expressionTextCache)
+        public static string GetExpressionText(
+            LambdaExpression expression,
+            ConcurrentDictionary<LambdaExpression, string> expressionTextCache
+        )
         {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
             }
 
-            if (expressionTextCache != null &&
-                expressionTextCache.TryGetValue(expression, out var expressionText))
+            if (
+                expressionTextCache != null
+                && expressionTextCache.TryGetValue(expression, out var expressionText)
+            )
             {
                 return expressionText;
             }
@@ -97,7 +102,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         }
                         else
                         {
-                            lastIsModel = string.Equals("model", name, StringComparison.OrdinalIgnoreCase);
+                            lastIsModel = string.Equals(
+                                "model",
+                                name,
+                                StringComparison.OrdinalIgnoreCase
+                            );
                             length += name.Length + 1;
                             part = memberExpressionPart.Expression;
                             segmentCount++;
@@ -155,7 +164,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         Debug.Assert(doNotCache);
                         var methodExpression = (MethodCallExpression)part;
 
-                        InsertIndexerInvocationText(builder, methodExpression.Arguments.Single(), expression);
+                        InsertIndexerInvocationText(
+                            builder,
+                            methodExpression.Arguments.Single(),
+                            expression
+                        );
 
                         part = methodExpression.Object;
                         break;
@@ -204,7 +217,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static void InsertIndexerInvocationText(
             StringBuilder builder,
             Expression indexExpression,
-            LambdaExpression parentExpression)
+            LambdaExpression parentExpression
+        )
         {
             if (builder == null)
             {
@@ -223,9 +237,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             if (parentExpression.Parameters == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(parentExpression.Parameters),
-                    nameof(parentExpression)));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(parentExpression.Parameters),
+                        nameof(parentExpression)
+                    )
+                );
             }
 
             var converted = Expression.Convert(indexExpression, typeof(object));
@@ -241,8 +258,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             {
                 var parameters = parentExpression.Parameters.ToArray();
                 throw new InvalidOperationException(
-                    Resources.FormatExpressionHelper_InvalidIndexerExpression(indexExpression, parameters[0].Name),
-                    ex);
+                    Resources.FormatExpressionHelper_InvalidIndexerExpression(
+                        indexExpression,
+                        parameters[0].Name
+                    ),
+                    ex
+                );
             }
 
             builder.Insert(0, ']');
@@ -252,7 +273,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         public static bool IsSingleArgumentIndexer(Expression expression)
         {
-            if (!(expression is MethodCallExpression methodExpression) || methodExpression.Arguments.Count != 1)
+            if (
+                !(expression is MethodCallExpression methodExpression)
+                || methodExpression.Arguments.Count != 1
+            )
             {
                 return false;
             }
@@ -260,7 +284,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             // Check whether GetDefaultMembers() (if present in CoreCLR) would return a member of this type. Compiler
             // names the indexer property, if any, in a generated [DefaultMember] attribute for the containing type.
             var declaringType = methodExpression.Method.DeclaringType;
-            var defaultMember = declaringType.GetCustomAttribute<DefaultMemberAttribute>(inherit: true);
+            var defaultMember = declaringType.GetCustomAttribute<DefaultMemberAttribute>(
+                inherit: true
+            );
             if (defaultMember == null)
             {
                 return false;
@@ -270,8 +296,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var runtimeProperties = declaringType.GetRuntimeProperties();
             foreach (var property in runtimeProperties)
             {
-                if ((string.Equals(defaultMember.MemberName, property.Name, StringComparison.Ordinal) &&
-                    property.GetMethod == methodExpression.Method))
+                if (
+                    (
+                        string.Equals(
+                            defaultMember.MemberName,
+                            property.Name,
+                            StringComparison.Ordinal
+                        )
+                        && property.GetMethod == methodExpression.Method
+                    )
+                )
                 {
                     return true;
                 }

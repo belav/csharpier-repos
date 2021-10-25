@@ -25,12 +25,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     b.Features.Remove(b.Features.OfType<ComponentMarkupDiagnosticPass>().Single());
                     b.Features.Remove(b.Features.OfType<ComponentMarkupBlockPass>().Single());
                     b.Features.Remove(b.Features.OfType<ComponentMarkupEncodingPass>().Single());
-                });
+                }
+            );
             Engine = ProjectEngine.Engine;
 
             Pass.Engine = Engine;
         }
-        
+
         private DefaultRazorProjectEngine ProjectEngine { get; }
 
         private RazorEngine Engine { get; }
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public void Execute_NoDuplicates()
         {
             // Arrange
-            var document = CreateDocument(@"
+            var document = CreateDocument(
+                @"
 <html>
   <head cool=""beans"">
     <div></div>
@@ -49,7 +51,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
       <li id=""15""></li>
     </ul>
   </head>
-</html>");
+</html>"
+            );
 
             var documentNode = Lower(document);
 
@@ -64,7 +67,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public void Execute_FindDuplicate()
         {
             // Arrange
-            var document = CreateDocument(@"
+            var document = CreateDocument(
+                @"
 <html>
   <head cool=""beans"">
     <div></div>
@@ -72,7 +76,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
       <li id=""15""></li>
     </ul>
   </head>
-</html>");
+</html>"
+            );
 
             var documentNode = Lower(document);
 
@@ -83,7 +88,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             var diagnostic = Assert.Single(documentNode.GetAllDiagnostics());
             Assert.Equal(ComponentDiagnosticFactory.DuplicateMarkupAttribute.Id, diagnostic.Id);
 
-            var node = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().Where(n => n.HasDiagnostics).Single();
+            var node = documentNode
+                .FindDescendantNodes<HtmlAttributeIntermediateNode>()
+                .Where(n => n.HasDiagnostics)
+                .Single();
             Assert.Equal("a", node.AttributeName);
             Assert.Equal(node.Source, diagnostic.Span);
         }
@@ -92,7 +100,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public void Execute_FindDuplicate_CaseInsensitive()
         {
             // Arrange
-            var document = CreateDocument(@"
+            var document = CreateDocument(
+                @"
 <html>
   <head cool=""beans"">
     <div></div>
@@ -100,7 +109,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
       <li id=""15""></li>
     </ul>
   </head>
-</html>");
+</html>"
+            );
 
             var documentNode = Lower(document);
 
@@ -111,7 +121,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             var diagnostic = Assert.Single(documentNode.GetAllDiagnostics());
             Assert.Equal(ComponentDiagnosticFactory.DuplicateMarkupAttribute.Id, diagnostic.Id);
 
-            var node = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().Where(n => n.HasDiagnostics).Single();
+            var node = documentNode
+                .FindDescendantNodes<HtmlAttributeIntermediateNode>()
+                .Where(n => n.HasDiagnostics)
+                .Single();
             Assert.Equal("attr", node.AttributeName);
             Assert.Equal(node.Source, diagnostic.Span);
         }
@@ -120,7 +133,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         public void Execute_FindDuplicate_Multiple()
         {
             // Arrange
-            var document = CreateDocument(@"
+            var document = CreateDocument(
+                @"
 <html>
   <head cool=""beans"">
     <div></div>
@@ -128,7 +142,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
       <li id=""15""></li>
     </ul>
   </head>
-</html>");
+</html>"
+            );
 
             var documentNode = Lower(document);
 
@@ -137,7 +152,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             // Assert
             var diagnostics = documentNode.GetAllDiagnostics();
-            var nodes = documentNode.FindDescendantNodes<HtmlAttributeIntermediateNode>().Where(n => n.HasDiagnostics).ToArray();
+            var nodes = documentNode
+                .FindDescendantNodes<HtmlAttributeIntermediateNode>()
+                .Where(n => n.HasDiagnostics)
+                .ToArray();
 
             Assert.Equal(2, diagnostics.Count);
             Assert.Equal(2, nodes.Length);
@@ -177,7 +195,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             var document = codeDocument.GetDocumentIntermediateNode();
-            Engine.Features.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
+            Engine.Features
+                .OfType<ComponentDocumentClassifierPass>()
+                .Single()
+                .Execute(codeDocument, document);
             return document;
         }
 

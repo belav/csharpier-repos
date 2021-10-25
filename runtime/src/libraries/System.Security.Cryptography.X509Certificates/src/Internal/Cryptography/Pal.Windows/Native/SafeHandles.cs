@@ -14,10 +14,7 @@ namespace Internal.Cryptography.Pal.Native
     /// </summary>
     internal abstract class SafePointerHandle<T> : SafeHandle where T : SafeHandle, new()
     {
-        protected SafePointerHandle()
-            : base(IntPtr.Zero, true)
-        {
-        }
+        protected SafePointerHandle() : base(IntPtr.Zero, true) { }
 
         public sealed override bool IsInvalid
         {
@@ -120,7 +117,8 @@ namespace Internal.Cryptography.Pal.Native
                 this,
                 propertyId,
                 null,
-                ref cb);
+                ref cb
+            );
 
             return hasProperty;
         }
@@ -133,7 +131,11 @@ namespace Internal.Cryptography.Pal.Native
     {
         protected sealed override bool ReleaseHandle()
         {
-            using (SafeCertContextHandle certContext = Interop.crypt32.CertDuplicateCertificateContext(handle))
+            using (
+                SafeCertContextHandle certContext = Interop.crypt32.CertDuplicateCertificateContext(
+                    handle
+                )
+            )
             {
                 DeleteKeyContainer(certContext);
             }
@@ -147,14 +149,25 @@ namespace Internal.Cryptography.Pal.Native
                 return;
 
             int cb = 0;
-            bool containsPrivateKey = Interop.crypt32.CertGetCertificateContextProperty(pCertContext, CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID, null, ref cb);
+            bool containsPrivateKey = Interop.crypt32.CertGetCertificateContextProperty(
+                pCertContext,
+                CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                null,
+                ref cb
+            );
             if (!containsPrivateKey)
                 return;
 
             byte[] provInfoAsBytes = new byte[cb];
-            if (!Interop.crypt32.CertGetCertificateContextProperty(pCertContext, CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID, provInfoAsBytes, ref cb))
+            if (
+                !Interop.crypt32.CertGetCertificateContextProperty(
+                    pCertContext,
+                    CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                    provInfoAsBytes,
+                    ref cb
+                )
+            )
                 return;
-
             unsafe
             {
                 fixed (byte* pProvInfoAsBytes = provInfoAsBytes)
@@ -166,12 +179,21 @@ namespace Internal.Cryptography.Pal.Native
                         // dwProvType being 0 indicates that the key is stored in CNG.
                         // dwProvType being non-zero indicates that the key is stored in CAPI.
 
-                        string providerName = Marshal.PtrToStringUni((IntPtr)(pProvInfo->pwszProvName))!;
-                        string keyContainerName = Marshal.PtrToStringUni((IntPtr)(pProvInfo->pwszContainerName))!;
+                        string providerName = Marshal.PtrToStringUni(
+                            (IntPtr)(pProvInfo->pwszProvName)
+                        )!;
+                        string keyContainerName = Marshal.PtrToStringUni(
+                            (IntPtr)(pProvInfo->pwszContainerName)
+                        )!;
 
                         try
                         {
-                            using (CngKey cngKey = CngKey.Open(keyContainerName, new CngProvider(providerName)))
+                            using (
+                                CngKey cngKey = CngKey.Open(
+                                    keyContainerName,
+                                    new CngProvider(providerName)
+                                )
+                            )
                             {
                                 cngKey.Delete();
                             }
@@ -184,9 +206,17 @@ namespace Internal.Cryptography.Pal.Native
                     }
                     else
                     {
-                        CryptAcquireContextFlags flags = (pProvInfo->dwFlags & CryptAcquireContextFlags.CRYPT_MACHINE_KEYSET) | CryptAcquireContextFlags.CRYPT_DELETEKEYSET;
+                        CryptAcquireContextFlags flags =
+                            (pProvInfo->dwFlags & CryptAcquireContextFlags.CRYPT_MACHINE_KEYSET)
+                            | CryptAcquireContextFlags.CRYPT_DELETEKEYSET;
                         IntPtr hProv;
-                        _ = Interop.cryptoapi.CryptAcquireContext(out hProv, pProvInfo->pwszContainerName, pProvInfo->pwszProvName, pProvInfo->dwProvType, flags);
+                        _ = Interop.cryptoapi.CryptAcquireContext(
+                            out hProv,
+                            pProvInfo->pwszContainerName,
+                            pProvInfo->pwszProvName,
+                            pProvInfo->dwProvType,
+                            flags
+                        );
 
                         // Called CryptAcquireContext solely for the side effect of deleting the key containers. When called with these flags, no actual
                         // hProv is returned (so there's nothing to clean up.)
@@ -242,22 +272,20 @@ namespace Internal.Cryptography.Pal.Native
 
     internal sealed class SafeChainEngineHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeChainEngineHandle()
-            : base(true)
-        {
-        }
+        public SafeChainEngineHandle() : base(true) { }
 
-        private SafeChainEngineHandle(IntPtr handle)
-            : base(true)
+        private SafeChainEngineHandle(IntPtr handle) : base(true)
         {
             SetHandle(handle);
         }
 
-        public static readonly SafeChainEngineHandle MachineChainEngine =
-            new SafeChainEngineHandle((IntPtr)ChainEngine.HCCE_LOCAL_MACHINE);
+        public static readonly SafeChainEngineHandle MachineChainEngine = new SafeChainEngineHandle(
+            (IntPtr)ChainEngine.HCCE_LOCAL_MACHINE
+        );
 
-        public static readonly SafeChainEngineHandle UserChainEngine =
-            new SafeChainEngineHandle((IntPtr)ChainEngine.HCCE_CURRENT_USER);
+        public static readonly SafeChainEngineHandle UserChainEngine = new SafeChainEngineHandle(
+            (IntPtr)ChainEngine.HCCE_CURRENT_USER
+        );
 
         protected sealed override bool ReleaseHandle()
         {

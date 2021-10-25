@@ -23,16 +23,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
     [UseExportProvider]
     public class SymbolEquivalenceComparerTests
     {
-        public static readonly CS.CSharpCompilationOptions CSharpDllOptions = new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
-        public static readonly CS.CSharpCompilationOptions CSharpSignedDllOptions = new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary).
-            WithCryptoKeyFile(SigningTestHelpers.KeyPairFile).
-            WithStrongNameProvider(DefaultDesktopStrongNameProvider);
+        public static readonly CS.CSharpCompilationOptions CSharpDllOptions =
+            new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
+        public static readonly CS.CSharpCompilationOptions CSharpSignedDllOptions =
+            new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+                .WithCryptoKeyFile(SigningTestHelpers.KeyPairFile)
+                .WithStrongNameProvider(DefaultDesktopStrongNameProvider);
 
         [Fact]
         public async Task TestArraysAreEquivalent()
         {
             var csharpCode =
-@"class C
+                @"class C
 {
     int intField1;
     int[] intArrayField1;
@@ -50,7 +52,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
 }";
 
             using var workspace = TestWorkspace.CreateCSharp(csharpCode);
-            var type = (ITypeSymbol)(await workspace.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("C").Single();
+            var type = (ITypeSymbol)(
+                await workspace.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("C")
+                .Single();
 
             var intField1 = (IFieldSymbol)type.GetMembers("intField1").Single();
             var intArrayField1 = (IFieldSymbol)type.GetMembers("intArrayField1").Single();
@@ -68,40 +74,106 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(intField1.Type, intField1.Type));
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(intField1.Type, intField2.Type));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(intField1.Type),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(intField2.Type));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(intField1.Type),
+                SymbolEquivalenceComparer.Instance.GetHashCode(intField2.Type)
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(intArrayField1.Type, intArrayField1.Type));
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(intArrayField1.Type, intArrayField2.Type));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(intArrayField1.Type),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(intArrayField2.Type));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(intArrayField1.Type, intArrayField1.Type)
+            );
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(intArrayField1.Type, intArrayField2.Type)
+            );
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(intArrayField1.Type),
+                SymbolEquivalenceComparer.Instance.GetHashCode(intArrayField2.Type)
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(stringArrayField1.Type, stringArrayField1.Type));
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(stringArrayField1.Type, stringArrayField2.Type));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    stringArrayField1.Type,
+                    stringArrayField1.Type
+                )
+            );
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    stringArrayField1.Type,
+                    stringArrayField2.Type
+                )
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(intArrayArrayField1.Type, intArrayArrayField1.Type));
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(intArrayArrayField1.Type, intArrayArrayField2.Type));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    intArrayArrayField1.Type,
+                    intArrayArrayField1.Type
+                )
+            );
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    intArrayArrayField1.Type,
+                    intArrayArrayField2.Type
+                )
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(intArrayRank2Field1.Type, intArrayRank2Field1.Type));
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(intArrayRank2Field1.Type, intArrayRank2Field2.Type));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    intArrayRank2Field1.Type,
+                    intArrayRank2Field1.Type
+                )
+            );
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    intArrayRank2Field1.Type,
+                    intArrayRank2Field2.Type
+                )
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(int32Field1.Type, int32Field1.Type));
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(int32Field1.Type, int32Field2.Type));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(int32Field1.Type, int32Field1.Type)
+            );
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(int32Field1.Type, int32Field2.Type)
+            );
 
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(intField1.Type, intArrayField1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(intArrayField1.Type, stringArrayField1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(stringArrayField1.Type, intArrayArrayField1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(intArrayArrayField1.Type, intArrayRank2Field1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(intArrayRank2Field1.Type, int32Field1.Type));
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(intField1.Type, intArrayField1.Type)
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    intArrayField1.Type,
+                    stringArrayField1.Type
+                )
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    stringArrayField1.Type,
+                    intArrayArrayField1.Type
+                )
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    intArrayArrayField1.Type,
+                    intArrayRank2Field1.Type
+                )
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    intArrayRank2Field1.Type,
+                    int32Field1.Type
+                )
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(int32Field1.Type, intField1.Type));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(int32Field1.Type, intField1.Type)
+            );
         }
 
         [Fact]
         public async Task TestArraysInDifferentLanguagesAreEquivalent()
         {
             var csharpCode =
-@"class C
+                @"class C
 {
     int intField1;
     int[] intArrayField1;
@@ -111,7 +183,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
     System.Int32 int32Field1;
 }";
             var vbCode =
-@"class C
+                @"class C
     dim intField1 as Integer;
     dim intArrayField1 as Integer()
     dim stringArrayField1 as String()
@@ -122,51 +194,147 @@ end class";
 
             using var csharpWorkspace = TestWorkspace.CreateCSharp(csharpCode);
             using var vbWorkspace = TestWorkspace.CreateVisualBasic(vbCode);
-            var csharpType = (ITypeSymbol)(await csharpWorkspace.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("C").Single();
-            var vbType = (await vbWorkspace.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("C").Single();
+            var csharpType = (ITypeSymbol)(
+                await csharpWorkspace.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("C")
+                .Single();
+            var vbType = (
+                await vbWorkspace.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("C")
+                .Single();
 
             var csharpIntField1 = (IFieldSymbol)csharpType.GetMembers("intField1").Single();
-            var csharpIntArrayField1 = (IFieldSymbol)csharpType.GetMembers("intArrayField1").Single();
-            var csharpStringArrayField1 = (IFieldSymbol)csharpType.GetMembers("stringArrayField1").Single();
-            var csharpIntArrayArrayField1 = (IFieldSymbol)csharpType.GetMembers("intArrayArrayField1").Single();
-            var csharpIntArrayRank2Field1 = (IFieldSymbol)csharpType.GetMembers("intArrayRank2Field1").Single();
+            var csharpIntArrayField1 = (IFieldSymbol)csharpType
+                .GetMembers("intArrayField1")
+                .Single();
+            var csharpStringArrayField1 = (IFieldSymbol)csharpType
+                .GetMembers("stringArrayField1")
+                .Single();
+            var csharpIntArrayArrayField1 = (IFieldSymbol)csharpType
+                .GetMembers("intArrayArrayField1")
+                .Single();
+            var csharpIntArrayRank2Field1 = (IFieldSymbol)csharpType
+                .GetMembers("intArrayRank2Field1")
+                .Single();
             var csharpInt32Field1 = (IFieldSymbol)csharpType.GetMembers("int32Field1").Single();
 
             var vbIntField1 = (IFieldSymbol)vbType.GetMembers("intField1").Single();
             var vbIntArrayField1 = (IFieldSymbol)vbType.GetMembers("intArrayField1").Single();
             var vbStringArrayField1 = (IFieldSymbol)vbType.GetMembers("stringArrayField1").Single();
-            var vbIntArrayArrayField1 = (IFieldSymbol)vbType.GetMembers("intArrayArrayField1").Single();
-            var vbIntArrayRank2Field1 = (IFieldSymbol)vbType.GetMembers("intArrayRank2Field1").Single();
+            var vbIntArrayArrayField1 = (IFieldSymbol)vbType
+                .GetMembers("intArrayArrayField1")
+                .Single();
+            var vbIntArrayRank2Field1 = (IFieldSymbol)vbType
+                .GetMembers("intArrayRank2Field1")
+                .Single();
             var vbInt32Field1 = (IFieldSymbol)vbType.GetMembers("int32Field1").Single();
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(csharpIntField1.Type, vbIntField1.Type));
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(csharpIntArrayField1.Type, vbIntArrayField1.Type));
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(csharpStringArrayField1.Type, vbStringArrayField1.Type));
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(csharpIntArrayArrayField1.Type, vbIntArrayArrayField1.Type));
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(csharpInt32Field1.Type, vbInt32Field1.Type));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(csharpIntField1.Type, vbIntField1.Type)
+            );
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    csharpIntArrayField1.Type,
+                    vbIntArrayField1.Type
+                )
+            );
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    csharpStringArrayField1.Type,
+                    vbStringArrayField1.Type
+                )
+            );
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    csharpIntArrayArrayField1.Type,
+                    vbIntArrayArrayField1.Type
+                )
+            );
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    csharpInt32Field1.Type,
+                    vbInt32Field1.Type
+                )
+            );
 
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpIntField1.Type, vbIntArrayField1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(vbIntArrayField1.Type, csharpStringArrayField1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpStringArrayField1.Type, vbIntArrayArrayField1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(vbIntArrayArrayField1.Type, csharpIntArrayRank2Field1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpIntArrayRank2Field1.Type, vbInt32Field1.Type));
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    csharpIntField1.Type,
+                    vbIntArrayField1.Type
+                )
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    vbIntArrayField1.Type,
+                    csharpStringArrayField1.Type
+                )
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    csharpStringArrayField1.Type,
+                    vbIntArrayArrayField1.Type
+                )
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    vbIntArrayArrayField1.Type,
+                    csharpIntArrayRank2Field1.Type
+                )
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    csharpIntArrayRank2Field1.Type,
+                    vbInt32Field1.Type
+                )
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(csharpInt32Field1.Type, vbIntField1.Type));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(csharpInt32Field1.Type, vbIntField1.Type)
+            );
 
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(vbIntField1.Type, csharpIntArrayField1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpIntArrayField1.Type, vbStringArrayField1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(vbStringArrayField1.Type, csharpIntArrayArrayField1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpIntArrayArrayField1.Type, vbIntArrayRank2Field1.Type));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(vbIntArrayRank2Field1.Type, csharpInt32Field1.Type));
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    vbIntField1.Type,
+                    csharpIntArrayField1.Type
+                )
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    csharpIntArrayField1.Type,
+                    vbStringArrayField1.Type
+                )
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    vbStringArrayField1.Type,
+                    csharpIntArrayArrayField1.Type
+                )
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    csharpIntArrayArrayField1.Type,
+                    vbIntArrayRank2Field1.Type
+                )
+            );
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    vbIntArrayRank2Field1.Type,
+                    csharpInt32Field1.Type
+                )
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(vbInt32Field1.Type, csharpIntField1.Type));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(vbInt32Field1.Type, csharpIntField1.Type)
+            );
         }
 
         [Fact]
         public async Task TestFields()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     int field1;
     string field2;
@@ -179,7 +347,7 @@ class Type2
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     int field1;
     short field4;
@@ -192,10 +360,26 @@ class Type2
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type2_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type2").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type2_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type2").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type2_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type2")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type2_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type2")
+                .Single();
 
             var field1_v1 = type1_v1.GetMembers("field1").Single();
             var field1_v2 = type1_v2.GetMembers("field1").Single();
@@ -207,8 +391,10 @@ class Type2
             var field4_v2 = type1_v2.GetMembers("field4").Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(field1_v1, field1_v2));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(field1_v1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(field1_v2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(field1_v1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(field1_v2)
+            );
 
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(field2_v1, field2_v2));
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(field3_v1, field3_v2));
@@ -220,7 +406,7 @@ class Type2
         public async Task TestFieldsAcrossLanguages()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     int field1;
     string field2;
@@ -233,7 +419,7 @@ class Type2
 }";
 
             var vbCode1 =
-@"class Type1
+                @"class Type1
     dim field1 as Integer;
     dim field4 as Short;
 end class
@@ -244,10 +430,26 @@ class Type2
 end class";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateVisualBasic(vbCode1);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type2_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type2").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type2_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type2").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type2_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type2")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type2_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type2")
+                .Single();
 
             var field1_v1 = type1_v1.GetMembers("field1").Single();
             var field1_v2 = type1_v2.GetMembers("field1").Single();
@@ -268,7 +470,7 @@ end class";
         public async Task TestFieldsInGenericTypes()
         {
             var code =
-@"class C<T>
+                @"class C<T>
 {
     int goo;
     C<int> intInstantiation1;
@@ -283,12 +485,24 @@ class D
 ";
 
             using var workspace = TestWorkspace.CreateCSharp(code);
-            var typeC = (await workspace.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("C").Single();
-            var typeD = (await workspace.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("D").Single();
+            var typeC = (
+                await workspace.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("C")
+                .Single();
+            var typeD = (
+                await workspace.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("D")
+                .Single();
 
             var intInstantiation1 = (IFieldSymbol)typeC.GetMembers("intInstantiation1").Single();
-            var stringInstantiation = (IFieldSymbol)typeC.GetMembers("stringInstantiation").Single();
-            var instanceInstantiation = (IFieldSymbol)typeC.GetMembers("instanceInstantiation").Single();
+            var stringInstantiation = (IFieldSymbol)typeC
+                .GetMembers("stringInstantiation")
+                .Single();
+            var instanceInstantiation = (IFieldSymbol)typeC
+                .GetMembers("instanceInstantiation")
+                .Single();
             var intInstantiation2 = (IFieldSymbol)typeD.GetMembers("intInstantiation2").Single();
 
             var goo = typeC.GetMembers("goo").Single();
@@ -300,35 +514,57 @@ class D
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(goo, goo_intInstantiation1));
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(goo, goo_intInstantiation2));
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(goo, goo_stringInstantiation));
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(goo_intInstantiation1, goo_stringInstantiation));
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    goo_intInstantiation1,
+                    goo_stringInstantiation
+                )
+            );
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(goo, goo_instanceInstantiation));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(goo),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(goo_instanceInstantiation));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(goo),
+                SymbolEquivalenceComparer.Instance.GetHashCode(goo_instanceInstantiation)
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(goo_intInstantiation1, goo_intInstantiation2));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(goo_intInstantiation1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(goo_intInstantiation2));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    goo_intInstantiation1,
+                    goo_intInstantiation2
+                )
+            );
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(goo_intInstantiation1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(goo_intInstantiation2)
+            );
         }
 
         [Fact]
         public async Task TestMethodsWithDifferentReturnTypeNotEquivalent()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo() {}
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     int Goo() {}
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
@@ -340,20 +576,28 @@ class D
         public async Task TestMethodsWithDifferentNamesAreNotEquivalent()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo() {}
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     void Goo1() {}
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo1").Single();
@@ -365,20 +609,28 @@ class D
         public async Task TestMethodsWithDifferentAritiesAreNotEquivalent()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo() {}
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     void Goo<T>() {}
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
@@ -390,20 +642,28 @@ class D
         public async Task TestMethodsWithDifferentParametersAreNotEquivalent()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo() {}
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     void Goo(int a) {}
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
@@ -415,101 +675,139 @@ class D
         public async Task TestMethodsWithDifferentTypeParameters()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo<A>(A a) {}
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     void Goo<B>(B a) {}
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(method_v1, method_v2));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(method_v2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v2)
+            );
         }
 
         [Fact]
         public async Task TestMethodsWithSameParameters()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo(int a) {}
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     void Goo(int a) {}
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(method_v1, method_v2));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(method_v2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v2)
+            );
         }
 
         [Fact]
         public async Task TestMethodsWithDifferentParameterNames()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo(int a) {}
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     void Goo(int b) {}
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(method_v1, method_v2));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(method_v2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v2)
+            );
         }
 
         [Fact]
         public async Task TestMethodsAreEquivalentOutToRef()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo(out int a) {}
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     void Goo(ref int a) {}
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
@@ -521,20 +819,28 @@ class D
         public async Task TestMethodsNotEquivalentRemoveOut()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo(out int a) {}
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     void Goo(int a) {}
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
@@ -546,47 +852,65 @@ class D
         public async Task TestMethodsAreEquivalentIgnoreParams()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo(params int[] a) {}
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     void Goo(int[] a) {}
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(method_v1, method_v2));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(method_v2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v2)
+            );
         }
 
         [Fact]
         public async Task TestMethodsNotEquivalentDifferentParameterTypes()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo(int[] a) {}
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     void Goo(string[] a) {}
 }";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
@@ -598,7 +922,7 @@ class D
         public async Task TestMethodsAcrossLanguages()
         {
             var csharpCode1 =
-@"
+                @"
 using System.Collections.Generic;
 
 class Type1
@@ -608,7 +932,7 @@ class Type1
 }";
 
             var vbCode1 =
-@"
+                @"
 Imports System.Collections.Generic
 
 class Type1
@@ -619,8 +943,16 @@ class Type1
 end class";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateVisualBasic(vbCode1);
-            var csharpType1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var vbType1 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var csharpType1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var vbType1 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var csharpGooMethod = csharpType1.GetMembers("Goo").Single();
             var csharpBarMethod = csharpType1.GetMembers("Bar").Single();
@@ -628,13 +960,19 @@ end class";
             var vbQuuxMethod = vbType1.GetMembers("Quux").Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(csharpGooMethod, vbGooMethod));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(csharpGooMethod),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(vbGooMethod));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(csharpGooMethod),
+                SymbolEquivalenceComparer.Instance.GetHashCode(vbGooMethod)
+            );
 
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpGooMethod, csharpBarMethod));
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(csharpGooMethod, csharpBarMethod)
+            );
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpGooMethod, vbQuuxMethod));
 
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpBarMethod, csharpGooMethod));
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(csharpBarMethod, csharpGooMethod)
+            );
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpBarMethod, vbGooMethod));
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpBarMethod, vbQuuxMethod));
         }
@@ -643,7 +981,7 @@ end class";
         public async Task TestMethodsInGenericTypesAcrossLanguages()
         {
             var csharpCode1 =
-@"
+                @"
 using System.Collections.Generic;
 
 class Type1<X>
@@ -653,7 +991,7 @@ class Type1<X>
 }";
 
             var vbCode1 =
-@"
+                @"
 Imports System.Collections.Generic
 
 class Type1(of M)
@@ -664,8 +1002,16 @@ class Type1(of M)
 end class";
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateVisualBasic(vbCode1);
-            var csharpType1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var vbType1 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var csharpType1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var vbType1 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var csharpGooMethod = csharpType1.GetMembers("Goo").Single();
             var csharpBarMethod = csharpType1.GetMembers("Bar").Single();
@@ -673,13 +1019,19 @@ end class";
             var vbBarMethod = vbType1.GetMembers("Bar").Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(csharpGooMethod, vbGooMethod));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(csharpGooMethod),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(vbGooMethod));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(csharpGooMethod),
+                SymbolEquivalenceComparer.Instance.GetHashCode(vbGooMethod)
+            );
 
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpGooMethod, csharpBarMethod));
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(csharpGooMethod, csharpBarMethod)
+            );
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpGooMethod, vbBarMethod));
 
-            Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpBarMethod, csharpGooMethod));
+            Assert.False(
+                SymbolEquivalenceComparer.Instance.Equals(csharpBarMethod, csharpGooMethod)
+            );
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpBarMethod, vbGooMethod));
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(csharpBarMethod, vbBarMethod));
         }
@@ -688,14 +1040,18 @@ end class";
         public async Task TestObjectAndDynamicAreNotEqualNormally()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     object field1;
     dynamic field2;
 }";
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var field1_v1 = type1_v1.GetMembers("field1").Single();
             var field2_v1 = type1_v1.GetMembers("field2").Single();
@@ -708,36 +1064,46 @@ end class";
         public async Task TestObjectAndDynamicAreEqualInSignatures()
         {
             var csharpCode1 =
-@"class Type1
+                @"class Type1
 {
     void Goo(object o1) { }
 }";
 
             var csharpCode2 =
-@"class Type1
+                @"class Type1
 {
     void Goo(dynamic o1) { }
 }";
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(method_v1, method_v2));
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(method_v2, method_v1));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(method_v2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v2)
+            );
         }
 
         [Fact]
         public async Task TestUnequalGenericsInSignatures()
         {
             var csharpCode1 =
-@"
+                @"
 using System.Collections.Generic;
 
 class Type1
@@ -746,7 +1112,7 @@ class Type1
 }";
 
             var csharpCode2 =
-@"
+                @"
 using System.Collections.Generic;
 
 class Type1
@@ -756,8 +1122,16 @@ class Type1
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
@@ -770,7 +1144,7 @@ class Type1
         public async Task TestGenericsWithDynamicAndObjectInSignatures()
         {
             var csharpCode1 =
-@"
+                @"
 using System.Collections.Generic;
 
 class Type1
@@ -779,7 +1153,7 @@ class Type1
 }";
 
             var csharpCode2 =
-@"
+                @"
 using System.Collections.Generic;
 
 class Type1
@@ -789,23 +1163,33 @@ class Type1
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(method_v1, method_v2));
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(method_v2, method_v1));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(method_v2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v2)
+            );
         }
 
         [Fact]
         public async Task TestDynamicAndUnrelatedTypeInSignatures()
         {
             var csharpCode1 =
-@"
+                @"
 using System.Collections.Generic;
 
 class Type1
@@ -814,7 +1198,7 @@ class Type1
 }";
 
             var csharpCode2 =
-@"
+                @"
 using System.Collections.Generic;
 
 class Type1
@@ -824,8 +1208,16 @@ class Type1
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
@@ -838,7 +1230,7 @@ class Type1
         public async Task TestNamespaces()
         {
             var csharpCode1 =
-@"namespace Outer
+                @"namespace Outer
 {
     namespace Inner
     {
@@ -855,8 +1247,16 @@ class Type1
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode1);
-            var outer1 = (INamespaceSymbol)(await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetMembers("Outer").Single();
-            var outer2 = (INamespaceSymbol)(await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetMembers("Outer").Single();
+            var outer1 = (INamespaceSymbol)(
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetMembers("Outer")
+                .Single();
+            var outer2 = (INamespaceSymbol)(
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetMembers("Outer")
+                .Single();
 
             var inner1 = (INamespaceSymbol)outer1.GetMembers("Inner").Single();
             var inner2 = (INamespaceSymbol)outer2.GetMembers("Inner").Single();
@@ -868,20 +1268,28 @@ class Type1
             var innerType2 = inner2.GetTypeMembers("Type").Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(outer1, outer2));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(outer1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(outer2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(outer1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(outer2)
+            );
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(inner1, inner2));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(inner1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(inner2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(inner1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(inner2)
+            );
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(outerType1, outerType2));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(outerType1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(outerType2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(outerType1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(outerType2)
+            );
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(innerType1, innerType2));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(innerType1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(innerType2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(innerType1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(innerType2)
+            );
 
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(outer1, inner1));
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(inner1, outerType1));
@@ -889,27 +1297,46 @@ class Type1
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(innerType1, outer1));
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(outer1, inner1.ContainingSymbol));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(outer1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(inner1.ContainingSymbol));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(outer1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(inner1.ContainingSymbol)
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(outer1, innerType1.ContainingSymbol.ContainingSymbol));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(outer1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(innerType1.ContainingSymbol.ContainingSymbol));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(
+                    outer1,
+                    innerType1.ContainingSymbol.ContainingSymbol
+                )
+            );
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(outer1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(
+                    innerType1.ContainingSymbol.ContainingSymbol
+                )
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(inner1, innerType1.ContainingSymbol));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(inner1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(innerType1.ContainingSymbol));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(inner1, innerType1.ContainingSymbol)
+            );
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(inner1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(innerType1.ContainingSymbol)
+            );
 
-            Assert.True(SymbolEquivalenceComparer.Instance.Equals(outer1, outerType1.ContainingSymbol));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(outer1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(outerType1.ContainingSymbol));
+            Assert.True(
+                SymbolEquivalenceComparer.Instance.Equals(outer1, outerType1.ContainingSymbol)
+            );
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(outer1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(outerType1.ContainingSymbol)
+            );
         }
 
         [Fact]
         public async Task TestNamedTypesEquivalent()
         {
             var csharpCode1 =
-@"
+                @"
 class Type1
 {
 }
@@ -920,7 +1347,7 @@ class Type2<X>
 ";
 
             var csharpCode2 =
-@"
+                @"
 class Type1
 {
   void Goo();
@@ -932,20 +1359,40 @@ class Type2<Y>
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type2_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type2").Single();
-            var type2_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type2").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type2_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type2")
+                .Single();
+            var type2_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type2")
+                .Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(type1_v1, type1_v2));
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(type1_v2, type1_v1));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(type1_v1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(type1_v2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(type1_v1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(type1_v2)
+            );
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(type2_v1, type2_v2));
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(type2_v2, type2_v1));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(type2_v1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(type2_v2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(type2_v1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(type2_v2)
+            );
 
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(type1_v1, type2_v1));
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(type2_v1, type1_v1));
@@ -955,13 +1402,13 @@ class Type2<Y>
         public async Task TestNamedTypesDifferentIfNameChanges()
         {
             var csharpCode1 =
-@"
+                @"
 class Type1
 {
 }";
 
             var csharpCode2 =
-@"
+                @"
 class Type2
 {
   void Goo();
@@ -969,8 +1416,16 @@ class Type2
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type2").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type2")
+                .Single();
 
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(type1_v1, type1_v2));
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(type1_v2, type1_v1));
@@ -980,13 +1435,13 @@ class Type2
         public async Task TestNamedTypesDifferentIfTypeKindChanges()
         {
             var csharpCode1 =
-@"
+                @"
 struct Type1
 {
 }";
 
             var csharpCode2 =
-@"
+                @"
 class Type1
 {
   void Goo();
@@ -994,8 +1449,16 @@ class Type1
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(type1_v1, type1_v2));
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(type1_v2, type1_v1));
@@ -1005,13 +1468,13 @@ class Type1
         public async Task TestNamedTypesDifferentIfArityChanges()
         {
             var csharpCode1 =
-@"
+                @"
 class Type1
 {
 }";
 
             var csharpCode2 =
-@"
+                @"
 class Type1<T>
 {
   void Goo();
@@ -1019,8 +1482,16 @@ class Type1<T>
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(type1_v1, type1_v2));
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(type1_v2, type1_v1));
@@ -1030,7 +1501,7 @@ class Type1<T>
         public async Task TestNamedTypesDifferentIfContainerDifferent()
         {
             var csharpCode1 =
-@"
+                @"
 class Outer
 {
     class Type1
@@ -1039,7 +1510,7 @@ class Outer
 }";
 
             var csharpCode2 =
-@"
+                @"
 class Other
 {
     class Type1
@@ -1050,8 +1521,16 @@ class Other
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var outer = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Outer").Single();
-            var other = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Other").Single();
+            var outer = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Outer")
+                .Single();
+            var other = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Other")
+                .Single();
             var type1_v1 = outer.GetTypeMembers("Type1").Single();
             var type1_v2 = other.GetTypeMembers("Type1").Single();
 
@@ -1063,7 +1542,7 @@ class Other
         public async Task TestAliasedTypes1()
         {
             var csharpCode1 =
-@"
+                @"
 using i = System.Int32;
 
 class Type1
@@ -1072,7 +1551,7 @@ class Type1
 }";
 
             var csharpCode2 =
-@"
+                @"
 class Type1
 {
     void Goo(int o1) { }
@@ -1080,16 +1559,26 @@ class Type1
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("Type1").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("Type1")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("Goo").Single();
             var method_v2 = type1_v2.GetMembers("Goo").Single();
 
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(method_v1, method_v2));
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(method_v2, method_v1));
-            Assert.Equal(SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(method_v2));
+            Assert.Equal(
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(method_v2)
+            );
         }
 
         [WorkItem(599, "https://github.com/dotnet/roslyn/issues/599")]
@@ -1097,14 +1586,14 @@ class Type1
         public async Task TestRefVersusOut()
         {
             var csharpCode1 =
-@"
+                @"
 class C
 {
     void M(out int i) { }
 }";
 
             var csharpCode2 =
-@"
+                @"
 class C
 {
     void M(ref int i) { }
@@ -1112,14 +1601,30 @@ class C
 
             using var workspace1 = TestWorkspace.CreateCSharp(csharpCode1);
             using var workspace2 = TestWorkspace.CreateCSharp(csharpCode2);
-            var type1_v1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("C").Single();
-            var type1_v2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetTypeMembers("C").Single();
+            var type1_v1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("C")
+                .Single();
+            var type1_v2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetTypeMembers("C")
+                .Single();
 
             var method_v1 = type1_v1.GetMembers("M").Single();
             var method_v2 = type1_v2.GetMembers("M").Single();
 
-            var trueComp = new SymbolEquivalenceComparer(assemblyComparerOpt: null, distinguishRefFromOut: true, tupleNamesMustMatch: false);
-            var falseComp = new SymbolEquivalenceComparer(assemblyComparerOpt: null, distinguishRefFromOut: false, tupleNamesMustMatch: false);
+            var trueComp = new SymbolEquivalenceComparer(
+                assemblyComparerOpt: null,
+                distinguishRefFromOut: true,
+                tupleNamesMustMatch: false
+            );
+            var falseComp = new SymbolEquivalenceComparer(
+                assemblyComparerOpt: null,
+                distinguishRefFromOut: false,
+                tupleNamesMustMatch: false
+            );
 
             Assert.False(trueComp.Equals(method_v1, method_v2));
             Assert.False(trueComp.Equals(method_v2, method_v1));
@@ -1127,14 +1632,14 @@ class C
 
             Assert.True(falseComp.Equals(method_v1, method_v2));
             Assert.True(falseComp.Equals(method_v2, method_v1));
-            Assert.Equal(falseComp.GetHashCode(method_v1),
-                         falseComp.GetHashCode(method_v2));
+            Assert.Equal(falseComp.GetHashCode(method_v1), falseComp.GetHashCode(method_v2));
         }
 
         [Fact]
         public async Task TestCSharpReducedExtensionMethodsAreEquivalent()
         {
-            var code = @"
+            var code =
+                @"
 class Zed {}
 
 public static class Extensions
@@ -1188,17 +1693,43 @@ class Test
             var comp1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync());
             var comp2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync());
 
-            TestReducedExtension<CS.Syntax.InvocationExpressionSyntax>(comp1, comp2, "Test", "NotGeneric");
-            TestReducedExtension<CS.Syntax.InvocationExpressionSyntax>(comp1, comp2, "Test", "GenericThis");
-            TestReducedExtension<CS.Syntax.InvocationExpressionSyntax>(comp1, comp2, "Test", "GenericNotThis");
-            TestReducedExtension<CS.Syntax.InvocationExpressionSyntax>(comp1, comp2, "Test", "GenericThisAndMore");
-            TestReducedExtension<CS.Syntax.InvocationExpressionSyntax>(comp1, comp2, "Test", "GenericThisAndOther");
+            TestReducedExtension<CS.Syntax.InvocationExpressionSyntax>(
+                comp1,
+                comp2,
+                "Test",
+                "NotGeneric"
+            );
+            TestReducedExtension<CS.Syntax.InvocationExpressionSyntax>(
+                comp1,
+                comp2,
+                "Test",
+                "GenericThis"
+            );
+            TestReducedExtension<CS.Syntax.InvocationExpressionSyntax>(
+                comp1,
+                comp2,
+                "Test",
+                "GenericNotThis"
+            );
+            TestReducedExtension<CS.Syntax.InvocationExpressionSyntax>(
+                comp1,
+                comp2,
+                "Test",
+                "GenericThisAndMore"
+            );
+            TestReducedExtension<CS.Syntax.InvocationExpressionSyntax>(
+                comp1,
+                comp2,
+                "Test",
+                "GenericThisAndOther"
+            );
         }
 
         [Fact]
         public async Task TestVisualBasicReducedExtensionMethodsAreEquivalent()
         {
-            var code = @"
+            var code =
+                @"
 Imports System.Runtime.CompilerServices
 
 Class Zed
@@ -1262,36 +1793,91 @@ End Class
             var comp1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync());
             var comp2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync());
 
-            TestReducedExtension<VB.Syntax.InvocationExpressionSyntax>(comp1, comp2, "Test", "NotGeneric");
-            TestReducedExtension<VB.Syntax.InvocationExpressionSyntax>(comp1, comp2, "Test", "GenericThis");
-            TestReducedExtension<VB.Syntax.InvocationExpressionSyntax>(comp1, comp2, "Test", "GenericNotThis");
-            TestReducedExtension<VB.Syntax.InvocationExpressionSyntax>(comp1, comp2, "Test", "GenericThisAndMore");
-            TestReducedExtension<VB.Syntax.InvocationExpressionSyntax>(comp1, comp2, "Test", "GenericThisAndOther");
+            TestReducedExtension<VB.Syntax.InvocationExpressionSyntax>(
+                comp1,
+                comp2,
+                "Test",
+                "NotGeneric"
+            );
+            TestReducedExtension<VB.Syntax.InvocationExpressionSyntax>(
+                comp1,
+                comp2,
+                "Test",
+                "GenericThis"
+            );
+            TestReducedExtension<VB.Syntax.InvocationExpressionSyntax>(
+                comp1,
+                comp2,
+                "Test",
+                "GenericNotThis"
+            );
+            TestReducedExtension<VB.Syntax.InvocationExpressionSyntax>(
+                comp1,
+                comp2,
+                "Test",
+                "GenericThisAndMore"
+            );
+            TestReducedExtension<VB.Syntax.InvocationExpressionSyntax>(
+                comp1,
+                comp2,
+                "Test",
+                "GenericThisAndOther"
+            );
         }
 
         [Fact]
         public async Task TestDifferentModules()
         {
             var csharpCode =
-@"namespace N
+                @"namespace N
 {
     namespace M
     {
     }
 }";
 
-            using var workspace1 = TestWorkspace.CreateCSharp(csharpCode, compilationOptions: new CS.CSharpCompilationOptions(OutputKind.NetModule, moduleName: "GooModule"));
-            using var workspace2 = TestWorkspace.CreateCSharp(csharpCode, compilationOptions: new CS.CSharpCompilationOptions(OutputKind.NetModule, moduleName: "BarModule"));
-            var namespace1 = (await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetNamespaceMembers().Single(n => n.Name == "N").GetNamespaceMembers().Single(n => n.Name == "M");
-            var namespace2 = (await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()).GlobalNamespace.GetNamespaceMembers().Single(n => n.Name == "N").GetNamespaceMembers().Single(n => n.Name == "M");
+            using var workspace1 = TestWorkspace.CreateCSharp(
+                csharpCode,
+                compilationOptions: new CS.CSharpCompilationOptions(
+                    OutputKind.NetModule,
+                    moduleName: "GooModule"
+                )
+            );
+            using var workspace2 = TestWorkspace.CreateCSharp(
+                csharpCode,
+                compilationOptions: new CS.CSharpCompilationOptions(
+                    OutputKind.NetModule,
+                    moduleName: "BarModule"
+                )
+            );
+            var namespace1 = (
+                await workspace1.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetNamespaceMembers()
+                .Single(n => n.Name == "N")
+                .GetNamespaceMembers()
+                .Single(n => n.Name == "M");
+            var namespace2 = (
+                await workspace2.CurrentSolution.Projects.Single().GetCompilationAsync()
+            ).GlobalNamespace
+                .GetNamespaceMembers()
+                .Single(n => n.Name == "N")
+                .GetNamespaceMembers()
+                .Single(n => n.Name == "M");
 
-            Assert.True(SymbolEquivalenceComparer.IgnoreAssembliesInstance.Equals(namespace1, namespace2));
-            Assert.Equal(SymbolEquivalenceComparer.IgnoreAssembliesInstance.GetHashCode(namespace1),
-                         SymbolEquivalenceComparer.IgnoreAssembliesInstance.GetHashCode(namespace2));
+            Assert.True(
+                SymbolEquivalenceComparer.IgnoreAssembliesInstance.Equals(namespace1, namespace2)
+            );
+            Assert.Equal(
+                SymbolEquivalenceComparer.IgnoreAssembliesInstance.GetHashCode(namespace1),
+                SymbolEquivalenceComparer.IgnoreAssembliesInstance.GetHashCode(namespace2)
+            );
 
             Assert.False(SymbolEquivalenceComparer.Instance.Equals(namespace1, namespace2));
-            Assert.NotEqual(SymbolEquivalenceComparer.Instance.GetHashCode(namespace1),
-                         SymbolEquivalenceComparer.Instance.GetHashCode(namespace2));
+            Assert.NotEqual(
+                SymbolEquivalenceComparer.Instance.GetHashCode(namespace1),
+                SymbolEquivalenceComparer.Instance.GetHashCode(namespace2)
+            );
         }
 
         [Fact]
@@ -1300,15 +1886,42 @@ End Class
             var references = new[] { TestMetadata.Net451.mscorlib };
 
             var source = "public class T {}";
-            var sourceV1 = "[assembly: System.Reflection.AssemblyVersion(\"1.0.0.0\")] public class T {}";
-            var sourceV2 = "[assembly: System.Reflection.AssemblyVersion(\"2.0.0.0\")] public class T {}";
+            var sourceV1 =
+                "[assembly: System.Reflection.AssemblyVersion(\"1.0.0.0\")] public class T {}";
+            var sourceV2 =
+                "[assembly: System.Reflection.AssemblyVersion(\"2.0.0.0\")] public class T {}";
 
-            var a1 = (Compilation)CS.CSharpCompilation.Create("a", new[] { CS.SyntaxFactory.ParseSyntaxTree(source) }, references, CSharpDllOptions);
-            var a2 = (Compilation)CS.CSharpCompilation.Create("a", new[] { CS.SyntaxFactory.ParseSyntaxTree(source) }, references, CSharpDllOptions);
+            var a1 = (Compilation)CS.CSharpCompilation.Create(
+                "a",
+                new[] { CS.SyntaxFactory.ParseSyntaxTree(source) },
+                references,
+                CSharpDllOptions
+            );
+            var a2 = (Compilation)CS.CSharpCompilation.Create(
+                "a",
+                new[] { CS.SyntaxFactory.ParseSyntaxTree(source) },
+                references,
+                CSharpDllOptions
+            );
 
-            var b1 = (Compilation)CS.CSharpCompilation.Create("b", new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV1) }, references, CSharpSignedDllOptions);
-            var b2 = (Compilation)CS.CSharpCompilation.Create("b", new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV2) }, references, CSharpSignedDllOptions);
-            var b3 = (Compilation)CS.CSharpCompilation.Create("b", new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV2) }, references, CSharpSignedDllOptions);
+            var b1 = (Compilation)CS.CSharpCompilation.Create(
+                "b",
+                new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV1) },
+                references,
+                CSharpSignedDllOptions
+            );
+            var b2 = (Compilation)CS.CSharpCompilation.Create(
+                "b",
+                new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV2) },
+                references,
+                CSharpSignedDllOptions
+            );
+            var b3 = (Compilation)CS.CSharpCompilation.Create(
+                "b",
+                new[] { CS.SyntaxFactory.ParseSyntaxTree(sourceV2) },
+                references,
+                CSharpSignedDllOptions
+            );
 
             var ta1 = (ITypeSymbol)a1.GlobalNamespace.GetMembers("T").Single();
             var ta2 = (ITypeSymbol)a2.GlobalNamespace.GetMembers("T").Single();
@@ -1316,7 +1929,11 @@ End Class
             var tb2 = (ITypeSymbol)b2.GlobalNamespace.GetMembers("T").Single();
             var tb3 = (ITypeSymbol)b3.GlobalNamespace.GetMembers("T").Single();
 
-            var identityComparer = new SymbolEquivalenceComparer(AssemblySymbolIdentityComparer.Instance, distinguishRefFromOut: false, tupleNamesMustMatch: false);
+            var identityComparer = new SymbolEquivalenceComparer(
+                AssemblySymbolIdentityComparer.Instance,
+                distinguishRefFromOut: false,
+                tupleNamesMustMatch: false
+            );
 
             // same name:
             Assert.True(SymbolEquivalenceComparer.IgnoreAssembliesInstance.Equals(ta1, ta2));
@@ -1341,19 +1958,20 @@ End Class
 
         private sealed class AssemblySymbolIdentityComparer : IEqualityComparer<IAssemblySymbol>
         {
-            public static readonly IEqualityComparer<IAssemblySymbol> Instance = new AssemblySymbolIdentityComparer();
+            public static readonly IEqualityComparer<IAssemblySymbol> Instance =
+                new AssemblySymbolIdentityComparer();
 
-            public bool Equals(IAssemblySymbol x, IAssemblySymbol y)
-                => x.Identity.Equals(y.Identity);
+            public bool Equals(IAssemblySymbol x, IAssemblySymbol y) =>
+                x.Identity.Equals(y.Identity);
 
-            public int GetHashCode(IAssemblySymbol obj)
-                => obj.Identity.GetHashCode();
+            public int GetHashCode(IAssemblySymbol obj) => obj.Identity.GetHashCode();
         }
 
         [Fact]
         public void CustomModifiers_Methods1()
         {
-            const string ilSource = @"
+            const string ilSource =
+                @"
 .class public C
 {
   .method public instance int32 [] modopt([mscorlib]System.Int64) F(         // 0
@@ -1389,7 +2007,8 @@ End Class
   }
 }
 ";
-            MetadataReference r1, r2;
+            MetadataReference r1,
+                r2;
             using (var tempAssembly = IlasmUtilities.CreateTempAssembly(ilSource))
             {
                 var bytes = File.ReadAllBytes(tempAssembly.Path);
@@ -1397,12 +2016,24 @@ End Class
                 r2 = MetadataReference.CreateFromImage(bytes);
             }
 
-            var c1 = (Compilation)CS.CSharpCompilation.Create("comp1", Array.Empty<SyntaxTree>(), new[] { TestMetadata.Net451.mscorlib, r1 });
-            var c2 = (Compilation)CS.CSharpCompilation.Create("comp2", Array.Empty<SyntaxTree>(), new[] { TestMetadata.Net451.mscorlib, r2 });
+            var c1 = (Compilation)CS.CSharpCompilation.Create(
+                "comp1",
+                Array.Empty<SyntaxTree>(),
+                new[] { TestMetadata.Net451.mscorlib, r1 }
+            );
+            var c2 = (Compilation)CS.CSharpCompilation.Create(
+                "comp2",
+                Array.Empty<SyntaxTree>(),
+                new[] { TestMetadata.Net451.mscorlib, r2 }
+            );
             var type1 = (ITypeSymbol)c1.GlobalNamespace.GetMembers("C").Single();
             var type2 = (ITypeSymbol)c2.GlobalNamespace.GetMembers("C").Single();
 
-            var identityComparer = new SymbolEquivalenceComparer(AssemblySymbolIdentityComparer.Instance, distinguishRefFromOut: false, tupleNamesMustMatch: false);
+            var identityComparer = new SymbolEquivalenceComparer(
+                AssemblySymbolIdentityComparer.Instance,
+                distinguishRefFromOut: false,
+                tupleNamesMustMatch: false
+            );
 
             var f1 = type1.GetMembers("F");
             var f2 = type2.GetMembers("F");
@@ -1428,8 +2059,12 @@ End Class
             Assert.True(identityComparer.Equals(f1[3], f2[3]));
         }
 
-        private static void TestReducedExtension<TInvocation>(Compilation comp1, Compilation comp2, string typeName, string methodName)
-            where TInvocation : SyntaxNode
+        private static void TestReducedExtension<TInvocation>(
+            Compilation comp1,
+            Compilation comp2,
+            string typeName,
+            string methodName
+        ) where TInvocation : SyntaxNode
         {
             var method1 = GetInvokedSymbol<TInvocation>(comp1, typeName, methodName);
             var method2 = GetInvokedSymbol<TInvocation>(comp2, typeName, methodName);
@@ -1448,8 +2083,11 @@ End Class
             Assert.True(SymbolEquivalenceComparer.Instance.Equals(cfmethod1, cfmethod2));
         }
 
-        private static IMethodSymbol GetInvokedSymbol<TInvocation>(Compilation compilation, string typeName, string methodName)
-            where TInvocation : SyntaxNode
+        private static IMethodSymbol GetInvokedSymbol<TInvocation>(
+            Compilation compilation,
+            string typeName,
+            string methodName
+        ) where TInvocation : SyntaxNode
         {
             var type1 = compilation.GlobalNamespace.GetTypeMembers(typeName).Single();
             var method = type1.GetMembers(methodName).Single();

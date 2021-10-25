@@ -14,6 +14,7 @@ namespace Microsoft.AspNetCore.SignalR
         /// <summary>
         /// Gets or sets the settings used to serialize invocation arguments and return values.
         /// </summary>
-        public JsonSerializerSettings PayloadSerializerSettings { get; set; } = NewtonsoftJsonHubProtocol.CreateDefaultSerializerSettings();
+        public JsonSerializerSettings PayloadSerializerSettings { get; set; } =
+            NewtonsoftJsonHubProtocol.CreateDefaultSerializerSettings();
     }
 }

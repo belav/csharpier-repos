@@ -33,8 +33,16 @@ namespace Microsoft.AspNetCore.Mvc
             if (query.ContainsKey("link"))
             {
                 var values = query
-                    .Where(kvp => kvp.Key != "link" && kvp.Key != "link_action" && kvp.Key != "link_controller")
-                    .ToDictionary(kvp => kvp.Key.Substring("link_".Length), kvp => (object)kvp.Value[0]);
+                    .Where(
+                        kvp =>
+                            kvp.Key != "link"
+                            && kvp.Key != "link_action"
+                            && kvp.Key != "link_controller"
+                    )
+                    .ToDictionary(
+                        kvp => kvp.Key.Substring("link_".Length),
+                        kvp => (object)kvp.Value[0]
+                    );
 
                 var urlHelper = GetUrlHelper(_actionContext);
                 link = urlHelper.Action(query["link_action"], query["link_controller"], values);
@@ -42,18 +50,22 @@ namespace Microsoft.AspNetCore.Mvc
 
             var attributeRoutingInfo = _actionContext.ActionDescriptor.AttributeRouteInfo;
 
-            return new OkObjectResult(new
-            {
-                expectedUrls = expectedUrls,
-                actualUrl = _actionContext.HttpContext.Request.Path.Value,
-                routeName = attributeRoutingInfo == null ? null : attributeRoutingInfo.Name,
-                routeValues = new Dictionary<string, object>(_actionContext.RouteData.Values),
-
-                action = ((ControllerActionDescriptor)_actionContext.ActionDescriptor).ActionName,
-                controller = ((ControllerActionDescriptor)_actionContext.ActionDescriptor).ControllerName,
-
-                link,
-            });
+            return new OkObjectResult(
+                new
+                {
+                    expectedUrls = expectedUrls,
+                    actualUrl = _actionContext.HttpContext.Request.Path.Value,
+                    routeName = attributeRoutingInfo == null ? null : attributeRoutingInfo.Name,
+                    routeValues = new Dictionary<string, object>(_actionContext.RouteData.Values),
+                    action = (
+                        (ControllerActionDescriptor)_actionContext.ActionDescriptor
+                    ).ActionName,
+                    controller = (
+                        (ControllerActionDescriptor)_actionContext.ActionDescriptor
+                    ).ControllerName,
+                    link,
+                }
+            );
         }
 
         private IUrlHelper GetUrlHelper(ActionContext context)

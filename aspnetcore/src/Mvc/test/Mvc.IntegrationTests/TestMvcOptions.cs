@@ -22,7 +22,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             optionsSetup.Configure(Value);
 
             var validationAttributeAdapterProvider = new ValidationAttributeAdapterProvider();
-            var dataAnnotationLocalizationOptions = Options.Create(new MvcDataAnnotationsLocalizationOptions());
+            var dataAnnotationLocalizationOptions = Options.Create(
+                new MvcDataAnnotationsLocalizationOptions()
+            );
             var stringLocalizer = new Mock<IStringLocalizer>();
             var stringLocalizerFactory = new Mock<IStringLocalizerFactory>();
             stringLocalizerFactory
@@ -32,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var dataAnnotationOptionsSetup = new MvcDataAnnotationsMvcOptionsSetup(
                 validationAttributeAdapterProvider,
                 dataAnnotationLocalizationOptions,
-                stringLocalizerFactory.Object);
+                stringLocalizerFactory.Object
+            );
             dataAnnotationOptionsSetup.Configure(Value);
 
             var loggerFactory = new LoggerFactory();
@@ -44,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 loggerFactory,
                 jsonOptions,
                 charPool,
-                objectPoolProvider);
+                objectPoolProvider
+            );
             mvcJsonMvcOptionsSetup.Configure(Value);
         }
 

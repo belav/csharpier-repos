@@ -19,9 +19,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportLspRequestHandlerProvider, Shared]
     [ProvidesMethod(LSP.Methods.TextDocumentSignatureHelpName)]
-    internal class SignatureHelpHandler : AbstractStatelessRequestHandler<LSP.TextDocumentPositionParams, LSP.SignatureHelp?>
+    internal class SignatureHelpHandler
+        : AbstractStatelessRequestHandler<LSP.TextDocumentPositionParams, LSP.SignatureHelp?>
     {
-        private readonly IEnumerable<Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>> _allProviders;
+        private readonly IEnumerable<
+            Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>
+        > _allProviders;
 
         public override string Method => LSP.Methods.TextDocumentSignatureHelpName;
 
@@ -30,14 +33,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SignatureHelpHandler([ImportMany] IEnumerable<Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>> allProviders)
+        public SignatureHelpHandler(
+            [ImportMany]
+                IEnumerable<Lazy<ISignatureHelpProvider, OrderableLanguageMetadata>> allProviders
+        )
         {
             _allProviders = allProviders;
         }
 
-        public override LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.TextDocumentPositionParams request) => request.TextDocument;
+        public override LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
+            LSP.TextDocumentPositionParams request
+        ) => request.TextDocument;
 
-        public override async Task<LSP.SignatureHelp?> HandleRequestAsync(LSP.TextDocumentPositionParams request, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<LSP.SignatureHelp?> HandleRequestAsync(
+            LSP.TextDocumentPositionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document == null)
@@ -45,14 +57,25 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return null;
             }
 
-            var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
+            var position = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var providers = _allProviders.Where(p => p.Metadata.Language == document.Project.Language);
-            var triggerInfo = new SignatureHelpTriggerInfo(SignatureHelpTriggerReason.InvokeSignatureHelpCommand);
+            var providers = _allProviders.Where(
+                p => p.Metadata.Language == document.Project.Language
+            );
+            var triggerInfo = new SignatureHelpTriggerInfo(
+                SignatureHelpTriggerReason.InvokeSignatureHelpCommand
+            );
 
             foreach (var provider in providers)
             {
-                var items = await provider.Value.GetItemsAsync(document, position, triggerInfo, cancellationToken).ConfigureAwait(false);
+                var items = await provider.Value
+                    .GetItemsAsync(document, position, triggerInfo, cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (items != null)
                 {
@@ -74,12 +97,26 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                         }
 
                         sigInfo.Label = GetSignatureText(item);
-                        sigInfo.Documentation = new LSP.MarkupContent { Kind = LSP.MarkupKind.PlainText, Value = item.DocumentationFactory(cancellationToken).GetFullText() };
-                        sigInfo.Parameters = item.Parameters.Select(p => new LSP.ParameterInformation
+                        sigInfo.Documentation = new LSP.MarkupContent
                         {
-                            Label = p.Name,
-                            Documentation = new LSP.MarkupContent { Kind = LSP.MarkupKind.PlainText, Value = p.DocumentationFactory(cancellationToken).GetFullText() }
-                        }).ToArray();
+                            Kind = LSP.MarkupKind.PlainText,
+                            Value = item.DocumentationFactory(cancellationToken).GetFullText()
+                        };
+                        sigInfo.Parameters = item.Parameters
+                            .Select(
+                                p =>
+                                    new LSP.ParameterInformation
+                                    {
+                                        Label = p.Name,
+                                        Documentation = new LSP.MarkupContent
+                                        {
+                                            Kind = LSP.MarkupKind.PlainText,
+                                            Value = p.DocumentationFactory(cancellationToken)
+                                                .GetFullText()
+                                        }
+                                    }
+                            )
+                            .ToArray();
                         sigInfos.Add(sigInfo);
                     }
 
@@ -110,7 +147,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // However, the LSP spec expects the language server to make this decision.
             // So implement the logic of picking a signature that has enough arguments here.
 
-            var matchingSignature = items.Items.FirstOrDefault(sig => sig.Parameters.Length > items.ArgumentIndex);
+            var matchingSignature = items.Items.FirstOrDefault(
+                sig => sig.Parameters.Length > items.ArgumentIndex
+            );
             return matchingSignature != null ? items.Items.IndexOf(matchingSignature) : 0;
         }
 
@@ -169,7 +208,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             taggedTexts.AddRange(item.SuffixDisplayParts);
             taggedTexts.AddRange(item.DescriptionParts);
 
-            return new ClassifiedTextElement(taggedTexts.ToArrayAndFree().Select(part => new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text)));
+            return new ClassifiedTextElement(
+                taggedTexts
+                    .ToArrayAndFree()
+                    .Select(
+                        part =>
+                            new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text)
+                    )
+            );
         }
     }
 }

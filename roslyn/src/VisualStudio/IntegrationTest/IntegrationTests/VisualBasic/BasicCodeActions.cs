@@ -19,20 +19,29 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicCodeActions(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicCodeActions))
-        {
-        }
+            : base(instanceFactory, nameof(BasicCodeActions)) { }
 
-        [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/20371"), Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
+        [
+            WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/20371"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)
+        ]
         public void GenerateMethodInClosedFile()
         {
-            var project = new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddFile(project, "Goo.vb", @"
+            var project =
+                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(
+                    ProjectName
+                );
+            VisualStudio.SolutionExplorer.AddFile(
+                project,
+                "Goo.vb",
+                @"
 Class Goo
 End Class
-");
+"
+            );
 
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Imports System;
 
 Class Program
@@ -41,17 +50,22 @@ Class Program
         f.Bar()$$
     End Sub
 End Class
-");
+"
+            );
 
             VisualStudio.Editor.InvokeCodeActionList();
             VisualStudio.Editor.Verify.CodeAction("Generate method 'Goo.Bar'", applyFix: true);
-            VisualStudio.SolutionExplorer.Verify.FileContents(project, "Goo.vb", @"
+            VisualStudio.SolutionExplorer.Verify.FileContents(
+                project,
+                "Goo.vb",
+                @"
 Class Goo
     Friend Sub Bar()
         Throw New NotImplementedException()
     End Sub
 End Class
-");
+"
+            );
         }
     }
 }

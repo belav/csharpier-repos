@@ -23,7 +23,9 @@ namespace Microsoft.AspNetCore.Razor.Language
         public TagHelperBinder(string tagHelperPrefix, IEnumerable<TagHelperDescriptor> descriptors)
         {
             _tagHelperPrefix = tagHelperPrefix;
-            _registrations = new Dictionary<string, HashSet<TagHelperDescriptor>>(StringComparer.OrdinalIgnoreCase);
+            _registrations = new Dictionary<string, HashSet<TagHelperDescriptor>>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Populate our registrations
             foreach (var descriptor in descriptors)
@@ -46,11 +48,16 @@ namespace Microsoft.AspNetCore.Razor.Language
             string tagName,
             IReadOnlyList<KeyValuePair<string, string>> attributes,
             string parentTagName,
-            bool parentIsTagHelper)
+            bool parentIsTagHelper
+        )
         {
-            if (!string.IsNullOrEmpty(_tagHelperPrefix) &&
-                (tagName.Length <= _tagHelperPrefix.Length ||
-                !tagName.StartsWith(_tagHelperPrefix, StringComparison.OrdinalIgnoreCase)))
+            if (
+                !string.IsNullOrEmpty(_tagHelperPrefix)
+                && (
+                    tagName.Length <= _tagHelperPrefix.Length
+                    || !tagName.StartsWith(_tagHelperPrefix, StringComparison.OrdinalIgnoreCase)
+                )
+            )
             {
                 // The tagName doesn't have the tag helper prefix, we can short circuit.
                 return null;
@@ -59,7 +66,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             IEnumerable<TagHelperDescriptor> descriptors;
 
             // Ensure there's a HashSet to use.
-            if (!_registrations.TryGetValue(TagHelperMatchingConventions.ElementCatchAllName, out HashSet<TagHelperDescriptor> catchAllDescriptors))
+            if (
+                !_registrations.TryGetValue(
+                    TagHelperMatchingConventions.ElementCatchAllName,
+                    out HashSet<TagHelperDescriptor> catchAllDescriptors
+                )
+            )
             {
                 descriptors = new HashSet<TagHelperDescriptor>(TagHelperDescriptorComparer.Default);
             }
@@ -70,19 +82,28 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // If we have a tag name associated with the requested name, we need to combine matchingDescriptors
             // with all the catch-all descriptors.
-            if (_registrations.TryGetValue(tagName, out HashSet<TagHelperDescriptor> matchingDescriptors))
+            if (
+                _registrations.TryGetValue(
+                    tagName,
+                    out HashSet<TagHelperDescriptor> matchingDescriptors
+                )
+            )
             {
                 descriptors = matchingDescriptors.Concat(descriptors);
             }
 
-            var tagNameWithoutPrefix = _tagHelperPrefix != null ? tagName.Substring(_tagHelperPrefix.Length) : tagName;
+            var tagNameWithoutPrefix =
+                _tagHelperPrefix != null ? tagName.Substring(_tagHelperPrefix.Length) : tagName;
             var parentTagNameWithoutPrefix = parentTagName;
             if (_tagHelperPrefix != null && parentIsTagHelper)
             {
                 parentTagNameWithoutPrefix = parentTagName.Substring(_tagHelperPrefix.Length);
             }
 
-            Dictionary<TagHelperDescriptor, IReadOnlyList<TagMatchingRuleDescriptor>> applicableDescriptorMappings = null;
+            Dictionary<
+                TagHelperDescriptor,
+                IReadOnlyList<TagMatchingRuleDescriptor>
+            > applicableDescriptorMappings = null;
             foreach (var descriptor in descriptors)
             {
                 // We're avoiding desccriptor.TagMatchingRules.Where and applicableRules.Any() to avoid
@@ -91,7 +112,14 @@ namespace Microsoft.AspNetCore.Razor.Language
                 for (var i = 0; i < descriptor.TagMatchingRules.Count; i++)
                 {
                     var rule = descriptor.TagMatchingRules[i];
-                    if (TagHelperMatchingConventions.SatisfiesRule(tagNameWithoutPrefix, parentTagNameWithoutPrefix, attributes, rule))
+                    if (
+                        TagHelperMatchingConventions.SatisfiesRule(
+                            tagNameWithoutPrefix,
+                            parentTagNameWithoutPrefix,
+                            attributes,
+                            rule
+                        )
+                    )
                     {
                         if (applicableRules is null)
                         {
@@ -106,7 +134,10 @@ namespace Microsoft.AspNetCore.Razor.Language
                 {
                     if (applicableDescriptorMappings == null)
                     {
-                        applicableDescriptorMappings = new Dictionary<TagHelperDescriptor, IReadOnlyList<TagMatchingRuleDescriptor>>();
+                        applicableDescriptorMappings = new Dictionary<
+                            TagHelperDescriptor,
+                            IReadOnlyList<TagMatchingRuleDescriptor>
+                        >();
                     }
 
                     applicableDescriptorMappings[descriptor] = applicableRules;
@@ -123,7 +154,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 attributes,
                 parentTagName,
                 applicableDescriptorMappings,
-                _tagHelperPrefix);
+                _tagHelperPrefix
+            );
 
             return tagHelperBinding;
         }
@@ -132,15 +164,25 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             foreach (var rule in descriptor.TagMatchingRules)
             {
-                var registrationKey =
-                    string.Equals(rule.TagName, TagHelperMatchingConventions.ElementCatchAllName, StringComparison.Ordinal) ?
-                    TagHelperMatchingConventions.ElementCatchAllName :
-                    _tagHelperPrefix + rule.TagName;
+                var registrationKey = string.Equals(
+                    rule.TagName,
+                    TagHelperMatchingConventions.ElementCatchAllName,
+                    StringComparison.Ordinal
+                )
+                    ? TagHelperMatchingConventions.ElementCatchAllName
+                    : _tagHelperPrefix + rule.TagName;
 
                 // Ensure there's a HashSet to add the descriptor to.
-                if (!_registrations.TryGetValue(registrationKey, out HashSet<TagHelperDescriptor> descriptorSet))
+                if (
+                    !_registrations.TryGetValue(
+                        registrationKey,
+                        out HashSet<TagHelperDescriptor> descriptorSet
+                    )
+                )
                 {
-                    descriptorSet = new HashSet<TagHelperDescriptor>(TagHelperDescriptorComparer.Default);
+                    descriptorSet = new HashSet<TagHelperDescriptor>(
+                        TagHelperDescriptorComparer.Default
+                    );
                     _registrations[registrationKey] = descriptorSet;
                 }
 

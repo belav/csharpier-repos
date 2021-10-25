@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DynamicAnalysis.UnitTests
 {
     public class DynamicAnalysisResourceTests : CSharpTestBase
     {
-        const string InstrumentationHelperSource = @"
+        const string InstrumentationHelperSource =
+            @"
 namespace Microsoft.CodeAnalysis.Runtime
 {
     public static class Instrumentation
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Runtime
 }
 ";
 
-        const string ExampleSource = @"
+        const string ExampleSource =
+            @"
 using System;
 
 public class C
@@ -69,61 +71,112 @@ public class C
 }
 ";
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.TestExecutionHasNewLineDependency)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.TestExecutionHasNewLineDependency
+        )]
         public void TestSpansPresentInResource()
         {
-            var c = CreateCompilation(Parse(ExampleSource + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
-            var peImage = c.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var c = CreateCompilation(
+                Parse(ExampleSource + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
+            var peImage = c.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
-            VerifyDocuments(reader, reader.Documents,
-                @"'C:\myproject\doc1.cs' 44-3F-7C-A1-EF-CA-A8-16-40-D2-09-4F-3E-52-7C-44-8D-22-C8-02 (SHA1)");
+            VerifyDocuments(
+                reader,
+                reader.Documents,
+                @"'C:\myproject\doc1.cs' 44-3F-7C-A1-EF-CA-A8-16-40-D2-09-4F-3E-52-7C-44-8D-22-C8-02 (SHA1)"
+            );
 
             Assert.Equal(13, reader.Methods.Length);
 
             string[] sourceLines = ExampleSource.Split('\n');
 
-            VerifySpans(reader, reader.Methods[0], sourceLines,                         // Main
+            VerifySpans(
+                reader,
+                reader.Methods[0],
+                sourceLines, // Main
                 new SpanResult(5, 4, 9, 5, "public static void Main()"),
                 new SpanResult(7, 8, 7, 31, "Console.WriteLine(123)"),
-                new SpanResult(8, 8, 8, 31, "Console.WriteLine(123)"));
+                new SpanResult(8, 8, 8, 31, "Console.WriteLine(123)")
+            );
 
-            VerifySpans(reader, reader.Methods[1], sourceLines,                         // Fred get
+            VerifySpans(
+                reader,
+                reader.Methods[1],
+                sourceLines, // Fred get
                 new SpanResult(11, 4, 11, 32, "public static int Fred => 3"),
-                new SpanResult(11, 30, 11, 31, "3"));
+                new SpanResult(11, 30, 11, 31, "3")
+            );
 
-            VerifySpans(reader, reader.Methods[2], sourceLines,                         // Barney
+            VerifySpans(
+                reader,
+                reader.Methods[2],
+                sourceLines, // Barney
                 new SpanResult(13, 4, 13, 41, "public static int Barney(int x) => x"),
-                new SpanResult(13, 39, 13, 40, "x"));
+                new SpanResult(13, 39, 13, 40, "x")
+            );
 
-            VerifySpans(reader, reader.Methods[3], sourceLines,                         // Wilma get
+            VerifySpans(
+                reader,
+                reader.Methods[3],
+                sourceLines, // Wilma get
                 new SpanResult(17, 8, 17, 26, "get { return 12; }"),
-                new SpanResult(17, 14, 17, 24, "return 12"));
+                new SpanResult(17, 14, 17, 24, "return 12")
+            );
 
-            VerifySpans(reader, reader.Methods[4], sourceLines,                         // Wilma set
-                new SpanResult(18, 8, 18, 15, "set { }"));
+            VerifySpans(
+                reader,
+                reader.Methods[4],
+                sourceLines, // Wilma set
+                new SpanResult(18, 8, 18, 15, "set { }")
+            );
 
-            VerifySpans(reader, reader.Methods[5], sourceLines,                         // Betty get
+            VerifySpans(
+                reader,
+                reader.Methods[5],
+                sourceLines, // Betty get
                 new SpanResult(21, 4, 21, 36, "public static int Betty { get; }"),
-                new SpanResult(21, 30, 21, 34, "get"));
+                new SpanResult(21, 30, 21, 34, "get")
+            );
 
-            VerifySpans(reader, reader.Methods[6], sourceLines,                         // Pebbles get
+            VerifySpans(
+                reader,
+                reader.Methods[6],
+                sourceLines, // Pebbles get
                 new SpanResult(23, 4, 23, 43, "public static int Pebbles { get; set; }"),
-                new SpanResult(23, 32, 23, 36, "get"));
+                new SpanResult(23, 32, 23, 36, "get")
+            );
 
-            VerifySpans(reader, reader.Methods[7], sourceLines,                         // Pebbles set
+            VerifySpans(
+                reader,
+                reader.Methods[7],
+                sourceLines, // Pebbles set
                 new SpanResult(23, 4, 23, 43, "public static int Pebbles { get; set; }"),
-                new SpanResult(23, 37, 23, 41, "set"));
+                new SpanResult(23, 37, 23, 41, "set")
+            );
 
             VerifySpans(reader, reader.Methods[8]);
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.TestExecutionHasNewLineDependency)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.TestExecutionHasNewLineDependency
+        )]
         public void ResourceStatementKinds()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class C
@@ -216,20 +269,35 @@ public class C
 }
 ";
 
-            var c = CreateCompilation(Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
-            var peImage = c.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var c = CreateCompilation(
+                Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
+            var peImage = c.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
-            VerifyDocuments(reader, reader.Documents,
-                @"'C:\myproject\doc1.cs' 6A-DC-C0-8A-16-CB-7C-A5-99-8B-2E-0C-3C-81-69-2C-B2-10-EE-F1 (SHA1)");
+            VerifyDocuments(
+                reader,
+                reader.Documents,
+                @"'C:\myproject\doc1.cs' 6A-DC-C0-8A-16-CB-7C-A5-99-8B-2E-0C-3C-81-69-2C-B2-10-EE-F1 (SHA1)"
+            );
 
             Assert.Equal(6, reader.Methods.Length);
 
             string[] sourceLines = source.Split('\n');
 
-            VerifySpans(reader, reader.Methods[0], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[0],
+                sourceLines,
                 new SpanResult(5, 4, 89, 5, "public static void Main()"),
                 new SpanResult(7, 8, 7, 19, "int z = 11"),
                 new SpanResult(8, 8, 8, 23, "int x = z + 10"),
@@ -263,15 +331,20 @@ public class C
                 new SpanResult(75, 8, 75, 29, "Console.WriteLine(x)"),
                 new SpanResult(81, 16, 81, 17, ";"),
                 new SpanResult(79, 19, 79, 51, "(System.IDisposable)new object()"),
-                new SpanResult(88, 8, 88, 15, "return"));
+                new SpanResult(88, 8, 88, 15, "return")
+            );
 
             VerifySpans(reader, reader.Methods[1]);
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.TestExecutionHasNewLineDependency)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.TestExecutionHasNewLineDependency
+        )]
         public void TestMethodSpansWithAttributes()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Security;
 
@@ -336,65 +409,122 @@ public class C
 }
 ";
 
-            var c = CreateCompilation(Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
-            var peImage = c.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var c = CreateCompilation(
+                Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
+            var peImage = c.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
-            VerifyDocuments(reader, reader.Documents,
-                @"'C:\myproject\doc1.cs' A3-08-94-55-7C-64-8D-C7-61-7A-11-0B-4B-68-2C-3B-51-C3-C4-58 (SHA1)");
+            VerifyDocuments(
+                reader,
+                reader.Documents,
+                @"'C:\myproject\doc1.cs' A3-08-94-55-7C-64-8D-C7-61-7A-11-0B-4B-68-2C-3B-51-C3-C4-58 (SHA1)"
+            );
 
             Assert.Equal(15, reader.Methods.Length);
 
             string[] sourceLines = source.Split('\n');
 
-            VerifySpans(reader, reader.Methods[0], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[0],
+                sourceLines,
                 new SpanResult(8, 4, 11, 5, "public static void Main()"),
-                new SpanResult(10, 8, 10, 15, "Fred()"));
+                new SpanResult(10, 8, 10, 15, "Fred()")
+            );
 
-            VerifySpans(reader, reader.Methods[1], sourceLines,
-                new SpanResult(14, 4, 16, 5, "static void Fred()"));
+            VerifySpans(
+                reader,
+                reader.Methods[1],
+                sourceLines,
+                new SpanResult(14, 4, 16, 5, "static void Fred()")
+            );
 
-            VerifySpans(reader, reader.Methods[2], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[2],
+                sourceLines,
                 new SpanResult(18, 4, 21, 5, "static C()"),
-                new SpanResult(20, 8, 20, 15, "x = 12"));
+                new SpanResult(20, 8, 20, 15, "x = 12")
+            );
 
-            VerifySpans(reader, reader.Methods[3], sourceLines,
-                new SpanResult(24, 4, 26, 5, "public C()"));
+            VerifySpans(
+                reader,
+                reader.Methods[3],
+                sourceLines,
+                new SpanResult(24, 4, 26, 5, "public C()")
+            );
 
-            VerifySpans(reader, reader.Methods[4], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[4],
+                sourceLines,
                 new SpanResult(31, 8, 31, 26, "get {"),
-                new SpanResult(31, 14, 31, 24, "return 12"));
+                new SpanResult(31, 14, 31, 24, "return 12")
+            );
 
-            VerifySpans(reader, reader.Methods[5], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[5],
+                sourceLines,
                 new SpanResult(35, 4, 35, 20, "int Betty"),
-                new SpanResult(35, 17, 35, 19, "13"));
+                new SpanResult(35, 17, 35, 19, "13")
+            );
 
-            VerifySpans(reader, reader.Methods[6], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[6],
+                sourceLines,
                 new SpanResult(38, 4, 41, 5, "int Pebbles()"),
-                new SpanResult(40, 8, 40, 17, "return 3"));
+                new SpanResult(40, 8, 40, 17, "return 3")
+            );
 
-            VerifySpans(reader, reader.Methods[7], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[7],
+                sourceLines,
                 new SpanResult(44, 4, 47, 5, "ref int BamBam"),
-                new SpanResult(46, 8, 46, 21, "return ref x"));
+                new SpanResult(46, 8, 46, 21, "return ref x")
+            );
 
-            VerifySpans(reader, reader.Methods[8], sourceLines,
-                new SpanResult(50, 4, 52, 5, "C(int x)"));
+            VerifySpans(
+                reader,
+                reader.Methods[8],
+                sourceLines,
+                new SpanResult(50, 4, 52, 5, "C(int x)")
+            );
 
-            VerifySpans(reader, reader.Methods[9], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[9],
+                sourceLines,
                 new SpanResult(55, 4, 55, 28, "public int Barney"),
-                new SpanResult(55, 25, 55, 27, "13"));
+                new SpanResult(55, 25, 55, 27, "13")
+            );
 
-            VerifySpans(reader, reader.Methods[10], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[10],
+                sourceLines,
                 new SpanResult(58, 4, 61, 5, "public static C operator +"),
-                new SpanResult(60, 8, 60, 17, "return a"));
+                new SpanResult(60, 8, 60, 17, "return a")
+            );
         }
 
         [Fact]
         public void TestPatternSpans()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class C
@@ -430,22 +560,38 @@ class Teacher : Person { public string Subject; }
 class Student : Person { public double GPA; }
 ";
 
-            var c = CreateCompilation(Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
-            var peImage = c.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var c = CreateCompilation(
+                Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
+            var peImage = c.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
             string[] sourceLines = source.Split('\n');
 
-            VerifySpans(reader, reader.Methods[0], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[0],
+                sourceLines,
                 new SpanResult(5, 4, 11, 5, "public static void Main()"),
                 new SpanResult(7, 8, 7, 34, "Student s = new Student()"),
                 new SpanResult(8, 8, 8, 24, "s.Name = \"Bozo\""),
                 new SpanResult(9, 8, 9, 20, "s.GPA = 2.3"),
-                new SpanResult(10, 8, 10, 19, "Operate(s)"));
+                new SpanResult(10, 8, 10, 19, "Operate(s)")
+            );
 
-            VerifySpans(reader, reader.Methods[1], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[1],
+                sourceLines,
                 new SpanResult(13, 4, 28, 5, "static string Operate(Person p)"),
                 new SpanResult(17, 27, 17, 43, "when s.GPA > 3.5"),
                 new SpanResult(19, 27, 19, 45, "when (s.GPA < 2.0)"),
@@ -454,13 +600,15 @@ class Student : Person { public double GPA; }
                 new SpanResult(22, 16, 22, 56, "return $\"Student {s.Name} ({s.GPA:N1})\""),
                 new SpanResult(24, 16, 24, 58, "return $\"Teacher {t.Name} of {t.Subject}\""),
                 new SpanResult(26, 16, 26, 42, "return $\"Person {p.Name}\""),
-                new SpanResult(15, 16, 15, 17, "p"));
+                new SpanResult(15, 16, 15, 17, "p")
+            );
         }
 
         [Fact]
         public void TestDeconstructionSpans()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class C
@@ -477,23 +625,37 @@ public class C
     }
 }
 ";
-            var c = CreateCompilation(Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
-            var peImage = c.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var c = CreateCompilation(
+                Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
+            var peImage = c.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
             string[] sourceLines = source.Split('\n');
 
-            VerifySpans(reader, reader.Methods[0], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[0],
+                sourceLines,
                 new SpanResult(5, 4, 8, 5, "public static void Main()"),
-                new SpanResult(7, 8, 7, 29, "var (x, y) = new C()"));
+                new SpanResult(7, 8, 7, 29, "var (x, y) = new C()")
+            );
         }
 
         [Fact]
         public void TestForeachSpans()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class C
@@ -508,26 +670,39 @@ public class C
     }
 }
 ";
-            var c = CreateCompilation(Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
-            var peImage = c.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var c = CreateCompilation(
+                Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
+            var peImage = c.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
             string[] sourceLines = source.Split('\n');
 
-            VerifySpans(reader, reader.Methods[0], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[0],
+                sourceLines,
                 new SpanResult(5, 4, 12, 5, "public static void Main()"),
                 new SpanResult(7, 8, 7, 21, "C[] a = null"),
                 new SpanResult(11, 12, 11, 13, ";"),
                 new SpanResult(10, 15, 10, 16, "a")
-                );
+            );
         }
 
         [Fact]
         public void TestForeachDeconstructionSpans()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class C
@@ -548,26 +723,39 @@ public class C
     }
 }
 ";
-            var c = CreateCompilation(Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
-            var peImage = c.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var c = CreateCompilation(
+                Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
+            var peImage = c.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
             string[] sourceLines = source.Split('\n');
 
-            VerifySpans(reader, reader.Methods[0], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[0],
+                sourceLines,
                 new SpanResult(5, 4, 12, 5, "public static void Main()"),
                 new SpanResult(7, 8, 7, 21, "C[] a = null"),
                 new SpanResult(11, 12, 11, 13, ";"),
                 new SpanResult(10, 15, 10, 16, "a")
-                );
+            );
         }
 
         [Fact]
         public void TestFieldInitializerSpans()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class C
@@ -616,60 +804,98 @@ public class C
 }
 ";
 
-            var c = CreateCompilation(Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
-            var peImage = c.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var c = CreateCompilation(
+                Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
+            var peImage = c.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
             string[] sourceLines = source.Split('\n');
 
-            VerifySpans(reader, reader.Methods[0], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[0],
+                sourceLines,
                 new SpanResult(5, 4, 8, 5, "public static void Main()"),
-                new SpanResult(7, 8, 7, 19, "TestMain()"));
+                new SpanResult(7, 8, 7, 19, "TestMain()")
+            );
 
-            VerifySpans(reader, reader.Methods[1], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[1],
+                sourceLines,
                 new SpanResult(10, 4, 13, 5, "static void TestMain()"),
                 new SpanResult(12, 8, 12, 26, "C local = new C()"),
-                new SpanResult(12, 27, 12, 47, "local = new C(1, 2)"));
+                new SpanResult(12, 27, 12, 47, "local = new C(1, 2)")
+            );
 
-            VerifySpans(reader, reader.Methods[2], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[2],
+                sourceLines,
                 new SpanResult(15, 4, 15, 28, "static int Init() => 33"),
-                new SpanResult(15, 25, 15, 27, "33"));
+                new SpanResult(15, 25, 15, 27, "33")
+            );
 
-            VerifySpans(reader, reader.Methods[3], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[3],
+                sourceLines,
                 new SpanResult(17, 4, 20, 5, "C()"),
                 new SpanResult(27, 13, 27, 19, "Init()"),
                 new SpanResult(28, 13, 28, 24, "Init() + 12"),
                 new SpanResult(44, 25, 44, 27, "15"),
-                new SpanResult(19, 8, 19, 16, "_z = 12"));
+                new SpanResult(19, 8, 19, 16, "_z = 12")
+            );
 
-            VerifySpans(reader, reader.Methods[4], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[4],
+                sourceLines,
                 new SpanResult(22, 4, 25, 5, "static C()"),
                 new SpanResult(30, 21, 30, 27, "Init()"),
                 new SpanResult(31, 21, 31, 33, "Init() + 153"),
                 new SpanResult(45, 32, 45, 35, "255"),
-                new SpanResult(24, 8, 24, 18, "s_z = 123"));
+                new SpanResult(24, 8, 24, 18, "s_z = 123")
+            );
 
-            VerifySpans(reader, reader.Methods[5], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[5],
+                sourceLines,
                 new SpanResult(34, 4, 37, 5, "C(int x)"),
                 new SpanResult(27, 13, 27, 19, "Init()"),
                 new SpanResult(28, 13, 28, 24, "Init() + 12"),
                 new SpanResult(44, 25, 44, 27, "15"),
-                new SpanResult(36, 8, 36, 15, "_z = x"));
+                new SpanResult(36, 8, 36, 15, "_z = x")
+            );
 
-            VerifySpans(reader, reader.Methods[6], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[6],
+                sourceLines,
                 new SpanResult(39, 4, 42, 5, "C(int a, int b)"),
                 new SpanResult(27, 13, 27, 19, "Init()"),
                 new SpanResult(28, 13, 28, 24, "Init() + 12"),
                 new SpanResult(44, 25, 44, 27, "15"),
-                new SpanResult(41, 8, 41, 19, "_z = a + b"));
+                new SpanResult(41, 8, 41, 19, "_z = a + b")
+            );
         }
 
         [Fact]
         public void TestImplicitConstructorSpans()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class C
@@ -697,42 +923,72 @@ public class C
 }
 ";
 
-            var c = CreateCompilation(Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
-            var peImage = c.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var c = CreateCompilation(
+                Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
+            var peImage = c.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
             string[] sourceLines = source.Split('\n');
 
-            VerifySpans(reader, reader.Methods[0], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[0],
+                sourceLines,
                 new SpanResult(5, 4, 8, 5, "public static void Main()"),
-                new SpanResult(7, 8, 7, 19, "TestMain()"));
+                new SpanResult(7, 8, 7, 19, "TestMain()")
+            );
 
-            VerifySpans(reader, reader.Methods[1], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[1],
+                sourceLines,
                 new SpanResult(10, 4, 13, 5, "static void TestMain()"),
-                new SpanResult(12, 8, 12, 26, "C local = new C()"));
+                new SpanResult(12, 8, 12, 26, "C local = new C()")
+            );
 
-            VerifySpans(reader, reader.Methods[2], sourceLines,
-               new SpanResult(15, 4, 15, 28, "static int Init() => 33"),
-               new SpanResult(15, 25, 15, 27, "33"));
+            VerifySpans(
+                reader,
+                reader.Methods[2],
+                sourceLines,
+                new SpanResult(15, 4, 15, 28, "static int Init() => 33"),
+                new SpanResult(15, 25, 15, 27, "33")
+            );
 
-            VerifySpans(reader, reader.Methods[5], sourceLines,                     // Synthesized instance constructor
+            VerifySpans(
+                reader,
+                reader.Methods[5],
+                sourceLines, // Synthesized instance constructor
                 new SpanResult(17, 13, 17, 19, "Init()"),
                 new SpanResult(18, 13, 18, 24, "Init() + 12"),
-                new SpanResult(23, 25, 23, 27, "15"));
+                new SpanResult(23, 25, 23, 27, "15")
+            );
 
-            VerifySpans(reader, reader.Methods[6], sourceLines,                     // Synthesized static constructor
+            VerifySpans(
+                reader,
+                reader.Methods[6],
+                sourceLines, // Synthesized static constructor
                 new SpanResult(19, 21, 19, 27, "Init()"),
                 new SpanResult(20, 21, 20, 33, "Init() + 153"),
                 new SpanResult(21, 21, 21, 24, "144"),
-                new SpanResult(24, 32, 24, 35, "255"));
+                new SpanResult(24, 32, 24, 35, "255")
+            );
         }
 
         [Fact]
         public void TestImplicitConstructorsWithLambdasSpans()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class C
@@ -778,56 +1034,94 @@ partial struct E
 }
 ";
 
-            var c = CreateCompilation(Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
-            var peImage = c.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var c = CreateCompilation(
+                Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
+            var peImage = c.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
             string[] sourceLines = source.Split('\n');
 
-            VerifySpans(reader, reader.Methods[0], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[0],
+                sourceLines,
                 new SpanResult(5, 4, 8, 5, "public static void Main()"),
-                new SpanResult(7, 8, 7, 19, "TestMain()"));
+                new SpanResult(7, 8, 7, 19, "TestMain()")
+            );
 
-            VerifySpans(reader, reader.Methods[1], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[1],
+                sourceLines,
                 new SpanResult(10, 4, 16, 5, "static void TestMain()"),
                 new SpanResult(12, 8, 12, 32, "int y = s_c._function()"),
                 new SpanResult(13, 8, 13, 22, "D d = new D()"),
                 new SpanResult(14, 8, 14, 33, "int z = d._c._function()"),
-                new SpanResult(15, 8, 15, 35, "int zz = D.s_c._function()"));
+                new SpanResult(15, 8, 15, 35, "int zz = D.s_c._function()")
+            );
 
-            VerifySpans(reader, reader.Methods[2], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[2],
+                sourceLines,
                 new SpanResult(18, 4, 21, 5, "public C(Func<int> f)"),
-                new SpanResult(20, 8, 20, 22, "_function = f"));
+                new SpanResult(20, 8, 20, 22, "_function = f")
+            );
 
-            VerifySpans(reader, reader.Methods[3], sourceLines,                     // Synthesized static constructor for C
+            VerifySpans(
+                reader,
+                reader.Methods[3],
+                sourceLines, // Synthesized static constructor for C
                 new SpanResult(23, 31, 23, 34, "115"),
-                new SpanResult(23, 19, 23, 35, "new C(() => 115)"));
+                new SpanResult(23, 19, 23, 35, "new C(() => 115)")
+            );
 
-            VerifySpans(reader, reader.Methods[4], sourceLines,                     // Synthesized instance constructor for D
+            VerifySpans(
+                reader,
+                reader.Methods[4],
+                sourceLines, // Synthesized instance constructor for D
                 new SpanResult(29, 30, 29, 33, "120"),
                 new SpanResult(31, 31, 31, 34, "130"),
                 new SpanResult(29, 18, 29, 34, "new C(() => 120)"),
-                new SpanResult(31, 19, 31, 35, "new C(() => 130)"));
+                new SpanResult(31, 19, 31, 35, "new C(() => 130)")
+            );
 
-            VerifySpans(reader, reader.Methods[5], sourceLines,                     // Synthesized static constructor for D
+            VerifySpans(
+                reader,
+                reader.Methods[5],
+                sourceLines, // Synthesized static constructor for D
                 new SpanResult(30, 38, 30, 41, "144"),
                 new SpanResult(32, 39, 32, 42, "156"),
                 new SpanResult(30, 26, 30, 42, "new C(() => 144)"),
-                new SpanResult(32, 27, 32, 43, "new C(() => 156"));
+                new SpanResult(32, 27, 32, 43, "new C(() => 156")
+            );
 
-            VerifySpans(reader, reader.Methods[6], sourceLines,                     // Synthesized static constructor for E
+            VerifySpans(
+                reader,
+                reader.Methods[6],
+                sourceLines, // Synthesized static constructor for E
                 new SpanResult(41, 38, 41, 42, "1444"),
                 new SpanResult(42, 41, 42, 53, "return 1567"),
                 new SpanResult(41, 26, 41, 43, "new C(() => 1444)"),
-                new SpanResult(42, 27, 42, 56, "new C(() => { return 1567; })"));
+                new SpanResult(42, 27, 42, 56, "new C(() => { return 1567; })")
+            );
         }
 
         [Fact]
         public void TestLocalFunctionWithLambdaSpans()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class C
@@ -872,23 +1166,43 @@ public class D
 }
 ";
 
-            var c = CreateCompilation(Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
-            var peImage = c.EmitToArray(EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage)));
+            var c = CreateCompilation(
+                Parse(source + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
+            var peImage = c.EmitToArray(
+                EmitOptions.Default.WithInstrumentationKinds(
+                    ImmutableArray.Create(InstrumentationKind.TestCoverage)
+                )
+            );
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
             string[] sourceLines = source.Split('\n');
 
-            VerifySpans(reader, reader.Methods[0], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[0],
+                sourceLines,
                 new SpanResult(5, 4, 8, 5, "public static void Main()"),
-                new SpanResult(7, 8, 7, 19, "TestMain()"));
+                new SpanResult(7, 8, 7, 19, "TestMain()")
+            );
 
-            VerifySpans(reader, reader.Methods[1], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[1],
+                sourceLines,
                 new SpanResult(10, 4, 13, 5, "static void TestMain()"),
-                new SpanResult(12, 8, 12, 21, "new D().M1()"));
+                new SpanResult(12, 8, 12, 21, "new D().M1()")
+            );
 
-            VerifySpans(reader, reader.Methods[3], sourceLines,
+            VerifySpans(
+                reader,
+                reader.Methods[3],
+                sourceLines,
                 new SpanResult(18, 4, 41, 5, "public void M1()"),
                 new SpanResult(20, 8, 20, 13, "L1()"),
                 new SpanResult(24, 22, 24, 23, "1"),
@@ -899,17 +1213,23 @@ public class D
                 new SpanResult(34, 23, 34, 28, "x + 3"),
                 new SpanResult(33, 12, 35, 14, "var f2 = new Func<int, int>"),
                 new SpanResult(38, 21, 38, 26, "x + 4"),
-                new SpanResult(37, 12, 39, 14, "var f3 = new Func<int, int>"));
+                new SpanResult(37, 12, 39, 14, "var f3 = new Func<int, int>")
+            );
         }
 
         [Fact]
         public void TestDynamicAnalysisResourceMissingWhenInstrumentationFlagIsDisabled()
         {
-            var c = CreateCompilation(Parse(ExampleSource + InstrumentationHelperSource, @"C:\myproject\doc1.cs"));
+            var c = CreateCompilation(
+                Parse(ExampleSource + InstrumentationHelperSource, @"C:\myproject\doc1.cs")
+            );
             var peImage = c.EmitToArray(EmitOptions.Default);
 
             var peReader = new PEReader(peImage);
-            var reader = DynamicAnalysisDataReader.TryCreateFromPE(peReader, "<DynamicAnalysisData>");
+            var reader = DynamicAnalysisDataReader.TryCreateFromPE(
+                peReader,
+                "<DynamicAnalysisData>"
+            );
 
             Assert.Null(reader);
         }
@@ -918,7 +1238,8 @@ public class D
         [Fact]
         public void EmptyStaticConstructor_WithEnableTestCoverage()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 class C
 {
@@ -928,9 +1249,13 @@ class C
 
     static object obj = null!;
 }" + InstrumentationHelperSource;
-            var emitOptions = EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage));
-            CompileAndVerify(source, emitOptions: emitOptions).VerifyIL("C..cctor()",
-@"{
+            var emitOptions = EmitOptions.Default.WithInstrumentationKinds(
+                ImmutableArray.Create(InstrumentationKind.TestCoverage)
+            );
+            CompileAndVerify(source, emitOptions: emitOptions)
+                .VerifyIL(
+                    "C..cctor()",
+                    @"{
   // Code size       57 (0x39)
   .maxstack  5
   .locals init (bool[] V_0)
@@ -954,25 +1279,30 @@ class C
   IL_0036:  ldc.i4.1
   IL_0037:  stelem.i1
   IL_0038:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(42985, "https://github.com/dotnet/roslyn/issues/42985")]
         [Fact]
         public void SynthesizedStaticConstructor_WithEnableTestCoverage()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 class C
 {
     static object obj = null!;
 }" + InstrumentationHelperSource;
-            var emitOptions = EmitOptions.Default.WithInstrumentationKinds(ImmutableArray.Create(InstrumentationKind.TestCoverage));
+            var emitOptions = EmitOptions.Default.WithInstrumentationKinds(
+                ImmutableArray.Create(InstrumentationKind.TestCoverage)
+            );
             CompileAndVerify(
                 source,
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 emitOptions: emitOptions,
-                symbolValidator: validator);
+                symbolValidator: validator
+            );
 
             void validator(ModuleSymbol module)
             {
@@ -988,7 +1318,13 @@ class C
             public int EndLine { get; }
             public int EndColumn { get; }
             public string TextStart { get; }
-            public SpanResult(int startLine, int startColumn, int endLine, int endColumn, string textStart)
+            public SpanResult(
+                int startLine,
+                int startColumn,
+                int endLine,
+                int endColumn,
+                string textStart
+            )
             {
                 StartLine = startLine;
                 StartColumn = startColumn;
@@ -998,33 +1334,70 @@ class C
             }
         }
 
-        private static void VerifySpans(DynamicAnalysisDataReader reader, DynamicAnalysisMethod methodData, string[] sourceLines, params SpanResult[] expected)
+        private static void VerifySpans(
+            DynamicAnalysisDataReader reader,
+            DynamicAnalysisMethod methodData,
+            string[] sourceLines,
+            params SpanResult[] expected
+        )
         {
-            ArrayBuilder<string> expectedSpanSpellings = ArrayBuilder<string>.GetInstance(expected.Length);
+            ArrayBuilder<string> expectedSpanSpellings = ArrayBuilder<string>.GetInstance(
+                expected.Length
+            );
             foreach (SpanResult expectedSpanResult in expected)
             {
-                Assert.True(sourceLines[expectedSpanResult.StartLine].Substring(expectedSpanResult.StartColumn).StartsWith(expectedSpanResult.TextStart));
-                expectedSpanSpellings.Add(string.Format("({0},{1})-({2},{3})", expectedSpanResult.StartLine, expectedSpanResult.StartColumn, expectedSpanResult.EndLine, expectedSpanResult.EndColumn));
+                Assert.True(
+                    sourceLines[expectedSpanResult.StartLine]
+                        .Substring(expectedSpanResult.StartColumn)
+                        .StartsWith(expectedSpanResult.TextStart)
+                );
+                expectedSpanSpellings.Add(
+                    string.Format(
+                        "({0},{1})-({2},{3})",
+                        expectedSpanResult.StartLine,
+                        expectedSpanResult.StartColumn,
+                        expectedSpanResult.EndLine,
+                        expectedSpanResult.EndColumn
+                    )
+                );
             }
 
             VerifySpans(reader, methodData, expectedSpanSpellings.ToArrayAndFree());
         }
 
-        private static void VerifySpans(DynamicAnalysisDataReader reader, DynamicAnalysisMethod methodData, params string[] expected)
+        private static void VerifySpans(
+            DynamicAnalysisDataReader reader,
+            DynamicAnalysisMethod methodData,
+            params string[] expected
+        )
         {
-            AssertEx.Equal(expected, reader.GetSpans(methodData.Blob).Select(s => $"({s.StartLine},{s.StartColumn})-({s.EndLine},{s.EndColumn})"));
+            AssertEx.Equal(
+                expected,
+                reader
+                    .GetSpans(methodData.Blob)
+                    .Select(s => $"({s.StartLine},{s.StartColumn})-({s.EndLine},{s.EndColumn})")
+            );
         }
 
-        private void VerifyDocuments(DynamicAnalysisDataReader reader, ImmutableArray<DynamicAnalysisDocument> documents, params string[] expected)
+        private void VerifyDocuments(
+            DynamicAnalysisDataReader reader,
+            ImmutableArray<DynamicAnalysisDocument> documents,
+            params string[] expected
+        )
         {
             var sha1 = new Guid("ff1816ec-aa5e-4d10-87f7-6f4963833460");
 
-            var actual = from d in documents
-                         let name = reader.GetDocumentName(d.Name)
-                         let hash = d.Hash.IsNil ? "" : " " + BitConverter.ToString(reader.GetBytes(d.Hash))
-                         let hashAlgGuid = reader.GetGuid(d.HashAlgorithm)
-                         let hashAlg = (hashAlgGuid == sha1) ? " (SHA1)" : (hashAlgGuid == default(Guid)) ? "" : " " + hashAlgGuid.ToString()
-                         select $"'{name}'{hash}{hashAlg}";
+            var actual =
+                from d in documents
+                let name = reader.GetDocumentName(d.Name)
+                let hash = d.Hash.IsNil ? "" : " " + BitConverter.ToString(reader.GetBytes(d.Hash))
+                let hashAlgGuid = reader.GetGuid(d.HashAlgorithm)
+                let hashAlg = (hashAlgGuid == sha1)
+                    ? " (SHA1)"
+                    : (hashAlgGuid == default(Guid))
+                        ? ""
+                        : " " + hashAlgGuid.ToString()
+                select $"'{name}'{hash}{hashAlg}";
 
             AssertEx.Equal(expected, actual);
         }

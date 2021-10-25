@@ -16,7 +16,8 @@ class CtorTest
         }
 
         // Get the args
-        int iCount = -1, mCount = -1;
+        int iCount = -1,
+            mCount = -1;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -35,7 +36,7 @@ class CtorTest
         CtorTest ct = new CtorTest();
         return ct.Run(iCount, mCount);
     }
-           
+
     private int Run(int initCount, int maxCount)
     {
         int iRet = -1;
@@ -47,16 +48,15 @@ class CtorTest
                 Console.WriteLine("Semaphore was created!");
             }
         }
-        catch(ArgumentException)
+        catch (ArgumentException)
         {
             //  Expected
             iRet = 100;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             //  other exceptions are not valid
-            Console.WriteLine("Unexpected exception thrown:  " + 
-                e.ToString());
+            Console.WriteLine("Unexpected exception thrown:  " + e.ToString());
         }
         Console.WriteLine(100 == iRet ? "Test Passed" : "Test Failed");
         return iRet;

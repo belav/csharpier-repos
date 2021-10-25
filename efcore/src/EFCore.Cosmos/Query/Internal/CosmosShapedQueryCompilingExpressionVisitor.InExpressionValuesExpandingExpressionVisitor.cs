@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
             public InExpressionValuesExpandingExpressionVisitor(
                 ISqlExpressionFactory sqlExpressionFactory,
-                IReadOnlyDictionary<string, object> parametersValues)
+                IReadOnlyDictionary<string, object> parametersValues
+            )
             {
                 _sqlExpressionFactory = sqlExpressionFactory;
                 _parametersValues = parametersValues;
@@ -36,61 +37,69 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     switch (inExpression.Values)
                     {
                         case SqlConstantExpression sqlConstant:
-                        {
-                            typeMapping = sqlConstant.TypeMapping;
-                            var values = (IEnumerable)sqlConstant.Value;
-                            foreach (var value in values)
-                            {
-                                if (value == null)
-                                {
-                                    hasNullValue = true;
-                                    continue;
-                                }
 
-                                inValues.Add(value);
+                            {
+                                typeMapping = sqlConstant.TypeMapping;
+                                var values = (IEnumerable)sqlConstant.Value;
+                                foreach (var value in values)
+                                {
+                                    if (value == null)
+                                    {
+                                        hasNullValue = true;
+                                        continue;
+                                    }
+
+                                    inValues.Add(value);
+                                }
                             }
-                        }
                             break;
 
                         case SqlParameterExpression sqlParameter:
-                        {
-                            typeMapping = sqlParameter.TypeMapping;
-                            var values = (IEnumerable)_parametersValues[sqlParameter.Name];
-                            foreach (var value in values)
-                            {
-                                if (value == null)
-                                {
-                                    hasNullValue = true;
-                                    continue;
-                                }
 
-                                inValues.Add(value);
+                            {
+                                typeMapping = sqlParameter.TypeMapping;
+                                var values = (IEnumerable)_parametersValues[sqlParameter.Name];
+                                foreach (var value in values)
+                                {
+                                    if (value == null)
+                                    {
+                                        hasNullValue = true;
+                                        continue;
+                                    }
+
+                                    inValues.Add(value);
+                                }
                             }
-                        }
                             break;
                     }
 
-                    var updatedInExpression = inValues.Count > 0
-                        ? _sqlExpressionFactory.In(
-                            (SqlExpression)Visit(inExpression.Item),
-                            _sqlExpressionFactory.Constant(inValues, typeMapping),
-                            inExpression.IsNegated)
-                        : null;
+                    var updatedInExpression =
+                        inValues.Count > 0
+                            ? _sqlExpressionFactory.In(
+                                  (SqlExpression)Visit(inExpression.Item),
+                                  _sqlExpressionFactory.Constant(inValues, typeMapping),
+                                  inExpression.IsNegated
+                              )
+                            : null;
 
                     var nullCheckExpression = hasNullValue
                         ? _sqlExpressionFactory.IsNull(inExpression.Item)
                         : null;
 
-                    if (updatedInExpression != null
-                        && nullCheckExpression != null)
+                    if (updatedInExpression != null && nullCheckExpression != null)
                     {
-                        return _sqlExpressionFactory.OrElse(updatedInExpression, nullCheckExpression);
+                        return _sqlExpressionFactory.OrElse(
+                            updatedInExpression,
+                            nullCheckExpression
+                        );
                     }
 
-                    if (updatedInExpression == null
-                        && nullCheckExpression == null)
+                    if (updatedInExpression == null && nullCheckExpression == null)
                     {
-                        return _sqlExpressionFactory.Equal(_sqlExpressionFactory.Constant(true), _sqlExpressionFactory.Constant(false));
+                        return _sqlExpressionFactory.Equal(
+                            _sqlExpressionFactory.Constant(true),
+                            _sqlExpressionFactory.Constant(false)
+                        );
                     }
 
                     return (SqlExpression)updatedInExpression ?? nullCheckExpression;

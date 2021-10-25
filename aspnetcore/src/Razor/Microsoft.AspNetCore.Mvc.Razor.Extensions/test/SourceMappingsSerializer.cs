@@ -9,7 +9,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 {
     public static class SourceMappingsSerializer
     {
-        public static string Serialize(RazorCSharpDocument csharpDocument, RazorSourceDocument sourceDocument)
+        public static string Serialize(
+            RazorCSharpDocument csharpDocument,
+            RazorSourceDocument sourceDocument
+        )
         {
             var builder = new StringBuilder();
             var sourceFilePath = sourceDocument.FilePath;
@@ -20,7 +23,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             for (var i = 0; i < csharpDocument.SourceMappings.Count; i++)
             {
                 var sourceMapping = csharpDocument.SourceMappings[i];
-                if (!string.Equals(sourceMapping.OriginalSpan.FilePath, sourceFilePath, StringComparison.Ordinal))
+                if (
+                    !string.Equals(
+                        sourceMapping.OriginalSpan.FilePath,
+                        sourceFilePath,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     continue;
                 }
@@ -29,7 +38,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
                 AppendMappingLocation(builder, sourceMapping.OriginalSpan, sourceContent);
 
                 builder.Append("Generated Location: ");
-                AppendMappingLocation(builder, sourceMapping.GeneratedSpan, csharpDocument.GeneratedCode);
+                AppendMappingLocation(
+                    builder,
+                    sourceMapping.GeneratedSpan,
+                    csharpDocument.GeneratedCode
+                );
 
                 builder.AppendLine();
             }
@@ -37,11 +50,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             return builder.ToString();
         }
 
-        private static void AppendMappingLocation(StringBuilder builder, SourceSpan location, string content)
+        private static void AppendMappingLocation(
+            StringBuilder builder,
+            SourceSpan location,
+            string content
+        )
         {
-            builder
-                .AppendLine(location.ToString())
-                .Append("|");
+            builder.AppendLine(location.ToString()).Append("|");
 
             for (var i = 0; i < location.Length; i++)
             {

@@ -19,12 +19,16 @@ namespace RazorWebSite.Controllers
 
         public IActionResult LayoutSpecifiedWithPartialPathInViewStart_ForViewSpecifiedWithRelativePath()
         {
-            return View("Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInViewStart.cshtml");
+            return View(
+                "Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInViewStart.cshtml"
+            );
         }
 
         public IActionResult LayoutSpecifiedWithPartialPathInViewStart_ForViewSpecifiedWithAppRelativePath()
         {
-            return View("~/Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInViewStart.cshtml");
+            return View(
+                "~/Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInViewStart.cshtml"
+            );
         }
 
         public IActionResult LayoutSpecifiedWithPartialPathInPage()
@@ -39,12 +43,16 @@ namespace RazorWebSite.Controllers
 
         public IActionResult LayoutSpecifiedWithPartialPathInPageWithRelativePath()
         {
-            return View("Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInPage.cshtml");
+            return View(
+                "Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInPage.cshtml"
+            );
         }
 
         public IActionResult LayoutSpecifiedWithPartialPathInPageWithAppRelativePath()
         {
-            return View("~/Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInPage.cshtml");
+            return View(
+                "~/Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInPage.cshtml"
+            );
         }
 
         public IActionResult LayoutSpecifiedWithRelativePath()

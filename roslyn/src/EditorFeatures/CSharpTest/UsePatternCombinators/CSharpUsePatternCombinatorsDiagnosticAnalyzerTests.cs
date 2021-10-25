@@ -22,40 +22,66 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
 {
-    public class CSharpUsePatternCombinatorsDiagnosticAnalyzerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class CSharpUsePatternCombinatorsDiagnosticAnalyzerTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        private static readonly ParseOptions CSharp9 = TestOptions.RegularPreview.WithLanguageVersion(LanguageVersion.CSharp9);
+        private static readonly ParseOptions CSharp9 =
+            TestOptions.RegularPreview.WithLanguageVersion(LanguageVersion.CSharp9);
 
-        private static readonly OptionsCollection s_disabled = new OptionsCollection(LanguageNames.CSharp)
-        {
-            { CSharpCodeStyleOptions.PreferPatternMatching, new CodeStyleOption2<bool>(false, NotificationOption2.None) }
+        private static readonly OptionsCollection s_disabled = new OptionsCollection(
+            LanguageNames.CSharp
+        ) {
+            {
+                CSharpCodeStyleOptions.PreferPatternMatching,
+                new CodeStyleOption2<bool>(false, NotificationOption2.None)
+            }
         };
 
         public CSharpUsePatternCombinatorsDiagnosticAnalyzerTests(ITestOutputHelper logger)
-             : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUsePatternCombinatorsDiagnosticAnalyzer(), new CSharpUsePatternCombinatorsCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUsePatternCombinatorsDiagnosticAnalyzer(),
+                new CSharpUsePatternCombinatorsCodeFixProvider()
+            );
 
-        private Task TestAllMissingOnExpressionAsync(string expression, ParseOptions parseOptions = null, bool enabled = true)
-            => TestMissingAsync(FromExpression(expression), parseOptions, enabled);
+        private Task TestAllMissingOnExpressionAsync(
+            string expression,
+            ParseOptions parseOptions = null,
+            bool enabled = true
+        ) => TestMissingAsync(FromExpression(expression), parseOptions, enabled);
 
-        private Task TestMissingAsync(string initialMarkup, ParseOptions parseOptions = null, bool enabled = true)
-            => TestMissingAsync(initialMarkup, new TestParameters(
-                parseOptions: parseOptions ?? CSharp9, options: enabled ? null : s_disabled));
+        private Task TestMissingAsync(
+            string initialMarkup,
+            ParseOptions parseOptions = null,
+            bool enabled = true
+        ) =>
+            TestMissingAsync(
+                initialMarkup,
+                new TestParameters(
+                    parseOptions: parseOptions ?? CSharp9,
+                    options: enabled ? null : s_disabled
+                )
+            );
 
-        private Task TestAllAsync(string initialMarkup, string expectedMarkup)
-            => TestInRegularAndScriptAsync(initialMarkup, expectedMarkup,
-                parseOptions: CSharp9, options: null);
+        private Task TestAllAsync(string initialMarkup, string expectedMarkup) =>
+            TestInRegularAndScriptAsync(
+                initialMarkup,
+                expectedMarkup,
+                parseOptions: CSharp9,
+                options: null
+            );
 
-        private Task TestAllOnExpressionAsync(string expression, string expected)
-            => TestAllAsync(FromExpression(expression), FromExpression(expected));
+        private Task TestAllOnExpressionAsync(string expression, string expected) =>
+            TestAllAsync(FromExpression(expression), FromExpression(expected));
 
         private static string FromExpression(string expression)
         {
-            const string initialMarkup = @"
+            const string initialMarkup =
+                @"
 using System;
 using System.Collections.Generic;
 class C
@@ -137,14 +163,17 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         public async Task TestMissingOnCSharp8()
         {
-            await TestAllMissingOnExpressionAsync("o == 1 || o == 2", parseOptions: TestOptions.Regular8);
+            await TestAllMissingOnExpressionAsync(
+                "o == 1 || o == 2",
+                parseOptions: TestOptions.Regular8
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         public async Task TestMultilineTrivia_01()
         {
             await TestAllAsync(
-@"class C
+                @"class C
 {
     bool M0(int variable)
     {
@@ -159,7 +188,7 @@ class C
                variable != 2; /*3*/
     }
 }",
-@"class C
+                @"class C
 {
     bool M0(int variable)
     {
@@ -173,14 +202,15 @@ class C
                not 1 and /*2*/
                not 2; /*3*/
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         public async Task TestMultilineTrivia_02()
         {
             await TestAllAsync(
-@"class C
+                @"class C
 {
     bool M0(int variable)
     {
@@ -195,7 +225,7 @@ class C
             && variable != 2; /*3*/
     }
 }",
-@"class C
+                @"class C
 {
     bool M0(int variable)
     {
@@ -209,14 +239,15 @@ class C
             and not 1 /*2*/
             and not 2; /*3*/
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         public async Task TestParenthesized()
         {
             await TestAllAsync(
-@"class C
+                @"class C
 {
     bool M0(int v)
     {
@@ -227,7 +258,7 @@ class C
         return (v == 0) || (v == 1) || (v == 2);
     }
 }",
-@"class C
+                @"class C
 {
     bool M0(int v)
     {
@@ -237,21 +268,23 @@ class C
     {
         return v is 0 or 1 or 2;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         public async Task TestMissingInExpressionTree()
         {
             await TestMissingAsync(
-@"using System.Linq;
+                @"using System.Linq;
 class C
 {
     void M0(IQueryable<int> q)
     {
         q.Where(item => item == 1 [||]|| item == 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -259,7 +292,7 @@ class C
         public async Task TestMissingInPropertyAccess_NullCheckOnLeftSide()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -273,7 +306,8 @@ public class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -281,7 +315,7 @@ public class C
         public async Task TestMissingInPropertyAccess_NullCheckOnRightSide()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -295,7 +329,8 @@ public class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -305,7 +340,7 @@ public class C
         public async Task TestMissingInPropertyAccess_EnumCheckAndNullCheck(string logicalOperator)
         {
             await TestMissingAsync(
-$@"using System.Diagnostics;
+                $@"using System.Diagnostics;
 
 public class C
 {{
@@ -316,17 +351,20 @@ public class C
             {{
             }}
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         [WorkItem(51691, "https://github.com/dotnet/roslyn/issues/51691")]
         [InlineData("&&")]
         [InlineData("||")]
-        public async Task TestMissingInPropertyAccess_EnumCheckAndNullCheckOnOtherType(string logicalOperator)
+        public async Task TestMissingInPropertyAccess_EnumCheckAndNullCheckOnOtherType(
+            string logicalOperator
+        )
         {
             await TestMissingAsync(
-$@"using System.Diagnostics;
+                $@"using System.Diagnostics;
 
 public class C
 {{
@@ -337,7 +375,8 @@ public class C
             {{
             }}
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -347,7 +386,7 @@ public class C
         public async Task TestMissingInPropertyAccess_IsCheckAndNullCheck(string logicalOperator)
         {
             await TestMissingAsync(
-$@"using System;
+                $@"using System;
 
 public class C
 {{
@@ -358,7 +397,8 @@ public class C
             {{
             }}
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -368,7 +408,7 @@ public class C
         public async Task TestMissingIntegerAndStringIndex(string logicalOperator)
         {
             await TestMissingAsync(
-$@"using System;
+                $@"using System;
 
 public class C
 {{
@@ -376,7 +416,8 @@ public class C
     {{
         return count == 1 [|{logicalOperator}|] ch[0] == 'S';
     }}
-}}");
+}}"
+            );
         }
     }
 }

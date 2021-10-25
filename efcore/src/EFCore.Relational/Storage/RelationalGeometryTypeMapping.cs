@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
     /// </summary>
     /// <typeparam name="TGeometry"> The geometry type. </typeparam>
     /// <typeparam name="TProvider"> The native type of the database provider. </typeparam>
-    public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : RelationalTypeMapping
+    public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider>
+        : RelationalTypeMapping
     {
         /// <summary>
         ///     Creates a new instance of the <see cref="RelationalGeometryTypeMapping{TGeometry,TProvider}" /> class.
@@ -27,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="storeType"> The store type name. </param>
         protected RelationalGeometryTypeMapping(
             ValueConverter<TGeometry, TProvider>? converter,
-            string storeType)
-            : base(CreateRelationalTypeMappingParameters(storeType))
+            string storeType
+        ) : base(CreateRelationalTypeMappingParameters(storeType))
         {
             SpatialConverter = converter;
         }
@@ -40,8 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="converter"> The converter to use when converting to and from database types. </param>
         protected RelationalGeometryTypeMapping(
             RelationalTypeMappingParameters parameters,
-            ValueConverter<TGeometry, TProvider>? converter)
-            : base(parameters)
+            ValueConverter<TGeometry, TProvider>? converter
+        ) : base(parameters)
         {
             SpatialConverter = converter;
         }
@@ -51,17 +52,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         protected virtual ValueConverter<TGeometry, TProvider>? SpatialConverter { get; }
 
-        private static RelationalTypeMappingParameters CreateRelationalTypeMappingParameters(string storeType)
+        private static RelationalTypeMappingParameters CreateRelationalTypeMappingParameters(
+            string storeType
+        )
         {
             var comparer = new GeometryValueComparer<TGeometry>();
 
             return new RelationalTypeMappingParameters(
-                new CoreTypeMappingParameters(
-                    typeof(TGeometry),
-                    null,
-                    comparer,
-                    comparer),
-                storeType);
+                new CoreTypeMappingParameters(typeof(TGeometry), null, comparer, comparer),
+                storeType
+            );
         }
 
         /// <summary>
@@ -72,7 +72,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="value"> The value to be assigned to the parameter. </param>
         /// <param name="nullable"> A value indicating whether the parameter should be a nullable type. </param>
         /// <returns> The newly created parameter. </returns>
-        public override DbParameter CreateParameter(DbCommand command, string name, object? value, bool? nullable = null)
+        public override DbParameter CreateParameter(
+            DbCommand command,
+            string name,
+            object? value,
+            bool? nullable = null
+        )
         {
             var parameter = command.CreateParameter();
             parameter.Direction = ParameterDirection.Input;
@@ -120,7 +125,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             return ReplacingExpressionVisitor.Replace(
                 SpatialConverter.ConvertFromProviderExpression.Parameters.Single(),
                 expression,
-                SpatialConverter.ConvertFromProviderExpression.Body);
+                SpatialConverter.ConvertFromProviderExpression.Body
+            );
         }
 
         /// <summary>
@@ -130,13 +136,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="value"> The value for which a literal is needed. </param>
         /// <returns> An expression tree that can be used to generate code for the literal value. </returns>
-        public override Expression GenerateCodeLiteral(object value)
-            => Expression.Convert(
+        public override Expression GenerateCodeLiteral(object value) =>
+            Expression.Convert(
                 Expression.Call(
                     Expression.New(WKTReaderType),
                     WKTReaderType.GetMethod("Read", new[] { typeof(string) })!,
-                    Expression.Constant(CreateWktWithSrid(value), typeof(string))),
-                value.GetType());
+                    Expression.Constant(CreateWktWithSrid(value), typeof(string))
+                ),
+                value.GetType()
+            );
 
         private string CreateWktWithSrid(object value)
         {

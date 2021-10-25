@@ -71,21 +71,22 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         {
             Check.DebugAssert(
                 KeyColumns.Length == KeyValues.GetLength(1),
-                $"The number of key values doesn't match the number of keys (${KeyColumns.Length})");
+                $"The number of key values doesn't match the number of keys (${KeyColumns.Length})"
+            );
             Check.DebugAssert(
                 Columns.Length == Values.GetLength(1),
-                $"The number of values doesn't match the number of keys (${Columns.Length})");
+                $"The number of values doesn't match the number of keys (${Columns.Length})"
+            );
             Check.DebugAssert(
                 KeyValues.GetLength(0) == Values.GetLength(0),
-                $"The number of key values doesn't match the number of values (${KeyValues.GetLength(0)})");
+                $"The number of key values doesn't match the number of values (${KeyValues.GetLength(0)})"
+            );
 
             var table = model?.GetRelationalModel().FindTable(Table, Schema);
-            var keyProperties = table != null
-                ? MigrationsModelDiffer.GetMappedProperties(table, KeyColumns)
-                : null;
-            var properties = table != null
-                ? MigrationsModelDiffer.GetMappedProperties(table, Columns)
-                : null;
+            var keyProperties =
+                table != null ? MigrationsModelDiffer.GetMappedProperties(table, KeyColumns) : null;
+            var properties =
+                table != null ? MigrationsModelDiffer.GetMappedProperties(table, Columns) : null;
 
             for (var i = 0; i < KeyValues.GetLength(0); i++)
             {
@@ -93,21 +94,42 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
                 for (var j = 0; j < KeyColumns.Length; j++)
                 {
                     keys[j] = new ColumnModification(
-                        KeyColumns[j], originalValue: null, value: KeyValues[i, j], property: keyProperties?[j],
-                        columnType: KeyColumnTypes?[j], isRead: false, isWrite: false, isKey: true, isCondition: true,
-                        sensitiveLoggingEnabled: false);
+                        KeyColumns[j],
+                        originalValue: null,
+                        value: KeyValues[i, j],
+                        property: keyProperties?[j],
+                        columnType: KeyColumnTypes?[j],
+                        isRead: false,
+                        isWrite: false,
+                        isKey: true,
+                        isCondition: true,
+                        sensitiveLoggingEnabled: false
+                    );
                 }
 
                 var modifications = new ColumnModification[Columns.Length];
                 for (var j = 0; j < Columns.Length; j++)
                 {
                     modifications[j] = new ColumnModification(
-                        Columns[j], originalValue: null, value: Values[i, j], property: properties?[j],
-                        columnType: ColumnTypes?[j], isRead: false, isWrite: true, isKey: true, isCondition: false,
-                        sensitiveLoggingEnabled: false);
+                        Columns[j],
+                        originalValue: null,
+                        value: Values[i, j],
+                        property: properties?[j],
+                        columnType: ColumnTypes?[j],
+                        isRead: false,
+                        isWrite: true,
+                        isKey: true,
+                        isCondition: false,
+                        sensitiveLoggingEnabled: false
+                    );
                 }
 
-                yield return new ModificationCommand(Table, Schema, keys.Concat(modifications).ToArray(), sensitiveLoggingEnabled: false);
+                yield return new ModificationCommand(
+                    Table,
+                    Schema,
+                    keys.Concat(modifications).ToArray(),
+                    sensitiveLoggingEnabled: false
+                );
             }
         }
     }

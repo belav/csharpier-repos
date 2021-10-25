@@ -61,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 {
                     Assert.Equal("UniquifyM~", s5.Name);
                     Assert.Equal("TestSchema", s5.Schema);
-                });
+                }
+            );
         }
 
         private ModelBuilder GetModelBuilder()
@@ -72,15 +73,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 .With(new CurrentDbContext(new DbContext(new DbContextOptions<DbContext>())));
             var relationalDependencies = CreateRelationalDependencies();
             conventionSet.ModelFinalizingConventions.Add(
-                new SequenceUniquificationConvention(dependencies, relationalDependencies));
+                new SequenceUniquificationConvention(dependencies, relationalDependencies)
+            );
 
             return new ModelBuilder(conventionSet);
         }
 
-        private ProviderConventionSetBuilderDependencies CreateDependencies()
-            => RelationalTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+        private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+            RelationalTestHelpers.Instance
+                .CreateContextServices()
+                .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
-        private RelationalConventionSetBuilderDependencies CreateRelationalDependencies()
-            => RelationalTestHelpers.Instance.CreateContextServices().GetRequiredService<RelationalConventionSetBuilderDependencies>();
+        private RelationalConventionSetBuilderDependencies CreateRelationalDependencies() =>
+            RelationalTestHelpers.Instance
+                .CreateContextServices()
+                .GetRequiredService<RelationalConventionSetBuilderDependencies>();
     }
 }

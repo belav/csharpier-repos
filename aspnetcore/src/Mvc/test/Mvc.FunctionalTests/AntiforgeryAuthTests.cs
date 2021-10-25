@@ -27,7 +27,11 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-            Assert.Equal("/Home/Login", response.Headers.Location.AbsolutePath, StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                "/Home/Login",
+                response.Headers.Location.AbsolutePath,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         [Fact]
@@ -39,14 +43,21 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Assert
             // Redirected to login page, Antiforgery didn't fail yet
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-            Assert.Equal("/Home/Login", response.Headers.Location.AbsolutePath, StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                "/Home/Login",
+                response.Headers.Location.AbsolutePath,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         [Fact]
         public async Task IgnoreAntiforgeryOverridesAutoAntiforgery()
         {
             // Arrange & Act
-            var response = await Client.PostAsync("http://localhost/Antiforgery/Index", content: null);
+            var response = await Client.PostAsync(
+                "http://localhost/Antiforgery/Index",
+                content: null
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -56,7 +67,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task AntiforgeryOverridesIgnoreAntiforgery()
         {
             // Arrange & Act
-            var response = await Client.PostAsync("http://localhost/IgnoreAntiforgery/Index", content: null);
+            var response = await Client.PostAsync(
+                "http://localhost/IgnoreAntiforgery/Index",
+                content: null
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);

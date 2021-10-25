@@ -31,10 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public ReferenceCollectionBuilder(
             IMutableEntityType principalEntityType,
             IMutableEntityType dependentEntityType,
-            IMutableForeignKey foreignKey)
-            : base(principalEntityType, dependentEntityType, foreignKey)
-        {
-        }
+            IMutableForeignKey foreignKey
+        ) : base(principalEntityType, dependentEntityType, foreignKey) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,10 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             ReferenceCollectionBuilder oldBuilder,
             bool foreignKeySet = false,
             bool principalKeySet = false,
-            bool requiredSet = false)
-            : base(builder, oldBuilder, foreignKeySet, principalKeySet, requiredSet)
-        {
-        }
+            bool requiredSet = false
+        ) : base(builder, oldBuilder, foreignKeySet, principalKeySet, requiredSet) { }
 
         /// <summary>
         ///     Adds or updates an annotation on the relationship. If an annotation with the key specified in
@@ -92,11 +88,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The name(s) of the foreign key property(s).
         /// </param>
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
-        public virtual ReferenceCollectionBuilder HasForeignKey(params string[] foreignKeyPropertyNames)
-            => new(
-                HasForeignKeyBuilder(Check.NotEmpty(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames))),
+        public virtual ReferenceCollectionBuilder HasForeignKey(
+            params string[] foreignKeyPropertyNames
+        ) =>
+            new(
+                HasForeignKeyBuilder(
+                    Check.NotEmpty(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames))
+                ),
                 this,
-                foreignKeySet: true);
+                foreignKeySet: true
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -105,8 +106,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected virtual InternalForeignKeyBuilder HasForeignKeyBuilder(IReadOnlyList<string> foreignKeyPropertyNames)
-            => Builder.HasForeignKey(foreignKeyPropertyNames, (EntityType)DependentEntityType, ConfigurationSource.Explicit)!;
+        protected virtual InternalForeignKeyBuilder HasForeignKeyBuilder(
+            IReadOnlyList<string> foreignKeyPropertyNames
+        ) =>
+            Builder.HasForeignKey(
+                foreignKeyPropertyNames,
+                (EntityType)DependentEntityType,
+                ConfigurationSource.Explicit
+            )!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -115,8 +122,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected virtual InternalForeignKeyBuilder HasForeignKeyBuilder(IReadOnlyList<MemberInfo> foreignKeyMembers)
-            => Builder.HasForeignKey(foreignKeyMembers, (EntityType)DependentEntityType, ConfigurationSource.Explicit)!;
+        protected virtual InternalForeignKeyBuilder HasForeignKeyBuilder(
+            IReadOnlyList<MemberInfo> foreignKeyMembers
+        ) =>
+            Builder.HasForeignKey(
+                foreignKeyMembers,
+                (EntityType)DependentEntityType,
+                ConfigurationSource.Explicit
+            )!;
 
         /// <summary>
         ///     Configures the unique property(s) that this relationship targets. Typically you would only call this
@@ -126,11 +139,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <param name="keyPropertyNames"> The name(s) of the referenced key property(s). </param>
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
-        public virtual ReferenceCollectionBuilder HasPrincipalKey(params string[] keyPropertyNames)
-            => new(
+        public virtual ReferenceCollectionBuilder HasPrincipalKey(
+            params string[] keyPropertyNames
+        ) =>
+            new(
                 HasPrincipalKeyBuilder(Check.NotEmpty(keyPropertyNames, nameof(keyPropertyNames))),
                 this,
-                principalKeySet: true);
+                principalKeySet: true
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -139,8 +155,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected virtual InternalForeignKeyBuilder HasPrincipalKeyBuilder(IReadOnlyList<string> keyPropertyNames)
-            => Builder.HasPrincipalKey(keyPropertyNames, ConfigurationSource.Explicit)!;
+        protected virtual InternalForeignKeyBuilder HasPrincipalKeyBuilder(
+            IReadOnlyList<string> keyPropertyNames
+        ) => Builder.HasPrincipalKey(keyPropertyNames, ConfigurationSource.Explicit)!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -149,8 +166,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected virtual InternalForeignKeyBuilder HasPrincipalKeyBuilder(IReadOnlyList<MemberInfo> keyMembers)
-            => Builder.HasPrincipalKey(keyMembers, ConfigurationSource.Explicit)!;
+        protected virtual InternalForeignKeyBuilder HasPrincipalKeyBuilder(
+            IReadOnlyList<MemberInfo> keyMembers
+        ) => Builder.HasPrincipalKey(keyMembers, ConfigurationSource.Explicit)!;
 
         /// <summary>
         ///     Configures whether this is a required relationship (i.e. whether the foreign key property(s) can
@@ -158,8 +176,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <param name="required"> A value indicating whether this is a required relationship. </param>
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
-        public virtual ReferenceCollectionBuilder IsRequired(bool required = true)
-            => new(Builder.IsRequired(required, ConfigurationSource.Explicit)!, this, requiredSet: true);
+        public virtual ReferenceCollectionBuilder IsRequired(bool required = true) =>
+            new(
+                Builder.IsRequired(required, ConfigurationSource.Explicit)!,
+                this,
+                requiredSet: true
+            );
 
         /// <summary>
         ///     Configures the operation applied to dependent entities in the relationship when the
@@ -167,7 +189,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <param name="deleteBehavior"> The action to perform. </param>
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
-        public virtual ReferenceCollectionBuilder OnDelete(DeleteBehavior deleteBehavior)
-            => new(Builder.OnDelete(deleteBehavior, ConfigurationSource.Explicit)!, this);
+        public virtual ReferenceCollectionBuilder OnDelete(DeleteBehavior deleteBehavior) =>
+            new(Builder.OnDelete(deleteBehavior, ConfigurationSource.Explicit)!, this);
     }
 }

@@ -11,17 +11,25 @@ namespace Microsoft.AspNetCore.Razor.Language
     {
         public static readonly SourceSpan Undefined = new SourceSpan(SourceLocation.Undefined, 0);
 
-        public SourceSpan(int absoluteIndex, int length)
-            : this(null, absoluteIndex, -1, -1, length)
-        {
-        }
+        public SourceSpan(int absoluteIndex, int length) : this(null, absoluteIndex, -1, -1, length)
+        { }
 
         public SourceSpan(SourceLocation location, int contentLength)
-            : this(location.FilePath, location.AbsoluteIndex, location.LineIndex, location.CharacterIndex, contentLength)
-        {
-        }
+            : this(
+                location.FilePath,
+                location.AbsoluteIndex,
+                location.LineIndex,
+                location.CharacterIndex,
+                contentLength
+            ) { }
 
-        public SourceSpan(string filePath, int absoluteIndex, int lineIndex, int characterIndex, int length)
+        public SourceSpan(
+            string filePath,
+            int absoluteIndex,
+            int lineIndex,
+            int characterIndex,
+            int length
+        )
         {
             AbsoluteIndex = absoluteIndex;
             LineIndex = lineIndex;
@@ -31,9 +39,13 @@ namespace Microsoft.AspNetCore.Razor.Language
         }
 
         public SourceSpan(int absoluteIndex, int lineIndex, int characterIndex, int length)
-            : this(filePath: null, absoluteIndex: absoluteIndex, lineIndex: lineIndex, characterIndex: characterIndex, length: length)
-        {
-        }
+            : this(
+                filePath: null,
+                absoluteIndex: absoluteIndex,
+                lineIndex: lineIndex,
+                characterIndex: characterIndex,
+                length: length
+            ) { }
 
         public int Length { get; }
 
@@ -47,12 +59,11 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public bool Equals(SourceSpan other)
         {
-            return
-                string.Equals(FilePath, other.FilePath, StringComparison.Ordinal) &&
-                AbsoluteIndex == other.AbsoluteIndex &&
-                LineIndex == other.LineIndex &&
-                CharacterIndex == other.CharacterIndex &&
-                Length == other.Length;
+            return string.Equals(FilePath, other.FilePath, StringComparison.Ordinal)
+                && AbsoluteIndex == other.AbsoluteIndex
+                && LineIndex == other.LineIndex
+                && CharacterIndex == other.CharacterIndex
+                && Length == other.Length;
         }
 
         public override bool Equals(object obj)
@@ -75,12 +86,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         public override string ToString()
         {
             return string.Format(
-                CultureInfo.CurrentCulture, "({0}:{1},{2} [{3}] {4})",
+                CultureInfo.CurrentCulture,
+                "({0}:{1},{2} [{3}] {4})",
                 AbsoluteIndex,
                 LineIndex,
                 CharacterIndex,
                 Length,
-                FilePath);
+                FilePath
+            );
         }
 
         public static bool operator ==(SourceSpan left, SourceSpan right)

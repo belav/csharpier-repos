@@ -31,19 +31,16 @@ namespace System.Diagnostics.Tracing
         /// This is the default format for String and Char types.
         /// </summary>
         String = 2,
-
         /// <summary>
         /// Field should be formatted as boolean data. Typically applied to 8-bit
         /// or 32-bit integers. This is the default format for the Boolean type.
         /// </summary>
         Boolean = 3,
-
         /// <summary>
         /// Field should be formatted as hexadecimal data. Typically applied to
         /// integer types.
         /// </summary>
         Hexadecimal = 4,
-
 #if false
         /// <summary>
         /// Field should be formatted as a process identifier. Typically applied to
@@ -83,7 +80,6 @@ namespace System.Diagnostics.Tracing
         /// strings or arrays of 8-bit or 16-bit integers.
         /// </summary>
         Xml = 11,
-
         /// <summary>
         /// Field should be formatted as JSON string data. Typically applied to
         /// strings or arrays of 8-bit or 16-bit integers.

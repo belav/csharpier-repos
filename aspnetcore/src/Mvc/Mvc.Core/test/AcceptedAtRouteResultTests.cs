@@ -22,15 +22,7 @@ namespace Microsoft.AspNetCore.Mvc
     {
         public static TheoryData<object> ValuesData
         {
-            get
-            {
-                return new TheoryData<object>
-                {
-                    null,
-                    "Test string",
-                    new object(),
-                };
-            }
+            get { return new TheoryData<object> { null, "Test string", new object(), }; }
         }
 
         [Theory]
@@ -41,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new AcceptedAtRouteResult(
                 routeName: null,
                 routeValues: null,
-                value: value);
+                value: value
+            );
 
             // Assert
             Assert.Equal(StatusCodes.Status202Accepted, result.StatusCode);
@@ -57,23 +50,23 @@ namespace Microsoft.AspNetCore.Mvc
             var formatter = CreateMockFormatter();
             var httpContext = GetHttpContext(formatter);
             object actual = null;
-            formatter.Setup(f => f.WriteAsync(It.IsAny<OutputFormatterWriteContext>()))
+            formatter
+                .Setup(f => f.WriteAsync(It.IsAny<OutputFormatterWriteContext>()))
                 .Callback((OutputFormatterWriteContext context) => actual = context.Object)
                 .Returns(Task.FromResult(0));
 
             var actionContext = GetActionContext(httpContext);
             var urlHelper = GetMockUrlHelper(url);
-            var routeValues = new RouteValueDictionary(new Dictionary<string, string>()
-            {
-                { "test", "case" },
-                { "sample", "route" }
-            });
+            var routeValues = new RouteValueDictionary(
+                new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+            );
 
             // Act
             var result = new AcceptedAtRouteResult(
                 routeName: "sample",
                 routeValues: routeValues,
-                value: value);
+                value: value
+            );
             result.UrlHelper = urlHelper;
             await result.ExecuteResultAsync(actionContext);
 
@@ -88,17 +81,15 @@ namespace Microsoft.AspNetCore.Mvc
                 return new TheoryData<object>
                 {
                     null,
-                    new Dictionary<string, string>()
-                    {
-                        { "hello", "world" }
-                    },
+                    new Dictionary<string, string>() { { "hello", "world" } },
                     new RouteValueDictionary(
                         new Dictionary<string, string>()
                         {
                             { "test", "case" },
                             { "sample", "route" }
-                        }),
-                    };
+                        }
+                    ),
+                };
             }
         }
 
@@ -136,14 +127,16 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new AcceptedAtRouteResult(
                 routeName: null,
                 routeValues: new Dictionary<string, object>(),
-                value: null);
+                value: null
+            );
 
             result.UrlHelper = urlHelper;
 
             // Assert
-            await ExceptionAssert.ThrowsAsync<InvalidOperationException>(() =>
-                result.ExecuteResultAsync(actionContext),
-                "No route matches the supplied values.");
+            await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
+                () => result.ExecuteResultAsync(actionContext),
+                "No route matches the supplied values."
+            );
         }
 
         private static ActionContext GetActionContext(HttpContext httpContext)
@@ -151,10 +144,7 @@ namespace Microsoft.AspNetCore.Mvc
             var routeData = new RouteData();
             routeData.Routers.Add(Mock.Of<IRouter>());
 
-            return new ActionContext(
-                httpContext,
-                routeData,
-                new ActionDescriptor());
+            return new ActionContext(httpContext, routeData, new ActionDescriptor());
         }
 
         private static HttpContext GetHttpContext(Mock<IOutputFormatter> formatter)
@@ -166,11 +156,10 @@ namespace Microsoft.AspNetCore.Mvc
 
         private static Mock<IOutputFormatter> CreateMockFormatter()
         {
-            var formatter = new Mock<IOutputFormatter>
-            {
-                CallBase = true
-            };
-            formatter.Setup(f => f.CanWriteResult(It.IsAny<OutputFormatterWriteContext>())).Returns(true);
+            var formatter = new Mock<IOutputFormatter> { CallBase = true };
+            formatter
+                .Setup(f => f.CanWriteResult(It.IsAny<OutputFormatterWriteContext>()))
+                .Returns(true);
 
             return formatter;
         }
@@ -180,11 +169,14 @@ namespace Microsoft.AspNetCore.Mvc
             var options = Options.Create(new MvcOptions());
             options.Value.OutputFormatters.Add(formatter.Object);
             var services = new ServiceCollection();
-            services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-                new TestHttpResponseStreamWriterFactory(),
-                NullLoggerFactory.Instance,
-                options));
+            services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+                new ObjectResultExecutor(
+                    new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                    new TestHttpResponseStreamWriterFactory(),
+                    NullLoggerFactory.Instance,
+                    options
+                )
+            );
 
             return services.BuildServiceProvider();
         }
@@ -192,7 +184,9 @@ namespace Microsoft.AspNetCore.Mvc
         private static IUrlHelper GetMockUrlHelper(string returnValue)
         {
             var urlHelper = new Mock<IUrlHelper>();
-            urlHelper.Setup(o => o.Link(It.IsAny<string>(), It.IsAny<object>())).Returns(returnValue);
+            urlHelper
+                .Setup(o => o.Link(It.IsAny<string>(), It.IsAny<object>()))
+                .Returns(returnValue);
 
             return urlHelper.Object;
         }

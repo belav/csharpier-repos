@@ -10,10 +10,12 @@ namespace Microsoft.EntityFrameworkCore.Internal
         [ConditionalFact]
         public async Task Entities_with_null_PK_can_be_added_with_normal_use_of_DbContext_methods_and_have_id_shadow_value_and_PK_created()
         {
-            await using var testDatabase = CosmosTestStore.Create("IdentifierShadowValuePresenceTest");
+            await using var testDatabase = CosmosTestStore.Create(
+                "IdentifierShadowValuePresenceTest"
+            );
             using var context = new IdentifierShadowValuePresenceTestContext(testDatabase);
 
-            var item = new GItem { };
+            var item = new GItem {  };
 
             Assert.Null(item.Id);
 
@@ -31,7 +33,9 @@ namespace Microsoft.EntityFrameworkCore.Internal
         [ConditionalFact]
         public async Task Entities_can_be_tracked_with_normal_use_of_DbContext_methods_and_have_correct_resultant_state_and_id_shadow_value()
         {
-            await using var testDatabase = CosmosTestStore.Create("IdentifierShadowValuePresenceTest");
+            await using var testDatabase = CosmosTestStore.Create(
+                "IdentifierShadowValuePresenceTest"
+            );
             using var context = new IdentifierShadowValuePresenceTestContext(testDatabase);
 
             var item = new Item { Id = 1337 };
@@ -69,17 +73,15 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder
-                .UseCosmos(
-                    _connectionUri,
-                    _authToken,
-                    _name,
-                    b => b.ApplyConfiguration());
+            optionsBuilder.UseCosmos(
+                _connectionUri,
+                _authToken,
+                _name,
+                b => b.ApplyConfiguration()
+            );
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
         public DbSet<GItem> GItems { get; set; }
 

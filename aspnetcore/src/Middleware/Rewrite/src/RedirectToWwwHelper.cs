@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Rewrite
                 newHost,
                 request.PathBase,
                 request.Path,
-                request.QueryString);
+                request.QueryString
+            );
 
             response.StatusCode = statusCode;
             response.Headers[HeaderNames.Location] = newUrl;

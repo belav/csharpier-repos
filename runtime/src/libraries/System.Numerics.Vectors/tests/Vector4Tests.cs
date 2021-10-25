@@ -114,27 +114,51 @@ namespace System.Numerics.Tests
             Vector4 v1 = new Vector4(2.5f, 2.0f, 3.0f, 3.3f);
 
             string v1str = v1.ToString();
-            string expectedv1 = string.Format(CultureInfo.CurrentCulture
-                , "<{1:G}{0} {2:G}{0} {3:G}{0} {4:G}>"
-                , separator, 2.5, 2, 3, 3.3);
+            string expectedv1 = string.Format(
+                CultureInfo.CurrentCulture,
+                "<{1:G}{0} {2:G}{0} {3:G}{0} {4:G}>",
+                separator,
+                2.5,
+                2,
+                3,
+                3.3
+            );
             Assert.Equal(expectedv1, v1str);
 
             string v1strformatted = v1.ToString("c", CultureInfo.CurrentCulture);
-            string expectedv1formatted = string.Format(CultureInfo.CurrentCulture
-                , "<{1:c}{0} {2:c}{0} {3:c}{0} {4:c}>"
-                , separator, 2.5, 2, 3, 3.3);
+            string expectedv1formatted = string.Format(
+                CultureInfo.CurrentCulture,
+                "<{1:c}{0} {2:c}{0} {3:c}{0} {4:c}>",
+                separator,
+                2.5,
+                2,
+                3,
+                3.3
+            );
             Assert.Equal(expectedv1formatted, v1strformatted);
 
             string v2strformatted = v1.ToString("c", enUsCultureInfo);
-            string expectedv2formatted = string.Format(enUsCultureInfo
-                , "<{1:c}{0} {2:c}{0} {3:c}{0} {4:c}>"
-                , enUsCultureInfo.NumberFormat.NumberGroupSeparator, 2.5, 2, 3, 3.3);
+            string expectedv2formatted = string.Format(
+                enUsCultureInfo,
+                "<{1:c}{0} {2:c}{0} {3:c}{0} {4:c}>",
+                enUsCultureInfo.NumberFormat.NumberGroupSeparator,
+                2.5,
+                2,
+                3,
+                3.3
+            );
             Assert.Equal(expectedv2formatted, v2strformatted);
 
             string v3strformatted = v1.ToString("c");
-            string expectedv3formatted = string.Format(CultureInfo.CurrentCulture
-                , "<{1:c}{0} {2:c}{0} {3:c}{0} {4:c}>"
-                , separator, 2.5, 2, 3, 3.3);
+            string expectedv3formatted = string.Format(
+                CultureInfo.CurrentCulture,
+                "<{1:c}{0} {2:c}{0} {3:c}{0} {4:c}>",
+                separator,
+                2.5,
+                2,
+                3,
+                3.3
+            );
             Assert.Equal(expectedv3formatted, v3strformatted);
         }
 
@@ -149,7 +173,10 @@ namespace System.Numerics.Tests
             float actual;
 
             actual = Vector4.DistanceSquared(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.DistanceSquared did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.DistanceSquared did not return the expected value."
+            );
         }
 
         // A test for Distance (Vector4f, Vector4f)
@@ -163,7 +190,10 @@ namespace System.Numerics.Tests
             float actual;
 
             actual = Vector4.Distance(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Distance did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Distance did not return the expected value."
+            );
         }
 
         // A test for Distance (Vector4f, Vector4f)
@@ -190,7 +220,10 @@ namespace System.Numerics.Tests
             float actual;
 
             actual = Vector4.Dot(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Dot did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Dot did not return the expected value."
+            );
         }
 
         // A test for Dot (Vector4f, Vector4f)
@@ -206,7 +239,10 @@ namespace System.Numerics.Tests
             Vector4 e = new Vector4(c, 0);
 
             float actual = Vector4.Dot(d, e);
-            Assert.True(MathHelper.Equal(0.0f, actual), "Vector4f.Dot did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(0.0f, actual),
+                "Vector4f.Dot did not return the expected value."
+            );
         }
 
         // A test for Length ()
@@ -223,7 +259,10 @@ namespace System.Numerics.Tests
 
             actual = target.Length();
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Length did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Length did not return the expected value."
+            );
         }
 
         // A test for Length ()
@@ -236,7 +275,10 @@ namespace System.Numerics.Tests
             float expected = 0.0f;
             float actual = target.Length();
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Length did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Length did not return the expected value."
+            );
         }
 
         // A test for LengthSquared ()
@@ -253,7 +295,10 @@ namespace System.Numerics.Tests
 
             actual = target.LengthSquared();
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.LengthSquared did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.LengthSquared did not return the expected value."
+            );
         }
 
         // A test for Min (Vector4f, Vector4f)
@@ -266,7 +311,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(-1.0f, 1.0f, -3.0f, 0.0f);
             Vector4 actual;
             actual = Vector4.Min(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Min did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Min did not return the expected value."
+            );
         }
 
         // A test for Max (Vector4f, Vector4f)
@@ -279,7 +327,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(2.0f, 4.0f, -1.0f, 1000.0f);
             Vector4 actual;
             actual = Vector4.Max(a, b);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Max did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Max did not return the expected value."
+            );
         }
 
         [Fact]
@@ -316,26 +367,38 @@ namespace System.Numerics.Tests
             // Case N1: specified value is in the range.
             Vector4 expected = new Vector4(0.5f, 0.3f, 0.33f, 0.44f);
             Vector4 actual = Vector4.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Clamp did not return the expected value."
+            );
 
             // Normal case.
             // Case N2: specified value is bigger than max value.
             a = new Vector4(2.0f, 3.0f, 4.0f, 5.0f);
             expected = max;
             actual = Vector4.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Clamp did not return the expected value."
+            );
 
             // Case N3: specified value is smaller than max value.
             a = new Vector4(-2.0f, -3.0f, -4.0f, -5.0f);
             expected = min;
             actual = Vector4.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Clamp did not return the expected value."
+            );
 
             // Case N4: combination case.
             a = new Vector4(-2.0f, 0.5f, 4.0f, -5.0f);
             expected = new Vector4(min.X, a.Y, max.Z, min.W);
             actual = Vector4.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Clamp did not return the expected value."
+            );
 
             // User specified min value is bigger than max value.
             max = new Vector4(0.0f, 0.1f, 0.13f, 0.14f);
@@ -345,20 +408,29 @@ namespace System.Numerics.Tests
             a = new Vector4(0.5f, 0.3f, 0.33f, 0.44f);
             expected = max;
             actual = Vector4.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Clamp did not return the expected value."
+            );
 
             // Normal case.
             // Case W2: specified value is bigger than max and min value.
             a = new Vector4(2.0f, 3.0f, 4.0f, 5.0f);
             expected = max;
             actual = Vector4.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Clamp did not return the expected value."
+            );
 
             // Case W3: specified value is smaller than min and max value.
             a = new Vector4(-2.0f, -3.0f, -4.0f, -5.0f);
             expected = max;
             actual = Vector4.Clamp(a, min, max);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Clamp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Clamp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector4f, Vector4f, float)
@@ -374,7 +446,10 @@ namespace System.Numerics.Tests
             Vector4 actual;
 
             actual = Vector4.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector4f, Vector4f, float)
@@ -388,7 +463,10 @@ namespace System.Numerics.Tests
             float t = 0.0f;
             Vector4 expected = new Vector4(1.0f, 2.0f, 3.0f, 4.0f);
             Vector4 actual = Vector4.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector4f, Vector4f, float)
@@ -402,7 +480,10 @@ namespace System.Numerics.Tests
             float t = 1.0f;
             Vector4 expected = new Vector4(4.0f, 5.0f, 6.0f, 7.0f);
             Vector4 actual = Vector4.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector4f, Vector4f, float)
@@ -416,7 +497,10 @@ namespace System.Numerics.Tests
             float t = 2.0f;
             Vector4 expected = new Vector4(8.0f, 10.0f, 12.0f, 14.0f);
             Vector4 actual = Vector4.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector4f, Vector4f, float)
@@ -430,7 +514,10 @@ namespace System.Numerics.Tests
             float t = -2.0f;
             Vector4 expected = -(b * 2);
             Vector4 actual = Vector4.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector4f, Vector4f, float)
@@ -443,8 +530,14 @@ namespace System.Numerics.Tests
 
             float t = 0.408f;
             Vector4 actual = Vector4.Lerp(a, b, t);
-            Assert.True(float.IsPositiveInfinity(actual.X), "Vector4f.Lerp did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.Y), "Vector4f.Lerp did not return the expected value.");
+            Assert.True(
+                float.IsPositiveInfinity(actual.X),
+                "Vector4f.Lerp did not return the expected value."
+            );
+            Assert.True(
+                float.IsNegativeInfinity(actual.Y),
+                "Vector4f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector4f, Vector4f, float)
@@ -458,7 +551,10 @@ namespace System.Numerics.Tests
             float t = 0.85f;
             Vector4 expected = a;
             Vector4 actual = Vector4.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector4f, Vector4f, float)
@@ -473,7 +569,10 @@ namespace System.Numerics.Tests
 
             Vector4 expected = new Vector4(0.45155275f);
             Vector4 actual = Vector4.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Lerp (Vector4f, Vector4f, float)
@@ -489,7 +588,10 @@ namespace System.Numerics.Tests
 
             Vector4 expected = new Vector4(0.33333334f);
             Vector4 actual = Vector4.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Lerp did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector2f, Matrix4x4)
@@ -499,9 +601,9 @@ namespace System.Numerics.Tests
             Vector2 v = new Vector2(1.0f, 2.0f);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             m.M41 = 10.0f;
             m.M42 = 20.0f;
             m.M43 = 30.0f;
@@ -510,7 +612,10 @@ namespace System.Numerics.Tests
             Vector4 actual;
 
             actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector3f, Matrix4x4)
@@ -520,9 +625,9 @@ namespace System.Numerics.Tests
             Vector3 v = new Vector3(1.0f, 2.0f, 3.0f);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             m.M41 = 10.0f;
             m.M42 = 20.0f;
             m.M43 = 30.0f;
@@ -531,7 +636,10 @@ namespace System.Numerics.Tests
             Vector4 actual;
 
             actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "vector4.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "vector4.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector4f, Matrix4x4)
@@ -541,9 +649,9 @@ namespace System.Numerics.Tests
             Vector4 v = new Vector4(1.0f, 2.0f, 3.0f, 0.0f);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             m.M41 = 10.0f;
             m.M42 = 20.0f;
             m.M43 = 30.0f;
@@ -552,14 +660,20 @@ namespace System.Numerics.Tests
             Vector4 actual;
 
             actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
 
             //
             v.W = 1.0f;
 
             expected = new Vector4(12.19198728f, 21.53349376f, 32.61602545f, 1.0f);
             actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector4f, Matrix4x4)
@@ -572,7 +686,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(0, 0, 0, 0);
 
             Vector4 actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector4f, Matrix4x4)
@@ -585,7 +702,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(1.0f, 2.0f, 3.0f, 0.0f);
 
             Vector4 actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector3f, Matrix4x4)
@@ -596,16 +716,19 @@ namespace System.Numerics.Tests
             Vector3 v = new Vector3(1.0f, 2.0f, 3.0f);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             m.M41 = 10.0f;
             m.M42 = 20.0f;
             m.M43 = 30.0f;
 
             Vector4 expected = Vector4.Transform(new Vector4(v, 1.0f), m);
             Vector4 actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector3f, Matrix4x4)
@@ -618,7 +741,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(0, 0, 0, 0);
 
             Vector4 actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector3f, Matrix4x4)
@@ -631,7 +757,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(1.0f, 2.0f, 3.0f, 1.0f);
 
             Vector4 actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector2f, Matrix4x4)
@@ -642,16 +771,19 @@ namespace System.Numerics.Tests
             Vector2 v = new Vector2(1.0f, 2.0f);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             m.M41 = 10.0f;
             m.M42 = 20.0f;
             m.M43 = 30.0f;
 
             Vector4 expected = Vector4.Transform(new Vector4(v, 0.0f, 1.0f), m);
             Vector4 actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector2f, Matrix4x4)
@@ -664,7 +796,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(0, 0, 0, 0);
 
             Vector4 actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector2f, Matrix4x4)
@@ -677,7 +812,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(1.0f, 2.0f, 0, 1.0f);
 
             Vector4 actual = Vector4.Transform(v, m);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector2f, Quaternion)
@@ -687,9 +825,9 @@ namespace System.Numerics.Tests
             Vector2 v = new Vector2(1.0f, 2.0f);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
 
             Quaternion q = Quaternion.CreateFromRotationMatrix(m);
 
@@ -697,7 +835,10 @@ namespace System.Numerics.Tests
             Vector4 actual;
 
             actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector3f, Quaternion)
@@ -707,16 +848,19 @@ namespace System.Numerics.Tests
             Vector3 v = new Vector3(1.0f, 2.0f, 3.0f);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             Quaternion q = Quaternion.CreateFromRotationMatrix(m);
 
             Vector4 expected = Vector4.Transform(v, m);
             Vector4 actual;
 
             actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "vector4.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "vector4.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector4f, Quaternion)
@@ -726,22 +870,28 @@ namespace System.Numerics.Tests
             Vector4 v = new Vector4(1.0f, 2.0f, 3.0f, 0.0f);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             Quaternion q = Quaternion.CreateFromRotationMatrix(m);
 
             Vector4 expected = Vector4.Transform(v, m);
             Vector4 actual;
 
             actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
 
             //
             v.W = 1.0f;
             expected.W = 1.0f;
             actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector4f, Quaternion)
@@ -754,7 +904,10 @@ namespace System.Numerics.Tests
             Vector4 expected = v;
 
             Vector4 actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector4f, Quaternion)
@@ -767,7 +920,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(1.0f, 2.0f, 3.0f, 0.0f);
 
             Vector4 actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector3f, Quaternion)
@@ -778,14 +934,17 @@ namespace System.Numerics.Tests
             Vector3 v = new Vector3(1.0f, 2.0f, 3.0f);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             Quaternion q = Quaternion.CreateFromRotationMatrix(m);
 
             Vector4 expected = Vector4.Transform(v, m);
             Vector4 actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector3f, Quaternion)
@@ -798,7 +957,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(v, 1.0f);
 
             Vector4 actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector3f, Quaternion)
@@ -811,7 +973,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(1.0f, 2.0f, 3.0f, 1.0f);
 
             Vector4 actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector2f, Quaternion)
@@ -822,14 +987,17 @@ namespace System.Numerics.Tests
             Vector2 v = new Vector2(1.0f, 2.0f);
 
             Matrix4x4 m =
-                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f)) *
-                Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
+                Matrix4x4.CreateRotationX(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationY(MathHelper.ToRadians(30.0f))
+                * Matrix4x4.CreateRotationZ(MathHelper.ToRadians(30.0f));
             Quaternion q = Quaternion.CreateFromRotationMatrix(m);
 
             Vector4 expected = Vector4.Transform(v, m);
             Vector4 actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector2f, Quaternion)
@@ -842,7 +1010,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(1.0f, 2.0f, 0, 1.0f);
 
             Vector4 actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Transform (Vector2f, Matrix4x4)
@@ -855,7 +1026,10 @@ namespace System.Numerics.Tests
             Vector4 expected = new Vector4(1.0f, 2.0f, 0, 1.0f);
 
             Vector4 actual = Vector4.Transform(v, q);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Transform did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Transform did not return the expected value."
+            );
         }
 
         // A test for Normalize (Vector4f)
@@ -868,11 +1042,15 @@ namespace System.Numerics.Tests
                 0.1825741858350553711523232609336f,
                 0.3651483716701107423046465218672f,
                 0.5477225575051661134569697828008f,
-                0.7302967433402214846092930437344f);
+                0.7302967433402214846092930437344f
+            );
             Vector4 actual;
 
             actual = Vector4.Normalize(a);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Normalize did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Normalize did not return the expected value."
+            );
         }
 
         // A test for Normalize (Vector4f)
@@ -884,7 +1062,10 @@ namespace System.Numerics.Tests
 
             Vector4 expected = new Vector4(1.0f, 0.0f, 0.0f, 0.0f);
             Vector4 actual = Vector4.Normalize(a);
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.Normalize did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.Normalize did not return the expected value."
+            );
         }
 
         // A test for Normalize (Vector4f)
@@ -896,7 +1077,13 @@ namespace System.Numerics.Tests
 
             Vector4 expected = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
             Vector4 actual = Vector4.Normalize(a);
-            Assert.True(float.IsNaN(actual.X) && float.IsNaN(actual.Y) && float.IsNaN(actual.Z) && float.IsNaN(actual.W), "Vector4f.Normalize did not return the expected value.");
+            Assert.True(
+                float.IsNaN(actual.X)
+                    && float.IsNaN(actual.Y)
+                    && float.IsNaN(actual.Z)
+                    && float.IsNaN(actual.W),
+                "Vector4f.Normalize did not return the expected value."
+            );
         }
 
         // A test for operator - (Vector4f)
@@ -910,7 +1097,10 @@ namespace System.Numerics.Tests
 
             actual = -a;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.operator - did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.operator - did not return the expected value."
+            );
         }
 
         // A test for operator - (Vector4f, Vector4f)
@@ -925,7 +1115,10 @@ namespace System.Numerics.Tests
 
             actual = a - b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.operator - did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.operator - did not return the expected value."
+            );
         }
 
         // A test for operator * (Vector4f, float)
@@ -940,7 +1133,10 @@ namespace System.Numerics.Tests
             Vector4 actual;
 
             actual = a * factor;
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.operator * did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.operator * did not return the expected value."
+            );
         }
 
         // A test for operator * (float, Vector4f)
@@ -954,7 +1150,10 @@ namespace System.Numerics.Tests
             Vector4 actual;
 
             actual = factor * a;
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.operator * did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.operator * did not return the expected value."
+            );
         }
 
         // A test for operator * (Vector4f, Vector4f)
@@ -969,7 +1168,10 @@ namespace System.Numerics.Tests
 
             actual = a * b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.operator * did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.operator * did not return the expected value."
+            );
         }
 
         // A test for operator / (Vector4f, float)
@@ -985,7 +1187,10 @@ namespace System.Numerics.Tests
 
             actual = a / div;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.operator / did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.operator / did not return the expected value."
+            );
         }
 
         // A test for operator / (Vector4f, Vector4f)
@@ -1000,7 +1205,10 @@ namespace System.Numerics.Tests
 
             actual = a / b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.operator / did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.operator / did not return the expected value."
+            );
         }
 
         // A test for operator / (Vector4f, Vector4f)
@@ -1014,10 +1222,22 @@ namespace System.Numerics.Tests
 
             Vector4 actual = a / div;
 
-            Assert.True(float.IsNegativeInfinity(actual.X), "Vector4f.operator / did not return the expected value.");
-            Assert.True(float.IsPositiveInfinity(actual.Y), "Vector4f.operator / did not return the expected value.");
-            Assert.True(float.IsPositiveInfinity(actual.Z), "Vector4f.operator / did not return the expected value.");
-            Assert.True(float.IsNaN(actual.W), "Vector4f.operator / did not return the expected value.");
+            Assert.True(
+                float.IsNegativeInfinity(actual.X),
+                "Vector4f.operator / did not return the expected value."
+            );
+            Assert.True(
+                float.IsPositiveInfinity(actual.Y),
+                "Vector4f.operator / did not return the expected value."
+            );
+            Assert.True(
+                float.IsPositiveInfinity(actual.Z),
+                "Vector4f.operator / did not return the expected value."
+            );
+            Assert.True(
+                float.IsNaN(actual.W),
+                "Vector4f.operator / did not return the expected value."
+            );
         }
 
         // A test for operator / (Vector4f, Vector4f)
@@ -1030,10 +1250,22 @@ namespace System.Numerics.Tests
 
             Vector4 actual = a / b;
 
-            Assert.True(float.IsPositiveInfinity(actual.X), "Vector4f.operator / did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.Y), "Vector4f.operator / did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.Z), "Vector4f.operator / did not return the expected value.");
-            Assert.True(float.IsNegativeInfinity(actual.W), "Vector4f.operator / did not return the expected value.");
+            Assert.True(
+                float.IsPositiveInfinity(actual.X),
+                "Vector4f.operator / did not return the expected value."
+            );
+            Assert.True(
+                float.IsNegativeInfinity(actual.Y),
+                "Vector4f.operator / did not return the expected value."
+            );
+            Assert.True(
+                float.IsNegativeInfinity(actual.Z),
+                "Vector4f.operator / did not return the expected value."
+            );
+            Assert.True(
+                float.IsNegativeInfinity(actual.W),
+                "Vector4f.operator / did not return the expected value."
+            );
         }
 
         // A test for operator + (Vector4f, Vector4f)
@@ -1048,7 +1280,10 @@ namespace System.Numerics.Tests
 
             actual = a + b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Vector4f.operator + did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Vector4f.operator + did not return the expected value."
+            );
         }
 
         [Fact]
@@ -1081,8 +1316,13 @@ namespace System.Numerics.Tests
 
             Vector4 target = new Vector4(x, y, z, w);
 
-            Assert.True(MathHelper.Equal(target.X, x) && MathHelper.Equal(target.Y, y) && MathHelper.Equal(target.Z, z) && MathHelper.Equal(target.W, w),
-                "Vector4f constructor(x,y,z,w) did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(target.X, x)
+                    && MathHelper.Equal(target.Y, y)
+                    && MathHelper.Equal(target.Z, z)
+                    && MathHelper.Equal(target.W, w),
+                "Vector4f constructor(x,y,z,w) did not return the expected value."
+            );
         }
 
         // A test for Vector4f (Vector2f, float, float)
@@ -1094,8 +1334,13 @@ namespace System.Numerics.Tests
             float w = 4.0f;
 
             Vector4 target = new Vector4(a, z, w);
-            Assert.True(MathHelper.Equal(target.X, a.X) && MathHelper.Equal(target.Y, a.Y) && MathHelper.Equal(target.Z, z) && MathHelper.Equal(target.W, w),
-                "Vector4f constructor(Vector2f,z,w) did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(target.X, a.X)
+                    && MathHelper.Equal(target.Y, a.Y)
+                    && MathHelper.Equal(target.Z, z)
+                    && MathHelper.Equal(target.W, w),
+                "Vector4f constructor(Vector2f,z,w) did not return the expected value."
+            );
         }
 
         // A test for Vector4f (Vector3f, float)
@@ -1107,8 +1352,13 @@ namespace System.Numerics.Tests
 
             Vector4 target = new Vector4(a, w);
 
-            Assert.True(MathHelper.Equal(target.X, a.X) && MathHelper.Equal(target.Y, a.Y) && MathHelper.Equal(target.Z, a.Z) && MathHelper.Equal(target.W, w),
-                "Vector4f constructor(Vector3f,w) did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(target.X, a.X)
+                    && MathHelper.Equal(target.Y, a.Y)
+                    && MathHelper.Equal(target.Z, a.Z)
+                    && MathHelper.Equal(target.W, w),
+                "Vector4f constructor(Vector3f,w) did not return the expected value."
+            );
         }
 
         // A test for Vector4f ()
@@ -1129,12 +1379,29 @@ namespace System.Numerics.Tests
         [Fact]
         public void Vector4ConstructorTest5()
         {
-            Vector4 target = new Vector4(float.NaN, float.MaxValue, float.PositiveInfinity, float.Epsilon);
+            Vector4 target = new Vector4(
+                float.NaN,
+                float.MaxValue,
+                float.PositiveInfinity,
+                float.Epsilon
+            );
 
-            Assert.True(float.IsNaN(target.X), "Vector4f.constructor (float, float, float, float) did not return the expected value.");
-            Assert.True(float.Equals(float.MaxValue, target.Y), "Vector4f.constructor (float, float, float, float) did not return the expected value.");
-            Assert.True(float.IsPositiveInfinity(target.Z), "Vector4f.constructor (float, float, float, float) did not return the expected value.");
-            Assert.True(float.Equals(float.Epsilon, target.W), "Vector4f.constructor (float, float, float, float) did not return the expected value.");
+            Assert.True(
+                float.IsNaN(target.X),
+                "Vector4f.constructor (float, float, float, float) did not return the expected value."
+            );
+            Assert.True(
+                float.Equals(float.MaxValue, target.Y),
+                "Vector4f.constructor (float, float, float, float) did not return the expected value."
+            );
+            Assert.True(
+                float.IsPositiveInfinity(target.Z),
+                "Vector4f.constructor (float, float, float, float) did not return the expected value."
+            );
+            Assert.True(
+                float.Equals(float.Epsilon, target.W),
+                "Vector4f.constructor (float, float, float, float) did not return the expected value."
+            );
         }
 
         // A test for Vector4f (ReadOnlySpan<float>)
@@ -1439,7 +1706,9 @@ namespace System.Numerics.Tests
         public void Vector4AbsTest()
         {
             Vector4 v1 = new Vector4(-2.5f, 2.0f, 3.0f, 3.3f);
-            Vector4 v3 = Vector4.Abs(new Vector4(float.PositiveInfinity, 0.0f, float.NegativeInfinity, float.NaN));
+            Vector4 v3 = Vector4.Abs(
+                new Vector4(float.PositiveInfinity, 0.0f, float.NegativeInfinity, float.NaN)
+            );
             Vector4 v = Vector4.Abs(v1);
             Assert.Equal(2.5f, v.X);
             Assert.Equal(2.0f, v.Y);
@@ -1571,7 +1840,10 @@ namespace System.Numerics.Tests
         private class DeeplyEmbeddedClass
         {
             public readonly Level0 L0 = new Level0();
-            public Vector4 RootEmbeddedObject { get { return L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector; } }
+            public Vector4 RootEmbeddedObject
+            {
+                get { return L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector; }
+            }
             public class Level0
             {
                 public readonly Level1 L1 = new Level1();
@@ -1595,7 +1867,12 @@ namespace System.Numerics.Tests
                                         public readonly Level7 L7 = new Level7();
                                         public class Level7
                                         {
-                                            public Vector4 EmbeddedVector = new Vector4(1, 5, 1, -5);
+                                            public Vector4 EmbeddedVector = new Vector4(
+                                                1,
+                                                5,
+                                                1,
+                                                -5
+                                            );
                                         }
                                     }
                                 }
@@ -1620,22 +1897,28 @@ namespace System.Numerics.Tests
                 obj.L0.L1.L2.L3.L4 = new Level0.Level1.Level2.Level3.Level4();
                 obj.L0.L1.L2.L3.L4.L5 = new Level0.Level1.Level2.Level3.Level4.Level5();
                 obj.L0.L1.L2.L3.L4.L5.L6 = new Level0.Level1.Level2.Level3.Level4.Level5.Level6();
-                obj.L0.L1.L2.L3.L4.L5.L6.L7 = new Level0.Level1.Level2.Level3.Level4.Level5.Level6.Level7();
+                obj.L0.L1.L2.L3.L4.L5.L6.L7 =
+                    new Level0.Level1.Level2.Level3.Level4.Level5.Level6.Level7();
                 obj.L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector = new Vector4(1, 5, 1, -5);
 
                 return obj;
             }
 
             public Level0 L0;
-            public Vector4 RootEmbeddedObject { get { return L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector; } }
+            public Vector4 RootEmbeddedObject
+            {
+                get { return L0.L1.L2.L3.L4.L5.L6.L7.EmbeddedVector; }
+            }
             public struct Level0
             {
-                private float _buffer0, _buffer1;
+                private float _buffer0,
+                    _buffer1;
                 public Level1 L1;
                 private float _buffer2;
                 public struct Level1
                 {
-                    private float _buffer0, _buffer1;
+                    private float _buffer0,
+                        _buffer1;
                     public Level2 L2;
                     private byte _buffer2;
                     public struct Level2
@@ -1661,7 +1944,8 @@ namespace System.Numerics.Tests
                                     {
                                         private byte _buffer0;
                                         public Level7 L7;
-                                        private byte _buffer1, _buffer2;
+                                        private byte _buffer1,
+                                            _buffer2;
                                         public struct Level7
                                         {
                                             public Vector4 EmbeddedVector;

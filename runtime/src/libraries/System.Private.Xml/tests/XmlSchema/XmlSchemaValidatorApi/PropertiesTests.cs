@@ -16,7 +16,7 @@ namespace System.Xml.Tests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCXmlResolver(ITestOutputHelper output): base(output)
+        public TCXmlResolver(ITestOutputHelper output) : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -30,16 +30,26 @@ namespace System.Xml.Tests
 
             manager.AddNamespace("t", "uri:tempuri");
 
-            XmlSchemaValidator val = new XmlSchemaValidator(new NameTable(),
-                                                            CreateSchemaSetFromXml("<root />"),
-                                                            manager,
-                                                            AllFlags);
+            XmlSchemaValidator val = new XmlSchemaValidator(
+                new NameTable(),
+                CreateSchemaSetFromXml("<root />"),
+                manager,
+                AllFlags
+            );
             XmlSchemaInfo info = new XmlSchemaInfo();
 
             val.XmlResolver = new XmlUrlResolver(); //Adding this as the default resolver is null and not XmlUrlResolver anymore
 
             val.Initialize();
-            val.ValidateElement("foo", "", null, "t:type1", null, "uri:tempuri " + Path.Combine(TestData, XSDFILE_TARGET_NAMESPACE), null);
+            val.ValidateElement(
+                "foo",
+                "",
+                null,
+                "t:type1",
+                null,
+                "uri:tempuri " + Path.Combine(TestData, XSDFILE_TARGET_NAMESPACE),
+                null
+            );
             val.ValidateEndOfAttributes(null);
             val.ValidateElement("bar", "", null);
             val.ValidateEndOfAttributes(null);
@@ -55,7 +65,9 @@ namespace System.Xml.Tests
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void UsingCustomXmlResolverWith_SchemaLocation_NoNamespaceSchemaLocation(bool schemaLocation)
+        public void UsingCustomXmlResolverWith_SchemaLocation_NoNamespaceSchemaLocation(
+            bool schemaLocation
+        )
         {
             CXmlTestResolver res = new CXmlTestResolver();
             CResolverHolder holder = new CResolverHolder();
@@ -64,21 +76,39 @@ namespace System.Xml.Tests
             res.CalledGetEntity += new XmlTestResolverEventHandler(holder.CallBackGetEntity);
 
             XmlNamespaceManager manager = new XmlNamespaceManager(new NameTable());
-            XmlSchemaValidator val = new XmlSchemaValidator(new NameTable(),
-                                                            new XmlSchemaSet(),
-                                                            manager,
-                                                            AllFlags);
+            XmlSchemaValidator val = new XmlSchemaValidator(
+                new NameTable(),
+                new XmlSchemaSet(),
+                manager,
+                AllFlags
+            );
             val.XmlResolver = res;
             val.Initialize();
 
             if (schemaLocation)
             {
                 manager.AddNamespace("t", "uri:tempuri");
-                val.ValidateElement("foo", "", null, "t:type1", null, "uri:tempuri " + Path.Combine(TestData, XSDFILE_TARGET_NAMESPACE), null);
+                val.ValidateElement(
+                    "foo",
+                    "",
+                    null,
+                    "t:type1",
+                    null,
+                    "uri:tempuri " + Path.Combine(TestData, XSDFILE_TARGET_NAMESPACE),
+                    null
+                );
             }
             else
             {
-                val.ValidateElement("foo", "", null, "type1", null, null, XSDFILE_NO_TARGET_NAMESPACE);
+                val.ValidateElement(
+                    "foo",
+                    "",
+                    null,
+                    "type1",
+                    null,
+                    null,
+                    XSDFILE_NO_TARGET_NAMESPACE
+                );
             }
 
             Assert.True(holder.IsCalledResolveUri);
@@ -97,14 +127,21 @@ namespace System.Xml.Tests
             res.CalledGetEntity += new XmlTestResolverEventHandler(holder.CallBackGetEntity);
 
             XmlNamespaceManager manager = new XmlNamespaceManager(new NameTable());
-            XmlSchemaValidator val = new XmlSchemaValidator(new NameTable(),
-                                                            new XmlSchemaSet(){ XmlResolver = new XmlUrlResolver()},
-                                                            manager,
-                                                            AllFlags);
+            XmlSchemaValidator val = new XmlSchemaValidator(
+                new NameTable(),
+                new XmlSchemaSet() { XmlResolver = new XmlUrlResolver() },
+                manager,
+                AllFlags
+            );
             val.XmlResolver = res;
 
             val.Initialize();
-            val.AddSchema(XmlSchema.Read(XmlReader.Create(Path.Combine(TestData, XSDFILE_VALIDATE_ATTRIBUTE)), null)); // this schema has xs:import
+            val.AddSchema(
+                XmlSchema.Read(
+                    XmlReader.Create(Path.Combine(TestData, XSDFILE_VALIDATE_ATTRIBUTE)),
+                    null
+                )
+            ); // this schema has xs:import
             val.ValidateElement("NoAttributesElement", "", null);
 
             Assert.True(!holder.IsCalledResolveUri);
@@ -123,14 +160,24 @@ namespace System.Xml.Tests
             res.CalledGetEntity += new XmlTestResolverEventHandler(holder.CallBackGetEntity);
 
             XmlNamespaceManager manager = new XmlNamespaceManager(new NameTable());
-            XmlSchemaValidator val = new XmlSchemaValidator(new NameTable(),
-                                                            new XmlSchemaSet(),
-                                                            manager,
-                                                            AllFlags);
+            XmlSchemaValidator val = new XmlSchemaValidator(
+                new NameTable(),
+                new XmlSchemaSet(),
+                manager,
+                AllFlags
+            );
             val.XmlResolver = res;
             val.Initialize();
 
-            val.ValidateElement("foo", "", null, "type1", null, null, Path.Combine(TestData, XSDFILE_NO_TARGET_NAMESPACE));
+            val.ValidateElement(
+                "foo",
+                "",
+                null,
+                "type1",
+                null,
+                null,
+                Path.Combine(TestData, XSDFILE_NO_TARGET_NAMESPACE)
+            );
             val.SkipToEndElement(null);
 
             Assert.True(holder.IsCalledResolveUri);
@@ -140,7 +187,15 @@ namespace System.Xml.Tests
             holder.IsCalledGetEntity = false;
             holder.IsCalledResolveUri = false;
 
-            val.ValidateElement("foo", "", null, "type1", null, null, Path.Combine(TestData, XSDFILE_NO_TARGET_NAMESPACE));
+            val.ValidateElement(
+                "foo",
+                "",
+                null,
+                "type1",
+                null,
+                null,
+                Path.Combine(TestData, XSDFILE_NO_TARGET_NAMESPACE)
+            );
 
             Assert.True(!holder.IsCalledResolveUri);
             Assert.True(!holder.IsCalledGetEntity);
@@ -158,14 +213,24 @@ namespace System.Xml.Tests
             res.CalledGetEntity += new XmlTestResolverEventHandler(holder.CallBackGetEntity);
 
             XmlNamespaceManager manager = new XmlNamespaceManager(new NameTable());
-            XmlSchemaValidator val = new XmlSchemaValidator(new NameTable(),
-                                                            new XmlSchemaSet(),
-                                                            manager,
-                                                            AllFlags);
+            XmlSchemaValidator val = new XmlSchemaValidator(
+                new NameTable(),
+                new XmlSchemaSet(),
+                manager,
+                AllFlags
+            );
             val.XmlResolver = res;
             val.Initialize();
 
-            val.ValidateElement("foo", "", null, "type1", null, null, Path.Combine(TestData, XSDFILE_NO_TARGET_NAMESPACE));
+            val.ValidateElement(
+                "foo",
+                "",
+                null,
+                "type1",
+                null,
+                null,
+                Path.Combine(TestData, XSDFILE_NO_TARGET_NAMESPACE)
+            );
             val.SkipToEndElement(null);
 
             Assert.True(holder.IsCalledResolveUri);
@@ -176,12 +241,24 @@ namespace System.Xml.Tests
 
             try
             {
-                val.ValidateElement("bar", "", null, "t:type1", null, "uri:tempuri " + Path.Combine(TestData, XSDFILE_TARGET_NAMESPACE), null);
+                val.ValidateElement(
+                    "bar",
+                    "",
+                    null,
+                    "t:type1",
+                    null,
+                    "uri:tempuri " + Path.Combine(TestData, XSDFILE_TARGET_NAMESPACE),
+                    null
+                );
                 Assert.True(false);
             }
             catch (XmlSchemaValidationException e)
             {
-                _exVerifier.IsExceptionOk(e, "Sch_XsiTypeNotFound", new string[] { "uri:tempuri:type1" });
+                _exVerifier.IsExceptionOk(
+                    e,
+                    "Sch_XsiTypeNotFound",
+                    new string[] { "uri:tempuri:type1" }
+                );
                 return;
             }
 
@@ -194,7 +271,7 @@ namespace System.Xml.Tests
     public class TCLineInfoProvider : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
-        public TCLineInfoProvider(ITestOutputHelper output): base(output)
+        public TCLineInfoProvider(ITestOutputHelper output) : base(output)
         {
             _output = output;
         }
@@ -297,11 +374,7 @@ namespace System.Xml.Tests
         [Fact]
         public void XmlReaderAsALineInfoProvider()
         {
-            string xmlSrc = "<root>\n" +
-                            "  <foo>\n" +
-                            "    FooText\n" +
-                            "  </foo>\n" +
-                            "</root>";
+            string xmlSrc = "<root>\n" + "  <foo>\n" + "    FooText\n" + "  </foo>\n" + "</root>";
             XmlSchemaInfo info = new XmlSchemaInfo();
 
             XmlSchemaValidator val = CreateValidator(CreateSchemaSetFromXml(xmlSrc));
@@ -335,7 +408,7 @@ namespace System.Xml.Tests
     public class TCSourceUri : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
-        public TCSourceUri(ITestOutputHelper output): base(output)
+        public TCSourceUri(ITestOutputHelper output) : base(output)
         {
             _output = output;
         }
@@ -369,11 +442,16 @@ namespace System.Xml.Tests
             try
             {
                 val.ValidateElement("bar", "", info);
-                Assert.True(false, "Validation Error - XmlSchemaValidationException wasn't thrown!");
+                Assert.True(
+                    false,
+                    "Validation Error - XmlSchemaValidationException wasn't thrown!"
+                );
             }
             catch (XmlSchemaValidationException e)
             {
-                Assert.True((tempUri == null && e.SourceUri == null) || (tempUri.ToString() == e.SourceUri));
+                Assert.True(
+                    (tempUri == null && e.SourceUri == null) || (tempUri.ToString() == e.SourceUri)
+                );
             }
 
             return;
@@ -421,7 +499,7 @@ namespace System.Xml.Tests
     public class TCValidationEventHandling : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
-        public TCValidationEventHandling(ITestOutputHelper output): base(output)
+        public TCValidationEventHandling(ITestOutputHelper output) : base(output)
         {
             _output = output;
         }
@@ -433,7 +511,9 @@ namespace System.Xml.Tests
         [InlineData("reader")]
         [InlineData("document")]
         [InlineData("navigator")]
-        public void Default_Null_ArbitraryObject_XmlReader_XmlDocument_XPathNavigator_ProvidedAsValidationEventSender(string param)
+        public void Default_Null_ArbitraryObject_XmlReader_XmlDocument_XPathNavigator_ProvidedAsValidationEventSender(
+            string param
+        )
         {
             XmlSchemaInfo info = new XmlSchemaInfo();
             XmlSchemaValidator val = CreateValidator(CreateSchemaSetFromXml("<root>foo</root>"));

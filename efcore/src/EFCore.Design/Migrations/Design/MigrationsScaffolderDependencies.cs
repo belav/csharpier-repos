@@ -66,7 +66,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             IOperationReporter operationReporter,
             IDatabaseProvider databaseProvider,
             ISnapshotModelProcessor snapshotModelProcessor,
-            IMigrator migrator)
+            IMigrator migrator
+        )
         {
             Check.NotNull(currentContext, nameof(currentContext));
             Check.NotNull(model, nameof(model));

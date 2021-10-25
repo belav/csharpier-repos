@@ -27,21 +27,37 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
         private readonly IStreamingFindUsagesPresenter _streamingPresenter;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public NavigableSymbolService(
             IWaitIndicator waitIndicator,
             IThreadingContext threadingContext,
-            IStreamingFindUsagesPresenter streamingPresenter)
+            IStreamingFindUsagesPresenter streamingPresenter
+        )
         {
             _waitIndicator = waitIndicator;
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
         }
 
-        public INavigableSymbolSource TryCreateNavigableSymbolSource(ITextView textView, ITextBuffer buffer)
+        public INavigableSymbolSource TryCreateNavigableSymbolSource(
+            ITextView textView,
+            ITextBuffer buffer
+        )
         {
-            return textView.GetOrCreatePerSubjectBufferProperty(buffer, s_key,
-                (v, b) => new NavigableSymbolSource(_threadingContext, _streamingPresenter, _waitIndicator));
+            return textView.GetOrCreatePerSubjectBufferProperty(
+                buffer,
+                s_key,
+                (v, b) =>
+                    new NavigableSymbolSource(
+                        _threadingContext,
+                        _streamingPresenter,
+                        _waitIndicator
+                    )
+            );
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Test
             AA[] local2 = new AA[7];
             while (true)
             {
-                local2[2].m_anField1 = new AA().m_anField1;	//this will blow up
+                local2[2].m_anField1 = new AA().m_anField1; //this will blow up
             }
         }
 

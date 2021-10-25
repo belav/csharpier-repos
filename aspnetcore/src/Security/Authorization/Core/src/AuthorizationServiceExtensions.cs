@@ -24,7 +24,12 @@ namespace Microsoft.AspNetCore.Authorization
         /// A flag indicating whether requirement evaluation has succeeded or failed.
         /// This value is <value>true</value> when the user fulfills the policy, otherwise <value>false</value>.
         /// </returns>
-        public static Task<AuthorizationResult> AuthorizeAsync(this IAuthorizationService service, ClaimsPrincipal user, object resource, IAuthorizationRequirement requirement)
+        public static Task<AuthorizationResult> AuthorizeAsync(
+            this IAuthorizationService service,
+            ClaimsPrincipal user,
+            object resource,
+            IAuthorizationRequirement requirement
+        )
         {
             if (service == null)
             {
@@ -36,7 +41,11 @@ namespace Microsoft.AspNetCore.Authorization
                 throw new ArgumentNullException(nameof(requirement));
             }
 
-            return service.AuthorizeAsync(user, resource, new IAuthorizationRequirement[] { requirement });
+            return service.AuthorizeAsync(
+                user,
+                resource,
+                new IAuthorizationRequirement[] { requirement }
+            );
         }
 
         /// <summary>
@@ -50,7 +59,12 @@ namespace Microsoft.AspNetCore.Authorization
         /// A flag indicating whether policy evaluation has succeeded or failed.
         /// This value is <value>true</value> when the user fulfills the policy, otherwise <value>false</value>.
         /// </returns>
-        public static Task<AuthorizationResult> AuthorizeAsync(this IAuthorizationService service, ClaimsPrincipal user, object? resource, AuthorizationPolicy policy)
+        public static Task<AuthorizationResult> AuthorizeAsync(
+            this IAuthorizationService service,
+            ClaimsPrincipal user,
+            object? resource,
+            AuthorizationPolicy policy
+        )
         {
             if (service == null)
             {
@@ -75,7 +89,11 @@ namespace Microsoft.AspNetCore.Authorization
         /// A flag indicating whether policy evaluation has succeeded or failed.
         /// This value is <value>true</value> when the user fulfills the policy, otherwise <value>false</value>.
         /// </returns>
-        public static Task<AuthorizationResult> AuthorizeAsync(this IAuthorizationService service, ClaimsPrincipal user, AuthorizationPolicy policy)
+        public static Task<AuthorizationResult> AuthorizeAsync(
+            this IAuthorizationService service,
+            ClaimsPrincipal user,
+            AuthorizationPolicy policy
+        )
         {
             if (service == null)
             {
@@ -100,7 +118,11 @@ namespace Microsoft.AspNetCore.Authorization
         /// A flag indicating whether policy evaluation has succeeded or failed.
         /// This value is <value>true</value> when the user fulfills the policy, otherwise <value>false</value>.
         /// </returns>
-        public static Task<AuthorizationResult> AuthorizeAsync(this IAuthorizationService service, ClaimsPrincipal user, string policyName)
+        public static Task<AuthorizationResult> AuthorizeAsync(
+            this IAuthorizationService service,
+            ClaimsPrincipal user,
+            string policyName
+        )
         {
             if (service == null)
             {

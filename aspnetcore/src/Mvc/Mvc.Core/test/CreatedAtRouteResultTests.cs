@@ -26,17 +26,20 @@ namespace Microsoft.AspNetCore.Mvc
             get
             {
                 yield return new object[] { null };
-                yield return
-                    new object[] {
-                        new Dictionary<string, string>() { { "hello", "world" } }
-                    };
-                yield return
-                    new object[] {
-                        new RouteValueDictionary(new Dictionary<string, string>() {
+                yield return new object[]
+                {
+                    new Dictionary<string, string>() { { "hello", "world" } }
+                };
+                yield return new object[]
+                {
+                    new RouteValueDictionary(
+                        new Dictionary<string, string>()
+                        {
                             { "test", "case" },
                             { "sample", "route" }
-                        })
-                    };
+                        }
+                    )
+                };
             }
         }
 
@@ -51,7 +54,11 @@ namespace Microsoft.AspNetCore.Mvc
             var urlHelper = GetMockUrlHelper(expectedUrl);
 
             // Act
-            var result = new CreatedAtRouteResult(routeName: null, routeValues: values, value: null);
+            var result = new CreatedAtRouteResult(
+                routeName: null,
+                routeValues: values,
+                value: null
+            );
             result.UrlHelper = urlHelper;
             await result.ExecuteResultAsync(actionContext);
 
@@ -71,14 +78,16 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new CreatedAtRouteResult(
                 routeName: null,
                 routeValues: new Dictionary<string, object>(),
-                value: null);
+                value: null
+            );
 
             result.UrlHelper = urlHelper;
 
             // Act & Assert
             await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
                 async () => await result.ExecuteResultAsync(actionContext),
-            "No route matches the supplied values.");
+                "No route matches the supplied values."
+            );
         }
 
         private static ActionContext GetActionContext(HttpContext httpContext)
@@ -86,9 +95,7 @@ namespace Microsoft.AspNetCore.Mvc
             var routeData = new RouteData();
             routeData.Routers.Add(Mock.Of<IRouter>());
 
-            return new ActionContext(httpContext,
-                                    routeData,
-                                    new ActionDescriptor());
+            return new ActionContext(httpContext, routeData, new ActionDescriptor());
         }
 
         private static HttpContext GetHttpContext()
@@ -104,14 +111,19 @@ namespace Microsoft.AspNetCore.Mvc
         {
             var options = Options.Create(new MvcOptions());
             options.Value.OutputFormatters.Add(new StringOutputFormatter());
-            options.Value.OutputFormatters.Add(SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions()));
+            options.Value.OutputFormatters.Add(
+                SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions())
+            );
 
             var services = new ServiceCollection();
-            services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-                new TestHttpResponseStreamWriterFactory(),
-                NullLoggerFactory.Instance,
-                options));
+            services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+                new ObjectResultExecutor(
+                    new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                    new TestHttpResponseStreamWriterFactory(),
+                    NullLoggerFactory.Instance,
+                    options
+                )
+            );
 
             return services.BuildServiceProvider();
         }
@@ -119,7 +131,9 @@ namespace Microsoft.AspNetCore.Mvc
         private static IUrlHelper GetMockUrlHelper(string returnValue)
         {
             var urlHelper = new Mock<IUrlHelper>();
-            urlHelper.Setup(o => o.Link(It.IsAny<string>(), It.IsAny<object>())).Returns(returnValue);
+            urlHelper
+                .Setup(o => o.Link(It.IsAny<string>(), It.IsAny<object>()))
+                .Returns(returnValue);
 
             return urlHelper.Object;
         }

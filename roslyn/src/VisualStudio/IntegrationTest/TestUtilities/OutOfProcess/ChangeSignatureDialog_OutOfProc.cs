@@ -19,40 +19,32 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             _inProc = CreateInProcComponent<ChangeSignatureDialog_InProc>(visualStudioInstance);
         }
 
-        public void VerifyOpen()
-            => _inProc.VerifyOpen();
+        public void VerifyOpen() => _inProc.VerifyOpen();
 
-        public void VerifyClosed()
-            => _inProc.VerifyClosed();
+        public void VerifyClosed() => _inProc.VerifyClosed();
 
-        public bool CloseWindow()
-            => _inProc.CloseWindow();
+        public bool CloseWindow() => _inProc.CloseWindow();
 
-        public void Invoke()
-            => VisualStudioInstance.Editor.SendKeys(new KeyPress(VirtualKey.R, ShiftState.Ctrl), new KeyPress(VirtualKey.V, ShiftState.Ctrl));
+        public void Invoke() =>
+            VisualStudioInstance.Editor.SendKeys(
+                new KeyPress(VirtualKey.R, ShiftState.Ctrl),
+                new KeyPress(VirtualKey.V, ShiftState.Ctrl)
+            );
 
-        public void ClickOK()
-            => _inProc.ClickOK();
+        public void ClickOK() => _inProc.ClickOK();
 
-        public void ClickCancel()
-            => _inProc.ClickCancel();
+        public void ClickCancel() => _inProc.ClickCancel();
 
-        public void ClickDownButton()
-            => _inProc.ClickDownButton();
+        public void ClickDownButton() => _inProc.ClickDownButton();
 
-        public void ClickUpButton()
-            => _inProc.ClickUpButton();
+        public void ClickUpButton() => _inProc.ClickUpButton();
 
-        public void ClickAddButton()
-            => _inProc.ClickAddButton();
+        public void ClickAddButton() => _inProc.ClickAddButton();
 
-        public void ClickRemoveButton()
-            => _inProc.ClickRemoveButton();
+        public void ClickRemoveButton() => _inProc.ClickRemoveButton();
 
-        public void ClickRestoreButton()
-            => _inProc.ClickRestoreButton();
+        public void ClickRestoreButton() => _inProc.ClickRestoreButton();
 
-        public void SelectParameter(string parameterName)
-            => _inProc.SelectParameter(parameterName);
+        public void SelectParameter(string parameterName) => _inProc.SelectParameter(parameterName);
     }
 }

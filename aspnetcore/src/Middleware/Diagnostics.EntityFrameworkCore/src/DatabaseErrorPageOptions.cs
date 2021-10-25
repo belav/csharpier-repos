@@ -16,6 +16,7 @@ namespace Microsoft.AspNetCore.Builder
         /// Gets or sets the path that <see cref="MigrationsEndPointMiddleware"/> will listen
         /// for requests to execute migrations commands.
         /// </summary>
-        public virtual PathString MigrationsEndPointPath { get; set; } = MigrationsEndPointOptions.DefaultPath;
+        public virtual PathString MigrationsEndPointPath { get; set; } =
+            MigrationsEndPointOptions.DefaultPath;
     }
 }

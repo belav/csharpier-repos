@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             ICSharpUtilities cSharpUtilities,
             ICSharpHelper cSharpHelper,
             INamedConnectionStringResolver connectionStringResolver,
-            IOperationReporter reporter)
+            IOperationReporter reporter
+        )
         {
             Check.NotNull(databaseModelFactory, nameof(databaseModelFactory));
             Check.NotNull(scaffoldingModelFactory, nameof(scaffoldingModelFactory));
@@ -84,22 +85,30 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             string connectionString,
             DatabaseModelFactoryOptions databaseOptions,
             ModelReverseEngineerOptions modelOptions,
-            ModelCodeGenerationOptions codeOptions)
+            ModelCodeGenerationOptions codeOptions
+        )
         {
             Check.NotEmpty(connectionString, nameof(connectionString));
             Check.NotNull(databaseOptions, nameof(databaseOptions));
             Check.NotNull(modelOptions, nameof(modelOptions));
             Check.NotNull(codeOptions, nameof(codeOptions));
 
-            if (!string.IsNullOrWhiteSpace(codeOptions.ContextName)
-                && (!_cSharpUtilities.IsValidIdentifier(codeOptions.ContextName)
-                    || _cSharpUtilities.IsCSharpKeyword(codeOptions.ContextName)))
+            if (
+                !string.IsNullOrWhiteSpace(codeOptions.ContextName)
+                && (
+                    !_cSharpUtilities.IsValidIdentifier(codeOptions.ContextName)
+                    || _cSharpUtilities.IsCSharpKeyword(codeOptions.ContextName)
+                )
+            )
             {
                 throw new ArgumentException(
-                    DesignStrings.ContextClassNotValidCSharpIdentifier(codeOptions.ContextName));
+                    DesignStrings.ContextClassNotValidCSharpIdentifier(codeOptions.ContextName)
+                );
             }
 
-            var resolvedConnectionString = _connectionStringResolver.ResolveConnectionString(connectionString);
+            var resolvedConnectionString = _connectionStringResolver.ResolveConnectionString(
+                connectionString
+            );
             if (resolvedConnectionString != connectionString)
             {
                 codeOptions.SuppressConnectionStringWarning = true;
@@ -114,8 +123,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 codeOptions.ConnectionString = connectionString;
             }
 
-            var databaseModel = _databaseModelFactory.Create(resolvedConnectionString, databaseOptions);
-            var modelConnectionString = (string?)(databaseModel[ScaffoldingAnnotationNames.ConnectionString]);
+            var databaseModel = _databaseModelFactory.Create(
+                resolvedConnectionString,
+                databaseOptions
+            );
+            var modelConnectionString = (string?)(
+                databaseModel[ScaffoldingAnnotationNames.ConnectionString]
+            );
             if (!string.IsNullOrEmpty(modelConnectionString))
             {
                 codeOptions.ConnectionString = modelConnectionString;
@@ -126,8 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             if (model == null)
             {
                 throw new InvalidOperationException(
-                    DesignStrings.ProviderReturnedNullModel(
-                        _factory.GetType().ShortDisplayName()));
+                    DesignStrings.ProviderReturnedNullModel(_factory.GetType().ShortDisplayName())
+                );
             }
 
             if (string.IsNullOrEmpty(codeOptions.ContextName))
@@ -152,13 +166,16 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public virtual SavedModelFiles Save(
             ScaffoldedModel scaffoldedModel,
             string outputDir,
-            bool overwriteFiles)
+            bool overwriteFiles
+        )
         {
             CheckOutputFiles(scaffoldedModel, outputDir, overwriteFiles);
 
             Directory.CreateDirectory(outputDir);
 
-            var contextPath = Path.GetFullPath(Path.Combine(outputDir, scaffoldedModel.ContextFile!.Path));
+            var contextPath = Path.GetFullPath(
+                Path.Combine(outputDir, scaffoldedModel.ContextFile!.Path)
+            );
             Directory.CreateDirectory(Path.GetDirectoryName(contextPath)!);
             File.WriteAllText(contextPath, scaffoldedModel.ContextFile.Code, Encoding.UTF8);
 
@@ -176,7 +193,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         private static void CheckOutputFiles(
             ScaffoldedModel scaffoldedModel,
             string outputDir,
-            bool overwriteFiles)
+            bool overwriteFiles
+        )
         {
             var paths = scaffoldedModel.AdditionalFiles.Select(f => f.Path).ToList();
             paths.Insert(0, scaffoldedModel.ContextFile!.Path);
@@ -198,13 +216,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 }
             }
 
-            if (!overwriteFiles
-                && existingFiles.Count != 0)
+            if (!overwriteFiles && existingFiles.Count != 0)
             {
                 throw new OperationException(
                     DesignStrings.ExistingFiles(
                         outputDir,
-                        string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, existingFiles)));
+                        string.Join(
+                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                            existingFiles
+                        )
+                    )
+                );
             }
 
             if (readOnlyFiles.Count != 0)
@@ -212,7 +234,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 throw new OperationException(
                     DesignStrings.ReadOnlyFiles(
                         outputDir,
-                        string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, readOnlyFiles)));
+                        string.Join(
+                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                            readOnlyFiles
+                        )
+                    )
+                );
             }
         }
     }

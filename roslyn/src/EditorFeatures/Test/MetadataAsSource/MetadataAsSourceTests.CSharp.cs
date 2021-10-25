@@ -20,15 +20,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
             [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
             public void ExtractXMLFromDocComment()
             {
-                var docCommentText = @"/// <summary>
+                var docCommentText =
+                    @"/// <summary>
 /// I am the very model of a modern major general.
 /// </summary>";
 
-                var expectedXMLFragment = @" <summary>
+                var expectedXMLFragment =
+                    @" <summary>
  I am the very model of a modern major general.
  </summary>";
 
-                var extractedXMLFragment = DocumentationCommentUtilities.ExtractXMLFragment(docCommentText, "///");
+                var extractedXMLFragment = DocumentationCommentUtilities.ExtractXMLFragment(
+                    docCommentText,
+                    "///"
+                );
 
                 Assert.Equal(expectedXMLFragment, extractedXMLFragment);
             }
@@ -40,7 +45,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 var metadataSource = "public class C { public nint i; public nuint i2; }";
                 var symbolName = "C";
 
-                await GenerateAndVerifySourceAsync(metadataSource, symbolName, LanguageNames.CSharp, languageVersion: "Preview", metadataLanguageVersion: "Preview",
+                await GenerateAndVerifySourceAsync(
+                    metadataSource,
+                    symbolName,
+                    LanguageNames.CSharp,
+                    languageVersion: "Preview",
+                    metadataLanguageVersion: "Preview",
                     expected: $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
@@ -51,13 +61,15 @@ public class [|C|]
     public nuint i2;
 
     public C();
-}}");
+}}"
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
             public async Task TestInitOnlyProperty()
             {
-                var metadataSource = @"public class C { public int Property { get; init; } }
+                var metadataSource =
+                    @"public class C { public int Property { get; init; } }
 namespace System.Runtime.CompilerServices
 {
     public sealed class IsExternalInit { }
@@ -65,7 +77,12 @@ namespace System.Runtime.CompilerServices
 ";
                 var symbolName = "C";
 
-                await GenerateAndVerifySourceAsync(metadataSource, symbolName, LanguageNames.CSharp, languageVersion: "Preview", metadataLanguageVersion: "Preview",
+                await GenerateAndVerifySourceAsync(
+                    metadataSource,
+                    symbolName,
+                    LanguageNames.CSharp,
+                    languageVersion: "Preview",
+                    metadataLanguageVersion: "Preview",
                     expected: $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
@@ -75,7 +92,8 @@ public class [|C|]
     public C();
 
     public int Property {{ get; init; }}
-}}");
+}}"
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
@@ -84,7 +102,10 @@ public class [|C|]
                 var metadataSource = "public class C { public (int a, int b) t; }";
                 var symbolName = "C";
 
-                await GenerateAndVerifySourceAsync(metadataSource, symbolName, LanguageNames.CSharp,
+                await GenerateAndVerifySourceAsync(
+                    metadataSource,
+                    symbolName,
+                    LanguageNames.CSharp,
                     expected: $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
@@ -97,15 +118,17 @@ public class [|C|]
     public (int a, int b) t;
 
     public C();
-}}");
+}}"
+                );
             }
 
             [Fact, WorkItem(26605, "https://github.com/dotnet/roslyn/issues/26605")]
             public async Task TestValueTuple()
             {
                 using var context = TestContext.Create(LanguageNames.CSharp);
-                await context.GenerateAndVerifySourceAsync("System.ValueTuple",
-@$"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
+                await context.GenerateAndVerifySourceAsync(
+                    "System.ValueTuple",
+                    @$"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 // System.ValueTuple.dll
 #endregion
 
@@ -130,16 +153,23 @@ namespace System
         public override int GetHashCode();
         public override string ToString();
     }}
-}}");
+}}"
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
             public async Task TestExtendedPartialMethod1()
             {
-                var metadataSource = "public partial class C { public partial void F(); public partial void F() { } }";
+                var metadataSource =
+                    "public partial class C { public partial void F(); public partial void F() { } }";
                 var symbolName = "C";
 
-                await GenerateAndVerifySourceAsync(metadataSource, symbolName, LanguageNames.CSharp, languageVersion: "Preview", metadataLanguageVersion: "Preview",
+                await GenerateAndVerifySourceAsync(
+                    metadataSource,
+                    symbolName,
+                    LanguageNames.CSharp,
+                    languageVersion: "Preview",
+                    metadataLanguageVersion: "Preview",
                     expected: $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
@@ -149,7 +179,8 @@ public class [|C|]
     public C();
 
     public void F();
-}}");
+}}"
+                );
             }
         }
     }

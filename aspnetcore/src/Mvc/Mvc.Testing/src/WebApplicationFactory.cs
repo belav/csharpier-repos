@@ -30,8 +30,9 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         private IHost _host;
         private Action<IWebHostBuilder> _configuration;
         private IList<HttpClient> _clients = new List<HttpClient>();
-        private List<WebApplicationFactory<TEntryPoint>> _derivedFactories =
-            new List<WebApplicationFactory<TEntryPoint>>();
+        private List<WebApplicationFactory<TEntryPoint>> _derivedFactories = new List<
+            WebApplicationFactory<TEntryPoint>
+        >();
 
         /// <summary>
         /// <para>
@@ -98,12 +99,14 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         /// by further customizing the <see cref="IWebHostBuilder"/> when calling
         /// <see cref="WebApplicationFactory{TEntryPoint}.WithWebHostBuilder(Action{IWebHostBuilder})"/>.
         /// </summary>
-        public IReadOnlyList<WebApplicationFactory<TEntryPoint>> Factories => _derivedFactories.AsReadOnly();
+        public IReadOnlyList<WebApplicationFactory<TEntryPoint>> Factories =>
+            _derivedFactories.AsReadOnly();
 
         /// <summary>
         /// Gets the <see cref="WebApplicationFactoryClientOptions"/> used by <see cref="CreateClient()"/>.
         /// </summary>
-        public WebApplicationFactoryClientOptions ClientOptions { get; private set; } = new WebApplicationFactoryClientOptions();
+        public WebApplicationFactoryClientOptions ClientOptions { get; private set; } =
+            new WebApplicationFactoryClientOptions();
 
         /// <summary>
         /// Creates a new <see cref="WebApplicationFactory{TEntryPoint}"/> with a <see cref="IWebHostBuilder"/>
@@ -113,10 +116,13 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         /// An <see cref="Action{IWebHostBuilder}"/> to configure the <see cref="IWebHostBuilder"/>.
         /// </param>
         /// <returns>A new <see cref="WebApplicationFactory{TEntryPoint}"/>.</returns>
-        public WebApplicationFactory<TEntryPoint> WithWebHostBuilder(Action<IWebHostBuilder> configuration) =>
-            WithWebHostBuilderCore(configuration);
+        public WebApplicationFactory<TEntryPoint> WithWebHostBuilder(
+            Action<IWebHostBuilder> configuration
+        ) => WithWebHostBuilderCore(configuration);
 
-        internal virtual WebApplicationFactory<TEntryPoint> WithWebHostBuilderCore(Action<IWebHostBuilder> configuration)
+        internal virtual WebApplicationFactory<TEntryPoint> WithWebHostBuilderCore(
+            Action<IWebHostBuilder> configuration
+        )
         {
             var factory = new DelegatedWebApplicationFactory(
                 ClientOptions,
@@ -130,7 +136,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
                 {
                     _configuration(builder);
                     configuration(builder);
-                });
+                }
+            );
 
             _derivedFactories.Add(factory);
 
@@ -149,12 +156,14 @@ namespace Microsoft.AspNetCore.Mvc.Testing
             var hostBuilder = CreateHostBuilder();
             if (hostBuilder != null)
             {
-                hostBuilder.ConfigureWebHost(webHostBuilder =>
-                {
-                    SetContentRoot(webHostBuilder);
-                    _configuration(webHostBuilder);
-                    webHostBuilder.UseTestServer();
-                });
+                hostBuilder.ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        SetContentRoot(webHostBuilder);
+                        _configuration(webHostBuilder);
+                        webHostBuilder.UseTestServer();
+                    }
+                );
                 _host = CreateHost(hostBuilder);
                 _server = (TestServer)_host.Services.GetRequiredService<IServer>();
                 return;
@@ -174,7 +183,9 @@ namespace Microsoft.AspNetCore.Mvc.Testing
             }
 
             var fromFile = File.Exists("MvcTestingAppManifest.json");
-            var contentRoot = fromFile ? GetContentRootFromFile("MvcTestingAppManifest.json") : GetContentRootFromAssembly();
+            var contentRoot = fromFile
+                ? GetContentRootFromFile("MvcTestingAppManifest.json")
+                : GetContentRootFromAssembly();
 
             if (contentRoot != null)
             {
@@ -188,12 +199,16 @@ namespace Microsoft.AspNetCore.Mvc.Testing
 
         private string GetContentRootFromFile(string file)
         {
-            var data = JsonSerializer.Deserialize<IDictionary<string, string>>(File.ReadAllBytes(file));
+            var data = JsonSerializer.Deserialize<IDictionary<string, string>>(
+                File.ReadAllBytes(file)
+            );
             var key = typeof(TEntryPoint).Assembly.GetName().FullName;
 
             if (!data.TryGetValue(key, out var contentRoot))
             {
-                throw new KeyNotFoundException($"Could not find content root for project '{key}' in test manifest file '{file}'");
+                throw new KeyNotFoundException(
+                    $"Could not find content root for project '{key}' in test manifest file '{file}'"
+                );
             }
 
             return (contentRoot == "~") ? AppContext.BaseDirectory : contentRoot;
@@ -203,7 +218,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         {
             var metadataAttributes = GetContentRootMetadataAttributes(
                 typeof(TEntryPoint).Assembly.FullName,
-                typeof(TEntryPoint).Assembly.GetName().Name);
+                typeof(TEntryPoint).Assembly.GetName().Name
+            );
 
             string contentRoot = null;
             for (var i = 0; i < metadataAttributes.Length; i++)
@@ -211,11 +227,13 @@ namespace Microsoft.AspNetCore.Mvc.Testing
                 var contentRootAttribute = metadataAttributes[i];
                 var contentRootCandidate = Path.Combine(
                     AppContext.BaseDirectory,
-                    contentRootAttribute.ContentRootPath);
+                    contentRootAttribute.ContentRootPath
+                );
 
                 var contentRootMarker = Path.Combine(
                     contentRootCandidate,
-                    Path.GetFileName(contentRootAttribute.ContentRootTest));
+                    Path.GetFileName(contentRootAttribute.ContentRootTest)
+                );
 
                 if (File.Exists(contentRootMarker))
                 {
@@ -247,13 +265,25 @@ namespace Microsoft.AspNetCore.Mvc.Testing
 
         private WebApplicationFactoryContentRootAttribute[] GetContentRootMetadataAttributes(
             string tEntryPointAssemblyFullName,
-            string tEntryPointAssemblyName)
+            string tEntryPointAssemblyName
+        )
         {
             var testAssembly = GetTestAssemblies();
             var metadataAttributes = testAssembly
                 .SelectMany(a => a.GetCustomAttributes<WebApplicationFactoryContentRootAttribute>())
-                .Where(a => string.Equals(a.Key, tEntryPointAssemblyFullName, StringComparison.OrdinalIgnoreCase) ||
-                            string.Equals(a.Key, tEntryPointAssemblyName, StringComparison.OrdinalIgnoreCase))
+                .Where(
+                    a =>
+                        string.Equals(
+                            a.Key,
+                            tEntryPointAssemblyFullName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        || string.Equals(
+                            a.Key,
+                            tEntryPointAssemblyName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                )
                 .OrderBy(a => a.Priority)
                 .ToArray();
 
@@ -279,8 +309,11 @@ namespace Microsoft.AspNetCore.Mvc.Testing
                     return new[] { Assembly.Load(AppDomain.CurrentDomain.FriendlyName) };
                 }
 
-                var runtimeProjectLibraries = context.RuntimeLibraries
-                    .ToDictionary(r => r.Name, r => r, StringComparer.Ordinal);
+                var runtimeProjectLibraries = context.RuntimeLibraries.ToDictionary(
+                    r => r.Name,
+                    r => r,
+                    StringComparer.Ordinal
+                );
 
                 // Find the list of projects
                 var projects = context.CompileLibraries.Where(l => l.Type == "project");
@@ -288,8 +321,17 @@ namespace Microsoft.AspNetCore.Mvc.Testing
                 var entryPointAssemblyName = typeof(TEntryPoint).Assembly.GetName().Name;
 
                 // Find the list of projects referencing TEntryPoint.
-                var candidates = context.CompileLibraries
-                    .Where(library => library.Dependencies.Any(d => string.Equals(d.Name, entryPointAssemblyName, StringComparison.Ordinal)));
+                var candidates = context.CompileLibraries.Where(
+                    library =>
+                        library.Dependencies.Any(
+                            d =>
+                                string.Equals(
+                                    d.Name,
+                                    entryPointAssemblyName,
+                                    StringComparison.Ordinal
+                                )
+                        )
+                );
 
                 var testAssemblies = new List<Assembly>();
                 foreach (var candidate in candidates)
@@ -303,9 +345,7 @@ namespace Microsoft.AspNetCore.Mvc.Testing
 
                 return testAssemblies;
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
 
             return Array.Empty<Assembly>();
         }
@@ -314,16 +354,21 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         {
             if (typeof(TEntryPoint).Assembly.EntryPoint == null)
             {
-                throw new InvalidOperationException(Resources.FormatInvalidAssemblyEntryPoint(typeof(TEntryPoint).Name));
+                throw new InvalidOperationException(
+                    Resources.FormatInvalidAssemblyEntryPoint(typeof(TEntryPoint).Name)
+                );
             }
 
             var depsFileName = $"{typeof(TEntryPoint).Assembly.GetName().Name}.deps.json";
             var depsFile = new FileInfo(Path.Combine(AppContext.BaseDirectory, depsFileName));
             if (!depsFile.Exists)
             {
-                throw new InvalidOperationException(Resources.FormatMissingDepsFile(
-                    depsFile.FullName,
-                    Path.GetFileName(depsFile.FullName)));
+                throw new InvalidOperationException(
+                    Resources.FormatMissingDepsFile(
+                        depsFile.FullName,
+                        Path.GetFileName(depsFile.FullName)
+                    )
+                );
             }
         }
 
@@ -338,7 +383,9 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         /// <returns>A <see cref="IHostBuilder"/> instance.</returns>
         protected virtual IHostBuilder CreateHostBuilder()
         {
-            var hostBuilder = HostFactoryResolver.ResolveHostBuilderFactory<IHostBuilder>(typeof(TEntryPoint).Assembly)?.Invoke(Array.Empty<string>());
+            var hostBuilder = HostFactoryResolver.ResolveHostBuilderFactory<IHostBuilder>(
+                typeof(TEntryPoint).Assembly
+            )?.Invoke(Array.Empty<string>());
             if (hostBuilder != null)
             {
                 hostBuilder.UseEnvironment(Environments.Development);
@@ -357,16 +404,21 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         /// <returns>A <see cref="IWebHostBuilder"/> instance.</returns>
         protected virtual IWebHostBuilder CreateWebHostBuilder()
         {
-            var builder = WebHostBuilderFactory.CreateFromTypesAssemblyEntryPoint<TEntryPoint>(Array.Empty<string>());
+            var builder = WebHostBuilderFactory.CreateFromTypesAssemblyEntryPoint<TEntryPoint>(
+                Array.Empty<string>()
+            );
             if (builder == null)
             {
-                throw new InvalidOperationException(Resources.FormatMissingBuilderMethod(
-                    nameof(IHostBuilder),
-                    nameof(IWebHostBuilder),
-                    typeof(TEntryPoint).Assembly.EntryPoint.DeclaringType.FullName,
-                    typeof(WebApplicationFactory<TEntryPoint>).Name,
-                    nameof(CreateHostBuilder),
-                    nameof(CreateWebHostBuilder)));
+                throw new InvalidOperationException(
+                    Resources.FormatMissingBuilderMethod(
+                        nameof(IHostBuilder),
+                        nameof(IWebHostBuilder),
+                        typeof(TEntryPoint).Assembly.EntryPoint.DeclaringType.FullName,
+                        typeof(WebApplicationFactory<TEntryPoint>).Name,
+                        nameof(CreateHostBuilder),
+                        nameof(CreateWebHostBuilder)
+                    )
+                );
             }
             else
             {
@@ -382,7 +434,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         /// <param name="builder">The <see cref="IWebHostBuilder"/> used to
         /// create the server.</param>
         /// <returns>The <see cref="TestServer"/> with the bootstrapped application.</returns>
-        protected virtual TestServer CreateServer(IWebHostBuilder builder) => new TestServer(builder);
+        protected virtual TestServer CreateServer(IWebHostBuilder builder) =>
+            new TestServer(builder);
 
         /// <summary>
         /// Creates the <see cref="IHost"/> with the bootstrapped application in <paramref name="builder"/>.
@@ -402,17 +455,14 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         /// Gives a fixture an opportunity to configure the application before it gets built.
         /// </summary>
         /// <param name="builder">The <see cref="IWebHostBuilder"/> for the application.</param>
-        protected virtual void ConfigureWebHost(IWebHostBuilder builder)
-        {
-        }
+        protected virtual void ConfigureWebHost(IWebHostBuilder builder) { }
 
         /// <summary>
         /// Creates an instance of <see cref="HttpClient"/> that automatically follows
         /// redirects and handles cookies.
         /// </summary>
         /// <returns>The <see cref="HttpClient"/>.</returns>
-        public HttpClient CreateClient() =>
-            CreateClient(ClientOptions);
+        public HttpClient CreateClient() => CreateClient(ClientOptions);
 
         /// <summary>
         /// Creates an instance of <see cref="HttpClient"/> that automatically follows
@@ -547,7 +597,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
                 Func<IHostBuilder> createHostBuilder,
                 Func<IEnumerable<Assembly>> getTestAssemblies,
                 Action<HttpClient> configureClient,
-                Action<IWebHostBuilder> configureWebHost)
+                Action<IWebHostBuilder> configureWebHost
+            )
             {
                 ClientOptions = new WebApplicationFactoryClientOptions(options);
                 _createServer = createServer;
@@ -559,7 +610,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
                 _configuration = configureWebHost;
             }
 
-            protected override TestServer CreateServer(IWebHostBuilder builder) => _createServer(builder);
+            protected override TestServer CreateServer(IWebHostBuilder builder) =>
+                _createServer(builder);
 
             protected override IHost CreateHost(IHostBuilder builder) => _createHost(builder);
 
@@ -569,11 +621,14 @@ namespace Microsoft.AspNetCore.Mvc.Testing
 
             protected override IEnumerable<Assembly> GetTestAssemblies() => _getTestAssemblies();
 
-            protected override void ConfigureWebHost(IWebHostBuilder builder) => _configuration(builder);
+            protected override void ConfigureWebHost(IWebHostBuilder builder) =>
+                _configuration(builder);
 
             protected override void ConfigureClient(HttpClient client) => _configureClient(client);
 
-            internal override WebApplicationFactory<TEntryPoint> WithWebHostBuilderCore(Action<IWebHostBuilder> configuration)
+            internal override WebApplicationFactory<TEntryPoint> WithWebHostBuilderCore(
+                Action<IWebHostBuilder> configuration
+            )
             {
                 return new DelegatedWebApplicationFactory(
                     ClientOptions,
@@ -587,7 +642,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing
                     {
                         _configuration(builder);
                         configuration(builder);
-                    });
+                    }
+                );
             }
         }
     }

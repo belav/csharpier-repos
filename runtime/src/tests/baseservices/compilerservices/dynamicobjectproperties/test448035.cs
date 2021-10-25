@@ -3,11 +3,11 @@
 using System;
 using System.Runtime.CompilerServices;
 
-class Test 
+class Test
 {
     int countdown;
 
-    Test(int n) 
+    Test(int n)
     {
         countdown = n;
     }
@@ -15,20 +15,19 @@ class Test
     ~Test()
     {
         if (countdown > 0)
-        { 
-            new Test(countdown - 1).ToString(); 
+        {
+            new Test(countdown - 1).ToString();
         }
 
         for (int i = 0; i < 1000; i++)
         {
             table.Add(new Object(), new Object());
         }
-     }
-     
+    }
 
-    static ConditionalWeakTable<Object,Object> table = new ConditionalWeakTable<Object,Object>();
+    static ConditionalWeakTable<Object, Object> table = new ConditionalWeakTable<Object, Object>();
 
-    public static int Main() 
+    public static int Main()
     {
         for (int i = 0; i < 10; i++)
         {
@@ -37,8 +36,8 @@ class Test
 
         new Test(5).ToString();
 
-	Console.WriteLine("PASS: Test did not assert");
-	return 100;
+        Console.WriteLine("PASS: Test did not assert");
+        return 100;
     }
 }
-    
+

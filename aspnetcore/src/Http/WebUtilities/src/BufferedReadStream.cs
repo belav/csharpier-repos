@@ -32,9 +32,7 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <param name="inner">The stream to wrap.</param>
         /// <param name="bufferSize">Size of buffer in bytes.</param>
         public BufferedReadStream(Stream inner, int bufferSize)
-            : this(inner, bufferSize, ArrayPool<byte>.Shared)
-        {
-        }
+            : this(inner, bufferSize, ArrayPool<byte>.Shared) { }
 
         /// <summary>
         /// Creates a new stream.
@@ -100,7 +98,11 @@ namespace Microsoft.AspNetCore.WebUtilities
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, "Position must be positive.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        "Position must be positive."
+                    );
                 }
                 if (value == Position)
                 {
@@ -194,7 +196,12 @@ namespace Microsoft.AspNetCore.WebUtilities
         }
 
         /// <inheritdoc/>
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             return _inner.WriteAsync(buffer, offset, count, cancellationToken);
         }
@@ -218,7 +225,12 @@ namespace Microsoft.AspNetCore.WebUtilities
         }
 
         /// <inheritdoc/>
-        public async override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public async override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBuffer(buffer, offset, count);
 
@@ -277,7 +289,11 @@ namespace Microsoft.AspNetCore.WebUtilities
         {
             if (minCount > _buffer.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(minCount), minCount, "The value must be smaller than the buffer size: " + _buffer.Length);
+                throw new ArgumentOutOfRangeException(
+                    nameof(minCount),
+                    minCount,
+                    "The value must be smaller than the buffer size: " + _buffer.Length
+                );
             }
             while (_bufferCount < minCount)
             {
@@ -290,7 +306,11 @@ namespace Microsoft.AspNetCore.WebUtilities
                     }
                     _bufferOffset = 0;
                 }
-                int read = _inner.Read(_buffer, _bufferOffset + _bufferCount, _buffer.Length - _bufferCount - _bufferOffset);
+                int read = _inner.Read(
+                    _buffer,
+                    _bufferOffset + _bufferCount,
+                    _buffer.Length - _bufferCount - _bufferOffset
+                );
                 _bufferCount += read;
                 if (read == 0)
                 {
@@ -306,11 +326,18 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <param name="minCount">Minimum amount of buffered data.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Returns <c>true</c> if the minimum amount of buffered data is available; <c>false</c> otherwise.</returns>
-        public async Task<bool> EnsureBufferedAsync(int minCount, CancellationToken cancellationToken)
+        public async Task<bool> EnsureBufferedAsync(
+            int minCount,
+            CancellationToken cancellationToken
+        )
         {
             if (minCount > _buffer.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(minCount), minCount, "The value must be smaller than the buffer size: " + _buffer.Length);
+                throw new ArgumentOutOfRangeException(
+                    nameof(minCount),
+                    minCount,
+                    "The value must be smaller than the buffer size: " + _buffer.Length
+                );
             }
             while (_bufferCount < minCount)
             {
@@ -323,7 +350,12 @@ namespace Microsoft.AspNetCore.WebUtilities
                     }
                     _bufferOffset = 0;
                 }
-                int read = await _inner.ReadAsync(_buffer, _bufferOffset + _bufferCount, _buffer.Length - _bufferCount - _bufferOffset, cancellationToken);
+                int read = await _inner.ReadAsync(
+                    _buffer,
+                    _bufferOffset + _bufferCount,
+                    _buffer.Length - _bufferCount - _bufferOffset,
+                    cancellationToken
+                );
                 _bufferCount += read;
                 if (read == 0)
                 {
@@ -345,13 +377,16 @@ namespace Microsoft.AspNetCore.WebUtilities
             CheckDisposed();
             using (var builder = new MemoryStream(200))
             {
-                bool foundCR = false, foundCRLF = false;
+                bool foundCR = false,
+                    foundCRLF = false;
 
                 while (!foundCRLF && EnsureBuffered())
                 {
                     if (builder.Length > lengthLimit)
                     {
-                        throw new InvalidDataException($"Line length limit {lengthLimit} exceeded.");
+                        throw new InvalidDataException(
+                            $"Line length limit {lengthLimit} exceeded."
+                        );
                     }
                     ProcessLineChar(builder, ref foundCR, ref foundCRLF);
                 }
@@ -368,18 +403,24 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <param name="lengthLimit">Maximum allowed line length.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A line.</returns>
-        public async Task<string> ReadLineAsync(int lengthLimit, CancellationToken cancellationToken)
+        public async Task<string> ReadLineAsync(
+            int lengthLimit,
+            CancellationToken cancellationToken
+        )
         {
             CheckDisposed();
             using (var builder = new MemoryStream(200))
             {
-                bool foundCR = false, foundCRLF = false;
+                bool foundCR = false,
+                    foundCRLF = false;
 
                 while (!foundCRLF && await EnsureBufferedAsync(cancellationToken))
                 {
                     if (builder.Length > lengthLimit)
                     {
-                        throw new InvalidDataException($"Line length limit {lengthLimit} exceeded.");
+                        throw new InvalidDataException(
+                            $"Line length limit {lengthLimit} exceeded."
+                        );
                     }
 
                     ProcessLineChar(builder, ref foundCR, ref foundCRLF);
@@ -424,7 +465,10 @@ namespace Microsoft.AspNetCore.WebUtilities
             var ignored = new ArraySegment<byte>(buffer, offset, count);
             if (count == 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), "The value must be greater than zero.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    "The value must be greater than zero."
+                );
             }
         }
     }

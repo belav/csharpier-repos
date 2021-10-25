@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         [Fact]
         public void CapturesServiceExceptionDetails()
         {
-            var methodInfo = GetType().GetMethod(nameof(InjectedMethod), BindingFlags.NonPublic | BindingFlags.Static);
+            var methodInfo = GetType()
+                .GetMethod(nameof(InjectedMethod), BindingFlags.NonPublic | BindingFlags.Static);
             Assert.NotNull(methodInfo);
 
             var services = new ServiceCollection()
@@ -24,12 +25,15 @@ namespace Microsoft.AspNetCore.Hosting.Tests
             var applicationBuilder = new ApplicationBuilder(services);
 
             var builder = new ConfigureBuilder(methodInfo);
-            Action<IApplicationBuilder> action = builder.Build(instance:null);
+            Action<IApplicationBuilder> action = builder.Build(instance: null);
             var ex = Assert.Throws<Exception>(() => action.Invoke(applicationBuilder));
 
             Assert.NotNull(ex);
-            Assert.Equal($"Could not resolve a service of type '{typeof(CrasherService).FullName}' for the parameter"
-                + $" 'service' of method '{methodInfo.Name}' on type '{methodInfo.DeclaringType.FullName}'.", ex.Message);
+            Assert.Equal(
+                $"Could not resolve a service of type '{typeof(CrasherService).FullName}' for the parameter"
+                    + $" 'service' of method '{methodInfo.Name}' on type '{methodInfo.DeclaringType.FullName}'.",
+                ex.Message
+            );
 
             // the inner exception contains the root cause
             Assert.NotNull(ex.InnerException);

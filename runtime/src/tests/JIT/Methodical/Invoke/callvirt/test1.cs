@@ -8,7 +8,10 @@ namespace Test
     internal class Base
     {
         public double m;
-        public Base() { m = 1.0; }
+        public Base()
+        {
+            m = 1.0;
+        }
 
         public virtual Base[] Clone(int numOfCopies)
         {
@@ -21,7 +24,10 @@ namespace Test
 
     internal class Derived : Base
     {
-        public Derived() { m = 2.0; }
+        public Derived()
+        {
+            m = 2.0;
+        }
 
         public override Base[] Clone(int numOfCopies)
         {

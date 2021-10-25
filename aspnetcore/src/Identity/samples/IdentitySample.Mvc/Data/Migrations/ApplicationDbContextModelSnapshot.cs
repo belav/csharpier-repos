@@ -18,68 +18,74 @@ namespace IdentitySample.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rc3")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation(
+                    "SqlServer:ValueGenerationStrategy",
+                    SqlServerValueGenerationStrategy.IdentityColumn
+                );
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
+            modelBuilder.Entity(
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole",
+                b =>
                 {
                     b.Property<string>("Id");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                    b.Property<string>("ConcurrencyStamp").IsConcurrencyToken();
 
-                    b.Property<string>("Name")
-                        .HasAnnotation("MaxLength", 256);
+                    b.Property<string>("Name").HasAnnotation("MaxLength", 256);
 
-                    b.Property<string>("NormalizedName")
-                        .HasAnnotation("MaxLength", 256);
+                    b.Property<string>("NormalizedName").HasAnnotation("MaxLength", 256);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedName")
-                        .HasName("RoleNameIndex");
+                    b.HasIndex("NormalizedName").HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
-                });
+                }
+            );
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity(
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>",
+                b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id").ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired();
+                    b.Property<string>("RoleId").IsRequired();
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
+                }
+            );
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity(
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>",
+                b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id").ValueGeneratedOnAdd();
 
                     b.Property<string>("ClaimType");
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<string>("UserId").IsRequired();
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims");
-                });
+                }
+            );
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity(
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>",
+                b =>
                 {
                     b.Property<string>("LoginProvider");
 
@@ -87,17 +93,19 @@ namespace IdentitySample.Data.Migrations
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<string>("UserId")
-                        .IsRequired();
+                    b.Property<string>("UserId").IsRequired();
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins");
-                });
+                }
+            );
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
+            modelBuilder.Entity(
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>",
+                b =>
                 {
                     b.Property<string>("UserId");
 
@@ -110,9 +118,12 @@ namespace IdentitySample.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserRoles");
-                });
+                }
+            );
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<string>", b =>
+            modelBuilder.Entity(
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<string>",
+                b =>
                 {
                     b.Property<string>("UserId");
 
@@ -125,19 +136,20 @@ namespace IdentitySample.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
+                }
+            );
 
-            modelBuilder.Entity("IdentitySample.Models.ApplicationUser", b =>
+            modelBuilder.Entity(
+                "IdentitySample.Models.ApplicationUser",
+                b =>
                 {
                     b.Property<string>("Id");
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                    b.Property<string>("ConcurrencyStamp").IsConcurrencyToken();
 
-                    b.Property<string>("Email")
-                        .HasAnnotation("MaxLength", 256);
+                    b.Property<string>("Email").HasAnnotation("MaxLength", 256);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -145,11 +157,9 @@ namespace IdentitySample.Data.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasAnnotation("MaxLength", 256);
+                    b.Property<string>("NormalizedEmail").HasAnnotation("MaxLength", 256);
 
-                    b.Property<string>("NormalizedUserName")
-                        .HasAnnotation("MaxLength", 256);
+                    b.Property<string>("NormalizedUserName").HasAnnotation("MaxLength", 256);
 
                     b.Property<string>("PasswordHash");
 
@@ -161,46 +171,54 @@ namespace IdentitySample.Data.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
-                    b.Property<string>("UserName")
-                        .HasAnnotation("MaxLength", 256);
+                    b.Property<string>("UserName").HasAnnotation("MaxLength", 256);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                    b.HasIndex("NormalizedEmail").HasName("EmailIndex");
 
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex");
+                    b.HasIndex("NormalizedUserName").IsUnique().HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-                });
+                }
+            );
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity(
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>",
+                b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
                         .WithMany("Claims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
+                }
+            );
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity(
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>",
+                b =>
                 {
                     b.HasOne("IdentitySample.Models.ApplicationUser")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
+                }
+            );
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity(
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>",
+                b =>
                 {
                     b.HasOne("IdentitySample.Models.ApplicationUser")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
+                }
+            );
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
+            modelBuilder.Entity(
+                "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>",
+                b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
                         .WithMany("Users")
@@ -211,7 +229,8 @@ namespace IdentitySample.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
+                }
+            );
 #pragma warning restore 612, 618
         }
     }

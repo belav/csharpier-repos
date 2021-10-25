@@ -32,6 +32,9 @@ namespace MS.Internal.Xml.XPath
             return input.MatchNode(context);
         }
 
-        public override XPathNodeIterator Clone() { return new ForwardPositionQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new ForwardPositionQuery(this);
+        }
     }
 }

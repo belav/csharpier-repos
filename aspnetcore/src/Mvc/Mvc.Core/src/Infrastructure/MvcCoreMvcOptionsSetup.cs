@@ -23,18 +23,22 @@ namespace Microsoft.AspNetCore.Mvc
     /// <summary>
     /// Sets up default options for <see cref="MvcOptions"/>.
     /// </summary>
-    internal class MvcCoreMvcOptionsSetup : IConfigureOptions<MvcOptions>, IPostConfigureOptions<MvcOptions>
+    internal class MvcCoreMvcOptionsSetup
+        : IConfigureOptions<MvcOptions>,
+          IPostConfigureOptions<MvcOptions>
     {
         private readonly IHttpRequestStreamReaderFactory _readerFactory;
         private readonly ILoggerFactory _loggerFactory;
         private readonly IOptions<JsonOptions> _jsonOptions;
 
         public MvcCoreMvcOptionsSetup(IHttpRequestStreamReaderFactory readerFactory)
-            : this(readerFactory, NullLoggerFactory.Instance, Options.Create(new JsonOptions()))
-        {
-        }
+            : this(readerFactory, NullLoggerFactory.Instance, Options.Create(new JsonOptions())) { }
 
-        public MvcCoreMvcOptionsSetup(IHttpRequestStreamReaderFactory readerFactory, ILoggerFactory loggerFactory, IOptions<JsonOptions> jsonOptions)
+        public MvcCoreMvcOptionsSetup(
+            IHttpRequestStreamReaderFactory readerFactory,
+            ILoggerFactory loggerFactory,
+            IOptions<JsonOptions> jsonOptions
+        )
         {
             if (readerFactory == null)
             {
@@ -61,7 +65,14 @@ namespace Microsoft.AspNetCore.Mvc
             // Set up ModelBinding
             options.ModelBinderProviders.Add(new BinderTypeModelBinderProvider());
             options.ModelBinderProviders.Add(new ServicesModelBinderProvider());
-            options.ModelBinderProviders.Add(new BodyModelBinderProvider(options.InputFormatters, _readerFactory, _loggerFactory, options));
+            options.ModelBinderProviders.Add(
+                new BodyModelBinderProvider(
+                    options.InputFormatters,
+                    _readerFactory,
+                    _loggerFactory,
+                    options
+                )
+            );
             options.ModelBinderProviders.Add(new HeaderModelBinderProvider());
             options.ModelBinderProviders.Add(new FloatingPointTypeModelBinderProvider());
             options.ModelBinderProviders.Add(new EnumTypeModelBinderProvider(options));
@@ -81,17 +92,27 @@ namespace Microsoft.AspNetCore.Mvc
             options.Filters.Add(new UnsupportedContentTypeFilter());
 
             // Set up default input formatters.
-            options.InputFormatters.Add(new SystemTextJsonInputFormatter(_jsonOptions.Value, _loggerFactory.CreateLogger<SystemTextJsonInputFormatter>()));
+            options.InputFormatters.Add(
+                new SystemTextJsonInputFormatter(
+                    _jsonOptions.Value,
+                    _loggerFactory.CreateLogger<SystemTextJsonInputFormatter>()
+                )
+            );
 
             // Media type formatter mappings for JSON
-            options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValues.ApplicationJson);
+            options.FormatterMappings.SetMediaTypeMappingForFormat(
+                "json",
+                MediaTypeHeaderValues.ApplicationJson
+            );
 
             // Set up default output formatters.
             options.OutputFormatters.Add(new HttpNoContentOutputFormatter());
             options.OutputFormatters.Add(new StringOutputFormatter());
             options.OutputFormatters.Add(new StreamOutputFormatter());
 
-            var jsonOutputFormatter = SystemTextJsonOutputFormatter.CreateFormatter(_jsonOptions.Value);
+            var jsonOutputFormatter = SystemTextJsonOutputFormatter.CreateFormatter(
+                _jsonOptions.Value
+            );
             options.OutputFormatters.Add(jsonOutputFormatter);
 
             // Set up ValueProviders
@@ -114,10 +135,14 @@ namespace Microsoft.AspNetCore.Mvc
             // validation. It is imperative that this executes later than all other metadata provider. We'll register it as part of PostConfigure.
             // This should ensure it appears later than all of the details provider registered by MVC and user configured details provider registered
             // as part of ConfigureOptions.
-            options.ModelMetadataDetailsProviders.Add(new HasValidatorsValidationMetadataProvider(options.ModelValidatorProviders));
+            options.ModelMetadataDetailsProviders.Add(
+                new HasValidatorsValidationMetadataProvider(options.ModelValidatorProviders)
+            );
         }
 
-        internal static void ConfigureAdditionalModelMetadataDetailsProviders(IList<IMetadataDetailsProvider> modelMetadataDetailsProviders)
+        internal static void ConfigureAdditionalModelMetadataDetailsProviders(
+            IList<IMetadataDetailsProvider> modelMetadataDetailsProviders
+        )
         {
             // Don't bind the Type class by default as it's expensive. A user can override this behavior
             // by altering the collection of providers.
@@ -126,20 +151,50 @@ namespace Microsoft.AspNetCore.Mvc
             modelMetadataDetailsProviders.Add(new DefaultBindingMetadataProvider());
             modelMetadataDetailsProviders.Add(new DefaultValidationMetadataProvider());
 
-            modelMetadataDetailsProviders.Add(new BindingSourceMetadataProvider(typeof(CancellationToken), BindingSource.Special));
-            modelMetadataDetailsProviders.Add(new BindingSourceMetadataProvider(typeof(IFormFile), BindingSource.FormFile));
-            modelMetadataDetailsProviders.Add(new BindingSourceMetadataProvider(typeof(IFormCollection), BindingSource.FormFile));
-            modelMetadataDetailsProviders.Add(new BindingSourceMetadataProvider(typeof(IFormFileCollection), BindingSource.FormFile));
-            modelMetadataDetailsProviders.Add(new BindingSourceMetadataProvider(typeof(IEnumerable<IFormFile>), BindingSource.FormFile));
+            modelMetadataDetailsProviders.Add(
+                new BindingSourceMetadataProvider(typeof(CancellationToken), BindingSource.Special)
+            );
+            modelMetadataDetailsProviders.Add(
+                new BindingSourceMetadataProvider(typeof(IFormFile), BindingSource.FormFile)
+            );
+            modelMetadataDetailsProviders.Add(
+                new BindingSourceMetadataProvider(typeof(IFormCollection), BindingSource.FormFile)
+            );
+            modelMetadataDetailsProviders.Add(
+                new BindingSourceMetadataProvider(
+                    typeof(IFormFileCollection),
+                    BindingSource.FormFile
+                )
+            );
+            modelMetadataDetailsProviders.Add(
+                new BindingSourceMetadataProvider(
+                    typeof(IEnumerable<IFormFile>),
+                    BindingSource.FormFile
+                )
+            );
 
             // Add types to be excluded from Validation
-            modelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(Type)));
-            modelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(Uri)));
-            modelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(CancellationToken)));
-            modelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(IFormFile)));
-            modelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(IFormCollection)));
-            modelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(IFormFileCollection)));
-            modelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(Stream)));
+            modelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider(typeof(Type))
+            );
+            modelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider(typeof(Uri))
+            );
+            modelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider(typeof(CancellationToken))
+            );
+            modelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider(typeof(IFormFile))
+            );
+            modelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider(typeof(IFormCollection))
+            );
+            modelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider(typeof(IFormFileCollection))
+            );
+            modelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider(typeof(Stream))
+            );
         }
     }
 }

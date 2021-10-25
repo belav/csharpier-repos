@@ -15,12 +15,14 @@ namespace Wasm.Build.Tests
     {
         public Dictionary<BuildArgs, BuildProduct> _buildPaths = new();
 
-        public void CacheBuild(BuildArgs buildArgs, BuildProduct product)
-            => _buildPaths.Add(buildArgs, product);
+        public void CacheBuild(BuildArgs buildArgs, BuildProduct product) =>
+            _buildPaths.Add(buildArgs, product);
 
         public void RemoveFromCache(string buildPath)
         {
-            KeyValuePair<BuildArgs, BuildProduct>? foundKvp = _buildPaths.Where(kvp => kvp.Value.BuildPath == buildPath).SingleOrDefault();
+            KeyValuePair<BuildArgs, BuildProduct>? foundKvp = _buildPaths
+                .Where(kvp => kvp.Value.BuildPath == buildPath)
+                .SingleOrDefault();
             if (foundKvp == null)
                 throw new Exception($"Could not find build path {buildPath} in cache to remove.");
 
@@ -28,12 +30,14 @@ namespace Wasm.Build.Tests
             RemoveDirectory(buildPath);
         }
 
-        public bool TryGetBuildFor(BuildArgs buildArgs, [NotNullWhen(true)] out BuildProduct? product)
-            => _buildPaths.TryGetValue(buildArgs, out product);
+        public bool TryGetBuildFor(
+            BuildArgs buildArgs,
+            [NotNullWhen(true)] out BuildProduct? product
+        ) => _buildPaths.TryGetValue(buildArgs, out product);
 
         public void Dispose()
         {
-            Console.WriteLine ($"============== DELETING THE BUILDS =============");
+            Console.WriteLine($"============== DELETING THE BUILDS =============");
             foreach (var kvp in _buildPaths.Values)
             {
                 RemoveDirectory(kvp.BuildPath);
@@ -52,6 +56,5 @@ namespace Wasm.Build.Tests
                 throw;
             }
         }
-
     }
 }

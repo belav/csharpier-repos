@@ -18,10 +18,16 @@ namespace System.Reflection
         public static Assembly Load(string assemblyString)
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return RuntimeAssembly.InternalLoad(assemblyString, ref stackMark, AssemblyLoadContext.CurrentContextualReflectionContext);
+            return RuntimeAssembly.InternalLoad(
+                assemblyString,
+                ref stackMark,
+                AssemblyLoadContext.CurrentContextualReflectionContext
+            );
         }
 
-        [Obsolete("This method has been deprecated. Please use Assembly.Load() instead. https://go.microsoft.com/fwlink/?linkid=14202")]
+        [Obsolete(
+            "This method has been deprecated. Please use Assembly.Load() instead. https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         [System.Security.DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod
         public static Assembly? LoadWithPartialName(string partialName)
         {
@@ -34,7 +40,11 @@ namespace System.Reflection
             try
             {
                 StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-                return RuntimeAssembly.InternalLoad(partialName, ref stackMark, AssemblyLoadContext.CurrentContextualReflectionContext);
+                return RuntimeAssembly.InternalLoad(
+                    partialName,
+                    ref stackMark,
+                    AssemblyLoadContext.CurrentContextualReflectionContext
+                );
             }
             catch (FileNotFoundException)
             {
@@ -51,16 +61,26 @@ namespace System.Reflection
                 throw new ArgumentNullException(nameof(assemblyRef));
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return RuntimeAssembly.InternalLoad(assemblyRef, ref stackMark, AssemblyLoadContext.CurrentContextualReflectionContext);
+            return RuntimeAssembly.InternalLoad(
+                assemblyRef,
+                ref stackMark,
+                AssemblyLoadContext.CurrentContextualReflectionContext
+            );
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetExecutingAssemblyNative(StackCrawlMarkHandle stackMark, ObjectHandleOnStack retAssembly);
+        private static extern void GetExecutingAssemblyNative(
+            StackCrawlMarkHandle stackMark,
+            ObjectHandleOnStack retAssembly
+        );
 
         internal static RuntimeAssembly GetExecutingAssembly(ref StackCrawlMark stackMark)
         {
             RuntimeAssembly? retAssembly = null;
-            GetExecutingAssemblyNative(new StackCrawlMarkHandle(ref stackMark), ObjectHandleOnStack.Create(ref retAssembly));
+            GetExecutingAssemblyNative(
+                new StackCrawlMarkHandle(ref stackMark),
+                ObjectHandleOnStack.Create(ref retAssembly)
+            );
             return retAssembly!;
         }
 

@@ -5,11 +5,14 @@
 
 namespace System.Diagnostics.CodeAnalysis
 {
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     internal sealed class NotNullIfNotNullAttribute : Attribute
     {
-        public NotNullIfNotNullAttribute(string parameterName)
-            => ParameterName = parameterName;
+        public NotNullIfNotNullAttribute(string parameterName) => ParameterName = parameterName;
 
         public string ParameterName { get; }
     }

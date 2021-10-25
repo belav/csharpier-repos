@@ -25,7 +25,11 @@ namespace Internal.Cryptography.Pal
             return new AppleKeychainStore(keychainHandle, OpenFlags.MaxAllowed);
         }
 
-        public static ILoaderPal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ILoaderPal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -33,15 +37,21 @@ namespace Internal.Cryptography.Pal
 
             if (contentType == X509ContentType.Pkcs12)
             {
-                if ((keyStorageFlags & X509KeyStorageFlags.EphemeralKeySet) == X509KeyStorageFlags.EphemeralKeySet)
+                if (
+                    (keyStorageFlags & X509KeyStorageFlags.EphemeralKeySet)
+                    == X509KeyStorageFlags.EphemeralKeySet
+                )
                 {
                     throw new PlatformNotSupportedException(SR.Cryptography_X509_NoEphemeralPfx);
                 }
 
-                bool exportable = (keyStorageFlags & X509KeyStorageFlags.Exportable) == X509KeyStorageFlags.Exportable;
+                bool exportable =
+                    (keyStorageFlags & X509KeyStorageFlags.Exportable)
+                    == X509KeyStorageFlags.Exportable;
 
                 bool persist =
-                    (keyStorageFlags & X509KeyStorageFlags.PersistKeySet) == X509KeyStorageFlags.PersistKeySet;
+                    (keyStorageFlags & X509KeyStorageFlags.PersistKeySet)
+                    == X509KeyStorageFlags.PersistKeySet;
 
                 SafeKeychainHandle keychain = persist
                     ? Interop.AppleCrypto.SecKeychainCopyDefault()
@@ -55,7 +65,8 @@ namespace Internal.Cryptography.Pal
                 contentType,
                 password,
                 SafeTemporaryKeychainHandle.InvalidHandle,
-                exportable: true);
+                exportable: true
+            );
 
             return new AppleCertLoader(certs, null);
         }
@@ -64,7 +75,8 @@ namespace Internal.Cryptography.Pal
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
             bool exportable,
-            SafeKeychainHandle keychain)
+            SafeKeychainHandle keychain
+        )
         {
             ApplePkcs12Reader reader = new ApplePkcs12Reader(rawData);
 
@@ -81,7 +93,11 @@ namespace Internal.Cryptography.Pal
             }
         }
 
-        public static ILoaderPal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        public static ILoaderPal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -94,12 +110,18 @@ namespace Internal.Cryptography.Pal
             return new AppleCertificateExporter(cert);
         }
 
-        public static IExportPal LinkFromCertificateCollection(X509Certificate2Collection certificates)
+        public static IExportPal LinkFromCertificateCollection(
+            X509Certificate2Collection certificates
+        )
         {
             return new AppleCertificateExporter(certificates);
         }
 
-        public static IStorePal FromSystemStore(string storeName, StoreLocation storeLocation, OpenFlags openFlags)
+        public static IStorePal FromSystemStore(
+            string storeName,
+            StoreLocation storeLocation,
+            OpenFlags openFlags
+        )
         {
             StringComparer ordinalIgnoreCase = StringComparer.OrdinalIgnoreCase;
 
@@ -111,7 +133,11 @@ namespace Internal.Cryptography.Pal
                     if (ordinalIgnoreCase.Equals("Root", storeName))
                         return AppleTrustStore.OpenStore(StoreName.Root, storeLocation, openFlags);
                     if (ordinalIgnoreCase.Equals("Disallowed", storeName))
-                        return AppleTrustStore.OpenStore(StoreName.Disallowed, storeLocation, openFlags);
+                        return AppleTrustStore.OpenStore(
+                            StoreName.Disallowed,
+                            storeLocation,
+                            openFlags
+                        );
                     return FromCustomKeychainStore(storeName, openFlags);
 
                 case StoreLocation.LocalMachine:
@@ -120,7 +146,11 @@ namespace Internal.Cryptography.Pal
                     if (ordinalIgnoreCase.Equals("Root", storeName))
                         return AppleTrustStore.OpenStore(StoreName.Root, storeLocation, openFlags);
                     if (ordinalIgnoreCase.Equals("Disallowed", storeName))
-                        return AppleTrustStore.OpenStore(StoreName.Disallowed, storeLocation, openFlags);
+                        return AppleTrustStore.OpenStore(
+                            StoreName.Disallowed,
+                            storeLocation,
+                            openFlags
+                        );
                     break;
             }
 
@@ -130,7 +160,8 @@ namespace Internal.Cryptography.Pal
             string message = SR.Format(
                 SR.Cryptography_X509_StoreCannotCreate,
                 storeName,
-                storeLocation);
+                storeLocation
+            );
 
             throw new CryptographicException(message, new PlatformNotSupportedException(message));
         }
@@ -140,13 +171,16 @@ namespace Internal.Cryptography.Pal
             string storePath;
 
             if (!IsValidStoreName(storeName))
-                throw new CryptographicException(SR.Format(SR.Security_InvalidValue, nameof(storeName)));
+                throw new CryptographicException(
+                    SR.Format(SR.Security_InvalidValue, nameof(storeName))
+                );
 
             storePath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                 "Library",
                 "Keychains",
-                storeName.ToLowerInvariant() + ".keychain");
+                storeName.ToLowerInvariant() + ".keychain"
+            );
 
             return AppleKeychainStore.CreateOrOpenKeychain(storePath, openFlags);
         }
@@ -155,7 +189,8 @@ namespace Internal.Cryptography.Pal
         {
             try
             {
-                return !string.IsNullOrWhiteSpace(storeName) && Path.GetFileName(storeName) == storeName;
+                return !string.IsNullOrWhiteSpace(storeName)
+                    && Path.GetFileName(storeName) == storeName;
             }
             catch (IOException)
             {
@@ -163,7 +198,10 @@ namespace Internal.Cryptography.Pal
             }
         }
 
-        private static void ReadCollection(SafeCFArrayHandle matches, HashSet<X509Certificate2> collection)
+        private static void ReadCollection(
+            SafeCFArrayHandle matches,
+            HashSet<X509Certificate2> collection
+        )
         {
             if (matches.IsInvalid)
             {
@@ -179,7 +217,13 @@ namespace Internal.Cryptography.Pal
                 SafeSecCertificateHandle certHandle;
                 SafeSecIdentityHandle identityHandle;
 
-                if (Interop.AppleCrypto.X509DemuxAndRetainHandle(handle, out certHandle, out identityHandle))
+                if (
+                    Interop.AppleCrypto.X509DemuxAndRetainHandle(
+                        handle,
+                        out certHandle,
+                        out identityHandle
+                    )
+                )
                 {
                     X509Certificate2 cert;
 

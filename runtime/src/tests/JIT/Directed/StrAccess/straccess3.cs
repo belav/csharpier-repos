@@ -20,7 +20,7 @@ internal class CL
 internal class StrAccess1
 {
     public static String str1;
-    public static Random rand = new Random(12345);  //this version is deterministic
+    public static Random rand = new Random(12345); //this version is deterministic
 
     private static int randomUnicodeLetterOrDigit()
     {
@@ -69,7 +69,11 @@ internal class StrAccess1
         for (int j = 0; j < len; j++)
             str1darr[j] = Convert.ToString(teststr[j]);
 
-        char b0, b1, b2, b3, b4;
+        char b0,
+            b1,
+            b2,
+            b3,
+            b4;
         try
         {
             passed = false;

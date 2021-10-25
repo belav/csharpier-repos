@@ -21,17 +21,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
     [Order(After = PredefinedCommandHandlerNames.Rename)]
     [Order(After = PredefinedCompletionNames.CompletionCommandHandler)]
     internal class DocumentationCommentCommandHandler
-        : AbstractDocumentationCommentCommandHandler<DocumentationCommentTriviaSyntax, MemberDeclarationSyntax>
+        : AbstractDocumentationCommentCommandHandler<
+              DocumentationCommentTriviaSyntax,
+              MemberDeclarationSyntax
+          >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public DocumentationCommentCommandHandler(
             IWaitIndicator waitIndicator,
             ITextUndoHistoryRegistry undoHistoryRegistry,
-            IEditorOperationsFactoryService editorOperationsFactoryService)
-            : base(waitIndicator, undoHistoryRegistry, editorOperationsFactoryService)
-        {
-        }
+            IEditorOperationsFactoryService editorOperationsFactoryService
+        ) : base(waitIndicator, undoHistoryRegistry, editorOperationsFactoryService) { }
 
         protected override string ExteriorTriviaText => "///";
     }

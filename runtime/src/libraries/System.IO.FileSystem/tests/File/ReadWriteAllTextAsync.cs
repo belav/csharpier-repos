@@ -9,12 +9,18 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class File_ReadWriteAllTextAsync : FileSystemTest
     {
         #region Utilities
 
-        protected virtual Task WriteAsync(string path, string content) => File.WriteAllTextAsync(path, content);
+        protected virtual Task WriteAsync(string path, string content) =>
+            File.WriteAllTextAsync(path, content);
 
         protected virtual Task<string> ReadAsync(string path) => File.ReadAllTextAsync(path);
 
@@ -25,13 +31,25 @@ namespace System.IO.Tests
         [Fact]
         public async Task NullParametersAsync()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>("path", async () => await WriteAsync(null, "Text"));
-            await Assert.ThrowsAsync<ArgumentNullException>("path", async () => await ReadAsync(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "path",
+                async () => await WriteAsync(null, "Text")
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "path",
+                async () => await ReadAsync(null)
+            );
         }
 
         [Fact]
-        public Task NonExistentPathAsync() => Assert.ThrowsAsync<DirectoryNotFoundException>(
-            async () => await WriteAsync(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), "Text"));
+        public Task NonExistentPathAsync() =>
+            Assert.ThrowsAsync<DirectoryNotFoundException>(
+                async () =>
+                    await WriteAsync(
+                        Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
+                        "Text"
+                    )
+            );
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public async Task NullContent_CreatesFileAsync()
@@ -52,7 +70,10 @@ namespace System.IO.Tests
         [Fact]
         public async Task InvalidParametersAsync()
         {
-            await Assert.ThrowsAsync<ArgumentException>("path", async () => await WriteAsync(string.Empty, "Text"));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "path",
+                async () => await WriteAsync(string.Empty, "Text")
+            );
             await Assert.ThrowsAsync<ArgumentException>("path", async () => await ReadAsync(""));
         }
 
@@ -65,7 +86,9 @@ namespace System.IO.Tests
         public async Task ValidWriteAsync(int size)
         {
             string path = GetTestFilePath();
-            string toWrite = new string(Enumerable.Range(0, size).Select(i => (char)(i + 1)).ToArray());
+            string toWrite = new string(
+                Enumerable.Range(0, size).Select(i => (char)(i + 1)).ToArray()
+            );
 
             File.Create(path).Dispose();
             await WriteAsync(path, toWrite);
@@ -99,7 +122,9 @@ namespace System.IO.Tests
 
         [Fact]
         public Task Read_FileNotFoundAsync() =>
-            Assert.ThrowsAsync<FileNotFoundException>(async () => await ReadAsync(GetTestFilePath()));
+            Assert.ThrowsAsync<FileNotFoundException>(
+                async () => await ReadAsync(GetTestFilePath())
+            );
 
         /// <summary>
         /// On Unix, modifying a file that is ReadOnly will fail under normal permissions.
@@ -121,7 +146,9 @@ namespace System.IO.Tests
                     Assert.Equal("text", await ReadAsync(path));
                 }
                 else
-                    await Assert.ThrowsAsync<UnauthorizedAccessException>(async () => await WriteAsync(path, "text"));
+                    await Assert.ThrowsAsync<UnauthorizedAccessException>(
+                        async () => await WriteAsync(path, "text")
+                    );
             }
             finally
             {
@@ -138,13 +165,18 @@ namespace System.IO.Tests
             source.Cancel();
             Assert.True(File.WriteAllTextAsync(path, "", token).IsCanceled);
             return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.WriteAllTextAsync(path, "", token));
+                async () => await File.WriteAllTextAsync(path, "", token)
+            );
         }
-
         #endregion
     }
 
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class File_ReadWriteAllText_EncodedAsync : File_ReadWriteAllTextAsync
     {
         protected override Task WriteAsync(string path, string content) =>
@@ -157,8 +189,14 @@ namespace System.IO.Tests
         public async Task NullEncodingAsync()
         {
             string path = GetTestFilePath();
-            await Assert.ThrowsAsync<ArgumentNullException>("encoding", async () => await File.WriteAllTextAsync(path, "Text", null));
-            await Assert.ThrowsAsync<ArgumentNullException>("encoding", async () => await File.ReadAllTextAsync(path, null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "encoding",
+                async () => await File.WriteAllTextAsync(path, "Text", null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "encoding",
+                async () => await File.ReadAllTextAsync(path, null)
+            );
         }
 
         [Fact]
@@ -170,7 +208,8 @@ namespace System.IO.Tests
             source.Cancel();
             Assert.True(File.WriteAllTextAsync(path, "", Encoding.UTF8, token).IsCanceled);
             return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.WriteAllTextAsync(path, "", Encoding.UTF8, token));
+                async () => await File.WriteAllTextAsync(path, "", Encoding.UTF8, token)
+            );
         }
     }
 }

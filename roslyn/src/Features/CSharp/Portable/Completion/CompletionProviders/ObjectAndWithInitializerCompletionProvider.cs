@@ -27,30 +27,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     // - new() { $$
     // - new C() { $$
     // - expr with { $$
-    [ExportCompletionProvider(nameof(ObjectAndWithInitializerCompletionProvider), LanguageNames.CSharp)]
+    [ExportCompletionProvider(
+        nameof(ObjectAndWithInitializerCompletionProvider),
+        LanguageNames.CSharp
+    )]
     [ExtensionOrder(After = nameof(ObjectCreationCompletionProvider))]
     [Shared]
-    internal class ObjectAndWithInitializerCompletionProvider : AbstractObjectInitializerCompletionProvider
+    internal class ObjectAndWithInitializerCompletionProvider
+        : AbstractObjectInitializerCompletionProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ObjectAndWithInitializerCompletionProvider()
-        {
-        }
+        public ObjectAndWithInitializerCompletionProvider() { }
 
-        protected override async Task<bool> IsExclusiveAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<bool> IsExclusiveAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             // We're exclusive if this context could only be an object initializer and not also a
             // collection initializer. If we're initializing something that could be initialized as
             // an object or as a collection, say we're not exclusive. That way the rest of
             // intellisense can be used in the collection initializer.
-            // 
+            //
             // Consider this case:
 
-            // class c : IEnumerable<int> 
-            // { 
+            // class c : IEnumerable<int>
+            // {
             // public void Add(int addend) { }
-            // public int goo; 
+            // public int goo;
             // }
 
             // void goo()
@@ -82,14 +88,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 return false;
             }
 
-            var semanticModel = await document.ReuseExistingSpeculativeModelAsync(expression, cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .ReuseExistingSpeculativeModelAsync(expression, cancellationToken)
+                .ConfigureAwait(false);
             var initializedType = semanticModel.GetTypeInfo(expression, cancellationToken).Type;
             if (initializedType == null)
             {
                 return false;
             }
 
-            var enclosingSymbol = semanticModel.GetEnclosingNamedTypeOrAssembly(position, cancellationToken);
+            var enclosingSymbol = semanticModel.GetEnclosingNamedTypeOrAssembly(
+                position,
+                cancellationToken
+            );
             // Non-exclusive if initializedType can be initialized as a collection.
             if (initializedType.CanSupportCollectionInitializer(enclosingSymbol))
             {
@@ -100,13 +111,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return true;
         }
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, OptionSet options)
-            => CompletionUtilities.IsTriggerCharacter(text, characterPosition, options) || text[characterPosition] == ' ';
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            OptionSet options
+        ) =>
+            CompletionUtilities.IsTriggerCharacter(text, characterPosition, options)
+            || text[characterPosition] == ' ';
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.CommonTriggerCharacters.Add(' ');
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.CommonTriggerCharacters.Add(' ');
 
         protected override Tuple<ITypeSymbol, Location> GetInitializedType(
-            Document document, SemanticModel semanticModel, int position, CancellationToken cancellationToken)
+            Document document,
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var tree = semanticModel.SyntaxTree;
             if (tree.IsInNonUserCode(position, cancellationToken))
@@ -128,8 +149,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
 
             // If we got a comma, we can syntactically find out if we're in an ObjectInitializerExpression or WithExpression
-            if (token.Kind() == SyntaxKind.CommaToken &&
-                !token.Parent.IsKind(SyntaxKind.ObjectInitializerExpression, SyntaxKind.WithInitializerExpression))
+            if (
+                token.Kind() == SyntaxKind.CommaToken
+                && !token.Parent.IsKind(
+                    SyntaxKind.ObjectInitializerExpression,
+                    SyntaxKind.WithInitializerExpression
+                )
+            )
             {
                 return null;
             }
@@ -143,13 +169,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return Tuple.Create(type, token.GetLocation());
         }
 
-        private static ITypeSymbol GetInitializedType(SyntaxToken token, Document document, SemanticModel semanticModel, CancellationToken cancellationToken)
+        private static ITypeSymbol GetInitializedType(
+            SyntaxToken token,
+            Document document,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             var parent = token.Parent.Parent;
 
             // new() { $$
             // new Goo { $$
-            if (parent.IsKind(SyntaxKind.ObjectCreationExpression, SyntaxKind.ImplicitObjectCreationExpression))
+            if (
+                parent.IsKind(
+                    SyntaxKind.ObjectCreationExpression,
+                    SyntaxKind.ImplicitObjectCreationExpression
+                )
+            )
             {
                 return semanticModel.GetTypeInfo(parent, cancellationToken).Type;
             }
@@ -160,7 +196,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // Use the type inferrer to get the type being initialized.
                 var typeInferenceService = document.GetLanguageService<ITypeInferenceService>();
                 var parentInitializer = token.GetAncestor<InitializerExpressionSyntax>();
-                return typeInferenceService.InferType(semanticModel, parentInitializer, objectAsDefault: false, cancellationToken: cancellationToken);
+                return typeInferenceService.InferType(
+                    semanticModel,
+                    parentInitializer,
+                    objectAsDefault: false,
+                    cancellationToken: cancellationToken
+                );
             }
 
             // expr with { $$
@@ -172,24 +213,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return null;
         }
 
-        protected override HashSet<string> GetInitializedMembers(SyntaxTree tree, int position, CancellationToken cancellationToken)
+        protected override HashSet<string> GetInitializedMembers(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var token = tree.FindTokenOnLeftOfPosition(position, cancellationToken)
-                            .GetPreviousTokenIfTouchingWord(position);
+                .GetPreviousTokenIfTouchingWord(position);
 
             // We should have gotten back a { or ,
             if (token.Kind() == SyntaxKind.CommaToken || token.Kind() == SyntaxKind.OpenBraceToken)
             {
                 if (token.Parent != null)
                 {
-
                     if (token.Parent is InitializerExpressionSyntax initializer)
                     {
-                        return new HashSet<string>(initializer.Expressions.OfType<AssignmentExpressionSyntax>()
-                            .Where(b => b.OperatorToken.Kind() == SyntaxKind.EqualsToken)
-                            .Select(b => b.Left)
-                            .OfType<IdentifierNameSyntax>()
-                            .Select(i => i.Identifier.ValueText));
+                        return new HashSet<string>(
+                            initializer.Expressions
+                                .OfType<AssignmentExpressionSyntax>()
+                                .Where(b => b.OperatorToken.Kind() == SyntaxKind.EqualsToken)
+                                .Select(b => b.Left)
+                                .OfType<IdentifierNameSyntax>()
+                                .Select(i => i.Identifier.ValueText)
+                        );
                     }
                 }
             }
@@ -207,7 +254,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return base.IsInitializable(member, containingType);
         }
 
-        protected override string EscapeIdentifier(ISymbol symbol)
-            => symbol.Name.EscapeIdentifier();
+        protected override string EscapeIdentifier(ISymbol symbol) =>
+            symbol.Name.EscapeIdentifier();
     }
 }

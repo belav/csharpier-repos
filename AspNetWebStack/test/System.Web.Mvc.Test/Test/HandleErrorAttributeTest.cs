@@ -34,10 +34,13 @@ namespace System.Web.Mvc.Test
         public void CanRetrieveMultipleAuthorizeAttributesFromOneClass()
         {
             // Arrange
-            ClassWithMultipleHandleErrorAttributes @class = new ClassWithMultipleHandleErrorAttributes();
+            ClassWithMultipleHandleErrorAttributes @class =
+                new ClassWithMultipleHandleErrorAttributes();
 
             // Act
-            IEnumerable<HandleErrorAttribute> attributes = TypeDescriptor.GetAttributes(@class).OfType<HandleErrorAttribute>();
+            IEnumerable<HandleErrorAttribute> attributes = TypeDescriptor
+                .GetAttributes(@class)
+                .OfType<HandleErrorAttribute>();
 
             // Assert
             Assert.Equal(2, attributes.Count());
@@ -69,8 +72,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Throws<ArgumentException>(
-                delegate { attr.ExceptionType = typeof(string); },
-                "The type 'System.String' does not inherit from Exception.");
+                delegate
+                {
+                    attr.ExceptionType = typeof(string);
+                },
+                "The type 'System.String' does not inherit from Exception."
+            );
         }
 
         [Fact]
@@ -81,7 +88,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.ExceptionType = null; }, "value");
+                delegate
+                {
+                    attr.ExceptionType = null;
+                },
+                "value"
+            );
         }
 
         [Fact]
@@ -118,7 +130,11 @@ namespace System.Web.Mvc.Test
             Controller controller = new Mock<Controller>().Object;
             controller.TempData = tempData;
 
-            ExceptionContext context = GetExceptionContext(mockHttpContext.Object, controller, exception);
+            ExceptionContext context = GetExceptionContext(
+                mockHttpContext.Object,
+                controller,
+                exception
+            );
 
             // Exception
             attr.OnException(context);
@@ -144,7 +160,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             HandleErrorAttribute attr = new HandleErrorAttribute();
             ActionResult result = new EmptyResult();
-            ExceptionContext context = GetExceptionContext(GetHttpContext(false), null, new Exception());
+            ExceptionContext context = GetExceptionContext(
+                GetHttpContext(false),
+                null,
+                new Exception()
+            );
             context.Result = result;
 
             // Exception
@@ -177,7 +197,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             HandleErrorAttribute attr = new HandleErrorAttribute();
             ActionResult result = new EmptyResult();
-            ExceptionContext context = GetExceptionContext(GetHttpContext(), null, new HttpException(404, "Some Exception"));
+            ExceptionContext context = GetExceptionContext(
+                GetHttpContext(),
+                null,
+                new HttpException(404, "Some Exception")
+            );
             context.Result = result;
 
             // Exception
@@ -195,16 +219,30 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.OnException(null /* filterContext */); }, "filterContext");
+                delegate
+                {
+                    attr.OnException(
+                        null /* filterContext */
+                    );
+                },
+                "filterContext"
+            );
         }
 
         [Fact]
         public void OnExceptionWithWrongExceptionTypeDoesNothing()
         {
             // Arrange
-            HandleErrorAttribute attr = new HandleErrorAttribute() { ExceptionType = typeof(ArgumentException) };
+            HandleErrorAttribute attr = new HandleErrorAttribute()
+            {
+                ExceptionType = typeof(ArgumentException)
+            };
             ActionResult result = new EmptyResult();
-            ExceptionContext context = GetExceptionContext(GetHttpContext(), null, new InvalidCastException());
+            ExceptionContext context = GetExceptionContext(
+                GetHttpContext(),
+                null,
+                new InvalidCastException()
+            );
             context.Result = result;
 
             // Exception
@@ -221,10 +259,19 @@ namespace System.Web.Mvc.Test
             HandleErrorAttribute attr = new HandleErrorAttribute();
 
             // Act & Assert
-            MemberHelper.TestStringProperty(attr, "View", "Error", nullAndEmptyReturnValue: "Error");
+            MemberHelper.TestStringProperty(
+                attr,
+                "View",
+                "Error",
+                nullAndEmptyReturnValue: "Error"
+            );
         }
 
-        private static ExceptionContext GetExceptionContext(HttpContextBase httpContext, ControllerBase controller, Exception exception)
+        private static ExceptionContext GetExceptionContext(
+            HttpContextBase httpContext,
+            ControllerBase controller,
+            Exception exception
+        )
         {
             RouteData rd = new RouteData();
             rd.Values["controller"] = "SomeController";

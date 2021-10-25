@@ -38,7 +38,10 @@ namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests
         {
             //Arrange
             var httpStatusCode = 541;
-            var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost/?statuscode={httpStatusCode}");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"http://localhost/?statuscode={httpStatusCode}"
+            );
 
             //Act
             var response = await Client.SendAsync(request);
@@ -50,14 +53,17 @@ namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests
             //Assert
             Assert.Equal((HttpStatusCode)httpStatusCode, response.StatusCode);
             Assert.DoesNotContain(";", responseBody);
-        }   
+        }
 
         [Fact]
         public async Task StatusCodePageOptions_IncludesSemicolon__AndReasonPhrase_WhenReasonPhrase_IsKnown()
         {
-            //Arrange    
+            //Arrange
             var httpStatusCode = 400;
-            var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost/?statuscode={httpStatusCode}");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"http://localhost/?statuscode={httpStatusCode}"
+            );
 
             //Act
             var response = await Client.SendAsync(request);

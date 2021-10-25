@@ -6,7 +6,12 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class InternalBufferSizeTests : FileSystemWatcherTest
     {
         // FSW works by calling ReadDirectoryChanges asynchronously, processing the changes
@@ -41,14 +46,17 @@ namespace System.IO.Tests
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes
         public void FileSystemWatcher_InternalBufferSize(bool setToHigherCapacity)
         {
             using (var testDirectory = new TempDirectory(GetTestFilePath()))
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
-            using (var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path)))
+            using (
+                var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
+            )
             {
-                int internalBufferOperationCapacity = watcher.InternalBufferSize / (17 + Path.GetFileName(file.Path).Length);
+                int internalBufferOperationCapacity =
+                    watcher.InternalBufferSize / (17 + Path.GetFileName(file.Path).Length);
 
                 // Set the capacity high to ensure no error events arise.
                 if (setToHigherCapacity)

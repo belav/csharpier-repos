@@ -24,7 +24,12 @@ namespace Microsoft.CodeAnalysis.Classification
         /// (i.e. identifiers being classified as keywords).  These incorrect results will be patched
         /// up when the lexical results are superseded by the calls to AddSyntacticClassifications.
         /// </summary>
-        void AddLexicalClassifications(SourceText text, TextSpan textSpan, List<ClassifiedSpan> result, CancellationToken cancellationToken);
+        void AddLexicalClassifications(
+            SourceText text,
+            TextSpan textSpan,
+            List<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Produce the classifications for the span of text specified.  The syntax of the document 
@@ -32,7 +37,12 @@ namespace Microsoft.CodeAnalysis.Classification
         /// be used to determine if a piece of text that looks like a keyword should actually be
         /// considered an identifier in its current context.
         /// </summary>
-        Task AddSyntacticClassificationsAsync(Document document, TextSpan textSpan, List<ClassifiedSpan> result, CancellationToken cancellationToken);
+        Task AddSyntacticClassificationsAsync(
+            Document document,
+            TextSpan textSpan,
+            List<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Produce the classifications for the span of text specified.  Semantics of the language
@@ -40,7 +50,12 @@ namespace Microsoft.CodeAnalysis.Classification
         /// For example, semantic information can be used to determine if an identifier should be
         /// classified as a type, structure, or something else entirely. 
         /// </summary>
-        Task AddSemanticClassificationsAsync(Document document, TextSpan textSpan, List<ClassifiedSpan> result, CancellationToken cancellationToken);
+        Task AddSemanticClassificationsAsync(
+            Document document,
+            TextSpan textSpan,
+            List<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Adjust a classification from a previous version of text accordingly based on the current
@@ -60,7 +75,10 @@ namespace Microsoft.CodeAnalysis.Classification
         /// concern that this might impact the UI thread later on when classifications are retrieved.  <see
         /// langword="null"/> can be returned if not data needs to be cached.
         /// </summary>
-        ValueTask<object?> GetDataToCacheAsync(Document document, CancellationToken cancellationToken);
+        ValueTask<object?> GetDataToCacheAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Determines the range of the documents that should be considered syntactically changed after an edit.  In
@@ -79,6 +97,10 @@ namespace Microsoft.CodeAnalysis.Classification
         /// </para>
         /// </summary>
         ValueTask<TextChangeRange?> ComputeSyntacticChangeRangeAsync(
-            Document oldDocument, Document newDocument, TimeSpan timeout, CancellationToken cancellationToken);
+            Document oldDocument,
+            Document newDocument,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        );
     }
 }

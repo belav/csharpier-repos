@@ -23,14 +23,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpOutlining(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpOutlining))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpOutlining)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public void Outlining()
         {
-            var input = @"
+            var input =
+                @"
 using [|System;
 using System.Collections.Generic;
 using System.Text;|]
@@ -53,7 +52,8 @@ namespace ConsoleApplication1[|
         [WpfFact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public void OutliningConfigChange()
         {
-            var input = @"
+            var input =
+                @"
 namespace ClassLibrary1[|
 {
     public class Class1[|
@@ -73,14 +73,21 @@ namespace ClassLibrary1[|
 #endif
     }|]
 }|]";
-            MarkupTestFile.GetSpans(input, out var text, out IDictionary<string, ImmutableArray<TextSpan>> spans);
+            MarkupTestFile.GetSpans(
+                input,
+                out var text,
+                out IDictionary<string, ImmutableArray<TextSpan>> spans
+            );
             VisualStudio.Editor.SetText(text);
 
             VerifySpansInConfiguration(spans, "Release");
             VerifySpansInConfiguration(spans, "Debug");
         }
 
-        private void VerifySpansInConfiguration(IDictionary<string, ImmutableArray<TextSpan>> spans, string configuration)
+        private void VerifySpansInConfiguration(
+            IDictionary<string, ImmutableArray<TextSpan>> spans,
+            string configuration
+        )
         {
             VisualStudio.ExecuteCommand("Build.SolutionConfigurations", configuration);
 

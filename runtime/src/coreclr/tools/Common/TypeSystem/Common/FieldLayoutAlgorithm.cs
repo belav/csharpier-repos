@@ -19,12 +19,18 @@ namespace Internal.TypeSystem
         /// <summary>
         /// Compute the instance field layout for a DefType. Must not depend on static field layout for any other type.
         /// </summary>
-        public abstract ComputedInstanceFieldLayout ComputeInstanceLayout(DefType type, InstanceLayoutKind layoutKind);
+        public abstract ComputedInstanceFieldLayout ComputeInstanceLayout(
+            DefType type,
+            InstanceLayoutKind layoutKind
+        );
 
         /// <summary>
         /// Compute the static field layout for a DefType. Must not depend on static field layout for any other type.
         /// </summary>
-        public abstract ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType type, StaticLayoutKind layoutKind);
+        public abstract ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType type,
+            StaticLayoutKind layoutKind
+        );
 
         /// <summary>
         /// Compute whether the fields of the specified type contain a GC pointer.
@@ -35,7 +41,9 @@ namespace Internal.TypeSystem
         /// Compute the shape of a value type. The shape information is used to control code generation and allocation
         /// (such as vectorization, passing the value type by value across method calls, or boxing alignment).
         /// </summary>
-        public abstract ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(DefType type);
+        public abstract ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
+            DefType type
+        );
     }
 
     /// <summary>
@@ -47,7 +55,6 @@ namespace Internal.TypeSystem
         /// Compute instance sizes and alignments.
         /// </summary>
         TypeOnly,
-
         /// <summary>
         /// Compute instance sizes, alignments and field offsets.
         /// </summary>
@@ -63,7 +70,6 @@ namespace Internal.TypeSystem
         /// Compute static region sizes.
         /// </summary>
         StaticRegionSizes,
-
         /// <summary>
         /// Compute static region sizes and static field offsets.
         /// </summary>
@@ -111,37 +117,30 @@ namespace Internal.TypeSystem
     public enum ValueTypeShapeCharacteristics
     {
         None = 0x00,
-
         /// <summary>
         /// The type is an aggregate of 32-bit floating-point values.
         /// </summary>
         Float32Aggregate = 0x01,
-
         /// <summary>
         /// The type is an aggregate of 64-bit floating-point values.
         /// </summary>
         Float64Aggregate = 0x02,
-
         /// <summary>
         /// The type is an aggregate of 64-bit short-vector values.
         /// </summary>
         Vector64Aggregate = 0x04,
-
         /// <summary>
         /// The type is an aggregate of 128-bit short-vector values.
         /// </summary>
         Vector128Aggregate = 0x08,
-
         /// <summary>
         /// The mask for homogeneous aggregates of floating-point values.
         /// </summary>
         FloatingPointAggregateMask = Float32Aggregate | Float64Aggregate,
-
         /// <summary>
         /// The mask for homogeneous aggregates of short-vector values.
         /// </summary>
         ShortVectorAggregateMask = Vector64Aggregate | Vector128Aggregate,
-
         /// <summary>
         /// The mask for homogeneous aggregates.
         /// </summary>

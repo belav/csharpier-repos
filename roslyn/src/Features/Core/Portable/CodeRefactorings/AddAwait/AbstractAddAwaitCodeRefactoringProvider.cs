@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
     /// Or:
     ///     var x = await GetAsync().ConfigureAwait(false);
     /// </summary>
-    internal abstract class AbstractAddAwaitCodeRefactoringProvider<TExpressionSyntax> : CodeRefactoringProvider
-        where TExpressionSyntax : SyntaxNode
+    internal abstract class AbstractAddAwaitCodeRefactoringProvider<TExpressionSyntax>
+        : CodeRefactoringProvider where TExpressionSyntax : SyntaxNode
     {
         protected abstract string GetTitle();
         protected abstract string GetTitleWithConfigureAwait();
@@ -34,15 +34,21 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
         {
             var (document, span, cancellationToken) = context;
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var node = root.FindNode(span);
             if (!IsInAsyncContext(node))
                 return;
 
-            var model = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var model = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            var expressions = await context.GetRelevantNodesAsync<TExpressionSyntax>().ConfigureAwait(false);
+            var expressions = await context
+                .GetRelevantNodesAsync<TExpressionSyntax>()
+                .ConfigureAwait(false);
             for (var i = expressions.Length - 1; i >= 0; i--)
             {
                 var expression = expressions[i];
@@ -51,25 +57,37 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
                     context.RegisterRefactoring(
                         new MyCodeAction(
                             GetTitle(),
-                            c => AddAwaitAsync(document, expression, withConfigureAwait: false, c)),
-                        expression.Span);
+                            c => AddAwaitAsync(document, expression, withConfigureAwait: false, c)
+                        ),
+                        expression.Span
+                    );
 
                     context.RegisterRefactoring(
                         new MyCodeAction(
                             GetTitleWithConfigureAwait(),
-                            c => AddAwaitAsync(document, expression, withConfigureAwait: true, c)),
-                        expression.Span);
+                            c => AddAwaitAsync(document, expression, withConfigureAwait: true, c)
+                        ),
+                        expression.Span
+                    );
                 }
             }
         }
 
-        private static bool IsValidAwaitableExpression(SyntaxNode invocation, SemanticModel model, ISyntaxFactsService syntaxFacts)
+        private static bool IsValidAwaitableExpression(
+            SyntaxNode invocation,
+            SemanticModel model,
+            ISyntaxFactsService syntaxFacts
+        )
         {
             if (syntaxFacts.IsExpressionOfInvocationExpression(invocation.Parent))
             {
                 // Do not offer fix on `MethodAsync()$$.ConfigureAwait()`
                 // Do offer fix on `MethodAsync()$$.Invalid()`
-                if (!model.GetTypeInfo(invocation.GetRequiredParent().GetRequiredParent()).Type.IsErrorType())
+                if (
+                    !model
+                        .GetTypeInfo(invocation.GetRequiredParent().GetRequiredParent())
+                        .Type.IsErrorType()
+                )
                     return false;
             }
 
@@ -87,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
             Document document,
             TExpressionSyntax expression,
             bool withConfigureAwait,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
             var withoutTrivia = expression.WithoutTrivia();
@@ -96,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
             {
                 withoutTrivia = (TExpressionSyntax)generator.InvocationExpression(
                     generator.MemberAccessExpression(withoutTrivia, nameof(Task.ConfigureAwait)),
-                    generator.FalseLiteralExpression());
+                    generator.FalseLiteralExpression()
+                );
             }
 
             var awaitExpression = generator
@@ -108,10 +128,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.AddAwait
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument) { }
         }
     }
 }

@@ -5,7 +5,11 @@ namespace System.Buffers.Text
 {
     public static partial class Utf8Parser
     {
-        private static bool TryParseSByteD(ReadOnlySpan<byte> source, out sbyte value, out int bytesConsumed)
+        private static bool TryParseSByteD(
+            ReadOnlySpan<byte> source,
+            out sbyte value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -79,18 +83,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = (sbyte)(answer * sign);
             return true;
         }
 
-        private static bool TryParseInt16D(ReadOnlySpan<byte> source, out short value, out int bytesConsumed)
+        private static bool TryParseInt16D(
+            ReadOnlySpan<byte> source,
+            out short value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -180,18 +188,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = (short)(answer * sign);
             return true;
         }
 
-        private static bool TryParseInt32D(ReadOnlySpan<byte> source, out int value, out int bytesConsumed)
+        private static bool TryParseInt32D(
+            ReadOnlySpan<byte> source,
+            out int value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -323,18 +335,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = answer * sign;
             return true;
         }
 
-        private static bool TryParseInt64D(ReadOnlySpan<byte> source, out long value, out int bytesConsumed)
+        private static bool TryParseInt64D(
+            ReadOnlySpan<byte> source,
+            out long value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
             {
@@ -424,7 +440,10 @@ namespace System.Buffers.Text
                     // if parsedValue == (long.MaxValue / 10), any nextDigit greater than 7 or 8 (depending on sign) implies overflow.
                     bool positive = sign > 0;
                     bool nextDigitTooLarge = nextDigit > 8 || (positive && nextDigit > 7);
-                    if (parsedValue > long.MaxValue / 10 || parsedValue == long.MaxValue / 10 && nextDigitTooLarge)
+                    if (
+                        parsedValue > long.MaxValue / 10
+                        || parsedValue == long.MaxValue / 10 && nextDigitTooLarge
+                    )
                     {
                         bytesConsumed = 0;
                         value = default;

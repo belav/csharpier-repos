@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Session
             ILoggerFactory loggerFactory,
             IDataProtectionProvider dataProtectionProvider,
             ISessionStore sessionStore,
-            IOptions<SessionOptions> options)
+            IOptions<SessionOptions> options
+        )
         {
             if (next == null)
             {
@@ -99,7 +100,13 @@ namespace Microsoft.AspNetCore.Session
             }
 
             var feature = new SessionFeature();
-            feature.Session = _sessionStore.Create(sessionKey, _options.IdleTimeout, _options.IOTimeout, tryEstablishSession, isNewSessionKey);
+            feature.Session = _sessionStore.Create(
+                sessionKey,
+                _options.IdleTimeout,
+                _options.IOTimeout,
+                tryEstablishSession,
+                isNewSessionKey
+            );
             context.Features.Set<ISessionFeature>(feature);
 
             try
@@ -135,7 +142,11 @@ namespace Microsoft.AspNetCore.Session
             private readonly SessionOptions _options;
             private bool _shouldEstablishSession;
 
-            public SessionEstablisher(HttpContext context, string cookieValue, SessionOptions options)
+            public SessionEstablisher(
+                HttpContext context,
+                string cookieValue,
+                SessionOptions options
+            )
             {
                 _context = context;
                 _cookieValue = cookieValue;

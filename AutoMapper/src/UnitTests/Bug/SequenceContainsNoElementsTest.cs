@@ -10,15 +10,18 @@ namespace AutoMapper.UnitTests.Bug
 {
     public class SequenceContainsNoElementsTest : AutoMapperSpecBase
     {
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Person, PersonModel>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Person, PersonModel>();
+                }
+            );
 
         [Fact]
         public void should_not_throw_InvalidOperationException()
         {
-            Person[] personArr = new Person[] { };
+            Person[] personArr = new Person[] {  };
             People people = new People(personArr);
             var pmc = Mapper.Map<People, List<PersonModel>>(people);
             pmc.ShouldNotBeNull();

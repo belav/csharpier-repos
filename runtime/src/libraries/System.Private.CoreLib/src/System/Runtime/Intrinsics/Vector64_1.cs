@@ -15,8 +15,7 @@ namespace System.Runtime.Intrinsics
     [DebuggerDisplay("{DisplayString,nq}")]
     [DebuggerTypeProxy(typeof(Vector64DebugView<>))]
     [StructLayout(LayoutKind.Sequential, Size = Vector64.Size)]
-    public readonly struct Vector64<T> : IEquatable<Vector64<T>>
-        where T : struct
+    public readonly struct Vector64<T> : IEquatable<Vector64<T>> where T : struct
     {
         // These fields exist to ensure the alignment is 8, rather than 1.
         // This also allows the debug view to work https://github.com/dotnet/runtime/issues/9495)
@@ -46,7 +45,6 @@ namespace System.Runtime.Intrinsics
             }
         }
 
-
         /// <summary>Gets a new <see cref="Vector64{T}" /> with all bits set to 1.</summary>
         /// <exception cref="NotSupportedException">The type of the current instance (<typeparamref name="T" />) is not supported.</exception>
         public static Vector64<T> AllBitsSet
@@ -58,7 +56,6 @@ namespace System.Runtime.Intrinsics
                 return Vector64.Create(0xFFFFFFFF).As<uint, T>();
             }
         }
-
 
         internal unsafe string DisplayString
         {
@@ -78,16 +75,17 @@ namespace System.Runtime.Intrinsics
         internal static bool IsSupported
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (typeof(T) == typeof(byte)) ||
-                   (typeof(T) == typeof(sbyte)) ||
-                   (typeof(T) == typeof(short)) ||
-                   (typeof(T) == typeof(ushort)) ||
-                   (typeof(T) == typeof(int)) ||
-                   (typeof(T) == typeof(uint)) ||
-                   (typeof(T) == typeof(long)) ||
-                   (typeof(T) == typeof(ulong)) ||
-                   (typeof(T) == typeof(float)) ||
-                   (typeof(T) == typeof(double));
+            get =>
+                (typeof(T) == typeof(byte))
+                || (typeof(T) == typeof(sbyte))
+                || (typeof(T) == typeof(short))
+                || (typeof(T) == typeof(ushort))
+                || (typeof(T) == typeof(int))
+                || (typeof(T) == typeof(uint))
+                || (typeof(T) == typeof(long))
+                || (typeof(T) == typeof(ulong))
+                || (typeof(T) == typeof(float))
+                || (typeof(T) == typeof(double));
         }
 
         /// <summary>Determines whether the specified <see cref="Vector64{T}" /> is equal to the current instance.</summary>

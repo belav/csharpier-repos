@@ -15,7 +15,8 @@ namespace System.Xml.Xsl.Runtime
     public struct DescendantIterator
     {
         private XmlNavigatorFilter _filter;
-        private XPathNavigator _navCurrent, _navEnd;
+        private XPathNavigator _navCurrent,
+            _navEnd;
         private bool _hasFirst;
 
         /// <summary>
@@ -65,7 +66,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over all descendant content nodes according to XPath descendant axis rules.  Eliminate duplicates by not
     /// querying over nodes that are contained in the subtree of the previous node.
@@ -74,7 +74,9 @@ namespace System.Xml.Xsl.Runtime
     public struct DescendantMergeIterator
     {
         private XmlNavigatorFilter _filter;
-        private XPathNavigator _navCurrent, _navRoot, _navEnd;
+        private XPathNavigator _navCurrent,
+            _navRoot,
+            _navEnd;
         private IteratorState _state;
         private bool _orSelf;
 
@@ -142,7 +144,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over matching parent node according to XPath parent axis rules.
     /// </summary>
@@ -188,7 +189,6 @@ namespace System.Xml.Xsl.Runtime
             get { return _navCurrent; }
         }
     }
-
 
     /// <summary>
     /// Iterate over all ancestor nodes according to XPath ancestor axis rules, returning nodes in reverse
@@ -247,7 +247,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over all ancestor nodes according to XPath ancestor axis rules, but return the nodes in document order.
     /// </summary>
@@ -291,7 +290,6 @@ namespace System.Xml.Xsl.Runtime
             get { return _navCurrent; }
         }
     }
-
 
     /// <summary>
     /// Iterate over all following nodes according to XPath following axis rules.  These rules specify that
@@ -386,7 +384,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over all following nodes according to XPath following axis rules.  Merge multiple sets of following nodes
     /// in document order and remove duplicates.
@@ -396,7 +393,8 @@ namespace System.Xml.Xsl.Runtime
     {
         private XmlNavigatorFilter _filter;
         private IteratorState _state;
-        private XPathNavigator _navCurrent, _navNext;
+        private XPathNavigator _navCurrent,
+            _navNext;
 
         private enum IteratorState
         {
@@ -496,7 +494,10 @@ namespace System.Xml.Xsl.Runtime
         private IteratorResult MoveFailed()
         {
             XPathNavigator navTemp;
-            Debug.Assert(_state == IteratorState.HaveCurrentHaveNext || _state == IteratorState.HaveCurrentNoNext);
+            Debug.Assert(
+                _state == IteratorState.HaveCurrentHaveNext
+                    || _state == IteratorState.HaveCurrentNoNext
+            );
 
             if (_state == IteratorState.HaveCurrentNoNext)
             {
@@ -521,7 +522,10 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         private IteratorResult MoveFirst()
         {
-            Debug.Assert(_state == IteratorState.HaveCurrentHaveNext || _state == IteratorState.HaveCurrentNoNext);
+            Debug.Assert(
+                _state == IteratorState.HaveCurrentHaveNext
+                    || _state == IteratorState.HaveCurrentNoNext
+            );
 
             if (!XPathFollowingIterator.MoveFirst(_filter, _navCurrent))
                 return MoveFailed();
@@ -529,7 +533,6 @@ namespace System.Xml.Xsl.Runtime
             return IteratorResult.HaveCurrentNode;
         }
     }
-
 
     /// <summary>
     /// Iterate over all content-typed nodes which precede the starting node in document order.  Return nodes
@@ -585,7 +588,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over all preceding nodes according to XPath preceding axis rules, returning nodes in reverse
     /// document order.  These rules specify that ancestors are not included, even though they precede the
@@ -631,7 +633,6 @@ namespace System.Xml.Xsl.Runtime
             get { return _navCurrent; }
         }
     }
-
 
     /// <summary>
     /// Iterate over all preceding nodes according to XPath preceding axis rules, returning nodes in document order.
@@ -700,14 +701,12 @@ namespace System.Xml.Xsl.Runtime
             do
             {
                 _navStack.Push(_navCurrent.Clone());
-            }
-            while (_navCurrent.MoveToParent());
+            } while (_navCurrent.MoveToParent());
 
             // Pop the root of the tree, since MoveToFollowing calls will never return it
             _navStack.Pop();
         }
     }
-
 
     /// <summary>
     /// Iterate over all preceding nodes according to XPath preceding axis rules, except that nodes are always
@@ -718,7 +717,8 @@ namespace System.Xml.Xsl.Runtime
     {
         private XmlNavigatorFilter _filter;
         private IteratorState _state;
-        private XPathNavigator _navCurrent, _navNext;
+        private XPathNavigator _navCurrent,
+            _navNext;
         private XmlNavigatorStack _navStack;
 
         private enum IteratorState
@@ -832,20 +832,21 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         private void PushAncestors()
         {
-            Debug.Assert(_state == IteratorState.HaveCurrentHaveNext || _state == IteratorState.HaveCurrentNoNext);
+            Debug.Assert(
+                _state == IteratorState.HaveCurrentHaveNext
+                    || _state == IteratorState.HaveCurrentNoNext
+            );
 
             _navStack.Reset();
             do
             {
                 _navStack.Push(_navCurrent.Clone());
-            }
-            while (_navCurrent.MoveToParent());
+            } while (_navCurrent.MoveToParent());
 
             // Pop the root of the tree, since MoveToFollowing calls will never return it
             _navStack.Pop();
         }
     }
-
 
     /// <summary>
     /// Iterate over these nodes in document order (filtering out those that do not match the filter test):
@@ -861,7 +862,8 @@ namespace System.Xml.Xsl.Runtime
     public struct NodeRangeIterator
     {
         private XmlNavigatorFilter _filter;
-        private XPathNavigator _navCurrent, _navEnd;
+        private XPathNavigator _navCurrent,
+            _navEnd;
         private IteratorState _state;
 
         private enum IteratorState
@@ -885,12 +887,16 @@ namespace System.Xml.Xsl.Runtime
             if (start.IsSamePosition(end))
             {
                 // Start is end, so only return node if it is not filtered
-                _state = !filter.IsFiltered(start) ? IteratorState.HaveCurrentNoNext : IteratorState.NoNext;
+                _state = !filter.IsFiltered(start)
+                    ? IteratorState.HaveCurrentNoNext
+                    : IteratorState.NoNext;
             }
             else
             {
                 // Return nodes until end is reached
-                _state = !filter.IsFiltered(start) ? IteratorState.HaveCurrent : IteratorState.NeedCurrent;
+                _state = !filter.IsFiltered(start)
+                    ? IteratorState.HaveCurrent
+                    : IteratorState.NeedCurrent;
             }
         }
 

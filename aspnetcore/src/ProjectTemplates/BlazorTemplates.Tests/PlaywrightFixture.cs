@@ -18,8 +18,9 @@ namespace ProjectTemplates.Tests.Infrastructure
 {
     public class PlaywrightFixture<TTestAssemblyType> : IAsyncLifetime
     {
-        private static readonly bool _isCIEnvironment =
-            !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ContinuousIntegrationBuild"));
+        private static readonly bool _isCIEnvironment = !string.IsNullOrWhiteSpace(
+            Environment.GetEnvironmentVariable("ContinuousIntegrationBuild")
+        );
 
         private readonly IMessageSink _diagnosticsMessageSink;
         private readonly IConfiguration _configuration;
@@ -44,17 +45,30 @@ namespace ProjectTemplates.Tests.Infrastructure
 
             var builder = new ConfigurationBuilder()
                 .AddJsonFile(Path.Combine(basePath, "playwrightSettings.json"))
-                .AddJsonFile(Path.Combine(basePath, $"playwrightSettings.{os}.json"), optional: true);
+                .AddJsonFile(
+                    Path.Combine(basePath, $"playwrightSettings.{os}.json"),
+                    optional: true
+                );
 
             if (_isCIEnvironment)
             {
-                builder.AddJsonFile(Path.Combine(basePath, "playwrightSettings.ci.json"), optional: true)
-                    .AddJsonFile(Path.Combine(basePath, $"playwrightSettings.ci.{os}.json"), optional: true);
+                builder
+                    .AddJsonFile(
+                        Path.Combine(basePath, "playwrightSettings.ci.json"),
+                        optional: true
+                    )
+                    .AddJsonFile(
+                        Path.Combine(basePath, $"playwrightSettings.ci.{os}.json"),
+                        optional: true
+                    );
             }
 
             if (Debugger.IsAttached)
             {
-                builder.AddJsonFile(Path.Combine(basePath, "playwrightSettings.debug.json"), optional: true);
+                builder.AddJsonFile(
+                    Path.Combine(basePath, "playwrightSettings.debug.json"),
+                    optional: true
+                );
             }
 
             return builder.Build();
