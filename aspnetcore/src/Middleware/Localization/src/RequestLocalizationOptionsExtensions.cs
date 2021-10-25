@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Builder
         /// <remarks>This method ensures that <paramref name="requestCultureProvider"/> has priority over other <see cref="RequestCultureProvider"/> instances in <see cref="RequestLocalizationOptions.RequestCultureProviders"/>.</remarks>
         public static RequestLocalizationOptions AddInitialRequestCultureProvider(
             this RequestLocalizationOptions requestLocalizationOptions,
-            RequestCultureProvider requestCultureProvider)
+            RequestCultureProvider requestCultureProvider
+        )
         {
             if (requestLocalizationOptions == null)
             {

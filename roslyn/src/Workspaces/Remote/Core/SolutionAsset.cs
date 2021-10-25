@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis.Remote
     /// </summary>
     internal sealed class SolutionAsset
     {
-        public static readonly SolutionAsset Null = new SolutionAsset(value: null, Checksum.Null, WellKnownSynchronizationKind.Null);
+        public static readonly SolutionAsset Null = new SolutionAsset(
+            value: null,
+            Checksum.Null,
+            WellKnownSynchronizationKind.Null
+        );
 
         /// <summary>
         /// Indicates what kind of object it.
@@ -43,8 +47,6 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public SolutionAsset(Checksum checksum, object value)
-            : this(value, checksum, value.GetWellKnownSynchronizationKind())
-        {
-        }
+            : this(value, checksum, value.GetWellKnownSynchronizationKind()) { }
     }
 }

@@ -13,8 +13,12 @@ internal class Program
     }
 
     public static int Test(
-    List<string> liste, List<string> unused1,
-    string unused2, int unused3, long p_lFirstId)
+        List<string> liste,
+        List<string> unused1,
+        string unused2,
+        int unused3,
+        long p_lFirstId
+    )
     {
         liste = new List<string>();
 
@@ -25,9 +29,7 @@ internal class Program
             sbSql.Append(p_lFirstId);
             p_lFirstId++;
 
-            foreach (string sColonne in liste)
-            {
-            }
+            foreach (string sColonne in liste) { }
         }
 
         System.Console.WriteLine(sbSql.ToString());

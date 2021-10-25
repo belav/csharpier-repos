@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns true if the nested type should be imported. 
         /// </summary>
-        public static bool ShouldImportNestedType(this PEModule module, TypeDefinitionHandle typeDef)
+        public static bool ShouldImportNestedType(
+            this PEModule module,
+            TypeDefinitionHandle typeDef
+        )
         {
             // Currently, it appears that we must import ALL types, even private ones,
             // in order to maintain language semantics. This is because a class may implement
@@ -26,7 +29,7 @@ namespace Microsoft.CodeAnalysis
             // conversions. For example:
             //
             // public class A: IEnumerable<A.X>
-            // { 
+            // {
             //    private class X: ICloneable {}
             // }
             //
@@ -40,7 +43,11 @@ namespace Microsoft.CodeAnalysis
         /// Returns true if the field should be imported. Visibility
         /// and the value of <paramref name="importOptions"/> are considered
         /// </summary>
-        public static bool ShouldImportField(this PEModule module, FieldDefinitionHandle field, MetadataImportOptions importOptions)
+        public static bool ShouldImportField(
+            this PEModule module,
+            FieldDefinitionHandle field,
+            MetadataImportOptions importOptions
+        )
         {
             try
             {
@@ -57,7 +64,10 @@ namespace Microsoft.CodeAnalysis
         /// Returns true if the flags represent a field that should be imported.
         /// Visibility and the value of <paramref name="importOptions"/> are considered
         /// </summary>
-        public static bool ShouldImportField(FieldAttributes flags, MetadataImportOptions importOptions)
+        public static bool ShouldImportField(
+            FieldAttributes flags,
+            MetadataImportOptions importOptions
+        )
         {
             switch (flags & FieldAttributes.FieldAccessMask)
             {
@@ -78,7 +88,11 @@ namespace Microsoft.CodeAnalysis
         /// explicit interface implementations. For other methods, visibility and the value of
         /// <paramref name="importOptions"/> are considered.
         /// </summary>
-        public static bool ShouldImportMethod(this PEModule module, MethodDefinitionHandle methodDef, MetadataImportOptions importOptions)
+        public static bool ShouldImportMethod(
+            this PEModule module,
+            MethodDefinitionHandle methodDef,
+            MetadataImportOptions importOptions
+        )
         {
             try
             {
@@ -97,7 +111,6 @@ namespace Microsoft.CodeAnalysis
                             {
                                 return false;
                             }
-
                             break;
 
                         case MethodAttributes.Assembly:
@@ -105,13 +118,11 @@ namespace Microsoft.CodeAnalysis
                             {
                                 return false;
                             }
-
                             break;
                     }
                 }
             }
-            catch (BadImageFormatException)
-            { }
+            catch (BadImageFormatException) { }
 
             try
             {
@@ -137,13 +148,13 @@ namespace Microsoft.CodeAnalysis
         {
             // From IMetaDataEmit::DefineMethod documentation (http://msdn.microsoft.com/en-us/library/ms230861(VS.100).aspx)
             // ----------------------
-            // In the case where one or more slots need to be skipped, such as to preserve parity with a COM interface layout, 
-            // a dummy method is defined to take up the slot or slots in the v-table; set the dwMethodFlags to the mdRTSpecialName 
+            // In the case where one or more slots need to be skipped, such as to preserve parity with a COM interface layout,
+            // a dummy method is defined to take up the slot or slots in the v-table; set the dwMethodFlags to the mdRTSpecialName
             // value of the CorMethodAttr enumeration and specify the name as:
             //
             // _VtblGap<SequenceNumber><_CountOfSlots>
             //
-            // where SequenceNumber is the sequence number of the method and CountOfSlots is the number of slots to skip in the v-table. 
+            // where SequenceNumber is the sequence number of the method and CountOfSlots is the number of slots to skip in the v-table.
             // If CountOfSlots is omitted, 1 is assumed.
             // ----------------------
             //
@@ -168,18 +179,27 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                if (index == prefix.Length ||
-                    index >= emittedMethodName.Length - 1 ||
-                    emittedMethodName[index] != '_' ||
-                    !char.IsDigit(emittedMethodName, index + 1))
+                if (
+                    index == prefix.Length
+                    || index >= emittedMethodName.Length - 1
+                    || emittedMethodName[index] != '_'
+                    || !char.IsDigit(emittedMethodName, index + 1)
+                )
                 {
                     return 1;
                 }
 
                 int countOfSlots;
 
-                if (int.TryParse(emittedMethodName.Substring(index + 1), NumberStyles.None, CultureInfo.InvariantCulture, out countOfSlots)
-                    && countOfSlots > 0)
+                if (
+                    int.TryParse(
+                        emittedMethodName.Substring(index + 1),
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out countOfSlots
+                    )
+                    && countOfSlots > 0
+                )
                 {
                     return countOfSlots;
                 }

@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public CosmosQueryTranslationPostprocessor(
             QueryTranslationPostprocessorDependencies dependencies,
             ISqlExpressionFactory sqlExpressionFactory,
-            QueryCompilationContext queryCompilationContext)
-            : base(dependencies, queryCompilationContext)
+            QueryCompilationContext queryCompilationContext
+        ) : base(dependencies, queryCompilationContext)
         {
             Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
 
@@ -44,14 +44,18 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         {
             query = base.Process(query);
 
-            if (query is ShapedQueryExpression shapedQueryExpression
-                && shapedQueryExpression.QueryExpression is SelectExpression selectExpression)
+            if (
+                query is ShapedQueryExpression shapedQueryExpression
+                && shapedQueryExpression.QueryExpression is SelectExpression selectExpression
+            )
             {
                 // Cosmos does not have nested select expression so this should be safe.
                 selectExpression.ApplyProjection();
             }
 
-            query = new CosmosValueConverterCompensatingExpressionVisitor(_sqlExpressionFactory).Visit(query);
+            query = new CosmosValueConverterCompensatingExpressionVisitor(
+                _sqlExpressionFactory
+            ).Visit(query);
 
             return query;
         }

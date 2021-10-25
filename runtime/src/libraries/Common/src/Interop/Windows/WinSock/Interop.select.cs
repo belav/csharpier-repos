@@ -14,7 +14,8 @@ internal static partial class Interop
             [In] IntPtr* readfds,
             [In] IntPtr* writefds,
             [In] IntPtr* exceptfds,
-            [In] ref TimeValue timeout);
+            [In] ref TimeValue timeout
+        );
 
         [DllImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static extern unsafe int select(
@@ -22,6 +23,7 @@ internal static partial class Interop
             [In] IntPtr* readfds,
             [In] IntPtr* writefds,
             [In] IntPtr* exceptfds,
-            [In] IntPtr nullTimeout);
+            [In] IntPtr nullTimeout
+        );
     }
 }

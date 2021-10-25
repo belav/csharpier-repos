@@ -10,7 +10,12 @@ namespace System.Security.Cryptography.Xml
 {
     public class XmlDsigXsltTransform : Transform
     {
-        private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlDocument), typeof(XmlNodeList) };
+        private readonly Type[] _inputTypes =
+        {
+            typeof(Stream),
+            typeof(XmlDocument),
+            typeof(XmlNodeList)
+        };
         private readonly Type[] _outputTypes = { typeof(Stream) };
         private XmlNodeList _xslNodes;
         private string _xslFragment;
@@ -30,18 +35,12 @@ namespace System.Security.Cryptography.Xml
 
         public override Type[] InputTypes
         {
-            get
-            {
-                return _inputTypes;
-            }
+            get { return _inputTypes; }
         }
 
         public override Type[] OutputTypes
         {
-            get
-            {
-                return _outputTypes;
-            }
+            get { return _outputTypes; }
         }
 
         public override void LoadInnerXml(XmlNodeList nodeList)
@@ -54,7 +53,8 @@ namespace System.Security.Cryptography.Xml
             foreach (XmlNode node in nodeList)
             {
                 // ignore whitespace, but make sure only one child element is present
-                if (node is XmlWhitespace) continue;
+                if (node is XmlWhitespace)
+                    continue;
                 if (node is XmlElement)
                 {
                     if (count != 0)
@@ -90,7 +90,8 @@ namespace System.Security.Cryptography.Xml
             {
                 CanonicalXml xmlDoc = new CanonicalXml((XmlNodeList)obj, null, _includeComments);
                 byte[] buffer = xmlDoc.GetBytes();
-                if (buffer == null) return;
+                if (buffer == null)
+                    return;
                 _inputStream.Write(buffer, 0, buffer.Length);
                 _inputStream.Flush();
                 _inputStream.Position = 0;
@@ -99,7 +100,8 @@ namespace System.Security.Cryptography.Xml
             {
                 CanonicalXml xmlDoc = new CanonicalXml((XmlDocument)obj, null, _includeComments);
                 byte[] buffer = xmlDoc.GetBytes();
-                if (buffer == null) return;
+                if (buffer == null)
+                    return;
                 _inputStream.Write(buffer, 0, buffer.Length);
                 _inputStream.Flush();
                 _inputStream.Position = 0;
@@ -142,7 +144,10 @@ namespace System.Security.Cryptography.Xml
         public override object GetOutput(Type type)
         {
             if (type != typeof(Stream) && !type.IsSubclassOf(typeof(Stream)))
-                throw new ArgumentException(SR.Cryptography_Xml_TransformIncorrectInputType, nameof(type));
+                throw new ArgumentException(
+                    SR.Cryptography_Xml_TransformIncorrectInputType,
+                    nameof(type)
+                );
             return (Stream)GetOutput();
         }
     }

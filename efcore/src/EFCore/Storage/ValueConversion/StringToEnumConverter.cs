@@ -19,17 +19,16 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public StringToEnumConverter(ConverterMappingHints? mappingHints = null)
-            : base(
-                ToEnum(),
-                ToString(),
-                mappingHints)
-        {
-        }
+            : base(ToEnum(), ToString(), mappingHints) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(string), typeof(TEnum), i => new StringToEnumConverter<TEnum>(i.MappingHints));
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(string),
+                typeof(TEnum),
+                i => new StringToEnumConverter<TEnum>(i.MappingHints)
+            );
     }
 }

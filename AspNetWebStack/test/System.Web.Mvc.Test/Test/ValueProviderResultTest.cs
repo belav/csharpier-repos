@@ -30,7 +30,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToCanConvertArraysToArrays()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(new int[] { 1, 20, 42 }, "", CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                new int[] { 1, 20, 42 },
+                "",
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             string[] converted = (string[])vpr.ConvertTo(typeof(string[]));
@@ -47,7 +51,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToCanConvertArraysToSingleElements()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(new int[] { 1, 20, 42 }, "", CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                new int[] { 1, 20, 42 },
+                "",
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             string converted = (string)vpr.ConvertTo(typeof(string));
@@ -90,10 +98,17 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object original = "someValue";
-            ValueProviderResult vpr = new ValueProviderResult(original, null, CultureInfo.GetCultureInfo("fr-FR"));
+            ValueProviderResult vpr = new ValueProviderResult(
+                original,
+                null,
+                CultureInfo.GetCultureInfo("fr-FR")
+            );
 
             // Act
-            DefaultModelBinderTest.StringContainer returned = (DefaultModelBinderTest.StringContainer)vpr.ConvertTo(typeof(DefaultModelBinderTest.StringContainer));
+            DefaultModelBinderTest.StringContainer returned =
+                (DefaultModelBinderTest.StringContainer)vpr.ConvertTo(
+                    typeof(DefaultModelBinderTest.StringContainer)
+                );
 
             // Assert
             Assert.Equal("someValue (fr-FR)", returned.Value);
@@ -104,7 +119,11 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object original = null;
-            ValueProviderResult vpr = new ValueProviderResult(original, "", CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                original,
+                "",
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             int? returned = (int?)vpr.ConvertTo(typeof(int?));
@@ -118,7 +137,11 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object original = " ";
-            ValueProviderResult vpr = new ValueProviderResult(original, "", CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                original,
+                "",
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             int? returned = (int?)vpr.ConvertTo(typeof(int?));
@@ -132,7 +155,11 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object original = new DefaultModelBinderTest.StringContainer("someValue");
-            ValueProviderResult vpr = new ValueProviderResult(original, "", CultureInfo.GetCultureInfo("en-US"));
+            ValueProviderResult vpr = new ValueProviderResult(
+                original,
+                "",
+                CultureInfo.GetCultureInfo("en-US")
+            );
 
             // Act
             string returned = (string)vpr.ConvertTo(typeof(string));
@@ -145,7 +172,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsNullIfArrayElementValueIsNull()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(new string[] { null }, null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                new string[] { null },
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(int));
@@ -158,7 +189,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsNullIfTryingToConvertEmptyArrayToSingleElement()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(new int[0], "", CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                new int[0],
+                "",
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(int));
@@ -171,7 +206,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsNullIfValueIsEmptyString()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult("", null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                "",
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(int));
@@ -184,7 +223,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsNullIfTrimmedValueIsEmptyString()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(" \t \r\n ", null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                " \t \r\n ",
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(int));
@@ -197,7 +240,13 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsNullIfValueIsNull()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(null /* rawValue */, null /* attemptedValue */, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                null /* rawValue */
+                ,
+                null /* attemptedValue */
+                ,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(int[]));
@@ -210,7 +259,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsValueIfArrayElementIsIntegerAndDestinationTypeIsEnum()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(new object[] { 1 }, null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                new object[] { 1 },
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(MyEnum));
@@ -223,7 +276,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsValueIfArrayElementIsStringValueAndDestinationTypeIsEnum()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(new object[] { "1" }, null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                new object[] { "1" },
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(MyEnum));
@@ -236,7 +293,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsValueIfArrayElementIsStringKeyAndDestinationTypeIsEnum()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(new object[] { "Value1" }, null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                new object[] { "Value1" },
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(MyEnum));
@@ -249,7 +310,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsValueIfElementIsStringAndDestionationIsNullableInteger()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult("12", null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                "12",
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(int?));
@@ -262,7 +327,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsValueIfElementIsStringAndDestionationIsNullableDouble()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult("12.5", null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                "12.5",
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(double?));
@@ -275,7 +344,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsValueIfElementIsDecimalAndDestionationIsNullableInteger()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(12M, null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                12M,
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(int?));
@@ -288,7 +361,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsValueIfElementIsDecimalAndDestionationIsNullableDouble()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(12.5M, null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                12.5M,
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(double?));
@@ -301,7 +378,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsValueIfElementIsDecimalDoubleAndDestionationIsNullableInteger()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(12.5M, null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                12.5M,
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(int?));
@@ -314,7 +395,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsValueIfElementIsDecimalDoubleAndDestionationIsNullableLong()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(12.5M, null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                12.5M,
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(long?));
@@ -327,7 +412,11 @@ namespace System.Web.Mvc.Test
         public void ConvertToReturnsValueIfArrayElementInstanceOfDestinationType()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult(new object[] { "some string" }, null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                new object[] { "some string" },
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(string));
@@ -341,7 +430,11 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             string[] original = new string[] { "some string" };
-            ValueProviderResult vpr = new ValueProviderResult(original, null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                original,
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act
             object outValue = vpr.ConvertTo(typeof(string[]));
@@ -354,14 +447,22 @@ namespace System.Web.Mvc.Test
         public void ConvertToThrowsIfConverterThrows()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult("x", null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                "x",
+                null,
+                CultureInfo.InvariantCulture
+            );
             Type destinationType = typeof(DefaultModelBinderTest.StringContainer);
 
             // Act & Assert
             // Will throw since the custom converter assumes the first 5 characters to be digits
             InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
-                delegate { vpr.ConvertTo(destinationType); },
-                "The parameter conversion from type 'System.String' to type 'System.Web.Mvc.Test.DefaultModelBinderTest+StringContainer' failed. See the inner exception for more information.");
+                delegate
+                {
+                    vpr.ConvertTo(destinationType);
+                },
+                "The parameter conversion from type 'System.String' to type 'System.Web.Mvc.Test.DefaultModelBinderTest+StringContainer' failed. See the inner exception for more information."
+            );
 
             Exception innerException = exception.InnerException;
             Assert.Equal("Value must have at least 3 characters.", innerException.Message);
@@ -371,24 +472,41 @@ namespace System.Web.Mvc.Test
         public void ConvertToThrowsIfNoConverterExists()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult("x", null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                "x",
+                null,
+                CultureInfo.InvariantCulture
+            );
             Type destinationType = typeof(MyClassWithoutConverter);
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { vpr.ConvertTo(destinationType); },
-                "The parameter conversion from type 'System.String' to type 'System.Web.Mvc.Test.ValueProviderResultTest+MyClassWithoutConverter' failed because no type converter can convert between these types.");
+                delegate
+                {
+                    vpr.ConvertTo(destinationType);
+                },
+                "The parameter conversion from type 'System.String' to type 'System.Web.Mvc.Test.ValueProviderResultTest+MyClassWithoutConverter' failed because no type converter can convert between these types."
+            );
         }
 
         [Fact]
         public void ConvertToThrowsIfTypeIsNull()
         {
             // Arrange
-            ValueProviderResult vpr = new ValueProviderResult("x", null, CultureInfo.InvariantCulture);
+            ValueProviderResult vpr = new ValueProviderResult(
+                "x",
+                null,
+                CultureInfo.InvariantCulture
+            );
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { vpr.ConvertTo(null); }, "type");
+                delegate
+                {
+                    vpr.ConvertTo(null);
+                },
+                "type"
+            );
         }
 
         [Fact]
@@ -397,10 +515,18 @@ namespace System.Web.Mvc.Test
             // Arrange
             object original = "someValue";
             CultureInfo gbCulture = CultureInfo.GetCultureInfo("en-GB");
-            ValueProviderResult vpr = new ValueProviderResult(original, null, CultureInfo.GetCultureInfo("fr-FR"));
+            ValueProviderResult vpr = new ValueProviderResult(
+                original,
+                null,
+                CultureInfo.GetCultureInfo("fr-FR")
+            );
 
             // Act
-            DefaultModelBinderTest.StringContainer returned = (DefaultModelBinderTest.StringContainer)vpr.ConvertTo(typeof(DefaultModelBinderTest.StringContainer), gbCulture);
+            DefaultModelBinderTest.StringContainer returned =
+                (DefaultModelBinderTest.StringContainer)vpr.ConvertTo(
+                    typeof(DefaultModelBinderTest.StringContainer),
+                    gbCulture
+                );
 
             // Assert
             Assert.Equal("someValue (en-GB)", returned.Value);

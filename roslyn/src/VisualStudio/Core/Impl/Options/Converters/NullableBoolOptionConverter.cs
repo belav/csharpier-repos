@@ -17,15 +17,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Convert
             _onNullValue = onNullValue;
         }
 
-        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
-            => value switch
+        public object Convert(
+            object? value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        ) =>
+            value switch
             {
                 null => _onNullValue(),
                 bool b => b,
                 _ => DependencyProperty.UnsetValue
             };
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => value;
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        ) => value;
     }
 }

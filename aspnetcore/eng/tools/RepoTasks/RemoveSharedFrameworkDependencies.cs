@@ -30,8 +30,13 @@ namespace RepoTasks
 
         public override bool Execute()
         {
-            Log.LogMessage("NuGet version = " + typeof(PackageArchiveReader).Assembly.GetName().Version);
-            var dependencyToRemove = new HashSet<string>(FrameworkOnlyPackages.Select(p => p.ItemSpec), StringComparer.OrdinalIgnoreCase);
+            Log.LogMessage(
+                "NuGet version = " + typeof(PackageArchiveReader).Assembly.GetName().Version
+            );
+            var dependencyToRemove = new HashSet<string>(
+                FrameworkOnlyPackages.Select(p => p.ItemSpec),
+                StringComparer.OrdinalIgnoreCase
+            );
 
             foreach (var file in Files)
             {
@@ -61,7 +66,10 @@ namespace RepoTasks
                     foreach (var group in packageBuilder.DependencyGroups)
                     {
                         var packages = new List<PackageDependency>();
-                        var updatedGroup = new PackageDependencyGroup(group.TargetFramework, packages);
+                        var updatedGroup = new PackageDependencyGroup(
+                            group.TargetFramework,
+                            packages
+                        );
                         foreach (var dependency in group.Packages)
                         {
                             if (dependencyToRemove.Contains(dependency.Id))
@@ -91,14 +99,31 @@ namespace RepoTasks
                         var ns = rawNuspec.Root.GetDefaultNamespace();
                         var metadata = rawNuspec.Root.Descendants(ns + "metadata").Single();
                         metadata.Add(
-                            new XElement(ns + "frameworkReferences",
-                                new XElement(ns + "group",
-                                    new XAttribute("targetFramework", NuGetFramework.Parse(SharedFrameworkTargetFramework).GetFrameworkString()),
-                                    new XElement(ns + "frameworkReference", new XAttribute("name", "Microsoft.AspNetCore.App")))));
+                            new XElement(
+                                ns + "frameworkReferences",
+                                new XElement(
+                                    ns + "group",
+                                    new XAttribute(
+                                        "targetFramework",
+                                        NuGetFramework
+                                            .Parse(SharedFrameworkTargetFramework)
+                                            .GetFrameworkString()
+                                    ),
+                                    new XElement(
+                                        ns + "frameworkReference",
+                                        new XAttribute("name", "Microsoft.AspNetCore.App")
+                                    )
+                                )
+                            )
+                        );
                         stream.Position = 0;
                         stream.SetLength(0);
                         rawNuspec.Save(stream);
-                        Log.LogMessage(MessageImportance.High, "Added <frameworkReference> to {0}", fileName);
+                        Log.LogMessage(
+                            MessageImportance.High,
+                            "Added <frameworkReference> to {0}",
+                            fileName
+                        );
                     }
                     else
                     {

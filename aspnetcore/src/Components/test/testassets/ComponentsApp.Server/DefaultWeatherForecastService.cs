@@ -20,7 +20,11 @@ namespace ComponentsApp.Server
 
         public override Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
         {
-            var path = Path.Combine(_hostingEnvironment.ContentRootPath, "sample-data", "weather.json");
+            var path = Path.Combine(
+                _hostingEnvironment.ContentRootPath,
+                "sample-data",
+                "weather.json"
+            );
             using (var file = File.OpenText(path))
             using (var reader = new JsonTextReader(file))
             {

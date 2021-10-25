@@ -16,8 +16,11 @@ namespace System.Reflection.Context.Virtual
             private readonly ParameterInfo _valueParameter;
             private readonly IEnumerable<Attribute> _attributes;
 
-            public PropertySetter(VirtualPropertyBase property, Action<object, object> setter, IEnumerable<Attribute> setterAttributes)
-                : base(property)
+            public PropertySetter(
+                VirtualPropertyBase property,
+                Action<object, object> setter,
+                IEnumerable<Attribute> setterAttributes
+            ) : base(property)
             {
                 Debug.Assert(null != setter);
 
@@ -31,7 +34,13 @@ namespace System.Reflection.Context.Virtual
                 return new ParameterInfo[] { _valueParameter };
             }
 
-            public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+            public override object Invoke(
+                object obj,
+                BindingFlags invokeAttr,
+                Binder binder,
+                object[] parameters,
+                CultureInfo culture
+            )
             {
                 // invokeAttr, binder, and culture are ignored, similar to what runtime reflection does with the default binder.
 
@@ -47,7 +56,9 @@ namespace System.Reflection.Context.Virtual
                     throw new TargetException(SR.Target_ObjectTargetMismatch);
 
                 if (ReturnType.IsInstanceOfType(value))
-                    throw new ArgumentException(SR.Format(SR.Argument_ObjectArgumentMismatch, value.GetType(), ReturnType));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_ObjectArgumentMismatch, value.GetType(), ReturnType)
+                    );
 
                 _setter(obj, value);
 
@@ -56,7 +67,10 @@ namespace System.Reflection.Context.Virtual
 
             public override object[] GetCustomAttributes(Type attributeType, bool inherit)
             {
-                return CollectionServices.IEnumerableToArray(AttributeUtils.FilterCustomAttributes(_attributes, attributeType), attributeType);
+                return CollectionServices.IEnumerableToArray(
+                    AttributeUtils.FilterCustomAttributes(_attributes, attributeType),
+                    attributeType
+                );
             }
 
             public override object[] GetCustomAttributes(bool inherit)

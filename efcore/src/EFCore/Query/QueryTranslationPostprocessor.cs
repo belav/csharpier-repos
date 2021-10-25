@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="queryCompilationContext"> The query compilation context object to use. </param>
         public QueryTranslationPostprocessor(
             QueryTranslationPostprocessorDependencies dependencies,
-            QueryCompilationContext queryCompilationContext)
+            QueryCompilationContext queryCompilationContext
+        )
         {
             Check.NotNull(dependencies, nameof(dependencies));
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));

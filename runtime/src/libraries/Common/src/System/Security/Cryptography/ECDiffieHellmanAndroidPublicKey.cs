@@ -16,7 +16,10 @@ namespace System.Security.Cryptography
                 if (ecKeyHandle == null)
                     throw new ArgumentNullException(nameof(ecKeyHandle));
                 if (ecKeyHandle.IsInvalid)
-                    throw new ArgumentException(SR.Cryptography_OpenInvalidHandle, nameof(ecKeyHandle));
+                    throw new ArgumentException(
+                        SR.Cryptography_OpenInvalidHandle,
+                        nameof(ecKeyHandle)
+                    );
 
                 _key = new ECAndroid(ecKeyHandle.DuplicateHandle());
             }

@@ -15,10 +15,12 @@ namespace Microsoft.AspNetCore.Components.Server
     /// authentication state from the host environment, and revalidate it at regular intervals.
     /// </summary>
     public abstract class RevalidatingServerAuthenticationStateProvider
-        : ServerAuthenticationStateProvider, IDisposable
+        : ServerAuthenticationStateProvider,
+          IDisposable
     {
         private readonly ILogger _logger;
-        private CancellationTokenSource _loopCancellationTokenSource = new CancellationTokenSource();
+        private CancellationTokenSource _loopCancellationTokenSource =
+            new CancellationTokenSource();
 
         /// <summary>
         /// Constructs an instance of <see cref="RevalidatingServerAuthenticationStateProvider"/>.
@@ -54,9 +56,15 @@ namespace Microsoft.AspNetCore.Components.Server
         /// <param name="authenticationState">The current <see cref="AuthenticationState"/>.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while performing the operation.</param>
         /// <returns>A <see cref="Task"/> that resolves as true if the <paramref name="authenticationState"/> is still valid, or false if it is not.</returns>
-        protected abstract Task<bool> ValidateAuthenticationStateAsync(AuthenticationState authenticationState, CancellationToken cancellationToken);
+        protected abstract Task<bool> ValidateAuthenticationStateAsync(
+            AuthenticationState authenticationState,
+            CancellationToken cancellationToken
+        );
 
-        private async Task RevalidationLoop(Task<AuthenticationState> authenticationStateTask, CancellationToken cancellationToken)
+        private async Task RevalidationLoop(
+            Task<AuthenticationState> authenticationStateTask,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -70,7 +78,10 @@ namespace Microsoft.AspNetCore.Components.Server
                         try
                         {
                             await Task.Delay(RevalidationInterval, cancellationToken);
-                            isValid = await ValidateAuthenticationStateAsync(authenticationState, cancellationToken);
+                            isValid = await ValidateAuthenticationStateAsync(
+                                authenticationState,
+                                cancellationToken
+                            );
                         }
                         catch (TaskCanceledException tce)
                         {
@@ -83,7 +94,7 @@ namespace Microsoft.AspNetCore.Components.Server
 
                             throw;
                         }
-                        
+
                         if (!isValid)
                         {
                             ForceSignOut();
@@ -113,8 +124,6 @@ namespace Microsoft.AspNetCore.Components.Server
         }
 
         /// <inheritdoc />
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
     }
 }

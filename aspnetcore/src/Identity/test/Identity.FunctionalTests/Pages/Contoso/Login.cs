@@ -35,10 +35,10 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Contoso
 
         private async Task<IHtmlDocument> SendLoginForm(string userName)
         {
-            var contosoResponse = await Client.SendAsync(_loginForm, new Dictionary<string, string>
-            {
-                ["Input_Login"] = userName
-            });
+            var contosoResponse = await Client.SendAsync(
+                _loginForm,
+                new Dictionary<string, string> { ["Input_Login"] = userName }
+            );
 
             var goToExternalLogin = ResponseAssert.IsRedirect(contosoResponse);
             var externalLogInResponse = await Client.GetAsync(goToExternalLogin);

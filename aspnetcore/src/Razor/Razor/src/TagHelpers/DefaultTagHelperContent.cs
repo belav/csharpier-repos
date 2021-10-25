@@ -82,7 +82,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         public override TagHelperContent Append(string unencoded) => AppendCore(unencoded);
 
         /// <inheritdoc />
-        public override TagHelperContent AppendHtml(IHtmlContent htmlContent) => AppendCore(htmlContent);
+        public override TagHelperContent AppendHtml(IHtmlContent htmlContent) =>
+            AppendCore(htmlContent);
 
         /// <inheritdoc />
         public override TagHelperContent AppendHtml(string encoded)
@@ -320,10 +321,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         {
             public override Encoding Encoding
             {
-                get
-                {
-                    return Encoding.UTF8;
-                }
+                get { return Encoding.UTF8; }
             }
 
             public bool IsEmptyOrWhiteSpace { get; private set; } = true;

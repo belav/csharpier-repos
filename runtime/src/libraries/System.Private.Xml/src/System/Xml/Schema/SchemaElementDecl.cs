@@ -10,7 +10,10 @@ namespace System.Xml.Schema
 
     internal sealed class SchemaElementDecl : SchemaDeclBase, IDtdAttributeListInfo
     {
-        private readonly Dictionary<XmlQualifiedName, SchemaAttDef> _attdefs = new Dictionary<XmlQualifiedName, SchemaAttDef>();
+        private readonly Dictionary<XmlQualifiedName, SchemaAttDef> _attdefs = new Dictionary<
+            XmlQualifiedName,
+            SchemaAttDef
+        >();
         private List<IDtdDefaultAttributeInfo>? _defaultAttdefs;
         private bool _isIdDeclared;
         private bool _hasNonCDataAttribute;
@@ -19,7 +22,8 @@ namespace System.Xml.Schema
         private bool _isNillable;
         private bool _hasRequiredAttribute;
         private bool _isNotationDeclared;
-        private readonly Dictionary<XmlQualifiedName, XmlQualifiedName> _prohibitedAttributes = new Dictionary<XmlQualifiedName, XmlQualifiedName>();
+        private readonly Dictionary<XmlQualifiedName, XmlQualifiedName> _prohibitedAttributes =
+            new Dictionary<XmlQualifiedName, XmlQualifiedName>();
         private ContentValidator? _contentValidator;
         private XmlSchemaAnyAttribute? _anyAttribute;
         private XmlSchemaDerivationMethod _block;
@@ -31,9 +35,7 @@ namespace System.Xml.Schema
         //
         // Constructor
         //
-        internal SchemaElementDecl()
-        {
-        }
+        internal SchemaElementDecl() { }
 
         internal SchemaElementDecl(XmlSchemaDatatype dtype)
         {
@@ -41,10 +43,7 @@ namespace System.Xml.Schema
             _contentValidator = ContentValidator.TextOnly;
         }
 
-        internal SchemaElementDecl(XmlQualifiedName name, string? prefix)
-        : base(name, prefix)
-        {
-        }
+        internal SchemaElementDecl(XmlQualifiedName name, string? prefix) : base(name, prefix) { }
 
         //
         // Static methods
@@ -188,11 +187,17 @@ namespace System.Xml.Schema
         internal void AddAttDef(SchemaAttDef attdef)
         {
             _attdefs.Add(attdef.Name, attdef);
-            if (attdef.Presence == SchemaDeclBase.Use.Required || attdef.Presence == SchemaDeclBase.Use.RequiredFixed)
+            if (
+                attdef.Presence == SchemaDeclBase.Use.Required
+                || attdef.Presence == SchemaDeclBase.Use.RequiredFixed
+            )
             {
                 _hasRequiredAttribute = true;
             }
-            if (attdef.Presence == SchemaDeclBase.Use.Default || attdef.Presence == SchemaDeclBase.Use.Fixed)
+            if (
+                attdef.Presence == SchemaDeclBase.Use.Default
+                || attdef.Presence == SchemaDeclBase.Use.Fixed
+            )
             { //Not adding RequiredFixed here
                 if (_defaultAttdefs == null)
                 {
@@ -240,9 +245,19 @@ namespace System.Xml.Schema
                 {
                     if (attdef.Presence == SchemaDeclBase.Use.Required)
                     {
-                        throw new XmlSchemaException(SR.Sch_MissRequiredAttribute, attdef.Name.ToString());
+                        throw new XmlSchemaException(
+                            SR.Sch_MissRequiredAttribute,
+                            attdef.Name.ToString()
+                        );
                     }
-                    else if (standalone && attdef.IsDeclaredInExternal && (attdef.Presence == SchemaDeclBase.Use.Default || attdef.Presence == SchemaDeclBase.Use.Fixed))
+                    else if (
+                        standalone
+                        && attdef.IsDeclaredInExternal
+                        && (
+                            attdef.Presence == SchemaDeclBase.Use.Default
+                            || attdef.Presence == SchemaDeclBase.Use.Fixed
+                        )
+                    )
                     {
                         throw new XmlSchemaException(SR.Sch_StandAlone, string.Empty);
                     }

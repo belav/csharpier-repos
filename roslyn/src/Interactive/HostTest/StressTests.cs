@@ -28,24 +28,36 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
 
         private async Task TestKillAfterAsync(int milliseconds)
         {
-            using var host = new InteractiveHost(typeof(CSharpReplServiceProvider), ".", millisecondsTimeout: 1, joinOutputWritingThreadsOnDisposal: true);
-            var options = InteractiveHostOptions.CreateFromDirectory(TestUtils.HostRootPath, initializationFileName: null, CultureInfo.InvariantCulture, InteractiveHostPlatform.Desktop64);
+            using var host = new InteractiveHost(
+                typeof(CSharpReplServiceProvider),
+                ".",
+                millisecondsTimeout: 1,
+                joinOutputWritingThreadsOnDisposal: true
+            );
+            var options = InteractiveHostOptions.CreateFromDirectory(
+                TestUtils.HostRootPath,
+                initializationFileName: null,
+                CultureInfo.InvariantCulture,
+                InteractiveHostPlatform.Desktop64
+            );
 
-            host.InteractiveHostProcessCreated += new Action<Process>(proc =>
-            {
-                _ = Task.Run(async () =>
+            host.InteractiveHostProcessCreated += new Action<Process>(
+                proc =>
                 {
-                    await Task.Delay(milliseconds).ConfigureAwait(false);
+                    _ = Task.Run(
+                        async () =>
+                        {
+                            await Task.Delay(milliseconds).ConfigureAwait(false);
 
-                    try
-                    {
-                        proc.Kill();
-                    }
-                    catch
-                    {
-                    }
-                });
-            });
+                            try
+                            {
+                                proc.Kill();
+                            }
+                            catch { }
+                        }
+                    );
+                }
+            );
 
             await host.ResetAsync(options).ConfigureAwait(false);
 

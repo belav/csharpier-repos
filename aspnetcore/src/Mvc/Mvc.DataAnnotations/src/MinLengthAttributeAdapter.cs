@@ -13,8 +13,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
     {
         private readonly string _min;
 
-        public MinLengthAttributeAdapter(MinLengthAttribute attribute, IStringLocalizer? stringLocalizer)
-            : base(attribute, stringLocalizer)
+        public MinLengthAttributeAdapter(
+            MinLengthAttribute attribute,
+            IStringLocalizer? stringLocalizer
+        ) : base(attribute, stringLocalizer)
         {
             _min = Attribute.Length.ToString(CultureInfo.InvariantCulture);
         }
@@ -42,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             return GetErrorMessage(
                 validationContext.ModelMetadata,
                 validationContext.ModelMetadata.GetDisplayName(),
-                Attribute.Length);
+                Attribute.Length
+            );
         }
     }
 }

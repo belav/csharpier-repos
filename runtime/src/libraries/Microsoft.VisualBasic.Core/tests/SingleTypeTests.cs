@@ -16,7 +16,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void FromObject(object value, float expected)
         {
             Assert.Equal(expected, SingleType.FromObject(value));
-            Assert.Equal(expected, SingleType.FromObject(value, System.Globalization.NumberFormatInfo.InvariantInfo));
+            Assert.Equal(
+                expected,
+                SingleType.FromObject(value, System.Globalization.NumberFormatInfo.InvariantInfo)
+            );
         }
 
         [Theory]
@@ -53,7 +56,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void FromString(string value, float expected)
         {
             Assert.Equal(expected, SingleType.FromString(value));
-            Assert.Equal(expected, SingleType.FromString(value, System.Globalization.NumberFormatInfo.InvariantInfo));
+            Assert.Equal(
+                expected,
+                SingleType.FromString(value, System.Globalization.NumberFormatInfo.InvariantInfo)
+            );
         }
 
         [Theory]
@@ -233,8 +239,16 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         public static IEnumerable<object[]> FromString_Other_TestData()
         {
-            yield return new object[] { double.PositiveInfinity.ToString(), float.PositiveInfinity };
-            yield return new object[] { double.NegativeInfinity.ToString(), float.NegativeInfinity };
+            yield return new object[]
+            {
+                double.PositiveInfinity.ToString(),
+                float.PositiveInfinity
+            };
+            yield return new object[]
+            {
+                double.NegativeInfinity.ToString(),
+                float.NegativeInfinity
+            };
         }
 
         public static IEnumerable<object[]> FromString_Invalid_TestData()

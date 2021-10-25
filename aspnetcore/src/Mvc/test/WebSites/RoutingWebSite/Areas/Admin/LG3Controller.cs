@@ -17,9 +17,7 @@ namespace RoutingWebSite
             _linkGenerator = linkGenerator;
         }
 
-        public void SomeAction()
-        {
-        }
+        public void SomeAction() { }
 
         public string LinkInsideOfArea()
         {
@@ -35,10 +33,11 @@ namespace RoutingWebSite
         public string LinkOutsideOfArea()
         {
             return _linkGenerator.GetPathByAction(
-                HttpContext, 
+                HttpContext,
                 action: nameof(SomeAction),
                 controller: "LG1",
-                values: new { area = "", });
+                values: new { area = "", }
+            );
         }
     }
 }

@@ -27,7 +27,10 @@ namespace Microsoft.AspNetCore.Components.Forms
 
             // Act & Assert
             var ex = Assert.Throws<IOException>(() => file.OpenReadStream(80));
-            Assert.Equal("Supplied file with size 100 bytes exceeds the maximum of 80 bytes.", ex.Message);
+            Assert.Equal(
+                "Supplied file with size 100 bytes exceeds the maximum of 80 bytes.",
+                ex.Message
+            );
         }
     }
 }

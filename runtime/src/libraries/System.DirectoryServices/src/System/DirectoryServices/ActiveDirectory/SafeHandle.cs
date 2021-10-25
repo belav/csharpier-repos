@@ -27,7 +27,8 @@ namespace System.DirectoryServices.ActiveDirectory
             SetHandle(value);
         }
 
-        protected override bool ReleaseHandle() => NativeMethods.LsaDeregisterLogonProcess(handle) == 0;
+        protected override bool ReleaseHandle() =>
+            NativeMethods.LsaDeregisterLogonProcess(handle) == 0;
     }
 
     internal sealed class LoadLibrarySafeHandle : SafeHandleZeroOrMinusOneIsInvalid

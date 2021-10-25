@@ -30,7 +30,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         private class TestController { }
 
-        public static TheoryData<List<ParameterDescriptor>> MultipleActionParametersAndValidationData
+        public static TheoryData<
+            List<ParameterDescriptor>
+        > MultipleActionParametersAndValidationData
         {
             get
             {
@@ -51,10 +53,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                         {
                             Name = "transferInfo",
                             ParameterType = typeof(TransferInfo),
-                            BindingInfo = new BindingInfo()
-                            {
-                                BindingSource = BindingSource.Body
-                            }
+                            BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body }
                         }
                     },
                     new List<ParameterDescriptor>()
@@ -63,10 +62,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                         {
                             Name = "transferInfo",
                             ParameterType = typeof(TransferInfo),
-                            BindingInfo = new BindingInfo()
-                            {
-                                BindingSource = BindingSource.Body
-                            }
+                            BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body }
                         },
                         new ParameterDescriptor()
                         {
@@ -80,7 +76,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         [Theory]
         [MemberData(nameof(MultipleActionParametersAndValidationData))]
-        public async Task ValidationIsTriggered_OnFromBodyModels(List<ParameterDescriptor> parameters)
+        public async Task ValidationIsTriggered_OnFromBodyModels(
+            List<ParameterDescriptor> parameters
+        )
         {
             // Arrange
             var actionDescriptor = new ControllerActionDescriptor()
@@ -94,10 +92,13 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 request =>
                 {
                     request.QueryString = new QueryString("?accountId=30");
-                    request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{\"accountId\": 15,\"amount\": 250.0}"));
+                    request.Body = new MemoryStream(
+                        Encoding.UTF8.GetBytes("{\"accountId\": 15,\"amount\": 250.0}")
+                    );
                     request.ContentType = "application/json";
                 },
-                actionDescriptor: actionDescriptor);
+                actionDescriptor: actionDescriptor
+            );
 
             var modelState = testContext.ModelState;
 
@@ -110,16 +111,23 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Assert
             Assert.False(modelState.IsValid);
 
-            var entry = Assert.Single(
-                modelState,
-                e => string.Equals(e.Key, "AccountId", StringComparison.OrdinalIgnoreCase)).Value;
+            var entry =
+                Assert.Single(
+                    modelState,
+                    e => string.Equals(e.Key, "AccountId", StringComparison.OrdinalIgnoreCase)
+                ).Value;
             var error = Assert.Single(entry.Errors);
-            Assert.Equal(ValidationAttributeUtil.GetRangeErrorMessage(25, 50, "AccountId"), error.ErrorMessage);
+            Assert.Equal(
+                ValidationAttributeUtil.GetRangeErrorMessage(25, 50, "AccountId"),
+                error.ErrorMessage
+            );
         }
 
         [Theory]
         [MemberData(nameof(MultipleActionParametersAndValidationData))]
-        public async Task MultipleActionParameter_ValidModelState(List<ParameterDescriptor> parameters)
+        public async Task MultipleActionParameter_ValidModelState(
+            List<ParameterDescriptor> parameters
+        )
         {
             // Since validation attribute is only present on the FromBody model's property(TransferInfo's AccountId),
             // validation should not trigger for the parameter which is bound from Uri.
@@ -136,10 +144,13 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 request =>
                 {
                     request.QueryString = new QueryString("?accountId=10");
-                    request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{\"accountId\": 40,\"amount\": 250.0}"));
+                    request.Body = new MemoryStream(
+                        Encoding.UTF8.GetBytes("{\"accountId\": 40,\"amount\": 250.0}")
+                    );
                     request.ContentType = "application/json";
                 },
-                actionDescriptor: actionDescriptor);
+                actionDescriptor: actionDescriptor
+            );
 
             var modelState = testContext.ModelState;
 
@@ -166,10 +177,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order1)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.CustomerName=bill");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.CustomerName=bill");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -203,10 +216,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order1)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -234,7 +249,6 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         private record Order2([Required] Person2 Customer);
 
-
         private record Person2(string Name);
 
         [Fact]
@@ -248,10 +262,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order2)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -286,10 +302,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order2)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -330,10 +348,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order3)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -368,11 +388,13 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order3)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                // Force creation of the Customer model.
-                request.QueryString = new QueryString("?parameter.Customer.Age=17");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    // Force creation of the Customer model.
+                    request.QueryString = new QueryString("?parameter.Customer.Age=17");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -415,10 +437,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order4)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Items[0].ItemId=17");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Items[0].ItemId=17");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -453,11 +477,13 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order4)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                // Force creation of the Customer model.
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    // Force creation of the Customer model.
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -496,10 +522,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(List<Order5>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].ProductId=17");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter[0].ProductId=17");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -533,11 +561,13 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(List<Order5>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                // Force creation of the Customer model.
-                request.QueryString = new QueryString("?parameter[0].Name=bill");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    // Force creation of the Customer model.
+                    request.QueryString = new QueryString("?parameter[0].Name=bill");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -578,10 +608,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order6)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Name=bill");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Name=bill");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -615,10 +647,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order6)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Name=billybob");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Name=billybob");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -659,10 +693,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order7)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -696,10 +732,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order7)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=billybob");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Customer.Name=billybob");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -736,10 +774,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order7)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -763,7 +803,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         private class ValidatePerson8Attribute : ValidationAttribute
         {
-            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            protected override ValidationResult IsValid(
+                object value,
+                ValidationContext validationContext
+            )
             {
                 if (((Person8)value).Name == "bill")
                 {
@@ -787,10 +830,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order8)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=bill");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Customer.Name=bill");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -824,10 +869,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order8)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Customer.Name=billybob");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Customer.Name=billybob");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -863,7 +910,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         private class ValidateProducts9Attribute : ValidationAttribute
         {
-            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            protected override ValidationResult IsValid(
+                object value,
+                ValidationContext validationContext
+            )
             {
                 if (((List<Product9>)value)[0].Name == "bill")
                 {
@@ -887,10 +937,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order9)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Products[0].Name=bill");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Products[0].Name=bill");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -924,10 +976,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Order9)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Products[0].Name=billybob");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Products[0].Name=billybob");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -971,10 +1025,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(List<Order10>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].Name=bill");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter[0].Name=bill");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -1008,10 +1064,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(List<Order10>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].Name=billybob");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter[0].Name=billybob");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -1048,10 +1106,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(List<Order10>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -1082,10 +1142,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(User)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Id=bill");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Id=bill");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -1122,10 +1184,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(User)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Zip=-123");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Zip=-123");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -1156,15 +1220,19 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
             {
                 var result = new ValidationResult(
-                    $"'{validationContext.MemberName}' (display: '{validationContext.DisplayName}') is not valid due " +
-                    $"to its {nameof(NeverValid)} type.");
+                    $"'{validationContext.MemberName}' (display: '{validationContext.DisplayName}') is not valid due "
+                        + $"to its {nameof(NeverValid)} type."
+                );
                 return new[] { result };
             }
         }
 
         private class NeverValidAttribute : ValidationAttribute
         {
-            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            protected override ValidationResult IsValid(
+                object value,
+                ValidationContext validationContext
+            )
             {
                 // By default, ValidationVisitor visits _all_ properties within a non-null complex object.
                 // But, like most reasonable ValidationAttributes, NeverValidAttribute ignores null property values.
@@ -1174,23 +1242,18 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 }
 
                 return new ValidationResult(
-                    $"'{validationContext.MemberName}' (display: '{validationContext.DisplayName}') is not valid due " +
-                    $"to its associated {nameof(NeverValidAttribute)}.");
+                    $"'{validationContext.MemberName}' (display: '{validationContext.DisplayName}') is not valid due "
+                        + $"to its associated {nameof(NeverValidAttribute)}."
+                );
             }
         }
 
         private record ValidateSomeProperties(
             [Display(Name = "Not ever valid")] NeverValid NeverValidBecauseType,
-
-            [NeverValid]
-            [Display(Name = "Never valid")]
-            string NeverValidBecauseAttribute,
-
-            [ValidateNever]
-            [NeverValid]
-            string ValidateNever)
+            [NeverValid] [Display(Name = "Never valid")] string NeverValidBecauseAttribute,
+            [ValidateNever] [NeverValid] string ValidateNever
+        )
         {
-
             [ValidateNever]
             public int ValidateNeverLength => ValidateNever.Length;
         }
@@ -1206,8 +1269,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             };
 
             var testContext = ModelBindingTestHelper.GetTestContext(
-                request => request.QueryString
-                    = new QueryString($"?{nameof(ValidateSomeProperties.NeverValidBecauseType)}.{nameof(NeverValid.NeverValidProperty)}=1"));
+                request =>
+                    request.QueryString = new QueryString(
+                        $"?{nameof(ValidateSomeProperties.NeverValidBecauseType)}.{nameof(NeverValid.NeverValidProperty)}=1"
+                    )
+            );
 
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var modelState = testContext.ModelState;
@@ -1232,16 +1298,19 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                     var error = Assert.Single(state.Value.Errors);
                     Assert.Equal(
                         "'NeverValidBecauseType' (display: 'Not ever valid') is not valid due to its NeverValid type.",
-                        error.ErrorMessage);
+                        error.ErrorMessage
+                    );
                     Assert.Null(error.Exception);
                 },
                 state =>
                 {
                     Assert.Equal(
                         $"{nameof(ValidateSomeProperties.NeverValidBecauseType)}.{nameof(NeverValid.NeverValidProperty)}",
-                        state.Key);
+                        state.Key
+                    );
                     Assert.Equal(ModelValidationState.Valid, state.Value.ValidationState);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -1255,8 +1324,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             };
 
             var testContext = ModelBindingTestHelper.GetTestContext(
-                request => request.QueryString
-                    = new QueryString($"?{nameof(ValidateSomeProperties.NeverValidBecauseAttribute)}=1"));
+                request =>
+                    request.QueryString = new QueryString(
+                        $"?{nameof(ValidateSomeProperties.NeverValidBecauseAttribute)}=1"
+                    )
+            );
 
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var modelState = testContext.ModelState;
@@ -1279,7 +1351,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var error = Assert.Single(state.Errors);
             Assert.Equal(
                 "'NeverValidBecauseAttribute' (display: 'Never valid') is not valid due to its associated NeverValidAttribute.",
-                error.ErrorMessage);
+                error.ErrorMessage
+            );
             Assert.Null(error.Exception);
         }
 
@@ -1294,8 +1367,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             };
 
             var testContext = ModelBindingTestHelper.GetTestContext(
-                request => request.QueryString
-                    = new QueryString($"?{nameof(ValidateSomeProperties.ValidateNever)}=1"));
+                request =>
+                    request.QueryString = new QueryString(
+                        $"?{nameof(ValidateSomeProperties.ValidateNever)}=1"
+                    )
+            );
 
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var modelState = testContext.ModelState;
@@ -1356,8 +1432,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             public bool ShouldValidateEntry(ValidationEntry entry, ValidationEntry parentEntry)
             {
-                if (entry.Metadata.MetadataKind == ModelMetadataKind.Property &&
-                    parentEntry.Metadata != null)
+                if (
+                    entry.Metadata.MetadataKind == ModelMetadataKind.Property
+                    && parentEntry.Metadata != null
+                )
                 {
                     // In real life, would throw an InvalidOperationException if otherProperty were null i.e. the
                     // property was not known. Could also assert container is non-null (see ValidationVisitor).
@@ -1398,7 +1476,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             modelState.SetModelValue(
                 nameof(ValidateSomePropertiesSometimes.ControlLength),
                 rawValue: null,
-                attemptedValue: null);
+                attemptedValue: null
+            );
 
             // Act
             var result = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -1428,8 +1507,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             };
 
             var testContext = ModelBindingTestHelper.GetTestContext(
-                request => request.QueryString = new QueryString(
-                    $"?{nameof(ValidateSomePropertiesSometimes.Control)}=1"));
+                request =>
+                    request.QueryString = new QueryString(
+                        $"?{nameof(ValidateSomePropertiesSometimes.Control)}=1"
+                    )
+            );
 
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var modelState = testContext.ModelState;
@@ -1438,7 +1520,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             modelState.SetModelValue(
                 nameof(ValidateSomePropertiesSometimes.ControlLength),
                 rawValue: null,
-                attemptedValue: null);
+                attemptedValue: null
+            );
 
             // Act
             var result = await parameterBinder.BindModelAsync(parameter, testContext);
@@ -1457,7 +1540,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 {
                     Assert.Equal(nameof(ValidateSomePropertiesSometimes.ControlLength), state.Key);
                     Assert.Equal(ModelValidationState.Valid, state.Value.ValidationState);
-                });
+                }
+            );
         }
 
         // This type has a IPropertyValidationFilter declared on a property, but no validators.
@@ -1486,14 +1570,17 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             modelState.SetModelValue(
                 nameof(ValidateSomePropertiesSometimes.ControlLength),
                 rawValue: null,
-                attemptedValue: null);
+                attemptedValue: null
+            );
 
             // Act
             var result = await parameterBinder.BindModelAsync(parameter, testContext);
 
             // Assert
             Assert.True(result.IsModelSet);
-            var model = Assert.IsType<ValidateSomePropertiesSometimesWithoutValidation>(result.Model);
+            var model = Assert.IsType<ValidateSomePropertiesSometimesWithoutValidation>(
+                result.Model
+            );
             Assert.Null(model.Control);
 
             // Note this Exception is not thrown earlier.
@@ -1501,29 +1588,23 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             Assert.True(modelState.IsValid);
             var kvp = Assert.Single(modelState);
-            Assert.Equal(nameof(ValidateSomePropertiesSometimesWithoutValidation.ControlLength), kvp.Key);
+            Assert.Equal(
+                nameof(ValidateSomePropertiesSometimesWithoutValidation.ControlLength),
+                kvp.Key
+            );
             Assert.Equal(ModelValidationState.Valid, kvp.Value.ValidationState);
         }
 
-        private record Order11
-        (
+        private record Order11(
             IEnumerable<Address> ShippingAddresses,
-
             Address HomeAddress,
-
-            [FromBody]
-            Address OfficeAddress
+            [FromBody] Address OfficeAddress
         );
 
-        private record Address
-        (
+        private record Address(
             int Street,
-
             string State,
-
-            [Range(10000, 99999)]
-            int Zip,
-
+            [Range(10000, 99999)] int Zip,
             Country Country
         );
 
@@ -1543,17 +1624,23 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {
-                    request.QueryString =
-                        new QueryString("?HomeAddress.Country.Name=US&ShippingAddresses[0].Zip=45&HomeAddress.Zip=46");
+                    request.QueryString = new QueryString(
+                        "?HomeAddress.Country.Name=US&ShippingAddresses[0].Zip=45&HomeAddress.Zip=46"
+                    );
                     request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
                     request.ContentType = "application/json";
                 },
                 options =>
                 {
-                    options.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(Address)));
-                });
+                    options.ModelMetadataDetailsProviders.Add(
+                        new SuppressChildValidationMetadataProvider(typeof(Address))
+                    );
+                }
+            );
 
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var modelState = testContext.ModelState;
 
             // Act
@@ -1599,10 +1686,13 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var testContext = ModelBindingTestHelper.GetTestContext(
                 updateRequest: request =>
                 {
-                    request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{ message: \"Hello\" }"));
+                    request.Body = new MemoryStream(
+                        Encoding.UTF8.GetBytes("{ message: \"Hello\" }")
+                    );
                     request.ContentType = "application/json";
                 },
-                mvcOptions: options);
+                mvcOptions: options
+            );
 
             var httpContext = testContext.HttpContext;
             var modelState = testContext.ModelState;
@@ -1617,7 +1707,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Assert
             Assert.True(modelBindingResult.IsModelSet);
             Assert.NotNull(modelBindingResult.Model);
-            var message = Assert.IsType<JObject>(modelBindingResult.Model).GetValue("message").Value<string>();
+            var message = Assert
+                .IsType<JObject>(modelBindingResult.Model)
+                .GetValue("message")
+                .Value<string>();
             Assert.Equal("Hello", message);
 
             Assert.True(modelState.IsValid);
@@ -1639,7 +1732,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task CancellationToken_WithEmptyPrefix_DoesNotSuppressUnrelatedErrors()
         {
             // Arrange
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(new TestMvcOptions().Value);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                new TestMvcOptions().Value
+            );
             var parameter = new ParameterDescriptor
             {
                 Name = "cancellationToken",
@@ -1675,23 +1770,25 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task FromBody_WithEmptyPrefix_DoesNotSuppressUnrelatedErrors_Valid()
         {
             // Arrange
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(new TestMvcOptions().Value);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                new TestMvcOptions().Value
+            );
             var parameter = new ParameterDescriptor
             {
                 Name = "Parameter1",
-                BindingInfo = new BindingInfo
-                {
-                    BindingSource = BindingSource.Body
-                },
+                BindingInfo = new BindingInfo { BindingSource = BindingSource.Body },
                 ParameterType = typeof(Greeting)
             };
 
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {
-                    request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{ message: \"Hello\" }"));
+                    request.Body = new MemoryStream(
+                        Encoding.UTF8.GetBytes("{ message: \"Hello\" }")
+                    );
                     request.ContentType = "application/json";
-                });
+                }
+            );
 
             var httpContext = testContext.HttpContext;
             var modelState = testContext.ModelState;
@@ -1721,14 +1818,13 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task FromBody_WithEmptyPrefix_DoesNotSuppressUnrelatedErrors_Invalid()
         {
             // Arrange
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(new TestMvcOptions().Value);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                new TestMvcOptions().Value
+            );
             var parameter = new ParameterDescriptor
             {
                 Name = "Parameter1",
-                BindingInfo = new BindingInfo
-                {
-                    BindingSource = BindingSource.Body
-                },
+                BindingInfo = new BindingInfo { BindingSource = BindingSource.Body },
                 ParameterType = typeof(Greeting)
             };
 
@@ -1736,9 +1832,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 request =>
                 {
                     // This string is too long and will have a validation error.
-                    request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{ message: \"Hello There\" }"));
+                    request.Body = new MemoryStream(
+                        Encoding.UTF8.GetBytes("{ message: \"Hello There\" }")
+                    );
                     request.ContentType = "application/json";
-                });
+                }
+            );
 
             var httpContext = testContext.HttpContext;
             var modelState = testContext.ModelState;
@@ -1776,19 +1875,20 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Name = "parameter",
                 ParameterType = typeof(Order12),
-                BindingInfo = new BindingInfo
-                {
-                    BindingSource = BindingSource.Body
-                },
+                BindingInfo = new BindingInfo { BindingSource = BindingSource.Body },
             };
 
             var input = new Order12(10, new byte[40]);
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(input)));
-                request.ContentType = "application/json";
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.Body = new MemoryStream(
+                        Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(input))
+                    );
+                    request.ContentType = "application/json";
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -1816,7 +1916,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task Validation_ListOfType_NoValidatorOnParameter()
         {
             // Arrange
-            var parameterInfo = GetType().GetMethod(nameof(Validation_ListOfType_NoValidatorOnParameterTestMethod), BindingFlags.NonPublic | BindingFlags.Static)
+            var parameterInfo = GetType()
+                .GetMethod(
+                    nameof(Validation_ListOfType_NoValidatorOnParameterTestMethod),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )
                 .GetParameters()
                 .First();
 
@@ -1830,15 +1934,22 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = parameterInfo.ParameterType,
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?[0]=1&[1]=2");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?[0]=1&[1]=2");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
             // Act
-            var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext, modelMetadataProvider, modelMetadata);
+            var modelBindingResult = await parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            );
 
             // Assert
             Assert.True(modelBindingResult.IsModelSet);
@@ -1862,13 +1973,19 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
         }
 
-        private static void Validation_ListOfType_NoValidatorOnParameterTestMethod(List<int> parameter) { }
+        private static void Validation_ListOfType_NoValidatorOnParameterTestMethod(
+            List<int> parameter
+        ) { }
 
         [Fact]
         public async Task Validation_ListOfType_ValidatorOnParameter()
         {
             // Arrange
-            var parameterInfo = GetType().GetMethod(nameof(Validation_ListOfType_ValidatorOnParameterTestMethod), BindingFlags.NonPublic | BindingFlags.Static)
+            var parameterInfo = GetType()
+                .GetMethod(
+                    nameof(Validation_ListOfType_ValidatorOnParameterTestMethod),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )
                 .GetParameters()
                 .First();
 
@@ -1882,15 +1999,22 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = parameterInfo.ParameterType,
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?[0]=1&[1]=2");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?[0]=1&[1]=2");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
             // Act
-            var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext, modelMetadataProvider, modelMetadata);
+            var modelBindingResult = await parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            );
 
             // Assert
             Assert.True(modelBindingResult.IsModelSet);
@@ -1917,7 +2041,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
         }
 
-        private static void Validation_ListOfType_ValidatorOnParameterTestMethod([ConsistentMinLength(3)] List<int> parameter) { }
+        private static void Validation_ListOfType_ValidatorOnParameterTestMethod(
+            [ConsistentMinLength(3)] List<int> parameter
+        ) { }
 
         private class ConsistentMinLength : ValidationAttribute
         {
@@ -1938,7 +2064,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task Validation_CollectionOfType_ValidatorOnElement()
         {
             // Arrange
-            var parameterInfo = GetType().GetMethod(nameof(Validation_CollectionOfType_ValidatorOnElementTestMethod), BindingFlags.NonPublic | BindingFlags.Static)
+            var parameterInfo = GetType()
+                .GetMethod(
+                    nameof(Validation_CollectionOfType_ValidatorOnElementTestMethod),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )
                 .GetParameters()
                 .First();
 
@@ -1952,15 +2082,22 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = parameterInfo.ParameterType,
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?p[0].Id=1&p[1].Id=2");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?p[0].Id=1&p[1].Id=2");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
             // Act
-            var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext, modelMetadataProvider, modelMetadata);
+            var modelBindingResult = await parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            );
 
             // Assert
             Assert.True(modelBindingResult.IsModelSet);
@@ -1988,7 +2125,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
         }
 
-        private static void Validation_CollectionOfType_ValidatorOnElementTestMethod(Collection<InvalidEvenIds> p) { }
+        private static void Validation_CollectionOfType_ValidatorOnElementTestMethod(
+            Collection<InvalidEvenIds> p
+        ) { }
 
         public class InvalidEvenIds : IValidatableObject
         {
@@ -2014,10 +2153,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(IDictionary<string, int>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].Key=key0&parameter[0].Value=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter[0].Key=key0&parameter[0].Value=10"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -2034,7 +2177,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 {
                     Assert.Equal("key0", kvp.Key);
                     Assert.Equal(10, kvp.Value);
-                });
+                }
+            );
 
             Assert.True(modelState.IsValid);
             Assert.Equal(ModelValidationState.Valid, modelState.ValidationState);
@@ -2061,10 +2205,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, NeverValid>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].Key=key0&parameter[0].Value.NeverValidProperty=value0");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter[0].Key=key0&parameter[0].Value.NeverValidProperty=value0"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -2081,7 +2229,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 {
                     Assert.Equal("key0", kvp.Key);
                     Assert.Equal("value0", kvp.Value.NeverValidProperty);
-                });
+                }
+            );
 
             Assert.False(modelState.IsValid);
             Assert.Equal(ModelValidationState.Invalid, modelState.ValidationState);
@@ -2091,7 +2240,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Assert.Equal("key0", entry.RawValue);
             Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
 
-            entry = Assert.Single(modelState, e => e.Key == "parameter[0].Value.NeverValidProperty").Value;
+            entry =
+                Assert.Single(
+                    modelState,
+                    e => e.Key == "parameter[0].Value.NeverValidProperty"
+                ).Value;
             Assert.Equal("value0", entry.AttemptedValue);
             Assert.Equal("value0", entry.RawValue);
             Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
@@ -2106,10 +2259,15 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         {
             // Arrange
             var modelType = typeof(Validation_TopLevelPropertyController);
-            var propertyInfo = modelType.GetProperty(nameof(Validation_TopLevelPropertyController.Model));
+            var propertyInfo = modelType.GetProperty(
+                nameof(Validation_TopLevelPropertyController.Model)
+            );
 
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var modelMetadata = modelMetadataProvider.GetMetadataForProperty(propertyInfo, propertyInfo.PropertyType);
+            var modelMetadata = modelMetadataProvider.GetMetadataForProperty(
+                propertyInfo,
+                propertyInfo.PropertyType
+            );
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder(modelMetadataProvider);
 
             var parameter = new ParameterDescriptor()
@@ -2118,15 +2276,22 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = propertyInfo.PropertyType,
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Model.Id=12");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Model.Id=12");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
             // Act
-            var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext, modelMetadataProvider, modelMetadata);
+            var modelBindingResult = await parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            );
 
             // Assert
             Assert.True(modelBindingResult.IsModelSet);
@@ -2157,10 +2322,15 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         {
             // Arrange
             var modelType = typeof(Validation_TopLevelProperty_ValidationOnPropertyController);
-            var propertyInfo = modelType.GetProperty(nameof(Validation_TopLevelProperty_ValidationOnPropertyController.Model));
+            var propertyInfo = modelType.GetProperty(
+                nameof(Validation_TopLevelProperty_ValidationOnPropertyController.Model)
+            );
 
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var modelMetadata = modelMetadataProvider.GetMetadataForProperty(propertyInfo, propertyInfo.PropertyType);
+            var modelMetadata = modelMetadataProvider.GetMetadataForProperty(
+                propertyInfo,
+                propertyInfo.PropertyType
+            );
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder(modelMetadataProvider);
 
             var parameter = new ParameterDescriptor()
@@ -2169,15 +2339,22 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = propertyInfo.PropertyType,
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Model.Id=12");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Model.Id=12");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
             // Act
-            var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext, modelMetadataProvider, modelMetadata);
+            var modelBindingResult = await parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            );
 
             // Assert
             Assert.True(modelBindingResult.IsModelSet);
@@ -2201,7 +2378,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         public class Validation_TopLevelProperty_ValidationOnPropertyController
         {
-            [CustomValidation(typeof(Validation_TopLevelProperty_ValidationOnPropertyController), nameof(Validate))]
+            [CustomValidation(
+                typeof(Validation_TopLevelProperty_ValidationOnPropertyController),
+                nameof(Validate)
+            )]
             public Validation_TopLevelPropertyModel Model { get; set; }
 
             public static ValidationResult Validate(ValidationContext context)
@@ -2221,10 +2401,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(RecursiveModel)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Property1=8");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Property1=8");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -2257,7 +2439,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task Validation_InifnitelyRecursiveModel_ValidationOnTopLevelParameter()
         {
             // Arrange
-            var parameterInfo = GetType().GetMethod(nameof(Validation_InifnitelyRecursiveModel_ValidationOnTopLevelParameterMethod), BindingFlags.NonPublic | BindingFlags.Static)
+            var parameterInfo = GetType()
+                .GetMethod(
+                    nameof(Validation_InifnitelyRecursiveModel_ValidationOnTopLevelParameterMethod),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )
                 .GetParameters()
                 .First();
 
@@ -2271,15 +2457,22 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = parameterInfo.ParameterType,
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Property1=8");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Property1=8");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
             // Act
-            var modelBindingResult = await parameterBinder.BindModelAsync(parameter, testContext, modelMetadataProvider, modelMetadata);
+            var modelBindingResult = await parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            );
 
             // Assert
             Assert.True(modelBindingResult.IsModelSet);
@@ -2296,7 +2489,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
         }
 
-        private static void Validation_InifnitelyRecursiveModel_ValidationOnTopLevelParameterMethod([Required] RecursiveModel model) { }
+        private static void Validation_InifnitelyRecursiveModel_ValidationOnTopLevelParameterMethod(
+            [Required] RecursiveModel model
+        ) { }
 
 #pragma warning disable CS8907 // Parameter is unread. Did you forget to use it to initialize the property with that name?
         private record RecordTypeWithValidatorsOnProperties(string Property1)
@@ -2314,8 +2509,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var modelMetadata = modelMetadataProvider.GetMetadataForType(modelType);
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder(modelMetadataProvider);
-            var expected = $"Record type '{modelType}' has validation metadata defined on property 'Property1' that will be ignored. " +
-                "'Property1' is a parameter in the record primary constructor and validation metadata must be associated with the constructor parameter.";
+            var expected =
+                $"Record type '{modelType}' has validation metadata defined on property 'Property1' that will be ignored. "
+                + "'Property1' is a parameter in the record primary constructor and validation metadata must be associated with the constructor parameter.";
 
             var parameter = new ParameterDescriptor()
             {
@@ -2323,22 +2519,33 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = modelType,
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Property1=8");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Property1=8");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                parameterBinder.BindModelAsync(parameter, testContext, modelMetadataProvider, modelMetadata));
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    parameterBinder.BindModelAsync(
+                        parameter,
+                        testContext,
+                        modelMetadataProvider,
+                        modelMetadata
+                    )
+            );
 
             Assert.Equal(expected, ex.Message);
         }
 
 #pragma warning disable CS8907 // Parameter is unread. Did you forget to use it to initialize the property with that name?
-        private record RecordTypeWithValidatorsOnPropertiesAndParameters([Required] string Property1)
+        private record RecordTypeWithValidatorsOnPropertiesAndParameters(
+            [Required] string Property1
+        )
 #pragma warning restore CS8907 // Parameter is unread. Did you forget to use it to initialize the property with that name?
         {
             [Required]
@@ -2353,8 +2560,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var modelMetadata = modelMetadataProvider.GetMetadataForType(modelType);
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder(modelMetadataProvider);
-            var expected = $"Record type '{modelType}' has validation metadata defined on property 'Property1' that will be ignored. " +
-                "'Property1' is a parameter in the record primary constructor and validation metadata must be associated with the constructor parameter.";
+            var expected =
+                $"Record type '{modelType}' has validation metadata defined on property 'Property1' that will be ignored. "
+                + "'Property1' is a parameter in the record primary constructor and validation metadata must be associated with the constructor parameter.";
 
             var parameter = new ParameterDescriptor()
             {
@@ -2362,22 +2570,34 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = modelType,
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Property1=8");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Property1=8");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                parameterBinder.BindModelAsync(parameter, testContext, modelMetadataProvider, modelMetadata));
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    parameterBinder.BindModelAsync(
+                        parameter,
+                        testContext,
+                        modelMetadataProvider,
+                        modelMetadata
+                    )
+            );
 
             Assert.Equal(expected, ex.Message);
         }
 
 #pragma warning disable CS8907 // Parameter is unread. Did you forget to use it to initialize the property with that name?
-        private record RecordTypeWithValidatorsOnMixOfPropertiesAndParameters([Required] string Property1, string Property2)
+        private record RecordTypeWithValidatorsOnMixOfPropertiesAndParameters(
+            [Required] string Property1,
+            string Property2
+        )
 #pragma warning restore CS8907 // Parameter is unread. Did you forget to use it to initialize the property with that name?
         {
             [Required]
@@ -2394,8 +2614,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var modelMetadata = modelMetadataProvider.GetMetadataForType(modelType);
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder(modelMetadataProvider);
-            var expected = $"Record type '{modelType}' has validation metadata defined on property 'Property2' that will be ignored. " +
-                "'Property2' is a parameter in the record primary constructor and validation metadata must be associated with the constructor parameter.";
+            var expected =
+                $"Record type '{modelType}' has validation metadata defined on property 'Property2' that will be ignored. "
+                + "'Property2' is a parameter in the record primary constructor and validation metadata must be associated with the constructor parameter.";
 
             var parameter = new ParameterDescriptor()
             {
@@ -2403,16 +2624,25 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = modelType,
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Property1=8");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Property1=8");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                parameterBinder.BindModelAsync(parameter, testContext, modelMetadataProvider, modelMetadata));
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    parameterBinder.BindModelAsync(
+                        parameter,
+                        testContext,
+                        modelMetadataProvider,
+                        modelMetadata
+                    )
+            );
 
             Assert.Equal(expected, ex.Message);
         }
@@ -2438,10 +2668,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = modelType,
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Property1=SomeValue");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Property1=SomeValue");
+                }
+            );
 
             var modelState = testContext.ModelState;
 

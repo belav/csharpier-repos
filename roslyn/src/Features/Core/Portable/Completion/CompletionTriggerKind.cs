@@ -18,28 +18,23 @@ namespace Microsoft.CodeAnalysis.Completion
         /// </summary>
         [Obsolete("Use 'Invoke' instead.")]
         Other = 0,
-
         /// <summary>
         /// Completion was trigger by a direct invocation of the completion feature 
         /// (ctrl-j in Visual Studio).
         /// </summary>
         Invoke = 0,
-
         /// <summary>
         /// Completion was triggered via an action inserting a character into the document.
         /// </summary>
         Insertion = 1,
-
         /// <summary>
         /// Completion was triggered via an action deleting a character from the document.
         /// </summary>
         Deletion = 2,
-
         /// <summary>
         /// Completion was triggered for snippets only.
         /// </summary>
         Snippets = 3,
-
         /// <summary>
         /// Completion was triggered with a request to commit if a unique item would be selected 
         /// (ctrl-space in Visual Studio).

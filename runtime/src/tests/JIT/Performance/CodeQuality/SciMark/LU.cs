@@ -40,7 +40,7 @@ namespace SciMark2
         /// factor is stored in the lower triangular portion.
         /// The main diagonal of L consists (by convention) of
         /// ones, and is not explicitly stored.
-        /// </returns>	
+        /// </returns>
         public static double num_flops(int N)
         {
             // rougly 2/3*N^3
@@ -56,7 +56,6 @@ namespace SciMark2
             x.CopyTo(T, 0);
             return T;
         }
-
 
         protected internal static double[][] new_copy(double[][] A)
         {
@@ -76,8 +75,6 @@ namespace SciMark2
 
             return T;
         }
-
-
 
         public static int[] new_copy(int[] x)
         {
@@ -126,7 +123,6 @@ namespace SciMark2
             return x;
         }
 
-
         /// <summary>
         /// LU factorization (in place).
         /// </summary>
@@ -150,7 +146,7 @@ namespace SciMark2
 
             for (int j = 0; j < minMN; j++)
             {
-                // find pivot in column j and  test for singularity.			
+                // find pivot in column j and  test for singularity.
                 int jp = j;
 
                 double t = Math.Abs(A[j][j]);
@@ -166,8 +162,8 @@ namespace SciMark2
 
                 pivot[j] = jp;
 
-                // jp now has the index of maximum element 
-                // of column j, below the diagonal				
+                // jp now has the index of maximum element
+                // of column j, below the diagonal
                 if (A[jp][j] == 0)
                     return 1;
 
@@ -212,7 +208,6 @@ namespace SciMark2
 
             return 0;
         }
-
 
         /// <summary>Solve a linear system, using a prefactored matrix
         /// in LU form.

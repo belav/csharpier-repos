@@ -9,16 +9,22 @@ namespace System.Runtime.Serialization
     {
         private readonly SpecialTypeDataContractCriticalHelper _helper;
 
-        public SpecialTypeDataContract(Type type, XmlDictionaryString name, XmlDictionaryString ns) : base(new SpecialTypeDataContractCriticalHelper(type, name, ns))
+        public SpecialTypeDataContract(Type type, XmlDictionaryString name, XmlDictionaryString ns)
+            : base(new SpecialTypeDataContractCriticalHelper(type, name, ns))
         {
             _helper = (base.Helper as SpecialTypeDataContractCriticalHelper)!;
         }
 
         public override bool IsBuiltInDataContract => true;
 
-        private sealed class SpecialTypeDataContractCriticalHelper : DataContract.DataContractCriticalHelper
+        private sealed class SpecialTypeDataContractCriticalHelper
+            : DataContract.DataContractCriticalHelper
         {
-            internal SpecialTypeDataContractCriticalHelper(Type type, XmlDictionaryString name, XmlDictionaryString ns) : base(type)
+            internal SpecialTypeDataContractCriticalHelper(
+                Type type,
+                XmlDictionaryString name,
+                XmlDictionaryString ns
+            ) : base(type)
             {
                 SetDataContractName(name, ns);
             }

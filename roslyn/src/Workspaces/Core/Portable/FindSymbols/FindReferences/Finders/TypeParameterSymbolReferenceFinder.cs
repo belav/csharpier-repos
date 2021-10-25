@@ -8,17 +8,19 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal class TypeParameterSymbolReferenceFinder : AbstractReferenceFinder<ITypeParameterSymbol>
+    internal class TypeParameterSymbolReferenceFinder
+        : AbstractReferenceFinder<ITypeParameterSymbol>
     {
-        protected override bool CanFind(ITypeParameterSymbol symbol)
-            => symbol.TypeParameterKind != TypeParameterKind.Method;
+        protected override bool CanFind(ITypeParameterSymbol symbol) =>
+            symbol.TypeParameterKind != TypeParameterKind.Method;
 
         protected override Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
             ITypeParameterSymbol symbol,
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Type parameters are only found in documents that have both their name, and the
             // name of its owning type.  NOTE(cyrusn): We have to check in multiple files because
@@ -27,7 +29,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             // parameter has a different name in different parts that we won't find it.  However,
             // this only happens in error situations.  It is not legal in C# to use a different
             // name for a type parameter in different parts.
-            return FindDocumentsAsync(project, documents, findInGlobalSuppressions: false, cancellationToken, symbol.Name, symbol.ContainingType.Name);
+            return FindDocumentsAsync(
+                project,
+                documents,
+                findInGlobalSuppressions: false,
+                cancellationToken,
+                symbol.Name,
+                symbol.ContainingType.Name
+            );
         }
 
         protected override ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
@@ -35,9 +44,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return FindReferencesInDocumentUsingSymbolNameAsync(symbol, document, semanticModel, cancellationToken);
+            return FindReferencesInDocumentUsingSymbolNameAsync(
+                symbol,
+                document,
+                semanticModel,
+                cancellationToken
+            );
         }
     }
 }

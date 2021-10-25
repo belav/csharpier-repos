@@ -25,7 +25,12 @@ namespace Roslyn.Test.Utilities
             _bytes = GCHandle.Alloc(metadata.DangerousGetUnderlyingArray(), GCHandleType.Pinned);
             this.Pointer = _bytes.AddrOfPinnedObject();
             this.Size = metadata.Length;
-            this.Reader = new MetadataReader((byte*)this.Pointer, this.Size, MetadataReaderOptions.None, null);
+            this.Reader = new MetadataReader(
+                (byte*)this.Pointer,
+                this.Size,
+                MetadataReaderOptions.None,
+                null
+            );
         }
 
         public void Dispose()

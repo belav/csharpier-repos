@@ -4,6 +4,8 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(Microsoft.Win32.SafeHandles.SafeFileHandle))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(Microsoft.Win32.SafeHandles.SafeFileHandle)
+)]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.IO.FileOptions))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.IO.FileStream))]

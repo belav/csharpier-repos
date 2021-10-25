@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
     [Export(typeof(ProjectCodeModelFactory))]
     internal sealed class ProjectCodeModelFactory : IProjectCodeModelFactory
     {
-        private readonly ConcurrentDictionary<ProjectId, ProjectCodeModel> _projectCodeModels = new ConcurrentDictionary<ProjectId, ProjectCodeModel>();
+        private readonly ConcurrentDictionary<ProjectId, ProjectCodeModel> _projectCodeModels =
+            new ConcurrentDictionary<ProjectId, ProjectCodeModel>();
 
         private readonly VisualStudioWorkspace _visualStudioWorkspace;
         private readonly IServiceProvider _serviceProvider;
@@ -36,13 +37,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         private readonly AsyncBatchingWorkQueue<DocumentId> _documentsToFireEventsFor;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public ProjectCodeModelFactory(
             VisualStudioWorkspace visualStudioWorkspace,
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
             IThreadingContext threadingContext,
             IForegroundNotificationService notificationService,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _visualStudioWorkspace = visualStudioWorkspace;
             _serviceProvider = serviceProvider;
@@ -55,19 +61,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             // for the same documents.  Once enough time has passed, take the documents that were changed and run
             // through them, firing their latest events.
             _documentsToFireEventsFor = new AsyncBatchingWorkQueue<DocumentId>(
-                TimeSpan.FromMilliseconds(visualStudioWorkspace.Options.GetOption(InternalSolutionCrawlerOptions.AllFilesWorkerBackOffTimeSpanInMS)),
+                TimeSpan.FromMilliseconds(
+                    visualStudioWorkspace.Options.GetOption(
+                        InternalSolutionCrawlerOptions.AllFilesWorkerBackOffTimeSpanInMS
+                    )
+                ),
                 ProcessNextDocumentBatchAsync,
                 // We only care about unique doc-ids, so pass in this comparer to collapse streams of changes for a
                 // single document down to one notification.
                 EqualityComparer<DocumentId>.Default,
                 _listener,
-                threadingContext.DisposalToken);
+                threadingContext.DisposalToken
+            );
 
             _visualStudioWorkspace.WorkspaceChanged += OnWorkspaceChanged;
         }
 
         private System.Threading.Tasks.Task ProcessNextDocumentBatchAsync(
-            ImmutableArray<DocumentId> documentIds, CancellationToken cancellationToken)
+            ImmutableArray<DocumentId> documentIds,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var documentId in documentIds)
             {
@@ -77,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 _notificationService.RegisterNotification(
                     () => FireEventsForDocument(documentId),
                     _listener.BeginAsyncOperation("CodeModelEvent"),
-                    cancellationToken);
+                    cancellationToken
+                );
             }
 
             return System.Threading.Tasks.Task.CompletedTask;
@@ -96,7 +110,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 if (filename == null)
                     return false;
 
-                if (!projectCodeModel.TryGetCachedFileCodeModel(filename, out var fileCodeModelHandle))
+                if (
+                    !projectCodeModel.TryGetCachedFileCodeModel(
+                        filename,
+                        out var fileCodeModelHandle
+                    )
+                )
                     return false;
 
                 var codeModel = fileCodeModelHandle.Object;
@@ -144,12 +163,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             }
         }
 
-        public IProjectCodeModel CreateProjectCodeModel(ProjectId id, ICodeModelInstanceFactory codeModelInstanceFactory)
+        public IProjectCodeModel CreateProjectCodeModel(
+            ProjectId id,
+            ICodeModelInstanceFactory codeModelInstanceFactory
+        )
         {
-            var projectCodeModel = new ProjectCodeModel(_threadingContext, id, codeModelInstanceFactory, _visualStudioWorkspace, _serviceProvider, this);
+            var projectCodeModel = new ProjectCodeModel(
+                _threadingContext,
+                id,
+                codeModelInstanceFactory,
+                _visualStudioWorkspace,
+                _serviceProvider,
+                this
+            );
             if (!_projectCodeModels.TryAdd(id, projectCodeModel))
             {
-                throw new InvalidOperationException($"A {nameof(IProjectCodeModel)} has already been created for project with ID {id}");
+                throw new InvalidOperationException(
+                    $"A {nameof(IProjectCodeModel)} has already been created for project with ID {id}"
+                );
             }
 
             return projectCodeModel;
@@ -159,17 +190,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         {
             if (!_projectCodeModels.TryGetValue(id, out var projectCodeModel))
             {
-                throw new InvalidOperationException($"No {nameof(ProjectCodeModel)} exists for project with ID {id}");
+                throw new InvalidOperationException(
+                    $"No {nameof(ProjectCodeModel)} exists for project with ID {id}"
+                );
             }
 
             return projectCodeModel;
         }
 
-        public IEnumerable<ProjectCodeModel> GetAllProjectCodeModels()
-            => _projectCodeModels.Values;
+        public IEnumerable<ProjectCodeModel> GetAllProjectCodeModels() => _projectCodeModels.Values;
 
-        internal void OnProjectClosed(ProjectId projectId)
-            => _projectCodeModels.TryRemove(projectId, out _);
+        internal void OnProjectClosed(ProjectId projectId) =>
+            _projectCodeModels.TryRemove(projectId, out _);
 
         public ProjectCodeModel TryGetProjectCodeModel(ProjectId id)
         {
@@ -177,17 +209,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             return projectCodeModel;
         }
 
-        public EnvDTE.FileCodeModel GetOrCreateFileCodeModel(ProjectId id, string filePath)
-            => GetProjectCodeModel(id).GetOrCreateFileCodeModel(filePath).Handle;
+        public EnvDTE.FileCodeModel GetOrCreateFileCodeModel(ProjectId id, string filePath) =>
+            GetProjectCodeModel(id).GetOrCreateFileCodeModel(filePath).Handle;
 
         public void ScheduleDeferredCleanupTask(Action<CancellationToken> a)
         {
-            _ = _threadingContext.RunWithShutdownBlockAsync(async cancellationToken =>
-            {
-                await _threadingContext.JoinableTaskFactory.StartOnIdle(
-                    () => a(cancellationToken),
-                    VsTaskRunContext.UIThreadNormalPriority);
-            });
+            _ = _threadingContext.RunWithShutdownBlockAsync(
+                async cancellationToken =>
+                {
+                    await _threadingContext.JoinableTaskFactory.StartOnIdle(
+                        () => a(cancellationToken),
+                        VsTaskRunContext.UIThreadNormalPriority
+                    );
+                }
+            );
         }
     }
 }

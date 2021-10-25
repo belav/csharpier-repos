@@ -37,9 +37,6 @@ namespace VirtualFunctionOverride
 
     class ClassWithFinalizer
     {
-        ~ClassWithFinalizer()
-        {
-
-        }
+        ~ClassWithFinalizer() { }
     }
 }

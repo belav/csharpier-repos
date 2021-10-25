@@ -43,8 +43,10 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceProvider = CreateTestServiceProvider(0);
 
             // Act + Assert
-            AssertExtensions.Throws<InvalidOperationException>(() => serviceProvider.GetRequiredService<IFoo>(),
-                $"No service for type '{typeof(IFoo)}' has been registered.");
+            AssertExtensions.Throws<InvalidOperationException>(
+                () => serviceProvider.GetRequiredService<IFoo>(),
+                $"No service for type '{typeof(IFoo)}' has been registered."
+            );
         }
 
         [Fact]
@@ -54,7 +56,9 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceProvider = new RequiredServiceSupportingProvider();
 
             // Act + Assert
-            AssertExtensions.Throws<RankException>(() => serviceProvider.GetRequiredService<IFoo>());
+            AssertExtensions.Throws<RankException>(
+                () => serviceProvider.GetRequiredService<IFoo>()
+            );
         }
 
         [Fact]
@@ -64,8 +68,10 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceProvider = CreateTestServiceProvider(0);
 
             // Act + Assert
-            AssertExtensions.Throws<InvalidOperationException>(() => serviceProvider.GetRequiredService(typeof(IFoo)),
-                $"No service for type '{typeof(IFoo)}' has been registered.");
+            AssertExtensions.Throws<InvalidOperationException>(
+                () => serviceProvider.GetRequiredService(typeof(IFoo)),
+                $"No service for type '{typeof(IFoo)}' has been registered."
+            );
         }
 
         [Fact]
@@ -75,7 +81,9 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceProvider = new RequiredServiceSupportingProvider();
 
             // Act + Assert
-            AssertExtensions.Throws<RankException>(() => serviceProvider.GetRequiredService(typeof(IFoo)));
+            AssertExtensions.Throws<RankException>(
+                () => serviceProvider.GetRequiredService(typeof(IFoo))
+            );
         }
 
         [Fact]

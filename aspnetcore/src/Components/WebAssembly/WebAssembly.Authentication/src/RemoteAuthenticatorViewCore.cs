@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
     /// A component that handles remote authentication operations in an application.
     /// </summary>
     /// <typeparam name="TAuthenticationState">The user state type persisted while the operation is in progress. It must be serializable.</typeparam>
-    public class RemoteAuthenticatorViewCore<TAuthenticationState> : ComponentBase where TAuthenticationState : RemoteAuthenticationState
+    public class RemoteAuthenticatorViewCore<TAuthenticationState> : ComponentBase
+        where TAuthenticationState : RemoteAuthenticationState
     {
         private string _message;
         private RemoteAuthenticationApplicationPathsOptions _applicationPaths;
@@ -22,97 +23,120 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         /// <summary>
         /// Gets or sets the <see cref="RemoteAuthenticationActions"/> action the component needs to handle.
         /// </summary>
-        [Parameter] public string Action { get => _action; set => _action = value?.ToLowerInvariant(); }
+        [Parameter]
+        public string Action
+        {
+            get => _action;
+            set => _action = value?.ToLowerInvariant();
+        }
 
         /// <summary>
         /// Gets or sets the <typeparamref name="TAuthenticationState"/> instance to be preserved during the authentication operation.
         /// </summary>
-        [Parameter] public TAuthenticationState AuthenticationState { get; set; }
+        [Parameter]
+        public TAuthenticationState AuthenticationState { get; set; }
 
         /// <summary>
         /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogIn"/> is being handled.
         /// </summary>
-        [Parameter] public RenderFragment LoggingIn { get; set; } = DefaultLogInFragment;
+        [Parameter]
+        public RenderFragment LoggingIn { get; set; } = DefaultLogInFragment;
 
         /// <summary>
         /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.Register"/> is being handled.
         /// </summary>
-        [Parameter] public RenderFragment Registering { get; set; }
+        [Parameter]
+        public RenderFragment Registering { get; set; }
 
         /// <summary>
         /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.Profile"/> is being handled.
         /// </summary>
-        [Parameter] public RenderFragment UserProfile { get; set; }
+        [Parameter]
+        public RenderFragment UserProfile { get; set; }
 
         /// <summary>
         /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogInCallback"/> is being handled.
         /// </summary>
-        [Parameter] public RenderFragment CompletingLoggingIn { get; set; } = DefaultLogInCallbackFragment;
+        [Parameter]
+        public RenderFragment CompletingLoggingIn { get; set; } = DefaultLogInCallbackFragment;
 
         /// <summary>
         /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogInFailed"/> is being handled.
         /// </summary>
-        [Parameter] public RenderFragment<string> LogInFailed { get; set; } = DefaultLogInFailedFragment;
+        [Parameter]
+        public RenderFragment<string> LogInFailed { get; set; } = DefaultLogInFailedFragment;
 
         /// <summary>
         /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOut"/> is being handled.
         /// </summary>
-        [Parameter] public RenderFragment LogOut { get; set; } = DefaultLogOutFragment;
+        [Parameter]
+        public RenderFragment LogOut { get; set; } = DefaultLogOutFragment;
 
         /// <summary>
         /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOutCallback"/> is being handled.
         /// </summary>
-        [Parameter] public RenderFragment CompletingLogOut { get; set; } = DefaultLogOutCallbackFragment;
+        [Parameter]
+        public RenderFragment CompletingLogOut { get; set; } = DefaultLogOutCallbackFragment;
 
         /// <summary>
         /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOutFailed"/> is being handled.
         /// </summary>
-        [Parameter] public RenderFragment<string> LogOutFailed { get; set; } = DefaultLogOutFailedFragment;
+        [Parameter]
+        public RenderFragment<string> LogOutFailed { get; set; } = DefaultLogOutFailedFragment;
 
         /// <summary>
         /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOutSucceeded"/> is being handled.
         /// </summary>
-        [Parameter] public RenderFragment LogOutSucceeded { get; set; } = DefaultLoggedOutFragment;
+        [Parameter]
+        public RenderFragment LogOutSucceeded { get; set; } = DefaultLoggedOutFragment;
 
         /// <summary>
         /// Gets or sets an event callback that will be invoked with the stored authentication state when a log in operation succeeds.
         /// </summary>
-        [Parameter] public EventCallback<TAuthenticationState> OnLogInSucceeded { get; set; }
+        [Parameter]
+        public EventCallback<TAuthenticationState> OnLogInSucceeded { get; set; }
 
         /// <summary>
         /// Gets or sets an event callback that will be invoked with the stored authentication state when a log out operation succeeds.
         /// </summary>
-        [Parameter] public EventCallback<TAuthenticationState> OnLogOutSucceeded { get; set; }
+        [Parameter]
+        public EventCallback<TAuthenticationState> OnLogOutSucceeded { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="IJSRuntime"/> to use for performin JavaScript interop.
         /// </summary>
-        [Inject] internal IJSRuntime JS { get; set; }
+        [Inject]
+        internal IJSRuntime JS { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="NavigationManager"/> to use for redirecting the browser.
         /// </summary>
-        [Inject] internal NavigationManager Navigation { get; set; }
+        [Inject]
+        internal NavigationManager Navigation { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="IRemoteAuthenticationService{TRemoteAuthenticationState}"/> to use for handling the underlying authentication protocol.
         /// </summary>
-        [Inject] internal IRemoteAuthenticationService<TAuthenticationState> AuthenticationService { get; set; }
+        [Inject]
+        internal IRemoteAuthenticationService<TAuthenticationState> AuthenticationService { get; set; }
 
         /// <summary>
         /// Gets or sets a default <see cref="IRemoteAuthenticationPathsProvider"/> to use as fallback if an <see cref="ApplicationPaths"/> has not been explicitly specified.
         /// </summary>
-        [Inject] internal IRemoteAuthenticationPathsProvider RemoteApplicationPathsProvider { get; set; }
+        [Inject]
+        internal IRemoteAuthenticationPathsProvider RemoteApplicationPathsProvider { get; set; }
 
         /// <summary>
         /// Gets or sets a default <see cref="AuthenticationStateProvider"/> with the current user.
         /// </summary>
-        [Inject] internal AuthenticationStateProvider AuthenticationProvider { get; set; }
+        [Inject]
+        internal AuthenticationStateProvider AuthenticationProvider { get; set; }
 
         /// <summary>
         /// Gets or sets a default <see cref="AuthenticationStateProvider"/> with the current user.
         /// </summary>
-        [Inject] internal SignOutSessionStateManager SignOutManager { get; set; }
+        [Inject]
+        internal SignOutSessionStateManager SignOutManager { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="RemoteAuthenticationApplicationPathsOptions"/> with the paths to different authentication pages.
@@ -198,7 +222,14 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                     }
                     break;
                 case RemoteAuthenticationActions.LogOut:
-                    await ProcessLogOut(GetReturnUrl(state: null, Navigation.ToAbsoluteUri(ApplicationPaths.LogOutSucceededPath).AbsoluteUri));
+                    await ProcessLogOut(
+                        GetReturnUrl(
+                            state: null,
+                            Navigation.ToAbsoluteUri(
+                                ApplicationPaths.LogOutSucceededPath
+                            ).AbsoluteUri
+                        )
+                    );
                     break;
                 case RemoteAuthenticationActions.LogOutCallback:
                     await ProcessLogOutCallback();
@@ -215,10 +246,12 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         private async Task ProcessLogIn(string returnUrl)
         {
             AuthenticationState.ReturnUrl = returnUrl;
-            var result = await AuthenticationService.SignInAsync(new RemoteAuthenticationContext<TAuthenticationState>
-            {
-                State = AuthenticationState
-            });
+            var result = await AuthenticationService.SignInAsync(
+                new RemoteAuthenticationContext<TAuthenticationState>
+                {
+                    State = AuthenticationState
+                }
+            );
 
             switch (result.Status)
             {
@@ -234,14 +267,18 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                     break;
                 case RemoteAuthenticationStatus.OperationCompleted:
                 default:
-                    throw new InvalidOperationException($"Invalid authentication result status '{result.Status}'.");
+                    throw new InvalidOperationException(
+                        $"Invalid authentication result status '{result.Status}'."
+                    );
             }
         }
 
         private async Task ProcessLogInCallback()
         {
             var url = Navigation.Uri;
-            var result = await AuthenticationService.CompleteSignInAsync(new RemoteAuthenticationContext<TAuthenticationState> { Url = url });
+            var result = await AuthenticationService.CompleteSignInAsync(
+                new RemoteAuthenticationContext<TAuthenticationState> { Url = url }
+            );
             switch (result.Status)
             {
                 case RemoteAuthenticationStatus.Redirect:
@@ -255,11 +292,17 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                 case RemoteAuthenticationStatus.OperationCompleted:
                     break;
                 case RemoteAuthenticationStatus.Failure:
-                    var uri = Navigation.ToAbsoluteUri($"{ApplicationPaths.LogInFailedPath}?message={Uri.EscapeDataString(result.ErrorMessage)}").ToString();
+                    var uri = Navigation
+                        .ToAbsoluteUri(
+                            $"{ApplicationPaths.LogInFailedPath}?message={Uri.EscapeDataString(result.ErrorMessage)}"
+                        )
+                        .ToString();
                     await NavigateToReturnUrl(uri);
                     break;
                 default:
-                    throw new InvalidOperationException($"Invalid authentication result status '{result.Status}'.");
+                    throw new InvalidOperationException(
+                        $"Invalid authentication result status '{result.Status}'."
+                    );
             }
         }
 
@@ -267,7 +310,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         {
             if (!await SignOutManager.ValidateSignOutState())
             {
-                var uri = $"{Navigation.ToAbsoluteUri(ApplicationPaths.LogOutFailedPath)}?message={Uri.EscapeDataString("The logout was not initiated from within the page.")}";
+                var uri =
+                    $"{Navigation.ToAbsoluteUri(ApplicationPaths.LogOutFailedPath)}?message={Uri.EscapeDataString("The logout was not initiated from within the page.")}";
                 Navigation.NavigateTo(uri);
 
                 return;
@@ -279,7 +323,12 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             var isauthenticated = state.User.Identity.IsAuthenticated;
             if (isauthenticated)
             {
-                var result = await AuthenticationService.SignOutAsync(new RemoteAuthenticationContext<TAuthenticationState> { State = AuthenticationState });
+                var result = await AuthenticationService.SignOutAsync(
+                    new RemoteAuthenticationContext<TAuthenticationState>
+                    {
+                        State = AuthenticationState
+                    }
+                );
                 switch (result.Status)
                 {
                     case RemoteAuthenticationStatus.Redirect:
@@ -295,7 +344,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                         Navigation.NavigateTo(ApplicationPaths.LogOutFailedPath);
                         break;
                     default:
-                        throw new InvalidOperationException($"Invalid authentication result status.");
+                        throw new InvalidOperationException(
+                            $"Invalid authentication result status."
+                        );
                 }
             }
             else
@@ -306,7 +357,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
         private async Task ProcessLogOutCallback()
         {
-            var result = await AuthenticationService.CompleteSignOutAsync(new RemoteAuthenticationContext<TAuthenticationState> { Url = Navigation.Uri });
+            var result = await AuthenticationService.CompleteSignOutAsync(
+                new RemoteAuthenticationContext<TAuthenticationState> { Url = Navigation.Uri }
+            );
             switch (result.Status)
             {
                 case RemoteAuthenticationStatus.Redirect:
@@ -315,12 +368,23 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                     throw new InvalidOperationException("Should not redirect.");
                 case RemoteAuthenticationStatus.Success:
                     await OnLogOutSucceeded.InvokeAsync(result.State);
-                    await NavigateToReturnUrl(GetReturnUrl(result.State, Navigation.ToAbsoluteUri(ApplicationPaths.LogOutSucceededPath).ToString()));
+                    await NavigateToReturnUrl(
+                        GetReturnUrl(
+                            result.State,
+                            Navigation
+                                .ToAbsoluteUri(ApplicationPaths.LogOutSucceededPath)
+                                .ToString()
+                        )
+                    );
                     break;
                 case RemoteAuthenticationStatus.OperationCompleted:
                     break;
                 case RemoteAuthenticationStatus.Failure:
-                    var uri = Navigation.ToAbsoluteUri($"{ApplicationPaths.LogOutFailedPath}?message={Uri.EscapeDataString(result.ErrorMessage)}").ToString();
+                    var uri = Navigation
+                        .ToAbsoluteUri(
+                            $"{ApplicationPaths.LogOutFailedPath}?message={Uri.EscapeDataString(result.ErrorMessage)}"
+                        )
+                        .ToString();
                     await NavigateToReturnUrl(uri);
                     break;
                 default:
@@ -335,27 +399,43 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                 return state.ReturnUrl;
             }
 
-            var fromQuery = QueryStringHelper.GetParameter(new Uri(Navigation.Uri).Query, "returnUrl");
-            if (!string.IsNullOrWhiteSpace(fromQuery) && !fromQuery.StartsWith(Navigation.BaseUri, StringComparison.Ordinal))
+            var fromQuery = QueryStringHelper.GetParameter(
+                new Uri(Navigation.Uri).Query,
+                "returnUrl"
+            );
+            if (
+                !string.IsNullOrWhiteSpace(fromQuery)
+                && !fromQuery.StartsWith(Navigation.BaseUri, StringComparison.Ordinal)
+            )
             {
                 // This is an extra check to prevent open redirects.
-                throw new InvalidOperationException("Invalid return url. The return url needs to have the same origin as the current page.");
+                throw new InvalidOperationException(
+                    "Invalid return url. The return url needs to have the same origin as the current page."
+                );
             }
 
             return fromQuery ?? defaultReturnUrl ?? Navigation.BaseUri;
         }
 
-        private async Task NavigateToReturnUrl(string returnUrl) => await JS.InvokeVoidAsync("Blazor.navigateTo", returnUrl, false, true);
+        private async Task NavigateToReturnUrl(string returnUrl) =>
+            await JS.InvokeVoidAsync("Blazor.navigateTo", returnUrl, false, true);
 
         private ValueTask RedirectToRegister()
         {
             var loginUrl = Navigation.ToAbsoluteUri(ApplicationPaths.LogInPath).PathAndQuery;
-            var registerUrl = Navigation.ToAbsoluteUri($"{ApplicationPaths.RemoteRegisterPath}?returnUrl={Uri.EscapeDataString(loginUrl)}").PathAndQuery;
+            var registerUrl =
+                Navigation.ToAbsoluteUri(
+                    $"{ApplicationPaths.RemoteRegisterPath}?returnUrl={Uri.EscapeDataString(loginUrl)}"
+                ).PathAndQuery;
 
             return JS.InvokeVoidAsync("location.replace", registerUrl);
         }
 
-        private ValueTask RedirectToProfile() => JS.InvokeVoidAsync("location.replace", Navigation.ToAbsoluteUri(ApplicationPaths.RemoteProfilePath).PathAndQuery);
+        private ValueTask RedirectToProfile() =>
+            JS.InvokeVoidAsync(
+                "location.replace",
+                Navigation.ToAbsoluteUri(ApplicationPaths.RemoteProfilePath).PathAndQuery
+            );
 
         private static void DefaultLogInFragment(RenderTreeBuilder builder)
         {

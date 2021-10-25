@@ -23,7 +23,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         {
             // Arrange
             var httpContext = new DefaultHttpContext();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider());
             var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
             var viewContext = new ViewContext(
@@ -32,7 +36,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 viewData,
                 tempData,
                 TextWriter.Null,
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
 
             var viewComponentDescriptor = new ViewComponentDescriptor();
 
@@ -42,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 new Dictionary<string, object>(),
                 new HtmlTestEncoder(),
                 viewContext,
-                TextWriter.Null);
+                TextWriter.Null
+            );
 
             // Assert
             // New ViewContext but initial View and TextWriter copied over.
@@ -82,11 +88,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         [MemberData(nameof(IncompatibleModelData))]
         public void ViewDataModelSetter_DoesNotThrow_IfValueIncompatibleWithSourceDeclaredType(
             object model,
-            Type expectedType)
+            Type expectedType
+        )
         {
             // Arrange
             var httpContext = new DefaultHttpContext();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var viewData = new ViewDataDictionary<int>(new EmptyModelMetadataProvider());
             var viewContext = new ViewContext(
                 actionContext,
@@ -94,7 +105,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 viewData,
                 new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()),
                 TextWriter.Null,
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
 
             var viewComponentDescriptor = new ViewComponentDescriptor();
             var viewComponentContext = new ViewComponentContext(
@@ -102,7 +114,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 new Dictionary<string, object>(),
                 new HtmlTestEncoder(),
                 viewContext,
-                TextWriter.Null);
+                TextWriter.Null
+            );
 
             // Act (does not throw)
             // Non-ints can be assigned despite type restrictions in the source ViewDataDictionary.

@@ -24,10 +24,12 @@ namespace Microsoft.AspNetCore.Hosting
         /// </returns>
         public static IWebHostBuilder UseSockets(this IWebHostBuilder hostBuilder)
         {
-            return hostBuilder.ConfigureServices(services =>
-            {
-                services.AddSingleton<IConnectionListenerFactory, SocketTransportFactory>();
-            });
+            return hostBuilder.ConfigureServices(
+                services =>
+                {
+                    services.AddSingleton<IConnectionListenerFactory, SocketTransportFactory>();
+                }
+            );
         }
 
         /// <summary>
@@ -42,12 +44,19 @@ namespace Microsoft.AspNetCore.Hosting
         /// <returns>
         /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
         /// </returns>
-        public static IWebHostBuilder UseSockets(this IWebHostBuilder hostBuilder, Action<SocketTransportOptions> configureOptions)
+        public static IWebHostBuilder UseSockets(
+            this IWebHostBuilder hostBuilder,
+            Action<SocketTransportOptions> configureOptions
+        )
         {
-            return hostBuilder.UseSockets().ConfigureServices(services =>
-            {
-                services.Configure(configureOptions);
-            });
+            return hostBuilder
+                .UseSockets()
+                .ConfigureServices(
+                    services =>
+                    {
+                        services.Configure(configureOptions);
+                    }
+                );
         }
     }
 }

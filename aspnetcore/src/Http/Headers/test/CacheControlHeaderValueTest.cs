@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -65,7 +65,10 @@ namespace Microsoft.Net.Http.Headers
             Assert.Throws<ArgumentNullException>(() => cacheControl.Extensions.Add(null!));
             cacheControl.Extensions.Add(new NameValueHeaderValue("name", "value"));
             Assert.Equal(1, cacheControl.Extensions.Count);
-            Assert.Equal(new NameValueHeaderValue("name", "value"), cacheControl.Extensions.First());
+            Assert.Equal(
+                new NameValueHeaderValue("name", "value"),
+                cacheControl.Extensions.First()
+            );
         }
 
         [Fact]
@@ -91,7 +94,10 @@ namespace Microsoft.Net.Http.Headers
             cacheControl.MaxStaleLimit = new TimeSpan(0, 2, 5);
             Assert.Equal("no-store, no-cache, max-age=70, max-stale=125", cacheControl.ToString());
             cacheControl.MinFresh = new TimeSpan(0, 3, 0);
-            Assert.Equal("no-store, no-cache, max-age=70, max-stale=125, min-fresh=180", cacheControl.ToString());
+            Assert.Equal(
+                "no-store, no-cache, max-age=70, max-stale=125, min-fresh=180",
+                cacheControl.ToString()
+            );
 
             cacheControl = new CacheControlHeaderValue();
             cacheControl.NoTransform = true;
@@ -100,7 +106,10 @@ namespace Microsoft.Net.Http.Headers
             Assert.Equal("no-transform, only-if-cached", cacheControl.ToString());
             cacheControl.Extensions.Add(new NameValueHeaderValue("custom"));
             cacheControl.Extensions.Add(new NameValueHeaderValue("customName", "customValue"));
-            Assert.Equal("no-transform, only-if-cached, custom, customName=customValue", cacheControl.ToString());
+            Assert.Equal(
+                "no-transform, only-if-cached, custom, customName=customValue",
+                cacheControl.ToString()
+            );
 
             cacheControl = new CacheControlHeaderValue();
             cacheControl.Extensions.Add(new NameValueHeaderValue("custom"));
@@ -127,9 +136,15 @@ namespace Microsoft.Net.Http.Headers
             cacheControl.PrivateHeaders.Add("PLACEHOLDER3");
             Assert.Equal("private=\"PLACEHOLDER2, PLACEHOLDER3\"", cacheControl.ToString());
             cacheControl.MustRevalidate = true;
-            Assert.Equal("must-revalidate, private=\"PLACEHOLDER2, PLACEHOLDER3\"", cacheControl.ToString());
+            Assert.Equal(
+                "must-revalidate, private=\"PLACEHOLDER2, PLACEHOLDER3\"",
+                cacheControl.ToString()
+            );
             cacheControl.ProxyRevalidate = true;
-            Assert.Equal("must-revalidate, proxy-revalidate, private=\"PLACEHOLDER2, PLACEHOLDER3\"", cacheControl.ToString());
+            Assert.Equal(
+                "must-revalidate, proxy-revalidate, private=\"PLACEHOLDER2, PLACEHOLDER3\"",
+                cacheControl.ToString()
+            );
         }
 
         [Fact]
@@ -229,12 +244,11 @@ namespace Microsoft.Net.Http.Headers
             cacheControl1.NoCacheHeaders.Add("PLACEHOLDER1");
             CompareHashCodes(cacheControl1, cacheControl2, true);
 
-            // Since NoCache and Private generate different hash codes, even if NoCacheHeaders and PrivateHeaders 
+            // Since NoCache and Private generate different hash codes, even if NoCacheHeaders and PrivateHeaders
             // have the same values, the hash code will be different.
             cacheControl3.Private = true;
             cacheControl3.PrivateHeaders.Add("PLACEHOLDER2");
             CompareHashCodes(cacheControl1, cacheControl3, false);
-
 
             cacheControl4.Extensions.Add(new NameValueHeaderValue("custom"));
             CompareHashCodes(cacheControl1, cacheControl4, false);
@@ -411,7 +425,10 @@ namespace Microsoft.Net.Http.Headers
             expected.ProxyRevalidate = true;
             expected.Extensions.Add(new NameValueHeaderValue("c", "d"));
             expected.Extensions.Add(new NameValueHeaderValue("a", "b"));
-            CheckValidTryParse(",public, , private=\"PLACEHOLDER1\", must-revalidate, c=d, proxy-revalidate, a=b", expected);
+            CheckValidTryParse(
+                ",public, , private=\"PLACEHOLDER1\", must-revalidate, c=d, proxy-revalidate, a=b",
+                expected
+            );
 
             expected = new CacheControlHeaderValue();
             expected.Private = true;
@@ -551,7 +568,11 @@ namespace Microsoft.Net.Http.Headers
 
         #region Helper methods
 
-        private void CompareHashCodes(CacheControlHeaderValue x, CacheControlHeaderValue y, bool areEqual)
+        private void CompareHashCodes(
+            CacheControlHeaderValue x,
+            CacheControlHeaderValue y,
+            bool areEqual
+        )
         {
             if (areEqual)
             {
@@ -563,7 +584,11 @@ namespace Microsoft.Net.Http.Headers
             }
         }
 
-        private void CompareValues(CacheControlHeaderValue x, CacheControlHeaderValue y, bool areEqual)
+        private void CompareValues(
+            CacheControlHeaderValue x,
+            CacheControlHeaderValue y,
+            bool areEqual
+        )
         {
             Assert.Equal(areEqual, x.Equals(y));
             Assert.Equal(areEqual, y.Equals(x));
@@ -591,7 +616,6 @@ namespace Microsoft.Net.Http.Headers
             Assert.False(CacheControlHeaderValue.TryParse(input, out var result));
             Assert.Null(result);
         }
-
         #endregion
     }
 }

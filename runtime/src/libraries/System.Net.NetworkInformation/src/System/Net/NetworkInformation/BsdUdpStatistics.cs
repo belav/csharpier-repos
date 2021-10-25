@@ -29,15 +29,29 @@ namespace System.Net.NetworkInformation
             _numListeners = (int)Math.Min(int.MaxValue, statistics.UdpListeners);
         }
 
-        public override long DatagramsReceived { get { return _datagramsReceived; } }
+        public override long DatagramsReceived
+        {
+            get { return _datagramsReceived; }
+        }
 
-        public override long DatagramsSent { get { return _datagramsSent; } }
+        public override long DatagramsSent
+        {
+            get { return _datagramsSent; }
+        }
 
-        public override long IncomingDatagramsDiscarded { get { return _incomingDiscarded; } }
+        public override long IncomingDatagramsDiscarded
+        {
+            get { return _incomingDiscarded; }
+        }
 
-        public override long IncomingDatagramsWithErrors { get { return _incomingErrors; } }
+        public override long IncomingDatagramsWithErrors
+        {
+            get { return _incomingErrors; }
+        }
 
-        public override int UdpListeners { get { return _numListeners; } }
-
+        public override int UdpListeners
+        {
+            get { return _numListeners; }
+        }
     }
 }

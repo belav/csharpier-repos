@@ -15,7 +15,6 @@ namespace System.Web.Razor.Tokenizer.Symbols
         RealLiteral,
         CharacterLiteral,
         StringLiteral,
-
         // Operators
         Arrow,
         Minus,
@@ -66,7 +65,6 @@ namespace System.Web.Razor.Tokenizer.Symbols
         RightShiftAssign,
         Hash,
         Transition,
-
         // Razor specific
         RazorCommentTransition,
         RazorCommentStar,

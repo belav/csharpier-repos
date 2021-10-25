@@ -22,9 +22,7 @@ namespace Microsoft.AspNetCore.Routing
 
         private static readonly char[] Delimiters = new char[] { SeparatorChar };
 
-        public RoutePatternMatcher(
-            RoutePattern pattern,
-            RouteValueDictionary defaults)
+        public RoutePatternMatcher(RoutePattern pattern, RouteValueDictionary defaults)
         {
             if (pattern == null)
             {
@@ -83,7 +81,7 @@ namespace Microsoft.AspNetCore.Routing
             // The most common case would be a literal segment that doesn't match.
             //
             // On the second pass, we're almost certainly going to match the URL, so go ahead and allocate the 'values'
-            // and start capturing strings. 
+            // and start capturing strings.
             foreach (var stringSegment in pathTokenizer)
             {
                 if (stringSegment.Length == 0)
@@ -91,14 +89,19 @@ namespace Microsoft.AspNetCore.Routing
                     return false;
                 }
 
-                var pathSegment = i >= RoutePattern.PathSegments.Count ? null : RoutePattern.PathSegments[i];
+                var pathSegment =
+                    i >= RoutePattern.PathSegments.Count ? null : RoutePattern.PathSegments[i];
                 if (pathSegment == null && stringSegment.Length > 0)
                 {
                     // If pathSegment is null, then we're out of route segments. All we can match is the empty
                     // string.
                     return false;
                 }
-                else if (pathSegment.IsSimple && pathSegment.Parts[0] is RoutePatternParameterPart parameter && parameter.IsCatchAll)
+                else if (
+                    pathSegment.IsSimple
+                    && pathSegment.Parts[0] is RoutePatternParameterPart parameter
+                    && parameter.IsCatchAll
+                )
                 {
                     // Nothing to validate for a catch-all - it can match any string, including the empty string.
                     //
@@ -180,7 +183,10 @@ namespace Microsoft.AspNetCore.Routing
                 Debug.Assert(part.IsParameter);
 
                 // It's ok for a catch-all to produce a null value
-                if (part is RoutePatternParameterPart parameter && (parameter.IsCatchAll || _hasDefaultValue[i]))
+                if (
+                    part is RoutePatternParameterPart parameter
+                    && (parameter.IsCatchAll || _hasDefaultValue[i])
+                )
                 {
                     // Don't replace an existing value with a null.
                     var defaultValue = _defaultValues[i];
@@ -207,7 +213,11 @@ namespace Microsoft.AspNetCore.Routing
             return true;
         }
 
-        private bool TryMatchLiterals(int index, StringSegment stringSegment, RoutePatternPathSegment pathSegment)
+        private bool TryMatchLiterals(
+            int index,
+            StringSegment stringSegment,
+            RoutePatternPathSegment pathSegment
+        )
         {
             if (pathSegment.IsSimple && !pathSegment.Parts[0].IsParameter)
             {
@@ -235,9 +245,7 @@ namespace Microsoft.AspNetCore.Routing
             {
                 // For a parameter, validate that it's a has some length, or we have a default, or it's optional.
                 var part = (RoutePatternParameterPart)pathSegment.Parts[0];
-                if (stringSegment.Length == 0 &&
-                    !_hasDefaultValue[index] &&
-                    !part.IsOptional)
+                if (stringSegment.Length == 0 && !_hasDefaultValue[index] && !part.IsOptional)
                 {
                     // There's no value for this parameter, the route can't match.
                     return false;
@@ -252,9 +260,18 @@ namespace Microsoft.AspNetCore.Routing
             return true;
         }
 
-        private bool SavePathSegmentsAsValues(int index, RouteValueDictionary values, StringSegment requestSegment, RoutePatternPathSegment pathSegment)
+        private bool SavePathSegmentsAsValues(
+            int index,
+            RouteValueDictionary values,
+            StringSegment requestSegment,
+            RoutePatternPathSegment pathSegment
+        )
         {
-            if (pathSegment.IsSimple && pathSegment.Parts[0] is RoutePatternParameterPart parameter && parameter.IsCatchAll)
+            if (
+                pathSegment.IsSimple
+                && pathSegment.Parts[0] is RoutePatternParameterPart parameter
+                && parameter.IsCatchAll
+            )
             {
                 // A catch-all captures til the end of the string.
                 var captured = requestSegment.Buffer.Substring(requestSegment.Offset);
@@ -294,12 +311,13 @@ namespace Microsoft.AspNetCore.Routing
         internal static bool MatchComplexSegment(
             RoutePatternPathSegment routeSegment,
             ReadOnlySpan<char> requestSegment,
-            RouteValueDictionary values)
+            RouteValueDictionary values
+        )
         {
             var indexOfLastSegment = routeSegment.Parts.Count - 1;
 
             // We match the request to the template starting at the rightmost parameter
-            // If the last segment of template is optional, then request can match the 
+            // If the last segment of template is optional, then request can match the
             // template with or without the last parameter. So we start with regular matching,
             // but if it doesn't match, we start with next to last parameter. Example:
             // Template: {p1}/{p2}.{p3?}. If the request is one/two.three it will match right away
@@ -307,31 +325,52 @@ namespace Microsoft.AspNetCore.Routing
             // rightmost giving p3 the value of two, then we end up not matching the segment.
             // In this case we start again from p2 to match the request and we succeed giving
             // the value two to p2
-            if (routeSegment.Parts[indexOfLastSegment] is RoutePatternParameterPart parameter && parameter.IsOptional &&
-                routeSegment.Parts[indexOfLastSegment - 1].IsSeparator)
+            if (
+                routeSegment.Parts[indexOfLastSegment] is RoutePatternParameterPart parameter
+                && parameter.IsOptional
+                && routeSegment.Parts[indexOfLastSegment - 1].IsSeparator
+            )
             {
-                if (MatchComplexSegmentCore(routeSegment, requestSegment, values, indexOfLastSegment))
+                if (
+                    MatchComplexSegmentCore(
+                        routeSegment,
+                        requestSegment,
+                        values,
+                        indexOfLastSegment
+                    )
+                )
                 {
                     return true;
                 }
                 else
                 {
-                    var separator = (RoutePatternSeparatorPart)routeSegment.Parts[indexOfLastSegment - 1];
-                    if (requestSegment.EndsWith(
-                    separator.Content,
-                    StringComparison.OrdinalIgnoreCase))
+                    var separator = (RoutePatternSeparatorPart)routeSegment.Parts[
+                        indexOfLastSegment - 1
+                    ];
+                    if (
+                        requestSegment.EndsWith(
+                            separator.Content,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                         return false;
 
                     return MatchComplexSegmentCore(
                         routeSegment,
                         requestSegment,
                         values,
-                        indexOfLastSegment - 2);
+                        indexOfLastSegment - 2
+                    );
                 }
             }
             else
             {
-                return MatchComplexSegmentCore(routeSegment, requestSegment, values, indexOfLastSegment);
+                return MatchComplexSegmentCore(
+                    routeSegment,
+                    requestSegment,
+                    values,
+                    indexOfLastSegment
+                );
             }
         }
 
@@ -339,7 +378,8 @@ namespace Microsoft.AspNetCore.Routing
             RoutePatternPathSegment routeSegment,
             ReadOnlySpan<char> requestSegment,
             RouteValueDictionary values,
-            int indexOfLastSegmentUsed)
+            int indexOfLastSegmentUsed
+        )
         {
             Debug.Assert(routeSegment != null);
             Debug.Assert(routeSegment.Parts.Count > 1);
@@ -383,16 +423,16 @@ namespace Microsoft.AspNetCore.Routing
                     if (part.IsLiteral)
                     {
                         var literal = (RoutePatternLiteralPart)part;
-                        indexOfLiteral = requestSegment.Slice(0, startIndex).LastIndexOf(
-                        literal.Content,
-                        StringComparison.OrdinalIgnoreCase);
+                        indexOfLiteral = requestSegment
+                            .Slice(0, startIndex)
+                            .LastIndexOf(literal.Content, StringComparison.OrdinalIgnoreCase);
                     }
                     else
                     {
                         var literal = (RoutePatternSeparatorPart)part;
-                        indexOfLiteral = requestSegment.Slice(0, startIndex).LastIndexOf(
-                        literal.Content,
-                        StringComparison.OrdinalIgnoreCase);
+                        indexOfLiteral = requestSegment
+                            .Slice(0, startIndex)
+                            .LastIndexOf(literal.Content, StringComparison.OrdinalIgnoreCase);
                     }
 
                     if (indexOfLiteral == -1)
@@ -406,11 +446,19 @@ namespace Microsoft.AspNetCore.Routing
                     // This check is related to the check we do at the very end of this function.
                     if (indexOfLastSegmentUsed == (routeSegment.Parts.Count - 1))
                     {
-                        if (part is RoutePatternLiteralPart literal && ((indexOfLiteral + literal.Content.Length) != requestSegment.Length))
+                        if (
+                            part is RoutePatternLiteralPart literal
+                            && ((indexOfLiteral + literal.Content.Length) != requestSegment.Length)
+                        )
                         {
                             return false;
                         }
-                        else if (part is RoutePatternSeparatorPart separator && ((indexOfLiteral + separator.Content.Length) != requestSegment.Length))
+                        else if (
+                            part is RoutePatternSeparatorPart separator
+                            && (
+                                (indexOfLiteral + separator.Content.Length) != requestSegment.Length
+                            )
+                        )
                         {
                             return false;
                         }
@@ -419,8 +467,13 @@ namespace Microsoft.AspNetCore.Routing
                     newLastIndex = indexOfLiteral;
                 }
 
-                if ((parameterNeedsValue != null) &&
-                    (((lastLiteral != null) && !part.IsParameter) || (indexOfLastSegmentUsed == 0)))
+                if (
+                    (parameterNeedsValue != null)
+                    && (
+                        ((lastLiteral != null) && !part.IsParameter)
+                        || (indexOfLastSegmentUsed == 0)
+                    )
+                )
                 {
                     // If we have a pending parameter that needs a value, grab that value
 
@@ -436,7 +489,10 @@ namespace Microsoft.AspNetCore.Routing
                         else
                         {
                             parameterStartIndex = newLastIndex;
-                            Debug.Assert(false, "indexOfLastSegementUsed should always be 0 from the check above");
+                            Debug.Assert(
+                                false,
+                                "indexOfLastSegementUsed should always be 0 from the check above"
+                            );
                         }
                         parameterTextLength = lastIndex;
                     }
@@ -464,15 +520,17 @@ namespace Microsoft.AspNetCore.Routing
                         }
                     }
 
-                    var parameterValueSpan = requestSegment.Slice(parameterStartIndex, parameterTextLength);
+                    var parameterValueSpan = requestSegment.Slice(
+                        parameterStartIndex,
+                        parameterTextLength
+                    );
 
                     if (parameterValueSpan.Length == 0)
                     {
                         // If we're here that means we have a segment that contains multiple sub-segments.
                         // For these segments all parameters must have non-empty values. If the parameter
-                        // has an empty value it's not a match.                        
+                        // has an empty value it's not a match.
                         return false;
-
                     }
                     else
                     {

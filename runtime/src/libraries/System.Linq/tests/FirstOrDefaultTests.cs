@@ -13,8 +13,7 @@ namespace System.Linq.Tests
         public void SameResultsRepeatCallsIntQuery()
         {
             IEnumerable<int> ieInt = Enumerable.Range(0, 0);
-            var q = from x in ieInt
-                    select x;
+            var q = from x in ieInt select x;
 
             Assert.Equal(q.FirstOrDefault(), q.FirstOrDefault());
         }
@@ -22,16 +21,17 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                    where !string.IsNullOrEmpty(x)
-                    select x;
+            var q =
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
+                where !string.IsNullOrEmpty(x)
+                select x;
 
             Assert.Equal(q.FirstOrDefault(), q.FirstOrDefault());
         }
 
         private static void TestEmptyIList<T>()
         {
-            T[] source = { };
+            T[] source = {  };
             T expected = default(T);
 
             Assert.IsAssignableFrom<IList<T>>(source);
@@ -41,7 +41,7 @@ namespace System.Linq.Tests
 
         private static void TestEmptyIListDefault<T>(T defaultValue)
         {
-            T[] source = { };
+            T[] source = {  };
 
             Assert.IsAssignableFrom<IList<T>>(source);
 
@@ -172,7 +172,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource()
         {
-            int?[] source = { };
+            int?[] source = {  };
 
             Assert.Null(source.FirstOrDefault(x => true));
             Assert.Null(source.FirstOrDefault(x => false));
@@ -271,23 +271,41 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).FirstOrDefault());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).FirstOrDefault(5));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).FirstOrDefault()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).FirstOrDefault(5)
+            );
         }
 
         [Fact]
         public void NullSourcePredicateUsed()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).FirstOrDefault(i => i != 2));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).FirstOrDefault(i => i != 2, 5));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).FirstOrDefault(i => i != 2)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).FirstOrDefault(i => i != 2, 5)
+            );
         }
 
         [Fact]
         public void NullPredicate()
         {
             Func<int, bool> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => Enumerable.Range(0, 3).FirstOrDefault(predicate));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => Enumerable.Range(0, 3).FirstOrDefault(predicate, 5));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => Enumerable.Range(0, 3).FirstOrDefault(predicate)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => Enumerable.Range(0, 3).FirstOrDefault(predicate, 5)
+            );
         }
     }
 }

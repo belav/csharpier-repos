@@ -18,7 +18,6 @@ namespace DefaultNamespace
                 Console.WriteLine("Test paSsed");
             else
                 Console.WriteLine("Test FAiLED");
-
         }
 
         public static int Main(String[] args)

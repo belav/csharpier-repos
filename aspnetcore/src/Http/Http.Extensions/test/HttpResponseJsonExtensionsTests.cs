@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -75,12 +75,20 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
 
         private class IntegerConverter : JsonConverter<int>
         {
-            public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override int Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
 
-            public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                int value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteBooleanValue(value % 2 == 0);
             }
@@ -112,7 +120,11 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
             context.Response.Body = body;
 
             // Act
-            await context.Response.WriteAsJsonAsync(1, options: null, contentType: "application/custom-type");
+            await context.Response.WriteAsJsonAsync(
+                1,
+                options: null,
+                contentType: "application/custom-type"
+            );
 
             // Assert
             Assert.Equal("application/custom-type", context.Response.ContentType);
@@ -144,10 +156,7 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
             var body = new MemoryStream();
             var context = new DefaultHttpContext();
             context.Response.Body = body;
-            var value = new TestObject
-            {
-                StringProperty = "激光這兩個字是甚麼意思"
-            };
+            var value = new TestObject { StringProperty = "激光這兩個字是甚麼意思" };
 
             // Act
             await context.Response.WriteAsJsonAsync(value);
@@ -203,7 +212,9 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
             context.Response.Body = body;
 
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () => await context.Response.WriteAsJsonAsync(value: null, type: null!));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                async () => await context.Response.WriteAsJsonAsync(value: null, type: null!)
+            );
         }
 
         [Fact]
@@ -215,7 +226,14 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
             context.Response.Body = body;
 
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(async () => await HttpResponseJsonExtensions.WriteAsJsonAsync(response: null!, value: null, typeof(int?)));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                async () =>
+                    await HttpResponseJsonExtensions.WriteAsJsonAsync(
+                        response: null!,
+                        value: null,
+                        typeof(int?)
+                    )
+            );
         }
 
         [Fact]
@@ -225,10 +243,7 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
             var body = new MemoryStream();
             var context = new DefaultHttpContext();
             context.Response.Body = body;
-            var value = new TestObject
-            {
-                StringProperty = "激光這兩個字是甚麼意思"
-            };
+            var value = new TestObject { StringProperty = "激光這兩個字是甚麼意思" };
 
             // Act
             await context.Response.WriteAsJsonAsync(value, typeof(TestObject));
@@ -293,14 +308,20 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
                 throw new NotImplementedException();
             }
 
-            public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+            public override ValueTask<int> ReadAsync(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken = default
+            )
             {
                 var tcs = new TaskCompletionSource<int>();
                 cancellationToken.Register(s => ((TaskCompletionSource<int>)s!).SetCanceled(), tcs);
                 return new ValueTask<int>(tcs.Task);
             }
 
-            public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+            public override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> buffer,
+                CancellationToken cancellationToken = default
+            )
             {
                 var tcs = new TaskCompletionSource<int>();
                 cancellationToken.Register(s => ((TaskCompletionSource<int>)s!).SetCanceled(), tcs);

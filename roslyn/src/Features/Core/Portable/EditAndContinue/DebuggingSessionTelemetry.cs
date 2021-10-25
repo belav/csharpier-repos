@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         private readonly List<EditSessionTelemetry.Data> _editSessionData;
         private int _emptyEditSessionCount;
 
-        public DebuggingSessionTelemetry()
-            => _editSessionData = new List<EditSessionTelemetry.Data>();
+        public DebuggingSessionTelemetry() =>
+            _editSessionData = new List<EditSessionTelemetry.Data>();
 
         public Data GetDataAndClear()
         {

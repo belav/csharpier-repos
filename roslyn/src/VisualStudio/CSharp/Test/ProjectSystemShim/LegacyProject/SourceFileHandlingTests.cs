@@ -43,7 +43,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             project.AddFileEx(@"C:\Cat.cs", linkMetadata: @"LinkFolder\Cat.cs");
 
-            var document = environment.Workspace.CurrentSolution.Projects.Single().Documents.Single();
+            var document = environment.Workspace.CurrentSolution.Projects
+                .Single()
+                .Documents.Single();
 
             Assert.Equal(new[] { "LinkFolder" }, document.Folders);
         }
@@ -57,7 +59,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
 
             project.AddFileEx(@"C:\Cat.cs", linkMetadata: @"Dog.cs");
 
-            var document = environment.Workspace.CurrentSolution.Projects.Single().Documents.Single();
+            var document = environment.Workspace.CurrentSolution.Projects
+                .Single()
+                .Documents.Single();
 
             Assert.Empty(document.Folders);
         }
@@ -68,11 +72,15 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         {
             using var environment = new TestEnvironment();
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
-            var projectFolder = Path.GetDirectoryName(environment.Workspace.CurrentSolution.Projects.Single().FilePath);
+            var projectFolder = Path.GetDirectoryName(
+                environment.Workspace.CurrentSolution.Projects.Single().FilePath
+            );
 
             project.AddFileEx(Path.Combine(projectFolder, "Cat.cs"), null);
 
-            var document = environment.Workspace.CurrentSolution.Projects.Single().Documents.Single();
+            var document = environment.Workspace.CurrentSolution.Projects
+                .Single()
+                .Documents.Single();
 
             Assert.Empty(document.Folders);
         }
@@ -83,11 +91,15 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         {
             using var environment = new TestEnvironment();
             var project = CSharpHelpers.CreateCSharpProject(environment, "Test");
-            var projectFolder = Path.GetDirectoryName(environment.Workspace.CurrentSolution.Projects.Single().FilePath);
+            var projectFolder = Path.GetDirectoryName(
+                environment.Workspace.CurrentSolution.Projects.Single().FilePath
+            );
 
             project.AddFileEx(Path.Combine(projectFolder, "RelativeFolder", "Cat.cs"), null);
 
-            var document = environment.Workspace.CurrentSolution.Projects.Single().Documents.Single();
+            var document = environment.Workspace.CurrentSolution.Projects
+                .Single()
+                .Documents.Single();
 
             Assert.Equal(new[] { "RelativeFolder" }, document.Folders);
         }

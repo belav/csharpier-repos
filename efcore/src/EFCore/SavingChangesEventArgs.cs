@@ -13,8 +13,6 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="acceptAllChangesOnSuccess"> The value passed to SaveChanges. </param>
         public SavingChangesEventArgs(bool acceptAllChangesOnSuccess)
-            : base(acceptAllChangesOnSuccess)
-        {
-        }
+            : base(acceptAllChangesOnSuccess) { }
     }
 }

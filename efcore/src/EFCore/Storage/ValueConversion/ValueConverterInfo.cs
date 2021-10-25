@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             Type modelClrType,
             Type providerClrType,
             Func<ValueConverterInfo, ValueConverter> factory,
-            ConverterMappingHints? mappingHints = null)
+            ConverterMappingHints? mappingHints = null
+        )
         {
             _factory = factory;
             Check.NotNull(modelClrType, nameof(modelClrType));
@@ -59,7 +60,6 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <summary>
         ///     Creates an instance of the <see cref="ValueConverter" />.
         /// </summary>
-        public ValueConverter Create()
-            => _factory(this);
+        public ValueConverter Create() => _factory(this);
     }
 }

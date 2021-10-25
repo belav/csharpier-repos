@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
     {
         public static void AddDataAnnotationsLocalizationServices(
             IServiceCollection services,
-            Action<MvcDataAnnotationsLocalizationOptions>? setupAction)
+            Action<MvcDataAnnotationsLocalizationOptions>? setupAction
+        )
         {
             services.AddLocalization();
 
@@ -23,9 +24,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             else
             {
                 services.TryAddEnumerable(
-                    ServiceDescriptor.Transient
-                    <IConfigureOptions<MvcDataAnnotationsLocalizationOptions>,
-                    MvcDataAnnotationsLocalizationOptionsSetup>());
+                    ServiceDescriptor.Transient<
+                        IConfigureOptions<MvcDataAnnotationsLocalizationOptions>,
+                        MvcDataAnnotationsLocalizationOptionsSetup
+                    >()
+                );
             }
         }
     }

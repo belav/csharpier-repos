@@ -12,7 +12,14 @@ namespace System.DirectoryServices.Protocols
         // Linux doesn't support setting FQDN so we mark the flag as if it is already set so we don't make a call to set it again.
         private bool _setFQDNDone = true;
 
-        private void InternalInitConnectionHandle(string hostname) => _ldapHandle = new ConnectionHandle(Interop.Ldap.ldap_init(hostname, ((LdapDirectoryIdentifier)_directoryIdentifier).PortNumber), _needDispose);
+        private void InternalInitConnectionHandle(string hostname) =>
+            _ldapHandle = new ConnectionHandle(
+                Interop.Ldap.ldap_init(
+                    hostname,
+                    ((LdapDirectoryIdentifier)_directoryIdentifier).PortNumber
+                ),
+                _needDispose
+            );
 
         private int InternalConnectToServer()
         {
@@ -21,10 +28,17 @@ namespace System.DirectoryServices.Protocols
             return 0;
         }
 
-        private int InternalBind(NetworkCredential tempCredential, SEC_WINNT_AUTH_IDENTITY_EX cred, BindMethod method)
+        private int InternalBind(
+            NetworkCredential tempCredential,
+            SEC_WINNT_AUTH_IDENTITY_EX cred,
+            BindMethod method
+        )
         {
             int error;
-            if (tempCredential == null && (AuthType == AuthType.External || AuthType == AuthType.Kerberos))
+            if (
+                tempCredential == null
+                && (AuthType == AuthType.External || AuthType == AuthType.Kerberos)
+            )
             {
                 error = BindSasl();
             }
@@ -43,7 +57,16 @@ namespace System.DirectoryServices.Protocols
             Marshal.StructureToPtr(defaults, ptrToDefaults, false);
             try
             {
-                return Interop.Ldap.ldap_sasl_interactive_bind(_ldapHandle, null, Interop.KerberosDefaultMechanism, IntPtr.Zero, IntPtr.Zero, Interop.LDAP_SASL_QUIET, LdapPal.SaslInteractionProcedure, ptrToDefaults);
+                return Interop.Ldap.ldap_sasl_interactive_bind(
+                    _ldapHandle,
+                    null,
+                    Interop.KerberosDefaultMechanism,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    Interop.LDAP_SASL_QUIET,
+                    LdapPal.SaslInteractionProcedure,
+                    ptrToDefaults
+                );
             }
             finally
             {
@@ -56,17 +79,29 @@ namespace System.DirectoryServices.Protocols
         {
             var defaults = new SaslDefaultCredentials { mech = Interop.KerberosDefaultMechanism };
             IntPtr outValue = IntPtr.Zero;
-            int error = Interop.Ldap.ldap_get_option_ptr(_ldapHandle, LdapOption.LDAP_OPT_X_SASL_REALM, ref outValue);
+            int error = Interop.Ldap.ldap_get_option_ptr(
+                _ldapHandle,
+                LdapOption.LDAP_OPT_X_SASL_REALM,
+                ref outValue
+            );
             if (error == 0 && outValue != IntPtr.Zero)
             {
                 defaults.realm = Marshal.PtrToStringAnsi(outValue);
             }
-            error = Interop.Ldap.ldap_get_option_ptr(_ldapHandle, LdapOption.LDAP_OPT_X_SASL_AUTHCID, ref outValue);
+            error = Interop.Ldap.ldap_get_option_ptr(
+                _ldapHandle,
+                LdapOption.LDAP_OPT_X_SASL_AUTHCID,
+                ref outValue
+            );
             if (error == 0 && outValue != IntPtr.Zero)
             {
                 defaults.authcid = Marshal.PtrToStringAnsi(outValue);
             }
-            error = Interop.Ldap.ldap_get_option_ptr(_ldapHandle, LdapOption.LDAP_OPT_X_SASL_AUTHZID, ref outValue);
+            error = Interop.Ldap.ldap_get_option_ptr(
+                _ldapHandle,
+                LdapOption.LDAP_OPT_X_SASL_AUTHZID,
+                ref outValue
+            );
             if (error == 0 && outValue != IntPtr.Zero)
             {
                 defaults.authzid = Marshal.PtrToStringAnsi(outValue);

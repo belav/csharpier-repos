@@ -31,22 +31,20 @@ namespace Prog
         }
         public void ServiceCallbackOnPositionAvailable(Object state, bool timedOut)
         {
-
             if (this.sessionRegisteredWait == null)
             {
                 this.sessionNotification.Reset();
                 this.sessionRegisteredWait.Unregister(null);
 
-                this.sessionRegisteredWait =
-                        ThreadPool.RegisterWaitForSingleObject(this.sessionNotification,
-                                                                ServiceCallbackOnPositionAvailable,
-                                                                this,   /* object state */
-                                                                -1,     /* INFINITE */
-                                                                true    /* ExecuteOnlyOnce */);
-
+                this.sessionRegisteredWait = ThreadPool.RegisterWaitForSingleObject(
+                    this.sessionNotification,
+                    ServiceCallbackOnPositionAvailable,
+                    this, /* object state */
+                    -1, /* INFINITE */
+                    true /* ExecuteOnlyOnce */
+                );
             }
             Console.WriteLine("callback running");
-
         }
         public void call()
         {
@@ -55,18 +53,15 @@ namespace Prog
         }
         public void register()
         {
-
-
             this.sessionNotification = new ManualResetEvent(false);
-      
+
             this.sessionRegisteredWait = ThreadPool.RegisterWaitForSingleObject(
-                                                            this.sessionNotification,
-                                                            ServiceCallbackOnPositionAvailable,
-                                                            this,   /* object state */
-                                                            -1,     /* INFINITE */
-                                                            true    /* ExecuteOnlyOnce */);
-
-
+                this.sessionNotification,
+                ServiceCallbackOnPositionAvailable,
+                this, /* object state */
+                -1, /* INFINITE */
+                true /* ExecuteOnlyOnce */
+            );
         }
         public bool unregister()
         {
@@ -96,19 +91,11 @@ namespace Prog
                 Console.WriteLine("Success");
                 return true;
             }
-            
-
-            
-
         }
-
-
     }
- 
 
     class Program
     {
-
         static int Main(string[] args)
         {
             Callback obj = new Callback();
@@ -130,7 +117,6 @@ namespace Prog
                 Console.WriteLine("test failed");
                 return 2;
             }
-
         }
     }
 }

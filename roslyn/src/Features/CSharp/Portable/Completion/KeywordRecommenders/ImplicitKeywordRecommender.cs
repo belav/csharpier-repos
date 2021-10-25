@@ -13,29 +13,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ImplicitKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        private static readonly ISet<SyntaxKind> s_validMemberModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-            {
-                SyntaxKind.StaticKeyword,
-                SyntaxKind.PublicKeyword,
-                SyntaxKind.ExternKeyword,
-                SyntaxKind.UnsafeKeyword,
-            };
+        private static readonly ISet<SyntaxKind> s_validMemberModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        ) {
+            SyntaxKind.StaticKeyword,
+            SyntaxKind.PublicKeyword,
+            SyntaxKind.ExternKeyword,
+            SyntaxKind.UnsafeKeyword,
+        };
 
-        public ImplicitKeywordRecommender()
-            : base(SyntaxKind.ImplicitKeyword)
-        {
-        }
+        public ImplicitKeywordRecommender() : base(SyntaxKind.ImplicitKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            if (context.IsMemberDeclarationContext(validModifiers: s_validMemberModifiers, validTypeDeclarations: SyntaxKindSet.ClassStructRecordTypeDeclarations, canBePartial: false, cancellationToken: cancellationToken))
+            if (
+                context.IsMemberDeclarationContext(
+                    validModifiers: s_validMemberModifiers,
+                    validTypeDeclarations: SyntaxKindSet.ClassStructRecordTypeDeclarations,
+                    canBePartial: false,
+                    cancellationToken: cancellationToken
+                )
+            )
             {
                 // operators must be both public and static
                 var modifiers = context.PrecedingModifiers;
 
-                return
-                    modifiers.Contains(SyntaxKind.PublicKeyword) &&
-                    modifiers.Contains(SyntaxKind.StaticKeyword);
+                return modifiers.Contains(SyntaxKind.PublicKeyword)
+                    && modifiers.Contains(SyntaxKind.StaticKeyword);
             }
 
             return false;

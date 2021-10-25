@@ -23,8 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public ProxyChangeTrackingConvention(
-            ProxiesOptionsExtension? options)
+        public ProxyChangeTrackingConvention(ProxiesOptionsExtension? options)
         {
             _options = options;
         }
@@ -36,13 +35,19 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessModelInitialized(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             if (_options?.UseChangeTrackingProxies == true)
             {
-                modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotifications);
+                modelBuilder.HasChangeTrackingStrategy(
+                    ChangeTrackingStrategy.ChangingAndChangedNotifications
+                );
 #pragma warning disable EF1001 // Internal EF Core API usage.
-                modelBuilder.HasAnnotation(CoreAnnotationNames.FullChangeTrackingNotificationsRequiredAnnotation, "true");
+                modelBuilder.HasAnnotation(
+                    CoreAnnotationNames.FullChangeTrackingNotificationsRequiredAnnotation,
+                    "true"
+                );
 #pragma warning restore EF1001 // Internal EF Core API usage.
             }
         }

@@ -9,9 +9,19 @@ internal static partial class Interop
     internal static partial class Advapi32
     {
         [DllImport(Libraries.Advapi32, SetLastError = true)]
-        public static extern bool CryptSetKeyParam(SafeKeyHandle hKey, int dwParam, byte[] pbData, int dwFlags);
+        public static extern bool CryptSetKeyParam(
+            SafeKeyHandle hKey,
+            int dwParam,
+            byte[] pbData,
+            int dwFlags
+        );
 
         [DllImport(Libraries.Advapi32, SetLastError = true)]
-        public static extern bool CryptSetKeyParam(SafeKeyHandle safeKeyHandle, int dwParam, ref int pdw, int dwFlags);
+        public static extern bool CryptSetKeyParam(
+            SafeKeyHandle safeKeyHandle,
+            int dwParam,
+            ref int pdw,
+            int dwFlags
+        );
     }
 }

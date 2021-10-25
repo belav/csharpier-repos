@@ -93,8 +93,8 @@ namespace System.Drawing.PrimitivesTests
         {
             Size sz1 = new Size(width, height);
             Size sz2 = new Size(height, width);
-            Size addExpected, subExpected;
-
+            Size addExpected,
+                subExpected;
             unchecked
             {
                 addExpected = new Size(width + height, height + width);
@@ -115,8 +115,9 @@ namespace System.Drawing.PrimitivesTests
         public void PointFMathematicalTest(float width, float height)
         {
             SizeF szF = new SizeF(width, height);
-            Size pCeiling, pTruncate, pRound;
-
+            Size pCeiling,
+                pTruncate,
+                pRound;
             unchecked
             {
                 pCeiling = new Size((int)Math.Ceiling(width), (int)Math.Ceiling(height));
@@ -177,7 +178,15 @@ namespace System.Drawing.PrimitivesTests
         public void ToStringTest()
         {
             Size sz = new Size(0, 0);
-            Assert.Equal(string.Format(CultureInfo.CurrentCulture, "{{Width={0}, Height={1}}}", sz.Width, sz.Height), sz.ToString());
+            Assert.Equal(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{{Width={0}, Height={1}}}",
+                    sz.Width,
+                    sz.Height
+                ),
+                sz.ToString()
+            );
         }
 
         [Theory]
@@ -206,7 +215,6 @@ namespace System.Drawing.PrimitivesTests
         {
             Size sz1 = new Size(dimension, dimension);
             Size mulExpected;
-
             unchecked
             {
                 mulExpected = new Size(dimension * multiplier, dimension * multiplier);
@@ -218,11 +226,14 @@ namespace System.Drawing.PrimitivesTests
 
         [Theory]
         [InlineData(1000, 2000, 3000)]
-        public void MultiplicationTestSizeIntWidthHeightMultiplier(int width, int height, int multiplier)
+        public void MultiplicationTestSizeIntWidthHeightMultiplier(
+            int width,
+            int height,
+            int multiplier
+        )
         {
             Size sz1 = new Size(width, height);
             Size mulExpected;
-
             unchecked
             {
                 mulExpected = new Size(width * multiplier, height * multiplier);
@@ -231,7 +242,6 @@ namespace System.Drawing.PrimitivesTests
             Assert.Equal(mulExpected, sz1 * multiplier);
             Assert.Equal(mulExpected, multiplier * sz1);
         }
-
 
         [Theory]
         [InlineData(1000, 0.0f)]
@@ -268,7 +278,11 @@ namespace System.Drawing.PrimitivesTests
 
         [Theory]
         [InlineData(1000, 2000, 30.33f)]
-        public void MultiplicationTestSizeFloatWidthHeightMultiplier(int width, int height, float multiplier)
+        public void MultiplicationTestSizeFloatWidthHeightMultiplier(
+            int width,
+            int height,
+            float multiplier
+        )
         {
             Size sz1 = new Size(width, height);
             SizeF mulExpected;
@@ -278,7 +292,6 @@ namespace System.Drawing.PrimitivesTests
             Assert.Equal(mulExpected, sz1 * multiplier);
             Assert.Equal(mulExpected, multiplier * sz1);
         }
-
 
         [Fact]
         public void DivideByZeroChecks()

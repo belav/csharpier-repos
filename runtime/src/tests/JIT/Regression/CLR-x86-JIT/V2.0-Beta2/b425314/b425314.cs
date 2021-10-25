@@ -216,7 +216,6 @@ public class ScenarioMonitor
     private const long MinimumCheckIterationCount_ForNonThrowingChecks = 50000L;
     private const long MinimumFlipIterationCount = 100000L;
 
-
     //
     // Force each scenario to run for at least 3 seconds.  If the scenario doesn't make the
     // required amount of progress within 3 minutes, signal a test failure.
@@ -230,7 +229,6 @@ public class ScenarioMonitor
     private const int MinimumExecutionTimeInMilliseconds = (3 * 1000);
     private const int MaximumExecutionTimeInMilliseconds = (180 * 1000);
 
-
     //
     // Define the volatile fields that will be used (generally using cross-thread accesses) to
     // track whether or not the scenario has hit the different relevant thresholds.
@@ -243,14 +241,17 @@ public class ScenarioMonitor
     private volatile bool _fScenarioHasEnded = false;
     private volatile bool _fScenarioExceededTheMaximumTime = false;
 
-
-    private void MinimumTimeHasElapsed(object state) { _fMinimumTimeHasElapsed = true; }
-    private void MaximumTimeHasElapsed(object state) { _fMaximumTimeHasElapsed = true; }
-
+    private void MinimumTimeHasElapsed(object state)
+    {
+        _fMinimumTimeHasElapsed = true;
+    }
+    private void MaximumTimeHasElapsed(object state)
+    {
+        _fMaximumTimeHasElapsed = true;
+    }
 
     private string _caption;
     private long _minimumCheckIterationCount;
-
 
     public ScenarioMonitor(string caption, ScenarioKind kind)
     {
@@ -258,16 +259,17 @@ public class ScenarioMonitor
 
         if (kind == ScenarioKind.WithThrowingChecks)
         {
-            _minimumCheckIterationCount = ScenarioMonitor.MinimumCheckIterationCount_ForThrowingChecks;
+            _minimumCheckIterationCount =
+                ScenarioMonitor.MinimumCheckIterationCount_ForThrowingChecks;
         }
         else
         {
-            _minimumCheckIterationCount = ScenarioMonitor.MinimumCheckIterationCount_ForNonThrowingChecks;
+            _minimumCheckIterationCount =
+                ScenarioMonitor.MinimumCheckIterationCount_ForNonThrowingChecks;
         }
 
         return;
     }
-
 
     public void RunScenario(ThreadStart runCheckThread, Action runFlipThread)
     {
@@ -278,7 +280,6 @@ public class ScenarioMonitor
         Timer timerForMaximumTime;
         Timer timerForMinimumTime;
 
-
         //
         // Start the "check" thread for this scenario.
         //
@@ -288,14 +289,23 @@ public class ScenarioMonitor
         checkThread.Start();
         Thread.Sleep(0);
 
-
         //
         // Start one-shot timers that will fire after the minimum and maximum execution times
         // elapse, respectively.
         //
 
-        using (timerForMinimumTime = Util.MakeOneShotTimer(this.MinimumTimeHasElapsed, ScenarioMonitor.MinimumExecutionTimeInMilliseconds))
-        using (timerForMaximumTime = Util.MakeOneShotTimer(this.MaximumTimeHasElapsed, ScenarioMonitor.MaximumExecutionTimeInMilliseconds))
+        using (
+            timerForMinimumTime = Util.MakeOneShotTimer(
+                this.MinimumTimeHasElapsed,
+                ScenarioMonitor.MinimumExecutionTimeInMilliseconds
+            )
+        )
+        using (
+            timerForMaximumTime = Util.MakeOneShotTimer(
+                this.MaximumTimeHasElapsed,
+                ScenarioMonitor.MaximumExecutionTimeInMilliseconds
+            )
+        )
         {
             // Use this thread to run the "flip" thread (hopefully in parallel with the "check" thread)
             // until the scenario ends (either due to timeout or due to completing the required amount
@@ -308,7 +318,6 @@ public class ScenarioMonitor
             //
             checkThread.Join();
         }
-
 
         if (_fScenarioHasEnded)
         {
@@ -336,12 +345,14 @@ public class ScenarioMonitor
         }
         else
         {
-            Util.PrintFailureAndAddToTestResults("Internal error: The `{0}' scenario did not end as expected.", _caption);
+            Util.PrintFailureAndAddToTestResults(
+                "Internal error: The `{0}' scenario did not end as expected.",
+                _caption
+            );
         }
 
         return;
     }
-
 
     // This non-volatile data and data accessor can only be used on the check thread.
     private long _checkIterations;
@@ -357,7 +368,6 @@ public class ScenarioMonitor
         return;
     }
 
-
     // This non-volatile data and data accessor can only be used on the flip thread.
     private long _flipIterations;
     public void RecordFlipIteration()
@@ -371,7 +381,6 @@ public class ScenarioMonitor
 
         return;
     }
-
 
     public bool ScenarioShouldContinueRunning()
     {
@@ -397,9 +406,11 @@ public class ScenarioMonitor
             }
             else
             {
-                if (_fMinimumTimeHasElapsed &&
-                    _fAllRequiredCheckIterationsHaveOccurred &&
-                    _fAllRequiredFlipIterationsHaveOccurred)
+                if (
+                    _fMinimumTimeHasElapsed
+                    && _fAllRequiredCheckIterationsHaveOccurred
+                    && _fAllRequiredFlipIterationsHaveOccurred
+                )
                 {
                     // Basic requirements have been met for execution time and iteration counts, so the
                     // scenario does not need to continue.
@@ -420,7 +431,6 @@ public class ScenarioMonitor
         }
     }
 }
-
 
 //************************************************************************
 
@@ -450,13 +460,11 @@ public class CastClass
         s_objVolatile = s_objs[1];
     }
 
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static public object GetObject()
     {
         return s_obj;
     }
-
 
     public static void CheckVal(string str)
     {
@@ -465,7 +473,6 @@ public class CastClass
             throw new Exception("Bad string " + str);
         }
     }
-
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public void CheckObjects()
@@ -482,29 +489,63 @@ public class CastClass
                 switch (i % 5)
                 {
                     case 0:
-                        try { str = (string)_obj; } catch (InvalidCastException) { continue; }
+                        try
+                        {
+                            str = (string)_obj;
+                        }
+                        catch (InvalidCastException)
+                        {
+                            continue;
+                        }
                         break;
 
                     case 1:
-                        try { str = (string)_objVolatile; } catch (InvalidCastException) { continue; }
+                        try
+                        {
+                            str = (string)_objVolatile;
+                        }
+                        catch (InvalidCastException)
+                        {
+                            continue;
+                        }
                         break;
 
                     case 2:
-                        try { str = (string)s_obj; } catch (InvalidCastException) { continue; }
+                        try
+                        {
+                            str = (string)s_obj;
+                        }
+                        catch (InvalidCastException)
+                        {
+                            continue;
+                        }
                         break;
 
                     case 3:
-                        try { str = (string)s_objVolatile; } catch (InvalidCastException) { continue; }
+                        try
+                        {
+                            str = (string)s_objVolatile;
+                        }
+                        catch (InvalidCastException)
+                        {
+                            continue;
+                        }
                         break;
 
                     case 4:
-                        try { str = (string)CastClass.GetObject(); } catch (InvalidCastException) { continue; }
+                        try
+                        {
+                            str = (string)CastClass.GetObject();
+                        }
+                        catch (InvalidCastException)
+                        {
+                            continue;
+                        }
                         break;
 
                     default:
                         throw new Exception("We should never get here");
                 }
-
 
                 //
                 // No exception occurred during this iteration of the loop, meaning the cast successfully
@@ -530,7 +571,6 @@ public class CastClass
         return;
     }
 
-
     private void Flip()
     {
         for (uint i = 0; CastClass.s_monitor.ScenarioShouldContinueRunning(); i++)
@@ -550,7 +590,6 @@ public class CastClass
         return;
     }
 
-
     public static void Test()
     {
         CastClass o = new CastClass();
@@ -559,7 +598,6 @@ public class CastClass
         return;
     }
 }
-
 
 //************************************************************************
 
@@ -591,13 +629,11 @@ public class Unbox
         s_objVolatile = s_objs[1];
     }
 
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static public object GetObject()
     {
         return s_obj;
     }
-
 
     public static void CheckVal(int val)
     {
@@ -606,7 +642,6 @@ public class Unbox
             throw new Exception("Bad value " + val);
         }
     }
-
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public void CheckObjects()
@@ -623,29 +658,63 @@ public class Unbox
                 switch (i % 5)
                 {
                     case 0:
-                        try { val = (int)_obj; } catch (InvalidCastException) { continue; }
+                        try
+                        {
+                            val = (int)_obj;
+                        }
+                        catch (InvalidCastException)
+                        {
+                            continue;
+                        }
                         break;
 
                     case 1:
-                        try { val = (int)_objVolatile; } catch (InvalidCastException) { continue; }
+                        try
+                        {
+                            val = (int)_objVolatile;
+                        }
+                        catch (InvalidCastException)
+                        {
+                            continue;
+                        }
                         break;
 
                     case 2:
-                        try { val = (int)s_obj; } catch (InvalidCastException) { continue; }
+                        try
+                        {
+                            val = (int)s_obj;
+                        }
+                        catch (InvalidCastException)
+                        {
+                            continue;
+                        }
                         break;
 
                     case 3:
-                        try { val = (int)s_objVolatile; } catch (InvalidCastException) { continue; }
+                        try
+                        {
+                            val = (int)s_objVolatile;
+                        }
+                        catch (InvalidCastException)
+                        {
+                            continue;
+                        }
                         break;
 
                     case 4:
-                        try { val = (int)Unbox.GetObject(); } catch (InvalidCastException) { continue; }
+                        try
+                        {
+                            val = (int)Unbox.GetObject();
+                        }
+                        catch (InvalidCastException)
+                        {
+                            continue;
+                        }
                         break;
 
                     default:
                         throw new Exception("We should never get here");
                 }
-
 
                 //
                 // No exception occurred during this iteration of the loop, meaning the cast successfully
@@ -671,7 +740,6 @@ public class Unbox
         return;
     }
 
-
     private void Flip()
     {
         for (uint i = 0; Unbox.s_monitor.ScenarioShouldContinueRunning(); i++)
@@ -689,7 +757,6 @@ public class Unbox
         }
     }
 
-
     public static void Test()
     {
         Unbox o = new Unbox();
@@ -698,7 +765,6 @@ public class Unbox
         return;
     }
 }
-
 
 //************************************************************************
 
@@ -724,7 +790,6 @@ public class GenericMethod1
     }
 }
 
-
 public class GenericMethod2 : GenericMethod1
 {
     public const int VAL2 = 0x60006000;
@@ -739,7 +804,6 @@ public class GenericMethod2 : GenericMethod1
         // runs, it will always return VAL2.
         return _i2;
     }
-
 
     private GenericMethod1 _obj;
     private volatile GenericMethod1 _objVolatile;
@@ -757,7 +821,6 @@ public class GenericMethod2 : GenericMethod1
         s_objs[1] = new GenericMethod2(VAL2);
     }
 
-
     public GenericMethod2(int val) : base(0)
     {
         // The `val' argument will always be VAL2.
@@ -769,13 +832,11 @@ public class GenericMethod2 : GenericMethod1
         s_objVolatile = s_objs[1];
     }
 
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static public GenericMethod1 GetObject()
     {
         return s_obj;
     }
-
 
     public static void CheckVal(int val)
     {
@@ -784,7 +845,6 @@ public class GenericMethod2 : GenericMethod1
             throw new Exception("Bad value " + val);
         }
     }
-
 
     /// <summary>
     ///
@@ -865,7 +925,6 @@ public class GenericMethod2 : GenericMethod1
                         throw new Exception("We should never get here");
                 }
 
-
                 //
                 // Check the basic consistency of the int value observed during this iteration.
                 //
@@ -885,7 +944,6 @@ public class GenericMethod2 : GenericMethod1
         return;
     }
 
-
     private void Flip()
     {
         for (uint i = 0; GenericMethod2.s_monitor.ScenarioShouldContinueRunning(); i++)
@@ -903,16 +961,17 @@ public class GenericMethod2 : GenericMethod1
         }
     }
 
-
     public static void Test()
     {
         GenericMethod2 o = new GenericMethod2(VAL2);
-        GenericMethod2.s_monitor = new ScenarioMonitor("GenericMethod", ScenarioKind.WithNonThrowingChecks);
+        GenericMethod2.s_monitor = new ScenarioMonitor(
+            "GenericMethod",
+            ScenarioKind.WithNonThrowingChecks
+        );
         GenericMethod2.s_monitor.RunScenario(o.CheckObjects, o.Flip);
         return;
     }
 }
-
 
 //************************************************************************
 

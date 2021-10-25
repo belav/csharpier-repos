@@ -23,17 +23,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.NavigationBar
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpEditorNavigationBarItemService(IThreadingContext threadingContext)
-            : base(threadingContext)
-        {
-        }
+            : base(threadingContext) { }
 
         protected override async Task<VirtualTreePoint?> GetSymbolNavigationPointAsync(
-            Document document, ISymbol symbol, CancellationToken cancellationToken)
+            Document document,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var location =
-                symbol.Locations.FirstOrDefault(l => Equals(l.SourceTree, syntaxTree)) ??
-                symbol.Locations.FirstOrDefault(l => l.SourceTree != null);
+                symbol.Locations.FirstOrDefault(l => Equals(l.SourceTree, syntaxTree))
+                ?? symbol.Locations.FirstOrDefault(l => l.SourceTree != null);
 
             if (location == null)
                 return null;
@@ -41,10 +44,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.NavigationBar
             var tree = location.SourceTree;
             Contract.ThrowIfNull(tree);
 
-            return new VirtualTreePoint(tree, tree.GetText(cancellationToken), location.SourceSpan.Start);
+            return new VirtualTreePoint(
+                tree,
+                tree.GetText(cancellationToken),
+                location.SourceSpan.Start
+            );
         }
 
-        protected override Task NavigateToItemAsync(Document document, WrappedNavigationBarItem item, ITextView textView, CancellationToken cancellationToken)
-            => NavigateToSymbolItemAsync(document, (RoslynNavigationBarItem.SymbolItem)item.UnderlyingItem, cancellationToken);
+        protected override Task NavigateToItemAsync(
+            Document document,
+            WrappedNavigationBarItem item,
+            ITextView textView,
+            CancellationToken cancellationToken
+        ) =>
+            NavigateToSymbolItemAsync(
+                document,
+                (RoslynNavigationBarItem.SymbolItem)item.UnderlyingItem,
+                cancellationToken
+            );
     }
 }

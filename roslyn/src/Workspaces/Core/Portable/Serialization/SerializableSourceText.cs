@@ -35,14 +35,9 @@ namespace Microsoft.CodeAnalysis.Serialization
         public SourceText? Text { get; }
 
         public SerializableSourceText(ITemporaryTextStorageWithName storage)
-            : this(storage, text: null)
-        {
-        }
+            : this(storage, text: null) { }
 
-        public SerializableSourceText(SourceText text)
-            : this(storage: null, text)
-        {
-        }
+        public SerializableSourceText(SourceText text) : this(storage: null, text) { }
 
         private SerializableSourceText(ITemporaryTextStorageWithName? storage, SourceText? text)
         {
@@ -65,7 +60,10 @@ namespace Microsoft.CodeAnalysis.Serialization
             return await Storage!.ReadTextAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public static async ValueTask<SerializableSourceText> FromTextDocumentStateAsync(TextDocumentState state, CancellationToken cancellationToken)
+        public static async ValueTask<SerializableSourceText> FromTextDocumentStateAsync(
+            TextDocumentState state,
+            CancellationToken cancellationToken
+        )
         {
             if (state.Storage is ITemporaryTextStorageWithName storage)
             {
@@ -73,7 +71,9 @@ namespace Microsoft.CodeAnalysis.Serialization
             }
             else
             {
-                return new SerializableSourceText(await state.GetTextAsync(cancellationToken).ConfigureAwait(false));
+                return new SerializableSourceText(
+                    await state.GetTextAsync(cancellationToken).ConfigureAwait(false)
+                );
             }
         }
     }

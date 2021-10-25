@@ -38,11 +38,17 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             Connected = false;
         }
 
-        public Task SendCoreAsync(string method, object[] args, CancellationToken cancellationToken = default)
+        public Task SendCoreAsync(
+            string method,
+            object[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             if (Client == null)
             {
-                throw new InvalidOperationException($"{nameof(SendCoreAsync)} cannot be invoked with an offline client.");
+                throw new InvalidOperationException(
+                    $"{nameof(SendCoreAsync)} cannot be invoked with an offline client."
+                );
             }
 
             return Client.SendCoreAsync(method, args, cancellationToken);

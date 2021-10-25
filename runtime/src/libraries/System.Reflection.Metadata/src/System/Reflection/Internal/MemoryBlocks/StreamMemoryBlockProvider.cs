@@ -36,7 +36,13 @@ namespace System.Reflection.Internal
         // MemoryMappedFile
         private IDisposable? _lazyMemoryMap;
 
-        public StreamMemoryBlockProvider(Stream stream, long imageStart, int imageSize, bool isFileStream, bool leaveOpen)
+        public StreamMemoryBlockProvider(
+            Stream stream,
+            long imageStart,
+            int imageSize,
+            bool isFileStream,
+            bool leaveOpen
+        )
         {
             Debug.Assert(stream.CanSeek && stream.CanRead);
             _stream = stream;
@@ -61,14 +67,16 @@ namespace System.Reflection.Internal
 
         public override int Size
         {
-            get
-            {
-                return _imageSize;
-            }
+            get { return _imageSize; }
         }
 
         /// <exception cref="IOException">Error reading from the stream.</exception>
-        internal static unsafe NativeHeapMemoryBlock ReadMemoryBlockNoLock(Stream stream, bool isFileStream, long start, int size)
+        internal static unsafe NativeHeapMemoryBlock ReadMemoryBlockNoLock(
+            Stream stream,
+            bool isFileStream,
+            long start,
+            int size
+        )
         {
             var block = new NativeHeapMemoryBlock(size);
             bool fault = true;
@@ -78,7 +86,11 @@ namespace System.Reflection.Internal
 
                 int bytesRead = 0;
 
-                if (!isFileStream || (bytesRead = FileStreamReadLightUp.ReadFile(stream, block.Pointer, size)) != size)
+                if (
+                    !isFileStream
+                    || (bytesRead = FileStreamReadLightUp.ReadFile(stream, block.Pointer, size))
+                        != size
+                )
                 {
                     stream.CopyTo(block.Pointer + bytesRead, size - bytesRead);
                 }
@@ -103,7 +115,13 @@ namespace System.Reflection.Internal
 
             if (_useMemoryMap && size > MemoryMapThreshold)
             {
-                if (TryCreateMemoryMappedFileBlock(absoluteStart, size, out MemoryMappedFileBlock? block))
+                if (
+                    TryCreateMemoryMappedFileBlock(
+                        absoluteStart,
+                        size,
+                        out MemoryMappedFileBlock? block
+                    )
+                )
                 {
                     return block;
                 }
@@ -124,7 +142,11 @@ namespace System.Reflection.Internal
         }
 
         /// <exception cref="IOException">IO error while mapping memory or not enough memory to create the mapping.</exception>
-        private unsafe bool TryCreateMemoryMappedFileBlock(long start, int size, [NotNullWhen(true)]out MemoryMappedFileBlock? block)
+        private unsafe bool TryCreateMemoryMappedFileBlock(
+            long start,
+            int size,
+            [NotNullWhen(true)] out MemoryMappedFileBlock? block
+        )
         {
             if (_lazyMemoryMap == null)
             {
@@ -156,7 +178,13 @@ namespace System.Reflection.Internal
                 return false;
             }
 
-            if (!MemoryMapLightUp.TryGetSafeBufferAndPointerOffset(accessor, out var safeBuffer, out long offset))
+            if (
+                !MemoryMapLightUp.TryGetSafeBufferAndPointerOffset(
+                    accessor,
+                    out var safeBuffer,
+                    out long offset
+                )
+            )
             {
                 block = null;
                 return false;

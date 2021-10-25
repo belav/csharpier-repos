@@ -98,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             string name,
             string? schema,
             IReadOnlyModel model,
-            ConfigurationSource configurationSource)
+            ConfigurationSource configurationSource
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NullButNotEmpty(schema, nameof(schema));
@@ -143,10 +144,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static IEnumerable<ISequence> GetSequences(IReadOnlyModel model)
-            => ((SortedDictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences])
-                ?.Values
-                ?? Enumerable.Empty<ISequence>();
+        public static IEnumerable<ISequence> GetSequences(IReadOnlyModel model) =>
+            (
+                (SortedDictionary<(string, string?), ISequence>?)model[
+                    RelationalAnnotationNames.Sequences
+                ]
+            )?.Values ?? Enumerable.Empty<ISequence>();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -156,9 +159,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static ISequence? FindSequence(IReadOnlyModel model, string name, string? schema)
         {
-            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences];
-            if (sequences == null
-                || !sequences.TryGetValue((name, schema), out var sequence))
+            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[
+                RelationalAnnotationNames.Sequences
+            ];
+            if (sequences == null || !sequences.TryGetValue((name, schema), out var sequence))
             {
                 return null;
             }
@@ -176,10 +180,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IMutableModel model,
             string name,
             string? schema,
-            ConfigurationSource configurationSource)
+            ConfigurationSource configurationSource
+        )
         {
             var sequence = new Sequence(name, schema, model, configurationSource);
-            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences];
+            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[
+                RelationalAnnotationNames.Sequences
+            ];
             if (sequences == null)
             {
                 sequences = new SortedDictionary<(string, string?), ISequence>();
@@ -196,10 +203,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static Sequence? SetName(
-            IMutableModel model,
-            Sequence sequence,
-            string name)
+        public static Sequence? SetName(IMutableModel model, Sequence sequence, string name)
         {
             Check.NotNull(model, nameof(model));
             Check.NotNull(sequence, nameof(sequence));
@@ -207,10 +211,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             sequence.EnsureMutable();
 
-            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences];
+            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[
+                RelationalAnnotationNames.Sequences
+            ];
             var tuple = (sequence.Name, sequence.Schema);
-            if (sequences == null
-                || !sequences.ContainsKey(tuple))
+            if (sequences == null || !sequences.ContainsKey(tuple))
             {
                 return null;
             }
@@ -232,9 +237,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static Sequence? RemoveSequence(IMutableModel model, string name, string? schema)
         {
-            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences];
-            if (sequences == null
-                || !sequences.TryGetValue((name, schema), out var sequence))
+            var sequences = (SortedDictionary<(string, string?), ISequence>?)model[
+                RelationalAnnotationNames.Sequences
+            ];
+            if (sequences == null || !sequences.TryGetValue((name, schema), out var sequence))
             {
                 return null;
             }
@@ -254,7 +260,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalSequenceBuilder Builder
         {
-            [DebuggerStepThrough] get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
+            [DebuggerStepThrough]
+            get =>
+                _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
         }
 
         /// <summary>
@@ -263,8 +271,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool IsInModel
-            => _builder is not null;
+        public virtual bool IsInModel => _builder is not null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -272,8 +279,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void SetRemovedFromModel()
-            => _builder = null;
+        public virtual void SetRemovedFromModel() => _builder = null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -302,8 +308,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual string? Schema
-            => _schema ?? Model.GetDefaultSchema();
+        public virtual string? Schema => _schema ?? Model.GetDefaultSchema();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -311,8 +316,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ConfigurationSource GetConfigurationSource()
-            => _configurationSource;
+        public virtual ConfigurationSource GetConfigurationSource() => _configurationSource;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -320,8 +324,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource)
-            => _configurationSource = _configurationSource.Max(configurationSource);
+        public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource) =>
+            _configurationSource = _configurationSource.Max(configurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -341,15 +345,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual long? SetStartValue(long? startValue, ConfigurationSource configurationSource)
+        public virtual long? SetStartValue(
+            long? startValue,
+            ConfigurationSource configurationSource
+        )
         {
             EnsureMutable();
 
             _startValue = startValue;
 
-            _startValueConfigurationSource = startValue == null
-                ? (ConfigurationSource?)null
-                : configurationSource.Max(_startValueConfigurationSource);
+            _startValueConfigurationSource =
+                startValue == null
+                    ? (ConfigurationSource?)null
+                    : configurationSource.Max(_startValueConfigurationSource);
 
             return startValue;
         }
@@ -360,8 +368,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ConfigurationSource? GetStartValueConfigurationSource()
-            => _startValueConfigurationSource;
+        public virtual ConfigurationSource? GetStartValueConfigurationSource() =>
+            _startValueConfigurationSource;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -381,15 +389,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual int? SetIncrementBy(int? incrementBy, ConfigurationSource configurationSource)
+        public virtual int? SetIncrementBy(
+            int? incrementBy,
+            ConfigurationSource configurationSource
+        )
         {
             EnsureMutable();
 
             _incrementBy = incrementBy;
 
-            _incrementByConfigurationSource = incrementBy == null
-                ? (ConfigurationSource?)null
-                : configurationSource.Max(_incrementByConfigurationSource);
+            _incrementByConfigurationSource =
+                incrementBy == null
+                    ? (ConfigurationSource?)null
+                    : configurationSource.Max(_incrementByConfigurationSource);
 
             return incrementBy;
         }
@@ -400,8 +412,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ConfigurationSource? GetIncrementByConfigurationSource()
-            => _incrementByConfigurationSource;
+        public virtual ConfigurationSource? GetIncrementByConfigurationSource() =>
+            _incrementByConfigurationSource;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -427,9 +439,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             _minValue = minValue;
 
-            _minValueConfigurationSource = minValue == null
-                ? (ConfigurationSource?)null
-                : configurationSource.Max(_minValueConfigurationSource);
+            _minValueConfigurationSource =
+                minValue == null
+                    ? (ConfigurationSource?)null
+                    : configurationSource.Max(_minValueConfigurationSource);
 
             return minValue;
         }
@@ -440,8 +453,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ConfigurationSource? GetMinValueConfigurationSource()
-            => _minValueConfigurationSource;
+        public virtual ConfigurationSource? GetMinValueConfigurationSource() =>
+            _minValueConfigurationSource;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -467,9 +480,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             _maxValue = maxValue;
 
-            _maxValueConfigurationSource = maxValue == null
-                ? (ConfigurationSource?)null
-                : configurationSource.Max(_maxValueConfigurationSource);
+            _maxValueConfigurationSource =
+                maxValue == null
+                    ? (ConfigurationSource?)null
+                    : configurationSource.Max(_maxValueConfigurationSource);
 
             return maxValue;
         }
@@ -480,8 +494,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ConfigurationSource? GetMaxValueConfigurationSource()
-            => _maxValueConfigurationSource;
+        public virtual ConfigurationSource? GetMaxValueConfigurationSource() =>
+            _maxValueConfigurationSource;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -489,8 +503,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static IReadOnlyCollection<Type> SupportedTypes { get; }
-            = new[] { typeof(byte), typeof(long), typeof(int), typeof(short), typeof(decimal) };
+        public static IReadOnlyCollection<Type> SupportedTypes { get; } =
+            new[] { typeof(byte), typeof(long), typeof(int), typeof(short), typeof(decimal) };
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -514,17 +528,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             EnsureMutable();
 
-            if (type != null
-                && !SupportedTypes.Contains(type))
+            if (type != null && !SupportedTypes.Contains(type))
             {
                 throw new ArgumentException(RelationalStrings.BadSequenceType);
             }
 
             _type = type;
 
-            _typeConfigurationSource = type == null
-                ? (ConfigurationSource?)null
-                : configurationSource.Max(_typeConfigurationSource);
+            _typeConfigurationSource =
+                type == null
+                    ? (ConfigurationSource?)null
+                    : configurationSource.Max(_typeConfigurationSource);
 
             return type;
         }
@@ -535,8 +549,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ConfigurationSource? GetTypeConfigurationSource()
-            => _typeConfigurationSource;
+        public virtual ConfigurationSource? GetTypeConfigurationSource() =>
+            _typeConfigurationSource;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -558,8 +572,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [Obsolete("Use SetType")]
-        public virtual Type? SetClrType(Type? type, ConfigurationSource configurationSource)
-            => SetType(type, configurationSource);
+        public virtual Type? SetClrType(Type? type, ConfigurationSource configurationSource) =>
+            SetType(type, configurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -568,8 +582,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [Obsolete("Use GetTypeConfigurationSource")]
-        public virtual ConfigurationSource? GetClrTypeConfigurationSource()
-            => GetTypeConfigurationSource();
+        public virtual ConfigurationSource? GetClrTypeConfigurationSource() =>
+            GetTypeConfigurationSource();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -595,9 +609,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             _isCyclic = cyclic;
 
-            _isCyclicConfigurationSource = cyclic == null
-                ? (ConfigurationSource?)null
-                : configurationSource.Max(_isCyclicConfigurationSource);
+            _isCyclicConfigurationSource =
+                cyclic == null
+                    ? (ConfigurationSource?)null
+                    : configurationSource.Max(_isCyclicConfigurationSource);
 
             return cyclic;
         }
@@ -608,8 +623,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ConfigurationSource? GetIsCyclicConfigurationSource()
-            => _isCyclicConfigurationSource;
+        public virtual ConfigurationSource? GetIsCyclicConfigurationSource() =>
+            _isCyclicConfigurationSource;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -617,8 +632,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string ToString()
-            => ((ISequence)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((ISequence)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -675,8 +690,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [DebuggerStepThrough]
-        long? IConventionSequence.SetStartValue(long? startValue, bool fromDataAnnotation)
-            => SetStartValue(startValue, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        long? IConventionSequence.SetStartValue(long? startValue, bool fromDataAnnotation) =>
+            SetStartValue(
+                startValue,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -685,8 +705,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [DebuggerStepThrough]
-        int? IConventionSequence.SetIncrementBy(int? incrementBy, bool fromDataAnnotation)
-            => SetIncrementBy(incrementBy, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        int? IConventionSequence.SetIncrementBy(int? incrementBy, bool fromDataAnnotation) =>
+            SetIncrementBy(
+                incrementBy,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -695,8 +720,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [DebuggerStepThrough]
-        long? IConventionSequence.SetMinValue(long? minValue, bool fromDataAnnotation)
-            => SetMinValue(minValue, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        long? IConventionSequence.SetMinValue(long? minValue, bool fromDataAnnotation) =>
+            SetMinValue(
+                minValue,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -705,8 +735,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [DebuggerStepThrough]
-        long? IConventionSequence.SetMaxValue(long? maxValue, bool fromDataAnnotation)
-            => SetMaxValue(maxValue, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        long? IConventionSequence.SetMaxValue(long? maxValue, bool fromDataAnnotation) =>
+            SetMaxValue(
+                maxValue,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -715,8 +750,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [DebuggerStepThrough]
-        Type? IConventionSequence.SetClrType(Type? type, bool fromDataAnnotation)
-            => SetType(type, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        Type? IConventionSequence.SetClrType(Type? type, bool fromDataAnnotation) =>
+            SetType(
+                type,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -725,8 +765,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [DebuggerStepThrough]
-        Type? IConventionSequence.SetType(Type? type, bool fromDataAnnotation)
-            => SetType(type, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        Type? IConventionSequence.SetType(Type? type, bool fromDataAnnotation) =>
+            SetType(
+                type,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -735,8 +780,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [DebuggerStepThrough]
-        bool? IConventionSequence.SetIsCyclic(bool? cyclic, bool fromDataAnnotation)
-            => SetIsCyclic(cyclic, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool? IConventionSequence.SetIsCyclic(bool? cyclic, bool fromDataAnnotation) =>
+            SetIsCyclic(
+                cyclic,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         [Obsolete("Don't use this in any new code")]
         private sealed class SequenceData
@@ -791,8 +841,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 var end = value.IndexOf('\'', position);
 
-                while (end + 1 < value.Length
-                    && value[end + 1] == '\'')
+                while (end + 1 < value.Length && value[end + 1] == '\'')
                 {
                     end = value.IndexOf('\'', end + 2);
                 }
@@ -803,11 +852,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 return extracted.Length == 0 ? null : extracted;
             }
 
-            private static long? AsLong(string? value)
-                => value == null ? null : (long?)long.Parse(value, CultureInfo.InvariantCulture);
+            private static long? AsLong(string? value) =>
+                value == null ? null : (long?)long.Parse(value, CultureInfo.InvariantCulture);
 
-            private static Type AsType(string value)
-                => value == typeof(long).Name
+            private static Type AsType(string value) =>
+                value == typeof(long).Name
                     ? typeof(long)
                     : value == typeof(int).Name
                         ? typeof(int)
@@ -817,8 +866,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                                 ? typeof(decimal)
                                 : typeof(byte);
 
-            private static bool AsBool(string? value)
-                => value != null && bool.Parse(value);
+            private static bool AsBool(string? value) => value != null && bool.Parse(value);
 
             private static void EscapeAndQuote(StringBuilder builder, object? value)
             {

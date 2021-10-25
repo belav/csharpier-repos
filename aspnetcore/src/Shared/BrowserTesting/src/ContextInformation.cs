@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.BrowserTesting
 {
     public class ContextInformation
     {
-        private readonly ILoggerFactory _factory;        
+        private readonly ILoggerFactory _factory;
         private string _harPath;
 
         public ContextInformation(ILoggerFactory factory)
@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.BrowserTesting
             _factory = factory;
         }
 
-        public IDictionary<IPage, PageInformation> Pages { get; } = new Dictionary<IPage, PageInformation>();
+        public IDictionary<IPage, PageInformation> Pages { get; } =
+            new Dictionary<IPage, PageInformation>();
 
         internal void Attach(IBrowserContext context)
         {
@@ -50,15 +51,20 @@ namespace Microsoft.AspNetCore.BrowserTesting
             }
         }
 
-        internal BrowserContextOptions ConfigureUniqueHarPath(BrowserContextOptions browserContextOptions)
+        internal BrowserContextOptions ConfigureUniqueHarPath(
+            BrowserContextOptions browserContextOptions
+        )
         {
             var uploadDir = Environment.GetEnvironmentVariable("HELIX_WORKITEM_UPLOAD_ROOT");
             if (browserContextOptions?.RecordHar?.Path != null)
             {
                 var identifier = Guid.NewGuid().ToString("N");
                 browserContextOptions.RecordHar.Path = Path.Combine(
-                    string.IsNullOrEmpty(uploadDir) ? browserContextOptions.RecordHar.Path : uploadDir, 
-                    $"{identifier}.har");
+                    string.IsNullOrEmpty(uploadDir)
+                      ? browserContextOptions.RecordHar.Path
+                      : uploadDir,
+                    $"{identifier}.har"
+                );
                 _harPath = browserContextOptions.RecordHar.Path;
             }
 

@@ -12,19 +12,25 @@ namespace System.Numerics
     /// are real numbers, and i is the imaginary unit, with the property i2= -1.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Numerics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Numerics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public struct Complex : IEquatable<Complex>, IFormattable
     {
         public static readonly Complex Zero = new Complex(0.0, 0.0);
         public static readonly Complex One = new Complex(1.0, 0.0);
         public static readonly Complex ImaginaryOne = new Complex(0.0, 1.0);
         public static readonly Complex NaN = new Complex(double.NaN, double.NaN);
-        public static readonly Complex Infinity = new Complex(double.PositiveInfinity, double.PositiveInfinity);
+        public static readonly Complex Infinity = new Complex(
+            double.PositiveInfinity,
+            double.PositiveInfinity
+        );
 
         private const double InverseOfLog10 = 0.43429448190325; // 1 / Log(10)
 
         // This is the largest x for which (Hypot(x,x) + x) will not overflow. It is used for branching inside Sqrt.
-        private static readonly double s_sqrtRescaleThreshold = double.MaxValue / (Math.Sqrt(2.0) + 1.0);
+        private static readonly double s_sqrtRescaleThreshold =
+            double.MaxValue / (Math.Sqrt(2.0) + 1.0);
 
         // This is the largest x for which 2 x^2 will not overflow. It is used for branching inside Asin and Acos.
         private static readonly double s_asinOverflowThreshold = Math.Sqrt(double.MaxValue) / 2.0;
@@ -42,11 +48,23 @@ namespace System.Numerics
             m_imaginary = imaginary;
         }
 
-        public double Real { get { return m_real; } }
-        public double Imaginary { get { return m_imaginary; } }
+        public double Real
+        {
+            get { return m_real; }
+        }
+        public double Imaginary
+        {
+            get { return m_imaginary; }
+        }
 
-        public double Magnitude { get { return Abs(this); } }
-        public double Phase { get { return Math.Atan2(m_imaginary, m_real); } }
+        public double Magnitude
+        {
+            get { return Abs(this); }
+        }
+        public double Phase
+        {
+            get { return Math.Atan2(m_imaginary, m_real); }
+        }
 
         public static Complex FromPolarCoordinates(double magnitude, double phase)
         {
@@ -118,7 +136,7 @@ namespace System.Numerics
             return dividend / divisor;
         }
 
-        public static Complex operator -(Complex value)  /* Unary negation of a complex number */
+        public static Complex operator -(Complex value) /* Unary negation of a complex number */
         {
             return new Complex(-value.m_real, -value.m_imaginary);
         }
@@ -156,8 +174,10 @@ namespace System.Numerics
         public static Complex operator *(Complex left, Complex right)
         {
             // Multiplication:  (a + bi)(c + di) = (ac -bd) + (bc + ad)i
-            double result_realpart = (left.m_real * right.m_real) - (left.m_imaginary * right.m_imaginary);
-            double result_imaginarypart = (left.m_imaginary * right.m_real) + (left.m_real * right.m_imaginary);
+            double result_realpart =
+                (left.m_real * right.m_real) - (left.m_imaginary * right.m_imaginary);
+            double result_imaginarypart =
+                (left.m_imaginary * right.m_real) + (left.m_real * right.m_imaginary);
             return new Complex(result_realpart, result_imaginarypart);
         }
 
@@ -285,7 +305,8 @@ namespace System.Numerics
             a = Math.Abs(a);
             b = Math.Abs(b);
 
-            double small, large;
+            double small,
+                large;
             if (a < b)
             {
                 small = a;
@@ -312,9 +333,7 @@ namespace System.Numerics
                 double ratio = small / large;
                 return (large * Math.Sqrt(1.0 + ratio * ratio));
             }
-
         }
-
 
         private static double Log1P(double x)
         {
@@ -339,7 +358,6 @@ namespace System.Numerics
             {
                 return Math.Log(xp1);
             }
-
         }
 
         public static Complex Conjugate(Complex value)
@@ -370,7 +388,8 @@ namespace System.Numerics
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
-            if (!(obj is Complex)) return false;
+            if (!(obj is Complex))
+                return false;
             return Equals((Complex)obj);
         }
 
@@ -396,7 +415,12 @@ namespace System.Numerics
 
         public string ToString(string? format, IFormatProvider? provider)
         {
-            return string.Format(provider, "({0}, {1})", m_real.ToString(format, provider), m_imaginary.ToString(format, provider));
+            return string.Format(
+                provider,
+                "({0}, {1})",
+                m_real.ToString(format, provider),
+                m_imaginary.ToString(format, provider)
+            );
         }
 
         public static Complex Sin(Complex value)
@@ -423,8 +447,16 @@ namespace System.Numerics
 
         public static Complex Asin(Complex value)
         {
-            double b, bPrime, v;
-            Asin_Internal(Math.Abs(value.Real), Math.Abs(value.Imaginary), out b, out bPrime, out v);
+            double b,
+                bPrime,
+                v;
+            Asin_Internal(
+                Math.Abs(value.Real),
+                Math.Abs(value.Imaginary),
+                out b,
+                out bPrime,
+                out v
+            );
 
             double u;
             if (bPrime < 0.0)
@@ -436,8 +468,10 @@ namespace System.Numerics
                 u = Math.Atan(bPrime);
             }
 
-            if (value.Real < 0.0) u = -u;
-            if (value.Imaginary < 0.0) v = -v;
+            if (value.Real < 0.0)
+                u = -u;
+            if (value.Imaginary < 0.0)
+                v = -v;
 
             return new Complex(u, v);
         }
@@ -459,8 +493,16 @@ namespace System.Numerics
 
         public static Complex Acos(Complex value)
         {
-            double b, bPrime, v;
-            Asin_Internal(Math.Abs(value.Real), Math.Abs(value.Imaginary), out b, out bPrime, out v);
+            double b,
+                bPrime,
+                v;
+            Asin_Internal(
+                Math.Abs(value.Real),
+                Math.Abs(value.Imaginary),
+                out b,
+                out bPrime,
+                out v
+            );
 
             double u;
             if (bPrime < 0.0)
@@ -472,8 +514,10 @@ namespace System.Numerics
                 u = Math.Atan(1.0 / bPrime);
             }
 
-            if (value.Real < 0.0) u = Math.PI - u;
-            if (value.Imaginary > 0.0) v = -v;
+            if (value.Real < 0.0)
+                u = Math.PI - u;
+            if (value.Imaginary > 0.0)
+                v = -v;
 
             return new Complex(u, v);
         }
@@ -517,12 +561,18 @@ namespace System.Numerics
         public static Complex Atan(Complex value)
         {
             Complex two = new Complex(2.0, 0.0);
-            return (ImaginaryOne / two) * (Log(One - ImaginaryOne * value) - Log(One + ImaginaryOne * value));
+            return (ImaginaryOne / two)
+                * (Log(One - ImaginaryOne * value) - Log(One + ImaginaryOne * value));
         }
 
-        private static void Asin_Internal(double x, double y, out double b, out double bPrime, out double v)
+        private static void Asin_Internal(
+            double x,
+            double y,
+            out double b,
+            out double bPrime,
+            out double v
+        )
         {
-
             // This method for the inverse complex sine (and cosine) is described in Hull, Fairgrieve,
             // and Tang, "Implementing the Complex Arcsine and Arccosine Functions Using Exception Handling",
             // ACM Transactions on Mathematical Software (1997)
@@ -570,7 +620,8 @@ namespace System.Numerics
                 b = -1.0;
                 bPrime = x / y;
 
-                double small, big;
+                double small,
+                    big;
                 if (x < y)
                 {
                     small = x;
@@ -638,9 +689,11 @@ namespace System.Numerics
             }
         }
 
-        public static bool IsFinite(Complex value) => double.IsFinite(value.m_real) && double.IsFinite(value.m_imaginary);
+        public static bool IsFinite(Complex value) =>
+            double.IsFinite(value.m_real) && double.IsFinite(value.m_imaginary);
 
-        public static bool IsInfinity(Complex value) => double.IsInfinity(value.m_real) || double.IsInfinity(value.m_imaginary);
+        public static bool IsInfinity(Complex value) =>
+            double.IsInfinity(value.m_real) || double.IsInfinity(value.m_imaginary);
 
         public static bool IsNaN(Complex value) => !IsInfinity(value) && !IsFinite(value);
 
@@ -670,7 +723,6 @@ namespace System.Numerics
 
         public static Complex Sqrt(Complex value)
         {
-
             if (value.m_imaginary == 0.0)
             {
                 // Handle the trivial case quickly.
@@ -685,7 +737,6 @@ namespace System.Numerics
             }
             else
             {
-
                 // One way to compute Sqrt(z) is just to call Pow(z, 0.5), which coverts to polar coordinates
                 // (sqrt + atan), halves the phase, and reconverts to cartesian coordinates (cos + sin).
                 // Not only is this more expensive than necessary, it also fails to preserve certain expected
@@ -713,7 +764,10 @@ namespace System.Numerics
                 // make the result representable. To avoid this, we re-scale (by exact powers of 2 for accuracy)
                 // when we encounter very large components to avoid intermediate infinities.
                 bool rescale = false;
-                if ((Math.Abs(value.m_real) >= s_sqrtRescaleThreshold) || (Math.Abs(value.m_imaginary) >= s_sqrtRescaleThreshold))
+                if (
+                    (Math.Abs(value.m_real) >= s_sqrtRescaleThreshold)
+                    || (Math.Abs(value.m_imaginary) >= s_sqrtRescaleThreshold)
+                )
                 {
                     if (double.IsInfinity(value.m_imaginary) && !double.IsNaN(value.m_real))
                     {
@@ -731,7 +785,8 @@ namespace System.Numerics
                 }
 
                 // This is the core of the algorithm. Everything else is special case handling.
-                double x, y;
+                double x,
+                    y;
                 if (value.m_real >= 0.0)
                 {
                     x = Math.Sqrt((Hypot(value.m_real, value.m_imaginary) + value.m_real) * 0.5);
@@ -740,7 +795,8 @@ namespace System.Numerics
                 else
                 {
                     y = Math.Sqrt((Hypot(value.m_real, value.m_imaginary) - value.m_real) * 0.5);
-                    if (value.m_imaginary < 0.0) y = -y;
+                    if (value.m_imaginary < 0.0)
+                        y = -y;
                     x = value.m_imaginary / (2.0 * y);
                 }
 
@@ -751,9 +807,7 @@ namespace System.Numerics
                 }
 
                 return new Complex(x, y);
-
             }
-
         }
 
         public static Complex Pow(Complex value, Complex power)

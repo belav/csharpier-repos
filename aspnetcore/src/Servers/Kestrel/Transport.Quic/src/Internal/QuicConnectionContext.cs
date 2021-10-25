@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
         private readonly QuicConnection _connection;
         private readonly QuicTransportContext _context;
         private readonly IQuicTrace _log;
-        private readonly CancellationTokenSource _connectionClosedTokenSource = new CancellationTokenSource();
+        private readonly CancellationTokenSource _connectionClosedTokenSource =
+            new CancellationTokenSource();
 
         private Task? _closeTask;
 
@@ -66,7 +67,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
             _connection.Dispose();
         }
 
-        public override void Abort() => Abort(new ConnectionAbortedException("The connection was aborted by the application via MultiplexedConnectionContext.Abort()."));
+        public override void Abort() =>
+            Abort(
+                new ConnectionAbortedException(
+                    "The connection was aborted by the application via MultiplexedConnectionContext.Abort()."
+                )
+            );
 
         public override void Abort(ConnectionAbortedException abortReason)
         {
@@ -74,7 +80,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
             _closeTask = _connection.CloseAsync(errorCode: Error).AsTask();
         }
 
-        public override async ValueTask<ConnectionContext?> AcceptAsync(CancellationToken cancellationToken = default)
+        public override async ValueTask<ConnectionContext?> AcceptAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             try
             {
@@ -99,7 +107,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
             return null;
         }
 
-        public override ValueTask<ConnectionContext> ConnectAsync(IFeatureCollection? features = null, CancellationToken cancellationToken = default)
+        public override ValueTask<ConnectionContext> ConnectAsync(
+            IFeatureCollection? features = null,
+            CancellationToken cancellationToken = default
+        )
         {
             QuicStream quicStream;
 

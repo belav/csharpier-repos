@@ -23,7 +23,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
     /// </summary>
     public partial class InMemoryShapedQueryCompilingExpressionVisitor
     {
-        private sealed class QueryingEnumerable<T> : IAsyncEnumerable<T>, IEnumerable<T>, IQueryingEnumerable
+        private sealed class QueryingEnumerable<T>
+            : IAsyncEnumerable<T>,
+              IEnumerable<T>,
+              IQueryingEnumerable
         {
             private readonly QueryContext _queryContext;
             private readonly IEnumerable<ValueBuffer> _innerEnumerable;
@@ -39,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 Func<QueryContext, ValueBuffer, T> shaper,
                 Type contextType,
                 bool standAloneStateManager,
-                bool concurrencyDetectionEnabled)
+                bool concurrencyDetectionEnabled
+            )
             {
                 _queryContext = queryContext;
                 _innerEnumerable = innerEnumerable;
@@ -50,17 +54,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 _concurrencyDetectionEnabled = concurrencyDetectionEnabled;
             }
 
-            public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
-                => new Enumerator(this, cancellationToken);
+            public IAsyncEnumerator<T> GetAsyncEnumerator(
+                CancellationToken cancellationToken = default
+            ) => new Enumerator(this, cancellationToken);
 
-            public IEnumerator<T> GetEnumerator()
-                => new Enumerator(this);
+            public IEnumerator<T> GetEnumerator() => new Enumerator(this);
 
-            IEnumerator IEnumerable.GetEnumerator()
-                => GetEnumerator();
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-            public string ToQueryString()
-                => InMemoryStrings.NoQueryStrings;
+            public string ToQueryString() => InMemoryStrings.NoQueryStrings;
 
             private sealed class Enumerator : IEnumerator<T>, IAsyncEnumerator<T>
             {
@@ -75,7 +77,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 private IEnumerator<ValueBuffer>? _enumerator;
 
-                public Enumerator(QueryingEnumerable<T> queryingEnumerable, CancellationToken cancellationToken = default)
+                public Enumerator(
+                    QueryingEnumerable<T> queryingEnumerable,
+                    CancellationToken cancellationToken = default
+                )
                 {
                     _queryContext = queryingEnumerable._queryContext;
                     _innerEnumerable = queryingEnumerable._innerEnumerable;
@@ -93,8 +98,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 public T Current { get; private set; }
 
-                object IEnumerator.Current
-                    => Current!;
+                object IEnumerator.Current => Current!;
 
                 public bool MoveNext()
                 {
@@ -156,9 +160,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                     var hasNext = _enumerator.MoveNext();
 
-                    Current = hasNext
-                        ? _shaper(_queryContext, _enumerator.Current)
-                        : default!;
+                    Current = hasNext ? _shaper(_queryContext, _enumerator.Current) : default!;
 
                     return hasNext;
                 }
@@ -177,8 +179,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     return enumerator.DisposeAsyncIfAvailable();
                 }
 
-                public void Reset()
-                    => throw new NotSupportedException(CoreStrings.EnumerableResetNotSupported);
+                public void Reset() =>
+                    throw new NotSupportedException(CoreStrings.EnumerableResetNotSupported);
             }
         }
     }

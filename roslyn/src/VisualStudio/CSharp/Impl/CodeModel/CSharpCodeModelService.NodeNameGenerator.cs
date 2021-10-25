@@ -16,13 +16,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 {
     internal partial class CSharpCodeModelService
     {
-        protected override AbstractNodeNameGenerator CreateNodeNameGenerator()
-            => new NodeNameGenerator();
+        protected override AbstractNodeNameGenerator CreateNodeNameGenerator() =>
+            new NodeNameGenerator();
 
         private class NodeNameGenerator : AbstractNodeNameGenerator
         {
-            protected override bool IsNameableNode(SyntaxNode node)
-                => CSharpCodeModelService.IsNameableNode(node);
+            protected override bool IsNameableNode(SyntaxNode node) =>
+                CSharpCodeModelService.IsNameableNode(node);
 
             private static void AppendName(StringBuilder builder, NameSyntax name)
             {
@@ -89,7 +89,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
                                 builder.Append(']');
                             }
-
                             break;
 
                         case SyntaxKind.PointerType:
@@ -105,7 +104,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 }
             }
 
-            private static void AppendParameterList(StringBuilder builder, BaseParameterListSyntax parameterList)
+            private static void AppendParameterList(
+                StringBuilder builder,
+                BaseParameterListSyntax parameterList
+            )
             {
                 builder.Append(parameterList is BracketedParameterListSyntax ? '[' : '(');
 
@@ -211,8 +213,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         break;
 
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        var conversionOperatorDeclaration = (ConversionOperatorDeclarationSyntax)node;
-                        AppendOperatorName(builder, conversionOperatorDeclaration.ImplicitOrExplicitKeyword.Kind());
+                        var conversionOperatorDeclaration =
+                            (ConversionOperatorDeclarationSyntax)node;
+                        AppendOperatorName(
+                            builder,
+                            conversionOperatorDeclaration.ImplicitOrExplicitKeyword.Kind()
+                        );
                         builder.Append('_');
                         AppendTypeName(builder, conversionOperatorDeclaration.Type);
                         AppendParameterList(builder, conversionOperatorDeclaration.ParameterList);
@@ -220,7 +226,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
                     case SyntaxKind.ConstructorDeclaration:
                         var constructorDeclaration = (ConstructorDeclarationSyntax)node;
-                        builder.Append(constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword) ? "#sctor" : "#ctor");
+                        builder.Append(
+                            constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword)
+                              ? "#sctor"
+                              : "#ctor"
+                        );
                         AppendParameterList(builder, constructorDeclaration.ParameterList);
                         break;
 

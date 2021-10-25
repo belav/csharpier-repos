@@ -53,14 +53,20 @@ namespace Microsoft.AspNetCore.Routing
             string value,
             int startIndex,
             int characterCount,
-            string expected)
+            string expected
+        )
         {
             // Arrange
             var urlTestEncoder = new UrlTestEncoder();
             var uriBuilldingContext = new UriBuildingContext(urlTestEncoder);
 
             // Act
-            uriBuilldingContext.EncodeValue(value, startIndex, characterCount, encodeSlashes: false);
+            uriBuilldingContext.EncodeValue(
+                value,
+                startIndex,
+                characterCount,
+                encodeSlashes: false
+            );
 
             // Assert
             Assert.Equal(expected, uriBuilldingContext.ToString());
@@ -83,7 +89,12 @@ namespace Microsoft.AspNetCore.Routing
         [InlineData("", false, true, "")]
         [InlineData("", true, false, "")]
         [InlineData("", true, true, "")]
-        public void ToPathString(string url, bool appendTrailingSlash, bool encodeSlashes, string expected)
+        public void ToPathString(
+            string url,
+            bool appendTrailingSlash,
+            bool encodeSlashes,
+            string expected
+        )
         {
             // Arrange
             var urlTestEncoder = new UrlTestEncoder();

@@ -8,39 +8,134 @@ using Xunit;
 
 namespace System.DirectoryServices.Protocols.Tests
 {
-    [ConditionalClass(typeof(DirectoryServicesTestHelpers), nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled))]
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/49105", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+    [ConditionalClass(
+        typeof(DirectoryServicesTestHelpers),
+        nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled)
+    )]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/49105",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMacOsAppleSilicon)
+    )]
     public class BerConverterTests
     {
         public static IEnumerable<object[]> Encode_TestData()
         {
             yield return new object[] { "", null, new byte[0] };
             yield return new object[] { "", new object[10], new byte[0] };
-            yield return new object[] { "b", new object[] { true, false, true, false }, new byte[] { 1, 1, 255 } };
+            yield return new object[]
+            {
+                "b",
+                new object[] { true, false, true, false },
+                new byte[] { 1, 1, 255 }
+            };
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                yield return new object[] { "{", new object[] { "a" }, new byte[] { 48, 0, 0, 0, 0, 0 } }; // This format is not supported by Linux OpenLDAP
+                yield return new object[]
+                {
+                    "{",
+                    new object[] { "a" },
+                    new byte[] { 48, 0, 0, 0, 0, 0 }
+                }; // This format is not supported by Linux OpenLDAP
             }
-            yield return new object[] { "{}", new object[] { "a" }, (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 0 } : new byte[] { 48, 0 } };
+            yield return new object[]
+            {
+                "{}",
+                new object[] { "a" },
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 0 }
+                    : new byte[] { 48, 0 }
+            };
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                yield return new object[] { "[", new object[] { "a" }, new byte[] { 49, 0, 0, 0, 0, 0 } }; // This format is not supported by Linux OpenLDAP
+                yield return new object[]
+                {
+                    "[",
+                    new object[] { "a" },
+                    new byte[] { 49, 0, 0, 0, 0, 0 }
+                }; // This format is not supported by Linux OpenLDAP
             }
-            yield return new object[] { "[]", new object[] { "a" }, (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 49, 132, 0, 0, 0, 0 } : new byte[] { 49, 0 } };
+            yield return new object[]
+            {
+                "[]",
+                new object[] { "a" },
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 49, 132, 0, 0, 0, 0 }
+                    : new byte[] { 49, 0 }
+            };
             yield return new object[] { "n", new object[] { "a" }, new byte[] { 5, 0 } };
 
-            yield return new object[] { "tetie", new object[] { 128, 0, 133, 2, 3 }, new byte[] { 128, 1, 0, 133, 1, 2, 10, 1, 3 } };
-            yield return new object[] { "{tetie}", new object[] { 128, 0, 133, 2, 3 }, (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 9, 128, 1, 0, 133, 1, 2, 10, 1, 3 } : new byte[] { 48, 9, 128, 1, 0, 133, 1, 2, 10, 1, 3 } };
+            yield return new object[]
+            {
+                "tetie",
+                new object[] { 128, 0, 133, 2, 3 },
+                new byte[] { 128, 1, 0, 133, 1, 2, 10, 1, 3 }
+            };
+            yield return new object[]
+            {
+                "{tetie}",
+                new object[] { 128, 0, 133, 2, 3 },
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 9, 128, 1, 0, 133, 1, 2, 10, 1, 3 }
+                    : new byte[] { 48, 9, 128, 1, 0, 133, 1, 2, 10, 1, 3 }
+            };
 
-            yield return new object[] { "bb", new object[] { true, false }, new byte[] { 1, 1, 255, 1, 1, 0 } };
-            yield return new object[] { "{bb}", new object[] { true, false }, (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 } : new byte[] { 48, 6, 1, 1, 255, 1, 1, 0 } };
+            yield return new object[]
+            {
+                "bb",
+                new object[] { true, false },
+                new byte[] { 1, 1, 255, 1, 1, 0 }
+            };
+            yield return new object[]
+            {
+                "{bb}",
+                new object[] { true, false },
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }
+                    : new byte[] { 48, 6, 1, 1, 255, 1, 1, 0 }
+            };
 
-            yield return new object[] { "ssss", new object[] { null, "", "abc", "\0" }, new byte[] { 4, 0, 4, 0, 4, 3, 97, 98, 99, 4, 1, 0 } };
-            yield return new object[] { "oXo", new object[] { null, new byte[] { 0, 1, 2, 255 }, new byte[0] }, (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 4, 0, 3, 4, 0, 1, 2, 255, 4, 0 } : new byte[] { 4, 0, 3, 2, 4, 0, 4, 0 } };
-            yield return new object[] { "vv", new object[] { null, new string[] { "abc", "", null } }, new byte[] { 4, 3, 97, 98, 99, 4, 0, 4, 0 } };
-            yield return new object[] { "{vv}", new object[] { null, new string[] { "abc", "", null } }, (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 9, 4, 3, 97, 98, 99, 4, 0, 4, 0 } : new byte[] { 48, 9, 4, 3, 97, 98, 99, 4, 0, 4, 0 } };
-            yield return new object[] { "VVVV", new object[] { null, new byte[][] { new byte[] { 0, 1, 2, 3 }, null }, new byte[][] { new byte[0] }, new byte[0][] }, new byte[] { 4, 4, 0, 1, 2, 3, 4, 0, 4, 0 } };
+            yield return new object[]
+            {
+                "ssss",
+                new object[] { null, "", "abc", "\0" },
+                new byte[] { 4, 0, 4, 0, 4, 3, 97, 98, 99, 4, 1, 0 }
+            };
+            yield return new object[]
+            {
+                "oXo",
+                new object[] { null, new byte[] { 0, 1, 2, 255 }, new byte[0] },
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 4, 0, 3, 4, 0, 1, 2, 255, 4, 0 }
+                    : new byte[] { 4, 0, 3, 2, 4, 0, 4, 0 }
+            };
+            yield return new object[]
+            {
+                "vv",
+                new object[] { null, new string[] { "abc", "", null } },
+                new byte[] { 4, 3, 97, 98, 99, 4, 0, 4, 0 }
+            };
+            yield return new object[]
+            {
+                "{vv}",
+                new object[] { null, new string[] { "abc", "", null } },
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 9, 4, 3, 97, 98, 99, 4, 0, 4, 0 }
+                    : new byte[] { 48, 9, 4, 3, 97, 98, 99, 4, 0, 4, 0 }
+            };
+            yield return new object[]
+            {
+                "VVVV",
+                new object[]
+                {
+                    null,
+                    new byte[][] { new byte[] { 0, 1, 2, 3 }, null },
+                    new byte[][] { new byte[0] },
+                    new byte[0][]
+                },
+                new byte[] { 4, 4, 0, 1, 2, 3, 4, 0, 4, 0 }
+            };
         }
 
         [Theory]
@@ -53,7 +148,10 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Encode_NullFormat_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("format", () => BerConverter.Encode(null, new object[0]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "format",
+                () => BerConverter.Encode(null, new object[0])
+            );
         }
 
         public static IEnumerable<object[]> Encode_Invalid_TestData()
@@ -101,7 +199,10 @@ namespace System.DirectoryServices.Protocols.Tests
         [MemberData(nameof(Encode_Invalid_TestData))]
         public void Encode_Invalid_ThrowsArgumentException(string format, object[] values)
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => BerConverter.Encode(format, values));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => BerConverter.Encode(format, values)
+            );
         }
 
         [Theory]
@@ -116,17 +217,62 @@ namespace System.DirectoryServices.Protocols.Tests
         public static IEnumerable<object[]> Decode_TestData()
         {
             yield return new object[] { "{}", new byte[] { 48, 0, 0, 0, 0, 0 }, new object[0] };
-            yield return new object[] { "{a}", new byte[] { 48, 132, 0, 0, 0, 5, 4, 3, 97, 98, 99 }, new object[] { "abc" } };
-            yield return new object[] { "{ie}", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }, new object[] { -1, 0 } };
-            yield return new object[] { "{bb}", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }, new object[] { true, false } };
-            yield return new object[] { "{OO}", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }, new object[] { new byte[] { 255 }, new byte[] { 0 } } };
-            yield return new object[] { "{BB}", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }, new object[] { new byte[] { 255 }, new byte[] { 0 } } };
+            yield return new object[]
+            {
+                "{a}",
+                new byte[] { 48, 132, 0, 0, 0, 5, 4, 3, 97, 98, 99 },
+                new object[] { "abc" }
+            };
+            yield return new object[]
+            {
+                "{ie}",
+                new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 },
+                new object[] { -1, 0 }
+            };
+            yield return new object[]
+            {
+                "{bb}",
+                new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 },
+                new object[] { true, false }
+            };
+            yield return new object[]
+            {
+                "{OO}",
+                new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 },
+                new object[] { new byte[] { 255 }, new byte[] { 0 } }
+            };
+            yield return new object[]
+            {
+                "{BB}",
+                new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 },
+                new object[] { new byte[] { 255 }, new byte[] { 0 } }
+            };
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) // vv and VV formats are not supported yet in Linux
             {
-                yield return new object[] { "{vv}", new byte[] { 48, 132, 0, 0, 0, 9, 4, 3, 97, 98, 99, 4, 0, 4, 0 }, new object[] { null, null } };
-                yield return new object[] { "{vv}", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }, new object[] { new string[] { "\x01" }, null } };
-                yield return new object[] { "{VV}", new byte[] { 48, 132, 0, 0, 0, 9, 4, 3, 97, 98, 99, 4, 0, 4, 0 }, new object[] { null, null } };
-                yield return new object[] { "{VV}", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }, new object[] { new byte[][] { new byte[] { 1 } }, null } };
+                yield return new object[]
+                {
+                    "{vv}",
+                    new byte[] { 48, 132, 0, 0, 0, 9, 4, 3, 97, 98, 99, 4, 0, 4, 0 },
+                    new object[] { null, null }
+                };
+                yield return new object[]
+                {
+                    "{vv}",
+                    new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 },
+                    new object[] { new string[] { "\x01" }, null }
+                };
+                yield return new object[]
+                {
+                    "{VV}",
+                    new byte[] { 48, 132, 0, 0, 0, 9, 4, 3, 97, 98, 99, 4, 0, 4, 0 },
+                    new object[] { null, null }
+                };
+                yield return new object[]
+                {
+                    "{VV}",
+                    new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 },
+                    new object[] { new byte[][] { new byte[] { 1 } }, null }
+                };
             }
         }
 
@@ -141,14 +287,20 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Decode_NullFormat_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("format", () => BerConverter.Decode(null, new byte[0]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "format",
+                () => BerConverter.Decode(null, new byte[0])
+            );
         }
 
         [Theory]
         [InlineData("p", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 })]
         public void UnknownFormat_ThrowsArgumentException(string format, byte[] values)
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => BerConverter.Decode(format, values));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => BerConverter.Decode(format, values)
+            );
         }
 
         public static IEnumerable<object[]> Decode_Invalid_ThrowsBerConversionException_Data()
@@ -160,16 +312,44 @@ namespace System.DirectoryServices.Protocols.Tests
             {
                 yield return new object[] { "}", new byte[] { 1 } }; // This is considered a valid case in Linux
             }
-            yield return new object[] { "{}{}{}{}{}{}{}", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 } };
+            yield return new object[]
+            {
+                "{}{}{}{}{}{}{}",
+                new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }
+            };
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                yield return new object[] { "aaa", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 } };
-            } 
-            yield return new object[] { "iii", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 } };
-            yield return new object[] { "eee", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 } };
-            yield return new object[] { "bbb", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 } };
-            yield return new object[] { "OOO", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 } };
-            yield return new object[] { "BBB", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 } };
+                yield return new object[]
+                {
+                    "aaa",
+                    new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }
+                };
+            }
+            yield return new object[]
+            {
+                "iii",
+                new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }
+            };
+            yield return new object[]
+            {
+                "eee",
+                new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }
+            };
+            yield return new object[]
+            {
+                "bbb",
+                new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }
+            };
+            yield return new object[]
+            {
+                "OOO",
+                new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }
+            };
+            yield return new object[]
+            {
+                "BBB",
+                new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 }
+            };
         }
 
         [Theory]

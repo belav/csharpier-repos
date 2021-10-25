@@ -35,13 +35,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         /// </summary>
         public SqlServerModificationCommandBatch(
             ModificationCommandBatchFactoryDependencies dependencies,
-            int? maxBatchSize)
-            : base(dependencies)
+            int? maxBatchSize
+        ) : base(dependencies)
         {
-            if (maxBatchSize.HasValue
-                && maxBatchSize.Value <= 0)
+            if (maxBatchSize.HasValue && maxBatchSize.Value <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(maxBatchSize), RelationalStrings.InvalidMaxBatchSize(maxBatchSize.Value));
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxBatchSize),
+                    RelationalStrings.InvalidMaxBatchSize(maxBatchSize.Value)
+                );
             }
 
             _maxBatchSize = Math.Min(maxBatchSize ?? 42, MaxRowCount);
@@ -53,8 +55,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected new virtual ISqlServerUpdateSqlGenerator UpdateSqlGenerator
-            => (ISqlServerUpdateSqlGenerator)base.UpdateSqlGenerator;
+        protected new virtual ISqlServerUpdateSqlGenerator UpdateSqlGenerator =>
+            (ISqlServerUpdateSqlGenerator)base.UpdateSqlGenerator;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -97,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                 }
 
                 var averageCommandLength = commandTextLength / ModificationCommands.Count;
-                var expectedAdditionalCommandCapacity = (MaxScriptLength - commandTextLength) / averageCommandLength;
+                var expectedAdditionalCommandCapacity =
+                    (MaxScriptLength - commandTextLength) / averageCommandLength;
                 _commandsLeftToLengthCheck = Math.Max(1, expectedAdditionalCommandCapacity / 4);
             }
 
@@ -110,14 +113,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override int GetParameterCount()
-            => _parameterCount;
+        protected override int GetParameterCount() => _parameterCount;
 
         private static int CountParameters(ModificationCommand modificationCommand)
         {
             var parameterCount = 0;
             // ReSharper disable once ForCanBeConvertedToForeach
-            for (var columnIndex = 0; columnIndex < modificationCommand.ColumnModifications.Count; columnIndex++)
+            for (
+                var columnIndex = 0;
+                columnIndex < modificationCommand.ColumnModifications.Count;
+                columnIndex++
+            )
             {
                 var columnModification = modificationCommand.ColumnModifications[columnIndex];
                 if (columnModification.UseCurrentValueParameter)
@@ -152,8 +158,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override string GetCommandText()
-            => base.GetCommandText() + GetBulkInsertCommandText(ModificationCommands.Count);
+        protected override string GetCommandText() =>
+            base.GetCommandText() + GetBulkInsertCommandText(ModificationCommands.Count);
 
         private string GetBulkInsertCommandText(int lastIndex)
         {
@@ -164,7 +170,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
 
             var stringBuilder = new StringBuilder();
             var resultSetMapping = UpdateSqlGenerator.AppendBulkInsertOperation(
-                stringBuilder, _bulkInsertCommands, lastIndex - _bulkInsertCommands.Count);
+                stringBuilder,
+                _bulkInsertCommands,
+                lastIndex - _bulkInsertCommands.Count
+            );
             for (var i = lastIndex - _bulkInsertCommands.Count; i < lastIndex; i++)
             {
                 CommandResultSet[i] = resultSetMapping;
@@ -190,8 +199,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
 
             if (newModificationCommand.EntityState == EntityState.Added)
             {
-                if (_bulkInsertCommands.Count > 0
-                    && !CanBeInsertedInSameStatement(_bulkInsertCommands[0], newModificationCommand))
+                if (
+                    _bulkInsertCommands.Count > 0
+                    && !CanBeInsertedInSameStatement(_bulkInsertCommands[0], newModificationCommand)
+                )
                 {
                     CachedCommandText.Append(GetBulkInsertCommandText(commandPosition));
                     _bulkInsertCommands.Clear();
@@ -210,12 +221,25 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
             }
         }
 
-        private static bool CanBeInsertedInSameStatement(ModificationCommand firstCommand, ModificationCommand secondCommand)
-            => string.Equals(firstCommand.TableName, secondCommand.TableName, StringComparison.Ordinal)
-                && string.Equals(firstCommand.Schema, secondCommand.Schema, StringComparison.Ordinal)
-                && firstCommand.ColumnModifications.Where(o => o.IsWrite).Select(o => o.ColumnName).SequenceEqual(
-                    secondCommand.ColumnModifications.Where(o => o.IsWrite).Select(o => o.ColumnName))
-                && firstCommand.ColumnModifications.Where(o => o.IsRead).Select(o => o.ColumnName).SequenceEqual(
-                    secondCommand.ColumnModifications.Where(o => o.IsRead).Select(o => o.ColumnName));
+        private static bool CanBeInsertedInSameStatement(
+            ModificationCommand firstCommand,
+            ModificationCommand secondCommand
+        ) =>
+            string.Equals(firstCommand.TableName, secondCommand.TableName, StringComparison.Ordinal)
+            && string.Equals(firstCommand.Schema, secondCommand.Schema, StringComparison.Ordinal)
+            && firstCommand.ColumnModifications
+                .Where(o => o.IsWrite)
+                .Select(o => o.ColumnName)
+                .SequenceEqual(
+                    secondCommand.ColumnModifications
+                        .Where(o => o.IsWrite)
+                        .Select(o => o.ColumnName)
+                )
+            && firstCommand.ColumnModifications
+                .Where(o => o.IsRead)
+                .Select(o => o.ColumnName)
+                .SequenceEqual(
+                    secondCommand.ColumnModifications.Where(o => o.IsRead).Select(o => o.ColumnName)
+                );
     }
 }

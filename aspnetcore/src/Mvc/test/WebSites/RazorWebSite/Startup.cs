@@ -21,19 +21,26 @@ namespace RazorWebSite
 
             services
                 .AddMvc()
-                .AddRazorOptions(options =>
-                {
-                    options.ViewLocationExpanders.Add(new NonMainPageViewLocationExpander());
-                    options.ViewLocationExpanders.Add(new BackSlashExpander());
-                })
-                .AddViewOptions(options =>
-                {
-                    options.HtmlHelperOptions.ClientValidationEnabled = false;
-                    options.HtmlHelperOptions.Html5DateRenderingMode = Microsoft.AspNetCore.Mvc.Rendering.Html5DateRenderingMode.Rfc3339;
-                    options.HtmlHelperOptions.IdAttributeDotReplacement = "!";
-                    options.HtmlHelperOptions.ValidationMessageElement = "validationMessageElement";
-                    options.HtmlHelperOptions.ValidationSummaryMessageElement = "validationSummaryElement";
-                })
+                .AddRazorOptions(
+                    options =>
+                    {
+                        options.ViewLocationExpanders.Add(new NonMainPageViewLocationExpander());
+                        options.ViewLocationExpanders.Add(new BackSlashExpander());
+                    }
+                )
+                .AddViewOptions(
+                    options =>
+                    {
+                        options.HtmlHelperOptions.ClientValidationEnabled = false;
+                        options.HtmlHelperOptions.Html5DateRenderingMode =
+                            Microsoft.AspNetCore.Mvc.Rendering.Html5DateRenderingMode.Rfc3339;
+                        options.HtmlHelperOptions.IdAttributeDotReplacement = "!";
+                        options.HtmlHelperOptions.ValidationMessageElement =
+                            "validationMessageElement";
+                        options.HtmlHelperOptions.ValidationSummaryMessageElement =
+                            "validationSummaryElement";
+                    }
+                )
                 .AddMvcLocalization(LanguageViewLocationExpanderFormat.SubFolder);
 
             services.AddTransient<InjectedHelper>();
@@ -47,28 +54,32 @@ namespace RazorWebSite
 
             app.UseRouting();
 
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("en-GB", "en-US"),
-                SupportedCultures = new List<CultureInfo>
+            app.UseRequestLocalization(
+                new RequestLocalizationOptions
                 {
-                    new CultureInfo("fr"),
-                    new CultureInfo("en-GB"),
-                    new CultureInfo("en-US"),
-                },
-                SupportedUICultures = new List<CultureInfo>
-                {
-                    new CultureInfo("fr"),
-                    new CultureInfo("en-GB"),
-                    new CultureInfo("en-US"),
+                    DefaultRequestCulture = new RequestCulture("en-GB", "en-US"),
+                    SupportedCultures = new List<CultureInfo>
+                    {
+                        new CultureInfo("fr"),
+                        new CultureInfo("en-GB"),
+                        new CultureInfo("en-US"),
+                    },
+                    SupportedUICultures = new List<CultureInfo>
+                    {
+                        new CultureInfo("fr"),
+                        new CultureInfo("en-GB"),
+                        new CultureInfo("en-US"),
+                    }
                 }
-            });
+            );
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
+                    endpoints.MapRazorPages();
+                }
+            );
         }
     }
 }

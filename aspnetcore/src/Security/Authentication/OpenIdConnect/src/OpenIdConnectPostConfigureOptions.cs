@@ -44,7 +44,10 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
             if (options.StateDataFormat == null)
             {
                 var dataProtector = options.DataProtectionProvider.CreateProtector(
-                    typeof(OpenIdConnectHandler).FullName!, name, "v1");
+                    typeof(OpenIdConnectHandler).FullName!,
+                    name,
+                    "v1"
+                );
                 options.StateDataFormat = new PropertiesDataFormat(dataProtector);
             }
 
@@ -54,20 +57,31 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                     typeof(OpenIdConnectHandler).FullName!,
                     typeof(string).FullName!,
                     name,
-                    "v1");
+                    "v1"
+                );
 
-                options.StringDataFormat = new SecureDataFormat<string>(new StringSerializer(), dataProtector);
+                options.StringDataFormat = new SecureDataFormat<string>(
+                    new StringSerializer(),
+                    dataProtector
+                );
             }
 
-            if (string.IsNullOrEmpty(options.TokenValidationParameters.ValidAudience) && !string.IsNullOrEmpty(options.ClientId))
+            if (
+                string.IsNullOrEmpty(options.TokenValidationParameters.ValidAudience)
+                && !string.IsNullOrEmpty(options.ClientId)
+            )
             {
                 options.TokenValidationParameters.ValidAudience = options.ClientId;
             }
 
             if (options.Backchannel == null)
             {
-                options.Backchannel = new HttpClient(options.BackchannelHttpHandler ?? new HttpClientHandler());
-                options.Backchannel.DefaultRequestHeaders.UserAgent.ParseAdd("Microsoft ASP.NET Core OpenIdConnect handler");
+                options.Backchannel = new HttpClient(
+                    options.BackchannelHttpHandler ?? new HttpClientHandler()
+                );
+                options.Backchannel.DefaultRequestHeaders.UserAgent.ParseAdd(
+                    "Microsoft ASP.NET Core OpenIdConnect handler"
+                );
                 options.Backchannel.Timeout = options.BackchannelTimeout;
                 options.Backchannel.MaxResponseContentBufferSize = 1024 * 1024 * 10; // 10 MB
             }
@@ -76,11 +90,22 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
             {
                 if (options.Configuration != null)
                 {
-                    options.ConfigurationManager = new StaticConfigurationManager<OpenIdConnectConfiguration>(options.Configuration);
+                    options.ConfigurationManager =
+                        new StaticConfigurationManager<OpenIdConnectConfiguration>(
+                            options.Configuration
+                        );
                 }
-                else if (!(string.IsNullOrEmpty(options.MetadataAddress) && string.IsNullOrEmpty(options.Authority)))
+                else if (
+                    !(
+                        string.IsNullOrEmpty(options.MetadataAddress)
+                        && string.IsNullOrEmpty(options.Authority)
+                    )
+                )
                 {
-                    if (string.IsNullOrEmpty(options.MetadataAddress) && !string.IsNullOrEmpty(options.Authority))
+                    if (
+                        string.IsNullOrEmpty(options.MetadataAddress)
+                        && !string.IsNullOrEmpty(options.Authority)
+                    )
                     {
                         options.MetadataAddress = options.Authority;
                         if (!options.MetadataAddress.EndsWith("/", StringComparison.Ordinal))
@@ -91,17 +116,33 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect
                         options.MetadataAddress += ".well-known/openid-configuration";
                     }
 
-                    if (options.RequireHttpsMetadata && !(options.MetadataAddress?.StartsWith("https://", StringComparison.OrdinalIgnoreCase) ?? false))
+                    if (
+                        options.RequireHttpsMetadata
+                        && !(
+                            options.MetadataAddress?.StartsWith(
+                                "https://",
+                                StringComparison.OrdinalIgnoreCase
+                            ) ?? false
+                        )
+                    )
                     {
-                        throw new InvalidOperationException("The MetadataAddress or Authority must use HTTPS unless disabled for development by setting RequireHttpsMetadata=false.");
+                        throw new InvalidOperationException(
+                            "The MetadataAddress or Authority must use HTTPS unless disabled for development by setting RequireHttpsMetadata=false."
+                        );
                     }
 
-                    options.ConfigurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(options.MetadataAddress, new OpenIdConnectConfigurationRetriever(),
-                        new HttpDocumentRetriever(options.Backchannel) { RequireHttps = options.RequireHttpsMetadata })
-                    {
-                        RefreshInterval = options.RefreshInterval,
-                        AutomaticRefreshInterval = options.AutomaticRefreshInterval,
-                    };
+                    options.ConfigurationManager =
+                        new ConfigurationManager<OpenIdConnectConfiguration>(
+                            options.MetadataAddress,
+                            new OpenIdConnectConfigurationRetriever(),
+                            new HttpDocumentRetriever(options.Backchannel)
+                            {
+                                RequireHttps = options.RequireHttpsMetadata
+                            }
+                        ) {
+                            RefreshInterval = options.RefreshInterval,
+                            AutomaticRefreshInterval = options.AutomaticRefreshInterval,
+                        };
                 }
             }
         }

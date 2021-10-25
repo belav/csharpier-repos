@@ -15,17 +15,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ThisKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public ThisKeywordRecommender()
-            : base(SyntaxKind.ThisKeyword)
-        {
-        }
+        public ThisKeywordRecommender() : base(SyntaxKind.ThisKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                IsInstanceExpressionOrStatement(context) ||
-                IsThisParameterModifierContext(context) ||
-                IsConstructorInitializerContext(context);
+            return IsInstanceExpressionOrStatement(context)
+                || IsThisParameterModifierContext(context)
+                || IsConstructorInitializerContext(context);
         }
 
         private static bool IsInstanceExpressionOrStatement(CSharpSyntaxContext context)
@@ -45,9 +45,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
             var token = context.TargetToken;
 
-            if (token.Kind() == SyntaxKind.ColonToken &&
-                token.Parent is ConstructorInitializerSyntax &&
-                token.Parent.IsParentKind(SyntaxKind.ConstructorDeclaration))
+            if (
+                token.Kind() == SyntaxKind.ColonToken
+                && token.Parent is ConstructorInitializerSyntax
+                && token.Parent.IsParentKind(SyntaxKind.ConstructorDeclaration)
+            )
             {
                 var constructor = token.GetAncestor<ConstructorDeclarationSyntax>();
                 if (constructor.Modifiers.Any(SyntaxKind.StaticKeyword))
@@ -63,15 +65,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
         private static bool IsThisParameterModifierContext(CSharpSyntaxContext context)
         {
-            if (context.SyntaxTree.IsParameterModifierContext(
-                    context.Position, context.LeftToken, includeOperators: false, out var parameterIndex, out var previousModifier))
+            if (
+                context.SyntaxTree.IsParameterModifierContext(
+                    context.Position,
+                    context.LeftToken,
+                    includeOperators: false,
+                    out var parameterIndex,
+                    out var previousModifier
+                )
+            )
             {
-                if (previousModifier == SyntaxKind.None ||
-                    previousModifier == SyntaxKind.RefKeyword ||
-                    previousModifier == SyntaxKind.InKeyword)
+                if (
+                    previousModifier == SyntaxKind.None
+                    || previousModifier == SyntaxKind.RefKeyword
+                    || previousModifier == SyntaxKind.InKeyword
+                )
                 {
-                    if (parameterIndex == 0 &&
-                        context.SyntaxTree.IsPossibleExtensionMethodContext(context.LeftToken))
+                    if (
+                        parameterIndex == 0
+                        && context.SyntaxTree.IsPossibleExtensionMethodContext(context.LeftToken)
+                    )
                     {
                         return true;
                     }
@@ -81,9 +94,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             return false;
         }
 
-        protected override bool ShouldPreselect(CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool ShouldPreselect(
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            var outerType = context.SemanticModel.GetEnclosingNamedType(context.Position, cancellationToken);
+            var outerType = context.SemanticModel.GetEnclosingNamedType(
+                context.Position,
+                cancellationToken
+            );
             return context.InferredTypes.Any(t => Equals(t, outerType));
         }
     }

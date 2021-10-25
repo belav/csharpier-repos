@@ -8,8 +8,15 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [DllImport(Interop.Libraries.Advapi32, EntryPoint = "GetSecurityDescriptorLength", CallingConvention = CallingConvention.Winapi,
-            SetLastError = true, ExactSpelling = true, CharSet = CharSet.Unicode)]
-        internal static extern /*DWORD*/ uint GetSecurityDescriptorLength(IntPtr byteArray);
+        [DllImport(
+            Interop.Libraries.Advapi32,
+            EntryPoint = "GetSecurityDescriptorLength",
+            CallingConvention = CallingConvention.Winapi,
+            SetLastError = true,
+            ExactSpelling = true,
+            CharSet = CharSet.Unicode
+        )]
+        internal static extern /*DWORD*/
+        uint GetSecurityDescriptorLength(IntPtr byteArray);
     }
 }

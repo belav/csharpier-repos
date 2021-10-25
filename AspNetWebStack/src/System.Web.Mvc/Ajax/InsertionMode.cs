@@ -9,17 +9,14 @@ namespace System.Web.Mvc.Ajax
         /// Replace the contents of the element.
         /// </summary>
         Replace = 0,
-
         /// <summary>
         /// Insert before the element.
         /// </summary>
         InsertBefore = 1,
-
         /// <summary>
         /// Insert after the element.
         /// </summary>
         InsertAfter = 2,
-
         /// <summary>
         /// Replace the entire element.
         /// </summary>

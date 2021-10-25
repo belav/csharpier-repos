@@ -17,8 +17,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
     {
         private readonly string _languageName;
 
-        public SourceGeneratedFileItem(DocumentId documentId, string hintName, string languageName, Workspace workspace)
-            : base(name: hintName)
+        public SourceGeneratedFileItem(
+            DocumentId documentId,
+            string hintName,
+            string languageName,
+            Workspace workspace
+        ) : base(name: hintName)
         {
             DocumentId = documentId;
             HintName = hintName;
@@ -43,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             return new BrowseObject(this);
         }
 
-        public override IInvocationController InvocationController => InvocationControllerImpl.Instance;
+        public override IInvocationController InvocationController =>
+            InvocationControllerImpl.Instance;
 
         private sealed class InvocationControllerImpl : IInvocationController
         {
@@ -55,12 +60,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
                 foreach (var item in items.OfType<SourceGeneratedFileItem>())
                 {
-                    var documentNavigationService = item.Workspace.Services.GetService<IDocumentNavigationService>();
+                    var documentNavigationService =
+                        item.Workspace.Services.GetService<IDocumentNavigationService>();
                     if (documentNavigationService != null)
                     {
                         // TODO: we're navigating back to the top of the file, do we have a way to just bring it to the focus and that's it?
                         // TODO: Use a threaded-wait-dialog here so we can cancel navigation.
-                        didNavigate |= documentNavigationService.TryNavigateToPosition(item.Workspace, item.DocumentId, position: 0, CancellationToken.None);
+                        didNavigate |= documentNavigationService.TryNavigateToPosition(
+                            item.Workspace,
+                            item.DocumentId,
+                            position: 0,
+                            CancellationToken.None
+                        );
                     }
                 }
 

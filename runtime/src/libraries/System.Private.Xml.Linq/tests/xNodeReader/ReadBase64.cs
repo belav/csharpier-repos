@@ -12,7 +12,6 @@ namespace CoreXml.Test.XLinq
 {
     public partial class XNodeReaderFunctionalTests : TestModule
     {
-
         public partial class XNodeReaderTests : XLinqTestCase
         {
             //[TestCase(Name = "ReadContentAsBase64", Desc = "ReadContentAsBase64")]
@@ -24,7 +23,8 @@ namespace CoreXml.Test.XLinq
                 public const string ST_ELEM_NAME4 = "ElemText";
                 public const string ST_ELEM_NAME5 = "ElemNumText";
                 public const string ST_ELEM_NAME6 = "ElemLong";
-                public const string strTextBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                public const string strTextBase64 =
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
                 public const string strNumBase64 = "0123456789+/";
 
                 public override void Init()
@@ -39,7 +39,12 @@ namespace CoreXml.Test.XLinq
                     base.Terminate();
                 }
 
-                private bool VerifyInvalidReadBase64(int iBufferSize, int iIndex, int iCount, Type exceptionType)
+                private bool VerifyInvalidReadBase64(
+                    int iBufferSize,
+                    int iIndex,
+                    int iCount,
+                    Type exceptionType
+                )
                 {
                     bool bPassed = false;
                     byte[] buffer = new byte[iBufferSize];
@@ -47,7 +52,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME1);
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return true;
+                    if (!DataReader.CanReadBinaryContent)
+                        return true;
                     try
                     {
                         DataReader.ReadContentAsBase64(buffer, iIndex, iCount);
@@ -70,7 +76,8 @@ namespace CoreXml.Test.XLinq
                 {
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnNodeType(DataReader, nt);
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
                     try
                     {
                         byte[] buffer = new byte[1];
@@ -79,7 +86,10 @@ namespace CoreXml.Test.XLinq
                     catch (InvalidOperationException ioe)
                     {
                         if (ioe.ToString().IndexOf(nt.ToString()) < 0)
-                            TestLog.Compare(false, "Call threw wrong invalid operation exception on " + nt);
+                            TestLog.Compare(
+                                false,
+                                "Call threw wrong invalid operation exception on " + nt
+                            );
                         else
                             return;
                     }
@@ -93,7 +103,8 @@ namespace CoreXml.Test.XLinq
                     PositionOnNodeType(DataReader, nt);
                     string name = DataReader.Name;
                     string value = DataReader.Value;
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     byte[] buffer = new byte[1];
                     int nBytes = DataReader.ReadContentAsBase64(buffer, 0, 1);
@@ -110,7 +121,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME1);
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     base64len = DataReader.ReadContentAsBase64(base64, 0, base64.Length);
 
@@ -120,7 +132,11 @@ namespace CoreXml.Test.XLinq
                         strActbase64 += System.BitConverter.ToChar(base64, i);
                     }
 
-                    TestLog.Compare(strActbase64, (strTextBase64 + strNumBase64), "Compare All Valid Base64");
+                    TestLog.Compare(
+                        strActbase64,
+                        (strTextBase64 + strNumBase64),
+                        "Compare All Valid Base64"
+                    );
                 }
 
                 //[Variation("ReadBase64 Element with all valid Num value", Priority = 0)]
@@ -132,7 +148,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME3);
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     base64len = DataReader.ReadContentAsBase64(base64, 0, base64.Length);
 
@@ -154,7 +171,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME4);
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     base64len = DataReader.ReadContentAsBase64(base64, 0, base64.Length);
 
@@ -176,7 +194,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME5);
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     base64len = DataReader.ReadContentAsBase64(base64, 0, base64.Length);
 
@@ -186,7 +205,11 @@ namespace CoreXml.Test.XLinq
                         strActbase64 += System.BitConverter.ToChar(base64, i);
                     }
 
-                    TestLog.Compare(strActbase64, (strTextBase64 + strNumBase64), "Compare All Valid Base64");
+                    TestLog.Compare(
+                        strActbase64,
+                        (strTextBase64 + strNumBase64),
+                        "Compare All Valid Base64"
+                    );
                 }
 
                 //[Variation("ReadBase64 Element with Long valid value (from concatenation), Priority=0")]
@@ -198,7 +221,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME6);
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     base64len = DataReader.ReadContentAsBase64(base64, 0, base64.Length);
 
@@ -218,31 +242,41 @@ namespace CoreXml.Test.XLinq
                 //[Variation("ReadBase64 with count > buffer size")]
                 public void ReadBase64_7()
                 {
-                    BoolToLTMResult(VerifyInvalidReadBase64(5, 0, 6, typeof(NotSupportedException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadBase64(5, 0, 6, typeof(NotSupportedException))
+                    );
                 }
 
                 //[Variation("ReadBase64 with count < 0")]
                 public void ReadBase64_8()
                 {
-                    BoolToLTMResult(VerifyInvalidReadBase64(5, 2, -1, typeof(NotSupportedException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadBase64(5, 2, -1, typeof(NotSupportedException))
+                    );
                 }
 
                 //[Variation("ReadBase64 with index > buffer size")]
                 public void ReadBase64_9()
                 {
-                    BoolToLTMResult(VerifyInvalidReadBase64(5, 5, 1, typeof(NotSupportedException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadBase64(5, 5, 1, typeof(NotSupportedException))
+                    );
                 }
 
                 //[Variation("ReadBase64 with index < 0")]
                 public void ReadBase64_10()
                 {
-                    BoolToLTMResult(VerifyInvalidReadBase64(5, -1, 1, typeof(NotSupportedException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadBase64(5, -1, 1, typeof(NotSupportedException))
+                    );
                 }
 
                 //[Variation("ReadBase64 with index + count exceeds buffer")]
                 public void ReadBase64_11()
                 {
-                    BoolToLTMResult(VerifyInvalidReadBase64(5, 0, 10, typeof(NotSupportedException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadBase64(5, 0, 10, typeof(NotSupportedException))
+                    );
                 }
 
                 //[Variation("ReadBase64 index & count =0")]
@@ -254,7 +288,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME1);
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     iCount = DataReader.ReadContentAsBase64(buffer, 0, 0);
 
@@ -270,14 +305,19 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME4);
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     string strActbase64 = "";
                     for (int i = 0; i < base64len; i = i + 2)
                     {
                         DataReader.ReadContentAsBase64(base64, i, 2);
                         strActbase64 = (System.BitConverter.ToChar(base64, i)).ToString();
-                        TestLog.Compare(string.Compare(strActbase64, 0, strTextBase64, i / 2, 1), 0, "Compare All Valid Base64");
+                        TestLog.Compare(
+                            string.Compare(strActbase64, 0, strTextBase64, i / 2, 1),
+                            0,
+                            "Compare All Valid Base64"
+                        );
                     }
                 }
 
@@ -288,7 +328,8 @@ namespace CoreXml.Test.XLinq
 
                     PositionOnElement(DataReader, ST_ELEM_NAME4);
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     try
                     {
@@ -309,8 +350,8 @@ namespace CoreXml.Test.XLinq
 
                     PositionOnElement(DataReader, "ElemErr");
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
-
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     byte[] buffer = new byte[10];
                     int nRead = 0;
@@ -332,7 +373,8 @@ namespace CoreXml.Test.XLinq
 
                     PositionOnElement(DataReader, "ElemNum");
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     byte[] buffer = new byte[10];
                     int nRead = DataReader.ReadContentAsBase64(buffer, 0, 8);
@@ -349,7 +391,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, "ElemNum");
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     byte[] buffer = new byte[30];
 
@@ -360,7 +403,11 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(nRead, 22, "1");
 
                     DataReader.Read();
-                    TestLog.Compare(DataReader.NodeType, XmlNodeType.Element, "Nodetype not end element");
+                    TestLog.Compare(
+                        DataReader.NodeType,
+                        XmlNodeType.Element,
+                        "Nodetype not end element"
+                    );
                     TestLog.Compare(DataReader.Name, "ElemText", "Nodetype not end element");
                 }
 
@@ -381,7 +428,8 @@ namespace CoreXml.Test.XLinq
 
                     PositionOnElement(DataReader, "ROOT");
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     int result = 0;
                     int nRead;
@@ -403,7 +451,8 @@ namespace CoreXml.Test.XLinq
                         XmlReader DataReader = GetReaderStr(strxml);
                         PositionOnElement(DataReader, "B");
                         DataReader.Read();
-                        if (!DataReader.CanReadBinaryContent) return;
+                        if (!DataReader.CanReadBinaryContent)
+                            return;
 
                         DataReader.ReadContentAsBase64(buffer, 0, 5000);
                         TestLog.WriteLine("Accepted incomplete element");
@@ -425,7 +474,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReaderStr(strxml);
                     PositionOnElement(DataReader, "abc");
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     for (int i = 0; i < 4; i++)
                     {
@@ -449,7 +499,8 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "abc");
 
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     for (int i = 0; i < 2; i++)
                     {
@@ -496,7 +547,8 @@ namespace CoreXml.Test.XLinq
 
                     PositionOnElement(DataReader, "base64");
                     DataReader.Read();
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     byte[] base64 = new byte[SIZE64];
 
@@ -528,7 +580,8 @@ namespace CoreXml.Test.XLinq
                 public const string ST_ELEM_NAME4 = "ElemText";
                 public const string ST_ELEM_NAME5 = "ElemNumText";
                 public const string ST_ELEM_NAME6 = "ElemLong";
-                public const string strTextBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                public const string strTextBase64 =
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
                 public const string strNumBase64 = "0123456789+/";
 
                 public override void Init()
@@ -543,14 +596,20 @@ namespace CoreXml.Test.XLinq
                     base.Terminate();
                 }
 
-                private bool VerifyInvalidReadBase64(int iBufferSize, int iIndex, int iCount, Type exceptionType)
+                private bool VerifyInvalidReadBase64(
+                    int iBufferSize,
+                    int iIndex,
+                    int iCount,
+                    Type exceptionType
+                )
                 {
                     bool bPassed = false;
                     byte[] buffer = new byte[iBufferSize];
 
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME1);
-                    if (!DataReader.CanReadBinaryContent) return true;
+                    if (!DataReader.CanReadBinaryContent)
+                        return true;
 
                     try
                     {
@@ -573,7 +632,8 @@ namespace CoreXml.Test.XLinq
                 {
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnNodeType(DataReader, nt);
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
                     try
                     {
                         byte[] buffer = new byte[1];
@@ -582,7 +642,10 @@ namespace CoreXml.Test.XLinq
                     catch (InvalidOperationException ioe)
                     {
                         if (ioe.ToString().IndexOf(nt.ToString()) < 0)
-                            TestLog.Compare(false, "Call threw wrong invalid operation exception on " + nt);
+                            TestLog.Compare(
+                                false,
+                                "Call threw wrong invalid operation exception on " + nt
+                            );
                         else
                             return;
                     }
@@ -597,7 +660,8 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME1);
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     base64len = DataReader.ReadElementContentAsBase64(base64, 0, base64.Length);
 
@@ -607,7 +671,11 @@ namespace CoreXml.Test.XLinq
                         strActbase64 += System.BitConverter.ToChar(base64, i);
                     }
 
-                    TestLog.Compare(strActbase64, (strTextBase64 + strNumBase64), "Compare All Valid Base64");
+                    TestLog.Compare(
+                        strActbase64,
+                        (strTextBase64 + strNumBase64),
+                        "Compare All Valid Base64"
+                    );
                 }
 
                 //[Variation("ReadBase64 Element with all valid Num value", Priority = 0)]
@@ -618,7 +686,8 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME3);
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     base64len = DataReader.ReadElementContentAsBase64(base64, 0, base64.Length);
 
@@ -639,7 +708,8 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME4);
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     base64len = DataReader.ReadElementContentAsBase64(base64, 0, base64.Length);
 
@@ -660,7 +730,8 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME5);
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     base64len = DataReader.ReadElementContentAsBase64(base64, 0, base64.Length);
 
@@ -670,7 +741,11 @@ namespace CoreXml.Test.XLinq
                         strActbase64 += System.BitConverter.ToChar(base64, i);
                     }
 
-                    TestLog.Compare(strActbase64, (strTextBase64 + strNumBase64), "Compare All Valid Base64");
+                    TestLog.Compare(
+                        strActbase64,
+                        (strTextBase64 + strNumBase64),
+                        "Compare All Valid Base64"
+                    );
                 }
 
                 //[Variation("ReadBase64 Element with Long valid value (from concatenation), Priority=0")]
@@ -681,7 +756,8 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME6);
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     base64len = DataReader.ReadElementContentAsBase64(base64, 0, base64.Length);
 
@@ -701,31 +777,41 @@ namespace CoreXml.Test.XLinq
                 //[Variation("ReadBase64 with count > buffer size")]
                 public void ReadBase64_7()
                 {
-                    BoolToLTMResult(VerifyInvalidReadBase64(5, 0, 6, typeof(ArgumentOutOfRangeException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadBase64(5, 0, 6, typeof(ArgumentOutOfRangeException))
+                    );
                 }
 
                 //[Variation("ReadBase64 with count < 0")]
                 public void ReadBase64_8()
                 {
-                    BoolToLTMResult(VerifyInvalidReadBase64(5, 2, -1, typeof(ArgumentOutOfRangeException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadBase64(5, 2, -1, typeof(ArgumentOutOfRangeException))
+                    );
                 }
 
                 //[Variation("ReadBase64 with index > buffer size")]
                 public void ReadBase64_9()
                 {
-                    BoolToLTMResult(VerifyInvalidReadBase64(5, 5, 1, typeof(ArgumentOutOfRangeException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadBase64(5, 5, 1, typeof(ArgumentOutOfRangeException))
+                    );
                 }
 
                 //[Variation("ReadBase64 with index < 0")]
                 public void ReadBase64_10()
                 {
-                    BoolToLTMResult(VerifyInvalidReadBase64(5, -1, 1, typeof(ArgumentOutOfRangeException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadBase64(5, -1, 1, typeof(ArgumentOutOfRangeException))
+                    );
                 }
 
                 //[Variation("ReadBase64 with index + count exceeds buffer")]
                 public void ReadBase64_11()
                 {
-                    BoolToLTMResult(VerifyInvalidReadBase64(5, 0, 10, typeof(ArgumentOutOfRangeException)));
+                    BoolToLTMResult(
+                        VerifyInvalidReadBase64(5, 0, 10, typeof(ArgumentOutOfRangeException))
+                    );
                 }
 
                 //[Variation("ReadBase64 index & count =0")]
@@ -736,7 +822,8 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME1);
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
                     iCount = DataReader.ReadElementContentAsBase64(buffer, 0, 0);
 
                     TestLog.Compare(iCount, 0, "has to be zero");
@@ -750,13 +837,18 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, ST_ELEM_NAME4);
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
                     string strActbase64 = "";
                     for (int i = 0; i < base64len; i = i + 2)
                     {
                         DataReader.ReadElementContentAsBase64(base64, i, 2);
                         strActbase64 = (System.BitConverter.ToChar(base64, i)).ToString();
-                        TestLog.Compare(string.Compare(strActbase64, 0, strTextBase64, i / 2, 1), 0, "Compare All Valid Base64");
+                        TestLog.Compare(
+                            string.Compare(strActbase64, 0, strTextBase64, i / 2, 1),
+                            0,
+                            "Compare All Valid Base64"
+                        );
                     }
                 }
 
@@ -766,7 +858,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
 
                     PositionOnElement(DataReader, ST_ELEM_NAME4);
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
                     try
                     {
                         DataReader.ReadElementContentAsBase64(null, 0, 0);
@@ -785,7 +878,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
 
                     PositionOnElement(DataReader, "ElemErr");
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     byte[] buffer = new byte[10];
                     int nRead = 0;
@@ -806,7 +900,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(pBase64Xml);
 
                     PositionOnElement(DataReader, "ElemNum");
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     byte[] buffer = new byte[10];
                     int nRead = DataReader.ReadElementContentAsBase64(buffer, 0, 8);
@@ -821,7 +916,8 @@ namespace CoreXml.Test.XLinq
                 {
                     XmlReader DataReader = GetReader(pBase64Xml);
                     PositionOnElement(DataReader, "ElemNum");
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     byte[] buffer = new byte[30];
 
@@ -831,7 +927,11 @@ namespace CoreXml.Test.XLinq
                     nRead = DataReader.ReadElementContentAsBase64(buffer, 0, 23);
                     TestLog.Compare(nRead, 22, "1");
 
-                    TestLog.Compare(DataReader.NodeType, XmlNodeType.EndElement, "Nodetype not end element");
+                    TestLog.Compare(
+                        DataReader.NodeType,
+                        XmlNodeType.EndElement,
+                        "Nodetype not end element"
+                    );
                     TestLog.Compare(DataReader.Name, "ElemNum", "Nodetype not end element");
                 }
 
@@ -845,7 +945,8 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReaderStr(strxml);
 
                     PositionOnElement(DataReader, "ROOT");
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     int result = 0;
                     int nRead;
@@ -866,7 +967,8 @@ namespace CoreXml.Test.XLinq
                     {
                         XmlReader DataReader = GetReaderStr(strxml);
                         PositionOnElement(DataReader, "B");
-                        if (!DataReader.CanReadBinaryContent) return;
+                        if (!DataReader.CanReadBinaryContent)
+                            return;
 
                         DataReader.ReadElementContentAsBase64(buffer, 0, 5000);
                         TestLog.WriteLine("Accepted incomplete element");
@@ -887,7 +989,8 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReaderStr(strxml);
                     PositionOnElement(DataReader, "abc");
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     for (int i = 0; i < 4; i++)
                     {
@@ -909,7 +1012,8 @@ namespace CoreXml.Test.XLinq
 
                     XmlReader DataReader = GetReaderStr(strxml);
                     PositionOnElement(DataReader, "abc");
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     for (int i = 0; i < 2; i++)
                     {
@@ -956,7 +1060,8 @@ namespace CoreXml.Test.XLinq
                     int SIZE64 = SIZE * 3 / 4;
 
                     PositionOnElement(DataReader, "base64");
-                    if (!DataReader.CanReadBinaryContent) return;
+                    if (!DataReader.CanReadBinaryContent)
+                        return;
 
                     byte[] base64 = new byte[SIZE64];
 
@@ -984,7 +1089,11 @@ namespace CoreXml.Test.XLinq
                     string strxml1 = "<root xmlns='";
                     string strxml2 = "'><bar/></root>";
 
-                    string[] binValue = new string[] { "AAECAwQFBgcI==", "0102030405060708090a0B0c" };
+                    string[] binValue = new string[]
+                    {
+                        "AAECAwQFBgcI==",
+                        "0102030405060708090a0B0c"
+                    };
                     for (int i = 0; i < binValue.Length; i++)
                     {
                         string strxml = strxml1 + binValue[i] + strxml2;
@@ -994,7 +1103,8 @@ namespace CoreXml.Test.XLinq
                             r.Read();
                             using (XmlReader sr = r.ReadSubtree())
                             {
-                                if (!sr.CanReadBinaryContent) return;
+                                if (!sr.CanReadBinaryContent)
+                                    return;
                                 sr.Read();
                                 sr.MoveToFirstAttribute();
                                 sr.MoveToFirstAttribute();

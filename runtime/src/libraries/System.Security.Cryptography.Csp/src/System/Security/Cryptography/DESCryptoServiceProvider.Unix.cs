@@ -11,7 +11,11 @@ namespace System.Security.Cryptography
     {
         private readonly DES _impl;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DESCryptoServiceProvider")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DESCryptoServiceProvider"
+        )]
         public DESCryptoServiceProvider() : base()
         {
             // This class wraps DES

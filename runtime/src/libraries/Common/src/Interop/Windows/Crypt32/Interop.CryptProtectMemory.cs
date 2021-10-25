@@ -14,6 +14,10 @@ internal static partial class Interop
         internal static extern bool CryptProtectMemory(SafeBuffer pData, uint cbData, uint dwFlags);
 
         [DllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern bool CryptUnprotectMemory(SafeBuffer pData, uint cbData, uint dwFlags);
+        internal static extern bool CryptUnprotectMemory(
+            SafeBuffer pData,
+            uint cbData,
+            uint dwFlags
+        );
     }
 }

@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 CreateTagHelperDescriptor(
                     tagName: "input",
                     typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly")
+                    assemblyName: "TestAssembly"
+                )
             };
 
             var projectEngine = CreateProjectEngine(builder => builder.AddTagHelpers(descriptors));
@@ -43,11 +44,10 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                     assemblyName: "TestAssembly",
                     attributes: new Action<BoundAttributeDescriptorBuilder>[]
                     {
-                        builder => builder
-                            .Name("bound")
-                            .PropertyName("FooProp")
-                            .TypeName("System.String"),
-                    })
+                        builder =>
+                            builder.Name("bound").PropertyName("FooProp").TypeName("System.String"),
+                    }
+                )
             };
 
             var projectEngine = CreateProjectEngine(builder => builder.AddTagHelpers(descriptors));
@@ -69,22 +69,23 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
                 CreateTagHelperDescriptor(
                     tagName: "p",
                     typeName: "PTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
                 CreateTagHelperDescriptor(
                     tagName: "form",
                     typeName: "FormTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
                 CreateTagHelperDescriptor(
                     tagName: "input",
                     typeName: "InputTagHelper",
                     assemblyName: "TestAssembly",
                     attributes: new Action<BoundAttributeDescriptorBuilder>[]
                     {
-                        builder => builder
-                            .Name("value")
-                            .PropertyName("FooProp")
-                            .TypeName("System.String"),
-                    })
+                        builder =>
+                            builder.Name("value").PropertyName("FooProp").TypeName("System.String"),
+                    }
+                )
             };
 
             var projectEngine = CreateProjectEngine(builder => builder.AddTagHelpers(descriptors));
@@ -103,7 +104,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
             string tagName,
             string typeName,
             string assemblyName,
-            IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null)
+            IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null
+        )
         {
             var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
             builder.TypeName(typeName);

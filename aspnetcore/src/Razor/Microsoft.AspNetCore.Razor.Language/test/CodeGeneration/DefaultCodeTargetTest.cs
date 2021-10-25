@@ -14,11 +14,7 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             // Arrange
             var options = RazorCodeGenerationOptions.CreateDefault();
 
-            var extensions = new ICodeTargetExtension[]
-            {
-                new MyExtension2(),
-                new MyExtension1(),
-            };
+            var extensions = new ICodeTargetExtension[] { new MyExtension2(), new MyExtension1(), };
 
             // Act
             var target = new DefaultCodeTarget(options, extensions);
@@ -61,11 +57,7 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             // Arrange
             var options = RazorCodeGenerationOptions.CreateDefault();
 
-            var extensions = new ICodeTargetExtension[]
-            {
-                new MyExtension2(),
-                new MyExtension1(),
-            };
+            var extensions = new ICodeTargetExtension[] { new MyExtension2(), new MyExtension1(), };
 
             var target = new DefaultCodeTarget(options, extensions);
 
@@ -82,11 +74,7 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             // Arrange
             var options = RazorCodeGenerationOptions.CreateDefault();
 
-            var extensions = new ICodeTargetExtension[]
-            {
-                new MyExtension2(),
-                new MyExtension2(),
-            };
+            var extensions = new ICodeTargetExtension[] { new MyExtension2(), new MyExtension2(), };
 
             var target = new DefaultCodeTarget(options, extensions);
 
@@ -103,11 +91,7 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             // Arrange
             var options = RazorCodeGenerationOptions.CreateDefault();
 
-            var extensions = new ICodeTargetExtension[]
-            {
-                new MyExtension2(),
-                new MyExtension1(),
-            };
+            var extensions = new ICodeTargetExtension[] { new MyExtension2(), new MyExtension1(), };
 
             var target = new DefaultCodeTarget(options, extensions);
 
@@ -141,18 +125,13 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             Assert.Same(extensions[1], result);
         }
 
-
         [Fact]
         public void GetExtension_ReturnsNull_WhenExtensionNotFound()
         {
             // Arrange
             var options = RazorCodeGenerationOptions.CreateDefault();
 
-            var extensions = new ICodeTargetExtension[]
-            {
-                new MyExtension2(),
-                new MyExtension2(),
-            };
+            var extensions = new ICodeTargetExtension[] { new MyExtension2(), new MyExtension2(), };
 
             var target = new DefaultCodeTarget(options, extensions);
 

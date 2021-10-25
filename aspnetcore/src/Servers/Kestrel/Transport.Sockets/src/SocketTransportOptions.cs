@@ -65,6 +65,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets
         /// </remarks>
         public bool UnsafePreferInlineScheduling { get; set; }
 
-        internal Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } = System.Buffers.PinnedBlockMemoryPoolFactory.Create;
+        internal Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } =
+            System.Buffers.PinnedBlockMemoryPoolFactory.Create;
     }
 }

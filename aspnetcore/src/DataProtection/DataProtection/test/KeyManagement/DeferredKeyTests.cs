@@ -25,16 +25,27 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             var expirationDate = creationDate.AddDays(90);
             var mockDescriptor = Mock.Of<IAuthenticatedEncryptorDescriptor>();
             var mockInternalKeyManager = new Mock<IInternalXmlKeyManager>();
-            mockInternalKeyManager.Setup(o => o.DeserializeDescriptorFromKeyElement(It.IsAny<XElement>()))
-                .Returns<XElement>(element =>
-                {
-                    XmlAssert.Equal(@"<node />", element);
-                    return mockDescriptor;
-                });
+            mockInternalKeyManager
+                .Setup(o => o.DeserializeDescriptorFromKeyElement(It.IsAny<XElement>()))
+                .Returns<XElement>(
+                    element =>
+                    {
+                        XmlAssert.Equal(@"<node />", element);
+                        return mockDescriptor;
+                    }
+                );
             var encryptorFactory = Mock.Of<IAuthenticatedEncryptorFactory>();
 
             // Act
-            var key = new DeferredKey(keyId, creationDate, activationDate, expirationDate, mockInternalKeyManager.Object, XElement.Parse(@"<node />"), new[] { encryptorFactory });
+            var key = new DeferredKey(
+                keyId,
+                creationDate,
+                activationDate,
+                expirationDate,
+                mockInternalKeyManager.Object,
+                XElement.Parse(@"<node />"),
+                new[] { encryptorFactory }
+            );
 
             // Assert
             Assert.Equal(keyId, key.KeyId);
@@ -50,7 +61,15 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             // Arrange
             var now = DateTimeOffset.UtcNow;
             var encryptorFactory = Mock.Of<IAuthenticatedEncryptorFactory>();
-            var key = new DeferredKey(Guid.Empty, now, now, now, new Mock<IInternalXmlKeyManager>().Object, XElement.Parse(@"<node />"), new[] { encryptorFactory });
+            var key = new DeferredKey(
+                Guid.Empty,
+                now,
+                now,
+                now,
+                new Mock<IInternalXmlKeyManager>().Object,
+                XElement.Parse(@"<node />"),
+                new[] { encryptorFactory }
+            );
 
             // Act & assert
             Assert.False(key.IsRevoked);
@@ -64,16 +83,27 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             // Arrange
             int numTimesCalled = 0;
             var mockKeyManager = new Mock<IInternalXmlKeyManager>();
-            mockKeyManager.Setup(o => o.DeserializeDescriptorFromKeyElement(It.IsAny<XElement>()))
-                .Returns<XElement>(element =>
-                {
-                    numTimesCalled++;
-                    throw new Exception("How exceptional.");
-                });
+            mockKeyManager
+                .Setup(o => o.DeserializeDescriptorFromKeyElement(It.IsAny<XElement>()))
+                .Returns<XElement>(
+                    element =>
+                    {
+                        numTimesCalled++;
+                        throw new Exception("How exceptional.");
+                    }
+                );
 
             var now = DateTimeOffset.UtcNow;
             var encryptorFactory = Mock.Of<IAuthenticatedEncryptorFactory>();
-            var key = new DeferredKey(Guid.Empty, now, now, now, mockKeyManager.Object, XElement.Parse(@"<node />"), new[] { encryptorFactory });
+            var key = new DeferredKey(
+                Guid.Empty,
+                now,
+                now,
+                now,
+                mockKeyManager.Object,
+                XElement.Parse(@"<node />"),
+                new[] { encryptorFactory }
+            );
 
             // Act & assert
             ExceptionAssert.Throws<Exception>(() => key.Descriptor, "How exceptional.");

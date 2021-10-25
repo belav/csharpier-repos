@@ -7,7 +7,6 @@ namespace System.Speech.Recognition
 {
     [Serializable]
     [DebuggerDisplay("Text: {Text}")]
-
     public class RecognizedWordUnit
     {
         #region Constructors
@@ -16,7 +15,15 @@ namespace System.Speech.Recognition
 #pragma warning disable 6507
 
         // Constructor for recognized 'word'
-        public RecognizedWordUnit(string text, float confidence, string pronunciation, string lexicalForm, DisplayAttributes displayAttributes, TimeSpan audioPosition, TimeSpan audioDuration)
+        public RecognizedWordUnit(
+            string text,
+            float confidence,
+            string pronunciation,
+            string lexicalForm,
+            DisplayAttributes displayAttributes,
+            TimeSpan audioPosition,
+            TimeSpan audioDuration
+        )
         {
             if (lexicalForm == null)
             {
@@ -30,7 +37,8 @@ namespace System.Speech.Recognition
 
             _text = text == null || text.Length == 0 ? null : text;
             _confidence = confidence;
-            _pronunciation = pronunciation == null || pronunciation.Length == 0 ? null : pronunciation;
+            _pronunciation =
+                pronunciation == null || pronunciation.Length == 0 ? null : pronunciation;
             _lexicalForm = lexicalForm;
             _displayAttributes = displayAttributes;
             _audioPosition = audioPosition;
@@ -56,10 +64,7 @@ namespace System.Speech.Recognition
         }
         public string Pronunciation
         {
-            get
-            {
-                return _pronunciation;
-            }
+            get { return _pronunciation; }
         }
         public string LexicalForm
         {
@@ -100,7 +105,6 @@ namespace System.Speech.Recognition
         private float _confidence;
         private string _pronunciation;
         private DisplayAttributes _displayAttributes;
-
         #endregion
     }
     [Flags]

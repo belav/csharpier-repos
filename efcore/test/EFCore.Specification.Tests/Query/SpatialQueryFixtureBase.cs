@@ -13,18 +13,18 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public abstract class SpatialQueryFixtureBase : SharedStoreFixtureBase<SpatialContext>, IQueryFixtureBase
+    public abstract class SpatialQueryFixtureBase
+        : SharedStoreFixtureBase<SpatialContext>,
+          IQueryFixtureBase
     {
         private GeometryFactory _geometryFactory;
 
-        public Func<DbContext> GetContextCreator()
-            => () => CreateContext();
+        public Func<DbContext> GetContextCreator() => () => CreateContext();
 
-        public virtual ISetSource GetExpectedData()
-            => new SpatialData(GeometryFactory);
+        public virtual ISetSource GetExpectedData() => new SpatialData(GeometryFactory);
 
-        public IReadOnlyDictionary<Type, object> GetEntitySorters()
-            => new Dictionary<Type, Func<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntitySorters() =>
+            new Dictionary<Type, Func<object, object>>
             {
                 { typeof(PointEntity), e => ((PointEntity)e)?.Id },
                 { typeof(LineStringEntity), e => ((LineStringEntity)e)?.Id },
@@ -33,11 +33,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                 { typeof(GeoPointEntity), e => ((GeoPointEntity)e)?.Id },
             }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-        public IReadOnlyDictionary<Type, object> GetEntityAsserters()
-            => new Dictionary<Type, Action<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
+            new Dictionary<Type, Action<object, object>>
             {
                 {
-                    typeof(PointEntity), (e, a) =>
+                    typeof(PointEntity),
+                    (e, a) =>
                     {
                         Assert.Equal(e == null, a == null);
 
@@ -56,7 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     }
                 },
                 {
-                    typeof(LineStringEntity), (e, a) =>
+                    typeof(LineStringEntity),
+                    (e, a) =>
                     {
                         Assert.Equal(e == null, a == null);
 
@@ -71,7 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     }
                 },
                 {
-                    typeof(PolygonEntity), (e, a) =>
+                    typeof(PolygonEntity),
+                    (e, a) =>
                     {
                         Assert.Equal(e == null, a == null);
 
@@ -86,7 +89,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     }
                 },
                 {
-                    typeof(MultiLineStringEntity), (e, a) =>
+                    typeof(MultiLineStringEntity),
+                    (e, a) =>
                     {
                         Assert.Equal(e == null, a == null);
 
@@ -103,14 +107,19 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 Assert.Equal(ee.MultiLineString.Area, aa.MultiLineString.Area);
                                 for (var i = 0; i < ee.MultiLineString.Count; i++)
                                 {
-                                    Assert.Equal(ee.MultiLineString[i], aa.MultiLineString[i], GeometryComparer.Instance);
+                                    Assert.Equal(
+                                        ee.MultiLineString[i],
+                                        aa.MultiLineString[i],
+                                        GeometryComparer.Instance
+                                    );
                                 }
                             }
                         }
                     }
                 },
                 {
-                    typeof(GeoPointEntity), (e, a) =>
+                    typeof(GeoPointEntity),
+                    (e, a) =>
                     {
                         Assert.Equal(e == null, a == null);
 
@@ -127,13 +136,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 },
             }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-        public virtual GeometryFactory GeometryFactory
-            => LazyInitializer.EnsureInitialized(
+        public virtual GeometryFactory GeometryFactory =>
+            LazyInitializer.EnsureInitialized(
                 ref _geometryFactory,
-                () => NtsGeometryServices.Instance.CreateGeometryFactory(srid: 0));
+                () => NtsGeometryServices.Instance.CreateGeometryFactory(srid: 0)
+            );
 
-        protected override string StoreName
-            => "SpatialQueryTest";
+        protected override string StoreName => "SpatialQueryTest";
 
         public override SpatialContext CreateContext()
         {
@@ -154,11 +163,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                 b =>
                 {
                     b.Property(e => e.Id).ValueGeneratedNever();
-                    b.Property(e => e.Location).HasConversion(new GeoPointConverter(GeometryFactory));
-                });
+                    b.Property(e => e.Location)
+                        .HasConversion(new GeoPointConverter(GeometryFactory));
+                }
+            );
         }
 
-        protected override void Seed(SpatialContext context)
-            => SpatialContext.Seed(context, GeometryFactory);
+        protected override void Seed(SpatialContext context) =>
+            SpatialContext.Seed(context, GeometryFactory);
     }
 }

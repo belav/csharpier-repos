@@ -19,10 +19,7 @@ namespace System
 
         internal IntPtr Value
         {
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         public int MDStreamVersion
@@ -61,39 +58,87 @@ namespace System
             return res;
         }
 
-        public RuntimeTypeHandle ResolveTypeHandle(int typeToken, RuntimeTypeHandle[]? typeInstantiationContext, RuntimeTypeHandle[]? methodInstantiationContext)
+        public RuntimeTypeHandle ResolveTypeHandle(
+            int typeToken,
+            RuntimeTypeHandle[]? typeInstantiationContext,
+            RuntimeTypeHandle[]? methodInstantiationContext
+        )
         {
             ResolveTokenError error;
             if (value == IntPtr.Zero)
                 throw new ArgumentNullException(string.Empty, "Invalid handle");
-            IntPtr res = RuntimeModule.ResolveTypeToken(value, typeToken, ptrs_from_handles(typeInstantiationContext), ptrs_from_handles(methodInstantiationContext), out error);
+            IntPtr res = RuntimeModule.ResolveTypeToken(
+                value,
+                typeToken,
+                ptrs_from_handles(typeInstantiationContext),
+                ptrs_from_handles(methodInstantiationContext),
+                out error
+            );
             if (res == IntPtr.Zero)
-                throw new TypeLoadException(string.Format("Could not load type '0x{0:x}' from assembly '0x{1:x}'", typeToken, value.ToInt64()));
+                throw new TypeLoadException(
+                    string.Format(
+                        "Could not load type '0x{0:x}' from assembly '0x{1:x}'",
+                        typeToken,
+                        value.ToInt64()
+                    )
+                );
             else
                 return new RuntimeTypeHandle(res);
         }
 
-        public RuntimeMethodHandle ResolveMethodHandle(int methodToken, RuntimeTypeHandle[]? typeInstantiationContext, RuntimeTypeHandle[]? methodInstantiationContext)
+        public RuntimeMethodHandle ResolveMethodHandle(
+            int methodToken,
+            RuntimeTypeHandle[]? typeInstantiationContext,
+            RuntimeTypeHandle[]? methodInstantiationContext
+        )
         {
             ResolveTokenError error;
             if (value == IntPtr.Zero)
                 throw new ArgumentNullException(string.Empty, "Invalid handle");
-            IntPtr res = RuntimeModule.ResolveMethodToken(value, methodToken, ptrs_from_handles(typeInstantiationContext), ptrs_from_handles(methodInstantiationContext), out error);
+            IntPtr res = RuntimeModule.ResolveMethodToken(
+                value,
+                methodToken,
+                ptrs_from_handles(typeInstantiationContext),
+                ptrs_from_handles(methodInstantiationContext),
+                out error
+            );
             if (res == IntPtr.Zero)
-                throw new Exception(string.Format("Could not load method '0x{0:x}' from assembly '0x{1:x}'", methodToken, value.ToInt64()));
+                throw new Exception(
+                    string.Format(
+                        "Could not load method '0x{0:x}' from assembly '0x{1:x}'",
+                        methodToken,
+                        value.ToInt64()
+                    )
+                );
             else
                 return new RuntimeMethodHandle(res);
         }
 
-        public RuntimeFieldHandle ResolveFieldHandle(int fieldToken, RuntimeTypeHandle[]? typeInstantiationContext, RuntimeTypeHandle[]? methodInstantiationContext)
+        public RuntimeFieldHandle ResolveFieldHandle(
+            int fieldToken,
+            RuntimeTypeHandle[]? typeInstantiationContext,
+            RuntimeTypeHandle[]? methodInstantiationContext
+        )
         {
             ResolveTokenError error;
             if (value == IntPtr.Zero)
                 throw new ArgumentNullException(string.Empty, "Invalid handle");
 
-            IntPtr res = RuntimeModule.ResolveFieldToken(value, fieldToken, ptrs_from_handles(typeInstantiationContext), ptrs_from_handles(methodInstantiationContext), out error);
+            IntPtr res = RuntimeModule.ResolveFieldToken(
+                value,
+                fieldToken,
+                ptrs_from_handles(typeInstantiationContext),
+                ptrs_from_handles(methodInstantiationContext),
+                out error
+            );
             if (res == IntPtr.Zero)
-                throw new Exception(string.Format("Could not load field '0x{0:x}' from assembly '0x{1:x}'", fieldToken, value.ToInt64()));
+                throw new Exception(
+                    string.Format(
+                        "Could not load field '0x{0:x}' from assembly '0x{1:x}'",
+                        fieldToken,
+                        value.ToInt64()
+                    )
+                );
             else
                 return new RuntimeFieldHandle(res);
         }

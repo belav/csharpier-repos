@@ -40,10 +40,14 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var resourceExecutionDelegate = GetResourceExecutionDelegate(httpContext);
 
             // Act
-            await middlewareFilter.OnResourceExecutionAsync(resourceExecutingContext, resourceExecutionDelegate);
+            await middlewareFilter.OnResourceExecutionAsync(
+                resourceExecutingContext,
+                resourceExecutionDelegate
+            );
 
             // Assert
-            var feature = resourceExecutingContext.HttpContext.Features.Get<IMiddlewareFilterFeature>();
+            var feature =
+                resourceExecutingContext.HttpContext.Features.Get<IMiddlewareFilterFeature>();
             Assert.NotNull(feature);
             Assert.Same(resourceExecutingContext, feature.ResourceExecutingContext);
             Assert.Same(resourceExecutionDelegate, feature.ResourceExecutionDelegate);
@@ -56,15 +60,21 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var expectedHeader = "h1";
             Pipeline1.ConfigurePipeline = (appBuilder) =>
             {
-                appBuilder.Use((httpContext, next) =>
-                {
-                    httpContext.Response.Headers.Add(expectedHeader, "");
-                    return Task.FromResult(true); // short circuit the request
-                });
+                appBuilder.Use(
+                    (httpContext, next) =>
+                    {
+                        httpContext.Response.Headers.Add(expectedHeader, "");
+                        return Task.FromResult(true); // short circuit the request
+                    }
+                );
             };
             var resourceFilter1 = new TestResourceFilter(TestResourceFilterAction.Passthrough);
-            var middlewareResourceFilter = new MiddlewareFilter(GetMiddlewarePipeline(typeof(Pipeline1)));
-            var exceptionThrowingResourceFilter = new TestResourceFilter(TestResourceFilterAction.ThrowException);
+            var middlewareResourceFilter = new MiddlewareFilter(
+                GetMiddlewarePipeline(typeof(Pipeline1))
+            );
+            var exceptionThrowingResourceFilter = new TestResourceFilter(
+                TestResourceFilterAction.ThrowException
+            );
 
             var invoker = CreateInvoker(
                 new IFilterMetadata[]
@@ -73,14 +83,17 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     middlewareResourceFilter,
                     exceptionThrowingResourceFilter,
                 },
-                actionThrows: true); // The action won't run
+                actionThrows: true
+            ); // The action won't run
 
             // Act
             await invoker.InvokeAsync();
 
             // Assert
             var resourceExecutedContext = resourceFilter1.ResourceExecutedContext;
-            Assert.True(resourceExecutedContext.HttpContext.Response.Headers.ContainsKey(expectedHeader));
+            Assert.True(
+                resourceExecutedContext.HttpContext.Response.Headers.ContainsKey(expectedHeader)
+            );
             Assert.True(resourceExecutedContext.Canceled);
             Assert.False(invoker.ControllerFactory.CreateCalled);
         }
@@ -94,34 +107,46 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var expectedHeaderValue = "pipeline1-pipeline2";
             Pipeline1.ConfigurePipeline = (appBuilder) =>
             {
-                appBuilder.Use((httpContext, next) =>
-                {
-                    httpContext.Response.Headers["h1"] = "pipeline1";
-                    return next();
-                });
+                appBuilder.Use(
+                    (httpContext, next) =>
+                    {
+                        httpContext.Response.Headers["h1"] = "pipeline1";
+                        return next();
+                    }
+                );
             };
             Pipeline2.ConfigurePipeline = (appBuilder) =>
             {
-                appBuilder.Use((httpContext, next) =>
-                {
-                    httpContext.Response.Headers["h1"] = httpContext.Response.Headers["h1"] + "-pipeline2";
-                    return Task.FromResult(true); // short circuits the request
-                });
+                appBuilder.Use(
+                    (httpContext, next) =>
+                    {
+                        httpContext.Response.Headers["h1"] =
+                            httpContext.Response.Headers["h1"] + "-pipeline2";
+                        return Task.FromResult(true); // short circuits the request
+                    }
+                );
             };
             var resourceFilter1 = new TestResourceFilter(TestResourceFilterAction.Passthrough);
-            var middlewareResourceFilter1 = new MiddlewareFilter(GetMiddlewarePipeline(typeof(Pipeline1)));
-            var middlewareResourceFilter2 = new MiddlewareFilter(GetMiddlewarePipeline(typeof(Pipeline2)));
-            var exceptionThrowingResourceFilter = new TestResourceFilter(TestResourceFilterAction.ThrowException);
+            var middlewareResourceFilter1 = new MiddlewareFilter(
+                GetMiddlewarePipeline(typeof(Pipeline1))
+            );
+            var middlewareResourceFilter2 = new MiddlewareFilter(
+                GetMiddlewarePipeline(typeof(Pipeline2))
+            );
+            var exceptionThrowingResourceFilter = new TestResourceFilter(
+                TestResourceFilterAction.ThrowException
+            );
 
             var invoker = CreateInvoker(
                 new IFilterMetadata[]
                 {
-                    resourceFilter1,                    // This filter will pass through
-                    middlewareResourceFilter1,          // This filter will pass through
-                    middlewareResourceFilter2,          // This filter will short circuit
-                    exceptionThrowingResourceFilter,    // This shouldn't run
+                    resourceFilter1, // This filter will pass through
+                    middlewareResourceFilter1, // This filter will pass through
+                    middlewareResourceFilter2, // This filter will short circuit
+                    exceptionThrowingResourceFilter, // This shouldn't run
                 },
-                actionThrows: true); // The action won't run
+                actionThrows: true
+            ); // The action won't run
 
             // Act
             await invoker.InvokeAsync();
@@ -142,14 +167,20 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var expectedMessage = "Error!!!";
             Pipeline1.ConfigurePipeline = (appBuilder) =>
             {
-                appBuilder.Use((httpContext, next) =>
-                {
-                    throw new InvalidOperationException(expectedMessage);
-                });
+                appBuilder.Use(
+                    (httpContext, next) =>
+                    {
+                        throw new InvalidOperationException(expectedMessage);
+                    }
+                );
             };
             var resourceFilter1 = new TestResourceFilter(TestResourceFilterAction.Passthrough);
-            var middlewareResourceFilter = new MiddlewareFilter(GetMiddlewarePipeline(typeof(Pipeline1)));
-            var exceptionThrowingResourceFilter = new TestResourceFilter(TestResourceFilterAction.ThrowException);
+            var middlewareResourceFilter = new MiddlewareFilter(
+                GetMiddlewarePipeline(typeof(Pipeline1))
+            );
+            var exceptionThrowingResourceFilter = new TestResourceFilter(
+                TestResourceFilterAction.ThrowException
+            );
 
             var invoker = CreateInvoker(
                 new IFilterMetadata[]
@@ -158,10 +189,13 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     middlewareResourceFilter,
                     exceptionThrowingResourceFilter, // This shouldn't run
                 },
-                actionThrows: true); // The action won't run
+                actionThrows: true
+            ); // The action won't run
 
             // Act
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await invoker.InvokeAsync());
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await invoker.InvokeAsync()
+            );
 
             // Assert
             Assert.Equal(expectedMessage, exception.Message);
@@ -174,30 +208,40 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var expectedMessage = "Error!!!";
             Pipeline1.ConfigurePipeline = (appBuilder) =>
             {
-                appBuilder.Use(async (httpContext, next) =>
-                {
-                    try
+                appBuilder.Use(
+                    async (httpContext, next) =>
                     {
-                        await next();
+                        try
+                        {
+                            await next();
+                        }
+                        catch
+                        {
+                            httpContext.Response.StatusCode = 500;
+                            httpContext.Response.Headers.Add("Error", "Error!!!!");
+                        }
                     }
-                    catch
-                    {
-                        httpContext.Response.StatusCode = 500;
-                        httpContext.Response.Headers.Add("Error", "Error!!!!");
-                    }
-                });
+                );
             };
             Pipeline2.ConfigurePipeline = (appBuilder) =>
             {
-                appBuilder.Use((httpContext, next) =>
-                {
-                    throw new InvalidOperationException(expectedMessage);
-                });
+                appBuilder.Use(
+                    (httpContext, next) =>
+                    {
+                        throw new InvalidOperationException(expectedMessage);
+                    }
+                );
             };
             var resourceFilter1 = new TestResourceFilter(TestResourceFilterAction.Passthrough);
-            var middlewareResourceFilter1 = new MiddlewareFilter(GetMiddlewarePipeline(typeof(Pipeline1)));
-            var middlewareResourceFilter2 = new MiddlewareFilter(GetMiddlewarePipeline(typeof(Pipeline2)));
-            var exceptionThrowingResourceFilter = new TestResourceFilter(TestResourceFilterAction.ThrowException);
+            var middlewareResourceFilter1 = new MiddlewareFilter(
+                GetMiddlewarePipeline(typeof(Pipeline1))
+            );
+            var middlewareResourceFilter2 = new MiddlewareFilter(
+                GetMiddlewarePipeline(typeof(Pipeline2))
+            );
+            var exceptionThrowingResourceFilter = new TestResourceFilter(
+                TestResourceFilterAction.ThrowException
+            );
 
             var invoker = CreateInvoker(
                 new IFilterMetadata[]
@@ -207,10 +251,13 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     middlewareResourceFilter2,
                     exceptionThrowingResourceFilter, // This shouldn't run
                 },
-                actionThrows: true); // The action won't run
+                actionThrows: true
+            ); // The action won't run
 
             // Act
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await invoker.InvokeAsync());
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await invoker.InvokeAsync()
+            );
 
             // Assert
             var resourceExecutedContext = resourceFilter1.ResourceExecutedContext;
@@ -223,20 +270,34 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         private ResourceExecutingContext GetResourceExecutingContext(HttpContext httpContext)
         {
             return new ResourceExecutingContext(
-                new ActionContext(httpContext, new RouteData(), new ActionDescriptor(), new ModelStateDictionary()),
+                new ActionContext(
+                    httpContext,
+                    new RouteData(),
+                    new ActionDescriptor(),
+                    new ModelStateDictionary()
+                ),
                 new List<IFilterMetadata>(),
-                new List<IValueProviderFactory>());
+                new List<IValueProviderFactory>()
+            );
         }
 
         private ResourceExecutionDelegate GetResourceExecutionDelegate(HttpContext httpContext)
         {
             return new ResourceExecutionDelegate(
-                () => Task.FromResult(new ResourceExecutedContext(new ActionContext(), new List<IFilterMetadata>())));
+                () =>
+                    Task.FromResult(
+                        new ResourceExecutedContext(
+                            new ActionContext(),
+                            new List<IFilterMetadata>()
+                        )
+                    )
+            );
         }
 
         private TestControllerActionInvoker CreateInvoker(
             IFilterMetadata[] filters,
-            bool actionThrows = false)
+            bool actionThrows = false
+        )
         {
             var actionDescriptor = new ControllerActionDescriptor()
             {
@@ -246,15 +307,20 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
             if (actionThrows)
             {
-                actionDescriptor.MethodInfo = typeof(ControllerActionInvokerTest.TestController).GetMethod(
-                    nameof(ControllerActionInvokerTest.TestController.ThrowingActionMethod));
+                actionDescriptor.MethodInfo =
+                    typeof(ControllerActionInvokerTest.TestController).GetMethod(
+                        nameof(ControllerActionInvokerTest.TestController.ThrowingActionMethod)
+                    );
             }
             else
             {
-                actionDescriptor.MethodInfo = typeof(ControllerActionInvokerTest.TestController).GetMethod(
-                    nameof(ControllerActionInvokerTest.TestController.ActionMethod));
+                actionDescriptor.MethodInfo =
+                    typeof(ControllerActionInvokerTest.TestController).GetMethod(
+                        nameof(ControllerActionInvokerTest.TestController.ActionMethod)
+                    );
             }
-            actionDescriptor.ControllerTypeInfo = typeof(ControllerActionInvokerTest.TestController).GetTypeInfo();
+            actionDescriptor.ControllerTypeInfo =
+                typeof(ControllerActionInvokerTest.TestController).GetTypeInfo();
 
             return CreateInvoker(filters, actionDescriptor, _controller);
         }
@@ -262,16 +328,15 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         private TestControllerActionInvoker CreateInvoker(
             IFilterMetadata[] filters,
             ControllerActionDescriptor actionDescriptor,
-            object controller)
+            object controller
+        )
         {
             var httpContext = GetHttpContext();
             httpContext.Response.Body = new MemoryStream();
 
             var options = new MvcOptions();
             var optionsAccessor = new Mock<IOptions<MvcOptions>>();
-            optionsAccessor
-                .SetupGet(o => o.Value)
-                .Returns(options);
+            optionsAccessor.SetupGet(o => o.Value).Returns(options);
 
             var actionContext = new ActionContext(httpContext, new RouteData(), actionDescriptor);
 
@@ -286,7 +351,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 new ActionResultTypeMapper(),
                 actionContext,
                 new List<IValueProviderFactory>(),
-                maxAllowedErrorsInModelState: 200);
+                maxAllowedErrorsInModelState: 200
+            );
             return invoker;
         }
 
@@ -325,10 +391,12 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         private RequestDelegate GetMiddlewarePipeline(Type middlewarePipelineProviderType)
         {
             var applicationServices = new ServiceCollection();
-            var applicationBuilder = new ApplicationBuilder(applicationServices.BuildServiceProvider());
+            var applicationBuilder = new ApplicationBuilder(
+                applicationServices.BuildServiceProvider()
+            );
             var middlewareFilterBuilderService = new MiddlewareFilterBuilder(
-                new MiddlewareFilterConfigurationProvider())
-            {
+                new MiddlewareFilterConfigurationProvider()
+            ) {
                 ApplicationBuilder = applicationBuilder
             };
 
@@ -400,15 +468,24 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 IActionResultTypeMapper mapper,
                 ActionContext actionContext,
                 IReadOnlyList<IValueProviderFactory> valueProviderFactories,
-                int maxAllowedErrorsInModelState)
+                int maxAllowedErrorsInModelState
+            )
                 : base(
-                      logger,
-                      diagnosticListener,
-                      ActionContextAccessor.Null,
-                      mapper,
-                      CreateControllerContext(actionContext, valueProviderFactories, maxAllowedErrorsInModelState),
-                      CreateCacheEntry((ControllerActionDescriptor)actionContext.ActionDescriptor, controllerFactory),
-                      filters)
+                    logger,
+                    diagnosticListener,
+                    ActionContextAccessor.Null,
+                    mapper,
+                    CreateControllerContext(
+                        actionContext,
+                        valueProviderFactories,
+                        maxAllowedErrorsInModelState
+                    ),
+                    CreateCacheEntry(
+                        (ControllerActionDescriptor)actionContext.ActionDescriptor,
+                        controllerFactory
+                    ),
+                    filters
+                )
             {
                 ControllerFactory = controllerFactory;
             }
@@ -423,15 +500,21 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 ControllerFactory.Verify();
             }
 
-            private static ObjectMethodExecutor CreateExecutor(ControllerActionDescriptor actionDescriptor)
+            private static ObjectMethodExecutor CreateExecutor(
+                ControllerActionDescriptor actionDescriptor
+            )
             {
-                return ObjectMethodExecutor.Create(actionDescriptor.MethodInfo, actionDescriptor.ControllerTypeInfo);
+                return ObjectMethodExecutor.Create(
+                    actionDescriptor.MethodInfo,
+                    actionDescriptor.ControllerTypeInfo
+                );
             }
 
             private static ControllerContext CreateControllerContext(
                 ActionContext actionContext,
                 IReadOnlyList<IValueProviderFactory> valueProviderFactories,
-                int maxAllowedErrorsInModelState)
+                int maxAllowedErrorsInModelState
+            )
             {
                 var controllerContext = new ControllerContext(actionContext)
                 {
@@ -444,7 +527,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
             private static ControllerActionInvokerCacheEntry CreateCacheEntry(
                 ControllerActionDescriptor actionDescriptor,
-                MockControllerFactory controllerFactory)
+                MockControllerFactory controllerFactory
+            )
             {
                 var objectMethodExecutor = CreateExecutor(actionDescriptor);
                 return new ControllerActionInvokerCacheEntry(
@@ -453,7 +537,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     controllerFactory.ReleaseControllerAsync,
                     null,
                     objectMethodExecutor,
-                    ActionMethodExecutor.GetExecutor(objectMethodExecutor));
+                    ActionMethodExecutor.GetExecutor(objectMethodExecutor)
+                );
             }
         }
 
@@ -478,12 +563,14 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
             public ResourceExecutedContext ResourceExecutedContext { get; private set; }
 
-            public async Task OnResourceExecutionAsync(ResourceExecutingContext context, ResourceExecutionDelegate next)
+            public async Task OnResourceExecutionAsync(
+                ResourceExecutingContext context,
+                ResourceExecutionDelegate next
+            )
             {
                 if (_action == TestResourceFilterAction.ThrowException)
                 {
                     throw new NotImplementedException("This filter should not have been run!");
-
                 }
                 else if (_action == TestResourceFilterAction.Passthrough)
                 {

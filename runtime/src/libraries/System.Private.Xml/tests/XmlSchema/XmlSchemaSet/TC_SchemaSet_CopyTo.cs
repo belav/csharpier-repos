@@ -18,7 +18,6 @@ namespace System.Xml.Tests
             _output = output;
         }
 
-
         //-----------------------------------------------------------------------------------
         [Fact]
         //[Variation(Desc = "v1 - CopyTo with array = null")]

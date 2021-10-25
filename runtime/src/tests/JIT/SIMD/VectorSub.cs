@@ -34,10 +34,14 @@ internal partial class VectorTest
             Vector4 A = new Vector4(3);
             Vector4 B = new Vector4(2);
             Vector4 C = A - B;
-            if (!(CheckValue<float>(C.X, 1f))) return Fail;
-            if (!(CheckValue<float>(C.Y, 1f))) return Fail;
-            if (!(CheckValue<float>(C.Z, 1f))) return Fail;
-            if (!(CheckValue<float>(C.W, 1f))) return Fail;
+            if (!(CheckValue<float>(C.X, 1f)))
+                return Fail;
+            if (!(CheckValue<float>(C.Y, 1f)))
+                return Fail;
+            if (!(CheckValue<float>(C.Z, 1f)))
+                return Fail;
+            if (!(CheckValue<float>(C.W, 1f)))
+                return Fail;
             return Pass;
         }
     }
@@ -48,9 +52,12 @@ internal partial class VectorTest
             Vector3 A = new Vector3(3);
             Vector3 B = new Vector3(2);
             Vector3 C = A - B;
-            if (!(CheckValue<float>(C.X, 1f))) return Fail;
-            if (!(CheckValue<float>(C.Y, 1f))) return Fail;
-            if (!(CheckValue<float>(C.Z, 1f))) return Fail;
+            if (!(CheckValue<float>(C.X, 1f)))
+                return Fail;
+            if (!(CheckValue<float>(C.Y, 1f)))
+                return Fail;
+            if (!(CheckValue<float>(C.Z, 1f)))
+                return Fail;
             return Pass;
         }
     }
@@ -61,26 +68,46 @@ internal partial class VectorTest
             Vector2 A = new Vector2(4, 3);
             Vector2 B = new Vector2(3, 2);
             Vector2 C = A - B;
-            if (!(CheckValue<float>(C.X, 1f))) return Fail;
-            if (!(CheckValue<float>(C.Y, 1f))) return Fail;
+            if (!(CheckValue<float>(C.X, 1f)))
+                return Fail;
+            if (!(CheckValue<float>(C.Y, 1f)))
+                return Fail;
             return Pass;
         }
     }
     private static int Main()
     {
         int returnVal = Pass;
-        if (VectorSubTest<float>.VectorSub(3, 2, (float)(3 - 2)) != Pass) returnVal = Fail;
-        if (VectorSubTest<double>.VectorSub(3, 2, (float)(3 - 2)) != Pass) returnVal = Fail;
-        if (VectorSubTest<int>.VectorSub(3, 2, (int)(3 - 2)) != Pass) returnVal = Fail;
-        if (VectorSubTest<long>.VectorSub(3, 2, (long)(3 - 2)) != Pass) returnVal = Fail;
-        if (Vector3Test.VectorSub() != Pass) returnVal = Fail;
-        if (Vector2Test.VectorSub() != Pass) returnVal = Fail;
-        if (VectorSubTest<ushort>.VectorSub(3, 2, (ushort)(3 - 2)) != Pass) returnVal = Fail;
-        if (VectorSubTest<byte>.VectorSub(3, 2, (byte)(3 - 2)) != Pass) returnVal = Fail;
-        if (VectorSubTest<short>.VectorSub(3, -2, (short)(3 + 2)) != Pass) returnVal = Fail;
-        if (VectorSubTest<sbyte>.VectorSub(3, -2, (sbyte)(3 + 2)) != Pass) returnVal = Fail;
-        if (VectorSubTest<uint>.VectorSub(0x42000000u, 0x41000000u, 0x42000000u - 0x41000000u) != Pass) returnVal = Fail;
-        if (VectorSubTest<ulong>.VectorSub(0x42000000ul, 0x41000000ul, 0x42000000ul - 0x41000000ul) != Pass) returnVal = Fail;
+        if (VectorSubTest<float>.VectorSub(3, 2, (float)(3 - 2)) != Pass)
+            returnVal = Fail;
+        if (VectorSubTest<double>.VectorSub(3, 2, (float)(3 - 2)) != Pass)
+            returnVal = Fail;
+        if (VectorSubTest<int>.VectorSub(3, 2, (int)(3 - 2)) != Pass)
+            returnVal = Fail;
+        if (VectorSubTest<long>.VectorSub(3, 2, (long)(3 - 2)) != Pass)
+            returnVal = Fail;
+        if (Vector3Test.VectorSub() != Pass)
+            returnVal = Fail;
+        if (Vector2Test.VectorSub() != Pass)
+            returnVal = Fail;
+        if (VectorSubTest<ushort>.VectorSub(3, 2, (ushort)(3 - 2)) != Pass)
+            returnVal = Fail;
+        if (VectorSubTest<byte>.VectorSub(3, 2, (byte)(3 - 2)) != Pass)
+            returnVal = Fail;
+        if (VectorSubTest<short>.VectorSub(3, -2, (short)(3 + 2)) != Pass)
+            returnVal = Fail;
+        if (VectorSubTest<sbyte>.VectorSub(3, -2, (sbyte)(3 + 2)) != Pass)
+            returnVal = Fail;
+        if (
+            VectorSubTest<uint>.VectorSub(0x42000000u, 0x41000000u, 0x42000000u - 0x41000000u)
+            != Pass
+        )
+            returnVal = Fail;
+        if (
+            VectorSubTest<ulong>.VectorSub(0x42000000ul, 0x41000000ul, 0x42000000ul - 0x41000000ul)
+            != Pass
+        )
+            returnVal = Fail;
         return returnVal;
     }
 }

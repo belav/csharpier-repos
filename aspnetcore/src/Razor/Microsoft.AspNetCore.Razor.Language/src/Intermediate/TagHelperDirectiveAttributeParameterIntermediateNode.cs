@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 {
     public sealed class TagHelperDirectiveAttributeParameterIntermediateNode : IntermediateNode
     {
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public string AttributeName { get; set; }
 
@@ -43,7 +44,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             formatter.WriteProperty(nameof(OriginalAttributeName), OriginalAttributeName);
             formatter.WriteProperty(nameof(AttributeStructure), AttributeStructure.ToString());
             formatter.WriteProperty(nameof(BoundAttribute), BoundAttribute?.DisplayName);
-            formatter.WriteProperty(nameof(BoundAttributeParameter), BoundAttributeParameter?.DisplayName);
+            formatter.WriteProperty(
+                nameof(BoundAttributeParameter),
+                BoundAttributeParameter?.DisplayName
+            );
             formatter.WriteProperty(nameof(TagHelper), TagHelper?.DisplayName);
         }
     }

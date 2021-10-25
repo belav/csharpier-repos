@@ -22,7 +22,13 @@ namespace ILCompiler.DependencyAnalysis.X64
         public readonly byte Scale;
         public readonly AddrModeSize Size;
 
-        public AddrMode(Register baseRegister, Register? indexRegister, int offset, byte scale, AddrModeSize size)
+        public AddrMode(
+            Register baseRegister,
+            Register? indexRegister,
+            int offset,
+            byte scale,
+            AddrModeSize size
+        )
         {
             BaseReg = baseRegister;
             IndexReg = indexRegister;

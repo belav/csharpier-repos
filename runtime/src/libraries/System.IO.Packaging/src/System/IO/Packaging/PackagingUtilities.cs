@@ -11,9 +11,11 @@ namespace System.IO.Packaging
 {
     internal static class PackagingUtilities
     {
-        internal const string RelationshipNamespaceUri = "http://schemas.openxmlformats.org/package/2006/relationships";
-        internal static readonly ContentType RelationshipPartContentType
-            = new ContentType("application/vnd.openxmlformats-package.relationships+xml");
+        internal const string RelationshipNamespaceUri =
+            "http://schemas.openxmlformats.org/package/2006/relationships";
+        internal static readonly ContentType RelationshipPartContentType = new ContentType(
+            "application/vnd.openxmlformats-package.relationships+xml"
+        );
 
         internal const string ContainerFileExtension = "xps";
         internal const string XamlFileExtension = "xaml";
@@ -42,8 +44,14 @@ namespace System.IO.Packaging
                     //Note: For Byte order markings that require additional information to be specified in
                     //the encoding attribute in XmlDeclaration have already been ruled out by this check as we allow for
                     //only two valid values.
-                    if (string.Equals(encoding, WebNameUTF8, StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(encoding, WebNameUnicode, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(encoding, WebNameUTF8, StringComparison.OrdinalIgnoreCase)
+                        || string.Equals(
+                            encoding,
+                            WebNameUnicode,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         return;
                     }
@@ -54,7 +62,6 @@ namespace System.IO.Packaging
                     }
                 }
             }
-
             //Previously, the logic in System.IO.Packaging was that if the XmlDeclaration is not present, or encoding attribute
             //is not present, we base our decision on byte order marking. Previously, reader was an XmlTextReader, which would
             //take that into account and return the correct value.
@@ -83,7 +90,10 @@ namespace System.IO.Packaging
         internal static int GetNonXmlnsAttributeCount(XmlReader reader)
         {
             Debug.Assert(reader != null, "xmlReader should not be null");
-            Debug.Assert(reader.NodeType == XmlNodeType.Element, "XmlReader should be positioned at an Element");
+            Debug.Assert(
+                reader.NodeType == XmlNodeType.Element,
+                "XmlReader should be positioned at an Element"
+            );
 
             int readerCount = 0;
 
@@ -94,8 +104,10 @@ namespace System.IO.Packaging
             //MoveToNextAttribute is the same as MoveToFirstAttribute.
             while (reader.MoveToNextAttribute())
             {
-                if (!string.Equals(reader.Name, XmlNamespace, StringComparison.Ordinal) &&
-                    !string.Equals(reader.Prefix, XmlNamespace, StringComparison.Ordinal))
+                if (
+                    !string.Equals(reader.Name, XmlNamespace, StringComparison.Ordinal)
+                    && !string.Equals(reader.Prefix, XmlNamespace, StringComparison.Ordinal)
+                )
                 {
                     readerCount++;
                 }

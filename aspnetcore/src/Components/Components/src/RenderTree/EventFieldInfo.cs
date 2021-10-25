@@ -7,7 +7,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
     /// Types in the Microsoft.AspNetCore.Components.RenderTree are not recommended for use outside
     /// of the Blazor framework. These types will change in a future release.
     /// </summary>
-    // 
+    //
     // Information supplied with an event notification that can be used to update an existing
     // render tree to match the latest UI state when a form field has mutated. To determine
     // which field has been mutated, the renderer matches it based on the event handler ID.

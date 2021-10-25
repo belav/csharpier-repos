@@ -18,26 +18,38 @@ internal class Program
         string superIlcFolder2 = Directory.GetDirectories(folder2, "CPAOT*").First();
 
         // Check for files that failed compilation with one of the seeds but not the other
-        HashSet<string> uniqueFilenames = new HashSet<string>(Directory.GetFiles(superIlcFolder1, "*.dll").Select(Path.GetFileName));
-        uniqueFilenames.SymmetricExceptWith(Directory.GetFiles(superIlcFolder2, "*.dll").Select(Path.GetFileName));
+        HashSet<string> uniqueFilenames = new HashSet<string>(
+            Directory.GetFiles(superIlcFolder1, "*.dll").Select(Path.GetFileName)
+        );
+        uniqueFilenames.SymmetricExceptWith(
+            Directory.GetFiles(superIlcFolder2, "*.dll").Select(Path.GetFileName)
+        );
         foreach (string uniqueFilename in uniqueFilenames)
         {
             Console.WriteLine($"{uniqueFilename} was found in only one of the output folders.");
             result = 1;
         }
 
-        foreach (string filename in Directory.GetFiles(superIlcFolder1, "*.dll").Select(Path.GetFileName))
+        foreach (
+            string filename in Directory.GetFiles(superIlcFolder1, "*.dll").Select(Path.GetFileName)
+        )
         {
             if (uniqueFilenames.Contains(filename))
                 continue;
 
-            byte[] file1 = File.ReadAllBytes(Path.Combine(superIlcFolder1, Path.GetFileName(filename)));
-            byte[] file2 = File.ReadAllBytes(Path.Combine(superIlcFolder2, Path.GetFileName(filename)));
+            byte[] file1 = File.ReadAllBytes(
+                Path.Combine(superIlcFolder1, Path.GetFileName(filename))
+            );
+            byte[] file2 = File.ReadAllBytes(
+                Path.Combine(superIlcFolder2, Path.GetFileName(filename))
+            );
 
             if (file1.Length != file2.Length)
             {
                 Console.WriteLine(filename);
-                Console.WriteLine($"Expected ReadyToRun'd files to be identical but they have different sizes ({file1.Length} and {file2.Length})");
+                Console.WriteLine(
+                    $"Expected ReadyToRun'd files to be identical but they have different sizes ({file1.Length} and {file2.Length})"
+                );
                 result = 1;
                 continue;
             }
@@ -54,7 +66,9 @@ internal class Program
             if (byteDifferentCount > 0)
             {
                 result = 1;
-                Console.WriteLine($"Error: Found {byteDifferentCount} different bytes in {filename}");
+                Console.WriteLine(
+                    $"Error: Found {byteDifferentCount} different bytes in {filename}"
+                );
                 continue;
             }
 
@@ -63,9 +77,13 @@ internal class Program
         return result;
     }
 
-    public static string OSExeSuffix(string path) => (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? path + ".exe" : path);
+    public static string OSExeSuffix(string path) =>
+        (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? path + ".exe" : path);
 
-    private static void PrepareCompilationInputFolder(string coreRootFolder, string compilationInputFolder)
+    private static void PrepareCompilationInputFolder(
+        string coreRootFolder,
+        string compilationInputFolder
+    )
     {
         if (Directory.Exists(compilationInputFolder))
         {
@@ -73,32 +91,55 @@ internal class Program
         }
         Directory.CreateDirectory(compilationInputFolder);
 
-        CopyDeterminismTestAssembly(coreRootFolder, compilationInputFolder, "System.Private.CoreLib.dll");
+        CopyDeterminismTestAssembly(
+            coreRootFolder,
+            compilationInputFolder,
+            "System.Private.CoreLib.dll"
+        );
     }
 
-    private static void CopyDeterminismTestAssembly(string coreRootFolder, string compilationInputFolder, string fileName)
+    private static void CopyDeterminismTestAssembly(
+        string coreRootFolder,
+        string compilationInputFolder,
+        string fileName
+    )
     {
-        File.Copy(Path.Combine(coreRootFolder, fileName), Path.Combine(compilationInputFolder, fileName));
+        File.Copy(
+            Path.Combine(coreRootFolder, fileName),
+            Path.Combine(compilationInputFolder, fileName)
+        );
     }
 
-    public static bool CompileWithSeed(int seed, string coreRootPath, string compilationInputFolder, string outDir)
+    public static bool CompileWithSeed(
+        int seed,
+        string coreRootPath,
+        string compilationInputFolder,
+        string outDir
+    )
     {
         string superIlcPath = Path.Combine(coreRootPath, "R2RTest", "R2RTest.dll");
         string coreRunPath = Path.Combine(coreRootPath, OSExeSuffix("corerun"));
 
-        Console.WriteLine($"================================== Compiling with seed {seed} ==================================");
+        Console.WriteLine(
+            $"================================== Compiling with seed {seed} =================================="
+        );
         Environment.SetEnvironmentVariable("CoreRT_DeterminismSeed", seed.ToString());
         if (Directory.Exists(outDir))
         {
             Directory.Delete(outDir, true);
         }
         Directory.CreateDirectory(outDir);
-        ProcessStartInfo processStartInfo = new ProcessStartInfo(coreRunPath, $"{superIlcPath} compile-directory -cr {coreRootPath} -in {compilationInputFolder} --nojit --noexe --large-bubble --release --nocleanup -out {outDir}");
+        ProcessStartInfo processStartInfo = new ProcessStartInfo(
+            coreRunPath,
+            $"{superIlcPath} compile-directory -cr {coreRootPath} -in {compilationInputFolder} --nojit --noexe --large-bubble --release --nocleanup -out {outDir}"
+        );
         var process = Process.Start(processStartInfo);
         process.WaitForExit();
         if (process.ExitCode != 0)
         {
-            Console.WriteLine($"Compilation failed. {processStartInfo.FileName} {processStartInfo.Arguments} failed with exit code {process.ExitCode}");
+            Console.WriteLine(
+                $"Compilation failed. {processStartInfo.FileName} {processStartInfo.Arguments} failed with exit code {process.ExitCode}"
+            );
         }
         return 0 == process.ExitCode;
     }

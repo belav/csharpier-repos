@@ -22,8 +22,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public OwnedEntityTypeBuilder()
-        {
-        }
+        public OwnedEntityTypeBuilder() { }
     }
 }

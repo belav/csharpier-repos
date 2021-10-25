@@ -24,7 +24,7 @@ namespace Microsoft.AspNetCore.Razor.Language
                 {
                     throw new ArgumentNullException(nameof(key));
                 }
-                
+
                 _inner.TryGetValue(key, out var value);
                 return value;
             }

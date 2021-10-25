@@ -32,7 +32,12 @@ namespace System.Resources
         // Consider modifying IResourceGroveler interface (hence this method signature) when we figure out
         // serialization compat story for moving ResourceManager members to either file-based or
         // manifest-based classes. Want to continue tightening the design to get rid of unused params.
-        public ResourceSet? GrovelForResourceSet(CultureInfo culture, Dictionary<string, ResourceSet> localResourceSets, bool tryParents, bool createIfNotExists)
+        public ResourceSet? GrovelForResourceSet(
+            CultureInfo culture,
+            Dictionary<string, ResourceSet> localResourceSets,
+            bool tryParents,
+            bool createIfNotExists
+        )
         {
             Debug.Assert(culture != null, "culture shouldn't be null; check caller");
 
@@ -51,7 +56,20 @@ namespace System.Resources
                     {
                         // We really don't think this should happen - we always
                         // expect the neutral locale's resources to be present.
-                        throw new MissingManifestResourceException(SR.MissingManifestResource_NoNeutralDisk + Environment.NewLineConst + "baseName: " + _mediator.BaseNameField + "  locationInfo: " + (_mediator.LocationInfo == null ? "<null>" : _mediator.LocationInfo.FullName) + "  fileName: " + _mediator.GetResourceFileName(culture));
+                        throw new MissingManifestResourceException(
+                            SR.MissingManifestResource_NoNeutralDisk
+                                + Environment.NewLineConst
+                                + "baseName: "
+                                + _mediator.BaseNameField
+                                + "  locationInfo: "
+                                + (
+                                    _mediator.LocationInfo == null
+                                        ? "<null>"
+                                        : _mediator.LocationInfo.FullName
+                                )
+                                + "  fileName: "
+                                + _mediator.GetResourceFileName(culture)
+                        );
                     }
                 }
             }
@@ -89,7 +107,7 @@ namespace System.Resources
             if (File.Exists(fileName))
                 return fileName;
 
-            return null;  // give up.
+            return null; // give up.
         }
 
         // Constructs a new ResourceSet for a given file name.
@@ -111,7 +129,13 @@ namespace System.Resources
                 }
                 catch (MissingMethodException e)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.InvalidOperation_ResMgrBadResSet_Type, _mediator.UserResourceSet.AssemblyQualifiedName), e);
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.InvalidOperation_ResMgrBadResSet_Type,
+                            _mediator.UserResourceSet.AssemblyQualifiedName
+                        ),
+                        e
+                    );
                 }
             }
         }

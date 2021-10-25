@@ -16,157 +16,364 @@ namespace System.Web.Razor.Test.Parser.Html
         [Fact]
         public void SimpleLiteralAttribute()
         {
-            ParseBlockTest("<a href='Foo' />",
+            ParseBlockTest(
+                "<a href='Foo' />",
                 new MarkupBlock(
                     Factory.Markup("<a"),
-                    new MarkupBlock(new AttributeBlockCodeGenerator(name: "href", prefix: new LocationTagged<string>(" href='", 2, 0, 2), suffix: new LocationTagged<string>("'", 12, 0, 12)),
+                    new MarkupBlock(
+                        new AttributeBlockCodeGenerator(
+                            name: "href",
+                            prefix: new LocationTagged<string>(" href='", 2, 0, 2),
+                            suffix: new LocationTagged<string>("'", 12, 0, 12)
+                        ),
                         Factory.Markup(" href='").With(SpanCodeGenerator.Null),
-                        Factory.Markup("Foo").With(new LiteralAttributeCodeGenerator(prefix: new LocationTagged<string>(String.Empty, 9, 0, 9), value: new LocationTagged<string>("Foo", 9, 0, 9))),
-                        Factory.Markup("'").With(SpanCodeGenerator.Null)),
-                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)));
+                        Factory
+                            .Markup("Foo")
+                            .With(
+                                new LiteralAttributeCodeGenerator(
+                                    prefix: new LocationTagged<string>(String.Empty, 9, 0, 9),
+                                    value: new LocationTagged<string>("Foo", 9, 0, 9)
+                                )
+                            ),
+                        Factory.Markup("'").With(SpanCodeGenerator.Null)
+                    ),
+                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void MultiPartLiteralAttribute()
         {
-            ParseBlockTest("<a href='Foo Bar Baz' />",
+            ParseBlockTest(
+                "<a href='Foo Bar Baz' />",
                 new MarkupBlock(
                     Factory.Markup("<a"),
-                    new MarkupBlock(new AttributeBlockCodeGenerator(name: "href", prefix: new LocationTagged<string>(" href='", 2, 0, 2), suffix: new LocationTagged<string>("'", 20, 0, 20)),
+                    new MarkupBlock(
+                        new AttributeBlockCodeGenerator(
+                            name: "href",
+                            prefix: new LocationTagged<string>(" href='", 2, 0, 2),
+                            suffix: new LocationTagged<string>("'", 20, 0, 20)
+                        ),
                         Factory.Markup(" href='").With(SpanCodeGenerator.Null),
-                        Factory.Markup("Foo").With(new LiteralAttributeCodeGenerator(prefix: new LocationTagged<string>(String.Empty, 9, 0, 9), value: new LocationTagged<string>("Foo", 9, 0, 9))),
-                        Factory.Markup(" Bar").With(new LiteralAttributeCodeGenerator(prefix: new LocationTagged<string>(" ", 12, 0, 12), value: new LocationTagged<string>("Bar", 13, 0, 13))),
-                        Factory.Markup(" Baz").With(new LiteralAttributeCodeGenerator(prefix: new LocationTagged<string>(" ", 16, 0, 16), value: new LocationTagged<string>("Baz", 17, 0, 17))),
-                        Factory.Markup("'").With(SpanCodeGenerator.Null)),
-                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)));
+                        Factory
+                            .Markup("Foo")
+                            .With(
+                                new LiteralAttributeCodeGenerator(
+                                    prefix: new LocationTagged<string>(String.Empty, 9, 0, 9),
+                                    value: new LocationTagged<string>("Foo", 9, 0, 9)
+                                )
+                            ),
+                        Factory
+                            .Markup(" Bar")
+                            .With(
+                                new LiteralAttributeCodeGenerator(
+                                    prefix: new LocationTagged<string>(" ", 12, 0, 12),
+                                    value: new LocationTagged<string>("Bar", 13, 0, 13)
+                                )
+                            ),
+                        Factory
+                            .Markup(" Baz")
+                            .With(
+                                new LiteralAttributeCodeGenerator(
+                                    prefix: new LocationTagged<string>(" ", 16, 0, 16),
+                                    value: new LocationTagged<string>("Baz", 17, 0, 17)
+                                )
+                            ),
+                        Factory.Markup("'").With(SpanCodeGenerator.Null)
+                    ),
+                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void DoubleQuotedLiteralAttribute()
         {
-            ParseBlockTest("<a href=\"Foo Bar Baz\" />",
+            ParseBlockTest(
+                "<a href=\"Foo Bar Baz\" />",
                 new MarkupBlock(
                     Factory.Markup("<a"),
-                    new MarkupBlock(new AttributeBlockCodeGenerator(name: "href", prefix: new LocationTagged<string>(" href=\"", 2, 0, 2), suffix: new LocationTagged<string>("\"", 20, 0, 20)),
+                    new MarkupBlock(
+                        new AttributeBlockCodeGenerator(
+                            name: "href",
+                            prefix: new LocationTagged<string>(" href=\"", 2, 0, 2),
+                            suffix: new LocationTagged<string>("\"", 20, 0, 20)
+                        ),
                         Factory.Markup(" href=\"").With(SpanCodeGenerator.Null),
-                        Factory.Markup("Foo").With(new LiteralAttributeCodeGenerator(prefix: new LocationTagged<string>(String.Empty, 9, 0, 9), value: new LocationTagged<string>("Foo", 9, 0, 9))),
-                        Factory.Markup(" Bar").With(new LiteralAttributeCodeGenerator(prefix: new LocationTagged<string>(" ", 12, 0, 12), value: new LocationTagged<string>("Bar", 13, 0, 13))),
-                        Factory.Markup(" Baz").With(new LiteralAttributeCodeGenerator(prefix: new LocationTagged<string>(" ", 16, 0, 16), value: new LocationTagged<string>("Baz", 17, 0, 17))),
-                        Factory.Markup("\"").With(SpanCodeGenerator.Null)),
-                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)));
+                        Factory
+                            .Markup("Foo")
+                            .With(
+                                new LiteralAttributeCodeGenerator(
+                                    prefix: new LocationTagged<string>(String.Empty, 9, 0, 9),
+                                    value: new LocationTagged<string>("Foo", 9, 0, 9)
+                                )
+                            ),
+                        Factory
+                            .Markup(" Bar")
+                            .With(
+                                new LiteralAttributeCodeGenerator(
+                                    prefix: new LocationTagged<string>(" ", 12, 0, 12),
+                                    value: new LocationTagged<string>("Bar", 13, 0, 13)
+                                )
+                            ),
+                        Factory
+                            .Markup(" Baz")
+                            .With(
+                                new LiteralAttributeCodeGenerator(
+                                    prefix: new LocationTagged<string>(" ", 16, 0, 16),
+                                    value: new LocationTagged<string>("Baz", 17, 0, 17)
+                                )
+                            ),
+                        Factory.Markup("\"").With(SpanCodeGenerator.Null)
+                    ),
+                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void UnquotedLiteralAttribute()
         {
-            ParseBlockTest("<a href=Foo Bar Baz />",
+            ParseBlockTest(
+                "<a href=Foo Bar Baz />",
                 new MarkupBlock(
                     Factory.Markup("<a"),
-                    new MarkupBlock(new AttributeBlockCodeGenerator(name: "href", prefix: new LocationTagged<string>(" href=", 2, 0, 2), suffix: new LocationTagged<string>(String.Empty, 11, 0, 11)),
+                    new MarkupBlock(
+                        new AttributeBlockCodeGenerator(
+                            name: "href",
+                            prefix: new LocationTagged<string>(" href=", 2, 0, 2),
+                            suffix: new LocationTagged<string>(String.Empty, 11, 0, 11)
+                        ),
                         Factory.Markup(" href=").With(SpanCodeGenerator.Null),
-                        Factory.Markup("Foo").With(new LiteralAttributeCodeGenerator(prefix: new LocationTagged<string>(String.Empty, 8, 0, 8), value: new LocationTagged<string>("Foo", 8, 0, 8)))),
-                    Factory.Markup(" Bar Baz />").Accepts(AcceptedCharacters.None)));
+                        Factory
+                            .Markup("Foo")
+                            .With(
+                                new LiteralAttributeCodeGenerator(
+                                    prefix: new LocationTagged<string>(String.Empty, 8, 0, 8),
+                                    value: new LocationTagged<string>("Foo", 8, 0, 8)
+                                )
+                            )
+                    ),
+                    Factory.Markup(" Bar Baz />").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void SimpleExpressionAttribute()
         {
-            ParseBlockTest("<a href='@foo' />",
+            ParseBlockTest(
+                "<a href='@foo' />",
                 new MarkupBlock(
                     Factory.Markup("<a"),
-                    new MarkupBlock(new AttributeBlockCodeGenerator(name: "href", prefix: new LocationTagged<string>(" href='", 2, 0, 2), suffix: new LocationTagged<string>("'", 13, 0, 13)),
+                    new MarkupBlock(
+                        new AttributeBlockCodeGenerator(
+                            name: "href",
+                            prefix: new LocationTagged<string>(" href='", 2, 0, 2),
+                            suffix: new LocationTagged<string>("'", 13, 0, 13)
+                        ),
                         Factory.Markup(" href='").With(SpanCodeGenerator.Null),
-                        new MarkupBlock(new DynamicAttributeBlockCodeGenerator(new LocationTagged<string>(String.Empty, 9, 0, 9), 9, 0, 9),
+                        new MarkupBlock(
+                            new DynamicAttributeBlockCodeGenerator(
+                                new LocationTagged<string>(String.Empty, 9, 0, 9),
+                                9,
+                                0,
+                                9
+                            ),
                             new ExpressionBlock(
                                 Factory.CodeTransition(),
-                                Factory.Code("foo")
-                                       .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                                       .Accepts(AcceptedCharacters.NonWhiteSpace))),
-                        Factory.Markup("'").With(SpanCodeGenerator.Null)),
-                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)));
+                                Factory
+                                    .Code("foo")
+                                    .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                                    .Accepts(AcceptedCharacters.NonWhiteSpace)
+                            )
+                        ),
+                        Factory.Markup("'").With(SpanCodeGenerator.Null)
+                    ),
+                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void MultiValueExpressionAttribute()
         {
-            ParseBlockTest("<a href='@foo bar @baz' />",
+            ParseBlockTest(
+                "<a href='@foo bar @baz' />",
                 new MarkupBlock(
                     Factory.Markup("<a"),
-                    new MarkupBlock(new AttributeBlockCodeGenerator(name: "href", prefix: new LocationTagged<string>(" href='", 2, 0, 2), suffix: new LocationTagged<string>("'", 22, 0, 22)),
+                    new MarkupBlock(
+                        new AttributeBlockCodeGenerator(
+                            name: "href",
+                            prefix: new LocationTagged<string>(" href='", 2, 0, 2),
+                            suffix: new LocationTagged<string>("'", 22, 0, 22)
+                        ),
                         Factory.Markup(" href='").With(SpanCodeGenerator.Null),
-                        new MarkupBlock(new DynamicAttributeBlockCodeGenerator(new LocationTagged<string>(String.Empty, 9, 0, 9), 9, 0, 9),
+                        new MarkupBlock(
+                            new DynamicAttributeBlockCodeGenerator(
+                                new LocationTagged<string>(String.Empty, 9, 0, 9),
+                                9,
+                                0,
+                                9
+                            ),
                             new ExpressionBlock(
                                 Factory.CodeTransition(),
-                                Factory.Code("foo")
-                                       .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                                       .Accepts(AcceptedCharacters.NonWhiteSpace))),
-                        Factory.Markup(" bar").With(new LiteralAttributeCodeGenerator(new LocationTagged<string>(" ", 13, 0, 13), new LocationTagged<string>("bar", 14, 0, 14))),
-                        new MarkupBlock(new DynamicAttributeBlockCodeGenerator(new LocationTagged<string>(" ", 17, 0, 17), 18, 0, 18),
+                                Factory
+                                    .Code("foo")
+                                    .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                                    .Accepts(AcceptedCharacters.NonWhiteSpace)
+                            )
+                        ),
+                        Factory
+                            .Markup(" bar")
+                            .With(
+                                new LiteralAttributeCodeGenerator(
+                                    new LocationTagged<string>(" ", 13, 0, 13),
+                                    new LocationTagged<string>("bar", 14, 0, 14)
+                                )
+                            ),
+                        new MarkupBlock(
+                            new DynamicAttributeBlockCodeGenerator(
+                                new LocationTagged<string>(" ", 17, 0, 17),
+                                18,
+                                0,
+                                18
+                            ),
                             Factory.Markup(" ").With(SpanCodeGenerator.Null),
                             new ExpressionBlock(
                                 Factory.CodeTransition(),
-                                Factory.Code("baz")
-                                       .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                                       .Accepts(AcceptedCharacters.NonWhiteSpace))),
-                        Factory.Markup("'").With(SpanCodeGenerator.Null)),
-                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)));
+                                Factory
+                                    .Code("baz")
+                                    .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                                    .Accepts(AcceptedCharacters.NonWhiteSpace)
+                            )
+                        ),
+                        Factory.Markup("'").With(SpanCodeGenerator.Null)
+                    ),
+                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void VirtualPathAttributesWorkWithConditionalAttributes()
         {
-            ParseBlockTest("<a href='@foo ~/Foo/Bar' />",
+            ParseBlockTest(
+                "<a href='@foo ~/Foo/Bar' />",
                 new MarkupBlock(
                     Factory.Markup("<a"),
-                    new MarkupBlock(new AttributeBlockCodeGenerator(name: "href", prefix: new LocationTagged<string>(" href='", 2, 0, 2), suffix: new LocationTagged<string>("'", 23, 0, 23)),
+                    new MarkupBlock(
+                        new AttributeBlockCodeGenerator(
+                            name: "href",
+                            prefix: new LocationTagged<string>(" href='", 2, 0, 2),
+                            suffix: new LocationTagged<string>("'", 23, 0, 23)
+                        ),
                         Factory.Markup(" href='").With(SpanCodeGenerator.Null),
-                        new MarkupBlock(new DynamicAttributeBlockCodeGenerator(new LocationTagged<string>(String.Empty, 9, 0, 9), 9, 0, 9),
+                        new MarkupBlock(
+                            new DynamicAttributeBlockCodeGenerator(
+                                new LocationTagged<string>(String.Empty, 9, 0, 9),
+                                9,
+                                0,
+                                9
+                            ),
                             new ExpressionBlock(
                                 Factory.CodeTransition(),
-                                Factory.Code("foo")
-                                       .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                                       .Accepts(AcceptedCharacters.NonWhiteSpace))),
-                        Factory.Markup(" ~/Foo/Bar")
-                               .WithEditorHints(EditorHints.VirtualPath)
-                               .With(new LiteralAttributeCodeGenerator(
-                                   new LocationTagged<string>(" ", 13, 0, 13),
-                                   new LocationTagged<SpanCodeGenerator>(new ResolveUrlCodeGenerator(), 14, 0, 14))),
-                        Factory.Markup("'").With(SpanCodeGenerator.Null)),
-                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)));
+                                Factory
+                                    .Code("foo")
+                                    .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                                    .Accepts(AcceptedCharacters.NonWhiteSpace)
+                            )
+                        ),
+                        Factory
+                            .Markup(" ~/Foo/Bar")
+                            .WithEditorHints(EditorHints.VirtualPath)
+                            .With(
+                                new LiteralAttributeCodeGenerator(
+                                    new LocationTagged<string>(" ", 13, 0, 13),
+                                    new LocationTagged<SpanCodeGenerator>(
+                                        new ResolveUrlCodeGenerator(),
+                                        14,
+                                        0,
+                                        14
+                                    )
+                                )
+                            ),
+                        Factory.Markup("'").With(SpanCodeGenerator.Null)
+                    ),
+                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void UnquotedAttributeWithCodeWithSpacesInBlock()
         {
-            ParseBlockTest("<input value=@foo />",
+            ParseBlockTest(
+                "<input value=@foo />",
                 new MarkupBlock(
                     Factory.Markup("<input"),
-                    new MarkupBlock(new AttributeBlockCodeGenerator(name: "value", prefix: new LocationTagged<string>(" value=", 6, 0, 6), suffix: new LocationTagged<string>(String.Empty, 17, 0, 17)),
+                    new MarkupBlock(
+                        new AttributeBlockCodeGenerator(
+                            name: "value",
+                            prefix: new LocationTagged<string>(" value=", 6, 0, 6),
+                            suffix: new LocationTagged<string>(String.Empty, 17, 0, 17)
+                        ),
                         Factory.Markup(" value=").With(SpanCodeGenerator.Null),
-                        new MarkupBlock(new DynamicAttributeBlockCodeGenerator(new LocationTagged<string>(String.Empty, 13, 0, 13), 13, 0, 13),
+                        new MarkupBlock(
+                            new DynamicAttributeBlockCodeGenerator(
+                                new LocationTagged<string>(String.Empty, 13, 0, 13),
+                                13,
+                                0,
+                                13
+                            ),
                             new ExpressionBlock(
                                 Factory.CodeTransition(),
-                                Factory.Code("foo")
-                                       .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                                       .Accepts(AcceptedCharacters.NonWhiteSpace)))),
-                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)));
+                                Factory
+                                    .Code("foo")
+                                    .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                                    .Accepts(AcceptedCharacters.NonWhiteSpace)
+                            )
+                        )
+                    ),
+                    Factory.Markup(" />").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void UnquotedAttributeWithCodeWithSpacesInDocument()
         {
-            ParseDocumentTest("<input value=@foo />",
+            ParseDocumentTest(
+                "<input value=@foo />",
                 new MarkupBlock(
                     Factory.Markup("<input"),
-                    new MarkupBlock(new AttributeBlockCodeGenerator(name: "value", prefix: new LocationTagged<string>(" value=", 6, 0, 6), suffix: new LocationTagged<string>(String.Empty, 17, 0, 17)),
+                    new MarkupBlock(
+                        new AttributeBlockCodeGenerator(
+                            name: "value",
+                            prefix: new LocationTagged<string>(" value=", 6, 0, 6),
+                            suffix: new LocationTagged<string>(String.Empty, 17, 0, 17)
+                        ),
                         Factory.Markup(" value=").With(SpanCodeGenerator.Null),
-                        new MarkupBlock(new DynamicAttributeBlockCodeGenerator(new LocationTagged<string>(String.Empty, 13, 0, 13), 13, 0, 13),
+                        new MarkupBlock(
+                            new DynamicAttributeBlockCodeGenerator(
+                                new LocationTagged<string>(String.Empty, 13, 0, 13),
+                                13,
+                                0,
+                                13
+                            ),
                             new ExpressionBlock(
                                 Factory.CodeTransition(),
-                                Factory.Code("foo")
-                                       .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                                       .Accepts(AcceptedCharacters.NonWhiteSpace)))),
-                    Factory.Markup(" />")));
+                                Factory
+                                    .Code("foo")
+                                    .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                                    .Accepts(AcceptedCharacters.NonWhiteSpace)
+                            )
+                        )
+                    ),
+                    Factory.Markup(" />")
+                )
+            );
         }
 
         [Fact]
@@ -174,23 +381,43 @@ namespace System.Web.Razor.Test.Parser.Html
         {
             // Act
             ParserResults results = ParseDocument("<a href='~/Foo/Bar' />");
-            Block rewritten = new ConditionalAttributeCollapser(new HtmlMarkupParser().BuildSpan).Rewrite(results.Document);
+            Block rewritten = new ConditionalAttributeCollapser(
+                new HtmlMarkupParser().BuildSpan
+            ).Rewrite(results.Document);
             rewritten = new MarkupCollapser(new HtmlMarkupParser().BuildSpan).Rewrite(rewritten);
 
             // Assert
             Assert.Equal(0, results.ParserErrors.Count);
-            EvaluateParseTree(rewritten,
+            EvaluateParseTree(
+                rewritten,
                 new MarkupBlock(
                     Factory.Markup("<a"),
-                    new MarkupBlock(new AttributeBlockCodeGenerator(name: "href", prefix: new LocationTagged<string>(" href='", 2, 0, 2), suffix: new LocationTagged<string>("'", 18, 0, 18)),
+                    new MarkupBlock(
+                        new AttributeBlockCodeGenerator(
+                            name: "href",
+                            prefix: new LocationTagged<string>(" href='", 2, 0, 2),
+                            suffix: new LocationTagged<string>("'", 18, 0, 18)
+                        ),
                         Factory.Markup(" href='").With(SpanCodeGenerator.Null),
-                        Factory.Markup("~/Foo/Bar")
-                               .WithEditorHints(EditorHints.VirtualPath)
-                               .With(new LiteralAttributeCodeGenerator(
-                                   new LocationTagged<string>(String.Empty, 9, 0, 9),
-                                   new LocationTagged<SpanCodeGenerator>(new ResolveUrlCodeGenerator(), 9, 0, 9))),
-                        Factory.Markup("'").With(SpanCodeGenerator.Null)),
-                    Factory.Markup(" />")));
+                        Factory
+                            .Markup("~/Foo/Bar")
+                            .WithEditorHints(EditorHints.VirtualPath)
+                            .With(
+                                new LiteralAttributeCodeGenerator(
+                                    new LocationTagged<string>(String.Empty, 9, 0, 9),
+                                    new LocationTagged<SpanCodeGenerator>(
+                                        new ResolveUrlCodeGenerator(),
+                                        9,
+                                        0,
+                                        9
+                                    )
+                                )
+                            ),
+                        Factory.Markup("'").With(SpanCodeGenerator.Null)
+                    ),
+                    Factory.Markup(" />")
+                )
+            );
         }
 
         [Fact]
@@ -198,7 +425,7 @@ namespace System.Web.Razor.Test.Parser.Html
         {
             // Arrange
             const string code =
- @"<div class=""sidebar"">
+                @"<div class=""sidebar"">
     <h1>Title</h1>
     <p>
         As the author, you can <a href=""/Photo/Edit/photoId"">edit</a>
@@ -258,7 +485,9 @@ namespace System.Web.Razor.Test.Parser.Html
 
             // Act
             ParserResults results = ParseDocument(code);
-            Block rewritten = new ConditionalAttributeCollapser(new HtmlMarkupParser().BuildSpan).Rewrite(results.Document);
+            Block rewritten = new ConditionalAttributeCollapser(
+                new HtmlMarkupParser().BuildSpan
+            ).Rewrite(results.Document);
             rewritten = new MarkupCollapser(new HtmlMarkupParser().BuildSpan).Rewrite(rewritten);
 
             // Assert
@@ -269,35 +498,47 @@ namespace System.Web.Razor.Test.Parser.Html
         [Fact]
         public void ConditionalAttributesAreDisabledForDataAttributesInBlock()
         {
-            ParseBlockTest("<span data-foo='@foo'></span>",
+            ParseBlockTest(
+                "<span data-foo='@foo'></span>",
                 new MarkupBlock(
                     Factory.Markup("<span"),
                     new MarkupBlock(
                         Factory.Markup(" data-foo='"),
                         new ExpressionBlock(
                             Factory.CodeTransition(),
-                            Factory.Code("foo")
-                                   .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                        Factory.Markup("'")),
-                    Factory.Markup("></span>").Accepts(AcceptedCharacters.None)));
+                            Factory
+                                .Code("foo")
+                                .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                                .Accepts(AcceptedCharacters.NonWhiteSpace)
+                        ),
+                        Factory.Markup("'")
+                    ),
+                    Factory.Markup("></span>").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void ConditionalAttributesAreDisabledForDataAttributesInDocument()
         {
-            ParseDocumentTest("<span data-foo='@foo'></span>",
+            ParseDocumentTest(
+                "<span data-foo='@foo'></span>",
                 new MarkupBlock(
                     Factory.Markup("<span"),
                     new MarkupBlock(
                         Factory.Markup(" data-foo='"),
                         new ExpressionBlock(
                             Factory.CodeTransition(),
-                            Factory.Code("foo")
-                                   .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                                   .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                        Factory.Markup("'")),
-                    Factory.Markup("></span>")));
+                            Factory
+                                .Code("foo")
+                                .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                                .Accepts(AcceptedCharacters.NonWhiteSpace)
+                        ),
+                        Factory.Markup("'")
+                    ),
+                    Factory.Markup("></span>")
+                )
+            );
         }
     }
 }

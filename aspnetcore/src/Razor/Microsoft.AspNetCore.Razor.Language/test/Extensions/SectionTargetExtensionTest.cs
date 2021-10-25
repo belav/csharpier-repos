@@ -15,17 +15,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Arrange
             var node = new SectionIntermediateNode()
             {
-                Children =
-                {
-                    new CSharpExpressionIntermediateNode(),
-                },
+                Children = { new CSharpExpressionIntermediateNode(), },
                 SectionName = "MySection"
             };
 
-            var extension = new SectionTargetExtension()
-            {
-                SectionMethodName = "CreateSection"
-            };
+            var extension = new SectionTargetExtension() { SectionMethodName = "CreateSection" };
 
             var context = TestCodeRenderingContext.CreateRuntime();
 
@@ -33,7 +27,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             extension.WriteSection(context, node);
 
             // Assert
-            var expected = @"CreateSection(""MySection"", async() => {
+            var expected =
+                @"CreateSection(""MySection"", async() => {
     Render Children
 }
 );
@@ -49,17 +44,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Arrange
             var node = new SectionIntermediateNode()
             {
-                Children =
-                {
-                    new CSharpExpressionIntermediateNode(),
-                },
+                Children = { new CSharpExpressionIntermediateNode(), },
                 SectionName = "MySection"
             };
 
-            var extension = new SectionTargetExtension()
-            {
-                SectionMethodName = "CreateSection"
-            };
+            var extension = new SectionTargetExtension() { SectionMethodName = "CreateSection" };
 
             var context = TestCodeRenderingContext.CreateDesignTime();
 
@@ -67,7 +56,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             extension.WriteSection(context, node);
 
             // Assert
-            var expected = @"CreateSection(""MySection"", async(__razor_section_writer) => {
+            var expected =
+                @"CreateSection(""MySection"", async(__razor_section_writer) => {
     Render Children
 }
 );

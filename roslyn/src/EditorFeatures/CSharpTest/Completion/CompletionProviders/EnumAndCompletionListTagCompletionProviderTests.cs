@@ -13,15 +13,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
-    public class EnumAndCompletionListTagCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class EnumAndCompletionListTagCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(EnumAndCompletionListTagCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(EnumAndCompletionListTagCompletionProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NullableEnum()
         {
-            var markup = @"class Program
+            var markup =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -30,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     }
 }
 ";
-            var colors = @"
+            var colors =
+                @"
 enum Colors
 {
     Red,
@@ -38,7 +41,8 @@ enum Colors
     Green,
 }
 ";
-            var colorsLike = @"
+            var colorsLike =
+                @"
 readonly struct Colors
 {
     public static readonly Colors Red;
@@ -56,7 +60,8 @@ readonly struct Colors
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EditorBrowsable_EnumMemberAlways()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     public void M()
@@ -65,7 +70,8 @@ class Program
     }
 }
 ";
-            var referencedCode = @"
+            var referencedCode =
+                @"
 [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
 public enum Goo
 {
@@ -78,7 +84,8 @@ public enum Goo
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact]
@@ -86,7 +93,8 @@ public enum Goo
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EditorBrowsable_EnumMemberNever()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     public void M()
@@ -95,7 +103,8 @@ class Program
     }
 }
 ";
-            var referencedCode = @"
+            var referencedCode =
+                @"
 [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
 public enum Goo
 {
@@ -108,7 +117,8 @@ public enum Goo
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact]
@@ -116,7 +126,8 @@ public enum Goo
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EditorBrowsable_EnumMemberAdvanced()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     public void M()
@@ -125,7 +136,8 @@ class Program
     }
 }
 ";
-            var referencedCode = @"
+            var referencedCode =
+                @"
 [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
 public enum Goo
 {
@@ -139,7 +151,8 @@ public enum Goo
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
                 referencedLanguage: LanguageNames.CSharp,
-                hideAdvancedMembers: true);
+                hideAdvancedMembers: true
+            );
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -149,21 +162,24 @@ public enum Goo
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
                 referencedLanguage: LanguageNames.CSharp,
-                hideAdvancedMembers: false);
+                hideAdvancedMembers: false
+            );
         }
 
         [WorkItem(854099, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/854099")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInComment()
         {
-            var markup = @"class Program
+            var markup =
+                @"class Program
 {
     static void Main(string[] args)
     {
         Colors c = // $$
     }
 ";
-            var colors = @"
+            var colors =
+                @"
 enum Colors
 {
     Red,
@@ -171,7 +187,8 @@ enum Colors
     Green,
 }
 ";
-            var colorsLike = @"
+            var colorsLike =
+                @"
 readonly struct Colors
 {
     public static readonly Colors Red;
@@ -191,7 +208,7 @@ readonly struct Colors
         public async Task InYieldReturnInMethod(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 using System.Collections.Generic;
 
 class Program
@@ -215,7 +232,7 @@ class Program
         public async Task InYieldReturnInLocalFunction(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 using System.Collections.Generic;
 
 class Program
@@ -242,7 +259,7 @@ class Program
         public async Task InAsyncMethodReturnStatement(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -266,7 +283,7 @@ class Program
         public async Task InSimpleLambdaAfterArrow(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -288,7 +305,7 @@ class Program
         public async Task InParenthesizedLambdaAfterArrow(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -310,7 +327,7 @@ class Program
         public async Task NotInAnonymousMethodAfterParameterList(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -328,7 +345,7 @@ class Program
         public async Task NotInSimpleLambdaAfterAsync(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -346,7 +363,7 @@ class Program
         public async Task NotInParenthesizedLambdaAfterAsync(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -364,7 +381,7 @@ class Program
         public async Task NotInAnonymousMethodAfterAsync(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -382,7 +399,7 @@ class Program
         public async Task NotInSimpleLambdaBlock(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -400,7 +417,7 @@ class Program
         public async Task NotInParenthesizedLambdaBlock(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -418,7 +435,7 @@ class Program
         public async Task NotInAnonymousMethodBlock(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 
 class Program
 {{
@@ -436,7 +453,7 @@ class Program
         public async Task InExpressionTreeSimpleLambdaAfterArrow(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 using System.Linq.Expressions;
 
 class Program
@@ -459,7 +476,7 @@ class Program
         public async Task InExpressionTreeParenthesizedLambdaAfterArrow(string typeName)
         {
             var markup =
-$@"using System;
+                $@"using System;
 using System.Linq.Expressions;
 
 class Program
@@ -480,7 +497,7 @@ class Program
         public async Task NoCompletionListTag()
         {
             var markup =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -502,7 +519,7 @@ class Program
         public async Task CompletionList()
         {
             var markup =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 /// <completionlist cref=""C""/>
@@ -525,7 +542,7 @@ class Program
         public async Task CompletionListCrefToString()
         {
             var markup =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 /// <completionlist cref=""string""/>
@@ -548,7 +565,7 @@ class Program
         public async Task CompletionListEmptyCref()
         {
             var markup =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 /// <completionlist cref=""""/>
@@ -571,7 +588,7 @@ class Program
         public async Task CompletionListInaccessibleType()
         {
             var markup =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 /// <completionlist cref=""C.Inner""/>
@@ -596,7 +613,7 @@ class Program
         public async Task CompletionListNotAType()
         {
             var markup =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 /// <completionlist cref=""C.Z()""/>
@@ -623,7 +640,8 @@ class Program
         [InlineData("System.DateTime")]
         public async Task SuggestAlias(string fullTypeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using D = {fullTypeName}; 
 class Program
 {{
@@ -645,7 +663,8 @@ class Program
         [InlineData("System.DateTime")]
         public async Task SuggestAlias2(string fullTypeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 namespace N
 {{
 using D = {fullTypeName}; 
@@ -672,7 +691,8 @@ class Program
         [InlineData("System.DateTime")]
         public async Task SuggestAlias3(string fullTypeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 namespace N
 {{
 using D = {fullTypeName}; 
@@ -701,19 +721,22 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInParameterNameContext()
         {
-            var enumE = @"
+            var enumE =
+                @"
 enum E
 {
     a
 }
 ";
-            var enumLikeE = @"
+            var enumLikeE =
+                @"
 readonly struct E
 {
     public static readonly E a;
 }
 ";
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void goo(E first, E second) 
@@ -733,12 +756,13 @@ class C
         public async Task InExpressionBodiedProperty()
         {
             var markup =
-@"class C
+                @"class C
 {
     Colors Colors => $$
 }
 ";
-            var colors = @"
+            var colors =
+                @"
 enum Colors
 {
     Red,
@@ -746,7 +770,8 @@ enum Colors
     Green,
 }
 ";
-            var colorsLike = @"
+            var colorsLike =
+                @"
 readonly struct Colors
 {
     public static readonly Colors Red;
@@ -764,12 +789,13 @@ readonly struct Colors
         public async Task InExpressionBodiedMethod()
         {
             var markup =
-@"class C
+                @"class C
 {
     Colors GetColors() => $$
 }
 ";
-            var colors = @"
+            var colors =
+                @"
 enum Colors
 {
     Red,
@@ -777,7 +803,8 @@ enum Colors
     Green,
 }
 ";
-            var colorsLike = @"
+            var colorsLike =
+                @"
 readonly struct Colors
 {
     public static readonly Colors Red;
@@ -794,7 +821,7 @@ readonly struct Colors
         public async Task NotAfterDot()
         {
             var markup =
-@"namespace ConsoleApplication253
+                @"namespace ConsoleApplication253
 {
     class Program
     {
@@ -807,14 +834,16 @@ readonly struct Colors
     }
 }
 ";
-            var enumE = @"
+            var enumE =
+                @"
 enum E
 {
     A,
     B,
 }
 ";
-            var enumLikeE = @"
+            var enumLikeE =
+                @"
 readonly struct E
 {
     public static readonly E A;
@@ -831,7 +860,7 @@ readonly struct E
         public async Task NotAfterDotWithTextTyped()
         {
             var markup =
-@"namespace ConsoleApplication253
+                @"namespace ConsoleApplication253
 {
     class Program
     {
@@ -844,14 +873,16 @@ readonly struct E
     }
 }
 ";
-            var enumE = @"
+            var enumE =
+                @"
 enum E
 {
     A,
     B,
 }
 ";
-            var enumLikeE = @"
+            var enumLikeE =
+                @"
 readonly struct E
 {
     public static readonly E A;
@@ -868,7 +899,7 @@ readonly struct E
         public async Task TestInEnumInitializer1()
         {
             var markup =
-@"using System;
+                @"using System;
 
 [Flags]
 internal enum ProjectTreeWriterOptions
@@ -888,7 +919,7 @@ internal enum ProjectTreeWriterOptions
         public async Task TestInEnumInitializer2()
         {
             var markup =
-@"using System;
+                @"using System;
 
 [Flags]
 internal enum ProjectTreeWriterOptions
@@ -908,7 +939,7 @@ internal enum ProjectTreeWriterOptions
         public async Task TestInEnumInitializer3()
         {
             var markup =
-@"using System;
+                @"using System;
 
 [Flags]
 internal enum ProjectTreeWriterOptions
@@ -928,7 +959,7 @@ internal enum ProjectTreeWriterOptions
         public async Task TestInEnumInitializer4()
         {
             var markup =
-@"using System;
+                @"using System;
 
 [Flags]
 internal enum ProjectTreeWriterOptions
@@ -948,7 +979,7 @@ internal enum ProjectTreeWriterOptions
         public async Task TestInEnumInitializer5()
         {
             var markup =
-@"using System;
+                @"using System;
 
 [Flags]
 internal enum ProjectTreeWriterOptions
@@ -967,7 +998,7 @@ internal enum ProjectTreeWriterOptions
         public async Task TestInEnumHasFlag()
         {
             var markup =
-@"using System.IO;
+                @"using System.IO;
 
 class C
 {
@@ -986,7 +1017,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestEditorBrowsable_EnumTypeDotMemberAlways()
         {
-            var markup = @"
+            var markup =
+                @"
 class P
 {
     public void S()
@@ -994,13 +1026,15 @@ class P
         MyEnum d = $$;
     }
 }";
-            var referencedCode = @"
+            var referencedCode =
+                @"
 public enum MyEnum
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
     Member
 }";
-            var referencedCode_EnumLike = @"
+            var referencedCode_EnumLike =
+                @"
 public readonly struct MyEnum
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
@@ -1014,7 +1048,8 @@ public readonly struct MyEnum
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -1023,14 +1058,16 @@ public readonly struct MyEnum
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestEditorBrowsable_EnumTypeDotMemberNever()
         {
-            var markup = @"
+            var markup =
+                @"
 class P
 {
     public void S()
@@ -1038,13 +1075,15 @@ class P
         MyEnum d = $$;
     }
 }";
-            var referencedCode = @"
+            var referencedCode =
+                @"
 public enum MyEnum
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
     Member
 }";
-            var referencedCode_EnumLike = @"
+            var referencedCode_EnumLike =
+                @"
 public readonly struct MyEnum
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -1058,7 +1097,8 @@ public readonly struct MyEnum
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -1067,14 +1107,16 @@ public readonly struct MyEnum
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestEditorBrowsable_EnumTypeDotMemberAdvanced()
         {
-            var markup = @"
+            var markup =
+                @"
 class P
 {
     public void S()
@@ -1082,13 +1124,15 @@ class P
         MyEnum d = $$;
     }
 }";
-            var referencedCode = @"
+            var referencedCode =
+                @"
 public enum MyEnum
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
     Member
 }";
-            var referencedCode_EnumLike = @"
+            var referencedCode_EnumLike =
+                @"
 public readonly struct MyEnum
 {
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1103,7 +1147,8 @@ public readonly struct MyEnum
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
                 referencedLanguage: LanguageNames.CSharp,
-                hideAdvancedMembers: true);
+                hideAdvancedMembers: true
+            );
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -1113,7 +1158,8 @@ public readonly struct MyEnum
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
                 referencedLanguage: LanguageNames.CSharp,
-                hideAdvancedMembers: false);
+                hideAdvancedMembers: false
+            );
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -1123,7 +1169,8 @@ public readonly struct MyEnum
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
                 referencedLanguage: LanguageNames.CSharp,
-                hideAdvancedMembers: true);
+                hideAdvancedMembers: true
+            );
 
             await VerifyItemInEditorBrowsableContextsAsync(
                 markup: markup,
@@ -1133,14 +1180,16 @@ public readonly struct MyEnum
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
                 referencedLanguage: LanguageNames.CSharp,
-                hideAdvancedMembers: false);
+                hideAdvancedMembers: false
+            );
         }
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestTriggeredOnOpenParen()
         {
-            var markup = @"
+            var markup =
+                @"
 static class Program
 {
     public static void Main(string[] args)
@@ -1154,7 +1203,8 @@ static class Program
     }
 }
 ";
-            var goo = @"
+            var goo =
+                @"
 enum Goo
 {
     AMember,
@@ -1162,7 +1212,8 @@ enum Goo
     CMember
 }
 ";
-            var gooLike = @"
+            var gooLike =
+                @"
 readonly struct Goo
 {
     public static readonly Goo AMember;
@@ -1171,17 +1222,34 @@ readonly struct Goo
 }
 ";
 
-            await VerifyItemExistsAsync(markup + goo, "Goo.AMember", usePreviousCharAsTrigger: true);
-            await VerifyItemExistsAsync(markup + goo, "Goo.AMember", usePreviousCharAsTrigger: false);
-            await VerifyItemIsAbsentAsync(markup + gooLike, "Goo.AMember", usePreviousCharAsTrigger: true);
-            await VerifyItemExistsAsync(markup + gooLike, "Goo.AMember", usePreviousCharAsTrigger: false);
+            await VerifyItemExistsAsync(
+                markup + goo,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: true
+            );
+            await VerifyItemExistsAsync(
+                markup + goo,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: false
+            );
+            await VerifyItemIsAbsentAsync(
+                markup + gooLike,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: true
+            );
+            await VerifyItemExistsAsync(
+                markup + gooLike,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: false
+            );
         }
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestRightSideOfAssignment()
         {
-            var markup = @"
+            var markup =
+                @"
 static class Program
 {
     public static void Main(string[] args)
@@ -1191,7 +1259,8 @@ static class Program
     }
 }
 ";
-            var goo = @"
+            var goo =
+                @"
 enum Goo
 {
     AMember,
@@ -1199,7 +1268,8 @@ enum Goo
     CMember
 }
 ";
-            var gooLike = @"
+            var gooLike =
+                @"
 readonly struct Goo
 {
     public static readonly Goo AMember;
@@ -1208,17 +1278,34 @@ readonly struct Goo
 }
 ";
 
-            await VerifyItemExistsAsync(markup + goo, "Goo.AMember", usePreviousCharAsTrigger: true);
-            await VerifyItemExistsAsync(markup + goo, "Goo.AMember", usePreviousCharAsTrigger: false);
-            await VerifyItemIsAbsentAsync(markup + gooLike, "Goo.AMember", usePreviousCharAsTrigger: true);
-            await VerifyItemExistsAsync(markup + gooLike, "Goo.AMember", usePreviousCharAsTrigger: false);
+            await VerifyItemExistsAsync(
+                markup + goo,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: true
+            );
+            await VerifyItemExistsAsync(
+                markup + goo,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: false
+            );
+            await VerifyItemIsAbsentAsync(
+                markup + gooLike,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: true
+            );
+            await VerifyItemExistsAsync(
+                markup + gooLike,
+                "Goo.AMember",
+                usePreviousCharAsTrigger: false
+            );
         }
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCaseStatement()
         {
-            var markup = @"
+            var markup =
+                @"
 static class Module1
 {
     public static void Main(string[] args)
@@ -1232,7 +1319,8 @@ static class Module1
     }
 }
 ";
-            var e = @"
+            var e =
+                @"
 enum E
 {
     A,
@@ -1240,7 +1328,8 @@ enum E
     C
 }
 ";
-            var eLike = @"
+            var eLike =
+                @"
 readonly struct E
 {
     public static readonly E A;
@@ -1261,7 +1350,8 @@ readonly struct E
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestInYieldReturn(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 using System.Collections.Generic;
 
@@ -1283,7 +1373,8 @@ class C
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestInAsyncMethodReturnStatement(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 using System.Threading.Tasks;
 
@@ -1306,7 +1397,8 @@ class C
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestInIndexedProperty(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 static class Module1
 {{
@@ -1337,7 +1429,8 @@ static class Module1
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestFullyQualified(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     public void M(System.{typeName} day)
@@ -1368,7 +1461,8 @@ class C
         [InlineData(nameof(DateTime))]
         public async Task TestTriggeredForNamedArgument(string typeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     public void M({typeName} day)
@@ -1391,9 +1485,17 @@ class C
 ";
 
             if (typeName == nameof(DayOfWeek))
-                await VerifyItemExistsAsync(markup, $"{typeName}.A", usePreviousCharAsTrigger: true);
+                await VerifyItemExistsAsync(
+                    markup,
+                    $"{typeName}.A",
+                    usePreviousCharAsTrigger: true
+                );
             else
-                await VerifyItemIsAbsentAsync(markup, $"{typeName}.A", usePreviousCharAsTrigger: true);
+                await VerifyItemIsAbsentAsync(
+                    markup,
+                    $"{typeName}.A",
+                    usePreviousCharAsTrigger: true
+                );
 
             await VerifyItemExistsAsync(markup, $"{typeName}.A", usePreviousCharAsTrigger: false);
         }
@@ -1404,7 +1506,8 @@ class C
         [InlineData(nameof(DateTime))]
         public async Task TestNotTriggeredAfterAssignmentEquals(string typeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     public void M({typeName} day)
@@ -1433,7 +1536,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCaseStatementWithInt32InferredType()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public void M(DayOfWeek day)
@@ -1463,7 +1567,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestLocalNoAs()
         {
-            var markup = @"
+            var markup =
+                @"
 enum E
 {
     A
@@ -1486,7 +1591,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestIncludeEnumAfterTyping()
         {
-            var markup = @"
+            var markup =
+                @"
 enum E
 {
     A
@@ -1508,7 +1614,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestNotInTrivia()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public void M(DayOfWeek day)
@@ -1536,7 +1643,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCommitOnComma()
         {
-            var markup = @"
+            var markup =
+                @"
 enum E
 {
     A
@@ -1551,7 +1659,8 @@ class C
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 enum E
 {
     A
@@ -1575,7 +1684,8 @@ class C
         [InlineData(nameof(DateTime))]
         public async Task EnumMember_NotAfterDot(string typeName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 static class Module1
 {{
     public static void Main({typeName} x)
@@ -1596,7 +1706,8 @@ static class Module1
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestInCollectionInitializer1(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 using System.Collections.Generic;
 
@@ -1621,7 +1732,8 @@ class C
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestInCollectionInitializer2(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 using System.Collections.Generic;
 
@@ -1645,7 +1757,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EnumMember_TestInEnumHasFlag()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.IO;
 
 class C
@@ -1665,7 +1778,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestMultipleEnumsCausedByOverloads()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public enum Color
@@ -1717,7 +1831,8 @@ class C
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestNullableEnum(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System;
 class C
 {{
@@ -1738,7 +1853,8 @@ class C
         [InlineData(nameof(DateTime), nameof(DateTime.Now))]
         public async Task TestTypeAlias(string typeName, string memberName)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using AT = System.{typeName};
 
 public class Program
@@ -1766,9 +1882,13 @@ public class Program
         [InlineData("Color.Green orWrittenWrong ", false)]
         [InlineData("not ")]
         [InlineData("not Re")]
-        public async Task TestPatterns_Is_ConstUnaryAndBinaryPattern(string isPattern, bool shouldOfferRed = true)
+        public async Task TestPatterns_Is_ConstUnaryAndBinaryPattern(
+            string isPattern,
+            bool shouldOfferRed = true
+        )
         {
-            var markup = @$"
+            var markup =
+                @$"
 class C
 {{
     public enum Color
@@ -1804,7 +1924,8 @@ class C
         [InlineData("not Re")]
         public async Task TestPatterns_Is_PropertyPattern(string partialWritten)
         {
-            var markup = @$"
+            var markup =
+                @$"
 public enum Color
 {{
     Red,
@@ -1828,7 +1949,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestPatterns_Is_PropertyPattern_NotAfterEnumDot()
         {
-            var markup = @$"
+            var markup =
+                @$"
 public enum Color
 {{
     Red,
@@ -1852,7 +1974,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestPatterns_SwitchStatement_PropertyPattern()
         {
-            var markup = @"
+            var markup =
+                @"
 public enum Color
 {
     Red,
@@ -1878,7 +2001,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestPatterns_SwitchExpression_PropertyPattern()
         {
-            var markup = @"
+            var markup =
+                @"
 public enum Color
 {
     Red,
@@ -1904,7 +2028,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestStaticAndInstanceMembers()
         {
-            var markup = @"
+            var markup =
+                @"
 public readonly struct Color
 {
     public static readonly Color Red;
@@ -1928,7 +2053,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestProperties()
         {
-            var markup = @"
+            var markup =
+                @"
 public readonly struct Color
 {
     public static Color Red { get; }
@@ -1958,7 +2084,8 @@ class C
         [InlineData("private")]
         public async Task TestAccessibilityDifferentType(string modifier)
         {
-            var markup = $@"
+            var markup =
+                $@"
 public class Color
 {{
     {modifier} static readonly Color Red;
@@ -1997,7 +2124,8 @@ class C
         [InlineData("private")]
         public async Task TestAccessibilitySameType(string modifier)
         {
-            var markup = $@"
+            var markup =
+                $@"
 public class Color
 {{
     {modifier} static readonly Color Red;
@@ -2019,7 +2147,8 @@ public class Color
         [InlineData("record")]
         public async Task TestEnumLikeTypeKinds(string typeKeyword)
         {
-            var markup = $@"
+            var markup =
+                $@"
 public {typeKeyword} Color
 {{
     public static readonly Color Red;
@@ -2036,7 +2165,6 @@ class C
 
             await VerifyItemExistsAsync(markup, "Color.Red");
         }
-
         #endregion
     }
 }

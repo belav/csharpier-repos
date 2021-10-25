@@ -54,12 +54,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         {
             Check.DebugAssert(
                 KeyColumns.Length == KeyValues.GetLength(1),
-                $"The number of key values doesn't match the number of keys (${KeyColumns.Length})");
+                $"The number of key values doesn't match the number of keys (${KeyColumns.Length})"
+            );
 
             var table = model?.GetRelationalModel().FindTable(Table, Schema);
-            var properties = table != null
-                ? MigrationsModelDiffer.GetMappedProperties(table, KeyColumns)
-                : null;
+            var properties =
+                table != null ? MigrationsModelDiffer.GetMappedProperties(table, KeyColumns) : null;
 
             for (var i = 0; i < KeyValues.GetLength(0); i++)
             {
@@ -67,12 +67,25 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
                 for (var j = 0; j < KeyColumns.Length; j++)
                 {
                     modifications[j] = new ColumnModification(
-                        KeyColumns[j], originalValue: null, value: KeyValues[i, j], property: properties?[j],
-                        columnType: KeyColumnTypes?[j], isRead: false, isWrite: true, isKey: true, isCondition: true,
-                        sensitiveLoggingEnabled: false);
+                        KeyColumns[j],
+                        originalValue: null,
+                        value: KeyValues[i, j],
+                        property: properties?[j],
+                        columnType: KeyColumnTypes?[j],
+                        isRead: false,
+                        isWrite: true,
+                        isKey: true,
+                        isCondition: true,
+                        sensitiveLoggingEnabled: false
+                    );
                 }
 
-                yield return new ModificationCommand(Table, Schema, modifications, sensitiveLoggingEnabled: false);
+                yield return new ModificationCommand(
+                    Table,
+                    Schema,
+                    modifications,
+                    sensitiveLoggingEnabled: false
+                );
             }
         }
     }

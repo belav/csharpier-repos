@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
     /// </summary>
     /// <typeparam name="TKey">Type of keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">Type of values in the dictionary.</typeparam>
-    public class DictionaryModelBinder<TKey, TValue> : CollectionModelBinder<KeyValuePair<TKey, TValue?>> where TKey : notnull
+    public class DictionaryModelBinder<TKey, TValue>
+        : CollectionModelBinder<KeyValuePair<TKey, TValue?>> where TKey : notnull
     {
         private readonly IModelBinder _valueBinder;
 
@@ -28,8 +29,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         /// <param name="keyBinder">The <see cref="IModelBinder"/> for <typeparamref name="TKey"/>.</param>
         /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref name="TValue"/>.</param>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
-        public DictionaryModelBinder(IModelBinder keyBinder, IModelBinder valueBinder, ILoggerFactory loggerFactory)
-            : base(new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory), loggerFactory)
+        public DictionaryModelBinder(
+            IModelBinder keyBinder,
+            IModelBinder valueBinder,
+            ILoggerFactory loggerFactory
+        )
+            : base(
+                new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
+                loggerFactory
+            )
         {
             if (valueBinder == null)
             {
@@ -61,12 +69,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IModelBinder keyBinder,
             IModelBinder valueBinder,
             ILoggerFactory loggerFactory,
-            bool allowValidatingTopLevelNodes)
+            bool allowValidatingTopLevelNodes
+        )
             : base(
                 new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
                 loggerFactory,
                 // CollectionModelBinder should not check IsRequired, done in this model binder.
-                allowValidatingTopLevelNodes: false)
+                allowValidatingTopLevelNodes: false
+            )
         {
             if (valueBinder == null)
             {
@@ -103,12 +113,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             IModelBinder valueBinder,
             ILoggerFactory loggerFactory,
             bool allowValidatingTopLevelNodes,
-            MvcOptions mvcOptions)
+            MvcOptions mvcOptions
+        )
             : base(
-                  new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
-                  loggerFactory,
-                  allowValidatingTopLevelNodes: false,
-                  mvcOptions)
+                new KeyValuePairModelBinder<TKey, TValue>(keyBinder, valueBinder, loggerFactory),
+                loggerFactory,
+                allowValidatingTopLevelNodes: false,
+                mvcOptions
+            )
         {
             if (valueBinder == null)
             {
@@ -145,7 +157,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             Logger.NoKeyValueFormatForDictionaryModelBinder(bindingContext);
 
-            if (bindingContext.ValueProvider is not IEnumerableValueProvider enumerableValueProvider)
+            if (
+                bindingContext.ValueProvider is not IEnumerableValueProvider enumerableValueProvider
+            )
             {
                 // No IEnumerableValueProvider available for the fallback approach. For example the user may have
                 // replaced the ValueProvider with something other than a CompositeValueProvider.
@@ -173,7 +187,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             // Update the existing successful but empty ModelBindingResult.
             var elementMetadata = bindingContext.ModelMetadata.ElementMetadata!;
-            var valueMetadata = elementMetadata.Properties[nameof(KeyValuePair<TKey, TValue>.Value)]!;
+            var valueMetadata = elementMetadata.Properties[
+                nameof(KeyValuePair<TKey, TValue>.Value)
+            ]!;
 
             var keyMappings = new Dictionary<string, TKey>(StringComparer.Ordinal);
             foreach (var kvp in keys)
@@ -182,11 +198,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 // that culture when rendering a form.
                 var convertedKey = ModelBindingHelper.ConvertTo<TKey>(kvp.Key, culture: null);
 
-                using (bindingContext.EnterNestedScope(
-                    modelMetadata: valueMetadata,
-                    fieldName: bindingContext.FieldName,
-                    modelName: kvp.Value,
-                    model: null))
+                using (
+                    bindingContext.EnterNestedScope(
+                        modelMetadata: valueMetadata,
+                        fieldName: bindingContext.FieldName,
+                        modelName: kvp.Value,
+                        model: null
+                    )
+                )
                 {
                     await _valueBinder.BindModelAsync(bindingContext);
 
@@ -200,11 +219,17 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                         // IKeyRewriterValueProvider implementation was first (hiding the original "[key][next key]").
                         if (kvp.Value.EndsWith(']'))
                         {
-                            bindingContext.ModelName = ModelNames.CreatePropertyModelName(prefix, kvp.Key);
+                            bindingContext.ModelName = ModelNames.CreatePropertyModelName(
+                                prefix,
+                                kvp.Key
+                            );
                         }
                         else
                         {
-                            bindingContext.ModelName = ModelNames.CreateIndexModelName(prefix, kvp.Key);
+                            bindingContext.ModelName = ModelNames.CreateIndexModelName(
+                                prefix,
+                                kvp.Key
+                            );
                         }
 
                         await _valueBinder.BindModelAsync(bindingContext);
@@ -212,21 +237,30 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     }
 
                     // Always add an entry to the dictionary but validate only if binding was successful.
-                    model[convertedKey] = ModelBindingHelper.CastOrDefault<TValue>(valueResult.Model);
+                    model[convertedKey] = ModelBindingHelper.CastOrDefault<TValue>(
+                        valueResult.Model
+                    );
                     keyMappings.Add(bindingContext.ModelName, convertedKey);
                 }
             }
 
-            bindingContext.ValidationState.Add(model, new ValidationStateEntry()
-            {
-                Strategy = new ShortFormDictionaryValidationStrategy<TKey, TValue?>(keyMappings, valueMetadata),
-            });
+            bindingContext.ValidationState.Add(
+                model,
+                new ValidationStateEntry()
+                {
+                    Strategy = new ShortFormDictionaryValidationStrategy<TKey, TValue?>(
+                        keyMappings,
+                        valueMetadata
+                    ),
+                }
+            );
         }
 
         /// <inheritdoc />
         protected override object? ConvertToCollectionType(
             Type targetType,
-            IEnumerable<KeyValuePair<TKey, TValue?>> collection)
+            IEnumerable<KeyValuePair<TKey, TValue?>> collection
+        )
         {
             if (collection == null)
             {

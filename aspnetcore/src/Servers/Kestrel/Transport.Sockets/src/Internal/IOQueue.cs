@@ -59,7 +59,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
                     // Execute has been rescheduled already, exit.
                     break;
                 }
-
                 // Is work, wasn't already scheduled so continue loop.
             }
         }

@@ -13,10 +13,16 @@ namespace Microsoft.AspNetCore.Internal
         [Theory]
         [InlineData(1, 2)]
         [InlineData(2, 3)]
-        public void NormalizeRange_ReturnsNullWhenRangeStartEqualsOrGreaterThanLength(long start, long end)
+        public void NormalizeRange_ReturnsNullWhenRangeStartEqualsOrGreaterThanLength(
+            long start,
+            long end
+        )
         {
             // Arrange & Act
-            var normalizedRange = RangeHelper.NormalizeRange(new RangeItemHeaderValue(start, end), 1);
+            var normalizedRange = RangeHelper.NormalizeRange(
+                new RangeItemHeaderValue(start, end),
+                1
+            );
 
             // Assert
             Assert.Null(normalizedRange);
@@ -35,10 +41,18 @@ namespace Microsoft.AspNetCore.Internal
         [Theory]
         [InlineData(0, null, 0, 2)]
         [InlineData(0, 0, 0, 0)]
-        public void NormalizeRange_ReturnsNormalizedRange(long? start, long? end, long? normalizedStart, long? normalizedEnd)
+        public void NormalizeRange_ReturnsNormalizedRange(
+            long? start,
+            long? end,
+            long? normalizedStart,
+            long? normalizedEnd
+        )
         {
             // Arrange & Act
-            var normalizedRange = RangeHelper.NormalizeRange(new RangeItemHeaderValue(start, end), 3);
+            var normalizedRange = RangeHelper.NormalizeRange(
+                new RangeItemHeaderValue(start, end),
+                3
+            );
 
             // Assert
             Assert.Equal(normalizedStart, normalizedRange.From);
@@ -66,7 +80,12 @@ namespace Microsoft.AspNetCore.Internal
             httpContext.Request.Headers[HeaderNames.Range] = range;
 
             // Act
-            var (isRangeRequest, parsedRangeResult) = RangeHelper.ParseRange(httpContext, httpContext.Request.GetTypedHeaders(), 10, NullLogger.Instance);
+            var (isRangeRequest, parsedRangeResult) = RangeHelper.ParseRange(
+                httpContext,
+                httpContext.Request.GetTypedHeaders(),
+                10,
+                NullLogger.Instance
+            );
 
             // Assert
             Assert.False(isRangeRequest);
@@ -83,7 +102,12 @@ namespace Microsoft.AspNetCore.Internal
             httpContext.Request.Headers[HeaderNames.Range] = range;
 
             // Act
-            var (isRangeRequest, parsedRangeResult) = RangeHelper.ParseRange(httpContext, httpContext.Request.GetTypedHeaders(), 10, NullLogger.Instance);
+            var (isRangeRequest, parsedRangeResult) = RangeHelper.ParseRange(
+                httpContext,
+                httpContext.Request.GetTypedHeaders(),
+                10,
+                NullLogger.Instance
+            );
 
             // Assert
             Assert.False(isRangeRequest);
@@ -99,7 +123,12 @@ namespace Microsoft.AspNetCore.Internal
             httpContext.Request.Headers[HeaderNames.Range] = range.ToString();
 
             // Act
-            var (isRangeRequest, parsedRange) = RangeHelper.ParseRange(httpContext, httpContext.Request.GetTypedHeaders(), 4, NullLogger.Instance);
+            var (isRangeRequest, parsedRange) = RangeHelper.ParseRange(
+                httpContext,
+                httpContext.Request.GetTypedHeaders(),
+                4,
+                NullLogger.Instance
+            );
 
             // Assert
             Assert.True(isRangeRequest);

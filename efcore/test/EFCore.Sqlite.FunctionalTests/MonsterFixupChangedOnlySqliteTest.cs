@@ -5,23 +5,34 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class MonsterFixupChangedOnlySqliteTest : MonsterFixupTestBase<
-        MonsterFixupChangedOnlySqliteTest.MonsterFixupChangedOnlySqliteFixture>
+    public class MonsterFixupChangedOnlySqliteTest
+        : MonsterFixupTestBase<MonsterFixupChangedOnlySqliteTest.MonsterFixupChangedOnlySqliteFixture>
     {
         public MonsterFixupChangedOnlySqliteTest(MonsterFixupChangedOnlySqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class MonsterFixupChangedOnlySqliteFixture : MonsterFixupChangedOnlyFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
 
-            protected override void OnModelCreating<TMessage, TProduct, TProductPhoto, TProductReview, TComputerDetail, TDimensions>(
-                ModelBuilder builder)
+            protected override void OnModelCreating<
+                TMessage,
+                TProduct,
+                TProductPhoto,
+                TProductReview,
+                TComputerDetail,
+                TDimensions
+            >(ModelBuilder builder)
             {
-                base.OnModelCreating<TMessage, TProduct, TProductPhoto, TProductReview, TComputerDetail, TDimensions>(builder);
+                base.OnModelCreating<
+                    TMessage,
+                    TProduct,
+                    TProductPhoto,
+                    TProductReview,
+                    TComputerDetail,
+                    TDimensions
+                >(builder);
 
                 builder.Entity<TMessage>().HasKey(e => e.MessageId);
                 builder.Entity<TProductPhoto>().HasKey(e => e.PhotoId);

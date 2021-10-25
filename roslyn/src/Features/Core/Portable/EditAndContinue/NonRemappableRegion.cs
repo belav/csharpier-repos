@@ -35,27 +35,26 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             IsExceptionRegion = isExceptionRegion;
         }
 
-        public override bool Equals(object? obj)
-            => obj is NonRemappableRegion region && Equals(region);
+        public override bool Equals(object? obj) =>
+            obj is NonRemappableRegion region && Equals(region);
 
-        public bool Equals(NonRemappableRegion other)
-            => Span.Equals(other.Span) &&
-               LineDelta == other.LineDelta &&
-               IsExceptionRegion == other.IsExceptionRegion;
+        public bool Equals(NonRemappableRegion other) =>
+            Span.Equals(other.Span)
+            && LineDelta == other.LineDelta
+            && IsExceptionRegion == other.IsExceptionRegion;
 
-        public override int GetHashCode()
-            => Hash.Combine(Span.GetHashCode(), Hash.Combine(IsExceptionRegion, LineDelta));
+        public override int GetHashCode() =>
+            Hash.Combine(Span.GetHashCode(), Hash.Combine(IsExceptionRegion, LineDelta));
 
-        public static bool operator ==(NonRemappableRegion left, NonRemappableRegion right)
-            => left.Equals(right);
+        public static bool operator ==(NonRemappableRegion left, NonRemappableRegion right) =>
+            left.Equals(right);
 
-        public static bool operator !=(NonRemappableRegion left, NonRemappableRegion right)
-            => !(left == right);
+        public static bool operator !=(NonRemappableRegion left, NonRemappableRegion right) =>
+            !(left == right);
 
-        public NonRemappableRegion WithLineDelta(int value)
-            => new(Span, value, IsExceptionRegion);
+        public NonRemappableRegion WithLineDelta(int value) => new(Span, value, IsExceptionRegion);
 
-        internal string GetDebuggerDisplay()
-            => $"{(IsExceptionRegion ? "ER" : "AS")} {Span} δ={LineDelta}";
+        internal string GetDebuggerDisplay() =>
+            $"{(IsExceptionRegion ? "ER" : "AS")} {Span} δ={LineDelta}";
     }
 }

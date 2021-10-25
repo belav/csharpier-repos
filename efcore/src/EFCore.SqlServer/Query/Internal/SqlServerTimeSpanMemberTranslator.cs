@@ -19,13 +19,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerTimeSpanMemberTranslator : IMemberTranslator
     {
-        private static readonly Dictionary<string, string> _datePartMappings = new()
-        {
-            { nameof(TimeSpan.Hours), "hour" },
-            { nameof(TimeSpan.Minutes), "minute" },
-            { nameof(TimeSpan.Seconds), "second" },
-            { nameof(TimeSpan.Milliseconds), "millisecond" }
-        };
+        private static readonly Dictionary<string, string> _datePartMappings =
+            new()
+            {
+                { nameof(TimeSpan.Hours), "hour" },
+                { nameof(TimeSpan.Minutes), "minute" },
+                { nameof(TimeSpan.Seconds), "second" },
+                { nameof(TimeSpan.Milliseconds), "millisecond" }
+            };
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -50,19 +51,25 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
 
-            if (member.DeclaringType == typeof(TimeSpan) && _datePartMappings.TryGetValue(member.Name, out var value))
+            if (
+                member.DeclaringType == typeof(TimeSpan)
+                && _datePartMappings.TryGetValue(member.Name, out var value)
+            )
             {
                 return _sqlExpressionFactory.Function(
-                    "DATEPART", new[] { _sqlExpressionFactory.Fragment(value), instance! },
+                    "DATEPART",
+                    new[] { _sqlExpressionFactory.Fragment(value), instance! },
                     nullable: true,
                     argumentsPropagateNullability: new[] { false, true },
-                    returnType);
+                    returnType
+                );
             }
 
             return null;

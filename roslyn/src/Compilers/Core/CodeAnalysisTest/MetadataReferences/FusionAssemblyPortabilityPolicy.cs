@@ -28,7 +28,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private IntPtr _assemblyConfigCookie;
         private readonly ImmutableArray<byte> _fileHash;
 
-        private FusionAssemblyPortabilityPolicy(IntPtr asmConfigCookie, ImmutableArray<byte> fileHash)
+        private FusionAssemblyPortabilityPolicy(
+            IntPtr asmConfigCookie,
+            ImmutableArray<byte> fileHash
+        )
         {
             _assemblyConfigCookie = asmConfigCookie;
             _fileHash = fileHash;
@@ -58,10 +61,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
             get { return _assemblyConfigCookie; }
         }
 
-        [DllImport("clr", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, PreserveSig = false)]
-        private static extern void CreateAssemblyConfigCookie([MarshalAs(UnmanagedType.LPWStr)] string configPath, out IntPtr assemblyConfig);
+        [DllImport(
+            "clr",
+            CallingConvention = CallingConvention.StdCall,
+            CharSet = CharSet.Unicode,
+            PreserveSig = false
+        )]
+        private static extern void CreateAssemblyConfigCookie(
+            [MarshalAs(UnmanagedType.LPWStr)] string configPath,
+            out IntPtr assemblyConfig
+        );
 
-        [DllImport("clr", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, PreserveSig = true)]
+        [DllImport(
+            "clr",
+            CallingConvention = CallingConvention.StdCall,
+            CharSet = CharSet.Unicode,
+            PreserveSig = true
+        )]
         private static extern int DestroyAssemblyConfigCookie(IntPtr assemblyConfig);
 
         public void Dispose()
@@ -94,8 +110,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // This is not foolproof, but we just assume that if both assembly
             // policies have the same path and the same timestamp that they are the same.
             // We can't do any better because we don't have access to the config cookie internals.
-            return (object)other != null &&
-                   Enumerable.SequenceEqual(_fileHash, other._fileHash);
+            return (object)other != null && Enumerable.SequenceEqual(_fileHash, other._fileHash);
         }
 
         public override int GetHashCode()

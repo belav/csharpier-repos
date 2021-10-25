@@ -47,7 +47,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
             if (_awaitableCache!.TryDequeue(out var awaitable))
             {
                 // Reset previously used awaitable
-                Debug.Assert(awaitable.GetStatus() == ValueTaskSourceStatus.Succeeded, "Previous awaitable should have been completed.");
+                Debug.Assert(
+                    awaitable.GetStatus() == ValueTaskSourceStatus.Succeeded,
+                    "Previous awaitable should have been completed."
+                );
                 awaitable.Reset();
             }
             else
@@ -84,13 +87,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl
             }
             else
             {
-                Debug.Assert(_awaitable.GetStatus() == ValueTaskSourceStatus.Succeeded, "Previous awaitable should have been completed.");
+                Debug.Assert(
+                    _awaitable.GetStatus() == ValueTaskSourceStatus.Succeeded,
+                    "Previous awaitable should have been completed."
+                );
                 _awaitable.Reset();
             }
 
             return _awaitable;
         }
 
-        public override int ActiveCount => _awaitable != null && _awaitable.GetStatus() != ValueTaskSourceStatus.Succeeded ? 1 : 0;
+        public override int ActiveCount =>
+            _awaitable != null && _awaitable.GetStatus() != ValueTaskSourceStatus.Succeeded ? 1 : 0;
     }
 }

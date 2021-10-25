@@ -10,7 +10,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
     public static class InteropTests
     {
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes
         public static void TestHandle()
         {
             //
@@ -28,20 +28,26 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Assert.Equal(TestData.MsCertificate.Length, cbCertEncoded);
 
                     byte[] pCertEncoded = new byte[cbCertEncoded];
-                    Marshal.Copy((IntPtr)(pCertContext->pbCertEncoded), pCertEncoded, 0, cbCertEncoded);
+                    Marshal.Copy(
+                        (IntPtr)(pCertContext->pbCertEncoded),
+                        pCertEncoded,
+                        0,
+                        cbCertEncoded
+                    );
                     Assert.Equal(TestData.MsCertificate, pCertEncoded);
 
                     // Does the serial number match?
                     CERT_INFO* pCertInfo = pCertContext->pCertInfo;
                     byte[] serialNumber = pCertInfo->SerialNumber.ToByteArray();
-                    byte[] expectedSerial = "b00000000100dd9f3bd08b0aaf11b000000033".HexToByteArray();
+                    byte[] expectedSerial =
+                        "b00000000100dd9f3bd08b0aaf11b000000033".HexToByteArray();
                     Assert.Equal(expectedSerial, serialNumber);
                 }
             }
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes
         public static void TestHandleCtor()
         {
             IntPtr pCertContext = IntPtr.Zero;
@@ -50,7 +56,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 fixed (byte* pRawData = rawData)
                 {
-                    CRYPTOAPI_BLOB certBlob = new CRYPTOAPI_BLOB() { cbData = rawData.Length, pbData = pRawData };
+                    CRYPTOAPI_BLOB certBlob = new CRYPTOAPI_BLOB()
+                    {
+                        cbData = rawData.Length,
+                        pbData = pRawData
+                    };
                     bool success = CryptQueryObject(
                         CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
                         ref certBlob,
@@ -63,7 +73,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         IntPtr.Zero,
                         IntPtr.Zero,
                         out pCertContext
-                            );
+                    );
 
                     if (!success)
                     {
@@ -90,23 +100,26 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 string issuer = c.Issuer;
                 Assert.Equal(
                     "CN=Microsoft Code Signing PCA, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
-                    issuer);
+                    issuer
+                );
 
                 byte[] expectedPublicKey = (
-                    "3082010a0282010100e8af5ca2200df8287cbc057b7fadeeeb76ac28533f3adb" +
-                    "407db38e33e6573fa551153454a5cfb48ba93fa837e12d50ed35164eef4d7adb" +
-                    "137688b02cf0595ca9ebe1d72975e41b85279bf3f82d9e41362b0b40fbbe3bba" +
-                    "b95c759316524bca33c537b0f3eb7ea8f541155c08651d2137f02cba220b10b1" +
-                    "109d772285847c4fb91b90b0f5a3fe8bf40c9a4ea0f5c90a21e2aae3013647fd" +
-                    "2f826a8103f5a935dc94579dfb4bd40e82db388f12fee3d67a748864e162c425" +
-                    "2e2aae9d181f0e1eb6c2af24b40e50bcde1c935c49a679b5b6dbcef9707b2801" +
-                    "84b82a29cfbfa90505e1e00f714dfdad5c238329ebc7c54ac8e82784d37ec643" +
-                    "0b950005b14f6571c50203010001").HexToByteArray();
+                    "3082010a0282010100e8af5ca2200df8287cbc057b7fadeeeb76ac28533f3adb"
+                    + "407db38e33e6573fa551153454a5cfb48ba93fa837e12d50ed35164eef4d7adb"
+                    + "137688b02cf0595ca9ebe1d72975e41b85279bf3f82d9e41362b0b40fbbe3bba"
+                    + "b95c759316524bca33c537b0f3eb7ea8f541155c08651d2137f02cba220b10b1"
+                    + "109d772285847c4fb91b90b0f5a3fe8bf40c9a4ea0f5c90a21e2aae3013647fd"
+                    + "2f826a8103f5a935dc94579dfb4bd40e82db388f12fee3d67a748864e162c425"
+                    + "2e2aae9d181f0e1eb6c2af24b40e50bcde1c935c49a679b5b6dbcef9707b2801"
+                    + "84b82a29cfbfa90505e1e00f714dfdad5c238329ebc7c54ac8e82784d37ec643"
+                    + "0b950005b14f6571c50203010001"
+                ).HexToByteArray();
 
                 byte[] publicKey = c.GetPublicKey();
                 Assert.Equal(expectedPublicKey, publicKey);
 
-                byte[] expectedThumbPrint = "108e2ba23632620c427c570b6d9db51ac31387fe".HexToByteArray();
+                byte[] expectedThumbPrint =
+                    "108e2ba23632620c427c570b6d9db51ac31387fe".HexToByteArray();
                 byte[] thumbPrint = c.GetCertHash();
                 Assert.Equal(expectedThumbPrint, thumbPrint);
             }
@@ -125,7 +138,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             IntPtr phCertStore,
             IntPtr phMsg,
             out IntPtr ppvContext
-            );
+        );
 
         [DllImport("crypt32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern bool CertFreeCertificateContext(IntPtr pCertContext);
@@ -141,43 +154,36 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             //encoded single certificate
             CERT_QUERY_CONTENT_FLAG_CERT = 1 << ContentType.CERT_QUERY_CONTENT_CERT,
-
             //encoded single CTL
             CERT_QUERY_CONTENT_FLAG_CTL = 1 << ContentType.CERT_QUERY_CONTENT_CTL,
-
             //encoded single CRL
             CERT_QUERY_CONTENT_FLAG_CRL = 1 << ContentType.CERT_QUERY_CONTENT_CRL,
-
             //serialized store
-            CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE = 1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_STORE,
-
+            CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE =
+                1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_STORE,
             //serialized single certificate
-            CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT = 1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CERT,
-
+            CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT =
+                1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CERT,
             //serialized single CTL
-            CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL = 1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CTL,
-
+            CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL =
+                1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CTL,
             //serialized single CRL
-            CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL = 1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CRL,
-
+            CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL =
+                1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CRL,
             //an encoded PKCS#7 signed message
             CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED = 1 << ContentType.CERT_QUERY_CONTENT_PKCS7_SIGNED,
-
             //an encoded PKCS#7 message.  But it is not a signed message
-            CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED = 1 << ContentType.CERT_QUERY_CONTENT_PKCS7_UNSIGNED,
-
+            CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED =
+                1 << ContentType.CERT_QUERY_CONTENT_PKCS7_UNSIGNED,
             //the content includes an embedded PKCS7 signed message
-            CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED = 1 << ContentType.CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED,
-
+            CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED =
+                1 << ContentType.CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED,
             //an encoded PKCS#10
             CERT_QUERY_CONTENT_FLAG_PKCS10 = 1 << ContentType.CERT_QUERY_CONTENT_PKCS10,
-
             //an encoded PFX BLOB
             CERT_QUERY_CONTENT_FLAG_PFX = 1 << ContentType.CERT_QUERY_CONTENT_PFX,
-
             //an encoded CertificatePair (contains forward and/or reverse cross certs)
             CERT_QUERY_CONTENT_FLAG_CERT_PAIR = 1 << ContentType.CERT_QUERY_CONTENT_CERT_PAIR,
-
             //an encoded PFX BLOB, and we do want to load it (not included in
             //CERT_QUERY_CONTENT_FLAG_ALL)
             CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD = 1 << ContentType.CERT_QUERY_CONTENT_PFX_AND_LOAD,
@@ -187,10 +193,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         private enum ExpectedFormatTypeFlags : int
         {
             CERT_QUERY_FORMAT_FLAG_BINARY = 1 << FormatType.CERT_QUERY_FORMAT_BINARY,
-            CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED = 1 << FormatType.CERT_QUERY_FORMAT_BASE64_ENCODED,
-            CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED = 1 << FormatType.CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED,
-
-            CERT_QUERY_FORMAT_FLAG_ALL = CERT_QUERY_FORMAT_FLAG_BINARY | CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED | CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED,
+            CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED =
+                1 << FormatType.CERT_QUERY_FORMAT_BASE64_ENCODED,
+            CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED =
+                1 << FormatType.CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED,
+            CERT_QUERY_FORMAT_FLAG_ALL =
+                CERT_QUERY_FORMAT_FLAG_BINARY
+                | CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED
+                | CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED,
         }
 
         private enum MsgAndCertEncodingType : int

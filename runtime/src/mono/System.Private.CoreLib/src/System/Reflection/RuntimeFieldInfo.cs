@@ -35,7 +35,13 @@ namespace System.Reflection
     internal abstract class RtFieldInfo : FieldInfo
     {
         internal abstract object UnsafeGetValue(object obj);
-        internal abstract void UnsafeSetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture);
+        internal abstract void UnsafeSetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            CultureInfo culture
+        );
         internal abstract void CheckConsistency(object target);
     }
 
@@ -52,10 +58,7 @@ namespace System.Reflection
 
         public override Module Module
         {
-            get
-            {
-                return GetRuntimeModule();
-            }
+            get { return GetRuntimeModule(); }
         }
 
         internal RuntimeType GetDeclaringTypeInternal()
@@ -65,10 +68,7 @@ namespace System.Reflection
 
         private RuntimeType ReflectedTypeInternal
         {
-            get
-            {
-                return (RuntimeType)ReflectedType;
-            }
+            get { return (RuntimeType)ReflectedType; }
         }
 
         internal RuntimeModule GetRuntimeModule()
@@ -93,8 +93,8 @@ namespace System.Reflection
                     else
                     {
                         throw new ArgumentException(
-                            SR.Format(SR.Arg_FieldDeclTarget,
-                                Name, DeclaringType, target.GetType()));
+                            SR.Format(SR.Arg_FieldDeclTarget, Name, DeclaringType, target.GetType())
+                        );
                     }
                 }
             }
@@ -102,10 +102,24 @@ namespace System.Reflection
 
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
-        internal override void UnsafeSetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
+        internal override void UnsafeSetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        )
         {
             bool domainInitialized = false;
-            RuntimeFieldHandle.SetValue(this, obj, value, null, Attributes, null, ref domainInitialized);
+            RuntimeFieldHandle.SetValue(
+                this,
+                obj,
+                value,
+                null,
+                Attributes,
+                null,
+                ref domainInitialized
+            );
         }
 
         [DebuggerStepThroughAttribute]
@@ -114,11 +128,16 @@ namespace System.Reflection
         {
             if (obj.IsNull)
                 throw new ArgumentException(SR.Arg_TypedReference_Null);
-
             unsafe
             {
                 // Passing TypedReference by reference is easier to make correct in native code
-                RuntimeFieldHandle.SetValueDirect(this, (RuntimeType)FieldType, &obj, value, (RuntimeType?)DeclaringType);
+                RuntimeFieldHandle.SetValueDirect(
+                    this,
+                    (RuntimeType)FieldType,
+                    &obj,
+                    value,
+                    (RuntimeType?)DeclaringType
+                );
             }
         }
 
@@ -128,27 +147,25 @@ namespace System.Reflection
         {
             if (obj.IsNull)
                 throw new ArgumentException(SR.Arg_TypedReference_Null);
-
             unsafe
             {
                 // Passing TypedReference by reference is easier to make correct in native code
-                return RuntimeFieldHandle.GetValueDirect(this, (RuntimeType)FieldType, &obj, (RuntimeType?)DeclaringType);
+                return RuntimeFieldHandle.GetValueDirect(
+                    this,
+                    (RuntimeType)FieldType,
+                    &obj,
+                    (RuntimeType?)DeclaringType
+                );
             }
         }
 
         public override FieldAttributes Attributes
         {
-            get
-            {
-                return attrs;
-            }
+            get { return attrs; }
         }
         public override RuntimeFieldHandle FieldHandle
         {
-            get
-            {
-                return fhandle;
-            }
+            get { return fhandle; }
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -169,10 +186,7 @@ namespace System.Reflection
 
         public override Type ReflectedType
         {
-            get
-            {
-                return GetParentType(false);
-            }
+            get { return GetParentType(false); }
         }
         public override Type? DeclaringType
         {
@@ -184,10 +198,7 @@ namespace System.Reflection
         }
         public override string Name
         {
-            get
-            {
-                return name!;
-            }
+            get { return name!; }
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -217,10 +228,15 @@ namespace System.Reflection
                 if (obj == null)
                     throw new TargetException("Non-static field requires a target");
                 if (!DeclaringType!.IsAssignableFrom(obj.GetType()))
-                    throw new ArgumentException(string.Format(
-                        "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
-                         Name, DeclaringType, obj.GetType()),
-                         nameof(obj));
+                    throw new ArgumentException(
+                        string.Format(
+                            "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
+                            Name,
+                            DeclaringType,
+                            obj.GetType()
+                        ),
+                        nameof(obj)
+                    );
             }
 
             if (!IsLiteral)
@@ -236,17 +252,28 @@ namespace System.Reflection
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void SetValueInternal(FieldInfo fi, object? obj, object? value);
 
-        public override void SetValue(object? obj, object? val, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? val,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        )
         {
             if (!IsStatic)
             {
                 if (obj == null)
                     throw new TargetException("Non-static field requires a target");
                 if (!DeclaringType!.IsAssignableFrom(obj.GetType()))
-                    throw new ArgumentException(string.Format(
-                        "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
-                         Name, DeclaringType, obj.GetType()),
-                         nameof(obj));
+                    throw new ArgumentException(
+                        string.Format(
+                            "Field {0} defined on type {1} is not a field on the target object which is of type {2}.",
+                            Name,
+                            DeclaringType,
+                            obj.GetType()
+                        ),
+                        nameof(obj)
+                    );
             }
             if (IsLiteral)
                 throw new FieldAccessException("Cannot set a constant field");
@@ -284,17 +311,17 @@ namespace System.Reflection
         {
             Type? declaringType = DeclaringType;
             if (declaringType != null && declaringType.ContainsGenericParameters)
-                throw new InvalidOperationException("Late bound operations cannot be performed on fields with types for which Type.ContainsGenericParameters is true.");
+                throw new InvalidOperationException(
+                    "Late bound operations cannot be performed on fields with types for which Type.ContainsGenericParameters is true."
+                );
         }
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeFieldInfo>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeFieldInfo>(other);
 
         public override int MetadataToken
         {
-            get
-            {
-                return get_metadata_token(this);
-            }
+            get { return get_metadata_token(this); }
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -307,6 +334,7 @@ namespace System.Reflection
 
         public override Type[] GetRequiredCustomModifiers() => GetCustomModifiers(false);
 
-        private Type[] GetCustomModifiers(bool optional) => GetTypeModifiers(optional) ?? Type.EmptyTypes;
+        private Type[] GetCustomModifiers(bool optional) =>
+            GetTypeModifiers(optional) ?? Type.EmptyTypes;
     }
 }

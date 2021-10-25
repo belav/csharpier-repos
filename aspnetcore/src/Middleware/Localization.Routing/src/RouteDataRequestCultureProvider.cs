@@ -27,7 +27,9 @@ namespace Microsoft.AspNetCore.Localization.Routing
         public string UIRouteDataStringKey { get; set; } = "ui-culture";
 
         /// <inheritdoc />
-        public override Task<ProviderCultureResult?> DetermineProviderCultureResult(HttpContext httpContext)
+        public override Task<ProviderCultureResult?> DetermineProviderCultureResult(
+            HttpContext httpContext
+        )
         {
             if (httpContext == null)
             {

@@ -109,13 +109,21 @@ namespace MonoTests.System.Drawing.Imaging
             Bitmap8bitsPixels(Helpers.GetTestBitmapPath("nature24bits87.gif"));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void Bitmap8bitsData()
         {
             string sInFile = Helpers.GetTestBitmapPath("nature24bits.gif");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
-                BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bmp.LockBits(
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     Assert.Equal(bmp.Height, data.Height);
@@ -123,7 +131,6 @@ namespace MonoTests.System.Drawing.Imaging
                     Assert.Equal(PixelFormat.Format24bppRgb, data.PixelFormat);
                     Assert.Equal(332, data.Stride);
                     Assert.Equal(100, data.Height);
-
                     unsafe
                     {
                         byte* scan = (byte*)data.Scan0;
@@ -234,9 +241,7 @@ namespace MonoTests.System.Drawing.Imaging
                 {
                     File.Delete(sOutFile);
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 

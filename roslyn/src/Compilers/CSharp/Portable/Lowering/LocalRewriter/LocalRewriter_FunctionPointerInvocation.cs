@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed partial class LocalRewriter
     {
-        public override BoundNode? VisitFunctionPointerInvocation(BoundFunctionPointerInvocation node)
+        public override BoundNode? VisitFunctionPointerInvocation(
+            BoundFunctionPointerInvocation node
+        )
         {
             var rewrittenExpression = VisitExpression(node.InvokedExpression);
             var rewrittenArgs = VisitList(node.Arguments);
@@ -27,16 +29,29 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ref argumentRefKindsOpt,
                 out ImmutableArray<LocalSymbol> temps,
                 invokedAsExtensionMethod: false,
-                enableCallerInfo: ThreeState.False);
+                enableCallerInfo: ThreeState.False
+            );
 
-            node = node.Update(rewrittenExpression, rewrittenArgs, argumentRefKindsOpt, node.ResultKind, node.Type);
+            node = node.Update(
+                rewrittenExpression,
+                rewrittenArgs,
+                argumentRefKindsOpt,
+                node.ResultKind,
+                node.Type
+            );
 
             if (temps.IsDefaultOrEmpty)
             {
                 return node;
             }
 
-            return new BoundSequence(node.Syntax, temps, sideEffects: ImmutableArray<BoundExpression>.Empty, node, node.Type);
+            return new BoundSequence(
+                node.Syntax,
+                temps,
+                sideEffects: ImmutableArray<BoundExpression>.Empty,
+                node,
+                node.Type
+            );
         }
     }
 }

@@ -12,8 +12,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal static partial class BoundNodeExtensions
     {
         // Return if any node in an array of nodes has errors.
-        public static bool HasErrors<T>(this ImmutableArray<T> nodeArray)
-            where T : BoundNode
+        public static bool HasErrors<T>(this ImmutableArray<T> nodeArray) where T : BoundNode
         {
             if (nodeArray.IsDefault)
                 return false;
@@ -27,7 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             return false;
         }
 
-        // Like HasErrors property, but also returns false for a null node. 
+        // Like HasErrors property, but also returns false for a null node.
         public static bool HasErrors([NotNullWhen(true)] this BoundNode? node)
         {
             return node != null && node.HasErrors;
@@ -39,13 +38,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (statement!.Kind == BoundKind.ExpressionStatement)
             {
                 BoundExpression expression = ((BoundExpressionStatement)statement).Expression;
-                if (expression.Kind == BoundKind.Sequence && ((BoundSequence)expression).SideEffects.IsDefaultOrEmpty)
+                if (
+                    expression.Kind == BoundKind.Sequence
+                    && ((BoundSequence)expression).SideEffects.IsDefaultOrEmpty
+                )
                 {
                     // in case there is a pattern variable declared in a ctor-initializer, it gets wrapped in a bound sequence.
                     expression = ((BoundSequence)expression).Value;
                 }
 
-                return expression.Kind == BoundKind.Call && ((BoundCall)expression).IsConstructorInitializer();
+                return expression.Kind == BoundKind.Call
+                    && ((BoundCall)expression).IsConstructorInitializer();
             }
 
             return false;
@@ -56,9 +59,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(call != null);
             MethodSymbol method = call!.Method;
             BoundExpression? receiverOpt = call!.ReceiverOpt;
-            return method.MethodKind == MethodKind.Constructor &&
-                receiverOpt != null &&
-                (receiverOpt.Kind == BoundKind.ThisReference || receiverOpt.Kind == BoundKind.BaseReference);
+            return method.MethodKind == MethodKind.Constructor
+                && receiverOpt != null
+                && (
+                    receiverOpt.Kind == BoundKind.ThisReference
+                    || receiverOpt.Kind == BoundKind.BaseReference
+                );
         }
 
         public static T MakeCompilerGenerated<T>(this T node) where T : BoundNode

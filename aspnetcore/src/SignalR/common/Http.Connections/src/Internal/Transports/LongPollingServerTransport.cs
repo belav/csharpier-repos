@@ -18,11 +18,18 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
         private readonly CancellationToken _timeoutToken;
         private readonly HttpConnectionContext? _connection;
 
-        public LongPollingServerTransport(CancellationToken timeoutToken, PipeReader application, ILoggerFactory loggerFactory)
-            : this(timeoutToken, application, loggerFactory, connection: null)
-        { }
+        public LongPollingServerTransport(
+            CancellationToken timeoutToken,
+            PipeReader application,
+            ILoggerFactory loggerFactory
+        ) : this(timeoutToken, application, loggerFactory, connection: null) { }
 
-        public LongPollingServerTransport(CancellationToken timeoutToken, PipeReader application, ILoggerFactory loggerFactory, HttpConnectionContext? connection)
+        public LongPollingServerTransport(
+            CancellationToken timeoutToken,
+            PipeReader application,
+            ILoggerFactory loggerFactory,
+            HttpConnectionContext? connection
+        )
         {
             _timeoutToken = timeoutToken;
             _application = application;
@@ -30,7 +37,9 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
             _connection = connection;
 
             // We create the logger with a string to preserve the logging namespace after the server side transport renames.
-            _logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Connections.Internal.Transports.LongPollingTransport");
+            _logger = loggerFactory.CreateLogger(
+                "Microsoft.AspNetCore.Http.Connections.Internal.Transports.LongPollingTransport"
+            );
         }
 
         public async Task ProcessRequestAsync(HttpContext context, CancellationToken token)
@@ -59,7 +68,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
                     context.Response.ContentType = "application/octet-stream";
 
                     _connection?.StartSendCancellation();
-                    await context.Response.Body.WriteAsync(buffer, _connection?.SendingToken ?? default);
+                    await context.Response.Body.WriteAsync(
+                        buffer,
+                        _connection?.SendingToken ?? default
+                    );
                 }
                 finally
                 {
@@ -118,19 +130,39 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
         private static class Log
         {
             private static readonly Action<ILogger, Exception?> _longPolling204 =
-                LoggerMessage.Define(LogLevel.Debug, new EventId(1, "LongPolling204"), "Terminating Long Polling connection by sending 204 response.");
+                LoggerMessage.Define(
+                    LogLevel.Debug,
+                    new EventId(1, "LongPolling204"),
+                    "Terminating Long Polling connection by sending 204 response."
+                );
 
             private static readonly Action<ILogger, Exception?> _pollTimedOut =
-                LoggerMessage.Define(LogLevel.Debug, new EventId(2, "PollTimedOut"), "Poll request timed out. Sending 200 response to connection.");
+                LoggerMessage.Define(
+                    LogLevel.Debug,
+                    new EventId(2, "PollTimedOut"),
+                    "Poll request timed out. Sending 200 response to connection."
+                );
 
             private static readonly Action<ILogger, long, Exception?> _longPollingWritingMessage =
-                LoggerMessage.Define<long>(LogLevel.Trace, new EventId(3, "LongPollingWritingMessage"), "Writing a {Count} byte message to connection.");
+                LoggerMessage.Define<long>(
+                    LogLevel.Trace,
+                    new EventId(3, "LongPollingWritingMessage"),
+                    "Writing a {Count} byte message to connection."
+                );
 
             private static readonly Action<ILogger, Exception?> _longPollingDisconnected =
-                LoggerMessage.Define(LogLevel.Debug, new EventId(4, "LongPollingDisconnected"), "Client disconnected from Long Polling endpoint for connection.");
+                LoggerMessage.Define(
+                    LogLevel.Debug,
+                    new EventId(4, "LongPollingDisconnected"),
+                    "Client disconnected from Long Polling endpoint for connection."
+                );
 
             private static readonly Action<ILogger, Exception?> _longPollingTerminated =
-                LoggerMessage.Define(LogLevel.Error, new EventId(5, "LongPollingTerminated"), "Long Polling transport was terminated due to an error on connection.");
+                LoggerMessage.Define(
+                    LogLevel.Error,
+                    new EventId(5, "LongPollingTerminated"),
+                    "Long Polling transport was terminated due to an error on connection."
+                );
 
             public static void LongPolling204(ILogger logger)
             {

@@ -27,9 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 RuntimeHelpers.EnsureSufficientExecutionStack();
                 return true;
             }
-            catch (InsufficientExecutionStackException)
-            {
-            }
+            catch (InsufficientExecutionStackException) { }
 #endif
 
             if (_executionStackCount < MaxExecutionStackCount)
@@ -44,17 +42,23 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         {
             // Prefer ValueTuple when available to reduce dependencies on Tuple
 #if NETSTANDARD2_1
-            return RunOnEmptyStackCore(static s =>
-            {
-                var t = ((Func<T1, T2, TR>, T1, T2))s;
-                return t.Item1(t.Item2, t.Item3);
-            }, (action, arg1, arg2));
+            return RunOnEmptyStackCore(
+                static s =>
+                {
+                    var t = ((Func<T1, T2, TR>, T1, T2))s;
+                    return t.Item1(t.Item2, t.Item3);
+                },
+                (action, arg1, arg2)
+            );
 #else
-            return RunOnEmptyStackCore(static s =>
-            {
-                var t = (Tuple<Func<T1, T2, TR>, T1, T2>)s;
-                return t.Item1(t.Item2, t.Item3);
-            }, Tuple.Create(action, arg1, arg2));
+            return RunOnEmptyStackCore(
+                static s =>
+                {
+                    var t = (Tuple<Func<T1, T2, TR>, T1, T2>)s;
+                    return t.Item1(t.Item2, t.Item3);
+                },
+                Tuple.Create(action, arg1, arg2)
+            );
 #endif
         }
 
@@ -65,7 +69,13 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             try
             {
                 // Using default scheduler rather than picking up the current scheduler.
-                Task<R> task = Task.Factory.StartNew(action, state, CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                Task<R> task = Task.Factory.StartNew(
+                    action,
+                    state,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
 
                 // Avoid AsyncWaitHandle lazy allocation of ManualResetEvent in the rare case we finish quickly.
                 if (!task.IsCompleted)

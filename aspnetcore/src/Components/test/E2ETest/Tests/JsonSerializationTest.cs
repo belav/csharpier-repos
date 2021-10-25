@@ -16,14 +16,15 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public JsonSerializationTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
-            Navigate(ServerPathBase, noReload: _serverFixture.ExecutionMode == ExecutionMode.Client);
+            Navigate(
+                ServerPathBase,
+                noReload: _serverFixture.ExecutionMode == ExecutionMode.Client
+            );
             Browser.MountTestComponent<JsonSerializationCases>();
             Browser.Exists(By.Id("json-serialization-cases"));
         }

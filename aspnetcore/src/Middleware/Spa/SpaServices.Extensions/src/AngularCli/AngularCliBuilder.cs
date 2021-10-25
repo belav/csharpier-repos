@@ -48,15 +48,17 @@ namespace Microsoft.AspNetCore.SpaServices.AngularCli
             var sourcePath = spaBuilder.Options.SourcePath;
             if (string.IsNullOrEmpty(sourcePath))
             {
-                throw new InvalidOperationException($"To use {nameof(AngularCliBuilder)}, you must supply a non-empty value for the {nameof(SpaOptions.SourcePath)} property of {nameof(SpaOptions)} when calling {nameof(SpaApplicationBuilderExtensions.UseSpa)}.");
+                throw new InvalidOperationException(
+                    $"To use {nameof(AngularCliBuilder)}, you must supply a non-empty value for the {nameof(SpaOptions.SourcePath)} property of {nameof(SpaOptions)} when calling {nameof(SpaApplicationBuilderExtensions.UseSpa)}."
+                );
             }
 
             var appBuilder = spaBuilder.ApplicationBuilder;
-            var applicationStoppingToken = appBuilder.ApplicationServices.GetRequiredService<IHostApplicationLifetime>().ApplicationStopping;
-            var logger = LoggerFinder.GetOrCreateLogger(
-                appBuilder,
-                nameof(AngularCliBuilder));
-            var diagnosticSource = appBuilder.ApplicationServices.GetRequiredService<DiagnosticSource>();
+            var applicationStoppingToken =
+                appBuilder.ApplicationServices.GetRequiredService<IHostApplicationLifetime>().ApplicationStopping;
+            var logger = LoggerFinder.GetOrCreateLogger(appBuilder, nameof(AngularCliBuilder));
+            var diagnosticSource =
+                appBuilder.ApplicationServices.GetRequiredService<DiagnosticSource>();
             var scriptRunner = new NodeScriptRunner(
                 sourcePath,
                 _scriptName,
@@ -64,7 +66,8 @@ namespace Microsoft.AspNetCore.SpaServices.AngularCli
                 null,
                 pkgManagerCommand,
                 diagnosticSource,
-                applicationStoppingToken);
+                applicationStoppingToken
+            );
             scriptRunner.AttachToLogger(logger);
 
             using (var stdOutReader = new EventedStreamStringReader(scriptRunner.StdOut))
@@ -73,21 +76,26 @@ namespace Microsoft.AspNetCore.SpaServices.AngularCli
                 try
                 {
                     await scriptRunner.StdOut.WaitForMatch(
-                        new Regex("Date", RegexOptions.None, RegexMatchTimeout));
+                        new Regex("Date", RegexOptions.None, RegexMatchTimeout)
+                    );
                 }
                 catch (EndOfStreamException ex)
                 {
                     throw new InvalidOperationException(
-                        $"The {pkgManagerCommand} script '{_scriptName}' exited without indicating success.\n" +
-                        $"Output was: {stdOutReader.ReadAsString()}\n" +
-                        $"Error output was: {stdErrReader.ReadAsString()}", ex);
+                        $"The {pkgManagerCommand} script '{_scriptName}' exited without indicating success.\n"
+                            + $"Output was: {stdOutReader.ReadAsString()}\n"
+                            + $"Error output was: {stdErrReader.ReadAsString()}",
+                        ex
+                    );
                 }
                 catch (OperationCanceledException ex)
                 {
                     throw new InvalidOperationException(
-                        $"The {pkgManagerCommand} script '{_scriptName}' timed out without indicating success. " +
-                        $"Output was: {stdOutReader.ReadAsString()}\n" +
-                        $"Error output was: {stdErrReader.ReadAsString()}", ex);
+                        $"The {pkgManagerCommand} script '{_scriptName}' timed out without indicating success. "
+                            + $"Output was: {stdOutReader.ReadAsString()}\n"
+                            + $"Error output was: {stdErrReader.ReadAsString()}",
+                        ex
+                    );
                 }
             }
         }

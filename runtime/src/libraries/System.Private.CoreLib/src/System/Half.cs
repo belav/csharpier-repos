@@ -17,7 +17,8 @@ namespace System
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct Half : IComparable, ISpanFormattable, IComparable<Half>, IEquatable<Half>
     {
-        private const NumberStyles DefaultParseStyle = NumberStyles.Float | NumberStyles.AllowThousands;
+        private const NumberStyles DefaultParseStyle =
+            NumberStyles.Float | NumberStyles.AllowThousands;
 
         // Constants for manipulating the private bit-representation
 
@@ -57,21 +58,21 @@ namespace System
 
         // Well-defined and commonly used values
 
-        public static Half Epsilon => new Half(EpsilonBits);                        //  5.9604645E-08
+        public static Half Epsilon => new Half(EpsilonBits); //  5.9604645E-08
 
-        public static Half PositiveInfinity => new Half(PositiveInfinityBits);      //  1.0 / 0.0;
+        public static Half PositiveInfinity => new Half(PositiveInfinityBits); //  1.0 / 0.0;
 
-        public static Half NegativeInfinity => new Half(NegativeInfinityBits);      // -1.0 / 0.0
+        public static Half NegativeInfinity => new Half(NegativeInfinityBits); // -1.0 / 0.0
 
-        public static Half NaN => new Half(NegativeQNaNBits);                       //  0.0 / 0.0
+        public static Half NaN => new Half(NegativeQNaNBits); //  0.0 / 0.0
 
-        public static Half MinValue => new Half(MinValueBits);                      // -65504
+        public static Half MinValue => new Half(MinValueBits); // -65504
 
-        public static Half MaxValue => new Half(MaxValueBits);                      //  65504
+        public static Half MaxValue => new Half(MaxValueBits); //  65504
 
         // We use these explicit definitions to avoid the confusion between 0.0 and -0.0.
-        private static readonly Half PositiveZero = new Half(PositiveZeroBits);            //  0.0
-        private static readonly Half NegativeZero = new Half(NegativeZeroBits);            // -0.0
+        private static readonly Half PositiveZero = new Half(PositiveZeroBits); //  0.0
+        private static readonly Half NegativeZero = new Half(NegativeZeroBits); // -0.0
 
         private readonly ushort _value;
 
@@ -80,23 +81,17 @@ namespace System
             _value = value;
         }
 
-        private Half(bool sign, ushort exp, ushort sig)
-            => _value = (ushort)(((sign ? 1 : 0) << SignShift) + (exp << ExponentShift) + sig);
+        private Half(bool sign, ushort exp, ushort sig) =>
+            _value = (ushort)(((sign ? 1 : 0) << SignShift) + (exp << ExponentShift) + sig);
 
         private sbyte Exponent
         {
-            get
-            {
-                return (sbyte)((_value & ExponentMask) >> ExponentShift);
-            }
+            get { return (sbyte)((_value & ExponentMask) >> ExponentShift); }
         }
 
         private ushort Significand
         {
-            get
-            {
-                return (ushort)((_value & SignificandMask) >> SignificandShift);
-            }
+            get { return (ushort)((_value & SignificandMask) >> SignificandShift); }
         }
 
         public static bool operator <(Half left, Half right)
@@ -201,9 +196,9 @@ namespace System
         public static bool IsNormal(Half value)
         {
             uint absValue = StripSign(value);
-            return (absValue < PositiveInfinityBits)    // is finite
-                && (absValue != 0)                      // is not zero
-                && ((absValue & ExponentMask) != 0);    // is not subnormal (has a non-zero exponent)
+            return (absValue < PositiveInfinityBits) // is finite
+                && (absValue != 0) // is not zero
+                && ((absValue & ExponentMask) != 0); // is not subnormal (has a non-zero exponent)
         }
 
         /// <summary>Determines whether the specified value is positive infinity.</summary>
@@ -217,9 +212,9 @@ namespace System
         public static bool IsSubnormal(Half value)
         {
             uint absValue = StripSign(value);
-            return (absValue < PositiveInfinityBits)    // is finite
-                && (absValue != 0)                      // is not zero
-                && ((absValue & ExponentMask) == 0);    // is subnormal (has a zero exponent)
+            return (absValue < PositiveInfinityBits) // is finite
+                && (absValue != 0) // is not zero
+                && ((absValue & ExponentMask) == 0); // is subnormal (has a zero exponent)
         }
 
         /// <summary>
@@ -229,8 +224,13 @@ namespace System
         /// <returns>The equivalent <see cref="Half"/> value representing the input string. If the input exceeds Half's range, a <see cref="Half.PositiveInfinity"/> or <see cref="Half.NegativeInfinity"/> is returned. </returns>
         public static Half Parse(string s)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseHalf(s, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseHalf(
+                s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                NumberFormatInfo.CurrentInfo
+            );
         }
 
         /// <summary>
@@ -242,7 +242,8 @@ namespace System
         public static Half Parse(string s, NumberStyles style)
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseHalf(s, style, NumberFormatInfo.CurrentInfo);
         }
 
@@ -254,8 +255,13 @@ namespace System
         /// <returns>The equivalent <see cref="Half"/> value representing the input string. If the input exceeds Half's range, a <see cref="Half.PositiveInfinity"/> or <see cref="Half.NegativeInfinity"/> is returned. </returns>
         public static Half Parse(string s, IFormatProvider? provider)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseHalf(s, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.GetInstance(provider));
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseHalf(
+                s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         /// <summary>
@@ -265,10 +271,15 @@ namespace System
         /// <param name="style">The <see cref="NumberStyles"/> used to parse the input.</param>
         /// <param name="provider">A format provider.</param>
         /// <returns>The equivalent <see cref="Half"/> value representing the input string. If the input exceeds Half's range, a <see cref="Half.PositiveInfinity"/> or <see cref="Half.NegativeInfinity"/> is returned. </returns>
-        public static Half Parse(string s, NumberStyles style = DefaultParseStyle, IFormatProvider? provider = null)
+        public static Half Parse(
+            string s,
+            NumberStyles style = DefaultParseStyle,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseHalf(s, style, NumberFormatInfo.GetInstance(provider));
         }
 
@@ -279,7 +290,11 @@ namespace System
         /// <param name="style">The <see cref="NumberStyles"/> used to parse the input.</param>
         /// <param name="provider">A format provider. </param>
         /// <returns>The equivalent <see cref="Half"/> value representing the input string. If the input exceeds Half's range, a <see cref="Half.PositiveInfinity"/> or <see cref="Half.NegativeInfinity"/> is returned. </returns>
-        public static Half Parse(ReadOnlySpan<char> s, NumberStyles style = DefaultParseStyle, IFormatProvider? provider = null)
+        public static Half Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = DefaultParseStyle,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return Number.ParseHalf(s, style, NumberFormatInfo.GetInstance(provider));
@@ -320,7 +335,12 @@ namespace System
         /// <param name="provider">A format provider. </param>
         /// <param name="result">The equivalent <see cref="Half"/> value representing the input string if the parse was successful. If the input exceeds Half's range, a <see cref="Half.PositiveInfinity"/> or <see cref="Half.NegativeInfinity"/> is returned. If the parse was unsuccessful, a default <see cref="Half"/> value is returned.</param>
         /// <returns><see langword="true" /> if the parse was successful, <see langword="false" /> otherwise.</returns>
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out Half result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out Half result
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
 
@@ -341,10 +361,20 @@ namespace System
         /// <param name="provider">A format provider. </param>
         /// <param name="result">The equivalent <see cref="Half"/> value representing the input string if the parse was successful. If the input exceeds Half's range, a <see cref="Half.PositiveInfinity"/> or <see cref="Half.NegativeInfinity"/> is returned. If the parse was unsuccessful, a default <see cref="Half"/> value is returned.</param>
         /// <returns><see langword="true" /> if the parse was successful, <see langword="false" /> otherwise.</returns>
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out Half result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out Half result
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-            return Number.TryParseHalf(s, style, NumberFormatInfo.GetInstance(provider), out result);
+            return Number.TryParseHalf(
+                s,
+                style,
+                NumberFormatInfo.GetInstance(provider),
+                out result
+            );
         }
 
         private static bool AreZero(Half left, Half right)
@@ -422,9 +452,7 @@ namespace System
         /// </summary>
         public bool Equals(Half other)
         {
-            return _value == other._value
-                || AreZero(this, other)
-                || (IsNaN(this) && IsNaN(other));
+            return _value == other._value || AreZero(this, other) || (IsNaN(this) && IsNaN(other));
         }
 
         /// <summary>
@@ -480,9 +508,20 @@ namespace System
         /// <param name="format">A span containing the characters that represent a standard or custom format string that defines the acceptable format for <paramref name="destination"/>.</param>
         /// <param name="provider">An optional object that supplies culture-specific formatting information for <paramref name="destination"/>.</param>
         /// <returns></returns>
-        public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        )
         {
-            return Number.TryFormatHalf(this, format, NumberFormatInfo.GetInstance(provider), destination, out charsWritten);
+            return Number.TryFormatHalf(
+                this,
+                format,
+                NumberFormatInfo.GetInstance(provider),
+                destination,
+                out charsWritten
+            );
         }
 
         // -----------------------Start of to-half conversions-------------------------
@@ -538,7 +577,9 @@ namespace System
             {
                 return new Half(sign, 0, 0);
             }
-            return new Half(RoundPackToHalf(sign, (short)(exp - 0x3F1), (ushort)(sigHalf | 0x4000)));
+            return new Half(
+                RoundPackToHalf(sign, (short)(exp - 0x3F1), (ushort)(sigHalf | 0x4000))
+            );
         }
 
         // -----------------------Start of from-half conversions-------------------------
@@ -657,11 +698,11 @@ namespace System
         // If any bits are lost by shifting, "jam" them into the LSB.
         // if dist > bit count, Will be 1 or 0 depending on i
         // (unlike bitwise operators that masks the lower 5 bits)
-        private static uint ShiftRightJam(uint i, int dist)
-            => dist < 31 ? (i >> dist) | (i << (-dist & 31) != 0 ? 1U : 0U) : (i != 0 ? 1U : 0U);
+        private static uint ShiftRightJam(uint i, int dist) =>
+            dist < 31 ? (i >> dist) | (i << (-dist & 31) != 0 ? 1U : 0U) : (i != 0 ? 1U : 0U);
 
-        private static ulong ShiftRightJam(ulong l, int dist)
-            => dist < 63 ? (l >> dist) | (l << (-dist & 63) != 0 ? 1UL : 0UL) : (l != 0 ? 1UL : 0UL);
+        private static ulong ShiftRightJam(ulong l, int dist) =>
+            dist < 63 ? (l >> dist) | (l << (-dist & 63) != 0 ? 1UL : 0UL) : (l != 0 ? 1UL : 0UL);
 
         private static float CreateSingleNaN(bool sign, ulong significand)
         {
@@ -683,12 +724,21 @@ namespace System
             return BitConverter.Int64BitsToDouble((long)(signInt | NaNBits | sigInt));
         }
 
-        private static float CreateSingle(bool sign, byte exp, uint sig)
-            => BitConverter.Int32BitsToSingle((int)(((sign ? 1U : 0U) << float.SignShift) + ((uint)exp << float.ExponentShift) + sig));
+        private static float CreateSingle(bool sign, byte exp, uint sig) =>
+            BitConverter.Int32BitsToSingle(
+                (int)(
+                    ((sign ? 1U : 0U) << float.SignShift) + ((uint)exp << float.ExponentShift) + sig
+                )
+            );
 
-        private static double CreateDouble(bool sign, ushort exp, ulong sig)
-            => BitConverter.Int64BitsToDouble((long)(((sign ? 1UL : 0UL) << double.SignShift) + ((ulong)exp << double.ExponentShift) + sig));
-
+        private static double CreateDouble(bool sign, ushort exp, ulong sig) =>
+            BitConverter.Int64BitsToDouble(
+                (long)(
+                    ((sign ? 1UL : 0UL) << double.SignShift)
+                    + ((ulong)exp << double.ExponentShift)
+                    + sig
+                )
+            );
         #endregion
     }
 }

@@ -17,14 +17,14 @@ namespace Microsoft.AspNetCore.Hosting
 
         public static IEnumerable<int> GetPorts(this IWebHost host)
         {
-            return host.GetUris()
-                .Select(u => u.Port);
+            return host.GetUris().Select(u => u.Port);
         }
 
         public static IEnumerable<Uri> GetUris(this IWebHost host)
         {
-            return host.ServerFeatures.Get<IServerAddressesFeature>().Addresses
-                .Select(a => new Uri(a));
+            return host.ServerFeatures
+                .Get<IServerAddressesFeature>()
+                .Addresses.Select(a => new Uri(a));
         }
     }
 }

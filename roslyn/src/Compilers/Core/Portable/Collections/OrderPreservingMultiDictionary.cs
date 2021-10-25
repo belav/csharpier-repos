@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.Collections
     /// <remarks>
     /// Always uses the default comparer.
     /// </remarks>
-    internal sealed class OrderPreservingMultiDictionary<K, V> :
-        IEnumerable<KeyValuePair<K, OrderPreservingMultiDictionary<K, V>.ValueSet>>
+    internal sealed class OrderPreservingMultiDictionary<K, V>
+        : IEnumerable<KeyValuePair<K, OrderPreservingMultiDictionary<K, V>.ValueSet>>
         where K : notnull
         where V : notnull
     {
@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.Collections
 
         private readonly ObjectPool<OrderPreservingMultiDictionary<K, V>>? _pool;
 
-        private OrderPreservingMultiDictionary(ObjectPool<OrderPreservingMultiDictionary<K, V>> pool)
+        private OrderPreservingMultiDictionary(
+            ObjectPool<OrderPreservingMultiDictionary<K, V>> pool
+        )
         {
             _pool = pool;
         }
@@ -51,14 +53,16 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         // global pool
-        private static readonly ObjectPool<OrderPreservingMultiDictionary<K, V>> s_poolInstance = CreatePool();
+        private static readonly ObjectPool<OrderPreservingMultiDictionary<K, V>> s_poolInstance =
+            CreatePool();
 
         // if someone needs to create a pool;
         public static ObjectPool<OrderPreservingMultiDictionary<K, V>> CreatePool()
         {
             var pool = new ObjectPool<OrderPreservingMultiDictionary<K, V>>(
                 pool => new OrderPreservingMultiDictionary<K, V>(pool),
-                16); // Size is a guess.
+                16
+            ); // Size is a guess.
             return pool;
         }
 
@@ -78,9 +82,7 @@ namespace Microsoft.CodeAnalysis.Collections
         // The underlying dictionary we store our data in.  null if we are empty.
         private PooledDictionary<K, ValueSet>? _dictionary;
 
-        public OrderPreservingMultiDictionary()
-        {
-        }
+        public OrderPreservingMultiDictionary() { }
 
         private void EnsureDictionary()
         {
@@ -97,7 +99,7 @@ namespace Microsoft.CodeAnalysis.Collections
             if (_dictionary is object && _dictionary.TryGetValue(k, out var valueSet))
             {
                 Debug.Assert(valueSet.Count >= 1);
-                // Have to re-store the ValueSet in case we upgraded the existing ValueSet from 
+                // Have to re-store the ValueSet in case we upgraded the existing ValueSet from
                 // holding a single item to holding multiple items.
                 _dictionary[k] = valueSet.WithAddedItem(v);
             }
@@ -108,7 +110,12 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        public bool TryGetValue<TArg>(K key, Func<V, TArg, bool> predicate, TArg arg, [MaybeNullWhen(false)] out V value)
+        public bool TryGetValue<TArg>(
+            K key,
+            Func<V, TArg, bool> predicate,
+            TArg arg,
+            [MaybeNullWhen(false)] out V value
+        )
         {
             if (_dictionary is not null && _dictionary.TryGetValue(key, out var valueSet))
             {
@@ -122,10 +129,14 @@ namespace Microsoft.CodeAnalysis.Collections
 
         public Dictionary<K, ValueSet>.Enumerator GetEnumerator()
         {
-            return _dictionary is null ? s_emptyDictionary.GetEnumerator() : _dictionary.GetEnumerator();
+            return _dictionary is null
+              ? s_emptyDictionary.GetEnumerator()
+              : _dictionary.GetEnumerator();
         }
 
-        IEnumerator<KeyValuePair<K, ValueSet>> IEnumerable<KeyValuePair<K, ValueSet>>.GetEnumerator()
+        IEnumerator<KeyValuePair<K, ValueSet>> IEnumerable<
+            KeyValuePair<K, ValueSet>
+        >.GetEnumerator()
         {
             return GetEnumerator();
         }
@@ -155,9 +166,9 @@ namespace Microsoft.CodeAnalysis.Collections
 
         public bool Contains(K key, V value)
         {
-            return _dictionary is object &&
-                _dictionary.TryGetValue(key, out var valueSet) &&
-                valueSet.Contains(value);
+            return _dictionary is object
+                && _dictionary.TryGetValue(key, out var valueSet)
+                && valueSet.Contains(value);
         }
 
         /// <summary>
@@ -217,7 +228,11 @@ namespace Microsoft.CodeAnalysis.Collections
                 }
             }
 
-            public bool TryGetValue<TArg>(Func<V, TArg, bool> predicate, TArg arg, [MaybeNullWhen(false)] out V value)
+            public bool TryGetValue<TArg>(
+                Func<V, TArg, bool> predicate,
+                TArg arg,
+                [MaybeNullWhen(false)] out V value
+            )
             {
                 Debug.Assert(this.Count >= 1);
                 var arrayBuilder = _value as ArrayBuilder<V>;
@@ -251,8 +266,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 Debug.Assert(this.Count >= 1);
                 var arrayBuilder = _value as ArrayBuilder<V>;
                 return arrayBuilder == null
-                    ? EqualityComparer<V>.Default.Equals(item, (V)_value)
-                    : arrayBuilder.Contains(item);
+                  ? EqualityComparer<V>.Default.Equals(item, (V)_value)
+                  : arrayBuilder.Contains(item);
             }
 
             internal ImmutableArray<V> Items
@@ -303,7 +318,7 @@ namespace Microsoft.CodeAnalysis.Collections
                     Debug.Assert(_value is V, "_value must be a V");
 
                     // By default we allocate array builders with a size of two.  That's to store
-                    // the single item already in _value, and to store the item we're adding.  
+                    // the single item already in _value, and to store the item we're adding.
                     // In general, we presume that the amount of values per key will be low, so this
                     // means we have very little overhead when there are multiple keys per value.
                     arrayBuilder = ArrayBuilder<V>.GetInstance(capacity: 2);
@@ -347,9 +362,7 @@ namespace Microsoft.CodeAnalysis.Collections
                     _index = -1;
                 }
 
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
         }
     }

@@ -8,7 +8,11 @@ using Xunit;
 
 class Helpers
 {
-    public static void SetAndReadHelper(Action<TextWriter> setHelper, Func<TextWriter> getHelper, Func<StreamReader, string> readHelper)
+    public static void SetAndReadHelper(
+        Action<TextWriter> setHelper,
+        Func<TextWriter> getHelper,
+        Func<StreamReader, string> readHelper
+    )
     {
         const string TestString = "Test";
 
@@ -54,7 +58,12 @@ class Helpers
         TextWriter savedOut = Console.Out;
         try
         {
-            Console.SetOut(new StreamWriter(data, new UTF8Encoding(false), 0x1000, leaveOpen: true) { AutoFlush = true });
+            Console.SetOut(
+                new StreamWriter(data, new UTF8Encoding(false), 0x1000, leaveOpen: true)
+                {
+                    AutoFlush = true
+                }
+            );
             command(data);
         }
         finally
@@ -74,9 +83,17 @@ class Helpers
             Console.SetOut(
                 new InterceptStreamWriter(
                     Console.OpenStandardOutput(),
-                    new StreamWriter(data, new UTF8Encoding(false), 0x1000, leaveOpen: true) { AutoFlush = true },
-                    new UTF8Encoding(false), 0x1000, leaveOpen: true)
-                { AutoFlush = true });
+                    new StreamWriter(data, new UTF8Encoding(false), 0x1000, leaveOpen: true)
+                    {
+                        AutoFlush = true
+                    },
+                    new UTF8Encoding(false),
+                    0x1000,
+                    leaveOpen: true
+                ) {
+                    AutoFlush = true
+                }
+            );
             command(data);
         }
         finally

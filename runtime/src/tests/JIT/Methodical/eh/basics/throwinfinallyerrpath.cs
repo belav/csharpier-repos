@@ -6,7 +6,6 @@ using System;
 
 namespace hello
 {
-
     class Class1
     {
         private static TestUtil.TestLog testLog;

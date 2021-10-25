@@ -83,7 +83,8 @@ namespace Microsoft.AspNetCore.Authentication
                 AddScheme(scheme);
                 return true;
             }
-            catch {
+            catch
+            {
                 return false;
             }
         }

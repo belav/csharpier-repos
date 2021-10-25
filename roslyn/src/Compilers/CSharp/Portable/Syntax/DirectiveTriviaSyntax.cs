@@ -62,7 +62,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
         }
 
-        public DirectiveTriviaSyntax? GetNextDirective(Func<DirectiveTriviaSyntax, bool>? predicate = null)
+        public DirectiveTriviaSyntax? GetNextDirective(
+            Func<DirectiveTriviaSyntax, bool>? predicate = null
+        )
         {
             var token = (SyntaxToken)this.ParentTrivia.Token;
             bool next = false;
@@ -93,7 +95,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             return null;
         }
 
-        public DirectiveTriviaSyntax? GetPreviousDirective(Func<DirectiveTriviaSyntax, bool>? predicate = null)
+        public DirectiveTriviaSyntax? GetPreviousDirective(
+            Func<DirectiveTriviaSyntax, bool>? predicate = null
+        )
         {
             var token = (SyntaxToken)this.ParentTrivia.Token;
             bool next = false;
@@ -169,7 +173,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
                         d = d.GetNextPossiblyRelatedDirective();
                     }
-
                     break;
                 case SyntaxKind.ElifDirectiveTrivia:
                     d = d.GetNextPossiblyRelatedDirective();
@@ -186,7 +189,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
                         d = d.GetNextPossiblyRelatedDirective();
                     }
-
                     break;
                 case SyntaxKind.ElseDirectiveTrivia:
                     while (d != null)
@@ -198,7 +200,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
                         d = d.GetNextPossiblyRelatedDirective();
                     }
-
                     break;
                 case SyntaxKind.RegionDirectiveTrivia:
                     while (d != null)
@@ -210,7 +211,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
                         d = d.GetNextPossiblyRelatedDirective();
                     }
-
                     break;
             }
 
@@ -233,14 +233,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                             {
                                 d = d.GetNextRelatedDirective();
                             }
-
                             continue;
                         case SyntaxKind.RegionDirectiveTrivia:
                             while (d != null && d.Kind() != SyntaxKind.EndRegionDirectiveTrivia)
                             {
                                 d = d.GetNextRelatedDirective();
                             }
-
                             continue;
                     }
                 }
@@ -269,7 +267,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
                         d = d.GetPreviousPossiblyRelatedDirective();
                     }
-
                     break;
                 case SyntaxKind.ElifDirectiveTrivia:
                     d = d.GetPreviousPossiblyRelatedDirective();
@@ -285,7 +282,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
                         d = d.GetPreviousPossiblyRelatedDirective();
                     }
-
                     break;
                 case SyntaxKind.ElseDirectiveTrivia:
                     while (d != null)
@@ -299,7 +295,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
                         d = d.GetPreviousPossiblyRelatedDirective();
                     }
-
                     break;
                 case SyntaxKind.EndRegionDirectiveTrivia:
                     while (d != null)
@@ -311,7 +306,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
                         d = d.GetPreviousPossiblyRelatedDirective();
                     }
-
                     break;
             }
 
@@ -334,14 +328,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                             {
                                 d = d.GetPreviousRelatedDirective();
                             }
-
                             continue;
                         case SyntaxKind.EndRegionDirectiveTrivia:
                             while (d != null && d.Kind() != SyntaxKind.RegionDirectiveTrivia)
                             {
                                 d = d.GetPreviousRelatedDirective();
                             }
-
                             continue;
                     }
                 }
@@ -352,6 +344,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             return null;
         }
 
-        private static readonly Func<SyntaxToken, bool> s_hasDirectivesFunction = t => t.ContainsDirectives;
+        private static readonly Func<SyntaxToken, bool> s_hasDirectivesFunction = t =>
+            t.ContainsDirectives;
     }
 }

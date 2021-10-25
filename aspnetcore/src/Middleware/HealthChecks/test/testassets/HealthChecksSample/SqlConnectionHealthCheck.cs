@@ -8,14 +8,10 @@ namespace HealthChecksSample
         private static readonly string DefaultTestQuery = "Select 1";
 
         public SqlConnectionHealthCheck(string connectionString)
-            : this(connectionString, testQuery: DefaultTestQuery)
-        {
-        }
+            : this(connectionString, testQuery: DefaultTestQuery) { }
 
         public SqlConnectionHealthCheck(string connectionString, string testQuery)
-            : base(connectionString, testQuery ?? DefaultTestQuery)
-        {
-        }
+            : base(connectionString, testQuery ?? DefaultTestQuery) { }
 
         protected override DbConnection CreateConnection(string connectionString)
         {

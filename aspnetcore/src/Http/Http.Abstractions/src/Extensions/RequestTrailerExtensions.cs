@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Http
         /// <returns></returns>
         public static bool CheckTrailersAvailable(this HttpRequest request)
         {
-            return request.HttpContext.Features.Get<IHttpRequestTrailersFeature>()?.Available == true;
+            return request.HttpContext.Features.Get<IHttpRequestTrailersFeature>()?.Available
+                == true;
         }
 
         /// <summary>

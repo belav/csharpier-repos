@@ -5,8 +5,6 @@ namespace System.CommandLine.Binding
 {
     internal class NoArgumentConversionResult : ArgumentConversionResult
     {
-        internal NoArgumentConversionResult(IArgument argument) : base(argument)
-        {
-        }
+        internal NoArgumentConversionResult(IArgument argument) : base(argument) { }
     }
 }

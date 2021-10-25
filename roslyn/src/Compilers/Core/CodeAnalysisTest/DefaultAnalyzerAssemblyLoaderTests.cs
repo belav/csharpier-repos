@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var loader = new DefaultAnalyzerAssemblyLoader();
 
-            Assert.Throws<ArgumentNullException>("fullPath", () => loader.AddDependencyLocation(null));
+            Assert.Throws<ArgumentNullException>(
+                "fullPath",
+                () => loader.AddDependencyLocation(null)
+            );
             Assert.Throws<ArgumentException>("fullPath", () => loader.AddDependencyLocation("a"));
         }
 
@@ -39,7 +42,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var directory = Temp.CreateDirectory();
 
-            var alphaDll = directory.CreateFile("Alpha.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Alpha);
+            var alphaDll = directory
+                .CreateFile("Alpha.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Alpha);
 
             var loader = new DefaultAnalyzerAssemblyLoader();
 
@@ -54,10 +59,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
             StringBuilder sb = new StringBuilder();
             var directory = Temp.CreateDirectory();
 
-            var alphaDll = Temp.CreateDirectory().CreateFile("Alpha.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Alpha);
-            var betaDll = Temp.CreateDirectory().CreateFile("Beta.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Beta);
-            var gammaDll = Temp.CreateDirectory().CreateFile("Gamma.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Gamma);
-            var deltaDll = Temp.CreateDirectory().CreateFile("Delta.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Delta);
+            var alphaDll = Temp.CreateDirectory()
+                .CreateFile("Alpha.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Alpha);
+            var betaDll = Temp.CreateDirectory()
+                .CreateFile("Beta.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Beta);
+            var gammaDll = Temp.CreateDirectory()
+                .CreateFile("Gamma.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Gamma);
+            var deltaDll = Temp.CreateDirectory()
+                .CreateFile("Delta.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Delta);
 
             var loader = new DefaultAnalyzerAssemblyLoader();
             loader.AddDependencyLocation(alphaDll.Path);
@@ -75,7 +88,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var b = beta.CreateInstance("Beta.B");
             b.GetType().GetMethod("Write").Invoke(b, new object[] { sb, "Test B" });
 
-            var expected = @"Delta: Gamma: Alpha: Test A
+            var expected =
+                @"Delta: Gamma: Alpha: Test A
 Delta: Gamma: Beta: Test B
 ";
 

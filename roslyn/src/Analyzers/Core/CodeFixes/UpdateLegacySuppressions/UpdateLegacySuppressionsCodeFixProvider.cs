@@ -18,43 +18,70 @@ using Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions;
 
 namespace Microsoft.CodeAnalysis.UpdateLegacySuppressions
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic, Name = PredefinedCodeFixProviderNames.UpdateLegacySuppressions), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeFixProviderNames.UpdateLegacySuppressions
+        ),
+        Shared
+    ]
     internal sealed class UpdateLegacySuppressionsCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UpdateLegacySuppressionsCodeFixProvider()
-        {
-        }
+        public UpdateLegacySuppressionsCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.LegacyFormatSuppressMessageAttributeDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(
+                IDEDiagnosticIds.LegacyFormatSuppressMessageAttributeDiagnosticId
+            );
 
-        internal override CodeFixCategory CodeFixCategory
-            => CodeFixCategory.CodeQuality;
+        internal override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeQuality;
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await context.Document
+                .GetSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             foreach (var diagnostic in context.Diagnostics)
             {
-                if (diagnostic.Properties?.ContainsKey(AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.DocCommentIdKey) == true &&
-                    root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true) != null)
+                if (
+                    diagnostic.Properties?.ContainsKey(
+                        AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.DocCommentIdKey
+                    ) == true
+                    && root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true)
+                        != null
+                )
                 {
                     context.RegisterCodeFix(
                         new MyCodeAction(c => FixAsync(context.Document, diagnostic, c)),
-                        diagnostic);
+                        diagnostic
+                    );
                 }
             }
         }
 
-        protected override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CancellationToken cancellationToken)
+        protected override Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
-                var node = editor.OriginalRoot.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
-                var newDocCommentId = diagnostic.Properties[AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.DocCommentIdKey];
-                editor.ReplaceNode(node, editor.Generator.LiteralExpression(newDocCommentId).WithTriviaFrom(node));
+                var node = editor.OriginalRoot.FindNode(
+                    diagnostic.Location.SourceSpan,
+                    getInnermostNodeForTie: true
+                );
+                var newDocCommentId = diagnostic.Properties[
+                    AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer.DocCommentIdKey
+                ];
+                editor.ReplaceNode(
+                    node,
+                    editor.Generator.LiteralExpression(newDocCommentId).WithTriviaFrom(node)
+                );
             }
 
             return Task.CompletedTask;
@@ -63,9 +90,11 @@ namespace Microsoft.CodeAnalysis.UpdateLegacySuppressions
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CodeFixesResources.Update_suppression_format, createChangedDocument, nameof(UpdateLegacySuppressionsCodeFixProvider))
-            {
-            }
+                : base(
+                    CodeFixesResources.Update_suppression_format,
+                    createChangedDocument,
+                    nameof(UpdateLegacySuppressionsCodeFixProvider)
+                ) { }
         }
     }
 }

@@ -47,9 +47,8 @@ namespace System.ComponentModel
         /// Initializes a new ToolboxItemFilterAttribute with the provide filter string and a filter type of
         /// "Allow".
         /// </summary>
-        public ToolboxItemFilterAttribute(string filterString) : this(filterString, ToolboxItemFilterType.Allow)
-        {
-        }
+        public ToolboxItemFilterAttribute(string filterString)
+            : this(filterString, ToolboxItemFilterType.Allow) { }
 
         /// <summary>
         /// Initializes a new ToolboxItemFilterAttribute with the provide filter string and filter type.
@@ -102,6 +101,7 @@ namespace System.ComponentModel
                 && other.FilterString.Equals(FilterString);
         }
 
-        public override string ToString() => FilterString + "," + Enum.GetName(typeof(ToolboxItemFilterType), FilterType);
+        public override string ToString() =>
+            FilterString + "," + Enum.GetName(typeof(ToolboxItemFilterType), FilterType);
     }
 }

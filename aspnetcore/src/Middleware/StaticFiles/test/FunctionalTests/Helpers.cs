@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.StaticFiles
     {
         public static string GetAddress(IHost server)
         {
-            return server.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses.First();
+            return server.Services
+                .GetService<IServer>()
+                .Features.Get<IServerAddressesFeature>()
+                .Addresses.First();
         }
     }
 }

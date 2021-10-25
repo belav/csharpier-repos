@@ -34,15 +34,23 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
         // Cached utf8 (and null terminated) versions of the common strings we need to pass to sqlite.  Used to prevent
         // having to convert these names to/from utf16 to utf8 on every call.  Sqlite requires these be null terminated.
 
-        private static readonly byte[] s_mainNameWithTrailingZero = GetUtf8BytesWithTrailingZero(Database.Main.GetName());
-        private static readonly byte[] s_writeCacheNameWithTrailingZero = GetUtf8BytesWithTrailingZero(Database.WriteCache.GetName());
+        private static readonly byte[] s_mainNameWithTrailingZero = GetUtf8BytesWithTrailingZero(
+            Database.Main.GetName()
+        );
+        private static readonly byte[] s_writeCacheNameWithTrailingZero =
+            GetUtf8BytesWithTrailingZero(Database.WriteCache.GetName());
 
-        private static readonly byte[] s_solutionTableNameWithTrailingZero = GetUtf8BytesWithTrailingZero(SolutionDataTableName);
-        private static readonly byte[] s_projectTableNameWithTrailingZero = GetUtf8BytesWithTrailingZero(ProjectDataTableName);
-        private static readonly byte[] s_documentTableNameWithTrailingZero = GetUtf8BytesWithTrailingZero(DocumentDataTableName);
+        private static readonly byte[] s_solutionTableNameWithTrailingZero =
+            GetUtf8BytesWithTrailingZero(SolutionDataTableName);
+        private static readonly byte[] s_projectTableNameWithTrailingZero =
+            GetUtf8BytesWithTrailingZero(ProjectDataTableName);
+        private static readonly byte[] s_documentTableNameWithTrailingZero =
+            GetUtf8BytesWithTrailingZero(DocumentDataTableName);
 
-        private static readonly byte[] s_checksumColumnNameWithTrailingZero = GetUtf8BytesWithTrailingZero(ChecksumColumnName);
-        private static readonly byte[] s_dataColumnNameWithTrailingZero = GetUtf8BytesWithTrailingZero(DataColumnName);
+        private static readonly byte[] s_checksumColumnNameWithTrailingZero =
+            GetUtf8BytesWithTrailingZero(ChecksumColumnName);
+        private static readonly byte[] s_dataColumnNameWithTrailingZero =
+            GetUtf8BytesWithTrailingZero(DataColumnName);
 
         private static byte[] GetUtf8BytesWithTrailingZero(string value)
         {
@@ -75,7 +83,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
         /// </summary>
         public bool IsInTransaction { get; private set; }
 
-        public static SqlConnection Create(IPersistentStorageFaultInjector? faultInjector, string databasePath)
+        public static SqlConnection Create(
+            IPersistentStorageFaultInjector? faultInjector,
+            string databasePath
+        )
         {
             faultInjector?.OnNewConnection();
 
@@ -91,22 +102,34 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             // requires OPEN_URI since we need a `file::memory:` uri for them all to refer to.
             //
             // see https://sqlite.org/threadsafe.html for more detail
-            var flags = OpenFlags.SQLITE_OPEN_CREATE |
-                OpenFlags.SQLITE_OPEN_READWRITE |
-                OpenFlags.SQLITE_OPEN_NOMUTEX |
-                OpenFlags.SQLITE_OPEN_SHAREDCACHE |
-                OpenFlags.SQLITE_OPEN_URI;
-            var handle = NativeMethods.sqlite3_open_v2(databasePath, (int)flags, vfs: null, out var result);
+            var flags =
+                OpenFlags.SQLITE_OPEN_CREATE
+                | OpenFlags.SQLITE_OPEN_READWRITE
+                | OpenFlags.SQLITE_OPEN_NOMUTEX
+                | OpenFlags.SQLITE_OPEN_SHAREDCACHE
+                | OpenFlags.SQLITE_OPEN_URI;
+            var handle = NativeMethods.sqlite3_open_v2(
+                databasePath,
+                (int)flags,
+                vfs: null,
+                out var result
+            );
 
             if (result != Result.OK)
             {
                 handle.Dispose();
-                throw new SqlException(result, $"Could not open database file: {databasePath} ({result})");
+                throw new SqlException(
+                    result,
+                    $"Could not open database file: {databasePath} ({result})"
+                );
             }
 
             try
             {
-                NativeMethods.sqlite3_busy_timeout(handle, (int)TimeSpan.FromMinutes(1).TotalMilliseconds);
+                NativeMethods.sqlite3_busy_timeout(
+                    handle,
+                    (int)TimeSpan.FromMinutes(1).TotalMilliseconds
+                );
                 var connection = new SqlConnection(handle, queryToStatement);
 
                 // Attach (creating if necessary) a singleton in-memory write cache to this connection.
@@ -143,7 +166,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             }
         }
 
-        private SqlConnection(SafeSqliteHandle handle, Dictionary<string, SqlStatement> queryToStatement)
+        private SqlConnection(
+            SafeSqliteHandle handle,
+            Dictionary<string, SqlStatement> queryToStatement
+        )
         {
             _handle = handle;
             _queryToStatement = queryToStatement;
@@ -208,7 +234,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
                     state.action(state.state);
                     return (object?)null;
                 },
-                (action, state));
+                (action, state)
+            );
         }
 
         public TResult RunInTransaction<TState, TResult>(Func<TState, TResult> action, TState state)
@@ -217,7 +244,9 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             {
                 if (IsInTransaction)
                 {
-                    throw new InvalidOperationException("Nested transactions not currently supported");
+                    throw new InvalidOperationException(
+                        "Nested transactions not currently supported"
+                    );
                 }
 
                 IsInTransaction = true;
@@ -227,15 +256,17 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
                 ExecuteCommand("commit transaction");
                 return result;
             }
-            catch (SqlException ex) when (ex.Result == Result.FULL ||
-                                          ex.Result == Result.IOERR ||
-                                          ex.Result == Result.BUSY ||
-                                          ex.Result == Result.LOCKED ||
-                                          ex.Result == Result.NOMEM)
+            catch (SqlException ex)
+                when (ex.Result == Result.FULL
+                    || ex.Result == Result.IOERR
+                    || ex.Result == Result.BUSY
+                    || ex.Result == Result.LOCKED
+                    || ex.Result == Result.NOMEM
+                )
             {
                 // See documentation here: https://sqlite.org/lang_transaction.html
-                // If certain kinds of errors occur within a transaction, the transaction 
-                // may or may not be rolled back automatically. The errors that can cause 
+                // If certain kinds of errors occur within a transaction, the transaction
+                // may or may not be rolled back automatically. The errors that can cause
                 // an automatic rollback include:
 
                 // SQLITE_FULL: database or disk full
@@ -246,7 +277,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
 
                 // It is recommended that applications respond to the errors listed above by
                 // explicitly issuing a ROLLBACK command. If the transaction has already been
-                // rolled back automatically by the error response, then the ROLLBACK command 
+                // rolled back automatically by the error response, then the ROLLBACK command
                 // will fail with an error, but no harm is caused by this.
                 Rollback(throwOnError: false);
                 throw;
@@ -262,25 +293,45 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             }
         }
 
-        private void Rollback(bool throwOnError)
-            => ExecuteCommand("rollback transaction", throwOnError);
+        private void Rollback(bool throwOnError) =>
+            ExecuteCommand("rollback transaction", throwOnError);
 
-        public int LastInsertRowId()
-            => (int)NativeMethods.sqlite3_last_insert_rowid(_handle);
+        public int LastInsertRowId() => (int)NativeMethods.sqlite3_last_insert_rowid(_handle);
 
-        [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/36114", AllowCaptures = false)]
-        public Optional<Stream> ReadDataBlob_MustRunInTransaction(Database database, Table table, long rowId)
+        [PerformanceSensitive(
+            "https://github.com/dotnet/roslyn/issues/36114",
+            AllowCaptures = false
+        )]
+        public Optional<Stream> ReadDataBlob_MustRunInTransaction(
+            Database database,
+            Table table,
+            long rowId
+        )
         {
             return ReadBlob_MustRunInTransaction(
-                database, table, Column.Data, rowId,
-                static (self, blobHandle) => new Optional<Stream>(self.ReadBlob(blobHandle)));
+                database,
+                table,
+                Column.Data,
+                rowId,
+                static (self, blobHandle) => new Optional<Stream>(self.ReadBlob(blobHandle))
+            );
         }
 
-        [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/36114", AllowCaptures = false)]
-        public Optional<Checksum.HashData> ReadChecksum_MustRunInTransaction(Database database, Table table, long rowId)
+        [PerformanceSensitive(
+            "https://github.com/dotnet/roslyn/issues/36114",
+            AllowCaptures = false
+        )]
+        public Optional<Checksum.HashData> ReadChecksum_MustRunInTransaction(
+            Database database,
+            Table table,
+            long rowId
+        )
         {
             return ReadBlob_MustRunInTransaction(
-                database, table, Column.Checksum, rowId,
+                database,
+                table,
+                Column.Checksum,
+                rowId,
                 static (self, blobHandle) =>
                 {
                     // If the length of the blob isn't correct, then we can't read a checksum out of this.
@@ -289,11 +340,16 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
                         return new Optional<Checksum.HashData>();
 
                     Span<byte> bytes = stackalloc byte[Checksum.HashSize];
-                    self.ThrowIfNotOk(NativeMethods.sqlite3_blob_read(blobHandle, bytes, offset: 0));
+                    self.ThrowIfNotOk(
+                        NativeMethods.sqlite3_blob_read(blobHandle, bytes, offset: 0)
+                    );
 
-                    Contract.ThrowIfFalse(MemoryMarshal.TryRead(bytes, out Checksum.HashData result));
+                    Contract.ThrowIfFalse(
+                        MemoryMarshal.TryRead(bytes, out Checksum.HashData result)
+                    );
                     return new Optional<Checksum.HashData>(result);
-                });
+                }
+            );
         }
 
         private Stream ReadBlob(SafeSqliteBlobHandle blob)
@@ -301,7 +357,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             var length = NativeMethods.sqlite3_blob_bytes(blob);
 
             // If it's a small blob, just read it into one of our pooled arrays, and then
-            // create a PooledStream over it. 
+            // create a PooledStream over it.
             if (length <= SQLitePersistentStorage.MaxPooledByteArrayLength)
             {
                 return ReadBlobIntoPooledStream(blob, length);
@@ -320,8 +376,13 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             var bytes = SQLitePersistentStorage.GetPooledBytes();
             try
             {
-
-                ThrowIfNotOk(NativeMethods.sqlite3_blob_read(blob, new Span<byte>(bytes, start: 0, length), offset: 0));
+                ThrowIfNotOk(
+                    NativeMethods.sqlite3_blob_read(
+                        blob,
+                        new Span<byte>(bytes, start: 0, length),
+                        offset: 0
+                    )
+                );
 
                 // Copy those bytes into a pooled stream
                 return SerializableBytes.CreateReadableStream(bytes, length);
@@ -333,23 +394,32 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             }
         }
 
-        [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/36114", AllowCaptures = false)]
+        [PerformanceSensitive(
+            "https://github.com/dotnet/roslyn/issues/36114",
+            AllowCaptures = false
+        )]
         public Optional<T> ReadBlob_MustRunInTransaction<T>(
-            Database database, Table table, Column column, long rowId,
-            Func<SqlConnection, SafeSqliteBlobHandle, Optional<T>> readBlob)
+            Database database,
+            Table table,
+            Column column,
+            long rowId,
+            Func<SqlConnection, SafeSqliteBlobHandle, Optional<T>> readBlob
+        )
         {
             // NOTE: we do need to do the blob reading in a transaction because of the
             // following: https://www.sqlite.org/c3ref/blob_open.html
             //
-            // If the row that a BLOB handle points to is modified by an UPDATE, DELETE, 
+            // If the row that a BLOB handle points to is modified by an UPDATE, DELETE,
             // or by ON CONFLICT side-effects then the BLOB handle is marked as "expired".
             // This is true if any column of the row is changed, even a column other than
-            // the one the BLOB handle is open on. Calls to sqlite3_blob_read() and 
+            // the one the BLOB handle is open on. Calls to sqlite3_blob_read() and
             // sqlite3_blob_write() for an expired BLOB handle fail with a return code of
             // SQLITE_ABORT.
             if (!IsInTransaction)
             {
-                throw new InvalidOperationException("Must read blobs within a transaction to prevent corruption!");
+                throw new InvalidOperationException(
+                    "Must read blobs within a transaction to prevent corruption!"
+                );
             }
 
             var databaseNameBytes = database switch
@@ -373,7 +443,6 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
                 Column.Checksum => s_checksumColumnNameWithTrailingZero,
                 _ => throw ExceptionUtilities.UnexpectedValue(column),
             };
-
             unsafe
             {
                 fixed (byte* databaseNamePtr = databaseNameBytes)
@@ -391,7 +460,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
                         utf8z.FromPtrLen(columnNamePtr, columnNameBytes.Length - 1),
                         rowId,
                         ReadOnlyFlags,
-                        out var result);
+                        out var result
+                    );
 
                     if (result == Result.ERROR)
                     {
@@ -405,11 +475,9 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             }
         }
 
-        public void ThrowIfNotOk(int result)
-            => ThrowIfNotOk((Result)result);
+        public void ThrowIfNotOk(int result) => ThrowIfNotOk((Result)result);
 
-        public void ThrowIfNotOk(Result result)
-            => ThrowIfNotOk(_handle, result);
+        public void ThrowIfNotOk(Result result) => ThrowIfNotOk(_handle, result);
 
         public static void ThrowIfNotOk(SafeSqliteHandle handle, Result result)
         {
@@ -419,12 +487,14 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             }
         }
 
-        public void Throw(Result result)
-            => Throw(_handle, result);
+        public void Throw(Result result) => Throw(_handle, result);
 
-        public static void Throw(SafeSqliteHandle handle, Result result)
-            => throw new SqlException(result,
-                NativeMethods.sqlite3_errmsg(handle) + Environment.NewLine +
-                NativeMethods.sqlite3_errstr(NativeMethods.sqlite3_extended_errcode(handle)));
+        public static void Throw(SafeSqliteHandle handle, Result result) =>
+            throw new SqlException(
+                result,
+                NativeMethods.sqlite3_errmsg(handle)
+                    + Environment.NewLine
+                    + NativeMethods.sqlite3_errstr(NativeMethods.sqlite3_extended_errcode(handle))
+            );
     }
 }

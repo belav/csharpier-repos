@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         /// Invoking <see cref="RazorReferenceManager.CompilationReferences"/> ensures that compilation
         /// references are lazily evaluated.
         /// </remarks>
-        public IReadOnlyList<MetadataReference> References => _referenceManager.CompilationReferences;
+        public IReadOnlyList<MetadataReference> References =>
+            _referenceManager.CompilationReferences;
 
         public RazorEngine Engine { get; set; }
     }

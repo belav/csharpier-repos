@@ -20,6 +20,9 @@ namespace Microsoft.AspNetCore.Connections
         /// <returns>
         /// A <see cref="ValueTask{TResult}" /> that represents the asynchronous connect, yielding the <see cref="ConnectionContext" /> for the new connection when completed.
         /// </returns>
-        ValueTask<ConnectionContext> ConnectAsync(EndPoint endpoint, CancellationToken cancellationToken = default);
+        ValueTask<ConnectionContext> ConnectAsync(
+            EndPoint endpoint,
+            CancellationToken cancellationToken = default
+        );
     }
 }

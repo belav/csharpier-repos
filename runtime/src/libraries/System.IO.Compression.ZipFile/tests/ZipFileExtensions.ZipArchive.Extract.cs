@@ -13,7 +13,9 @@ namespace System.IO.Compression.Tests
             using (ZipArchive archive = ZipFile.Open(zfile("normal.zip"), ZipArchiveMode.Read))
             {
                 string tempFolder = GetTestFilePath();
-                Assert.Throws<ArgumentNullException>(() => ((ZipArchive)null).ExtractToDirectory(tempFolder));
+                Assert.Throws<ArgumentNullException>(
+                    () => ((ZipArchive)null).ExtractToDirectory(tempFolder)
+                );
                 Assert.Throws<ArgumentNullException>(() => archive.ExtractToDirectory(null));
                 archive.ExtractToDirectory(tempFolder);
 
@@ -31,6 +33,5 @@ namespace System.IO.Compression.Tests
                 DirFileNamesEqual(tempFolder, zfolder("unicode"));
             }
         }
-
     }
 }

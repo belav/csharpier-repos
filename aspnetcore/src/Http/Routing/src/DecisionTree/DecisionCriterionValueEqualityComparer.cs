@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Routing.DecisionTree
 {
-    internal class DecisionCriterionValueEqualityComparer : IEqualityComparer<DecisionCriterionValue>
+    internal class DecisionCriterionValueEqualityComparer
+        : IEqualityComparer<DecisionCriterionValue>
     {
         public DecisionCriterionValueEqualityComparer(IEqualityComparer<object> innerComparer)
         {

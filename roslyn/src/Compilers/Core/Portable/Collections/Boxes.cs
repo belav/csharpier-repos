@@ -54,9 +54,12 @@ namespace Microsoft.CodeAnalysis
         {
             switch (i)
             {
-                case 0: return BoxedInt32Zero;
-                case 1: return BoxedInt32One;
-                default: return i;
+                case 0:
+                    return BoxedInt32Zero;
+                case 1:
+                    return BoxedInt32One;
+                default:
+                    return i;
             }
         }
 
@@ -91,9 +94,7 @@ namespace Microsoft.CodeAnalysis
 
         public static object Box(char c)
         {
-            return c < 128
-                ? s_boxedAsciiChars[c] ?? (s_boxedAsciiChars[c] = c)
-                : c;
+            return c < 128 ? s_boxedAsciiChars[c] ?? (s_boxedAsciiChars[c] = c) : c;
         }
 
         public static unsafe object Box(decimal d)

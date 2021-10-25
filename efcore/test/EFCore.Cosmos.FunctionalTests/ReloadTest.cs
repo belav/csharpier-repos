@@ -11,7 +11,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 {
     public class ReloadTest
     {
-        public static IEnumerable<object[]> IsAsyncData = new[] { new object[] { true }, new object[] { false } };
+        public static IEnumerable<object[]> IsAsyncData = new[]
+        {
+            new object[] { true },
+            new object[] { false }
+        };
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
@@ -57,17 +61,15 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseCosmos(
-                        _connectionUri,
-                        _authToken,
-                        _name,
-                        b => b.ApplyConfiguration());
+                optionsBuilder.UseCosmos(
+                    _connectionUri,
+                    _authToken,
+                    _name,
+                    b => b.ApplyConfiguration()
+                );
             }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-            {
-            }
+            protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
             public DbSet<Item> Items { get; set; }
         }

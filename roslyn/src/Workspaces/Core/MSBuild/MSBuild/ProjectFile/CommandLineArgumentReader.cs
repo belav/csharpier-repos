@@ -28,7 +28,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
         {
             if (RoslynString.IsNullOrEmpty(name) || name.Contains(char.IsWhiteSpace))
             {
-                throw new ArgumentException(WorkspaceMSBuildResources.Parameter_cannot_be_null_empty_or_contain_whitespace, nameof(name));
+                throw new ArgumentException(
+                    WorkspaceMSBuildResources.Parameter_cannot_be_null_empty_or_contain_whitespace,
+                    nameof(name)
+                );
             }
         }
 
@@ -154,14 +157,15 @@ namespace Microsoft.CodeAnalysis.MSBuild
             AddIfTrue("codepage", codePage.ToString(), codePage != 0);
         }
 
-        private static readonly ImmutableDictionary<string, string> s_debugTypeValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-        {
-            { "none", "none" },
-            { "pdbonly", "pdbonly" },
-            { "full", "full" },
-            { "portable", "portable" },
-            { "embedded", "embedded" }
-        }.ToImmutableDictionary();
+        private static readonly ImmutableDictionary<string, string> s_debugTypeValues =
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "none", "none" },
+                { "pdbonly", "pdbonly" },
+                { "full", "full" },
+                { "portable", "portable" },
+                { "embedded", "embedded" }
+            }.ToImmutableDictionary();
 
         protected void ReadDebugInfo()
         {
@@ -199,7 +203,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
             var features = Project.ReadPropertyString(PropertyNames.Features);
             if (!RoslynString.IsNullOrWhiteSpace(features))
             {
-                foreach (var feature in CompilerOptionParseUtilities.ParseFeatureFromMSBuild(features))
+                foreach (
+                    var feature in CompilerOptionParseUtilities.ParseFeatureFromMSBuild(features)
+                )
                 {
                     Add("features", feature);
                 }
@@ -211,7 +217,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
             var imports = Project.GetTaskItems(ItemNames.Import);
             if (imports != null)
             {
-                AddIfNotNullOrWhiteSpace("imports", string.Join(",", imports.Select(item => item.ItemSpec.Trim())));
+                AddIfNotNullOrWhiteSpace(
+                    "imports",
+                    string.Join(",", imports.Select(item => item.ItemSpec.Trim()))
+                );
             }
         }
 
@@ -220,7 +229,13 @@ namespace Microsoft.CodeAnalysis.MSBuild
             var platform = Project.ReadPropertyString(PropertyNames.PlatformTarget);
             var prefer32bit = Project.ReadPropertyBool(PropertyNames.Prefer32Bit);
 
-            if (prefer32bit && (RoslynString.IsNullOrWhiteSpace(platform) || string.Equals("anycpu", platform, StringComparison.OrdinalIgnoreCase)))
+            if (
+                prefer32bit
+                && (
+                    RoslynString.IsNullOrWhiteSpace(platform)
+                    || string.Equals("anycpu", platform, StringComparison.OrdinalIgnoreCase)
+                )
+            )
             {
                 platform = "anycpu32bitpreferred";
             }
@@ -248,7 +263,13 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         {
                             foreach (var alias in aliases)
                             {
-                                if (string.Equals(alias, "global", StringComparison.OrdinalIgnoreCase))
+                                if (
+                                    string.Equals(
+                                        alias,
+                                        "global",
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                )
                                 {
                                     Add("reference", filePath);
                                 }

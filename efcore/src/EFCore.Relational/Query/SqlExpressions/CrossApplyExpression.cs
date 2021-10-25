@@ -21,10 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Creates a new instance of the <see cref="CrossApplyExpression" /> class.
         /// </summary>
         /// <param name="table"> A table source to CROSS APPLY with. </param>
-        public CrossApplyExpression(TableExpressionBase table)
-            : base(table)
-        {
-        }
+        public CrossApplyExpression(TableExpressionBase table) : base(table) { }
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -44,9 +41,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(table, nameof(table));
 
-            return table != Table
-                ? new CrossApplyExpression(table)
-                : this;
+            return table != Table ? new CrossApplyExpression(table) : this;
         }
 
         /// <inheritdoc />
@@ -59,17 +54,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is CrossApplyExpression crossApplyExpression
-                    && Equals(crossApplyExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is CrossApplyExpression crossApplyExpression && Equals(crossApplyExpression)
+            );
 
-        private bool Equals(CrossApplyExpression crossApplyExpression)
-            => base.Equals(crossApplyExpression);
+        private bool Equals(CrossApplyExpression crossApplyExpression) =>
+            base.Equals(crossApplyExpression);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

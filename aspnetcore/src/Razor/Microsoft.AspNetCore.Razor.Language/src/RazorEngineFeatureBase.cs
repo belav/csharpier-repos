@@ -29,7 +29,9 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             if (Engine == null)
             {
-                throw new InvalidOperationException(Resources.FormatFeatureMustBeInitialized(nameof(Engine)));
+                throw new InvalidOperationException(
+                    Resources.FormatFeatureMustBeInitialized(nameof(Engine))
+                );
             }
 
             var feature = Engine.Features.OfType<TFeature>().FirstOrDefault();
@@ -38,7 +40,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             return feature;
         }
 
-        protected void ThrowForMissingDocumentDependency<TDocumentDependency>(TDocumentDependency value)
+        protected void ThrowForMissingDocumentDependency<TDocumentDependency>(
+            TDocumentDependency value
+        )
         {
             if (value == null)
             {
@@ -46,7 +50,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                     Resources.FormatFeatureDependencyMissing(
                         GetType().Name,
                         typeof(TDocumentDependency).Name,
-                        typeof(RazorCodeDocument).Name));
+                        typeof(RazorCodeDocument).Name
+                    )
+                );
             }
         }
 
@@ -58,12 +64,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                     Resources.FormatFeatureDependencyMissing(
                         GetType().Name,
                         typeof(TEngineDependency).Name,
-                        typeof(RazorEngine).Name));
+                        typeof(RazorEngine).Name
+                    )
+                );
             }
         }
 
-        protected virtual void OnInitialized()
-        {
-        }
+        protected virtual void OnInitialized() { }
     }
 }

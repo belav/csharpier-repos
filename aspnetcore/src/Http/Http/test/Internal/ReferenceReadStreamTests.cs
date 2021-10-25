@@ -57,7 +57,9 @@ namespace Microsoft.AspNetCore.Http
         public async Task WriteAsync_Throws()
         {
             var stream = new ReferenceReadStream(Mock.Of<Stream>(), 0, 1);
-            await Assert.ThrowsAsync<NotSupportedException>(() => stream.WriteAsync(new byte[1], 0, 1));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => stream.WriteAsync(new byte[1], 0, 1)
+            );
         }
 
         [Fact]

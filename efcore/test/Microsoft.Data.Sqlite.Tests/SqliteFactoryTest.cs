@@ -16,7 +16,9 @@ namespace Microsoft.Data.Sqlite
         [Fact]
         public void CreateConnectionStringBuilder_works()
         {
-            Assert.IsType<SqliteConnectionStringBuilder>(SqliteFactory.Instance.CreateConnectionStringBuilder());
+            Assert.IsType<SqliteConnectionStringBuilder>(
+                SqliteFactory.Instance.CreateConnectionStringBuilder()
+            );
         }
 
         [Fact]

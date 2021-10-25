@@ -19,24 +19,29 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public async Task OnPageHandlerExecutionAsync_ExecutesAsyncFilters()
         {
             // Arrange
-            var pageContext = new PageContext(new ActionContext(
-                new DefaultHttpContext(),
-                new RouteData(),
-                new PageActionDescriptor(),
-                new ModelStateDictionary()));
+            var pageContext = new PageContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new PageActionDescriptor(),
+                    new ModelStateDictionary()
+                )
+            );
             var model = new Mock<PageModel>();
 
             var pageHandlerExecutingContext = new PageHandlerExecutingContext(
-               pageContext,
-               Array.Empty<IFilterMetadata>(),
-               new HandlerMethodDescriptor(),
-               new Dictionary<string, object>(),
-               model.Object);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new HandlerMethodDescriptor(),
+                new Dictionary<string, object>(),
+                model.Object
+            );
             var pageHandlerExecutedContext = new PageHandlerExecutedContext(
-              pageContext,
-              Array.Empty<IFilterMetadata>(),
-              new HandlerMethodDescriptor(),
-              model.Object);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new HandlerMethodDescriptor(),
+                model.Object
+            );
             PageHandlerExecutionDelegate next = () => Task.FromResult(pageHandlerExecutedContext);
 
             var modelAsFilter = model.As<IAsyncPageFilter>();
@@ -48,7 +53,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var pageHandlerPageFilter = new PageHandlerPageFilter();
 
             // Act
-            await pageHandlerPageFilter.OnPageHandlerExecutionAsync(pageHandlerExecutingContext, next);
+            await pageHandlerPageFilter.OnPageHandlerExecutionAsync(
+                pageHandlerExecutingContext,
+                next
+            );
 
             // Assert
             modelAsFilter.Verify();
@@ -58,11 +66,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public async Task OnPageHandlerExecutionAsync_ExecutesSyncFilters()
         {
             // Arrange
-            var pageContext = new PageContext(new ActionContext(
-                new DefaultHttpContext(),
-                new RouteData(),
-                new PageActionDescriptor(),
-                new ModelStateDictionary()));
+            var pageContext = new PageContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new PageActionDescriptor(),
+                    new ModelStateDictionary()
+                )
+            );
             var model = new Mock<object>();
 
             var modelAsFilter = model.As<IPageFilter>();
@@ -75,22 +86,27 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 .Verifiable();
 
             var pageHandlerExecutingContext = new PageHandlerExecutingContext(
-               pageContext,
-               Array.Empty<IFilterMetadata>(),
-               new HandlerMethodDescriptor(),
-               new Dictionary<string, object>(),
-               model.Object);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new HandlerMethodDescriptor(),
+                new Dictionary<string, object>(),
+                model.Object
+            );
             var pageHandlerExecutedContext = new PageHandlerExecutedContext(
-              pageContext,
-              Array.Empty<IFilterMetadata>(),
-              new HandlerMethodDescriptor(),
-              model.Object);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new HandlerMethodDescriptor(),
+                model.Object
+            );
             PageHandlerExecutionDelegate next = () => Task.FromResult(pageHandlerExecutedContext);
 
             var pageHandlerPageFilter = new PageHandlerPageFilter();
 
             // Act
-            await pageHandlerPageFilter.OnPageHandlerExecutionAsync(pageHandlerExecutingContext, next);
+            await pageHandlerPageFilter.OnPageHandlerExecutionAsync(
+                pageHandlerExecutingContext,
+                next
+            );
 
             // Assert
             modelAsFilter.Verify();
@@ -100,17 +116,22 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public async Task OnPageHandlerExecutionAsync_DoesNotInvokeHandlerExecuted_IfResultIsSet()
         {
             // Arrange
-            var pageContext = new PageContext(new ActionContext(
-                new DefaultHttpContext(),
-                new RouteData(),
-                new PageActionDescriptor(),
-                new ModelStateDictionary()));
+            var pageContext = new PageContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new PageActionDescriptor(),
+                    new ModelStateDictionary()
+                )
+            );
             var model = new Mock<object>();
 
             var modelAsFilter = model.As<IPageFilter>();
             modelAsFilter
                 .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
-                .Callback((PageHandlerExecutingContext context) => context.Result = new PageResult())
+                .Callback(
+                    (PageHandlerExecutingContext context) => context.Result = new PageResult()
+                )
                 .Verifiable();
 
             modelAsFilter
@@ -118,22 +139,27 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 .Throws(new Exception("Shouldn't be called"));
 
             var pageHandlerExecutingContext = new PageHandlerExecutingContext(
-               pageContext,
-               Array.Empty<IFilterMetadata>(),
-               new HandlerMethodDescriptor(),
-               new Dictionary<string, object>(),
-               model.Object);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new HandlerMethodDescriptor(),
+                new Dictionary<string, object>(),
+                model.Object
+            );
             var pageHandlerExecutedContext = new PageHandlerExecutedContext(
-              pageContext,
-              Array.Empty<IFilterMetadata>(),
-              new HandlerMethodDescriptor(),
-              model.Object);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new HandlerMethodDescriptor(),
+                model.Object
+            );
             PageHandlerExecutionDelegate next = () => Task.FromResult(pageHandlerExecutedContext);
 
             var pageHandlerPageFilter = new PageHandlerPageFilter();
 
             // Act
-            await pageHandlerPageFilter.OnPageHandlerExecutionAsync(pageHandlerExecutingContext, next);
+            await pageHandlerPageFilter.OnPageHandlerExecutionAsync(
+                pageHandlerExecutingContext,
+                next
+            );
 
             // Assert
             modelAsFilter.Verify();
@@ -143,24 +169,29 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public async Task OnPageHandlerExecutionAsync_InvokesNextDelegateIfHandlerDoesNotImplementFilter()
         {
             // Arrange
-            var pageContext = new PageContext(new ActionContext(
-                new DefaultHttpContext(),
-                new RouteData(),
-                new PageActionDescriptor(),
-                new ModelStateDictionary()));
+            var pageContext = new PageContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new PageActionDescriptor(),
+                    new ModelStateDictionary()
+                )
+            );
             var model = new object();
 
             var pageHandlerExecutingContext = new PageHandlerExecutingContext(
-               pageContext,
-               Array.Empty<IFilterMetadata>(),
-               new HandlerMethodDescriptor(),
-               new Dictionary<string, object>(),
-               model);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new HandlerMethodDescriptor(),
+                new Dictionary<string, object>(),
+                model
+            );
             var pageHandlerExecutedContext = new PageHandlerExecutedContext(
-              pageContext,
-              Array.Empty<IFilterMetadata>(),
-              new HandlerMethodDescriptor(),
-              model);
+                pageContext,
+                Array.Empty<IFilterMetadata>(),
+                new HandlerMethodDescriptor(),
+                model
+            );
             var invoked = false;
             PageHandlerExecutionDelegate next = () =>
             {
@@ -171,7 +202,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var pageHandlerPageFilter = new PageHandlerPageFilter();
 
             // Act
-            await pageHandlerPageFilter.OnPageHandlerExecutionAsync(pageHandlerExecutingContext, next);
+            await pageHandlerPageFilter.OnPageHandlerExecutionAsync(
+                pageHandlerExecutingContext,
+                next
+            );
 
             // Assert
             Assert.True(invoked);

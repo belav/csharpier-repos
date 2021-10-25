@@ -19,24 +19,27 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 {
-    public class InputFileTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>, IDisposable
+    public class InputFileTest
+        : ServerTestBase<ToggleExecutionModeServerFixture<Program>>,
+          IDisposable
     {
         private string _tempDirectory;
 
         public InputFileTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
             _tempDirectory = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(_tempDirectory);
 
-            Navigate(ServerPathBase, noReload: _serverFixture.ExecutionMode == ExecutionMode.Client);
+            Navigate(
+                ServerPathBase,
+                noReload: _serverFixture.ExecutionMode == ExecutionMode.Client
+            );
             Browser.MountTestComponent<InputFileComponent>();
         }
 
@@ -44,7 +47,11 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public void CanUploadSingleSmallFile()
         {
             // Create a temporary text file
-            var file = TempFile.Create(_tempDirectory, "txt", "This file was uploaded to the browser and read from .NET.");
+            var file = TempFile.Create(
+                _tempDirectory,
+                "txt",
+                "This file was uploaded to the browser and read from .NET."
+            );
 
             // Upload the file
             var inputFile = Browser.Exists(By.Id("input-file"));
@@ -59,8 +66,15 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // Validate that the file was uploaded correctly and all fields are present
             Browser.False(() => string.IsNullOrWhiteSpace(fileNameElement.Text));
-            Browser.NotEqual(default, () => DateTimeOffset.Parse(fileLastModifiedElement.Text, CultureInfo.InvariantCulture));
-            Browser.Equal(file.Contents.Length.ToString(CultureInfo.InvariantCulture), () => fileSizeElement.Text);
+            Browser.NotEqual(
+                default,
+                () =>
+                    DateTimeOffset.Parse(fileLastModifiedElement.Text, CultureInfo.InvariantCulture)
+            );
+            Browser.Equal(
+                file.Contents.Length.ToString(CultureInfo.InvariantCulture),
+                () => fileSizeElement.Text
+            );
             Browser.Equal("text/plain", () => fileContentTypeElement.Text);
             Browser.Equal(file.Text, () => fileContentElement.Text);
         }
@@ -93,8 +107,15 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // Validate that the file was uploaded correctly and all fields are present
             Browser.False(() => string.IsNullOrWhiteSpace(fileNameElement.Text));
-            Browser.NotEqual(default, () => DateTimeOffset.Parse(fileLastModifiedElement.Text, CultureInfo.InvariantCulture));
-            Browser.Equal(file.Contents.Length.ToString(CultureInfo.InvariantCulture), () => fileSizeElement.Text);
+            Browser.NotEqual(
+                default,
+                () =>
+                    DateTimeOffset.Parse(fileLastModifiedElement.Text, CultureInfo.InvariantCulture)
+            );
+            Browser.Equal(
+                file.Contents.Length.ToString(CultureInfo.InvariantCulture),
+                () => fileSizeElement.Text
+            );
             Browser.Equal("text/plain", () => fileContentTypeElement.Text);
             Browser.Equal(file.Text, () => fileContentElement.Text);
         }
@@ -103,7 +124,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public void CanUploadMultipleFiles()
         {
             // Create multiple small text files
-            var files = Enumerable.Range(1, 3)
+            var files = Enumerable
+                .Range(1, 3)
                 .Select(i => TempFile.Create(_tempDirectory, "txt", $"Contents of file {i}."))
                 .ToList();
 
@@ -112,22 +134,39 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             inputFile.SendKeys(string.Join("\n", files.Select(f => f.Path)));
 
             // Validate that each file was uploaded correctly
-            Assert.All(files, file =>
-            {
-                var fileContainer = Browser.Exists(By.Id($"file-{file.Name}"));
-                var fileNameElement = fileContainer.FindElement(By.Id("file-name"));
-                var fileLastModifiedElement = fileContainer.FindElement(By.Id("file-last-modified"));
-                var fileSizeElement = fileContainer.FindElement(By.Id("file-size"));
-                var fileContentTypeElement = fileContainer.FindElement(By.Id("file-content-type"));
-                var fileContentElement = fileContainer.FindElement(By.Id("file-content"));
+            Assert.All(
+                files,
+                file =>
+                {
+                    var fileContainer = Browser.Exists(By.Id($"file-{file.Name}"));
+                    var fileNameElement = fileContainer.FindElement(By.Id("file-name"));
+                    var fileLastModifiedElement = fileContainer.FindElement(
+                        By.Id("file-last-modified")
+                    );
+                    var fileSizeElement = fileContainer.FindElement(By.Id("file-size"));
+                    var fileContentTypeElement = fileContainer.FindElement(
+                        By.Id("file-content-type")
+                    );
+                    var fileContentElement = fileContainer.FindElement(By.Id("file-content"));
 
-                // Validate that the file was uploaded correctly and all fields are present
-                Browser.False(() => string.IsNullOrWhiteSpace(fileNameElement.Text));
-                Browser.NotEqual(default, () => DateTimeOffset.Parse(fileLastModifiedElement.Text, CultureInfo.InvariantCulture));
-                Browser.Equal(file.Contents.Length.ToString(CultureInfo.InvariantCulture), () => fileSizeElement.Text);
-                Browser.Equal("text/plain", () => fileContentTypeElement.Text);
-                Browser.Equal(file.Text, () => fileContentElement.Text);
-            });
+                    // Validate that the file was uploaded correctly and all fields are present
+                    Browser.False(() => string.IsNullOrWhiteSpace(fileNameElement.Text));
+                    Browser.NotEqual(
+                        default,
+                        () =>
+                            DateTimeOffset.Parse(
+                                fileLastModifiedElement.Text,
+                                CultureInfo.InvariantCulture
+                            )
+                    );
+                    Browser.Equal(
+                        file.Contents.Length.ToString(CultureInfo.InvariantCulture),
+                        () => fileSizeElement.Text
+                    );
+                    Browser.Equal("text/plain", () => fileContentTypeElement.Text);
+                    Browser.Equal(file.Text, () => fileContentElement.Text);
+                }
+            );
         }
 
         [Fact]
@@ -137,7 +176,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var sourceImageId = "image-source";
 
             // Get the source image base64
-            var base64 = Browser.ExecuteJavaScript<string>($@"
+            var base64 = Browser.ExecuteJavaScript<string>(
+                $@"
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
                 const image = document.getElementById('{sourceImageId}');
@@ -146,7 +186,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
                 canvas.height = image.naturalHeight;
                 context.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight);
 
-                return canvas.toDataURL().split(',').pop();");
+                return canvas.toDataURL().split(',').pop();"
+            );
 
             // Save the image file locally
             var file = TempFile.Create(_tempDirectory, "png", Convert.FromBase64String(base64));
@@ -179,7 +220,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // Validate that the proper exception is thrown
             var exceptionMessage = Browser.Exists(By.Id("exception-message"));
-            Browser.Equal("The maximum number of files accepted is 1, but 2 were supplied.", () => exceptionMessage.Text);
+            Browser.Equal(
+                "The maximum number of files accepted is 1, but 2 were supplied.",
+                () => exceptionMessage.Text
+            );
         }
 
         [Fact]
@@ -198,7 +242,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // Validate that the proper exception is thrown
             var exceptionMessage = Browser.Exists(By.Id("exception-message"));
-            Browser.Equal("Supplied file with size 32 bytes exceeds the maximum of 10 bytes.", () => exceptionMessage.Text);
+            Browser.Equal(
+                "Supplied file with size 32 bytes exceeds the maximum of 10 bytes.",
+                () => exceptionMessage.Text
+            );
         }
 
         public void Dispose()
@@ -230,8 +277,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
                 return file;
             }
 
-            public static TempFile Create(string tempDirectory, string extension, string text)
-                => Create(tempDirectory, extension, Encoding.ASCII.GetBytes(text));
+            public static TempFile Create(string tempDirectory, string extension, string text) =>
+                Create(tempDirectory, extension, Encoding.ASCII.GetBytes(text));
         }
     }
 }

@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that configures column name and type for a property based on the applied <see cref="ColumnAttribute" />.
     /// </summary>
-    public class RelationalColumnAttributeConvention : PropertyAttributeConventionBase<ColumnAttribute>
+    public class RelationalColumnAttributeConvention
+        : PropertyAttributeConventionBase<ColumnAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="RelationalColumnAttributeConvention" />.
@@ -20,10 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
         public RelationalColumnAttributeConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies)
-        {
-        }
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
@@ -36,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBuilder propertyBuilder,
             ColumnAttribute attribute,
             MemberInfo clrMember,
-            IConventionContext context)
+            IConventionContext context
+        )
         {
             if (!string.IsNullOrWhiteSpace(attribute.Name))
             {

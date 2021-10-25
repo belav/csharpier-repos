@@ -27,7 +27,10 @@ namespace Microsoft.CodeAnalysis.Serialization
         private static Checksum CreateChecksum(WellKnownSynchronizationKind kind, object[] children)
         {
             // given children must be either Checksum or Checksums (collection of a checksum)
-            return Checksum.Create(kind, children.Select(c => c as Checksum ?? ((ChecksumCollection)c).Checksum));
+            return Checksum.Create(
+                kind,
+                children.Select(c => c as Checksum ?? ((ChecksumCollection)c).Checksum)
+            );
         }
     }
 }

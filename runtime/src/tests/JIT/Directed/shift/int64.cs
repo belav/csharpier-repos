@@ -44,10 +44,16 @@ namespace ShiftTest
 
             // Test >>
 
-            Console.WriteLine("The expected result of (0x7FFFFFFFFFFFFFFF>>8) is: {0}", (0x7FFFFFFFFFFFFFFF >> 8));
+            Console.WriteLine(
+                "The expected result of (0x7FFFFFFFFFFFFFFF>>8) is: {0}",
+                (0x7FFFFFFFFFFFFFFF >> 8)
+            );
             Console.WriteLine();
 
-            Console.WriteLine("The actual result for funciton argument is: {0}", f1(0x7FFFFFFFFFFFFFFF));
+            Console.WriteLine(
+                "The actual result for funciton argument is: {0}",
+                f1(0x7FFFFFFFFFFFFFFF)
+            );
             loc_data >>= 8;
             Console.WriteLine("The actual result for local variable is: {0}", loc_data);
             s_data >>= 8;

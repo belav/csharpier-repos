@@ -32,9 +32,9 @@ class InterlockedRead
     {
         bool bRet = true;
         lCurr = iValue;
-        if(iValue != Interlocked.Read(ref lCurr))
+        if (iValue != Interlocked.Read(ref lCurr))
             bRet = false;
-        if(bRet)
+        if (bRet)
             success++;
     }
 }

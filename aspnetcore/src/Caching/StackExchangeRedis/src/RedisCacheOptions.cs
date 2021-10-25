@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
         /// The configuration used to connect to Redis.
         /// </summary>
         public string Configuration { get; set; }
-        
+
         /// <summary>
         /// The configuration used to connect to Redis.
         /// This is preferred over Configuration.

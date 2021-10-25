@@ -23,7 +23,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         // UI context defined by Live Share when connected as a guest in a Live Share session
         // https://devdiv.visualstudio.com/DevDiv/_git/Cascade?path=%2Fsrc%2FVS%2FContracts%2FGuidList.cs&version=GBmain&line=32&lineEnd=33&lineStartColumn=1&lineEndColumn=1&lineStyle=plain&_a=contents
-        private static readonly Guid LiveShareGuestUIContextGuid = Guid.Parse("fd93f3eb-60da-49cd-af15-acda729e357e");
+        private static readonly Guid LiveShareGuestUIContextGuid = Guid.Parse(
+            "fd93f3eb-60da-49cd-af15-acda729e357e"
+        );
 
         private readonly Workspace _workspace;
 
@@ -36,14 +38,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         public bool IsCloudEnvironmentClient()
         {
-            var context = UIContext.FromUIContextGuid(VSConstants.UICONTEXT.CloudEnvironmentConnected_guid);
+            var context = UIContext.FromUIContextGuid(
+                VSConstants.UICONTEXT.CloudEnvironmentConnected_guid
+            );
             return context.IsActive;
         }
 
         public bool IsInLspEditorContext()
         {
-            var featureFlagService = _workspace.Services.GetRequiredService<IExperimentationService>();
-            var isInLspContext = IsLiveShareGuest() || IsCloudEnvironmentClient() || featureFlagService.IsExperimentEnabled(LspEditorFeatureFlagName);
+            var featureFlagService =
+                _workspace.Services.GetRequiredService<IExperimentationService>();
+            var isInLspContext =
+                IsLiveShareGuest()
+                || IsCloudEnvironmentClient()
+                || featureFlagService.IsExperimentEnabled(LspEditorFeatureFlagName);
             return isInLspContext;
         }
 

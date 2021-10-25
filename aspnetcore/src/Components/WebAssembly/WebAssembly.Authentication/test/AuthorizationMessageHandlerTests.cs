@@ -17,16 +17,21 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         public async Task Throws_IfTheListOfAllowedUrlsIsNotConfigured()
         {
             // Arrange
-            var expectedMessage = "The 'AuthorizationMessageHandler' is not configured. " +
-                    "Call 'ConfigureHandler' and provide a list of endpoint urls to attach the token to.";
+            var expectedMessage =
+                "The 'AuthorizationMessageHandler' is not configured. "
+                + "Call 'ConfigureHandler' and provide a list of endpoint urls to attach the token to.";
 
             var tokenProvider = new Mock<IAccessTokenProvider>();
 
-            var handler = new AuthorizationMessageHandler(tokenProvider.Object, Mock.Of<NavigationManager>());
+            var handler = new AuthorizationMessageHandler(
+                tokenProvider.Object,
+                Mock.Of<NavigationManager>()
+            );
             // Act & Assert
 
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => new HttpClient(handler).GetAsync("https://www.example.com"));
+                () => new HttpClient(handler).GetAsync("https://www.example.com")
+            );
 
             Assert.Equal(expectedMessage, exception.Message);
         }
@@ -37,7 +42,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             // Arrange
             var tokenProvider = new Mock<IAccessTokenProvider>();
 
-            var handler = new AuthorizationMessageHandler(tokenProvider.Object, Mock.Of<NavigationManager>());
+            var handler = new AuthorizationMessageHandler(
+                tokenProvider.Object,
+                Mock.Of<NavigationManager>()
+            );
             handler.ConfigureHandler(new[] { "https://localhost:5001" });
 
             var response = new HttpResponseMessage(HttpStatusCode.OK);
@@ -55,17 +63,27 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         {
             // Arrange
             var tokenProvider = new Mock<IAccessTokenProvider>();
-            tokenProvider.Setup(tp => tp.RequestAccessToken())
-                    .Returns(new ValueTask<AccessTokenResult>(new AccessTokenResult(AccessTokenResultStatus.Success,
-                    new AccessToken
-                    {
-                        Expires = DateTime.Now.AddHours(1),
-                        GrantedScopes = new string[] { "All" },
-                        Value = "asdf"
-                    },
-                    "https://www.example.com")));
+            tokenProvider
+                .Setup(tp => tp.RequestAccessToken())
+                .Returns(
+                    new ValueTask<AccessTokenResult>(
+                        new AccessTokenResult(
+                            AccessTokenResultStatus.Success,
+                            new AccessToken
+                            {
+                                Expires = DateTime.Now.AddHours(1),
+                                GrantedScopes = new string[] { "All" },
+                                Value = "asdf"
+                            },
+                            "https://www.example.com"
+                        )
+                    )
+                );
 
-            var handler = new AuthorizationMessageHandler(tokenProvider.Object, Mock.Of<NavigationManager>());
+            var handler = new AuthorizationMessageHandler(
+                tokenProvider.Object,
+                Mock.Of<NavigationManager>()
+            );
             handler.ConfigureHandler(new[] { "https://localhost:5001" });
 
             var response = new HttpResponseMessage(HttpStatusCode.OK);
@@ -83,17 +101,27 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         {
             // Arrange
             var tokenProvider = new Mock<IAccessTokenProvider>();
-            tokenProvider.Setup(tp => tp.RequestAccessToken())
-                    .Returns(new ValueTask<AccessTokenResult>(new AccessTokenResult(AccessTokenResultStatus.Success,
-                    new AccessToken
-                    {
-                        Expires = DateTime.Now.AddHours(1),
-                        GrantedScopes = new string[] { "All" },
-                        Value = "asdf"
-                    },
-                    "https://www.example.com")));
+            tokenProvider
+                .Setup(tp => tp.RequestAccessToken())
+                .Returns(
+                    new ValueTask<AccessTokenResult>(
+                        new AccessTokenResult(
+                            AccessTokenResultStatus.Success,
+                            new AccessToken
+                            {
+                                Expires = DateTime.Now.AddHours(1),
+                                GrantedScopes = new string[] { "All" },
+                                Value = "asdf"
+                            },
+                            "https://www.example.com"
+                        )
+                    )
+                );
 
-            var handler = new AuthorizationMessageHandler(tokenProvider.Object, Mock.Of<NavigationManager>());
+            var handler = new AuthorizationMessageHandler(
+                tokenProvider.Object,
+                Mock.Of<NavigationManager>()
+            );
             handler.ConfigureHandler(new[] { "https://localhost:5001" });
 
             var response = new HttpResponseMessage(HttpStatusCode.OK);
@@ -115,17 +143,27 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         {
             // Arrange
             var tokenProvider = new Mock<IAccessTokenProvider>();
-            tokenProvider.Setup(tp => tp.RequestAccessToken())
-                    .Returns(new ValueTask<AccessTokenResult>(new AccessTokenResult(AccessTokenResultStatus.Success,
-                    new AccessToken
-                    {
-                        Expires = DateTime.Now.AddMinutes(3),
-                        GrantedScopes = new string[] { "All" },
-                        Value = "asdf"
-                    },
-                    "https://www.example.com")));
+            tokenProvider
+                .Setup(tp => tp.RequestAccessToken())
+                .Returns(
+                    new ValueTask<AccessTokenResult>(
+                        new AccessTokenResult(
+                            AccessTokenResultStatus.Success,
+                            new AccessToken
+                            {
+                                Expires = DateTime.Now.AddMinutes(3),
+                                GrantedScopes = new string[] { "All" },
+                                Value = "asdf"
+                            },
+                            "https://www.example.com"
+                        )
+                    )
+                );
 
-            var handler = new AuthorizationMessageHandler(tokenProvider.Object, Mock.Of<NavigationManager>());
+            var handler = new AuthorizationMessageHandler(
+                tokenProvider.Object,
+                Mock.Of<NavigationManager>()
+            );
             handler.ConfigureHandler(new[] { "https://localhost:5001" });
 
             var response = new HttpResponseMessage(HttpStatusCode.OK);
@@ -146,19 +184,31 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         {
             // Arrange
             var tokenProvider = new Mock<IAccessTokenProvider>();
-            tokenProvider.Setup(tp => tp.RequestAccessToken())
-                    .Returns(new ValueTask<AccessTokenResult>(new AccessTokenResult(AccessTokenResultStatus.RequiresRedirect,
-                    null,
-                    "https://www.example.com")));
+            tokenProvider
+                .Setup(tp => tp.RequestAccessToken())
+                .Returns(
+                    new ValueTask<AccessTokenResult>(
+                        new AccessTokenResult(
+                            AccessTokenResultStatus.RequiresRedirect,
+                            null,
+                            "https://www.example.com"
+                        )
+                    )
+                );
 
-            var handler = new AuthorizationMessageHandler(tokenProvider.Object, Mock.Of<NavigationManager>());
+            var handler = new AuthorizationMessageHandler(
+                tokenProvider.Object,
+                Mock.Of<NavigationManager>()
+            );
             handler.ConfigureHandler(new[] { "https://localhost:5001" });
 
             var response = new HttpResponseMessage(HttpStatusCode.OK);
             handler.InnerHandler = new TestMessageHandler(response);
 
             // Act & assert
-            var exception = await Assert.ThrowsAsync<AccessTokenNotAvailableException>(() => new HttpClient(handler).GetAsync("https://localhost:5001/weather"));
+            var exception = await Assert.ThrowsAsync<AccessTokenNotAvailableException>(
+                () => new HttpClient(handler).GetAsync("https://localhost:5001/weather")
+            );
         }
 
         [Fact]
@@ -166,21 +216,32 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         {
             // Arrange
             var tokenProvider = new Mock<IAccessTokenProvider>();
-            tokenProvider.Setup(tp => tp.RequestAccessToken(It.IsAny<AccessTokenRequestOptions>()))
-                .Returns(new ValueTask<AccessTokenResult>(new AccessTokenResult(AccessTokenResultStatus.Success,
-                new AccessToken
-                {
-                    Expires = DateTime.Now.AddMinutes(3),
-                    GrantedScopes = new string[] { "All" },
-                    Value = "asdf"
-                },
-                "https://www.example.com/return")));
+            tokenProvider
+                .Setup(tp => tp.RequestAccessToken(It.IsAny<AccessTokenRequestOptions>()))
+                .Returns(
+                    new ValueTask<AccessTokenResult>(
+                        new AccessTokenResult(
+                            AccessTokenResultStatus.Success,
+                            new AccessToken
+                            {
+                                Expires = DateTime.Now.AddMinutes(3),
+                                GrantedScopes = new string[] { "All" },
+                                Value = "asdf"
+                            },
+                            "https://www.example.com/return"
+                        )
+                    )
+                );
 
-            var handler = new AuthorizationMessageHandler(tokenProvider.Object, Mock.Of<NavigationManager>());
+            var handler = new AuthorizationMessageHandler(
+                tokenProvider.Object,
+                Mock.Of<NavigationManager>()
+            );
             handler.ConfigureHandler(
                 new[] { "https://localhost:5001" },
                 scopes: new[] { "example.read", "example.write" },
-                returnUrl: "https://www.example.com/return");
+                returnUrl: "https://www.example.com/return"
+            );
 
             var response = new HttpResponseMessage(HttpStatusCode.OK);
             handler.InnerHandler = new TestMessageHandler(response);
@@ -199,7 +260,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
         public TestMessageHandler(HttpResponseMessage response) => _response = response;
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             _response.RequestMessage = request;
             return Task.FromResult(_response);

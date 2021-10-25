@@ -12,12 +12,10 @@ namespace System.DirectoryServices
         /// Limits the search to the base object. The result contains at most one object.
         /// </devdoc>
         Base = 0,
-
         /// <devdoc>
         /// Searched one level of the immediate children, excluding the base object.
         /// </devdoc>
         OneLevel = 1,
-
         /// <devdoc>
         /// Searches the whole subtree, including all the children and the base object itself.
         /// </devdoc>

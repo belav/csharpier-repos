@@ -12,8 +12,7 @@ namespace System.Speech.Internal.SrgsCompiler
     {
         #region Constructors
 
-        internal GrammarElement(Backend backend, CustomGrammar cg)
-            : base(null)
+        internal GrammarElement(Backend backend, CustomGrammar cg) : base(null)
         {
             _cg = cg;
             _backend = backend;
@@ -25,17 +24,16 @@ namespace System.Speech.Internal.SrgsCompiler
 
         string IGrammar.Root
         {
-            get
-            {
-                return _sRoot;
-            }
-            set
-            {
-                _sRoot = value;
-            }
+            get { return _sRoot; }
+            set { _sRoot = value; }
         }
 
-        IRule IGrammar.CreateRule(string id, RulePublic publicRule, RuleDynamic dynamic, bool hasScript)
+        IRule IGrammar.CreateRule(
+            string id,
+            RulePublic publicRule,
+            RuleDynamic dynamic,
+            bool hasScript
+        )
         {
             SPCFGRULEATTRIBUTES dwRuleAttributes = 0;
 
@@ -50,13 +48,17 @@ namespace System.Speech.Internal.SrgsCompiler
             //  false       private     false       0
             if (id == _sRoot)
             {
-                dwRuleAttributes |= SPCFGRULEATTRIBUTES.SPRAF_Root | SPCFGRULEATTRIBUTES.SPRAF_Active | SPCFGRULEATTRIBUTES.SPRAF_TopLevel;
+                dwRuleAttributes |=
+                    SPCFGRULEATTRIBUTES.SPRAF_Root
+                    | SPCFGRULEATTRIBUTES.SPRAF_Active
+                    | SPCFGRULEATTRIBUTES.SPRAF_TopLevel;
                 _hasRoot = true;
             }
 
             if (publicRule == RulePublic.True)
             {
-                dwRuleAttributes |= SPCFGRULEATTRIBUTES.SPRAF_TopLevel | SPCFGRULEATTRIBUTES.SPRAF_Export;
+                dwRuleAttributes |=
+                    SPCFGRULEATTRIBUTES.SPRAF_TopLevel | SPCFGRULEATTRIBUTES.SPRAF_Export;
             }
 
             if (dynamic == RuleDynamic.True)
@@ -92,8 +94,16 @@ namespace System.Speech.Internal.SrgsCompiler
             }
 
             // SAPI semantics only for .NET Semantics
-            bool containsCode = ((IGrammar)this).CodeBehind.Count > 0 || ((IGrammar)this).ImportNamespaces.Count > 0 || ((IGrammar)this).AssemblyReferences.Count > 0 || CustomGrammar._scriptRefs.Count > 0;
-            if (containsCode && ((IGrammar)this).TagFormat != System.Speech.Recognition.SrgsGrammar.SrgsTagFormat.KeyValuePairs)
+            bool containsCode =
+                ((IGrammar)this).CodeBehind.Count > 0
+                || ((IGrammar)this).ImportNamespaces.Count > 0
+                || ((IGrammar)this).AssemblyReferences.Count > 0
+                || CustomGrammar._scriptRefs.Count > 0;
+            if (
+                containsCode
+                && ((IGrammar)this).TagFormat
+                    != System.Speech.Recognition.SrgsGrammar.SrgsTagFormat.KeyValuePairs
+            )
             {
                 XmlParser.ThrowSrgsException(SRID.InvalidSemanticProcessingType);
             }
@@ -147,10 +157,7 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         GrammarType IGrammar.Mode
         {
-            set
-            {
-                _backend.GrammarMode = value;
-            }
+            set { _backend.GrammarMode = value; }
         }
 
         /// <summary>
@@ -158,10 +165,7 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         AlphabetType IGrammar.PhoneticAlphabet
         {
-            set
-            {
-                _backend.Alphabet = value;
-            }
+            set { _backend.Alphabet = value; }
         }
 
         /// <summary>
@@ -171,11 +175,16 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             get
             {
-                return System.Speech.Recognition.SrgsGrammar.SrgsDocument.GrammarOptions2TagFormat(_backend.GrammarOptions);
+                return System.Speech.Recognition.SrgsGrammar.SrgsDocument.GrammarOptions2TagFormat(
+                    _backend.GrammarOptions
+                );
             }
             set
             {
-                _backend.GrammarOptions = System.Speech.Recognition.SrgsGrammar.SrgsDocument.TagFormat2GrammarOptions(value);
+                _backend.GrammarOptions =
+                    System.Speech.Recognition.SrgsGrammar.SrgsDocument.TagFormat2GrammarOptions(
+                        value
+                    );
             }
         }
 
@@ -184,30 +193,18 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         Collection<string> IGrammar.GlobalTags
         {
-            get
-            {
-                return _backend.GlobalTags;
-            }
-            set
-            {
-                _backend.GlobalTags = value;
-            }
+            get { return _backend.GlobalTags; }
+            set { _backend.GlobalTags = value; }
         }
 
         internal List<Rule> UndefRules
         {
-            get
-            {
-                return _undefRules;
-            }
+            get { return _undefRules; }
         }
 
         internal Backend Backend
         {
-            get
-            {
-                return _backend;
-            }
+            get { return _backend; }
         }
 
         /// <summary>
@@ -215,14 +212,8 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         string IGrammar.Language
         {
-            get
-            {
-                return _cg._language;
-            }
-            set
-            {
-                _cg._language = value;
-            }
+            get { return _cg._language; }
+            set { _cg._language = value; }
         }
 
         /// <summary>
@@ -230,14 +221,8 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         string IGrammar.Namespace
         {
-            get
-            {
-                return _cg._namespace;
-            }
-            set
-            {
-                _cg._namespace = value;
-            }
+            get { return _cg._namespace; }
+            set { _cg._namespace = value; }
         }
 
         /// <summary>
@@ -245,14 +230,8 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         Collection<string> IGrammar.CodeBehind
         {
-            get
-            {
-                return _cg._codebehind;
-            }
-            set
-            {
-                _cg._codebehind = value;
-            }
+            get { return _cg._codebehind; }
+            set { _cg._codebehind = value; }
         }
 
         /// <summary>
@@ -260,10 +239,7 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         bool IGrammar.Debug
         {
-            set
-            {
-                _cg._fDebugScript = value;
-            }
+            set { _cg._fDebugScript = value; }
         }
 
         /// <summary>
@@ -271,14 +247,8 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         Collection<string> IGrammar.ImportNamespaces
         {
-            get
-            {
-                return _cg._importNamespaces;
-            }
-            set
-            {
-                _cg._importNamespaces = value;
-            }
+            get { return _cg._importNamespaces; }
+            set { _cg._importNamespaces = value; }
         }
 
         /// <summary>
@@ -286,22 +256,13 @@ namespace System.Speech.Internal.SrgsCompiler
         /// </summary>
         Collection<string> IGrammar.AssemblyReferences
         {
-            get
-            {
-                return _cg._assemblyReferences;
-            }
-            set
-            {
-                _cg._assemblyReferences = value;
-            }
+            get { return _cg._assemblyReferences; }
+            set { _cg._assemblyReferences = value; }
         }
 
         internal CustomGrammar CustomGrammar
         {
-            get
-            {
-                return _cg;
-            }
+            get { return _cg; }
         }
 
         #endregion
@@ -339,7 +300,7 @@ namespace System.Speech.Internal.SrgsCompiler
                 else
                 {
                     // Multiple definitions of the same Rule.
-                    XmlParser.ThrowSrgsException(SRID.RuleRedefinition, sRuleId);    // "Redefinition of rule ""%s""."
+                    XmlParser.ThrowSrgsException(SRID.RuleRedefinition, sRuleId); // "Redefinition of rule ""%s""."
                 }
             }
             else
@@ -364,7 +325,6 @@ namespace System.Speech.Internal.SrgsCompiler
         private string _sRoot;
 
         private bool _hasRoot;
-
         #endregion
     }
 }

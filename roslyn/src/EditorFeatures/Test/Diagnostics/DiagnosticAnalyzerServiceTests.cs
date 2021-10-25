@@ -36,36 +36,57 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     [UseExportProvider]
     public class DiagnosticAnalyzerServiceTests
     {
-        private static readonly TestComposition s_featuresCompositionWithMockDiagnosticUpdateSourceRegistrationService = FeaturesTestCompositions.Features
-            .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
-            .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
+        private static readonly TestComposition s_featuresCompositionWithMockDiagnosticUpdateSourceRegistrationService =
+            FeaturesTestCompositions.Features
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
+                .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
-        private static readonly TestComposition s_editorFeaturesCompositionWithMockDiagnosticUpdateSourceRegistrationService = EditorTestCompositions.EditorFeatures
-            .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
-            .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
+        private static readonly TestComposition s_editorFeaturesCompositionWithMockDiagnosticUpdateSourceRegistrationService =
+            EditorTestCompositions.EditorFeatures
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
+                .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
-        private static AdhocWorkspace CreateWorkspace(Type[] additionalParts = null)
-            => new AdhocWorkspace(s_featuresCompositionWithMockDiagnosticUpdateSourceRegistrationService.AddParts(additionalParts).GetHostServices());
+        private static AdhocWorkspace CreateWorkspace(Type[] additionalParts = null) =>
+            new AdhocWorkspace(
+                s_featuresCompositionWithMockDiagnosticUpdateSourceRegistrationService
+                    .AddParts(additionalParts)
+                    .GetHostServices()
+            );
 
         [Fact]
         public async Task TestHasSuccessfullyLoadedBeingFalse()
         {
             using var workspace = CreateWorkspace();
 
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(new Analyzer()));
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(new Analyzer())
+            );
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var document = GetDocumentFromIncompleteProject(workspace);
 
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticAnalyzerService>()
+            );
             var analyzer = service.CreateIncrementalAnalyzer(workspace);
 
             // listen to events
             // check empty since this could be called to clear up existing diagnostics
             service.DiagnosticsUpdated += (s, a) =>
             {
-                var diagnostics = a.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode);
+                var diagnostics = a.GetPushDiagnostics(
+                    workspace,
+                    InternalDiagnosticsOptions.NormalDiagnosticMode
+                );
                 Assert.Empty(diagnostics);
             };
 
@@ -73,7 +94,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             await RunAllAnalysisAsync(analyzer, document).ConfigureAwait(false);
 
             // wait for all events to raised
-            await ((AsynchronousOperationListener)service.Listener).ExpeditedWaitAsync().ConfigureAwait(false);
+            await ((AsynchronousOperationListener)service.Listener)
+                .ExpeditedWaitAsync()
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -81,18 +104,33 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             using var workspace = CreateWorkspace();
 
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(new Analyzer()));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(new Analyzer())
+            );
 
-            var options = workspace.CurrentSolution.Options
-                .WithChangedOption(SolutionCrawlerOptions.BackgroundAnalysisScopeOption, LanguageNames.CSharp, BackgroundAnalysisScope.FullSolution);
+            var options = workspace.CurrentSolution.Options.WithChangedOption(
+                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                LanguageNames.CSharp,
+                BackgroundAnalysisScope.FullSolution
+            );
 
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithOptions(options).WithAnalyzerReferences(new[] { analyzerReference }));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution
+                    .WithOptions(options)
+                    .WithAnalyzerReferences(new[] { analyzerReference })
+            );
             var document = GetDocumentFromIncompleteProject(workspace);
 
             // open document
             workspace.OpenDocument(document.Id);
 
-            await TestAnalyzerAsync(workspace, document, AnalyzerResultSetter, expectedSyntax: true, expectedSemantic: true);
+            await TestAnalyzerAsync(
+                workspace,
+                document,
+                AnalyzerResultSetter,
+                expectedSyntax: true,
+                expectedSemantic: true
+            );
         }
 
         [Fact]
@@ -100,15 +138,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             using var workspace = CreateWorkspace();
 
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(new Analyzer()));
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(new Analyzer())
+            );
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var document = GetDocumentFromIncompleteProject(workspace);
 
             // open document
             workspace.OpenDocument(document.Id);
 
-            await TestAnalyzerAsync(workspace, document, AnalyzerResultSetter, expectedSyntax: true, expectedSemantic: true);
+            await TestAnalyzerAsync(
+                workspace,
+                document,
+                AnalyzerResultSetter,
+                expectedSyntax: true,
+                expectedSemantic: true
+            );
         }
 
         [Fact]
@@ -116,15 +164,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             using var workspace = CreateWorkspace();
 
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpCompilerDiagnosticAnalyzer()));
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpCompilerDiagnosticAnalyzer())
+            );
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var document = GetDocumentFromIncompleteProject(workspace);
 
             // open document
             workspace.OpenDocument(document.Id);
 
-            await TestAnalyzerAsync(workspace, document, CompilerAnalyzerResultSetter, expectedSyntax: true, expectedSemantic: false);
+            await TestAnalyzerAsync(
+                workspace,
+                document,
+                CompilerAnalyzerResultSetter,
+                expectedSyntax: true,
+                expectedSemantic: false
+            );
         }
 
         [Fact]
@@ -132,31 +190,57 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         {
             using var workspace = CreateWorkspace();
 
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpCompilerDiagnosticAnalyzer()));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpCompilerDiagnosticAnalyzer())
+            );
 
-            var options = workspace.CurrentSolution.Options
-                .WithChangedOption(SolutionCrawlerOptions.BackgroundAnalysisScopeOption, LanguageNames.CSharp, BackgroundAnalysisScope.FullSolution);
+            var options = workspace.CurrentSolution.Options.WithChangedOption(
+                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                LanguageNames.CSharp,
+                BackgroundAnalysisScope.FullSolution
+            );
 
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithOptions(options).WithAnalyzerReferences(new[] { analyzerReference }));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution
+                    .WithOptions(options)
+                    .WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var document = GetDocumentFromIncompleteProject(workspace);
 
-            await TestAnalyzerAsync(workspace, document, CompilerAnalyzerResultSetter, expectedSyntax: true, expectedSemantic: false);
+            await TestAnalyzerAsync(
+                workspace,
+                document,
+                CompilerAnalyzerResultSetter,
+                expectedSyntax: true,
+                expectedSemantic: false
+            );
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task TestDisabledByDefaultAnalyzerEnabledWithEditorConfig(bool enabledWithEditorconfig)
+        public async Task TestDisabledByDefaultAnalyzerEnabledWithEditorConfig(
+            bool enabledWithEditorconfig
+        )
         {
             using var workspace = CreateWorkspace();
 
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(new DisabledByDefaultAnalyzer()));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(new DisabledByDefaultAnalyzer())
+            );
 
-            var options = workspace.CurrentSolution.Options
-                .WithChangedOption(SolutionCrawlerOptions.BackgroundAnalysisScopeOption, LanguageNames.CSharp, BackgroundAnalysisScope.FullSolution);
+            var options = workspace.CurrentSolution.Options.WithChangedOption(
+                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                LanguageNames.CSharp,
+                BackgroundAnalysisScope.FullSolution
+            );
 
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }).WithOptions(options));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution
+                    .WithAnalyzerReferences(new[] { analyzerReference })
+                    .WithOptions(options)
+            );
 
             var project = workspace.AddProject(
                 ProjectInfo.Create(
@@ -165,25 +249,45 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     "CSharpProject",
                     "CSharpProject",
                     LanguageNames.CSharp,
-                    filePath: "z:\\CSharpProject.csproj"));
+                    filePath: "z:\\CSharpProject.csproj"
+                )
+            );
 
             if (enabledWithEditorconfig)
             {
-                var editorconfigText = @$"
+                var editorconfigText =
+                    @$"
 [*.cs]
 dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_syntaxRule.Id}.severity = warning
 dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_semanticRule.Id}.severity = warning
 dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = warning";
 
-                project = project.AddAnalyzerConfigDocument(".editorconfig", filePath: "z:\\.editorconfig", text: SourceText.From(editorconfigText)).Project;
+                project =
+                    project.AddAnalyzerConfigDocument(
+                        ".editorconfig",
+                        filePath: "z:\\.editorconfig",
+                        text: SourceText.From(editorconfigText)
+                    ).Project;
             }
 
-            var document = project.AddDocument("test.cs", SourceText.From("class A {}"), filePath: "z:\\test.cs");
+            var document = project.AddDocument(
+                "test.cs",
+                SourceText.From("class A {}"),
+                filePath: "z:\\test.cs"
+            );
             var applied = workspace.TryApplyChanges(document.Project.Solution);
             Assert.True(applied);
 
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticAnalyzerService>()
+            );
             var analyzer = service.CreateIncrementalAnalyzer(workspace);
 
             // listen to events
@@ -192,7 +296,10 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
             var compilationDiagnostic = false;
             service.DiagnosticsUpdated += (s, a) =>
             {
-                var diagnostics = a.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode);
+                var diagnostics = a.GetPushDiagnostics(
+                    workspace,
+                    InternalDiagnosticsOptions.NormalDiagnosticMode
+                );
                 var diagnostic = Assert.Single(diagnostics);
                 Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
 
@@ -212,13 +319,17 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
 
             // open document
             workspace.OpenDocument(document.Id);
-            await analyzer.DocumentOpenAsync(document, CancellationToken.None).ConfigureAwait(false);
+            await analyzer
+                .DocumentOpenAsync(document, CancellationToken.None)
+                .ConfigureAwait(false);
 
             // run analysis
             await RunAllAnalysisAsync(analyzer, document).ConfigureAwait(false);
 
             // wait for all events to raised
-            await ((AsynchronousOperationListener)service.Listener).ExpeditedWaitAsync().ConfigureAwait(false);
+            await ((AsynchronousOperationListener)service.Listener)
+                .ExpeditedWaitAsync()
+                .ConfigureAwait(false);
 
             Assert.Equal(enabledWithEditorconfig, syntaxDiagnostic);
             Assert.Equal(enabledWithEditorconfig, semanticDiagnostic);
@@ -229,10 +340,20 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
             AdhocWorkspace workspace,
             Document document,
             Func<bool, bool, ImmutableArray<DiagnosticData>, (bool, bool)> resultSetter,
-            bool expectedSyntax, bool expectedSemantic)
+            bool expectedSyntax,
+            bool expectedSemantic
+        )
         {
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticAnalyzerService>()
+            );
             var analyzer = service.CreateIncrementalAnalyzer(workspace);
 
             var syntax = false;
@@ -241,7 +362,10 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
             // listen to events
             service.DiagnosticsUpdated += (s, a) =>
             {
-                var diagnostics = a.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode);
+                var diagnostics = a.GetPushDiagnostics(
+                    workspace,
+                    InternalDiagnosticsOptions.NormalDiagnosticMode
+                );
                 (syntax, semantic) = resultSetter(syntax, semantic, diagnostics);
             };
 
@@ -249,7 +373,9 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
             await RunAllAnalysisAsync(analyzer, document).ConfigureAwait(false);
 
             // wait for all events to raised
-            await ((AsynchronousOperationListener)service.Listener).ExpeditedWaitAsync().ConfigureAwait(false);
+            await ((AsynchronousOperationListener)service.Listener)
+                .ExpeditedWaitAsync()
+                .ConfigureAwait(false);
 
             // two should have been called.
             Assert.Equal(expectedSyntax, syntax);
@@ -261,21 +387,35 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
         {
             using var workspace = CreateWorkspace();
 
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(new OpenFileOnlyAnalyzer()));
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(new OpenFileOnlyAnalyzer())
+            );
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var project = workspace.AddProject(
-                           ProjectInfo.Create(
-                               ProjectId.CreateNewId(),
-                               VersionStamp.Create(),
-                               "CSharpProject",
-                               "CSharpProject",
-                               LanguageNames.CSharp));
+                ProjectInfo.Create(
+                    ProjectId.CreateNewId(),
+                    VersionStamp.Create(),
+                    "CSharpProject",
+                    "CSharpProject",
+                    LanguageNames.CSharp
+                )
+            );
 
             var document = workspace.AddDocument(project.Id, "Empty.cs", SourceText.From(""));
 
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticAnalyzerService>()
+            );
             var analyzer = service.CreateIncrementalAnalyzer(workspace);
 
             // listen to events
@@ -283,7 +423,10 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
             {
                 if (workspace.IsDocumentOpen(a.DocumentId))
                 {
-                    var diagnostics = a.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode);
+                    var diagnostics = a.GetPushDiagnostics(
+                        workspace,
+                        InternalDiagnosticsOptions.NormalDiagnosticMode
+                    );
                     // check the diagnostics are reported
                     Assert.Equal(document.Id, a.DocumentId);
                     Assert.Equal(1, diagnostics.Length);
@@ -293,56 +436,85 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
                 if (a.DocumentId == document.Id && !workspace.IsDocumentOpen(a.DocumentId))
                 {
                     // check the diagnostics reported are cleared
-                    var diagnostics = a.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode);
+                    var diagnostics = a.GetPushDiagnostics(
+                        workspace,
+                        InternalDiagnosticsOptions.NormalDiagnosticMode
+                    );
                     Assert.Equal(0, diagnostics.Length);
                 }
             };
 
             // open document
             workspace.OpenDocument(document.Id);
-            await analyzer.DocumentOpenAsync(document, CancellationToken.None).ConfigureAwait(false);
+            await analyzer
+                .DocumentOpenAsync(document, CancellationToken.None)
+                .ConfigureAwait(false);
 
             // cause analysis
             await RunAllAnalysisAsync(analyzer, document).ConfigureAwait(false);
 
             // close document
             workspace.CloseDocument(document.Id);
-            await analyzer.DocumentCloseAsync(document, CancellationToken.None).ConfigureAwait(false);
+            await analyzer
+                .DocumentCloseAsync(document, CancellationToken.None)
+                .ConfigureAwait(false);
 
             await RunAllAnalysisAsync(analyzer, document).ConfigureAwait(false);
 
             // wait for all events to raised
-            await ((AsynchronousOperationListener)service.Listener).ExpeditedWaitAsync().ConfigureAwait(false);
+            await ((AsynchronousOperationListener)service.Listener)
+                .ExpeditedWaitAsync()
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task TestSynchronizeWithBuild()
         {
-            using var workspace = CreateWorkspace(new[] { typeof(NoCompilationLanguageServiceFactory) });
+            using var workspace = CreateWorkspace(
+                new[] { typeof(NoCompilationLanguageServiceFactory) }
+            );
 
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(new NoNameAnalyzer()));
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(new NoNameAnalyzer())
+            );
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var language = NoCompilationConstants.LanguageName;
 
             var project = workspace.AddProject(
-                           ProjectInfo.Create(
-                               ProjectId.CreateNewId(),
-                               VersionStamp.Create(),
-                               "NoNameProject",
-                               "NoNameProject",
-                               language));
+                ProjectInfo.Create(
+                    ProjectId.CreateNewId(),
+                    VersionStamp.Create(),
+                    "NoNameProject",
+                    "NoNameProject",
+                    language
+                )
+            );
 
             var filePath = "NoNameDoc.other";
             var document = workspace.AddDocument(
                 DocumentInfo.Create(
                     DocumentId.CreateNewId(project.Id),
                     "Empty",
-                    loader: TextLoader.From(TextAndVersion.Create(SourceText.From(""), VersionStamp.Create(), filePath)),
-                    filePath: filePath));
+                    loader: TextLoader.From(
+                        TextAndVersion.Create(SourceText.From(""), VersionStamp.Create(), filePath)
+                    ),
+                    filePath: filePath
+                )
+            );
 
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticAnalyzerService>()
+            );
             var analyzer = service.CreateIncrementalAnalyzer(workspace);
 
             var syntax = false;
@@ -350,7 +522,10 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
             // listen to events
             service.DiagnosticsUpdated += (s, a) =>
             {
-                var diagnostics = a.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode);
+                var diagnostics = a.GetPushDiagnostics(
+                    workspace,
+                    InternalDiagnosticsOptions.NormalDiagnosticMode
+                );
                 switch (diagnostics.Length)
                 {
                     case 0:
@@ -371,17 +546,25 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
                 workspace,
                 ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>>.Empty.Add(
                     document.Project.Id,
-                    ImmutableArray.Create(DiagnosticData.Create(Diagnostic.Create(NoNameAnalyzer.s_syntaxRule, location), document.Project))),
+                    ImmutableArray.Create(
+                        DiagnosticData.Create(
+                            Diagnostic.Create(NoNameAnalyzer.s_syntaxRule, location),
+                            document.Project
+                        )
+                    )
+                ),
                 new TaskQueue(service.Listener, TaskScheduler.Default),
                 onBuildCompleted: true,
-                CancellationToken.None);
+                CancellationToken.None
+            );
 
             // wait for all events to raised
-            await ((AsynchronousOperationListener)service.Listener).ExpeditedWaitAsync().ConfigureAwait(false);
+            await ((AsynchronousOperationListener)service.Listener)
+                .ExpeditedWaitAsync()
+                .ConfigureAwait(false);
 
             // two should have been called.
             Assert.True(syntax);
-
             // we should reach here without crashing
         }
 
@@ -390,43 +573,61 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
         {
             using var workspace = CreateWorkspace();
 
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(
-                new Priority20Analyzer(),
-                new Priority15Analyzer(),
-                new Priority10Analyzer(),
-                new Priority1Analyzer(),
-                new Priority0Analyzer(),
-                new CSharpCompilerDiagnosticAnalyzer(),
-                new Analyzer()
-            ));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(
+                    new Priority20Analyzer(),
+                    new Priority15Analyzer(),
+                    new Priority10Analyzer(),
+                    new Priority1Analyzer(),
+                    new Priority0Analyzer(),
+                    new CSharpCompilerDiagnosticAnalyzer(),
+                    new Analyzer()
+                )
+            );
 
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var project = workspace.AddProject(
-                          ProjectInfo.Create(
-                              ProjectId.CreateNewId(),
-                              VersionStamp.Create(),
-                              "Dummy",
-                              "Dummy",
-                              LanguageNames.CSharp));
+                ProjectInfo.Create(
+                    ProjectId.CreateNewId(),
+                    VersionStamp.Create(),
+                    "Dummy",
+                    "Dummy",
+                    LanguageNames.CSharp
+                )
+            );
 
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticAnalyzerService>()
+            );
 
-            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            var incrementalAnalyzer =
+                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
             var analyzers = incrementalAnalyzer.GetAnalyzersTestOnly(project).ToArray();
 
-            AssertEx.Equal(new[]
-            {
-                typeof(FileContentLoadAnalyzer),
-                typeof(CSharpCompilerDiagnosticAnalyzer),
-                typeof(Analyzer),
-                typeof(Priority0Analyzer),
-                typeof(Priority1Analyzer),
-                typeof(Priority10Analyzer),
-                typeof(Priority15Analyzer),
-                typeof(Priority20Analyzer)
-            }, analyzers.Select(a => a.GetType()));
+            AssertEx.Equal(
+                new[]
+                {
+                    typeof(FileContentLoadAnalyzer),
+                    typeof(CSharpCompilerDiagnosticAnalyzer),
+                    typeof(Analyzer),
+                    typeof(Priority0Analyzer),
+                    typeof(Priority1Analyzer),
+                    typeof(Priority10Analyzer),
+                    typeof(Priority15Analyzer),
+                    typeof(Priority20Analyzer)
+                },
+                analyzers.Select(a => a.GetType())
+            );
         }
 
         [Fact]
@@ -436,34 +637,66 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
 
             var solution = workspace.CurrentSolution;
 
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(
-                new LeakDocumentAnalyzer(), new LeakProjectAnalyzer()));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(
+                    new LeakDocumentAnalyzer(),
+                    new LeakProjectAnalyzer()
+                )
+            );
 
-            var options = solution.Options.WithChangedOption(SolutionCrawlerOptions.BackgroundAnalysisScopeOption, LanguageNames.CSharp, BackgroundAnalysisScope.FullSolution);
-            workspace.TryApplyChanges(solution.WithOptions(options).WithAnalyzerReferences(new[] { analyzerReference }));
+            var options = solution.Options.WithChangedOption(
+                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                LanguageNames.CSharp,
+                BackgroundAnalysisScope.FullSolution
+            );
+            workspace.TryApplyChanges(
+                solution.WithOptions(options).WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var projectId = ProjectId.CreateNewId();
             var project = workspace.AddProject(
-                          ProjectInfo.Create(
-                              projectId,
-                              VersionStamp.Create(),
-                              "Dummy",
-                              "Dummy",
-                              LanguageNames.CSharp,
-                              documents: new[] {
-                                  DocumentInfo.Create(
-                                      DocumentId.CreateNewId(projectId),
-                                      "test.cs",
-                                      loader: TextLoader.From(TextAndVersion.Create(SourceText.From("class A {}"), VersionStamp.Create(), filePath: "test.cs")),
-                                      filePath: "test.cs")}));
+                ProjectInfo.Create(
+                    projectId,
+                    VersionStamp.Create(),
+                    "Dummy",
+                    "Dummy",
+                    LanguageNames.CSharp,
+                    documents: new[]
+                    {
+                        DocumentInfo.Create(
+                            DocumentId.CreateNewId(projectId),
+                            "test.cs",
+                            loader: TextLoader.From(
+                                TextAndVersion.Create(
+                                    SourceText.From("class A {}"),
+                                    VersionStamp.Create(),
+                                    filePath: "test.cs"
+                                )
+                            ),
+                            filePath: "test.cs"
+                        )
+                    }
+                )
+            );
 
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticAnalyzerService>()
+            );
 
             var called = false;
             service.DiagnosticsUpdated += (s, e) =>
             {
-                var diagnostics = e.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode);
+                var diagnostics = e.GetPushDiagnostics(
+                    workspace,
+                    InternalDiagnosticsOptions.NormalDiagnosticMode
+                );
                 if (diagnostics.Length == 0)
                 {
                     return;
@@ -475,8 +708,14 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
                 called = true;
             };
 
-            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
-            await incrementalAnalyzer.AnalyzeProjectAsync(project, semanticsChanged: true, InvocationReasons.Reanalyze, CancellationToken.None);
+            var incrementalAnalyzer =
+                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            await incrementalAnalyzer.AnalyzeProjectAsync(
+                project,
+                semanticsChanged: true,
+                InvocationReasons.Reanalyze,
+                CancellationToken.None
+            );
 
             await ((AsynchronousOperationListener)service.Listener).ExpeditedWaitAsync();
 
@@ -487,10 +726,16 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
         public async Task TestFullSolutionAnalysisForHiddenAnalyzers()
         {
             // By default, hidden analyzer does not execute in full solution analysis.
-            using var workspace = CreateWorkspaceWithProjectAndAnalyzer(new NamedTypeAnalyzer(DiagnosticSeverity.Hidden));
+            using var workspace = CreateWorkspaceWithProjectAndAnalyzer(
+                new NamedTypeAnalyzer(DiagnosticSeverity.Hidden)
+            );
             var project = workspace.CurrentSolution.Projects.Single();
 
-            await TestFullSolutionAnalysisForProjectAsync(workspace, project, expectAnalyzerExecuted: false);
+            await TestFullSolutionAnalysisForProjectAsync(
+                workspace,
+                project,
+                expectAnalyzerExecuted: false
+            );
         }
 
         [Fact, WorkItem(42353, "https://github.com/dotnet/roslyn/issues/42353")]
@@ -498,36 +743,58 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
         {
             // Escalating the analyzer to non-hidden effective severity through compilation options
             // ensures that analyzer executes in full solution analysis.
-            using var workspace = CreateWorkspaceWithProjectAndAnalyzer(new NamedTypeAnalyzer(DiagnosticSeverity.Hidden));
+            using var workspace = CreateWorkspaceWithProjectAndAnalyzer(
+                new NamedTypeAnalyzer(DiagnosticSeverity.Hidden)
+            );
             var project = workspace.CurrentSolution.Projects.Single();
 
-            var newSpecificOptions = project.CompilationOptions.SpecificDiagnosticOptions.Add(NamedTypeAnalyzer.DiagnosticId, ReportDiagnostic.Warn);
-            project = project.WithCompilationOptions(project.CompilationOptions.WithSpecificDiagnosticOptions(newSpecificOptions));
-            await TestFullSolutionAnalysisForProjectAsync(workspace, project, expectAnalyzerExecuted: true);
+            var newSpecificOptions = project.CompilationOptions.SpecificDiagnosticOptions.Add(
+                NamedTypeAnalyzer.DiagnosticId,
+                ReportDiagnostic.Warn
+            );
+            project = project.WithCompilationOptions(
+                project.CompilationOptions.WithSpecificDiagnosticOptions(newSpecificOptions)
+            );
+            await TestFullSolutionAnalysisForProjectAsync(
+                workspace,
+                project,
+                expectAnalyzerExecuted: true
+            );
         }
 
         [Fact, WorkItem(42353, "https://github.com/dotnet/roslyn/issues/42353")]
         public async Task TestFullSolutionAnalysisForHiddenAnalyzers_SeverityInAnalyzerConfigOptions()
         {
-            using var workspace = CreateWorkspaceWithProjectAndAnalyzer(new NamedTypeAnalyzer(DiagnosticSeverity.Hidden));
+            using var workspace = CreateWorkspaceWithProjectAndAnalyzer(
+                new NamedTypeAnalyzer(DiagnosticSeverity.Hidden)
+            );
             var project = workspace.CurrentSolution.Projects.Single();
 
             // Escalating the analyzer to non-hidden effective severity through analyzer config options
             // ensures that analyzer executes in full solution analysis.
-            var analyzerConfigText = $@"
+            var analyzerConfigText =
+                $@"
 [*.cs]
 dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
 ";
 
-            project = project.AddAnalyzerConfigDocument(
-                ".editorconfig",
-                text: SourceText.From(analyzerConfigText),
-                filePath: "z:\\.editorconfig").Project;
+            project =
+                project.AddAnalyzerConfigDocument(
+                    ".editorconfig",
+                    text: SourceText.From(analyzerConfigText),
+                    filePath: "z:\\.editorconfig"
+                ).Project;
 
-            await TestFullSolutionAnalysisForProjectAsync(workspace, project, expectAnalyzerExecuted: true);
+            await TestFullSolutionAnalysisForProjectAsync(
+                workspace,
+                project,
+                expectAnalyzerExecuted: true
+            );
         }
 
-        private static AdhocWorkspace CreateWorkspaceWithProjectAndAnalyzer(DiagnosticAnalyzer analyzer)
+        private static AdhocWorkspace CreateWorkspaceWithProjectAndAnalyzer(
+            DiagnosticAnalyzer analyzer
+        )
         {
             var workspace = CreateWorkspace();
             var projectId = ProjectId.CreateNewId();
@@ -535,7 +802,13 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
             var solution = workspace.CurrentSolution;
 
             solution = solution
-                .WithOptions(solution.Options.WithChangedOption(SolutionCrawlerOptions.BackgroundAnalysisScopeOption, LanguageNames.CSharp, BackgroundAnalysisScope.FullSolution))
+                .WithOptions(
+                    solution.Options.WithChangedOption(
+                        SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                        LanguageNames.CSharp,
+                        BackgroundAnalysisScope.FullSolution
+                    )
+                )
                 .AddAnalyzerReference(new AnalyzerImageReference(ImmutableArray.Create(analyzer)))
                 .AddProject(
                     ProjectInfo.Create(
@@ -545,27 +818,53 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                         "Dummy",
                         LanguageNames.CSharp,
                         filePath: "z:\\Dummy.csproj",
-                        documents: new[] {
+                        documents: new[]
+                        {
                             DocumentInfo.Create(
                                 DocumentId.CreateNewId(projectId),
                                 "test.cs",
-                                loader: TextLoader.From(TextAndVersion.Create(SourceText.From("class A {}"), VersionStamp.Create(), filePath: "test.cs")),
-                                filePath: "z:\\test.cs")}));
+                                loader: TextLoader.From(
+                                    TextAndVersion.Create(
+                                        SourceText.From("class A {}"),
+                                        VersionStamp.Create(),
+                                        filePath: "test.cs"
+                                    )
+                                ),
+                                filePath: "z:\\test.cs"
+                            )
+                        }
+                    )
+                );
 
             Assert.True(workspace.TryApplyChanges(solution));
 
             return workspace;
         }
 
-        private static async Task TestFullSolutionAnalysisForProjectAsync(AdhocWorkspace workspace, Project project, bool expectAnalyzerExecuted)
+        private static async Task TestFullSolutionAnalysisForProjectAsync(
+            AdhocWorkspace workspace,
+            Project project,
+            bool expectAnalyzerExecuted
+        )
         {
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticAnalyzerService>()
+            );
 
             var called = false;
             service.DiagnosticsUpdated += (s, e) =>
             {
-                var diagnostics = e.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode);
+                var diagnostics = e.GetPushDiagnostics(
+                    workspace,
+                    InternalDiagnosticsOptions.NormalDiagnosticMode
+                );
                 if (diagnostics.Length == 0)
                 {
                     return;
@@ -577,8 +876,16 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                 called = true;
             };
 
-            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(project.Solution.Workspace);
-            await incrementalAnalyzer.AnalyzeProjectAsync(project, semanticsChanged: true, InvocationReasons.Reanalyze, CancellationToken.None);
+            var incrementalAnalyzer =
+                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(
+                    project.Solution.Workspace
+                );
+            await incrementalAnalyzer.AnalyzeProjectAsync(
+                project,
+                semanticsChanged: true,
+                InvocationReasons.Reanalyze,
+                CancellationToken.None
+            );
 
             await ((AsynchronousOperationListener)service.Listener).ExpeditedWaitAsync();
 
@@ -586,45 +893,89 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
         }
 
         [Theory, CombinatorialData]
-        internal async Task TestAdditionalFileAnalyzer(bool registerFromInitialize, bool testMultiple, BackgroundAnalysisScope analysisScope)
+        internal async Task TestAdditionalFileAnalyzer(
+            bool registerFromInitialize,
+            bool testMultiple,
+            BackgroundAnalysisScope analysisScope
+        )
         {
             using var workspace = CreateWorkspace();
-            var options = workspace.Options.WithChangedOption(SolutionCrawlerOptions.BackgroundAnalysisScopeOption, LanguageNames.CSharp, analysisScope);
+            var options = workspace.Options.WithChangedOption(
+                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                LanguageNames.CSharp,
+                analysisScope
+            );
             workspace.SetOptions(options);
 
-            var projectInfo = ProjectInfo.Create(ProjectId.CreateNewId(), VersionStamp.Create(), "CSharpProject", "CSharpProject", LanguageNames.CSharp);
+            var projectInfo = ProjectInfo.Create(
+                ProjectId.CreateNewId(),
+                VersionStamp.Create(),
+                "CSharpProject",
+                "CSharpProject",
+                LanguageNames.CSharp
+            );
             var project = workspace.AddProject(projectInfo);
 
             var diagnosticSpan = new TextSpan(2, 2);
-            var analyzer = new AdditionalFileAnalyzer(registerFromInitialize, diagnosticSpan, id: "ID0001");
+            var analyzer = new AdditionalFileAnalyzer(
+                registerFromInitialize,
+                diagnosticSpan,
+                id: "ID0001"
+            );
             var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(analyzer);
             if (testMultiple)
             {
-                analyzer = new AdditionalFileAnalyzer2(registerFromInitialize, diagnosticSpan, id: "ID0002");
+                analyzer = new AdditionalFileAnalyzer2(
+                    registerFromInitialize,
+                    diagnosticSpan,
+                    id: "ID0002"
+                );
                 analyzers = analyzers.Add(analyzer);
             }
 
             var analyzerReference = new AnalyzerImageReference(analyzers);
-            project = project.WithAnalyzerReferences(new[] { analyzerReference })
-                .AddAdditionalDocument(name: "dummy.txt", text: "Additional File Text", filePath: "dummy.txt").Project;
+            project =
+                project
+                    .WithAnalyzerReferences(new[] { analyzerReference })
+                    .AddAdditionalDocument(
+                        name: "dummy.txt",
+                        text: "Additional File Text",
+                        filePath: "dummy.txt"
+                    ).Project;
             if (testMultiple)
             {
-                project = project.AddAdditionalDocument(name: "dummy2.txt", text: "Additional File2 Text", filePath: "dummy2.txt").Project;
+                project =
+                    project.AddAdditionalDocument(
+                        name: "dummy2.txt",
+                        text: "Additional File2 Text",
+                        filePath: "dummy2.txt"
+                    ).Project;
             }
 
             var applied = workspace.TryApplyChanges(project.Solution);
             Assert.True(applied);
 
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(((IMefHostExportProvider)workspace.Services.HostServices).GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                (
+                    (IMefHostExportProvider)workspace.Services.HostServices
+                ).GetExportedValue<IDiagnosticAnalyzerService>()
+            );
 
             var diagnostics = new ConcurrentSet<DiagnosticData>();
             service.DiagnosticsUpdated += (s, e) =>
             {
-                diagnostics.AddRange(e.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode));
+                diagnostics.AddRange(
+                    e.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode)
+                );
             };
 
-            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            var incrementalAnalyzer =
+                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
             var firstAdditionalDocument = project.AdditionalDocuments.FirstOrDefault();
 
             switch (analysisScope)
@@ -632,11 +983,20 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                 case BackgroundAnalysisScope.ActiveFile:
                 case BackgroundAnalysisScope.OpenFilesAndProjects:
                     workspace.OpenAdditionalDocument(firstAdditionalDocument.Id);
-                    await incrementalAnalyzer.AnalyzeNonSourceDocumentAsync(firstAdditionalDocument, InvocationReasons.SyntaxChanged, CancellationToken.None);
+                    await incrementalAnalyzer.AnalyzeNonSourceDocumentAsync(
+                        firstAdditionalDocument,
+                        InvocationReasons.SyntaxChanged,
+                        CancellationToken.None
+                    );
                     break;
 
                 case BackgroundAnalysisScope.FullSolution:
-                    await incrementalAnalyzer.AnalyzeProjectAsync(project, semanticsChanged: true, InvocationReasons.Reanalyze, CancellationToken.None);
+                    await incrementalAnalyzer.AnalyzeProjectAsync(
+                        project,
+                        semanticsChanged: true,
+                        InvocationReasons.Reanalyze,
+                        CancellationToken.None
+                    );
                     break;
 
                 default:
@@ -647,7 +1007,9 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
 
             var expectedCount = !testMultiple
                 ? 1
-                : analysisScope == BackgroundAnalysisScope.FullSolution ? 4 : 2;
+                : analysisScope == BackgroundAnalysisScope.FullSolution
+                    ? 4
+                    : 2;
             Assert.Equal(expectedCount, diagnostics.Count);
 
             for (var i = 0; i < analyzers.Length; i++)
@@ -656,10 +1018,15 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                 foreach (var additionalDoc in project.AdditionalDocuments)
                 {
                     var applicableDiagnostics = diagnostics.Where(
-                        d => d.Id == analyzer.Descriptor.Id && d.DataLocation.OriginalFilePath == additionalDoc.FilePath);
+                        d =>
+                            d.Id == analyzer.Descriptor.Id
+                            && d.DataLocation.OriginalFilePath == additionalDoc.FilePath
+                    );
 
-                    if (analysisScope != BackgroundAnalysisScope.FullSolution &&
-                        firstAdditionalDocument != additionalDoc)
+                    if (
+                        analysisScope != BackgroundAnalysisScope.FullSolution
+                        && firstAdditionalDocument != additionalDoc
+                    )
                     {
                         Assert.Empty(applicableDiagnostics);
                     }
@@ -677,14 +1044,19 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
 
         private class AdditionalFileAnalyzer2 : AdditionalFileAnalyzer
         {
-            public AdditionalFileAnalyzer2(bool registerFromInitialize, TextSpan diagnosticSpan, string id)
-                : base(registerFromInitialize, diagnosticSpan, id)
-            {
-            }
+            public AdditionalFileAnalyzer2(
+                bool registerFromInitialize,
+                TextSpan diagnosticSpan,
+                string id
+            ) : base(registerFromInitialize, diagnosticSpan, id) { }
         }
 
         [Theory, CombinatorialData]
-        internal async Task TestDiagnosticSuppressor(bool includeAnalyzer, bool includeSuppressor, BackgroundAnalysisScope analysisScope)
+        internal async Task TestDiagnosticSuppressor(
+            bool includeAnalyzer,
+            bool includeSuppressor,
+            BackgroundAnalysisScope analysisScope
+        )
         {
             var analyzers = ArrayBuilder<DiagnosticAnalyzer>.GetInstance();
             if (includeAnalyzer)
@@ -699,22 +1071,40 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
 
             var analyzerReference = new AnalyzerImageReference(analyzers.ToImmutableArray());
 
-            using var workspace = TestWorkspace.CreateCSharp("class A {}", composition: s_editorFeaturesCompositionWithMockDiagnosticUpdateSourceRegistrationService.AddParts(typeof(TestDocumentTrackingService)));
-            var options = workspace.Options.WithChangedOption(SolutionCrawlerOptions.BackgroundAnalysisScopeOption, LanguageNames.CSharp, analysisScope);
+            using var workspace = TestWorkspace.CreateCSharp(
+                "class A {}",
+                composition: s_editorFeaturesCompositionWithMockDiagnosticUpdateSourceRegistrationService.AddParts(
+                    typeof(TestDocumentTrackingService)
+                )
+            );
+            var options = workspace.Options.WithChangedOption(
+                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                LanguageNames.CSharp,
+                analysisScope
+            );
             workspace.SetOptions(options);
 
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var project = workspace.CurrentSolution.Projects.Single();
             var document = project.Documents.Single();
 
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(workspace.ExportProvider.GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                workspace.ExportProvider.GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
+            );
 
             DiagnosticData diagnostic = null;
             service.DiagnosticsUpdated += (s, e) =>
             {
-                var diagnostics = e.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode);
+                var diagnostics = e.GetPushDiagnostics(
+                    workspace,
+                    InternalDiagnosticsOptions.NormalDiagnosticMode
+                );
                 if (diagnostics.Length == 0)
                 {
                     return;
@@ -723,24 +1113,41 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                 diagnostic = Assert.Single(diagnostics);
             };
 
-            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            var incrementalAnalyzer =
+                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
 
             switch (analysisScope)
             {
                 case BackgroundAnalysisScope.ActiveFile:
                     workspace.OpenDocument(document.Id);
-                    var documentTrackingService = (TestDocumentTrackingService)workspace.Services.GetService<IDocumentTrackingService>();
+                    var documentTrackingService =
+                        (TestDocumentTrackingService)workspace.Services.GetService<IDocumentTrackingService>();
                     documentTrackingService.SetActiveDocument(document.Id);
-                    await incrementalAnalyzer.AnalyzeDocumentAsync(document, bodyOpt: null, InvocationReasons.SemanticChanged, CancellationToken.None);
+                    await incrementalAnalyzer.AnalyzeDocumentAsync(
+                        document,
+                        bodyOpt: null,
+                        InvocationReasons.SemanticChanged,
+                        CancellationToken.None
+                    );
                     break;
 
                 case BackgroundAnalysisScope.OpenFilesAndProjects:
                     workspace.OpenDocument(document.Id);
-                    await incrementalAnalyzer.AnalyzeDocumentAsync(document, bodyOpt: null, InvocationReasons.SemanticChanged, CancellationToken.None);
+                    await incrementalAnalyzer.AnalyzeDocumentAsync(
+                        document,
+                        bodyOpt: null,
+                        InvocationReasons.SemanticChanged,
+                        CancellationToken.None
+                    );
                     break;
 
                 case BackgroundAnalysisScope.FullSolution:
-                    await incrementalAnalyzer.AnalyzeProjectAsync(project, semanticsChanged: true, InvocationReasons.Reanalyze, CancellationToken.None);
+                    await incrementalAnalyzer.AnalyzeProjectAsync(
+                        project,
+                        semanticsChanged: true,
+                        InvocationReasons.Reanalyze,
+                        CancellationToken.None
+                    );
                     break;
             }
 
@@ -759,19 +1166,24 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
         }
 
         [Theory, CombinatorialData]
-        internal async Task TestRemoveUnnecessaryInlineSuppressionsAnalyzer(BackgroundAnalysisScope analysisScope, bool testPragma)
+        internal async Task TestRemoveUnnecessaryInlineSuppressionsAnalyzer(
+            BackgroundAnalysisScope analysisScope,
+            bool testPragma
+        )
         {
             var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(
                 new CSharpCompilerDiagnosticAnalyzer(),
                 new NamedTypeAnalyzer(),
-                new CSharpRemoveUnnecessaryInlineSuppressionsDiagnosticAnalyzer());
+                new CSharpRemoveUnnecessaryInlineSuppressionsDiagnosticAnalyzer()
+            );
 
             var analyzerReference = new AnalyzerImageReference(analyzers);
 
             string code;
             if (testPragma)
             {
-                code = $@"
+                code =
+                    $@"
 #pragma warning disable {NamedTypeAnalyzer.DiagnosticId} // Unnecessary
 #pragma warning disable CS0168 // Variable is declared but never used - Unnecessary
 
@@ -788,7 +1200,8 @@ class A
             }
             else
             {
-                code = $@"
+                code =
+                    $@"
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category1"", ""{NamedTypeAnalyzer.DiagnosticId}"")] // Necessary
 class A
 {{
@@ -803,45 +1216,80 @@ class A
 ";
             }
 
-            using var workspace = TestWorkspace.CreateCSharp(code, composition: s_editorFeaturesCompositionWithMockDiagnosticUpdateSourceRegistrationService.AddParts(typeof(TestDocumentTrackingService)));
-            var options = workspace.Options.WithChangedOption(SolutionCrawlerOptions.BackgroundAnalysisScopeOption, LanguageNames.CSharp, analysisScope);
+            using var workspace = TestWorkspace.CreateCSharp(
+                code,
+                composition: s_editorFeaturesCompositionWithMockDiagnosticUpdateSourceRegistrationService.AddParts(
+                    typeof(TestDocumentTrackingService)
+                )
+            );
+            var options = workspace.Options.WithChangedOption(
+                SolutionCrawlerOptions.BackgroundAnalysisScopeOption,
+                LanguageNames.CSharp,
+                analysisScope
+            );
             workspace.SetOptions(options);
 
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var project = workspace.CurrentSolution.Projects.Single();
             var document = project.Documents.Single();
 
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(workspace.ExportProvider.GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                workspace.ExportProvider.GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
+            );
 
             var diagnostics = ArrayBuilder<DiagnosticData>.GetInstance();
             service.DiagnosticsUpdated += (s, e) =>
             {
                 diagnostics.AddRange(
                     e.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode)
-                     .Where(d => d.Id == IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId)
-                     .OrderBy(d => d.GetTextSpan()));
+                        .Where(
+                            d => d.Id == IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId
+                        )
+                        .OrderBy(d => d.GetTextSpan())
+                );
             };
 
-            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            var incrementalAnalyzer =
+                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
 
             switch (analysisScope)
             {
                 case BackgroundAnalysisScope.ActiveFile:
                     workspace.OpenDocument(document.Id);
-                    var documentTrackingService = (TestDocumentTrackingService)workspace.Services.GetRequiredService<IDocumentTrackingService>();
+                    var documentTrackingService =
+                        (TestDocumentTrackingService)workspace.Services.GetRequiredService<IDocumentTrackingService>();
                     documentTrackingService.SetActiveDocument(document.Id);
-                    await incrementalAnalyzer.AnalyzeDocumentAsync(document, bodyOpt: null, InvocationReasons.SemanticChanged, CancellationToken.None);
+                    await incrementalAnalyzer.AnalyzeDocumentAsync(
+                        document,
+                        bodyOpt: null,
+                        InvocationReasons.SemanticChanged,
+                        CancellationToken.None
+                    );
                     break;
 
                 case BackgroundAnalysisScope.OpenFilesAndProjects:
                     workspace.OpenDocument(document.Id);
-                    await incrementalAnalyzer.AnalyzeDocumentAsync(document, bodyOpt: null, InvocationReasons.SemanticChanged, CancellationToken.None);
+                    await incrementalAnalyzer.AnalyzeDocumentAsync(
+                        document,
+                        bodyOpt: null,
+                        InvocationReasons.SemanticChanged,
+                        CancellationToken.None
+                    );
                     break;
 
                 case BackgroundAnalysisScope.FullSolution:
-                    await incrementalAnalyzer.AnalyzeProjectAsync(project, semanticsChanged: true, InvocationReasons.Reanalyze, CancellationToken.None);
+                    await incrementalAnalyzer.AnalyzeProjectAsync(
+                        project,
+                        semanticsChanged: true,
+                        InvocationReasons.Reanalyze,
+                        CancellationToken.None
+                    );
                     break;
             }
 
@@ -852,26 +1300,41 @@ class A
             if (testPragma)
             {
                 var pragma1 = root.FindTrivia(diagnostics[0].GetTextSpan().Start).ToString();
-                Assert.Equal($"#pragma warning disable {NamedTypeAnalyzer.DiagnosticId} // Unnecessary", pragma1);
+                Assert.Equal(
+                    $"#pragma warning disable {NamedTypeAnalyzer.DiagnosticId} // Unnecessary",
+                    pragma1
+                );
                 var pragma2 = root.FindTrivia(diagnostics[1].GetTextSpan().Start).ToString();
-                Assert.Equal($"#pragma warning disable CS0168 // Variable is declared but never used - Unnecessary", pragma2);
+                Assert.Equal(
+                    $"#pragma warning disable CS0168 // Variable is declared but never used - Unnecessary",
+                    pragma2
+                );
             }
             else
             {
                 var attribute1 = root.FindNode(diagnostics[0].GetTextSpan()).ToString();
-                Assert.Equal($@"System.Diagnostics.CodeAnalysis.SuppressMessage(""Category2"", ""{NamedTypeAnalyzer.DiagnosticId}"")", attribute1);
+                Assert.Equal(
+                    $@"System.Diagnostics.CodeAnalysis.SuppressMessage(""Category2"", ""{NamedTypeAnalyzer.DiagnosticId}"")",
+                    attribute1
+                );
                 var attribute2 = root.FindNode(diagnostics[1].GetTextSpan()).ToString();
-                Assert.Equal($@"System.Diagnostics.CodeAnalysis.SuppressMessage(""Category3"", ""CS0168"")", attribute2);
+                Assert.Equal(
+                    $@"System.Diagnostics.CodeAnalysis.SuppressMessage(""Category3"", ""CS0168"")",
+                    attribute2
+                );
             }
         }
 
         [Theory, CombinatorialData]
-        internal async Task TestCancellationDuringDiagnosticComputation_InProc(AnalyzerRegisterActionKind actionKind)
+        internal async Task TestCancellationDuringDiagnosticComputation_InProc(
+            AnalyzerRegisterActionKind actionKind
+        )
         {
             // This test verifies that we do no attempt to re-use CompilationWithAnalyzers instance in IDE in-proc diagnostic computation in presence of an OperationCanceledException during analysis.
             // Attempting to do so has led to large number of reliability issues and flakiness in diagnostic computation, which we want to avoid.
 
-            var source = @"
+            var source =
+                @"
 class A
 {
     void M()
@@ -880,23 +1343,38 @@ class A
     }
 }";
 
-            using var workspace = TestWorkspace.CreateCSharp(source,
-                composition: s_editorFeaturesCompositionWithMockDiagnosticUpdateSourceRegistrationService.AddParts(typeof(TestDocumentTrackingService)));
+            using var workspace = TestWorkspace.CreateCSharp(
+                source,
+                composition: s_editorFeaturesCompositionWithMockDiagnosticUpdateSourceRegistrationService.AddParts(
+                    typeof(TestDocumentTrackingService)
+                )
+            );
 
             var analyzer = new CancellationTestAnalyzer(actionKind);
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(analyzer));
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(analyzer)
+            );
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var project = workspace.CurrentSolution.Projects.Single();
             var document = project.Documents.Single();
 
-            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(workspace.ExportProvider.GetExportedValue<IDiagnosticUpdateSourceRegistrationService>());
-            var service = Assert.IsType<DiagnosticAnalyzerService>(workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>());
+            Assert.IsType<MockDiagnosticUpdateSourceRegistrationService>(
+                workspace.ExportProvider.GetExportedValue<IDiagnosticUpdateSourceRegistrationService>()
+            );
+            var service = Assert.IsType<DiagnosticAnalyzerService>(
+                workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
+            );
 
             DiagnosticData diagnostic = null;
             service.DiagnosticsUpdated += (s, e) =>
             {
-                var diagnostics = e.GetPushDiagnostics(workspace, InternalDiagnosticsOptions.NormalDiagnosticMode);
+                var diagnostics = e.GetPushDiagnostics(
+                    workspace,
+                    InternalDiagnosticsOptions.NormalDiagnosticMode
+                );
                 if (diagnostics.IsEmpty)
                 {
                     return;
@@ -906,7 +1384,8 @@ class A
                 diagnostic = Assert.Single(diagnostics);
             };
 
-            var incrementalAnalyzer = (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
+            var incrementalAnalyzer =
+                (DiagnosticIncrementalAnalyzer)service.CreateIncrementalAnalyzer(workspace);
 
             workspace.OpenDocument(document.Id);
 
@@ -916,18 +1395,26 @@ class A
             {
                 if (actionKind == AnalyzerRegisterActionKind.SyntaxTree)
                 {
-                    await incrementalAnalyzer.AnalyzeSyntaxAsync(document, InvocationReasons.SyntaxChanged, analyzer.CancellationToken);
+                    await incrementalAnalyzer.AnalyzeSyntaxAsync(
+                        document,
+                        InvocationReasons.SyntaxChanged,
+                        analyzer.CancellationToken
+                    );
                 }
                 else
                 {
-                    await incrementalAnalyzer.AnalyzeDocumentAsync(document, bodyOpt: null, InvocationReasons.SemanticChanged, analyzer.CancellationToken);
+                    await incrementalAnalyzer.AnalyzeDocumentAsync(
+                        document,
+                        bodyOpt: null,
+                        InvocationReasons.SemanticChanged,
+                        analyzer.CancellationToken
+                    );
                 }
 
                 throw ExceptionUtilities.Unreachable;
             }
-            catch (OperationCanceledException ex) when (ex.CancellationToken == analyzer.CancellationToken)
-            {
-            }
+            catch (OperationCanceledException ex)
+                when (ex.CancellationToken == analyzer.CancellationToken) { }
 
             Assert.Single(analyzer.CanceledCompilations);
             Assert.Null(diagnostic);
@@ -935,11 +1422,20 @@ class A
             // Then invoke analysis without cancellation token, and verify non-cancelled diagnostic.
             if (actionKind == AnalyzerRegisterActionKind.SyntaxTree)
             {
-                await incrementalAnalyzer.AnalyzeSyntaxAsync(document, InvocationReasons.SyntaxChanged, CancellationToken.None);
+                await incrementalAnalyzer.AnalyzeSyntaxAsync(
+                    document,
+                    InvocationReasons.SyntaxChanged,
+                    CancellationToken.None
+                );
             }
             else
             {
-                await incrementalAnalyzer.AnalyzeDocumentAsync(document, bodyOpt: null, InvocationReasons.SemanticChanged, CancellationToken.None);
+                await incrementalAnalyzer.AnalyzeDocumentAsync(
+                    document,
+                    bodyOpt: null,
+                    InvocationReasons.SemanticChanged,
+                    CancellationToken.None
+                );
             }
 
             await ((AsynchronousOperationListener)service.Listener).ExpeditedWaitAsync();
@@ -950,22 +1446,43 @@ class A
 
         [Theory, CombinatorialData]
         [WorkItem(49698, "https://github.com/dotnet/roslyn/issues/49698")]
-        internal async Task TestOnlyRequiredAnalyzerExecutedDuringDiagnosticComputation(bool documentAnalysis)
+        internal async Task TestOnlyRequiredAnalyzerExecutedDuringDiagnosticComputation(
+            bool documentAnalysis
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp("class A { }");
 
             // Verify that requesting analyzer diagnostics for analyzer1 does not lead to invoking analyzer2.
-            var analyzer1 = new NamedTypeAnalyzerWithConfigurableEnabledByDefault(isEnabledByDefault: true, DiagnosticSeverity.Warning, throwOnAllNamedTypes: false);
+            var analyzer1 = new NamedTypeAnalyzerWithConfigurableEnabledByDefault(
+                isEnabledByDefault: true,
+                DiagnosticSeverity.Warning,
+                throwOnAllNamedTypes: false
+            );
             var analyzer1Id = analyzer1.GetAnalyzerId();
             var analyzer2 = new NamedTypeAnalyzer();
             var analyzerIdsToRequestDiagnostics = new[] { analyzer1Id };
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(analyzer1, analyzer2));
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(analyzer1, analyzer2)
+            );
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
             var project = workspace.CurrentSolution.Projects.Single();
             var documentId = documentAnalysis ? project.Documents.Single().Id : null;
-            var diagnosticComputer = new DiagnosticComputer(documentId, project, span: null, AnalysisKind.Semantic, new DiagnosticAnalyzerInfoCache());
-            var diagnosticsMapResults = await diagnosticComputer.GetDiagnosticsAsync(analyzerIdsToRequestDiagnostics, reportSuppressedDiagnostics: false,
-                logPerformanceInfo: false, getTelemetryInfo: false, cancellationToken: CancellationToken.None);
+            var diagnosticComputer = new DiagnosticComputer(
+                documentId,
+                project,
+                span: null,
+                AnalysisKind.Semantic,
+                new DiagnosticAnalyzerInfoCache()
+            );
+            var diagnosticsMapResults = await diagnosticComputer.GetDiagnosticsAsync(
+                analyzerIdsToRequestDiagnostics,
+                reportSuppressedDiagnostics: false,
+                logPerformanceInfo: false,
+                getTelemetryInfo: false,
+                cancellationToken: CancellationToken.None
+            );
             Assert.False(analyzer2.ReceivedSymbolCallback);
 
             Assert.Equal(1, diagnosticsMapResults.Diagnostics.Length);
@@ -982,14 +1499,17 @@ class A
         }
 
         [Theory, CombinatorialData]
-        internal async Task TestCancellationDuringDiagnosticComputation_OutOfProc(AnalyzerRegisterActionKind actionKind)
+        internal async Task TestCancellationDuringDiagnosticComputation_OutOfProc(
+            AnalyzerRegisterActionKind actionKind
+        )
         {
             // This test verifies that we do no attempt to re-use CompilationWithAnalyzers instance in IDE OutOfProc diagnostic computation in presence of an OperationCanceledException during analysis.
             // Attempting to do so has led to large number of reliability issues and flakiness in diagnostic computation, which we want to avoid.
             // NOTE: Unfortunately, we cannot perform an end-to-end OutOfProc test, similar to the InProc test above because AnalyzerImageReference is not serializable.
             //       So, we perform a very targeted test which directly uses the 'DiagnosticComputer' type that is used for all OutOfProc diagnostic computation.
 
-            var source = @"
+            var source =
+                @"
 class A
 {
     void M()
@@ -1001,37 +1521,62 @@ class A
             using var workspace = TestWorkspace.CreateCSharp(source);
 
             var analyzer = new CancellationTestAnalyzer(actionKind);
-            var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create<DiagnosticAnalyzer>(analyzer));
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            var analyzerReference = new AnalyzerImageReference(
+                ImmutableArray.Create<DiagnosticAnalyzer>(analyzer)
+            );
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             var project = workspace.CurrentSolution.Projects.Single();
             var document = project.Documents.Single();
             var diagnosticAnalyzerInfoCache = new DiagnosticAnalyzerInfoCache();
 
-            var kind = actionKind == AnalyzerRegisterActionKind.SyntaxTree ? AnalysisKind.Syntax : AnalysisKind.Semantic;
-            var diagnosticComputer = new DiagnosticComputer(document.Id, project, span: null, kind, diagnosticAnalyzerInfoCache);
+            var kind =
+                actionKind == AnalyzerRegisterActionKind.SyntaxTree
+                    ? AnalysisKind.Syntax
+                    : AnalysisKind.Semantic;
+            var diagnosticComputer = new DiagnosticComputer(
+                document.Id,
+                project,
+                span: null,
+                kind,
+                diagnosticAnalyzerInfoCache
+            );
             var analyzerIds = new[] { analyzer.GetAnalyzerId() };
 
             // First invoke analysis with cancellation token, and verify canceled compilation and no reported diagnostics.
             Assert.Empty(analyzer.CanceledCompilations);
             try
             {
-                _ = await diagnosticComputer.GetDiagnosticsAsync(analyzerIds, reportSuppressedDiagnostics: false,
-                    logPerformanceInfo: false, getTelemetryInfo: false, cancellationToken: analyzer.CancellationToken);
+                _ = await diagnosticComputer.GetDiagnosticsAsync(
+                    analyzerIds,
+                    reportSuppressedDiagnostics: false,
+                    logPerformanceInfo: false,
+                    getTelemetryInfo: false,
+                    cancellationToken: analyzer.CancellationToken
+                );
 
                 throw ExceptionUtilities.Unreachable;
             }
-            catch (OperationCanceledException ex) when (ex.CancellationToken == analyzer.CancellationToken)
-            {
-            }
+            catch (OperationCanceledException ex)
+                when (ex.CancellationToken == analyzer.CancellationToken) { }
 
             Assert.Single(analyzer.CanceledCompilations);
 
             // Then invoke analysis without cancellation token, and verify non-cancelled diagnostic.
-            var diagnosticsMap = await diagnosticComputer.GetDiagnosticsAsync(analyzerIds, reportSuppressedDiagnostics: false,
-                logPerformanceInfo: false, getTelemetryInfo: false, cancellationToken: CancellationToken.None);
+            var diagnosticsMap = await diagnosticComputer.GetDiagnosticsAsync(
+                analyzerIds,
+                reportSuppressedDiagnostics: false,
+                logPerformanceInfo: false,
+                getTelemetryInfo: false,
+                cancellationToken: CancellationToken.None
+            );
             var builder = diagnosticsMap.Diagnostics.Single().diagnosticMap;
-            var diagnostic = kind == AnalysisKind.Syntax ? builder.Syntax.Single().Item2.Single() : builder.Semantic.Single().Item2.Single();
+            var diagnostic =
+                kind == AnalysisKind.Syntax
+                    ? builder.Syntax.Single().Item2.Single()
+                    : builder.Semantic.Single().Item2.Single();
             Assert.Equal(CancellationTestAnalyzer.NonCanceledDiagnosticId, diagnostic.Id);
         }
 
@@ -1049,10 +1594,23 @@ class A
         {
             public const string CanceledDiagnosticId = "CanceledId";
             public const string NonCanceledDiagnosticId = "NonCanceledId";
-            private readonly DiagnosticDescriptor s_canceledDescriptor =
-                new DiagnosticDescriptor(CanceledDiagnosticId, "test", "test", "test", DiagnosticSeverity.Warning, isEnabledByDefault: true);
+            private readonly DiagnosticDescriptor s_canceledDescriptor = new DiagnosticDescriptor(
+                CanceledDiagnosticId,
+                "test",
+                "test",
+                "test",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
             private readonly DiagnosticDescriptor s_nonCanceledDescriptor =
-                new DiagnosticDescriptor(NonCanceledDiagnosticId, "test", "test", "test", DiagnosticSeverity.Warning, isEnabledByDefault: true);
+                new DiagnosticDescriptor(
+                    NonCanceledDiagnosticId,
+                    "test",
+                    "test",
+                    "test",
+                    DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
             private readonly AnalyzerRegisterActionKind _actionKind;
             private readonly CancellationTokenSource _cancellationTokenSource;
@@ -1067,7 +1625,8 @@ class A
             public CancellationToken CancellationToken => _cancellationTokenSource.Token;
             public ConcurrentSet<Compilation> CanceledCompilations { get; }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s_canceledDescriptor, s_nonCanceledDescriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(s_canceledDescriptor, s_nonCanceledDescriptor);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -1079,24 +1638,72 @@ class A
                 switch (_actionKind)
                 {
                     case AnalyzerRegisterActionKind.SyntaxTree:
-                        context.RegisterSyntaxTreeAction(syntaxContext => HandleCallback(syntaxContext.Tree.GetRoot().GetLocation(), context.Compilation, syntaxContext.ReportDiagnostic, syntaxContext.CancellationToken));
+                        context.RegisterSyntaxTreeAction(
+                            syntaxContext =>
+                                HandleCallback(
+                                    syntaxContext.Tree.GetRoot().GetLocation(),
+                                    context.Compilation,
+                                    syntaxContext.ReportDiagnostic,
+                                    syntaxContext.CancellationToken
+                                )
+                        );
                         break;
                     case AnalyzerRegisterActionKind.SyntaxNode:
-                        context.RegisterSyntaxNodeAction(context => HandleCallback(context.Node.GetLocation(), context.Compilation, context.ReportDiagnostic, context.CancellationToken), CodeAnalysis.CSharp.SyntaxKind.ClassDeclaration);
+                        context.RegisterSyntaxNodeAction(
+                            context =>
+                                HandleCallback(
+                                    context.Node.GetLocation(),
+                                    context.Compilation,
+                                    context.ReportDiagnostic,
+                                    context.CancellationToken
+                                ),
+                            CodeAnalysis.CSharp.SyntaxKind.ClassDeclaration
+                        );
                         break;
                     case AnalyzerRegisterActionKind.Symbol:
-                        context.RegisterSymbolAction(context => HandleCallback(context.Symbol.Locations[0], context.Compilation, context.ReportDiagnostic, context.CancellationToken), SymbolKind.NamedType);
+                        context.RegisterSymbolAction(
+                            context =>
+                                HandleCallback(
+                                    context.Symbol.Locations[0],
+                                    context.Compilation,
+                                    context.ReportDiagnostic,
+                                    context.CancellationToken
+                                ),
+                            SymbolKind.NamedType
+                        );
                         break;
                     case AnalyzerRegisterActionKind.Operation:
-                        context.RegisterOperationAction(context => HandleCallback(context.Operation.Syntax.GetLocation(), context.Compilation, context.ReportDiagnostic, context.CancellationToken), OperationKind.VariableDeclaration);
+                        context.RegisterOperationAction(
+                            context =>
+                                HandleCallback(
+                                    context.Operation.Syntax.GetLocation(),
+                                    context.Compilation,
+                                    context.ReportDiagnostic,
+                                    context.CancellationToken
+                                ),
+                            OperationKind.VariableDeclaration
+                        );
                         break;
                     case AnalyzerRegisterActionKind.SemanticModel:
-                        context.RegisterSemanticModelAction(context => HandleCallback(context.SemanticModel.SyntaxTree.GetRoot().GetLocation(), context.SemanticModel.Compilation, context.ReportDiagnostic, context.CancellationToken));
+                        context.RegisterSemanticModelAction(
+                            context =>
+                                HandleCallback(
+                                    context.SemanticModel.SyntaxTree.GetRoot().GetLocation(),
+                                    context.SemanticModel.Compilation,
+                                    context.ReportDiagnostic,
+                                    context.CancellationToken
+                                )
+                        );
                         break;
                 }
             }
 
-            private void HandleCallback(Location analysisLocation, Compilation compilation, Action<Diagnostic> reportDiagnostic, CancellationToken cancellationToken)
+            private void HandleCallback(
+                Location analysisLocation,
+                Compilation compilation,
+                Action<Diagnostic> reportDiagnostic,
+                CancellationToken cancellationToken
+            )
             {
                 // Mimic cancellation by throwing an OperationCanceledException in first callback.
                 if (!_cancellationTokenSource.IsCancellationRequested)
@@ -1113,7 +1720,9 @@ class A
                 }
 
                 // Report diagnostic in the second callback.
-                var descriptor = CanceledCompilations.Contains(compilation) ? s_canceledDescriptor : s_nonCanceledDescriptor;
+                var descriptor = CanceledCompilations.Contains(compilation)
+                    ? s_canceledDescriptor
+                    : s_nonCanceledDescriptor;
                 reportDiagnostic(Diagnostic.Create(descriptor, analysisLocation));
             }
         }
@@ -1121,17 +1730,29 @@ class A
         private static Document GetDocumentFromIncompleteProject(AdhocWorkspace workspace)
         {
             var project = workspace.AddProject(
-                            ProjectInfo.Create(
-                                ProjectId.CreateNewId(),
-                                VersionStamp.Create(),
-                                "CSharpProject",
-                                "CSharpProject",
-                                LanguageNames.CSharp).WithHasAllInformation(hasAllInformation: false));
+                ProjectInfo
+                    .Create(
+                        ProjectId.CreateNewId(),
+                        VersionStamp.Create(),
+                        "CSharpProject",
+                        "CSharpProject",
+                        LanguageNames.CSharp
+                    )
+                    .WithHasAllInformation(hasAllInformation: false)
+            );
 
-            return workspace.AddDocument(project.Id, "Empty.cs", SourceText.From("class A { B B {get} }"));
+            return workspace.AddDocument(
+                project.Id,
+                "Empty.cs",
+                SourceText.From("class A { B B {get} }")
+            );
         }
 
-        private static (bool, bool) AnalyzerResultSetter(bool syntax, bool semantic, ImmutableArray<DiagnosticData> diagnostics)
+        private static (bool, bool) AnalyzerResultSetter(
+            bool syntax,
+            bool semantic,
+            ImmutableArray<DiagnosticData> diagnostics
+        )
         {
             switch (diagnostics.Length)
             {
@@ -1149,7 +1770,11 @@ class A
             return (syntax, semantic);
         }
 
-        private static (bool, bool) CompilerAnalyzerResultSetter(bool syntax, bool semantic, ImmutableArray<DiagnosticData> diagnostics)
+        private static (bool, bool) CompilerAnalyzerResultSetter(
+            bool syntax,
+            bool semantic,
+            ImmutableArray<DiagnosticData> diagnostics
+        )
         {
             syntax |= diagnostics.Any(d => d.Properties["Origin"] == "Syntactic");
             semantic |= diagnostics.Any(d => d.Properties["Origin"] != "Syntactic");
@@ -1157,80 +1782,229 @@ class A
             return (syntax, semantic);
         }
 
-        private static async Task RunAllAnalysisAsync(IIncrementalAnalyzer analyzer, TextDocument textDocument)
+        private static async Task RunAllAnalysisAsync(
+            IIncrementalAnalyzer analyzer,
+            TextDocument textDocument
+        )
         {
             if (textDocument is Document document)
             {
-                await analyzer.AnalyzeSyntaxAsync(document, InvocationReasons.Empty, CancellationToken.None).ConfigureAwait(false);
-                await analyzer.AnalyzeDocumentAsync(document, bodyOpt: null, reasons: InvocationReasons.Empty, cancellationToken: CancellationToken.None).ConfigureAwait(false);
+                await analyzer
+                    .AnalyzeSyntaxAsync(document, InvocationReasons.Empty, CancellationToken.None)
+                    .ConfigureAwait(false);
+                await analyzer
+                    .AnalyzeDocumentAsync(
+                        document,
+                        bodyOpt: null,
+                        reasons: InvocationReasons.Empty,
+                        cancellationToken: CancellationToken.None
+                    )
+                    .ConfigureAwait(false);
             }
             else if (analyzer is IIncrementalAnalyzer2 analyzer2)
             {
-                await analyzer2.AnalyzeNonSourceDocumentAsync(textDocument, InvocationReasons.Empty, CancellationToken.None).ConfigureAwait(false);
+                await analyzer2
+                    .AnalyzeNonSourceDocumentAsync(
+                        textDocument,
+                        InvocationReasons.Empty,
+                        CancellationToken.None
+                    )
+                    .ConfigureAwait(false);
             }
 
-            await analyzer.AnalyzeProjectAsync(textDocument.Project, semanticsChanged: true, reasons: InvocationReasons.Empty, cancellationToken: CancellationToken.None).ConfigureAwait(false);
+            await analyzer
+                .AnalyzeProjectAsync(
+                    textDocument.Project,
+                    semanticsChanged: true,
+                    reasons: InvocationReasons.Empty,
+                    cancellationToken: CancellationToken.None
+                )
+                .ConfigureAwait(false);
         }
 
         private class Analyzer : DiagnosticAnalyzer
         {
-            internal static readonly DiagnosticDescriptor s_syntaxRule = new DiagnosticDescriptor("syntax", "test", "test", "test", DiagnosticSeverity.Error, isEnabledByDefault: true);
-            internal static readonly DiagnosticDescriptor s_semanticRule = new DiagnosticDescriptor("semantic", "test", "test", "test", DiagnosticSeverity.Error, isEnabledByDefault: true);
-            internal static readonly DiagnosticDescriptor s_compilationRule = new DiagnosticDescriptor("compilation", "test", "test", "test", DiagnosticSeverity.Error, isEnabledByDefault: true);
+            internal static readonly DiagnosticDescriptor s_syntaxRule = new DiagnosticDescriptor(
+                "syntax",
+                "test",
+                "test",
+                "test",
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true
+            );
+            internal static readonly DiagnosticDescriptor s_semanticRule = new DiagnosticDescriptor(
+                "semantic",
+                "test",
+                "test",
+                "test",
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true
+            );
+            internal static readonly DiagnosticDescriptor s_compilationRule =
+                new DiagnosticDescriptor(
+                    "compilation",
+                    "test",
+                    "test",
+                    "test",
+                    DiagnosticSeverity.Error,
+                    isEnabledByDefault: true
+                );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s_syntaxRule, s_semanticRule, s_compilationRule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(s_syntaxRule, s_semanticRule, s_compilationRule);
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(c => c.ReportDiagnostic(Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())));
-                context.RegisterSemanticModelAction(c => c.ReportDiagnostic(Diagnostic.Create(s_semanticRule, c.SemanticModel.SyntaxTree.GetRoot().GetLocation())));
-                context.RegisterCompilationAction(c => c.ReportDiagnostic(Diagnostic.Create(s_compilationRule, c.Compilation.SyntaxTrees.First().GetRoot().GetLocation())));
+                context.RegisterSyntaxTreeAction(
+                    c =>
+                        c.ReportDiagnostic(
+                            Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())
+                        )
+                );
+                context.RegisterSemanticModelAction(
+                    c =>
+                        c.ReportDiagnostic(
+                            Diagnostic.Create(
+                                s_semanticRule,
+                                c.SemanticModel.SyntaxTree.GetRoot().GetLocation()
+                            )
+                        )
+                );
+                context.RegisterCompilationAction(
+                    c =>
+                        c.ReportDiagnostic(
+                            Diagnostic.Create(
+                                s_compilationRule,
+                                c.Compilation.SyntaxTrees.First().GetRoot().GetLocation()
+                            )
+                        )
+                );
             }
         }
 
         private class DisabledByDefaultAnalyzer : DiagnosticAnalyzer
         {
-            internal static readonly DiagnosticDescriptor s_syntaxRule = new DiagnosticDescriptor("syntax", "test", "test", "test", DiagnosticSeverity.Error, isEnabledByDefault: false);
-            internal static readonly DiagnosticDescriptor s_semanticRule = new DiagnosticDescriptor("semantic", "test", "test", "test", DiagnosticSeverity.Error, isEnabledByDefault: false);
-            internal static readonly DiagnosticDescriptor s_compilationRule = new DiagnosticDescriptor("compilation", "test", "test", "test", DiagnosticSeverity.Error, isEnabledByDefault: false);
+            internal static readonly DiagnosticDescriptor s_syntaxRule = new DiagnosticDescriptor(
+                "syntax",
+                "test",
+                "test",
+                "test",
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: false
+            );
+            internal static readonly DiagnosticDescriptor s_semanticRule = new DiagnosticDescriptor(
+                "semantic",
+                "test",
+                "test",
+                "test",
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: false
+            );
+            internal static readonly DiagnosticDescriptor s_compilationRule =
+                new DiagnosticDescriptor(
+                    "compilation",
+                    "test",
+                    "test",
+                    "test",
+                    DiagnosticSeverity.Error,
+                    isEnabledByDefault: false
+                );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s_syntaxRule, s_semanticRule, s_compilationRule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(s_syntaxRule, s_semanticRule, s_compilationRule);
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(c => c.ReportDiagnostic(Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())));
-                context.RegisterSemanticModelAction(c => c.ReportDiagnostic(Diagnostic.Create(s_semanticRule, c.SemanticModel.SyntaxTree.GetRoot().GetLocation())));
-                context.RegisterCompilationAction(c => c.ReportDiagnostic(Diagnostic.Create(s_compilationRule, c.Compilation.SyntaxTrees.First().GetRoot().GetLocation())));
+                context.RegisterSyntaxTreeAction(
+                    c =>
+                        c.ReportDiagnostic(
+                            Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())
+                        )
+                );
+                context.RegisterSemanticModelAction(
+                    c =>
+                        c.ReportDiagnostic(
+                            Diagnostic.Create(
+                                s_semanticRule,
+                                c.SemanticModel.SyntaxTree.GetRoot().GetLocation()
+                            )
+                        )
+                );
+                context.RegisterCompilationAction(
+                    c =>
+                        c.ReportDiagnostic(
+                            Diagnostic.Create(
+                                s_compilationRule,
+                                c.Compilation.SyntaxTrees.First().GetRoot().GetLocation()
+                            )
+                        )
+                );
             }
         }
 
         private class OpenFileOnlyAnalyzer : DiagnosticAnalyzer, IBuiltInAnalyzer
         {
-            internal static readonly DiagnosticDescriptor s_syntaxRule = new DiagnosticDescriptor("syntax", "test", "test", "test", DiagnosticSeverity.Error, isEnabledByDefault: true);
+            internal static readonly DiagnosticDescriptor s_syntaxRule = new DiagnosticDescriptor(
+                "syntax",
+                "test",
+                "test",
+                "test",
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s_syntaxRule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(s_syntaxRule);
 
-            public override void Initialize(AnalysisContext context)
-                => context.RegisterSyntaxTreeAction(c => c.ReportDiagnostic(Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())));
+            public override void Initialize(AnalysisContext context) =>
+                context.RegisterSyntaxTreeAction(
+                    c =>
+                        c.ReportDiagnostic(
+                            Diagnostic.Create(s_syntaxRule, c.Tree.GetRoot().GetLocation())
+                        )
+                );
 
-            public DiagnosticAnalyzerCategory GetAnalyzerCategory()
-                => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+            public DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+                DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
-            public bool OpenFileOnly(CodeAnalysis.Options.OptionSet options)
-                => true;
+            public bool OpenFileOnly(CodeAnalysis.Options.OptionSet options) => true;
         }
 
         private class NoNameAnalyzer : DocumentDiagnosticAnalyzer
         {
-            internal static readonly DiagnosticDescriptor s_syntaxRule = new DiagnosticDescriptor("syntax", "test", "test", "test", DiagnosticSeverity.Error, isEnabledByDefault: true);
+            internal static readonly DiagnosticDescriptor s_syntaxRule = new DiagnosticDescriptor(
+                "syntax",
+                "test",
+                "test",
+                "test",
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s_syntaxRule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(s_syntaxRule);
 
-            public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken)
-                => Task.FromResult(ImmutableArray.Create(Diagnostic.Create(s_syntaxRule, Location.Create(document.FilePath, TextSpan.FromBounds(0, 0), new LinePositionSpan(new LinePosition(0, 0), new LinePosition(0, 0))))));
+            public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) =>
+                Task.FromResult(
+                    ImmutableArray.Create(
+                        Diagnostic.Create(
+                            s_syntaxRule,
+                            Location.Create(
+                                document.FilePath,
+                                TextSpan.FromBounds(0, 0),
+                                new LinePositionSpan(new LinePosition(0, 0), new LinePosition(0, 0))
+                            )
+                        )
+                    )
+                );
 
-            public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken)
-                => SpecializedTasks.Default<ImmutableArray<Diagnostic>>();
+            public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => SpecializedTasks.Default<ImmutableArray<Diagnostic>>();
         }
 
         private class Priority20Analyzer : PriorityTestDocumentDiagnosticAnalyzer
@@ -1260,49 +2034,81 @@ class A
 
         private class PriorityTestDocumentDiagnosticAnalyzer : DocumentDiagnosticAnalyzer
         {
-            protected PriorityTestDocumentDiagnosticAnalyzer(int priority)
-                => Priority = priority;
+            protected PriorityTestDocumentDiagnosticAnalyzer(int priority) => Priority = priority;
 
             public override int Priority { get; }
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray<DiagnosticDescriptor>.Empty;
-            public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken)
-                => Task.FromResult(ImmutableArray<Diagnostic>.Empty);
-            public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken)
-                => Task.FromResult(ImmutableArray<Diagnostic>.Empty);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray<DiagnosticDescriptor>.Empty;
+            public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => Task.FromResult(ImmutableArray<Diagnostic>.Empty);
+            public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => Task.FromResult(ImmutableArray<Diagnostic>.Empty);
         }
 
         private class PriorityTestProjectDiagnosticAnalyzer : ProjectDiagnosticAnalyzer
         {
-            protected PriorityTestProjectDiagnosticAnalyzer(int priority)
-                => Priority = priority;
+            protected PriorityTestProjectDiagnosticAnalyzer(int priority) => Priority = priority;
 
             public override int Priority { get; }
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray<DiagnosticDescriptor>.Empty;
-            public override Task<ImmutableArray<Diagnostic>> AnalyzeProjectAsync(Project project, CancellationToken cancellationToken)
-                => Task.FromResult(ImmutableArray<Diagnostic>.Empty);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray<DiagnosticDescriptor>.Empty;
+            public override Task<ImmutableArray<Diagnostic>> AnalyzeProjectAsync(
+                Project project,
+                CancellationToken cancellationToken
+            ) => Task.FromResult(ImmutableArray<Diagnostic>.Empty);
         }
 
         private class LeakDocumentAnalyzer : DocumentDiagnosticAnalyzer
         {
-            internal static readonly DiagnosticDescriptor s_syntaxRule = new DiagnosticDescriptor("leak", "test", "test", "test", DiagnosticSeverity.Error, isEnabledByDefault: true);
+            internal static readonly DiagnosticDescriptor s_syntaxRule = new DiagnosticDescriptor(
+                "leak",
+                "test",
+                "test",
+                "test",
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s_syntaxRule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(s_syntaxRule);
 
-            public override async Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken)
+            public override async Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+                Document document,
+                CancellationToken cancellationToken
+            )
             {
-                var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await document
+                    .GetSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 return ImmutableArray.Create(Diagnostic.Create(s_syntaxRule, root.GetLocation()));
             }
 
-            public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken)
-                => SpecializedTasks.Default<ImmutableArray<Diagnostic>>();
+            public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+                Document document,
+                CancellationToken cancellationToken
+            ) => SpecializedTasks.Default<ImmutableArray<Diagnostic>>();
         }
 
         private class LeakProjectAnalyzer : ProjectDiagnosticAnalyzer
         {
-            private static readonly DiagnosticDescriptor s_rule = new DiagnosticDescriptor("project", "test", "test", "test", DiagnosticSeverity.Error, isEnabledByDefault: true);
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s_rule);
-            public override Task<ImmutableArray<Diagnostic>> AnalyzeProjectAsync(Project project, CancellationToken cancellationToken) => SpecializedTasks.Default<ImmutableArray<Diagnostic>>();
+            private static readonly DiagnosticDescriptor s_rule = new DiagnosticDescriptor(
+                "project",
+                "test",
+                "test",
+                "test",
+                DiagnosticSeverity.Error,
+                isEnabledByDefault: true
+            );
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(s_rule);
+            public override Task<ImmutableArray<Diagnostic>> AnalyzeProjectAsync(
+                Project project,
+                CancellationToken cancellationToken
+            ) => SpecializedTasks.Default<ImmutableArray<Diagnostic>>();
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -1311,19 +2117,36 @@ class A
             public const string DiagnosticId = "test";
             private readonly ImmutableArray<DiagnosticDescriptor> _supportedDiagnostics;
 
-            public NamedTypeAnalyzer(DiagnosticSeverity defaultSeverity = DiagnosticSeverity.Warning)
-                => _supportedDiagnostics = ImmutableArray.Create(new DiagnosticDescriptor(DiagnosticId, "test", "test", "test", defaultSeverity, isEnabledByDefault: true));
+            public NamedTypeAnalyzer(
+                DiagnosticSeverity defaultSeverity = DiagnosticSeverity.Warning
+            ) =>
+                _supportedDiagnostics = ImmutableArray.Create(
+                    new DiagnosticDescriptor(
+                        DiagnosticId,
+                        "test",
+                        "test",
+                        "test",
+                        defaultSeverity,
+                        isEnabledByDefault: true
+                    )
+                );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => _supportedDiagnostics;
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                _supportedDiagnostics;
             public bool ReceivedSymbolCallback { get; private set; }
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSymbolAction(c =>
-                {
-                    ReceivedSymbolCallback = true;
-                    c.ReportDiagnostic(Diagnostic.Create(_supportedDiagnostics[0], c.Symbol.Locations[0]));
-                }, SymbolKind.NamedType);
+                context.RegisterSymbolAction(
+                    c =>
+                    {
+                        ReceivedSymbolCallback = true;
+                        c.ReportDiagnostic(
+                            Diagnostic.Create(_supportedDiagnostics[0], c.Symbol.Locations[0])
+                        );
+                    },
+                    SymbolKind.NamedType
+                );
             }
         }
     }

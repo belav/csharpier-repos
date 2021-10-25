@@ -13,7 +13,10 @@ namespace Microsoft.AspNetCore.Razor.Language
     /// </summary>
     public abstract class TagHelperDocumentContext
     {
-        public static TagHelperDocumentContext Create(string prefix, IEnumerable<TagHelperDescriptor> tagHelpers)
+        public static TagHelperDocumentContext Create(
+            string prefix,
+            IEnumerable<TagHelperDescriptor> tagHelpers
+        )
         {
             if (tagHelpers == null)
             {

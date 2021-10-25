@@ -21,8 +21,7 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 UserAgent = "X-SignalR-User-Agent";
             }
 
-            var assemblyVersion = typeof(Constants)
-                .Assembly
+            var assemblyVersion = typeof(Constants).Assembly
                 .GetCustomAttributes<AssemblyInformationalVersionAttribute>()
                 .FirstOrDefault();
 
@@ -31,7 +30,13 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             var runtime = ".NET";
             var runtimeVersion = RuntimeInformation.FrameworkDescription;
 
-            UserAgentHeader = ConstructUserAgent(typeof(Constants).Assembly.GetName().Version!, assemblyVersion.InformationalVersion, GetOS(), runtime, runtimeVersion);
+            UserAgentHeader = ConstructUserAgent(
+                typeof(Constants).Assembly.GetName().Version!,
+                assemblyVersion.InformationalVersion,
+                GetOS(),
+                runtime,
+                runtimeVersion
+            );
         }
 
         private static string GetOS()
@@ -54,7 +59,13 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             }
         }
 
-        public static string ConstructUserAgent(Version version, string detailedVersion, string os, string runtime, string runtimeVersion)
+        public static string ConstructUserAgent(
+            Version version,
+            string detailedVersion,
+            string os,
+            string runtime,
+            string runtimeVersion
+        )
         {
             var userAgent = $"Microsoft SignalR/{version.Major}.{version.Minor} (";
 

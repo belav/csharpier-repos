@@ -25,13 +25,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             Verify = new Verifier<TextViewWindow_OutOfProc>(this, visualStudioInstance);
         }
 
-        internal abstract TextViewWindow_InProc CreateInProcComponent(VisualStudioInstance visualStudioInstance);
+        internal abstract TextViewWindow_InProc CreateInProcComponent(
+            VisualStudioInstance visualStudioInstance
+        );
 
-        public int GetCaretPosition()
-            => _textViewWindowInProc.GetCaretPosition();
+        public int GetCaretPosition() => _textViewWindowInProc.GetCaretPosition();
 
-        public int GetCaretColumn()
-            => _textViewWindowInProc.GetCaretColumn();
+        public int GetCaretColumn() => _textViewWindowInProc.GetCaretColumn();
 
         public string[] GetCompletionItems()
         {
@@ -39,42 +39,39 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             return _textViewWindowInProc.GetCompletionItems();
         }
 
-        public int GetVisibleColumnCount()
-            => _textViewWindowInProc.GetVisibleColumnCount();
+        public int GetVisibleColumnCount() => _textViewWindowInProc.GetVisibleColumnCount();
 
         public void PlaceCaret(
             string marker,
             int charsOffset = 0,
             int occurrence = 0,
             bool extendSelection = false,
-            bool selectBlock = false)
-            => _textViewWindowInProc.PlaceCaret(
+            bool selectBlock = false
+        ) =>
+            _textViewWindowInProc.PlaceCaret(
                 marker,
                 charsOffset,
                 occurrence,
                 extendSelection,
-                selectBlock);
+                selectBlock
+            );
 
-        public string[] GetCurrentClassifications()
-            => _textViewWindowInProc.GetCurrentClassifications();
+        public string[] GetCurrentClassifications() =>
+            _textViewWindowInProc.GetCurrentClassifications();
 
-        public string GetQuickInfo()
-            => _textViewWindowInProc.GetQuickInfo();
+        public string GetQuickInfo() => _textViewWindowInProc.GetQuickInfo();
 
-        public void VerifyTags(string tagTypeName, int expectedCount)
-            => _textViewWindowInProc.VerifyTags(tagTypeName, expectedCount);
+        public void VerifyTags(string tagTypeName, int expectedCount) =>
+            _textViewWindowInProc.VerifyTags(tagTypeName, expectedCount);
 
-        public void ShowLightBulb()
-            => _textViewWindowInProc.ShowLightBulb();
+        public void ShowLightBulb() => _textViewWindowInProc.ShowLightBulb();
 
-        public void WaitForLightBulbSession()
-            => _textViewWindowInProc.WaitForLightBulbSession();
+        public void WaitForLightBulbSession() => _textViewWindowInProc.WaitForLightBulbSession();
 
-        public bool IsLightBulbSessionExpanded()
-            => _textViewWindowInProc.IsLightBulbSessionExpanded();
+        public bool IsLightBulbSessionExpanded() =>
+            _textViewWindowInProc.IsLightBulbSessionExpanded();
 
-        public void DismissLightBulbSession()
-            => _textViewWindowInProc.DismissLightBulbSession();
+        public void DismissLightBulbSession() => _textViewWindowInProc.DismissLightBulbSession();
 
         public void DismissCompletionSessions()
         {
@@ -82,26 +79,40 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             _textViewWindowInProc.DismissCompletionSessions();
         }
 
-        public string[] GetLightBulbActions()
-            => _textViewWindowInProc.GetLightBulbActions();
+        public string[] GetLightBulbActions() => _textViewWindowInProc.GetLightBulbActions();
 
-        public bool ApplyLightBulbAction(string action, FixAllScope? fixAllScope, bool blockUntilComplete = true)
-            => _textViewWindowInProc.ApplyLightBulbAction(action, fixAllScope, blockUntilComplete);
+        public bool ApplyLightBulbAction(
+            string action,
+            FixAllScope? fixAllScope,
+            bool blockUntilComplete = true
+        ) => _textViewWindowInProc.ApplyLightBulbAction(action, fixAllScope, blockUntilComplete);
 
         public void InvokeCompletionList()
         {
             _instance.ExecuteCommand(WellKnownCommandNames.Edit_ListMembers);
-            _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.CompletionSet);
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.CompletionSet
+            );
         }
 
         public void InvokeCodeActionList()
         {
-            _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SolutionCrawler);
-            _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.DiagnosticService);
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SolutionCrawler
+            );
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.DiagnosticService
+            );
 
             ShowLightBulb();
             WaitForLightBulbSession();
-            _instance.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.LightBulb);
+            _instance.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.LightBulb
+            );
         }
 
         /// <summary>
@@ -114,7 +125,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             WaitForLightBulbSession();
         }
 
-        public void InvokeQuickInfo()
-            => _textViewWindowInProc.InvokeQuickInfo();
+        public void InvokeQuickInfo() => _textViewWindowInProc.InvokeQuickInfo();
     }
 }

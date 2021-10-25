@@ -28,7 +28,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         {
             lock (_pools)
             {
-                var pool = new DiagnosticMemoryPool(new PinnedBlockMemoryPool(), _allowLateReturn, _rentTracking);
+                var pool = new DiagnosticMemoryPool(
+                    new PinnedBlockMemoryPool(),
+                    _allowLateReturn,
+                    _rentTracking
+                );
                 _pools.Add(pool);
                 return pool;
             }
@@ -38,7 +42,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         {
             lock (_pools)
             {
-                return Task.WhenAll(_pools.Select(p=>p.WhenAllBlocksReturnedAsync(span)));
+                return Task.WhenAll(_pools.Select(p => p.WhenAllBlocksReturnedAsync(span)));
             }
         }
     }

@@ -17,13 +17,12 @@ namespace GenericHostWebSite
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             new HostBuilder()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseStartup<Startup>()
-                        .UseKestrel()
-                        .UseIISIntegration();
-                });
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseStartup<Startup>().UseKestrel().UseIISIntegration();
+                    }
+                );
     }
 
     public class TestGenericService

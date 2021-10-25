@@ -37,7 +37,11 @@ namespace System.Drawing.Drawing2D.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_HatchStyle_ForeColor_BackColor_TestData))]
-        public void Ctor_HatchStyle_ForeColor_BackColor(HatchStyle hatchStyle, Color foreColor, Color backColor)
+        public void Ctor_HatchStyle_ForeColor_BackColor(
+            HatchStyle hatchStyle,
+            Color foreColor,
+            Color backColor
+        )
         {
             using (var brush = new HatchBrush(hatchStyle, foreColor, backColor))
             {
@@ -52,18 +56,32 @@ namespace System.Drawing.Drawing2D.Tests
         }
 
         [Theory]
-        [InlineData(HatchStyle.Horizontal -1 )]
+        [InlineData(HatchStyle.Horizontal - 1)]
         [InlineData(HatchStyle.SolidDiamond + 1)]
         public void Ctor_InvalidHatchStyle_ThrowsArgumentException(HatchStyle hatchStyle)
         {
-            AssertExtensions.Throws<ArgumentException>("hatchstyle", null, () => new HatchBrush(hatchStyle, Color.Empty));
-            AssertExtensions.Throws<ArgumentException>("hatchstyle", null, () => new HatchBrush(hatchStyle, Color.Empty, Color.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                "hatchstyle",
+                null,
+                () => new HatchBrush(hatchStyle, Color.Empty)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "hatchstyle",
+                null,
+                () => new HatchBrush(hatchStyle, Color.Empty, Color.Empty)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Clone_Brush_ReturnsClone()
         {
-            using (var brush = new HatchBrush(HatchStyle.DarkDownwardDiagonal, Color.Magenta, Color.Peru))
+            using (
+                var brush = new HatchBrush(
+                    HatchStyle.DarkDownwardDiagonal,
+                    Color.Magenta,
+                    Color.Peru
+                )
+            )
             {
                 HatchBrush clone = Assert.IsType<HatchBrush>(brush.Clone());
 

@@ -25,25 +25,35 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
-    [ExportCompletionProvider(nameof(EnumAndCompletionListTagCompletionProvider), LanguageNames.CSharp)]
+    [ExportCompletionProvider(
+        nameof(EnumAndCompletionListTagCompletionProvider),
+        LanguageNames.CSharp
+    )]
     [ExtensionOrder(After = nameof(CSharpSuggestionModeCompletionProvider))]
     [Shared]
     internal partial class EnumAndCompletionListTagCompletionProvider : LSPCompletionProvider
     {
-        private static readonly CompletionItemRules s_enumTypeRules =
-            CompletionItemRules.Default.WithCommitCharacterRules(ImmutableArray.Create(CharacterSetModificationRule.Create(CharacterSetModificationKind.Replace, '.')))
-                                       .WithMatchPriority(MatchPriority.Preselect)
-                                       .WithSelectionBehavior(CompletionItemSelectionBehavior.HardSelection);
+        private static readonly CompletionItemRules s_enumTypeRules = CompletionItemRules.Default
+            .WithCommitCharacterRules(
+                ImmutableArray.Create(
+                    CharacterSetModificationRule.Create(CharacterSetModificationKind.Replace, '.')
+                )
+            )
+            .WithMatchPriority(MatchPriority.Preselect)
+            .WithSelectionBehavior(CompletionItemSelectionBehavior.HardSelection);
 
-        private static readonly ImmutableHashSet<char> s_triggerCharacters = ImmutableHashSet.Create(' ', '[', '(', '~');
+        private static readonly ImmutableHashSet<char> s_triggerCharacters =
+            ImmutableHashSet.Create(' ', '[', '(', '~');
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EnumAndCompletionListTagCompletionProvider()
-        {
-        }
+        public EnumAndCompletionListTagCompletionProvider() { }
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, OptionSet options)
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            OptionSet options
+        )
         {
             // Bring up on space or at the start of a word, or after a ( or [.
             //
@@ -52,12 +62,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // operator.  Instead, the user normally types <space> and we will bring up the list
             // then.
             var ch = text[characterPosition];
-            return
-                ch == ' ' ||
-                ch == '[' ||
-                ch == '(' ||
-                ch == '~' ||
-                (options.GetOption(CompletionOptions.TriggerOnTypingLetters2, LanguageNames.CSharp) && CompletionUtilities.IsStartingNewWord(text, characterPosition));
+            return ch == ' '
+                || ch == '['
+                || ch == '('
+                || ch == '~'
+                || (
+                    options.GetOption(
+                        CompletionOptions.TriggerOnTypingLetters2,
+                        LanguageNames.CSharp
+                    ) && CompletionUtilities.IsStartingNewWord(text, characterPosition)
+                );
         }
 
         public override ImmutableHashSet<char> TriggerCharacters => s_triggerCharacters;
@@ -70,12 +84,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var position = context.Position;
                 var cancellationToken = context.CancellationToken;
 
-                var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var tree = await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 if (tree.IsInNonUserCode(position, cancellationToken))
                     return;
 
                 var token = tree.FindTokenOnLeftOfPosition(position, cancellationToken)
-                                .GetPreviousTokenIfTouchingWord(position);
+                    .GetPreviousTokenIfTouchingWord(position);
 
                 if (token.IsMandatoryNamedParameterPosition())
                     return;
@@ -90,14 +106,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var typeInferenceService = document.GetLanguageService<ITypeInferenceService>();
                 Contract.ThrowIfNull(typeInferenceService, nameof(typeInferenceService));
 
-                var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
-                var types = typeInferenceService.InferTypes(semanticModel, position, cancellationToken);
+                var semanticModel = await document
+                    .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                    .ConfigureAwait(false);
+                var types = typeInferenceService.InferTypes(
+                    semanticModel,
+                    position,
+                    cancellationToken
+                );
 
                 if (types.Length == 0)
-                    types = ImmutableArray.Create<ITypeSymbol>(semanticModel.Compilation.ObjectType);
+                    types = ImmutableArray.Create<ITypeSymbol>(
+                        semanticModel.Compilation.ObjectType
+                    );
 
                 foreach (var type in types)
-                    await HandleSingleTypeAsync(context, semanticModel, token, type, cancellationToken).ConfigureAwait(false);
+                    await HandleSingleTypeAsync(
+                            context,
+                            semanticModel,
+                            token,
+                            type,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
             {
@@ -105,7 +136,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
         }
 
-        private static async Task HandleSingleTypeAsync(CompletionContext context, SemanticModel semanticModel, SyntaxToken token, ITypeSymbol type, CancellationToken cancellationToken)
+        private static async Task HandleSingleTypeAsync(
+            CompletionContext context,
+            SemanticModel semanticModel,
+            SyntaxToken token,
+            ITypeSymbol type,
+            CancellationToken cancellationToken
+        )
         {
             // If we have a Nullable<T>, unwrap it.
             if (type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T)
@@ -122,15 +159,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // only show the qualified members in these cases.
             var showType = true;
             var position = context.Position;
-            var enclosingNamedType = semanticModel.GetEnclosingNamedType(position, cancellationToken);
+            var enclosingNamedType = semanticModel.GetEnclosingNamedType(
+                position,
+                cancellationToken
+            );
             if (type.TypeKind != TypeKind.Enum)
             {
-                var enumType = TryGetEnumTypeInEnumInitializer(semanticModel, token, type, cancellationToken) ??
-                               TryGetCompletionListType(type, enclosingNamedType, semanticModel.Compilation);
+                var enumType =
+                    TryGetEnumTypeInEnumInitializer(semanticModel, token, type, cancellationToken)
+                    ?? TryGetCompletionListType(
+                        type,
+                        enclosingNamedType,
+                        semanticModel.Compilation
+                    );
 
                 if (enumType == null)
                 {
-                    if (context.Trigger.Kind == CompletionTriggerKind.Insertion && s_triggerCharacters.Contains(context.Trigger.Character))
+                    if (
+                        context.Trigger.Kind == CompletionTriggerKind.Insertion
+                        && s_triggerCharacters.Contains(context.Trigger.Character)
+                    )
                     {
                         // This completion provider understands static members of matching types, but doesn't
                         // proactively trigger completion for them to avoid interfering with common typing patterns.
@@ -152,16 +200,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
 
             var options = context.Options;
-            var hideAdvancedMembers = options.GetOption(CompletionOptions.HideAdvancedMembers, semanticModel.Language);
+            var hideAdvancedMembers = options.GetOption(
+                CompletionOptions.HideAdvancedMembers,
+                semanticModel.Language
+            );
             if (!type.IsEditorBrowsable(hideAdvancedMembers, semanticModel.Compilation))
                 return;
 
             // Does type have any aliases?
-            var alias = await type.FindApplicableAliasAsync(position, semanticModel, cancellationToken).ConfigureAwait(false);
+            var alias = await type.FindApplicableAliasAsync(
+                    position,
+                    semanticModel,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var displayText = alias != null
-                ? alias.Name
-                : type.ToMinimalDisplayString(semanticModel, position);
+            var displayText =
+                alias != null ? alias.Name : type.ToMinimalDisplayString(semanticModel, position);
 
             // Add the enum itself.
             var symbol = alias ?? type;
@@ -169,13 +224,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             if (showType)
             {
-                context.AddItem(SymbolCompletionItem.CreateWithSymbolId(
-                    displayText,
-                    displayTextSuffix: "",
-                    symbols: ImmutableArray.Create(symbol),
-                    rules: s_enumTypeRules,
-                    contextPosition: position,
-                    sortText: sortText));
+                context.AddItem(
+                    SymbolCompletionItem.CreateWithSymbolId(
+                        displayText,
+                        displayTextSuffix: "",
+                        symbols: ImmutableArray.Create(symbol),
+                        rules: s_enumTypeRules,
+                        contextPosition: position,
+                        sortText: sortText
+                    )
+                );
             }
 
             // And now all the accessible members of the enum.
@@ -184,22 +242,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // We'll want to build a list of the actual enum members and all accessible instances of that enum, too
                 var index = 0;
 
-                var fields = type.GetMembers().OfType<IFieldSymbol>().Where(f => f.IsConst).Where(f => f.HasConstantValue);
-                foreach (var field in fields.OrderBy(f => IntegerUtilities.ToInt64(f.ConstantValue)))
+                var fields = type.GetMembers()
+                    .OfType<IFieldSymbol>()
+                    .Where(f => f.IsConst)
+                    .Where(f => f.HasConstantValue);
+                foreach (
+                    var field in fields.OrderBy(f => IntegerUtilities.ToInt64(f.ConstantValue))
+                )
                 {
                     index++;
                     if (!field.IsEditorBrowsable(hideAdvancedMembers, semanticModel.Compilation))
                         continue;
 
                     var memberDisplayName = $"{displayText}.{field.Name}";
-                    context.AddItem(SymbolCompletionItem.CreateWithSymbolId(
-                        displayText: memberDisplayName,
-                        displayTextSuffix: "",
-                        symbols: ImmutableArray.Create<ISymbol>(field),
-                        rules: CompletionItemRules.Default,
-                        contextPosition: position,
-                        sortText: $"{sortText}_{index:0000}",
-                        filterText: memberDisplayName));
+                    context.AddItem(
+                        SymbolCompletionItem.CreateWithSymbolId(
+                            displayText: memberDisplayName,
+                            displayTextSuffix: "",
+                            symbols: ImmutableArray.Create<ISymbol>(field),
+                            rules: CompletionItemRules.Default,
+                            contextPosition: position,
+                            sortText: $"{sortText}_{index:0000}",
+                            filterText: memberDisplayName
+                        )
+                    );
                 }
             }
             else if (enclosingNamedType is not null)
@@ -214,7 +280,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         staticSymbol = field;
                         symbolType = field.Type;
                     }
-                    else if (member is IPropertySymbol { IsStatic: true, IsIndexer: false } property)
+                    else if (
+                        member is IPropertySymbol { IsStatic: true, IsIndexer: false } property
+                    )
                     {
                         staticSymbol = property;
                         symbolType = property.Type;
@@ -225,60 +293,84 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         continue;
                     }
 
-                    if (!SymbolEqualityComparer.Default.Equals(type, symbolType)
+                    if (
+                        !SymbolEqualityComparer.Default.Equals(type, symbolType)
                         || !staticSymbol.IsAccessibleWithin(enclosingNamedType)
-                        || !staticSymbol.IsEditorBrowsable(hideAdvancedMembers, semanticModel.Compilation))
+                        || !staticSymbol.IsEditorBrowsable(
+                            hideAdvancedMembers,
+                            semanticModel.Compilation
+                        )
+                    )
                     {
                         continue;
                     }
 
                     var memberDisplayName = $"{displayText}.{staticSymbol.Name}";
-                    context.AddItem(SymbolCompletionItem.CreateWithSymbolId(
-                        displayText: memberDisplayName,
-                        displayTextSuffix: "",
-                        symbols: ImmutableArray.Create(staticSymbol),
-                        rules: CompletionItemRules.Default,
-                        contextPosition: position,
-                        sortText: memberDisplayName,
-                        filterText: memberDisplayName));
+                    context.AddItem(
+                        SymbolCompletionItem.CreateWithSymbolId(
+                            displayText: memberDisplayName,
+                            displayTextSuffix: "",
+                            symbols: ImmutableArray.Create(staticSymbol),
+                            rules: CompletionItemRules.Default,
+                            contextPosition: position,
+                            sortText: memberDisplayName,
+                            filterText: memberDisplayName
+                        )
+                    );
                 }
             }
         }
 
         private static ITypeSymbol? TryGetEnumTypeInEnumInitializer(
-            SemanticModel semanticModel, SyntaxToken token,
-            ITypeSymbol type, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            SyntaxToken token,
+            ITypeSymbol type,
+            CancellationToken cancellationToken
+        )
         {
             // https://github.com/dotnet/roslyn/issues/5419
             //
-            // 14.3: "Within an enum member initializer, values of other enum members are always 
+            // 14.3: "Within an enum member initializer, values of other enum members are always
             // treated as having the type of their underlying type"
 
-            // i.e. if we have "enum E { X, Y, Z = X | 
+            // i.e. if we have "enum E { X, Y, Z = X |
             // then we want to offer the enum after the |.  However, the compiler will report this
             // as an 'int' type, not the enum type.
 
             // See if we're after a common enum-combining operator.
-            if (token.Kind() == SyntaxKind.BarToken ||
-                token.Kind() == SyntaxKind.AmpersandToken ||
-                token.Kind() == SyntaxKind.CaretToken)
+            if (
+                token.Kind() == SyntaxKind.BarToken
+                || token.Kind() == SyntaxKind.AmpersandToken
+                || token.Kind() == SyntaxKind.CaretToken
+            )
             {
                 // See if the type we're looking at is the underlying type for the enum we're contained in.
-                var containingType = semanticModel.GetEnclosingNamedType(token.SpanStart, cancellationToken);
-                if (containingType?.TypeKind == TypeKind.Enum &&
-                    type.Equals(containingType.EnumUnderlyingType))
+                var containingType = semanticModel.GetEnclosingNamedType(
+                    token.SpanStart,
+                    cancellationToken
+                );
+                if (
+                    containingType?.TypeKind == TypeKind.Enum
+                    && type.Equals(containingType.EnumUnderlyingType)
+                )
                 {
                     // If so, walk back to the token before the operator token and see if it binds to a member
                     // of this enum.
                     var previousToken = token.GetPreviousToken();
                     if (previousToken.Parent != null)
                     {
-                        var symbol = semanticModel.GetSymbolInfo(previousToken.Parent, cancellationToken).Symbol;
+                        var symbol =
+                            semanticModel.GetSymbolInfo(
+                                previousToken.Parent,
+                                cancellationToken
+                            ).Symbol;
 
-                        if (symbol?.Kind == SymbolKind.Field &&
-                            containingType.Equals(symbol.ContainingType))
+                        if (
+                            symbol?.Kind == SymbolKind.Field
+                            && containingType.Equals(symbol.ContainingType)
+                        )
                         {
-                            // If so, then offer this as a place for enum completion for the enum we're currently 
+                            // If so, then offer this as a place for enum completion for the enum we're currently
                             // inside of.
                             return containingType;
                         }
@@ -289,10 +381,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return null;
         }
 
-        protected override Task<CompletionDescription> GetDescriptionWorkerAsync(Document document, CompletionItem item, CancellationToken cancellationToken)
-            => SymbolCompletionItem.GetDescriptionAsync(item, document, cancellationToken);
+        protected override Task<CompletionDescription> GetDescriptionWorkerAsync(
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        ) => SymbolCompletionItem.GetDescriptionAsync(item, document, cancellationToken);
 
-        private static INamedTypeSymbol? TryGetCompletionListType(ITypeSymbol type, INamedTypeSymbol? within, Compilation compilation)
+        private static INamedTypeSymbol? TryGetCompletionListType(
+            ITypeSymbol type,
+            INamedTypeSymbol? within,
+            Compilation compilation
+        )
         {
             if (within == null)
                 return null;
@@ -304,18 +403,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             // PERF: Avoid parsing XML unless the text contains the word "completionlist".
             var xmlText = type.GetDocumentationCommentXml();
-            if (xmlText == null || !xmlText.Contains(DocumentationCommentXmlNames.CompletionListElementName))
+            if (
+                xmlText == null
+                || !xmlText.Contains(DocumentationCommentXmlNames.CompletionListElementName)
+            )
                 return null;
 
-            var documentation = CodeAnalysis.Shared.Utilities.DocumentationComment.FromXmlFragment(xmlText);
+            var documentation = CodeAnalysis.Shared.Utilities.DocumentationComment.FromXmlFragment(
+                xmlText
+            );
 
-            var completionListType = documentation.CompletionListCref != null
-                ? DocumentationCommentId.GetSymbolsForDeclarationId(documentation.CompletionListCref, compilation).OfType<INamedTypeSymbol>().FirstOrDefault()
-                : null;
+            var completionListType =
+                documentation.CompletionListCref != null
+                    ? DocumentationCommentId
+                      .GetSymbolsForDeclarationId(documentation.CompletionListCref, compilation)
+                      .OfType<INamedTypeSymbol>()
+                      .FirstOrDefault()
+                    : null;
 
             return completionListType != null && completionListType.IsAccessibleWithin(within)
-                ? completionListType
-                : null;
+              ? completionListType
+              : null;
         }
 
         private static INamedTypeSymbol? TryGetTypeWithStaticMembers(ITypeSymbol type)

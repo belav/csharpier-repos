@@ -22,8 +22,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IDependentKeyValueFactory<TKey> Create<TKey>(IForeignKey foreignKey)
-            => foreignKey.Properties.Count == 1
+        public virtual IDependentKeyValueFactory<TKey> Create<TKey>(IForeignKey foreignKey) =>
+            foreignKey.Properties.Count == 1
                 ? CreateSimple<TKey>(foreignKey)
                 : (IDependentKeyValueFactory<TKey>)CreateComposite(foreignKey);
 
@@ -39,24 +39,36 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var principalType = foreignKey.PrincipalKey.Properties.Single().ClrType;
             var propertyAccessors = dependentProperty.GetPropertyAccessors();
 
-            if (dependentProperty.ClrType.IsNullableType()
-                && principalType.IsNullableType())
+            if (dependentProperty.ClrType.IsNullableType() && principalType.IsNullableType())
             {
-                return new SimpleFullyNullableDependentKeyValueFactory<TKey>(dependentProperty, propertyAccessors);
+                return new SimpleFullyNullableDependentKeyValueFactory<TKey>(
+                    dependentProperty,
+                    propertyAccessors
+                );
             }
 
             if (dependentProperty.ClrType.IsNullableType())
             {
                 return (IDependentKeyValueFactory<TKey>)Activator.CreateInstance(
-                    typeof(SimpleNullableDependentKeyValueFactory<>).MakeGenericType(
-                        typeof(TKey)), dependentProperty, propertyAccessors)!;
+                    typeof(SimpleNullableDependentKeyValueFactory<>).MakeGenericType(typeof(TKey)),
+                    dependentProperty,
+                    propertyAccessors
+                )!;
             }
 
             return principalType.IsNullableType()
-                ? (IDependentKeyValueFactory<TKey>)Activator.CreateInstance(
-                    typeof(SimpleNullablePrincipalDependentKeyValueFactory<,>).MakeGenericType(
-                        typeof(TKey), typeof(TKey).UnwrapNullableType()), dependentProperty, propertyAccessors)!
-                : new SimpleNonNullableDependentKeyValueFactory<TKey>(dependentProperty, propertyAccessors);
+              ? (IDependentKeyValueFactory<TKey>)Activator.CreateInstance(
+                    typeof(SimpleNullablePrincipalDependentKeyValueFactory<, >).MakeGenericType(
+                        typeof(TKey),
+                        typeof(TKey).UnwrapNullableType()
+                    ),
+                    dependentProperty,
+                    propertyAccessors
+                )!
+              : new SimpleNonNullableDependentKeyValueFactory<TKey>(
+                    dependentProperty,
+                    propertyAccessors
+                );
         }
 
         /// <summary>
@@ -65,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IDependentKeyValueFactory<object[]> CreateComposite(IForeignKey foreignKey)
-            => new CompositeValueFactory(foreignKey.Properties);
+        public virtual IDependentKeyValueFactory<object[]> CreateComposite(
+            IForeignKey foreignKey
+        ) => new CompositeValueFactory(foreignKey.Properties);
     }
 }

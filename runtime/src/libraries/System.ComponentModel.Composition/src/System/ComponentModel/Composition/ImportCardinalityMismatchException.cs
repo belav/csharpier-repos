@@ -19,10 +19,7 @@ namespace System.ComponentModel.Composition
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class.
         /// </summary>
-        public ImportCardinalityMismatchException()
-            : this((string?)null, (Exception?)null)
-        {
-        }
+        public ImportCardinalityMismatchException() : this((string?)null, (Exception?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class
@@ -33,10 +30,8 @@ namespace System.ComponentModel.Composition
         ///     <see cref="ImportCardinalityMismatchException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.Message"/> property to its default value.
         /// </param>
-        public ImportCardinalityMismatchException(string? message)
-            : this(message, (Exception?)null)
-        {
-        }
+        public ImportCardinalityMismatchException(string? message) : this(message, (Exception?)null)
+        { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class
@@ -54,9 +49,7 @@ namespace System.ComponentModel.Composition
         ///     the <see cref="Exception.InnerException"/> property to <see langword="null"/>.
         /// </param>
         public ImportCardinalityMismatchException(string? message, Exception? innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class
@@ -79,9 +72,9 @@ namespace System.ComponentModel.Composition
         /// <exception cref="InvalidCastException">
         ///     <paramref name="info"/> contains a value that cannot be cast to the correct type.
         /// </exception>
-        protected ImportCardinalityMismatchException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        protected ImportCardinalityMismatchException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
     }
 }

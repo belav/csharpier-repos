@@ -171,7 +171,6 @@ namespace System.IO.Packaging
             }
         }
 
-
         #region Private Methods
 
         private void ThrowIfStreamDisposed()
@@ -186,7 +185,6 @@ namespace System.IO.Packaging
 
         private Stream _stream;
         private bool _disposed;
-
         #endregion Private Variables
     }
 }

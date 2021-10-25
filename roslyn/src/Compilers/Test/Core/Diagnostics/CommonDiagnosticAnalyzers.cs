@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis
                 isEnabledByDefault: true,
                 description: "Description1",
                 helpLinkUri: "HelpLink1",
-                customTags: new[] { "1_CustomTag1", "1_CustomTag2" });
+                customTags: new[] { "1_CustomTag1", "1_CustomTag2" }
+            );
 
             public static readonly DiagnosticDescriptor Descriptor2 = new DiagnosticDescriptor(
                 "ID2",
@@ -47,35 +48,47 @@ namespace Microsoft.CodeAnalysis
                 isEnabledByDefault: true,
                 description: "Description2",
                 helpLinkUri: "HelpLink2",
-                customTags: new[] { "2_CustomTag1", "2_CustomTag2" });
+                customTags: new[] { "2_CustomTag1", "2_CustomTag2" }
+            );
 
             private static readonly ImmutableDictionary<string, string> s_properties =
-                new Dictionary<string, string> { { "Key1", "Value1" }, { "Key2", "Value2" } }.ToImmutableDictionary();
+                new Dictionary<string, string>
+                {
+                    { "Key1", "Value1" },
+                    { "Key2", "Value2" }
+                }.ToImmutableDictionary();
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(Descriptor1, Descriptor2);
-                }
+                get { return ImmutableArray.Create(Descriptor1, Descriptor2); }
             }
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationAction(compilationContext =>
-                {
-                    // With location diagnostic.
-                    var location = compilationContext.Compilation.SyntaxTrees.First().GetRoot().GetLocation();
-                    compilationContext.ReportDiagnostic(Diagnostic.Create(Descriptor1, location, s_properties));
+                context.RegisterCompilationAction(
+                    compilationContext =>
+                    {
+                        // With location diagnostic.
+                        var location = compilationContext.Compilation.SyntaxTrees
+                            .First()
+                            .GetRoot()
+                            .GetLocation();
+                        compilationContext.ReportDiagnostic(
+                            Diagnostic.Create(Descriptor1, location, s_properties)
+                        );
 
-                    // No location diagnostic.
-                    compilationContext.ReportDiagnostic(Diagnostic.Create(Descriptor2, Location.None, s_properties));
-                });
+                        // No location diagnostic.
+                        compilationContext.ReportDiagnostic(
+                            Diagnostic.Create(Descriptor2, Location.None, s_properties)
+                        );
+                    }
+                );
             }
 
             private static string GetExpectedPropertiesMapText()
             {
-                var expectedText = @"
+                var expectedText =
+                    @"
             ""customProperties"": {";
 
                 foreach (var kvp in s_properties.OrderBy(kvp => kvp.Key))
@@ -85,11 +98,16 @@ namespace Microsoft.CodeAnalysis
                         expectedText += ",";
                     }
 
-                    expectedText += string.Format(@"
-              ""{0}"": ""{1}""", kvp.Key, kvp.Value);
+                    expectedText += string.Format(
+                        @"
+              ""{0}"": ""{1}""",
+                        kvp.Key,
+                        kvp.Value
+                    );
                 }
 
-                expectedText += @"
+                expectedText +=
+                    @"
             }";
 
                 return expectedText;
@@ -105,61 +123,144 @@ namespace Microsoft.CodeAnalysis
                 return @"
       ""results"": [
         {
-          ""ruleId"": """ + Descriptor1.Id + @""",
-          ""level"": """ + (Descriptor1.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
-          ""message"": """ + Descriptor1.MessageFormat + @""",
+          ""ruleId"": """
+                    + Descriptor1.Id
+                    + @""",
+          ""level"": """
+                    + (
+                        Descriptor1.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
+          ""message"": """
+                    + Descriptor1.MessageFormat
+                    + @""",
           ""locations"": [
             {
               ""resultFile"": {
-                ""uri"": """ + filePath + @""",
+                ""uri"": """
+                    + filePath
+                    + @""",
                 ""region"": {
-                  ""startLine"": " + (expectedLineSpan.StartLinePosition.Line + 1) + @",
-                  ""startColumn"": " + (expectedLineSpan.StartLinePosition.Character + 1) + @",
-                  ""endLine"": " + (expectedLineSpan.EndLinePosition.Line + 1) + @",
-                  ""endColumn"": " + (expectedLineSpan.EndLinePosition.Character + 1) + @"
+                  ""startLine"": "
+                    + (expectedLineSpan.StartLinePosition.Line + 1)
+                    + @",
+                  ""startColumn"": "
+                    + (expectedLineSpan.StartLinePosition.Character + 1)
+                    + @",
+                  ""endLine"": "
+                    + (expectedLineSpan.EndLinePosition.Line + 1)
+                    + @",
+                  ""endColumn"": "
+                    + (expectedLineSpan.EndLinePosition.Character + 1)
+                    + @"
                 }
               }
             }
           ],
           ""properties"": {
-            ""warningLevel"": 1," + GetExpectedPropertiesMapText() + @"
+            ""warningLevel"": 1,"
+                    + GetExpectedPropertiesMapText()
+                    + @"
           }
         },
         {
-          ""ruleId"": """ + Descriptor2.Id + @""",
-          ""level"": """ + (Descriptor2.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
-          ""message"": """ + Descriptor2.MessageFormat + @""",
-          ""properties"": {" +
-             GetExpectedPropertiesMapText() + @"
+          ""ruleId"": """
+                    + Descriptor2.Id
+                    + @""",
+          ""level"": """
+                    + (
+                        Descriptor2.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
+          ""message"": """
+                    + Descriptor2.MessageFormat
+                    + @""",
+          ""properties"": {"
+                    + GetExpectedPropertiesMapText()
+                    + @"
           }
         }
       ],
       ""rules"": {
-        """ + Descriptor1.Id + @""": {
-          ""id"": """ + Descriptor1.Id + @""",
-          ""shortDescription"": """ + Descriptor1.Title + @""",
-          ""fullDescription"": """ + Descriptor1.Description + @""",
-          ""defaultLevel"": """ + (Descriptor1.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
-          ""helpUri"": """ + Descriptor1.HelpLinkUri + @""",
+        """
+                    + Descriptor1.Id
+                    + @""": {
+          ""id"": """
+                    + Descriptor1.Id
+                    + @""",
+          ""shortDescription"": """
+                    + Descriptor1.Title
+                    + @""",
+          ""fullDescription"": """
+                    + Descriptor1.Description
+                    + @""",
+          ""defaultLevel"": """
+                    + (
+                        Descriptor1.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
+          ""helpUri"": """
+                    + Descriptor1.HelpLinkUri
+                    + @""",
           ""properties"": {
-            ""category"": """ + Descriptor1.Category + @""",
-            ""isEnabledByDefault"": " + (Descriptor2.IsEnabledByDefault ? "true" : "false") + @",
+            ""category"": """
+                    + Descriptor1.Category
+                    + @""",
+            ""isEnabledByDefault"": "
+                    + (Descriptor2.IsEnabledByDefault ? "true" : "false")
+                    + @",
             ""tags"": [
-              " + String.Join("," + Environment.NewLine + "              ", Descriptor1.CustomTags.Select(s => $"\"{s}\"")) + @"
+              "
+                    + String.Join(
+                        "," + Environment.NewLine + "              ",
+                        Descriptor1.CustomTags.Select(s => $"\"{s}\"")
+                    )
+                    + @"
             ]
           }
         },
-        """ + Descriptor2.Id + @""": {
-          ""id"": """ + Descriptor2.Id + @""",
-          ""shortDescription"": """ + Descriptor2.Title + @""",
-          ""fullDescription"": """ + Descriptor2.Description + @""",
-          ""defaultLevel"": """ + (Descriptor2.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
-          ""helpUri"": """ + Descriptor2.HelpLinkUri + @""",
+        """
+                    + Descriptor2.Id
+                    + @""": {
+          ""id"": """
+                    + Descriptor2.Id
+                    + @""",
+          ""shortDescription"": """
+                    + Descriptor2.Title
+                    + @""",
+          ""fullDescription"": """
+                    + Descriptor2.Description
+                    + @""",
+          ""defaultLevel"": """
+                    + (
+                        Descriptor2.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
+          ""helpUri"": """
+                    + Descriptor2.HelpLinkUri
+                    + @""",
           ""properties"": {
-            ""category"": """ + Descriptor2.Category + @""",
-            ""isEnabledByDefault"": " + (Descriptor2.IsEnabledByDefault ? "true" : "false") + @",
+            ""category"": """
+                    + Descriptor2.Category
+                    + @""",
+            ""isEnabledByDefault"": "
+                    + (Descriptor2.IsEnabledByDefault ? "true" : "false")
+                    + @",
             ""tags"": [
-              " + String.Join("," + Environment.NewLine + "              ", Descriptor2.CustomTags.Select(s => $"\"{s}\"")) + @"
+              "
+                    + String.Join(
+                        "," + Environment.NewLine + "              ",
+                        Descriptor2.CustomTags.Select(s => $"\"{s}\"")
+                    )
+                    + @"
             ]
           }
         }
@@ -169,7 +270,9 @@ namespace Microsoft.CodeAnalysis
 }";
             }
 
-            public static string GetExpectedV1ErrorLogWithSuppressionResultsAndRulesText(Compilation compilation)
+            public static string GetExpectedV1ErrorLogWithSuppressionResultsAndRulesText(
+                Compilation compilation
+            )
             {
                 var tree = compilation.SyntaxTrees.First();
                 var root = tree.GetRoot();
@@ -179,64 +282,147 @@ namespace Microsoft.CodeAnalysis
                 return @"
       ""results"": [
         {
-          ""ruleId"": """ + Descriptor1.Id + @""",
-          ""level"": """ + (Descriptor1.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
-          ""message"": """ + Descriptor1.MessageFormat + @""",
+          ""ruleId"": """
+                    + Descriptor1.Id
+                    + @""",
+          ""level"": """
+                    + (
+                        Descriptor1.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
+          ""message"": """
+                    + Descriptor1.MessageFormat
+                    + @""",
           ""suppressionStates"": [
             ""suppressedInSource""
           ],
           ""locations"": [
             {
               ""resultFile"": {
-                ""uri"": """ + filePath + @""",
+                ""uri"": """
+                    + filePath
+                    + @""",
                 ""region"": {
-                  ""startLine"": " + (expectedLineSpan.StartLinePosition.Line + 1) + @",
-                  ""startColumn"": " + (expectedLineSpan.StartLinePosition.Character + 1) + @",
-                  ""endLine"": " + (expectedLineSpan.EndLinePosition.Line + 1) + @",
-                  ""endColumn"": " + (expectedLineSpan.EndLinePosition.Character + 1) + @"
+                  ""startLine"": "
+                    + (expectedLineSpan.StartLinePosition.Line + 1)
+                    + @",
+                  ""startColumn"": "
+                    + (expectedLineSpan.StartLinePosition.Character + 1)
+                    + @",
+                  ""endLine"": "
+                    + (expectedLineSpan.EndLinePosition.Line + 1)
+                    + @",
+                  ""endColumn"": "
+                    + (expectedLineSpan.EndLinePosition.Character + 1)
+                    + @"
                 }
               }
             }
           ],
           ""properties"": {
-            ""warningLevel"": 1," + GetExpectedPropertiesMapText() + @"
+            ""warningLevel"": 1,"
+                    + GetExpectedPropertiesMapText()
+                    + @"
           }
         },
         {
-          ""ruleId"": """ + Descriptor2.Id + @""",
-          ""level"": """ + (Descriptor2.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
-          ""message"": """ + Descriptor2.MessageFormat + @""",
-          ""properties"": {" +
-             GetExpectedPropertiesMapText() + @"
+          ""ruleId"": """
+                    + Descriptor2.Id
+                    + @""",
+          ""level"": """
+                    + (
+                        Descriptor2.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
+          ""message"": """
+                    + Descriptor2.MessageFormat
+                    + @""",
+          ""properties"": {"
+                    + GetExpectedPropertiesMapText()
+                    + @"
           }
         }
       ],
       ""rules"": {
-        """ + Descriptor1.Id + @""": {
-          ""id"": """ + Descriptor1.Id + @""",
-          ""shortDescription"": """ + Descriptor1.Title + @""",
-          ""fullDescription"": """ + Descriptor1.Description + @""",
-          ""defaultLevel"": """ + (Descriptor1.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
-          ""helpUri"": """ + Descriptor1.HelpLinkUri + @""",
+        """
+                    + Descriptor1.Id
+                    + @""": {
+          ""id"": """
+                    + Descriptor1.Id
+                    + @""",
+          ""shortDescription"": """
+                    + Descriptor1.Title
+                    + @""",
+          ""fullDescription"": """
+                    + Descriptor1.Description
+                    + @""",
+          ""defaultLevel"": """
+                    + (
+                        Descriptor1.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
+          ""helpUri"": """
+                    + Descriptor1.HelpLinkUri
+                    + @""",
           ""properties"": {
-            ""category"": """ + Descriptor1.Category + @""",
-            ""isEnabledByDefault"": " + (Descriptor2.IsEnabledByDefault ? "true" : "false") + @",
+            ""category"": """
+                    + Descriptor1.Category
+                    + @""",
+            ""isEnabledByDefault"": "
+                    + (Descriptor2.IsEnabledByDefault ? "true" : "false")
+                    + @",
             ""tags"": [
-              " + String.Join("," + Environment.NewLine + "              ", Descriptor1.CustomTags.Select(s => $"\"{s}\"")) + @"
+              "
+                    + String.Join(
+                        "," + Environment.NewLine + "              ",
+                        Descriptor1.CustomTags.Select(s => $"\"{s}\"")
+                    )
+                    + @"
             ]
           }
         },
-        """ + Descriptor2.Id + @""": {
-          ""id"": """ + Descriptor2.Id + @""",
-          ""shortDescription"": """ + Descriptor2.Title + @""",
-          ""fullDescription"": """ + Descriptor2.Description + @""",
-          ""defaultLevel"": """ + (Descriptor2.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
-          ""helpUri"": """ + Descriptor2.HelpLinkUri + @""",
+        """
+                    + Descriptor2.Id
+                    + @""": {
+          ""id"": """
+                    + Descriptor2.Id
+                    + @""",
+          ""shortDescription"": """
+                    + Descriptor2.Title
+                    + @""",
+          ""fullDescription"": """
+                    + Descriptor2.Description
+                    + @""",
+          ""defaultLevel"": """
+                    + (
+                        Descriptor2.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
+          ""helpUri"": """
+                    + Descriptor2.HelpLinkUri
+                    + @""",
           ""properties"": {
-            ""category"": """ + Descriptor2.Category + @""",
-            ""isEnabledByDefault"": " + (Descriptor2.IsEnabledByDefault ? "true" : "false") + @",
+            ""category"": """
+                    + Descriptor2.Category
+                    + @""",
+            ""isEnabledByDefault"": "
+                    + (Descriptor2.IsEnabledByDefault ? "true" : "false")
+                    + @",
             ""tags"": [
-              " + String.Join("," + Environment.NewLine + "              ", Descriptor2.CustomTags.Select(s => $"\"{s}\"")) + @"
+              "
+                    + String.Join(
+                        "," + Environment.NewLine + "              ",
+                        Descriptor2.CustomTags.Select(s => $"\"{s}\"")
+                    )
+                    + @"
             ]
           }
         }
@@ -253,98 +439,173 @@ namespace Microsoft.CodeAnalysis
                 var expectedLineSpan = root.GetLocation().GetLineSpan();
                 var filePath = GetUriForPath(tree.FilePath);
 
-                return
-@"      ""results"": [
+                return @"      ""results"": [
         {
-          ""ruleId"": """ + Descriptor1.Id + @""",
+          ""ruleId"": """
+                    + Descriptor1.Id
+                    + @""",
           ""ruleIndex"": 0,
-          ""level"": """ + (Descriptor1.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
+          ""level"": """
+                    + (
+                        Descriptor1.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
           ""message"": {
-            ""text"": """ + Descriptor1.MessageFormat + @"""
+            ""text"": """
+                    + Descriptor1.MessageFormat
+                    + @"""
           },
           ""locations"": [
             {
               ""physicalLocation"": {
                 ""artifactLocation"": {
-                  ""uri"": """ + filePath + @"""
+                  ""uri"": """
+                    + filePath
+                    + @"""
                 },
                 ""region"": {
-                  ""startLine"": " + (expectedLineSpan.StartLinePosition.Line + 1) + @",
-                  ""startColumn"": " + (expectedLineSpan.StartLinePosition.Character + 1) + @",
-                  ""endLine"": " + (expectedLineSpan.EndLinePosition.Line + 1) + @",
-                  ""endColumn"": " + (expectedLineSpan.EndLinePosition.Character + 1) + @"
+                  ""startLine"": "
+                    + (expectedLineSpan.StartLinePosition.Line + 1)
+                    + @",
+                  ""startColumn"": "
+                    + (expectedLineSpan.StartLinePosition.Character + 1)
+                    + @",
+                  ""endLine"": "
+                    + (expectedLineSpan.EndLinePosition.Line + 1)
+                    + @",
+                  ""endColumn"": "
+                    + (expectedLineSpan.EndLinePosition.Character + 1)
+                    + @"
                 }
               }
             }
           ],
           ""properties"": {
-            ""warningLevel"": 1," + GetExpectedPropertiesMapText() + @"
+            ""warningLevel"": 1,"
+                    + GetExpectedPropertiesMapText()
+                    + @"
           }
         },
         {
-          ""ruleId"": """ + Descriptor2.Id + @""",
+          ""ruleId"": """
+                    + Descriptor2.Id
+                    + @""",
           ""ruleIndex"": 1,
-          ""level"": """ + (Descriptor2.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
+          ""level"": """
+                    + (
+                        Descriptor2.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
           ""message"": {
-            ""text"": """ + Descriptor2.MessageFormat + @"""
+            ""text"": """
+                    + Descriptor2.MessageFormat
+                    + @"""
           },
-          ""properties"": {" +
-             GetExpectedPropertiesMapText() + @"
+          ""properties"": {"
+                    + GetExpectedPropertiesMapText()
+                    + @"
           }
         }
       ]";
             }
 
-            public static string GetExpectedV2ErrorLogWithSuppressionResultsText(Compilation compilation, string justification)
+            public static string GetExpectedV2ErrorLogWithSuppressionResultsText(
+                Compilation compilation,
+                string justification
+            )
             {
                 var tree = compilation.SyntaxTrees.First();
                 var root = tree.GetRoot();
                 var expectedLineSpan = root.GetLocation().GetLineSpan();
                 var filePath = GetUriForPath(tree.FilePath);
 
-                return
-@"      ""results"": [
+                return @"      ""results"": [
         {
-          ""ruleId"": """ + Descriptor1.Id + @""",
+          ""ruleId"": """
+                    + Descriptor1.Id
+                    + @""",
           ""ruleIndex"": 0,
-          ""level"": """ + (Descriptor1.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
+          ""level"": """
+                    + (
+                        Descriptor1.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
           ""message"": {
-            ""text"": """ + Descriptor1.MessageFormat + @"""
+            ""text"": """
+                    + Descriptor1.MessageFormat
+                    + @"""
           },
           ""suppressions"": [
             {
-              ""kind"": ""inSource""" + (justification == null ? "" : @",
-              ""justification"": """ + (justification) + @"""") + @"
+              ""kind"": ""inSource"""
+                    + (
+                        justification == null
+                            ? ""
+                            : @",
+              ""justification"": """
+                              + (justification)
+                              + @""""
+                    )
+                    + @"
             }
           ],
           ""locations"": [
             {
               ""physicalLocation"": {
                 ""artifactLocation"": {
-                  ""uri"": """ + filePath + @"""
+                  ""uri"": """
+                    + filePath
+                    + @"""
                 },
                 ""region"": {
-                  ""startLine"": " + (expectedLineSpan.StartLinePosition.Line + 1) + @",
-                  ""startColumn"": " + (expectedLineSpan.StartLinePosition.Character + 1) + @",
-                  ""endLine"": " + (expectedLineSpan.EndLinePosition.Line + 1) + @",
-                  ""endColumn"": " + (expectedLineSpan.EndLinePosition.Character + 1) + @"
+                  ""startLine"": "
+                    + (expectedLineSpan.StartLinePosition.Line + 1)
+                    + @",
+                  ""startColumn"": "
+                    + (expectedLineSpan.StartLinePosition.Character + 1)
+                    + @",
+                  ""endLine"": "
+                    + (expectedLineSpan.EndLinePosition.Line + 1)
+                    + @",
+                  ""endColumn"": "
+                    + (expectedLineSpan.EndLinePosition.Character + 1)
+                    + @"
                 }
               }
             }
           ],
           ""properties"": {
-            ""warningLevel"": 1," + GetExpectedPropertiesMapText() + @"
+            ""warningLevel"": 1,"
+                    + GetExpectedPropertiesMapText()
+                    + @"
           }
         },
         {
-          ""ruleId"": """ + Descriptor2.Id + @""",
+          ""ruleId"": """
+                    + Descriptor2.Id
+                    + @""",
           ""ruleIndex"": 1,
-          ""level"": """ + (Descriptor2.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @""",
+          ""level"": """
+                    + (
+                        Descriptor2.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @""",
           ""message"": {
-            ""text"": """ + Descriptor2.MessageFormat + @"""
+            ""text"": """
+                    + Descriptor2.MessageFormat
+                    + @"""
           },
-          ""properties"": {" +
-             GetExpectedPropertiesMapText() + @"
+          ""properties"": {"
+                    + GetExpectedPropertiesMapText()
+                    + @"
           }
         }
       ]";
@@ -352,40 +613,75 @@ namespace Microsoft.CodeAnalysis
 
             public static string GetExpectedV2ErrorLogRulesText()
             {
-                return
-@"          ""rules"": [
+                return @"          ""rules"": [
             {
-              ""id"": """ + Descriptor1.Id + @""",
+              ""id"": """
+                    + Descriptor1.Id
+                    + @""",
               ""shortDescription"": {
-                ""text"": """ + Descriptor1.Title + @"""
+                ""text"": """
+                    + Descriptor1.Title
+                    + @"""
               },
               ""fullDescription"": {
-                ""text"": """ + Descriptor1.Description + @"""
+                ""text"": """
+                    + Descriptor1.Description
+                    + @"""
               },
-              ""helpUri"": """ + Descriptor1.HelpLinkUri + @""",
+              ""helpUri"": """
+                    + Descriptor1.HelpLinkUri
+                    + @""",
               ""properties"": {
-                ""category"": """ + Descriptor1.Category + @""",
+                ""category"": """
+                    + Descriptor1.Category
+                    + @""",
                 ""tags"": [
-                  " + String.Join("," + Environment.NewLine + "                  ", Descriptor1.CustomTags.Select(s => $"\"{s}\"")) + @"
+                  "
+                    + String.Join(
+                        "," + Environment.NewLine + "                  ",
+                        Descriptor1.CustomTags.Select(s => $"\"{s}\"")
+                    )
+                    + @"
                 ]
               }
             },
             {
-              ""id"": """ + Descriptor2.Id + @""",
+              ""id"": """
+                    + Descriptor2.Id
+                    + @""",
               ""shortDescription"": {
-                ""text"": """ + Descriptor2.Title + @"""
+                ""text"": """
+                    + Descriptor2.Title
+                    + @"""
               },
               ""fullDescription"": {
-                ""text"": """ + Descriptor2.Description + @"""
+                ""text"": """
+                    + Descriptor2.Description
+                    + @"""
               },
               ""defaultConfiguration"": {
-                ""level"": """ + (Descriptor2.DefaultSeverity == DiagnosticSeverity.Error ? "error" : "warning") + @"""
+                ""level"": """
+                    + (
+                        Descriptor2.DefaultSeverity == DiagnosticSeverity.Error
+                            ? "error"
+                            : "warning"
+                    )
+                    + @"""
               },
-              ""helpUri"": """ + Descriptor2.HelpLinkUri + @""",
+              ""helpUri"": """
+                    + Descriptor2.HelpLinkUri
+                    + @""",
               ""properties"": {
-                ""category"": """ + Descriptor2.Category + @""",
+                ""category"": """
+                    + Descriptor2.Category
+                    + @""",
                 ""tags"": [
-                  " + String.Join("," + Environment.NewLine + "                  ", Descriptor2.CustomTags.Select(s => $"\"{s}\"")) + @"
+                  "
+                    + String.Join(
+                        "," + Environment.NewLine + "                  ",
+                        Descriptor2.CustomTags.Select(s => $"\"{s}\"")
+                    )
+                    + @"
                 ]
               }
             }
@@ -395,9 +691,7 @@ namespace Microsoft.CodeAnalysis
             public static string GetUriForPath(string path)
             {
                 var uri = new Uri(path, UriKind.RelativeOrAbsolute);
-                return uri.IsAbsoluteUri
-                    ? uri.AbsoluteUri
-                    : WebUtility.UrlEncode(uri.ToString());
+                return uri.IsAbsoluteUri ? uri.AbsoluteUri : WebUtility.UrlEncode(uri.ToString());
             }
         }
 
@@ -411,7 +705,8 @@ namespace Microsoft.CodeAnalysis
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                customTags: WellKnownDiagnosticTags.NotConfigurable);
+                customTags: WellKnownDiagnosticTags.NotConfigurable
+            );
 
             public static readonly DiagnosticDescriptor DisabledRule = new DiagnosticDescriptor(
                 "ID2",
@@ -420,26 +715,30 @@ namespace Microsoft.CodeAnalysis
                 "Category2",
                 defaultSeverity: DiagnosticSeverity.Warning,
                 isEnabledByDefault: false,
-                customTags: WellKnownDiagnosticTags.NotConfigurable);
+                customTags: WellKnownDiagnosticTags.NotConfigurable
+            );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
-                get
-                {
-                    return ImmutableArray.Create(EnabledRule, DisabledRule);
-                }
+                get { return ImmutableArray.Create(EnabledRule, DisabledRule); }
             }
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationAction(compilationContext =>
-                {
-                    // Report enabled diagnostic.
-                    compilationContext.ReportDiagnostic(Diagnostic.Create(EnabledRule, Location.None));
+                context.RegisterCompilationAction(
+                    compilationContext =>
+                    {
+                        // Report enabled diagnostic.
+                        compilationContext.ReportDiagnostic(
+                            Diagnostic.Create(EnabledRule, Location.None)
+                        );
 
-                    // Try to report disabled diagnostic.
-                    compilationContext.ReportDiagnostic(Diagnostic.Create(DisabledRule, Location.None));
-                });
+                        // Try to report disabled diagnostic.
+                        compilationContext.ReportDiagnostic(
+                            Diagnostic.Create(DisabledRule, Location.None)
+                        );
+                    }
+                );
             }
         }
 
@@ -453,86 +752,127 @@ namespace Microsoft.CodeAnalysis
                 _onlyStatelessAction = onlyStatelessAction;
             }
 
-            public static readonly DiagnosticDescriptor CodeBlockTopLevelRule = new DiagnosticDescriptor(
-                "CodeBlockTopLevelRuleId",
-                "CodeBlockTopLevelRuleTitle",
-                "CodeBlock : {0}",
-                "Category",
-                defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor CodeBlockTopLevelRule =
+                new DiagnosticDescriptor(
+                    "CodeBlockTopLevelRuleId",
+                    "CodeBlockTopLevelRuleTitle",
+                    "CodeBlock : {0}",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
-            public static readonly DiagnosticDescriptor CodeBlockPerCompilationRule = new DiagnosticDescriptor(
-                "CodeBlockPerCompilationRuleId",
-                "CodeBlockPerCompilationRuleTitle",
-                "CodeBlock : {0}",
-                "Category",
-                defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor CodeBlockPerCompilationRule =
+                new DiagnosticDescriptor(
+                    "CodeBlockPerCompilationRuleId",
+                    "CodeBlockPerCompilationRuleTitle",
+                    "CodeBlock : {0}",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
                 get
                 {
-                    return ImmutableArray.Create(CodeBlockTopLevelRule, CodeBlockPerCompilationRule);
+                    return ImmutableArray.Create(
+                        CodeBlockTopLevelRule,
+                        CodeBlockPerCompilationRule
+                    );
                 }
             }
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCodeBlockAction(codeBlockContext =>
-                {
-                    codeBlockContext.ReportDiagnostic(Diagnostic.Create(CodeBlockTopLevelRule, codeBlockContext.OwningSymbol.Locations[0], codeBlockContext.OwningSymbol.Name));
-                });
+                context.RegisterCodeBlockAction(
+                    codeBlockContext =>
+                    {
+                        codeBlockContext.ReportDiagnostic(
+                            Diagnostic.Create(
+                                CodeBlockTopLevelRule,
+                                codeBlockContext.OwningSymbol.Locations[0],
+                                codeBlockContext.OwningSymbol.Name
+                            )
+                        );
+                    }
+                );
 
                 if (!_onlyStatelessAction)
                 {
-                    context.RegisterCompilationStartAction(compilationStartContext =>
-                    {
-                        compilationStartContext.RegisterCodeBlockAction(codeBlockContext =>
+                    context.RegisterCompilationStartAction(
+                        compilationStartContext =>
                         {
-                            codeBlockContext.ReportDiagnostic(Diagnostic.Create(CodeBlockPerCompilationRule, codeBlockContext.OwningSymbol.Locations[0], codeBlockContext.OwningSymbol.Name));
-                        });
-                    });
+                            compilationStartContext.RegisterCodeBlockAction(
+                                codeBlockContext =>
+                                {
+                                    codeBlockContext.ReportDiagnostic(
+                                        Diagnostic.Create(
+                                            CodeBlockPerCompilationRule,
+                                            codeBlockContext.OwningSymbol.Locations[0],
+                                            codeBlockContext.OwningSymbol.Name
+                                        )
+                                    );
+                                }
+                            );
+                        }
+                    );
                 }
             }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
-        public class CSharpCodeBlockObjectCreationAnalyzer : CodeBlockObjectCreationAnalyzer<SyntaxKind>
+        public class CSharpCodeBlockObjectCreationAnalyzer
+            : CodeBlockObjectCreationAnalyzer<SyntaxKind>
         {
-            protected override SyntaxKind ObjectCreationExpressionKind => SyntaxKind.ObjectCreationExpression;
+            protected override SyntaxKind ObjectCreationExpressionKind =>
+                SyntaxKind.ObjectCreationExpression;
         }
 
         [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-        public class VisualBasicCodeBlockObjectCreationAnalyzer : CodeBlockObjectCreationAnalyzer<VisualBasic.SyntaxKind>
+        public class VisualBasicCodeBlockObjectCreationAnalyzer
+            : CodeBlockObjectCreationAnalyzer<VisualBasic.SyntaxKind>
         {
-            protected override VisualBasic.SyntaxKind ObjectCreationExpressionKind => VisualBasic.SyntaxKind.ObjectCreationExpression;
+            protected override VisualBasic.SyntaxKind ObjectCreationExpressionKind =>
+                VisualBasic.SyntaxKind.ObjectCreationExpression;
         }
 
-        public abstract class CodeBlockObjectCreationAnalyzer<TLanguageKindEnum> : DiagnosticAnalyzer
-            where TLanguageKindEnum : struct
+        public abstract class CodeBlockObjectCreationAnalyzer<TLanguageKindEnum>
+            : DiagnosticAnalyzer where TLanguageKindEnum : struct
         {
-            public static readonly DiagnosticDescriptor DiagnosticDescriptor = new DiagnosticDescriptor(
-                "Id",
-                "Title",
-                "Message",
-                "Category",
-                defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor DiagnosticDescriptor =
+                new DiagnosticDescriptor(
+                    "Id",
+                    "Title",
+                    "Message",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(DiagnosticDescriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(DiagnosticDescriptor);
             protected abstract TLanguageKindEnum ObjectCreationExpressionKind { get; }
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCodeBlockStartAction<TLanguageKindEnum>(codeBlockStartContext =>
-                {
-                    codeBlockStartContext.RegisterSyntaxNodeAction(syntaxNodeContext =>
+                context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
+                    codeBlockStartContext =>
                     {
-                        syntaxNodeContext.ReportDiagnostic(Diagnostic.Create(DiagnosticDescriptor, syntaxNodeContext.Node.GetLocation()));
-                    },
-                    ObjectCreationExpressionKind);
-                });
+                        codeBlockStartContext.RegisterSyntaxNodeAction(
+                            syntaxNodeContext =>
+                            {
+                                syntaxNodeContext.ReportDiagnostic(
+                                    Diagnostic.Create(
+                                        DiagnosticDescriptor,
+                                        syntaxNodeContext.Node.GetLocation()
+                                    )
+                                );
+                            },
+                            ObjectCreationExpressionKind
+                        );
+                    }
+                );
             }
         }
 
@@ -545,12 +885,17 @@ namespace Microsoft.CodeAnalysis
             public const string Category = nameof(Category);
             public const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
-            internal static DiagnosticDescriptor Rule =
-                new DiagnosticDescriptor(DiagnosticId, Title, Message,
-                                         Category, Severity, isEnabledByDefault: true);
+            internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(
+                DiagnosticId,
+                Title,
+                Message,
+                Category,
+                Severity,
+                isEnabledByDefault: true
+            );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
-                 ImmutableArray.Create(Rule);
+                ImmutableArray.Create(Rule);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -564,19 +909,23 @@ namespace Microsoft.CodeAnalysis
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
-        public class CSharpNamespaceDeclarationAnalyzer : AbstractNamespaceDeclarationAnalyzer<SyntaxKind>
+        public class CSharpNamespaceDeclarationAnalyzer
+            : AbstractNamespaceDeclarationAnalyzer<SyntaxKind>
         {
-            protected override SyntaxKind NamespaceDeclarationSyntaxKind => SyntaxKind.NamespaceDeclaration;
+            protected override SyntaxKind NamespaceDeclarationSyntaxKind =>
+                SyntaxKind.NamespaceDeclaration;
         }
 
         [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-        public class VisualBasicNamespaceDeclarationAnalyzer : AbstractNamespaceDeclarationAnalyzer<VisualBasic.SyntaxKind>
+        public class VisualBasicNamespaceDeclarationAnalyzer
+            : AbstractNamespaceDeclarationAnalyzer<VisualBasic.SyntaxKind>
         {
-            protected override VisualBasic.SyntaxKind NamespaceDeclarationSyntaxKind => VisualBasic.SyntaxKind.NamespaceStatement;
+            protected override VisualBasic.SyntaxKind NamespaceDeclarationSyntaxKind =>
+                VisualBasic.SyntaxKind.NamespaceStatement;
         }
 
-        public abstract class AbstractNamespaceDeclarationAnalyzer<TLanguageKindEnum> : DiagnosticAnalyzer
-            where TLanguageKindEnum : struct
+        public abstract class AbstractNamespaceDeclarationAnalyzer<TLanguageKindEnum>
+            : DiagnosticAnalyzer where TLanguageKindEnum : struct
         {
             public const string DiagnosticId = nameof(DiagnosticId);
             public const string Title = nameof(Title);
@@ -584,12 +933,17 @@ namespace Microsoft.CodeAnalysis
             public const string Category = nameof(Category);
             public const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
-            internal static DiagnosticDescriptor Rule =
-                new DiagnosticDescriptor(DiagnosticId, Title, Message,
-                                         Category, Severity, isEnabledByDefault: true);
+            internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(
+                DiagnosticId,
+                Title,
+                Message,
+                Category,
+                Severity,
+                isEnabledByDefault: true
+            );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
-                 ImmutableArray.Create(Rule);
+                ImmutableArray.Create(Rule);
             protected abstract TLanguageKindEnum NamespaceDeclarationSyntaxKind { get; }
 
             public override void Initialize(AnalysisContext context)
@@ -612,9 +966,11 @@ namespace Microsoft.CodeAnalysis
                 "Message1",
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(DummyRule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(DummyRule);
             public override void Initialize(AnalysisContext context) { }
         }
 
@@ -627,9 +983,11 @@ namespace Microsoft.CodeAnalysis
                 "Message1",
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: false);
+                isEnabledByDefault: false
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Rule);
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterSymbolAction(_ => { }, SymbolKind.NamedType);
@@ -645,12 +1003,17 @@ namespace Microsoft.CodeAnalysis
             public const string Category = nameof(Category);
             public const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
-            internal static DiagnosticDescriptor Rule =
-                new DiagnosticDescriptor(DiagnosticId, Title, Message,
-                                         Category, Severity, isEnabledByDefault: true);
+            internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(
+                DiagnosticId,
+                Title,
+                Message,
+                Category,
+                Severity,
+                isEnabledByDefault: true
+            );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
-                 ImmutableArray.Create(Rule);
+                ImmutableArray.Create(Rule);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -661,7 +1024,10 @@ namespace Microsoft.CodeAnalysis
             {
                 // Ensure we are not invoked for merged namespace symbol, but instead for constituent namespace scoped to the source assembly.
                 var ns = (INamespaceSymbol)context.Symbol;
-                if (ns.ContainingAssembly != context.Compilation.Assembly || ns.ConstituentNamespaces.Length > 1)
+                if (
+                    ns.ContainingAssembly != context.Compilation.Assembly
+                    || ns.ConstituentNamespaces.Length > 1
+                )
                 {
                     context.ReportDiagnostic(Diagnostic.Create(Rule, ns.Locations[0]));
                 }
@@ -684,20 +1050,27 @@ namespace Microsoft.CodeAnalysis
                 "Message1",
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationAction(compilationContext =>
-                    compilationContext.ReportDiagnostic(Diagnostic.Create(Descriptor, Location.None)));
+                context.RegisterCompilationAction(
+                    compilationContext =>
+                        compilationContext.ReportDiagnostic(
+                            Diagnostic.Create(Descriptor, Location.None)
+                        )
+                );
             }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
         public sealed class AnalyzerWithNullDescriptor : DiagnosticAnalyzer
         {
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create((DiagnosticDescriptor)null);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create((DiagnosticDescriptor)null);
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationAction(_ => { });
@@ -715,13 +1088,19 @@ namespace Microsoft.CodeAnalysis
                 "Message1",
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationAction(compilationContext =>
-                    compilationContext.ReportDiagnostic(Diagnostic.Create(Descriptor, Location.None)));
+                context.RegisterCompilationAction(
+                    compilationContext =>
+                        compilationContext.ReportDiagnostic(
+                            Diagnostic.Create(Descriptor, Location.None)
+                        )
+                );
             }
         }
 
@@ -736,13 +1115,19 @@ namespace Microsoft.CodeAnalysis
                 "Message1",
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationAction(compilationContext =>
-                    compilationContext.ReportDiagnostic(Diagnostic.Create(Descriptor, Location.None)));
+                context.RegisterCompilationAction(
+                    compilationContext =>
+                        compilationContext.ReportDiagnostic(
+                            Diagnostic.Create(Descriptor, Location.None)
+                        )
+                );
             }
         }
 
@@ -757,26 +1142,35 @@ namespace Microsoft.CodeAnalysis
                 "Message",
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
             public AnalyzerWithInvalidDiagnosticSpan(TextSpan badSpan) => _badSpan = badSpan;
             public Exception ThrownException { get; set; }
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(c =>
-                {
-                    try
+                context.RegisterSyntaxTreeAction(
+                    c =>
                     {
-                        ThrownException = null;
-                        c.ReportDiagnostic(Diagnostic.Create(Descriptor, SourceLocation.Create(c.Tree, _badSpan)));
+                        try
+                        {
+                            ThrownException = null;
+                            c.ReportDiagnostic(
+                                Diagnostic.Create(
+                                    Descriptor,
+                                    SourceLocation.Create(c.Tree, _badSpan)
+                                )
+                            );
+                        }
+                        catch (Exception e)
+                        {
+                            ThrownException = e;
+                            throw;
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        ThrownException = e;
-                        throw;
-                    }
-                });
+                );
             }
         }
 
@@ -792,7 +1186,8 @@ namespace Microsoft.CodeAnalysis
                 "Message {0}",
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
             public enum ActionKind
             {
@@ -805,13 +1200,19 @@ namespace Microsoft.CodeAnalysis
                 SyntaxTree
             }
 
-            public AnalyzerWithInvalidDiagnosticLocation(SyntaxTree treeInAnotherCompilation, ActionKind actionKind)
+            public AnalyzerWithInvalidDiagnosticLocation(
+                SyntaxTree treeInAnotherCompilation,
+                ActionKind actionKind
+            )
             {
                 _invalidLocation = treeInAnotherCompilation.GetRoot().GetLocation();
                 _actionKind = actionKind;
             }
 
-            private void ReportDiagnostic(Action<Diagnostic> addDiagnostic, ActionKind actionKindBeingRun)
+            private void ReportDiagnostic(
+                Action<Diagnostic> addDiagnostic,
+                ActionKind actionKindBeingRun
+            )
             {
                 if (_actionKind == actionKindBeingRun)
                 {
@@ -820,31 +1221,57 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationStartAction(cc =>
-                {
-                    cc.RegisterSymbolAction(c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.Symbol), SymbolKind.NamedType);
-                    cc.RegisterCodeBlockAction(c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.CodeBlock));
-                    cc.RegisterCompilationEndAction(c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.CompilationEnd));
-
-                    cc.RegisterOperationBlockStartAction(oc =>
+                context.RegisterCompilationStartAction(
+                    cc =>
                     {
-                        oc.RegisterOperationAction(c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.Operation), OperationKind.VariableDeclarationGroup);
-                        oc.RegisterOperationBlockEndAction(c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.OperationBlockEnd));
-                    });
-                });
+                        cc.RegisterSymbolAction(
+                            c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.Symbol),
+                            SymbolKind.NamedType
+                        );
+                        cc.RegisterCodeBlockAction(
+                            c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.CodeBlock)
+                        );
+                        cc.RegisterCompilationEndAction(
+                            c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.CompilationEnd)
+                        );
 
-                context.RegisterSyntaxTreeAction(c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.SyntaxTree));
-                context.RegisterCompilationAction(cc => ReportDiagnostic(cc.ReportDiagnostic, ActionKind.Compilation));
+                        cc.RegisterOperationBlockStartAction(
+                            oc =>
+                            {
+                                oc.RegisterOperationAction(
+                                    c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.Operation),
+                                    OperationKind.VariableDeclarationGroup
+                                );
+                                oc.RegisterOperationBlockEndAction(
+                                    c =>
+                                        ReportDiagnostic(
+                                            c.ReportDiagnostic,
+                                            ActionKind.OperationBlockEnd
+                                        )
+                                );
+                            }
+                        );
+                    }
+                );
+
+                context.RegisterSyntaxTreeAction(
+                    c => ReportDiagnostic(c.ReportDiagnostic, ActionKind.SyntaxTree)
+                );
+                context.RegisterCompilationAction(
+                    cc => ReportDiagnostic(cc.ReportDiagnostic, ActionKind.Compilation)
+                );
             }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
         public sealed class AnalyzerThatThrowsInSupportedDiagnostics : DiagnosticAnalyzer
         {
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => throw new NotImplementedException();
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                throw new NotImplementedException();
             public override void Initialize(AnalysisContext context) { }
         }
 
@@ -857,15 +1284,22 @@ namespace Microsoft.CodeAnalysis
                 new MyLocalizableStringThatThrows(),
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Rule);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSymbolAction(symbolContext =>
-                {
-                    symbolContext.ReportDiagnostic(Diagnostic.Create(Rule, symbolContext.Symbol.Locations[0]));
-                }, SymbolKind.NamedType);
+                context.RegisterSymbolAction(
+                    symbolContext =>
+                    {
+                        symbolContext.ReportDiagnostic(
+                            Diagnostic.Create(Rule, symbolContext.Symbol.Locations[0])
+                        );
+                    },
+                    SymbolKind.NamedType
+                );
             }
 
             private sealed class MyLocalizableStringThatThrows : LocalizableString
@@ -896,16 +1330,27 @@ namespace Microsoft.CodeAnalysis
                 "Symbol Name: {0}, Extra argument: {1}",
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Rule);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSymbolAction(symbolContext =>
-                {
-                    // Report diagnostic with incorrect number of message format arguments.
-                    symbolContext.ReportDiagnostic(Diagnostic.Create(Rule, symbolContext.Symbol.Locations[0], symbolContext.Symbol.Name));
-                }, SymbolKind.NamedType);
+                context.RegisterSymbolAction(
+                    symbolContext =>
+                    {
+                        // Report diagnostic with incorrect number of message format arguments.
+                        symbolContext.ReportDiagnostic(
+                            Diagnostic.Create(
+                                Rule,
+                                symbolContext.Symbol.Locations[0],
+                                symbolContext.Symbol.Name
+                            )
+                        );
+                    },
+                    SymbolKind.NamedType
+                );
             }
         }
 
@@ -913,11 +1358,11 @@ namespace Microsoft.CodeAnalysis
         public class CompilationAnalyzerWithSeverity : DiagnosticAnalyzer
         {
             public const string DiagnosticId = "ID1000";
-            public CompilationAnalyzerWithSeverity(
-                DiagnosticSeverity severity,
-                bool configurable)
+            public CompilationAnalyzerWithSeverity(DiagnosticSeverity severity, bool configurable)
             {
-                var customTags = !configurable ? new[] { WellKnownDiagnosticTags.NotConfigurable } : Array.Empty<string>();
+                var customTags = !configurable
+                    ? new[] { WellKnownDiagnosticTags.NotConfigurable }
+                    : Array.Empty<string>();
                 Descriptor = new DiagnosticDescriptor(
                     DiagnosticId,
                     "Description1",
@@ -925,12 +1370,14 @@ namespace Microsoft.CodeAnalysis
                     "Analysis",
                     severity,
                     true,
-                    customTags: customTags);
+                    customTags: customTags
+                );
             }
 
             public DiagnosticDescriptor Descriptor { get; }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -942,7 +1389,9 @@ namespace Microsoft.CodeAnalysis
                 // Report the diagnostic on all trees in compilation.
                 foreach (var tree in context.Compilation.SyntaxTrees)
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(Descriptor, tree.GetRoot().GetLocation()));
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(Descriptor, tree.GetRoot().GetLocation())
+                    );
                 }
             }
         }
@@ -964,16 +1413,21 @@ namespace Microsoft.CodeAnalysis
                 "ConcurrentAnalyzerMessage for symbol '{0}'",
                 "Category",
                 DiagnosticSeverity.Warning,
-                true);
+                true
+            );
 
             public ConcurrentAnalyzer(IEnumerable<string> symbolNames)
             {
-                Assert.True(Environment.ProcessorCount > 1, "This analyzer is intended to be used only in a concurrent environment.");
+                Assert.True(
+                    Environment.ProcessorCount > 1,
+                    "This analyzer is intended to be used only in a concurrent environment."
+                );
                 _symbolNames = symbolNames.ToImmutableHashSet();
                 _token = 0;
             }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationStartAction(this.OnCompilationStart);
@@ -984,7 +1438,10 @@ namespace Microsoft.CodeAnalysis
 
             private void OnCompilationStart(CompilationStartAnalysisContext context)
             {
-                Assert.True(context.Compilation.Options.ConcurrentBuild, "This analyzer is intended to be used only when concurrent build is enabled.");
+                Assert.True(
+                    context.Compilation.Options.ConcurrentBuild,
+                    "This analyzer is intended to be used only when concurrent build is enabled."
+                );
 
                 var pendingSymbols = new ConcurrentSet<INamedTypeSymbol>();
                 foreach (var type in context.Compilation.GlobalNamespace.GetTypeMembers())
@@ -995,28 +1452,35 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                context.RegisterSymbolAction(symbolContext =>
-                {
-                    if (!pendingSymbols.Remove((INamedTypeSymbol)symbolContext.Symbol))
+                context.RegisterSymbolAction(
+                    symbolContext =>
                     {
-                        return;
-                    }
-
-                    var myToken = Interlocked.Increment(ref _token);
-                    if (myToken == 1)
-                    {
-                        // Wait for all symbol callbacks to execute.
-                        // This analyzer will deadlock if the driver doesn't attempt concurrent callbacks.
-                        while (pendingSymbols.Any())
+                        if (!pendingSymbols.Remove((INamedTypeSymbol)symbolContext.Symbol))
                         {
-                            Thread.Sleep(10);
+                            return;
                         }
-                    }
 
-                    // ok, now report diagnostic on the symbol.
-                    var diagnostic = Diagnostic.Create(Descriptor, symbolContext.Symbol.Locations[0], symbolContext.Symbol.Name);
-                    symbolContext.ReportDiagnostic(diagnostic);
-                }, SymbolKind.NamedType);
+                        var myToken = Interlocked.Increment(ref _token);
+                        if (myToken == 1)
+                        {
+                            // Wait for all symbol callbacks to execute.
+                            // This analyzer will deadlock if the driver doesn't attempt concurrent callbacks.
+                            while (pendingSymbols.Any())
+                            {
+                                Thread.Sleep(10);
+                            }
+                        }
+
+                        // ok, now report diagnostic on the symbol.
+                        var diagnostic = Diagnostic.Create(
+                            Descriptor,
+                            symbolContext.Symbol.Locations[0],
+                            symbolContext.Symbol.Name
+                        );
+                        symbolContext.ReportDiagnostic(diagnostic);
+                    },
+                    SymbolKind.NamedType
+                );
             }
         }
 
@@ -1033,30 +1497,41 @@ namespace Microsoft.CodeAnalysis
                 "Analyzer driver made concurrent action callbacks, when analyzer didn't register for concurrent execution",
                 "Category",
                 DiagnosticSeverity.Warning,
-                true);
+                true
+            );
             private const int registeredActionCounts = 1000;
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
                 SemaphoreSlim gate = new SemaphoreSlim(initialCount: registeredActionCounts);
                 for (var i = 0; i < registeredActionCounts; i++)
                 {
-                    context.RegisterSymbolAction(symbolContext =>
-                    {
-                        using (gate.DisposableWait(symbolContext.CancellationToken))
+                    context.RegisterSymbolAction(
+                        symbolContext =>
                         {
-                            ReportDiagnosticIfActionInvokedConcurrently(gate, symbolContext);
-                        }
-                    }, SymbolKind.NamedType);
+                            using (gate.DisposableWait(symbolContext.CancellationToken))
+                            {
+                                ReportDiagnosticIfActionInvokedConcurrently(gate, symbolContext);
+                            }
+                        },
+                        SymbolKind.NamedType
+                    );
                 }
             }
 
-            private void ReportDiagnosticIfActionInvokedConcurrently(SemaphoreSlim gate, SymbolAnalysisContext symbolContext)
+            private void ReportDiagnosticIfActionInvokedConcurrently(
+                SemaphoreSlim gate,
+                SymbolAnalysisContext symbolContext
+            )
             {
                 if (gate.CurrentCount != registeredActionCounts - 1)
                 {
-                    var diagnostic = Diagnostic.Create(Descriptor, symbolContext.Symbol.Locations[0]);
+                    var diagnostic = Diagnostic.Create(
+                        Descriptor,
+                        symbolContext.Symbol.Locations[0]
+                    );
                     symbolContext.ReportDiagnostic(diagnostic);
                 }
             }
@@ -1067,7 +1542,10 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly ActionKind _actionKind;
             private readonly bool _verifyGetControlFlowGraph;
-            private readonly ConcurrentDictionary<IOperation, (ControlFlowGraph Graph, ISymbol AssociatedSymbol)> _controlFlowGraphMapOpt;
+            private readonly ConcurrentDictionary<
+                IOperation,
+                (ControlFlowGraph Graph, ISymbol AssociatedSymbol)
+            > _controlFlowGraphMapOpt;
 
             public static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
                 "ID",
@@ -1075,7 +1553,8 @@ namespace Microsoft.CodeAnalysis
                 "{0} diagnostic",
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
             public enum ActionKind
             {
@@ -1089,13 +1568,20 @@ namespace Microsoft.CodeAnalysis
             {
                 _actionKind = actionKind;
                 _verifyGetControlFlowGraph = verifyGetControlFlowGraph;
-                _controlFlowGraphMapOpt = verifyGetControlFlowGraph ? new ConcurrentDictionary<IOperation, (ControlFlowGraph, ISymbol)>() : null;
+                _controlFlowGraphMapOpt = verifyGetControlFlowGraph
+                    ? new ConcurrentDictionary<IOperation, (ControlFlowGraph, ISymbol)>()
+                    : null;
             }
 
             public ImmutableArray<(ControlFlowGraph Graph, ISymbol AssociatedSymbol)> GetControlFlowGraphs()
             {
                 Assert.True(_verifyGetControlFlowGraph);
-                return _controlFlowGraphMapOpt.Values.OrderBy(flowGraphAndSymbol => flowGraphAndSymbol.Graph.OriginalOperation.Syntax.SpanStart).ToImmutableArray();
+                return _controlFlowGraphMapOpt.Values
+                    .OrderBy(
+                        flowGraphAndSymbol =>
+                            flowGraphAndSymbol.Graph.OriginalOperation.Syntax.SpanStart
+                    )
+                    .ToImmutableArray();
             }
 
             private void ReportDiagnostic(Action<Diagnostic> addDiagnostic, Location location)
@@ -1104,7 +1590,13 @@ namespace Microsoft.CodeAnalysis
                 addDiagnostic(diagnostic);
             }
 
-            private void CacheAndVerifyControlFlowGraph(ImmutableArray<IOperation> operationBlocks, Func<IOperation, (ControlFlowGraph Graph, ISymbol AssociatedSymbol)> getControlFlowGraph)
+            private void CacheAndVerifyControlFlowGraph(
+                ImmutableArray<IOperation> operationBlocks,
+                Func<
+                    IOperation,
+                    (ControlFlowGraph Graph, ISymbol AssociatedSymbol)
+                > getControlFlowGraph
+            )
             {
                 if (_verifyGetControlFlowGraph)
                 {
@@ -1112,12 +1604,21 @@ namespace Microsoft.CodeAnalysis
                     {
                         var controlFlowGraphAndSymbol = getControlFlowGraph(operationBlock);
                         Assert.NotNull(controlFlowGraphAndSymbol);
-                        Assert.Same(operationBlock.GetRootOperation(), controlFlowGraphAndSymbol.Graph.OriginalOperation);
+                        Assert.Same(
+                            operationBlock.GetRootOperation(),
+                            controlFlowGraphAndSymbol.Graph.OriginalOperation
+                        );
 
-                        _controlFlowGraphMapOpt.Add(controlFlowGraphAndSymbol.Graph.OriginalOperation, controlFlowGraphAndSymbol);
+                        _controlFlowGraphMapOpt.Add(
+                            controlFlowGraphAndSymbol.Graph.OriginalOperation,
+                            controlFlowGraphAndSymbol
+                        );
 
                         // Verify analyzer driver caches the flow graph.
-                        Assert.Same(controlFlowGraphAndSymbol.Graph, getControlFlowGraph(operationBlock).Graph);
+                        Assert.Same(
+                            controlFlowGraphAndSymbol.Graph,
+                            getControlFlowGraph(operationBlock).Graph
+                        );
 
                         // Verify exceptions for invalid inputs.
                         try
@@ -1126,7 +1627,10 @@ namespace Microsoft.CodeAnalysis
                         }
                         catch (ArgumentNullException ex)
                         {
-                            Assert.Equal(new ArgumentNullException("operationBlock").Message, ex.Message);
+                            Assert.Equal(
+                                new ArgumentNullException("operationBlock").Message,
+                                ex.Message
+                            );
                         }
 
                         try
@@ -1135,13 +1639,22 @@ namespace Microsoft.CodeAnalysis
                         }
                         catch (ArgumentException ex)
                         {
-                            Assert.Equal(new ArgumentException(CodeAnalysisResources.InvalidOperationBlockForAnalysisContext, "operationBlock").Message, ex.Message);
+                            Assert.Equal(
+                                new ArgumentException(
+                                    CodeAnalysisResources.InvalidOperationBlockForAnalysisContext,
+                                    "operationBlock"
+                                ).Message,
+                                ex.Message
+                            );
                         }
                     }
                 }
             }
 
-            private void VerifyControlFlowGraph(OperationAnalysisContext operationContext, bool inBlockAnalysisContext)
+            private void VerifyControlFlowGraph(
+                OperationAnalysisContext operationContext,
+                bool inBlockAnalysisContext
+            )
             {
                 if (_verifyGetControlFlowGraph)
                 {
@@ -1159,53 +1672,108 @@ namespace Microsoft.CodeAnalysis
                     }
                     else
                     {
-                        _controlFlowGraphMapOpt[rootOperation] = (controlFlowGraph, operationContext.ContainingSymbol);
+                        _controlFlowGraphMapOpt[rootOperation] = (
+                            controlFlowGraph,
+                            operationContext.ContainingSymbol
+                        );
                     }
                 }
             }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
                 switch (_actionKind)
                 {
                     case ActionKind.OperationBlockEnd:
-                        context.RegisterOperationBlockStartAction(blockStartContext =>
-                        {
-                            blockStartContext.RegisterOperationBlockEndAction(c => ReportDiagnostic(c.ReportDiagnostic, c.OwningSymbol.Locations[0]));
-                            CacheAndVerifyControlFlowGraph(blockStartContext.OperationBlocks, op => (blockStartContext.GetControlFlowGraph(op), blockStartContext.OwningSymbol));
-                        });
-
+                        context.RegisterOperationBlockStartAction(
+                            blockStartContext =>
+                            {
+                                blockStartContext.RegisterOperationBlockEndAction(
+                                    c =>
+                                        ReportDiagnostic(
+                                            c.ReportDiagnostic,
+                                            c.OwningSymbol.Locations[0]
+                                        )
+                                );
+                                CacheAndVerifyControlFlowGraph(
+                                    blockStartContext.OperationBlocks,
+                                    op =>
+                                        (
+                                            blockStartContext.GetControlFlowGraph(op),
+                                            blockStartContext.OwningSymbol
+                                        )
+                                );
+                            }
+                        );
                         break;
 
                     case ActionKind.OperationBlock:
-                        context.RegisterOperationBlockAction(blockContext =>
-                        {
-                            ReportDiagnostic(blockContext.ReportDiagnostic, blockContext.OwningSymbol.Locations[0]);
-                            CacheAndVerifyControlFlowGraph(blockContext.OperationBlocks, op => (blockContext.GetControlFlowGraph(op), blockContext.OwningSymbol));
-                        });
-
+                        context.RegisterOperationBlockAction(
+                            blockContext =>
+                            {
+                                ReportDiagnostic(
+                                    blockContext.ReportDiagnostic,
+                                    blockContext.OwningSymbol.Locations[0]
+                                );
+                                CacheAndVerifyControlFlowGraph(
+                                    blockContext.OperationBlocks,
+                                    op =>
+                                        (
+                                            blockContext.GetControlFlowGraph(op),
+                                            blockContext.OwningSymbol
+                                        )
+                                );
+                            }
+                        );
                         break;
 
                     case ActionKind.Operation:
-                        context.RegisterOperationAction(operationContext =>
-                        {
-                            ReportDiagnostic(operationContext.ReportDiagnostic, operationContext.Operation.Syntax.GetLocation());
-                            VerifyControlFlowGraph(operationContext, inBlockAnalysisContext: false);
-                        }, OperationKind.Literal);
-
+                        context.RegisterOperationAction(
+                            operationContext =>
+                            {
+                                ReportDiagnostic(
+                                    operationContext.ReportDiagnostic,
+                                    operationContext.Operation.Syntax.GetLocation()
+                                );
+                                VerifyControlFlowGraph(
+                                    operationContext,
+                                    inBlockAnalysisContext: false
+                                );
+                            },
+                            OperationKind.Literal
+                        );
                         break;
 
                     case ActionKind.OperationInOperationBlockStart:
-                        context.RegisterOperationBlockStartAction(blockContext =>
-                        {
-                            CacheAndVerifyControlFlowGraph(blockContext.OperationBlocks, op => (blockContext.GetControlFlowGraph(op), blockContext.OwningSymbol));
-                            blockContext.RegisterOperationAction(operationContext =>
+                        context.RegisterOperationBlockStartAction(
+                            blockContext =>
                             {
-                                ReportDiagnostic(operationContext.ReportDiagnostic, operationContext.Operation.Syntax.GetLocation());
-                                VerifyControlFlowGraph(operationContext, inBlockAnalysisContext: true);
-                            }, OperationKind.Literal);
-                        });
+                                CacheAndVerifyControlFlowGraph(
+                                    blockContext.OperationBlocks,
+                                    op =>
+                                        (
+                                            blockContext.GetControlFlowGraph(op),
+                                            blockContext.OwningSymbol
+                                        )
+                                );
+                                blockContext.RegisterOperationAction(
+                                    operationContext =>
+                                    {
+                                        ReportDiagnostic(
+                                            operationContext.ReportDiagnostic,
+                                            operationContext.Operation.Syntax.GetLocation()
+                                        );
+                                        VerifyControlFlowGraph(
+                                            operationContext,
+                                            inBlockAnalysisContext: true
+                                        );
+                                    },
+                                    OperationKind.Literal
+                                );
+                            }
+                        );
                         break;
                 }
             }
@@ -1220,19 +1788,28 @@ namespace Microsoft.CodeAnalysis
                 "OperationBlock for {0}: {1}",
                 "Category1",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterOperationBlockAction(c =>
-                {
-                    foreach (var operationRoot in c.OperationBlocks)
+                context.RegisterOperationBlockAction(
+                    c =>
                     {
-                        var diagnostic = Diagnostic.Create(Descriptor, c.OwningSymbol.Locations[0], c.OwningSymbol.Name, operationRoot.Kind);
-                        c.ReportDiagnostic(diagnostic);
+                        foreach (var operationRoot in c.OperationBlocks)
+                        {
+                            var diagnostic = Diagnostic.Create(
+                                Descriptor,
+                                c.OwningSymbol.Locations[0],
+                                c.OwningSymbol.Name,
+                                operationRoot.Kind
+                            );
+                            c.ReportDiagnostic(diagnostic);
+                        }
                     }
-                });
+                );
             }
         }
 
@@ -1246,43 +1823,70 @@ namespace Microsoft.CodeAnalysis
                 "Field {0} = {1}",
                 "Category",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
             public FieldReferenceOperationAnalyzer(bool doOperationBlockAnalysis)
             {
                 _doOperationBlockAnalysis = doOperationBlockAnalysis;
             }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
                 if (_doOperationBlockAnalysis)
                 {
-                    context.RegisterOperationBlockAction(operationBlockAnalysisContext =>
-                    {
-                        foreach (var operationBlock in operationBlockAnalysisContext.OperationBlocks)
+                    context.RegisterOperationBlockAction(
+                        operationBlockAnalysisContext =>
                         {
-                            foreach (var operation in operationBlock.DescendantsAndSelf().OfType<IFieldReferenceOperation>())
+                            foreach (
+                                var operationBlock in operationBlockAnalysisContext.OperationBlocks
+                            )
                             {
-                                AnalyzerFieldReferenceOperation(operation, operationBlockAnalysisContext.ReportDiagnostic);
+                                foreach (
+                                    var operation in operationBlock
+                                        .DescendantsAndSelf()
+                                        .OfType<IFieldReferenceOperation>()
+                                )
+                                {
+                                    AnalyzerFieldReferenceOperation(
+                                        operation,
+                                        operationBlockAnalysisContext.ReportDiagnostic
+                                    );
+                                }
                             }
                         }
-                    });
+                    );
                 }
                 else
                 {
-                    context.RegisterOperationAction(AnalyzerOperation, OperationKind.FieldReference);
+                    context.RegisterOperationAction(
+                        AnalyzerOperation,
+                        OperationKind.FieldReference
+                    );
                 }
             }
 
             private static void AnalyzerOperation(OperationAnalysisContext operationAnalysisContext)
             {
-                AnalyzerFieldReferenceOperation((IFieldReferenceOperation)operationAnalysisContext.Operation, operationAnalysisContext.ReportDiagnostic);
+                AnalyzerFieldReferenceOperation(
+                    (IFieldReferenceOperation)operationAnalysisContext.Operation,
+                    operationAnalysisContext.ReportDiagnostic
+                );
             }
 
-            private static void AnalyzerFieldReferenceOperation(IFieldReferenceOperation operation, Action<Diagnostic> reportDiagnostic)
+            private static void AnalyzerFieldReferenceOperation(
+                IFieldReferenceOperation operation,
+                Action<Diagnostic> reportDiagnostic
+            )
             {
-                var diagnostic = Diagnostic.Create(Descriptor, operation.Syntax.GetLocation(), operation.Field.Name, operation.Field.ConstantValue);
+                var diagnostic = Diagnostic.Create(
+                    Descriptor,
+                    operation.Syntax.GetLocation(),
+                    operation.Field.Name,
+                    operation.Field.ConstantValue
+                );
                 reportDiagnostic(diagnostic);
             }
         }
@@ -1296,16 +1900,26 @@ namespace Microsoft.CodeAnalysis
                 "Method {0}",
                 "Category",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterOperationAction(operationContext =>
-                {
-                    var diagnostic = Diagnostic.Create(Descriptor, operationContext.Operation.Syntax.GetLocation(), operationContext.ContainingSymbol.Name);
-                    operationContext.ReportDiagnostic(diagnostic);
-                }, OperationKind.MethodBody, OperationKind.ConstructorBody);
+                context.RegisterOperationAction(
+                    operationContext =>
+                    {
+                        var diagnostic = Diagnostic.Create(
+                            Descriptor,
+                            operationContext.Operation.Syntax.GetLocation(),
+                            operationContext.ContainingSymbol.Name
+                        );
+                        operationContext.ReportDiagnostic(diagnostic);
+                    },
+                    OperationKind.MethodBody,
+                    OperationKind.ConstructorBody
+                );
             }
         }
 
@@ -1320,7 +1934,8 @@ namespace Microsoft.CodeAnalysis
                 "GeneratedCodeAnalyzerMessage for '{0}'",
                 "Category",
                 DiagnosticSeverity.Warning,
-                true);
+                true
+            );
 
             public static readonly DiagnosticDescriptor Error = new DiagnosticDescriptor(
                 "GeneratedCodeAnalyzerError",
@@ -1328,7 +1943,8 @@ namespace Microsoft.CodeAnalysis
                 "GeneratedCodeAnalyzerMessage for '{0}'",
                 "Category",
                 DiagnosticSeverity.Error,
-                true);
+                true
+            );
 
             public static readonly DiagnosticDescriptor Summary = new DiagnosticDescriptor(
                 "GeneratedCodeAnalyzerSummary",
@@ -1336,14 +1952,16 @@ namespace Microsoft.CodeAnalysis
                 "GeneratedCodeAnalyzer received callbacks for: '{0}' types and '{1}' files",
                 "Category",
                 DiagnosticSeverity.Warning,
-                true);
+                true
+            );
 
             public GeneratedCodeAnalyzer(GeneratedCodeAnalysisFlags? generatedCodeAnalysisFlagsOpt)
             {
                 _generatedCodeAnalysisFlagsOpt = generatedCodeAnalysisFlagsOpt;
             }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Warning, Error, Summary);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Warning, Error, Summary);
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterCompilationStartAction(this.OnCompilationStart);
@@ -1359,27 +1977,37 @@ namespace Microsoft.CodeAnalysis
             {
                 var sortedCallbackSymbolNames = new SortedSet<string>();
                 var sortedCallbackTreePaths = new SortedSet<string>();
-                context.RegisterSymbolAction(symbolContext =>
-                {
-                    sortedCallbackSymbolNames.Add(symbolContext.Symbol.Name);
-                    ReportSymbolDiagnostics(symbolContext.Symbol, symbolContext.ReportDiagnostic);
-                }, SymbolKind.NamedType);
+                context.RegisterSymbolAction(
+                    symbolContext =>
+                    {
+                        sortedCallbackSymbolNames.Add(symbolContext.Symbol.Name);
+                        ReportSymbolDiagnostics(
+                            symbolContext.Symbol,
+                            symbolContext.ReportDiagnostic
+                        );
+                    },
+                    SymbolKind.NamedType
+                );
 
-                context.RegisterSyntaxTreeAction(treeContext =>
-                {
-                    sortedCallbackTreePaths.Add(treeContext.Tree.FilePath);
-                    ReportTreeDiagnostics(treeContext.Tree, treeContext.ReportDiagnostic);
-                });
+                context.RegisterSyntaxTreeAction(
+                    treeContext =>
+                    {
+                        sortedCallbackTreePaths.Add(treeContext.Tree.FilePath);
+                        ReportTreeDiagnostics(treeContext.Tree, treeContext.ReportDiagnostic);
+                    }
+                );
 
-                context.RegisterCompilationEndAction(endContext =>
-                {
-                    var arg1 = sortedCallbackSymbolNames.Join(",");
-                    var arg2 = sortedCallbackTreePaths.Join(",");
+                context.RegisterCompilationEndAction(
+                    endContext =>
+                    {
+                        var arg1 = sortedCallbackSymbolNames.Join(",");
+                        var arg2 = sortedCallbackTreePaths.Join(",");
 
-                    // Summary diagnostics about received callbacks.
-                    var diagnostic = Diagnostic.Create(Summary, Location.None, arg1, arg2);
-                    endContext.ReportDiagnostic(diagnostic);
-                });
+                        // Summary diagnostics about received callbacks.
+                        var diagnostic = Diagnostic.Create(Summary, Location.None, arg1, arg2);
+                        endContext.ReportDiagnostic(diagnostic);
+                    }
+                );
             }
 
             private void ReportSymbolDiagnostics(ISymbol symbol, Action<Diagnostic> addDiagnostic)
@@ -1389,10 +2017,18 @@ namespace Microsoft.CodeAnalysis
 
             private void ReportTreeDiagnostics(SyntaxTree tree, Action<Diagnostic> addDiagnostic)
             {
-                ReportDiagnosticsCore(addDiagnostic, tree.GetRoot().GetLastToken().GetLocation(), tree.FilePath);
+                ReportDiagnosticsCore(
+                    addDiagnostic,
+                    tree.GetRoot().GetLastToken().GetLocation(),
+                    tree.FilePath
+                );
             }
 
-            private void ReportDiagnosticsCore(Action<Diagnostic> addDiagnostic, Location location, params object[] messageArguments)
+            private void ReportDiagnosticsCore(
+                Action<Diagnostic> addDiagnostic,
+                Location location,
+                params object[] messageArguments
+            )
             {
                 // warning diagnostic
                 var diagnostic = Diagnostic.Create(Warning, location, messageArguments);
@@ -1413,28 +2049,42 @@ namespace Microsoft.CodeAnalysis
                 "GeneratedCodeAnalyzer2Message for '{0}'; Total types analyzed: '{1}'",
                 "Category",
                 DiagnosticSeverity.Warning,
-                true);
+                true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Rule);
             public override void Initialize(AnalysisContext context)
             {
                 // Analyze but don't report diagnostics on generated code.
                 context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze);
 
-                context.RegisterCompilationStartAction(compilationStartContext =>
-                {
-                    var namedTypes = new HashSet<ISymbol>();
-                    compilationStartContext.RegisterSymbolAction(symbolContext => namedTypes.Add(symbolContext.Symbol), SymbolKind.NamedType);
-
-                    compilationStartContext.RegisterCompilationEndAction(compilationEndContext =>
+                context.RegisterCompilationStartAction(
+                    compilationStartContext =>
                     {
-                        foreach (var namedType in namedTypes)
-                        {
-                            var diagnostic = Diagnostic.Create(Rule, namedType.Locations[0], namedType.Name, namedTypes.Count);
-                            compilationEndContext.ReportDiagnostic(diagnostic);
-                        }
-                    });
-                });
+                        var namedTypes = new HashSet<ISymbol>();
+                        compilationStartContext.RegisterSymbolAction(
+                            symbolContext => namedTypes.Add(symbolContext.Symbol),
+                            SymbolKind.NamedType
+                        );
+
+                        compilationStartContext.RegisterCompilationEndAction(
+                            compilationEndContext =>
+                            {
+                                foreach (var namedType in namedTypes)
+                                {
+                                    var diagnostic = Diagnostic.Create(
+                                        Rule,
+                                        namedType.Locations[0],
+                                        namedType.Name,
+                                        namedTypes.Count
+                                    );
+                                    compilationEndContext.ReportDiagnostic(diagnostic);
+                                }
+                            }
+                        );
+                    }
+                );
             }
         }
 
@@ -1447,37 +2097,45 @@ namespace Microsoft.CodeAnalysis
             private readonly SourceTextValueProvider<int> _textValueProvider;
             private readonly HashSet<SourceText> _textCallbackSet;
 
-            public static readonly DiagnosticDescriptor GeneratedCodeDescriptor = new DiagnosticDescriptor(
-                "GeneratedCodeDiagnostic",
-                "Title1",
-                "GeneratedCodeDiagnostic {0}",
-                "Category",
-                DiagnosticSeverity.Warning,
-                true);
+            public static readonly DiagnosticDescriptor GeneratedCodeDescriptor =
+                new DiagnosticDescriptor(
+                    "GeneratedCodeDiagnostic",
+                    "Title1",
+                    "GeneratedCodeDiagnostic {0}",
+                    "Category",
+                    DiagnosticSeverity.Warning,
+                    true
+                );
 
-            public static readonly DiagnosticDescriptor NonGeneratedCodeDescriptor = new DiagnosticDescriptor(
-                "UserCodeDiagnostic",
-                "Title2",
-                "UserCodeDiagnostic {0}",
-                "Category",
-                DiagnosticSeverity.Warning,
-                true);
+            public static readonly DiagnosticDescriptor NonGeneratedCodeDescriptor =
+                new DiagnosticDescriptor(
+                    "UserCodeDiagnostic",
+                    "Title2",
+                    "UserCodeDiagnostic {0}",
+                    "Category",
+                    DiagnosticSeverity.Warning,
+                    true
+                );
 
-            public static readonly DiagnosticDescriptor UniqueTextFileDescriptor = new DiagnosticDescriptor(
-                "UniqueTextFileDiagnostic",
-                "Title3",
-                "UniqueTextFileDiagnostic {0}",
-                "Category",
-                DiagnosticSeverity.Warning,
-                true);
+            public static readonly DiagnosticDescriptor UniqueTextFileDescriptor =
+                new DiagnosticDescriptor(
+                    "UniqueTextFileDiagnostic",
+                    "Title3",
+                    "UniqueTextFileDiagnostic {0}",
+                    "Category",
+                    DiagnosticSeverity.Warning,
+                    true
+                );
 
-            public static readonly DiagnosticDescriptor NumberOfUniqueTextFileDescriptor = new DiagnosticDescriptor(
-                "NumberOfUniqueTextFileDescriptor",
-                "Title4",
-                "NumberOfUniqueTextFileDescriptor {0}",
-                "Category",
-                DiagnosticSeverity.Warning,
-                true);
+            public static readonly DiagnosticDescriptor NumberOfUniqueTextFileDescriptor =
+                new DiagnosticDescriptor(
+                    "NumberOfUniqueTextFileDescriptor",
+                    "Title4",
+                    "NumberOfUniqueTextFileDescriptor {0}",
+                    "Category",
+                    DiagnosticSeverity.Warning,
+                    true
+                );
 
             public SharedStateAnalyzer()
             {
@@ -1498,9 +2156,18 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                var fileNameWithoutExtension = PathUtilities.GetFileName(tree.FilePath, includeExtension: false);
-                return fileNameWithoutExtension.EndsWith(".designer", StringComparison.OrdinalIgnoreCase) ||
-                    fileNameWithoutExtension.EndsWith(".generated", StringComparison.OrdinalIgnoreCase);
+                var fileNameWithoutExtension = PathUtilities.GetFileName(
+                    tree.FilePath,
+                    includeExtension: false
+                );
+                return fileNameWithoutExtension.EndsWith(
+                        ".designer",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    || fileNameWithoutExtension.EndsWith(
+                        ".generated",
+                        StringComparison.OrdinalIgnoreCase
+                    );
             }
 
             private int GetCharacterCount(SourceText text)
@@ -1516,7 +2183,13 @@ namespace Microsoft.CodeAnalysis
                 return text.Length;
             }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(GeneratedCodeDescriptor, NonGeneratedCodeDescriptor, UniqueTextFileDescriptor, NumberOfUniqueTextFileDescriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(
+                    GeneratedCodeDescriptor,
+                    NonGeneratedCodeDescriptor,
+                    UniqueTextFileDescriptor,
+                    NumberOfUniqueTextFileDescriptor
+                );
 
             public override void Initialize(AnalysisContext context)
             {
@@ -1525,61 +2198,103 @@ namespace Microsoft.CodeAnalysis
 
             private void OnCompilationStart(CompilationStartAnalysisContext context)
             {
-                context.RegisterSymbolAction(symbolContext =>
-                {
-                    var descriptor = GeneratedCodeDescriptor;
-                    foreach (var location in symbolContext.Symbol.Locations)
+                context.RegisterSymbolAction(
+                    symbolContext =>
                     {
-                        context.TryGetValue(location.SourceTree, _treeValueProvider, out var isGeneratedCode);
-                        if (!isGeneratedCode)
+                        var descriptor = GeneratedCodeDescriptor;
+                        foreach (var location in symbolContext.Symbol.Locations)
                         {
-                            descriptor = NonGeneratedCodeDescriptor;
-                            break;
+                            context.TryGetValue(
+                                location.SourceTree,
+                                _treeValueProvider,
+                                out var isGeneratedCode
+                            );
+                            if (!isGeneratedCode)
+                            {
+                                descriptor = NonGeneratedCodeDescriptor;
+                                break;
+                            }
                         }
-                    }
 
-                    var diagnostic = Diagnostic.Create(descriptor, symbolContext.Symbol.Locations[0], symbolContext.Symbol.Name);
-                    symbolContext.ReportDiagnostic(diagnostic);
-                }, SymbolKind.NamedType);
+                        var diagnostic = Diagnostic.Create(
+                            descriptor,
+                            symbolContext.Symbol.Locations[0],
+                            symbolContext.Symbol.Name
+                        );
+                        symbolContext.ReportDiagnostic(diagnostic);
+                    },
+                    SymbolKind.NamedType
+                );
 
-                context.RegisterSyntaxTreeAction(treeContext =>
-                {
-                    context.TryGetValue(treeContext.Tree, _treeValueProvider, out var isGeneratedCode);
-                    var descriptor = isGeneratedCode ? GeneratedCodeDescriptor : NonGeneratedCodeDescriptor;
-
-                    var diagnostic = Diagnostic.Create(descriptor, Location.None, treeContext.Tree.FilePath);
-                    treeContext.ReportDiagnostic(diagnostic);
-
-                    context.TryGetValue(treeContext.Tree.GetText(), _textValueProvider, out var length);
-                    diagnostic = Diagnostic.Create(UniqueTextFileDescriptor, Location.None, treeContext.Tree.FilePath);
-                    treeContext.ReportDiagnostic(diagnostic);
-                });
-
-                context.RegisterCompilationEndAction(endContext =>
-                {
-                    if (_treeCallbackSet.Count != endContext.Compilation.SyntaxTrees.Count())
+                context.RegisterSyntaxTreeAction(
+                    treeContext =>
                     {
-                        throw new Exception("Expected driver to make a callback for every tree");
-                    }
+                        context.TryGetValue(
+                            treeContext.Tree,
+                            _treeValueProvider,
+                            out var isGeneratedCode
+                        );
+                        var descriptor = isGeneratedCode
+                            ? GeneratedCodeDescriptor
+                            : NonGeneratedCodeDescriptor;
 
-                    var diagnostic = Diagnostic.Create(NumberOfUniqueTextFileDescriptor, Location.None, _textCallbackSet.Count);
-                    endContext.ReportDiagnostic(diagnostic);
-                });
+                        var diagnostic = Diagnostic.Create(
+                            descriptor,
+                            Location.None,
+                            treeContext.Tree.FilePath
+                        );
+                        treeContext.ReportDiagnostic(diagnostic);
+
+                        context.TryGetValue(
+                            treeContext.Tree.GetText(),
+                            _textValueProvider,
+                            out var length
+                        );
+                        diagnostic = Diagnostic.Create(
+                            UniqueTextFileDescriptor,
+                            Location.None,
+                            treeContext.Tree.FilePath
+                        );
+                        treeContext.ReportDiagnostic(diagnostic);
+                    }
+                );
+
+                context.RegisterCompilationEndAction(
+                    endContext =>
+                    {
+                        if (_treeCallbackSet.Count != endContext.Compilation.SyntaxTrees.Count())
+                        {
+                            throw new Exception(
+                                "Expected driver to make a callback for every tree"
+                            );
+                        }
+
+                        var diagnostic = Diagnostic.Create(
+                            NumberOfUniqueTextFileDescriptor,
+                            Location.None,
+                            _textCallbackSet.Count
+                        );
+                        endContext.ReportDiagnostic(diagnostic);
+                    }
+                );
             }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
         public class AnalyzerForParameters : DiagnosticAnalyzer
         {
-            public static readonly DiagnosticDescriptor ParameterDescriptor = new DiagnosticDescriptor(
-                "Parameter_ID",
-                "Parameter_Title",
-                "Parameter_Message",
-                "Parameter_Category",
-                defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor ParameterDescriptor =
+                new DiagnosticDescriptor(
+                    "Parameter_ID",
+                    "Parameter_Title",
+                    "Parameter_Message",
+                    "Parameter_Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(ParameterDescriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(ParameterDescriptor);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -1588,7 +2303,9 @@ namespace Microsoft.CodeAnalysis
 
             private void SymbolAction(SymbolAnalysisContext context)
             {
-                context.ReportDiagnostic(Diagnostic.Create(ParameterDescriptor, context.Symbol.Locations[0]));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(ParameterDescriptor, context.Symbol.Locations[0])
+                );
             }
         }
 
@@ -1600,7 +2317,12 @@ namespace Microsoft.CodeAnalysis
             private readonly OperationKind? _operationKind;
             private readonly string _analyzerId;
 
-            public SymbolStartAnalyzer(bool topLevelAction, SymbolKind symbolKind, OperationKind? operationKindOpt = null, int? analyzerId = null)
+            public SymbolStartAnalyzer(
+                bool topLevelAction,
+                SymbolKind symbolKind,
+                OperationKind? operationKindOpt = null,
+                int? analyzerId = null
+            )
             {
                 _topLevelAction = topLevelAction;
                 _symbolKind = symbolKind;
@@ -1611,69 +2333,85 @@ namespace Microsoft.CodeAnalysis
 
             internal ConcurrentSet<ISymbol> SymbolsStarted { get; }
 
-            public static readonly DiagnosticDescriptor SymbolStartTopLevelRule = new DiagnosticDescriptor(
-                "SymbolStartTopLevelRuleId",
-                "SymbolStartTopLevelRuleTitle",
-                "Symbol : {0}, Analyzer: {1}",
-                "Category",
-                defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor SymbolStartTopLevelRule =
+                new DiagnosticDescriptor(
+                    "SymbolStartTopLevelRuleId",
+                    "SymbolStartTopLevelRuleTitle",
+                    "Symbol : {0}, Analyzer: {1}",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
-            public static readonly DiagnosticDescriptor SymbolStartCompilationLevelRule = new DiagnosticDescriptor(
-                "SymbolStartRuleId",
-                "SymbolStartRuleTitle",
-                "Symbol : {0}, Analyzer: {1}",
-                "Category",
-                defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor SymbolStartCompilationLevelRule =
+                new DiagnosticDescriptor(
+                    "SymbolStartRuleId",
+                    "SymbolStartRuleTitle",
+                    "Symbol : {0}, Analyzer: {1}",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
-            public static readonly DiagnosticDescriptor SymbolStartedEndedDifferRule = new DiagnosticDescriptor(
-                "SymbolStartedEndedDifferRuleId",
-                "SymbolStartedEndedDifferRuleTitle",
-                "Symbols Started: '{0}', Symbols Ended: '{1}', Analyzer: {2}",
-                "Category",
-                defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor SymbolStartedEndedDifferRule =
+                new DiagnosticDescriptor(
+                    "SymbolStartedEndedDifferRuleId",
+                    "SymbolStartedEndedDifferRuleTitle",
+                    "Symbols Started: '{0}', Symbols Ended: '{1}', Analyzer: {2}",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
-            public static readonly DiagnosticDescriptor SymbolStartedOrderingRule = new DiagnosticDescriptor(
-               "SymbolStartedOrderingRuleId",
-               "SymbolStartedOrderingRuleTitle",
-               "Member '{0}' started before container '{1}', Analyzer: {2}",
-               "Category",
-               defaultSeverity: DiagnosticSeverity.Warning,
-               isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor SymbolStartedOrderingRule =
+                new DiagnosticDescriptor(
+                    "SymbolStartedOrderingRuleId",
+                    "SymbolStartedOrderingRuleTitle",
+                    "Member '{0}' started before container '{1}', Analyzer: {2}",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
-            public static readonly DiagnosticDescriptor SymbolEndedOrderingRule = new DiagnosticDescriptor(
-               "SymbolEndedOrderingRuleId",
-               "SymbolEndedOrderingRuleTitle",
-               "Container '{0}' ended before member '{1}', Analyzer: {2}",
-               "Category",
-               defaultSeverity: DiagnosticSeverity.Warning,
-               isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor SymbolEndedOrderingRule =
+                new DiagnosticDescriptor(
+                    "SymbolEndedOrderingRuleId",
+                    "SymbolEndedOrderingRuleTitle",
+                    "Container '{0}' ended before member '{1}', Analyzer: {2}",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
-            public static readonly DiagnosticDescriptor OperationOrderingRule = new DiagnosticDescriptor(
-               "OperationOrderingRuleId",
-               "OperationOrderingRuleTitle",
-               "Container '{0}' started after operation '{1}', Analyzer: {2}",
-               "Category",
-               defaultSeverity: DiagnosticSeverity.Warning,
-               isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor OperationOrderingRule =
+                new DiagnosticDescriptor(
+                    "OperationOrderingRuleId",
+                    "OperationOrderingRuleTitle",
+                    "Container '{0}' started after operation '{1}', Analyzer: {2}",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
-            public static readonly DiagnosticDescriptor DuplicateStartActionRule = new DiagnosticDescriptor(
-               "DuplicateStartActionRuleId",
-               "DuplicateStartActionRuleTitle",
-               "Symbol : {0}, Analyzer: {1}",
-               "Category",
-               defaultSeverity: DiagnosticSeverity.Warning,
-               isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor DuplicateStartActionRule =
+                new DiagnosticDescriptor(
+                    "DuplicateStartActionRuleId",
+                    "DuplicateStartActionRuleTitle",
+                    "Symbol : {0}, Analyzer: {1}",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
-            public static readonly DiagnosticDescriptor DuplicateEndActionRule = new DiagnosticDescriptor(
-              "DuplicateEndActionRuleId",
-              "DuplicateEndActionRuleTitle",
-              "Symbol : {0}, Analyzer: {1}",
-              "Category",
-              defaultSeverity: DiagnosticSeverity.Warning,
-              isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor DuplicateEndActionRule =
+                new DiagnosticDescriptor(
+                    "DuplicateEndActionRuleId",
+                    "DuplicateEndActionRuleTitle",
+                    "Symbol : {0}, Analyzer: {1}",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
             public static readonly DiagnosticDescriptor OperationRule = new DiagnosticDescriptor(
                 "OperationRuleId",
@@ -1681,7 +2419,8 @@ namespace Microsoft.CodeAnalysis
                 "Symbol Started: '{0}', Owning Symbol: '{1}' Operation : {2}, Analyzer: {3}",
                 "Category",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {
@@ -1696,7 +2435,8 @@ namespace Microsoft.CodeAnalysis
                         DuplicateStartActionRule,
                         DuplicateEndActionRule,
                         OperationRule,
-                        OperationOrderingRule);
+                        OperationOrderingRule
+                    );
                 }
             }
 
@@ -1704,31 +2444,45 @@ namespace Microsoft.CodeAnalysis
             {
                 var diagnostics = new ConcurrentBag<Diagnostic>();
                 var symbolsEnded = new ConcurrentSet<ISymbol>();
-                var seenOperationContainers = new ConcurrentDictionary<OperationAnalysisContext, ISet<ISymbol>>();
+                var seenOperationContainers = new ConcurrentDictionary<
+                    OperationAnalysisContext,
+                    ISet<ISymbol>
+                >();
 
                 if (_topLevelAction)
                 {
                     context.RegisterSymbolStartAction(onSymbolStart, _symbolKind);
 
-                    context.RegisterCompilationStartAction(compilationStartContext =>
-                    {
-                        compilationStartContext.RegisterCompilationEndAction(compilationEndContext =>
+                    context.RegisterCompilationStartAction(
+                        compilationStartContext =>
                         {
-                            reportDiagnosticsAtCompilationEnd(compilationEndContext);
-                        });
-                    });
+                            compilationStartContext.RegisterCompilationEndAction(
+                                compilationEndContext =>
+                                {
+                                    reportDiagnosticsAtCompilationEnd(compilationEndContext);
+                                }
+                            );
+                        }
+                    );
                 }
                 else
                 {
-                    context.RegisterCompilationStartAction(compilationStartContext =>
-                    {
-                        compilationStartContext.RegisterSymbolStartAction(onSymbolStart, _symbolKind);
-
-                        compilationStartContext.RegisterCompilationEndAction(compilationEndContext =>
+                    context.RegisterCompilationStartAction(
+                        compilationStartContext =>
                         {
-                            reportDiagnosticsAtCompilationEnd(compilationEndContext);
-                        });
-                    });
+                            compilationStartContext.RegisterSymbolStartAction(
+                                onSymbolStart,
+                                _symbolKind
+                            );
+
+                            compilationStartContext.RegisterCompilationEndAction(
+                                compilationEndContext =>
+                                {
+                                    reportDiagnosticsAtCompilationEnd(compilationEndContext);
+                                }
+                            );
+                        }
+                    );
                 }
 
                 return;
@@ -1739,26 +2493,53 @@ namespace Microsoft.CodeAnalysis
 
                     if (_operationKind.HasValue)
                     {
-                        symbolStartContext.RegisterOperationAction(operationContext =>
-                        {
-                            performOperationActionVerification(operationContext, symbolStartContext);
-                        }, _operationKind.Value);
+                        symbolStartContext.RegisterOperationAction(
+                            operationContext =>
+                            {
+                                performOperationActionVerification(
+                                    operationContext,
+                                    symbolStartContext
+                                );
+                            },
+                            _operationKind.Value
+                        );
                     }
 
-                    symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
-                    {
-                        performSymbolEndActionVerification(symbolEndContext, symbolStartContext);
-                    });
+                    symbolStartContext.RegisterSymbolEndAction(
+                        symbolEndContext =>
+                        {
+                            performSymbolEndActionVerification(
+                                symbolEndContext,
+                                symbolStartContext
+                            );
+                        }
+                    );
                 }
 
-                void reportDiagnosticsAtCompilationEnd(CompilationAnalysisContext compilationEndContext)
+                void reportDiagnosticsAtCompilationEnd(
+                    CompilationAnalysisContext compilationEndContext
+                )
                 {
                     if (!SymbolsStarted.SetEquals(symbolsEnded))
                     {
                         // Symbols Started: '{0}', Symbols Ended: '{1}', Analyzer: {2}
-                        var symbolsStartedStr = string.Join(", ", SymbolsStarted.Select(s => s.ToDisplayString()).Order());
-                        var symbolsEndedStr = string.Join(", ", symbolsEnded.Select(s => s.ToDisplayString()).Order());
-                        compilationEndContext.ReportDiagnostic(Diagnostic.Create(SymbolStartedEndedDifferRule, Location.None, symbolsStartedStr, symbolsEndedStr, _analyzerId));
+                        var symbolsStartedStr = string.Join(
+                            ", ",
+                            SymbolsStarted.Select(s => s.ToDisplayString()).Order()
+                        );
+                        var symbolsEndedStr = string.Join(
+                            ", ",
+                            symbolsEnded.Select(s => s.ToDisplayString()).Order()
+                        );
+                        compilationEndContext.ReportDiagnostic(
+                            Diagnostic.Create(
+                                SymbolStartedEndedDifferRule,
+                                Location.None,
+                                symbolsStartedStr,
+                                symbolsEndedStr,
+                                _analyzerId
+                            )
+                        );
                     }
 
                     foreach (var diagnostic in diagnostics)
@@ -1767,38 +2548,81 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                void performSymbolStartActionVerification(SymbolStartAnalysisContext symbolStartContext)
+                void performSymbolStartActionVerification(
+                    SymbolStartAnalysisContext symbolStartContext
+                )
                 {
                     verifySymbolStartOrdering(symbolStartContext);
                     verifySymbolStartAndOperationOrdering(symbolStartContext);
                     if (!SymbolsStarted.Add(symbolStartContext.Symbol))
                     {
-                        diagnostics.Add(Diagnostic.Create(DuplicateStartActionRule, Location.None, symbolStartContext.Symbol.Name, _analyzerId));
+                        diagnostics.Add(
+                            Diagnostic.Create(
+                                DuplicateStartActionRule,
+                                Location.None,
+                                symbolStartContext.Symbol.Name,
+                                _analyzerId
+                            )
+                        );
                     }
                 }
 
-                void performSymbolEndActionVerification(SymbolAnalysisContext symbolEndContext, SymbolStartAnalysisContext symbolStartContext)
+                void performSymbolEndActionVerification(
+                    SymbolAnalysisContext symbolEndContext,
+                    SymbolStartAnalysisContext symbolStartContext
+                )
                 {
                     Assert.Equal(symbolStartContext.Symbol, symbolEndContext.Symbol);
                     verifySymbolEndOrdering(symbolEndContext);
                     if (!symbolsEnded.Add(symbolEndContext.Symbol))
                     {
-                        diagnostics.Add(Diagnostic.Create(DuplicateEndActionRule, Location.None, symbolEndContext.Symbol.Name, _analyzerId));
+                        diagnostics.Add(
+                            Diagnostic.Create(
+                                DuplicateEndActionRule,
+                                Location.None,
+                                symbolEndContext.Symbol.Name,
+                                _analyzerId
+                            )
+                        );
                     }
 
                     Assert.False(symbolEndContext.Symbol.IsImplicitlyDeclared);
-                    var rule = _topLevelAction ? SymbolStartTopLevelRule : SymbolStartCompilationLevelRule;
-                    symbolEndContext.ReportDiagnostic(Diagnostic.Create(rule, Location.None, symbolStartContext.Symbol.Name, _analyzerId));
+                    var rule = _topLevelAction
+                        ? SymbolStartTopLevelRule
+                        : SymbolStartCompilationLevelRule;
+                    symbolEndContext.ReportDiagnostic(
+                        Diagnostic.Create(
+                            rule,
+                            Location.None,
+                            symbolStartContext.Symbol.Name,
+                            _analyzerId
+                        )
+                    );
                 }
 
-                void performOperationActionVerification(OperationAnalysisContext operationContext, SymbolStartAnalysisContext symbolStartContext)
+                void performOperationActionVerification(
+                    OperationAnalysisContext operationContext,
+                    SymbolStartAnalysisContext symbolStartContext
+                )
                 {
-                    var containingSymbols = GetContainingSymbolsAndThis(operationContext.ContainingSymbol).ToSet();
+                    var containingSymbols = GetContainingSymbolsAndThis(
+                            operationContext.ContainingSymbol
+                        )
+                        .ToSet();
                     seenOperationContainers.Add(operationContext, containingSymbols);
                     Assert.Contains(symbolStartContext.Symbol, containingSymbols);
                     Assert.All(containingSymbols, s => Assert.DoesNotContain(s, symbolsEnded));
                     // Symbol Started: '{0}', Owning Symbol: '{1}' Operation : {2}, Analyzer: {3}
-                    operationContext.ReportDiagnostic(Diagnostic.Create(OperationRule, Location.None, symbolStartContext.Symbol.Name, operationContext.ContainingSymbol.Name, operationContext.Operation.Syntax.ToString(), _analyzerId));
+                    operationContext.ReportDiagnostic(
+                        Diagnostic.Create(
+                            OperationRule,
+                            Location.None,
+                            symbolStartContext.Symbol.Name,
+                            operationContext.ContainingSymbol.Name,
+                            operationContext.Operation.Syntax.ToString(),
+                            _analyzerId
+                        )
+                    );
                 }
 
                 IEnumerable<ISymbol> GetContainingSymbolsAndThis(ISymbol symbol)
@@ -1807,8 +2631,7 @@ namespace Microsoft.CodeAnalysis
                     {
                         yield return symbol;
                         symbol = symbol.ContainingSymbol;
-                    }
-                    while (symbol != null && !symbol.IsImplicitlyDeclared);
+                    } while (symbol != null && !symbol.IsImplicitlyDeclared);
                 }
 
                 void verifySymbolStartOrdering(SymbolStartAnalysisContext symbolStartContext)
@@ -1834,7 +2657,15 @@ namespace Microsoft.CodeAnalysis
                         if (SymbolsStarted.Contains(member))
                         {
                             // Member '{0}' started before container '{1}', Analyzer {2}
-                            diagnostics.Add(Diagnostic.Create(SymbolStartedOrderingRule, Location.None, member, symbolStarted, _analyzerId));
+                            diagnostics.Add(
+                                Diagnostic.Create(
+                                    SymbolStartedOrderingRule,
+                                    Location.None,
+                                    member,
+                                    symbolStarted,
+                                    _analyzerId
+                                )
+                            );
                         }
                     }
                 }
@@ -1858,12 +2689,22 @@ namespace Microsoft.CodeAnalysis
                         if (symbolsEnded.Contains(container))
                         {
                             // Container '{0}' ended before member '{1}', Analyzer {2}
-                            diagnostics.Add(Diagnostic.Create(SymbolEndedOrderingRule, Location.None, container, symbolEnded, _analyzerId));
+                            diagnostics.Add(
+                                Diagnostic.Create(
+                                    SymbolEndedOrderingRule,
+                                    Location.None,
+                                    container,
+                                    symbolEnded,
+                                    _analyzerId
+                                )
+                            );
                         }
                     }
                 }
 
-                void verifySymbolStartAndOperationOrdering(SymbolStartAnalysisContext symbolStartContext)
+                void verifySymbolStartAndOperationOrdering(
+                    SymbolStartAnalysisContext symbolStartContext
+                )
                 {
                     foreach (var kvp in seenOperationContainers)
                     {
@@ -1873,7 +2714,15 @@ namespace Microsoft.CodeAnalysis
                         if (containers.Contains(symbolStartContext.Symbol))
                         {
                             // Container '{0}' started after operation '{1}', Analyzer {2}
-                            diagnostics.Add(Diagnostic.Create(OperationOrderingRule, Location.None, symbolStartContext.Symbol, operationContext.Operation.Syntax.ToString(), _analyzerId));
+                            diagnostics.Add(
+                                Diagnostic.Create(
+                                    OperationOrderingRule,
+                                    Location.None,
+                                    symbolStartContext.Symbol,
+                                    operationContext.Operation.Syntax.ToString(),
+                                    _analyzerId
+                                )
+                            );
                         }
                     }
                 }
@@ -1884,42 +2733,53 @@ namespace Microsoft.CodeAnalysis
         public sealed class DiagnosticSuppressorForId : DiagnosticSuppressor
         {
             public SuppressionDescriptor SuppressionDescriptor { get; }
-            public DiagnosticSuppressorForId(string suppressedDiagnosticId, string suppressionId = null)
+            public DiagnosticSuppressorForId(
+                string suppressedDiagnosticId,
+                string suppressionId = null
+            )
             {
                 SuppressionDescriptor = new SuppressionDescriptor(
                     id: suppressionId ?? "SPR0001",
                     suppressedDiagnosticId: suppressedDiagnosticId,
-                    justification: $"Suppress {suppressedDiagnosticId}");
+                    justification: $"Suppress {suppressedDiagnosticId}"
+                );
             }
 
-            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions
-                => ImmutableArray.Create(SuppressionDescriptor);
+            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
+                ImmutableArray.Create(SuppressionDescriptor);
 
             public override void ReportSuppressions(SuppressionAnalysisContext context)
             {
                 foreach (var diagnostic in context.ReportedDiagnostics)
                 {
                     Assert.Equal(SuppressionDescriptor.SuppressedDiagnosticId, diagnostic.Id);
-                    context.ReportSuppression(Suppression.Create(SuppressionDescriptor, diagnostic));
+                    context.ReportSuppression(
+                        Suppression.Create(SuppressionDescriptor, diagnostic)
+                    );
                 }
             }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-        public sealed class DiagnosticSuppressorForId_ThrowsOperationCancelledException : DiagnosticSuppressor
+        public sealed class DiagnosticSuppressorForId_ThrowsOperationCancelledException
+            : DiagnosticSuppressor
         {
-            public CancellationTokenSource CancellationTokenSource { get; } = new CancellationTokenSource();
+            public CancellationTokenSource CancellationTokenSource { get; } =
+                new CancellationTokenSource();
             public SuppressionDescriptor SuppressionDescriptor { get; }
-            public DiagnosticSuppressorForId_ThrowsOperationCancelledException(string suppressedDiagnosticId)
+            public DiagnosticSuppressorForId_ThrowsOperationCancelledException(
+                string suppressedDiagnosticId
+            )
             {
                 SuppressionDescriptor = new SuppressionDescriptor(
                     id: "SPR0001",
                     suppressedDiagnosticId: suppressedDiagnosticId,
-                    justification: $"Suppress {suppressedDiagnosticId}");
+                    justification: $"Suppress {suppressedDiagnosticId}"
+                );
             }
 
-            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions
-                => ImmutableArray.Create(SuppressionDescriptor);
+            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
+                ImmutableArray.Create(SuppressionDescriptor);
 
             public override void ReportSuppressions(SuppressionAnalysisContext context)
             {
@@ -1929,40 +2789,46 @@ namespace Microsoft.CodeAnalysis
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-        public sealed class DiagnosticSuppressorThrowsExceptionFromSupportedSuppressions : DiagnosticSuppressor
+        public sealed class DiagnosticSuppressorThrowsExceptionFromSupportedSuppressions
+            : DiagnosticSuppressor
         {
             private readonly NotImplementedException _exception;
 
-            public DiagnosticSuppressorThrowsExceptionFromSupportedSuppressions(NotImplementedException exception)
+            public DiagnosticSuppressorThrowsExceptionFromSupportedSuppressions(
+                NotImplementedException exception
+            )
             {
                 _exception = exception;
             }
 
-            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions
-                => throw _exception;
+            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
+                throw _exception;
 
-            public override void ReportSuppressions(SuppressionAnalysisContext context)
-            {
-            }
+            public override void ReportSuppressions(SuppressionAnalysisContext context) { }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-        public sealed class DiagnosticSuppressorThrowsExceptionFromReportedSuppressions : DiagnosticSuppressor
+        public sealed class DiagnosticSuppressorThrowsExceptionFromReportedSuppressions
+            : DiagnosticSuppressor
         {
             private readonly SuppressionDescriptor _descriptor;
             private readonly NotImplementedException _exception;
 
-            public DiagnosticSuppressorThrowsExceptionFromReportedSuppressions(string suppressedDiagnosticId, NotImplementedException exception)
+            public DiagnosticSuppressorThrowsExceptionFromReportedSuppressions(
+                string suppressedDiagnosticId,
+                NotImplementedException exception
+            )
             {
                 _descriptor = new SuppressionDescriptor(
                     "SPR0001",
                     suppressedDiagnosticId,
-                    $"Suppress {suppressedDiagnosticId}");
+                    $"Suppress {suppressedDiagnosticId}"
+                );
                 _exception = exception;
             }
 
-            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions
-                => ImmutableArray.Create(_descriptor);
+            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
+                ImmutableArray.Create(_descriptor);
 
             public override void ReportSuppressions(SuppressionAnalysisContext context)
             {
@@ -1971,90 +2837,114 @@ namespace Microsoft.CodeAnalysis
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-        public sealed class DiagnosticSuppressor_UnsupportedSuppressionReported : DiagnosticSuppressor
+        public sealed class DiagnosticSuppressor_UnsupportedSuppressionReported
+            : DiagnosticSuppressor
         {
             private readonly SuppressionDescriptor _supportedDescriptor;
             private readonly SuppressionDescriptor _unsupportedDescriptor;
 
-            public DiagnosticSuppressor_UnsupportedSuppressionReported(string suppressedDiagnosticId, string supportedSuppressionId, string unsupportedSuppressionId)
+            public DiagnosticSuppressor_UnsupportedSuppressionReported(
+                string suppressedDiagnosticId,
+                string supportedSuppressionId,
+                string unsupportedSuppressionId
+            )
             {
                 _supportedDescriptor = new SuppressionDescriptor(
                     supportedSuppressionId,
                     suppressedDiagnosticId,
-                    $"Suppress {suppressedDiagnosticId}");
+                    $"Suppress {suppressedDiagnosticId}"
+                );
 
                 _unsupportedDescriptor = new SuppressionDescriptor(
                     unsupportedSuppressionId,
                     suppressedDiagnosticId,
-                    $"Suppress {suppressedDiagnosticId}");
+                    $"Suppress {suppressedDiagnosticId}"
+                );
             }
 
-            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions
-                => ImmutableArray.Create(_supportedDescriptor);
+            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
+                ImmutableArray.Create(_supportedDescriptor);
 
             public override void ReportSuppressions(SuppressionAnalysisContext context)
             {
                 foreach (var diagnostic in context.ReportedDiagnostics)
                 {
                     Assert.Equal(_unsupportedDescriptor.SuppressedDiagnosticId, diagnostic.Id);
-                    context.ReportSuppression(Suppression.Create(_unsupportedDescriptor, diagnostic));
+                    context.ReportSuppression(
+                        Suppression.Create(_unsupportedDescriptor, diagnostic)
+                    );
                 }
             }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-        public sealed class DiagnosticSuppressor_InvalidDiagnosticSuppressionReported : DiagnosticSuppressor
+        public sealed class DiagnosticSuppressor_InvalidDiagnosticSuppressionReported
+            : DiagnosticSuppressor
         {
             private readonly SuppressionDescriptor _supportedDescriptor;
             private readonly SuppressionDescriptor _unsupportedDescriptor;
 
-            public DiagnosticSuppressor_InvalidDiagnosticSuppressionReported(string suppressedDiagnosticId, string unsupportedSuppressedDiagnosticId)
+            public DiagnosticSuppressor_InvalidDiagnosticSuppressionReported(
+                string suppressedDiagnosticId,
+                string unsupportedSuppressedDiagnosticId
+            )
             {
                 _supportedDescriptor = new SuppressionDescriptor(
                     "SPR0001",
                     suppressedDiagnosticId,
-                    $"Suppress {suppressedDiagnosticId}");
+                    $"Suppress {suppressedDiagnosticId}"
+                );
 
                 _unsupportedDescriptor = new SuppressionDescriptor(
                     "SPR0002",
                     unsupportedSuppressedDiagnosticId,
-                    $"Suppress {unsupportedSuppressedDiagnosticId}");
+                    $"Suppress {unsupportedSuppressedDiagnosticId}"
+                );
             }
 
-            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions
-                => ImmutableArray.Create(_supportedDescriptor);
+            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
+                ImmutableArray.Create(_supportedDescriptor);
 
             public override void ReportSuppressions(SuppressionAnalysisContext context)
             {
                 foreach (var diagnostic in context.ReportedDiagnostics)
                 {
                     Assert.Equal(_supportedDescriptor.SuppressedDiagnosticId, diagnostic.Id);
-                    context.ReportSuppression(Suppression.Create(_unsupportedDescriptor, diagnostic));
+                    context.ReportSuppression(
+                        Suppression.Create(_unsupportedDescriptor, diagnostic)
+                    );
                 }
             }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-        public sealed class DiagnosticSuppressor_NonReportedDiagnosticCannotBeSuppressed : DiagnosticSuppressor
+        public sealed class DiagnosticSuppressor_NonReportedDiagnosticCannotBeSuppressed
+            : DiagnosticSuppressor
         {
-            private readonly SuppressionDescriptor _descriptor1, _descriptor2;
+            private readonly SuppressionDescriptor _descriptor1,
+                _descriptor2;
             private readonly string _nonReportedDiagnosticId;
 
-            public DiagnosticSuppressor_NonReportedDiagnosticCannotBeSuppressed(string reportedDiagnosticId, string nonReportedDiagnosticId)
+            public DiagnosticSuppressor_NonReportedDiagnosticCannotBeSuppressed(
+                string reportedDiagnosticId,
+                string nonReportedDiagnosticId
+            )
             {
                 _descriptor1 = new SuppressionDescriptor(
                     "SPR0001",
                     reportedDiagnosticId,
-                    $"Suppress {reportedDiagnosticId}");
+                    $"Suppress {reportedDiagnosticId}"
+                );
                 _descriptor2 = new SuppressionDescriptor(
                     "SPR0002",
                     nonReportedDiagnosticId,
-                    $"Suppress {nonReportedDiagnosticId}");
+                    $"Suppress {nonReportedDiagnosticId}"
+                );
                 _nonReportedDiagnosticId = nonReportedDiagnosticId;
             }
 
-            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions
-                => ImmutableArray.Create(_descriptor1, _descriptor2);
+            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
+                ImmutableArray.Create(_descriptor1, _descriptor2);
 
             public override void ReportSuppressions(SuppressionAnalysisContext context)
             {
@@ -2065,7 +2955,8 @@ namespace Microsoft.CodeAnalysis
                     severity: DiagnosticSeverity.Warning,
                     defaultSeverity: DiagnosticSeverity.Warning,
                     isEnabledByDefault: true,
-                    warningLevel: 1);
+                    warningLevel: 1
+                );
                 context.ReportSuppression(Suppression.Create(_descriptor2, nonReportedDiagnostic));
             }
         }
@@ -2087,13 +2978,19 @@ namespace Microsoft.CodeAnalysis
             private readonly GeneratedCodeAnalysisFlags _analysisFlags;
             private readonly ConcurrentSet<ISymbol> _symbolCallbacks;
 
-            public NamedTypeAnalyzer(AnalysisKind analysisKind, GeneratedCodeAnalysisFlags analysisFlags = GeneratedCodeAnalysisFlags.None, bool configurable = true)
+            public NamedTypeAnalyzer(
+                AnalysisKind analysisKind,
+                GeneratedCodeAnalysisFlags analysisFlags = GeneratedCodeAnalysisFlags.None,
+                bool configurable = true
+            )
             {
                 _analysisKind = analysisKind;
                 _analysisFlags = analysisFlags;
                 _symbolCallbacks = new ConcurrentSet<ISymbol>();
 
-                var customTags = configurable ? Array.Empty<string>() : new[] { WellKnownDiagnosticTags.NotConfigurable };
+                var customTags = configurable
+                    ? Array.Empty<string>()
+                    : new[] { WellKnownDiagnosticTags.NotConfigurable };
                 _rule = new DiagnosticDescriptor(
                     RuleId,
                     "Title1",
@@ -2101,11 +2998,14 @@ namespace Microsoft.CodeAnalysis
                     RuleCategory,
                     defaultSeverity: DiagnosticSeverity.Warning,
                     isEnabledByDefault: true,
-                    customTags: customTags);
+                    customTags: customTags
+                );
             }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
-            public string GetSortedSymbolCallbacksString() => string.Join(", ", _symbolCallbacks.Select(s => s.Name).Order());
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(_rule);
+            public string GetSortedSymbolCallbacksString() =>
+                string.Join(", ", _symbolCallbacks.Select(s => s.Name).Order());
 
             public override void Initialize(AnalysisContext context)
             {
@@ -2114,44 +3014,65 @@ namespace Microsoft.CodeAnalysis
                 switch (_analysisKind)
                 {
                     case AnalysisKind.Symbol:
-                        context.RegisterSymbolAction(c =>
+                        context.RegisterSymbolAction(
+                            c =>
                             {
                                 _symbolCallbacks.Add(c.Symbol);
                                 ReportDiagnostic(c.Symbol, c.ReportDiagnostic);
-                            }, SymbolKind.NamedType);
+                            },
+                            SymbolKind.NamedType
+                        );
                         break;
 
                     case AnalysisKind.SymbolStartEnd:
-                        context.RegisterSymbolStartAction(symbolStartContext =>
-                        {
-                            symbolStartContext.RegisterSymbolEndAction(symbolEndContext =>
+                        context.RegisterSymbolStartAction(
+                            symbolStartContext =>
                             {
-                                _symbolCallbacks.Add(symbolEndContext.Symbol);
-                                ReportDiagnostic(symbolEndContext.Symbol, symbolEndContext.ReportDiagnostic);
-                            });
-                        }, SymbolKind.NamedType);
-
+                                symbolStartContext.RegisterSymbolEndAction(
+                                    symbolEndContext =>
+                                    {
+                                        _symbolCallbacks.Add(symbolEndContext.Symbol);
+                                        ReportDiagnostic(
+                                            symbolEndContext.Symbol,
+                                            symbolEndContext.ReportDiagnostic
+                                        );
+                                    }
+                                );
+                            },
+                            SymbolKind.NamedType
+                        );
                         break;
 
                     case AnalysisKind.CompilationStartEnd:
-                        context.RegisterCompilationStartAction(compilationStartContext =>
-                        {
-                            compilationStartContext.RegisterSymbolAction(c =>
+                        context.RegisterCompilationStartAction(
+                            compilationStartContext =>
                             {
-                                _symbolCallbacks.Add(c.Symbol);
-                            }, SymbolKind.NamedType);
+                                compilationStartContext.RegisterSymbolAction(
+                                    c =>
+                                    {
+                                        _symbolCallbacks.Add(c.Symbol);
+                                    },
+                                    SymbolKind.NamedType
+                                );
 
-                            compilationStartContext.RegisterCompilationEndAction(
-                                compilationEndContext => compilationEndContext.ReportDiagnostic(
-                                    Diagnostic.Create(_rule, Location.None, GetSortedSymbolCallbacksString())));
-                        });
-
+                                compilationStartContext.RegisterCompilationEndAction(
+                                    compilationEndContext =>
+                                        compilationEndContext.ReportDiagnostic(
+                                            Diagnostic.Create(
+                                                _rule,
+                                                Location.None,
+                                                GetSortedSymbolCallbacksString()
+                                            )
+                                        )
+                                );
+                            }
+                        );
                         break;
                 }
             }
 
-            private void ReportDiagnostic(ISymbol symbol, Action<Diagnostic> reportDiagnostic)
-                => reportDiagnostic(Diagnostic.Create(_rule, symbol.Locations[0], symbol.Name));
+            private void ReportDiagnostic(ISymbol symbol, Action<Diagnostic> reportDiagnostic) =>
+                reportDiagnostic(Diagnostic.Create(_rule, symbol.Locations[0], symbol.Name));
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
@@ -2165,16 +3086,22 @@ namespace Microsoft.CodeAnalysis
                     "Message1",
                     "Category1",
                     defaultSeverity: DiagnosticSeverity.Warning,
-                    isEnabledByDefault);
+                    isEnabledByDefault
+                );
             }
 
             public DiagnosticDescriptor Descriptor { get; }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationAction(compilationContext =>
-                    compilationContext.ReportDiagnostic(Diagnostic.Create(Descriptor, Location.None)));
+                context.RegisterCompilationAction(
+                    compilationContext =>
+                        compilationContext.ReportDiagnostic(
+                            Diagnostic.Create(Descriptor, Location.None)
+                        )
+                );
             }
         }
 
@@ -2182,7 +3109,11 @@ namespace Microsoft.CodeAnalysis
         public sealed class NamedTypeAnalyzerWithConfigurableEnabledByDefault : DiagnosticAnalyzer
         {
             private readonly bool _throwOnAllNamedTypes;
-            public NamedTypeAnalyzerWithConfigurableEnabledByDefault(bool isEnabledByDefault, DiagnosticSeverity defaultSeverity, bool throwOnAllNamedTypes = false)
+            public NamedTypeAnalyzerWithConfigurableEnabledByDefault(
+                bool isEnabledByDefault,
+                DiagnosticSeverity defaultSeverity,
+                bool throwOnAllNamedTypes = false
+            )
             {
                 Descriptor = new DiagnosticDescriptor(
                     "ID0001",
@@ -2190,25 +3121,31 @@ namespace Microsoft.CodeAnalysis
                     "Message1",
                     "Category1",
                     defaultSeverity,
-                    isEnabledByDefault);
+                    isEnabledByDefault
+                );
                 _throwOnAllNamedTypes = throwOnAllNamedTypes;
             }
 
             public DiagnosticDescriptor Descriptor { get; }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSymbolAction(context =>
+                context.RegisterSymbolAction(
+                    context =>
                     {
                         if (_throwOnAllNamedTypes)
                         {
                             throw new NotImplementedException();
                         }
 
-                        context.ReportDiagnostic(Diagnostic.Create(Descriptor, context.Symbol.Locations[0]));
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(Descriptor, context.Symbol.Locations[0])
+                        );
                     },
-                    SymbolKind.NamedType);
+                    SymbolKind.NamedType
+                );
             }
         }
 
@@ -2221,9 +3158,11 @@ namespace Microsoft.CodeAnalysis
                 "Message",
                 "Category",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s_descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(s_descriptor);
             public override void Initialize(AnalysisContext analysisContext)
             {
                 analysisContext.RegisterOperationAction(_ => { }, OperationKind.Invocation);
@@ -2233,7 +3172,11 @@ namespace Microsoft.CodeAnalysis
             private void OnOperationBlockStart(OperationBlockStartAnalysisContext context)
             {
                 context.RegisterOperationBlockEndAction(
-                    endContext => endContext.ReportDiagnostic(Diagnostic.Create(s_descriptor, context.OwningSymbol.Locations[0])));
+                    endContext =>
+                        endContext.ReportDiagnostic(
+                            Diagnostic.Create(s_descriptor, context.OwningSymbol.Locations[0])
+                        )
+                );
             }
         }
 
@@ -2250,31 +3193,46 @@ namespace Microsoft.CodeAnalysis
                     "Message",
                     "Category",
                     defaultSeverity: DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true);
+                    isEnabledByDefault: true
+                );
             }
 
             public DiagnosticDescriptor Descriptor { get; }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context)
             {
                 if (_syntaxTreeAction)
                 {
-                    context.RegisterSyntaxTreeAction(context =>
-                    {
-                        var fields = context.Tree.GetRoot().DescendantNodes().OfType<CSharp.Syntax.FieldDeclarationSyntax>();
-                        foreach (var variable in fields.SelectMany(f => f.Declaration.Variables))
+                    context.RegisterSyntaxTreeAction(
+                        context =>
                         {
-                            context.ReportDiagnostic(Diagnostic.Create(Descriptor, variable.Identifier.GetLocation()));
+                            var fields = context.Tree
+                                .GetRoot()
+                                .DescendantNodes()
+                                .OfType<CSharp.Syntax.FieldDeclarationSyntax>();
+                            foreach (
+                                var variable in fields.SelectMany(f => f.Declaration.Variables)
+                            )
+                            {
+                                context.ReportDiagnostic(
+                                    Diagnostic.Create(Descriptor, variable.Identifier.GetLocation())
+                                );
+                            }
                         }
-                    });
+                    );
                 }
                 else
                 {
                     context.RegisterSymbolAction(
-                        context => context.ReportDiagnostic(Diagnostic.Create(Descriptor, context.Symbol.Locations[0])),
-                        SymbolKind.Field);
+                        context =>
+                            context.ReportDiagnostic(
+                                Diagnostic.Create(Descriptor, context.Symbol.Locations[0])
+                            ),
+                        SymbolKind.Field
+                    );
                 }
             }
         }
@@ -2285,7 +3243,11 @@ namespace Microsoft.CodeAnalysis
             private readonly bool _registerFromInitialize;
             private readonly TextSpan _diagnosticSpan;
 
-            public AdditionalFileAnalyzer(bool registerFromInitialize, TextSpan diagnosticSpan, string id = "ID0001")
+            public AdditionalFileAnalyzer(
+                bool registerFromInitialize,
+                TextSpan diagnosticSpan,
+                string id = "ID0001"
+            )
             {
                 _registerFromInitialize = registerFromInitialize;
                 _diagnosticSpan = diagnosticSpan;
@@ -2296,12 +3258,14 @@ namespace Microsoft.CodeAnalysis
                     "Message1",
                     "Category1",
                     defaultSeverity: DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true);
+                    isEnabledByDefault: true
+                );
             }
 
             public DiagnosticDescriptor Descriptor { get; }
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
             public override void Initialize(AnalysisContext context)
             {
                 if (_registerFromInitialize)
@@ -2310,8 +3274,9 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    context.RegisterCompilationStartAction(context =>
-                        context.RegisterAdditionalFileAction(AnalyzeAdditionalFile));
+                    context.RegisterCompilationStartAction(
+                        context => context.RegisterAdditionalFileAction(AnalyzeAdditionalFile)
+                    );
                 }
             }
 
@@ -2323,7 +3288,11 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 var text = context.AdditionalFile.GetText();
-                var location = Location.Create(context.AdditionalFile.Path, _diagnosticSpan, text.Lines.GetLinePositionSpan(_diagnosticSpan));
+                var location = Location.Create(
+                    context.AdditionalFile.Path,
+                    _diagnosticSpan,
+                    text.Lines.GetLinePositionSpan(_diagnosticSpan)
+                );
                 context.ReportDiagnostic(Diagnostic.Create(Descriptor, location));
             }
         }
@@ -2338,30 +3307,37 @@ namespace Microsoft.CodeAnalysis
                 "Message",
                 "Category",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
-            private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+                isEnabledByDefault: true
+            );
+            private readonly CancellationTokenSource _cancellationTokenSource =
+                new CancellationTokenSource();
             public CancellationToken CancellationToken => _cancellationTokenSource.Token;
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s_descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(s_descriptor);
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSyntaxTreeAction(context =>
-                {
-                    // Mimic cancellation by throwing an OperationCanceledException in first callback.
-                    if (!_cancellationTokenSource.IsCancellationRequested)
+                context.RegisterSyntaxTreeAction(
+                    context =>
                     {
-                        _cancellationTokenSource.Cancel();
-
-                        while (true)
+                        // Mimic cancellation by throwing an OperationCanceledException in first callback.
+                        if (!_cancellationTokenSource.IsCancellationRequested)
                         {
-                            context.CancellationToken.ThrowIfCancellationRequested();
+                            _cancellationTokenSource.Cancel();
+
+                            while (true)
+                            {
+                                context.CancellationToken.ThrowIfCancellationRequested();
+                            }
+
+                            throw ExceptionUtilities.Unreachable;
                         }
 
-                        throw ExceptionUtilities.Unreachable;
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(s_descriptor, context.Tree.GetRoot().GetLocation())
+                        );
                     }
-
-                    context.ReportDiagnostic(Diagnostic.Create(s_descriptor, context.Tree.GetRoot().GetLocation()));
-                });
+                );
             }
         }
     }

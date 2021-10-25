@@ -19,7 +19,6 @@ public class GCUtil
     public static List<GCHandle> list2 = new List<GCHandle>();
     public static List<byte[]> blist2 = new List<byte[]>();
 
-
     public static void Alloc(int numNodes, int percentPinned)
     {
         for (int i = 0; i < numNodes; i++)
@@ -36,7 +35,6 @@ public class GCUtil
         }
     }
 
-
     public static void FreePins()
     {
         foreach (GCHandle gch in list)
@@ -47,13 +45,10 @@ public class GCUtil
         blist.Clear();
     }
 
-
     public static void FreeNonPins()
     {
         blist.Clear();
     }
-
-
 
     public static void Alloc2(int numNodes, int percentPinned)
     {
@@ -71,8 +66,6 @@ public class GCUtil
         }
     }
 
-
-
     public static void FreePins2()
     {
         foreach (GCHandle gch in list2)
@@ -83,13 +76,10 @@ public class GCUtil
         blist2.Clear();
     }
 
-
-
     public static void FreeNonPins2()
     {
         blist2.Clear();
     }
-
 
     public static void AllocWithGaps()
     {

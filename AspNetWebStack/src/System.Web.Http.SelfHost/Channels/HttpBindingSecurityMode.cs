@@ -13,12 +13,10 @@ namespace System.Web.Http.SelfHost.Channels
         /// Indicates no security is used with HTTP requests.
         /// </summary>
         None,
-
         /// <summary>
         /// Indicates that transport-level security is used with HTTP requests.
         /// </summary>
         Transport,
-
         /// <summary>
         /// Indicates that only HTTP-based client authentication is provided.
         /// </summary>

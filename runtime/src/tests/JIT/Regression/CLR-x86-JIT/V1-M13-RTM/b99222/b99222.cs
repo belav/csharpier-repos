@@ -23,7 +23,10 @@ public struct AA
         m_b.m_bval = b;
     }
 
-    public unsafe static B* get_pb(AA* px) { return &px->m_b; }
+    public unsafe static B* get_pb(AA* px)
+    {
+        return &px->m_b;
+    }
 }
 
 internal class TestApp

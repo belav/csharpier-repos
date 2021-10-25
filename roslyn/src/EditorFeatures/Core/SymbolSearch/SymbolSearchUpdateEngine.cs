@@ -29,22 +29,24 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     /// </summary>
     internal partial class SymbolSearchUpdateEngine : ISymbolSearchUpdateEngine
     {
-        private readonly ConcurrentDictionary<string, IAddReferenceDatabaseWrapper> _sourceToDatabase =
-            new();
+        private readonly ConcurrentDictionary<
+            string,
+            IAddReferenceDatabaseWrapper
+        > _sourceToDatabase = new();
 
         /// <summary>
         /// Don't call directly. Use <see cref="SymbolSearchUpdateEngineFactory"/> instead.
         /// </summary>
         public SymbolSearchUpdateEngine()
-            : this(new RemoteControlService(),
-                   new DelayService(),
-                   new IOService(),
-                   new PatchService(),
-                   new DatabaseFactoryService(),
-                   // Report all exceptions we encounter, but don't crash on them.
-                   FatalError.ReportAndCatch)
-        {
-        }
+            : this(
+                new RemoteControlService(),
+                new DelayService(),
+                new IOService(),
+                new PatchService(),
+                new DatabaseFactoryService(),
+                // Report all exceptions we encounter, but don't crash on them.
+                FatalError.ReportAndCatch
+            ) { }
 
         /// <summary>
         /// For testing purposes only.
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             IIOService ioService,
             IPatchService patchService,
             IDatabaseFactoryService databaseFactoryService,
-            Func<Exception, bool> reportAndSwallowException)
+            Func<Exception, bool> reportAndSwallowException
+        )
         {
             _delayService = delayService;
             _ioService = ioService;
@@ -66,11 +69,15 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         }
 
         public ValueTask<ImmutableArray<PackageWithTypeResult>> FindPackagesWithTypeAsync(
-            string source, string name, int arity, CancellationToken cancellationToken)
+            string source,
+            string name,
+            int arity,
+            CancellationToken cancellationToken
+        )
         {
             if (!_sourceToDatabase.TryGetValue(source, out var databaseWrapper))
             {
-                // Don't have a database to search.  
+                // Don't have a database to search.
                 return ValueTaskFactory.FromResult(ImmutableArray<PackageWithTypeResult>.Empty);
             }
 
@@ -105,11 +112,14 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         }
 
         public ValueTask<ImmutableArray<PackageWithAssemblyResult>> FindPackagesWithAssemblyAsync(
-            string source, string assemblyName, CancellationToken cancellationToken)
+            string source,
+            string assemblyName,
+            CancellationToken cancellationToken
+        )
         {
             if (!_sourceToDatabase.TryGetValue(source, out var databaseWrapper))
             {
-                // Don't have a database to search.  
+                // Don't have a database to search.
                 return ValueTaskFactory.FromResult(ImmutableArray<PackageWithAssemblyResult>.Empty);
             }
 
@@ -118,8 +128,15 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             var database = databaseWrapper.Database;
             var index = database.Index;
             var stringStore = database.StringStore;
-            if (stringStore.TryFindString(assemblyName, out var range) &&
-                index.TryGetMatchesInRange(range, out var matches, out var startIndex, out var count))
+            if (
+                stringStore.TryFindString(assemblyName, out var range)
+                && index.TryGetMatchesInRange(
+                    range,
+                    out var matches,
+                    out var startIndex,
+                    out var count
+                )
+            )
             {
                 for (var i = startIndex; i < (startIndex + count); i++)
                 {
@@ -133,10 +150,13 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                         {
                             var version = database.GetPackageVersion(symbol.Index).ToString();
 
-                            result.Add(new PackageWithAssemblyResult(
-                                symbol.PackageName.ToString(),
-                                GetRank(symbol),
-                                string.IsNullOrWhiteSpace(version) ? null : version));
+                            result.Add(
+                                new PackageWithAssemblyResult(
+                                    symbol.PackageName.ToString(),
+                                    GetRank(symbol),
+                                    string.IsNullOrWhiteSpace(version) ? null : version
+                                )
+                            );
                         }
                     }
                 }
@@ -145,21 +165,30 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             return ValueTaskFactory.FromResult(result.ToImmutableAndFree());
         }
 
-        public ValueTask<ImmutableArray<ReferenceAssemblyWithTypeResult>> FindReferenceAssembliesWithTypeAsync(
-            string name, int arity, CancellationToken cancellationToken)
+        public ValueTask<
+            ImmutableArray<ReferenceAssemblyWithTypeResult>
+        > FindReferenceAssembliesWithTypeAsync(
+            string name,
+            int arity,
+            CancellationToken cancellationToken
+        )
         {
             // Our reference assembly data is stored in the nuget.org DB.
             if (!_sourceToDatabase.TryGetValue(NugetOrgSource, out var databaseWrapper))
             {
-                // Don't have a database to search.  
-                return ValueTaskFactory.FromResult(ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty);
+                // Don't have a database to search.
+                return ValueTaskFactory.FromResult(
+                    ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty
+                );
             }
 
             var database = databaseWrapper.Database;
             if (name == "var")
             {
                 // never find anything named 'var'.
-                return ValueTaskFactory.FromResult(ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty);
+                return ValueTaskFactory.FromResult(
+                    ImmutableArray<ReferenceAssemblyWithTypeResult>.Empty
+                );
             }
 
             var query = new MemberQuery(name, isFullSuffix: true, isFullNamespace: false);
@@ -180,8 +209,10 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                         var nameParts = ArrayBuilder<string>.GetInstance();
                         GetFullName(nameParts, type.FullName.Parent);
                         var result = new ReferenceAssemblyWithTypeResult(
-                            type.AssemblyName.ToString(), type.Name.ToString(),
-                            containingNamespaceNames: nameParts.ToImmutableAndFree());
+                            type.AssemblyName.ToString(),
+                            type.Name.ToString(),
+                            containingNamespaceNames: nameParts.ToImmutableAndFree()
+                        );
                         results.Add(result);
                     }
                 }
@@ -193,12 +224,13 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         private static List<Symbol> FilterToViableTypes(PartialArray<Symbol> symbols)
         {
             // Don't return nested types.  Currently their value does not seem worth
-            // it given all the extra stuff we'd have to plumb through.  Namely 
+            // it given all the extra stuff we'd have to plumb through.  Namely
             // going down the "using static" code path and whatnot.
             return new List<Symbol>(
                 from symbol in symbols
                 where IsType(symbol) && !IsType(symbol.Parent())
-                select symbol);
+                select symbol
+            );
         }
 
         private PackageWithTypeResult CreateResult(AddReferenceDatabase database, Symbol type)
@@ -215,13 +247,16 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                 rank: GetRank(type),
                 typeName: type.Name.ToString(),
                 version: string.IsNullOrWhiteSpace(version) ? null : version,
-                containingNamespaceNames: nameParts.ToImmutableAndFree());
+                containingNamespaceNames: nameParts.ToImmutableAndFree()
+            );
         }
 
         private static int GetRank(Symbol symbol)
         {
-            if (!TryGetRankingSymbol(symbol, out var rankingSymbol) ||
-                !int.TryParse(rankingSymbol.Name.ToString(), out var rank))
+            if (
+                !TryGetRankingSymbol(symbol, out var rankingSymbol)
+                || !int.TryParse(rankingSymbol.Name.ToString(), out var rank)
+            )
             {
                 return 0;
             }
@@ -258,8 +293,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             return false;
         }
 
-        private static bool IsType(Symbol symbol)
-            => symbol.Type.IsType();
+        private static bool IsType(Symbol symbol) => symbol.Type.IsType();
 
         private void GetFullName(ArrayBuilder<string> nameParts, Path8 path)
         {

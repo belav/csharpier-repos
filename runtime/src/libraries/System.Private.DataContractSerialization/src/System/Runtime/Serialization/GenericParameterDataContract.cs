@@ -18,24 +18,20 @@ namespace System.Runtime.Serialization
 
         internal int ParameterPosition
         {
-            get
-            { return _helper.ParameterPosition; }
+            get { return _helper.ParameterPosition; }
         }
 
         public override bool IsBuiltInDataContract
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        private sealed class GenericParameterDataContractCriticalHelper : DataContract.DataContractCriticalHelper
+        private sealed class GenericParameterDataContractCriticalHelper
+            : DataContract.DataContractCriticalHelper
         {
             private readonly int _parameterPosition;
 
-            internal GenericParameterDataContractCriticalHelper(Type type)
-                : base(type)
+            internal GenericParameterDataContractCriticalHelper(Type type) : base(type)
             {
                 SetDataContractName(DataContract.GetStableName(type));
                 _parameterPosition = type.GenericParameterPosition;
@@ -47,7 +43,10 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal DataContract BindGenericParameters(DataContract[] paramContracts, Dictionary<DataContract, DataContract> boundContracts)
+        internal DataContract BindGenericParameters(
+            DataContract[] paramContracts,
+            Dictionary<DataContract, DataContract> boundContracts
+        )
         {
             return paramContracts[ParameterPosition];
         }

@@ -102,7 +102,12 @@ namespace System.Xml.Xsl.XsltOld
 
                     string value = processor.ValueOf(frame.NodeSet.Current!);
 
-                    if (processor.TextEvent(value, /*disableOutputEscaping:*/false))
+                    if (
+                        processor.TextEvent(
+                            value, /*disableOutputEscaping:*/
+                            false
+                        )
+                    )
                     {
                         frame.Finished();
                     }

@@ -9,12 +9,15 @@ namespace Microsoft.CodeAnalysis.NavigationBar
         public class GenerateFinalizer : AbstractGenerateCodeItem
         {
             public GenerateFinalizer(string text, SymbolKey destinationTypeSymbolKey)
-                : base(RoslynNavigationBarItemKind.GenerateFinalizer, text, Glyph.MethodProtected, destinationTypeSymbolKey)
-            {
-            }
+                : base(
+                    RoslynNavigationBarItemKind.GenerateFinalizer,
+                    text,
+                    Glyph.MethodProtected,
+                    destinationTypeSymbolKey
+                ) { }
 
-            protected internal override SerializableNavigationBarItem Dehydrate()
-                => SerializableNavigationBarItem.GenerateFinalizer(Text, DestinationTypeSymbolKey);
+            protected internal override SerializableNavigationBarItem Dehydrate() =>
+                SerializableNavigationBarItem.GenerateFinalizer(Text, DestinationTypeSymbolKey);
         }
     }
 }

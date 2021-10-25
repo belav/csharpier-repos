@@ -12,68 +12,97 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
         private static readonly Action<ILogger, Exception?> _noContextType = LoggerMessage.Define(
             LogLevel.Error,
             new EventId(1, "NoContextType"),
-            "No context type was specified. Ensure the form data from the request includes a 'context' value, specifying the context type name to apply migrations for.");
+            "No context type was specified. Ensure the form data from the request includes a 'context' value, specifying the context type name to apply migrations for."
+        );
 
-        private static readonly Action<ILogger, string, Exception?> _contextNotRegistered = LoggerMessage.Define<string>(
-            LogLevel.Error,
-            new EventId(3, "ContextNotRegistered"),
-            "The context type '{ContextTypeName}' was not found in services. This usually means the context was not registered in services during startup. You probably want to call AddScoped<>() inside the UseServices(...) call in your application startup code.");
+        private static readonly Action<ILogger, string, Exception?> _contextNotRegistered =
+            LoggerMessage.Define<string>(
+                LogLevel.Error,
+                new EventId(3, "ContextNotRegistered"),
+                "The context type '{ContextTypeName}' was not found in services. This usually means the context was not registered in services during startup. You probably want to call AddScoped<>() inside the UseServices(...) call in your application startup code."
+            );
 
-        private static readonly Action<ILogger, string, Exception?> _requestPathMatched = LoggerMessage.Define<string>(
-            LogLevel.Debug,
-            new EventId(4, "RequestPathMatched"),
-            "Request path matched the path configured for this migrations endpoint({RequestPath}). Attempting to process the migrations request.");
+        private static readonly Action<ILogger, string, Exception?> _requestPathMatched =
+            LoggerMessage.Define<string>(
+                LogLevel.Debug,
+                new EventId(4, "RequestPathMatched"),
+                "Request path matched the path configured for this migrations endpoint({RequestPath}). Attempting to process the migrations request."
+            );
 
-        private static readonly Action<ILogger, string, Exception?> _applyingMigrations = LoggerMessage.Define<string>(
-            LogLevel.Debug,
-            new EventId(5, "ApplyingMigrations"),
-            "Request is valid, applying migrations for context '{ContextTypeName}'");
+        private static readonly Action<ILogger, string, Exception?> _applyingMigrations =
+            LoggerMessage.Define<string>(
+                LogLevel.Debug,
+                new EventId(5, "ApplyingMigrations"),
+                "Request is valid, applying migrations for context '{ContextTypeName}'"
+            );
 
-        private static readonly Action<ILogger, string, Exception?> _migrationsApplied = LoggerMessage.Define<string>(
-            LogLevel.Debug,
-            new EventId(6, "MigrationsApplied"),
-            "Migrations successfully applied for context '{ContextTypeName}'.");
+        private static readonly Action<ILogger, string, Exception?> _migrationsApplied =
+            LoggerMessage.Define<string>(
+                LogLevel.Debug,
+                new EventId(6, "MigrationsApplied"),
+                "Migrations successfully applied for context '{ContextTypeName}'."
+            );
 
-        private static readonly Action<ILogger, string, Exception> _migrationsEndPointMiddlewareException = LoggerMessage.Define<string>(
+        private static readonly Action<
+            ILogger,
+            string,
+            Exception
+        > _migrationsEndPointMiddlewareException = LoggerMessage.Define<string>(
             LogLevel.Error,
             new EventId(7, "MigrationsEndPointException"),
-            "An error occurred while applying the migrations for '{ContextTypeName}'. See InnerException for details:");
+            "An error occurred while applying the migrations for '{ContextTypeName}'. See InnerException for details:"
+        );
 
         // DatabaseErrorPageMiddleware
-        private static readonly Action<ILogger, Type, Exception?> _attemptingToMatchException = LoggerMessage.Define<Type>(
-            LogLevel.Debug,
-            new EventId(1, "AttemptingToMatchException"),
-            "{ExceptionType} occurred, checking if Entity Framework recorded this exception as resulting from a failed database operation.");
+        private static readonly Action<ILogger, Type, Exception?> _attemptingToMatchException =
+            LoggerMessage.Define<Type>(
+                LogLevel.Debug,
+                new EventId(1, "AttemptingToMatchException"),
+                "{ExceptionType} occurred, checking if Entity Framework recorded this exception as resulting from a failed database operation."
+            );
 
-        private static readonly Action<ILogger, Exception?> _noRecordedException = LoggerMessage.Define(
-            LogLevel.Debug,
-            new EventId(2, "NoRecordedException"),
-            "Entity Framework did not record any exceptions due to failed database operations. This means the current exception is not a failed Entity Framework database operation, or the current exception occurred from a DbContext that was not obtained from request services.");
+        private static readonly Action<ILogger, Exception?> _noRecordedException =
+            LoggerMessage.Define(
+                LogLevel.Debug,
+                new EventId(2, "NoRecordedException"),
+                "Entity Framework did not record any exceptions due to failed database operations. This means the current exception is not a failed Entity Framework database operation, or the current exception occurred from a DbContext that was not obtained from request services."
+            );
 
         private static readonly Action<ILogger, Exception?> _noMatch = LoggerMessage.Define(
             LogLevel.Debug,
             new EventId(3, "NoMatchFound"),
-            "The current exception (and its inner exceptions) do not match the last exception Entity Framework recorded due to a failed database operation. This means the database operation exception was handled and another exception occurred later in the request.");
+            "The current exception (and its inner exceptions) do not match the last exception Entity Framework recorded due to a failed database operation. This means the database operation exception was handled and another exception occurred later in the request."
+        );
 
         private static readonly Action<ILogger, Exception?> _matched = LoggerMessage.Define(
             LogLevel.Debug,
             new EventId(4, "MatchFound"),
-            "Entity Framework recorded that the current exception was due to a failed database operation. Attempting to show database error page.");
+            "Entity Framework recorded that the current exception was due to a failed database operation. Attempting to show database error page."
+        );
 
-        private static readonly Action<ILogger, string, Exception?> _contextNotRegisteredDatabaseErrorPageMiddleware = LoggerMessage.Define<string>(
+        private static readonly Action<
+            ILogger,
+            string,
+            Exception?
+        > _contextNotRegisteredDatabaseErrorPageMiddleware = LoggerMessage.Define<string>(
             LogLevel.Error,
             new EventId(5, "ContextNotRegistered"),
-            "The context type '{ContextTypeName}' was not found in services. This usually means the context was not registered in services during startup. You probably want to call AddScoped<>() inside the UseServices(...) call in your application startup code. Skipping display of the database error page.");
+            "The context type '{ContextTypeName}' was not found in services. This usually means the context was not registered in services during startup. You probably want to call AddScoped<>() inside the UseServices(...) call in your application startup code. Skipping display of the database error page."
+        );
 
-        private static readonly Action<ILogger, Exception?> _notRelationalDatabase = LoggerMessage.Define(
-            LogLevel.Debug,
-            new EventId(6, "NotRelationalDatabase"),
-            "The target data store is not a relational database. Skipping the database error page.");
+        private static readonly Action<ILogger, Exception?> _notRelationalDatabase =
+            LoggerMessage.Define(
+                LogLevel.Debug,
+                new EventId(6, "NotRelationalDatabase"),
+                "The target data store is not a relational database. Skipping the database error page."
+            );
 
-        private static readonly Action<ILogger, Exception> _databaseErrorPageMiddlewareException = LoggerMessage.Define(
-            LogLevel.Error,
-            new EventId(7, "DatabaseErrorPageException"),
-            "An exception occurred while calculating the database error page content. Skipping display of the database error page.");
+        private static readonly Action<ILogger, Exception> _databaseErrorPageMiddlewareException =
+            LoggerMessage.Define(
+                LogLevel.Error,
+                new EventId(7, "DatabaseErrorPageException"),
+                "An exception occurred while calculating the database error page content. Skipping display of the database error page."
+            );
 
         public static void NoContextType(this ILogger logger)
         {
@@ -100,7 +129,11 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
             _migrationsApplied(logger, contextTypeName, null);
         }
 
-        public static void MigrationsEndPointMiddlewareException(this ILogger logger, string context, Exception exception)
+        public static void MigrationsEndPointMiddlewareException(
+            this ILogger logger,
+            string context,
+            Exception exception
+        )
         {
             _migrationsEndPointMiddlewareException(logger, context, exception);
         }
@@ -130,12 +163,18 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
             _notRelationalDatabase(logger, null);
         }
 
-        public static void ContextNotRegisteredDatabaseErrorPageMiddleware(this ILogger logger, string contextTypeName)
+        public static void ContextNotRegisteredDatabaseErrorPageMiddleware(
+            this ILogger logger,
+            string contextTypeName
+        )
         {
             _contextNotRegisteredDatabaseErrorPageMiddleware(logger, contextTypeName, null);
         }
 
-        public static void DatabaseErrorPageMiddlewareException(this ILogger logger, Exception exception)
+        public static void DatabaseErrorPageMiddlewareException(
+            this ILogger logger,
+            Exception exception
+        )
         {
             _databaseErrorPageMiddlewareException(logger, exception);
         }

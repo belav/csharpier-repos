@@ -118,14 +118,15 @@ namespace Microsoft.CodeAnalysis
         /// <see cref="ToString()"/> from this same session.  Instantiating with a string 
         /// from any other source is not supported.
         /// </summary>
-        public SymbolKey(string data)
-            => _symbolKeyData = data ?? throw new ArgumentNullException();
+        public SymbolKey(string data) => _symbolKeyData = data ?? throw new ArgumentNullException();
 
         /// <summary>
         /// Constructs a new <see cref="SymbolKey"/> representing the provided <paramref name="symbol"/>.
         /// </summary>
-        public static SymbolKey Create(ISymbol? symbol, CancellationToken cancellationToken = default)
-            => new(CreateString(symbol, cancellationToken));
+        public static SymbolKey Create(
+            ISymbol? symbol,
+            CancellationToken cancellationToken = default
+        ) => new(CreateString(symbol, cancellationToken));
 
         /// <summary>
         /// Returns an <see cref="IEqualityComparer{T}"/> that determines if two <see cref="SymbolKey"/>s
@@ -140,14 +141,19 @@ namespace Microsoft.CodeAnalysis
         /// <c>A</c> and <c>X.SomeClass</c> from assembly <c>B</c> will be considered the same
         /// effective symbol.
         /// </param>
-        public static IEqualityComparer<SymbolKey> GetComparer(bool ignoreCase = false, bool ignoreAssemblyKeys = false)
-            => SymbolKeyComparer.GetComparer(ignoreCase, ignoreAssemblyKeys);
+        public static IEqualityComparer<SymbolKey> GetComparer(
+            bool ignoreCase = false,
+            bool ignoreAssemblyKeys = false
+        ) => SymbolKeyComparer.GetComparer(ignoreCase, ignoreAssemblyKeys);
 
         public static bool CanCreate(ISymbol symbol, CancellationToken cancellationToken)
         {
             if (IsBodyLevelSymbol(symbol))
             {
-                var locations = BodyLevelSymbolKey.GetBodyLevelSourceLocations(symbol, cancellationToken);
+                var locations = BodyLevelSymbolKey.GetBodyLevelSourceLocations(
+                    symbol,
+                    cancellationToken
+                );
                 if (locations.Length == 0)
                     return false;
 
@@ -161,25 +167,51 @@ namespace Microsoft.CodeAnalysis
         }
 
         public static SymbolKeyResolution ResolveString(
-            string symbolKey, Compilation compilation,
-            bool ignoreAssemblyKey = false, CancellationToken cancellationToken = default)
+            string symbolKey,
+            Compilation compilation,
+            bool ignoreAssemblyKey = false,
+            CancellationToken cancellationToken = default
+        )
         {
-            return ResolveString(symbolKey, compilation, ignoreAssemblyKey, out _, cancellationToken);
+            return ResolveString(
+                symbolKey,
+                compilation,
+                ignoreAssemblyKey,
+                out _,
+                cancellationToken
+            );
         }
 
         public static SymbolKeyResolution ResolveString(
-            string symbolKey, Compilation compilation,
-            out string? failureReason, CancellationToken cancellationToken)
+            string symbolKey,
+            Compilation compilation,
+            out string? failureReason,
+            CancellationToken cancellationToken
+        )
         {
-            return ResolveString(symbolKey, compilation, ignoreAssemblyKey: false, out failureReason, cancellationToken);
+            return ResolveString(
+                symbolKey,
+                compilation,
+                ignoreAssemblyKey: false,
+                out failureReason,
+                cancellationToken
+            );
         }
 
         public static SymbolKeyResolution ResolveString(
-            string symbolKey, Compilation compilation, bool ignoreAssemblyKey,
-            out string? failureReason, CancellationToken cancellationToken)
+            string symbolKey,
+            Compilation compilation,
+            bool ignoreAssemblyKey,
+            out string? failureReason,
+            CancellationToken cancellationToken
+        )
         {
             using var reader = SymbolKeyReader.GetReader(
-                symbolKey, compilation, ignoreAssemblyKey, cancellationToken);
+                symbolKey,
+                compilation,
+                ignoreAssemblyKey,
+                cancellationToken
+            );
             var version = reader.ReadFormatVersion();
             if (version != FormatVersion)
             {
@@ -192,11 +224,17 @@ namespace Microsoft.CodeAnalysis
             return result;
         }
 
-        public static string CreateString(ISymbol? symbol, CancellationToken cancellationToken = default)
-            => CreateStringWorker(FormatVersion, symbol, cancellationToken);
+        public static string CreateString(
+            ISymbol? symbol,
+            CancellationToken cancellationToken = default
+        ) => CreateStringWorker(FormatVersion, symbol, cancellationToken);
 
         // Internal for testing purposes.
-        internal static string CreateStringWorker(int version, ISymbol? symbol, CancellationToken cancellationToken = default)
+        internal static string CreateStringWorker(
+            int version,
+            ISymbol? symbol,
+            CancellationToken cancellationToken = default
+        )
         {
             using var writer = SymbolKeyWriter.GetWriter(cancellationToken);
             writer.WriteFormatVersion(version);
@@ -209,7 +247,10 @@ namespace Microsoft.CodeAnalysis
         /// <paramref name="compilation"/> to a matching symbol.
         /// </summary>
         public SymbolKeyResolution Resolve(
-            Compilation compilation, bool ignoreAssemblyKey = false, CancellationToken cancellationToken = default)
+            Compilation compilation,
+            bool ignoreAssemblyKey = false,
+            CancellationToken cancellationToken = default
+        )
         {
             return ResolveString(_symbolKeyData, compilation, ignoreAssemblyKey, cancellationToken);
         }
@@ -223,12 +264,13 @@ namespace Microsoft.CodeAnalysis
         /// Roslyn.  As such it should only be used for caching data, with the knowledge that
         /// the data may need to be recomputed if the cached data can no longer be used.
         /// </summary>
-        public override string ToString()
-            => _symbolKeyData;
+        public override string ToString() => _symbolKeyData;
 
         private static SymbolKeyResolution CreateResolution<TSymbol>(
-            PooledArrayBuilder<TSymbol> symbols, string reasonIfFailed, out string? failureReason)
-            where TSymbol : class, ISymbol
+            PooledArrayBuilder<TSymbol> symbols,
+            string reasonIfFailed,
+            out string? failureReason
+        ) where TSymbol : class, ISymbol
         {
             if (symbols.Builder.Count == 0)
             {
@@ -245,27 +287,31 @@ namespace Microsoft.CodeAnalysis
                 failureReason = null;
                 return new SymbolKeyResolution(
                     ImmutableArray<ISymbol>.CastUp(symbols.Builder.ToImmutable()),
-                    CandidateReason.Ambiguous);
+                    CandidateReason.Ambiguous
+                );
             }
         }
 
-        private static bool Equals(Compilation compilation, string? name1, string? name2)
-            => Equals(compilation.IsCaseSensitive, name1, name2);
+        private static bool Equals(Compilation compilation, string? name1, string? name2) =>
+            Equals(compilation.IsCaseSensitive, name1, name2);
 
-        private static bool Equals(bool isCaseSensitive, string? name1, string? name2)
-            => string.Equals(name1, name2, isCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+        private static bool Equals(bool isCaseSensitive, string? name1, string? name2) =>
+            string.Equals(
+                name1,
+                name2,
+                isCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase
+            );
 
         private static string GetName(string metadataName)
         {
             var index = metadataName.IndexOf('`');
-            return index > 0
-                ? metadataName.Substring(0, index)
-                : metadataName;
+            return index > 0 ? metadataName.Substring(0, index) : metadataName;
         }
 
         private static bool ParameterRefKindsMatch(
             ImmutableArray<IParameterSymbol> parameters,
-            PooledArrayBuilder<RefKind> refKinds)
+            PooledArrayBuilder<RefKind> refKinds
+        )
         {
             if (parameters.Length != refKinds.Count)
             {
@@ -276,8 +322,13 @@ namespace Microsoft.CodeAnalysis
             {
                 // The ref-out distinction is not interesting for SymbolKey because you can't overload
                 // based on the difference.
-                if (!SymbolEquivalenceComparer.AreRefKindsEquivalent(
-                        refKinds[i], parameters[i].RefKind, distinguishRefFromOut: false))
+                if (
+                    !SymbolEquivalenceComparer.AreRefKindsEquivalent(
+                        refKinds[i],
+                        parameters[i].RefKind,
+                        distinguishRefFromOut: false
+                    )
+                )
                 {
                     return false;
                 }
@@ -288,14 +339,16 @@ namespace Microsoft.CodeAnalysis
 
         private static PooledArrayBuilder<TSymbol> GetMembersOfNamedType<TSymbol>(
             SymbolKeyResolution containingTypeResolution,
-            string? metadataName) where TSymbol : ISymbol
+            string? metadataName
+        ) where TSymbol : ISymbol
         {
             var result = PooledArrayBuilder<TSymbol>.GetInstance();
             foreach (var containingType in containingTypeResolution.OfType<INamedTypeSymbol>())
             {
-                var members = metadataName == null
-                    ? containingType.GetMembers()
-                    : containingType.GetMembers(metadataName);
+                var members =
+                    metadataName == null
+                        ? containingType.GetMembers()
+                        : containingType.GetMembers(metadataName);
 
                 foreach (var member in members)
                 {
@@ -309,8 +362,8 @@ namespace Microsoft.CodeAnalysis
             return result;
         }
 
-        public static bool IsBodyLevelSymbol(ISymbol symbol)
-            => symbol switch
+        public static bool IsBodyLevelSymbol(ISymbol symbol) =>
+            symbol switch
             {
                 ILabelSymbol _ => true,
                 IRangeVariableSymbol _ => true,

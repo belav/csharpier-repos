@@ -18,11 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             TypeComparer = new TypeSyntaxComparer(tokenComparer, this);
         }
 
-        public static IComparer<NameSyntax?> Create()
-            => Create(TokenComparer.NormalInstance);
+        public static IComparer<NameSyntax?> Create() => Create(TokenComparer.NormalInstance);
 
-        public static IComparer<NameSyntax?> Create(IComparer<SyntaxToken> tokenComparer)
-            => new NameSyntaxComparer(tokenComparer);
+        public static IComparer<NameSyntax?> Create(IComparer<SyntaxToken> tokenComparer) =>
+            new NameSyntaxComparer(tokenComparer);
 
         public int Compare(NameSyntax? x, NameSyntax? y)
         {
@@ -55,7 +54,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             // first token.
             if (x is IdentifierNameSyntax && y is IdentifierNameSyntax)
             {
-                return _tokenComparer.Compare(x.GetFirstToken(includeSkipped: true), y.GetFirstToken());
+                return _tokenComparer.Compare(
+                    x.GetFirstToken(includeSkipped: true),
+                    y.GetFirstToken()
+                );
             }
             else if (x is GenericNameSyntax && y is GenericNameSyntax)
             {
@@ -65,7 +67,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
             else if (x is IdentifierNameSyntax && y is GenericNameSyntax)
             {
-                var compare = _tokenComparer.Compare(x.GetFirstToken(includeSkipped: true), y.GetFirstToken());
+                var compare = _tokenComparer.Compare(
+                    x.GetFirstToken(includeSkipped: true),
+                    y.GetFirstToken()
+                );
                 if (compare != 0)
                 {
                     return compare;
@@ -76,7 +81,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
             else if (x is GenericNameSyntax && y is IdentifierNameSyntax)
             {
-                var compare = _tokenComparer.Compare(x.GetFirstToken(includeSkipped: true), y.GetFirstToken());
+                var compare = _tokenComparer.Compare(
+                    x.GetFirstToken(includeSkipped: true),
+                    y.GetFirstToken()
+                );
                 if (compare != 0)
                 {
                     return compare;

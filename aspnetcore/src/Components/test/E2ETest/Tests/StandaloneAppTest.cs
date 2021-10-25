@@ -14,15 +14,14 @@ using Xunit.Abstractions;
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 {
     public class StandaloneAppTest
-        : ServerTestBase<DevHostServerFixture<StandaloneApp.Program>>, IDisposable
+        : ServerTestBase<DevHostServerFixture<StandaloneApp.Program>>,
+          IDisposable
     {
         public StandaloneAppTest(
             BrowserFixture browserFixture,
             DevHostServerFixture<StandaloneApp.Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
@@ -50,22 +49,28 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // Verify we start at home, with the home link highlighted
             Assert.Equal("Hello, world!", Browser.Exists(mainHeaderSelector).Text);
-            Assert.Collection(Browser.FindElements(activeNavLinksSelector),
-                item => Assert.Equal("Home", item.Text.Trim()));
+            Assert.Collection(
+                Browser.FindElements(activeNavLinksSelector),
+                item => Assert.Equal("Home", item.Text.Trim())
+            );
 
             // Click on the "counter" link
             Browser.Exists(By.LinkText("Counter")).Click();
 
             // Verify we're now on the counter page, with that nav link (only) highlighted
             Assert.Equal("Counter", Browser.Exists(mainHeaderSelector).Text);
-            Assert.Collection(Browser.FindElements(activeNavLinksSelector),
-                item => Assert.Equal("Counter", item.Text.Trim()));
+            Assert.Collection(
+                Browser.FindElements(activeNavLinksSelector),
+                item => Assert.Equal("Counter", item.Text.Trim())
+            );
 
             // Verify we can navigate back to home too
             Browser.Exists(By.LinkText("Home")).Click();
             Assert.Equal("Hello, world!", Browser.Exists(mainHeaderSelector).Text);
-            Assert.Collection(Browser.FindElements(activeNavLinksSelector),
-                item => Assert.Equal("Home", item.Text.Trim()));
+            Assert.Collection(
+                Browser.FindElements(activeNavLinksSelector),
+                item => Assert.Equal("Home", item.Text.Trim())
+            );
         }
 
         [Fact]

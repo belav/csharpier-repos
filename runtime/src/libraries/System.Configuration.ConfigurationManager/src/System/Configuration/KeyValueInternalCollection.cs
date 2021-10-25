@@ -12,7 +12,8 @@ namespace System.Configuration
         public KeyValueInternalCollection(AppSettingsSection root)
         {
             _root = root;
-            foreach (KeyValueConfigurationElement element in _root.Settings) base.Add(element.Key, element.Value);
+            foreach (KeyValueConfigurationElement element in _root.Settings)
+                base.Add(element.Key, element.Value);
         }
 
         public override void Add(string key, string value)

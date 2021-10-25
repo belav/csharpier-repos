@@ -36,13 +36,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(CancellationTokenBundle),
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.Form = new FormCollection(new Dictionary<string, StringValues>
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
                 {
-                    { "name", new[] { "Fred" } }
-                });
-            });
+                    request.Form = new FormCollection(
+                        new Dictionary<string, StringValues> { { "name", new[] { "Fred" } } }
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
             var token = testContext.HttpContext.RequestAborted;
@@ -96,7 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 {
                     request.QueryString = QueryString.Create("Name", "Fred");
                     UpdateRequest(request, data, "File");
-                });
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -127,10 +129,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         {
             const string fileName = "text.txt";
             var fileCollection = new FormFileCollection();
-            var formCollection = new FormCollection(new Dictionary<string, StringValues>(), fileCollection);
+            var formCollection = new FormCollection(
+                new Dictionary<string, StringValues>(),
+                fileCollection
+            );
 
             request.Form = formCollection;
-            request.ContentType = "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
+            request.ContentType =
+                "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
 
             if (string.IsNullOrEmpty(data) || string.IsNullOrEmpty(name))
             {
@@ -141,10 +147,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             request.Headers["Content-Disposition"] = $"form-data; name={name}; filename={fileName}";
 
             var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(data));
-            fileCollection.Add(new FormFile(memoryStream, 0, data.Length, name, fileName)
-            {
-                Headers = request.Headers
-            });
+            fileCollection.Add(
+                new FormFile(memoryStream, 0, data.Length, name, fileName)
+                {
+                    Headers = request.Headers
+                }
+            );
         }
     }
 }

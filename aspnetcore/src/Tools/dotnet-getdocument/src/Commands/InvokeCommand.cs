@@ -20,9 +20,7 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
         private readonly ProjectOptions _projectOptions = new ProjectOptions();
         private IList<string> _args;
 
-        public InvokeCommand(IConsole console) : base(console)
-        {
-        }
+        public InvokeCommand(IConsole console) : base(console) { }
 
         public override void Configure(CommandLineApplication command)
         {
@@ -40,7 +38,9 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
 
         protected override int Execute()
         {
-            var thisPath = Path.GetFullPath(Path.GetDirectoryName(typeof(InvokeCommand).Assembly.Location));
+            var thisPath = Path.GetFullPath(
+                Path.GetDirectoryName(typeof(InvokeCommand).Assembly.Location)
+            );
 
             var projectName = _projectOptions.ProjectName.Value();
             var assemblyPath = _projectOptions.AssemblyPath.Value();
@@ -59,7 +59,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                         cleanupExecutable = true;
                         toolsDirectory = Path.Combine(
                             thisPath,
-                            _projectOptions.Platform.Value() == "x86" ? "net461-x86" : "net461");
+                            _projectOptions.Platform.Value() == "x86" ? "net461-x86" : "net461"
+                        );
 
                         var executableSource = Path.Combine(toolsDirectory, InsideManName + ".exe");
                         executable = Path.Combine(targetDirectory, InsideManName + ".exe");
@@ -75,9 +76,12 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                     case ".NETCoreApp":
                         if (targetFramework.Version < new Version(2, 1))
                         {
-                            throw new CommandException(Resources.FormatOldNETCoreAppProject(
-                                projectName,
-                                targetFramework.Version));
+                            throw new CommandException(
+                                Resources.FormatOldNETCoreAppProject(
+                                    projectName,
+                                    targetFramework.Version
+                                )
+                            );
                         }
 
                         executable = DotNetMuxer.MuxerPathOrDefault();
@@ -88,7 +92,10 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                         args.Add(Path.ChangeExtension(assemblyPath, ".deps.json"));
 
                         var projectAssetsFile = _projectOptions.AssetsFile.Value();
-                        if (!string.IsNullOrEmpty(projectAssetsFile) && File.Exists(projectAssetsFile))
+                        if (
+                            !string.IsNullOrEmpty(projectAssetsFile)
+                            && File.Exists(projectAssetsFile)
+                        )
                         {
                             using var reader = new JsonTextReader(File.OpenText(projectAssetsFile));
                             var projectAssets = JToken.ReadFrom(reader);
@@ -103,7 +110,10 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                             }
                         }
 
-                        var runtimeConfigPath = Path.ChangeExtension(assemblyPath, ".runtimeconfig.json");
+                        var runtimeConfigPath = Path.ChangeExtension(
+                            assemblyPath,
+                            ".runtimeconfig.json"
+                        );
                         if (File.Exists(runtimeConfigPath))
                         {
                             args.Add("--runtimeConfig");
@@ -111,7 +121,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                         }
                         else
                         {
-                            var runtimeFrameworkVersion = _projectOptions.RuntimeFrameworkVersion.Value();
+                            var runtimeFrameworkVersion =
+                                _projectOptions.RuntimeFrameworkVersion.Value();
                             if (!string.IsNullOrEmpty(runtimeFrameworkVersion))
                             {
                                 args.Add("--fx-version");
@@ -127,7 +138,11 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
 
                     default:
                         throw new CommandException(
-                            Resources.FormatUnsupportedFramework(projectName, targetFramework.Identifier));
+                            Resources.FormatUnsupportedFramework(
+                                projectName,
+                                targetFramework.Identifier
+                            )
+                        );
                 }
 
                 args.AddRange(_args);
@@ -164,17 +179,13 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
                     {
                         File.Delete(executable);
                     }
-                    catch (UnauthorizedAccessException)
-                    {
-                    }
+                    catch (UnauthorizedAccessException) { }
 
                     try
                     {
                         File.Delete(executable + ".config");
                     }
-                    catch (UnauthorizedAccessException)
-                    {
-                    }
+                    catch (UnauthorizedAccessException) { }
                 }
             }
         }

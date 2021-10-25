@@ -16,13 +16,23 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
     /// </summary>
     internal class TagHelperComponentPropertyActivator : ITagHelperComponentPropertyActivator
     {
-        private readonly ConcurrentDictionary<Type, PropertyActivator<ViewContext>[]> _propertiesToActivate;
-        private readonly Func<Type, PropertyActivator<ViewContext>[]> _getPropertiesToActivate = GetPropertiesToActivate;
-        private static readonly Func<PropertyInfo, PropertyActivator<ViewContext>> _createActivateInfo = CreateActivateInfo;
+        private readonly ConcurrentDictionary<
+            Type,
+            PropertyActivator<ViewContext>[]
+        > _propertiesToActivate;
+        private readonly Func<Type, PropertyActivator<ViewContext>[]> _getPropertiesToActivate =
+            GetPropertiesToActivate;
+        private static readonly Func<
+            PropertyInfo,
+            PropertyActivator<ViewContext>
+        > _createActivateInfo = CreateActivateInfo;
 
         public TagHelperComponentPropertyActivator()
         {
-            _propertiesToActivate = new ConcurrentDictionary<Type, PropertyActivator<ViewContext>[]>();
+            _propertiesToActivate = new ConcurrentDictionary<
+                Type,
+                PropertyActivator<ViewContext>[]
+            >();
         }
 
         /// <inheritdoc />
@@ -35,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
 
             var propertiesToActivate = _propertiesToActivate.GetOrAdd(
                 tagHelperComponent.GetType(),
-                _getPropertiesToActivate);
+                _getPropertiesToActivate
+            );
 
             for (var i = 0; i < propertiesToActivate.Length; i++)
             {
@@ -54,7 +65,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
             return PropertyActivator<ViewContext>.GetPropertiesToActivate(
                 type,
                 typeof(ViewContextAttribute),
-                _createActivateInfo);
+                _createActivateInfo
+            );
         }
     }
 }

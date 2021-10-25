@@ -18,11 +18,14 @@ namespace Microsoft.AspNetCore.Routing
             var called = false;
 
             var dataSource = new DynamicEndpointDataSource();
-            var cache = new DataSourceDependentCache<string>(dataSource, (endpoints) =>
-            {
-                called = true;
-                return "hello, world!";
-            });
+            var cache = new DataSourceDependentCache<string>(
+                dataSource,
+                (endpoints) =>
+                {
+                    called = true;
+                    return "hello, world!";
+                }
+            );
 
             // Act
             cache.EnsureInitialized();
@@ -39,11 +42,14 @@ namespace Microsoft.AspNetCore.Routing
             var called = false;
 
             var dataSource = new DynamicEndpointDataSource();
-            var cache = new DataSourceDependentCache<string>(dataSource, (endpoints) =>
-            {
-                called = true;
-                return "hello, world!";
-            });
+            var cache = new DataSourceDependentCache<string>(
+                dataSource,
+                (endpoints) =>
+                {
+                    called = true;
+                    return "hello, world!";
+                }
+            );
 
             // Act
             GC.KeepAlive(cache.Value);
@@ -60,11 +66,14 @@ namespace Microsoft.AspNetCore.Routing
             var count = 0;
 
             var dataSource = new DynamicEndpointDataSource();
-            var cache = new DataSourceDependentCache<string>(dataSource, (endpoints) =>
-            {
-                count++;
-                return $"hello, {count}!";
-            });
+            var cache = new DataSourceDependentCache<string>(
+                dataSource,
+                (endpoints) =>
+                {
+                    count++;
+                    return $"hello, {count}!";
+                }
+            );
 
             cache.EnsureInitialized();
             Assert.Equal("hello, 1!", cache.Value);
@@ -84,11 +93,14 @@ namespace Microsoft.AspNetCore.Routing
             var count = 0;
 
             var dataSource = new DynamicEndpointDataSource();
-            var cache = new DataSourceDependentCache<string>(dataSource, (endpoints) =>
-            {
-                count++;
-                return $"hello, {count}!";
-            });
+            var cache = new DataSourceDependentCache<string>(
+                dataSource,
+                (endpoints) =>
+                {
+                    count++;
+                    return $"hello, {count}!";
+                }
+            );
 
             // Act
             cache.Dispose();
@@ -105,11 +117,14 @@ namespace Microsoft.AspNetCore.Routing
             var count = 0;
 
             var dataSource = new DynamicEndpointDataSource();
-            var cache = new DataSourceDependentCache<string>(dataSource, (endpoints) =>
-            {
-                count++;
-                return $"hello, {count}!";
-            });
+            var cache = new DataSourceDependentCache<string>(
+                dataSource,
+                (endpoints) =>
+                {
+                    count++;
+                    return $"hello, {count}!";
+                }
+            );
 
             cache.EnsureInitialized();
             Assert.Equal("hello, 1!", cache.Value);

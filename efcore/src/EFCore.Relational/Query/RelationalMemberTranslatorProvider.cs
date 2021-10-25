@@ -34,14 +34,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     Creates a new instance of the <see cref="RelationalMemberTranslatorProvider" /> class.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this class. </param>
-        public RelationalMemberTranslatorProvider(RelationalMemberTranslatorProviderDependencies dependencies)
+        public RelationalMemberTranslatorProvider(
+            RelationalMemberTranslatorProviderDependencies dependencies
+        )
         {
             Check.NotNull(dependencies, nameof(dependencies));
 
             _plugins.AddRange(dependencies.Plugins.SelectMany(p => p.Translators));
-            _translators
-                .AddRange(
-                    new[] { new NullableMemberTranslator(dependencies.SqlExpressionFactory) });
+            _translators.AddRange(
+                new[] { new NullableMemberTranslator(dependencies.SqlExpressionFactory) }
+            );
         }
 
         /// <inheritdoc />
@@ -49,14 +51,17 @@ namespace Microsoft.EntityFrameworkCore.Query
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
 
-            return _plugins.Concat(_translators)
-                .Select(t => t.Translate(instance, member, returnType, logger)).FirstOrDefault(t => t != null);
+            return _plugins
+                .Concat(_translators)
+                .Select(t => t.Translate(instance, member, returnType, logger))
+                .FirstOrDefault(t => t != null);
         }
 
         /// <summary>

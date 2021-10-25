@@ -10,7 +10,8 @@ using System.Runtime.CompilerServices;
 
 internal partial class IntelHardwareIntrinsicTest
 {
-    public static Vector128<T> Vector128Add<T>(Vector128<T> left, Vector128<T> right) where T : struct
+    public static Vector128<T> Vector128Add<T>(Vector128<T> left, Vector128<T> right)
+        where T : struct
     {
         if (typeof(T) == typeof(byte))
         {
@@ -58,7 +59,8 @@ internal partial class IntelHardwareIntrinsicTest
         }
     }
 
-    public static Vector256<T> Vector256Add<T>(Vector256<T> left, Vector256<T> right) where T : struct
+    public static Vector256<T> Vector256Add<T>(Vector256<T> left, Vector256<T> right)
+        where T : struct
     {
         if (typeof(T) == typeof(byte))
         {
@@ -207,11 +209,14 @@ internal partial class IntelHardwareIntrinsicTest
         bool returnVal;
         if (typeof(T) == typeof(float))
         {
-            returnVal = Math.Abs(((float)(object)value) - ((float)(object)expectedValue)) <= Single.Epsilon;
+            returnVal =
+                Math.Abs(((float)(object)value) - ((float)(object)expectedValue)) <= Single.Epsilon;
         }
         if (typeof(T) == typeof(double))
         {
-            returnVal = Math.Abs(((double)(object)value) - ((double)(object)expectedValue)) <= Double.Epsilon;
+            returnVal =
+                Math.Abs(((double)(object)value) - ((double)(object)expectedValue))
+                <= Double.Epsilon;
         }
         else
         {
@@ -221,11 +226,23 @@ internal partial class IntelHardwareIntrinsicTest
         {
             if ((typeof(T) == typeof(double)) || (typeof(T) == typeof(float)))
             {
-                Console.WriteLine("CheckValue failed for type " + typeof(T).ToString() + ". Expected: {0} , Got: {1}", expectedValue, value);
+                Console.WriteLine(
+                    "CheckValue failed for type "
+                        + typeof(T).ToString()
+                        + ". Expected: {0} , Got: {1}",
+                    expectedValue,
+                    value
+                );
             }
             else
             {
-                Console.WriteLine("CheckValue failed for type " + typeof(T).ToString() + ". Expected: {0} (0x{0:X}), Got: {1} (0x{1:X})", expectedValue, value);
+                Console.WriteLine(
+                    "CheckValue failed for type "
+                        + typeof(T).ToString()
+                        + ". Expected: {0} (0x{0:X}), Got: {1} (0x{1:X})",
+                    expectedValue,
+                    value
+                );
             }
         }
         return returnVal;

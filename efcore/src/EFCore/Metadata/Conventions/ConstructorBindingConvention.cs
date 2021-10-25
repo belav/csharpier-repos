@@ -35,18 +35,32 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             foreach (EntityType entityType in modelBuilder.Metadata.GetEntityTypes())
             {
-                if (!entityType.ClrType.IsAbstract
-                    && ConfigurationSource.Convention.Overrides(entityType.GetConstructorBindingConfigurationSource()))
+                if (
+                    !entityType.ClrType.IsAbstract
+                    && ConfigurationSource.Convention.Overrides(
+                        entityType.GetConstructorBindingConfigurationSource()
+                    )
+                )
                 {
                     Dependencies.ConstructorBindingFactory.GetBindings(
-                        (IMutableEntityType)entityType, out var constructorBinding, out var serviceOnlyBinding);
+                        (IMutableEntityType)entityType,
+                        out var constructorBinding,
+                        out var serviceOnlyBinding
+                    );
 
-                    entityType.Builder.HasConstructorBinding(constructorBinding, ConfigurationSource.Convention);
-                    entityType.Builder.HasServiceOnlyConstructorBinding(serviceOnlyBinding, ConfigurationSource.Convention);
+                    entityType.Builder.HasConstructorBinding(
+                        constructorBinding,
+                        ConfigurationSource.Convention
+                    );
+                    entityType.Builder.HasServiceOnlyConstructorBinding(
+                        serviceOnlyBinding,
+                        ConfigurationSource.Convention
+                    );
                 }
             }
         }

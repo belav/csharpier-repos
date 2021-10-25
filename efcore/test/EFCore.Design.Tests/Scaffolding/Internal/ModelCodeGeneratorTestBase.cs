@@ -21,13 +21,18 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             Action<ModelBuilder> buildModel,
             ModelCodeGenerationOptions options,
             Action<ScaffoldedModel> assertScaffold,
-            Action<IModel> assertModel)
+            Action<IModel> assertModel
+        )
         {
             var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
             modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
             buildModel(modelBuilder);
 
-            var model = SqlServerTestHelpers.Instance.Finalize(modelBuilder, designTime: true, skipValidation: true);
+            var model = SqlServerTestHelpers.Instance.Finalize(
+                modelBuilder,
+                designTime: true,
+                skipValidation: true
+            );
 
             var generator = CreateServices()
                 .BuildServiceProvider()
@@ -37,9 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             options.ContextName = "TestDbContext";
             options.ConnectionString = "Initial Catalog=TestDatabase";
 
-            var scaffoldedModel = generator.GenerateModel(
-                model,
-                options);
+            var scaffoldedModel = generator.GenerateModel(model, options);
             assertScaffold(scaffoldedModel);
 
             var build = new BuildSource
@@ -53,15 +56,18 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 },
                 Sources = new List<string>(
                     new[] { scaffoldedModel.ContextFile.Code }.Concat(
-                        scaffoldedModel.AdditionalFiles.Select(f => f.Code)))
+                        scaffoldedModel.AdditionalFiles.Select(f => f.Code)
+                    )
+                )
             };
 
             var assembly = build.BuildInMemory();
             var contextNamespace = options.ContextNamespace ?? options.ModelNamespace;
             var context = (DbContext)assembly.CreateInstance(
                 !string.IsNullOrEmpty(contextNamespace)
-                    ? contextNamespace + "." + options.ContextName
-                    : options.ContextName);
+                  ? contextNamespace + "." + options.ContextName
+                  : options.ContextName
+            );
 
             if (assertModel != null)
             {
@@ -74,14 +80,16 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         {
             var testAssembly = typeof(ModelCodeGeneratorTestBase).Assembly;
             var reporter = new TestOperationReporter();
-            var services = new DesignTimeServicesBuilder(testAssembly, testAssembly, reporter, new string[0])
-                .CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer");
+            var services = new DesignTimeServicesBuilder(
+                testAssembly,
+                testAssembly,
+                reporter,
+                new string[0]
+            ).CreateServiceCollection("Microsoft.EntityFrameworkCore.SqlServer");
             return services;
         }
 
-        protected static void AssertFileContents(
-            string expectedCode,
-            ScaffoldedFile file)
-            => Assert.Equal(expectedCode, file.Code, ignoreLineEndingDifferences: true);
+        protected static void AssertFileContents(string expectedCode, ScaffoldedFile file) =>
+            Assert.Equal(expectedCode, file.Code, ignoreLineEndingDifferences: true);
     }
 }

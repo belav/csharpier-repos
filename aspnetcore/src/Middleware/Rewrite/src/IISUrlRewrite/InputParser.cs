@@ -16,11 +16,12 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
         private readonly IISRewriteMapCollection? _rewriteMaps;
         private readonly bool _alwaysUseManagedServerVariables;
 
-        public InputParser()
-        {
-        }
+        public InputParser() { }
 
-        public InputParser(IISRewriteMapCollection? rewriteMaps, bool alwaysUseManagedServerVariables)
+        public InputParser(
+            IISRewriteMapCollection? rewriteMaps,
+            bool alwaysUseManagedServerVariables
+        )
         {
             _rewriteMaps = rewriteMaps;
             _alwaysUseManagedServerVariables = alwaysUseManagedServerVariables;
@@ -66,7 +67,9 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
                     if (!context.Next())
                     {
                         // missing {
-                        throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
+                        throw new FormatException(
+                            Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+                        );
                     }
                     ParseParameter(context, results, uriMatchPart);
                 }
@@ -76,7 +79,7 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
                 }
                 else
                 {
-                    // Parse for literals, which will return on either the end of the test string 
+                    // Parse for literals, which will return on either the end of the test string
                     // or when it hits a special character
                     ParseLiteral(context, results);
                 }
@@ -84,14 +87,18 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             return new Pattern(results);
         }
 
-        private void ParseParameter(ParserContext context, IList<PatternSegment> results, UriMatchPart uriMatchPart)
+        private void ParseParameter(
+            ParserContext context,
+            IList<PatternSegment> results,
+            UriMatchPart uriMatchPart
+        )
         {
             context.Mark();
             // Four main cases:
             // 1. {NAME} - Server Variable, create lambda to get the part of the context
             // 2. {R:1}  - IRule parameter
             // 3. {C:1}  - Condition Parameter
-            // 4. {function:xxx} - String function 
+            // 4. {function:xxx} - String function
             // (unless we support Reload)
             string? parameter;
             while (context.Next())
@@ -100,7 +107,14 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
                 {
                     // This is just a server variable, so we do a lookup and verify the server variable exists.
                     parameter = context.Capture();
-                    results.Add(ServerVariables.FindServerVariable(parameter!, context, uriMatchPart, _alwaysUseManagedServerVariables));
+                    results.Add(
+                        ServerVariables.FindServerVariable(
+                            parameter!,
+                            context,
+                            uriMatchPart,
+                            _alwaysUseManagedServerVariables
+                        )
+                    );
                     return;
                 }
                 else if (context.Current == Colon)
@@ -111,46 +125,56 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
                     switch (parameter)
                     {
                         case "ToLower":
-                            {
-                                var pattern = ParseString(context, uriMatchPart);
-                                results.Add(new ToLowerSegment(pattern));
+                        {
+                            var pattern = ParseString(context, uriMatchPart);
+                            results.Add(new ToLowerSegment(pattern));
 
-                                // at this point, we expect our context to be on the ending closing brace,
-                                // because the ParseString() call will increment the context until it 
-                                // has processed the new string.
-                                if (context.Current != CloseBrace)
-                                {
-                                    throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
-                                }
-                                return;
+                            // at this point, we expect our context to be on the ending closing brace,
+                            // because the ParseString() call will increment the context until it
+                            // has processed the new string.
+                            if (context.Current != CloseBrace)
+                            {
+                                throw new FormatException(
+                                    Resources.FormatError_InputParserMissingCloseBrace(
+                                        context.Index
+                                    )
+                                );
                             }
+                            return;
+                        }
                         case "UrlDecode":
-                            {
-                                throw new NotImplementedException("UrlDecode is not implemented because of no great library available");
-                            }
+                        {
+                            throw new NotImplementedException(
+                                "UrlDecode is not implemented because of no great library available"
+                            );
+                        }
                         case "UrlEncode":
-                            {
-                                var pattern = ParseString(context, uriMatchPart);
-                                results.Add(new UrlEncodeSegment(pattern));
+                        {
+                            var pattern = ParseString(context, uriMatchPart);
+                            results.Add(new UrlEncodeSegment(pattern));
 
-                                if (context.Current != CloseBrace)
-                                {
-                                    throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
-                                }
-                                return;
+                            if (context.Current != CloseBrace)
+                            {
+                                throw new FormatException(
+                                    Resources.FormatError_InputParserMissingCloseBrace(
+                                        context.Index
+                                    )
+                                );
                             }
+                            return;
+                        }
                         case "R":
-                            {
-                                var index = GetBackReferenceIndex(context);
-                                results.Add(new RuleMatchSegment(index));
-                                return;
-                            }
+                        {
+                            var index = GetBackReferenceIndex(context);
+                            results.Add(new RuleMatchSegment(index));
+                            return;
+                        }
                         case "C":
-                            {
-                                var index = GetBackReferenceIndex(context);
-                                results.Add(new ConditionMatchSegment(index));
-                                return;
-                            }
+                        {
+                            var index = GetBackReferenceIndex(context);
+                            results.Add(new ConditionMatchSegment(index));
+                            return;
+                        }
                         default:
                             var rewriteMap = _rewriteMaps?[parameter!];
                             if (rewriteMap != null)
@@ -159,18 +183,27 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
                                 results.Add(new RewriteMapSegment(rewriteMap, pattern));
                                 return;
                             }
-                            throw new FormatException(Resources.FormatError_InputParserUnrecognizedParameter(parameter, context.Index));
+                            throw new FormatException(
+                                Resources.FormatError_InputParserUnrecognizedParameter(
+                                    parameter,
+                                    context.Index
+                                )
+                            );
                     }
                 }
             }
-            throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
+            throw new FormatException(
+                Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+            );
         }
 
         private static int GetBackReferenceIndex(ParserContext context)
         {
             if (!context.Next())
             {
-                throw new FormatException(Resources.FormatError_InputParserNoBackreference(context.Index));
+                throw new FormatException(
+                    Resources.FormatError_InputParserNoBackreference(context.Index)
+                );
             }
 
             context.Mark();
@@ -178,7 +211,9 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             {
                 if (!context.Next())
                 {
-                    throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
+                    throw new FormatException(
+                        Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+                    );
                 }
             }
 
@@ -186,12 +221,16 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             int index;
             if (!int.TryParse(res, NumberStyles.None, CultureInfo.InvariantCulture, out index))
             {
-                throw new FormatException(Resources.FormatError_InputParserInvalidInteger(res, context.Index));
+                throw new FormatException(
+                    Resources.FormatError_InputParserInvalidInteger(res, context.Index)
+                );
             }
 
             if (index > 9 || index < 0)
             {
-                throw new FormatException(Resources.FormatError_InputParserIndexOutOfRange(res, context.Index));
+                throw new FormatException(
+                    Resources.FormatError_InputParserIndexOutOfRange(res, context.Index)
+                );
             }
             return index;
         }

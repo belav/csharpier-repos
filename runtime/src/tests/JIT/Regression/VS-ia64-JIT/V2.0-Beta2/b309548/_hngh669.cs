@@ -12,22 +12,22 @@ public enum TestEnum
     blue = 4,
 }
 
-
 [StructLayout(LayoutKind.Sequential)]
 public class AA
 {
-    public static float[][, , , ,] m_afStatic1;
+    public static float[][,,,,] m_afStatic1;
     public static uint[,] Static3(ushort param1)
     {
         byte local14 = ((byte)(Math.Min(((ulong)(36.0)), ((ulong)(124.0)))));
         uint local15 = 26u;
-        for (local14 /= (local14 *= local14); ('\x20' != ((char)(((int)(local15))
-            ))); local15 -= 95u)
+        for (
+            local14 /= (local14 *= local14);
+            ('\x20' != ((char)(((int)(local15)))));
+            local15 -= 95u
+        )
         {
-            for (local15++; (118u == local15); param1 = (param1 /= (param1 -= (
-                param1 /= param1))))
-            {
-            }
+            for (local15++; (118u == local15); param1 = (param1 /= (param1 -= (param1 /= param1))))
+            { }
         }
         return ((uint[,])(((Array)(null))));
     }
@@ -50,5 +50,4 @@ public class App
         Console.WriteLine("Passed.");
         return 100;
     }
-
 }

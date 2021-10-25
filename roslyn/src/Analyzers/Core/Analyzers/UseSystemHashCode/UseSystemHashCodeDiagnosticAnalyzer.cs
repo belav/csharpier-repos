@@ -13,27 +13,37 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
     internal class UseSystemHashCodeDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public UseSystemHashCodeDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseSystemHashCode,
-                   EnforceOnBuildValues.UseSystemHashCode,
-                   CodeStyleOptions2.PreferSystemHashCode,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Use_System_HashCode), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   new LocalizableResourceString(nameof(AnalyzersResources.GetHashCode_implementation_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseSystemHashCode,
+                EnforceOnBuildValues.UseSystemHashCode,
+                CodeStyleOptions2.PreferSystemHashCode,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_System_HashCode),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.GetHashCode_implementation_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(c =>
-            {
-                // var hashCodeType = c.Compilation.GetTypeByMetadataName("System.HashCode");
-                if (Analyzer.TryGetAnalyzer(c.Compilation, out var analyzer))
+            context.RegisterCompilationStartAction(
+                c =>
                 {
-                    c.RegisterOperationBlockAction(ctx => AnalyzeOperationBlock(analyzer, ctx));
+                    // var hashCodeType = c.Compilation.GetTypeByMetadataName("System.HashCode");
+                    if (Analyzer.TryGetAnalyzer(c.Compilation, out var analyzer))
+                    {
+                        c.RegisterOperationBlockAction(ctx => AnalyzeOperationBlock(analyzer, ctx));
+                    }
                 }
-            });
+            );
         }
 
         private void AnalyzeOperationBlock(Analyzer analyzer, OperationBlockAnalysisContext context)
@@ -43,8 +53,13 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
 
             var owningSymbol = context.OwningSymbol;
             var operation = context.OperationBlocks[0];
-            var (accessesBase, hashedMembers, statements) = analyzer.GetHashedMembers(owningSymbol, operation);
-            var elementCount = (accessesBase ? 1 : 0) + (hashedMembers.IsDefaultOrEmpty ? 0 : hashedMembers.Length);
+            var (accessesBase, hashedMembers, statements) = analyzer.GetHashedMembers(
+                owningSymbol,
+                operation
+            );
+            var elementCount =
+                (accessesBase ? 1 : 0)
+                + (hashedMembers.IsDefaultOrEmpty ? 0 : hashedMembers.Length);
 
             // No members to call into HashCode.Combine with.  Don't offer anything here.
             if (elementCount == 0)
@@ -67,18 +82,28 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
             var syntaxTree = operation.Syntax.SyntaxTree;
             var cancellationToken = context.CancellationToken;
 
-            var option = context.Options.GetOption(CodeStyleOptions2.PreferSystemHashCode, operation.Language, syntaxTree, cancellationToken);
+            var option = context.Options.GetOption(
+                CodeStyleOptions2.PreferSystemHashCode,
+                operation.Language,
+                syntaxTree,
+                cancellationToken
+            );
             if (option?.Value != true)
                 return;
 
             var operationLocation = operation.Syntax.GetLocation();
-            var declarationLocation = context.OwningSymbol.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken).GetLocation();
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                owningSymbol.Locations[0],
-                option.Notification.Severity,
-                new[] { operationLocation, declarationLocation },
-                ImmutableDictionary<string, string>.Empty));
+            var declarationLocation = context.OwningSymbol.DeclaringSyntaxReferences[0]
+                .GetSyntax(cancellationToken)
+                .GetLocation();
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    owningSymbol.Locations[0],
+                    option.Notification.Severity,
+                    new[] { operationLocation, declarationLocation },
+                    ImmutableDictionary<string, string>.Empty
+                )
+            );
         }
     }
 }

@@ -45,7 +45,9 @@ namespace Microsoft.Extensions.Hosting.Tests
             tcs.TrySetException(new Exception("fail!"));
             var service = new MyBackgroundService(tcs.Task);
 
-            var exception = await Assert.ThrowsAsync<Exception>(() => service.StartAsync(CancellationToken.None));
+            var exception = await Assert.ThrowsAsync<Exception>(
+                () => service.StartAsync(CancellationToken.None)
+            );
 
             Assert.Equal("fail!", exception.Message);
         }
@@ -147,16 +149,20 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             protected override Task ExecuteAsync(CancellationToken stoppingToken)
             {
-                stoppingToken.Register(() =>
-                {
-                    TokenCalls++;
-                    throw new InvalidOperationException();
-                });
+                stoppingToken.Register(
+                    () =>
+                    {
+                        TokenCalls++;
+                        throw new InvalidOperationException();
+                    }
+                );
 
-                stoppingToken.Register(() =>
-                {
-                    TokenCalls++;
-                });
+                stoppingToken.Register(
+                    () =>
+                    {
+                        TokenCalls++;
+                    }
+                );
 
                 return new TaskCompletionSource<object>().Task;
             }

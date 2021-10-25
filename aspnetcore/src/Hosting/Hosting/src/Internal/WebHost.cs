@@ -39,7 +39,7 @@ namespace Microsoft.AspNetCore.Hosting
 
         private IServiceProvider? _applicationServices;
         private ExceptionDispatchInfo? _applicationServicesException;
-        private ILogger _logger =  NullLogger.Instance;
+        private ILogger _logger = NullLogger.Instance;
 
         private bool _stopped;
         private bool _startedServer;
@@ -54,7 +54,8 @@ namespace Microsoft.AspNetCore.Hosting
             IServiceProvider hostingServiceProvider,
             WebHostOptions options,
             IConfiguration config,
-            AggregateException? hostingStartupErrors)
+            AggregateException? hostingStartupErrors
+        )
         {
             if (appServices == null)
             {
@@ -79,13 +80,20 @@ namespace Microsoft.AspNetCore.Hosting
             _applicationServiceCollection.AddSingleton<ApplicationLifetime>();
             // There's no way to to register multiple service types per definition. See https://github.com/aspnet/DependencyInjection/issues/360
 #pragma warning disable CS8634 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'class' constraint.
-            _applicationServiceCollection.AddSingleton(services
-                => services.GetService<ApplicationLifetime>() as IHostApplicationLifetime);
+            _applicationServiceCollection.AddSingleton(
+                services => services.GetService<ApplicationLifetime>() as IHostApplicationLifetime
+            );
 #pragma warning disable CS0618 // Type or member is obsolete
-            _applicationServiceCollection.AddSingleton(services
-                => services.GetService<ApplicationLifetime>() as AspNetCore.Hosting.IApplicationLifetime);
-            _applicationServiceCollection.AddSingleton(services
-                => services.GetService<ApplicationLifetime>() as Extensions.Hosting.IApplicationLifetime);
+            _applicationServiceCollection.AddSingleton(
+                services =>
+                    services.GetService<ApplicationLifetime>()
+                    as AspNetCore.Hosting.IApplicationLifetime
+            );
+            _applicationServiceCollection.AddSingleton(
+                services =>
+                    services.GetService<ApplicationLifetime>()
+                    as Extensions.Hosting.IApplicationLifetime
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 #pragma warning restore CS8634 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'class' constraint.
             _applicationServiceCollection.AddSingleton<HostedServiceExecutor>();
@@ -95,7 +103,10 @@ namespace Microsoft.AspNetCore.Hosting
         {
             get
             {
-                Debug.Assert(_applicationServices != null, "Initialize must be called before accessing services.");
+                Debug.Assert(
+                    _applicationServices != null,
+                    "Initialize must be called before accessing services."
+                );
                 return _applicationServices;
             }
         }
@@ -143,13 +154,16 @@ namespace Microsoft.AspNetCore.Hosting
             Debug.Assert(_applicationServices != null, "Initialize must be called first.");
 
             HostingEventSource.Log.HostStart();
-            _logger = _applicationServices.GetRequiredService<ILoggerFactory>().CreateLogger("Microsoft.AspNetCore.Hosting.Diagnostics");
+            _logger = _applicationServices
+                .GetRequiredService<ILoggerFactory>()
+                .CreateLogger("Microsoft.AspNetCore.Hosting.Diagnostics");
             _logger.Starting();
 
             var application = BuildApplication();
 
             _applicationLifetime = _applicationServices.GetRequiredService<ApplicationLifetime>();
-            _hostedServiceExecutor = _applicationServices.GetRequiredService<HostedServiceExecutor>();
+            _hostedServiceExecutor =
+                _applicationServices.GetRequiredService<HostedServiceExecutor>();
 
             // Fire IHostedService.Start
             await _hostedServiceExecutor.StartAsync(cancellationToken).ConfigureAwait(false);
@@ -157,13 +171,18 @@ namespace Microsoft.AspNetCore.Hosting
             var diagnosticSource = _applicationServices.GetRequiredService<DiagnosticListener>();
             var activitySource = _applicationServices.GetRequiredService<ActivitySource>();
             var httpContextFactory = _applicationServices.GetRequiredService<IHttpContextFactory>();
-            var hostingApp = new HostingApplication(application, _logger, diagnosticSource, activitySource, httpContextFactory);
+            var hostingApp = new HostingApplication(
+                application,
+                _logger,
+                diagnosticSource,
+                activitySource,
+                httpContextFactory
+            );
             await Server.StartAsync(hostingApp, cancellationToken).ConfigureAwait(false);
             _startedServer = true;
 
             // Fire IApplicationLifetime.Started
             _applicationLifetime?.NotifyStarted();
-
 
             _logger.Started();
 
@@ -206,7 +225,9 @@ namespace Microsoft.AspNetCore.Hosting
 
             if (startup == null)
             {
-                throw new InvalidOperationException($"No application configured. Please specify startup via IWebHostBuilder.UseStartup, IWebHostBuilder.Configure, injecting {nameof(IStartup)} or specifying the startup assembly via {nameof(WebHostDefaults.StartupAssemblyKey)} in the web host configuration.");
+                throw new InvalidOperationException(
+                    $"No application configured. Please specify startup via IWebHostBuilder.UseStartup, IWebHostBuilder.Configure, injecting {nameof(IStartup)} or specifying the startup assembly via {nameof(WebHostDefaults.StartupAssemblyKey)} in the web host configuration."
+                );
             }
 
             _startup = startup;
@@ -222,7 +243,8 @@ namespace Microsoft.AspNetCore.Hosting
                 _applicationServicesException?.Throw();
                 EnsureServer();
 
-                var builderFactory = _applicationServices.GetRequiredService<IApplicationBuilderFactory>();
+                var builderFactory =
+                    _applicationServices.GetRequiredService<IApplicationBuilderFactory>();
                 var builder = builderFactory.CreateBuilder(Server.Features);
                 builder.ApplicationServices = _applicationServices;
 
@@ -261,7 +283,12 @@ namespace Microsoft.AspNetCore.Hosting
                 var hostingEnv = _applicationServices.GetRequiredService<IHostEnvironment>();
                 var showDetailedErrors = hostingEnv.IsDevelopment() || _options.DetailedErrors;
 
-                return ErrorPageBuilder.BuildErrorPageApplication(hostingEnv.ContentRootFileProvider, logger, showDetailedErrors, ex);
+                return ErrorPageBuilder.BuildErrorPageApplication(
+                    hostingEnv.ContentRootFileProvider,
+                    logger,
+                    showDetailedErrors,
+                    ex
+                );
             }
         }
 
@@ -278,12 +305,18 @@ namespace Microsoft.AspNetCore.Hosting
                 var addresses = serverAddressesFeature?.Addresses;
                 if (addresses != null && !addresses.IsReadOnly && addresses.Count == 0)
                 {
-                    var urls = _config[WebHostDefaults.ServerUrlsKey] ?? _config[DeprecatedServerUrlsKey];
+                    var urls =
+                        _config[WebHostDefaults.ServerUrlsKey] ?? _config[DeprecatedServerUrlsKey];
                     if (!string.IsNullOrEmpty(urls))
                     {
-                        serverAddressesFeature!.PreferHostingUrls = WebHostUtilities.ParseBool(_config, WebHostDefaults.PreferHostingUrlsKey);
+                        serverAddressesFeature!.PreferHostingUrls = WebHostUtilities.ParseBool(
+                            _config,
+                            WebHostDefaults.PreferHostingUrlsKey
+                        );
 
-                        foreach (var value in urls.Split(';', StringSplitOptions.RemoveEmptyEntries))
+                        foreach (
+                            var value in urls.Split(';', StringSplitOptions.RemoveEmptyEntries)
+                        )
                         {
                             addresses.Add(value);
                         }
@@ -310,7 +343,11 @@ namespace Microsoft.AspNetCore.Hosting
             }
             else
             {
-                cancellationToken = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeoutToken).Token;
+                cancellationToken =
+                    CancellationTokenSource.CreateLinkedTokenSource(
+                        cancellationToken,
+                        timeoutToken
+                    ).Token;
             }
 
             // Fire IApplicationLifetime.Stopping

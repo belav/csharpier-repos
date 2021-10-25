@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         /// <summary>
         /// Gets or sets the path to the login callback page.
         /// </summary>
-        public string LogInCallbackPath { get; set; } = RemoteAuthenticationDefaults.LoginCallbackPath;
+        public string LogInCallbackPath { get; set; } =
+            RemoteAuthenticationDefaults.LoginCallbackPath;
 
         /// <summary>
         /// Gets or sets the path to the login failed page.
@@ -53,16 +54,19 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         /// <summary>
         /// Gets or sets the path to the logout callback page.
         /// </summary>
-        public string LogOutCallbackPath { get; set; } = RemoteAuthenticationDefaults.LogoutCallbackPath;
+        public string LogOutCallbackPath { get; set; } =
+            RemoteAuthenticationDefaults.LogoutCallbackPath;
 
         /// <summary>
         /// Gets or sets the path to the logout failed page.
         /// </summary>
-        public string LogOutFailedPath { get; set; } = RemoteAuthenticationDefaults.LogoutFailedPath;
+        public string LogOutFailedPath { get; set; } =
+            RemoteAuthenticationDefaults.LogoutFailedPath;
 
         /// <summary>
         /// Gets or sets the path to the logout succeeded page.
         /// </summary>
-        public string LogOutSucceededPath { get; set; } = RemoteAuthenticationDefaults.LogoutSucceededPath;
+        public string LogOutSucceededPath { get; set; } =
+            RemoteAuthenticationDefaults.LogoutSucceededPath;
     }
 }

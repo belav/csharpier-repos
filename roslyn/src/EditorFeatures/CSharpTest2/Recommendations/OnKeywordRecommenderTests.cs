@@ -15,118 +15,148 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"class C { }
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"class C { }
+$$"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"System.Console.WriteLine();
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"System.Console.WriteLine();
+$$"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"int i = 0;
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"int i = 0;
+$$"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestAfterJoinInExpr1()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var q = from x in y
-          join a in e $$"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a in e $$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestAfterJoinInExpr2()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in e $$"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in e $$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterOn1()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in e on $$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in e on $$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterOn2()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in e on o$$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in e on o$$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterOn3()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in e on o1 $$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in e on o1 $$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterOn4()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in e on o1 e$$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in e on o1 e$$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterOn5()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in e on o1 equals $$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in e on o1 equals $$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterOn6()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in e on o1 equals o$$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in e on o1 equals o$$"
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordRecommending)]
         public async Task TestNotAfterIn()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y
-          join a.b c in $$"));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"var q = from x in y
+          join a.b c in $$"
+                )
+            );
         }
     }
 }

@@ -39,11 +39,13 @@ namespace System.CodeDom.Compiler.Tests
         public void ContinueOnNewLine_InvokeWithOutput_Appends(string st, string expected)
         {
             CodeGeneratorTests generator = this;
-            generator.PerformActionWithOutput(writer =>
-            {
-                generator.ContinueOnNewLine(st);
-                Assert.Equal(expected + Environment.NewLine, writer.ToString());
-            });
+            generator.PerformActionWithOutput(
+                writer =>
+                {
+                    generator.ContinueOnNewLine(st);
+                    Assert.Equal(expected + Environment.NewLine, writer.ToString());
+                }
+            );
         }
 
         [Theory]
@@ -63,11 +65,13 @@ namespace System.CodeDom.Compiler.Tests
         public void Indent_SetWithOutput_GetReturnsExpected(int value, int expected)
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.Indent = value;
-                Assert.Equal(expected, generator.Indent);
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.Indent = value;
+                    Assert.Equal(expected, generator.Indent);
+                }
+            );
         }
 
         [Fact]
@@ -79,27 +83,66 @@ namespace System.CodeDom.Compiler.Tests
 
         public static IEnumerable<object[]> GenerateBinaryOperatorExpression_TestData()
         {
-            yield return new object[] { new CodeBinaryOperatorExpression(new CodePrimitiveExpression(1), CodeBinaryOperatorType.Add, new CodePrimitiveExpression(2)), "(1 + 2)" };
-            yield return new object[] { new CodeBinaryOperatorExpression(new CodeBinaryOperatorExpression(new CodePrimitiveExpression(1), CodeBinaryOperatorType.Multiply, new CodePrimitiveExpression(2)), CodeBinaryOperatorType.Add, new CodePrimitiveExpression(3)), $"((1 * 2) {Environment.NewLine}            + 3)" };
-            yield return new object[] { new CodeBinaryOperatorExpression(new CodePrimitiveExpression(1), CodeBinaryOperatorType.Multiply, new CodeBinaryOperatorExpression(new CodePrimitiveExpression(2), CodeBinaryOperatorType.Add, new CodePrimitiveExpression(3))), $"(1 {Environment.NewLine}            * (2 + 3))" };
+            yield return new object[]
+            {
+                new CodeBinaryOperatorExpression(
+                    new CodePrimitiveExpression(1),
+                    CodeBinaryOperatorType.Add,
+                    new CodePrimitiveExpression(2)
+                ),
+                "(1 + 2)"
+            };
+            yield return new object[]
+            {
+                new CodeBinaryOperatorExpression(
+                    new CodeBinaryOperatorExpression(
+                        new CodePrimitiveExpression(1),
+                        CodeBinaryOperatorType.Multiply,
+                        new CodePrimitiveExpression(2)
+                    ),
+                    CodeBinaryOperatorType.Add,
+                    new CodePrimitiveExpression(3)
+                ),
+                $"((1 * 2) {Environment.NewLine}            + 3)"
+            };
+            yield return new object[]
+            {
+                new CodeBinaryOperatorExpression(
+                    new CodePrimitiveExpression(1),
+                    CodeBinaryOperatorType.Multiply,
+                    new CodeBinaryOperatorExpression(
+                        new CodePrimitiveExpression(2),
+                        CodeBinaryOperatorType.Add,
+                        new CodePrimitiveExpression(3)
+                    )
+                ),
+                $"(1 {Environment.NewLine}            * (2 + 3))"
+            };
         }
 
         [Theory]
         [MemberData(nameof(GenerateBinaryOperatorExpression_TestData))]
-        public void GenerateBinaryOperatorExpression_Invoke_Success(CodeBinaryOperatorExpression e, string expected)
+        public void GenerateBinaryOperatorExpression_Invoke_Success(
+            CodeBinaryOperatorExpression e,
+            string expected
+        )
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.OutputIdentifierAction = (actualIdentifier, baseMethod) => baseMethod(actualIdentifier);
-                generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
-                generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                generator.GenerateBinaryOperatorExpression(e);
-                Assert.Equal(expected, writer.ToString());
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.OutputIdentifierAction = (actualIdentifier, baseMethod) =>
+                        baseMethod(actualIdentifier);
+                    generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
+                    generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    generator.GenerateBinaryOperatorExpression(e);
+                    Assert.Equal(expected, writer.ToString());
 
-                // Call again to make sure indent is reset.
-                Assert.Equal(expected, writer.ToString());
-            });
+                    // Call again to make sure indent is reset.
+                    Assert.Equal(expected, writer.ToString());
+                }
+            );
         }
 
         [Fact]
@@ -107,7 +150,10 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateBinaryOperatorExpression_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateBinaryOperatorExpression(null));
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateBinaryOperatorExpression(null)
+            );
         }
 
         [Fact]
@@ -115,13 +161,23 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateBinaryOperatorExpression_NullLeftE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeBinaryOperatorExpression(null, CodeBinaryOperatorType.Add, new CodePrimitiveExpression(1));
-                generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
-                generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                Assert.Throws<ArgumentNullException>("e", () => generator.GenerateBinaryOperatorExpression(null));
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var e = new CodeBinaryOperatorExpression(
+                        null,
+                        CodeBinaryOperatorType.Add,
+                        new CodePrimitiveExpression(1)
+                    );
+                    generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
+                    generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    Assert.Throws<ArgumentNullException>(
+                        "e",
+                        () => generator.GenerateBinaryOperatorExpression(null)
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -129,13 +185,23 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateBinaryOperatorExpression_NullRightE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeBinaryOperatorExpression(new CodePrimitiveExpression(1), CodeBinaryOperatorType.Add, null);
-                generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
-                generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                Assert.Throws<ArgumentNullException>("e", () => generator.GenerateBinaryOperatorExpression(null));
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var e = new CodeBinaryOperatorExpression(
+                        new CodePrimitiveExpression(1),
+                        CodeBinaryOperatorType.Add,
+                        null
+                    );
+                    generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
+                    generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    Assert.Throws<ArgumentNullException>(
+                        "e",
+                        () => generator.GenerateBinaryOperatorExpression(null)
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -144,23 +210,41 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             var e = new CodeBinaryOperatorExpression();
             generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<NullReferenceException>(() => generator.GenerateBinaryOperatorExpression(e));
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            Assert.Throws<NullReferenceException>(
+                () => generator.GenerateBinaryOperatorExpression(e)
+            );
         }
 
         public static IEnumerable<object[]> GenerateCodeFromMember_TestData()
         {
             yield return new object[] { new CodeTypeMember(), null, Environment.NewLine };
-            yield return new object[] { new CodeTypeMember(), new CodeGeneratorOptions(), Environment.NewLine };
-            yield return new object[] { new CodeTypeMember(), new CodeGeneratorOptions { BlankLinesBetweenMembers = false}, string.Empty };
+            yield return new object[]
+            {
+                new CodeTypeMember(),
+                new CodeGeneratorOptions(),
+                Environment.NewLine
+            };
+            yield return new object[]
+            {
+                new CodeTypeMember(),
+                new CodeGeneratorOptions { BlankLinesBetweenMembers = false },
+                string.Empty
+            };
         }
 
         [Theory]
         [MemberData(nameof(GenerateCodeFromMember_TestData))]
-        public void GenerateCodeFromMember_Invoke_Success(CodeTypeMember member, CodeGeneratorOptions options, string expected)
+        public void GenerateCodeFromMember_Invoke_Success(
+            CodeTypeMember member,
+            CodeGeneratorOptions options,
+            string expected
+        )
         {
             CodeGeneratorTests generator = this;
-            generator.GenerateCommentStatementsAction = (actualE, baseMethod) => baseMethod(actualE);
+            generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
             var writer = new StringWriter();
             generator.GenerateCodeFromMember(member, writer, options);
             Assert.Equal(expected, writer.ToString());
@@ -181,10 +265,14 @@ namespace System.CodeDom.Compiler.Tests
             member.Comments.Add(new CodeCommentStatement("Comment"));
             member.StartDirectives.Add(new CodeDirective());
             member.StartDirectives.Add(new CodeChecksumPragma());
-            member.StartDirectives.Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
+            member.StartDirectives.Add(
+                new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
+            );
             member.EndDirectives.Add(new CodeDirective());
             member.EndDirectives.Add(new CodeChecksumPragma());
-            member.EndDirectives.Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
+            member.EndDirectives.Add(
+                new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
+            );
 
             var writer = new StringWriter();
             int generateCommentStatementsCallCount = 0;
@@ -226,12 +314,22 @@ namespace System.CodeDom.Compiler.Tests
             generator.GenerateDirectivesAction = (actualDirectives, baseMethod) =>
             {
                 baseMethod(actualDirectives);
-                Assert.Same(generateDirectivesCallCount == 0 ? member.StartDirectives : member.EndDirectives, actualDirectives);
-                writer.Write(generateDirectivesCallCount == 0 ? "StartDirectives " : "EndDirectives");
+                Assert.Same(
+                    generateDirectivesCallCount == 0
+                      ? member.StartDirectives
+                      : member.EndDirectives,
+                    actualDirectives
+                );
+                writer.Write(
+                    generateDirectivesCallCount == 0 ? "StartDirectives " : "EndDirectives"
+                );
                 generateDirectivesCallCount++;
             };
             generator.GenerateCodeFromMember(member, writer, null);
-            Assert.Equal($"{Environment.NewLine}StartDirectives Comment Comment Comments LinePragmaStart LinePragmaEnd EndDirectives", writer.ToString());
+            Assert.Equal(
+                $"{Environment.NewLine}StartDirectives Comment Comment Comments LinePragmaStart LinePragmaEnd EndDirectives",
+                writer.ToString()
+            );
             Assert.Equal(1, generateCommentStatementsCallCount);
             Assert.Equal(2, generateCommentCallCount);
             Assert.Equal(1, generateLinePragmaStartCallCount);
@@ -383,10 +481,19 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCodeFromMember_InvokeWithOutput_ThrowsInvalidOperationException()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                Assert.Throws<InvalidOperationException>(() => generator.GenerateCodeFromMember(new CodeTypeMember(), new StringWriter(), new CodeGeneratorOptions()));
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    Assert.Throws<InvalidOperationException>(
+                        () =>
+                            generator.GenerateCodeFromMember(
+                                new CodeTypeMember(),
+                                new StringWriter(),
+                                new CodeGeneratorOptions()
+                            )
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -394,7 +501,15 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCodeFromMember_NullMember_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>("member", () => generator.GenerateCodeFromMember(null, new StringWriter(), new CodeGeneratorOptions()));
+            Assert.Throws<ArgumentNullException>(
+                "member",
+                () =>
+                    generator.GenerateCodeFromMember(
+                        null,
+                        new StringWriter(),
+                        new CodeGeneratorOptions()
+                    )
+            );
         }
 
         [Fact]
@@ -402,7 +517,15 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCodeFromMember_NullWriter_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>("writer", () => generator.GenerateCodeFromMember(new CodeTypeMember(), null, new CodeGeneratorOptions()));
+            Assert.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    generator.GenerateCodeFromMember(
+                        new CodeTypeMember(),
+                        null,
+                        new CodeGeneratorOptions()
+                    )
+            );
         }
 
         [Theory]
@@ -428,7 +551,10 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCommentStatement_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateCommentStatement(null));
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateCommentStatement(null)
+            );
         }
 
         [Fact]
@@ -446,12 +572,15 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCommentStatements_InvokeNonEmpty_CallsCorrectMethod(string text)
         {
             CodeGeneratorTests generator = this;
-            generator.GenerateCommentStatementsAction = (actualE, baseMethod) => baseMethod(actualE);
-            var e = new CodeCommentStatementCollection(new CodeCommentStatement[]
-            {
-                new CodeCommentStatement(text),
-                new CodeCommentStatement("otherText")
-            });
+            generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            var e = new CodeCommentStatementCollection(
+                new CodeCommentStatement[]
+                {
+                    new CodeCommentStatement(text),
+                    new CodeCommentStatement("otherText")
+                }
+            );
             int callCount = 0;
             generator.GenerateCommentAction = (actualComment) =>
             {
@@ -466,7 +595,8 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCommentStatements_InvokeEmptyE_Nop()
         {
             CodeGeneratorTests generator = this;
-            generator.GenerateCommentStatementsAction = (actualE, baseMethod) => baseMethod(actualE);
+            generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
             generator.GenerateCommentStatements(new CodeCommentStatementCollection());
         }
 
@@ -475,16 +605,23 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCommentStatements_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            generator.GenerateCommentStatementsAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateCommentStatements(null));
+            generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateCommentStatements(null)
+            );
         }
 
         [Fact]
         public void GenerateCommentStatements_NullValueInE_ThrowsArgumentException()
         {
             CodeGeneratorTests generator = this;
-            generator.GenerateCommentStatementsAction = (actualE, baseMethod) => baseMethod(actualE);
-            var e = new CodeCommentStatementCollection(new CodeCommentStatement[] { new CodeCommentStatement() });
+            generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            var e = new CodeCommentStatementCollection(
+                new CodeCommentStatement[] { new CodeCommentStatement() }
+            );
             Assert.Throws<ArgumentException>("e", () => generator.GenerateCommentStatements(e));
         }
 
@@ -498,76 +635,94 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCompileUnit_InvokeWithOutput_Success(CodeCompileUnit e)
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.GenerateCompileUnitAction = (actualE, baseMethod) => baseMethod(actualE);
-                int generateCompileUnitStartCallCount = 0;
-                int generateCompileUnitEndCallCount = 0;
-                generator.GenerateCompileUnitStartAction = (actualE, baseMethod) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    baseMethod(actualE);
-                    Assert.Same(e, actualE);
-                    Assert.Equal(0, generateCompileUnitEndCallCount);
-                    generateCompileUnitStartCallCount++;
-                };
-                generator.GenerateCompileUnitEndAction = (actualE, baseMethod) =>
-                {
-                    baseMethod(actualE);
-                    Assert.Same(e, actualE);
-                    generateCompileUnitEndCallCount++;
-                };
-                generator.GenerateCompileUnit(e);
-                Assert.Equal(1, generateCompileUnitStartCallCount);
-                Assert.Equal(1, generateCompileUnitEndCallCount);
-                Assert.Empty(writer.ToString());
-            });
+                    generator.GenerateCompileUnitAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    int generateCompileUnitStartCallCount = 0;
+                    int generateCompileUnitEndCallCount = 0;
+                    generator.GenerateCompileUnitStartAction = (actualE, baseMethod) =>
+                    {
+                        baseMethod(actualE);
+                        Assert.Same(e, actualE);
+                        Assert.Equal(0, generateCompileUnitEndCallCount);
+                        generateCompileUnitStartCallCount++;
+                    };
+                    generator.GenerateCompileUnitEndAction = (actualE, baseMethod) =>
+                    {
+                        baseMethod(actualE);
+                        Assert.Same(e, actualE);
+                        generateCompileUnitEndCallCount++;
+                    };
+                    generator.GenerateCompileUnit(e);
+                    Assert.Equal(1, generateCompileUnitStartCallCount);
+                    Assert.Equal(1, generateCompileUnitEndCallCount);
+                    Assert.Empty(writer.ToString());
+                }
+            );
         }
 
         [Fact]
         public void GenerateCompileUnit_InvokeWithDirectives_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.GenerateCompileUnitAction = (actualE, baseMethod) => baseMethod(actualE);
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.GenerateCompileUnitAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
 
-                var e = new CodeSnippetCompileUnit("value") { LinePragma = new CodeLinePragma() };
-                e.StartDirectives.Add(new CodeDirective());
-                e.StartDirectives.Add(new CodeChecksumPragma());
-                e.StartDirectives.Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
-                e.EndDirectives.Add(new CodeDirective());
-                e.EndDirectives.Add(new CodeChecksumPragma());
-                e.EndDirectives.Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
-                int generateCompileUnitStartCallCount = 0;
-                int generateCompileUnitEndCallCount = 0;
-                int generateDirectivesCallCount = 0;
-                generator.GenerateCompileUnitStartAction = (actualE, baseMethod) =>
-                {
-                    baseMethod(actualE);
-                    Assert.Same(e, actualE);
-                    Assert.Equal(0, generateCompileUnitEndCallCount);
-                    Assert.Equal(1, generateDirectivesCallCount);
-                    generateCompileUnitStartCallCount++;
-                };
-                generator.GenerateCompileUnitEndAction = (actualE, baseMethod) =>
-                {
-                    baseMethod(actualE);
-                    Assert.Same(e, actualE);
+                    var e = new CodeSnippetCompileUnit("value")
+                    {
+                        LinePragma = new CodeLinePragma()
+                    };
+                    e.StartDirectives.Add(new CodeDirective());
+                    e.StartDirectives.Add(new CodeChecksumPragma());
+                    e.StartDirectives.Add(
+                        new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
+                    );
+                    e.EndDirectives.Add(new CodeDirective());
+                    e.EndDirectives.Add(new CodeChecksumPragma());
+                    e.EndDirectives.Add(
+                        new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
+                    );
+                    int generateCompileUnitStartCallCount = 0;
+                    int generateCompileUnitEndCallCount = 0;
+                    int generateDirectivesCallCount = 0;
+                    generator.GenerateCompileUnitStartAction = (actualE, baseMethod) =>
+                    {
+                        baseMethod(actualE);
+                        Assert.Same(e, actualE);
+                        Assert.Equal(0, generateCompileUnitEndCallCount);
+                        Assert.Equal(1, generateDirectivesCallCount);
+                        generateCompileUnitStartCallCount++;
+                    };
+                    generator.GenerateCompileUnitEndAction = (actualE, baseMethod) =>
+                    {
+                        baseMethod(actualE);
+                        Assert.Same(e, actualE);
+                        Assert.Equal(2, generateDirectivesCallCount);
+                        generateCompileUnitEndCallCount++;
+                    };
+                    generator.GenerateDirectivesAction = (actualDirectives, baseMethod) =>
+                    {
+                        Assert.Same(
+                            generateDirectivesCallCount == 0 ? e.StartDirectives : e.EndDirectives,
+                            actualDirectives
+                        );
+                        writer.Write(
+                            generateDirectivesCallCount == 0 ? "StartDirectives " : "EndDirectives"
+                        );
+                        generateDirectivesCallCount++;
+                    };
+                    generator.GenerateCompileUnit(e);
+                    Assert.Equal(1, generateCompileUnitStartCallCount);
+                    Assert.Equal(1, generateCompileUnitEndCallCount);
                     Assert.Equal(2, generateDirectivesCallCount);
-                    generateCompileUnitEndCallCount++;
-                };
-                generator.GenerateDirectivesAction = (actualDirectives, baseMethod) =>
-                {
-                    Assert.Same(generateDirectivesCallCount == 0 ? e.StartDirectives : e.EndDirectives, actualDirectives);
-                    writer.Write(generateDirectivesCallCount == 0 ? "StartDirectives " : "EndDirectives");
-                    generateDirectivesCallCount++;
-                };
-                generator.GenerateCompileUnit(e);
-                Assert.Equal(1, generateCompileUnitStartCallCount);
-                Assert.Equal(1, generateCompileUnitEndCallCount);
-                Assert.Equal(2, generateDirectivesCallCount);
-                Assert.Equal("StartDirectives EndDirectives", writer.ToString());
-            });
+                    Assert.Equal("StartDirectives EndDirectives", writer.ToString());
+                }
+            );
         }
 
         [Theory]
@@ -688,19 +843,25 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             generator.GenerateCompileUnitStartAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateCompileUnitStart(null));
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateCompileUnitStart(null)
+            );
         }
 
         [Fact]
         public void GenerateDecimalValue_Invoke_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.GenerateDecimalValueAction = (actualS, baseMethod) => baseMethod(actualS);
-                generator.GenerateDecimalValue(decimal.MaxValue);
-                Assert.Equal("79228162514264337593543950335", writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.GenerateDecimalValueAction = (actualS, baseMethod) =>
+                        baseMethod(actualS);
+                    generator.GenerateDecimalValue(decimal.MaxValue);
+                    Assert.Equal("79228162514264337593543950335", writer.ToString());
+                }
+            );
         }
 
         [Fact]
@@ -719,22 +880,30 @@ namespace System.CodeDom.Compiler.Tests
 
         [Theory]
         [MemberData(nameof(GenerateDefaultValueExpression_TestData))]
-        public void GenerateDefaultValueExpression_InvokeWithOutput_Nop(CodeDefaultValueExpression e)
+        public void GenerateDefaultValueExpression_InvokeWithOutput_Nop(
+            CodeDefaultValueExpression e
+        )
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.GenerateDefaultValueExpressionAction = (actualE, baseMethod) => baseMethod(e);
-                generator.GenerateDefaultValueExpression(e);
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.GenerateDefaultValueExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(e);
+                    generator.GenerateDefaultValueExpression(e);
+                }
+            );
         }
 
         [Theory]
         [MemberData(nameof(GenerateDefaultValueExpression_TestData))]
-        public void GenerateDefaultValueExpression_InvokeWithoutOutput_Nop(CodeDefaultValueExpression e)
+        public void GenerateDefaultValueExpression_InvokeWithoutOutput_Nop(
+            CodeDefaultValueExpression e
+        )
         {
             CodeGeneratorTests generator = this;
-            generator.GenerateDefaultValueExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
+            generator.GenerateDefaultValueExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
             generator.GenerateDefaultValueExpression(e);
         }
 
@@ -749,25 +918,32 @@ namespace System.CodeDom.Compiler.Tests
 
         [Theory]
         [MemberData(nameof(GenerateDirectionExpression_TestData))]
-        public void GenerateDirectionExpression_Invoke_Success(FieldDirection direction, string expected)
+        public void GenerateDirectionExpression_Invoke_Success(
+            FieldDirection direction,
+            string expected
+        )
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeDirectionExpression(direction, new CodePrimitiveExpression(1));
-                generator.GenerateDirectionExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                int outputDirectionCallCount = 0;
-                generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    baseMethod(actualDirection);
-                    Assert.Equal(e.Direction, actualDirection);
-                    outputDirectionCallCount++;
-                };
-                generator.GenerateDirectionExpression(e);
-                Assert.Equal(expected, writer.ToString());
-                Assert.Equal(1, outputDirectionCallCount);
-            });
+                    var e = new CodeDirectionExpression(direction, new CodePrimitiveExpression(1));
+                    generator.GenerateDirectionExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    int outputDirectionCallCount = 0;
+                    generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                    {
+                        baseMethod(actualDirection);
+                        Assert.Equal(e.Direction, actualDirection);
+                        outputDirectionCallCount++;
+                    };
+                    generator.GenerateDirectionExpression(e);
+                    Assert.Equal(expected, writer.ToString());
+                    Assert.Equal(1, outputDirectionCallCount);
+                }
+            );
         }
 
         [Fact]
@@ -775,9 +951,14 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateDirectionExpression_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            generator.GenerateDirectionExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            generator.OutputDirectionAction = (actualDirection, baseMethod) => baseMethod(actualDirection);
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateDirectionExpression(null));
+            generator.GenerateDirectionExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                baseMethod(actualDirection);
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateDirectionExpression(null)
+            );
         }
 
         [Fact]
@@ -785,22 +966,33 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             var e = new CodeDirectionExpression();
-            generator.GenerateDirectionExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            generator.OutputDirectionAction = (actualDirection, baseMethod) => baseMethod(actualDirection);
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateDirectionExpression(e));
+            generator.GenerateDirectionExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                baseMethod(actualDirection);
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateDirectionExpression(e)
+            );
         }
 
         [Theory]
         [InlineData(FieldDirection.Out)]
         [InlineData(FieldDirection.Ref)]
-        public void GenerateDirectionExpression_InvokeNonInWithoutWriter_ThrowsNullReferenceException(FieldDirection direction)
+        public void GenerateDirectionExpression_InvokeNonInWithoutWriter_ThrowsNullReferenceException(
+            FieldDirection direction
+        )
         {
             CodeGeneratorTests generator = this;
             var e = new CodeDirectionExpression(direction, new CodePrimitiveExpression(1));
-            generator.GenerateDirectionExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            generator.OutputDirectionAction = (actualDirection, baseMethod) => baseMethod(actualDirection);
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
+            generator.GenerateDirectionExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                baseMethod(actualDirection);
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
             Assert.Throws<NullReferenceException>(() => generator.GenerateDirectionExpression(e));
         }
 
@@ -808,7 +1000,10 @@ namespace System.CodeDom.Compiler.Tests
         {
             yield return new object[] { null };
             yield return new object[] { new CodeDirectiveCollection() };
-            yield return new object[] { new CodeDirectiveCollection(new CodeDirective[] { new CodeDirective() }) };
+            yield return new object[]
+            {
+                new CodeDirectiveCollection(new CodeDirective[] { new CodeDirective() })
+            };
         }
 
         [Theory]
@@ -816,11 +1011,14 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateDirectives_InvokeWithOutput_Nop(CodeDirectiveCollection directives)
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.GenerateDirectivesAction = (actualDirectives, baseMethod) => baseMethod(actualDirectives);
-                generator.GenerateDirectives(directives);
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.GenerateDirectivesAction = (actualDirectives, baseMethod) =>
+                        baseMethod(actualDirectives);
+                    generator.GenerateDirectives(directives);
+                }
+            );
         }
 
         [Theory]
@@ -828,7 +1026,8 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateDirectives_InvokeWithoutOutput_Nop(CodeDirectiveCollection directives)
         {
             CodeGeneratorTests generator = this;
-            generator.GenerateDirectivesAction = (actualDirectives, baseMethod) => baseMethod(actualDirectives);
+            generator.GenerateDirectivesAction = (actualDirectives, baseMethod) =>
+                baseMethod(actualDirectives);
             generator.GenerateDirectives(directives);
         }
 
@@ -836,12 +1035,15 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateDoubleValue_Invoke_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.GenerateDoubleValueAction = (actualS, baseMethod) => baseMethod(actualS);
-                generator.GenerateDoubleValue(double.MaxValue);
-                Assert.Equal("1.7976931348623157E+308", writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.GenerateDoubleValueAction = (actualS, baseMethod) =>
+                        baseMethod(actualS);
+                    generator.GenerateDoubleValue(double.MaxValue);
+                    Assert.Equal("1.7976931348623157E+308", writer.ToString());
+                }
+            );
         }
 
         [Fact]
@@ -1239,83 +1441,95 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateNamespace_InvokeEmpty_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeNamespace();
-                int generateNamespaceStartCallCount = 0;
-                int generateNamespaceEndCallCount = 0;
-                generator.GenerateNamespaceAction = (actualE, baseMethod) => baseMethod(actualE);
-                generator.GenerateNamespaceStartAction = (actualE) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    Assert.Same(e, actualE);
-                    Assert.Equal(0, generateNamespaceEndCallCount);
-                    writer.Write("NamespaceStart ");
-                    generateNamespaceStartCallCount++;
-                };
-                generator.GenerateNamespaceEndAction = (actualE) =>
-                {
-                    Assert.Same(e, actualE);
-                    writer.Write("NamespaceEnd");
-                    generateNamespaceEndCallCount++;
-                };
+                    var e = new CodeNamespace();
+                    int generateNamespaceStartCallCount = 0;
+                    int generateNamespaceEndCallCount = 0;
+                    generator.GenerateNamespaceAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    generator.GenerateNamespaceStartAction = (actualE) =>
+                    {
+                        Assert.Same(e, actualE);
+                        Assert.Equal(0, generateNamespaceEndCallCount);
+                        writer.Write("NamespaceStart ");
+                        generateNamespaceStartCallCount++;
+                    };
+                    generator.GenerateNamespaceEndAction = (actualE) =>
+                    {
+                        Assert.Same(e, actualE);
+                        writer.Write("NamespaceEnd");
+                        generateNamespaceEndCallCount++;
+                    };
 
-                generator.GenerateNamespace(e);
-                Assert.Equal(1, generateNamespaceStartCallCount);
-                Assert.Equal(1, generateNamespaceEndCallCount);
-                Assert.Equal($"NamespaceStart {Environment.NewLine}NamespaceEnd", writer.ToString());
-            });
+                    generator.GenerateNamespace(e);
+                    Assert.Equal(1, generateNamespaceStartCallCount);
+                    Assert.Equal(1, generateNamespaceEndCallCount);
+                    Assert.Equal(
+                        $"NamespaceStart {Environment.NewLine}NamespaceEnd",
+                        writer.ToString()
+                    );
+                }
+            );
         }
 
         [Fact]
         public void GenerateNamespace_InvokeWithComments_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeNamespace();
-                e.Comments.Add(new CodeCommentStatement("Comment"));
-                e.Comments.Add(new CodeCommentStatement("Comment"));
-                int generateCommentStatementsCallCount = 0;
-                int generateCommentCallCount = 0;
-                int generateNamespaceStartCallCount = 0;
-                int generateNamespaceEndCallCount = 0;
-                generator.GenerateNamespaceAction = (actualE, baseMethod) => baseMethod(actualE);
-                generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    baseMethod(actualE);
-                    Assert.Same(e.Comments, actualE);
-                    Assert.Equal(0, generateNamespaceStartCallCount);
-                    Assert.Equal(0, generateNamespaceEndCallCount);
-                    writer.Write("Comments ");
-                    generateCommentStatementsCallCount++;
-                };
-                generator.GenerateCommentAction = (actualE) =>
-                {
-                    Assert.Same(e.Comments[generateCommentCallCount].Comment, actualE);
-                    writer.Write("Comment ");
-                    generateCommentCallCount++;
-                };
-                generator.GenerateNamespaceStartAction = (actualE) =>
-                {
-                    Assert.Same(e, actualE);
-                    Assert.Equal(0, generateNamespaceEndCallCount);
-                    writer.Write("NamespaceStart ");
-                    generateNamespaceStartCallCount++;
-                };
-                generator.GenerateNamespaceEndAction = (actualE) =>
-                {
-                    Assert.Same(e, actualE);
-                    writer.Write("NamespaceEnd");
-                    generateNamespaceEndCallCount++;
-                };
+                    var e = new CodeNamespace();
+                    e.Comments.Add(new CodeCommentStatement("Comment"));
+                    e.Comments.Add(new CodeCommentStatement("Comment"));
+                    int generateCommentStatementsCallCount = 0;
+                    int generateCommentCallCount = 0;
+                    int generateNamespaceStartCallCount = 0;
+                    int generateNamespaceEndCallCount = 0;
+                    generator.GenerateNamespaceAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
+                    {
+                        baseMethod(actualE);
+                        Assert.Same(e.Comments, actualE);
+                        Assert.Equal(0, generateNamespaceStartCallCount);
+                        Assert.Equal(0, generateNamespaceEndCallCount);
+                        writer.Write("Comments ");
+                        generateCommentStatementsCallCount++;
+                    };
+                    generator.GenerateCommentAction = (actualE) =>
+                    {
+                        Assert.Same(e.Comments[generateCommentCallCount].Comment, actualE);
+                        writer.Write("Comment ");
+                        generateCommentCallCount++;
+                    };
+                    generator.GenerateNamespaceStartAction = (actualE) =>
+                    {
+                        Assert.Same(e, actualE);
+                        Assert.Equal(0, generateNamespaceEndCallCount);
+                        writer.Write("NamespaceStart ");
+                        generateNamespaceStartCallCount++;
+                    };
+                    generator.GenerateNamespaceEndAction = (actualE) =>
+                    {
+                        Assert.Same(e, actualE);
+                        writer.Write("NamespaceEnd");
+                        generateNamespaceEndCallCount++;
+                    };
 
-                generator.GenerateNamespace(e);
-                Assert.Equal(1, generateCommentStatementsCallCount);
-                Assert.Equal(2, generateCommentCallCount);
-                Assert.Equal(1, generateNamespaceStartCallCount);
-                Assert.Equal(1, generateNamespaceEndCallCount);
-                Assert.Equal($"Comment Comment Comments NamespaceStart {Environment.NewLine}NamespaceEnd", writer.ToString());
-            });
+                    generator.GenerateNamespace(e);
+                    Assert.Equal(1, generateCommentStatementsCallCount);
+                    Assert.Equal(2, generateCommentCallCount);
+                    Assert.Equal(1, generateNamespaceStartCallCount);
+                    Assert.Equal(1, generateNamespaceEndCallCount);
+                    Assert.Equal(
+                        $"Comment Comment Comments NamespaceStart {Environment.NewLine}NamespaceEnd",
+                        writer.ToString()
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -1333,9 +1547,10 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             var e = new CodeNamespace();
             generator.GenerateNamespaceAction = (actualE, baseMethod) => baseMethod(actualE);
-            generator.GenerateCommentStatementsAction = (actualE, baseMethod) => baseMethod(actualE);
-            generator.GenerateNamespaceStartAction = (actualE) => {};
-            generator.GenerateNamespaceEndAction = (actualE) => {};
+            generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            generator.GenerateNamespaceStartAction = (actualE) => { };
+            generator.GenerateNamespaceEndAction = (actualE) => { };
 
             Assert.Throws<NullReferenceException>(() => generator.GenerateNamespace(e));
         }
@@ -1344,94 +1559,115 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateNamespace_NullValueInE_ThrowsArgumentException()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeNamespace();
-                e.Comments.Add(new CodeCommentStatement());
-                generator.GenerateNamespaceAction = (actualE, baseMethod) => baseMethod(actualE);
-                generator.GenerateCommentStatementsAction = (actualE, baseMethod) => baseMethod(actualE);
-                generator.GenerateNamespaceStartAction = (actualE) => {};
-                generator.GenerateNamespaceEndAction = (actualE) => {};
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var e = new CodeNamespace();
+                    e.Comments.Add(new CodeCommentStatement());
+                    generator.GenerateNamespaceAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    generator.GenerateNamespaceStartAction = (actualE) => { };
+                    generator.GenerateNamespaceEndAction = (actualE) => { };
 
-                Assert.Throws<ArgumentException>("e", () => generator.GenerateNamespace(e));
-            });
+                    Assert.Throws<ArgumentException>("e", () => generator.GenerateNamespace(e));
+                }
+            );
         }
 
         [Fact]
         public void GenerateNamespaceImports_InvokeEmptyWithOutput_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeNamespace();
-                int generateNamespaceCallCount = 0;
-                generator.GenerateNamespaceImportAction = (actualE) => generateNamespaceCallCount++;
-                generator.GenerateNamespaceImports(e);
-                Assert.Equal(0, generateNamespaceCallCount);
-                Assert.Empty(writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var e = new CodeNamespace();
+                    int generateNamespaceCallCount = 0;
+                    generator.GenerateNamespaceImportAction = (actualE) =>
+                        generateNamespaceCallCount++;
+                    generator.GenerateNamespaceImports(e);
+                    Assert.Equal(0, generateNamespaceCallCount);
+                    Assert.Empty(writer.ToString());
+                }
+            );
         }
 
         [Fact]
         public void GenerateNamespaceImports_InvokeNonEmptyWithOutput_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeNamespace();
-                e.Imports.Add(new CodeNamespaceImport("Namespace1"));
-                e.Imports.Add(new CodeNamespaceImport("Namespace2"));
-                int generateNamespaceCallCount = 0;
-                generator.GenerateNamespaceImportAction = (actualE) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    Assert.Same(e.Imports[generateNamespaceCallCount], actualE);
-                    generateNamespaceCallCount++;
-                };
-                generator.GenerateNamespaceImports(e);
-                Assert.Equal(2, generateNamespaceCallCount);
-                Assert.Empty(writer.ToString());
-            });
+                    var e = new CodeNamespace();
+                    e.Imports.Add(new CodeNamespaceImport("Namespace1"));
+                    e.Imports.Add(new CodeNamespaceImport("Namespace2"));
+                    int generateNamespaceCallCount = 0;
+                    generator.GenerateNamespaceImportAction = (actualE) =>
+                    {
+                        Assert.Same(e.Imports[generateNamespaceCallCount], actualE);
+                        generateNamespaceCallCount++;
+                    };
+                    generator.GenerateNamespaceImports(e);
+                    Assert.Equal(2, generateNamespaceCallCount);
+                    Assert.Empty(writer.ToString());
+                }
+            );
         }
 
         [Fact]
         public void GenerateNamespaceImports_InvokeWithOutputWithLinePragma_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeNamespace();
-                e.Imports.Add(new CodeNamespaceImport("Namespace1") { LinePragma = new CodeLinePragma() });
-                e.Imports.Add(new CodeNamespaceImport("Namespace2") { LinePragma = new CodeLinePragma() });
-                int generateLinePragmaStartCallCount = 0;
-                int generateNamespaceCallCount = 0;
-                int generateLinePragmaEndCallCount = 0;
-                generator.GenerateLinePragmaStartAction = (actualE) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    Assert.Same(e.Imports[generateLinePragmaEndCallCount].LinePragma, actualE);
-                    Assert.Equal(generateLinePragmaStartCallCount, generateNamespaceCallCount);
-                    Assert.Equal(generateLinePragmaStartCallCount, generateLinePragmaEndCallCount);
-                    writer.Write("LinePragmaStart ");
-                    generateLinePragmaStartCallCount++;
-                };
-                generator.GenerateNamespaceImportAction = (actualE) =>
-                {
-                    Assert.Same(e.Imports[generateLinePragmaEndCallCount], actualE);
-                    Assert.Equal(generateNamespaceCallCount, generateLinePragmaEndCallCount);
-                    writer.Write("Namespace ");
-                    generateNamespaceCallCount++;
-                };
-                generator.GenerateLinePragmaEndAction = (actualE) =>
-                {
-                    Assert.Same(e.Imports[generateLinePragmaEndCallCount].LinePragma, actualE);
-                    writer.Write("LinePragmaEnd");
-                    generateLinePragmaEndCallCount++;
-                };
-                generator.GenerateNamespaceImports(e);
-                Assert.Equal(2, generateLinePragmaStartCallCount);
-                Assert.Equal(2, generateNamespaceCallCount);
-                Assert.Equal(2, generateLinePragmaEndCallCount);
-                Assert.Equal("LinePragmaStart Namespace LinePragmaEndLinePragmaStart Namespace LinePragmaEnd", writer.ToString());
-            });
+                    var e = new CodeNamespace();
+                    e.Imports.Add(
+                        new CodeNamespaceImport("Namespace1") { LinePragma = new CodeLinePragma() }
+                    );
+                    e.Imports.Add(
+                        new CodeNamespaceImport("Namespace2") { LinePragma = new CodeLinePragma() }
+                    );
+                    int generateLinePragmaStartCallCount = 0;
+                    int generateNamespaceCallCount = 0;
+                    int generateLinePragmaEndCallCount = 0;
+                    generator.GenerateLinePragmaStartAction = (actualE) =>
+                    {
+                        Assert.Same(e.Imports[generateLinePragmaEndCallCount].LinePragma, actualE);
+                        Assert.Equal(generateLinePragmaStartCallCount, generateNamespaceCallCount);
+                        Assert.Equal(
+                            generateLinePragmaStartCallCount,
+                            generateLinePragmaEndCallCount
+                        );
+                        writer.Write("LinePragmaStart ");
+                        generateLinePragmaStartCallCount++;
+                    };
+                    generator.GenerateNamespaceImportAction = (actualE) =>
+                    {
+                        Assert.Same(e.Imports[generateLinePragmaEndCallCount], actualE);
+                        Assert.Equal(generateNamespaceCallCount, generateLinePragmaEndCallCount);
+                        writer.Write("Namespace ");
+                        generateNamespaceCallCount++;
+                    };
+                    generator.GenerateLinePragmaEndAction = (actualE) =>
+                    {
+                        Assert.Same(e.Imports[generateLinePragmaEndCallCount].LinePragma, actualE);
+                        writer.Write("LinePragmaEnd");
+                        generateLinePragmaEndCallCount++;
+                    };
+                    generator.GenerateNamespaceImports(e);
+                    Assert.Equal(2, generateLinePragmaStartCallCount);
+                    Assert.Equal(2, generateNamespaceCallCount);
+                    Assert.Equal(2, generateLinePragmaEndCallCount);
+                    Assert.Equal(
+                        "LinePragmaStart Namespace LinePragmaEndLinePragmaStart Namespace LinePragmaEnd",
+                        writer.ToString()
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -1467,7 +1703,10 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateNamespaceImports_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateNamespaceImports(null));
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateNamespaceImports(null)
+            );
         }
 
         public static IEnumerable<object[]> GenerateParameterDeclarationExpression_TestData()
@@ -1476,116 +1715,169 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { string.Empty, string.Empty, FieldDirection.In, "Type " };
             yield return new object[] { "type", "name", FieldDirection.In, "Type name" };
             yield return new object[] { null, null, FieldDirection.Out, "out Type " };
-            yield return new object[] { string.Empty, string.Empty, FieldDirection.Out, "out Type " };
+            yield return new object[]
+            {
+                string.Empty,
+                string.Empty,
+                FieldDirection.Out,
+                "out Type "
+            };
             yield return new object[] { "type", "name", FieldDirection.Out, "out Type name" };
             yield return new object[] { null, null, FieldDirection.Ref, "ref Type " };
-            yield return new object[] { string.Empty, string.Empty, FieldDirection.Ref, "ref Type " };
+            yield return new object[]
+            {
+                string.Empty,
+                string.Empty,
+                FieldDirection.Ref,
+                "ref Type "
+            };
             yield return new object[] { "type", "name", FieldDirection.Ref, "ref Type name" };
             yield return new object[] { null, null, FieldDirection.In - 1, "Type " };
-            yield return new object[] { string.Empty, string.Empty, FieldDirection.In - 1, "Type " };
+            yield return new object[]
+            {
+                string.Empty,
+                string.Empty,
+                FieldDirection.In - 1,
+                "Type "
+            };
             yield return new object[] { "type", "name", FieldDirection.In - 1, "Type name" };
             yield return new object[] { null, null, FieldDirection.Ref + 1, "Type " };
-            yield return new object[] { string.Empty, string.Empty, FieldDirection.Ref + 1, "Type " };
+            yield return new object[]
+            {
+                string.Empty,
+                string.Empty,
+                FieldDirection.Ref + 1,
+                "Type "
+            };
             yield return new object[] { "type", "name", FieldDirection.Ref + 1, "Type name" };
         }
 
         [Theory]
         [MemberData(nameof(GenerateParameterDeclarationExpression_TestData))]
-        public void GenerateParameterDeclarationExpression_Invoke_Success(string type, string name, FieldDirection direction, string expected)
+        public void GenerateParameterDeclarationExpression_Invoke_Success(
+            string type,
+            string name,
+            FieldDirection direction,
+            string expected
+        )
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeParameterDeclarationExpression(type, name) { Direction = direction };
-                generator.GenerateParameterDeclarationExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                int outputDirectionCallCount = 0;
-                int outputTypeNamePairCallCount = 0;
-                int outputTypeCallCount = 0;
-                generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    baseMethod(actualDirection);
-                    Assert.Equal(e.Direction, actualDirection);
-                    Assert.Equal(0, outputTypeNamePairCallCount);
-                    Assert.Equal(0, outputTypeCallCount);
-                    outputDirectionCallCount++;
-                };
-                generator.OutputTypeNamePairAction = (actualType, actualName, baseMethod) =>
-                {
-                    baseMethod(actualType, actualName);
-                    Assert.Same(e.Type, actualType);
-                    Assert.Same(e.Name, actualName);
-                    outputTypeNamePairCallCount++;
-                };
-                generator.OutputTypeAction = (actualType) =>
-                {
-                    Assert.Same(e.Type, actualType);
-                    writer.Write("Type");
-                    outputTypeCallCount++;
-                };
-                generator.OutputIdentifierAction = (actualIdent, baseMethod) => baseMethod(actualIdent);
-                generator.GenerateParameterDeclarationExpression(e);
-                Assert.Equal(expected, writer.ToString());
-                Assert.Equal(1, outputDirectionCallCount);
-                Assert.Equal(1, outputTypeNamePairCallCount);
-                Assert.Equal(1, outputTypeCallCount);
-            });
+                    var e = new CodeParameterDeclarationExpression(type, name)
+                    {
+                        Direction = direction
+                    };
+                    generator.GenerateParameterDeclarationExpressionAction = (
+                        actualE,
+                        baseMethod
+                    ) => baseMethod(actualE);
+                    int outputDirectionCallCount = 0;
+                    int outputTypeNamePairCallCount = 0;
+                    int outputTypeCallCount = 0;
+                    generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                    {
+                        baseMethod(actualDirection);
+                        Assert.Equal(e.Direction, actualDirection);
+                        Assert.Equal(0, outputTypeNamePairCallCount);
+                        Assert.Equal(0, outputTypeCallCount);
+                        outputDirectionCallCount++;
+                    };
+                    generator.OutputTypeNamePairAction = (actualType, actualName, baseMethod) =>
+                    {
+                        baseMethod(actualType, actualName);
+                        Assert.Same(e.Type, actualType);
+                        Assert.Same(e.Name, actualName);
+                        outputTypeNamePairCallCount++;
+                    };
+                    generator.OutputTypeAction = (actualType) =>
+                    {
+                        Assert.Same(e.Type, actualType);
+                        writer.Write("Type");
+                        outputTypeCallCount++;
+                    };
+                    generator.OutputIdentifierAction = (actualIdent, baseMethod) =>
+                        baseMethod(actualIdent);
+                    generator.GenerateParameterDeclarationExpression(e);
+                    Assert.Equal(expected, writer.ToString());
+                    Assert.Equal(1, outputDirectionCallCount);
+                    Assert.Equal(1, outputTypeNamePairCallCount);
+                    Assert.Equal(1, outputTypeCallCount);
+                }
+            );
         }
 
         [Fact]
         public void GenerateParameterDeclarationExpression_InvokeWithCustomAttributes_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeParameterDeclarationExpression("Type", "Name") { Direction = FieldDirection.Ref };
-                e.CustomAttributes.Add(new CodeAttributeDeclaration("name"));
-                e.CustomAttributes.Add(new CodeAttributeDeclaration("name"));
-                generator.GenerateParameterDeclarationExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                int outputAttributeDeclarationsCallCount = 0;
-                int outputDirectionCallCount = 0;
-                int outputTypeNamePairCallCount = 0;
-                int outputTypeCallCount = 0;
-                generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    baseMethod(actualAttributes);
-                    Assert.Same(e.CustomAttributes, actualAttributes);
-                    Assert.Equal(0, outputDirectionCallCount);
-                    Assert.Equal(0, outputTypeNamePairCallCount);
-                    Assert.Equal(0, outputTypeCallCount);
-                    outputAttributeDeclarationsCallCount++;
-                };
-                generator.GenerateAttributeDeclarationsStartAction = (actualArg) => writer.Write("StartAttributes ");
-                generator.OutputAttributeArgumentAction = (actualArg, baseMethod) => baseMethod(actualArg);
-                generator.GenerateAttributeDeclarationsEndAction = (actualArg) => writer.Write(" EndAttributes");
-                generator.OutputDirectionAction = (actualDirection, baseMethod) =>
-                {
-                    baseMethod(actualDirection);
-                    Assert.Equal(e.Direction, actualDirection);
-                    Assert.Equal(0, outputTypeNamePairCallCount);
-                    Assert.Equal(0, outputTypeCallCount);
-                    outputDirectionCallCount++;
-                };
-                generator.OutputTypeNamePairAction = (actualType, actualName, baseMethod) =>
-                {
-                    baseMethod(actualType, actualName);
-                    Assert.Same(e.Type, actualType);
-                    Assert.Same(e.Name, actualName);
-                    outputTypeNamePairCallCount++;
-                };
-                generator.OutputTypeAction = (actualType) =>
-                {
-                    Assert.Same(e.Type, actualType);
-                    writer.Write("Type");
-                    outputTypeCallCount++;
-                };
-                generator.OutputIdentifierAction = (actualIdent, baseMethod) => baseMethod(actualIdent);
-                generator.GenerateParameterDeclarationExpression(e);
-                Assert.Equal($"StartAttributes name(), {Environment.NewLine}name() EndAttributes ref Type Name", writer.ToString());
-                Assert.Equal(1, outputAttributeDeclarationsCallCount);
-                Assert.Equal(1, outputDirectionCallCount);
-                Assert.Equal(1, outputTypeNamePairCallCount);
-                Assert.Equal(1, outputTypeCallCount);
-            });
+                    var e = new CodeParameterDeclarationExpression("Type", "Name")
+                    {
+                        Direction = FieldDirection.Ref
+                    };
+                    e.CustomAttributes.Add(new CodeAttributeDeclaration("name"));
+                    e.CustomAttributes.Add(new CodeAttributeDeclaration("name"));
+                    generator.GenerateParameterDeclarationExpressionAction = (
+                        actualE,
+                        baseMethod
+                    ) => baseMethod(actualE);
+                    int outputAttributeDeclarationsCallCount = 0;
+                    int outputDirectionCallCount = 0;
+                    int outputTypeNamePairCallCount = 0;
+                    int outputTypeCallCount = 0;
+                    generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
+                    {
+                        baseMethod(actualAttributes);
+                        Assert.Same(e.CustomAttributes, actualAttributes);
+                        Assert.Equal(0, outputDirectionCallCount);
+                        Assert.Equal(0, outputTypeNamePairCallCount);
+                        Assert.Equal(0, outputTypeCallCount);
+                        outputAttributeDeclarationsCallCount++;
+                    };
+                    generator.GenerateAttributeDeclarationsStartAction = (actualArg) =>
+                        writer.Write("StartAttributes ");
+                    generator.OutputAttributeArgumentAction = (actualArg, baseMethod) =>
+                        baseMethod(actualArg);
+                    generator.GenerateAttributeDeclarationsEndAction = (actualArg) =>
+                        writer.Write(" EndAttributes");
+                    generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                    {
+                        baseMethod(actualDirection);
+                        Assert.Equal(e.Direction, actualDirection);
+                        Assert.Equal(0, outputTypeNamePairCallCount);
+                        Assert.Equal(0, outputTypeCallCount);
+                        outputDirectionCallCount++;
+                    };
+                    generator.OutputTypeNamePairAction = (actualType, actualName, baseMethod) =>
+                    {
+                        baseMethod(actualType, actualName);
+                        Assert.Same(e.Type, actualType);
+                        Assert.Same(e.Name, actualName);
+                        outputTypeNamePairCallCount++;
+                    };
+                    generator.OutputTypeAction = (actualType) =>
+                    {
+                        Assert.Same(e.Type, actualType);
+                        writer.Write("Type");
+                        outputTypeCallCount++;
+                    };
+                    generator.OutputIdentifierAction = (actualIdent, baseMethod) =>
+                        baseMethod(actualIdent);
+                    generator.GenerateParameterDeclarationExpression(e);
+                    Assert.Equal(
+                        $"StartAttributes name(), {Environment.NewLine}name() EndAttributes ref Type Name",
+                        writer.ToString()
+                    );
+                    Assert.Equal(1, outputAttributeDeclarationsCallCount);
+                    Assert.Equal(1, outputDirectionCallCount);
+                    Assert.Equal(1, outputTypeNamePairCallCount);
+                    Assert.Equal(1, outputTypeCallCount);
+                }
+            );
         }
 
         [Fact]
@@ -1593,8 +1885,12 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateParameterDeclarationExpression_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            generator.GenerateParameterDeclarationExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateParameterDeclarationExpression(null));
+            generator.GenerateParameterDeclarationExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateParameterDeclarationExpression(null)
+            );
         }
 
         [Fact]
@@ -1602,11 +1898,16 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             var e = new CodeParameterDeclarationExpression();
-            generator.GenerateParameterDeclarationExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            generator.OutputTypeNamePairAction = (actualType, actualName, baseMethod) => baseMethod(actualType, actualName);
-            generator.OutputDirectionAction = (actualDirection, baseMethod) => baseMethod(actualDirection);
+            generator.GenerateParameterDeclarationExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            generator.OutputTypeNamePairAction = (actualType, actualName, baseMethod) =>
+                baseMethod(actualType, actualName);
+            generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                baseMethod(actualDirection);
             generator.OutputTypeAction = (actualType) => { };
-            Assert.Throws<NullReferenceException>(() => generator.GenerateParameterDeclarationExpression(e));
+            Assert.Throws<NullReferenceException>(
+                () => generator.GenerateParameterDeclarationExpression(e)
+            );
         }
 
         public static IEnumerable<object[]> GeneratePrimitiveExpression_TestData()
@@ -1626,13 +1927,16 @@ namespace System.CodeDom.Compiler.Tests
         public void GeneratePrimitiveExpression_Invoke_Success(object value, string expected)
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodePrimitiveExpression(value);
-                generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                generator.GeneratePrimitiveExpression(e);
-                Assert.Equal(expected, writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var e = new CodePrimitiveExpression(value);
+                    generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    generator.GeneratePrimitiveExpression(e);
+                    Assert.Equal(expected, writer.ToString());
+                }
+            );
         }
 
         [Fact]
@@ -1640,7 +1944,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             var e = new CodePrimitiveExpression((float)1);
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
             int generateSingleFloatValueCallCount = 0;
             generator.GenerateSingleFloatValueAction = (actualValue, baseMethod) =>
             {
@@ -1656,7 +1961,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             var e = new CodePrimitiveExpression((double)1);
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
             int generateDoubleValueCallCount = 0;
             generator.GenerateDoubleValueAction = (actualValue, baseMethod) =>
             {
@@ -1672,7 +1978,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             var e = new CodePrimitiveExpression((decimal)1);
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
             int generateDecimalValueCallCount = 0;
             generator.GenerateDecimalValueAction = (actualValue, baseMethod) =>
             {
@@ -1690,22 +1997,26 @@ namespace System.CodeDom.Compiler.Tests
         public void GeneratePrimitiveExpression_InvokeString_Success(string result, string expected)
         {
             CodeGeneratorTests generator = this;
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodePrimitiveExpression("value");
-                generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                int quoteSnippetCallCount = 0;
-                generator.QuoteSnippetStringAction = (actualValue) =>
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            PerformActionWithOutput(
+                writer =>
                 {
-                    Assert.Equal("value", actualValue);
-                    quoteSnippetCallCount++;
-                    return result;
-                };
-                generator.GeneratePrimitiveExpression(e);
-                Assert.Equal(expected, writer.ToString());
-                Assert.Equal(1, quoteSnippetCallCount);
-            });
+                    var e = new CodePrimitiveExpression("value");
+                    generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    int quoteSnippetCallCount = 0;
+                    generator.QuoteSnippetStringAction = (actualValue) =>
+                    {
+                        Assert.Equal("value", actualValue);
+                        quoteSnippetCallCount++;
+                        return result;
+                    };
+                    generator.GeneratePrimitiveExpression(e);
+                    Assert.Equal(expected, writer.ToString());
+                    Assert.Equal(1, quoteSnippetCallCount);
+                }
+            );
         }
 
         [Fact]
@@ -1713,8 +2024,12 @@ namespace System.CodeDom.Compiler.Tests
         public void GeneratePrimitiveExpression_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>("e", () => generator.GeneratePrimitiveExpression(null));
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GeneratePrimitiveExpression(null)
+            );
         }
 
         public static IEnumerable<object[]> GeneratePrimitiveExpression_InvalidEValue_TestData()
@@ -1735,7 +2050,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             var e = new CodePrimitiveExpression(value);
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
             Assert.Throws<ArgumentException>("e", () => generator.GeneratePrimitiveExpression(e));
         }
 
@@ -1758,11 +2074,14 @@ namespace System.CodeDom.Compiler.Tests
 
         [Theory]
         [MemberData(nameof(GeneratePrimitiveExpression_WithoutOutput_TestData))]
-        public void GeneratePrimitiveExpression_InvokeWithoutOutput_ThrowsNullRefereneException(object value)
+        public void GeneratePrimitiveExpression_InvokeWithoutOutput_ThrowsNullRefereneException(
+            object value
+        )
         {
             CodeGeneratorTests generator = this;
             var e = new CodePrimitiveExpression(value);
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
             generator.GenerateSingleFloatValueAction = (actualS, baseMethod) => baseMethod(actualS);
             generator.GenerateDoubleValueAction = (actualD, baseMethod) => baseMethod(actualD);
             generator.GenerateDecimalValueAction = (actualD, baseMethod) => baseMethod(actualD);
@@ -1774,12 +2093,18 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateSingleFloatValue_Invoke_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.GenerateSingleFloatValueAction = (actualS, baseMethod) => baseMethod(actualS);
-                generator.GenerateSingleFloatValue(float.MaxValue);
-                Assert.Equal(float.MaxValue.ToString("R", CultureInfo.InvariantCulture.NumberFormat), writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.GenerateSingleFloatValueAction = (actualS, baseMethod) =>
+                        baseMethod(actualS);
+                    generator.GenerateSingleFloatValue(float.MaxValue);
+                    Assert.Equal(
+                        float.MaxValue.ToString("R", CultureInfo.InvariantCulture.NumberFormat),
+                        writer.ToString()
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -1798,58 +2123,77 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             var e = new CodeSnippetCompileUnit(value);
-            PerformActionWithOutput(writer =>
-            {
-                generator.GenerateSnippetCompileUnit(e);
-                Assert.Equal(expected + Environment.NewLine, writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.GenerateSnippetCompileUnit(e);
+                    Assert.Equal(expected + Environment.NewLine, writer.ToString());
+                }
+            );
         }
 
         [Fact]
         public void GenerateSnippetCompileUnit_InvokeWithDirectivesAndLinePragma_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeSnippetCompileUnit("value") { LinePragma = new CodeLinePragma() };
-                e.StartDirectives.Add(new CodeDirective());
-                e.StartDirectives.Add(new CodeChecksumPragma());
-                e.StartDirectives.Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
-                e.EndDirectives.Add(new CodeDirective());
-                e.EndDirectives.Add(new CodeChecksumPragma());
-                e.EndDirectives.Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var e = new CodeSnippetCompileUnit("value")
+                    {
+                        LinePragma = new CodeLinePragma()
+                    };
+                    e.StartDirectives.Add(new CodeDirective());
+                    e.StartDirectives.Add(new CodeChecksumPragma());
+                    e.StartDirectives.Add(
+                        new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
+                    );
+                    e.EndDirectives.Add(new CodeDirective());
+                    e.EndDirectives.Add(new CodeChecksumPragma());
+                    e.EndDirectives.Add(
+                        new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
+                    );
 
-                int generateLinePragmaStartCallCount = 0;
-                int generateDirectivesCallCount = 0;
-                int generateLinePragmaEndCallCount = 0;
-                generator.GenerateLinePragmaStartAction = (actualE) =>
-                {
-                    Assert.Same(e.LinePragma, actualE);
-                    Assert.Equal(0, generateLinePragmaEndCallCount);
-                    Assert.Equal(1, generateDirectivesCallCount);
-                    writer.Write("LinePragmaStart ");
-                    generateLinePragmaStartCallCount++;
-                };
-                generator.GenerateLinePragmaEndAction = (actualE) =>
-                {
-                    Assert.Same(e.LinePragma, actualE);
-                    Assert.Equal(1, generateDirectivesCallCount);
-                    writer.Write("LinePragmaEnd ");
-                    generateLinePragmaEndCallCount++;
-                };
-                generator.GenerateDirectivesAction = (actualDirectives, baseMethod) =>
-                {
-                    baseMethod(actualDirectives);
-                    Assert.Same(generateDirectivesCallCount == 0 ? e.StartDirectives : e.EndDirectives, actualDirectives);
-                    writer.Write(generateDirectivesCallCount == 0 ? "StartDirectives " : "EndDirectives");
-                    generateDirectivesCallCount++;
-                };
-                generator.GenerateSnippetCompileUnit(e);
-                Assert.Equal($"StartDirectives LinePragmaStart value{Environment.NewLine}LinePragmaEnd EndDirectives", writer.ToString());
-                Assert.Equal(1, generateLinePragmaStartCallCount);
-                Assert.Equal(2, generateDirectivesCallCount);
-                Assert.Equal(1, generateLinePragmaEndCallCount);
-            });
+                    int generateLinePragmaStartCallCount = 0;
+                    int generateDirectivesCallCount = 0;
+                    int generateLinePragmaEndCallCount = 0;
+                    generator.GenerateLinePragmaStartAction = (actualE) =>
+                    {
+                        Assert.Same(e.LinePragma, actualE);
+                        Assert.Equal(0, generateLinePragmaEndCallCount);
+                        Assert.Equal(1, generateDirectivesCallCount);
+                        writer.Write("LinePragmaStart ");
+                        generateLinePragmaStartCallCount++;
+                    };
+                    generator.GenerateLinePragmaEndAction = (actualE) =>
+                    {
+                        Assert.Same(e.LinePragma, actualE);
+                        Assert.Equal(1, generateDirectivesCallCount);
+                        writer.Write("LinePragmaEnd ");
+                        generateLinePragmaEndCallCount++;
+                    };
+                    generator.GenerateDirectivesAction = (actualDirectives, baseMethod) =>
+                    {
+                        baseMethod(actualDirectives);
+                        Assert.Same(
+                            generateDirectivesCallCount == 0 ? e.StartDirectives : e.EndDirectives,
+                            actualDirectives
+                        );
+                        writer.Write(
+                            generateDirectivesCallCount == 0 ? "StartDirectives " : "EndDirectives"
+                        );
+                        generateDirectivesCallCount++;
+                    };
+                    generator.GenerateSnippetCompileUnit(e);
+                    Assert.Equal(
+                        $"StartDirectives LinePragmaStart value{Environment.NewLine}LinePragmaEnd EndDirectives",
+                        writer.ToString()
+                    );
+                    Assert.Equal(1, generateLinePragmaStartCallCount);
+                    Assert.Equal(2, generateDirectivesCallCount);
+                    Assert.Equal(1, generateLinePragmaEndCallCount);
+                }
+            );
         }
 
         [Fact]
@@ -1857,7 +2201,10 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateSnippetCompileUnit_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateSnippetCompileUnit(null));
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateSnippetCompileUnit(null)
+            );
         }
 
         [Fact]
@@ -1875,13 +2222,16 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateSnippetStatement_Invoke_Success(string value, string expected)
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.GenerateSnippetStatementAction = (actualE, baseMethod) => baseMethod(actualE);
-                var e = new CodeSnippetStatement(value);
-                generator.GenerateSnippetStatement(e);
-                Assert.Equal(expected + Environment.NewLine, writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.GenerateSnippetStatementAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    var e = new CodeSnippetStatement(value);
+                    generator.GenerateSnippetStatement(e);
+                    Assert.Equal(expected + Environment.NewLine, writer.ToString());
+                }
+            );
         }
 
         [Fact]
@@ -1890,65 +2240,82 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             generator.GenerateSnippetStatementAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateSnippetStatement(null));
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateSnippetStatement(null)
+            );
         }
 
         [Fact]
         public void GenerateStatement_InvokeWithDirectivesAndLinePragma_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeGotoStatement { LinePragma = new CodeLinePragma() };
-                e.StartDirectives.Add(new CodeDirective());
-                e.StartDirectives.Add(new CodeChecksumPragma());
-                e.StartDirectives.Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
-                e.EndDirectives.Add(new CodeDirective());
-                e.EndDirectives.Add(new CodeChecksumPragma());
-                e.EndDirectives.Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var e = new CodeGotoStatement { LinePragma = new CodeLinePragma() };
+                    e.StartDirectives.Add(new CodeDirective());
+                    e.StartDirectives.Add(new CodeChecksumPragma());
+                    e.StartDirectives.Add(
+                        new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
+                    );
+                    e.EndDirectives.Add(new CodeDirective());
+                    e.EndDirectives.Add(new CodeChecksumPragma());
+                    e.EndDirectives.Add(
+                        new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
+                    );
 
-                int generateLinePragmaStartCallCount = 0;
-                int generateDirectivesCallCount = 0;
-                int generateStatementCallCount = 0;
-                int generateLinePragmaEndCallCount = 0;
-                generator.GenerateLinePragmaStartAction = (actualE) =>
-                {
-                    Assert.Same(e.LinePragma, actualE);
-                    Assert.Equal(0, generateLinePragmaEndCallCount);
-                    Assert.Equal(0, generateStatementCallCount);
-                    Assert.Equal(1, generateDirectivesCallCount);
-                    writer.Write("LinePragmaStart ");
-                    generateLinePragmaStartCallCount++;
-                };
-                generator.GenerateGotoStatementAction = (actualE) =>
-                {
-                    Assert.Same(e, actualE);
-                    Assert.Equal(0, generateLinePragmaEndCallCount);
-                    Assert.Equal(1, generateDirectivesCallCount);
-                    writer.Write("Statement ");
-                    generateStatementCallCount++;
-                };
-                generator.GenerateLinePragmaEndAction = (actualE) =>
-                {
-                    Assert.Same(e.LinePragma, actualE);
-                    Assert.Equal(1, generateDirectivesCallCount);
-                    writer.Write("LinePragmaEnd ");
-                    generateLinePragmaEndCallCount++;
-                };
-                generator.GenerateDirectivesAction = (actualDirectives, baseMethod) =>
-                {
-                    baseMethod(actualDirectives);
-                    Assert.Same(generateDirectivesCallCount == 0 ? e.StartDirectives : e.EndDirectives, actualDirectives);
-                    writer.Write(generateDirectivesCallCount == 0 ? "StartDirectives " : "EndDirectives");
-                    generateDirectivesCallCount++;
-                };
-                generator.GenerateStatement(e);
-                Assert.Equal($"StartDirectives LinePragmaStart Statement LinePragmaEnd EndDirectives", writer.ToString());
-                Assert.Equal(1, generateLinePragmaStartCallCount);
-                Assert.Equal(1, generateStatementCallCount);
-                Assert.Equal(2, generateDirectivesCallCount);
-                Assert.Equal(1, generateLinePragmaEndCallCount);
-            });
+                    int generateLinePragmaStartCallCount = 0;
+                    int generateDirectivesCallCount = 0;
+                    int generateStatementCallCount = 0;
+                    int generateLinePragmaEndCallCount = 0;
+                    generator.GenerateLinePragmaStartAction = (actualE) =>
+                    {
+                        Assert.Same(e.LinePragma, actualE);
+                        Assert.Equal(0, generateLinePragmaEndCallCount);
+                        Assert.Equal(0, generateStatementCallCount);
+                        Assert.Equal(1, generateDirectivesCallCount);
+                        writer.Write("LinePragmaStart ");
+                        generateLinePragmaStartCallCount++;
+                    };
+                    generator.GenerateGotoStatementAction = (actualE) =>
+                    {
+                        Assert.Same(e, actualE);
+                        Assert.Equal(0, generateLinePragmaEndCallCount);
+                        Assert.Equal(1, generateDirectivesCallCount);
+                        writer.Write("Statement ");
+                        generateStatementCallCount++;
+                    };
+                    generator.GenerateLinePragmaEndAction = (actualE) =>
+                    {
+                        Assert.Same(e.LinePragma, actualE);
+                        Assert.Equal(1, generateDirectivesCallCount);
+                        writer.Write("LinePragmaEnd ");
+                        generateLinePragmaEndCallCount++;
+                    };
+                    generator.GenerateDirectivesAction = (actualDirectives, baseMethod) =>
+                    {
+                        baseMethod(actualDirectives);
+                        Assert.Same(
+                            generateDirectivesCallCount == 0 ? e.StartDirectives : e.EndDirectives,
+                            actualDirectives
+                        );
+                        writer.Write(
+                            generateDirectivesCallCount == 0 ? "StartDirectives " : "EndDirectives"
+                        );
+                        generateDirectivesCallCount++;
+                    };
+                    generator.GenerateStatement(e);
+                    Assert.Equal(
+                        $"StartDirectives LinePragmaStart Statement LinePragmaEnd EndDirectives",
+                        writer.ToString()
+                    );
+                    Assert.Equal(1, generateLinePragmaStartCallCount);
+                    Assert.Equal(1, generateStatementCallCount);
+                    Assert.Equal(2, generateDirectivesCallCount);
+                    Assert.Equal(1, generateLinePragmaEndCallCount);
+                }
+            );
         }
 
         [Fact]
@@ -2090,22 +2457,24 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateStatement_CodeSnippetStatement_CallsCorrectMethod()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.Indent = 1;
-
-                var e = new CodeSnippetStatement();
-                int callCount = 0;
-                generator.GenerateSnippetStatementAction = (actualE, baseMethod) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    Assert.Same(e, actualE);
-                    callCount++;
-                };
-                generator.GenerateStatement(e);
-                Assert.Equal(1, callCount);
+                    generator.Indent = 1;
 
-                Assert.Equal(1, generator.Indent);
-            });
+                    var e = new CodeSnippetStatement();
+                    int callCount = 0;
+                    generator.GenerateSnippetStatementAction = (actualE, baseMethod) =>
+                    {
+                        Assert.Same(e, actualE);
+                        callCount++;
+                    };
+                    generator.GenerateStatement(e);
+                    Assert.Equal(1, callCount);
+
+                    Assert.Equal(1, generator.Indent);
+                }
+            );
         }
 
         [Fact]
@@ -2188,30 +2557,36 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateStatements_InvokeWithWriter_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var stmts = new CodeStatementCollection(new CodeStatement[] { new CodeGotoStatement(), new CodeGotoStatement() });
-                int generateStatementCallCount = 0;
-                generator.GenerateGotoStatementAction = (actualE) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    Assert.Same(stmts[generateStatementCallCount], actualE);
-                    generateStatementCallCount++;
-                };
-                generator.GenerateStatements(stmts);
-                Assert.Equal(2, generateStatementCallCount);
-            });
+                    var stmts = new CodeStatementCollection(
+                        new CodeStatement[] { new CodeGotoStatement(), new CodeGotoStatement() }
+                    );
+                    int generateStatementCallCount = 0;
+                    generator.GenerateGotoStatementAction = (actualE) =>
+                    {
+                        Assert.Same(stmts[generateStatementCallCount], actualE);
+                        generateStatementCallCount++;
+                    };
+                    generator.GenerateStatements(stmts);
+                    Assert.Equal(2, generateStatementCallCount);
+                }
+            );
         }
 
         [Fact]
         public void GenerateStatements_InvokeEmptyStatementsWithWriter_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var stmts = new CodeStatementCollection();
-                generator.GenerateStatements(stmts);
-                Assert.Empty(writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var stmts = new CodeStatementCollection();
+                    generator.GenerateStatements(stmts);
+                    Assert.Empty(writer.ToString());
+                }
+            );
         }
 
         [Fact]
@@ -2234,11 +2609,18 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateStatements_InvalidStatementInStmts_ThrowsArgumentException()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var stmts = new CodeStatementCollection(new CodeStatement[] { new CodeStatement() });
-                Assert.Throws<ArgumentException>("e", () => generator.GenerateStatements(stmts));
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var stmts = new CodeStatementCollection(
+                        new CodeStatement[] { new CodeStatement() }
+                    );
+                    Assert.Throws<ArgumentException>(
+                        "e",
+                        () => generator.GenerateStatements(stmts)
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -2253,21 +2635,24 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateTypeOfExpression_Invoke_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeTypeOfExpression(new CodeTypeReference());
-                generator.GenerateTypeOfExpressionAction = (actualE, baseMethod) => baseMethod(actualE);   
-                int outputTypeCallCount = 0;
-                generator.OutputTypeAction = (actualTypeRef) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    Assert.Same(e.Type, actualTypeRef);
-                    writer.Write("Type");
-                    outputTypeCallCount++;
-                };
-                generator.GenerateTypeOfExpression(e);
-                Assert.Equal("typeof(Type)", writer.ToString());
-                Assert.Equal(1, outputTypeCallCount);
-            });
+                    var e = new CodeTypeOfExpression(new CodeTypeReference());
+                    generator.GenerateTypeOfExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    int outputTypeCallCount = 0;
+                    generator.OutputTypeAction = (actualTypeRef) =>
+                    {
+                        Assert.Same(e.Type, actualTypeRef);
+                        writer.Write("Type");
+                        outputTypeCallCount++;
+                    };
+                    generator.GenerateTypeOfExpression(e);
+                    Assert.Equal("typeof(Type)", writer.ToString());
+                    Assert.Equal(1, outputTypeCallCount);
+                }
+            );
         }
 
         [Fact]
@@ -2276,7 +2661,10 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             generator.GenerateTypeOfExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateTypeOfExpression(null));
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateTypeOfExpression(null)
+            );
         }
 
         [Fact]
@@ -2292,21 +2680,24 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateTypeReferenceExpression_Invoke_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeTypeReferenceExpression(new CodeTypeReference());
-                generator.GenerateTypeReferenceExpressionAction = (actualE, baseMethod) => baseMethod(actualE);   
-                int outputTypeCallCount = 0;
-                generator.OutputTypeAction = (actualTypeRef) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    Assert.Same(e.Type, actualTypeRef);
-                    writer.Write("Type");
-                    outputTypeCallCount++;
-                };
-                generator.GenerateTypeReferenceExpression(e);
-                Assert.Equal("Type", writer.ToString());
-                Assert.Equal(1, outputTypeCallCount);
-            });
+                    var e = new CodeTypeReferenceExpression(new CodeTypeReference());
+                    generator.GenerateTypeReferenceExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    int outputTypeCallCount = 0;
+                    generator.OutputTypeAction = (actualTypeRef) =>
+                    {
+                        Assert.Same(e.Type, actualTypeRef);
+                        writer.Write("Type");
+                        outputTypeCallCount++;
+                    };
+                    generator.GenerateTypeReferenceExpression(e);
+                    Assert.Equal("Type", writer.ToString());
+                    Assert.Equal(1, outputTypeCallCount);
+                }
+            );
         }
 
         [Fact]
@@ -2314,256 +2705,327 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateTypeReferenceExpression_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            generator.GenerateTypeReferenceExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>("e", () => generator.GenerateTypeReferenceExpression(null));
+            generator.GenerateTypeReferenceExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            Assert.Throws<ArgumentNullException>(
+                "e",
+                () => generator.GenerateTypeReferenceExpression(null)
+            );
         }
 
         public static IEnumerable<object[]> GenerateTypes_TestData()
         {
-            yield return new object[] { new CodeTypeDeclaration(), null, $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd" };
-            yield return new object[] { new CodeTypeDeclaration(), new CodeGeneratorOptions(), $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd" };
-            yield return new object[] { new CodeTypeDeclaration(), new CodeGeneratorOptions { BlankLinesBetweenMembers = false }, $"TypeStart TypeEndTypeStart TypeEnd" };
+            yield return new object[]
+            {
+                new CodeTypeDeclaration(),
+                null,
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+            };
+            yield return new object[]
+            {
+                new CodeTypeDeclaration(),
+                new CodeGeneratorOptions(),
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+            };
+            yield return new object[]
+            {
+                new CodeTypeDeclaration(),
+                new CodeGeneratorOptions { BlankLinesBetweenMembers = false },
+                $"TypeStart TypeEndTypeStart TypeEnd"
+            };
 
-            yield return new object[] { new CodeTypeDeclaration("name") { IsClass = true }, null, $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd" };
-            yield return new object[] { new CodeTypeDeclaration("name") { IsEnum = true }, null, $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd" };
-            yield return new object[] { new CodeTypeDeclaration("name") { IsInterface = true }, null, $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd" };
-            yield return new object[] { new CodeTypeDeclaration("name") { IsStruct = true }, null, $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd" };
+            yield return new object[]
+            {
+                new CodeTypeDeclaration("name") { IsClass = true },
+                null,
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+            };
+            yield return new object[]
+            {
+                new CodeTypeDeclaration("name") { IsEnum = true },
+                null,
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+            };
+            yield return new object[]
+            {
+                new CodeTypeDeclaration("name") { IsInterface = true },
+                null,
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+            };
+            yield return new object[]
+            {
+                new CodeTypeDeclaration("name") { IsStruct = true },
+                null,
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+            };
         }
 
         [Theory]
         [MemberData(nameof(GenerateTypes_TestData))]
-        public void GenerateTypes_InvokeClassWithWriter_Success(CodeTypeDeclaration type, CodeGeneratorOptions options, string expected)
+        public void GenerateTypes_InvokeClassWithWriter_Success(
+            CodeTypeDeclaration type,
+            CodeGeneratorOptions options,
+            string expected
+        )
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeNamespace();
-                e.Types.Add(new CodeTypeDeclaration());
-                e.Types.Add(type);
-                int generateTypeStartCallCount = 0;
-                int generateTypeEndCallCount = 0;
-                generator.GenerateTypeStartAction = (actualE) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    Assert.Same(e.Types[generateTypeStartCallCount], actualE);
-                    Assert.Equal(generateTypeStartCallCount, generateTypeEndCallCount);
-                    writer.Write("TypeStart ");
-                    generateTypeStartCallCount++;
-                };
-                generator.GenerateTypeEndAction = (actualE) =>
-                {
-                    Assert.Same(e.Types[generateTypeEndCallCount], actualE);
-                    writer.Write("TypeEnd");
-                    generateTypeEndCallCount++;
-                };
-                generator.GenerateTypes(e);
-                Assert.Equal(expected, writer.ToString());
-                Assert.Equal(2, generateTypeStartCallCount);
-                Assert.Equal(2, generateTypeEndCallCount);
+                    var e = new CodeNamespace();
+                    e.Types.Add(new CodeTypeDeclaration());
+                    e.Types.Add(type);
+                    int generateTypeStartCallCount = 0;
+                    int generateTypeEndCallCount = 0;
+                    generator.GenerateTypeStartAction = (actualE) =>
+                    {
+                        Assert.Same(e.Types[generateTypeStartCallCount], actualE);
+                        Assert.Equal(generateTypeStartCallCount, generateTypeEndCallCount);
+                        writer.Write("TypeStart ");
+                        generateTypeStartCallCount++;
+                    };
+                    generator.GenerateTypeEndAction = (actualE) =>
+                    {
+                        Assert.Same(e.Types[generateTypeEndCallCount], actualE);
+                        writer.Write("TypeEnd");
+                        generateTypeEndCallCount++;
+                    };
+                    generator.GenerateTypes(e);
+                    Assert.Equal(expected, writer.ToString());
+                    Assert.Equal(2, generateTypeStartCallCount);
+                    Assert.Equal(2, generateTypeEndCallCount);
 
-                Assert.Same(e.Types[1], generator.CurrentClass);
-                Assert.Null(generator.CurrentMember);
-                Assert.Equal("<% unknown %>", generator.CurrentMemberName);
-                Assert.Same(e.Types[1].Name, generator.CurrentTypeName);
-                Assert.Equal(e.Types[1].IsClass, generator.IsCurrentClass);
-                Assert.False(generator.IsCurrentDelegate);
-                Assert.Equal(e.Types[1].IsEnum, generator.IsCurrentEnum);
-                Assert.Equal(e.Types[1].IsInterface, generator.IsCurrentInterface);
-                Assert.Equal(e.Types[1].IsStruct, generator.IsCurrentStruct);
-            }, options);
+                    Assert.Same(e.Types[1], generator.CurrentClass);
+                    Assert.Null(generator.CurrentMember);
+                    Assert.Equal("<% unknown %>", generator.CurrentMemberName);
+                    Assert.Same(e.Types[1].Name, generator.CurrentTypeName);
+                    Assert.Equal(e.Types[1].IsClass, generator.IsCurrentClass);
+                    Assert.False(generator.IsCurrentDelegate);
+                    Assert.Equal(e.Types[1].IsEnum, generator.IsCurrentEnum);
+                    Assert.Equal(e.Types[1].IsInterface, generator.IsCurrentInterface);
+                    Assert.Equal(e.Types[1].IsStruct, generator.IsCurrentStruct);
+                },
+                options
+            );
         }
 
         [Fact]
         public void GenerateTypes_InvokeDelegateWithWriter_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeNamespace();
-                e.Types.Add(new CodeTypeDeclaration());
-                e.Types.Add(new CodeTypeDelegate("name"));
-                int generateTypeStartCallCount = 0;
-                int generateTypeEndCallCount = 0;
-                generator.GenerateTypeStartAction = (actualE) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    Assert.Same(e.Types[generateTypeStartCallCount], actualE);
-                    Assert.Equal(generateTypeStartCallCount, generateTypeEndCallCount);
-                    writer.Write("TypeStart ");
-                    generateTypeStartCallCount++;
-                };
-                generator.GenerateTypeEndAction = (actualE) =>
-                {
-                    Assert.Same(e.Types[generateTypeEndCallCount], actualE);
-                    writer.Write("TypeEnd");
-                    generateTypeEndCallCount++;
-                };
-                generator.GenerateTypes(e);
-                Assert.Equal($"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd", writer.ToString());
-                Assert.Equal(2, generateTypeStartCallCount);
-                Assert.Equal(2, generateTypeEndCallCount);
+                    var e = new CodeNamespace();
+                    e.Types.Add(new CodeTypeDeclaration());
+                    e.Types.Add(new CodeTypeDelegate("name"));
+                    int generateTypeStartCallCount = 0;
+                    int generateTypeEndCallCount = 0;
+                    generator.GenerateTypeStartAction = (actualE) =>
+                    {
+                        Assert.Same(e.Types[generateTypeStartCallCount], actualE);
+                        Assert.Equal(generateTypeStartCallCount, generateTypeEndCallCount);
+                        writer.Write("TypeStart ");
+                        generateTypeStartCallCount++;
+                    };
+                    generator.GenerateTypeEndAction = (actualE) =>
+                    {
+                        Assert.Same(e.Types[generateTypeEndCallCount], actualE);
+                        writer.Write("TypeEnd");
+                        generateTypeEndCallCount++;
+                    };
+                    generator.GenerateTypes(e);
+                    Assert.Equal(
+                        $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd",
+                        writer.ToString()
+                    );
+                    Assert.Equal(2, generateTypeStartCallCount);
+                    Assert.Equal(2, generateTypeEndCallCount);
 
-                Assert.Same(e.Types[1], generator.CurrentClass);
-                Assert.Null(generator.CurrentMember);
-                Assert.Equal("<% unknown %>", generator.CurrentMemberName);
-                Assert.Same(e.Types[1].Name, generator.CurrentTypeName);
-                Assert.False(generator.IsCurrentClass);
-                Assert.True(generator.IsCurrentDelegate);
-                Assert.False(generator.IsCurrentEnum);
-                Assert.False(generator.IsCurrentInterface);
-                Assert.False(generator.IsCurrentStruct);
-            });
+                    Assert.Same(e.Types[1], generator.CurrentClass);
+                    Assert.Null(generator.CurrentMember);
+                    Assert.Equal("<% unknown %>", generator.CurrentMemberName);
+                    Assert.Same(e.Types[1].Name, generator.CurrentTypeName);
+                    Assert.False(generator.IsCurrentClass);
+                    Assert.True(generator.IsCurrentDelegate);
+                    Assert.False(generator.IsCurrentEnum);
+                    Assert.False(generator.IsCurrentInterface);
+                    Assert.False(generator.IsCurrentStruct);
+                }
+            );
         }
 
         [Fact]
         public void GenerateTypes_InvokeWithCommentsDirectivesAndLinePragma_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var type = new CodeTypeDeclaration { LinePragma = new CodeLinePragma() };
-                type.Comments.Add(new CodeCommentStatement("Comment"));
-                type.Comments.Add(new CodeCommentStatement("Comment"));
-                type.StartDirectives.Add(new CodeDirective());
-                type.StartDirectives.Add(new CodeChecksumPragma());
-                type.StartDirectives.Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
-                type.EndDirectives.Add(new CodeDirective());
-                type.EndDirectives.Add(new CodeChecksumPragma());
-                type.EndDirectives.Add(new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0]));
-                var e = new CodeNamespace();
-                e.Types.Add(type);
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var type = new CodeTypeDeclaration { LinePragma = new CodeLinePragma() };
+                    type.Comments.Add(new CodeCommentStatement("Comment"));
+                    type.Comments.Add(new CodeCommentStatement("Comment"));
+                    type.StartDirectives.Add(new CodeDirective());
+                    type.StartDirectives.Add(new CodeChecksumPragma());
+                    type.StartDirectives.Add(
+                        new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
+                    );
+                    type.EndDirectives.Add(new CodeDirective());
+                    type.EndDirectives.Add(new CodeChecksumPragma());
+                    type.EndDirectives.Add(
+                        new CodeChecksumPragma("fileName", Guid.NewGuid(), new byte[0])
+                    );
+                    var e = new CodeNamespace();
+                    e.Types.Add(type);
 
-                int generateCommentStatementsCallCount = 0;
-                int generateCommentCallCount = 0;
-                int generateLinePragmaStartCallCount = 0;
-                int generateTypeStartCallCount = 0;
-                int generateTypeEndCallCount = 0;
-                int generateDirectivesCallCount = 0;
-                int generateLinePragmaEndCallCount = 0;
-                generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
-                {
-                    baseMethod(actualE);
-                    Assert.Same(type.Comments, actualE);
-                    writer.Write("Comments ");
-                    Assert.Equal(0, generateLinePragmaStartCallCount);
-                    Assert.Equal(0, generateTypeStartCallCount);
-                    Assert.Equal(1, generateDirectivesCallCount);
-                    Assert.Equal(0, generateLinePragmaEndCallCount);
-                    Assert.Equal(0, generateTypeEndCallCount);
-                    generateCommentStatementsCallCount++;
-                };
-                generator.GenerateCommentAction = (actualE) =>
-                {
-                    Assert.Same(type.Comments[generateCommentCallCount].Comment, actualE);
-                    writer.Write("Comment ");
-                    generateCommentCallCount++;
-                };
-                generator.GenerateLinePragmaStartAction = (actualE) =>
-                {
-                    Assert.Same(type.LinePragma, actualE);
-                    Assert.Equal(0, generateTypeStartCallCount);
-                    Assert.Equal(1, generateDirectivesCallCount);
-                    Assert.Equal(0, generateLinePragmaEndCallCount);
-                    Assert.Equal(0, generateTypeEndCallCount);
-                    writer.Write("LinePragmaStart ");
-                    generateLinePragmaStartCallCount++;
-                };
-                generator.GenerateTypeStartAction = (actualE) =>
-                {
-                    Assert.Same(type, actualE);
-                    Assert.Equal(1, generateDirectivesCallCount);
-                    Assert.Equal(0, generateLinePragmaEndCallCount);
-                    Assert.Equal(0, generateTypeEndCallCount);
-                    writer.Write("TypeStart ");
-                    generateTypeStartCallCount++;
-                };
-                generator.GenerateTypeEndAction = (actualE) =>
-                {
-                    Assert.Same(type, actualE);
-                    Assert.Equal(1, generateDirectivesCallCount);
-                    Assert.Equal(0, generateLinePragmaEndCallCount);
-                    writer.Write("TypeEnd ");
-                    generateTypeEndCallCount++;
-                };
-                generator.GenerateLinePragmaEndAction = (actualE) =>
-                {
-                    Assert.Same(type.LinePragma, actualE);
-                    Assert.Equal(1, generateDirectivesCallCount);
+                    int generateCommentStatementsCallCount = 0;
+                    int generateCommentCallCount = 0;
+                    int generateLinePragmaStartCallCount = 0;
+                    int generateTypeStartCallCount = 0;
+                    int generateTypeEndCallCount = 0;
+                    int generateDirectivesCallCount = 0;
+                    int generateLinePragmaEndCallCount = 0;
+                    generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
+                    {
+                        baseMethod(actualE);
+                        Assert.Same(type.Comments, actualE);
+                        writer.Write("Comments ");
+                        Assert.Equal(0, generateLinePragmaStartCallCount);
+                        Assert.Equal(0, generateTypeStartCallCount);
+                        Assert.Equal(1, generateDirectivesCallCount);
+                        Assert.Equal(0, generateLinePragmaEndCallCount);
+                        Assert.Equal(0, generateTypeEndCallCount);
+                        generateCommentStatementsCallCount++;
+                    };
+                    generator.GenerateCommentAction = (actualE) =>
+                    {
+                        Assert.Same(type.Comments[generateCommentCallCount].Comment, actualE);
+                        writer.Write("Comment ");
+                        generateCommentCallCount++;
+                    };
+                    generator.GenerateLinePragmaStartAction = (actualE) =>
+                    {
+                        Assert.Same(type.LinePragma, actualE);
+                        Assert.Equal(0, generateTypeStartCallCount);
+                        Assert.Equal(1, generateDirectivesCallCount);
+                        Assert.Equal(0, generateLinePragmaEndCallCount);
+                        Assert.Equal(0, generateTypeEndCallCount);
+                        writer.Write("LinePragmaStart ");
+                        generateLinePragmaStartCallCount++;
+                    };
+                    generator.GenerateTypeStartAction = (actualE) =>
+                    {
+                        Assert.Same(type, actualE);
+                        Assert.Equal(1, generateDirectivesCallCount);
+                        Assert.Equal(0, generateLinePragmaEndCallCount);
+                        Assert.Equal(0, generateTypeEndCallCount);
+                        writer.Write("TypeStart ");
+                        generateTypeStartCallCount++;
+                    };
+                    generator.GenerateTypeEndAction = (actualE) =>
+                    {
+                        Assert.Same(type, actualE);
+                        Assert.Equal(1, generateDirectivesCallCount);
+                        Assert.Equal(0, generateLinePragmaEndCallCount);
+                        writer.Write("TypeEnd ");
+                        generateTypeEndCallCount++;
+                    };
+                    generator.GenerateLinePragmaEndAction = (actualE) =>
+                    {
+                        Assert.Same(type.LinePragma, actualE);
+                        Assert.Equal(1, generateDirectivesCallCount);
+                        Assert.Equal(1, generateTypeEndCallCount);
+                        writer.Write("LinePragmaEnd ");
+                        generateLinePragmaEndCallCount++;
+                    };
+                    generator.GenerateDirectivesAction = (actualDirectives, baseMethod) =>
+                    {
+                        baseMethod(actualDirectives);
+                        Assert.Same(
+                            generateDirectivesCallCount == 0
+                              ? type.StartDirectives
+                              : type.EndDirectives,
+                            actualDirectives
+                        );
+                        writer.Write(
+                            generateDirectivesCallCount == 0 ? "StartDirectives " : "EndDirectives"
+                        );
+                        generateDirectivesCallCount++;
+                    };
+                    generator.GenerateTypes(e);
+                    Assert.Equal(
+                        $"{Environment.NewLine}StartDirectives Comment Comment Comments LinePragmaStart TypeStart TypeEnd LinePragmaEnd EndDirectives",
+                        writer.ToString()
+                    );
+                    Assert.Equal(1, generateCommentStatementsCallCount);
+                    Assert.Equal(2, generateCommentCallCount);
+                    Assert.Equal(1, generateLinePragmaStartCallCount);
+                    Assert.Equal(1, generateTypeStartCallCount);
                     Assert.Equal(1, generateTypeEndCallCount);
-                    writer.Write("LinePragmaEnd ");
-                    generateLinePragmaEndCallCount++;
-                };
-                generator.GenerateDirectivesAction = (actualDirectives, baseMethod) =>
-                {
-                    baseMethod(actualDirectives);
-                    Assert.Same(generateDirectivesCallCount == 0 ? type.StartDirectives : type.EndDirectives, actualDirectives);
-                    writer.Write(generateDirectivesCallCount == 0 ? "StartDirectives " : "EndDirectives");
-                    generateDirectivesCallCount++;
-                };
-                generator.GenerateTypes(e);
-                Assert.Equal($"{Environment.NewLine}StartDirectives Comment Comment Comments LinePragmaStart TypeStart TypeEnd LinePragmaEnd EndDirectives", writer.ToString());
-                Assert.Equal(1, generateCommentStatementsCallCount);
-                Assert.Equal(2, generateCommentCallCount);
-                Assert.Equal(1, generateLinePragmaStartCallCount);
-                Assert.Equal(1, generateTypeStartCallCount);
-                Assert.Equal(1, generateTypeEndCallCount);
-                Assert.Equal(1, generateLinePragmaEndCallCount);
-                Assert.Equal(2, generateDirectivesCallCount);
+                    Assert.Equal(1, generateLinePragmaEndCallCount);
+                    Assert.Equal(2, generateDirectivesCallCount);
 
-                Assert.Same(type, generator.CurrentClass);
-                Assert.Null(generator.CurrentMember);
-                Assert.Equal("<% unknown %>", generator.CurrentMemberName);
-                Assert.Same(type.Name, generator.CurrentTypeName);
-                Assert.Equal(type.IsClass, generator.IsCurrentClass);
-                Assert.False(generator.IsCurrentDelegate);
-                Assert.Equal(type.IsEnum, generator.IsCurrentEnum);
-                Assert.Equal(type.IsInterface, generator.IsCurrentInterface);
-                Assert.Equal(type.IsStruct, generator.IsCurrentStruct);
-            });
+                    Assert.Same(type, generator.CurrentClass);
+                    Assert.Null(generator.CurrentMember);
+                    Assert.Equal("<% unknown %>", generator.CurrentMemberName);
+                    Assert.Same(type.Name, generator.CurrentTypeName);
+                    Assert.Equal(type.IsClass, generator.IsCurrentClass);
+                    Assert.False(generator.IsCurrentDelegate);
+                    Assert.Equal(type.IsEnum, generator.IsCurrentEnum);
+                    Assert.Equal(type.IsInterface, generator.IsCurrentInterface);
+                    Assert.Equal(type.IsStruct, generator.IsCurrentStruct);
+                }
+            );
         }
 
         [Fact]
         public void GenerateTypes_InvokeWithMembers_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var type = new CodeTypeDeclaration();
-                type.Members.Add(new CodeTypeMember());
-                var e = new CodeNamespace();
-                e.Types.Add(type);
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var type = new CodeTypeDeclaration();
+                    type.Members.Add(new CodeTypeMember());
+                    var e = new CodeNamespace();
+                    e.Types.Add(type);
 
-                int generateTypeStartCallCount = 0;
-                int generateTypeEndCallCount = 0;
-                generator.GenerateTypeStartAction = (actualE) =>
-                {
-                    Assert.Same(type, actualE);
-                    Assert.Equal(0, generateTypeEndCallCount);
-                    writer.Write("TypeStart ");
-                    generateTypeStartCallCount++;
-                };
-                generator.GenerateTypeEndAction = (actualE) =>
-                {
-                    Assert.Same(type, actualE);
-                    writer.Write("TypeEnd");
-                    generateTypeEndCallCount++;
-                };
-                generator.GenerateTypes(e);
-                Assert.Equal($"{Environment.NewLine}TypeStart TypeEnd", writer.ToString());
-                Assert.Equal(1, generateTypeStartCallCount);
-                Assert.Equal(1, generateTypeEndCallCount);
-                Assert.Same(type, generator.CurrentClass);
-            });
+                    int generateTypeStartCallCount = 0;
+                    int generateTypeEndCallCount = 0;
+                    generator.GenerateTypeStartAction = (actualE) =>
+                    {
+                        Assert.Same(type, actualE);
+                        Assert.Equal(0, generateTypeEndCallCount);
+                        writer.Write("TypeStart ");
+                        generateTypeStartCallCount++;
+                    };
+                    generator.GenerateTypeEndAction = (actualE) =>
+                    {
+                        Assert.Same(type, actualE);
+                        writer.Write("TypeEnd");
+                        generateTypeEndCallCount++;
+                    };
+                    generator.GenerateTypes(e);
+                    Assert.Equal($"{Environment.NewLine}TypeStart TypeEnd", writer.ToString());
+                    Assert.Equal(1, generateTypeStartCallCount);
+                    Assert.Equal(1, generateTypeEndCallCount);
+                    Assert.Same(type, generator.CurrentClass);
+                }
+            );
         }
 
         [Fact]
         public void GenerateTypes_InvokeEmpty_Nop()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var e = new CodeNamespace();
-                generator.GenerateTypes(e);
-                Assert.Empty(writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var e = new CodeNamespace();
+                    generator.GenerateTypes(e);
+                    Assert.Empty(writer.ToString());
+                }
+            );
         }
 
         [Fact]
@@ -2586,20 +3048,24 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateTypes_NullValueInE_ThrowsArgumentException()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var type = new CodeTypeDeclaration();
-                type.Comments.Add(new CodeCommentStatement());
-                var e = new CodeNamespace();
-                e.Types.Add(type);
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var type = new CodeTypeDeclaration();
+                    type.Comments.Add(new CodeCommentStatement());
+                    var e = new CodeNamespace();
+                    e.Types.Add(type);
 
-                generator.GenerateNamespaceAction = (actualE, baseMethod) => baseMethod(actualE);
-                generator.GenerateCommentStatementsAction = (actualE, baseMethod) => baseMethod(actualE);
-                generator.GenerateNamespaceStartAction = (actualE) => {};
-                generator.GenerateNamespaceEndAction = (actualE) => {};
+                    generator.GenerateNamespaceAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    generator.GenerateNamespaceStartAction = (actualE) => { };
+                    generator.GenerateNamespaceEndAction = (actualE) => { };
 
-                Assert.Throws<ArgumentException>("e", () => generator.GenerateTypes(e));
-            });
+                    Assert.Throws<ArgumentException>("e", () => generator.GenerateTypes(e));
+                }
+            );
         }
 
         [Theory]
@@ -2661,7 +3127,10 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData("\n", false)]
         [InlineData("a\n", false)]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Not fixed on NetFX")]
-        public void IsValidLanguageIndependentIdentifier_Invoke_ReturnsExpected(string value, bool expected)
+        public void IsValidLanguageIndependentIdentifier_Invoke_ReturnsExpected(
+            string value,
+            bool expected
+        )
         {
             Assert.Equal(expected, CodeGenerator.IsValidLanguageIndependentIdentifier(value));
         }
@@ -2673,15 +3142,20 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputAttributeArgument_Invoke_Success(string name, string expected)
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var arg = new CodeAttributeArgument(name, new CodePrimitiveExpression(1));
-                generator.OutputIdentifierAction = (actualIdentifier, baseMethod) => baseMethod(actualIdentifier);
-                generator.OutputAttributeArgumentAction = (actualArg, baseMethod) => baseMethod(actualArg);
-                generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                generator.OutputAttributeArgument(arg);
-                Assert.Equal(expected, writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var arg = new CodeAttributeArgument(name, new CodePrimitiveExpression(1));
+                    generator.OutputIdentifierAction = (actualIdentifier, baseMethod) =>
+                        baseMethod(actualIdentifier);
+                    generator.OutputAttributeArgumentAction = (actualArg, baseMethod) =>
+                        baseMethod(actualArg);
+                    generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    generator.OutputAttributeArgument(arg);
+                    Assert.Equal(expected, writer.ToString());
+                }
+            );
         }
 
         [Fact]
@@ -2689,37 +3163,56 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputAttributeArgument_NullArg_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            generator.OutputIdentifierAction = (actualIdentifier, baseMethod) => baseMethod(actualIdentifier);
-            generator.OutputAttributeArgumentAction = (actualArg, baseMethod) => baseMethod(actualArg);
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>("arg", () => generator.OutputAttributeArgument(null));
+            generator.OutputIdentifierAction = (actualIdentifier, baseMethod) =>
+                baseMethod(actualIdentifier);
+            generator.OutputAttributeArgumentAction = (actualArg, baseMethod) =>
+                baseMethod(actualArg);
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
+            Assert.Throws<ArgumentNullException>(
+                "arg",
+                () => generator.OutputAttributeArgument(null)
+            );
         }
 
         [Fact]
         public void OutputAttributeArgument_NullArgValue_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var arg = new CodeAttributeArgument();
-                generator.OutputIdentifierAction = (actualIdentifier, baseMethod) => baseMethod(actualIdentifier);
-                generator.OutputAttributeArgumentAction = (actualArg, baseMethod) => baseMethod(actualArg);
-                generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                Assert.Throws<ArgumentNullException>("e", () => generator.OutputAttributeArgument(arg));
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    var arg = new CodeAttributeArgument();
+                    generator.OutputIdentifierAction = (actualIdentifier, baseMethod) =>
+                        baseMethod(actualIdentifier);
+                    generator.OutputAttributeArgumentAction = (actualArg, baseMethod) =>
+                        baseMethod(actualArg);
+                    generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    Assert.Throws<ArgumentNullException>(
+                        "e",
+                        () => generator.OutputAttributeArgument(arg)
+                    );
+                }
+            );
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData("name")]
-        public void OutputAttributeArgument_InvokeNonNullNameWithoutOutput_ThrowsNullReferenceException(string name)
+        public void OutputAttributeArgument_InvokeNonNullNameWithoutOutput_ThrowsNullReferenceException(
+            string name
+        )
         {
             CodeGeneratorTests generator = this;
             var arg = new CodeAttributeArgument(name, new CodePrimitiveExpression(1));
-            generator.OutputIdentifierAction = (actualIdentifier, baseMethod) => baseMethod(actualIdentifier);
-            generator.OutputAttributeArgumentAction = (actualArg, baseMethod) => baseMethod(actualArg);
-            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
+            generator.OutputIdentifierAction = (actualIdentifier, baseMethod) =>
+                baseMethod(actualIdentifier);
+            generator.OutputAttributeArgumentAction = (actualArg, baseMethod) =>
+                baseMethod(actualArg);
+            generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                baseMethod(actualE);
             Assert.Throws<NullReferenceException>(() => generator.OutputAttributeArgument(arg));
         }
 
@@ -2727,48 +3220,79 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputAttributeDeclarations_NonEmptyAttributes_Success()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var attributes = new CodeAttributeDeclarationCollection(new CodeAttributeDeclaration[]
+            PerformActionWithOutput(
+                writer =>
                 {
-                    new CodeAttributeDeclaration(),
-                    new CodeAttributeDeclaration(string.Empty),
-                    new CodeAttributeDeclaration("name"),
-                    new CodeAttributeDeclaration("name", new CodeAttributeArgument(new CodePrimitiveExpression(1))),
-                    new CodeAttributeDeclaration("name", new CodeAttributeArgument("AttributeName", new CodePrimitiveExpression(1))),
-                    new CodeAttributeDeclaration("name", new CodeAttributeArgument("AttributeName1", new CodePrimitiveExpression(1)), new CodeAttributeArgument("AttributeName2", new CodePrimitiveExpression(2)))
-                });
-                int generateAttributeDeclarationsStartCallCount = 0;
-                int generateAttributeDeclarationsEndCallCount = 0;
-                generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
-                generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) =>
-                {
-                    Assert.Same(attributes, actualAttributes);
-                    Assert.Equal(0, generateAttributeDeclarationsEndCallCount);
-                    generator.Output.Write("StartAttributes ");
-                    generateAttributeDeclarationsStartCallCount++;
-                };
-                generator.OutputIdentifierAction = (actualIdentifier, baseMethod) => baseMethod(actualIdentifier);
-                generator.OutputAttributeArgumentAction = (actualArg, baseMethod) => baseMethod(actualArg);
-                generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-                generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) =>
-                {
-                    Assert.Same(attributes, actualAttributes);
-                    generator.Output.Write(" EndAttributes");
-                    generateAttributeDeclarationsEndCallCount++;
-                };
-                generator.OutputAttributeDeclarations(attributes);
-                Assert.Equal(1, generateAttributeDeclarationsStartCallCount);
-                Assert.Equal(1, generateAttributeDeclarationsStartCallCount);
-                Assert.Equal($"StartAttributes (), {Environment.NewLine}(), {Environment.NewLine}name(), {Environment.NewLine}name(1), {Environment.NewLine}name(AttributeName=1), {Environment.NewLine}name(AttributeName1=1, AttributeName2=2) EndAttributes", writer.ToString());
-            });
+                    var attributes = new CodeAttributeDeclarationCollection(
+                        new CodeAttributeDeclaration[]
+                        {
+                            new CodeAttributeDeclaration(),
+                            new CodeAttributeDeclaration(string.Empty),
+                            new CodeAttributeDeclaration("name"),
+                            new CodeAttributeDeclaration(
+                                "name",
+                                new CodeAttributeArgument(new CodePrimitiveExpression(1))
+                            ),
+                            new CodeAttributeDeclaration(
+                                "name",
+                                new CodeAttributeArgument(
+                                    "AttributeName",
+                                    new CodePrimitiveExpression(1)
+                                )
+                            ),
+                            new CodeAttributeDeclaration(
+                                "name",
+                                new CodeAttributeArgument(
+                                    "AttributeName1",
+                                    new CodePrimitiveExpression(1)
+                                ),
+                                new CodeAttributeArgument(
+                                    "AttributeName2",
+                                    new CodePrimitiveExpression(2)
+                                )
+                            )
+                        }
+                    );
+                    int generateAttributeDeclarationsStartCallCount = 0;
+                    int generateAttributeDeclarationsEndCallCount = 0;
+                    generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
+                        baseMethod(actualAttributes);
+                    generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) =>
+                    {
+                        Assert.Same(attributes, actualAttributes);
+                        Assert.Equal(0, generateAttributeDeclarationsEndCallCount);
+                        generator.Output.Write("StartAttributes ");
+                        generateAttributeDeclarationsStartCallCount++;
+                    };
+                    generator.OutputIdentifierAction = (actualIdentifier, baseMethod) =>
+                        baseMethod(actualIdentifier);
+                    generator.OutputAttributeArgumentAction = (actualArg, baseMethod) =>
+                        baseMethod(actualArg);
+                    generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
+                        baseMethod(actualE);
+                    generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) =>
+                    {
+                        Assert.Same(attributes, actualAttributes);
+                        generator.Output.Write(" EndAttributes");
+                        generateAttributeDeclarationsEndCallCount++;
+                    };
+                    generator.OutputAttributeDeclarations(attributes);
+                    Assert.Equal(1, generateAttributeDeclarationsStartCallCount);
+                    Assert.Equal(1, generateAttributeDeclarationsStartCallCount);
+                    Assert.Equal(
+                        $"StartAttributes (), {Environment.NewLine}(), {Environment.NewLine}name(), {Environment.NewLine}name(1), {Environment.NewLine}name(AttributeName=1), {Environment.NewLine}name(AttributeName1=1, AttributeName2=2) EndAttributes",
+                        writer.ToString()
+                    );
+                }
+            );
         }
 
         [Fact]
         public void OutputAttributeDeclarations_InvokeEmptyAttributes_Nop()
         {
             CodeGeneratorTests generator = this;
-                generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
+            generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
+                baseMethod(actualAttributes);
             generator.OutputAttributeDeclarations(new CodeAttributeDeclarationCollection());
         }
 
@@ -2777,42 +3301,60 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputAttributeDeclarations_NullAttributes_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-                generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
-            Assert.Throws<ArgumentNullException>("attributes", () => generator.OutputAttributeDeclarations(null));
+            generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
+                baseMethod(actualAttributes);
+            Assert.Throws<ArgumentNullException>(
+                "attributes",
+                () => generator.OutputAttributeDeclarations(null)
+            );
         }
 
         [Fact]
         public void OutputAttributeDeclarations_InvokeNonEmptyAttributesNoOutput_ThrowsNullReferenceException()
         {
             CodeGeneratorTests generator = this;
-            var attributes = new CodeAttributeDeclarationCollection(new CodeAttributeDeclaration[]
-            {
-                new CodeAttributeDeclaration(),
-                new CodeAttributeDeclaration(string.Empty),
-                new CodeAttributeDeclaration("name")
-            });
-                generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
-            generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) => {};
-            generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) => {};
-            Assert.Throws<NullReferenceException>(() => generator.OutputAttributeDeclarations(attributes));
+            var attributes = new CodeAttributeDeclarationCollection(
+                new CodeAttributeDeclaration[]
+                {
+                    new CodeAttributeDeclaration(),
+                    new CodeAttributeDeclaration(string.Empty),
+                    new CodeAttributeDeclaration("name")
+                }
+            );
+            generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
+                baseMethod(actualAttributes);
+            generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) => { };
+            generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) => { };
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputAttributeDeclarations(attributes)
+            );
         }
 
         [Fact]
         public void OutputAttributeDeclarations_NullArgumentExpressionInAttributes_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var attributes = new CodeAttributeDeclarationCollection(new CodeAttributeDeclaration[]
+            PerformActionWithOutput(
+                writer =>
                 {
-                    new CodeAttributeDeclaration("name", new CodeAttributeArgument())
-                });
-                generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
-                generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) => { };
-                generator.OutputAttributeArgumentAction = (actualArg, baseMethod) => baseMethod(actualArg);
-                generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) => { };
-                Assert.Throws<ArgumentNullException>("e", () => generator.OutputAttributeDeclarations(attributes));
-            });
+                    var attributes = new CodeAttributeDeclarationCollection(
+                        new CodeAttributeDeclaration[]
+                        {
+                            new CodeAttributeDeclaration("name", new CodeAttributeArgument())
+                        }
+                    );
+                    generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
+                        baseMethod(actualAttributes);
+                    generator.GenerateAttributeDeclarationsStartAction = (actualAttributes) => { };
+                    generator.OutputAttributeArgumentAction = (actualArg, baseMethod) =>
+                        baseMethod(actualArg);
+                    generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) => { };
+                    Assert.Throws<ArgumentNullException>(
+                        "e",
+                        () => generator.OutputAttributeDeclarations(attributes)
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -2824,21 +3366,27 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputDirection_Invoke_Success(FieldDirection direction, string expected)
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.OutputDirectionAction = (actualDirection, baseMethod) => baseMethod(actualDirection);
-                generator.OutputDirection(direction);
-                Assert.Equal(expected, writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                        baseMethod(actualDirection);
+                    generator.OutputDirection(direction);
+                    Assert.Equal(expected, writer.ToString());
+                }
+            );
         }
 
         [Theory]
         [InlineData(FieldDirection.Out)]
         [InlineData(FieldDirection.Ref)]
-        public void OutputDirection_InvokeWithoutOutput_ThrowsNullReferenceException(FieldDirection direction)
+        public void OutputDirection_InvokeWithoutOutput_ThrowsNullReferenceException(
+            FieldDirection direction
+        )
         {
             CodeGeneratorTests generator = this;
-            generator.OutputDirectionAction = (actualDirection, baseMethod) => baseMethod(actualDirection);
+            generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                baseMethod(actualDirection);
             Assert.Throws<NullReferenceException>(() => generator.OutputDirection(direction));
         }
 
@@ -2846,10 +3394,13 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(FieldDirection.In)]
         [InlineData(FieldDirection.In - 1)]
         [InlineData(FieldDirection.Ref + 1)]
-        public void OutputDirection_InvokeWithoutOutputInvaliddirection_Ndirection(FieldDirection direction)
+        public void OutputDirection_InvokeWithoutOutputInvaliddirection_Ndirection(
+            FieldDirection direction
+        )
         {
             CodeGeneratorTests generator = this;
-            generator.OutputDirectionAction = (actualDirection, baseMethod) => baseMethod(actualDirection);
+            generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                baseMethod(actualDirection);
             generator.OutputDirection(direction);
         }
 
@@ -2875,15 +3426,21 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.Const | MemberAttributes.Private, "const ")]
         [InlineData(MemberAttributes.New | MemberAttributes.Static, "new static ")]
         [InlineData(MemberAttributes.New | MemberAttributes.Const, "new const ")]
-        public void OutputFieldScopeModifier_Invoke_Success(MemberAttributes attributes, string expected)
+        public void OutputFieldScopeModifier_Invoke_Success(
+            MemberAttributes attributes,
+            string expected
+        )
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.OutputFieldScopeModifierAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
-                generator.OutputFieldScopeModifier(attributes);
-                Assert.Equal(expected, writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.OutputFieldScopeModifierAction = (actualAttributes, baseMethod) =>
+                        baseMethod(actualAttributes);
+                    generator.OutputFieldScopeModifier(attributes);
+                    Assert.Equal(expected, writer.ToString());
+                }
+            );
         }
 
         [Theory]
@@ -2895,11 +3452,16 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.Const | MemberAttributes.Private)]
         [InlineData(MemberAttributes.New | MemberAttributes.Static)]
         [InlineData(MemberAttributes.New | MemberAttributes.Const)]
-        public void OutputFieldScopeModifier_InvokeWithoutOutput_ThrowsNullReferenceException(MemberAttributes attributes)
+        public void OutputFieldScopeModifier_InvokeWithoutOutput_ThrowsNullReferenceException(
+            MemberAttributes attributes
+        )
         {
             CodeGeneratorTests generator = this;
-            generator.OutputFieldScopeModifierAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
-            Assert.Throws<NullReferenceException>(() => generator.OutputFieldScopeModifier(attributes));
+            generator.OutputFieldScopeModifierAction = (actualAttributes, baseMethod) =>
+                baseMethod(actualAttributes);
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputFieldScopeModifier(attributes)
+            );
         }
 
         [Theory]
@@ -2916,10 +3478,13 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.Private)]
         [InlineData(MemberAttributes.Public)]
         [InlineData(MemberAttributes.AccessMask)]
-        public void OutputFieldScopeModifier_InvokeWithoutOutputInvalid_Nop(MemberAttributes attributes)
+        public void OutputFieldScopeModifier_InvokeWithoutOutputInvalid_Nop(
+            MemberAttributes attributes
+        )
         {
             CodeGeneratorTests generator = this;
-            generator.OutputFieldScopeModifierAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
+            generator.OutputFieldScopeModifierAction = (actualAttributes, baseMethod) =>
+                baseMethod(actualAttributes);
             generator.OutputFieldScopeModifier(attributes);
         }
 
@@ -2930,12 +3495,15 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputIdentifier_InvokeWithOutput_Appends(string st, string expected)
         {
             CodeGeneratorTests generator = this;
-            generator.PerformActionWithOutput(writer =>
-            {
-                generator.OutputIdentifierAction = (actualSt, baseMethod) => baseMethod(actualSt);
-                generator.OutputIdentifier(st);
-                Assert.Equal(expected, writer.ToString());
-            });
+            generator.PerformActionWithOutput(
+                writer =>
+                {
+                    generator.OutputIdentifierAction = (actualSt, baseMethod) =>
+                        baseMethod(actualSt);
+                    generator.OutputIdentifier(st);
+                    Assert.Equal(expected, writer.ToString());
+                }
+            );
         }
 
         [Theory]
@@ -2969,48 +3537,147 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.New | MemberAttributes.Assembly, "internal ")]
         [InlineData(MemberAttributes.New | MemberAttributes.FamilyAndAssembly, "internal ")]
         [InlineData(MemberAttributes.New | MemberAttributes.Family, "protected ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.FamilyOrAssembly, "protected internal ")]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.FamilyOrAssembly,
+            "protected internal "
+        )]
         [InlineData(MemberAttributes.New | MemberAttributes.Private, "private ")]
         [InlineData(MemberAttributes.New | MemberAttributes.Public, "public ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Assembly, "internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Assembly, "internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Assembly, "internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Assembly, "internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Assembly, "internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyAndAssembly, "internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyAndAssembly, "internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyAndAssembly, "internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyAndAssembly, "internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyAndAssembly, "internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Family, "protected ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Family, "protected ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Family, "protected ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Family, "protected ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Family, "protected ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyOrAssembly, "protected internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyOrAssembly, "protected internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyOrAssembly, "protected internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyOrAssembly, "protected internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyOrAssembly, "protected internal ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Private, "private ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Private, "private ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Private, "private ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Private, "private ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Private, "private ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Public, "public ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Public, "public ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Public, "public ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Public, "public ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public, "public ")]
-        public void OutputMemberAccessModifier_Invoke_Success(MemberAttributes attributes, string expected)
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Assembly,
+            "internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Assembly,
+            "internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Assembly,
+            "internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Assembly,
+            "internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Assembly,
+            "internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyAndAssembly,
+            "internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyAndAssembly,
+            "internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyAndAssembly,
+            "internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyAndAssembly,
+            "internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyAndAssembly,
+            "internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Family,
+            "protected "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Family,
+            "protected "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Family,
+            "protected "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Family,
+            "protected "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Family,
+            "protected "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyOrAssembly,
+            "protected internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyOrAssembly,
+            "protected internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyOrAssembly,
+            "protected internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyOrAssembly,
+            "protected internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyOrAssembly,
+            "protected internal "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Private,
+            "private "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Private,
+            "private "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Private,
+            "private "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Private,
+            "private "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Private,
+            "private "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Public,
+            "public "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Public,
+            "public "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Public,
+            "public "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Public,
+            "public "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public,
+            "public "
+        )]
+        public void OutputMemberAccessModifier_Invoke_Success(
+            MemberAttributes attributes,
+            string expected
+        )
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.OutputMemberAccessModifierAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
-                generator.OutputMemberAccessModifier(attributes);
-                Assert.Equal(expected, writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.OutputMemberAccessModifierAction = (actualAttributes, baseMethod) =>
+                        baseMethod(actualAttributes);
+                    generator.OutputMemberAccessModifier(attributes);
+                    Assert.Equal(expected, writer.ToString());
+                }
+            );
         }
 
         [Theory]
@@ -3031,21 +3698,41 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Assembly)]
         [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Assembly)]
         [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Assembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyAndAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyAndAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyAndAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyAndAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyAndAssembly)]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyAndAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyAndAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyAndAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyAndAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyAndAssembly
+        )]
         [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Family)]
         [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Family)]
         [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Family)]
         [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Family)]
         [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Family)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyOrAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyOrAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyOrAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyOrAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyOrAssembly)]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyOrAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyOrAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyOrAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyOrAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyOrAssembly
+        )]
         [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Private)]
         [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Private)]
         [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Private)]
@@ -3056,11 +3743,16 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Public)]
         [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Public)]
         [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public)]
-        public void OutputMemberAccessModifier_InvokeWithoutOutput_ThrowsNullReferenceException(MemberAttributes attributes)
+        public void OutputMemberAccessModifier_InvokeWithoutOutput_ThrowsNullReferenceException(
+            MemberAttributes attributes
+        )
         {
             CodeGeneratorTests generator = this;
-            generator.OutputMemberAccessModifierAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
-            Assert.Throws<NullReferenceException>(() => generator.OutputMemberAccessModifier(attributes));
+            generator.OutputMemberAccessModifierAction = (actualAttributes, baseMethod) =>
+                baseMethod(actualAttributes);
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputMemberAccessModifier(attributes)
+            );
         }
 
         [Theory]
@@ -3074,10 +3766,13 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.VTableMask)]
         [InlineData(MemberAttributes.Overloaded)]
         [InlineData(MemberAttributes.AccessMask)]
-        public void OutputMemberAccessModifier_InvokeWithoutOutputInvalid_Nop(MemberAttributes attributes)
+        public void OutputMemberAccessModifier_InvokeWithoutOutputInvalid_Nop(
+            MemberAttributes attributes
+        )
         {
             CodeGeneratorTests generator = this;
-            generator.OutputMemberAccessModifierAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
+            generator.OutputMemberAccessModifierAction = (actualAttributes, baseMethod) =>
+                baseMethod(actualAttributes);
             generator.OutputMemberAccessModifier(attributes);
         }
 
@@ -3104,45 +3799,141 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.New | MemberAttributes.FamilyOrAssembly, "new ")]
         [InlineData(MemberAttributes.New | MemberAttributes.Private, "new ")]
         [InlineData(MemberAttributes.New | MemberAttributes.Public, "new virtual ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Assembly, "new abstract ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Assembly, "new ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Assembly, "new static ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Assembly, "new override ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Assembly, "new ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyAndAssembly, "new abstract ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyAndAssembly, "new ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyAndAssembly, "new static ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyAndAssembly, "new override ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyAndAssembly, "new ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Family, "new abstract ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Family, "new ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Family, "new static ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Family, "new override ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Family, "new virtual ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyOrAssembly, "new abstract ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyOrAssembly, "new ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyOrAssembly, "new static ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyOrAssembly, "new override ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyOrAssembly, "new ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Private, "new abstract ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Private, "new ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Private, "new static ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Private, "new override ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Private, "new ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Public, "new abstract ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Public, "new ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Public, "new static ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Public, "new override ")]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public, "new virtual ")]
-        public void OutputMemberScopeModifier_Invoke_Success(MemberAttributes attributes, string expected)
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Assembly,
+            "new abstract "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Assembly,
+            "new "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Assembly,
+            "new static "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Assembly,
+            "new override "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Assembly,
+            "new "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyAndAssembly,
+            "new abstract "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyAndAssembly,
+            "new "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyAndAssembly,
+            "new static "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyAndAssembly,
+            "new override "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyAndAssembly,
+            "new "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Family,
+            "new abstract "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Family,
+            "new "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Family,
+            "new static "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Family,
+            "new override "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Family,
+            "new virtual "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyOrAssembly,
+            "new abstract "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyOrAssembly,
+            "new "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyOrAssembly,
+            "new static "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyOrAssembly,
+            "new override "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyOrAssembly,
+            "new "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Private,
+            "new abstract "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Private,
+            "new "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Private,
+            "new static "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Private,
+            "new override "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Private,
+            "new "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Public,
+            "new abstract "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Public,
+            "new "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Public,
+            "new static "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Public,
+            "new override "
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public,
+            "new virtual "
+        )]
+        public void OutputMemberScopeModifier_Invoke_Success(
+            MemberAttributes attributes,
+            string expected
+        )
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.OutputMemberScopeModifierAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
-                generator.OutputMemberScopeModifier(attributes);
-                Assert.Equal(expected, writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.OutputMemberScopeModifierAction = (actualAttributes, baseMethod) =>
+                        baseMethod(actualAttributes);
+                    generator.OutputMemberScopeModifier(attributes);
+                    Assert.Equal(expected, writer.ToString());
+                }
+            );
         }
 
         [Theory]
@@ -3164,21 +3955,41 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Assembly)]
         [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Assembly)]
         [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Assembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyAndAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyAndAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyAndAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyAndAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyAndAssembly)]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyAndAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyAndAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyAndAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyAndAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyAndAssembly
+        )]
         [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Family)]
         [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Family)]
         [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Family)]
         [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Family)]
         [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Family)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyOrAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyOrAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyOrAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyOrAssembly)]
-        [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyOrAssembly)]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.FamilyOrAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.FamilyOrAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.FamilyOrAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Override | MemberAttributes.FamilyOrAssembly
+        )]
+        [InlineData(
+            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.FamilyOrAssembly
+        )]
         [InlineData(MemberAttributes.New | MemberAttributes.Abstract | MemberAttributes.Private)]
         [InlineData(MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Private)]
         [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Private)]
@@ -3189,11 +4000,16 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Public)]
         [InlineData(MemberAttributes.New | MemberAttributes.Override | MemberAttributes.Public)]
         [InlineData(MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public)]
-        public void OutputMemberScopeModifier_InvokeWithoutOutput_ThrowsNullReferenceException(MemberAttributes attributes)
+        public void OutputMemberScopeModifier_InvokeWithoutOutput_ThrowsNullReferenceException(
+            MemberAttributes attributes
+        )
         {
             CodeGeneratorTests generator = this;
-            generator.OutputMemberScopeModifierAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
-            Assert.Throws<NullReferenceException>(() => generator.OutputMemberScopeModifier(attributes));
+            generator.OutputMemberScopeModifierAction = (actualAttributes, baseMethod) =>
+                baseMethod(actualAttributes);
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputMemberScopeModifier(attributes)
+            );
         }
 
         [Theory]
@@ -3206,10 +4022,13 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(MemberAttributes.FamilyOrAssembly)]
         [InlineData(MemberAttributes.Private)]
         [InlineData(MemberAttributes.AccessMask)]
-        public void OutputMemberScopeModifier_InvokeWithoutOutputInvalid_Nop(MemberAttributes attributes)
+        public void OutputMemberScopeModifier_InvokeWithoutOutputInvalid_Nop(
+            MemberAttributes attributes
+        )
         {
             CodeGeneratorTests generator = this;
-            generator.OutputMemberScopeModifierAction = (actualAttributes, baseMethod) => baseMethod(actualAttributes);
+            generator.OutputMemberScopeModifierAction = (actualAttributes, baseMethod) =>
+                baseMethod(actualAttributes);
             generator.OutputMemberScopeModifier(attributes);
         }
 
@@ -3236,12 +4055,14 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputOperator_Invoke_Success(CodeBinaryOperatorType op, string expected)
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
-                generator.OutputOperator(op);
-                Assert.Equal(expected, writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
+                    generator.OutputOperator(op);
+                    Assert.Equal(expected, writer.ToString());
+                }
+            );
         }
 
         [Theory]
@@ -3262,7 +4083,9 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(CodeBinaryOperatorType.Multiply)]
         [InlineData(CodeBinaryOperatorType.Subtract)]
         [InlineData(CodeBinaryOperatorType.ValueEquality)]
-        public void OutputOperator_InvokeWithoutOutput_ThrowsNullReferenceException(CodeBinaryOperatorType op)
+        public void OutputOperator_InvokeWithoutOutput_ThrowsNullReferenceException(
+            CodeBinaryOperatorType op
+        )
         {
             CodeGeneratorTests generator = this;
             generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
@@ -3278,31 +4101,69 @@ namespace System.CodeDom.Compiler.Tests
             generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
             generator.OutputOperator(op);
         }
-        
+
         public static IEnumerable<object[]> OutputParameter_TestData()
         {
             yield return new object[] { new CodeParameterDeclarationExpression[0], "" };
-            yield return new object[] { new CodeParameterDeclarationExpression[] { new CodeParameterDeclarationExpression() }, "Type " };
-            yield return new object[] { new CodeParameterDeclarationExpression[] { new CodeParameterDeclarationExpression("type1", "name1"), new CodeParameterDeclarationExpression("type2", "name2") }, "Type name1, Type name2" };
             yield return new object[]
             {
-                new CodeParameterDeclarationExpression[] 
+                new CodeParameterDeclarationExpression[]
                 {
-                    new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression()
+                    new CodeParameterDeclarationExpression()
+                },
+                "Type "
+            };
+            yield return new object[]
+            {
+                new CodeParameterDeclarationExpression[]
+                {
+                    new CodeParameterDeclarationExpression("type1", "name1"),
+                    new CodeParameterDeclarationExpression("type2", "name2")
+                },
+                "Type name1, Type name2"
+            };
+            yield return new object[]
+            {
+                new CodeParameterDeclarationExpression[]
+                {
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression()
                 },
                 "Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type "
             };
             yield return new object[]
             {
-                new CodeParameterDeclarationExpression[] 
+                new CodeParameterDeclarationExpression[]
                 {
-                    new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression(), new CodeParameterDeclarationExpression()
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression()
                 },
                 $"{Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             "
             };
@@ -3310,40 +4171,60 @@ namespace System.CodeDom.Compiler.Tests
 
         [Theory]
         [MemberData(nameof(OutputParameter_TestData))]
-        public void OutputParameter_Invoke_Success(CodeParameterDeclarationExpression[] parametersArray, string expected)
+        public void OutputParameter_Invoke_Success(
+            CodeParameterDeclarationExpression[] parametersArray,
+            string expected
+        )
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                var parameters = new CodeParameterDeclarationExpressionCollection(parametersArray);
-                generator.OutputParametersAction = (actualParameters, baseMethod) => baseMethod(actualParameters);
-                int generateParameterDeclarationExpressionCallCount = 0;
-                int outputTypeActionCallCount = 0;
-                generator.GenerateParameterDeclarationExpressionAction = (actualE, baseMethod) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    baseMethod(actualE);
-                    Assert.Same(parameters[generateParameterDeclarationExpressionCallCount], actualE);
-                    generateParameterDeclarationExpressionCallCount++;
-                };
-                generator.OutputDirectionAction = (actualDirection, baseMethod) => baseMethod(actualDirection);
-                generator.OutputTypeNamePairAction = (actualTypeRef, actualName, baseMethod) => baseMethod(actualTypeRef, actualName);
-                generator.OutputTypeAction = (actualTypeRef) =>
-                {
-                    Assert.Same(parameters[generateParameterDeclarationExpressionCallCount].Type, actualTypeRef);
-                    writer.Write("Type");
-                    outputTypeActionCallCount++;
-                };
-                generator.OutputIdentifierAction = (actualTypeRef, baseMethod) => baseMethod(actualTypeRef);
-                generator.OutputParameters(parameters);
-                Assert.Equal(expected, writer.ToString());
-                Assert.Equal(parameters.Count, generateParameterDeclarationExpressionCallCount);
-                Assert.Equal(parameters.Count, outputTypeActionCallCount);
+                    var parameters = new CodeParameterDeclarationExpressionCollection(
+                        parametersArray
+                    );
+                    generator.OutputParametersAction = (actualParameters, baseMethod) =>
+                        baseMethod(actualParameters);
+                    int generateParameterDeclarationExpressionCallCount = 0;
+                    int outputTypeActionCallCount = 0;
+                    generator.GenerateParameterDeclarationExpressionAction = (
+                        actualE,
+                        baseMethod
+                    ) =>
+                    {
+                        baseMethod(actualE);
+                        Assert.Same(
+                            parameters[generateParameterDeclarationExpressionCallCount],
+                            actualE
+                        );
+                        generateParameterDeclarationExpressionCallCount++;
+                    };
+                    generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                        baseMethod(actualDirection);
+                    generator.OutputTypeNamePairAction = (actualTypeRef, actualName, baseMethod) =>
+                        baseMethod(actualTypeRef, actualName);
+                    generator.OutputTypeAction = (actualTypeRef) =>
+                    {
+                        Assert.Same(
+                            parameters[generateParameterDeclarationExpressionCallCount].Type,
+                            actualTypeRef
+                        );
+                        writer.Write("Type");
+                        outputTypeActionCallCount++;
+                    };
+                    generator.OutputIdentifierAction = (actualTypeRef, baseMethod) =>
+                        baseMethod(actualTypeRef);
+                    generator.OutputParameters(parameters);
+                    Assert.Equal(expected, writer.ToString());
+                    Assert.Equal(parameters.Count, generateParameterDeclarationExpressionCallCount);
+                    Assert.Equal(parameters.Count, outputTypeActionCallCount);
 
-                // Call again to make sure indent is reset.
-                Assert.Equal(expected, writer.ToString());
-                Assert.Equal(parameters.Count, generateParameterDeclarationExpressionCallCount);
-                Assert.Equal(parameters.Count, outputTypeActionCallCount);
-            });
+                    // Call again to make sure indent is reset.
+                    Assert.Equal(expected, writer.ToString());
+                    Assert.Equal(parameters.Count, generateParameterDeclarationExpressionCallCount);
+                    Assert.Equal(parameters.Count, outputTypeActionCallCount);
+                }
+            );
         }
 
         [Fact]
@@ -3351,7 +4232,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             var parameters = new CodeParameterDeclarationExpressionCollection();
-            generator.OutputParametersAction = (actualParameters, baseMethod) => baseMethod(actualParameters);
+            generator.OutputParametersAction = (actualParameters, baseMethod) =>
+                baseMethod(actualParameters);
             generator.OutputParameters(parameters);
         }
 
@@ -3359,8 +4241,14 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputParameters_InvokeWithoutWriter_ThrowsNullReferenceException()
         {
             CodeGeneratorTests generator = this;
-            var parameters = new CodeParameterDeclarationExpressionCollection(new CodeParameterDeclarationExpression[] { new CodeParameterDeclarationExpression() });
-            generator.OutputParametersAction = (actualParameters, baseMethod) => baseMethod(actualParameters);
+            var parameters = new CodeParameterDeclarationExpressionCollection(
+                new CodeParameterDeclarationExpression[]
+                {
+                    new CodeParameterDeclarationExpression()
+                }
+            );
+            generator.OutputParametersAction = (actualParameters, baseMethod) =>
+                baseMethod(actualParameters);
             int generateParameterDeclarationExpressionCallCount = 0;
             generator.GenerateParameterDeclarationExpressionAction = (actualE, baseMethod) =>
             {
@@ -3368,8 +4256,10 @@ namespace System.CodeDom.Compiler.Tests
                 Assert.Same(parameters[generateParameterDeclarationExpressionCallCount], actualE);
                 generateParameterDeclarationExpressionCallCount++;
             };
-            generator.OutputDirectionAction = (actualDirection, baseMethod) => baseMethod(actualDirection);
-            generator.OutputTypeNamePairAction = (actualTypeRef, actualName, baseMethod) => baseMethod(actualTypeRef, actualName);
+            generator.OutputDirectionAction = (actualDirection, baseMethod) =>
+                baseMethod(actualDirection);
+            generator.OutputTypeNamePairAction = (actualTypeRef, actualName, baseMethod) =>
+                baseMethod(actualTypeRef, actualName);
             generator.OutputTypeAction = (actualTypeRef) => { };
             Assert.Throws<NullReferenceException>(() => generator.OutputParameters(parameters));
         }
@@ -3379,8 +4269,12 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputParameters_NullParameters_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            generator.OutputParametersAction = (actualParameters, baseMethod) => baseMethod(actualParameters);
-            Assert.Throws<ArgumentNullException>("parameters", () => generator.OutputParameters(null));
+            generator.OutputParametersAction = (actualParameters, baseMethod) =>
+                baseMethod(actualParameters);
+            Assert.Throws<ArgumentNullException>(
+                "parameters",
+                () => generator.OutputParameters(null)
+            );
         }
 
         public static IEnumerable<object[]> OutputTypeNamePair_TestData()
@@ -3395,28 +4289,31 @@ namespace System.CodeDom.Compiler.Tests
         public void OutputTypeNamePair_Invoke_Success(CodeTypeReference typeRef, string name)
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.OutputTypeNamePairAction = (actualTypeRef, actualName, baseMethod) => baseMethod(actualTypeRef, actualName);
-                int outputTypeCallCount = 0;
-                int outputIdentifierCallCount = 0;
-                generator.OutputTypeAction = (actualTypeRef) =>
+            PerformActionWithOutput(
+                writer =>
                 {
-                    Assert.Same(typeRef, actualTypeRef);
-                    Assert.Equal(0, outputIdentifierCallCount);
-                    writer.Write("Type");
-                    outputTypeCallCount++;
-                };
-                generator.OutputIdentifierAction = (actualIdent, baseMethod) =>
-                {
-                    baseMethod(actualIdent);
-                    outputIdentifierCallCount++;
-                };
-                generator.OutputTypeNamePair(typeRef, name);
-                Assert.Equal($"Type {name}", writer.ToString());
-                Assert.Equal(1, outputTypeCallCount);
-                Assert.Equal(1, outputIdentifierCallCount);
-            });
+                    generator.OutputTypeNamePairAction = (actualTypeRef, actualName, baseMethod) =>
+                        baseMethod(actualTypeRef, actualName);
+                    int outputTypeCallCount = 0;
+                    int outputIdentifierCallCount = 0;
+                    generator.OutputTypeAction = (actualTypeRef) =>
+                    {
+                        Assert.Same(typeRef, actualTypeRef);
+                        Assert.Equal(0, outputIdentifierCallCount);
+                        writer.Write("Type");
+                        outputTypeCallCount++;
+                    };
+                    generator.OutputIdentifierAction = (actualIdent, baseMethod) =>
+                    {
+                        baseMethod(actualIdent);
+                        outputIdentifierCallCount++;
+                    };
+                    generator.OutputTypeNamePair(typeRef, name);
+                    Assert.Equal($"Type {name}", writer.ToString());
+                    Assert.Equal(1, outputTypeCallCount);
+                    Assert.Equal(1, outputIdentifierCallCount);
+                }
+            );
         }
 
         [Fact]
@@ -3424,9 +4321,12 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             var typeRef = new CodeTypeReference();
-            generator.OutputTypeNamePairAction = (actualTypeRef, actualName, baseMethod) => baseMethod(actualTypeRef, actualName);
-            generator.OutputTypeAction = (actualTypeRef) => {};
-            Assert.Throws<NullReferenceException>(() => generator.OutputTypeNamePair(typeRef, "name"));
+            generator.OutputTypeNamePairAction = (actualTypeRef, actualName, baseMethod) =>
+                baseMethod(actualTypeRef, actualName);
+            generator.OutputTypeAction = (actualTypeRef) => { };
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputTypeNamePair(typeRef, "name")
+            );
         }
 
         [Theory]
@@ -3474,15 +4374,27 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(TypeAttributes.ReservedMask, false, false, "class ")]
         [InlineData(TypeAttributes.BeforeFieldInit, false, false, "class ")]
         [InlineData(TypeAttributes.CustomFormatMask, false, false, "class ")]
-        public void OutputTypeAttributes_Invoke_Success(TypeAttributes attributes, bool isStruct, bool isEnum, string expected)
+        public void OutputTypeAttributes_Invoke_Success(
+            TypeAttributes attributes,
+            bool isStruct,
+            bool isEnum,
+            string expected
+        )
         {
             CodeGeneratorTests generator = this;
-            PerformActionWithOutput(writer =>
-            {
-                generator.OutputTypeAttributesAction = (actualAttributes, isStruct, isEnum, baseMethod) => baseMethod(actualAttributes, isStruct, isEnum);
-                generator.OutputTypeAttributes(attributes, isStruct, isEnum);
-                Assert.Equal(expected, writer.ToString());
-            });
+            PerformActionWithOutput(
+                writer =>
+                {
+                    generator.OutputTypeAttributesAction = (
+                        actualAttributes,
+                        isStruct,
+                        isEnum,
+                        baseMethod
+                    ) => baseMethod(actualAttributes, isStruct, isEnum);
+                    generator.OutputTypeAttributes(attributes, isStruct, isEnum);
+                    Assert.Equal(expected, writer.ToString());
+                }
+            );
         }
 
         [Theory]
@@ -3530,11 +4442,22 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData(TypeAttributes.ReservedMask, false, false)]
         [InlineData(TypeAttributes.BeforeFieldInit, false, false)]
         [InlineData(TypeAttributes.CustomFormatMask, false, false)]
-        public void OutputTypeAttributes_InvokeWithoutWriter_ThrowsNullReferenceException(TypeAttributes attributes, bool isStruct, bool isEnum)
+        public void OutputTypeAttributes_InvokeWithoutWriter_ThrowsNullReferenceException(
+            TypeAttributes attributes,
+            bool isStruct,
+            bool isEnum
+        )
         {
             CodeGeneratorTests generator = this;
-            generator.OutputTypeAttributesAction = (actualAttributes, isStruct, isEnum, baseMethod) => baseMethod(actualAttributes, isStruct, isEnum);
-            Assert.Throws<NullReferenceException>(() => generator.OutputTypeAttributes(attributes, isStruct, isEnum));
+            generator.OutputTypeAttributesAction = (
+                actualAttributes,
+                isStruct,
+                isEnum,
+                baseMethod
+            ) => baseMethod(actualAttributes, isStruct, isEnum);
+            Assert.Throws<NullReferenceException>(
+                () => generator.OutputTypeAttributes(attributes, isStruct, isEnum)
+            );
         }
 
         [Theory]
@@ -3545,7 +4468,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             int isValidIdentifierCallCount = 0;
-            generator.ValidateIdentifierAction = (actualValue, baseMethod) => baseMethod(actualValue);
+            generator.ValidateIdentifierAction = (actualValue, baseMethod) =>
+                baseMethod(actualValue);
             generator.IsValidIdentifierAction = (actualValue) =>
             {
                 Assert.Same(value, actualValue);
@@ -3565,7 +4489,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             int isValidIdentifierCallCount = 0;
-            generator.ValidateIdentifierAction = (actualValue, baseMethod) => baseMethod(actualValue);
+            generator.ValidateIdentifierAction = (actualValue, baseMethod) =>
+                baseMethod(actualValue);
             generator.IsValidIdentifierAction = (actualValue) =>
             {
                 Assert.Same(value, actualValue);
@@ -3586,7 +4511,10 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData("identifier", null)]
         [InlineData("identifier", "")]
         [InlineData("identifier", "escapedIdentifier")]
-        public void ICodeGeneratorCreateEscapedIdentifier_Invoke_ReturnsExpected(string value, string result)
+        public void ICodeGeneratorCreateEscapedIdentifier_Invoke_ReturnsExpected(
+            string value,
+            string result
+        )
         {
             CodeGeneratorTests generator = this;
             int callCount = 0;
@@ -3611,7 +4539,10 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData("identifier", null)]
         [InlineData("identifier", "")]
         [InlineData("identifier", "validIdentifier")]
-        public void ICodeGeneratorCreateValidIdentifier_Invoke_ReturnsExpected(string value, string result)
+        public void ICodeGeneratorCreateValidIdentifier_Invoke_ReturnsExpected(
+            string value,
+            string result
+        )
         {
             CodeGeneratorTests generator = this;
             int callCount = 0;
@@ -3638,7 +4569,10 @@ namespace System.CodeDom.Compiler.Tests
 
         [Theory]
         [MemberData(nameof(GetTypeOutput_TestData))]
-        public void ICodeGeneratorGetTypeOutput_Invoke_ReturnsExpected(CodeTypeReference value, string result)
+        public void ICodeGeneratorGetTypeOutput_Invoke_ReturnsExpected(
+            CodeTypeReference value,
+            string result
+        )
         {
             CodeGeneratorTests generator = this;
             int callCount = 0;
@@ -3665,7 +4599,10 @@ namespace System.CodeDom.Compiler.Tests
 
         [Theory]
         [MemberData(nameof(IsValidIdentifier_TestData))]
-        public void ICodeGeneratorIsValidIdentifier_Invoke_ReturnsExpected(string value, bool result)
+        public void ICodeGeneratorIsValidIdentifier_Invoke_ReturnsExpected(
+            string value,
+            bool result
+        )
         {
             CodeGeneratorTests generator = this;
             int callCount = 0;
@@ -3691,7 +4628,10 @@ namespace System.CodeDom.Compiler.Tests
 
         [Theory]
         [MemberData(nameof(Supports_TestData))]
-        public void ICodeGeneratorSupports_Invoke_ReturnsExpected(GeneratorSupport support, bool result)
+        public void ICodeGeneratorSupports_Invoke_ReturnsExpected(
+            GeneratorSupport support,
+            bool result
+        )
         {
             CodeGeneratorTests generator = this;
             int callCount = 0;
@@ -3714,7 +4654,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             int isValidIdentifierCallCount = 0;
-            generator.ValidateIdentifierAction = (actualValue, baseMethod) => baseMethod(actualValue);
+            generator.ValidateIdentifierAction = (actualValue, baseMethod) =>
+                baseMethod(actualValue);
             generator.IsValidIdentifierAction = (actualValue) =>
             {
                 Assert.Same(value, actualValue);
@@ -3731,11 +4672,14 @@ namespace System.CodeDom.Compiler.Tests
         [InlineData("")]
         [InlineData("value")]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Not fixed on NetFX")]
-        public void ICodeGeneratorValidateIdentifier_InvokeInvalid_ThrowsArgumentException(string value)
+        public void ICodeGeneratorValidateIdentifier_InvokeInvalid_ThrowsArgumentException(
+            string value
+        )
         {
             CodeGeneratorTests generator = this;
             int isValidIdentifierCallCount = 0;
-            generator.ValidateIdentifierAction = (actualValue, baseMethod) => baseMethod(actualValue);
+            generator.ValidateIdentifierAction = (actualValue, baseMethod) =>
+                baseMethod(actualValue);
             generator.IsValidIdentifierAction = (actualValue) =>
             {
                 Assert.Same(value, actualValue);
@@ -3743,11 +4687,17 @@ namespace System.CodeDom.Compiler.Tests
                 return false;
             };
             ICodeGenerator iCodeGenerator = generator;
-            Assert.Throws<ArgumentException>("value", () => iCodeGenerator.ValidateIdentifier(value));
+            Assert.Throws<ArgumentException>(
+                "value",
+                () => iCodeGenerator.ValidateIdentifier(value)
+            );
             Assert.Equal(1, isValidIdentifierCallCount);
         }
 
-        private void PerformActionWithOutput(Action<StringWriter> action, CodeGeneratorOptions options = null)
+        private void PerformActionWithOutput(
+            Action<StringWriter> action,
+            CodeGeneratorOptions options = null
+        )
         {
             CodeGeneratorTests generator = this;
             ICodeGenerator iCodeGenerator = generator;
@@ -3793,7 +4743,9 @@ namespace System.CodeDom.Compiler.Tests
 
         public Action<CodeArgumentReferenceExpression> GenerateArgumentReferenceExpressionAction { get; set; }
 
-        protected override void GenerateArgumentReferenceExpression(CodeArgumentReferenceExpression e)
+        protected override void GenerateArgumentReferenceExpression(
+            CodeArgumentReferenceExpression e
+        )
         {
             GenerateArgumentReferenceExpressionAction(e);
         }
@@ -3825,17 +4777,21 @@ namespace System.CodeDom.Compiler.Tests
         {
             GenerateAttachEventStatementAction(e);
         }
-        
+
         public Action<CodeAttributeDeclarationCollection> GenerateAttributeDeclarationsEndAction { get; set; }
 
-        protected override void GenerateAttributeDeclarationsEnd(CodeAttributeDeclarationCollection attributes)
+        protected override void GenerateAttributeDeclarationsEnd(
+            CodeAttributeDeclarationCollection attributes
+        )
         {
             GenerateAttributeDeclarationsEndAction(attributes);
         }
 
         public Action<CodeAttributeDeclarationCollection> GenerateAttributeDeclarationsStartAction { get; set; }
 
-        protected override void GenerateAttributeDeclarationsStart(CodeAttributeDeclarationCollection attributes)
+        protected override void GenerateAttributeDeclarationsStart(
+            CodeAttributeDeclarationCollection attributes
+        )
         {
             GenerateAttributeDeclarationsStartAction(attributes);
         }
@@ -3861,7 +4817,10 @@ namespace System.CodeDom.Compiler.Tests
             GenerateCommentAction(e);
         }
 
-        public Action<CodeCommentStatementCollection, Action<CodeCommentStatementCollection>> GenerateCommentStatementsAction { get; set; }
+        public Action<
+            CodeCommentStatementCollection,
+            Action<CodeCommentStatementCollection>
+        > GenerateCommentStatementsAction { get; set; }
 
         protected override void GenerateCommentStatements(CodeCommentStatementCollection e)
         {
@@ -3878,21 +4837,30 @@ namespace System.CodeDom.Compiler.Tests
             }
         }
 
-        public Action<CodeCompileUnit, Action<CodeCompileUnit>> GenerateCompileUnitAction { get; set; }
+        public Action<
+            CodeCompileUnit,
+            Action<CodeCompileUnit>
+        > GenerateCompileUnitAction { get; set; }
 
         protected override void GenerateCompileUnit(CodeCompileUnit e)
         {
             GenerateCompileUnitAction(e, base.GenerateCompileUnit);
         }
 
-        public Action<CodeCompileUnit, Action<CodeCompileUnit>> GenerateCompileUnitEndAction { get; set; }
+        public Action<
+            CodeCompileUnit,
+            Action<CodeCompileUnit>
+        > GenerateCompileUnitEndAction { get; set; }
 
         protected override void GenerateCompileUnitEnd(CodeCompileUnit e)
         {
             GenerateCompileUnitEndAction(e, base.GenerateCompileUnitEnd);
         }
 
-        public Action<CodeCompileUnit, Action<CodeCompileUnit>> GenerateCompileUnitStartAction { get; set; }
+        public Action<
+            CodeCompileUnit,
+            Action<CodeCompileUnit>
+        > GenerateCompileUnitStartAction { get; set; }
 
         protected override void GenerateCompileUnitStart(CodeCompileUnit e)
         {
@@ -3920,7 +4888,10 @@ namespace System.CodeDom.Compiler.Tests
             GenerateDecimalValueAction(d, base.GenerateDecimalValue);
         }
 
-        public Action<CodeDefaultValueExpression, Action<CodeDefaultValueExpression>> GenerateDefaultValueExpressionAction { get; set; }
+        public Action<
+            CodeDefaultValueExpression,
+            Action<CodeDefaultValueExpression>
+        > GenerateDefaultValueExpressionAction { get; set; }
 
         protected override void GenerateDefaultValueExpression(CodeDefaultValueExpression e)
         {
@@ -3941,14 +4912,20 @@ namespace System.CodeDom.Compiler.Tests
             GenerateDelegateInvokeExpressionAction(e);
         }
 
-        public Action<CodeDirectionExpression, Action<CodeDirectionExpression>> GenerateDirectionExpressionAction { get; set; }
+        public Action<
+            CodeDirectionExpression,
+            Action<CodeDirectionExpression>
+        > GenerateDirectionExpressionAction { get; set; }
 
         protected override void GenerateDirectionExpression(CodeDirectionExpression e)
         {
             GenerateDirectionExpressionAction(e, base.GenerateDirectionExpression);
         }
 
-        public Action<CodeDirectiveCollection, Action<CodeDirectiveCollection>> GenerateDirectivesAction { get; set; }
+        public Action<
+            CodeDirectiveCollection,
+            Action<CodeDirectiveCollection>
+        > GenerateDirectivesAction { get; set; }
 
         protected override void GenerateDirectives(CodeDirectiveCollection directives)
         {
@@ -3965,9 +4942,15 @@ namespace System.CodeDom.Compiler.Tests
             GenerateDoubleValueAction(d, base.GenerateDoubleValue);
         }
 
-        public Action<CodeEntryPointMethod, CodeTypeDeclaration> GenerateEntryPointMethodAction { get; set; }
+        public Action<
+            CodeEntryPointMethod,
+            CodeTypeDeclaration
+        > GenerateEntryPointMethodAction { get; set; }
 
-        protected override void GenerateEntryPointMethod(CodeEntryPointMethod e, CodeTypeDeclaration c)
+        protected override void GenerateEntryPointMethod(
+            CodeEntryPointMethod e,
+            CodeTypeDeclaration c
+        )
         {
             GenerateEntryPointMethodAction(e, c);
         }
@@ -4112,14 +5095,25 @@ namespace System.CodeDom.Compiler.Tests
             GenerateObjectCreateExpressionAction(e);
         }
 
-        public Action<CodeParameterDeclarationExpression, Action<CodeParameterDeclarationExpression>>  GenerateParameterDeclarationExpressionAction { get; set; }
+        public Action<
+            CodeParameterDeclarationExpression,
+            Action<CodeParameterDeclarationExpression>
+        > GenerateParameterDeclarationExpressionAction { get; set; }
 
-        protected override void GenerateParameterDeclarationExpression(CodeParameterDeclarationExpression e)
+        protected override void GenerateParameterDeclarationExpression(
+            CodeParameterDeclarationExpression e
+        )
         {
-            GenerateParameterDeclarationExpressionAction(e, base.GenerateParameterDeclarationExpression);
+            GenerateParameterDeclarationExpressionAction(
+                e,
+                base.GenerateParameterDeclarationExpression
+            );
         }
 
-        public Action<CodePrimitiveExpression, Action<CodePrimitiveExpression>> GeneratePrimitiveExpressionAction { get; set; }
+        public Action<
+            CodePrimitiveExpression,
+            Action<CodePrimitiveExpression>
+        > GeneratePrimitiveExpressionAction { get; set; }
 
         protected override void GeneratePrimitiveExpression(CodePrimitiveExpression e)
         {
@@ -4135,14 +5129,18 @@ namespace System.CodeDom.Compiler.Tests
 
         public Action<CodePropertyReferenceExpression> GeneratePropertyReferenceExpressionAction { get; set; }
 
-        protected override void GeneratePropertyReferenceExpression(CodePropertyReferenceExpression e)
+        protected override void GeneratePropertyReferenceExpression(
+            CodePropertyReferenceExpression e
+        )
         {
             GeneratePropertyReferenceExpressionAction(e);
         }
 
         public Action<CodePropertySetValueReferenceExpression> GeneratePropertySetValueReferenceExpressionAction { get; set; }
 
-        protected override void GeneratePropertySetValueReferenceExpression(CodePropertySetValueReferenceExpression e)
+        protected override void GeneratePropertySetValueReferenceExpression(
+            CodePropertySetValueReferenceExpression e
+        )
         {
             GeneratePropertySetValueReferenceExpressionAction(e);
         }
@@ -4175,7 +5173,10 @@ namespace System.CodeDom.Compiler.Tests
             GenerateSnippetMemberAction(e);
         }
 
-        public Action<CodeSnippetStatement, Action<CodeSnippetStatement>> GenerateSnippetStatementAction { get; set; }
+        public Action<
+            CodeSnippetStatement,
+            Action<CodeSnippetStatement>
+        > GenerateSnippetStatementAction { get; set; }
 
         protected override void GenerateSnippetStatement(CodeSnippetStatement e)
         {
@@ -4217,14 +5218,20 @@ namespace System.CodeDom.Compiler.Tests
             GenerateTypeEndAction(e);
         }
 
-        public Action<CodeTypeOfExpression, Action<CodeTypeOfExpression>> GenerateTypeOfExpressionAction { get; set; } 
+        public Action<
+            CodeTypeOfExpression,
+            Action<CodeTypeOfExpression>
+        > GenerateTypeOfExpressionAction { get; set; }
 
         protected override void GenerateTypeOfExpression(CodeTypeOfExpression e)
         {
             GenerateTypeOfExpressionAction(e, base.GenerateTypeOfExpression);
         }
 
-        public Action<CodeTypeReferenceExpression, Action<CodeTypeReferenceExpression>> GenerateTypeReferenceExpressionAction { get; set; } 
+        public Action<
+            CodeTypeReferenceExpression,
+            Action<CodeTypeReferenceExpression>
+        > GenerateTypeReferenceExpressionAction { get; set; }
 
         protected override void GenerateTypeReferenceExpression(CodeTypeReferenceExpression e)
         {
@@ -4240,14 +5247,18 @@ namespace System.CodeDom.Compiler.Tests
 
         public Action<CodeVariableDeclarationStatement> GenerateVariableDeclarationStatementAction { get; set; }
 
-        protected override void GenerateVariableDeclarationStatement(CodeVariableDeclarationStatement e)
+        protected override void GenerateVariableDeclarationStatement(
+            CodeVariableDeclarationStatement e
+        )
         {
             GenerateVariableDeclarationStatementAction(e);
         }
 
         public Action<CodeVariableReferenceExpression> GenerateVariableReferenceExpressionAction { get; set; }
 
-        protected override void GenerateVariableReferenceExpression(CodeVariableReferenceExpression e)
+        protected override void GenerateVariableReferenceExpression(
+            CodeVariableReferenceExpression e
+        )
         {
             GenerateVariableReferenceExpressionAction(e);
         }
@@ -4263,19 +5274,27 @@ namespace System.CodeDom.Compiler.Tests
 
         protected override bool IsValidIdentifier(string value)
         {
-            return IsValidIdentifierAction(value);   
+            return IsValidIdentifierAction(value);
         }
 
-        public Action<CodeAttributeArgument, Action<CodeAttributeArgument>> OutputAttributeArgumentAction { get; set; }
+        public Action<
+            CodeAttributeArgument,
+            Action<CodeAttributeArgument>
+        > OutputAttributeArgumentAction { get; set; }
 
         protected override void OutputAttributeArgument(CodeAttributeArgument arg)
         {
             OutputAttributeArgumentAction(arg, base.OutputAttributeArgument);
         }
 
-        public Action<CodeAttributeDeclarationCollection, Action<CodeAttributeDeclarationCollection>> OutputAttributeDeclarationsAction { get; set; }
+        public Action<
+            CodeAttributeDeclarationCollection,
+            Action<CodeAttributeDeclarationCollection>
+        > OutputAttributeDeclarationsAction { get; set; }
 
-        protected override void OutputAttributeDeclarations(CodeAttributeDeclarationCollection attributes)
+        protected override void OutputAttributeDeclarations(
+            CodeAttributeDeclarationCollection attributes
+        )
         {
             OutputAttributeDeclarationsAction(attributes, base.OutputAttributeDeclarations);
         }
@@ -4287,7 +5306,10 @@ namespace System.CodeDom.Compiler.Tests
             OutputDirectionAction(dir, base.OutputDirection);
         }
 
-        public Action<MemberAttributes, Action<MemberAttributes>> OutputFieldScopeModifierAction { get; set; }
+        public Action<
+            MemberAttributes,
+            Action<MemberAttributes>
+        > OutputFieldScopeModifierAction { get; set; }
 
         protected override void OutputFieldScopeModifier(MemberAttributes attributes)
         {
@@ -4301,30 +5323,44 @@ namespace System.CodeDom.Compiler.Tests
             OutputIdentifierAction(ident, base.OutputIdentifier);
         }
 
-        public Action<MemberAttributes, Action<MemberAttributes>> OutputMemberAccessModifierAction { get; set; }
+        public Action<
+            MemberAttributes,
+            Action<MemberAttributes>
+        > OutputMemberAccessModifierAction { get; set; }
 
         protected override void OutputMemberAccessModifier(MemberAttributes attributes)
         {
             OutputMemberAccessModifierAction(attributes, base.OutputMemberAccessModifier);
         }
 
-        public Action<MemberAttributes, Action<MemberAttributes>> OutputMemberScopeModifierAction { get; set; }
+        public Action<
+            MemberAttributes,
+            Action<MemberAttributes>
+        > OutputMemberScopeModifierAction { get; set; }
 
         protected override void OutputMemberScopeModifier(MemberAttributes attributes)
         {
             OutputMemberScopeModifierAction(attributes, base.OutputMemberScopeModifier);
         }
 
-        public Action<CodeBinaryOperatorType, Action<CodeBinaryOperatorType>> OutputOperatorAction { get; set; }
+        public Action<
+            CodeBinaryOperatorType,
+            Action<CodeBinaryOperatorType>
+        > OutputOperatorAction { get; set; }
 
         protected override void OutputOperator(CodeBinaryOperatorType op)
         {
             OutputOperatorAction(op, base.OutputOperator);
         }
 
-        public Action<CodeParameterDeclarationExpressionCollection, Action<CodeParameterDeclarationExpressionCollection>> OutputParametersAction { get; set; }
+        public Action<
+            CodeParameterDeclarationExpressionCollection,
+            Action<CodeParameterDeclarationExpressionCollection>
+        > OutputParametersAction { get; set; }
 
-        protected override void OutputParameters(CodeParameterDeclarationExpressionCollection parameters)
+        protected override void OutputParameters(
+            CodeParameterDeclarationExpressionCollection parameters
+        )
         {
             OutputParametersAction(parameters, base.OutputParameters);
         }
@@ -4336,14 +5372,27 @@ namespace System.CodeDom.Compiler.Tests
             OutputTypeAction(typeRef);
         }
 
-        public Action<TypeAttributes, bool, bool, Action<TypeAttributes, bool, bool>> OutputTypeAttributesAction { get; set; }
+        public Action<
+            TypeAttributes,
+            bool,
+            bool,
+            Action<TypeAttributes, bool, bool>
+        > OutputTypeAttributesAction { get; set; }
 
-        protected override void OutputTypeAttributes(TypeAttributes attributes, bool isStruct, bool isEnum)
+        protected override void OutputTypeAttributes(
+            TypeAttributes attributes,
+            bool isStruct,
+            bool isEnum
+        )
         {
             OutputTypeAttributesAction(attributes, isStruct, isEnum, base.OutputTypeAttributes);
         }
 
-        public Action<CodeTypeReference, string, Action<CodeTypeReference, string>> OutputTypeNamePairAction { get; set; }
+        public Action<
+            CodeTypeReference,
+            string,
+            Action<CodeTypeReference, string>
+        > OutputTypeNamePairAction { get; set; }
 
         protected override void OutputTypeNamePair(CodeTypeReference typeRef, string name)
         {

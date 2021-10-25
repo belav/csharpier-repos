@@ -11,12 +11,20 @@ namespace System.IO.Compression
 {
     public class DeflateStreamUnitTests : CompressionStreamUnitTestBase
     {
-        public override Stream CreateStream(Stream stream, CompressionMode mode) => new DeflateStream(stream, mode);
-        public override Stream CreateStream(Stream stream, CompressionMode mode, bool leaveOpen) => new DeflateStream(stream, mode, leaveOpen);
-        public override Stream CreateStream(Stream stream, CompressionLevel level) => new DeflateStream(stream, level);
-        public override Stream CreateStream(Stream stream, CompressionLevel level, bool leaveOpen) => new DeflateStream(stream, level, leaveOpen);
+        public override Stream CreateStream(Stream stream, CompressionMode mode) =>
+            new DeflateStream(stream, mode);
+        public override Stream CreateStream(Stream stream, CompressionMode mode, bool leaveOpen) =>
+            new DeflateStream(stream, mode, leaveOpen);
+        public override Stream CreateStream(Stream stream, CompressionLevel level) =>
+            new DeflateStream(stream, level);
+        public override Stream CreateStream(
+            Stream stream,
+            CompressionLevel level,
+            bool leaveOpen
+        ) => new DeflateStream(stream, level, leaveOpen);
         public override Stream BaseStream(Stream stream) => ((DeflateStream)stream).BaseStream;
-        protected override string CompressedTestFile(string uncompressedPath) => Path.Combine("DeflateTestData", Path.GetFileName(uncompressedPath));
+        protected override string CompressedTestFile(string uncompressedPath) =>
+            Path.Combine("DeflateTestData", Path.GetFileName(uncompressedPath));
 
         public static IEnumerable<object[]> DecompressFailsWithWrapperStream_MemberData()
         {
@@ -31,15 +39,29 @@ namespace System.IO.Compression
         [Theory]
         [MemberData(nameof(DecompressFailsWithWrapperStream_MemberData))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/36845", TestPlatforms.Android)]
-        public async Task DecompressFailsWithWrapperStream(string uncompressedPath, string newDirectory, string newSuffix)
+        public async Task DecompressFailsWithWrapperStream(
+            string uncompressedPath,
+            string newDirectory,
+            string newSuffix
+        )
         {
-            string fileName = Path.Combine(newDirectory, Path.GetFileName(uncompressedPath) + newSuffix);
-            using (LocalMemoryStream baseStream = await LocalMemoryStream.readAppFileAsync(fileName))
+            string fileName = Path.Combine(
+                newDirectory,
+                Path.GetFileName(uncompressedPath) + newSuffix
+            );
+            using (
+                LocalMemoryStream baseStream = await LocalMemoryStream.readAppFileAsync(fileName)
+            )
             using (Stream cs = CreateStream(baseStream, CompressionMode.Decompress))
             {
                 int _bufferSize = 2048;
                 var bytes = new byte[_bufferSize];
-                Assert.Throws<InvalidDataException>(() => { cs.Read(bytes, 0, _bufferSize); });
+                Assert.Throws<InvalidDataException>(
+                    () =>
+                    {
+                        cs.Read(bytes, 0, _bufferSize);
+                    }
+                );
             }
         }
 
@@ -47,25 +69,49 @@ namespace System.IO.Compression
         public void DerivedStream_ReadWriteSpan_UsesReadWriteArray()
         {
             var ms = new MemoryStream();
-            using (var compressor = new DerivedDeflateStream(ms, CompressionMode.Compress, leaveOpen: true))
+            using (
+                var compressor = new DerivedDeflateStream(
+                    ms,
+                    CompressionMode.Compress,
+                    leaveOpen: true
+                )
+            )
             {
                 compressor.Write(new Span<byte>(new byte[1]));
                 Assert.True(compressor.WriteArrayInvoked);
             }
             ms.Position = 0;
-            using (var compressor = new DerivedDeflateStream(ms, CompressionMode.Decompress, leaveOpen: true))
+            using (
+                var compressor = new DerivedDeflateStream(
+                    ms,
+                    CompressionMode.Decompress,
+                    leaveOpen: true
+                )
+            )
             {
                 compressor.Read(new Span<byte>(new byte[1]));
                 Assert.True(compressor.ReadArrayInvoked);
             }
             ms.Position = 0;
-            using (var compressor = new DerivedDeflateStream(ms, CompressionMode.Decompress, leaveOpen: true))
+            using (
+                var compressor = new DerivedDeflateStream(
+                    ms,
+                    CompressionMode.Decompress,
+                    leaveOpen: true
+                )
+            )
             {
                 compressor.ReadAsync(new Memory<byte>(new byte[1])).AsTask().Wait();
                 Assert.True(compressor.ReadArrayInvoked);
             }
             ms.Position = 0;
-            using (var compressor = new DerivedDeflateStream(ms, CompressionMode.Compress, leaveOpen: true))
+            using (
+                var compressor = new DerivedDeflateStream(
+                    ms,
+                    CompressionMode.Compress,
+                    leaveOpen: true
+                )
+            )
             {
                 compressor.WriteAsync(new ReadOnlyMemory<byte>(new byte[1])).AsTask().Wait();
                 Assert.True(compressor.WriteArrayInvoked);
@@ -74,8 +120,10 @@ namespace System.IO.Compression
 
         private sealed class DerivedDeflateStream : DeflateStream
         {
-            public bool ReadArrayInvoked = false, WriteArrayInvoked = false;
-            internal DerivedDeflateStream(Stream stream, CompressionMode mode, bool leaveOpen) : base(stream, mode, leaveOpen) { }
+            public bool ReadArrayInvoked = false,
+                WriteArrayInvoked = false;
+            internal DerivedDeflateStream(Stream stream, CompressionMode mode, bool leaveOpen)
+                : base(stream, mode, leaveOpen) { }
 
             public override int Read(byte[] buffer, int offset, int count)
             {
@@ -83,7 +131,12 @@ namespace System.IO.Compression
                 return base.Read(buffer, offset, count);
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 ReadArrayInvoked = true;
                 return base.ReadAsync(buffer, offset, count, cancellationToken);
@@ -95,7 +148,12 @@ namespace System.IO.Compression
                 base.Write(buffer, offset, count);
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 WriteArrayInvoked = true;
                 return base.WriteAsync(buffer, offset, count, cancellationToken);

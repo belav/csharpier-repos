@@ -47,7 +47,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             var descriptor = new DefaultAllowedChildTagDescriptor(
                 Name,
                 displayName,
-                diagnostics.ToArray());
+                diagnostics.ToArray()
+            );
 
             return descriptor;
         }
@@ -56,7 +57,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidRestrictedChildNullOrWhitespace(_parent.GetDisplayName());
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidRestrictedChildNullOrWhitespace(
+                        _parent.GetDisplayName()
+                    );
 
                 yield return diagnostic;
             }
@@ -64,9 +68,17 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 foreach (var character in Name)
                 {
-                    if (char.IsWhiteSpace(character) || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character))
+                    if (
+                        char.IsWhiteSpace(character)
+                        || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character)
+                    )
                     {
-                        var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidRestrictedChild(_parent.GetDisplayName(), Name, character);
+                        var diagnostic =
+                            RazorDiagnosticFactory.CreateTagHelper_InvalidRestrictedChild(
+                                _parent.GetDisplayName(),
+                                Name,
+                                character
+                            );
 
                         yield return diagnostic;
                     }

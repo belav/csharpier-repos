@@ -41,9 +41,11 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             return Context.ConnectionId;
         }
 
-        public ChannelReader<string> StreamEcho(ChannelReader<string> source) => TestHubMethodsImpl.StreamEcho(source);
+        public ChannelReader<string> StreamEcho(ChannelReader<string> source) =>
+            TestHubMethodsImpl.StreamEcho(source);
 
-        public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) => TestHubMethodsImpl.StreamEchoInt(source);
+        public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) =>
+            TestHubMethodsImpl.StreamEchoInt(source);
 
         public IAsyncEnumerable<int> StreamIAsyncConsumer(IAsyncEnumerable<int> source) => source;
 
@@ -110,9 +112,7 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         {
             public Unserializable Child { get; private set; }
 
-            private Unserializable()
-            {
-            }
+            private Unserializable() { }
 
             internal static Unserializable Create()
             {
@@ -151,9 +151,11 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             return Context.ConnectionId;
         }
 
-        public ChannelReader<string> StreamEcho(ChannelReader<string> source) => TestHubMethodsImpl.StreamEcho(source);
+        public ChannelReader<string> StreamEcho(ChannelReader<string> source) =>
+            TestHubMethodsImpl.StreamEcho(source);
 
-        public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) => TestHubMethodsImpl.StreamEchoInt(source);
+        public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) =>
+            TestHubMethodsImpl.StreamEchoInt(source);
 
         public IAsyncEnumerable<int> StreamIAsyncConsumer(IAsyncEnumerable<int> source) => source;
     }
@@ -185,9 +187,11 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
             return Context.ConnectionId;
         }
 
-        public ChannelReader<string> StreamEcho(ChannelReader<string> source) => TestHubMethodsImpl.StreamEcho(source);
+        public ChannelReader<string> StreamEcho(ChannelReader<string> source) =>
+            TestHubMethodsImpl.StreamEcho(source);
 
-        public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) => TestHubMethodsImpl.StreamEchoInt(source);
+        public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) =>
+            TestHubMethodsImpl.StreamEchoInt(source);
 
         public IAsyncEnumerable<int> StreamIAsyncConsumer(IAsyncEnumerable<int> source) => source;
     }
@@ -208,16 +212,18 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         {
             var channel = Channel.CreateUnbounded<int>();
 
-            Task.Run(async () =>
-            {
-                for (var i = 0; i < count; i++)
+            Task.Run(
+                async () =>
                 {
-                    await channel.Writer.WriteAsync(i);
-                    await Task.Delay(20);
-                }
+                    for (var i = 0; i < count; i++)
+                    {
+                        await channel.Writer.WriteAsync(i);
+                        await Task.Delay(20);
+                    }
 
-                channel.Writer.TryComplete();
-            });
+                    channel.Writer.TryComplete();
+                }
+            );
 
             return channel.Reader;
         }
@@ -232,23 +238,25 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         public static ChannelReader<string> StreamEcho(ChannelReader<string> source)
         {
             var output = Channel.CreateUnbounded<string>();
-            _ = Task.Run(async () =>
-            {
-                try
+            _ = Task.Run(
+                async () =>
                 {
-                    while (await source.WaitToReadAsync())
+                    try
                     {
-                        while (source.TryRead(out var item))
+                        while (await source.WaitToReadAsync())
                         {
-                            await output.Writer.WriteAsync(item);
+                            while (source.TryRead(out var item))
+                            {
+                                await output.Writer.WriteAsync(item);
+                            }
                         }
                     }
+                    finally
+                    {
+                        output.Writer.TryComplete();
+                    }
                 }
-                finally
-                {
-                    output.Writer.TryComplete();
-                }
-            });
+            );
 
             return output.Reader;
         }
@@ -256,23 +264,25 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
         public static ChannelReader<int> StreamEchoInt(ChannelReader<int> source)
         {
             var output = Channel.CreateUnbounded<int>();
-            _ = Task.Run(async () =>
-            {
-                try
+            _ = Task.Run(
+                async () =>
                 {
-                    while (await source.WaitToReadAsync())
+                    try
                     {
-                        while (source.TryRead(out var item))
+                        while (await source.WaitToReadAsync())
                         {
-                            await output.Writer.WriteAsync(item);
+                            while (source.TryRead(out var item))
+                            {
+                                await output.Writer.WriteAsync(item);
+                            }
                         }
                     }
+                    finally
+                    {
+                        output.Writer.TryComplete();
+                    }
                 }
-                finally
-                {
-                    output.Writer.TryComplete();
-                }
-            });
+            );
 
             return output.Reader;
         }

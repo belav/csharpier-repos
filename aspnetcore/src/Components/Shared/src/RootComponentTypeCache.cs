@@ -23,14 +23,19 @@ namespace Microsoft.AspNetCore.Components
             }
             else
             {
-                return _typeToKeyLookUp.GetOrAdd(key, ResolveType, AppDomain.CurrentDomain.GetAssemblies());
+                return _typeToKeyLookUp.GetOrAdd(
+                    key,
+                    ResolveType,
+                    AppDomain.CurrentDomain.GetAssemblies()
+                );
             }
         }
 
         private static Type? ResolveType(Key key, Assembly[] assemblies)
         {
-            var assembly = assemblies
-                .FirstOrDefault(a => string.Equals(a.GetName().Name, key.Assembly, StringComparison.Ordinal));
+            var assembly = assemblies.FirstOrDefault(
+                a => string.Equals(a.GetName().Name, key.Assembly, StringComparison.Ordinal)
+            );
 
             if (assembly == null)
             {
@@ -42,8 +47,7 @@ namespace Microsoft.AspNetCore.Components
 
         private readonly struct Key : IEquatable<Key>
         {
-            public Key(string assembly, string type) =>
-                (Assembly, Type) = (assembly, type);
+            public Key(string assembly, string type) => (Assembly, Type) = (assembly, type);
 
             public string Assembly { get; }
 
@@ -51,8 +55,9 @@ namespace Microsoft.AspNetCore.Components
 
             public override bool Equals(object? obj) => obj is Key key && Equals(key);
 
-            public bool Equals(Key other) => string.Equals(Assembly, other.Assembly, StringComparison.Ordinal) &&
-                string.Equals(Type, other.Type, StringComparison.Ordinal);
+            public bool Equals(Key other) =>
+                string.Equals(Assembly, other.Assembly, StringComparison.Ordinal)
+                && string.Equals(Type, other.Type, StringComparison.Ordinal);
 
             public override int GetHashCode() => HashCode.Combine(Assembly, Type);
         }

@@ -10,19 +10,18 @@ namespace System.Data
 {
     internal sealed class DataExpression : IFilter
     {
-        internal string? _originalExpression;  // original, unoptimized string
+        internal string? _originalExpression; // original, unoptimized string
 
         private readonly bool _parsed;
         private bool _bound;
         private ExpressionNode? _expr;
         private DataTable? _table;
         private readonly StorageType _storageType;
-        private readonly Type? _dataType;  // This set if the expression is part of ExpressionCoulmn
+        private readonly Type? _dataType; // This set if the expression is part of ExpressionCoulmn
         private DataColumn[] _dependency = Array.Empty<DataColumn>();
 
-        internal DataExpression(DataTable? table, string? expression) : this(table, expression, null)
-        {
-        }
+        internal DataExpression(DataTable? table, string? expression)
+            : this(table, expression, null) { }
 
         internal DataExpression(DataTable? table, string? expression, Type? type)
         {
@@ -65,18 +64,12 @@ namespace System.Data
 
         internal ExpressionNode? ExpressionNode
         {
-            get
-            {
-                return _expr;
-            }
+            get { return _expr; }
         }
 
         internal bool HasValue
         {
-            get
-            {
-                return (null != _expr);
-            }
+            get { return (null != _expr); }
         }
 
         internal void Bind(DataTable? table)
@@ -136,7 +129,12 @@ namespace System.Data
                         if (StorageType.Object != _storageType)
                         {
                             // TODO: _dataType can be null, probably a bug
-                            result = SqlConvert.ChangeType2(result, _storageType, _dataType!, _table!.FormatProvider);
+                            result = SqlConvert.ChangeType2(
+                                result,
+                                _storageType,
+                                _dataType!,
+                                _table!.FormatProvider
+                            );
                         }
                     }
                     catch (Exception e) when (ADP.IsCatchableExceptionType(e))
@@ -157,7 +155,6 @@ namespace System.Data
         {
             return Evaluate(rows, DataRowVersion.Default);
         }
-
 
         internal object Evaluate(DataRow[] rows, DataRowVersion version)
         {
@@ -209,7 +206,10 @@ namespace System.Data
 
         internal DataColumn[] GetDependency()
         {
-            Debug.Assert(_dependency != null, "GetDependencies: null, we should have created an empty list");
+            Debug.Assert(
+                _dependency != null,
+                "GetDependencies: null, we should have created an empty list"
+            );
             return _dependency;
         }
 

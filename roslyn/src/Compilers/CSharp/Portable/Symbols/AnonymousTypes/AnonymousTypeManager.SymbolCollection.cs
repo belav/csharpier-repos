@@ -25,32 +25,77 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ReportErrorOnSymbol(System_String, diagnostics, ref hasErrors);
             ReportErrorOnSymbol(System_Int32, diagnostics, ref hasErrors);
 
-            ReportErrorOnSpecialMember(System_Object__Equals, SpecialMember.System_Object__Equals, diagnostics, ref hasErrors);
-            ReportErrorOnSpecialMember(System_Object__ToString, SpecialMember.System_Object__ToString, diagnostics, ref hasErrors);
-            ReportErrorOnSpecialMember(System_Object__GetHashCode, SpecialMember.System_Object__GetHashCode, diagnostics, ref hasErrors);
-            ReportErrorOnWellKnownMember(System_String__Format_IFormatProvider, WellKnownMember.System_String__Format_IFormatProvider, diagnostics, ref hasErrors);
+            ReportErrorOnSpecialMember(
+                System_Object__Equals,
+                SpecialMember.System_Object__Equals,
+                diagnostics,
+                ref hasErrors
+            );
+            ReportErrorOnSpecialMember(
+                System_Object__ToString,
+                SpecialMember.System_Object__ToString,
+                diagnostics,
+                ref hasErrors
+            );
+            ReportErrorOnSpecialMember(
+                System_Object__GetHashCode,
+                SpecialMember.System_Object__GetHashCode,
+                diagnostics,
+                ref hasErrors
+            );
+            ReportErrorOnWellKnownMember(
+                System_String__Format_IFormatProvider,
+                WellKnownMember.System_String__Format_IFormatProvider,
+                diagnostics,
+                ref hasErrors
+            );
 
             // optional synthesized attributes:
-            Debug.Assert(WellKnownMembers.IsSynthesizedAttributeOptional(WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor));
-            Debug.Assert(WellKnownMembers.IsSynthesizedAttributeOptional(WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor));
-            Debug.Assert(WellKnownMembers.IsSynthesizedAttributeOptional(WellKnownMember.System_Diagnostics_DebuggerBrowsableAttribute__ctor));
+            Debug.Assert(
+                WellKnownMembers.IsSynthesizedAttributeOptional(
+                    WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                )
+            );
+            Debug.Assert(
+                WellKnownMembers.IsSynthesizedAttributeOptional(
+                    WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
+                )
+            );
+            Debug.Assert(
+                WellKnownMembers.IsSynthesizedAttributeOptional(
+                    WellKnownMember.System_Diagnostics_DebuggerBrowsableAttribute__ctor
+                )
+            );
 
-            ReportErrorOnWellKnownMember(System_Collections_Generic_EqualityComparer_T__Equals,
-                                         WellKnownMember.System_Collections_Generic_EqualityComparer_T__Equals,
-                                         diagnostics, ref hasErrors);
-            ReportErrorOnWellKnownMember(System_Collections_Generic_EqualityComparer_T__GetHashCode,
-                                         WellKnownMember.System_Collections_Generic_EqualityComparer_T__GetHashCode,
-                                         diagnostics, ref hasErrors);
-            ReportErrorOnWellKnownMember(System_Collections_Generic_EqualityComparer_T__get_Default,
-                                         WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default,
-                                         diagnostics, ref hasErrors);
+            ReportErrorOnWellKnownMember(
+                System_Collections_Generic_EqualityComparer_T__Equals,
+                WellKnownMember.System_Collections_Generic_EqualityComparer_T__Equals,
+                diagnostics,
+                ref hasErrors
+            );
+            ReportErrorOnWellKnownMember(
+                System_Collections_Generic_EqualityComparer_T__GetHashCode,
+                WellKnownMember.System_Collections_Generic_EqualityComparer_T__GetHashCode,
+                diagnostics,
+                ref hasErrors
+            );
+            ReportErrorOnWellKnownMember(
+                System_Collections_Generic_EqualityComparer_T__get_Default,
+                WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default,
+                diagnostics,
+                ref hasErrors
+            );
 
             return hasErrors;
         }
 
         #region Error reporting implementation
 
-        private static void ReportErrorOnSymbol(Symbol symbol, BindingDiagnosticBag diagnostics, ref bool hasError)
+        private static void ReportErrorOnSymbol(
+            Symbol symbol,
+            BindingDiagnosticBag diagnostics,
+            ref bool hasError
+        )
         {
             if ((object)symbol == null)
             {
@@ -60,13 +105,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             hasError |= diagnostics.ReportUseSite(symbol, NoLocation.Singleton);
         }
 
-        private static void ReportErrorOnSpecialMember(Symbol symbol, SpecialMember member, BindingDiagnosticBag diagnostics, ref bool hasError)
+        private static void ReportErrorOnSpecialMember(
+            Symbol symbol,
+            SpecialMember member,
+            BindingDiagnosticBag diagnostics,
+            ref bool hasError
+        )
         {
             if ((object)symbol == null)
             {
                 MemberDescriptor memberDescriptor = SpecialMembers.GetDescriptor(member);
-                diagnostics.Add(ErrorCode.ERR_MissingPredefinedMember, NoLocation.Singleton,
-                    memberDescriptor.DeclaringTypeMetadataName, memberDescriptor.Name);
+                diagnostics.Add(
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    NoLocation.Singleton,
+                    memberDescriptor.DeclaringTypeMetadataName,
+                    memberDescriptor.Name
+                );
                 hasError = true;
             }
             else
@@ -75,13 +129,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        private static void ReportErrorOnWellKnownMember(Symbol symbol, WellKnownMember member, BindingDiagnosticBag diagnostics, ref bool hasError)
+        private static void ReportErrorOnWellKnownMember(
+            Symbol symbol,
+            WellKnownMember member,
+            BindingDiagnosticBag diagnostics,
+            ref bool hasError
+        )
         {
             if ((object)symbol == null)
             {
                 MemberDescriptor memberDescriptor = WellKnownMembers.GetDescriptor(member);
-                diagnostics.Add(ErrorCode.ERR_MissingPredefinedMember, NoLocation.Singleton,
-                    memberDescriptor.DeclaringTypeMetadataName, memberDescriptor.Name);
+                diagnostics.Add(
+                    ErrorCode.ERR_MissingPredefinedMember,
+                    NoLocation.Singleton,
+                    memberDescriptor.DeclaringTypeMetadataName,
+                    memberDescriptor.Name
+                );
                 hasError = true;
             }
             else
@@ -122,44 +185,81 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public NamedTypeSymbol System_Diagnostics_DebuggerBrowsableState
         {
-            get { return Compilation.GetWellKnownType(WellKnownType.System_Diagnostics_DebuggerBrowsableState); }
+            get
+            {
+                return Compilation.GetWellKnownType(
+                    WellKnownType.System_Diagnostics_DebuggerBrowsableState
+                );
+            }
         }
 
         public MethodSymbol System_Object__Equals
         {
-            get { return this.Compilation.GetSpecialTypeMember(SpecialMember.System_Object__Equals) as MethodSymbol; }
+            get
+            {
+                return this.Compilation.GetSpecialTypeMember(SpecialMember.System_Object__Equals)
+                    as MethodSymbol;
+            }
         }
 
         public MethodSymbol System_Object__ToString
         {
-            get { return this.Compilation.GetSpecialTypeMember(SpecialMember.System_Object__ToString) as MethodSymbol; }
+            get
+            {
+                return this.Compilation.GetSpecialTypeMember(SpecialMember.System_Object__ToString)
+                    as MethodSymbol;
+            }
         }
 
         public MethodSymbol System_Object__GetHashCode
         {
-            get { return this.Compilation.GetSpecialTypeMember(SpecialMember.System_Object__GetHashCode) as MethodSymbol; }
+            get
+            {
+                return this.Compilation.GetSpecialTypeMember(
+                        SpecialMember.System_Object__GetHashCode
+                    ) as MethodSymbol;
+            }
         }
 
         public MethodSymbol System_Collections_Generic_EqualityComparer_T__Equals
         {
-            get { return this.Compilation.GetWellKnownTypeMember(WellKnownMember.System_Collections_Generic_EqualityComparer_T__Equals) as MethodSymbol; }
+            get
+            {
+                return this.Compilation.GetWellKnownTypeMember(
+                        WellKnownMember.System_Collections_Generic_EqualityComparer_T__Equals
+                    ) as MethodSymbol;
+            }
         }
 
         public MethodSymbol System_Collections_Generic_EqualityComparer_T__GetHashCode
         {
-            get { return this.Compilation.GetWellKnownTypeMember(WellKnownMember.System_Collections_Generic_EqualityComparer_T__GetHashCode) as MethodSymbol; }
+            get
+            {
+                return this.Compilation.GetWellKnownTypeMember(
+                        WellKnownMember.System_Collections_Generic_EqualityComparer_T__GetHashCode
+                    ) as MethodSymbol;
+            }
         }
 
         public MethodSymbol System_Collections_Generic_EqualityComparer_T__get_Default
         {
-            get { return this.Compilation.GetWellKnownTypeMember(WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default) as MethodSymbol; }
+            get
+            {
+                return this.Compilation.GetWellKnownTypeMember(
+                        WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default
+                    ) as MethodSymbol;
+            }
         }
 
         public MethodSymbol System_String__Format_IFormatProvider
         {
-            get { return this.Compilation.GetWellKnownTypeMember(WellKnownMember.System_String__Format_IFormatProvider) as MethodSymbol; }
+            get
+            {
+                return this.Compilation.GetWellKnownTypeMember(
+                        WellKnownMember.System_String__Format_IFormatProvider
+                    ) as MethodSymbol;
+            }
         }
-
         #endregion
     }
 }

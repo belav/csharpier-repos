@@ -13,9 +13,7 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     [Collection(PublishedSitesCollection.Name)]
     public class AppOfflineIISExpressTests : IISFunctionalTestBase
     {
-        public AppOfflineIISExpressTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public AppOfflineIISExpressTests(PublishedSitesFixture fixture) : base(fixture) { }
 
         [ConditionalFact]
         public async Task AppOfflineDroppedWhileSiteStarting_SiteShutsDown_InProcess()
@@ -54,7 +52,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     {
                         // For IISExpress, we need to catch the exception because IISExpress will not restart a process if it crashed.
                         // RemoveAppOffline will fail due to a bad request exception as the server is down.
-                        Assert.Contains(TestSink.Writes, context => context.Message.Contains("Drained all requests, notifying managed."));
+                        Assert.Contains(
+                            TestSink.Writes,
+                            context =>
+                                context.Message.Contains("Drained all requests, notifying managed.")
+                        );
                         deploymentResult.AssertWorkerProcessStop();
                         return;
                     }

@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.FunctionalTests
         private readonly Lazy<bool> _isDelegateSupported = new Lazy<bool>(CanDelegate);
         public bool IsMet => (_isDelegateSupported.Value == _isSupported);
 
-        public string SkipReason => $"Http.Sys does {(_isSupported ? "not" : "")} support delegating requests";
+        public string SkipReason =>
+            $"Http.Sys does {(_isSupported ? "not" : "")} support delegating requests";
 
         private static bool CanDelegate()
         {

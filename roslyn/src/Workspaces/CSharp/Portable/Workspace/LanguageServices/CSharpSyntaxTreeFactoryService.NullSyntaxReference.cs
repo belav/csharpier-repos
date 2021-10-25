@@ -24,25 +24,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 private readonly SyntaxTree _tree;
 
-                public NullSyntaxReference(SyntaxTree tree)
-                    => _tree = tree;
+                public NullSyntaxReference(SyntaxTree tree) => _tree = tree;
 
                 public override SyntaxTree SyntaxTree
                 {
-                    get
-                    {
-                        return _tree;
-                    }
+                    get { return _tree; }
                 }
 
-                public override SyntaxNode GetSyntax(CancellationToken cancellationToken)
-                    => null;
+                public override SyntaxNode GetSyntax(CancellationToken cancellationToken) => null;
 
                 public override TextSpan Span
                 {
                     get
                     {
-                        throw new NotSupportedException(CSharpWorkspaceResources.Cannot_retrieve_the_Span_of_a_null_syntax_reference);
+                        throw new NotSupportedException(
+                            CSharpWorkspaceResources.Cannot_retrieve_the_Span_of_a_null_syntax_reference
+                        );
                     }
                 }
             }

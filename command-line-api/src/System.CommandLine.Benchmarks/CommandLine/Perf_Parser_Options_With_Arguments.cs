@@ -17,19 +17,25 @@ namespace System.CommandLine.Benchmarks.CommandLine
         private string _testSymbolsAsString;
         private Parser _testParser;
 
-        private IEnumerable<Option> GenerateTestOptions(int count, IArgumentArity arity)
-            => Enumerable.Range(0, count)
-                         .Select(i => new Option($"-option{i}", arity: arity)
-                             {
-                                 Description = $"Description for -option {i} ...."
-                             }
-                         );
+        private IEnumerable<Option> GenerateTestOptions(int count, IArgumentArity arity) =>
+            Enumerable
+                .Range(0, count)
+                .Select(
+                    i =>
+                        new Option($"-option{i}", arity: arity)
+                        {
+                            Description = $"Description for -option {i} ...."
+                        }
+                );
 
         /// <remarks>
         /// For optionsCount: 5, argumentsCount: 5 will return:
         /// -option0 arg0..arg4 -option1 arg0..arg4 ... -option4 arg0..arg4
         /// </remarks>
-        private string GenerateTestOptionsWithArgumentsAsStringExpr(int optionsCount, int argumentsCount)
+        private string GenerateTestOptionsWithArgumentsAsStringExpr(
+            int optionsCount,
+            int argumentsCount
+        )
         {
             var arguments = Enumerable
                 .Range(0, argumentsCount)
@@ -51,12 +57,17 @@ namespace System.CommandLine.Benchmarks.CommandLine
         [GlobalSetup(Target = nameof(ParserFromOptionsWithArguments_Parse))]
         public void SetupParserFromOptionsWithArguments_Parse()
         {
-            var testSymbolsArr = GenerateTestOptions(TestOptionsCount, ArgumentArity.OneOrMore).ToArray();
+            var testSymbolsArr = GenerateTestOptions(TestOptionsCount, ArgumentArity.OneOrMore)
+                .ToArray();
             _testParser = new Parser(testSymbolsArr);
-            _testSymbolsAsString = GenerateTestOptionsWithArgumentsAsStringExpr(testSymbolsArr.Length, TestArgumentsCount);
+            _testSymbolsAsString = GenerateTestOptionsWithArgumentsAsStringExpr(
+                testSymbolsArr.Length,
+                TestArgumentsCount
+            );
         }
 
         [Benchmark]
-        public ParseResult ParserFromOptionsWithArguments_Parse() => _testParser.Parse(_testSymbolsAsString);
+        public ParseResult ParserFromOptionsWithArguments_Parse() =>
+            _testParser.Parse(_testSymbolsAsString);
     }
 }

@@ -10,11 +10,14 @@ namespace Microsoft.AspNetCore.Razor.Language
 {
     internal class DirectiveTokenEditHandler : SpanEditHandler
     {
-        public DirectiveTokenEditHandler(Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer) : base(tokenizer)
-        {
-        }
+        public DirectiveTokenEditHandler(
+            Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer
+        ) : base(tokenizer) { }
 
-        protected override PartialParseResultInternal CanAcceptChange(SyntaxNode target, SourceChange change)
+        protected override PartialParseResultInternal CanAcceptChange(
+            SyntaxNode target,
+            SourceChange change
+        )
         {
             if (AcceptedCharacters == AcceptedCharactersInternal.NonWhitespace)
             {
@@ -26,7 +29,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                     // Did not modify whitespace, directive format should be the same.
                     // Return provisional so extensible IR/code gen pieces can see the full directive text
                     // once the user stops editing the document.
-                    return PartialParseResultInternal.Accepted | PartialParseResultInternal.Provisional;
+                    return PartialParseResultInternal.Accepted
+                        | PartialParseResultInternal.Provisional;
                 }
             }
 

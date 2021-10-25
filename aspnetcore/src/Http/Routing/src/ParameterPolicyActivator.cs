@@ -19,8 +19,8 @@ namespace Microsoft.AspNetCore.Routing
             IDictionary<string, Type> inlineParameterPolicyMap,
             IServiceProvider serviceProvider,
             string inlineParameterPolicy,
-            out string parameterPolicyKey)
-            where T : IParameterPolicy
+            out string parameterPolicyKey
+        ) where T : IParameterPolicy
         {
             // IServiceProvider could be null
             // DefaultInlineConstraintResolver can be created without an IServiceProvider and then call this method
@@ -37,12 +37,16 @@ namespace Microsoft.AspNetCore.Routing
 
             string argumentString;
             var indexOfFirstOpenParens = inlineParameterPolicy.IndexOf('(');
-            if (indexOfFirstOpenParens >= 0 && inlineParameterPolicy.EndsWith(")", StringComparison.Ordinal))
+            if (
+                indexOfFirstOpenParens >= 0
+                && inlineParameterPolicy.EndsWith(")", StringComparison.Ordinal)
+            )
             {
                 parameterPolicyKey = inlineParameterPolicy.Substring(0, indexOfFirstOpenParens);
                 argumentString = inlineParameterPolicy.Substring(
                     indexOfFirstOpenParens + 1,
-                    inlineParameterPolicy.Length - indexOfFirstOpenParens - 2);
+                    inlineParameterPolicy.Length - indexOfFirstOpenParens - 2
+                );
             }
             else
             {
@@ -50,7 +54,12 @@ namespace Microsoft.AspNetCore.Routing
                 argumentString = null;
             }
 
-            if (!inlineParameterPolicyMap.TryGetValue(parameterPolicyKey, out var parameterPolicyType))
+            if (
+                !inlineParameterPolicyMap.TryGetValue(
+                    parameterPolicyKey,
+                    out var parameterPolicyType
+                )
+            )
             {
                 return default;
             }
@@ -61,8 +70,12 @@ namespace Microsoft.AspNetCore.Routing
                 {
                     // Error if type is not a parameter policy
                     throw new RouteCreationException(
-                                Resources.FormatDefaultInlineConstraintResolver_TypeNotConstraint(
-                                                            parameterPolicyType, parameterPolicyKey, typeof(T).Name));
+                        Resources.FormatDefaultInlineConstraintResolver_TypeNotConstraint(
+                            parameterPolicyType,
+                            parameterPolicyKey,
+                            typeof(T).Name
+                        )
+                    );
                 }
 
                 // Return null if type is parameter policy but is not the exact type
@@ -73,7 +86,11 @@ namespace Microsoft.AspNetCore.Routing
 
             try
             {
-                return (T)CreateParameterPolicy(serviceProvider, parameterPolicyType, argumentString);
+                return (T)CreateParameterPolicy(
+                    serviceProvider,
+                    parameterPolicyType,
+                    argumentString
+                );
             }
             catch (RouteCreationException)
             {
@@ -83,12 +100,21 @@ namespace Microsoft.AspNetCore.Routing
             {
                 throw new RouteCreationException(
                     $"An error occurred while trying to create an instance of '{parameterPolicyType.FullName}'.",
-                    exception);
+                    exception
+                );
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2006:UnrecognizedReflectionPattern", Justification = "This type comes from the ConstraintMap.")]
-        private static IParameterPolicy CreateParameterPolicy(IServiceProvider serviceProvider, Type parameterPolicyType, string argumentString)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2006:UnrecognizedReflectionPattern",
+            Justification = "This type comes from the ConstraintMap."
+        )]
+        private static IParameterPolicy CreateParameterPolicy(
+            IServiceProvider serviceProvider,
+            Type parameterPolicyType,
+            string argumentString
+        )
         {
             ConstructorInfo activationConstructor = null;
             object[] parameters = null;
@@ -96,14 +122,26 @@ namespace Microsoft.AspNetCore.Routing
 
             // If there is only one constructor and it has a single parameter, pass the argument string directly
             // This is necessary for the Regex RouteConstraint to ensure that patterns are not split on commas.
-            if (constructors.Length == 1 && GetNonConvertableParameterTypeCount(serviceProvider, constructors[0].GetParameters()) == 1)
+            if (
+                constructors.Length == 1
+                && GetNonConvertableParameterTypeCount(
+                    serviceProvider,
+                    constructors[0].GetParameters()
+                ) == 1
+            )
             {
                 activationConstructor = constructors[0];
-                parameters = ConvertArguments(serviceProvider, activationConstructor.GetParameters(), new string[] { argumentString });
+                parameters = ConvertArguments(
+                    serviceProvider,
+                    activationConstructor.GetParameters(),
+                    new string[] { argumentString }
+                );
             }
             else
             {
-                var arguments = argumentString?.Split(',', StringSplitOptions.TrimEntries) ?? Array.Empty<string>();
+                var arguments =
+                    argumentString?.Split(',', StringSplitOptions.TrimEntries)
+                    ?? Array.Empty<string>();
 
                 // We want to find the constructors that match the number of passed in arguments
                 // We either want a single match, or a single best match. The best match is the one with the most
@@ -111,39 +149,59 @@ namespace Microsoft.AspNetCore.Routing
                 //
                 // For example, ctor(string, IService) will beat ctor(string)
                 var matchingConstructors = constructors
-                    .Where(ci => GetNonConvertableParameterTypeCount(serviceProvider, ci.GetParameters()) == arguments.Length)
+                    .Where(
+                        ci =>
+                            GetNonConvertableParameterTypeCount(serviceProvider, ci.GetParameters())
+                            == arguments.Length
+                    )
                     .OrderByDescending(ci => ci.GetParameters().Length)
                     .ToArray();
 
                 if (matchingConstructors.Length == 0)
                 {
                     throw new RouteCreationException(
-                                Resources.FormatDefaultInlineConstraintResolver_CouldNotFindCtor(
-                                                       parameterPolicyType.Name, arguments.Length));
+                        Resources.FormatDefaultInlineConstraintResolver_CouldNotFindCtor(
+                            parameterPolicyType.Name,
+                            arguments.Length
+                        )
+                    );
                 }
                 else
                 {
                     // When there are multiple matching constructors, choose the one with the most service arguments
-                    if (matchingConstructors.Length == 1
-                        || matchingConstructors[0].GetParameters().Length > matchingConstructors[1].GetParameters().Length)
+                    if (
+                        matchingConstructors.Length == 1
+                        || matchingConstructors[0].GetParameters().Length
+                            > matchingConstructors[1].GetParameters().Length
+                    )
                     {
                         activationConstructor = matchingConstructors[0];
                     }
                     else
                     {
                         throw new RouteCreationException(
-                                    Resources.FormatDefaultInlineConstraintResolver_AmbiguousCtors(
-                                                           parameterPolicyType.Name, matchingConstructors[0].GetParameters().Length));
+                            Resources.FormatDefaultInlineConstraintResolver_AmbiguousCtors(
+                                parameterPolicyType.Name,
+                                matchingConstructors[0].GetParameters().Length
+                            )
+                        );
                     }
 
-                    parameters = ConvertArguments(serviceProvider, activationConstructor.GetParameters(), arguments);
+                    parameters = ConvertArguments(
+                        serviceProvider,
+                        activationConstructor.GetParameters(),
+                        arguments
+                    );
                 }
             }
 
             return (IParameterPolicy)activationConstructor.Invoke(parameters);
         }
 
-        private static int GetNonConvertableParameterTypeCount(IServiceProvider serviceProvider, ParameterInfo[] parameters)
+        private static int GetNonConvertableParameterTypeCount(
+            IServiceProvider serviceProvider,
+            ParameterInfo[] parameters
+        )
         {
             if (serviceProvider == null)
             {
@@ -162,7 +220,11 @@ namespace Microsoft.AspNetCore.Routing
             return count;
         }
 
-        private static object[] ConvertArguments(IServiceProvider serviceProvider, ParameterInfo[] parameterInfos, string[] arguments)
+        private static object[] ConvertArguments(
+            IServiceProvider serviceProvider,
+            ParameterInfo[] parameterInfos,
+            string[] arguments
+        )
         {
             var parameters = new object[parameterInfos.Length];
             var argumentPosition = 0;
@@ -171,13 +233,19 @@ namespace Microsoft.AspNetCore.Routing
                 var parameter = parameterInfos[i];
                 var parameterType = parameter.ParameterType;
 
-                if (serviceProvider != null && !typeof(IConvertible).IsAssignableFrom(parameterType))
+                if (
+                    serviceProvider != null && !typeof(IConvertible).IsAssignableFrom(parameterType)
+                )
                 {
                     parameters[i] = serviceProvider.GetRequiredService(parameterType);
                 }
                 else
                 {
-                    parameters[i] = Convert.ChangeType(arguments[argumentPosition], parameterType, CultureInfo.InvariantCulture);
+                    parameters[i] = Convert.ChangeType(
+                        arguments[argumentPosition],
+                        parameterType,
+                        CultureInfo.InvariantCulture
+                    );
                     argumentPosition++;
                 }
             }

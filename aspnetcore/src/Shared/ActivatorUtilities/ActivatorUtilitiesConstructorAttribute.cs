@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.Internal
     // dependency on Microsoft.AspNetCore.DependencyInjection.Abstractions.
     internal
 #endif
-    class ActivatorUtilitiesConstructorAttribute: Attribute
+    class ActivatorUtilitiesConstructorAttribute : Attribute
     {
     }
 }

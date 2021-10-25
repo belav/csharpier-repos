@@ -13,7 +13,8 @@ namespace DatabaseErrorPageSample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MyContext>(
-                options => options.UseSqlite($"Data Source = DatabaseErrorPageSample.db"));
+                options => options.UseSqlite($"Data Source = DatabaseErrorPageSample.db")
+            );
         }
 
         public void Configure(IApplicationBuilder app)
@@ -22,23 +23,24 @@ namespace DatabaseErrorPageSample
 #pragma warning disable CS0618 // Type or member is obsolete
             app.UseDatabaseErrorPage();
 #pragma warning restore CS0618 // Type or member is obsolete
-            app.Run(context =>
-            {
-                context.RequestServices.GetService<MyContext>().Blog.FirstOrDefault();
-                return Task.FromResult(0);
-            });
+            app.Run(
+                context =>
+                {
+                    context.RequestServices.GetService<MyContext>().Blog.FirstOrDefault();
+                    return Task.FromResult(0);
+                }
+            );
         }
 
         public static Task Main(string[] args)
         {
             var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseKestrel()
-                    .UseIISIntegration()
-                    .UseStartup<Startup>();
-                })
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder.UseKestrel().UseIISIntegration().UseStartup<Startup>();
+                    }
+                )
                 .Build();
 
             return host.RunAsync();
@@ -47,10 +49,7 @@ namespace DatabaseErrorPageSample
 
     public class MyContext : DbContext
     {
-        public MyContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public MyContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Blog> Blog { get; set; }
     }

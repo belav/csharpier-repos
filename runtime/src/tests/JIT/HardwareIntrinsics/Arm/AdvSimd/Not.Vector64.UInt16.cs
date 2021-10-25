@@ -125,7 +125,11 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<UInt16>();
                 int sizeOfoutArray = outArray.Length * Unsafe.SizeOf<UInt16>();
-                if ((alignment != 16 && alignment != 8) || (alignment * 2) < sizeOfinArray1 || (alignment * 2) < sizeOfoutArray)
+                if (
+                    (alignment != 16 && alignment != 8)
+                    || (alignment * 2) < sizeOfinArray1
+                    || (alignment * 2) < sizeOfoutArray
+                )
                 {
                     throw new ArgumentException("Invalid value of alignment");
                 }
@@ -138,11 +142,17 @@ namespace JIT.HardwareIntrinsics.Arm
 
                 this.alignment = (ulong)alignment;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray1Ptr), ref Unsafe.As<UInt16, byte>(ref inArray1[0]), (uint)sizeOfinArray1);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray1Ptr),
+                    ref Unsafe.As<UInt16, byte>(ref inArray1[0]),
+                    (uint)sizeOfinArray1
+                );
             }
 
-            public void* inArray1Ptr => Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray1Ptr =>
+                Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outArrayPtr =>
+                Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -164,8 +174,15 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetUInt16(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<UInt16>, byte>(ref testStruct._fld1), ref Unsafe.As<UInt16, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector64<UInt16>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data1[i] = TestLibrary.Generator.GetUInt16();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector64<UInt16>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<UInt16, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector64<UInt16>>()
+                );
 
                 return testStruct;
             }
@@ -182,9 +199,7 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 fixed (Vector64<UInt16>* pFld1 = &_fld1)
                 {
-                    var result = AdvSimd.Not(
-                        AdvSimd.LoadVector64((UInt16*)(pFld1))
-                    );
+                    var result = AdvSimd.Not(AdvSimd.LoadVector64((UInt16*)(pFld1)));
 
                     Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                     testClass.ValidateResult(_fld1, testClass._dataTable.outArrayPtr);
@@ -194,8 +209,10 @@ namespace JIT.HardwareIntrinsics.Arm
 
         private static readonly int LargestVectorSize = 8;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector64<UInt16>>() / sizeof(UInt16);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector64<UInt16>>() / sizeof(UInt16);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector64<UInt16>>() / sizeof(UInt16);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector64<UInt16>>() / sizeof(UInt16);
 
         private static UInt16[] _data1 = new UInt16[Op1ElementCount];
 
@@ -207,18 +224,35 @@ namespace JIT.HardwareIntrinsics.Arm
 
         static SimpleUnaryOpTest__Not_Vector64_UInt16()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetUInt16(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<UInt16>, byte>(ref _clsVar1), ref Unsafe.As<UInt16, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector64<UInt16>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetUInt16();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector64<UInt16>, byte>(ref _clsVar1),
+                ref Unsafe.As<UInt16, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector64<UInt16>>()
+            );
         }
 
         public SimpleUnaryOpTest__Not_Vector64_UInt16()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetUInt16(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<UInt16>, byte>(ref _fld1), ref Unsafe.As<UInt16, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector64<UInt16>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetUInt16();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector64<UInt16>, byte>(ref _fld1),
+                ref Unsafe.As<UInt16, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector64<UInt16>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetUInt16(); }
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetUInt16();
+            }
             _dataTable = new DataTable(_data1, new UInt16[RetElementCount], LargestVectorSize);
         }
 
@@ -230,9 +264,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = AdvSimd.Not(
-                Unsafe.Read<Vector64<UInt16>>(_dataTable.inArray1Ptr)
-            );
+            var result = AdvSimd.Not(Unsafe.Read<Vector64<UInt16>>(_dataTable.inArray1Ptr));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
@@ -242,9 +274,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = AdvSimd.Not(
-                AdvSimd.LoadVector64((UInt16*)(_dataTable.inArray1Ptr))
-            );
+            var result = AdvSimd.Not(AdvSimd.LoadVector64((UInt16*)(_dataTable.inArray1Ptr)));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
@@ -254,10 +284,12 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd).GetMethod(nameof(AdvSimd.Not), new Type[] { typeof(Vector64<UInt16>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector64<UInt16>>(_dataTable.inArray1Ptr)
-                                     });
+            var result = typeof(AdvSimd)
+                .GetMethod(nameof(AdvSimd.Not), new Type[] { typeof(Vector64<UInt16>) })
+                .Invoke(
+                    null,
+                    new object[] { Unsafe.Read<Vector64<UInt16>>(_dataTable.inArray1Ptr) }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector64<UInt16>)(result));
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
@@ -267,10 +299,12 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd).GetMethod(nameof(AdvSimd.Not), new Type[] { typeof(Vector64<UInt16>) })
-                                     .Invoke(null, new object[] {
-                                        AdvSimd.LoadVector64((UInt16*)(_dataTable.inArray1Ptr))
-                                     });
+            var result = typeof(AdvSimd)
+                .GetMethod(nameof(AdvSimd.Not), new Type[] { typeof(Vector64<UInt16>) })
+                .Invoke(
+                    null,
+                    new object[] { AdvSimd.LoadVector64((UInt16*)(_dataTable.inArray1Ptr)) }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector64<UInt16>)(result));
             ValidateResult(_dataTable.inArray1Ptr, _dataTable.outArrayPtr);
@@ -280,9 +314,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = AdvSimd.Not(
-                _clsVar1
-            );
+            var result = AdvSimd.Not(_clsVar1);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar1, _dataTable.outArrayPtr);
@@ -294,9 +326,7 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<UInt16>* pClsVar1 = &_clsVar1)
             {
-                var result = AdvSimd.Not(
-                    AdvSimd.LoadVector64((UInt16*)(pClsVar1))
-                );
+                var result = AdvSimd.Not(AdvSimd.LoadVector64((UInt16*)(pClsVar1)));
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_clsVar1, _dataTable.outArrayPtr);
@@ -344,9 +374,7 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<UInt16>* pFld1 = &test._fld1)
             {
-                var result = AdvSimd.Not(
-                    AdvSimd.LoadVector64((UInt16*)(pFld1))
-                );
+                var result = AdvSimd.Not(AdvSimd.LoadVector64((UInt16*)(pFld1)));
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(test._fld1, _dataTable.outArrayPtr);
@@ -369,9 +397,7 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (Vector64<UInt16>* pFld1 = &_fld1)
             {
-                var result = AdvSimd.Not(
-                    AdvSimd.LoadVector64((UInt16*)(pFld1))
-                );
+                var result = AdvSimd.Not(AdvSimd.LoadVector64((UInt16*)(pFld1)));
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_fld1, _dataTable.outArrayPtr);
@@ -394,9 +420,7 @@ namespace JIT.HardwareIntrinsics.Arm
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result = AdvSimd.Not(
-                AdvSimd.LoadVector64((UInt16*)(&test._fld1))
-            );
+            var result = AdvSimd.Not(AdvSimd.LoadVector64((UInt16*)(&test._fld1)));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(test._fld1, _dataTable.outArrayPtr);
@@ -439,13 +463,21 @@ namespace JIT.HardwareIntrinsics.Arm
             }
         }
 
-        private void ValidateResult(Vector64<UInt16> op1, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector64<UInt16> op1,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref inArray1[0]), op1);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector64<UInt16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector64<UInt16>>()
+            );
 
             ValidateResult(inArray1, outArray, method);
         }
@@ -455,13 +487,25 @@ namespace JIT.HardwareIntrinsics.Arm
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref inArray1[0]), ref Unsafe.AsRef<byte>(op1), (uint)Unsafe.SizeOf<Vector64<UInt16>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector64<UInt16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref inArray1[0]),
+                ref Unsafe.AsRef<byte>(op1),
+                (uint)Unsafe.SizeOf<Vector64<UInt16>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector64<UInt16>>()
+            );
 
             ValidateResult(inArray1, outArray, method);
         }
 
-        private void ValidateResult(UInt16[] firstOp, UInt16[] result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt16[] firstOp,
+            UInt16[] result,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -476,9 +520,15 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(AdvSimd)}.{nameof(AdvSimd.Not)}<UInt16>(Vector64<UInt16>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.Not)}<UInt16>(Vector64<UInt16>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $" firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

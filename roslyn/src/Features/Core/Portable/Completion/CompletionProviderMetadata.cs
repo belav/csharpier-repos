@@ -14,10 +14,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
     {
         public string[] Roles { get; }
 
-        public CompletionProviderMetadata(IDictionary<string, object> data)
-            : base(data)
+        public CompletionProviderMetadata(IDictionary<string, object> data) : base(data)
         {
-            Roles = (string[])data.GetValueOrDefault("Roles")
+            Roles =
+                (string[])data.GetValueOrDefault("Roles")
                 ?? (string[])data.GetValueOrDefault("TextViewRoles");
         }
     }

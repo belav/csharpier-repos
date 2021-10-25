@@ -59,7 +59,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 Parameters = new List<ParameterDescriptor>(),
             };
 
-            var actions = new ActionDescriptor[] { actionWithConstraints, actionWithoutConstraints };
+            var actions = new ActionDescriptor[]
+            {
+                actionWithConstraints,
+                actionWithoutConstraints
+            };
             var candidateSet = CreateCandidateSet(actions);
 
             var selector = CreateSelector(actions);
@@ -350,10 +354,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     },
                     EndpointMetadata = new List<object>()
                     {
-                        new DataTokensMetadata(new Dictionary<string, object>
-                        {
-                            ["DataTokens"] = true
-                        })
+                        new DataTokensMetadata(
+                            new Dictionary<string, object> { ["DataTokens"] = true }
+                        )
                     }
                 },
             };
@@ -378,15 +381,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var actions = new ActionDescriptor[]
             {
-                new ActionDescriptor()
-                {
-
-                },
+                new ActionDescriptor() {  },
                 new ActionDescriptor()
                 {
                     ActionConstraints = new List<IActionConstraintMetadata>()
                     {
-                        new HttpMethodActionConstraint(new[]{ "GET", }),
+                        new HttpMethodActionConstraint(new[] { "GET", }),
                     },
                 },
                 new ActionDescriptor()
@@ -414,10 +414,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var actions = new ActionDescriptor[]
             {
-                new ActionDescriptor()
-                {
-
-                },
+                new ActionDescriptor() {  },
                 new ActionDescriptor()
                 {
                     ActionConstraints = new List<IActionConstraintMetadata>()
@@ -444,22 +441,25 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var actionDescriptorProvider = new Mock<IActionDescriptorProvider>();
             actionDescriptorProvider
                 .Setup(a => a.OnProvidersExecuted(It.IsAny<ActionDescriptorProviderContext>()))
-                .Callback<ActionDescriptorProviderContext>(c =>
-                {
-                    for (var i = 0; i < actions.Length; i++)
+                .Callback<ActionDescriptorProviderContext>(
+                    c =>
                     {
-                        c.Results.Add(actions[i]);
+                        for (var i = 0; i < actions.Length; i++)
+                        {
+                            c.Results.Add(actions[i]);
+                        }
                     }
-                });
+                );
 
             var actionDescriptorCollectionProvider = new DefaultActionDescriptorCollectionProvider(
                 new IActionDescriptorProvider[] { actionDescriptorProvider.Object, },
-                Enumerable.Empty<IActionDescriptorChangeProvider>());
+                Enumerable.Empty<IActionDescriptorChangeProvider>()
+            );
 
-            var cache = new ActionConstraintCache(actionDescriptorCollectionProvider, new[]
-            {
-                new DefaultActionConstraintProvider(),
-            });
+            var cache = new ActionConstraintCache(
+                actionDescriptorCollectionProvider,
+                new[] { new DefaultActionConstraintProvider(), }
+            );
 
             return new ActionConstraintMatcherPolicy(cache);
         }
@@ -482,7 +482,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             return new Endpoint(
                 (context) => Task.CompletedTask,
                 new EndpointMetadataCollection(metadata),
-                $"test: {action?.DisplayName}");
+                $"test: {action?.DisplayName}"
+            );
         }
 
         private static CandidateSet CreateCandidateSet(ActionDescriptor[] actions)
@@ -496,7 +497,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var candidateSet = new CandidateSet(
                 actions.Select(CreateEndpoint).ToArray(),
                 values,
-                new int[actions.Length]);
+                new int[actions.Length]
+            );
             return candidateSet;
         }
 

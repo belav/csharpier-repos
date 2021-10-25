@@ -10,7 +10,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.SecretManager.Tools.Tests
 {
-
     public class SetCommandTest
     {
         private readonly ITestOutputHelper _output;
@@ -23,7 +22,8 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
         [Fact]
         public void SetsFromPipedInput()
         {
-            var input = @"
+            var input =
+                @"
 {
    ""Key1"": ""str value"",
 ""Key2"": 1234,
@@ -37,7 +37,9 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
             var secretStore = new TestSecretsStore(_output);
             var command = new SetCommand.FromStdInStrategy();
 
-            command.Execute(new CommandContext(secretStore, new TestReporter(_output), testConsole));
+            command.Execute(
+                new CommandContext(secretStore, new TestReporter(_output), testConsole)
+            );
 
             Assert.Equal(3, secretStore.Count);
             Assert.Equal("str value", secretStore["Key1"]);
@@ -48,7 +50,8 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
         [Fact]
         public void ParsesNestedObjects()
         {
-            var input = @"
+            var input =
+                @"
                 {
                    ""Key1"": {
                        ""nested"" : ""value""
@@ -64,7 +67,9 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
             var secretStore = new TestSecretsStore(_output);
             var command = new SetCommand.FromStdInStrategy();
 
-            command.Execute(new CommandContext(secretStore, new TestReporter(_output), testConsole));
+            command.Execute(
+                new CommandContext(secretStore, new TestReporter(_output), testConsole)
+            );
 
             Assert.Equal(3, secretStore.Count);
             Assert.True(secretStore.ContainsKey("Key1:nested"));
@@ -81,16 +86,14 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
                 IsInputRedirected = true,
                 In = new StringReader("")
             };
-            var options = CommandLineOptions.Parse(new [] { "set", "key", "value" }, testConsole);
+            var options = CommandLineOptions.Parse(new[] { "set", "key", "value" }, testConsole);
             Assert.IsType<SetCommand.ForOneValueStrategy>(options.Command);
         }
 
         private class TestSecretsStore : SecretsStore
         {
             public TestSecretsStore(ITestOutputHelper output)
-                : base("xyz", new TestReporter(output))
-            {
-            }
+                : base("xyz", new TestReporter(output)) { }
 
             protected override IDictionary<string, string> Load(string userSecretsId)
             {

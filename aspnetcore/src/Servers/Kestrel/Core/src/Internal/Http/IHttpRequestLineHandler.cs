@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         void OnStartLine(
             HttpVersionAndMethod versionAndMethod,
             TargetOffsetPathLength targetPath,
-            Span<byte> startLine);
+            Span<byte> startLine
+        );
     }
 
     public struct HttpVersionAndMethod
@@ -52,15 +53,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public int Offset
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return (int)(_targetOffsetPathLength >> 32);
-            }
+            get { return (int)(_targetOffsetPathLength >> 32); }
         }
 
         public int Length
         {
-
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
@@ -77,10 +74,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public bool IsEncoded
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return (int)_targetOffsetPathLength < 0 ? true : false;
-            }
+            get { return (int)_targetOffsetPathLength < 0 ? true : false; }
         }
     }
 }

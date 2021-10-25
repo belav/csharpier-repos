@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Session
         /// Represent the default cookie name, which is ".AspNetCore.Session".
         /// </summary>
         public static readonly string CookieName = ".AspNetCore.Session";
-        
+
         /// <summary>
         /// Represents the default path used to create the cookie, which is "/".
         /// </summary>

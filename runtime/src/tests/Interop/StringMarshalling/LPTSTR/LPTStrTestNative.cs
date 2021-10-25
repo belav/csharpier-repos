@@ -24,8 +24,15 @@ class LPTStrTestNative
     [DllImport(nameof(LPTStrTestNative), CharSet = CharSet.Unicode)]
     public static extern bool Verify_NullTerminators_PastEnd(StringBuilder builder, int length);
 
-    [DllImport(nameof(LPTStrTestNative), EntryPoint = "Verify_NullTerminators_PastEnd", CharSet = CharSet.Unicode)]
-    public static extern bool Verify_NullTerminators_PastEnd_Out([Out] StringBuilder builder, int length);
+    [DllImport(
+        nameof(LPTStrTestNative),
+        EntryPoint = "Verify_NullTerminators_PastEnd",
+        CharSet = CharSet.Unicode
+    )]
+    public static extern bool Verify_NullTerminators_PastEnd_Out(
+        [Out] StringBuilder builder,
+        int length
+    );
 
     [DllImport(nameof(LPTStrTestNative))]
     public static extern bool MatchFuncNameAnsi(ByValStringInStructAnsi str);

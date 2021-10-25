@@ -7,11 +7,8 @@ namespace System.CommandLine.Rendering
 {
     internal class FileRenderingSpanVisitor : ContentRenderingSpanVisitor
     {
-        public FileRenderingSpanVisitor(
-            IStandardStreamWriter writer,
-            Region region) : base(writer, region)
-        {
-        }
+        public FileRenderingSpanVisitor(IStandardStreamWriter writer, Region region)
+            : base(writer, region) { }
 
         protected override void SetCursorPosition(int? left = null, int? top = null)
         {

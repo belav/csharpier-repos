@@ -32,10 +32,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var metadataProvider = new EmptyModelMetadataProvider();
             DefaultModelBindingContext bindingContext = new DefaultModelBindingContext
             {
-                ActionContext = new ActionContext()
-                {
-                    HttpContext = new DefaultHttpContext(),
-                },
+                ActionContext = new ActionContext() { HttpContext = new DefaultHttpContext(), },
                 ModelMetadata = metadataProvider.GetMetadataForType(modelType),
                 ModelName = "someName",
                 ValueProvider = new SimpleValueProvider(),

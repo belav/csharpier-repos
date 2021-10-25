@@ -28,29 +28,28 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             private readonly object _gate = new();
             private readonly Dictionary<SerializableSymbolGroup, SymbolGroup> _groupMap = new();
-            private readonly Dictionary<SerializableSymbolAndProjectId, ISymbol> _definitionMap = new();
+            private readonly Dictionary<SerializableSymbolAndProjectId, ISymbol> _definitionMap =
+                new();
 
             public FindReferencesServerCallback(
                 Solution solution,
                 IStreamingFindReferencesProgress progress,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 _solution = solution;
                 _progress = progress;
                 _cancellationToken = cancellationToken;
             }
 
-            public ValueTask AddItemsAsync(int count)
-                => _progress.ProgressTracker.AddItemsAsync(count);
+            public ValueTask AddItemsAsync(int count) =>
+                _progress.ProgressTracker.AddItemsAsync(count);
 
-            public ValueTask ItemCompletedAsync()
-                => _progress.ProgressTracker.ItemCompletedAsync();
+            public ValueTask ItemCompletedAsync() => _progress.ProgressTracker.ItemCompletedAsync();
 
-            public ValueTask OnStartedAsync()
-                => _progress.OnStartedAsync();
+            public ValueTask OnStartedAsync() => _progress.OnStartedAsync();
 
-            public ValueTask OnCompletedAsync()
-                => _progress.OnCompletedAsync();
+            public ValueTask OnCompletedAsync() => _progress.OnCompletedAsync();
 
             public ValueTask OnFindInDocumentStartedAsync(DocumentId documentId)
             {
@@ -68,11 +67,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 Contract.ThrowIfTrue(dehydrated.Symbols.Count == 0);
 
-                using var _ = PooledDictionary<SerializableSymbolAndProjectId, ISymbol>.GetInstance(out var map);
+                using var _ = PooledDictionary<SerializableSymbolAndProjectId, ISymbol>.GetInstance(
+                    out var map
+                );
 
                 foreach (var symbolAndProjectId in dehydrated.Symbols)
                 {
-                    var symbol = await symbolAndProjectId.TryRehydrateAsync(_solution, _cancellationToken).ConfigureAwait(false);
+                    var symbol = await symbolAndProjectId
+                        .TryRehydrateAsync(_solution, _cancellationToken)
+                        .ConfigureAwait(false);
                     if (symbol == null)
                         return;
 
@@ -93,7 +96,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             public async ValueTask OnReferenceFoundAsync(
                 SerializableSymbolGroup serializableSymbolGroup,
                 SerializableSymbolAndProjectId serializableSymbol,
-                SerializableReferenceLocation reference)
+                SerializableReferenceLocation reference
+            )
             {
                 SymbolGroup symbolGroup;
                 ISymbol symbol;
@@ -106,17 +110,22 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     //    definition so we can track down that issue.
                     // 2. NFE'ing and failing to show a result, is much better than NFE'ing and then crashing
                     //    immediately afterwards.
-                    if (!_groupMap.TryGetValue(serializableSymbolGroup, out symbolGroup) ||
-                        !_definitionMap.TryGetValue(serializableSymbol, out symbol))
+                    if (
+                        !_groupMap.TryGetValue(serializableSymbolGroup, out symbolGroup)
+                        || !_definitionMap.TryGetValue(serializableSymbol, out symbol)
+                    )
                     {
                         return;
                     }
                 }
 
-                var referenceLocation = await reference.RehydrateAsync(
-                    _solution, _cancellationToken).ConfigureAwait(false);
+                var referenceLocation = await reference
+                    .RehydrateAsync(_solution, _cancellationToken)
+                    .ConfigureAwait(false);
 
-                await _progress.OnReferenceFoundAsync(symbolGroup, symbol, referenceLocation).ConfigureAwait(false);
+                await _progress
+                    .OnReferenceFoundAsync(symbolGroup, symbol, referenceLocation)
+                    .ConfigureAwait(false);
             }
         }
     }

@@ -31,12 +31,12 @@ class Runtime_36584
 
         if (x != 100)
         {
-            try 
+            try
             {
                 x++;
             }
             // This finally will be cloned
-            finally 
+            finally
             {
                 if (x != 100)
                 {

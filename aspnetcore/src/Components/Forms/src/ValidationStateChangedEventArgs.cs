@@ -13,13 +13,12 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// <summary>
         /// Gets a shared empty instance of <see cref="ValidationStateChangedEventArgs"/>.
         /// </summary>
-        public new static readonly ValidationStateChangedEventArgs Empty = new ValidationStateChangedEventArgs();
+        public new static readonly ValidationStateChangedEventArgs Empty =
+            new ValidationStateChangedEventArgs();
 
         /// <summary>
         /// Creates a new instance of <see cref="ValidationStateChangedEventArgs" />
         /// </summary>
-        public ValidationStateChangedEventArgs()
-        {
-        }
+        public ValidationStateChangedEventArgs() { }
     }
 }

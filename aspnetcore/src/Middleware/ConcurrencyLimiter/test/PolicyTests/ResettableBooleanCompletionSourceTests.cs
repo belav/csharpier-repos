@@ -10,7 +10,7 @@ using Xunit;
 namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests
 {
     public static class ResettableBooleanCompletionSourceTests
-     {
+    {
         private static StackPolicy _testQueue = TestUtils.CreateStackPolicy(8);
 
         [Fact]
@@ -36,10 +36,12 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests
         {
             var tcs = new ResettableBooleanCompletionSource(_testQueue);
 
-            _ = Task.Run(() =>
-            {
-                tcs.Complete(true);
-            });
+            _ = Task.Run(
+                () =>
+                {
+                    tcs.Complete(true);
+                }
+            );
 
             var result = await tcs.GetValueTask();
             Assert.True(result);
@@ -50,10 +52,12 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests
         {
             var tcs = new ResettableBooleanCompletionSource(_testQueue);
 
-            _ = Task.Run(() =>
-            {
-                tcs.Complete(false);
-            });
+            _ = Task.Run(
+                () =>
+                {
+                    tcs.Complete(false);
+                }
+            );
 
             var result = await tcs.GetValueTask();
             Assert.False(result);

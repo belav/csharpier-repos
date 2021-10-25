@@ -15,35 +15,38 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
     {
         public void EnableTestTelemetryChannel()
         {
-            InvokeOnUIThread(cancellationToken =>
-            {
-                TelemetryService.DetachTestChannel(LoggerTestChannel.Instance);
+            InvokeOnUIThread(
+                cancellationToken =>
+                {
+                    TelemetryService.DetachTestChannel(LoggerTestChannel.Instance);
 
-                LoggerTestChannel.Instance.Clear();
+                    LoggerTestChannel.Instance.Clear();
 
-                TelemetryService.AttachTestChannel(LoggerTestChannel.Instance);
-            });
+                    TelemetryService.AttachTestChannel(LoggerTestChannel.Instance);
+                }
+            );
         }
 
         public void DisableTestTelemetryChannel()
         {
-            InvokeOnUIThread(cancellationToken =>
-            {
-                TelemetryService.DetachTestChannel(LoggerTestChannel.Instance);
+            InvokeOnUIThread(
+                cancellationToken =>
+                {
+                    TelemetryService.DetachTestChannel(LoggerTestChannel.Instance);
 
-                LoggerTestChannel.Instance.Clear();
-            });
+                    LoggerTestChannel.Instance.Clear();
+                }
+            );
         }
 
-        public void WaitForTelemetryEvents(string[] names)
-            => LoggerTestChannel.Instance.WaitForEvents(names);
+        public void WaitForTelemetryEvents(string[] names) =>
+            LoggerTestChannel.Instance.WaitForEvents(names);
 
         private sealed class LoggerTestChannel : ITelemetryTestChannel
         {
             public static readonly LoggerTestChannel Instance = new LoggerTestChannel();
 
-            private ConcurrentBag<TelemetryEvent> eventsQueue =
-                new ConcurrentBag<TelemetryEvent>();
+            private ConcurrentBag<TelemetryEvent> eventsQueue = new ConcurrentBag<TelemetryEvent>();
 
             /// <summary>
             /// Waits for one or more events with the specified names

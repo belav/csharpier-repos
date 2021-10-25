@@ -81,7 +81,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         }
 
         /// <inheritdoc />
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             return _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
@@ -92,7 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             int offset,
             int count,
             AsyncCallback? callback,
-            object? state)
+            object? state
+        )
         {
             return _innerStream.BeginRead(buffer, offset, count, callback, state);
         }
@@ -109,7 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             int offset,
             int count,
             AsyncCallback? callback,
-            object? state)
+            object? state
+        )
         {
             return _innerStream.BeginWrite(buffer, offset, count, callback, state);
         }
@@ -121,9 +128,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         }
 
         /// <inheritdoc />
-        public override void Close()
-        {
-        }
+        public override void Close() { }
 
         /// <inheritdoc />
         public override int ReadByte()
@@ -138,7 +143,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         }
 
         /// <inheritdoc />
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             return _innerStream.CopyToAsync(destination, bufferSize, cancellationToken);
         }
@@ -162,7 +171,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         }
 
         /// <inheritdoc />
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             return _innerStream.WriteAsync(buffer, offset, count, cancellationToken);
         }

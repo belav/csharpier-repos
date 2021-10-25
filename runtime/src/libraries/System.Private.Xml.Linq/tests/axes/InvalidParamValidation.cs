@@ -49,10 +49,32 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public static void InvalidXNameTest()
         {
-            Assert.Throws<XmlException>(() => { TestData.GetDocumentWithContacts().Root.Attribute("*&^%_#@!"); });
-            AssertExtensions.Throws<ArgumentException>(null, () => { TestData.GetDocumentWithContacts().Root.Attribute(""); });
-            Assert.Throws<XmlException>(() => { TestData.GetDocumentWithContacts().Root.Attributes("*&^%_#@!"); });
-            AssertExtensions.Throws<ArgumentException>(null, () => { TestData.GetDocumentWithContacts().Root.Attributes(""); });
+            Assert.Throws<XmlException>(
+                () =>
+                {
+                    TestData.GetDocumentWithContacts().Root.Attribute("*&^%_#@!");
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    TestData.GetDocumentWithContacts().Root.Attribute("");
+                }
+            );
+            Assert.Throws<XmlException>(
+                () =>
+                {
+                    TestData.GetDocumentWithContacts().Root.Attributes("*&^%_#@!");
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    TestData.GetDocumentWithContacts().Root.Attributes("");
+                }
+            );
         }
     }
 

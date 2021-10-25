@@ -17,25 +17,26 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         public async Task CallingUseIISIntegrationMultipleTimesWorks()
         {
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/")
-                        .UseIISIntegration()
-                        .UseIISIntegration()
-                        .Configure(app => { })
-                        .UseTestServer();
-                })
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/")
+                            .UseIISIntegration()
+                            .UseIISIntegration()
+                            .Configure(app => { })
+                            .UseTestServer();
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();
 
             await host.StartAsync();
 
-            var filters = server.Services.GetServices<IStartupFilter>()
-                .OfType<IISSetupFilter>();
+            var filters = server.Services.GetServices<IStartupFilter>().OfType<IISSetupFilter>();
 
             Assert.Single(filters);
         }

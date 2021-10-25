@@ -14,24 +14,34 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Internal
 {
-    internal class QuicStreamContext : TransportConnection, IStreamDirectionFeature, IProtocolErrorCodeFeature, IStreamIdFeature
+    internal class QuicStreamContext
+        : TransportConnection,
+          IStreamDirectionFeature,
+          IProtocolErrorCodeFeature,
+          IStreamIdFeature
     {
         private Task _processingTask = Task.CompletedTask;
         private readonly QuicStream _stream;
         private readonly QuicConnectionContext _connection;
         private readonly QuicTransportContext _context;
         private readonly IDuplexPipe _originalTransport;
-        private readonly CancellationTokenSource _streamClosedTokenSource = new CancellationTokenSource();
+        private readonly CancellationTokenSource _streamClosedTokenSource =
+            new CancellationTokenSource();
         private readonly IQuicTrace _log;
         private string? _connectionId;
         private const int MinAllocBufferSize = 4096;
         private volatile Exception? _shutdownReason;
         private bool _streamClosed;
         private bool _aborted;
-        private readonly TaskCompletionSource _waitForConnectionClosedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _waitForConnectionClosedTcs =
+            new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         private readonly object _shutdownLock = new object();
 
-        public QuicStreamContext(QuicStream stream, QuicConnectionContext connection, QuicTransportContext context)
+        public QuicStreamContext(
+            QuicStream stream,
+            QuicConnectionContext connection,
+            QuicTransportContext context
+        )
         {
             _stream = stream;
             _connection = connection;
@@ -45,8 +55,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
             var maxWriteBufferSize = context.Options.MaxWriteBufferSize ?? 0;
 
             // TODO should we allow these PipeScheduler to be configurable here?
-            var inputOptions = new PipeOptions(MemoryPool, PipeScheduler.ThreadPool, PipeScheduler.Inline, maxReadBufferSize, maxReadBufferSize / 2, useSynchronizationContext: false);
-            var outputOptions = new PipeOptions(MemoryPool, PipeScheduler.Inline, PipeScheduler.ThreadPool, maxWriteBufferSize, maxWriteBufferSize / 2, useSynchronizationContext: false);
+            var inputOptions = new PipeOptions(
+                MemoryPool,
+                PipeScheduler.ThreadPool,
+                PipeScheduler.Inline,
+                maxReadBufferSize,
+                maxReadBufferSize / 2,
+                useSynchronizationContext: false
+            );
+            var outputOptions = new PipeOptions(
+                MemoryPool,
+                PipeScheduler.Inline,
+                PipeScheduler.ThreadPool,
+                maxWriteBufferSize,
+                maxWriteBufferSize / 2,
+                useSynchronizationContext: false
+            );
 
             var pair = DuplexPipe.CreateConnectionPair(inputOptions, outputOptions);
 
@@ -110,7 +134,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
             }
             catch (Exception ex)
             {
-                _log.LogError(0, ex, $"Unexpected exception in {nameof(QuicStreamContext)}.{nameof(StartAsync)}.");
+                _log.LogError(
+                    0,
+                    ex,
+                    $"Unexpected exception in {nameof(QuicStreamContext)}.{nameof(StartAsync)}."
+                );
             }
         }
 
@@ -194,14 +222,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
 
             _streamClosed = true;
 
-            ThreadPool.UnsafeQueueUserWorkItem(state =>
-            {
-                state.CancelConnectionClosedToken();
+            ThreadPool.UnsafeQueueUserWorkItem(
+                state =>
+                {
+                    state.CancelConnectionClosedToken();
 
-                state._waitForConnectionClosedTcs.TrySetResult();
-            },
-            this,
-            preferLocal: false);
+                    state._waitForConnectionClosedTcs.TrySetResult();
+                },
+                this,
+                preferLocal: false
+            );
         }
 
         private void CancelConnectionClosedToken()
@@ -212,10 +242,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
             }
             catch (Exception ex)
             {
-                _log.LogError(0, ex, $"Unexpected exception in {nameof(QuicStreamContext)}.{nameof(CancelConnectionClosedToken)}.");
+                _log.LogError(
+                    0,
+                    ex,
+                    $"Unexpected exception in {nameof(QuicStreamContext)}.{nameof(CancelConnectionClosedToken)}."
+                );
             }
         }
-
 
         private async Task DoSend()
         {
@@ -310,7 +343,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Experimental.Quic.Intern
                 lock (_shutdownLock)
                 {
                     // TODO: Exception is always allocated. Consider only allocating if receive hasn't completed.
-                    _shutdownReason = shutdownReason ?? new ConnectionAbortedException("The Quic transport's send loop completed gracefully.");
+                    _shutdownReason =
+                        shutdownReason
+                        ?? new ConnectionAbortedException(
+                            "The Quic transport's send loop completed gracefully."
+                        );
                     _log.StreamShutdownWrite(this, _shutdownReason.Message);
 
                     _stream.Shutdown();

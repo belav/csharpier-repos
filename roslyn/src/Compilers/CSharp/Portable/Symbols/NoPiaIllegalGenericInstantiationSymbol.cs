@@ -21,7 +21,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly ModuleSymbol _exposingModule;
         private readonly NamedTypeSymbol _underlyingSymbol;
 
-        public NoPiaIllegalGenericInstantiationSymbol(ModuleSymbol exposingModule, NamedTypeSymbol underlyingSymbol)
+        public NoPiaIllegalGenericInstantiationSymbol(
+            ModuleSymbol exposingModule,
+            NamedTypeSymbol underlyingSymbol
+        )
         {
             _exposingModule = exposingModule;
             _underlyingSymbol = underlyingSymbol;
@@ -43,10 +46,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public NamedTypeSymbol UnderlyingSymbol
         {
-            get
-            {
-                return _underlyingSymbol;
-            }
+            get { return _underlyingSymbol; }
         }
 
         internal override DiagnosticInfo ErrorInfo
@@ -63,7 +63,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                 }
 
-                return new CSDiagnosticInfo(ErrorCode.ERR_GenericsUsedAcrossAssemblies, _underlyingSymbol, _exposingModule.ContainingAssembly);
+                return new CSDiagnosticInfo(
+                    ErrorCode.ERR_GenericsUsedAcrossAssemblies,
+                    _underlyingSymbol,
+                    _exposingModule.ContainingAssembly
+                );
             }
         }
 

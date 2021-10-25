@@ -29,14 +29,19 @@ namespace Microsoft.AspNetCore.Hosting
         /// </returns>
         public static IWebHostBuilder UseKestrel(this IWebHostBuilder hostBuilder)
         {
-            return hostBuilder.ConfigureServices(services =>
-            {
-                // Don't override an already-configured transport
-                services.TryAddSingleton<IConnectionListenerFactory, SocketTransportFactory>();
+            return hostBuilder.ConfigureServices(
+                services =>
+                {
+                    // Don't override an already-configured transport
+                    services.TryAddSingleton<IConnectionListenerFactory, SocketTransportFactory>();
 
-                services.AddTransient<IConfigureOptions<KestrelServerOptions>, KestrelServerOptionsSetup>();
-                services.AddSingleton<IServer, KestrelServerImpl>();
-            });
+                    services.AddTransient<
+                        IConfigureOptions<KestrelServerOptions>,
+                        KestrelServerOptionsSetup
+                    >();
+                    services.AddSingleton<IServer, KestrelServerImpl>();
+                }
+            );
         }
 
         /// <summary>
@@ -51,7 +56,10 @@ namespace Microsoft.AspNetCore.Hosting
         /// <returns>
         /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
         /// </returns>
-        public static IWebHostBuilder UseKestrel(this IWebHostBuilder hostBuilder, Action<KestrelServerOptions> options)
+        public static IWebHostBuilder UseKestrel(
+            this IWebHostBuilder hostBuilder,
+            Action<KestrelServerOptions> options
+        )
         {
             return hostBuilder.UseKestrel().ConfigureKestrel(options);
         }
@@ -68,12 +76,17 @@ namespace Microsoft.AspNetCore.Hosting
         /// <returns>
         /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
         /// </returns>
-        public static IWebHostBuilder ConfigureKestrel(this IWebHostBuilder hostBuilder, Action<KestrelServerOptions> options)
+        public static IWebHostBuilder ConfigureKestrel(
+            this IWebHostBuilder hostBuilder,
+            Action<KestrelServerOptions> options
+        )
         {
-            return hostBuilder.ConfigureServices(services =>
-            {
-                services.Configure(options);
-            });
+            return hostBuilder.ConfigureServices(
+                services =>
+                {
+                    services.Configure(options);
+                }
+            );
         }
 
         /// <summary>
@@ -86,7 +99,10 @@ namespace Microsoft.AspNetCore.Hosting
         /// <returns>
         /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
         /// </returns>
-        public static IWebHostBuilder UseKestrel(this IWebHostBuilder hostBuilder, Action<WebHostBuilderContext, KestrelServerOptions> configureOptions)
+        public static IWebHostBuilder UseKestrel(
+            this IWebHostBuilder hostBuilder,
+            Action<WebHostBuilderContext, KestrelServerOptions> configureOptions
+        )
         {
             return hostBuilder.UseKestrel().ConfigureKestrel(configureOptions);
         }
@@ -101,20 +117,27 @@ namespace Microsoft.AspNetCore.Hosting
         /// <returns>
         /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
         /// </returns>
-        public static IWebHostBuilder ConfigureKestrel(this IWebHostBuilder hostBuilder, Action<WebHostBuilderContext, KestrelServerOptions> configureOptions)
+        public static IWebHostBuilder ConfigureKestrel(
+            this IWebHostBuilder hostBuilder,
+            Action<WebHostBuilderContext, KestrelServerOptions> configureOptions
+        )
         {
             if (configureOptions == null)
             {
                 throw new ArgumentNullException(nameof(configureOptions));
             }
 
-            return hostBuilder.ConfigureServices((context, services) =>
-            {
-                services.Configure<KestrelServerOptions>(options =>
+            return hostBuilder.ConfigureServices(
+                (context, services) =>
                 {
-                    configureOptions(context, options);
-                });
-            });
+                    services.Configure<KestrelServerOptions>(
+                        options =>
+                        {
+                            configureOptions(context, options);
+                        }
+                    );
+                }
+            );
         }
     }
 }

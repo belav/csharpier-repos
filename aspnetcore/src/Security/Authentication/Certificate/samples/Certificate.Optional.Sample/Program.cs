@@ -17,28 +17,46 @@ namespace Certificate.Optional.Sample
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureKestrel((context, options) =>
+                .ConfigureWebHostDefaults(
+                    webBuilder =>
                     {
-                        // Kestrel can't have different ssl settings for different hosts on the same IP because there's no way to change them based on SNI.
-                        // https://github.com/dotnet/runtime/issues/31097
-                        options.Listen(IPAddress.Parse(HostWithoutCert), 5001, listenOptions =>
-                        {
-                            listenOptions.UseHttps(httpsOptions =>
+                        webBuilder.UseStartup<Startup>();
+                        webBuilder.ConfigureKestrel(
+                            (context, options) =>
                             {
-                                httpsOptions.ClientCertificateMode = ClientCertificateMode.NoCertificate;
-                            });
-                        });
-                        options.Listen(IPAddress.Parse(HostWithCert), 5001, listenOptions =>
-                        {
-                            listenOptions.UseHttps(httpsOptions =>
-                            {
-                                httpsOptions.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-                            });
-                        });
-                    });
-                });
+                                // Kestrel can't have different ssl settings for different hosts on the same IP because there's no way to change them based on SNI.
+                                // https://github.com/dotnet/runtime/issues/31097
+                                options.Listen(
+                                    IPAddress.Parse(HostWithoutCert),
+                                    5001,
+                                    listenOptions =>
+                                    {
+                                        listenOptions.UseHttps(
+                                            httpsOptions =>
+                                            {
+                                                httpsOptions.ClientCertificateMode =
+                                                    ClientCertificateMode.NoCertificate;
+                                            }
+                                        );
+                                    }
+                                );
+                                options.Listen(
+                                    IPAddress.Parse(HostWithCert),
+                                    5001,
+                                    listenOptions =>
+                                    {
+                                        listenOptions.UseHttps(
+                                            httpsOptions =>
+                                            {
+                                                httpsOptions.ClientCertificateMode =
+                                                    ClientCertificateMode.RequireCertificate;
+                                            }
+                                        );
+                                    }
+                                );
+                            }
+                        );
+                    }
+                );
     }
 }

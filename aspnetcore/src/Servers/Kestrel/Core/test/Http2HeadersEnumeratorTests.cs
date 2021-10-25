@@ -35,19 +35,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             var headers = GetNormalizedHeaders(e);
 
-            Assert.Equal(new[]
-            {
-                CreateHeaderResult(H2StaticTable.Date, "Date", "Date!"),
-                CreateHeaderResult(-1, "Grpc-Encoding", "Identity!"),
-                CreateHeaderResult(H2StaticTable.AcceptRanges, "Accept-Ranges", "AcceptRanges!"),
-                CreateHeaderResult(H2StaticTable.Age, "Age", "1"),
-                CreateHeaderResult(H2StaticTable.Age, "Age", "2"),
-                CreateHeaderResult(H2StaticTable.ContentLength, "Content-Length", "9"),
-                CreateHeaderResult(-1, "Name1", "Value1"),
-                CreateHeaderResult(-1, "Name2", "Value2-1"),
-                CreateHeaderResult(-1, "Name2", "Value2-2"),
-                CreateHeaderResult(-1, "Name3", "Value3"),
-            }, headers);
+            Assert.Equal(
+                new[]
+                {
+                    CreateHeaderResult(H2StaticTable.Date, "Date", "Date!"),
+                    CreateHeaderResult(-1, "Grpc-Encoding", "Identity!"),
+                    CreateHeaderResult(
+                        H2StaticTable.AcceptRanges,
+                        "Accept-Ranges",
+                        "AcceptRanges!"
+                    ),
+                    CreateHeaderResult(H2StaticTable.Age, "Age", "1"),
+                    CreateHeaderResult(H2StaticTable.Age, "Age", "2"),
+                    CreateHeaderResult(H2StaticTable.ContentLength, "Content-Length", "9"),
+                    CreateHeaderResult(-1, "Name1", "Value1"),
+                    CreateHeaderResult(-1, "Name2", "Value2-1"),
+                    CreateHeaderResult(-1, "Name2", "Value2-2"),
+                    CreateHeaderResult(-1, "Name3", "Value3"),
+                },
+                headers
+            );
         }
 
         [Fact]
@@ -68,14 +75,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             var headers = GetNormalizedHeaders(e);
 
-            Assert.Equal(new[]
-            {
-                CreateHeaderResult(H2StaticTable.ETag, "ETag", "ETag!"),
-                CreateHeaderResult(-1, "Name1", "Value1"),
-                CreateHeaderResult(-1, "Name2", "Value2-1"),
-                CreateHeaderResult(-1, "Name2", "Value2-2"),
-                CreateHeaderResult(-1, "Name3", "Value3"),
-            }, headers);
+            Assert.Equal(
+                new[]
+                {
+                    CreateHeaderResult(H2StaticTable.ETag, "ETag", "ETag!"),
+                    CreateHeaderResult(-1, "Name1", "Value1"),
+                    CreateHeaderResult(-1, "Name2", "Value2-1"),
+                    CreateHeaderResult(-1, "Name2", "Value2-2"),
+                    CreateHeaderResult(-1, "Name3", "Value3"),
+                },
+                headers
+            );
         }
 
         [Fact]
@@ -104,10 +114,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.Equal("Value2-2", e.Current.Value);
             Assert.Equal(-1, e.HPackStaticTableId);
 
-            var responseTrailers = new HttpResponseTrailers
-            {
-                HeaderGrpcStatus = "1"
-            };
+            var responseTrailers = new HttpResponseTrailers { HeaderGrpcStatus = "1" };
             responseTrailers.Append("Name1", "Value1");
             responseTrailers.Append("Name2", "Value2-1");
             responseTrailers.Append("Name2", "Value2-2");
@@ -137,17 +144,29 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.False(e.MoveNext());
         }
 
-        private (int HPackStaticTableId, string Name, string Value)[] GetNormalizedHeaders(Http2HeadersEnumerator enumerator)
+        private (int HPackStaticTableId, string Name, string Value)[] GetNormalizedHeaders(
+            Http2HeadersEnumerator enumerator
+        )
         {
             var headers = new List<(int HPackStaticTableId, string Name, string Value)>();
             while (enumerator.MoveNext())
             {
-                headers.Add(CreateHeaderResult(enumerator.HPackStaticTableId, enumerator.Current.Key, enumerator.Current.Value));
+                headers.Add(
+                    CreateHeaderResult(
+                        enumerator.HPackStaticTableId,
+                        enumerator.Current.Key,
+                        enumerator.Current.Value
+                    )
+                );
             }
             return headers.ToArray();
         }
 
-        private static (int HPackStaticTableId, string Key, string Value) CreateHeaderResult(int hPackStaticTableId, string key, string value)
+        private static (int HPackStaticTableId, string Key, string Value) CreateHeaderResult(
+            int hPackStaticTableId,
+            string key,
+            string value
+        )
         {
             return (hPackStaticTableId, key, value);
         }

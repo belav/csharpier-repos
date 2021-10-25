@@ -19,7 +19,9 @@ namespace Microsoft.Win32
         private static readonly IntPtr HKEY_CURRENT_USER = new IntPtr(unchecked((int)0x80000001));
         private static readonly IntPtr HKEY_LOCAL_MACHINE = new IntPtr(unchecked((int)0x80000002));
         private static readonly IntPtr HKEY_USERS = new IntPtr(unchecked((int)0x80000003));
-        private static readonly IntPtr HKEY_PERFORMANCE_DATA = new IntPtr(unchecked((int)0x80000004));
+        private static readonly IntPtr HKEY_PERFORMANCE_DATA = new IntPtr(
+            unchecked((int)0x80000004)
+        );
         private static readonly IntPtr HKEY_CURRENT_CONFIG = new IntPtr(unchecked((int)0x80000005));
 
         /// <summary>Names of keys.  This array must be in the same order as the HKEY values listed above.</summary>
@@ -50,10 +52,8 @@ namespace Microsoft.Win32
         /// <summary>
         /// Creates a RegistryKey. This key is bound to hkey, if writable is <b>false</b> then no write operations will be allowed.
         /// </summary>
-        private RegistryKey(SafeRegistryHandle hkey, bool writable, RegistryView view) :
-            this(hkey, writable, false, false, false, view)
-        {
-        }
+        private RegistryKey(SafeRegistryHandle hkey, bool writable, RegistryView view)
+            : this(hkey, writable, false, false, false, view) { }
 
         /// <summary>
         /// Creates a RegistryKey.
@@ -63,7 +63,14 @@ namespace Microsoft.Win32
         /// The remoteKey flag when set to true indicates that we are dealing with registry entries
         /// on a remote machine and requires the program making these calls to have full trust.
         /// </summary>
-        private RegistryKey(SafeRegistryHandle hkey, bool writable, bool systemkey, bool remoteKey, bool isPerfData, RegistryView view)
+        private RegistryKey(
+            SafeRegistryHandle hkey,
+            bool writable,
+            bool systemkey,
+            bool remoteKey,
+            bool isPerfData,
+            RegistryView view
+        )
         {
             ValidateKeyView(view);
 
@@ -132,12 +139,24 @@ namespace Microsoft.Win32
 
         public RegistryKey CreateSubKey(string subkey, bool writable)
         {
-            return CreateSubKey(subkey, writable ? RegistryKeyPermissionCheck.ReadWriteSubTree : RegistryKeyPermissionCheck.ReadSubTree, RegistryOptions.None);
+            return CreateSubKey(
+                subkey,
+                writable
+                  ? RegistryKeyPermissionCheck.ReadWriteSubTree
+                  : RegistryKeyPermissionCheck.ReadSubTree,
+                RegistryOptions.None
+            );
         }
 
         public RegistryKey CreateSubKey(string subkey, bool writable, RegistryOptions options)
         {
-            return CreateSubKey(subkey, writable ? RegistryKeyPermissionCheck.ReadWriteSubTree : RegistryKeyPermissionCheck.ReadSubTree, options);
+            return CreateSubKey(
+                subkey,
+                writable
+                  ? RegistryKeyPermissionCheck.ReadWriteSubTree
+                  : RegistryKeyPermissionCheck.ReadSubTree,
+                options
+            );
         }
 
         public RegistryKey CreateSubKey(string subkey, RegistryKeyPermissionCheck permissionCheck)
@@ -145,17 +164,30 @@ namespace Microsoft.Win32
             return CreateSubKey(subkey, permissionCheck, RegistryOptions.None);
         }
 
-        public RegistryKey CreateSubKey(string subkey, RegistryKeyPermissionCheck permissionCheck, RegistryOptions registryOptions, RegistrySecurity? registrySecurity)
+        public RegistryKey CreateSubKey(
+            string subkey,
+            RegistryKeyPermissionCheck permissionCheck,
+            RegistryOptions registryOptions,
+            RegistrySecurity? registrySecurity
+        )
         {
             return CreateSubKey(subkey, permissionCheck, registryOptions);
         }
 
-        public RegistryKey CreateSubKey(string subkey, RegistryKeyPermissionCheck permissionCheck, RegistrySecurity? registrySecurity)
+        public RegistryKey CreateSubKey(
+            string subkey,
+            RegistryKeyPermissionCheck permissionCheck,
+            RegistrySecurity? registrySecurity
+        )
         {
             return CreateSubKey(subkey, permissionCheck, RegistryOptions.None);
         }
 
-        public RegistryKey CreateSubKey(string subkey, RegistryKeyPermissionCheck permissionCheck, RegistryOptions registryOptions)
+        public RegistryKey CreateSubKey(
+            string subkey,
+            RegistryKeyPermissionCheck permissionCheck,
+            RegistryOptions registryOptions
+        )
         {
             ValidateKeyOptions(registryOptions);
             ValidateKeyName(subkey);
@@ -166,7 +198,10 @@ namespace Microsoft.Win32
             // only keys opened under read mode is not writable
             if (!_remoteKey)
             {
-                RegistryKey? key = InternalOpenSubKeyWithoutSecurityChecks(subkey, (permissionCheck != RegistryKeyPermissionCheck.ReadSubTree));
+                RegistryKey? key = InternalOpenSubKeyWithoutSecurityChecks(
+                    subkey,
+                    (permissionCheck != RegistryKeyPermissionCheck.ReadSubTree)
+                );
                 if (key != null)
                 {
                     // Key already exits
@@ -323,7 +358,11 @@ namespace Microsoft.Win32
             return OpenRemoteBaseKey(hKey, machineName, RegistryView.Default);
         }
 
-        public static RegistryKey OpenRemoteBaseKey(RegistryHive hKey, string machineName, RegistryView view)
+        public static RegistryKey OpenRemoteBaseKey(
+            RegistryHive hKey,
+            string machineName,
+            RegistryView view
+        )
         {
             if (machineName == null)
             {
@@ -362,7 +401,11 @@ namespace Microsoft.Win32
         {
             ValidateKeyMode(permissionCheck);
 
-            return OpenSubKey(name, permissionCheck, (RegistryRights)GetRegistryKeyAccess(permissionCheck));
+            return OpenSubKey(
+                name,
+                permissionCheck,
+                (RegistryRights)GetRegistryKeyAccess(permissionCheck)
+            );
         }
 
         public RegistryKey? OpenSubKey(string name, RegistryRights rights)
@@ -370,7 +413,11 @@ namespace Microsoft.Win32
             return OpenSubKey(name, this._checkMode, rights);
         }
 
-        public RegistryKey? OpenSubKey(string name, RegistryKeyPermissionCheck permissionCheck, RegistryRights rights)
+        public RegistryKey? OpenSubKey(
+            string name,
+            RegistryKeyPermissionCheck permissionCheck,
+            RegistryRights rights
+        )
         {
             ValidateKeyName(name);
             ValidateKeyMode(permissionCheck);
@@ -393,7 +440,11 @@ namespace Microsoft.Win32
 
         public RegistrySecurity GetAccessControl()
         {
-            return GetAccessControl(AccessControlSections.Access | AccessControlSections.Owner | AccessControlSections.Group);
+            return GetAccessControl(
+                AccessControlSections.Access
+                    | AccessControlSections.Owner
+                    | AccessControlSections.Group
+            );
         }
 
         public RegistrySecurity GetAccessControl(AccessControlSections includeSections)
@@ -449,7 +500,8 @@ namespace Microsoft.Win32
 
         public static RegistryKey FromHandle(SafeRegistryHandle handle, RegistryView view)
         {
-            if (handle == null) throw new ArgumentNullException(nameof(handle));
+            if (handle == null)
+                throw new ArgumentNullException(nameof(handle));
             ValidateKeyView(view);
 
             return new RegistryKey(handle, writable: true, view: view);
@@ -461,9 +513,7 @@ namespace Microsoft.Win32
         {
             EnsureNotDisposed();
             int subkeys = SubKeyCount;
-            return subkeys > 0 ?
-                InternalGetSubKeyNamesCore(subkeys) :
-                Array.Empty<string>();
+            return subkeys > 0 ? InternalGetSubKeyNamesCore(subkeys) : Array.Empty<string>();
         }
 
         /// <summary>Retrieves the count of values.</summary>
@@ -484,9 +534,7 @@ namespace Microsoft.Win32
             EnsureNotDisposed();
 
             int values = ValueCount;
-            return values > 0 ?
-                GetValueNamesCore(values) :
-                Array.Empty<string>();
+            return values > 0 ? GetValueNamesCore(values) : Array.Empty<string>();
         }
 
         /// <summary>Retrieves the specified value. <b>null</b> is returned if the value doesn't exist</summary>
@@ -520,9 +568,15 @@ namespace Microsoft.Win32
 
         public object? GetValue(string? name, object? defaultValue, RegistryValueOptions options)
         {
-            if (options < RegistryValueOptions.None || options > RegistryValueOptions.DoNotExpandEnvironmentNames)
+            if (
+                options < RegistryValueOptions.None
+                || options > RegistryValueOptions.DoNotExpandEnvironmentNames
+            )
             {
-                throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, (int)options), nameof(options));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EnumIllegalVal, (int)options),
+                    nameof(options)
+                );
             }
             bool doNotExpand = (options == RegistryValueOptions.DoNotExpandEnvironmentNames);
             return InternalGetValue(name, defaultValue, doNotExpand);
@@ -607,7 +661,9 @@ namespace Microsoft.Win32
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Format(SR.Arg_RegSetBadArrType, value.GetType().Name));
+                    throw new ArgumentException(
+                        SR.Format(SR.Arg_RegSetBadArrType, value.GetType().Name)
+                    );
                 }
             }
             else
@@ -749,9 +805,15 @@ namespace Microsoft.Win32
 
         private static void ValidateKeyMode(RegistryKeyPermissionCheck mode)
         {
-            if (mode < RegistryKeyPermissionCheck.Default || mode > RegistryKeyPermissionCheck.ReadWriteSubTree)
+            if (
+                mode < RegistryKeyPermissionCheck.Default
+                || mode > RegistryKeyPermissionCheck.ReadWriteSubTree
+            )
             {
-                throw new ArgumentException(SR.Argument_InvalidRegistryKeyPermissionCheck, nameof(mode));
+                throw new ArgumentException(
+                    SR.Argument_InvalidRegistryKeyPermissionCheck,
+                    nameof(mode)
+                );
             }
         }
 
@@ -759,13 +821,20 @@ namespace Microsoft.Win32
         {
             if (options < RegistryOptions.None || options > RegistryOptions.Volatile)
             {
-                throw new ArgumentException(SR.Argument_InvalidRegistryOptionsCheck, nameof(options));
+                throw new ArgumentException(
+                    SR.Argument_InvalidRegistryOptionsCheck,
+                    nameof(options)
+                );
             }
         }
 
         private static void ValidateKeyView(RegistryView view)
         {
-            if (view != RegistryView.Default && view != RegistryView.Registry32 && view != RegistryView.Registry64)
+            if (
+                view != RegistryView.Default
+                && view != RegistryView.Registry32
+                && view != RegistryView.Registry64
+            )
             {
                 throw new ArgumentException(SR.Argument_InvalidRegistryViewCheck, nameof(view));
             }

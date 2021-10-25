@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             IReadOnlyList<IReadOnlyPropertyBase> firstPropertyCollection,
-            IReadOnlyList<IReadOnlyPropertyBase> secondPropertyCollection)
-            : base(eventDefinition, messageGenerator)
+            IReadOnlyList<IReadOnlyPropertyBase> secondPropertyCollection
+        ) : base(eventDefinition, messageGenerator)
         {
             FirstPropertyCollection = firstPropertyCollection;
             SecondPropertyCollection = secondPropertyCollection;

@@ -17,7 +17,8 @@ namespace System.Runtime.InteropServices
             {
                 if (s_frameworkDescription == null)
                 {
-                    string? versionString = typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                    string? versionString =
+                        typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
 
                     // Strip the git hash if there is one
                     if (versionString != null)
@@ -29,7 +30,9 @@ namespace System.Runtime.InteropServices
                         }
                     }
 
-                    s_frameworkDescription = !string.IsNullOrWhiteSpace(versionString) ? $"{FrameworkName} {versionString}" : FrameworkName;
+                    s_frameworkDescription = !string.IsNullOrWhiteSpace(versionString)
+                        ? $"{FrameworkName} {versionString}"
+                        : FrameworkName;
                 }
 
                 return s_frameworkDescription;
@@ -52,6 +55,7 @@ namespace System.Runtime.InteropServices
         /// <summary>
         /// Indicates whether the current application is running on the specified platform.
         /// </summary>
-        public static bool IsOSPlatform(OSPlatform osPlatform) => OperatingSystem.IsOSPlatform(osPlatform.Name);
+        public static bool IsOSPlatform(OSPlatform osPlatform) =>
+            OperatingSystem.IsOSPlatform(osPlatform.Name);
     }
 }

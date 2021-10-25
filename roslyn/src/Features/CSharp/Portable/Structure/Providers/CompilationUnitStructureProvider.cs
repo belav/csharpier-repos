@@ -12,15 +12,21 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class CompilationUnitStructureProvider : AbstractSyntaxNodeStructureProvider<CompilationUnitSyntax>
+    internal class CompilationUnitStructureProvider
+        : AbstractSyntaxNodeStructureProvider<CompilationUnitSyntax>
     {
         protected override void CollectBlockSpans(
             CompilationUnitSyntax compilationUnit,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            CSharpStructureHelpers.CollectCommentBlockSpans(compilationUnit, ref spans, optionProvider);
+            CSharpStructureHelpers.CollectCommentBlockSpans(
+                compilationUnit,
+                ref spans,
+                optionProvider
+            );
 
             // extern aliases and usings are outlined in a single region
             var externsAndUsings = new List<SyntaxNode>();
@@ -28,16 +34,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             externsAndUsings.AddRange(compilationUnit.Usings);
             externsAndUsings.Sort((node1, node2) => node1.SpanStart.CompareTo(node2.SpanStart));
 
-            spans.AddIfNotNull(CSharpStructureHelpers.CreateBlockSpan(
-                externsAndUsings, compressEmptyLines: false, autoCollapse: true,
-                type: BlockTypes.Imports, isCollapsible: true));
+            spans.AddIfNotNull(
+                CSharpStructureHelpers.CreateBlockSpan(
+                    externsAndUsings,
+                    compressEmptyLines: false,
+                    autoCollapse: true,
+                    type: BlockTypes.Imports,
+                    isCollapsible: true
+                )
+            );
 
-            if (compilationUnit.Usings.Count > 0 ||
-                compilationUnit.Externs.Count > 0 ||
-                compilationUnit.Members.Count > 0 ||
-                compilationUnit.AttributeLists.Count > 0)
+            if (
+                compilationUnit.Usings.Count > 0
+                || compilationUnit.Externs.Count > 0
+                || compilationUnit.Members.Count > 0
+                || compilationUnit.AttributeLists.Count > 0
+            )
             {
-                CSharpStructureHelpers.CollectCommentBlockSpans(compilationUnit.EndOfFileToken.LeadingTrivia, ref spans);
+                CSharpStructureHelpers.CollectCommentBlockSpans(
+                    compilationUnit.EndOfFileToken.LeadingTrivia,
+                    ref spans
+                );
             }
         }
     }

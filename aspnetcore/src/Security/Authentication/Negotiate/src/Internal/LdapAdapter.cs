@@ -15,15 +15,22 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
 {
     internal static class LdapAdapter
     {
-        public static async Task RetrieveClaimsAsync(LdapSettings settings, ClaimsIdentity identity, ILogger logger)
+        public static async Task RetrieveClaimsAsync(
+            LdapSettings settings,
+            ClaimsIdentity identity,
+            ILogger logger
+        )
         {
             var user = identity.Name!;
             var userAccountNameIndex = user.IndexOf('@');
-            var userAccountName = userAccountNameIndex == -1 ? user : user.Substring(0, userAccountNameIndex);
+            var userAccountName =
+                userAccountNameIndex == -1 ? user : user.Substring(0, userAccountNameIndex);
 
             if (settings.ClaimsCache == null)
             {
-                settings.ClaimsCache = new MemoryCache(new MemoryCacheOptions { SizeLimit = settings.ClaimsCacheSize });
+                settings.ClaimsCache = new MemoryCache(
+                    new MemoryCacheOptions { SizeLimit = settings.ClaimsCacheSize }
+                );
             }
 
             if (settings.ClaimsCache.TryGetValue<IEnumerable<string>>(user, out var cachedClaims))
@@ -36,25 +43,36 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                 return;
             }
 
-            var distinguishedName = settings.Domain.Split('.').Select(name => $"dc={name}").Aggregate((a, b) => $"{a},{b}");
+            var distinguishedName = settings.Domain
+                .Split('.')
+                .Select(name => $"dc={name}")
+                .Aggregate((a, b) => $"{a},{b}");
             var retrievedClaims = new List<string>();
 
             var filter = $"(&(objectClass=user)(sAMAccountName={userAccountName}))"; // This is using ldap search query language, it is looking on the server for someUser
-            var searchRequest = new SearchRequest(distinguishedName, filter, SearchScope.Subtree, null);
+            var searchRequest = new SearchRequest(
+                distinguishedName,
+                filter,
+                SearchScope.Subtree,
+                null
+            );
 
             Debug.Assert(settings.LdapConnection != null);
-            var searchResponse = (SearchResponse) await Task<DirectoryResponse>.Factory.FromAsync(
+            var searchResponse = (SearchResponse)await Task<DirectoryResponse>.Factory.FromAsync(
                 settings.LdapConnection.BeginSendRequest,
                 settings.LdapConnection.EndSendRequest,
                 searchRequest,
                 PartialResultProcessing.NoPartialResultSupport,
-                null);
+                null
+            );
 
             if (searchResponse.Entries.Count > 0)
             {
                 if (searchResponse.Entries.Count > 1)
                 {
-                    logger.LogWarning($"More than one response received for query: {filter} with distinguished name: {distinguishedName}");
+                    logger.LogWarning(
+                        $"More than one response received for query: {filter} with distinguished name: {distinguishedName}"
+                    );
                 }
 
                 var userFound = searchResponse.Entries[0]; //Get the object that was found on ldap
@@ -68,7 +86,14 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
 
                     if (!settings.IgnoreNestedGroups)
                     {
-                        GetNestedGroups(settings.LdapConnection, identity, distinguishedName, groupCN, logger, retrievedClaims);
+                        GetNestedGroups(
+                            settings.LdapConnection,
+                            identity,
+                            distinguishedName,
+                            groupCN,
+                            logger,
+                            retrievedClaims
+                        );
                     }
                     else
                     {
@@ -83,30 +108,48 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                     entrySize += claim.Length * 2; //Approximate the size of stored value in memory cache.
                 }
 
-                settings.ClaimsCache.Set(user,
+                settings.ClaimsCache.Set(
+                    user,
                     retrievedClaims,
                     new MemoryCacheEntryOptions()
                         .SetSize(entrySize)
                         .SetSlidingExpiration(settings.ClaimsCacheSlidingExpiration)
-                        .SetAbsoluteExpiration(settings.ClaimsCacheAbsoluteExpiration));
+                        .SetAbsoluteExpiration(settings.ClaimsCacheAbsoluteExpiration)
+                );
             }
             else
             {
-                logger.LogWarning($"No response received for query: {filter} with distinguished name: {distinguishedName}");
+                logger.LogWarning(
+                    $"No response received for query: {filter} with distinguished name: {distinguishedName}"
+                );
             }
         }
 
-        private static void GetNestedGroups(LdapConnection connection, ClaimsIdentity principal, string distinguishedName, string groupCN, ILogger logger, IList<string> retrievedClaims)
+        private static void GetNestedGroups(
+            LdapConnection connection,
+            ClaimsIdentity principal,
+            string distinguishedName,
+            string groupCN,
+            ILogger logger,
+            IList<string> retrievedClaims
+        )
         {
             var filter = $"(&(objectClass=group)(sAMAccountName={groupCN}))"; // This is using ldap search query language, it is looking on the server for someUser
-            var searchRequest = new SearchRequest(distinguishedName, filter, SearchScope.Subtree, null);
+            var searchRequest = new SearchRequest(
+                distinguishedName,
+                filter,
+                SearchScope.Subtree,
+                null
+            );
             var searchResponse = (SearchResponse)connection.SendRequest(searchRequest);
 
             if (searchResponse.Entries.Count > 0)
             {
                 if (searchResponse.Entries.Count > 1)
                 {
-                    logger.LogWarning($"More than one response received for query: {filter} with distinguished name: {distinguishedName}");
+                    logger.LogWarning(
+                        $"More than one response received for query: {filter} with distinguished name: {distinguishedName}"
+                    );
                 }
 
                 var group = searchResponse.Entries[0]; //Get the object that was found on ldap
@@ -120,7 +163,14 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                     {
                         var groupDN = $"{Encoding.UTF8.GetString((byte[])member)}";
                         var nestedGroupCN = groupDN.Split(',')[0].Substring("CN=".Length);
-                        GetNestedGroups(connection, principal, distinguishedName, nestedGroupCN, logger, retrievedClaims);
+                        GetNestedGroups(
+                            connection,
+                            principal,
+                            distinguishedName,
+                            nestedGroupCN,
+                            logger,
+                            retrievedClaims
+                        );
                     }
                 }
             }

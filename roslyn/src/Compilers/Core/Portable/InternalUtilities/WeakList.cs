@@ -11,8 +11,7 @@ namespace Roslyn.Utilities
     /// <summary>
     /// Represents an ordered sequence of weak references.
     /// </summary>
-    internal sealed class WeakList<T> : IEnumerable<T>
-        where T : class
+    internal sealed class WeakList<T> : IEnumerable<T> where T : class
     {
         private WeakReference<T>[] _items;
         private int _size;
@@ -50,7 +49,7 @@ namespace Roslyn.Utilities
             }
             else if (alive >= 3 * _items.Length / 4)
             {
-                // If we have a lot of items alive we expand the array since just compacting them 
+                // If we have a lot of items alive we expand the array since just compacting them
                 // wouldn't free up much space (we would end up calling Resize again after adding a few more items).
                 var newItems = new WeakReference<T>[GetExpandedSize(_items.Length)];
 
@@ -73,7 +72,10 @@ namespace Roslyn.Utilities
                 Compact(firstDead, _items);
             }
 
-            Debug.Assert(_items.Length > 0 && _size < 3 * _items.Length / 4, "length: " + _items.Length + " size: " + _size);
+            Debug.Assert(
+                _items.Length > 0 && _size < 3 * _items.Length / 4,
+                "length: " + _items.Length + " size: " + _size
+            );
         }
 
         private void Shrink(int firstDead, int alive)
@@ -173,7 +175,7 @@ namespace Roslyn.Utilities
                 }
                 else
                 {
-                    // object has been collected 
+                    // object has been collected
 
                     if (firstDead < 0)
                     {
@@ -201,6 +203,9 @@ namespace Roslyn.Utilities
             return GetEnumerator();
         }
 
-        internal WeakReference<T>[] TestOnly_UnderlyingArray { get { return _items; } }
+        internal WeakReference<T>[] TestOnly_UnderlyingArray
+        {
+            get { return _items; }
+        }
     }
 }

@@ -18,10 +18,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.CSharp
     {
         internal override CommonMessageProvider MessageProvider
         {
-            get
-            {
-                return CodeAnalysis.CSharp.MessageProvider.Instance;
-            }
+            get { return CodeAnalysis.CSharp.MessageProvider.Instance; }
         }
 
         internal override ImmutableArray<int> GetSupportedErrorCodes()

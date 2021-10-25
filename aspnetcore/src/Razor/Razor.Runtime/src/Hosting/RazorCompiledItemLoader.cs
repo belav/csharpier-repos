@@ -61,7 +61,11 @@ namespace Microsoft.AspNetCore.Razor.Hosting
                 throw new ArgumentNullException(nameof(attribute));
             }
 
-            return new DefaultRazorCompiledItem(attribute.Type, attribute.Kind, attribute.Identifier);
+            return new DefaultRazorCompiledItem(
+                attribute.Type,
+                attribute.Kind,
+                attribute.Identifier
+            );
         }
 
         /// <summary>

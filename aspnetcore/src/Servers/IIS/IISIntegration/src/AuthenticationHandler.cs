@@ -15,13 +15,15 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         private HttpContext? _context;
         private AuthenticationScheme? _scheme;
 
-        public Task<AuthenticateResult> AuthenticateAsync() 
+        public Task<AuthenticateResult> AuthenticateAsync()
         {
             Debug.Assert(_scheme != null, "Handler must be initialized.");
 
             if (_user != null)
             {
-                return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(_user, _scheme.Name)));
+                return Task.FromResult(
+                    AuthenticateResult.Success(new AuthenticationTicket(_user, _scheme.Name))
+                );
             }
             else
             {

@@ -34,8 +34,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 throw new ArgumentException(
                     Resources.FormatBinderType_MustBeIModelBinder(
                         binderType.FullName,
-                        typeof(IModelBinder).FullName),
-                    nameof(binderType));
+                        typeof(IModelBinder).FullName
+                    ),
+                    nameof(binderType)
+                );
             }
 
             _factory = ActivatorUtilities.CreateFactory(binderType, Type.EmptyTypes);

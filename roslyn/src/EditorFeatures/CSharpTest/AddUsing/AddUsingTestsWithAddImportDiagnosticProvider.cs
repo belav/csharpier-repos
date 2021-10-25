@@ -18,22 +18,26 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddImport)]
-    public partial class AddUsingTestsWithAddImportDiagnosticProvider : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class AddUsingTestsWithAddImportDiagnosticProvider
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddUsingTestsWithAddImportDiagnosticProvider(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public AddUsingTestsWithAddImportDiagnosticProvider(ITestOutputHelper logger) : base(logger)
+        { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUnboundIdentifiersDiagnosticAnalyzer(), new CSharpAddImportCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUnboundIdentifiersDiagnosticAnalyzer(),
+                new CSharpAddImportCodeFixProvider()
+            );
 
         [WorkItem(1239, @"https://github.com/dotnet/roslyn/issues/1239")]
         [Fact]
         public async Task TestIncompleteLambda1()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Linq;
+                @"using System.Linq;
 
 class C
 {
@@ -41,7 +45,7 @@ class C
     {
         """".Select(() => {
         new [|Byte|]",
-@"using System;
+                @"using System;
 using System.Linq;
 
 class C
@@ -49,7 +53,8 @@ class C
     C()
     {
         """".Select(() => {
-        new Byte");
+        new Byte"
+            );
         }
 
         [WorkItem(1239, @"https://github.com/dotnet/roslyn/issues/1239")]
@@ -57,7 +62,7 @@ class C
         public async Task TestIncompleteLambda2()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Linq;
+                @"using System.Linq;
 
 class C
 {
@@ -65,7 +70,7 @@ class C
     {
         """".Select(() => {
             new [|Byte|]() }",
-@"using System;
+                @"using System;
 using System.Linq;
 
 class C
@@ -73,7 +78,8 @@ class C
     C()
     {
         """".Select(() => {
-            new Byte() }");
+            new Byte() }"
+            );
         }
 
         [WorkItem(860648, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/860648")]
@@ -82,7 +88,7 @@ class C
         public async Task TestIncompleteSimpleLambdaExpression()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Linq;
+                @"using System.Linq;
 
 class Program
 {
@@ -92,7 +98,7 @@ class Program
         string a;
     }
 }",
-@"using System.Linq;
+                @"using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 
 class Program
@@ -102,7 +108,8 @@ class Program
         args[0].Any(x => IBindCtx
         string a;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(829970, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/829970")]
@@ -110,16 +117,17 @@ class Program
         public async Task TestUnknownIdentifierGenericName()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     private [|List<int>|]
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
     private List<int>
-}");
+}"
+            );
         }
 
         [WorkItem(829970, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/829970")]
@@ -127,33 +135,35 @@ class C
         public async Task TestUnknownIdentifierInAttributeSyntaxWithoutTarget()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     [[|Extension|]]
 }",
-@"using System.Runtime.CompilerServices;
+                @"using System.Runtime.CompilerServices;
 
 class C
 {
     [Extension]
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOutsideOfMethodWithMalformedGenericParameters()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
     Func<[|FlowControl|] x }",
-@"using System;
+                @"using System;
 using System.Reflection.Emit;
 
 class Program
 {
-    Func<FlowControl x }");
+    Func<FlowControl x }"
+            );
         }
 
         [WorkItem(752640, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/752640")]
@@ -161,16 +171,17 @@ class Program
         public async Task TestUnknownIdentifierWithSyntaxError()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     [|Directory|] private int i;
 }",
-@"using System.IO;
+                @"using System.IO;
 
 class C
 {
     Directory private int i;
-}");
+}"
+            );
         }
 
         [WorkItem(855748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/855748")]
@@ -178,40 +189,43 @@ class C
         public async Task TestGenericNameWithBrackets()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|List|]
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Class
 {
     List
-}");
+}"
+            );
 
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|List<>|]
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Class
 {
     List<>
-}");
+}"
+            );
 
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     List[|<>|]
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Class
 {
     List<>
-}");
+}"
+            );
         }
 
         [WorkItem(867496, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/867496")]
@@ -219,24 +233,26 @@ class Class
         public async Task TestMalformedGenericParameters()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|List<|] }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Class
 {
-    List< }");
+    List< }"
+            );
 
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|List<Y x;|] }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Class
 {
-    List<Y x; }");
+    List<Y x; }"
+            );
         }
 
         [WorkItem(18621, "https://github.com/dotnet/roslyn/issues/18621")]
@@ -244,7 +260,7 @@ class Class
         public async Task TestIncompleteMemberWithAsyncTaskReturnType()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -262,7 +278,7 @@ namespace ConsoleApp282
         public async Task<IReadOnlyCollection<[|ProjectConfiguration|]>>
     }
 }",
-@"
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using X;
@@ -280,7 +296,8 @@ namespace ConsoleApp282
     {
         public async Task<IReadOnlyCollection<ProjectConfiguration>>
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23667, "https://github.com/dotnet/roslyn/issues/23667")]
@@ -288,7 +305,7 @@ namespace ConsoleApp282
         public async Task TestMissingDiagnosticForNameOf()
         {
             await TestDiagnosticMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -296,7 +313,8 @@ class C
         var x = [|nameof|](System);
 #warning xxx
     };
-}");
+}"
+            );
         }
     }
 }

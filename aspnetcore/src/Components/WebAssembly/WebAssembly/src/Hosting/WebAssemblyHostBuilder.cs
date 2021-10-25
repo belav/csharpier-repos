@@ -78,13 +78,19 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
 
             _createServiceProvider = () =>
             {
-                return Services.BuildServiceProvider(validateScopes: WebAssemblyHostEnvironmentExtensions.IsDevelopment(hostEnvironment));
+                return Services.BuildServiceProvider(
+                    validateScopes: WebAssemblyHostEnvironmentExtensions.IsDevelopment(
+                        hostEnvironment
+                    )
+                );
             };
         }
 
         private void InitializeRegisteredRootComponents(IJSUnmarshalledRuntime jsRuntime)
         {
-            var componentsCount = jsRuntime.InvokeUnmarshalled<int>(RegisteredComponentsInterop.GetRegisteredComponentsCount);
+            var componentsCount = jsRuntime.InvokeUnmarshalled<int>(
+                RegisteredComponentsInterop.GetRegisteredComponentsCount
+            );
             if (componentsCount == 0)
             {
                 return;
@@ -93,26 +99,59 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             var registeredComponents = new WebAssemblyComponentMarker[componentsCount];
             for (var i = 0; i < componentsCount; i++)
             {
-                var id = jsRuntime.InvokeUnmarshalled<int, int>(RegisteredComponentsInterop.GetId, i);
-                var assembly = jsRuntime.InvokeUnmarshalled<int, string>(RegisteredComponentsInterop.GetAssembly, id);
-                var typeName = jsRuntime.InvokeUnmarshalled<int, string>(RegisteredComponentsInterop.GetTypeName, id);
-                var serializedParameterDefinitions = jsRuntime.InvokeUnmarshalled<int, object?, object?, string>(RegisteredComponentsInterop.GetParameterDefinitions, id, null, null);
-                var serializedParameterValues = jsRuntime.InvokeUnmarshalled<int, object?, object?, string>(RegisteredComponentsInterop.GetParameterValues, id, null, null);
-                registeredComponents[i] = new WebAssemblyComponentMarker(WebAssemblyComponentMarker.ClientMarkerType, assembly, typeName, serializedParameterDefinitions, serializedParameterValues, id.ToString(CultureInfo.InvariantCulture));
+                var id = jsRuntime.InvokeUnmarshalled<int, int>(
+                    RegisteredComponentsInterop.GetId,
+                    i
+                );
+                var assembly = jsRuntime.InvokeUnmarshalled<int, string>(
+                    RegisteredComponentsInterop.GetAssembly,
+                    id
+                );
+                var typeName = jsRuntime.InvokeUnmarshalled<int, string>(
+                    RegisteredComponentsInterop.GetTypeName,
+                    id
+                );
+                var serializedParameterDefinitions = jsRuntime.InvokeUnmarshalled<
+                    int,
+                    object?,
+                    object?,
+                    string
+                >(RegisteredComponentsInterop.GetParameterDefinitions, id, null, null);
+                var serializedParameterValues = jsRuntime.InvokeUnmarshalled<
+                    int,
+                    object?,
+                    object?,
+                    string
+                >(RegisteredComponentsInterop.GetParameterValues, id, null, null);
+                registeredComponents[i] = new WebAssemblyComponentMarker(
+                    WebAssemblyComponentMarker.ClientMarkerType,
+                    assembly,
+                    typeName,
+                    serializedParameterDefinitions,
+                    serializedParameterValues,
+                    id.ToString(CultureInfo.InvariantCulture)
+                );
             }
 
             var componentDeserializer = WebAssemblyComponentParameterDeserializer.Instance;
             foreach (var registeredComponent in registeredComponents)
             {
                 _rootComponentCache = new RootComponentTypeCache();
-                var componentType = _rootComponentCache.GetRootComponent(registeredComponent.Assembly!, registeredComponent.TypeName!);
+                var componentType = _rootComponentCache.GetRootComponent(
+                    registeredComponent.Assembly!,
+                    registeredComponent.TypeName!
+                );
                 if (componentType is null)
                 {
                     continue;
                 }
 
-                var definitions = componentDeserializer.GetParameterDefinitions(registeredComponent.ParameterDefinitions!);
-                var values = componentDeserializer.GetParameterValues(registeredComponent.ParameterValues!);
+                var definitions = componentDeserializer.GetParameterDefinitions(
+                    registeredComponent.ParameterDefinitions!
+                );
+                var values = componentDeserializer.GetParameterValues(
+                    registeredComponent.ParameterValues!
+                );
                 var parameters = componentDeserializer.DeserializeParameters(definitions, values);
 
                 RootComponents.Add(componentType, registeredComponent.PrerenderId!, parameters);
@@ -121,21 +160,32 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
 
         private void InitializePersistedState(IJSUnmarshalledRuntime jsRuntime)
         {
-            _persistedState = jsRuntime.InvokeUnmarshalled<string>("Blazor._internal.getPersistedState");
+            _persistedState = jsRuntime.InvokeUnmarshalled<string>(
+                "Blazor._internal.getPersistedState"
+            );
         }
 
         private void InitializeNavigationManager(IJSUnmarshalledRuntime jsRuntime)
         {
-            var baseUri = jsRuntime.InvokeUnmarshalled<string>(BrowserNavigationManagerInterop.GetBaseUri);
-            var uri = jsRuntime.InvokeUnmarshalled<string>(BrowserNavigationManagerInterop.GetLocationHref);
+            var baseUri = jsRuntime.InvokeUnmarshalled<string>(
+                BrowserNavigationManagerInterop.GetBaseUri
+            );
+            var uri = jsRuntime.InvokeUnmarshalled<string>(
+                BrowserNavigationManagerInterop.GetLocationHref
+            );
 
             WebAssemblyNavigationManager.Instance = new WebAssemblyNavigationManager(baseUri, uri);
         }
 
         private WebAssemblyHostEnvironment InitializeEnvironment(IJSUnmarshalledRuntime jsRuntime)
         {
-            var applicationEnvironment = jsRuntime.InvokeUnmarshalled<string>("Blazor._internal.getApplicationEnvironment");
-            var hostEnvironment = new WebAssemblyHostEnvironment(applicationEnvironment, WebAssemblyNavigationManager.Instance.BaseUri);
+            var applicationEnvironment = jsRuntime.InvokeUnmarshalled<string>(
+                "Blazor._internal.getApplicationEnvironment"
+            );
+            var hostEnvironment = new WebAssemblyHostEnvironment(
+                applicationEnvironment,
+                WebAssemblyNavigationManager.Instance.BaseUri
+            );
 
             Services.AddSingleton<IWebAssemblyHostEnvironment>(hostEnvironment);
 
@@ -148,13 +198,17 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             foreach (var configFile in configFiles)
             {
                 var appSettingsJson = jsRuntime.InvokeUnmarshalled<string, byte[]>(
-                    "Blazor._internal.getConfig", configFile);
+                    "Blazor._internal.getConfig",
+                    configFile
+                );
 
                 if (appSettingsJson != null)
                 {
                     // Perf: Using this over AddJsonStream. This allows the linker to trim out the "File"-specific APIs and assemblies
                     // for Configuration, of where there are several.
-                    Configuration.Add<JsonStreamConfigurationSource>(s => s.Stream = new MemoryStream(appSettingsJson));
+                    Configuration.Add<JsonStreamConfigurationSource>(
+                        s => s.Stream = new MemoryStream(appSettingsJson)
+                    );
                 }
             }
 
@@ -206,7 +260,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         /// the previously stored <paramref name="factory"/> and <paramref name="configure"/> delegate.
         /// </para>
         /// </remarks>
-        public void ConfigureContainer<TBuilder>(IServiceProviderFactory<TBuilder> factory, Action<TBuilder>? configure = null) where TBuilder : notnull
+        public void ConfigureContainer<TBuilder>(
+            IServiceProviderFactory<TBuilder> factory,
+            Action<TBuilder>? configure = null
+        ) where TBuilder : notnull
         {
             if (factory == null)
             {
@@ -236,22 +293,36 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             var services = _createServiceProvider();
             var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope();
 
-            return new WebAssemblyHost(services, scope, Configuration, RootComponents.ToArray(), _persistedState);
+            return new WebAssemblyHost(
+                services,
+                scope,
+                Configuration,
+                RootComponents.ToArray(),
+                _persistedState
+            );
         }
 
         internal void InitializeDefaultServices()
         {
             Services.AddSingleton<IJSRuntime>(DefaultWebAssemblyJSRuntime.Instance);
             Services.AddSingleton<NavigationManager>(WebAssemblyNavigationManager.Instance);
-            Services.AddSingleton<INavigationInterception>(WebAssemblyNavigationInterception.Instance);
+            Services.AddSingleton<INavigationInterception>(
+                WebAssemblyNavigationInterception.Instance
+            );
             Services.AddSingleton(new LazyAssemblyLoader(DefaultWebAssemblyJSRuntime.Instance));
             Services.AddSingleton<ComponentApplicationLifetime>();
-            Services.AddSingleton<ComponentApplicationState>(sp => sp.GetRequiredService<ComponentApplicationLifetime>().State);
+            Services.AddSingleton<ComponentApplicationState>(
+                sp => sp.GetRequiredService<ComponentApplicationLifetime>().State
+            );
             Services.AddSingleton<IErrorBoundaryLogger, WebAssemblyErrorBoundaryLogger>();
-            Services.AddLogging(builder =>
-            {
-                builder.AddProvider(new WebAssemblyConsoleLoggerProvider(DefaultWebAssemblyJSRuntime.Instance));
-            });
+            Services.AddLogging(
+                builder =>
+                {
+                    builder.AddProvider(
+                        new WebAssemblyConsoleLoggerProvider(DefaultWebAssemblyJSRuntime.Instance)
+                    );
+                }
+            );
         }
     }
 }

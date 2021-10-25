@@ -55,7 +55,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             if (endpoints.Length != values.Length || endpoints.Length != scores.Length)
             {
-                throw new ArgumentException($"The provided {nameof(endpoints)}, {nameof(values)}, and {nameof(scores)} must have the same length.");
+                throw new ArgumentException(
+                    $"The provided {nameof(endpoints)}, {nameof(values)}, and {nameof(scores)} must have the same length."
+                );
             }
 
             Candidates = new CandidateState[endpoints.Length];
@@ -220,7 +222,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
         /// correctly if other endpoints exist with the same score.
         /// </para>
         /// </remarks>
-        public void ExpandEndpoint(int index, IReadOnlyList<Endpoint> endpoints, IComparer<Endpoint> comparer)
+        public void ExpandEndpoint(
+            int index,
+            IReadOnlyList<Endpoint> endpoints,
+            IComparer<Endpoint> comparer
+        )
         {
             // Friendliness for inlining
             if ((uint)index >= Count)
@@ -312,16 +318,22 @@ namespace Microsoft.AspNetCore.Routing.Matching
                             scoreOffset++;
                         }
 
-                        Candidates[i + index] = new CandidateState(buffer[i], values, score + scoreOffset);
+                        Candidates[i + index] = new CandidateState(
+                            buffer[i],
+                            values,
+                            score + scoreOffset
+                        );
                     }
 
                     for (var i = index + 1; i < original.Length; i++)
                     {
-                        Candidates[i + endpoints.Count - 1] = new CandidateState(original[i].Endpoint, original[i].Values, original[i].Score + scoreOffset);
+                        Candidates[i + endpoints.Count - 1] = new CandidateState(
+                            original[i].Endpoint,
+                            original[i].Values,
+                            original[i].Score + scoreOffset
+                        );
                     }
-
                     break;
-                    
             }
         }
 
@@ -362,9 +374,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 }
 
                 var message =
-                    $"Using {nameof(ExpandEndpoint)} requires that the replaced endpoint have a unique priority. " +
-                    $"The following endpoints were found with the same priority:" + Environment.NewLine +
-                    string.Join(Environment.NewLine, duplicates.Select(e => e.DisplayName));
+                    $"Using {nameof(ExpandEndpoint)} requires that the replaced endpoint have a unique priority. "
+                    + $"The following endpoints were found with the same priority:"
+                    + Environment.NewLine
+                    + string.Join(Environment.NewLine, duplicates.Select(e => e.DisplayName));
                 throw new InvalidOperationException(message);
             }
         }

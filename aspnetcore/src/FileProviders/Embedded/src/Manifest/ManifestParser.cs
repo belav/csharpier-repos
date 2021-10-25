@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
 {
     internal static class ManifestParser
     {
-        private static readonly string DefaultManifestName = "Microsoft.Extensions.FileProviders.Embedded.Manifest.xml";
+        private static readonly string DefaultManifestName =
+            "Microsoft.Extensions.FileProviders.Embedded.Manifest.xml";
 
         public static EmbeddedFilesManifest Parse(Assembly assembly)
         {
@@ -35,8 +36,10 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
             var stream = assembly.GetManifestResourceStream(name);
             if (stream == null)
             {
-                throw new InvalidOperationException($"Could not load the embedded file manifest " +
-                    $"'{name}' for assembly '{assembly.GetName().Name}'.");
+                throw new InvalidOperationException(
+                    $"Could not load the embedded file manifest "
+                        + $"'{name}' for assembly '{assembly.GetName().Name}'."
+                );
             }
 
             var document = XDocument.Load(stream);
@@ -46,9 +49,11 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
             var version = EnsureText(manifestVersion);
             if (!string.Equals("1.0", version, StringComparison.Ordinal))
             {
-                throw new InvalidOperationException($"The embedded file manifest '{name}' for " +
-                    $"assembly '{assembly.GetName().Name}' specifies an unsupported file format" +
-                    $" version: '{version}'.");
+                throw new InvalidOperationException(
+                    $"The embedded file manifest '{name}' for "
+                        + $"assembly '{assembly.GetName().Name}' specifies an unsupported file format"
+                        + $" version: '{version}'."
+                );
             }
             var fileSystem = EnsureElement(manifest, "FileSystem");
 
@@ -65,7 +70,6 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
             var rootDirectory = ManifestDirectory.CreateRootDirectory(entriesList.ToArray());
 
             return new EmbeddedFilesManifest(rootDirectory);
-
         }
 
         private static void ValidateEntries(List<ManifestEntry> entriesList)
@@ -74,11 +78,18 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
             {
                 for (int j = i + 1; j < entriesList.Count; j++)
                 {
-                    if (string.Equals(entriesList[i].Name, entriesList[j].Name, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            entriesList[i].Name,
+                            entriesList[j].Name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         throw new InvalidOperationException(
-                            "Found two entries with the same name but different casing:" +
-                            $" '{entriesList[i].Name}' and '{entriesList[j]}'");
+                            "Found two entries with the same name but different casing:"
+                                + $" '{entriesList[i].Name}' and '{entriesList[j]}'"
+                        );
                     }
                 }
             }
@@ -89,8 +100,10 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
             RuntimeHelpers.EnsureSufficientExecutionStack();
             if (element.NodeType != XmlNodeType.Element)
             {
-                throw new InvalidOperationException($"Invalid manifest format. Expected a 'File' or a 'Directory' node:" +
-                    $" '{element.ToString()}'");
+                throw new InvalidOperationException(
+                    $"Invalid manifest format. Expected a 'File' or a 'Directory' node:"
+                        + $" '{element.ToString()}'"
+                );
             }
 
             if (string.Equals(element.Name.LocalName, "File", StringComparison.Ordinal))
@@ -115,8 +128,10 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
                 return ManifestDirectory.CreateDirectory(directoryName, children.ToArray());
             }
 
-            throw new InvalidOperationException($"Invalid manifest format.Expected a 'File' or a 'Directory' node. " +
-                $"Got '{element.Name.LocalName}' instead.");
+            throw new InvalidOperationException(
+                $"Invalid manifest format.Expected a 'File' or a 'Directory' node. "
+                    + $"Got '{element.Name.LocalName}' instead."
+            );
         }
 
         private static XElement EnsureElement(XContainer container, string elementName)
@@ -124,7 +139,9 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
             var element = container.Element(elementName);
             if (element == null)
             {
-                throw new InvalidOperationException($"Invalid manifest format. Missing '{elementName}' element name");
+                throw new InvalidOperationException(
+                    $"Invalid manifest format. Missing '{elementName}' element name"
+                );
             }
 
             return element;
@@ -135,7 +152,9 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
             var value = element.Attribute("Name")?.Value;
             if (value == null)
             {
-                throw new InvalidOperationException($"Invalid manifest format. '{element.Name}' must contain a 'Name' attribute.");
+                throw new InvalidOperationException(
+                    $"Invalid manifest format. '{element.Name}' must contain a 'Name' attribute."
+                );
             }
 
             return value;
@@ -143,17 +162,20 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
 
         private static string EnsureText(XElement element)
         {
-            if (element.Elements().Count() == 0 &&
-                !element.IsEmpty &&
-                element.Nodes().Count() == 1 &&
-                element.FirstNode?.NodeType == XmlNodeType.Text)
+            if (
+                element.Elements().Count() == 0
+                && !element.IsEmpty
+                && element.Nodes().Count() == 1
+                && element.FirstNode?.NodeType == XmlNodeType.Text
+            )
             {
                 return element.Value;
             }
 
             throw new InvalidOperationException(
-                $"Invalid manifest format. '{element.Name.LocalName}' must contain " +
-                $"a text value. '{element.Value}'");
+                $"Invalid manifest format. '{element.Name.LocalName}' must contain "
+                    + $"a text value. '{element.Value}'"
+            );
         }
     }
 }

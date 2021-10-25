@@ -26,7 +26,6 @@ public class GCUtil
         gh.Free();
     }
 
-
     [SecuritySafeCritical]
     public static Object GetTarget(GCHandle gh)
     {

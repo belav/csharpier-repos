@@ -17,9 +17,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
 
         public IReadOnlyList<LifecycleProperty> Properties { get; }
 
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-        }
+        public void OnActionExecuted(ActionExecutedContext context) { }
 
         public void OnActionExecuting(ActionExecutingContext context)
         {

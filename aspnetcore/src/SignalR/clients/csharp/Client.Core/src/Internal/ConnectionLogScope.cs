@@ -60,7 +60,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.Internal
             {
                 if (!string.IsNullOrEmpty(ConnectionId))
                 {
-                    _cachedToString = FormattableString.Invariant($"{ClientConnectionIdKey}:{ConnectionId}");
+                    _cachedToString = FormattableString.Invariant(
+                        $"{ClientConnectionIdKey}:{ConnectionId}"
+                    );
                 }
             }
 

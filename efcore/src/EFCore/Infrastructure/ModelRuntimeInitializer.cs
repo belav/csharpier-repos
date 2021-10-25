@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual IModel Initialize(
             IModel model,
             bool designTime = true,
-            IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? validationLogger = null)
+            IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? validationLogger = null
+        )
         {
             if (model.ModelDependencies == null)
             {
@@ -65,23 +66,25 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                         initializer.InitializeModel(model, preValidation: true);
 
-                        if (validationLogger != null
-                            && model is IConventionModel)
+                        if (validationLogger != null && model is IConventionModel)
                         {
-                            initializer.Dependencies.ModelValidator.Validate(model, validationLogger);
+                            initializer.Dependencies.ModelValidator.Validate(
+                                model,
+                                validationLogger
+                            );
                         }
 
                         initializer.InitializeModel(model, preValidation: false);
 
-                        if (!designTime
-                            && model is Model mutableModel)
+                        if (!designTime && model is Model mutableModel)
                         {
                             model = mutableModel.OnModelFinalized();
                         }
 
                         return model;
                     },
-                    (this, model, designTime, validationLogger));
+                    (this, model, designTime, validationLogger)
+                );
 
                 if (designTime)
                 {
@@ -101,7 +104,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                         return model!;
                     },
-                    model);
+                    model
+                );
             }
 
             return model;
@@ -115,8 +119,6 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     <see langword="true"/> indicates that only pre-validation initialization should be performed;
         ///     <see langword="false"/> indicates that only post-validation initialization should be performed.
         /// </param>
-        protected virtual void InitializeModel(IModel model, bool preValidation)
-        {
-        }
+        protected virtual void InitializeModel(IModel model, bool preValidation) { }
     }
 }

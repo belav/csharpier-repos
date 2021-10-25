@@ -20,10 +20,12 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             // Arrange
             var filter = Mock.Of<IFilterMetadata>();
 
-            var context = CreateFilterContext(new List<FilterItem>()
-            {
-                new FilterItem(new FilterDescriptor(filter, FilterScope.Global)),
-            });
+            var context = CreateFilterContext(
+                new List<FilterItem>()
+                {
+                    new FilterItem(new FilterDescriptor(filter, FilterScope.Global)),
+                }
+            );
 
             var provider = CreateProvider();
 
@@ -51,10 +53,12 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 .Setup(ff => ff.CreateInstance(It.IsAny<IServiceProvider>()))
                 .Returns(filter);
 
-            var context = CreateFilterContext(new List<FilterItem>()
-            {
-                new FilterItem(new FilterDescriptor(filterFactory.Object, FilterScope.Global)),
-            });
+            var context = CreateFilterContext(
+                new List<FilterItem>()
+                {
+                    new FilterItem(new FilterDescriptor(filterFactory.Object, FilterScope.Global)),
+                }
+            );
 
             var provider = CreateProvider();
 
@@ -84,10 +88,12 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
             filterFactory.As<IOrderedFilter>().SetupGet(ff => ff.Order).Returns(17);
 
-            var context = CreateFilterContext(new List<FilterItem>()
-            {
-                new FilterItem(new FilterDescriptor(filterFactory.Object, FilterScope.Global)),
-            });
+            var context = CreateFilterContext(
+                new List<FilterItem>()
+                {
+                    new FilterItem(new FilterDescriptor(filterFactory.Object, FilterScope.Global)),
+                }
+            );
 
             var provider = CreateProvider();
 
@@ -115,10 +121,12 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 .Setup(ff => ff.CreateInstance(It.IsAny<IServiceProvider>()))
                 .Returns(filter.As<IFilterMetadata>().Object);
 
-            var context = CreateFilterContext(new List<FilterItem>()
-            {
-                new FilterItem(new FilterDescriptor(filterFactory.Object, FilterScope.Global)),
-            });
+            var context = CreateFilterContext(
+                new List<FilterItem>()
+                {
+                    new FilterItem(new FilterDescriptor(filterFactory.Object, FilterScope.Global)),
+                }
+            );
 
             var provider = CreateProvider();
 
@@ -144,14 +152,19 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         {
             var actionContext = CreateActionContext();
             actionContext.ActionDescriptor.FilterDescriptors = new List<FilterDescriptor>(
-                items.Select(item => item.Descriptor));
+                items.Select(item => item.Descriptor)
+            );
 
             return new FilterProviderContext(actionContext, items);
         }
 
         private ActionContext CreateActionContext()
         {
-            return new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            return new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
         }
     }
 }

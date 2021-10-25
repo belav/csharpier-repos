@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             IJsonHelper jsonHelper,
             DiagnosticListener diagnosticListener,
             HtmlEncoder htmlEncoder,
-            IModelExpressionProvider modelExpressionProvider)
+            IModelExpressionProvider modelExpressionProvider
+        )
         {
             _pageActivator = pageActivator;
             _modelMetadataProvider = metadataProvider;
@@ -41,22 +42,30 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             };
         }
 
-        public Func<PageContext, ViewContext, object> CreatePageFactory(CompiledPageActionDescriptor actionDescriptor)
+        public Func<PageContext, ViewContext, object> CreatePageFactory(
+            CompiledPageActionDescriptor actionDescriptor
+        )
         {
             if (!typeof(PageBase).GetTypeInfo().IsAssignableFrom(actionDescriptor.PageTypeInfo))
             {
-                throw new InvalidOperationException(Resources.FormatActivatedInstance_MustBeAnInstanceOf(
-                    _pageActivator.GetType().FullName,
-                    typeof(PageBase).FullName));
+                throw new InvalidOperationException(
+                    Resources.FormatActivatedInstance_MustBeAnInstanceOf(
+                        _pageActivator.GetType().FullName,
+                        typeof(PageBase).FullName
+                    )
+                );
             }
 
             var activatorFactory = _pageActivator.CreateActivator(actionDescriptor);
-            var declaredModelType = actionDescriptor.DeclaredModelTypeInfo?.AsType() ?? actionDescriptor.PageTypeInfo.AsType();
+            var declaredModelType =
+                actionDescriptor.DeclaredModelTypeInfo?.AsType()
+                ?? actionDescriptor.PageTypeInfo.AsType();
             var propertyActivator = new RazorPagePropertyActivator(
                 actionDescriptor.PageTypeInfo.AsType(),
                 declaredModelType,
                 _modelMetadataProvider,
-                _propertyAccessors);
+                _propertyAccessors
+            );
 
             return (pageContext, viewContext) =>
             {
@@ -69,7 +78,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             };
         }
 
-        public Action<PageContext, ViewContext, object> CreatePageDisposer(CompiledPageActionDescriptor descriptor)
+        public Action<PageContext, ViewContext, object> CreatePageDisposer(
+            CompiledPageActionDescriptor descriptor
+        )
         {
             if (descriptor == null)
             {
@@ -79,7 +90,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             return _pageActivator.CreateReleaser(descriptor);
         }
 
-        public Func<PageContext, ViewContext, object, ValueTask> CreateAsyncPageDisposer(CompiledPageActionDescriptor descriptor)
+        public Func<PageContext, ViewContext, object, ValueTask> CreateAsyncPageDisposer(
+            CompiledPageActionDescriptor descriptor
+        )
         {
             if (descriptor == null)
             {

@@ -13,12 +13,14 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     [Collection(PublishedSitesCollection.Name)]
     public class ShadowCopyTests : IISFunctionalTestBase
     {
-        public ShadowCopyTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public ShadowCopyTests(PublishedSitesFixture fixture) : base(fixture) { }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         public async Task ShadowCopyDoesNotLockFiles()
         {
             using var directory = TempDirectory.Create();
@@ -45,7 +47,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         public async Task ShadowCopyRelativeInSameDirectoryWorks()
         {
             var directoryName = Path.GetRandomFileName();
@@ -76,13 +82,18 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         public async Task ShadowCopyRelativeOutsideDirectoryWorks()
         {
             using var directory = TempDirectory.Create();
             var deploymentParameters = Fixture.GetBaseDeploymentParameters();
             deploymentParameters.HandlerSettings["experimentalEnableShadowCopy"] = "true";
-            deploymentParameters.HandlerSettings["shadowCopyDirectory"] = $"..\\{directory.DirectoryInfo.Name}";
+            deploymentParameters.HandlerSettings["shadowCopyDirectory"] =
+                $"..\\{directory.DirectoryInfo.Name}";
             deploymentParameters.ApplicationPath = directory.DirectoryPath;
 
             var deploymentResult = await DeployAsync(deploymentParameters);
@@ -110,7 +121,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         public async Task ShadowCopySingleFileChangedWorks()
         {
             using var directory = TempDirectory.Create();
@@ -146,7 +161,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         public async Task ShadowCopyE2EWorksWithFolderPresent()
         {
             using var directory = TempDirectory.Create();
@@ -155,7 +174,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             deploymentParameters.HandlerSettings["shadowCopyDirectory"] = directory.DirectoryPath;
             var deploymentResult = await DeployAsync(deploymentParameters);
 
-            DirectoryCopy(deploymentResult.ContentRoot, Path.Combine(directory.DirectoryPath, "0"), copySubDirs: true);
+            DirectoryCopy(
+                deploymentResult.ContentRoot,
+                Path.Combine(directory.DirectoryPath, "0"),
+                copySubDirs: true
+            );
 
             var response = await deploymentResult.HttpClient.GetAsync("Wow!");
             Assert.True(response.IsSuccessStatusCode);
@@ -163,8 +186,16 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             using var secondTempDir = TempDirectory.Create();
 
             // copy back and forth to cause file change notifications.
-            DirectoryCopy(deploymentResult.ContentRoot, secondTempDir.DirectoryPath, copySubDirs: true);
-            DirectoryCopy(secondTempDir.DirectoryPath, deploymentResult.ContentRoot, copySubDirs: true);
+            DirectoryCopy(
+                deploymentResult.ContentRoot,
+                secondTempDir.DirectoryPath,
+                copySubDirs: true
+            );
+            DirectoryCopy(
+                secondTempDir.DirectoryPath,
+                deploymentResult.ContentRoot,
+                copySubDirs: true
+            );
 
             deploymentResult.AssertWorkerProcessStop();
             response = await deploymentResult.HttpClient.GetAsync("Wow!");
@@ -222,7 +253,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         // copied from https://docs.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
-        private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        private static void DirectoryCopy(
+            string sourceDirName,
+            string destDirName,
+            bool copySubDirs
+        )
         {
             // Get the subdirectories for the specified directory.
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
@@ -230,8 +265,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             if (!dir.Exists)
             {
                 throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + sourceDirName);
+                    "Source directory does not exist or could not be found: " + sourceDirName
+                );
             }
 
             DirectoryInfo[] dirs = dir.GetDirectories();

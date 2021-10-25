@@ -25,9 +25,16 @@ namespace Microsoft.CodeAnalysis.Remote
     /// </summary>
     internal sealed class SolutionAssetProvider : ISolutionAssetProvider
     {
-        public const string ServiceName = ServiceDescriptors.ServiceNameTopLevelPrefix + ServiceDescriptors.ComponentName + ".SolutionAssetProvider";
+        public const string ServiceName =
+            ServiceDescriptors.ServiceNameTopLevelPrefix
+            + ServiceDescriptors.ComponentName
+            + ".SolutionAssetProvider";
 
-        internal static ServiceDescriptor ServiceDescriptor { get; } = ServiceDescriptor.CreateInProcServiceDescriptor(ServiceName, ServiceDescriptors.GetFeatureDisplayName);
+        internal static ServiceDescriptor ServiceDescriptor { get; } =
+            ServiceDescriptor.CreateInProcServiceDescriptor(
+                ServiceName,
+                ServiceDescriptors.GetFeatureDisplayName
+            );
 
         private readonly HostWorkspaceServices _services;
 
@@ -36,9 +43,15 @@ namespace Microsoft.CodeAnalysis.Remote
             _services = services;
         }
 
-        public async ValueTask GetAssetsAsync(PipeWriter pipeWriter, int scopeId, Checksum[] checksums, CancellationToken cancellationToken)
+        public async ValueTask GetAssetsAsync(
+            PipeWriter pipeWriter,
+            int scopeId,
+            Checksum[] checksums,
+            CancellationToken cancellationToken
+        )
         {
-            var assetStorage = _services.GetRequiredService<ISolutionAssetStorageProvider>().AssetStorage;
+            var assetStorage =
+                _services.GetRequiredService<ISolutionAssetStorageProvider>().AssetStorage;
             var serializer = _services.GetRequiredService<ISerializerService>();
             var replicationContext = assetStorage.GetReplicationContext(scopeId);
 
@@ -47,11 +60,18 @@ namespace Microsoft.CodeAnalysis.Remote
 
             if (checksums.Length == 1)
             {
-                singleAsset = (await assetStorage.GetAssetAsync(scopeId, checksums[0], cancellationToken).ConfigureAwait(false)) ?? SolutionAsset.Null;
+                singleAsset =
+                    (
+                        await assetStorage
+                            .GetAssetAsync(scopeId, checksums[0], cancellationToken)
+                            .ConfigureAwait(false)
+                    ) ?? SolutionAsset.Null;
             }
             else
             {
-                assetMap = await assetStorage.GetAssetsAsync(scopeId, checksums, cancellationToken).ConfigureAwait(false);
+                assetMap = await assetStorage
+                    .GetAssetsAsync(scopeId, checksums, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             // We can cancel early, but once the pipe operations are scheduled we rely on both operations running to
@@ -64,21 +84,40 @@ namespace Microsoft.CodeAnalysis.Remote
             //
             // Configure the pipe to never block on write (waiting for the reader to read). This prevents deadlocks but might result in more
             // (non-contiguous) memory allocated for the underlying buffers. The amount of memory is bounded by the total size of the serialized assets.
-            var localPipe = new Pipe(RemoteHostAssetSerialization.PipeOptionsWithUnlimitedWriterBuffer);
+            var localPipe = new Pipe(
+                RemoteHostAssetSerialization.PipeOptionsWithUnlimitedWriterBuffer
+            );
 
-            var task1 = Task.Run(() =>
-            {
-                try
+            var task1 = Task.Run(
+                () =>
                 {
-                    var stream = localPipe.Writer.AsStream(leaveOpen: false);
-                    using var writer = new ObjectWriter(stream, leaveOpen: false, cancellationToken);
-                    RemoteHostAssetSerialization.WriteData(writer, singleAsset, assetMap, serializer, replicationContext, scopeId, checksums, cancellationToken);
-                }
-                catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
-                {
-                    // no-op
-                }
-            }, mustNotCancelToken);
+                    try
+                    {
+                        var stream = localPipe.Writer.AsStream(leaveOpen: false);
+                        using var writer = new ObjectWriter(
+                            stream,
+                            leaveOpen: false,
+                            cancellationToken
+                        );
+                        RemoteHostAssetSerialization.WriteData(
+                            writer,
+                            singleAsset,
+                            assetMap,
+                            serializer,
+                            replicationContext,
+                            scopeId,
+                            checksums,
+                            cancellationToken
+                        );
+                    }
+                    catch (Exception e)
+                        when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken))
+                    {
+                        // no-op
+                    }
+                },
+                mustNotCancelToken
+            );
 
             // Complete RPC once we send the initial piece of data and start waiting for the writer to send more,
             // so the client can start reading from the stream. Once CopyPipeDataAsync completes the pipeWriter
@@ -92,7 +131,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 Exception? exception = null;
                 try
                 {
-                    await localPipe.Reader.CopyToAsync(pipeWriter, cancellationToken).ConfigureAwait(false);
+                    await localPipe.Reader
+                        .CopyToAsync(pipeWriter, cancellationToken)
+                        .ConfigureAwait(false);
                 }
                 catch (Exception e)
                 {
@@ -103,7 +144,10 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     await localPipe.Reader.CompleteAsync(exception).ConfigureAwait(false);
 
-                    if (cancellationToken.IsCancellationRequested && exception is null or OperationCanceledException)
+                    if (
+                        cancellationToken.IsCancellationRequested
+                        && exception is null or OperationCanceledException
+                    )
                     {
                         // Throw rather than close the pipe writer. The caller will coordinate cancellation and closing
                         // of the reader and writer together.
@@ -117,7 +161,14 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        public ValueTask<bool> IsExperimentEnabledAsync(string experimentName, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_services.GetRequiredService<IExperimentationService>().IsExperimentEnabled(experimentName));
+        public ValueTask<bool> IsExperimentEnabledAsync(
+            string experimentName,
+            CancellationToken cancellationToken
+        ) =>
+            ValueTaskFactory.FromResult(
+                _services
+                    .GetRequiredService<IExperimentationService>()
+                    .IsExperimentEnabled(experimentName)
+            );
     }
 }

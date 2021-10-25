@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerGeometryCollectionMemberTranslator : IMemberTranslator
     {
-        private static readonly MemberInfo _count = typeof(GeometryCollection).GetRequiredRuntimeProperty(nameof(GeometryCollection.Count));
+        private static readonly MemberInfo _count =
+            typeof(GeometryCollection).GetRequiredRuntimeProperty(nameof(GeometryCollection.Count));
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
         /// <summary>
@@ -28,7 +29,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqlServerGeometryCollectionMemberTranslator(ISqlExpressionFactory sqlExpressionFactory)
+        public SqlServerGeometryCollectionMemberTranslator(
+            ISqlExpressionFactory sqlExpressionFactory
+        )
         {
             _sqlExpressionFactory = sqlExpressionFactory;
         }
@@ -43,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
@@ -58,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     nullable: true,
                     instancePropagatesNullability: true,
                     argumentsPropagateNullability: Array.Empty<bool>(),
-                    returnType);
+                    returnType
+                );
             }
 
             return null;

@@ -12,15 +12,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
     internal class OperatorSymbolReferenceFinder : AbstractReferenceFinder<IMethodSymbol>
     {
-        protected override bool CanFind(IMethodSymbol symbol)
-            => symbol.MethodKind == MethodKind.UserDefinedOperator;
+        protected override bool CanFind(IMethodSymbol symbol) =>
+            symbol.MethodKind == MethodKind.UserDefinedOperator;
 
         protected override Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
             IMethodSymbol symbol,
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var op = symbol.GetPredefinedOperator();
             return FindDocumentsAsync(project, documents, op, cancellationToken);
@@ -31,22 +32,29 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var op = symbol.GetPredefinedOperator();
 
-            return FindReferencesInDocumentAsync(symbol, document, semanticModel, t =>
-                IsPotentialReference(syntaxFacts, op, t),
-                cancellationToken);
+            return FindReferencesInDocumentAsync(
+                symbol,
+                document,
+                semanticModel,
+                t => IsPotentialReference(syntaxFacts, op, t),
+                cancellationToken
+            );
         }
 
         private static bool IsPotentialReference(
             ISyntaxFactsService syntaxFacts,
             PredefinedOperator op,
-            SyntaxToken token)
+            SyntaxToken token
+        )
         {
-            return syntaxFacts.TryGetPredefinedOperator(token, out var actualOperator) && actualOperator == op;
+            return syntaxFacts.TryGetPredefinedOperator(token, out var actualOperator)
+                && actualOperator == op;
         }
     }
 }

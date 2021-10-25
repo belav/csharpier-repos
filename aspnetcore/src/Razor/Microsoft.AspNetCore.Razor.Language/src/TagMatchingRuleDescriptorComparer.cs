@@ -13,11 +13,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         /// <summary>
         /// A default instance of the <see cref="TagMatchingRuleDescriptorComparer"/>.
         /// </summary>
-        public static readonly TagMatchingRuleDescriptorComparer Default = new TagMatchingRuleDescriptorComparer();
+        public static readonly TagMatchingRuleDescriptorComparer Default =
+            new TagMatchingRuleDescriptorComparer();
 
-        private TagMatchingRuleDescriptorComparer()
-        {
-        }
+        private TagMatchingRuleDescriptorComparer() { }
 
         public virtual bool Equals(TagMatchingRuleDescriptor ruleX, TagMatchingRuleDescriptor ruleY)
         {
@@ -31,12 +30,15 @@ namespace Microsoft.AspNetCore.Razor.Language
                 return false;
             }
 
-            return
-                string.Equals(ruleX.TagName, ruleY.TagName, StringComparison.Ordinal) &&
-                string.Equals(ruleX.ParentTag, ruleY.ParentTag, StringComparison.Ordinal) &&
-                ruleX.CaseSensitive == ruleY.CaseSensitive &&
-                ruleX.TagStructure == ruleY.TagStructure &&
-                Enumerable.SequenceEqual(ruleX.Attributes, ruleY.Attributes, RequiredAttributeDescriptorComparer.Default);
+            return string.Equals(ruleX.TagName, ruleY.TagName, StringComparison.Ordinal)
+                && string.Equals(ruleX.ParentTag, ruleY.ParentTag, StringComparison.Ordinal)
+                && ruleX.CaseSensitive == ruleY.CaseSensitive
+                && ruleX.TagStructure == ruleY.TagStructure
+                && Enumerable.SequenceEqual(
+                    ruleX.Attributes,
+                    ruleY.Attributes,
+                    RequiredAttributeDescriptorComparer.Default
+                );
         }
 
         public virtual int GetHashCode(TagMatchingRuleDescriptor rule)

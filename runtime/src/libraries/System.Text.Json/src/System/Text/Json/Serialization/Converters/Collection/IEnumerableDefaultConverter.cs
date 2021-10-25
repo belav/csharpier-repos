@@ -14,12 +14,20 @@ namespace System.Text.Json.Serialization.Converters
         : JsonCollectionConverter<TCollection, TElement>
     {
         protected abstract void Add(in TElement value, ref ReadStack state);
-        protected abstract void CreateCollection(ref Utf8JsonReader reader, ref ReadStack state, JsonSerializerOptions options);
-        protected virtual void ConvertCollection(ref ReadStack state, JsonSerializerOptions options) { }
+        protected abstract void CreateCollection(
+            ref Utf8JsonReader reader,
+            ref ReadStack state,
+            JsonSerializerOptions options
+        );
+        protected virtual void ConvertCollection(
+            ref ReadStack state,
+            JsonSerializerOptions options
+        ) { }
 
         protected static JsonConverter<TElement> GetElementConverter(JsonTypeInfo elementTypeInfo)
         {
-            JsonConverter<TElement> converter = (JsonConverter<TElement>)elementTypeInfo.PropertyInfoForTypeInfo.ConverterBase;
+            JsonConverter<TElement> converter =
+                (JsonConverter<TElement>)elementTypeInfo.PropertyInfoForTypeInfo.ConverterBase;
             Debug.Assert(converter != null); // It should not be possible to have a null converter at this point.
 
             return converter;
@@ -27,7 +35,8 @@ namespace System.Text.Json.Serialization.Converters
 
         protected static JsonConverter<TElement> GetElementConverter(ref WriteStack state)
         {
-            JsonConverter<TElement> converter = (JsonConverter<TElement>)state.Current.DeclaredJsonPropertyInfo!.ConverterBase;
+            JsonConverter<TElement> converter =
+                (JsonConverter<TElement>)state.Current.DeclaredJsonPropertyInfo!.ConverterBase;
             Debug.Assert(converter != null); // It should not be possible to have a null converter at this point.
 
             return converter;
@@ -38,7 +47,8 @@ namespace System.Text.Json.Serialization.Converters
             Type typeToConvert,
             JsonSerializerOptions options,
             ref ReadStack state,
-            [MaybeNullWhen(false)] out TCollection value)
+            [MaybeNullWhen(false)] out TCollection value
+        )
         {
             JsonTypeInfo elementTypeInfo = state.Current.JsonTypeInfo.ElementTypeInfo!;
 
@@ -54,7 +64,9 @@ namespace System.Text.Json.Serialization.Converters
                 CreateCollection(ref reader, ref state, options);
 
                 JsonConverter<TElement> elementConverter = GetElementConverter(elementTypeInfo);
-                if (elementConverter.CanUseDirectReadOrWrite && state.Current.NumberHandling == null)
+                if (
+                    elementConverter.CanUseDirectReadOrWrite && state.Current.NumberHandling == null
+                )
                 {
                     // Fast path that avoids validation and extra indirection.
                     while (true)
@@ -66,7 +78,11 @@ namespace System.Text.Json.Serialization.Converters
                         }
 
                         // Obtain the CLR value from the JSON and apply to the object.
-                        TElement? element = elementConverter.Read(ref reader, elementConverter.TypeToConvert, options);
+                        TElement? element = elementConverter.Read(
+                            ref reader,
+                            elementConverter.TypeToConvert,
+                            options
+                        );
                         Add(element!, ref state);
                     }
                 }
@@ -82,7 +98,13 @@ namespace System.Text.Json.Serialization.Converters
                         }
 
                         // Get the value from the converter and add it.
-                        elementConverter.TryRead(ref reader, typeof(TElement), options, ref state, out TElement? element);
+                        elementConverter.TryRead(
+                            ref reader,
+                            typeof(TElement),
+                            options,
+                            ref state,
+                            out TElement? element
+                        );
                         Add(element!, ref state);
                     }
                 }
@@ -91,7 +113,8 @@ namespace System.Text.Json.Serialization.Converters
             {
                 // Slower path that supports continuation and preserved references.
 
-                bool preserveReferences = options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve;
+                bool preserveReferences =
+                    options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve;
                 if (state.Current.ObjectState == StackFrameObjectState.None)
                 {
                     if (reader.TokenType == JsonTokenType.StartArray)
@@ -102,21 +125,34 @@ namespace System.Text.Json.Serialization.Converters
                     {
                         if (reader.TokenType != JsonTokenType.StartObject)
                         {
-                            ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(TypeToConvert);
+                            ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(
+                                TypeToConvert
+                            );
                         }
 
                         state.Current.ObjectState = StackFrameObjectState.StartToken;
                     }
                     else
                     {
-                        ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(TypeToConvert);
+                        ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(
+                            TypeToConvert
+                        );
                     }
                 }
 
                 // Handle the metadata properties.
-                if (preserveReferences && state.Current.ObjectState < StackFrameObjectState.PropertyValue)
+                if (
+                    preserveReferences
+                    && state.Current.ObjectState < StackFrameObjectState.PropertyValue
+                )
                 {
-                    if (JsonSerializer.ResolveMetadataForJsonArray<TCollection>(ref reader, ref state, options))
+                    if (
+                        JsonSerializer.ResolveMetadataForJsonArray<TCollection>(
+                            ref reader,
+                            ref state,
+                            options
+                        )
+                    )
                     {
                         if (state.Current.ObjectState == StackFrameObjectState.ReadRefEndObject)
                         {
@@ -135,7 +171,8 @@ namespace System.Text.Json.Serialization.Converters
                 if (state.Current.ObjectState < StackFrameObjectState.CreatedObject)
                 {
                     CreateCollection(ref reader, ref state, options);
-                    state.Current.JsonPropertyInfo = state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+                    state.Current.JsonPropertyInfo =
+                        state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
                     state.Current.ObjectState = StackFrameObjectState.CreatedObject;
                 }
 
@@ -150,7 +187,13 @@ namespace System.Text.Json.Serialization.Converters
                         {
                             state.Current.PropertyState = StackFramePropertyState.ReadValue;
 
-                            if (!SingleValueReadWithReadAhead(elementConverter.ConverterStrategy, ref reader, ref state))
+                            if (
+                                !SingleValueReadWithReadAhead(
+                                    elementConverter.ConverterStrategy,
+                                    ref reader,
+                                    ref state
+                                )
+                            )
                             {
                                 value = default;
                                 return false;
@@ -170,7 +213,15 @@ namespace System.Text.Json.Serialization.Converters
                         if (state.Current.PropertyState < StackFramePropertyState.TryRead)
                         {
                             // Get the value from the converter and add it.
-                            if (!elementConverter.TryRead(ref reader, typeof(TElement), options, ref state, out TElement? element))
+                            if (
+                                !elementConverter.TryRead(
+                                    ref reader,
+                                    typeof(TElement),
+                                    options,
+                                    ref state,
+                                    out TElement? element
+                                )
+                            )
                             {
                                 value = default;
                                 return false;
@@ -208,7 +259,11 @@ namespace System.Text.Json.Serialization.Converters
                         if (reader.TokenType != JsonTokenType.EndObject)
                         {
                             Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
-                            ThrowHelper.ThrowJsonException_MetadataPreservedArrayInvalidProperty(ref state, typeToConvert, reader);
+                            ThrowHelper.ThrowJsonException_MetadataPreservedArrayInvalidProperty(
+                                ref state,
+                                typeToConvert,
+                                reader
+                            );
                         }
                     }
                 }
@@ -223,7 +278,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             TCollection value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             bool success;
 
@@ -239,7 +295,12 @@ namespace System.Text.Json.Serialization.Converters
                     state.Current.ProcessedStartToken = true;
                     if (options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.Preserve)
                     {
-                        MetadataPropertyName metadata = JsonSerializer.WriteReferenceForCollection(this, value, ref state, writer);
+                        MetadataPropertyName metadata = JsonSerializer.WriteReferenceForCollection(
+                            this,
+                            value,
+                            ref state,
+                            writer
+                        );
                         if (metadata == MetadataPropertyName.Ref)
                         {
                             return true;
@@ -252,7 +313,8 @@ namespace System.Text.Json.Serialization.Converters
                         writer.WriteStartArray();
                     }
 
-                    state.Current.DeclaredJsonPropertyInfo = state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+                    state.Current.DeclaredJsonPropertyInfo =
+                        state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
                 }
 
                 success = OnWriteResume(writer, value, options, ref state);
@@ -275,9 +337,17 @@ namespace System.Text.Json.Serialization.Converters
             return success;
         }
 
-        protected abstract bool OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, ref WriteStack state);
+        protected abstract bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TCollection value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        );
 
-        internal sealed override void CreateInstanceForReferenceResolver(ref Utf8JsonReader reader, ref ReadStack state, JsonSerializerOptions options)
-            => CreateCollection(ref reader, ref state, options);
+        internal sealed override void CreateInstanceForReferenceResolver(
+            ref Utf8JsonReader reader,
+            ref ReadStack state,
+            JsonSerializerOptions options
+        ) => CreateCollection(ref reader, ref state, options);
     }
 }

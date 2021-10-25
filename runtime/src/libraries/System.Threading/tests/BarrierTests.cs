@@ -62,7 +62,12 @@ namespace System.Threading.Tests
         [Fact]
         public static void RunBarrierSignalAndWaitTests_NegativeTests()
         {
-            RunBarrierTest2_SignalAndWait(1, new TimeSpan(0, 0, 0, 0, -2), false, typeof(ArgumentOutOfRangeException));
+            RunBarrierTest2_SignalAndWait(
+                1,
+                new TimeSpan(0, 0, 0, 0, -2),
+                false,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         /// <summary>
@@ -73,7 +78,12 @@ namespace System.Threading.Tests
         /// <param name="result">Expected return value</param>
         /// <param name="exceptionType">Type of the exception in case of invalid input, null for valid cases</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        private static void RunBarrierTest2_SignalAndWait(int initialCount, TimeSpan timeout, bool result, Type exceptionType)
+        private static void RunBarrierTest2_SignalAndWait(
+            int initialCount,
+            TimeSpan timeout,
+            bool result,
+            Type exceptionType
+        )
         {
             Barrier b = new Barrier(initialCount);
             try
@@ -154,10 +164,12 @@ namespace System.Threading.Tests
         public static async Task RemovingWaitingParticipants()
         {
             Barrier b = new Barrier(4);
-            Task t = Task.Run(() =>
-            {
-                b.SignalAndWait();
-            });
+            Task t = Task.Run(
+                () =>
+                {
+                    b.SignalAndWait();
+                }
+            );
 
             while (b.ParticipantsRemaining > 3)
             {
@@ -187,7 +199,11 @@ namespace System.Threading.Tests
         /// <param name="participantsToAdd">The participants that will be added</param>
         /// <param name="exceptionType">Type of the exception in case of invalid input, null for valid cases</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        private static void RunBarrierTest4_AddParticipants(int initialCount, int participantsToAdd, Type exceptionType)
+        private static void RunBarrierTest4_AddParticipants(
+            int initialCount,
+            int participantsToAdd,
+            Type exceptionType
+        )
         {
             Barrier b = new Barrier(initialCount);
             try
@@ -224,7 +240,11 @@ namespace System.Threading.Tests
         /// <param name="participantsToRemove">The participants that will be added</param>
         /// <param name="exceptionType">Type of the exception in case of invalid input, null for valid cases</param>
         /// <returns>True if the test succeeded, false otherwise</returns>
-        private static void RunBarrierTest5_RemoveParticipants(int initialCount, int participantsToRemove, Type exceptionType)
+        private static void RunBarrierTest5_RemoveParticipants(
+            int initialCount,
+            int participantsToRemove,
+            Type exceptionType
+        )
         {
             Barrier b = new Barrier(initialCount);
             try
@@ -269,19 +289,27 @@ namespace System.Threading.Tests
                 Action[] actions = new Action[4];
                 for (int k = 0; k < 4; k++)
                 {
-                    actions[k] = (Action)(() =>
-                    {
-                        for (int i = 0; i < 400; i++)
+                    actions[k] = (Action)(
+                        () =>
                         {
-                            b.AddParticipant();
-                            b.RemoveParticipant();
+                            for (int i = 0; i < 400; i++)
+                            {
+                                b.AddParticipant();
+                                b.RemoveParticipant();
+                            }
                         }
-                    });
+                    );
                 }
 
                 Task[] tasks = new Task[actions.Length];
                 for (int k = 0; k < tasks.Length; k++)
-                    tasks[k] = Task.Factory.StartNew((index) => actions[(int)index](), k, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
+                    tasks[k] = Task.Factory.StartNew(
+                        (index) => actions[(int)index](),
+                        k,
+                        CancellationToken.None,
+                        TaskCreationOptions.None,
+                        TaskScheduler.Default
+                    );
                 Task.WaitAll(tasks);
                 Assert.Equal(0, b.ParticipantCount);
             }
@@ -296,11 +324,14 @@ namespace System.Threading.Tests
         {
             bool shouldThrow = true;
             int participants = 4;
-            Barrier barrier = new Barrier(participants, (b) =>
+            Barrier barrier = new Barrier(
+                participants,
+                (b) =>
                 {
                     if (shouldThrow)
                         throw new InvalidOperationException();
-                });
+                }
+            );
             int succeededCount = 0;
 
             // Run threads that will expect BarrierPostPhaseException when they call SignalAndWait, and increment the count in the catch block
@@ -308,7 +339,8 @@ namespace System.Threading.Tests
             Task[] threads = new Task[participants];
             for (int i = 0; i < threads.Length; i++)
             {
-                threads[i] = Task.Run(() =>
+                threads[i] = Task.Run(
+                    () =>
                     {
                         try
                         {
@@ -316,10 +348,15 @@ namespace System.Threading.Tests
                         }
                         catch (BarrierPostPhaseException ex)
                         {
-                            if (ex.InnerException.GetType().Equals(typeof(InvalidOperationException)))
+                            if (
+                                ex.InnerException
+                                    .GetType()
+                                    .Equals(typeof(InvalidOperationException))
+                            )
                                 Interlocked.Increment(ref succeededCount);
                         }
-                    });
+                    }
+                );
             }
 
             foreach (Task t in threads)
@@ -334,17 +371,19 @@ namespace System.Threading.Tests
             threads = new Task[participants];
             for (int i = 0; i < threads.Length; i++)
             {
-                threads[i] = Task.Run(() =>
-                {
-                    try
+                threads[i] = Task.Run(
+                    () =>
                     {
-                        barrier.SignalAndWait();
+                        try
+                        {
+                            barrier.SignalAndWait();
+                        }
+                        catch (BarrierPostPhaseException)
+                        {
+                            Interlocked.Decrement(ref succeededCount);
+                        }
                     }
-                    catch (BarrierPostPhaseException)
-                    {
-                        Interlocked.Decrement(ref succeededCount);
-                    }
-                });
+                );
             }
             foreach (Task t in threads)
                 t.Wait();
@@ -383,17 +422,17 @@ namespace System.Threading.Tests
                 var src = new CancellationTokenSource();
                 for (int i = 0; i < tasks.Length; i++)
                 {
-                    tasks[i] = Task.Run(() =>
-                    {
-                        try
+                    tasks[i] = Task.Run(
+                        () =>
                         {
-                            if (b.SignalAndWait(-1, src.Token))
-                                src.Cancel();
+                            try
+                            {
+                                if (b.SignalAndWait(-1, src.Token))
+                                    src.Cancel();
+                            }
+                            catch (OperationCanceledException) { }
                         }
-                        catch (OperationCanceledException)
-                        {
-                        }
-                    });
+                    );
                 }
                 Task.WaitAll(tasks);
             }
@@ -406,12 +445,14 @@ namespace System.Threading.Tests
             for (int j = 0; j < 10; j++)
             {
                 Barrier b = new Barrier(2);
-                var t1 = Task.Run(() =>
+                var t1 = Task.Run(
+                    () =>
                     {
                         b.SignalAndWait();
                         b.RemoveParticipant();
                         b.SignalAndWait();
-                    });
+                    }
+                );
 
                 var t2 = Task.Run(() => b.SignalAndWait());
                 Task.WaitAll(t1, t2);
@@ -460,10 +501,11 @@ namespace System.Threading.Tests
         /// </summary>
         private static void EnsurePostPhaseThrew(Barrier barrier)
         {
-            BarrierPostPhaseException be = Assert.Throws<BarrierPostPhaseException>(() => barrier.SignalAndWait());
+            BarrierPostPhaseException be = Assert.Throws<BarrierPostPhaseException>(
+                () => barrier.SignalAndWait()
+            );
             Assert.IsType<InvalidOperationException>(be.InnerException);
         }
-
         #endregion
     }
 }

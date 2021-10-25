@@ -10,6 +10,9 @@ internal class foo
     {
         bool f = typeof(string) == s_o as Type;
         Console.WriteLine(f);
-        if (f) return 100; else return 101;
+        if (f)
+            return 100;
+        else
+            return 101;
     }
 }

@@ -54,14 +54,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public async Task ReadAsyncThrows()
         {
             var stream = CreateHttpResponseStream();
-            await Assert.ThrowsAsync<NotSupportedException>(() => stream.ReadAsync(new byte[1], 0, 1));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => stream.ReadAsync(new byte[1], 0, 1)
+            );
         }
 
         [Fact]
         public void BeginReadThrows()
         {
             var stream = CreateHttpResponseStream();
-            Assert.Throws<NotSupportedException>(() => stream.BeginRead(new byte[1], 0, 1, null, null));
+            Assert.Throws<NotSupportedException>(
+                () => stream.BeginRead(new byte[1], 0, 1, null, null)
+            );
         }
 
         [Fact]
@@ -100,7 +104,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var stream = new HttpResponseStream(Mock.Of<IHttpBodyControlFeature>(), pipeWriter);
             pipeWriter.StartAcceptingWrites();
             pipeWriter.StopAcceptingWritesAsync();
-            var ex = Assert.Throws<ObjectDisposedException>(() => { stream.WriteAsync(new byte[1], 0, 1); });
+            var ex = Assert.Throws<ObjectDisposedException>(
+                () =>
+                {
+                    stream.WriteAsync(new byte[1], 0, 1);
+                }
+            );
             Assert.Contains(CoreStrings.WritingToResponseBodyAfterResponseCompleted, ex.Message);
         }
 
@@ -111,7 +120,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var mockBodyControl = new Mock<IHttpBodyControlFeature>();
             mockBodyControl.Setup(m => m.AllowSynchronousIO).Returns(() => allowSynchronousIO);
             var mockHttpResponseControl = new Mock<IHttpResponseControl>();
-            mockHttpResponseControl.Setup(m => m.WritePipeAsync(It.IsAny<ReadOnlyMemory<byte>>(), CancellationToken.None)).Returns(new ValueTask<FlushResult>(new FlushResult()));
+            mockHttpResponseControl
+                .Setup(
+                    m => m.WritePipeAsync(It.IsAny<ReadOnlyMemory<byte>>(), CancellationToken.None)
+                )
+                .Returns(new ValueTask<FlushResult>(new FlushResult()));
 
             var pipeWriter = new HttpResponsePipeWriter(mockHttpResponseControl.Object);
             var stream = new HttpResponseStream(mockBodyControl.Object, pipeWriter);
@@ -120,8 +133,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             // WriteAsync doesn't throw.
             await stream.WriteAsync(new byte[1], 0, 1);
 
-            var ioEx = Assert.Throws<InvalidOperationException>(() => stream.Write(new byte[1], 0, 1));
-            Assert.Equal("Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.", ioEx.Message);
+            var ioEx = Assert.Throws<InvalidOperationException>(
+                () => stream.Write(new byte[1], 0, 1)
+            );
+            Assert.Equal(
+                "Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.",
+                ioEx.Message
+            );
 
             allowSynchronousIO = true;
             // If IHttpBodyControlFeature.AllowSynchronousIO is true, Write no longer throws.

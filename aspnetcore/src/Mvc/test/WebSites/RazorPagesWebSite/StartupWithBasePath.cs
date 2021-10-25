@@ -21,18 +21,25 @@ namespace RazorPagesWebSite
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => options.LoginPath = "/Login");
-            var builder = services.AddMvc()
+            var builder = services
+                .AddMvc()
                 .AddCookieTempDataProvider()
-                .AddRazorPagesOptions(options =>
-                {
-                    options.Conventions.AuthorizePage("/Conventions/Auth");
-                    options.Conventions.AuthorizeFolder("/Conventions/AuthFolder");
-                    options.Conventions.AuthorizeAreaFolder("Accounts", "/RequiresAuth");
-                    options.Conventions.AllowAnonymousToAreaPage("Accounts", "/RequiresAuth/AllowAnonymous");
-                    options.Conventions.Add(new CustomModelTypeConvention());
-                });
+                .AddRazorPagesOptions(
+                    options =>
+                    {
+                        options.Conventions.AuthorizePage("/Conventions/Auth");
+                        options.Conventions.AuthorizeFolder("/Conventions/AuthFolder");
+                        options.Conventions.AuthorizeAreaFolder("Accounts", "/RequiresAuth");
+                        options.Conventions.AllowAnonymousToAreaPage(
+                            "Accounts",
+                            "/RequiresAuth/AllowAnonymous"
+                        );
+                        options.Conventions.Add(new CustomModelTypeConvention());
+                    }
+                );
         }
 
         public void Configure(IApplicationBuilder app)
@@ -44,11 +51,16 @@ namespace RazorPagesWebSite
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}");
-                endpoints.MapRazorPages();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllerRoute(
+                        "areaRoute",
+                        "{area:exists}/{controller=Home}/{action=Index}"
+                    );
+                    endpoints.MapRazorPages();
+                }
+            );
         }
     }
 }

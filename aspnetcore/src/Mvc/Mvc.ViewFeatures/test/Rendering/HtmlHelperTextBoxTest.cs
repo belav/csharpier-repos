@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [InlineData("tel")]
         [InlineData("email")]
         [InlineData("number")]
-        public void TextBoxFor_GeneratesPlaceholderAttribute_WhenDisplayAttributePromptIsSetAndTypeIsValid(string type)
+        public void TextBoxFor_GeneratesPlaceholderAttribute_WhenDisplayAttributePromptIsSetAndTypeIsValid(
+            string type
+        )
         {
             // Arrange
             var model = new TextBoxModel();
@@ -29,7 +31,11 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
             // Assert
             var result = HtmlContentUtilities.HtmlContentToString(textBox);
-            Assert.Contains(@"placeholder=""HtmlEncode[[placeholder]]""", result, StringComparison.Ordinal);
+            Assert.Contains(
+                @"placeholder=""HtmlEncode[[placeholder]]""",
+                result,
+                StringComparison.Ordinal
+            );
         }
 
         [Theory]
@@ -45,7 +51,9 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [InlineData("button")]
         [InlineData("image")]
         [InlineData("file")]
-        public void TextBoxFor_DoesNotGeneratePlaceholderAttribute_WhenDisplayAttributePromptIsSetAndTypeIsInvalid(string type)
+        public void TextBoxFor_DoesNotGeneratePlaceholderAttribute_WhenDisplayAttributePromptIsSetAndTypeIsInvalid(
+            string type
+        )
         {
             // Arrange
             var model = new TextBoxModel();
@@ -56,7 +64,11 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
             // Assert
             var result = HtmlContentUtilities.HtmlContentToString(textBox);
-            Assert.DoesNotContain(@"placeholder=""HtmlEncode[[placeholder]]""", result, StringComparison.Ordinal);
+            Assert.DoesNotContain(
+                @"placeholder=""HtmlEncode[[placeholder]]""",
+                result,
+                StringComparison.Ordinal
+            );
         }
 
         public static TheoryData TextBoxFor_UsesModelValueForComplexExpressionsData
@@ -67,18 +79,18 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 {
                     {
                         model => model.Property3["key"],
-                        @"<input id=""HtmlEncode[[pre_Property3_key_]]"" name=""HtmlEncode[[pre.Property3[key]]]"" " +
-                        @"type=""HtmlEncode[[text]]"" value=""HtmlEncode[[Prop3Val]]"" />"
+                        @"<input id=""HtmlEncode[[pre_Property3_key_]]"" name=""HtmlEncode[[pre.Property3[key]]]"" "
+                            + @"type=""HtmlEncode[[text]]"" value=""HtmlEncode[[Prop3Val]]"" />"
                     },
                     {
                         model => model.Property4.Property5,
-                        @"<input id=""HtmlEncode[[pre_Property4_Property5]]"" name=""HtmlEncode[[pre.Property4.Property5]]"" " +
-                        @"type=""HtmlEncode[[text]]"" value=""HtmlEncode[[Prop5Val]]"" />"
+                        @"<input id=""HtmlEncode[[pre_Property4_Property5]]"" name=""HtmlEncode[[pre.Property4.Property5]]"" "
+                            + @"type=""HtmlEncode[[text]]"" value=""HtmlEncode[[Prop5Val]]"" />"
                     },
                     {
                         model => model.Property4.Property6[0],
-                        @"<input id=""HtmlEncode[[pre_Property4_Property6_0_]]"" " +
-                        @"name=""HtmlEncode[[pre.Property4.Property6[0]]]"" type=""HtmlEncode[[text]]"" value=""HtmlEncode[[Prop6Val]]"" />"
+                        @"<input id=""HtmlEncode[[pre_Property4_Property6_0_]]"" "
+                            + @"name=""HtmlEncode[[pre.Property4.Property6[0]]]"" type=""HtmlEncode[[text]]"" value=""HtmlEncode[[Prop6Val]]"" />"
                     }
                 };
             }
@@ -88,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [MemberData(nameof(TextBoxFor_UsesModelValueForComplexExpressionsData))]
         public void TextBoxFor_ComplexExpressions_UsesModelValueForComplexExpressions(
             Expression<Func<ComplexModel, string>> expression,
-            string expected)
+            string expected
+        )
         {
             // Arrange
             var model = new ComplexModel();
@@ -114,18 +127,18 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 {
                     {
                         model => model.Property3["key"],
-                        @"<input id=""HtmlEncode[[pre_Property3_key_]]"" name=""HtmlEncode[[pre.Property3[key]]]"" " +
-                        @"type=""HtmlEncode[[text]]"" value=""HtmlEncode[[MProp3Val]]"" />"
+                        @"<input id=""HtmlEncode[[pre_Property3_key_]]"" name=""HtmlEncode[[pre.Property3[key]]]"" "
+                            + @"type=""HtmlEncode[[text]]"" value=""HtmlEncode[[MProp3Val]]"" />"
                     },
                     {
                         model => model.Property4.Property5,
-                        @"<input id=""HtmlEncode[[pre_Property4_Property5]]"" name=""HtmlEncode[[pre.Property4.Property5]]"" " +
-                        @"type=""HtmlEncode[[text]]"" value=""HtmlEncode[[MProp5Val]]"" />"
+                        @"<input id=""HtmlEncode[[pre_Property4_Property5]]"" name=""HtmlEncode[[pre.Property4.Property5]]"" "
+                            + @"type=""HtmlEncode[[text]]"" value=""HtmlEncode[[MProp5Val]]"" />"
                     },
                     {
                         model => model.Property4.Property6[0],
-                        @"<input id=""HtmlEncode[[pre_Property4_Property6_0_]]"" " +
-                        @"name=""HtmlEncode[[pre.Property4.Property6[0]]]"" type=""HtmlEncode[[text]]"" value=""HtmlEncode[[MProp6Val]]"" />"
+                        @"<input id=""HtmlEncode[[pre_Property4_Property6_0_]]"" "
+                            + @"name=""HtmlEncode[[pre.Property4.Property6[0]]]"" type=""HtmlEncode[[text]]"" value=""HtmlEncode[[MProp6Val]]"" />"
                     }
                 };
             }
@@ -135,16 +148,29 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [MemberData(nameof(TextBoxFor_UsesModelStateValueForComplexExpressionsData))]
         public void TextBoxFor_ComplexExpressions_UsesModelStateValueForComplexExpressions(
             Expression<Func<ComplexModel, string>> expression,
-            string expected)
+            string expected
+        )
         {
             // Arrange
             var model = new ComplexModel();
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
             helper.ViewData.TemplateInfo.HtmlFieldPrefix = "pre";
 
-            helper.ViewData.ModelState.SetModelValue("pre.Property3[key]", "MProp3Val", "MProp3Val");
-            helper.ViewData.ModelState.SetModelValue("pre.Property4.Property5", "MProp5Val", "MProp5Val");
-            helper.ViewData.ModelState.SetModelValue("pre.Property4.Property6[0]", "MProp6Val", "MProp6Val");
+            helper.ViewData.ModelState.SetModelValue(
+                "pre.Property3[key]",
+                "MProp3Val",
+                "MProp3Val"
+            );
+            helper.ViewData.ModelState.SetModelValue(
+                "pre.Property4.Property5",
+                "MProp5Val",
+                "MProp5Val"
+            );
+            helper.ViewData.ModelState.SetModelValue(
+                "pre.Property4.Property6[0]",
+                "MProp6Val",
+                "MProp6Val"
+            );
 
             helper.ViewData.Model.Property3["key"] = "Prop3Val";
             helper.ViewData.Model.Property4.Property5 = "Prop5Val";

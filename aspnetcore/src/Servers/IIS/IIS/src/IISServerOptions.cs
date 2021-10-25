@@ -45,7 +45,7 @@ namespace Microsoft.AspNetCore.Builder
         // https://www.iis.net/configreference/system.webserver/security/requestfiltering/requestlimits#005
         private long? _maxRequestBodySize = 30000000;
 
-        internal long IisMaxRequestSizeLimit; // Used for verifying if limit set in managed exceeds native 
+        internal long IisMaxRequestSizeLimit; // Used for verifying if limit set in managed exceeds native
 
         /// <summary>
         /// Gets or sets the maximum allowed size of any request body in bytes.
@@ -64,7 +64,10 @@ namespace Microsoft.AspNetCore.Builder
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.NonNegativeNumberOrNullRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.NonNegativeNumberOrNullRequired
+                    );
                 }
                 _maxRequestBodySize = value;
             }

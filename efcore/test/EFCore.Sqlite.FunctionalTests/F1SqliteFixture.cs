@@ -16,10 +16,9 @@ namespace Microsoft.EntityFrameworkCore
 
     public abstract class F1SqliteFixtureBase<TRowVersion> : F1RelationalFixture<TRowVersion>
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => PrivateCacheSqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory =>
+            PrivateCacheSqliteTestStoreFactory.Instance;
 
-        public override TestHelpers TestHelpers
-            => SqliteTestHelpers.Instance;
+        public override TestHelpers TestHelpers => SqliteTestHelpers.Instance;
     }
 }

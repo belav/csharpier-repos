@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void PositionalRecord1()
         {
-            var text = @"
+            var text =
+                @"
 record C(int x, int y)
 `{
 `}";
@@ -35,11 +36,14 @@ record C(int x, int y)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -53,7 +57,8 @@ record C(int x, int y)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 x, out System.Int32 y)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop
             );
 
@@ -63,21 +68,26 @@ record C(int x, int y)
         [Fact]
         public void PositionalRecord2()
         {
-            var text = @"
+            var text =
+                @"
 `record C`<T`>(int x, T t = default(T));";
             var expectedNames = MakeExpectedSymbols(
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C<T>"),
+                    "C<T>"
+                ),
                 Add( // C Type parameters
-                    "T"),
+                    "T"
+                ),
                 Add( // Members
                     "System.Int32 C<T>.x { get; init; }",
                     "T C<T>.t { get; init; }",
                     "System.Boolean C<T>.Equals(C<T>? other)",
                     "System.Boolean C<T>.Equals(System.Object? obj)",
-                    "System.Boolean C<T>." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C<T>."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -89,9 +99,10 @@ record C(int x, int y)
                     "System.String C<T>.ToString()",
                     "System.String System.Object.ToString()",
                     "System.Type C<T>.EqualityContract { get; }",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 s_pop
-                );
+            );
 
             TestLookupNames(text, expectedNames);
         }
@@ -99,18 +110,22 @@ record C(int x, int y)
         [Fact]
         public void NominalRecord()
         {
-            var text = @"
+            var text =
+                @"
 `record C`<T`>
 `{
     int x { get; }
     T t { get; }
 `}";
-            var members = new[] {
+            var members = new[]
+            {
                 "System.Int32 C<T>.x { get; }",
                 "T C<T>.t { get; }",
                 "System.Boolean C<T>.Equals(C<T>? other)",
                 "System.Boolean C<T>.Equals(System.Object? obj)",
-                "System.Boolean C<T>." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                "System.Boolean C<T>."
+                    + WellKnownMemberNames.PrintMembersMethodName
+                    + "(System.Text.StringBuilder builder)",
                 "System.Boolean System.Object.Equals(System.Object obj)",
                 "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                 "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -127,14 +142,16 @@ record C(int x, int y)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C<T>"),
+                    "C<T>"
+                ),
                 Add( // C decl
-                    "T"),
+                    "T"
+                ),
                 Add(members), // members are visible in type parameter list
                 s_pop,
                 Add(members), // body
                 Combine(s_pop, s_pop) // remove members and type parameters
-                );
+            );
 
             TestLookupNames(text, expectedNames);
         }
@@ -142,7 +159,8 @@ record C(int x, int y)
         [Fact]
         public void ExpressionBodiedProp()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     int P => 10;
@@ -152,7 +170,8 @@ class C
                 Add( //Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( //C
                     "System.Int32 C.P { get; }",
                     "void C.M()",
@@ -163,8 +182,10 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
-                s_pop);
+                    "System.Type System.Object.GetType()"
+                ),
+                s_pop
+            );
 
             TestLookupNames(text, expectedNames);
         }
@@ -172,7 +193,8 @@ class C
         [Fact]
         public void TestNonGenericTypes()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     int x;
@@ -197,7 +219,8 @@ class C
                 Add( //Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( //C
                     "C.S",
                     "System.Int32 C.x",
@@ -210,10 +233,10 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Combine( //C.S
-                    Remove(
-                        "void C.M()"),
+                    Remove("void C.M()"),
                     Add(
                         "C.S.I",
                         "System.Int32 C.S.y",
@@ -221,7 +244,9 @@ class C
                         "void C.S.M()",
                         "System.Boolean System.ValueType.Equals(System.Object obj)",
                         "System.Int32 System.ValueType.GetHashCode()",
-                        "System.String System.ValueType.ToString()")),
+                        "System.String System.ValueType.ToString()"
+                    )
+                ),
                 Add("System.Int32 value"), //C.S.set
                 s_pop, //C.S.set
                 Combine( //C.S.I
@@ -229,9 +254,10 @@ class C
                         "void C.S.M()",
                         "System.Boolean System.ValueType.Equals(System.Object obj)",
                         "System.Int32 System.ValueType.GetHashCode()",
-                        "System.String System.ValueType.ToString()"),
-                    Add(
-                        "void C.S.I.M()")),
+                        "System.String System.ValueType.ToString()"
+                    ),
+                    Add("void C.S.I.M()")
+                ),
                 Combine(s_pop, s_pop), //C.S.I
                 Combine(s_pop, s_pop), //C.S
                 s_pop //C
@@ -243,7 +269,8 @@ class C
         [Fact]
         public void TestGenericTypes()
         {
-            var text = @"
+            var text =
+                @"
 `class C`<T, Z`>
 `{
     int x;
@@ -264,7 +291,8 @@ class C
 `}
 ";
 
-            string[] class_C_members = new string[] {
+            string[] class_C_members = new string[]
+            {
                 "C<T, Z>.S<U, Z>",
                 "System.Int32 C<T, Z>.x",
                 "System.Int32 C<T, Z>.P { get; set; }",
@@ -279,7 +307,8 @@ class C
                 "System.Type System.Object.GetType()"
             };
 
-            string[] struct_S_members = new string[] {
+            string[] struct_S_members = new string[]
+            {
                 "C<T, Z>.S<U, Z>.I<V, Z>",
                 "System.Int32 C<T, Z>.S<U, Z>.y",
                 "System.Int32 C<T, Z>.S<U, Z>.Q { set; }",
@@ -295,39 +324,47 @@ class C
                 Add( //Global
                     "System",
                     "Microsoft",
-                    "C<T, Z>"),
+                    "C<T, Z>"
+                ),
                 Add( //C decl
                     "T",
-                    "Z"),
-                Add(class_C_members), //"<T, Z>" : C members are in scope in Type parameter list 
+                    "Z"
+                ),
+                Add(class_C_members), //"<T, Z>" : C members are in scope in Type parameter list
                 s_pop, //C members are not in scope in Base declaration list
                 Add(class_C_members), //C<T> body
                 Add("U"), //C.S decl
-                Combine( //"<U, Z>" : C.S members are in scope in Type parameter list 
+                Combine( //"<U, Z>" : C.S members are in scope in Type parameter list
                     Remove("void C<T, Z>.M()"),
-                    Add(struct_S_members)),
+                    Add(struct_S_members)
+                ),
                 Combine(s_pop, s_pop), //C.S members are not in scope in Base declaration list
                 Combine( //C.S body
                     Remove("void C<T, Z>.M()"),
-                    Add(struct_S_members)),
+                    Add(struct_S_members)
+                ),
                 Add("System.Int32 value"), //C.S.set
                 s_pop, //C.S.set
-                Add("V"), //C.S.I decl 
-                Combine( //"<V, Z>" : C.S.I members are in scope in Type parameter list 
+                Add("V"), //C.S.I decl
+                Combine( //"<V, Z>" : C.S.I members are in scope in Type parameter list
                     Remove(
                         "void C<T, Z>.S<U, Z>.M()",
                         "System.Boolean System.ValueType.Equals(System.Object obj)",
                         "System.Int32 System.ValueType.GetHashCode()",
-                        "System.String System.ValueType.ToString()"),
-                    Add(interface_I_member)),
+                        "System.String System.ValueType.ToString()"
+                    ),
+                    Add(interface_I_member)
+                ),
                 Combine(s_pop, s_pop), //C.S.I members are not in scope in Base declaration list
                 Combine( //C.S.I body
                     Remove(
                         "void C<T, Z>.S<U, Z>.M()",
                         "System.Boolean System.ValueType.Equals(System.Object obj)",
                         "System.Int32 System.ValueType.GetHashCode()",
-                        "System.String System.ValueType.ToString()"),
-                    Add(interface_I_member)),
+                        "System.String System.ValueType.ToString()"
+                    ),
+                    Add(interface_I_member)
+                ),
                 Combine(s_pop, s_pop, s_pop), //C.S.I decl and body
                 Combine(s_pop, s_pop, s_pop), //C.S body and decl
                 Combine(s_pop, s_pop) //C body and decl
@@ -339,7 +376,8 @@ class C
         [Fact]
         public void TestGenericMethods()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     `void `M`<T>(T t) `{ `}
@@ -352,7 +390,8 @@ class C
                 Add( //Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( //C
                     "void C.M<T>(T t)",
                     "void C.N<T>()",
@@ -364,12 +403,15 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
-                Add("T"), s_pop, //C.M return type
+                    "System.Type System.Object.GetType()"
+                ),
+                Add("T"),
+                s_pop, //C.M return type
                 Add("T"), //C.M after name
                 Add("T t"), //C.M body
                 Combine(s_pop, s_pop), //C.M
-                Add("T"), s_pop, //C.N return type
+                Add("T"),
+                s_pop, //C.N return type
                 Add("T"), //C.N after name
                 s_pop, //C.N
                 Add("System.Int32 t"), //C.O
@@ -380,80 +422,83 @@ class C
             TestLookupNames(text, expectedNames);
         }
 
-        private static readonly string[] s_commonDelegateTypeMembers = new string[] {
-                "System.Boolean System.Delegate.Equals(System.Object obj)",
-                "System.Boolean System.MulticastDelegate.Equals(System.Object obj)",
-                "System.Delegate System.Delegate.Combine(params System.Delegate[] delegates)",
-                "System.Delegate System.Delegate.Combine(System.Delegate a, System.Delegate b)",
-                "System.Delegate System.Delegate.CombineImpl(System.Delegate d)",
-                "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Object firstArgument, System.Reflection.MethodInfo method)",
-                "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Object firstArgument, System.Reflection.MethodInfo method, System.Boolean throwOnBindFailure)",
-                "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Object target, System.String method)",
-                "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Object target, System.String method, System.Boolean ignoreCase)",
-                "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Object target, System.String method, System.Boolean ignoreCase, System.Boolean throwOnBindFailure)",
-                "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Reflection.MethodInfo method)",
-                "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Reflection.MethodInfo method, System.Boolean throwOnBindFailure)",
-                "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Type target, System.String method)",
-                "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Type target, System.String method, System.Boolean ignoreCase)",
-                "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Type target, System.String method, System.Boolean ignoreCase, System.Boolean throwOnBindFailure)",
-                "System.Delegate System.Delegate.Remove(System.Delegate source, System.Delegate value)",
-                "System.Delegate System.Delegate.RemoveAll(System.Delegate source, System.Delegate value)",
-                "System.Delegate System.Delegate.RemoveImpl(System.Delegate d)",
-                "System.Delegate System.MulticastDelegate.CombineImpl(System.Delegate follow)",
-                "System.Delegate System.MulticastDelegate.RemoveImpl(System.Delegate value)",
-                "System.Delegate[] System.Delegate.GetInvocationList()",
-                "System.Delegate[] System.MulticastDelegate.GetInvocationList()",
-                "System.Int32 System.Delegate.GetHashCode()",
-                "System.Int32 System.MulticastDelegate.GetHashCode()",
-                "System.Object System.Delegate.Clone()",
-                "System.Object System.Delegate.DynamicInvoke(params System.Object[] args)",
-                "System.Object System.Delegate.DynamicInvokeImpl(System.Object[] args)",
-                "System.Object System.Delegate.Target { get; }",
-                "System.Reflection.MethodInfo System.Delegate.GetMethodImpl()",
-                "System.Reflection.MethodInfo System.Delegate.Method { get; }",
-                "System.Reflection.MethodInfo System.MulticastDelegate.GetMethodImpl()",
-                "void System.Delegate.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)",
-                "void System.MulticastDelegate.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)",
-            };
+        private static readonly string[] s_commonDelegateTypeMembers = new string[]
+        {
+            "System.Boolean System.Delegate.Equals(System.Object obj)",
+            "System.Boolean System.MulticastDelegate.Equals(System.Object obj)",
+            "System.Delegate System.Delegate.Combine(params System.Delegate[] delegates)",
+            "System.Delegate System.Delegate.Combine(System.Delegate a, System.Delegate b)",
+            "System.Delegate System.Delegate.CombineImpl(System.Delegate d)",
+            "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Object firstArgument, System.Reflection.MethodInfo method)",
+            "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Object firstArgument, System.Reflection.MethodInfo method, System.Boolean throwOnBindFailure)",
+            "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Object target, System.String method)",
+            "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Object target, System.String method, System.Boolean ignoreCase)",
+            "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Object target, System.String method, System.Boolean ignoreCase, System.Boolean throwOnBindFailure)",
+            "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Reflection.MethodInfo method)",
+            "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Reflection.MethodInfo method, System.Boolean throwOnBindFailure)",
+            "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Type target, System.String method)",
+            "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Type target, System.String method, System.Boolean ignoreCase)",
+            "System.Delegate System.Delegate.CreateDelegate(System.Type type, System.Type target, System.String method, System.Boolean ignoreCase, System.Boolean throwOnBindFailure)",
+            "System.Delegate System.Delegate.Remove(System.Delegate source, System.Delegate value)",
+            "System.Delegate System.Delegate.RemoveAll(System.Delegate source, System.Delegate value)",
+            "System.Delegate System.Delegate.RemoveImpl(System.Delegate d)",
+            "System.Delegate System.MulticastDelegate.CombineImpl(System.Delegate follow)",
+            "System.Delegate System.MulticastDelegate.RemoveImpl(System.Delegate value)",
+            "System.Delegate[] System.Delegate.GetInvocationList()",
+            "System.Delegate[] System.MulticastDelegate.GetInvocationList()",
+            "System.Int32 System.Delegate.GetHashCode()",
+            "System.Int32 System.MulticastDelegate.GetHashCode()",
+            "System.Object System.Delegate.Clone()",
+            "System.Object System.Delegate.DynamicInvoke(params System.Object[] args)",
+            "System.Object System.Delegate.DynamicInvokeImpl(System.Object[] args)",
+            "System.Object System.Delegate.Target { get; }",
+            "System.Reflection.MethodInfo System.Delegate.GetMethodImpl()",
+            "System.Reflection.MethodInfo System.Delegate.Method { get; }",
+            "System.Reflection.MethodInfo System.MulticastDelegate.GetMethodImpl()",
+            "void System.Delegate.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)",
+            "void System.MulticastDelegate.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)",
+        };
 
-        private static readonly string[] s_commonEnumTypeMembers = new string[] {
-                "System.Array System.Enum.GetValues(System.Type enumType)",
-                "System.Boolean System.Enum.Equals(System.Object obj)",
-                "System.Boolean System.Enum.HasFlag(System.Enum flag)",
-                "System.Boolean System.Enum.IsDefined(System.Type enumType, System.Object value)",
-                "System.Boolean System.Enum.TryParse<TEnum>(System.String value, out TEnum result)",
-                "System.Boolean System.Enum.TryParse<TEnum>(System.String value, System.Boolean ignoreCase, out TEnum result)",
-                "System.Boolean System.ValueType.Equals(System.Object obj)",
-                "System.Int32 System.Enum.CompareTo(System.Object target)",
-                "System.Int32 System.Enum.GetHashCode()",
-                "System.Int32 System.ValueType.GetHashCode()",
-                "System.Object System.Enum.Parse(System.Type enumType, System.String value)",
-                "System.Object System.Enum.Parse(System.Type enumType, System.String value, System.Boolean ignoreCase)",
-                "System.Object System.Enum.ToObject(System.Type enumType, System.Byte value)",
-                "System.Object System.Enum.ToObject(System.Type enumType, System.Int16 value)",
-                "System.Object System.Enum.ToObject(System.Type enumType, System.Int32 value)",
-                "System.Object System.Enum.ToObject(System.Type enumType, System.Int64 value)",
-                "System.Object System.Enum.ToObject(System.Type enumType, System.Object value)",
-                "System.Object System.Enum.ToObject(System.Type enumType, System.SByte value)",
-                "System.Object System.Enum.ToObject(System.Type enumType, System.UInt16 value)",
-                "System.Object System.Enum.ToObject(System.Type enumType, System.UInt32 value)",
-                "System.Object System.Enum.ToObject(System.Type enumType, System.UInt64 value)",
-                "System.String System.Enum.Format(System.Type enumType, System.Object value, System.String format)",
-                "System.String System.Enum.GetName(System.Type enumType, System.Object value)",
-                "System.String System.Enum.ToString()",
-                "System.String System.Enum.ToString(System.IFormatProvider provider)",
-                "System.String System.Enum.ToString(System.String format)",
-                "System.String System.Enum.ToString(System.String format, System.IFormatProvider provider)",
-                "System.String System.ValueType.ToString()",
-                "System.String[] System.Enum.GetNames(System.Type enumType)",
-                "System.Type System.Enum.GetUnderlyingType(System.Type enumType)",
-                "System.TypeCode System.Enum.GetTypeCode()",
-            };
+        private static readonly string[] s_commonEnumTypeMembers = new string[]
+        {
+            "System.Array System.Enum.GetValues(System.Type enumType)",
+            "System.Boolean System.Enum.Equals(System.Object obj)",
+            "System.Boolean System.Enum.HasFlag(System.Enum flag)",
+            "System.Boolean System.Enum.IsDefined(System.Type enumType, System.Object value)",
+            "System.Boolean System.Enum.TryParse<TEnum>(System.String value, out TEnum result)",
+            "System.Boolean System.Enum.TryParse<TEnum>(System.String value, System.Boolean ignoreCase, out TEnum result)",
+            "System.Boolean System.ValueType.Equals(System.Object obj)",
+            "System.Int32 System.Enum.CompareTo(System.Object target)",
+            "System.Int32 System.Enum.GetHashCode()",
+            "System.Int32 System.ValueType.GetHashCode()",
+            "System.Object System.Enum.Parse(System.Type enumType, System.String value)",
+            "System.Object System.Enum.Parse(System.Type enumType, System.String value, System.Boolean ignoreCase)",
+            "System.Object System.Enum.ToObject(System.Type enumType, System.Byte value)",
+            "System.Object System.Enum.ToObject(System.Type enumType, System.Int16 value)",
+            "System.Object System.Enum.ToObject(System.Type enumType, System.Int32 value)",
+            "System.Object System.Enum.ToObject(System.Type enumType, System.Int64 value)",
+            "System.Object System.Enum.ToObject(System.Type enumType, System.Object value)",
+            "System.Object System.Enum.ToObject(System.Type enumType, System.SByte value)",
+            "System.Object System.Enum.ToObject(System.Type enumType, System.UInt16 value)",
+            "System.Object System.Enum.ToObject(System.Type enumType, System.UInt32 value)",
+            "System.Object System.Enum.ToObject(System.Type enumType, System.UInt64 value)",
+            "System.String System.Enum.Format(System.Type enumType, System.Object value, System.String format)",
+            "System.String System.Enum.GetName(System.Type enumType, System.Object value)",
+            "System.String System.Enum.ToString()",
+            "System.String System.Enum.ToString(System.IFormatProvider provider)",
+            "System.String System.Enum.ToString(System.String format)",
+            "System.String System.Enum.ToString(System.String format, System.IFormatProvider provider)",
+            "System.String System.ValueType.ToString()",
+            "System.String[] System.Enum.GetNames(System.Type enumType)",
+            "System.Type System.Enum.GetUnderlyingType(System.Type enumType)",
+            "System.TypeCode System.Enum.GetTypeCode()",
+        };
 
         [Fact, WorkItem(545556, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545556")]
         public void TestAssortedMembers()
         {
-            var text = @"
+            var text =
+                @"
 namespace NS
 `{
     public interface I `{ `}
@@ -498,7 +543,8 @@ public abstract `class C`<T`> : NS.I
     `public abstract void `M`<W>(W w)`;
 `}
 ";
-            string[] class_C_members = new string[]{
+            string[] class_C_members = new string[]
+            {
                 "C<T>.D1",
                 "C<T>.D2",
                 "C<T>.D3<U>",
@@ -516,42 +562,56 @@ public abstract `class C`<T`> : NS.I
                 "System.Object System.Object.MemberwiseClone()",
                 "void System.Object.Finalize()",
                 "System.String System.Object.ToString()",
-                "System.Type System.Object.GetType()"};
+                "System.Type System.Object.GetType()"
+            };
 
-            string[] delegate_d1_members = new string[]{
+            string[] delegate_d1_members = new string[]
+            {
                 "System.IAsyncResult C<T>.D1.BeginInvoke(System.AsyncCallback callback, System.Object @object)",
                 "void C<T>.D1.EndInvoke(System.IAsyncResult result)",
                 "void C<T>.D1.Invoke()"
-            }.Concat(s_commonDelegateTypeMembers).ToArray();
+            }
+                .Concat(s_commonDelegateTypeMembers)
+                .ToArray();
 
-            string[] delegate_d2_members = new string[]{
+            string[] delegate_d2_members = new string[]
+            {
                 "System.IAsyncResult C<T>.D2.BeginInvoke(System.Int32 t, System.AsyncCallback callback, System.Object @object)",
                 "void C<T>.D2.EndInvoke(System.IAsyncResult result)",
                 "void C<T>.D2.Invoke(System.Int32 t)"
-            }.Concat(s_commonDelegateTypeMembers).ToArray();
+            }
+                .Concat(s_commonDelegateTypeMembers)
+                .ToArray();
 
-            string[] delegate_d3_members = new string[]{
+            string[] delegate_d3_members = new string[]
+            {
                 "System.IAsyncResult C<T>.D3<U>.BeginInvoke(System.AsyncCallback callback, System.Object @object)",
                 "void C<T>.D3<U>.EndInvoke(System.IAsyncResult result)",
                 "void C<T>.D3<U>.Invoke()"
-            }.Concat(s_commonDelegateTypeMembers).ToArray();
+            }
+                .Concat(s_commonDelegateTypeMembers)
+                .ToArray();
 
-            string[] delegate_d4_members = new string[]{
+            string[] delegate_d4_members = new string[]
+            {
                 "System.IAsyncResult C<T>.D4<V>.BeginInvoke(V t, System.AsyncCallback callback, System.Object @object)",
                 "void C<T>.D4<V>.EndInvoke(System.IAsyncResult result)",
                 "void C<T>.D4<V>.Invoke(V t)"
-            }.Concat(s_commonDelegateTypeMembers).ToArray();
+            }
+                .Concat(s_commonDelegateTypeMembers)
+                .ToArray();
 
-            string[] enum_e_members = new string[]{
-                "C<T>.E.A"
-            }.Concat(s_commonEnumTypeMembers).ToArray();
+            string[] enum_e_members = new string[] { "C<T>.E.A" }
+                .Concat(s_commonEnumTypeMembers)
+                .ToArray();
 
             var expectedNames = MakeExpectedSymbols(
                 Add( //Global
                     "NS",
                     "C<T>",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add("NS.I"), //NS
                 Add(
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -559,11 +619,12 @@ public abstract `class C`<T`> : NS.I
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
                     "System.Int32 System.Object.GetHashCode()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 s_pop, //NS.I
                 s_pop, //NS
                 Add("T"), //C<T> decl
-                Add(class_C_members), //"<T>" : C<T> members are in scope in Type parameter list 
+                Add(class_C_members), //"<T>" : C<T> members are in scope in Type parameter list
                 s_pop, // ": NS.I" : C<T> members are not in scope in Base declaration list
                 Add(class_C_members), //C<T> body
                 Add(delegate_d1_members), //C<T>.D1
@@ -572,21 +633,30 @@ public abstract `class C`<T`> : NS.I
                 s_pop, //C<T>.D2
                 Combine( //C<T>.D3<U>
                     Add("U"), //C<T>.D3<U>
-                    Add(delegate_d3_members)), //C<T>.D3<U> members are in scope in delegate declaration
+                    Add(delegate_d3_members)
+                ), //C<T>.D3<U> members are in scope in delegate declaration
                 Combine(s_pop, s_pop), //C<T>.D3<U>
                 Combine( //C<T>.D4<V>
                     Add("V"), //C<T>.D4<V>
-                    Add(delegate_d4_members)), //C<T>.D4<V> members are in scope in delegate declaration
+                    Add(delegate_d4_members)
+                ), //C<T>.D4<V> members are in scope in delegate declaration
                 Combine(s_pop, s_pop), //C<T>.D4<V>
                 Add(enum_e_members), //C<T>.E
                 s_pop, //C<T>.E
-                Add("T t"), s_pop, //C<T>..ctor(T)
-                Add("System.Int32 t"), s_pop, //C<T>..ctor(int)
-                Add("System.Int32 value"), s_pop, //C<T>.Q.set
-                Add("System.Int32 z"), s_pop, //C<T>.this[int].get
-                Add("System.Int32 z", "System.Int32 value"), s_pop, //C<T>.this[int].set
-                Add("W"), s_pop, //C<T>.M<W> return type
-                Add("W"), s_pop, //C<T>.M<W> after name
+                Add("T t"),
+                s_pop, //C<T>..ctor(T)
+                Add("System.Int32 t"),
+                s_pop, //C<T>..ctor(int)
+                Add("System.Int32 value"),
+                s_pop, //C<T>.Q.set
+                Add("System.Int32 z"),
+                s_pop, //C<T>.this[int].get
+                Add("System.Int32 z", "System.Int32 value"),
+                s_pop, //C<T>.this[int].set
+                Add("W"),
+                s_pop, //C<T>.M<W> return type
+                Add("W"),
+                s_pop, //C<T>.M<W> after name
                 Combine(s_pop, s_pop) //C<T>
             );
 
@@ -596,7 +666,8 @@ public abstract `class C`<T`> : NS.I
         [Fact]
         public void TestSafeControlFlow() //i.e. not unsafe
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     void M()
@@ -752,7 +823,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "void C.M()",
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -762,48 +834,69 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Add("System.Object a"), //C.M
-                Add("System.Int32 b"), s_pop, //block
-                Add("System.Int32 c"), s_pop, //while
-                Add("System.Int32 d"), s_pop, //do-while
+                Add("System.Int32 b"),
+                s_pop, //block
+                Add("System.Int32 c"),
+                s_pop, //while
+                Add("System.Int32 d"),
+                s_pop, //do-while
                 Add("System.Int32 e"), //for decl
                 Add("System.Int32 f"), //for body
                 Combine(s_pop, s_pop), //for decl & body
-                Add("System.Int32 f"), s_pop, //second for body
+                Add("System.Int32 f"),
+                s_pop, //second for body
                 Add("System.Int32 g", "System.Int32 h"), //foreach
                 s_pop, //foreach
                 Add("System.IDisposable i"), //using decl
                 Add("System.Int32 j"), //using body
                 Combine(s_pop, s_pop), //using decl & body
-                Add("System.Int32 k"), s_pop, //checked
-                Add("System.Int32 l"), s_pop, //unchecked
-                Add("System.Int32 m"), s_pop, //lock
-                Add("System.Int32 n"), s_pop, //if
-                Add("System.Int32 o"), s_pop, //if-else if part
-                Add("System.Int32 p"), s_pop, //if-else else part
-                Add("System.Int32 q"), s_pop, //if-elseif if part
-                Add("System.Int32 r"), s_pop, //if-elseif elseif part
-                Add("System.Int32 s", "System.Int32 t", "System.Int32 u"), s_pop, //switch
-                Add("System.Int32 v"), s_pop, //try1 try part
+                Add("System.Int32 k"),
+                s_pop, //checked
+                Add("System.Int32 l"),
+                s_pop, //unchecked
+                Add("System.Int32 m"),
+                s_pop, //lock
+                Add("System.Int32 n"),
+                s_pop, //if
+                Add("System.Int32 o"),
+                s_pop, //if-else if part
+                Add("System.Int32 p"),
+                s_pop, //if-else else part
+                Add("System.Int32 q"),
+                s_pop, //if-elseif if part
+                Add("System.Int32 r"),
+                s_pop, //if-elseif elseif part
+                Add("System.Int32 s", "System.Int32 t", "System.Int32 u"),
+                s_pop, //switch
+                Add("System.Int32 v"),
+                s_pop, //try1 try part
                 Add("System.Int32 w"), //try1 catch
                 s_pop, //try1 catch
-                Add("System.Int32 x"), s_pop, //try2 try part
+                Add("System.Int32 x"),
+                s_pop, //try2 try part
                 Add("System.Exception y", "System.Int32 z"), //try2 catch
                 s_pop, //try2 catch
-                Add("System.Int32 aa"), s_pop, //try3 try part
+                Add("System.Int32 aa"),
+                s_pop, //try3 try part
                 Add("System.InvalidCastException bb", "System.Int32 cc"), //try3 first catch
                 s_pop, //try3 first catch
                 Add("System.InvalidOperationException dd", "System.Int32 ee"), //try3 second catch
                 s_pop, //try3 second catch
                 Add("System.Int32 ff"), //try3 third catch
                 s_pop, //try3 third catch
-                Add("System.Int32 gg"), s_pop, //try4 try part
-                Add("System.Int32 hh"), s_pop, //try4 finally part
-                Add("System.Int32 ii"), s_pop, //try5 try part
+                Add("System.Int32 gg"),
+                s_pop, //try4 try part
+                Add("System.Int32 hh"),
+                s_pop, //try4 finally part
+                Add("System.Int32 ii"),
+                s_pop, //try5 try part
                 Add("System.InvalidCastException jj", "System.Int32 kk"), //try5 catch
                 s_pop, //try5 catch
-                Add("System.Int32 ll"), s_pop, //try5 finally part
+                Add("System.Int32 ll"),
+                s_pop, //try5 finally part
                 s_pop, //C.M
                 s_pop //C
             );
@@ -814,7 +907,8 @@ class C
         [Fact]
         public void TestLambdas()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     System.Func<int, int> f1 = x `=> x`;
@@ -832,7 +926,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "System.Func<System.Int32, System.Int32> C.f1",
                     "System.Func<System.Int32, System.Int32> C.f2",
@@ -844,13 +939,19 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
-                Add("System.Int32 x"), s_pop, //f1
+                    "System.Type System.Object.GetType()"
+                ),
+                Add("System.Int32 x"),
+                s_pop, //f1
                 Add("System.Int32 x"), //f2 lambda parameters
                 Add("System.Int32 y"), //f2 lambda body
                 Combine(s_pop, s_pop), //f2 lambda parameters and body
-                Add("System.Func<System.Int32, System.Int32> g1", "System.Func<System.Int32, System.Int32> g2"), //C.M
-                Add("System.Int32 x"), s_pop, //g1
+                Add(
+                    "System.Func<System.Int32, System.Int32> g1",
+                    "System.Func<System.Int32, System.Int32> g2"
+                ), //C.M
+                Add("System.Int32 x"),
+                s_pop, //g1
                 Add("System.Int32 x"), //g2 lambda parameters
                 Add("System.Int32 y"), //g2 lambda body
                 Combine(s_pop, s_pop), //g2 lambda parameters and body
@@ -864,7 +965,8 @@ class C
         [Fact]
         public void TestNestedLambdas()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     System.Func<int, System.Func<int, int>> f1 = x `=> y `=> x + y`;
@@ -882,7 +984,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "System.Func<System.Int32, System.Func<System.Int32, System.Int32>> C.f1",
                     "System.Func<System.Int32, System.Func<System.Int32, System.Int32>> C.f2",
@@ -894,26 +997,30 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Add("System.Int32 x"), //f1 outer
                 Add("System.Int32 y"), //f1 inner
                 Combine(s_pop, s_pop), //f1
                 Add("System.Int32 x"), //f2 outer
                 Add("System.Int32 y"), //f2 outer block 1
                 Add("System.Int32 z"), //f2 outer block 2
-                Add("System.Int32 a"), s_pop, //f2 inner
+                Add("System.Int32 a"),
+                s_pop, //f2 inner
                 s_pop, //f2 outer block 2
                 Combine(s_pop, s_pop), //f2 outer block 1 and outer
                 Add( //C.M
                     "System.Func<System.Int32, System.Func<System.Int32, System.Int32>> g1",
-                    "System.Func<System.Int32, System.Func<System.Int32, System.Int32>> g2"),
+                    "System.Func<System.Int32, System.Func<System.Int32, System.Int32>> g2"
+                ),
                 Add("System.Int32 x"), //g1 outer
                 Add("System.Int32 y"), //g1 inner
                 Combine(s_pop, s_pop), //g1
                 Add("System.Int32 x"), //g2 outer
                 Add("System.Int32 y"), //g2 outer block 1
                 Add("System.Int32 z"), //g2 outer block 2
-                Add("System.Int32 a"), s_pop, //g2 inner
+                Add("System.Int32 a"),
+                s_pop, //g2 inner
                 s_pop, //g2 outer block 2
                 Combine(s_pop, s_pop), //g2 outer block 1 and outer
                 s_pop, //C.M
@@ -927,7 +1034,8 @@ class C
         [Fact]
         public void TestConstructorInitializers()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     public C(int x) `{ `}
@@ -945,7 +1053,8 @@ class D : C
                     "C",
                     "D",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
@@ -954,8 +1063,10 @@ class D : C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
-                Add("System.Int32 x"), s_pop, //C.C(int)
+                    "System.Type System.Object.GetType()"
+                ),
+                Add("System.Int32 x"),
+                s_pop, //C.C(int)
                 s_pop, //C
                 Add( //D
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -965,9 +1076,12 @@ class D : C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
-                Add("System.Int32 a", "System.Int32 b"), s_pop, //D.D(int, int)
-                Add("System.Int32 c"), s_pop, //D.D(int)
+                    "System.Type System.Object.GetType()"
+                ),
+                Add("System.Int32 a", "System.Int32 b"),
+                s_pop, //D.D(int, int)
+                Add("System.Int32 c"),
+                s_pop, //D.D(int)
                 s_pop //D
             );
 
@@ -978,7 +1092,8 @@ class D : C
         [Fact]
         public void TestLambdaInConstructorInitializer()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     public C(System.Func<int, int> x) `{ `}
@@ -995,7 +1110,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "void C.M(System.Func<System.Int32, System.Int32> f)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -1005,11 +1121,16 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
-                Add("System.Func<System.Int32, System.Int32> x"), s_pop, //C.C(Func)
-                Add("System.Int32 a"), s_pop, //C.C() ctor initializer lambda
-                Add("System.Int32 b"), s_pop, //C.C() ctor body lambda
-                Add("System.Func<System.Int32, System.Int32> f"), s_pop, //C.M(Func)
+                    "System.Type System.Object.GetType()"
+                ),
+                Add("System.Func<System.Int32, System.Int32> x"),
+                s_pop, //C.C(Func)
+                Add("System.Int32 a"),
+                s_pop, //C.C() ctor initializer lambda
+                Add("System.Int32 b"),
+                s_pop, //C.C() ctor body lambda
+                Add("System.Func<System.Int32, System.Int32> f"),
+                s_pop, //C.M(Func)
                 s_pop //C
             );
 
@@ -1020,7 +1141,8 @@ class C
         [Fact]
         public void TestLambdaAtEof()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     private void M(System.Func<int, int> f) `{ `}
@@ -1033,7 +1155,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "void C.M(System.Func<System.Int32, System.Int32> f)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -1043,8 +1166,10 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
-                Add("System.Func<System.Int32, System.Int32> f"), s_pop, //C.M(Func)
+                    "System.Type System.Object.GetType()"
+                ),
+                Add("System.Func<System.Int32, System.Int32> f"),
+                s_pop, //C.M(Func)
                 Add("System.Int32 b") //C.C() ctor body lambda
             );
 
@@ -1055,7 +1180,8 @@ class C
         [Fact]
         public void TestLambdaWithMissingBody()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     private void M(System.Func<int, int> f) `{ `}
@@ -1070,7 +1196,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "void C.M(System.Func<System.Int32, System.Int32> f)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -1080,9 +1207,12 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
-                Add("System.Func<System.Int32, System.Int32> f"), s_pop, //C.M(Func)
-                Add("System.Int32 b"), s_pop, //C.C() ctor body lambda
+                    "System.Type System.Object.GetType()"
+                ),
+                Add("System.Func<System.Int32, System.Int32> f"),
+                s_pop, //C.M(Func)
+                Add("System.Int32 b"),
+                s_pop, //C.C() ctor body lambda
                 s_pop //C
             );
 
@@ -1093,7 +1223,8 @@ class C
         [Fact]
         public void TestIncompleteConstructorParameters1()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     public C(int x
@@ -1103,7 +1234,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
@@ -1112,7 +1244,8 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()")
+                    "System.Type System.Object.GetType()"
+                )
             );
 
             TestLookupNames(text, expectedNames);
@@ -1122,7 +1255,8 @@ class C
         [Fact]
         public void TestIncompleteConstructorParameters2()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     public C(int x)
@@ -1132,7 +1266,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
@@ -1141,7 +1276,8 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()")
+                    "System.Type System.Object.GetType()"
+                )
             //NB: can't see x because we're in the parameter list until we see another token
             );
 
@@ -1152,7 +1288,8 @@ class C
         [Fact]
         public void TestIncompleteConstructorParameters3()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     public C(int x) `:
@@ -1162,7 +1299,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
@@ -1171,7 +1309,8 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Add("System.Int32 x") // C.C(int)
             );
 
@@ -1182,7 +1321,8 @@ class C
         [Fact]
         public void TestIncompleteConstructorParameters4()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     public C(int x) `{
@@ -1192,7 +1332,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
@@ -1201,7 +1342,8 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Add("System.Int32 x") // C.C(int)
             );
 
@@ -1212,7 +1354,8 @@ class C
         [Fact]
         public void TestMethodParameterAndTypeParameterScope()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     [System.ObsoleteAttribute`]
@@ -1224,7 +1367,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "void C.M<T>(System.Int32 x)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -1234,8 +1378,10 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
-                Add("T"), s_pop, //C.C(int) return type
+                    "System.Type System.Object.GetType()"
+                ),
+                Add("T"),
+                s_pop, //C.C(int) return type
                 Add("T"), //C.C(int) between name and body
                 Add("System.Int32 x"), //C.C(int) body
                 Combine(s_pop, s_pop), //C.C(int)
@@ -1249,7 +1395,8 @@ class C
         [WorkItem(16801, "https://github.com/dotnet/roslyn/issues/16801")]
         public void TestLocalFunctionParameterAndTypeParameterScope()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     void Test()
@@ -1263,7 +1410,8 @@ class C
                 Add( //Global
                     "C",
                     "System",
-                    "Microsoft"),
+                    "Microsoft"
+                ),
                 Add( //C
                     "void C.Test()",
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -1273,7 +1421,8 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Add("void M<T>(System.Int32 x)"), // Test body
                 Add("T"), //M<T>(int) return type
                 s_pop, //M<T>(int) name
@@ -1291,7 +1440,8 @@ class C
         [Fact]
         public void TestLeftToRightDeclarators()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 `{
     int[] a = new int[2];
@@ -1322,7 +1472,8 @@ unsafe class C
                 Add( //Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( //C
                     "System.Int32[] C.a",
                     "void C.M()",
@@ -1333,13 +1484,18 @@ unsafe class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Add( //C.M
                     "System.Object o1",
-                    "System.Object o2"),
-                Add("System.Int32* p", "System.Int32* q"), s_pop, //fixed stmt
-                Add("System.IDisposable d1", "System.IDisposable d2"), s_pop, //using stmt
-                Add("System.Int32 i", "System.Int32 j"), s_pop, //for loop
+                    "System.Object o2"
+                ),
+                Add("System.Int32* p", "System.Int32* q"),
+                s_pop, //fixed stmt
+                Add("System.IDisposable d1", "System.IDisposable d2"),
+                s_pop, //using stmt
+                Add("System.Int32 i", "System.Int32 j"),
+                s_pop, //for loop
                 s_pop, //C.M
                 s_pop //C
             );
@@ -1351,7 +1507,8 @@ unsafe class C
         [Fact]
         public void NestedForEachLoops()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     static void M(string[] args)
@@ -1370,7 +1527,8 @@ class C
                 Add( //Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( //C
                     "void C.M(System.String[] args)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -1380,10 +1538,12 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Add("System.String[] args"), //C.Main
                 Add("System.String arg"), //outer foreach
-                Add("var ch"), s_pop, //inner foreach // NOTE: inference failed because the expression didn't bind.
+                Add("var ch"),
+                s_pop, //inner foreach // NOTE: inference failed because the expression didn't bind.
                 s_pop, //outer foreach
                 s_pop, //C.Main
                 s_pop //C
@@ -1396,7 +1556,8 @@ class C
         [Fact]
         public void NestedForEachLoops_Embedded()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     static void M(string[] args)
@@ -1411,7 +1572,8 @@ class C
                 Add( //Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( //C
                     "void C.M(System.String[] args)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -1421,7 +1583,8 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Add("System.String[] args"), //C.Main
                 Add("System.String arg"), //outer foreach
                 s_pop, //outer foreach
@@ -1436,7 +1599,8 @@ class C
         [Fact]
         public void NestedForLoops_Embedded()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     static void M(string[] args)
@@ -1451,7 +1615,8 @@ class C
                 Add( //Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( //C
                     "void C.M(System.String[] args)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -1461,7 +1626,8 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Add("System.String[] args"), //C.Main
                 Add("System.Int32 i"), //outer for
                 Add("System.Int32 j"), //inner for
@@ -1477,7 +1643,8 @@ class C
         [Fact]
         public void NestedFixedStatements_Embedded()
         {
-            var text = @"
+            var text =
+                @"
 unsafe class C
 `{
     static void M(string[] args)
@@ -1492,7 +1659,8 @@ unsafe class C
                 Add( //Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( //C
                     "void C.M(System.String[] args)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -1502,7 +1670,8 @@ unsafe class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Add("System.String[] args"), //C.Main
                 Add("System.Char* p"), //outer fixed
                 Add("System.Char* q"), //inner fixed
@@ -1518,7 +1687,8 @@ unsafe class C
         [Fact]
         public void NestedUsingStatements_Embedded()
         {
-            var text = @"
+            var text =
+                @"
 class C
 `{
     static void M(string[] args)
@@ -1533,7 +1703,8 @@ class C
                 Add( //Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( //C
                     "void C.M(System.String[] args)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
@@ -1543,7 +1714,8 @@ class C
                     "System.Object System.Object.MemberwiseClone()",
                     "void System.Object.Finalize()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 Add("System.String[] args"), //C.Main
                 Add("System.IDisposable d1"), //outer using
                 Add("System.IDisposable d2"), //inner using
@@ -1558,7 +1730,8 @@ class C
         [Fact]
         public void GotoLabelWithUsings()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 class Program
@@ -1579,14 +1752,17 @@ label1:
 
             var tree = compilation.SyntaxTrees.Single();
             var model = (Microsoft.CodeAnalysis.SemanticModel)(compilation.GetSemanticModel(tree));
-            var symbols = model.LookupLabels(source.ToString().IndexOf("label1;", StringComparison.Ordinal));
+            var symbols = model.LookupLabels(
+                source.ToString().IndexOf("label1;", StringComparison.Ordinal)
+            );
             Assert.True(symbols.IsEmpty);
         }
 
         [Fact]
         public void GotoLabelShouldNotHaveColon()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static void M(object o)
@@ -1607,8 +1783,13 @@ label1:
             var compilation = CreateCompilation(source);
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
-            var symbols = model.LookupLabels(source.ToString().IndexOf("HERE", StringComparison.Ordinal));
-            AssertEx.SetEqual(new[] { "default", "case int i:", "label1" }, symbols.Select(s => s.ToTestDisplayString()));
+            var symbols = model.LookupLabels(
+                source.ToString().IndexOf("HERE", StringComparison.Ordinal)
+            );
+            AssertEx.SetEqual(
+                new[] { "default", "case int i:", "label1" },
+                symbols.Select(s => s.ToTestDisplayString())
+            );
         }
 
         [WorkItem(586815, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/586815")]
@@ -1616,7 +1797,8 @@ label1:
         [Fact]
         public void Cref()
         {
-            var text = @"
+            var text =
+                @"
 `class Base`<T`>
 `{
     private int Private;
@@ -1683,18 +1865,22 @@ class Derived : Base<int>
                     "System",
                     "Microsoft",
                     "Base<T>",
-                    "Derived"),
+                    "Derived"
+                ),
                 Add("T"), //Base decl
-                Add(baseMembers), //"<T>" : Base members are in scope in type parameter list 
+                Add(baseMembers), //"<T>" : Base members are in scope in type parameter list
                 s_pop, //Base members are not in scope in Base declaration list
                 Add(baseMembers), //Base<T> body
                 Combine(s_pop, s_pop), //Base<T> body
                 Add(inaccessibleGlobalMembers), // Start of cref
-                Add(derivedInheritedMembers), s_pop, // cref return type
-                Add(derivedInheritedMembers), s_pop, // cref parameter type
+                Add(derivedInheritedMembers),
+                s_pop, // cref return type
+                Add(derivedInheritedMembers),
+                s_pop, // cref parameter type
                 s_pop, // end cref
                 Add(derivedMembers), //Derived body
-                Add("Derived d"), s_pop, //Derived.op_Explicit body
+                Add("Derived d"),
+                s_pop, //Derived.op_Explicit body
                 s_pop //Derived body
             );
 
@@ -1704,7 +1890,8 @@ class Derived : Base<int>
         [Fact]
         public void RecordBaseArguments_01()
         {
-            var text = @"
+            var text =
+                @"
 record C(int X) : Base`(X`)
 `{
 `}
@@ -1713,12 +1900,15 @@ record C(int X) : Base`(X`)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members + parameters
                     "System.Boolean C.Equals(Base? other)",
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -1731,13 +1921,16 @@ record C(int X) : Base`(X`)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop,
                 Add( // Members
                     "System.Boolean C.Equals(Base? other)",
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -1750,7 +1943,8 @@ record C(int X) : Base`(X`)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop
             );
 
@@ -1760,7 +1954,8 @@ record C(int X) : Base`(X`)
         [Fact]
         public void RecordBaseArguments_02()
         {
-            var text = @"
+            var text =
+                @"
 record C : Base(X)
 `{
 `}
@@ -1769,12 +1964,15 @@ record C : Base(X)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members
                     "System.Boolean C.Equals(Base? other)",
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -1785,7 +1983,8 @@ record C : Base(X)
                     "System.String System.Object.ToString()",
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop
             );
 
@@ -1795,7 +1994,8 @@ record C : Base(X)
         [Fact]
         public void RecordBaseArguments_03()
         {
-            var text = @"
+            var text =
+                @"
 partial record C(int X)
 `{
 `}
@@ -1808,12 +2008,15 @@ partial record C : Base(X, Y)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members
                     "System.Boolean C.Equals(Base? other)",
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -1826,13 +2029,16 @@ partial record C : Base(X, Y)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop,
                 Add( // Members
                     "System.Boolean C.Equals(Base? other)",
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -1845,9 +2051,9 @@ partial record C : Base(X, Y)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop
-
             );
 
             TestLookupNames(text, expectedNames);
@@ -1856,7 +2062,8 @@ partial record C : Base(X, Y)
         [Fact]
         public void RecordBaseArguments_04()
         {
-            var text = @"
+            var text =
+                @"
 partial record C(int X) : Base`(X`)
 `{
 `}
@@ -1869,12 +2076,15 @@ partial record C : Base(X)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members + parameters
                     "System.Boolean C.Equals(Base? other)",
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -1887,13 +2097,16 @@ partial record C : Base(X)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop,
                 Add( // Members
                     "System.Boolean C.Equals(Base? other)",
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -1906,13 +2119,16 @@ partial record C : Base(X)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop,
                 Add( // Members
                     "System.Boolean C.Equals(Base? other)",
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -1925,7 +2141,8 @@ partial record C : Base(X)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop
             );
 
@@ -1935,7 +2152,8 @@ partial record C : Base(X)
         [Fact]
         public void RecordBaseArguments_05()
         {
-            var text = @"
+            var text =
+                @"
 partial record C : Base(X)
 `{
 `}
@@ -1948,12 +2166,15 @@ partial record C(int X) : Base`(X`)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members
                     "System.Boolean C.Equals(Base? other)",
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -1966,13 +2187,16 @@ partial record C(int X) : Base`(X`)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop,
                 Add( // Members + parameters
                     "System.Boolean C.Equals(Base? other)",
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -1985,13 +2209,16 @@ partial record C(int X) : Base`(X`)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop,
                 Add( // Members
                     "System.Boolean C.Equals(Base? other)",
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -2004,7 +2231,8 @@ partial record C(int X) : Base`(X`)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop
             );
 
@@ -2014,7 +2242,8 @@ partial record C(int X) : Base`(X`)
         [Fact]
         public void RecordBaseArguments_06()
         {
-            var text = @"
+            var text =
+                @"
 class C : Base(X)
 `{
 `}
@@ -2023,7 +2252,8 @@ class C : Base(X)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
@@ -2032,7 +2262,8 @@ class C : Base(X)
                     "System.Object System.Object.MemberwiseClone()",
                     "System.String System.Object.ToString()",
                     "System.Type System.Object.GetType()",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop
             );
 
@@ -2042,7 +2273,8 @@ class C : Base(X)
         [Fact]
         public void RecordBaseArguments_07()
         {
-            var text = @"
+            var text =
+                @"
 struct C : Base(X)
 `{
 `}
@@ -2051,7 +2283,8 @@ struct C : Base(X)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
@@ -2063,7 +2296,8 @@ struct C : Base(X)
                     "System.String System.Object.ToString()",
                     "System.String System.ValueType.ToString()",
                     "System.Type System.Object.GetType()",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop
             );
 
@@ -2073,7 +2307,8 @@ struct C : Base(X)
         [Fact]
         public void RecordBaseArguments_08()
         {
-            var text = @"
+            var text =
+                @"
 interface C : Base(X)
 `{
 `}
@@ -2082,14 +2317,16 @@ interface C : Base(X)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
                     "System.Int32 System.Object.GetHashCode()",
                     "System.String System.Object.ToString()",
-                    "System.Type System.Object.GetType()"),
+                    "System.Type System.Object.GetType()"
+                ),
                 s_pop
             );
 
@@ -2099,7 +2336,8 @@ interface C : Base(X)
         [Fact]
         public void RecordInitializers_01()
         {
-            var text = @"
+            var text =
+                @"
 record C(int X)
 `{
     int Z `= X + 1`;
@@ -2109,11 +2347,14 @@ record C(int X)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -2127,11 +2368,9 @@ record C(int X)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
-                Combine(
-                    Remove("System.Int32 C.X { get; init; }"),
-                    Add("System.Int32 X")
-                    ),
+                    "void System.Object.Finalize()"
+                ),
+                Combine(Remove("System.Int32 C.X { get; init; }"), Add("System.Int32 X")),
                 Combine(s_pop, s_pop),
                 s_pop
             );
@@ -2142,7 +2381,8 @@ record C(int X)
         [Fact]
         public void RecordInitializers_02()
         {
-            var text = @"
+            var text =
+                @"
 record C(int X)
 `{
     static int Z = X + 1;
@@ -2152,11 +2392,14 @@ record C(int X)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -2170,7 +2413,8 @@ record C(int X)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop
             );
 
@@ -2180,7 +2424,8 @@ record C(int X)
         [Fact]
         public void RecordInitializers_03()
         {
-            var text = @"
+            var text =
+                @"
 record C(int X)
 `{
     const int Z = X + 1;
@@ -2190,11 +2435,14 @@ record C(int X)
                 Add( // Global
                     "System",
                     "Microsoft",
-                    "C"),
+                    "C"
+                ),
                 Add( // Members
                     "System.Boolean C.Equals(C? other)",
                     "System.Boolean C.Equals(System.Object? obj)",
-                    "System.Boolean C." + WellKnownMemberNames.PrintMembersMethodName + "(System.Text.StringBuilder builder)",
+                    "System.Boolean C."
+                        + WellKnownMemberNames.PrintMembersMethodName
+                        + "(System.Text.StringBuilder builder)",
                     "System.Boolean System.Object.Equals(System.Object obj)",
                     "System.Boolean System.Object.Equals(System.Object objA, System.Object objB)",
                     "System.Boolean System.Object.ReferenceEquals(System.Object objA, System.Object objB)",
@@ -2208,7 +2456,8 @@ record C(int X)
                     "System.Type C.EqualityContract { get; }",
                     "System.Type System.Object.GetType()",
                     "void C.Deconstruct(out System.Int32 X)",
-                    "void System.Object.Finalize()"),
+                    "void System.Object.Finalize()"
+                ),
                 s_pop
             );
 
@@ -2236,7 +2485,14 @@ record C(int X)
             // Number of key positions = number of backticks + 2 (start and end)
             int actualNumExpectedNames = expectedNames.Length;
             int expectedNumExpectedNames = keyPositions.Length - 2 + 1;
-            Assert.True(actualNumExpectedNames == expectedNumExpectedNames, string.Format("Expected {0} sets of expected names, but found {1}", expectedNumExpectedNames, actualNumExpectedNames));
+            Assert.True(
+                actualNumExpectedNames == expectedNumExpectedNames,
+                string.Format(
+                    "Expected {0} sets of expected names, but found {1}",
+                    expectedNumExpectedNames,
+                    actualNumExpectedNames
+                )
+            );
 
             for (int key = 0; key < keyPositions.Length - 1; key++)
             {
@@ -2254,7 +2510,10 @@ record C(int X)
         /// Strip the backticks out of "markedText" and record their positions.
         /// Return a SemanticModel for the compiled text.
         /// </summary>
-        private static SemanticModel GetModelAndKeyPositions(string markedText, out int[] keyPositions)
+        private static SemanticModel GetModelAndKeyPositions(
+            string markedText,
+            out int[] keyPositions
+        )
         {
             ArrayBuilder<int> keyPositionBuilder = ArrayBuilder<int>.GetInstance();
             StringBuilder textBuilder = new StringBuilder();
@@ -2265,7 +2524,10 @@ record C(int X)
             {
                 if (ch == KeyPositionMarker)
                 {
-                    Assert.False(keyPositionBuilder.Contains(position), "Duplicate position " + position);
+                    Assert.False(
+                        keyPositionBuilder.Contains(position),
+                        "Duplicate position " + position
+                    );
                     keyPositionBuilder.Add(position);
                 }
                 else
@@ -2280,7 +2542,9 @@ record C(int X)
             keyPositions = keyPositionBuilder.ToArrayAndFree();
             var text = textBuilder.ToString();
 
-            var parseOptions = TestOptions.Regular9.WithDocumentationMode(DocumentationMode.Diagnose);
+            var parseOptions = TestOptions.Regular9.WithDocumentationMode(
+                DocumentationMode.Diagnose
+            );
             var compilation = CreateCompilationWithMscorlib40(text, parseOptions: parseOptions);
             var tree = compilation.SyntaxTrees[0];
             return compilation.GetSemanticModel(tree);
@@ -2289,15 +2553,34 @@ record C(int X)
         /// <summary>
         /// Assert that the result of LookupNames(position) matches the list of expected names.
         /// </summary>
-        private static void CheckSymbols(SemanticModel model, int keyPositionNum, int position, IEnumerable<string> expectedSymbols)
+        private static void CheckSymbols(
+            SemanticModel model,
+            int keyPositionNum,
+            int position,
+            IEnumerable<string> expectedSymbols
+        )
         {
-            var actualSymbols = model.LookupSymbols(position).Select(SymbolExtensions.ToTestDisplayString).ToArray();
+            var actualSymbols = model
+                .LookupSymbols(position)
+                .Select(SymbolExtensions.ToTestDisplayString)
+                .ToArray();
             Array.Sort(actualSymbols);
 
-            SyntaxToken token = model.SyntaxTree.GetCompilationUnitRoot().FindToken(position, findInsideTrivia: true);
-            AssertEx.Equal(expectedSymbols, actualSymbols,
-                message: string.Format("Lookup({0}) - '{1}' in '{2}' after {3}th '{4}' - \"-->\" found but not expected, \"++>\" expected but not found",
-                         position, token.ToString(), token.Parent.ToString(), keyPositionNum, KeyPositionMarker));
+            SyntaxToken token = model.SyntaxTree
+                .GetCompilationUnitRoot()
+                .FindToken(position, findInsideTrivia: true);
+            AssertEx.Equal(
+                expectedSymbols,
+                actualSymbols,
+                message: string.Format(
+                    "Lookup({0}) - '{1}' in '{2}' after {3}th '{4}' - \"-->\" found but not expected, \"++>\" expected but not found",
+                    position,
+                    token.ToString(),
+                    token.Parent.ToString(),
+                    keyPositionNum,
+                    KeyPositionMarker
+                )
+            );
         }
 
         private static string[][] MakeExpectedSymbols(params Action<Stack<string[]>>[] deltas)
@@ -2319,11 +2602,14 @@ record C(int X)
         /// </summary>
         private static Action<Stack<string[]>> Combine(params Action<Stack<string[]>>[] deltas)
         {
-            return deltas.Aggregate((f, g) => stack =>
-            {
-                f(stack);
-                g(stack);
-            });
+            return deltas.Aggregate(
+                (f, g) =>
+                    stack =>
+                    {
+                        f(stack);
+                        g(stack);
+                    }
+            );
         }
 
         private static Action<Stack<string[]>> Add(params string[] added)

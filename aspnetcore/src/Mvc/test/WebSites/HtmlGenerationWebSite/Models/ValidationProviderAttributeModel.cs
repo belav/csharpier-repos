@@ -34,10 +34,7 @@ namespace HtmlGenerationWebSite.Models
     {
         public override IEnumerable<ValidationAttribute> GetValidationAttributes()
         {
-            return new List<ValidationAttribute>
-            {
-                new RequiredAttribute()
-            };
+            return new List<ValidationAttribute> { new RequiredAttribute() };
         }
     }
 }

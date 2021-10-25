@@ -27,12 +27,22 @@ namespace Microsoft.EntityFrameworkCore.Query
     /// </summary>
     public class EntityShaperExpression : Expression, IPrintableExpression
     {
-        private static readonly MethodInfo _createUnableToDiscriminateException
-            = typeof(EntityShaperExpression).GetRequiredDeclaredMethod(nameof(CreateUnableToDiscriminateException));
+        private static readonly MethodInfo _createUnableToDiscriminateException =
+            typeof(EntityShaperExpression).GetRequiredDeclaredMethod(
+                nameof(CreateUnableToDiscriminateException)
+            );
 
         [UsedImplicitly]
-        private static Exception CreateUnableToDiscriminateException(IEntityType entityType, object discriminator)
-            => new InvalidOperationException(CoreStrings.UnableToDiscriminate(entityType.DisplayName(), discriminator?.ToString()));
+        private static Exception CreateUnableToDiscriminateException(
+            IEntityType entityType,
+            object discriminator
+        ) =>
+            new InvalidOperationException(
+                CoreStrings.UnableToDiscriminate(
+                    entityType.DisplayName(),
+                    discriminator?.ToString()
+                )
+            );
 
         /// <summary>
         ///     Creates a new instance of the <see cref="EntityShaperExpression" /> class.
@@ -43,10 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public EntityShaperExpression(
             IEntityType entityType,
             Expression valueBufferExpression,
-            bool nullable)
-            : this(entityType, valueBufferExpression, nullable, null)
-        {
-        }
+            bool nullable
+        ) : this(entityType, valueBufferExpression, nullable, null) { }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="EntityShaperExpression" /> class.
@@ -62,7 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IEntityType entityType,
             Expression valueBufferExpression,
             bool nullable,
-            LambdaExpression? materializationCondition)
+            LambdaExpression? materializationCondition
+        )
         {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(valueBufferExpression, nameof(valueBufferExpression));
@@ -71,11 +80,17 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 materializationCondition = GenerateMaterializationCondition(entityType, nullable);
             }
-            else if (materializationCondition.Parameters.Count != 1
+            else if (
+                materializationCondition.Parameters.Count != 1
                 || materializationCondition.Parameters[0].Type != typeof(ValueBuffer)
-                || materializationCondition.ReturnType != typeof(IEntityType))
+                || materializationCondition.ReturnType != typeof(IEntityType)
+            )
             {
-                throw new InvalidOperationException(CoreStrings.QueryEntityMaterializationConditionWrongShape(entityType.DisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.QueryEntityMaterializationConditionWrongShape(
+                        entityType.DisplayName()
+                    )
+                );
             }
 
             EntityType = entityType;
@@ -91,12 +106,23 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="entityType"> The entity type for which materialization was requested. </param>
         /// <param name="discriminatorValue"> The expression containing value of discriminator. </param>
         /// <returns> An expression of <see cref="Func{ValueBuffer, IEntityType}" /> representing materilization condition for the entity type. </returns>
-        protected static Expression CreateUnableToDiscriminateExceptionExpression(IEntityType entityType, Expression discriminatorValue)
-            => Block(
-                Throw(Call(_createUnableToDiscriminateException,
-                    Constant(Check.NotNull(entityType, nameof(entityType))),
-                    Convert(Check.NotNull(discriminatorValue, nameof(discriminatorValue)), typeof(object)))),
-                Constant(null, typeof(IEntityType)));
+        protected static Expression CreateUnableToDiscriminateExceptionExpression(
+            IEntityType entityType,
+            Expression discriminatorValue
+        ) =>
+            Block(
+                Throw(
+                    Call(
+                        _createUnableToDiscriminateException,
+                        Constant(Check.NotNull(entityType, nameof(entityType))),
+                        Convert(
+                            Check.NotNull(discriminatorValue, nameof(discriminatorValue)),
+                            typeof(object)
+                        )
+                    )
+                ),
+                Constant(null, typeof(IEntityType))
+            );
 
         /// <summary>
         ///     Creates an expression of <see cref="Func{ValueBuffer, IEntityType}" /> to determine which entity type to materialize.
@@ -104,7 +130,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="entityType"> The entity type to create materialization condition for. </param>
         /// <param name="nullable"> Whether this entity instance can be null. </param>
         /// <returns> An expression of <see cref="Func{ValueBuffer, IEntityType}" /> representing materilization condition for the entity type. </returns>
-        protected virtual LambdaExpression GenerateMaterializationCondition(IEntityType entityType, bool nullable)
+        protected virtual LambdaExpression GenerateMaterializationCondition(
+            IEntityType entityType,
+            bool nullable
+        )
         {
             Check.NotNull(entityType, nameof(EntityType));
 
@@ -114,16 +143,26 @@ namespace Microsoft.EntityFrameworkCore.Query
             var discriminatorProperty = entityType.FindDiscriminatorProperty();
             if (discriminatorProperty != null)
             {
-                var discriminatorValueVariable = Variable(discriminatorProperty.ClrType, "discriminator");
+                var discriminatorValueVariable = Variable(
+                    discriminatorProperty.ClrType,
+                    "discriminator"
+                );
                 var expressions = new List<Expression>
                 {
                     Assign(
                         discriminatorValueVariable,
                         valueBufferParameter.CreateValueBufferReadValueExpression(
-                            discriminatorProperty.ClrType, discriminatorProperty.GetIndex(), discriminatorProperty))
+                            discriminatorProperty.ClrType,
+                            discriminatorProperty.GetIndex(),
+                            discriminatorProperty
+                        )
+                    )
                 };
 
-                var exception = CreateUnableToDiscriminateExceptionExpression(entityType, discriminatorValueVariable);
+                var exception = CreateUnableToDiscriminateExceptionExpression(
+                    entityType,
+                    discriminatorValueVariable
+                );
 
                 var discriminatorComparer = discriminatorProperty.GetKeyValueComparer();
                 if (discriminatorComparer.IsDefault())
@@ -131,8 +170,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                     var switchCases = new SwitchCase[concreteEntityTypes.Length];
                     for (var i = 0; i < concreteEntityTypes.Length; i++)
                     {
-                        var discriminatorValue = Constant(concreteEntityTypes[i].GetDiscriminatorValue(), discriminatorProperty.ClrType);
-                        switchCases[i] = SwitchCase(Constant(concreteEntityTypes[i], typeof(IEntityType)), discriminatorValue);
+                        var discriminatorValue = Constant(
+                            concreteEntityTypes[i].GetDiscriminatorValue(),
+                            discriminatorProperty.ClrType
+                        );
+                        switchCases[i] = SwitchCase(
+                            Constant(concreteEntityTypes[i], typeof(IEntityType)),
+                            discriminatorValue
+                        );
                     }
 
                     expressions.Add(Switch(discriminatorValueVariable, exception, switchCases));
@@ -147,9 +192,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 discriminatorValueVariable,
                                 Constant(
                                     concreteEntityTypes[i].GetDiscriminatorValue(),
-                                    discriminatorProperty.ClrType)),
+                                    discriminatorProperty.ClrType
+                                )
+                            ),
                             Constant(concreteEntityTypes[i], typeof(IEntityType)),
-                            conditions);
+                            conditions
+                        );
                     }
 
                     expressions.Add(conditions);
@@ -158,21 +206,32 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
             else
             {
-                body = Constant(concreteEntityTypes.Length == 1 ? concreteEntityTypes[0] : entityType, typeof(IEntityType));
+                body = Constant(
+                    concreteEntityTypes.Length == 1 ? concreteEntityTypes[0] : entityType,
+                    typeof(IEntityType)
+                );
             }
 
-            if (entityType.FindPrimaryKey() == null
-                && nullable)
+            if (entityType.FindPrimaryKey() == null && nullable)
             {
                 body = Condition(
-                    entityType.GetProperties()
+                    entityType
+                        .GetProperties()
                         .Select(
-                            p => NotEqual(
-                                valueBufferParameter.CreateValueBufferReadValueExpression(typeof(object), p.GetIndex(), p),
-                                Constant(null)))
+                            p =>
+                                NotEqual(
+                                    valueBufferParameter.CreateValueBufferReadValueExpression(
+                                        typeof(object),
+                                        p.GetIndex(),
+                                        p
+                                    ),
+                                    Constant(null)
+                                )
+                        )
                         .Aggregate((a, b) => OrElse(a, b)),
                     body,
-                    Default(typeof(IEntityType)));
+                    Default(typeof(IEntityType))
+                );
             }
 
             return Lambda(body, valueBufferParameter);
@@ -218,8 +277,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(entityType, nameof(entityType));
 
             return entityType != EntityType
-                ? new EntityShaperExpression(entityType, ValueBufferExpression, IsNullable)
-                : this;
+              ? new EntityShaperExpression(entityType, ValueBufferExpression, IsNullable)
+              : this;
         }
 
         /// <summary>
@@ -227,16 +286,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <returns> This expression if nullability not changed, or an expression with updated nullability. </returns>
         [Obsolete("Use MakeNullable() instead.")]
-        public virtual EntityShaperExpression MarkAsNullable()
-            => MakeNullable();
+        public virtual EntityShaperExpression MarkAsNullable() => MakeNullable();
 
         /// <summary>
         ///     Assigns nullability for this shaper, indicating whether it can shape null entity instances or not.
         /// </summary>
         /// <param name="nullable"> A value indicating if the shaper is nullable. </param>
         /// <returns> This expression if nullability not changed, or an expression with updated nullability. </returns>
-        public virtual EntityShaperExpression MakeNullable(bool nullable = true)
-            => IsNullable != nullable
+        public virtual EntityShaperExpression MakeNullable(bool nullable = true) =>
+            IsNullable != nullable
                 // Marking nullable requires recomputation of materialization condition
                 ? new EntityShaperExpression(EntityType, ValueBufferExpression, nullable)
                 : this;
@@ -252,17 +310,20 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(valueBufferExpression, nameof(valueBufferExpression));
 
             return valueBufferExpression != ValueBufferExpression
-                ? new EntityShaperExpression(EntityType, valueBufferExpression, IsNullable, MaterializationCondition)
-                : this;
+              ? new EntityShaperExpression(
+                    EntityType,
+                    valueBufferExpression,
+                    IsNullable,
+                    MaterializationCondition
+                )
+              : this;
         }
 
         /// <inheritdoc />
-        public override Type Type
-            => EntityType.ClrType;
+        public override Type Type => EntityType.ClrType;
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
         void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)

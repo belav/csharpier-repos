@@ -17,12 +17,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     [Collection(PublishedSitesCollection.Name)]
     public class BasicAuthTests : IISFunctionalTestBase
     {
-        public BasicAuthTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public BasicAuthTests(PublishedSitesFixture fixture) : base(fixture) { }
 
-        public static TestMatrix TestVariants
-            => TestMatrix.ForServers(DeployerSelector.ServerType)
+        public static TestMatrix TestVariants =>
+            TestMatrix
+                .ForServers(DeployerSelector.ServerType)
                 .WithTfms(Tfm.Default)
                 .WithApplicationTypes(ApplicationType.Portable)
                 .WithAllHostingModels();
@@ -45,7 +44,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             var deploymentResult = await DeployAsync(deploymentParameters);
             var request = new HttpRequestMessage(HttpMethod.Get, "/Auth");
             var byteArray = new UTF8Encoding().GetBytes(username + ":" + password);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+            request.Headers.Authorization = new AuthenticationHeaderValue(
+                "Basic",
+                Convert.ToBase64String(byteArray)
+            );
 
             var response = await deploymentResult.HttpClient.SendAsync(request);
 

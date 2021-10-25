@@ -5,7 +5,11 @@ namespace System.Buffers.Text
 {
     public static partial class Utf8Parser
     {
-        private static bool TryParseByteD(ReadOnlySpan<byte> source, out byte value, out int bytesConsumed)
+        private static bool TryParseByteD(
+            ReadOnlySpan<byte> source,
+            out byte value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -60,18 +64,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = (byte)answer;
             return true;
         }
 
-        private static bool TryParseUInt16D(ReadOnlySpan<byte> source, out ushort value, out int bytesConsumed)
+        private static bool TryParseUInt16D(
+            ReadOnlySpan<byte> source,
+            out ushort value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -142,18 +150,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = (ushort)answer;
             return true;
         }
 
-        private static bool TryParseUInt32D(ReadOnlySpan<byte> source, out uint value, out int bytesConsumed)
+        private static bool TryParseUInt32D(
+            ReadOnlySpan<byte> source,
+            out uint value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -251,7 +263,10 @@ namespace System.Buffers.Text
                 if (!ParserHelpers.IsDigit(num))
                     goto Done;
                 index++;
-                if (((uint)answer) > uint.MaxValue / 10 || (((uint)answer) == uint.MaxValue / 10 && num > '5'))
+                if (
+                    ((uint)answer) > uint.MaxValue / 10
+                    || (((uint)answer) == uint.MaxValue / 10 && num > '5')
+                )
                     goto FalseExit; // Overflow
                 answer = answer * 10 + num - '0';
 
@@ -264,18 +279,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = (uint)answer;
             return true;
         }
 
-        private static bool TryParseUInt64D(ReadOnlySpan<byte> source, out ulong value, out int bytesConsumed)
+        private static bool TryParseUInt64D(
+            ReadOnlySpan<byte> source,
+            out ulong value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
             {
@@ -324,7 +343,11 @@ namespace System.Buffers.Text
                     }
                     parsedValue = parsedValue * 10 + nextDigit;
                 }
-                for (int index = ParserHelpers.Int64OverflowLength - 1; index < source.Length; index++)
+                for (
+                    int index = ParserHelpers.Int64OverflowLength - 1;
+                    index < source.Length;
+                    index++
+                )
                 {
                     ulong nextDigit = source[index] - 48u; // '0'
                     if (nextDigit > 9)
@@ -335,7 +358,10 @@ namespace System.Buffers.Text
                     }
                     // If parsedValue > (ulong.MaxValue / 10), any more appended digits will cause overflow.
                     // if parsedValue == (ulong.MaxValue / 10), any nextDigit greater than 5 implies overflow.
-                    if (parsedValue > ulong.MaxValue / 10 || (parsedValue == ulong.MaxValue / 10 && nextDigit > 5))
+                    if (
+                        parsedValue > ulong.MaxValue / 10
+                        || (parsedValue == ulong.MaxValue / 10 && nextDigit > 5)
+                    )
                     {
                         bytesConsumed = 0;
                         value = default;

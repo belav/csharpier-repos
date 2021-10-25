@@ -18,27 +18,39 @@ namespace System.Reflection
 {
     internal class RuntimeAssembly : Assembly
     {
-        internal RuntimeAssembly() { throw new NotSupportedException(); }
+        internal RuntimeAssembly()
+        {
+            throw new NotSupportedException();
+        }
 
         #region private data members
 #pragma warning disable 67 // events are declared but not used
         private event ModuleResolveEventHandler? _ModuleResolve;
 #pragma warning restore 67
         private string? m_fullname;
-        private object? m_syncRoot;   // Used to keep collectible types alive and as the syncroot for reflection.emit
+        private object? m_syncRoot; // Used to keep collectible types alive and as the syncroot for reflection.emit
 #pragma warning disable 169
-        private IntPtr m_assembly;    // slack for ptr datum on unmanaged side
+        private IntPtr m_assembly; // slack for ptr datum on unmanaged side
 #pragma warning restore 169
 
         #endregion
 
-        internal IntPtr GetUnderlyingNativeHandle() { return m_assembly; }
+        internal IntPtr GetUnderlyingNativeHandle()
+        {
+            return m_assembly;
+        }
 
         private sealed class ManifestResourceStream : UnmanagedMemoryStream
         {
             private RuntimeAssembly _manifestAssembly;
 
-            internal unsafe ManifestResourceStream(RuntimeAssembly manifestAssembly, byte* pointer, long length, long capacity, FileAccess access) : base(pointer, length, capacity, access)
+            internal unsafe ManifestResourceStream(
+                RuntimeAssembly manifestAssembly,
+                byte* pointer,
+                long length,
+                long capacity,
+                FileAccess access
+            ) : base(pointer, length, capacity, access)
             {
                 _manifestAssembly = manifestAssembly;
             }
@@ -58,25 +70,26 @@ namespace System.Reflection
 
         public override event ModuleResolveEventHandler? ModuleResolve
         {
-            add
-            {
-                _ModuleResolve += value;
-            }
-            remove
-            {
-                _ModuleResolve -= value;
-            }
+            add { _ModuleResolve += value; }
+            remove { _ModuleResolve -= value; }
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern bool GetCodeBase(QCallAssembly assembly,
-                                               StringHandleOnStack retString);
+        private static extern bool GetCodeBase(
+            QCallAssembly assembly,
+            StringHandleOnStack retString
+        );
 
         internal string? GetCodeBase()
         {
             string? codeBase = null;
             RuntimeAssembly runtimeAssembly = this;
-            if (GetCodeBase(new QCallAssembly(ref runtimeAssembly), new StringHandleOnStack(ref codeBase)))
+            if (
+                GetCodeBase(
+                    new QCallAssembly(ref runtimeAssembly),
+                    new StringHandleOnStack(ref codeBase)
+                )
+            )
             {
                 return codeBase;
             }
@@ -106,16 +119,18 @@ namespace System.Reflection
         {
             string? codeBase = GetCodeBase();
 
-            var an = new AssemblyName(GetSimpleName(),
-                    GetPublicKey(),
-                    null, // public key token
-                    GetVersion(),
-                    GetLocale(),
-                    GetHashAlgorithm(),
-                    AssemblyVersionCompatibility.SameMachine,
-                    codeBase,
-                    GetFlags() | AssemblyNameFlags.PublicKey,
-                    null); // strong name key pair
+            var an = new AssemblyName(
+                GetSimpleName(),
+                GetPublicKey(),
+                null, // public key token
+                GetVersion(),
+                GetLocale(),
+                GetHashAlgorithm(),
+                AssemblyVersionCompatibility.SameMachine,
+                codeBase,
+                GetFlags() | AssemblyNameFlags.PublicKey,
+                null
+            ); // strong name key pair
 
             Module manifestModule = ManifestModule;
             if (manifestModule.MDStreamVersion > 0x10000)
@@ -127,7 +142,10 @@ namespace System.Reflection
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetFullName(QCallAssembly assembly, StringHandleOnStack retString);
+        private static extern void GetFullName(
+            QCallAssembly assembly,
+            StringHandleOnStack retString
+        );
 
         public override string? FullName
         {
@@ -138,7 +156,10 @@ namespace System.Reflection
                 {
                     string? s = null;
                     RuntimeAssembly runtimeAssembly = this;
-                    GetFullName(new QCallAssembly(ref runtimeAssembly), new StringHandleOnStack(ref s));
+                    GetFullName(
+                        new QCallAssembly(ref runtimeAssembly),
+                        new StringHandleOnStack(ref s)
+                    );
                     Interlocked.CompareExchange(ref m_fullname, s, null);
                 }
 
@@ -147,7 +168,10 @@ namespace System.Reflection
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetEntryPoint(QCallAssembly assembly, ObjectHandleOnStack retMethod);
+        private static extern void GetEntryPoint(
+            QCallAssembly assembly,
+            ObjectHandleOnStack retMethod
+        );
 
         public override MethodInfo? EntryPoint
         {
@@ -155,7 +179,10 @@ namespace System.Reflection
             {
                 IRuntimeMethodInfo? methodHandle = null;
                 RuntimeAssembly runtimeAssembly = this;
-                GetEntryPoint(new QCallAssembly(ref runtimeAssembly), ObjectHandleOnStack.Create(ref methodHandle));
+                GetEntryPoint(
+                    new QCallAssembly(ref runtimeAssembly),
+                    ObjectHandleOnStack.Create(ref methodHandle)
+                );
 
                 if (methodHandle == null)
                     return null;
@@ -165,13 +192,15 @@ namespace System.Reflection
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetType(QCallAssembly assembly,
-                                            string name,
-                                            bool throwOnError,
-                                            bool ignoreCase,
-                                            ObjectHandleOnStack type,
-                                            ObjectHandleOnStack keepAlive,
-                                            ObjectHandleOnStack assemblyLoadContext);
+        private static extern void GetType(
+            QCallAssembly assembly,
+            string name,
+            bool throwOnError,
+            bool ignoreCase,
+            ObjectHandleOnStack type,
+            ObjectHandleOnStack keepAlive,
+            ObjectHandleOnStack assemblyLoadContext
+        );
 
         [RequiresUnreferencedCode("Types might be removed")]
         public override Type? GetType(string name, bool throwOnError, bool ignoreCase)
@@ -182,30 +211,39 @@ namespace System.Reflection
 
             RuntimeType? type = null;
             object? keepAlive = null;
-            AssemblyLoadContext? assemblyLoadContextStack = AssemblyLoadContext.CurrentContextualReflectionContext;
+            AssemblyLoadContext? assemblyLoadContextStack =
+                AssemblyLoadContext.CurrentContextualReflectionContext;
 
             RuntimeAssembly runtimeAssembly = this;
-            GetType(new QCallAssembly(ref runtimeAssembly),
-                    name,
-                    throwOnError,
-                    ignoreCase,
-                    ObjectHandleOnStack.Create(ref type),
-                    ObjectHandleOnStack.Create(ref keepAlive),
-                    ObjectHandleOnStack.Create(ref assemblyLoadContextStack));
+            GetType(
+                new QCallAssembly(ref runtimeAssembly),
+                name,
+                throwOnError,
+                ignoreCase,
+                ObjectHandleOnStack.Create(ref type),
+                ObjectHandleOnStack.Create(ref keepAlive),
+                ObjectHandleOnStack.Create(ref assemblyLoadContextStack)
+            );
             GC.KeepAlive(keepAlive);
 
             return type;
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetExportedTypes(QCallAssembly assembly, ObjectHandleOnStack retTypes);
+        private static extern void GetExportedTypes(
+            QCallAssembly assembly,
+            ObjectHandleOnStack retTypes
+        );
 
         [RequiresUnreferencedCode("Types might be removed")]
         public override Type[] GetExportedTypes()
         {
             Type[]? types = null;
             RuntimeAssembly runtimeAssembly = this;
-            GetExportedTypes(new QCallAssembly(ref runtimeAssembly), ObjectHandleOnStack.Create(ref types));
+            GetExportedTypes(
+                new QCallAssembly(ref runtimeAssembly),
+                ObjectHandleOnStack.Create(ref types)
+            );
             return types!;
         }
 
@@ -239,15 +277,18 @@ namespace System.Reflection
             get
             {
                 RuntimeAssembly runtimeAssembly = this;
-                return GetIsCollectible(new QCallAssembly(ref runtimeAssembly)) != Interop.BOOL.FALSE;
+                return GetIsCollectible(new QCallAssembly(ref runtimeAssembly))
+                    != Interop.BOOL.FALSE;
             }
         }
 
         // GetResource will return a pointer to the resources in memory.
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern unsafe byte* GetResource(QCallAssembly assembly,
-                                                       string resourceName,
-                                                       out uint length);
+        private static extern unsafe byte* GetResource(
+            QCallAssembly assembly,
+            string resourceName,
+            out uint length
+        );
 
         // Load a resource based on the NameSpace of the type.
         public override Stream? GetManifestResourceStream(Type type, string name)
@@ -258,9 +299,10 @@ namespace System.Reflection
             string? nameSpace = type?.Namespace;
 
             char c = Type.Delimiter;
-            string resourceName = nameSpace != null && name != null ?
-                string.Concat(nameSpace, new ReadOnlySpan<char>(ref c, 1), name) :
-                string.Concat(nameSpace, name);
+            string resourceName =
+                nameSpace != null && name != null
+                    ? string.Concat(nameSpace, new ReadOnlySpan<char>(ref c, 1), name)
+                    : string.Concat(nameSpace, name);
 
             return GetManifestResourceStream(resourceName);
         }
@@ -268,11 +310,21 @@ namespace System.Reflection
         public override unsafe Stream? GetManifestResourceStream(string name)
         {
             RuntimeAssembly runtimeAssembly = this;
-            byte* pbInMemoryResource = GetResource(new QCallAssembly(ref runtimeAssembly), name, out uint length);
+            byte* pbInMemoryResource = GetResource(
+                new QCallAssembly(ref runtimeAssembly),
+                name,
+                out uint length
+            );
 
             if (pbInMemoryResource != null)
             {
-                return new ManifestResourceStream(this, pbInMemoryResource, length, length, FileAccess.Read);
+                return new ManifestResourceStream(
+                    this,
+                    pbInMemoryResource,
+                    length,
+                    length,
+                    FileAccess.Read
+                );
             }
 
             return null;
@@ -325,48 +377,75 @@ namespace System.Reflection
             return CustomAttributeData.GetCustomAttributesInternal(this);
         }
 
-        internal static RuntimeAssembly InternalLoad(string assemblyName, ref StackCrawlMark stackMark, AssemblyLoadContext? assemblyLoadContext = null)
-            => InternalLoad(new AssemblyName(assemblyName), ref stackMark, assemblyLoadContext);
+        internal static RuntimeAssembly InternalLoad(
+            string assemblyName,
+            ref StackCrawlMark stackMark,
+            AssemblyLoadContext? assemblyLoadContext = null
+        ) => InternalLoad(new AssemblyName(assemblyName), ref stackMark, assemblyLoadContext);
 
-        internal static RuntimeAssembly InternalLoad(AssemblyName assemblyName, ref StackCrawlMark stackMark, AssemblyLoadContext? assemblyLoadContext = null)
-            => InternalLoad(assemblyName, requestingAssembly: null, ref stackMark, throwOnFileNotFound: true, assemblyLoadContext);
+        internal static RuntimeAssembly InternalLoad(
+            AssemblyName assemblyName,
+            ref StackCrawlMark stackMark,
+            AssemblyLoadContext? assemblyLoadContext = null
+        ) =>
+            InternalLoad(
+                assemblyName,
+                requestingAssembly: null,
+                ref stackMark,
+                throwOnFileNotFound: true,
+                assemblyLoadContext
+            );
 
-        internal static RuntimeAssembly InternalLoad(AssemblyName assemblyName,
-                                                     RuntimeAssembly? requestingAssembly,
-                                                     ref StackCrawlMark stackMark,
-                                                     bool throwOnFileNotFound,
-                                                     AssemblyLoadContext? assemblyLoadContext = null)
+        internal static RuntimeAssembly InternalLoad(
+            AssemblyName assemblyName,
+            RuntimeAssembly? requestingAssembly,
+            ref StackCrawlMark stackMark,
+            bool throwOnFileNotFound,
+            AssemblyLoadContext? assemblyLoadContext = null
+        )
         {
             RuntimeAssembly? retAssembly = null;
-            InternalLoad(ObjectHandleOnStack.Create(ref assemblyName),
-                         ObjectHandleOnStack.Create(ref requestingAssembly),
-                         new StackCrawlMarkHandle(ref stackMark),
-                         throwOnFileNotFound,
-                         ObjectHandleOnStack.Create(ref assemblyLoadContext),
-                         ObjectHandleOnStack.Create(ref retAssembly));
+            InternalLoad(
+                ObjectHandleOnStack.Create(ref assemblyName),
+                ObjectHandleOnStack.Create(ref requestingAssembly),
+                new StackCrawlMarkHandle(ref stackMark),
+                throwOnFileNotFound,
+                ObjectHandleOnStack.Create(ref assemblyLoadContext),
+                ObjectHandleOnStack.Create(ref retAssembly)
+            );
             return retAssembly!;
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void InternalLoad(ObjectHandleOnStack assemblyName,
-                                                ObjectHandleOnStack requestingAssembly,
-                                                StackCrawlMarkHandle stackMark,
-                                                bool throwOnFileNotFound,
-                                                ObjectHandleOnStack assemblyLoadContext,
-                                                ObjectHandleOnStack retAssembly);
+        private static extern void InternalLoad(
+            ObjectHandleOnStack assemblyName,
+            ObjectHandleOnStack requestingAssembly,
+            StackCrawlMarkHandle stackMark,
+            bool throwOnFileNotFound,
+            ObjectHandleOnStack assemblyLoadContext,
+            ObjectHandleOnStack retAssembly
+        );
 
         public override bool ReflectionOnly => false;
 
         // Returns the module in this assembly with name 'name'
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetModule(QCallAssembly assembly, string name, ObjectHandleOnStack retModule);
+        private static extern void GetModule(
+            QCallAssembly assembly,
+            string name,
+            ObjectHandleOnStack retModule
+        );
 
         public override Module? GetModule(string name)
         {
             Module? retModule = null;
             RuntimeAssembly runtimeAssembly = this;
-            GetModule(new QCallAssembly(ref runtimeAssembly), name, ObjectHandleOnStack.Create(ref retModule));
+            GetModule(
+                new QCallAssembly(ref runtimeAssembly),
+                name,
+                ObjectHandleOnStack.Create(ref retModule)
+            );
             return retModule;
         }
 
@@ -384,9 +463,14 @@ namespace System.Reflection
             if (m == null)
                 return null;
 
-            return new FileStream(m.GetFullyQualifiedName(),
-                                  FileMode.Open,
-                                  FileAccess.Read, FileShare.Read, FileStream.DefaultBufferSize, false);
+            return new FileStream(
+                m.GetFullyQualifiedName(),
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read,
+                FileStream.DefaultBufferSize,
+                false
+            );
         }
 
         public override FileStream[] GetFiles(bool getResourceModules)
@@ -402,9 +486,14 @@ namespace System.Reflection
 
             for (int i = 0; i < fs.Length; i++)
             {
-                fs[i] = new FileStream(((RuntimeModule)m[i]).GetFullyQualifiedName(),
-                                       FileMode.Open,
-                                       FileAccess.Read, FileShare.Read, FileStream.DefaultBufferSize, false);
+                fs[i] = new FileStream(
+                    ((RuntimeModule)m[i]).GetFullyQualifiedName(),
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    FileStream.DefaultBufferSize,
+                    false
+                );
             }
 
             return fs;
@@ -431,29 +520,36 @@ namespace System.Reflection
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern int GetManifestResourceInfo(QCallAssembly assembly,
-                                                          string resourceName,
-                                                          ObjectHandleOnStack assemblyRef,
-                                                          StringHandleOnStack retFileName);
+        private static extern int GetManifestResourceInfo(
+            QCallAssembly assembly,
+            string resourceName,
+            ObjectHandleOnStack assemblyRef,
+            StringHandleOnStack retFileName
+        );
 
         public override ManifestResourceInfo? GetManifestResourceInfo(string resourceName)
         {
             RuntimeAssembly? retAssembly = null;
             string? fileName = null;
             RuntimeAssembly runtimeAssembly = this;
-            int location = GetManifestResourceInfo(new QCallAssembly(ref runtimeAssembly), resourceName,
-                                                   ObjectHandleOnStack.Create(ref retAssembly),
-                                                   new StringHandleOnStack(ref fileName));
+            int location = GetManifestResourceInfo(
+                new QCallAssembly(ref runtimeAssembly),
+                resourceName,
+                ObjectHandleOnStack.Create(ref retAssembly),
+                new StringHandleOnStack(ref fileName)
+            );
 
             if (location == -1)
                 return null;
 
-            return new ManifestResourceInfo(retAssembly!, fileName!,
-                                                (ResourceLocation)location);
+            return new ManifestResourceInfo(retAssembly!, fileName!, (ResourceLocation)location);
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetLocation(QCallAssembly assembly, StringHandleOnStack retString);
+        private static extern void GetLocation(
+            QCallAssembly assembly,
+            StringHandleOnStack retString
+        );
 
         public override string Location
         {
@@ -462,14 +558,20 @@ namespace System.Reflection
                 string? location = null;
 
                 RuntimeAssembly runtimeAssembly = this;
-                GetLocation(new QCallAssembly(ref runtimeAssembly), new StringHandleOnStack(ref location));
+                GetLocation(
+                    new QCallAssembly(ref runtimeAssembly),
+                    new StringHandleOnStack(ref location)
+                );
 
                 return location!;
             }
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetImageRuntimeVersion(QCallAssembly assembly, StringHandleOnStack retString);
+        private static extern void GetImageRuntimeVersion(
+            QCallAssembly assembly,
+            StringHandleOnStack retString
+        );
 
         public override string ImageRuntimeVersion
         {
@@ -477,27 +579,42 @@ namespace System.Reflection
             {
                 string? s = null;
                 RuntimeAssembly runtimeAssembly = this;
-                GetImageRuntimeVersion(new QCallAssembly(ref runtimeAssembly), new StringHandleOnStack(ref s));
+                GetImageRuntimeVersion(
+                    new QCallAssembly(ref runtimeAssembly),
+                    new StringHandleOnStack(ref s)
+                );
                 return s!;
             }
         }
 
-        [Obsolete(Obsoletions.GlobalAssemblyCacheMessage, DiagnosticId = Obsoletions.GlobalAssemblyCacheDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.GlobalAssemblyCacheMessage,
+            DiagnosticId = Obsoletions.GlobalAssemblyCacheDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public override bool GlobalAssemblyCache => false;
 
         public override long HostContext => 0;
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetVersion(QCallAssembly assembly,
-                                              out int majVer,
-                                              out int minVer,
-                                              out int buildNum,
-                                              out int revNum);
+        private static extern void GetVersion(
+            QCallAssembly assembly,
+            out int majVer,
+            out int minVer,
+            out int buildNum,
+            out int revNum
+        );
 
         internal Version GetVersion()
         {
             RuntimeAssembly runtimeAssembly = this;
-            GetVersion(new QCallAssembly(ref runtimeAssembly), out int majorVer, out int minorVer, out int build, out int revision);
+            GetVersion(
+                new QCallAssembly(ref runtimeAssembly),
+                out int majorVer,
+                out int minorVer,
+                out int build,
+                out int revision
+            );
             return new Version(majorVer, minorVer, build, revision);
         }
 
@@ -523,13 +640,19 @@ namespace System.Reflection
         public override bool IsDynamic => FCallIsDynamic(GetNativeHandle());
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetSimpleName(QCallAssembly assembly, StringHandleOnStack retSimpleName);
+        private static extern void GetSimpleName(
+            QCallAssembly assembly,
+            StringHandleOnStack retSimpleName
+        );
 
         internal string? GetSimpleName()
         {
             RuntimeAssembly runtimeAssembly = this;
             string? name = null;
-            GetSimpleName(new QCallAssembly(ref runtimeAssembly), new StringHandleOnStack(ref name));
+            GetSimpleName(
+                new QCallAssembly(ref runtimeAssembly),
+                new StringHandleOnStack(ref name)
+            );
             return name;
         }
 
@@ -552,13 +675,19 @@ namespace System.Reflection
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetPublicKey(QCallAssembly assembly, ObjectHandleOnStack retPublicKey);
+        private static extern void GetPublicKey(
+            QCallAssembly assembly,
+            ObjectHandleOnStack retPublicKey
+        );
 
         internal byte[]? GetPublicKey()
         {
             byte[]? publicKey = null;
             RuntimeAssembly runtimeAssembly = this;
-            GetPublicKey(new QCallAssembly(ref runtimeAssembly), ObjectHandleOnStack.Create(ref publicKey));
+            GetPublicKey(
+                new QCallAssembly(ref runtimeAssembly),
+                ObjectHandleOnStack.Create(ref publicKey)
+            );
             return publicKey;
         }
 
@@ -577,9 +706,11 @@ namespace System.Reflection
         }
 
         [System.Security.DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod
-        internal Assembly? InternalGetSatelliteAssembly(CultureInfo culture,
-                                                       Version? version,
-                                                       bool throwOnFileNotFound)
+        internal Assembly? InternalGetSatelliteAssembly(
+            CultureInfo culture,
+            Version? version,
+            bool throwOnFileNotFound
+        )
         {
             var an = new AssemblyName();
             an.SetPublicKey(GetPublicKey());
@@ -600,25 +731,33 @@ namespace System.Reflection
 
             if (retAssembly == null && throwOnFileNotFound)
             {
-                throw new FileNotFoundException(SR.Format(culture, SR.IO_FileNotFound_FileName, an.Name));
+                throw new FileNotFoundException(
+                    SR.Format(culture, SR.IO_FileNotFound_FileName, an.Name)
+                );
             }
 
             return retAssembly;
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetModules(QCallAssembly assembly,
-                                              bool loadIfNotFound,
-                                              bool getResourceModules,
-                                              ObjectHandleOnStack retModuleHandles);
+        private static extern void GetModules(
+            QCallAssembly assembly,
+            bool loadIfNotFound,
+            bool getResourceModules,
+            ObjectHandleOnStack retModuleHandles
+        );
 
-        private RuntimeModule[] GetModulesInternal(bool loadIfNotFound,
-                                     bool getResourceModules)
+        private RuntimeModule[] GetModulesInternal(bool loadIfNotFound, bool getResourceModules)
         {
             RuntimeModule[]? modules = null;
             RuntimeAssembly runtimeAssembly = this;
 
-            GetModules(new QCallAssembly(ref runtimeAssembly), loadIfNotFound, getResourceModules, ObjectHandleOnStack.Create(ref modules));
+            GetModules(
+                new QCallAssembly(ref runtimeAssembly),
+                loadIfNotFound,
+                getResourceModules,
+                ObjectHandleOnStack.Create(ref modules)
+            );
             return modules!;
         }
 
@@ -658,7 +797,7 @@ namespace System.Reflection
                 {
                     GetForwardedType(pAssembly, mdtExternalType, pType);
                     if (type == null)
-                        continue;  // mdtExternalType was not a forwarder entry.
+                        continue; // mdtExternalType was not a forwarder entry.
                 }
                 catch (Exception e)
                 {
@@ -691,8 +830,14 @@ namespace System.Reflection
             return types.ToArray();
         }
 
-        [RequiresUnreferencedCode("Types might be removed because recursive nested types can't currently be annotated for dynamic access.")]
-        private static void AddPublicNestedTypes(Type type, List<Type> types, List<Exception> exceptions)
+        [RequiresUnreferencedCode(
+            "Types might be removed because recursive nested types can't currently be annotated for dynamic access."
+        )]
+        private static void AddPublicNestedTypes(
+            Type type,
+            List<Type> types,
+            List<Exception> exceptions
+        )
         {
             Type[] nestedTypes;
             try
@@ -712,6 +857,10 @@ namespace System.Reflection
         }
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
-        private static extern void GetForwardedType(QCallAssembly assembly, MetadataToken mdtExternalType, ObjectHandleOnStack type);
+        private static extern void GetForwardedType(
+            QCallAssembly assembly,
+            MetadataToken mdtExternalType,
+            ObjectHandleOnStack type
+        );
     }
 }

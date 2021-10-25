@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <returns> The total number of rows affected. </returns>
         int Execute(
             IEnumerable<ModificationCommandBatch> commandBatches,
-            IRelationalConnection connection);
+            IRelationalConnection connection
+        );
 
         /// <summary>
         ///     Executes the commands in the batches against the given database connection.
@@ -50,6 +51,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         Task<int> ExecuteAsync(
             IEnumerable<ModificationCommandBatch> commandBatches,
             IRelationalConnection connection,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
     }
 }

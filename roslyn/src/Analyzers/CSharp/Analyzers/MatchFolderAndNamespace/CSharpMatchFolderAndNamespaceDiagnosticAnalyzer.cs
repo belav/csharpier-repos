@@ -11,7 +11,8 @@ using Microsoft.CodeAnalysis.CSharp.LanguageServices;
 namespace Microsoft.CodeAnalysis.CSharp.Analyzers.MatchFolderAndNamespace
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpMatchFolderAndNamespaceDiagnosticAnalyzer : AbstractMatchFolderAndNamespaceDiagnosticAnalyzer<NamespaceDeclarationSyntax>
+    internal class CSharpMatchFolderAndNamespaceDiagnosticAnalyzer
+        : AbstractMatchFolderAndNamespaceDiagnosticAnalyzer<NamespaceDeclarationSyntax>
     {
         protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
 

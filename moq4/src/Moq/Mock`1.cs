@@ -14,7 +14,7 @@ using Moq.Properties;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	///   Provides a mock implementation of <typeparamref name="T"/>.
 	/// </summary>
 	/// <typeparam name="T">Type to mock, which can be an interface, a class, or a delegate.</typeparam>
@@ -67,52 +67,51 @@ namespace Moq
 	///     Assert.False(order.IsFilled);
 	///   </code>
 	/// </example>
-	public partial class Mock<T> : Mock, IMock<T> where T : class
-	{
-		private static Type[] inheritedInterfaces;
-		private static int serialNumberCounter;
+    public partial class Mock<T> : Mock, IMock<T> where T : class
+    {
+        private static Type[] inheritedInterfaces;
+        private static int serialNumberCounter;
 
-		static Mock()
-		{
-			inheritedInterfaces =
-				typeof(T)
-				.GetInterfaces()
-				.Where(i => ProxyFactory.Instance.IsTypeVisible(i) && !i.IsImport)
-				.ToArray();
+        static Mock()
+        {
+            inheritedInterfaces = typeof(T)
+                .GetInterfaces()
+                .Where(i => ProxyFactory.Instance.IsTypeVisible(i) && !i.IsImport)
+                .ToArray();
 
-			serialNumberCounter = 0;
-		}
+            serialNumberCounter = 0;
+        }
 
-		private T instance;
-		private List<Type> additionalInterfaces;
-		private Dictionary<Type, object> configuredDefaultValues;
-		private object[] constructorArguments;
-		private DefaultValueProvider defaultValueProvider;
-		private EventHandlerCollection eventHandlers;
-		private InvocationCollection invocations;
-		private string name;
-		private SetupCollection setups;
+        private T instance;
+        private List<Type> additionalInterfaces;
+        private Dictionary<Type, object> configuredDefaultValues;
+        private object[] constructorArguments;
+        private DefaultValueProvider defaultValueProvider;
+        private EventHandlerCollection eventHandlers;
+        private InvocationCollection invocations;
+        private string name;
+        private SetupCollection setups;
 
-		private MockBehavior behavior;
-		private bool callBase;
-		private Switches switches;
+        private MockBehavior behavior;
+        private bool callBase;
+        private Switches switches;
 
 #region Ctors
 
-		/// <summary>
+        /// <summary>
 		/// Ctor invoked by AsTInterface exclusively.
 		/// </summary>
-		internal Mock(bool skipInitialize)
-		{
-			// HACK: this is quick hackish. 
-			// In order to avoid having an IMock<T> I relevant members 
-			// virtual so that As<TInterface> overrides them (i.e. Interceptor).
-			// The skipInitialize parameter is not used at all, and it's 
-			// just to differentiate this ctor that should do nothing 
-			// from the regular ones which initializes the proxy, etc.
-		}
+        internal Mock(bool skipInitialize)
+        {
+            // HACK: this is quick hackish.
+            // In order to avoid having an IMock<T> I relevant members
+            // virtual so that As<TInterface> overrides them (i.e. Interceptor).
+            // The skipInitialize parameter is not used at all, and it's
+            // just to differentiate this ctor that should do nothing
+            // from the regular ones which initializes the proxy, etc.
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Initializes an instance of the mock with <see cref="MockBehavior.Default"/> behavior.
 		/// </summary>
 		/// <example>
@@ -120,12 +119,9 @@ namespace Moq
 		///     var mock = new Mock&lt;IFormatProvider&gt;();
 		///   </code>
 		/// </example>
-		public Mock()
-			: this(MockBehavior.Default)
-		{
-		}
+        public Mock() : this(MockBehavior.Default) { }
 
-		/// <summary>
+        /// <summary>
 		///   Initializes an instance of the mock with <see cref="MockBehavior.Default"/> behavior
 		///   and with the given constructor arguments for the class. (Only valid when <typeparamref name="T"/> is a class.)
 		/// </summary>
@@ -139,12 +135,9 @@ namespace Moq
 		///     var mock = new Mock&lt;MyProvider&gt;(someArgument, 25);
 		///   </code>
 		/// </example>
-		public Mock(params object[] args)
-			: this(MockBehavior.Default, args)
-		{
-		}
+        public Mock(params object[] args) : this(MockBehavior.Default, args) { }
 
-		/// <summary>
+        /// <summary>
 		///   Initializes an instance of the mock with the specified <see cref="MockBehavior"/> behavior.
 		/// </summary>
 		/// <param name="behavior">Behavior of the mock.</param>
@@ -153,12 +146,9 @@ namespace Moq
 		///     var mock = new Mock&lt;IFormatProvider&gt;(MockBehavior.Strict);
 		///   </code>
 		/// </example>
-		public Mock(MockBehavior behavior)
-			: this(behavior, new object[0])
-		{
-		}
+        public Mock(MockBehavior behavior) : this(behavior, new object[0]) { }
 
-		/// <summary>
+        /// <summary>
 		///   Initializes an instance of the mock with a specific <see cref="MockBehavior"/> behavior
 		///   and with the given constructor arguments for the class.
 		/// </summary>
@@ -168,30 +158,30 @@ namespace Moq
 		///   The mock will try to find the best match constructor given the constructor arguments,
 		///   and invoke that to initialize the instance. This applies only to classes, not interfaces.
 		/// </remarks>
-		public Mock(MockBehavior behavior, params object[] args)
-		{
-			Guard.IsMockable(typeof(T));
+        public Mock(MockBehavior behavior, params object[] args)
+        {
+            Guard.IsMockable(typeof(T));
 
-			if (args == null)
-			{
-				args = new object[] { null };
-			}
+            if (args == null)
+            {
+                args = new object[] { null };
+            }
 
-			this.additionalInterfaces = new List<Type>();
-			this.behavior = behavior;
-			this.configuredDefaultValues = new Dictionary<Type, object>();
-			this.constructorArguments = args;
-			this.defaultValueProvider = DefaultValueProvider.Empty;
-			this.eventHandlers = new EventHandlerCollection();
-			this.invocations = new InvocationCollection(this);
-			this.name = CreateUniqueDefaultMockName();
-			this.setups = new SetupCollection();
-			this.switches = Switches.Default;
+            this.additionalInterfaces = new List<Type>();
+            this.behavior = behavior;
+            this.configuredDefaultValues = new Dictionary<Type, object>();
+            this.constructorArguments = args;
+            this.defaultValueProvider = DefaultValueProvider.Empty;
+            this.eventHandlers = new EventHandlerCollection();
+            this.invocations = new InvocationCollection(this);
+            this.name = CreateUniqueDefaultMockName();
+            this.setups = new SetupCollection();
+            this.switches = Switches.Default;
 
-			this.CheckParameters();
-		}
+            this.CheckParameters();
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Initializes an instance of the mock using the given constructor call including its
 		///   argument values and with a specific <see cref="MockBehavior"/> behavior.
 		/// </summary>
@@ -200,153 +190,163 @@ namespace Moq
 		/// <example>
 		/// <code>var mock = new Mock&lt;MyProvider&gt;(() => new MyProvider(someArgument, 25), MockBehavior.Loose);</code>
 		/// </example>
-		public Mock(Expression<Func<T>> newExpression, MockBehavior behavior = MockBehavior.Default)
-			: this(behavior, Expressions.Visitors.ConstructorCallVisitor.ExtractArgumentValues(newExpression))
-		{
-		}
+        public Mock(Expression<Func<T>> newExpression, MockBehavior behavior = MockBehavior.Default)
+            : this(
+                behavior,
+                Expressions.Visitors.ConstructorCallVisitor.ExtractArgumentValues(newExpression)
+            ) { }
 
-		private static string CreateUniqueDefaultMockName()
-		{
-			var serialNumber = Interlocked.Increment(ref serialNumberCounter);
+        private static string CreateUniqueDefaultMockName()
+        {
+            var serialNumber = Interlocked.Increment(ref serialNumberCounter);
 
-			var name = new StringBuilder();
-			name.Append("Mock<").AppendNameOf(typeof(T)).Append(':').Append(serialNumber).Append('>');
-			return name.ToString();
-		}
+            var name = new StringBuilder();
+            name.Append("Mock<")
+                .AppendNameOf(typeof(T))
+                .Append(':')
+                .Append(serialNumber)
+                .Append('>');
+            return name.ToString();
+        }
 
-		private void CheckParameters()
-		{
-			if (this.constructorArguments.Length > 0)
-			{
-				if (typeof(T).IsInterface)
-				{
-					throw new ArgumentException(Resources.ConstructorArgsForInterface);
-				}
-				if (typeof(T).IsDelegateType())
-				{
-					throw new ArgumentException(Resources.ConstructorArgsForDelegate);
-				}
-			}
-		}
+        private void CheckParameters()
+        {
+            if (this.constructorArguments.Length > 0)
+            {
+                if (typeof(T).IsInterface)
+                {
+                    throw new ArgumentException(Resources.ConstructorArgsForInterface);
+                }
+                if (typeof(T).IsDelegateType())
+                {
+                    throw new ArgumentException(Resources.ConstructorArgsForDelegate);
+                }
+            }
+        }
 
 #endregion
 
 #region Properties
 
-		/// <inheritdoc/>
-		public override MockBehavior Behavior => this.behavior;
+        /// <inheritdoc/>
+        public override MockBehavior Behavior => this.behavior;
 
-		/// <inheritdoc/>
-		public override bool CallBase
-		{
-			get => this.callBase;
-			set
-			{
-				if (value && this.MockedType.IsDelegateType())
-				{
-					throw new NotSupportedException(Resources.CallBaseCannotBeUsedWithDelegateMocks);
-				}
+        /// <inheritdoc/>
+        public override bool CallBase
+        {
+            get => this.callBase;
+            set
+            {
+                if (value && this.MockedType.IsDelegateType())
+                {
+                    throw new NotSupportedException(
+                        Resources.CallBaseCannotBeUsedWithDelegateMocks
+                    );
+                }
 
-				this.callBase = value;
-			}
-		}
+                this.callBase = value;
+            }
+        }
 
-		internal override object[] ConstructorArguments => this.constructorArguments;
+        internal override object[] ConstructorArguments => this.constructorArguments;
 
-		internal override Dictionary<Type, object> ConfiguredDefaultValues => this.configuredDefaultValues;
+        internal override Dictionary<Type, object> ConfiguredDefaultValues =>
+            this.configuredDefaultValues;
 
-		/// <summary>
+        /// <summary>
 		/// Gets or sets the <see cref="DefaultValueProvider"/> instance that will be used
 		/// e. g. to produce default return values for unexpected invocations.
 		/// </summary>
-		public override DefaultValueProvider DefaultValueProvider
-		{
-			get => this.defaultValueProvider;
-			set => this.defaultValueProvider = value ?? throw new ArgumentNullException(nameof(value));
-		}
+        public override DefaultValueProvider DefaultValueProvider
+        {
+            get => this.defaultValueProvider;
+            set =>
+                this.defaultValueProvider = value ?? throw new ArgumentNullException(nameof(value));
+        }
 
-		internal override DefaultValueProvider AutoSetupPropertiesDefaultValueProvider { get; set; }
+        internal override DefaultValueProvider AutoSetupPropertiesDefaultValueProvider { get; set; }
 
-		internal override EventHandlerCollection EventHandlers => this.eventHandlers;
+        internal override EventHandlerCollection EventHandlers => this.eventHandlers;
 
-		internal override List<Type> AdditionalInterfaces => this.additionalInterfaces;
+        internal override List<Type> AdditionalInterfaces => this.additionalInterfaces;
 
-		internal override InvocationCollection MutableInvocations => this.invocations;
+        internal override InvocationCollection MutableInvocations => this.invocations;
 
-		internal override bool IsObjectInitialized => this.instance != null;
+        internal override bool IsObjectInitialized => this.instance != null;
 
-		/// <summary>
+        /// <summary>
 		///   Exposes the mocked object instance.
 		/// </summary>
-		public virtual new T Object
-		{
-			get { return (T)base.Object; }
-		}
+        public virtual new T Object
+        {
+            get { return (T)base.Object; }
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Allows naming of your mocks, so they can be easily identified in error messages (e.g. from failed assertions).
 		/// </summary>
-		public string Name
-		{
-			get => this.name;
-			set => this.name = value;
-		}
+        public string Name
+        {
+            get => this.name;
+            set => this.name = value;
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Returns the name of the mock.
 		/// </summary>
-		public override string ToString()
-		{
-			return this.Name;
-		}
+        public override string ToString()
+        {
+            return this.Name;
+        }
 
-		private void InitializeInstance()
-		{
-			// Determine the set of interfaces that the proxy object should additionally implement.
-			var additionalInterfaceCount = this.AdditionalInterfaces.Count;
-			var interfaces = new Type[1 + additionalInterfaceCount];
-			interfaces[0] = typeof(IMocked<T>);
-			this.AdditionalInterfaces.CopyTo(0, interfaces, 1, additionalInterfaceCount);
+        private void InitializeInstance()
+        {
+            // Determine the set of interfaces that the proxy object should additionally implement.
+            var additionalInterfaceCount = this.AdditionalInterfaces.Count;
+            var interfaces = new Type[1 + additionalInterfaceCount];
+            interfaces[0] = typeof(IMocked<T>);
+            this.AdditionalInterfaces.CopyTo(0, interfaces, 1, additionalInterfaceCount);
 
-			this.instance = (T)ProxyFactory.Instance.CreateProxy(
-				typeof(T),
-				this,
-				interfaces,
-				this.constructorArguments);
-		}
+            this.instance = (T)ProxyFactory.Instance.CreateProxy(
+                typeof(T),
+                this,
+                interfaces,
+                this.constructorArguments
+            );
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Returns the mocked object value.
 		/// </summary>
-		protected override object OnGetObject()
-		{
-			if (this.instance == null)
-			{
-				this.InitializeInstance();
-			}
+        protected override object OnGetObject()
+        {
+            if (this.instance == null)
+            {
+                this.InitializeInstance();
+            }
 
-			return this.instance;
-		}
+            return this.instance;
+        }
 
-		internal override Type MockedType => typeof(T);
+        internal override Type MockedType => typeof(T);
 
-		internal override SetupCollection MutableSetups => this.setups;
+        internal override SetupCollection MutableSetups => this.setups;
 
-		internal override Type[] InheritedInterfaces => Mock<T>.inheritedInterfaces;
+        internal override Type[] InheritedInterfaces => Mock<T>.inheritedInterfaces;
 
-		/// <summary>
+        /// <summary>
 		/// A set of switches that influence how this mock will operate.
 		/// You can opt in or out of certain features via this property.
 		/// </summary>
-		public override Switches Switches
-		{
-			get => this.switches;
-			set => this.switches = value;
-		}
+        public override Switches Switches
+        {
+            get => this.switches;
+            set => this.switches = value;
+        }
 
 #endregion
 
-		/// <summary>
+        /// <summary>
 		///   Adds an interface implementation to the mock, allowing setups to be specified for it.
 		/// </summary>
 		/// <remarks>
@@ -375,46 +375,46 @@ namespace Moq
 		///               .Verifiable();
 		///   </code>
 		/// </example>
-		public override Mock<TInterface> As<TInterface>()
-		{
-			var interfaceType = typeof(TInterface);
+        public override Mock<TInterface> As<TInterface>()
+        {
+            var interfaceType = typeof(TInterface);
 
-			if (!interfaceType.IsInterface)
-			{
-				throw new ArgumentException(Resources.AsMustBeInterface);
-			}
+            if (!interfaceType.IsInterface)
+            {
+                throw new ArgumentException(Resources.AsMustBeInterface);
+            }
 
-			if (typeof(TInterface) == typeof(T))
-			{
-				return (Mock<TInterface>)(Mock)this;
-			}
+            if (typeof(TInterface) == typeof(T))
+            {
+                return (Mock<TInterface>)(Mock)this;
+            }
 
-			if (this.IsObjectInitialized && this.ImplementsInterface(interfaceType) == false)
-			{
-				throw new InvalidOperationException(Resources.AlreadyInitialized);
-			}
+            if (this.IsObjectInitialized && this.ImplementsInterface(interfaceType) == false)
+            {
+                throw new InvalidOperationException(Resources.AlreadyInitialized);
+            }
 
-			if (this.AdditionalInterfaces.Contains(interfaceType) == false)
-			{
-				// We get here for either of two reasons:
-				//
-				// 1. We are being asked to implement an interface that the mocked type does *not* itself
-				//    inherit or implement. We need to hand this interface type to DynamicProxy's
-				//    `CreateClassProxy` method as an additional interface to be implemented.
-				//
-				// 2. The user is possibly going to create a setup through an interface type that the
-				//    mocked type *does* implement. Since the mocked type might implement that interface's
-				//    methods non-virtually, we can only intercept those if DynamicProxy reimplements the
-				//    interface in the generated proxy type. Therefore we do the same as for (1).
-				this.AdditionalInterfaces.Add(interfaceType);
-			}
+            if (this.AdditionalInterfaces.Contains(interfaceType) == false)
+            {
+                // We get here for either of two reasons:
+                //
+                // 1. We are being asked to implement an interface that the mocked type does *not* itself
+                //    inherit or implement. We need to hand this interface type to DynamicProxy's
+                //    `CreateClassProxy` method as an additional interface to be implemented.
+                //
+                // 2. The user is possibly going to create a setup through an interface type that the
+                //    mocked type *does* implement. Since the mocked type might implement that interface's
+                //    methods non-virtually, we can only intercept those if DynamicProxy reimplements the
+                //    interface in the generated proxy type. Therefore we do the same as for (1).
+                this.AdditionalInterfaces.Add(interfaceType);
+            }
 
-			return new AsInterface<TInterface>(this);
-		}
+            return new AsInterface<TInterface>(this);
+        }
 
 #region Setup
 
-		/// <summary>
+        /// <summary>
 		///   Specifies a setup on the mocked type for a call to a <see langword="void"/> method.
 		/// </summary>
 		/// <param name="expression">Lambda expression that specifies the expected method invocation.</param>
@@ -428,13 +428,13 @@ namespace Moq
 		///     mock.Setup(x => x.Execute("ping"));
 		///   </code>
 		/// </example>
-		public ISetup<T> Setup(Expression<Action<T>> expression)
-		{
-			var setup = Mock.Setup(this, expression, null);
-			return new VoidSetupPhrase<T>(setup);
-		}
+        public ISetup<T> Setup(Expression<Action<T>> expression)
+        {
+            var setup = Mock.Setup(this, expression, null);
+            return new VoidSetupPhrase<T>(setup);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Specifies a setup on the mocked type for a call to a non-<see langword="void"/> (value-returning) method.
 		/// </summary>
 		/// <param name="expression">Lambda expression that specifies the method invocation.</param>
@@ -449,13 +449,13 @@ namespace Moq
 		///         .Returns(true);
 		///   </code>
 		/// </example>
-		public ISetup<T, TResult> Setup<TResult>(Expression<Func<T, TResult>> expression)
-		{
-			var setup = Mock.Setup(this, expression, null);
-			return new NonVoidSetupPhrase<T, TResult>(setup);
-		}
+        public ISetup<T, TResult> Setup<TResult>(Expression<Func<T, TResult>> expression)
+        {
+            var setup = Mock.Setup(this, expression, null);
+            return new NonVoidSetupPhrase<T, TResult>(setup);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Specifies a setup on the mocked type for a call to a property getter.
 		/// </summary>
 		/// <param name="expression">Lambda expression that specifies the property getter.</param>
@@ -470,13 +470,15 @@ namespace Moq
 		///         .Returns(true);
 		///   </code>
 		/// </example>
-		public ISetupGetter<T, TProperty> SetupGet<TProperty>(Expression<Func<T, TProperty>> expression)
-		{
-			var setup = Mock.SetupGet(this, expression, null);
-			return new NonVoidSetupPhrase<T, TProperty>(setup);
-		}
+        public ISetupGetter<T, TProperty> SetupGet<TProperty>(
+            Expression<Func<T, TProperty>> expression
+        )
+        {
+            var setup = Mock.SetupGet(this, expression, null);
+            return new NonVoidSetupPhrase<T, TProperty>(setup);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Specifies a setup on the mocked type for a call to a property setter.
 		/// </summary>
 		/// <param name="setterExpression">The Lambda expression that sets a property to a value.</param>
@@ -493,16 +495,19 @@ namespace Moq
 		///     mock.SetupSet(x => x.Suspended = true);
 		///   </code>
 		/// </example>
-		public ISetupSetter<T, TProperty> SetupSet<TProperty>(Action<T> setterExpression)
-		{
-			Guard.NotNull(setterExpression, nameof(setterExpression));
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
+        public ISetupSetter<T, TProperty> SetupSet<TProperty>(Action<T> setterExpression)
+        {
+            Guard.NotNull(setterExpression, nameof(setterExpression));
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
 
-			var setup = Mock.SetupSet(this, expression, condition: null);
-			return new SetterSetupPhrase<T, TProperty>(setup);
-		}
+            var setup = Mock.SetupSet(this, expression, condition: null);
+            return new SetterSetupPhrase<T, TProperty>(setup);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Specifies a setup on the mocked type for a call to a property setter.
 		/// </summary>
 		/// <param name="setterExpression">Lambda expression that sets a property to a value.</param>
@@ -515,16 +520,19 @@ namespace Moq
 		///     mock.SetupSet(x => x.Suspended = true);
 		///   </code>
 		/// </example>
-		public ISetup<T> SetupSet(Action<T> setterExpression)
-		{
-			Guard.NotNull(setterExpression, nameof(setterExpression));
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
+        public ISetup<T> SetupSet(Action<T> setterExpression)
+        {
+            Guard.NotNull(setterExpression, nameof(setterExpression));
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
 
-			var setup = Mock.SetupSet(this, expression, condition: null);
-			return new VoidSetupPhrase<T>(setup);
-		}
+            var setup = Mock.SetupSet(this, expression, condition: null);
+            return new VoidSetupPhrase<T>(setup);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Specifies a setup on the mocked type for a call to an event add.
 		/// </summary>
 		/// <param name="addExpression">Lambda expression that adds an event.</param>
@@ -537,17 +545,20 @@ namespace Moq
 		///     mock.SetupAdd(x => x.EventHandler += (s, e) => {});
 		///   </code>
 		/// </example>
-		public ISetup<T> SetupAdd(Action<T> addExpression)
-		{
-			Guard.NotNull(addExpression, nameof(addExpression));
+        public ISetup<T> SetupAdd(Action<T> addExpression)
+        {
+            Guard.NotNull(addExpression, nameof(addExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
 
-			var setup = Mock.SetupAdd(this, expression, condition: null);
-			return new VoidSetupPhrase<T>(setup);
-		}
+            var setup = Mock.SetupAdd(this, expression, condition: null);
+            return new VoidSetupPhrase<T>(setup);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Specifies a setup on the mocked type for a call to an event remove.
 		/// </summary>
 		/// <param name="removeExpression">Lambda expression that removes an event.</param>
@@ -560,17 +571,20 @@ namespace Moq
 		///     mock.SetupRemove(x => x.EventHandler -= (s, e) => {});
 		///   </code>
 		/// </example>
-		public ISetup<T> SetupRemove(Action<T> removeExpression)
-		{
-			Guard.NotNull(removeExpression, nameof(removeExpression));
+        public ISetup<T> SetupRemove(Action<T> removeExpression)
+        {
+            Guard.NotNull(removeExpression, nameof(removeExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
 
-			var setup = Mock.SetupRemove(this, expression, condition: null);
-			return new VoidSetupPhrase<T>(setup);
-		}
+            var setup = Mock.SetupRemove(this, expression, condition: null);
+            return new VoidSetupPhrase<T>(setup);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Specifies that the given property should have "property behavior",
 		///   meaning that setting its value will cause it to be saved and later returned when the property is requested.
 		///   (This is also known as "stubbing".)
@@ -594,12 +608,12 @@ namespace Moq
 		///     Assert.Equal(5, v.Value);
 		///   </code>
 		/// </example>
-		public Mock<T> SetupProperty<TProperty>(Expression<Func<T, TProperty>> property)
-		{
-			return this.SetupProperty(property, default(TProperty));
-		}
+        public Mock<T> SetupProperty<TProperty>(Expression<Func<T, TProperty>> property)
+        {
+            return this.SetupProperty(property, default(TProperty));
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Specifies that the given property should have "property behavior",
 		///   meaning that setting its value will cause it to be saved and later returned when the property is requested.
 		///   This overload allows setting the initial value for the property.
@@ -628,21 +642,25 @@ namespace Moq
 		///     Assert.Equal(6, v.Value);
 		///   </code>
 		/// </example>
-		public Mock<T> SetupProperty<TProperty>(Expression<Func<T, TProperty>> property, TProperty initialValue)
-		{
-			Guard.NotNull(property, nameof(property));
+        public Mock<T> SetupProperty<TProperty>(
+            Expression<Func<T, TProperty>> property,
+            TProperty initialValue
+        )
+        {
+            Guard.NotNull(property, nameof(property));
 
-			var pi = property.ToPropertyInfo();
-			Guard.CanRead(pi);
-			Guard.CanWrite(pi);
+            var pi = property.ToPropertyInfo();
+            Guard.CanRead(pi);
+            Guard.CanWrite(pi);
 
-			TProperty value = initialValue;
-			this.SetupGet(property).Returns(() => value);
-			Mock.SetupSet(this, property.AssignItIsAny(), condition: null).SetCallbackBehavior(new Action<TProperty>(p => value = p));
-			return this;
-		}
+            TProperty value = initialValue;
+            this.SetupGet(property).Returns(() => value);
+            Mock.SetupSet(this, property.AssignItIsAny(), condition: null)
+                .SetCallbackBehavior(new Action<TProperty>(p => value = p));
+            return this;
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Specifies that the all properties on the mock should have "property behavior",
 		///   meaning that setting their value will cause them to be saved and later returned when the properties is requested.
 		///   (This is also known as "stubbing".)
@@ -653,35 +671,37 @@ namespace Moq
 		///   If the mock's <see cref="Mock.DefaultValue"/> is set to <see cref="DefaultValue.Mock"/>,
 		///   the mocked default values will also get all properties setup recursively.
 		/// </remarks>
-		public Mock<T> SetupAllProperties()
-		{
-			SetupAllProperties(this);
-			return this;
-		}
+        public Mock<T> SetupAllProperties()
+        {
+            SetupAllProperties(this);
+            return this;
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Return a sequence of values, once per call.
 		/// </summary>
-		public ISetupSequentialResult<TResult> SetupSequence<TResult>(Expression<Func<T, TResult>> expression)
-		{
-			var setup = Mock.SetupSequence(this, expression);
-			return new SetupSequencePhrase<TResult>(setup);
-		}
+        public ISetupSequentialResult<TResult> SetupSequence<TResult>(
+            Expression<Func<T, TResult>> expression
+        )
+        {
+            var setup = Mock.SetupSequence(this, expression);
+            return new SetupSequencePhrase<TResult>(setup);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Performs a sequence of actions, one per call.
 		/// </summary>
-		public ISetupSequentialAction SetupSequence(Expression<Action<T>> expression)
-		{
-			var setup = Mock.SetupSequence(this, expression);
-			return new SetupSequencePhrase(setup);
-		}
+        public ISetupSequentialAction SetupSequence(Expression<Action<T>> expression)
+        {
+            var setup = Mock.SetupSequence(this, expression);
+            return new SetupSequencePhrase(setup);
+        }
 
 #endregion
 
 #region When
 
-		/// <summary>
+        /// <summary>
 		///   Allows setting up a conditional setup.
 		///   Conditional setups are only matched by an invocation
 		///   when the specified condition evaluates to <see langword="true"/>
@@ -691,16 +711,16 @@ namespace Moq
 		///   The condition that should be checked
 		///   when a setup is being matched against an invocation.
 		/// </param>
-		public ISetupConditionResult<T> When(Func<bool> condition)
-		{
-			return new WhenPhrase<T>(this, new Condition(condition));
-		}
+        public ISetupConditionResult<T> When(Func<bool> condition)
+        {
+            return new WhenPhrase<T>(this, new Condition(condition));
+        }
 
 #endregion
 
 #region Verify
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a specific invocation matching the given expression was performed on the mock.
 		///   Use in conjunction with the default <see cref="MockBehavior.Loose"/>.
 		/// </summary>
@@ -718,12 +738,12 @@ namespace Moq
 		///     mock.Verify(proc => proc.Execute("ping"));
 		///   </code>
 		/// </example>
-		public void Verify(Expression<Action<T>> expression)
-		{
-			Mock.Verify(this, expression, Times.AtLeastOnce(), null);
-		}
+        public void Verify(Expression<Action<T>> expression)
+        {
+            Mock.Verify(this, expression, Times.AtLeastOnce(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a specific invocation matching the given expression was performed on the mock.
 		///   Use in conjunction with the default <see cref="MockBehavior.Loose"/>.
 		/// </summary>
@@ -732,12 +752,12 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void Verify(Expression<Action<T>> expression, Times times)
-		{
-			Mock.Verify(this, expression, times, null);
-		}
+        public void Verify(Expression<Action<T>> expression, Times times)
+        {
+            Mock.Verify(this, expression, times, null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a specific invocation matching the given expression was performed on the mock.
 		///   Use in conjunction with the default <see cref="MockBehavior.Loose"/>.
 		/// </summary>
@@ -746,12 +766,12 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void Verify(Expression<Action<T>> expression, Func<Times> times)
-		{
-			Verify(expression, times());
-		}
+        public void Verify(Expression<Action<T>> expression, Func<Times> times)
+        {
+            Verify(expression, times());
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a specific invocation matching the given expression was performed on the mock,
 		///   specifying a failure error message.
 		///   Use in conjunction with the default <see cref="MockBehavior.Loose"/>.
@@ -759,12 +779,12 @@ namespace Moq
 		/// <param name="expression">Expression to verify.</param>
 		/// <param name="failMessage">Message to show if verification fails.</param>
 		/// <exception cref="MockException">The invocation was not performed on the mock.</exception>
-		public void Verify(Expression<Action<T>> expression, string failMessage)
-		{
-			Mock.Verify(this, expression, Times.AtLeastOnce(), failMessage);
-		}
+        public void Verify(Expression<Action<T>> expression, string failMessage)
+        {
+            Mock.Verify(this, expression, Times.AtLeastOnce(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a specific invocation matching the given expression was performed on the mock,
 		///   specifying a failure error message.
 		///   Use in conjunction with the default <see cref="MockBehavior.Loose"/>.
@@ -775,12 +795,12 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void Verify(Expression<Action<T>> expression, Times times, string failMessage)
-		{
-			Mock.Verify(this, expression, times, failMessage);
-		}
+        public void Verify(Expression<Action<T>> expression, Times times, string failMessage)
+        {
+            Mock.Verify(this, expression, times, failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a specific invocation matching the given expression was performed on the mock,
 		///   specifying a failure error message.
 		///   Use in conjunction with the default <see cref="MockBehavior.Loose"/>.
@@ -791,12 +811,12 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void Verify(Expression<Action<T>> expression, Func<Times> times, string failMessage)
-		{
-			Mock.Verify(this, expression, times(), failMessage);
-		}
+        public void Verify(Expression<Action<T>> expression, Func<Times> times, string failMessage)
+        {
+            Mock.Verify(this, expression, times(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a specific invocation matching the given expression was performed on the mock.
 		///   Use in conjunction with the default <see cref="MockBehavior.Loose"/>.
 		/// </summary>
@@ -815,12 +835,12 @@ namespace Moq
 		///     mock.Verify(warehouse => warehouse.HasInventory(TALISKER, 50));
 		///   </code>
 		/// </example>
-		public void Verify<TResult>(Expression<Func<T, TResult>> expression)
-		{
-			Mock.Verify(this, expression, Times.AtLeastOnce(), null);
-		}
+        public void Verify<TResult>(Expression<Func<T, TResult>> expression)
+        {
+            Mock.Verify(this, expression, Times.AtLeastOnce(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a specific invocation matching the given expression was performed on the mock.
 		///   Use in conjunction with the default <see cref="MockBehavior.Loose"/>.
 		/// </summary>
@@ -830,12 +850,12 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void Verify<TResult>(Expression<Func<T, TResult>> expression, Times times)
-		{
-			Mock.Verify(this, expression, times, null);
-		}
+        public void Verify<TResult>(Expression<Func<T, TResult>> expression, Times times)
+        {
+            Mock.Verify(this, expression, times, null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a specific invocation matching the given expression was performed on the mock.
 		///   Use in conjunction with the default <see cref="MockBehavior.Loose"/>.
 		/// </summary>
@@ -845,12 +865,12 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void Verify<TResult>(Expression<Func<T, TResult>> expression, Func<Times> times)
-		{
-			Mock.Verify(this, expression, times(), null);
-		}
+        public void Verify<TResult>(Expression<Func<T, TResult>> expression, Func<Times> times)
+        {
+            Mock.Verify(this, expression, times(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a specific invocation matching the given expression was performed on the mock,
 		///   specifying a failure error message.
 		/// </summary>
@@ -871,12 +891,12 @@ namespace Moq
 		///                 "When filling orders, inventory has to be checked");
 		///   </code>
 		/// </example>
-		public void Verify<TResult>(Expression<Func<T, TResult>> expression, string failMessage)
-		{
-			Mock.Verify(this, expression, Times.AtLeastOnce(), failMessage);
-		}
+        public void Verify<TResult>(Expression<Func<T, TResult>> expression, string failMessage)
+        {
+            Mock.Verify(this, expression, Times.AtLeastOnce(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a specific invocation matching the given expression was performed on the mock,
 		///   specifying a failure error message.
 		/// </summary>
@@ -887,12 +907,16 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number times specified by <paramref name="times"/>.
 		/// </exception>
-		public void Verify<TResult>(Expression<Func<T, TResult>> expression, Times times, string failMessage)
-		{
-			Mock.Verify(this, expression, times, failMessage);
-		}
+        public void Verify<TResult>(
+            Expression<Func<T, TResult>> expression,
+            Times times,
+            string failMessage
+        )
+        {
+            Mock.Verify(this, expression, times, failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was read on the mock.
 		/// </summary>
 		/// <param name="expression">Expression to verify.</param>
@@ -912,12 +936,12 @@ namespace Moq
 		///     mock.VerifyGet(warehouse => warehouse.IsClosed);
 		///   </code>
 		/// </example>
-		public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression)
-		{
-			Mock.VerifyGet(this, expression, Times.AtLeastOnce(), null);
-		}
+        public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression)
+        {
+            Mock.VerifyGet(this, expression, Times.AtLeastOnce(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was read on the mock.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -928,12 +952,12 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression, Times times)
-		{
-			Mock.VerifyGet(this, expression, times, null);
-		}
+        public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression, Times times)
+        {
+            Mock.VerifyGet(this, expression, times, null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was read on the mock.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -944,12 +968,15 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression, Func<Times> times)
-		{
-			VerifyGet(this, expression, times(), null);
-		}
+        public void VerifyGet<TProperty>(
+            Expression<Func<T, TProperty>> expression,
+            Func<Times> times
+        )
+        {
+            VerifyGet(this, expression, times(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was read on the mock, specifying a failure error message.
 		/// </summary>
 		/// <param name="expression">Expression to verify.</param>
@@ -958,12 +985,15 @@ namespace Moq
 		///   Type of the property to verify. Typically omitted as it can be inferred from the expression's return type.
 		/// </typeparam>
 		/// <exception cref="MockException">The invocation was not performed on the mock.</exception>
-		public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression, string failMessage)
-		{
-			Mock.VerifyGet(this, expression, Times.AtLeastOnce(), failMessage);
-		}
+        public void VerifyGet<TProperty>(
+            Expression<Func<T, TProperty>> expression,
+            string failMessage
+        )
+        {
+            Mock.VerifyGet(this, expression, Times.AtLeastOnce(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was read on the mock, specifying a failure error message.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -975,12 +1005,16 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression, Times times, string failMessage)
-		{
-			Mock.VerifyGet(this, expression, times, failMessage);
-		}
+        public void VerifyGet<TProperty>(
+            Expression<Func<T, TProperty>> expression,
+            Times times,
+            string failMessage
+        )
+        {
+            Mock.VerifyGet(this, expression, times, failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was read on the mock, specifying a failure error message.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -992,12 +1026,16 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyGet<TProperty>(Expression<Func<T, TProperty>> expression, Func<Times> times, string failMessage)
-		{
-			VerifyGet(this, expression, times(), failMessage);
-		}
+        public void VerifyGet<TProperty>(
+            Expression<Func<T, TProperty>> expression,
+            Func<Times> times,
+            string failMessage
+        )
+        {
+            VerifyGet(this, expression, times(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was set on the mock.
 		/// </summary>
 		/// <param name="setterExpression">Expression to verify.</param>
@@ -1014,15 +1052,18 @@ namespace Moq
 		///     mock.VerifySet(warehouse => warehouse.IsClosed = true);
 		///   </code>
 		/// </example>
-		public void VerifySet(Action<T> setterExpression)
-		{
-			Guard.NotNull(setterExpression, nameof(setterExpression));
+        public void VerifySet(Action<T> setterExpression)
+        {
+            Guard.NotNull(setterExpression, nameof(setterExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
-			Mock.VerifySet(this, expression, Times.AtLeastOnce(), null);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifySet(this, expression, Times.AtLeastOnce(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was set on the mock.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1030,15 +1071,18 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifySet(Action<T> setterExpression, Times times)
-		{
-			Guard.NotNull(setterExpression, nameof(setterExpression));
+        public void VerifySet(Action<T> setterExpression, Times times)
+        {
+            Guard.NotNull(setterExpression, nameof(setterExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
-			Mock.VerifySet(this, expression, times, null);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifySet(this, expression, times, null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was set on the mock.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1046,15 +1090,18 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifySet(Action<T> setterExpression, Func<Times> times)
-		{
-			Guard.NotNull(setterExpression, nameof(setterExpression));
+        public void VerifySet(Action<T> setterExpression, Func<Times> times)
+        {
+            Guard.NotNull(setterExpression, nameof(setterExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
-			Mock.VerifySet(this, expression, times(), null);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifySet(this, expression, times(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was set on the mock, specifying a failure message.
 		/// </summary>
 		/// <param name="setterExpression">Expression to verify.</param>
@@ -1073,15 +1120,18 @@ namespace Moq
 		///                    "Warehouse should always be closed after the action");
 		///   </code>
 		/// </example>
-		public void VerifySet(Action<T> setterExpression, string failMessage)
-		{
-			Guard.NotNull(setterExpression, nameof(setterExpression));
+        public void VerifySet(Action<T> setterExpression, string failMessage)
+        {
+            Guard.NotNull(setterExpression, nameof(setterExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
-			Mock.VerifySet(this, expression, Times.AtLeastOnce(), failMessage);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifySet(this, expression, Times.AtLeastOnce(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was set on the mock, specifying a failure message.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1090,15 +1140,18 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifySet(Action<T> setterExpression, Times times, string failMessage)
-		{
-			Guard.NotNull(setterExpression, nameof(setterExpression));
+        public void VerifySet(Action<T> setterExpression, Times times, string failMessage)
+        {
+            Guard.NotNull(setterExpression, nameof(setterExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
-			Mock.VerifySet(this, expression, times, failMessage);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifySet(this, expression, times, failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that a property was set on the mock, specifying a failure message.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1107,15 +1160,18 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifySet(Action<T> setterExpression, Func<Times> times, string failMessage)
-		{
-			Guard.NotNull(setterExpression, nameof(setterExpression));
+        public void VerifySet(Action<T> setterExpression, Func<Times> times, string failMessage)
+        {
+            Guard.NotNull(setterExpression, nameof(setterExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.ConstructorArguments);
-			Mock.VerifySet(this, expression , times(), failMessage);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifySet(this, expression, times(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was added to the mock.
 		/// </summary>
 		/// <param name="addExpression">Expression to verify.</param>
@@ -1132,15 +1188,18 @@ namespace Moq
 		///     mock.VerifyAdd(warehouse => warehouse.OnClosed += It.IsAny&lt;EventHandler&gt;());
 		///   </code>
 		/// </example>
-		public void VerifyAdd(Action<T> addExpression)
-		{
-			Guard.NotNull(addExpression, nameof(addExpression));
+        public void VerifyAdd(Action<T> addExpression)
+        {
+            Guard.NotNull(addExpression, nameof(addExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
-			Mock.VerifyAdd(this, expression, Times.AtLeastOnce(), null);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyAdd(this, expression, Times.AtLeastOnce(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was added to the mock.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1148,15 +1207,18 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyAdd(Action<T> addExpression, Times times)
-		{
-			Guard.NotNull(addExpression, nameof(addExpression));
+        public void VerifyAdd(Action<T> addExpression, Times times)
+        {
+            Guard.NotNull(addExpression, nameof(addExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
-			Mock.VerifyAdd(this, expression, times, null);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyAdd(this, expression, times, null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was added to the mock.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1164,29 +1226,35 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyAdd(Action<T> addExpression, Func<Times> times)
-		{
-			Guard.NotNull(addExpression, nameof(addExpression));
+        public void VerifyAdd(Action<T> addExpression, Func<Times> times)
+        {
+            Guard.NotNull(addExpression, nameof(addExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
-			Mock.VerifyAdd(this, expression, times(), null);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyAdd(this, expression, times(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was added to the mock, specifying a failure message.
 		/// </summary>
 		/// <param name="addExpression">Expression to verify.</param>
 		/// <param name="failMessage">Message to show if verification fails.</param>
 		/// <exception cref="MockException">The invocation was not performed on the mock.</exception>
-		public void VerifyAdd(Action<T> addExpression, string failMessage)
-		{
-			Guard.NotNull(addExpression, nameof(addExpression));
+        public void VerifyAdd(Action<T> addExpression, string failMessage)
+        {
+            Guard.NotNull(addExpression, nameof(addExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
-			Mock.VerifyAdd(this, expression, Times.AtLeastOnce(), failMessage);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyAdd(this, expression, Times.AtLeastOnce(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was added to the mock, specifying a failure message.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1195,15 +1263,18 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyAdd(Action<T> addExpression, Times times, string failMessage)
-		{
-			Guard.NotNull(addExpression, nameof(addExpression));
+        public void VerifyAdd(Action<T> addExpression, Times times, string failMessage)
+        {
+            Guard.NotNull(addExpression, nameof(addExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
-			Mock.VerifyAdd(this, expression, times, failMessage);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyAdd(this, expression, times, failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was added to the mock, specifying a failure message.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1212,15 +1283,18 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyAdd(Action<T> addExpression, Func<Times> times, string failMessage)
-		{
-			Guard.NotNull(addExpression, nameof(addExpression));
+        public void VerifyAdd(Action<T> addExpression, Func<Times> times, string failMessage)
+        {
+            Guard.NotNull(addExpression, nameof(addExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(addExpression, this.ConstructorArguments);
-			Mock.VerifyAdd(this, expression, times(), failMessage);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                addExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyAdd(this, expression, times(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was removed from the mock.
 		/// </summary>
 		/// <param name="removeExpression">Expression to verify.</param>
@@ -1237,15 +1311,18 @@ namespace Moq
 		///     mock.VerifyRemove(warehouse => warehouse.OnClose -= It.IsAny&lt;EventHandler&gt;());
 		///   </code>
 		/// </example>
-		public void VerifyRemove(Action<T> removeExpression)
-		{
-			Guard.NotNull(removeExpression, nameof(removeExpression));
+        public void VerifyRemove(Action<T> removeExpression)
+        {
+            Guard.NotNull(removeExpression, nameof(removeExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
-			Mock.VerifyRemove(this, expression, Times.AtLeastOnce(), null);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyRemove(this, expression, Times.AtLeastOnce(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was removed from the mock.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1253,15 +1330,18 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyRemove(Action<T> removeExpression, Times times)
-		{
-			Guard.NotNull(removeExpression, nameof(removeExpression));
+        public void VerifyRemove(Action<T> removeExpression, Times times)
+        {
+            Guard.NotNull(removeExpression, nameof(removeExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
-			Mock.VerifyRemove(this, expression, times, null);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyRemove(this, expression, times, null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was removed from the mock.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1269,29 +1349,35 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyRemove(Action<T> removeExpression, Func<Times> times)
-		{
-			Guard.NotNull(removeExpression, nameof(removeExpression));
+        public void VerifyRemove(Action<T> removeExpression, Func<Times> times)
+        {
+            Guard.NotNull(removeExpression, nameof(removeExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
-			Mock.VerifyRemove(this, expression, times(), null);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyRemove(this, expression, times(), null);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was removed from the mock, specifying a failure message.
 		/// </summary>
 		/// <param name="removeExpression">Expression to verify.</param>
 		/// <param name="failMessage">Message to show if verification fails.</param>
 		/// <exception cref="MockException">The invocation was not performed on the mock.</exception>
-		public void VerifyRemove(Action<T> removeExpression, string failMessage)
-		{
-			Guard.NotNull(removeExpression, nameof(removeExpression));
+        public void VerifyRemove(Action<T> removeExpression, string failMessage)
+        {
+            Guard.NotNull(removeExpression, nameof(removeExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
-			Mock.VerifyRemove(this, expression, Times.AtLeastOnce(), failMessage);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyRemove(this, expression, Times.AtLeastOnce(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was removed from the mock, specifying a failure message.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1300,15 +1386,18 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyRemove(Action<T> removeExpression, Times times, string failMessage)
-		{
-			Guard.NotNull(removeExpression, nameof(removeExpression));
+        public void VerifyRemove(Action<T> removeExpression, Times times, string failMessage)
+        {
+            Guard.NotNull(removeExpression, nameof(removeExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
-			Mock.VerifyRemove(this, expression, times, failMessage);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyRemove(this, expression, times, failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Verifies that an event was removed from the mock, specifying a failure message.
 		/// </summary>
 		/// <param name="times">The number of times a method is expected to be called.</param>
@@ -1317,28 +1406,31 @@ namespace Moq
 		/// <exception cref="MockException">
 		///   The invocation was not called the number of times specified by <paramref name="times"/>.
 		/// </exception>
-		public void VerifyRemove(Action<T> removeExpression, Func<Times> times, string failMessage)
-		{
-			Guard.NotNull(removeExpression, nameof(removeExpression));
+        public void VerifyRemove(Action<T> removeExpression, Func<Times> times, string failMessage)
+        {
+            Guard.NotNull(removeExpression, nameof(removeExpression));
 
-			var expression = ExpressionReconstructor.Instance.ReconstructExpression(removeExpression, this.ConstructorArguments);
-			Mock.VerifyRemove(this, expression, times(), failMessage);
-		}
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                removeExpression,
+                this.ConstructorArguments
+            );
+            Mock.VerifyRemove(this, expression, times(), failMessage);
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Verifies that there were no calls other than those already verified.
 		/// </summary>
 		/// <exception cref="MockException">There was at least one invocation not previously verified.</exception>
-		public void VerifyNoOtherCalls()
-		{
-			Mock.VerifyNoOtherCalls(this);
-		}
+        public void VerifyNoOtherCalls()
+        {
+            Mock.VerifyNoOtherCalls(this);
+        }
 
 #endregion
 
 #region Raise
 
-		/// <summary>
+        /// <summary>
 		///   Raises the event referenced in <paramref name="eventExpression"/> using the given <paramref name="args"/> argument.
 		/// </summary>
 		/// <exception cref="ArgumentException">
@@ -1371,12 +1463,12 @@ namespace Moq
 		///     Assert.Equal("moq", presenter.SelectedOrder.ProductName);
 		///   </code>
 		/// </example>
-		public void Raise(Action<T> eventExpression, EventArgs args)
-		{
-			Mock.RaiseEvent(this, eventExpression, new object[] { this.Object, args });
-		}
+        public void Raise(Action<T> eventExpression, EventArgs args)
+        {
+            Mock.RaiseEvent(this, eventExpression, new object[] { this.Object, args });
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Raises the event referenced in <paramref name="eventExpression"/> using the given <paramref name="args"/> argument for a non-<see cref="EventHandler"/>-typed event.
 		/// </summary>
 		/// <exception cref="ArgumentException">
@@ -1391,11 +1483,10 @@ namespace Moq
 		///     mock.Raise(x => x.MyEvent -= null, "Name", bool, 25);
 		///   </code>
 		/// </example>
-		public void Raise(Action<T> eventExpression, params object[] args)
-		{
-			Mock.RaiseEvent(this, eventExpression, args);
-		}
-
+        public void Raise(Action<T> eventExpression, params object[] args)
+        {
+            Mock.RaiseEvent(this, eventExpression, args);
+        }
 #endregion
-	}
+    }
 }

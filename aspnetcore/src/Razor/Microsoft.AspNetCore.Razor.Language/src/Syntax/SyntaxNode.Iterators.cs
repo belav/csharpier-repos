@@ -8,7 +8,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 {
     internal abstract partial class SyntaxNode
     {
-        private IEnumerable<SyntaxNode> DescendantNodesImpl(TextSpan span, Func<SyntaxNode, bool> descendIntoChildren, bool includeSelf)
+        private IEnumerable<SyntaxNode> DescendantNodesImpl(
+            TextSpan span,
+            Func<SyntaxNode, bool> descendIntoChildren,
+            bool includeSelf
+        )
         {
             if (includeSelf && IsInSpan(in span, FullSpan))
             {
@@ -42,12 +46,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
         private struct ChildSyntaxListEnumeratorStack : IDisposable
         {
-            private static readonly ObjectPool<ChildSyntaxList.Enumerator[]> StackPool = new ObjectPool<ChildSyntaxList.Enumerator[]>(() => new ChildSyntaxList.Enumerator[16]);
+            private static readonly ObjectPool<ChildSyntaxList.Enumerator[]> StackPool =
+                new ObjectPool<ChildSyntaxList.Enumerator[]>(
+                    () => new ChildSyntaxList.Enumerator[16]
+                );
 
             private ChildSyntaxList.Enumerator[] _stack;
             private int _stackPtr;
 
-            public ChildSyntaxListEnumeratorStack(SyntaxNode startingNode, Func<SyntaxNode, bool> descendIntoChildren)
+            public ChildSyntaxListEnumeratorStack(
+                SyntaxNode startingNode,
+                Func<SyntaxNode, bool> descendIntoChildren
+            )
             {
                 if (descendIntoChildren == null || descendIntoChildren(startingNode))
                 {
@@ -62,7 +72,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 }
             }
 
-            public bool IsNotEmpty { get { return _stackPtr >= 0; } }
+            public bool IsNotEmpty
+            {
+                get { return _stackPtr >= 0; }
+            }
 
             public bool TryGetNextInSpan(in TextSpan span, out SyntaxNode value)
             {

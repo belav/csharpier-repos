@@ -129,7 +129,10 @@ namespace System.IO.Tests
             Stream ms = CreateStream();
             StreamWriter sw = new StreamWriter(ms);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => sw.Write(chArr, 1, chArr.Length));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => sw.Write(chArr, 1, chArr.Length)
+            );
             sw.Dispose();
         }
 
@@ -245,10 +248,20 @@ namespace System.IO.Tests
         [InlineData(1, 1, 1, true)]
         [InlineData(100, 1, 100, true)]
         [InlineData(100, 10, 3, true)]
-        public void Write_Span_WritesExpectedData(int length, int writeSize, int writerBufferSize, bool autoFlush)
+        public void Write_Span_WritesExpectedData(
+            int length,
+            int writeSize,
+            int writerBufferSize,
+            bool autoFlush
+        )
         {
             using (var s = new MemoryStream())
-            using (var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize) { AutoFlush = autoFlush })
+            using (
+                var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
+                {
+                    AutoFlush = autoFlush
+                }
+            )
             {
                 var data = new char[length];
                 var rand = new Random(42);
@@ -278,10 +291,20 @@ namespace System.IO.Tests
         [InlineData(1, 1, 1, true)]
         [InlineData(100, 1, 100, true)]
         [InlineData(100, 10, 3, true)]
-        public async Task Write_Memory_WritesExpectedData(int length, int writeSize, int writerBufferSize, bool autoFlush)
+        public async Task Write_Memory_WritesExpectedData(
+            int length,
+            int writeSize,
+            int writerBufferSize,
+            bool autoFlush
+        )
         {
             using (var s = new MemoryStream())
-            using (var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize) { AutoFlush = autoFlush })
+            using (
+                var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
+                {
+                    AutoFlush = autoFlush
+                }
+            )
             {
                 var data = new char[length];
                 var rand = new Random(42);
@@ -311,10 +334,20 @@ namespace System.IO.Tests
         [InlineData(1, 1, 1, true)]
         [InlineData(100, 1, 100, true)]
         [InlineData(100, 10, 3, true)]
-        public void WriteLine_Span_WritesExpectedData(int length, int writeSize, int writerBufferSize, bool autoFlush)
+        public void WriteLine_Span_WritesExpectedData(
+            int length,
+            int writeSize,
+            int writerBufferSize,
+            bool autoFlush
+        )
         {
             using (var s = new MemoryStream())
-            using (var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize) { AutoFlush = autoFlush })
+            using (
+                var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
+                {
+                    AutoFlush = autoFlush
+                }
+            )
             {
                 var data = new char[length];
                 var rand = new Random(42);
@@ -333,7 +366,10 @@ namespace System.IO.Tests
 
                 writer.Flush();
 
-                Assert.Equal(length + (Environment.NewLine.Length * (length / writeSize)), s.Length);
+                Assert.Equal(
+                    length + (Environment.NewLine.Length * (length / writeSize)),
+                    s.Length
+                );
             }
         }
 
@@ -344,10 +380,20 @@ namespace System.IO.Tests
         [InlineData(1, 1, 1, true)]
         [InlineData(100, 1, 100, true)]
         [InlineData(100, 10, 3, true)]
-        public async Task WriteLineAsync_Memory_WritesExpectedData(int length, int writeSize, int writerBufferSize, bool autoFlush)
+        public async Task WriteLineAsync_Memory_WritesExpectedData(
+            int length,
+            int writeSize,
+            int writerBufferSize,
+            bool autoFlush
+        )
         {
             using (var s = new MemoryStream())
-            using (var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize) { AutoFlush = autoFlush })
+            using (
+                var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
+                {
+                    AutoFlush = autoFlush
+                }
+            )
             {
                 var data = new char[length];
                 var rand = new Random(42);
@@ -366,7 +412,10 @@ namespace System.IO.Tests
 
                 await writer.FlushAsync();
 
-                Assert.Equal(length + (Environment.NewLine.Length * (length / writeSize)), s.Length);
+                Assert.Equal(
+                    length + (Environment.NewLine.Length * (length / writeSize)),
+                    s.Length
+                );
             }
         }
 
@@ -375,15 +424,26 @@ namespace System.IO.Tests
         {
             using (var writer = new StreamWriter(Stream.Null))
             {
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(() => writer.WriteAsync(ReadOnlyMemory<char>.Empty, new CancellationToken(true)));
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(() => writer.WriteLineAsync(ReadOnlyMemory<char>.Empty, new CancellationToken(true)));
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    () => writer.WriteAsync(ReadOnlyMemory<char>.Empty, new CancellationToken(true))
+                );
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    () =>
+                        writer.WriteLineAsync(
+                            ReadOnlyMemory<char>.Empty,
+                            new CancellationToken(true)
+                        )
+                );
             }
         }
 
         [Fact]
         public void StreamWriter_WithOptionalArguments_NoExceptions()
         {
-            Encoding UTF8NoBOM = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+            Encoding UTF8NoBOM = new UTF8Encoding(
+                encoderShouldEmitUTF8Identifier: false,
+                throwOnInvalidBytes: true
+            );
 
             // check enabled leaveOpen and default encoding
             using (var tempStream = new MemoryStream())

@@ -15,12 +15,14 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlMatches
         [Fact]
         public void IntegerMatch_Constructor_Integer_Parse_Excetion()
         {
-            var ex = Assert.Throws<FormatException>(() => new IntegerMatch("Not an int", IntegerOperationType.Equal));
+            var ex = Assert.Throws<FormatException>(
+                () => new IntegerMatch("Not an int", IntegerOperationType.Equal)
+            );
             Assert.Equal(ex.Message, Resources.Error_IntegerMatch_FormatExceptionMessage);
         }
 
         [Theory]
-        [InlineData(1, (int)IntegerOperationType.Equal,"1",true)]
+        [InlineData(1, (int)IntegerOperationType.Equal, "1", true)]
         [InlineData(1, (int)IntegerOperationType.NotEqual, "2", true)]
         [InlineData(2, (int)IntegerOperationType.Less, "1", true)]
         [InlineData(1, (int)IntegerOperationType.LessEqual, "2", false)]
@@ -29,7 +31,12 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlMatches
         [InlineData(1, (int)IntegerOperationType.Equal, "Not an int", false)]
         [InlineData(1, (int)IntegerOperationType.Equal, "", false)]
         [InlineData(1, (int)IntegerOperationType.Equal, "2147483648", false)]
-        public void IntegerMatch_Evaluation_Cases_Tests(int value, int operation, string input, bool expectedResult)
+        public void IntegerMatch_Evaluation_Cases_Tests(
+            int value,
+            int operation,
+            string input,
+            bool expectedResult
+        )
         {
             var context = new RewriteContext { HttpContext = new DefaultHttpContext() };
             var integerMatch = new IntegerMatch(value, (IntegerOperationType)operation);

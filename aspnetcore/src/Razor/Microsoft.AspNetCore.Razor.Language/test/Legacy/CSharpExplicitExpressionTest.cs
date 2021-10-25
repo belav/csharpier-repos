@@ -42,11 +42,17 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void ShouldAcceptMultiLineVerbatimStrings()
         {
-            ParseDocumentTest(@"@(@""" + Environment.NewLine
-                         + @"Foo" + Environment.NewLine
-                         + @"Bar" + Environment.NewLine
-                         + @"Baz" + Environment.NewLine
-                         + @""")");
+            ParseDocumentTest(
+                @"@(@"""
+                    + Environment.NewLine
+                    + @"Foo"
+                    + Environment.NewLine
+                    + @"Bar"
+                    + Environment.NewLine
+                    + @"Baz"
+                    + Environment.NewLine
+                    + @""")"
+            );
         }
 
         [Fact]

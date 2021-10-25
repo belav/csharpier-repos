@@ -16,8 +16,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class NullCheckRemovingExpressionVisitor : ExpressionVisitor
     {
-        private readonly NullSafeAccessVerifyingExpressionVisitor _nullSafeAccessVerifyingExpressionVisitor
-            = new();
+        private readonly NullSafeAccessVerifyingExpressionVisitor _nullSafeAccessVerifyingExpressionVisitor =
+            new();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,26 +44,37 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             var test = Visit(conditionalExpression.Test);
 
-            if (test is BinaryExpression binaryTest
-                && (binaryTest.NodeType == ExpressionType.Equal
-                    || binaryTest.NodeType == ExpressionType.NotEqual))
+            if (
+                test is BinaryExpression binaryTest
+                && (
+                    binaryTest.NodeType == ExpressionType.Equal
+                    || binaryTest.NodeType == ExpressionType.NotEqual
+                )
+            )
             {
                 var isLeftNullConstant = IsNullConstant(binaryTest.Left);
                 var isRightNullConstant = IsNullConstant(binaryTest.Right);
 
-                if ((isLeftNullConstant == isRightNullConstant)
-                    || (binaryTest.NodeType == ExpressionType.Equal
-                        && !IsNullConstant(conditionalExpression.IfTrue))
-                    || (binaryTest.NodeType == ExpressionType.NotEqual
-                        && !IsNullConstant(conditionalExpression.IfFalse)))
+                if (
+                    (isLeftNullConstant == isRightNullConstant)
+                    || (
+                        binaryTest.NodeType == ExpressionType.Equal
+                        && !IsNullConstant(conditionalExpression.IfTrue)
+                    )
+                    || (
+                        binaryTest.NodeType == ExpressionType.NotEqual
+                        && !IsNullConstant(conditionalExpression.IfFalse)
+                    )
+                )
                 {
                     return conditionalExpression;
                 }
 
                 var caller = isLeftNullConstant ? binaryTest.Right : binaryTest.Left;
-                var accessOperation = binaryTest.NodeType == ExpressionType.Equal
-                    ? conditionalExpression.IfFalse
-                    : conditionalExpression.IfTrue;
+                var accessOperation =
+                    binaryTest.NodeType == ExpressionType.Equal
+                        ? conditionalExpression.IfFalse
+                        : conditionalExpression.IfTrue;
 
                 if (_nullSafeAccessVerifyingExpressionVisitor.Verify(caller, accessOperation))
                 {
@@ -78,10 +89,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         {
             // Simplify (a ? b : null) == null => !a || b == null
             // Simplify (a ? null : b) == null => a || b == null
-            if (expression is BinaryExpression binaryExpression
+            if (
+                expression is BinaryExpression binaryExpression
                 && binaryExpression.NodeType == ExpressionType.Equal
-                && (binaryExpression.Left is ConditionalExpression
-                    || binaryExpression.Right is ConditionalExpression))
+                && (
+                    binaryExpression.Left is ConditionalExpression
+                    || binaryExpression.Right is ConditionalExpression
+                )
+            )
             {
                 Expression comparedExpression;
                 if (binaryExpression.Left is ConditionalExpression conditionalExpression)
@@ -94,20 +109,26 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     comparedExpression = binaryExpression.Left;
                 }
 
-                if (conditionalExpression.IfFalse.IsNullConstantExpression()
-                    && comparedExpression.IsNullConstantExpression())
+                if (
+                    conditionalExpression.IfFalse.IsNullConstantExpression()
+                    && comparedExpression.IsNullConstantExpression()
+                )
                 {
                     return Expression.OrElse(
                         Expression.Not(conditionalExpression.Test),
-                        Expression.Equal(conditionalExpression.IfTrue, comparedExpression));
+                        Expression.Equal(conditionalExpression.IfTrue, comparedExpression)
+                    );
                 }
 
-                if (conditionalExpression.IfTrue.IsNullConstantExpression()
-                    && comparedExpression.IsNullConstantExpression())
+                if (
+                    conditionalExpression.IfTrue.IsNullConstantExpression()
+                    && comparedExpression.IsNullConstantExpression()
+                )
                 {
                     return Expression.OrElse(
                         conditionalExpression.Test,
-                        Expression.Equal(conditionalExpression.IfFalse, comparedExpression));
+                        Expression.Equal(conditionalExpression.IfFalse, comparedExpression)
+                    );
                 }
             }
 
@@ -116,7 +137,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
         private sealed class NullSafeAccessVerifyingExpressionVisitor : ExpressionVisitor
         {
-            private readonly ISet<Expression> _nullSafeAccesses = new HashSet<Expression>(ExpressionEqualityComparer.Instance);
+            private readonly ISet<Expression> _nullSafeAccesses = new HashSet<Expression>(
+                ExpressionEqualityComparer.Instance
+            );
 
             public bool Verify(Expression caller, Expression result)
             {
@@ -128,8 +151,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             }
 
             [return: NotNullIfNotNull("expression")]
-            public override Expression? Visit(Expression? expression)
-                => expression == null || _nullSafeAccesses.Contains(expression)
+            public override Expression? Visit(Expression? expression) =>
+                expression == null || _nullSafeAccesses.Contains(expression)
                     ? expression
                     : base.Visit(expression);
 
@@ -138,8 +161,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 Check.NotNull(memberExpression, nameof(memberExpression));
 
                 var innerExpression = Visit(memberExpression.Expression);
-                if (innerExpression != null
-                    && _nullSafeAccesses.Contains(innerExpression))
+                if (innerExpression != null && _nullSafeAccesses.Contains(innerExpression))
                 {
                     _nullSafeAccesses.Add(memberExpression);
                 }
@@ -152,9 +174,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 Check.NotNull(unaryExpression, nameof(unaryExpression));
 
                 var operand = Visit(unaryExpression.Operand);
-                if ((unaryExpression.NodeType == ExpressionType.Convert
-                        || unaryExpression.NodeType == ExpressionType.ConvertChecked)
-                    && _nullSafeAccesses.Contains(operand))
+                if (
+                    (
+                        unaryExpression.NodeType == ExpressionType.Convert
+                        || unaryExpression.NodeType == ExpressionType.ConvertChecked
+                    ) && _nullSafeAccesses.Contains(operand)
+                )
                 {
                     _nullSafeAccesses.Add(unaryExpression);
                 }
@@ -163,8 +188,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             }
         }
 
-        private bool IsNullConstant(Expression expression)
-            => expression is ConstantExpression constantExpression
-                && constantExpression.Value == null;
+        private bool IsNullConstant(Expression expression) =>
+            expression is ConstantExpression constantExpression && constantExpression.Value == null;
     }
 }

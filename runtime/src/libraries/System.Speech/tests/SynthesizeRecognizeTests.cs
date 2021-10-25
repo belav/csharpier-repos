@@ -17,14 +17,18 @@ using Xunit;
 
 namespace SampleSynthesisTests
 {
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))] // No SAPI on Nano or Server Core
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+    )] // No SAPI on Nano or Server Core
     [SkipOnMono("No SAPI on Mono")]
     public class SynthesizeRecognizeTests : FileCleanupTestBase
     {
         // Our Windows 7 and Windows 8.1 queues seem to have no recognizers installed
-        public static bool HasInstalledRecognizers => PlatformDetection.IsNotMonoRuntime &&
-                                                      PlatformDetection.IsNotWindowsNanoNorServerCore &&
-                                                      SpeechRecognitionEngine.InstalledRecognizers().Count > 0;
+        public static bool HasInstalledRecognizers =>
+            PlatformDetection.IsNotMonoRuntime
+            && PlatformDetection.IsNotWindowsNanoNorServerCore
+            && SpeechRecognitionEngine.InstalledRecognizers().Count > 0;
 
         [ConditionalFact(nameof(HasInstalledRecognizers))]
         public void SpeechSynthesizerToSpeechRecognitionEngine()
@@ -80,7 +84,9 @@ namespace SampleSynthesisTests
                 rec.MaxAlternates = 1;
 
                 Assert.Throws<KeyNotFoundException>(() => rec.QueryRecognizerSetting("foo"));
-                Assert.Throws<KeyNotFoundException>(() => rec.UpdateRecognizerSetting("foo", "bar"));
+                Assert.Throws<KeyNotFoundException>(
+                    () => rec.UpdateRecognizerSetting("foo", "bar")
+                );
                 Assert.Throws<KeyNotFoundException>(() => rec.UpdateRecognizerSetting("foo", 1));
             }
         }
@@ -118,12 +124,14 @@ namespace SampleSynthesisTests
             {
                 synth.SetOutputToNull();
 
-                string ssml = @"
+                string ssml =
+                    @"
 <speak version='1.0' xml:lang='en-US' xmlns='https://www.w3.org/2001/10/synthesis'>
 	<s>His name is Mike <phoneme alphabet='ups' ph='@#$#@$'>Zhou </phoneme></s>
 </speak>";
                 Assert.Throws<FormatException>(() => synth.SpeakSsml(ssml));
-                ssml = @"
+                ssml =
+                    @"
 <speak version='1.0' xml:lang='en-US' xmlns='https://www.w3.org/2001/10/synthesis'>
 	<s>His name is Mike <phoneme alphabet='@#$@#$' ph='JH'>Zhou </phoneme></s>
 </speak>";
@@ -139,7 +147,14 @@ namespace SampleSynthesisTests
                 using var ms = new MemoryStream();
 
                 synth.SetOutputToNull();
-                synth.SetOutputToAudioStream(ms, new SpeechAudioFormatInfo(16000, AudioBitsPerSample.Sixteen, AudioChannel.Stereo));
+                synth.SetOutputToAudioStream(
+                    ms,
+                    new SpeechAudioFormatInfo(
+                        16000,
+                        AudioBitsPerSample.Sixteen,
+                        AudioChannel.Stereo
+                    )
+                );
                 synth.SelectVoiceByHints(VoiceGender.Male, VoiceAge.Adult);
                 Assert.True(synth.Volume > 0);
                 Assert.NotNull(synth.Voice);
@@ -156,7 +171,8 @@ namespace SampleSynthesisTests
                 synth.SpeakStarted += (object o, SpeakStartedEventArgs e) => events++;
                 synth.VisemeReached += (object o, VisemeReachedEventArgs e) => events++;
                 synth.VoiceChange += (object o, VoiceChangeEventArgs e) => events++;
-                synth.StateChanged += (object o, System.Speech.Synthesis.StateChangedEventArgs e) => events++;
+                synth.StateChanged += (object o, System.Speech.Synthesis.StateChangedEventArgs e) =>
+                    events++;
                 synth.SpeakCompleted += (object o, SpeakCompletedEventArgs e) =>
                 {
                     events++;
@@ -177,7 +193,8 @@ namespace SampleSynthesisTests
         public void AddLexicon()
         {
             string temp = GetTestFilePath();
-            string content = @"
+            string content =
+                @"
 <lexicon alphabet='x-microsoft-ups' version='1.0' xml:lang='en-US' xmlns='http://www.w3.org/2005/01/pronunciation-lexicon'>
 	<lexeme>
 		<grapheme>blue </grapheme>

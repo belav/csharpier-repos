@@ -9,10 +9,10 @@ internal static partial class Interop
     {
         internal enum AccessMode : int
         {
-            F_OK = 0,   /* Check for existence */
-            X_OK = 1,   /* Check for execute */
-            W_OK = 2,   /* Check for write */
-            R_OK = 4,   /* Check for read */
+            F_OK = 0, /* Check for existence */
+            X_OK = 1, /* Check for execute */
+            W_OK = 2, /* Check for write */
+            R_OK = 4, /* Check for read */
         }
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_Access", SetLastError = true)]

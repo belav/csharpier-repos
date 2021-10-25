@@ -21,7 +21,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             var entityType = builder.Model.FindEntityType(typeof(Customer));
             Assert.NotNull(entityType);
-            Assert.Equal(nameof(Customer.AlternateKey), entityType.GetKeys().Single().Properties.Single().Name);
+            Assert.Equal(
+                nameof(Customer.AlternateKey),
+                entityType.GetKeys().Single().Properties.Single().Name
+            );
         }
 
         [ConditionalFact]
@@ -33,7 +36,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             builder.ApplyConfiguration(new CustomerConfiguration());
 
             var entityType = builder.Model.FindEntityType(typeof(Customer));
-            Assert.Equal(nameof(Customer.AlternateKey), entityType.GetKeys().Single().Properties.Single().Name);
+            Assert.Equal(
+                nameof(Customer.AlternateKey),
+                entityType.GetKeys().Single().Properties.Single().Name
+            );
         }
 
         [ConditionalFact]
@@ -69,7 +75,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             builder.ApplyConfiguration(new CustomerConfiguration2());
 
             var entityType = builder.Model.FindEntityType(typeof(Customer));
-            Assert.Equal(nameof(Customer.AlternateKey), entityType.GetKeys().Single().Properties.Single().Name);
+            Assert.Equal(
+                nameof(Customer.AlternateKey),
+                entityType.GetKeys().Single().Properties.Single().Name
+            );
             Assert.Equal(1000, entityType.FindProperty(nameof(Customer.Name)).GetMaxLength());
         }
 

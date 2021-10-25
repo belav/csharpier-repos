@@ -34,8 +34,7 @@ namespace System.Web.WebPages
 
         public BuildManagerWrapper()
             : this(() => HostingEnvironment.VirtualPathProvider, new VirtualPathUtilityWrapper())
-        {
-        }
+        { }
 
         public BuildManagerWrapper(VirtualPathProvider vpp, IVirtualPathUtility virtualPathUtility)
             : this(() => vpp, virtualPathUtility)
@@ -43,7 +42,10 @@ namespace System.Web.WebPages
             Contract.Assert(vpp != null);
         }
 
-        public BuildManagerWrapper(Func<VirtualPathProvider> vppFunc, IVirtualPathUtility virtualPathUtility)
+        public BuildManagerWrapper(
+            Func<VirtualPathProvider> vppFunc,
+            IVirtualPathUtility virtualPathUtility
+        )
         {
             Contract.Assert(vppFunc != null);
             Contract.Assert(virtualPathUtility != null);
@@ -96,9 +98,15 @@ namespace System.Web.WebPages
         /// <remarks>
         /// This code is based on System.Web.DynamicData.Misc.IsNonUpdatablePrecompiledAppNoCache (DynamicData)
         /// </remarks>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "We want to replicate the behavior of BuildManager which catches all exceptions.")]
-        internal static bool IsNonUpdateablePrecompiledApp(VirtualPathProvider vpp, IVirtualPathUtility virtualPathUtility)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We want to replicate the behavior of BuildManager which catches all exceptions."
+        )]
+        internal static bool IsNonUpdateablePrecompiledApp(
+            VirtualPathProvider vpp,
+            IVirtualPathUtility virtualPathUtility
+        )
         {
             var virtualPath = virtualPathUtility.ToAbsolute("~/PrecompiledApp.config");
             if (!vpp.FileExists(virtualPath))
@@ -120,7 +128,13 @@ namespace System.Web.WebPages
                 }
             }
 
-            if (document.Root == null || !document.Root.Name.LocalName.Equals("precompiledApp", StringComparison.OrdinalIgnoreCase))
+            if (
+                document.Root == null
+                || !document.Root.Name.LocalName.Equals(
+                    "precompiledApp",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return false;
             }
@@ -141,11 +155,23 @@ namespace System.Web.WebPages
             var buildManagerResult = (BuildManagerResult)HttpRuntime.Cache.Get(key);
             if (buildManagerResult == null)
             {
-                // For precompiled apps, we cache the ObjectFactory and use it in the CreateInstance method. 
+                // For precompiled apps, we cache the ObjectFactory and use it in the CreateInstance method.
                 var objectFactory = GetObjectFactory(virtualPath);
-                buildManagerResult = new BuildManagerResult { ObjectFactory = objectFactory, Exists = objectFactory != null };
-                // Cache the result with a sliding expiration for a long duration. 
-                HttpRuntime.Cache.Add(key, buildManagerResult, null, Cache.NoAbsoluteExpiration, _objectFactoryCacheDuration, CacheItemPriority.Low, null);
+                buildManagerResult = new BuildManagerResult
+                {
+                    ObjectFactory = objectFactory,
+                    Exists = objectFactory != null
+                };
+                // Cache the result with a sliding expiration for a long duration.
+                HttpRuntime.Cache.Add(
+                    key,
+                    buildManagerResult,
+                    null,
+                    Cache.NoAbsoluteExpiration,
+                    _objectFactoryCacheDuration,
+                    CacheItemPriority.Low,
+                    null
+                );
             }
             return buildManagerResult.Exists;
         }
@@ -183,11 +209,16 @@ namespace System.Web.WebPages
         {
             if (_isPrecompiled)
             {
-                var buildManagerResult = (BuildManagerResult)HttpRuntime.Cache.Get(GetKeyFromVirtualPath(virtualPath));
+                var buildManagerResult = (BuildManagerResult)HttpRuntime.Cache.Get(
+                    GetKeyFromVirtualPath(virtualPath)
+                );
                 // The cache could have evicted our results. In this case, we'll simply fall through to CreateInstanceFromVirtualPath
                 if (buildManagerResult != null)
                 {
-                    Debug.Assert(buildManagerResult.Exists && buildManagerResult.ObjectFactory != null, "This method must only be called if the file exists.");
+                    Debug.Assert(
+                        buildManagerResult.Exists && buildManagerResult.ObjectFactory != null,
+                        "This method must only be called if the file exists."
+                    );
                     return buildManagerResult.ObjectFactory.CreateInstance() as T;
                 }
             }
@@ -202,7 +233,10 @@ namespace System.Web.WebPages
         {
             string extension = PathUtil.GetExtension(virtualPath);
             return !String.IsNullOrEmpty(extension)
-                   && SupportedExtensions.Contains(extension.Substring(1), StringComparer.OrdinalIgnoreCase);
+                && SupportedExtensions.Contains(
+                    extension.Substring(1),
+                    StringComparer.OrdinalIgnoreCase
+                );
         }
 
         /// <summary>

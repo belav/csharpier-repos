@@ -4,9 +4,21 @@
 namespace System.Security.Permissions
 {
 #if NET50_OBSOLETIONS
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class KeyContainerPermissionAttribute : CodeAccessSecurityAttribute
     {
         public KeyContainerPermissionAttribute(SecurityAction action) : base(action) { }
@@ -16,6 +28,9 @@ namespace System.Security.Permissions
         public string KeyContainerName { get; set; }
         public int KeySpec { get; set; }
         public KeyContainerPermissionFlags Flags { get; set; }
-        public override IPermission CreatePermission() { return null; }
+        public override IPermission CreatePermission()
+        {
+            return null;
+        }
     }
 }

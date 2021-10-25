@@ -14,31 +14,38 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
 {
     public class TopLevelParameterNameAnalyzerTest
     {
-        private MvcDiagnosticAnalyzerRunner Runner { get; } = new MvcDiagnosticAnalyzerRunner(new TopLevelParameterNameAnalyzer());
+        private MvcDiagnosticAnalyzerRunner Runner { get; } =
+            new MvcDiagnosticAnalyzerRunner(new TopLevelParameterNameAnalyzer());
 
         [Fact]
-        public Task DiagnosticsAreReturned_ForControllerActionsWithParametersThatMatchProperties()
-            => RunTest(nameof(DiagnosticsAreReturned_ForControllerActionsWithParametersThatMatchPropertiesModel), "model");
+        public Task DiagnosticsAreReturned_ForControllerActionsWithParametersThatMatchProperties() =>
+            RunTest(
+                nameof(
+                    DiagnosticsAreReturned_ForControllerActionsWithParametersThatMatchPropertiesModel
+                ),
+                "model"
+            );
 
         [Fact]
-        public Task DiagnosticsAreReturned_ForModelBoundParameters()
-            => RunTest(nameof(DiagnosticsAreReturned_ForModelBoundParametersModel), "value");
+        public Task DiagnosticsAreReturned_ForModelBoundParameters() =>
+            RunTest(nameof(DiagnosticsAreReturned_ForModelBoundParametersModel), "value");
 
         [Fact]
-        public Task DiagnosticsAreReturned_IfModelNameProviderIsUsedToModifyParameterName()
-            => RunTest(nameof(DiagnosticsAreReturned_IfModelNameProviderIsUsedToModifyParameterNameModel), "parameter");
+        public Task DiagnosticsAreReturned_IfModelNameProviderIsUsedToModifyParameterName() =>
+            RunTest(
+                nameof(DiagnosticsAreReturned_IfModelNameProviderIsUsedToModifyParameterNameModel),
+                "parameter"
+            );
 
         [Fact]
-        public Task NoDiagnosticsAreReturnedForApiControllers()
-            => RunNoDiagnosticsAreReturned();
+        public Task NoDiagnosticsAreReturnedForApiControllers() => RunNoDiagnosticsAreReturned();
 
         [Fact]
-        public Task NoDiagnosticsAreReturnedIfParameterIsRenamedUsingBindingAttribute()
-            => RunNoDiagnosticsAreReturned();
+        public Task NoDiagnosticsAreReturnedIfParameterIsRenamedUsingBindingAttribute() =>
+            RunNoDiagnosticsAreReturned();
 
         [Fact]
-        public Task NoDiagnosticsAreReturnedForNonActions()
-            => RunNoDiagnosticsAreReturned();
+        public Task NoDiagnosticsAreReturnedForNonActions() => RunNoDiagnosticsAreReturned();
 
         [Fact]
         public async Task IsProblematicParameter_ReturnsTrue_IfParameterNameIsTheSameAsModelProperty()
@@ -106,18 +113,41 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
 
             var compilation = await project.GetCompilationAsync();
 
-            var modelType = compilation.GetTypeByMetadataName($"Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFiles.{testName}");
+            var modelType = compilation.GetTypeByMetadataName(
+                $"Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFiles.{testName}"
+            );
             var method = (IMethodSymbol)modelType.GetMembers("ActionMethod").First();
 
-            Assert.True(TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(compilation, out var symbolCache));
+            Assert.True(
+                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
+                    compilation,
+                    out var symbolCache
+                )
+            );
 
             Assert.Collection(
                 method.Parameters,
-                p => Assert.False(TopLevelParameterNameAnalyzer.IsProblematicParameter(symbolCache, p)),
-                p => Assert.False(TopLevelParameterNameAnalyzer.IsProblematicParameter(symbolCache, p)),
-                p => Assert.False(TopLevelParameterNameAnalyzer.IsProblematicParameter(symbolCache, p)),
-                p => Assert.False(TopLevelParameterNameAnalyzer.IsProblematicParameter(symbolCache, p)),
-                p => Assert.False(TopLevelParameterNameAnalyzer.IsProblematicParameter(symbolCache, p)));
+                p =>
+                    Assert.False(
+                        TopLevelParameterNameAnalyzer.IsProblematicParameter(symbolCache, p)
+                    ),
+                p =>
+                    Assert.False(
+                        TopLevelParameterNameAnalyzer.IsProblematicParameter(symbolCache, p)
+                    ),
+                p =>
+                    Assert.False(
+                        TopLevelParameterNameAnalyzer.IsProblematicParameter(symbolCache, p)
+                    ),
+                p =>
+                    Assert.False(
+                        TopLevelParameterNameAnalyzer.IsProblematicParameter(symbolCache, p)
+                    ),
+                p =>
+                    Assert.False(
+                        TopLevelParameterNameAnalyzer.IsProblematicParameter(symbolCache, p)
+                    )
+            );
         }
 
         [Fact]
@@ -148,20 +178,35 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             Assert.False(result);
         }
 
-        private async Task<bool> IsProblematicParameterTest([CallerMemberName] string testMethod = "")
+        private async Task<bool> IsProblematicParameterTest(
+            [CallerMemberName] string testMethod = ""
+        )
         {
             var testSource = MvcTestSource.Read(GetType().Name, testMethod);
-            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+                GetType().Assembly,
+                new[] { testSource.Source }
+            );
 
             var compilation = await project.GetCompilationAsync();
 
-            var modelType = compilation.GetTypeByMetadataName($"Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFiles.{testMethod}");
+            var modelType = compilation.GetTypeByMetadataName(
+                $"Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFiles.{testMethod}"
+            );
             var method = (IMethodSymbol)modelType.GetMembers("ActionMethod").First();
             var parameter = method.Parameters[0];
 
-            Assert.True(TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(compilation, out var symbolCache));
+            Assert.True(
+                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
+                    compilation,
+                    out var symbolCache
+                )
+            );
 
-            var result = TopLevelParameterNameAnalyzer.IsProblematicParameter(symbolCache, parameter);
+            var result = TopLevelParameterNameAnalyzer.IsProblematicParameter(
+                symbolCache,
+                parameter
+            );
             return result;
         }
 
@@ -170,7 +215,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             var methodName = nameof(GetNameTests.SingleAttribute);
             var compilation = await GetCompilationForGetName();
-            Assert.True(TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(compilation, out var symbolCache));
+            Assert.True(
+                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
+                    compilation,
+                    out var symbolCache
+                )
+            );
 
             var type = compilation.GetTypeByMetadataName(typeof(GetNameTests).FullName);
             var method = (IMethodSymbol)type.GetMembers(methodName).First();
@@ -186,7 +236,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             var methodName = nameof(GetNameTests.NoAttribute);
             var compilation = await GetCompilationForGetName();
-            Assert.True(TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(compilation, out var symbolCache));
+            Assert.True(
+                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
+                    compilation,
+                    out var symbolCache
+                )
+            );
 
             var type = compilation.GetTypeByMetadataName(typeof(GetNameTests).FullName);
             var method = (IMethodSymbol)type.GetMembers(methodName).First();
@@ -202,7 +257,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             var methodName = nameof(GetNameTests.SingleAttributeWithoutName);
             var compilation = await GetCompilationForGetName();
-            Assert.True(TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(compilation, out var symbolCache));
+            Assert.True(
+                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
+                    compilation,
+                    out var symbolCache
+                )
+            );
 
             var type = compilation.GetTypeByMetadataName(typeof(GetNameTests).FullName);
             var method = (IMethodSymbol)type.GetMembers(methodName).First();
@@ -218,7 +278,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             var methodName = nameof(GetNameTests.MultipleAttributes);
             var compilation = await GetCompilationForGetName();
-            Assert.True(TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(compilation, out var symbolCache));
+            Assert.True(
+                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
+                    compilation,
+                    out var symbolCache
+                )
+            );
 
             var type = compilation.GetTypeByMetadataName(typeof(GetNameTests).FullName);
             var method = (IMethodSymbol)type.GetMembers(methodName).First();
@@ -232,7 +297,10 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         private async Task<Compilation> GetCompilationForGetName()
         {
             var testSource = MvcTestSource.Read(GetType().Name, "GetNameTests");
-            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+                GetType().Assembly,
+                new[] { testSource.Source }
+            );
 
             var compilation = await project.GetCompilationAsync();
             return compilation;
@@ -241,12 +309,22 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         [Fact]
         public async Task SpecifiesModelType_ReturnsFalse_IfModelBinderDoesNotSpecifyType()
         {
-            var testMethod = nameof(SpecifiesModelType_ReturnsFalse_IfModelBinderDoesNotSpecifyType);
+            var testMethod = nameof(
+                SpecifiesModelType_ReturnsFalse_IfModelBinderDoesNotSpecifyType
+            );
             var testSource = MvcTestSource.Read(GetType().Name, "SpecifiesModelTypeTests");
-            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+                GetType().Assembly,
+                new[] { testSource.Source }
+            );
 
             var compilation = await project.GetCompilationAsync();
-            Assert.True(TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(compilation, out var symbolCache));
+            Assert.True(
+                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
+                    compilation,
+                    out var symbolCache
+                )
+            );
 
             var type = compilation.GetTypeByMetadataName(typeof(SpecifiesModelTypeTests).FullName);
             var method = (IMethodSymbol)type.GetMembers(testMethod).First();
@@ -259,12 +337,22 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         [Fact]
         public async Task SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromConstructor()
         {
-            var testMethod = nameof(SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromConstructor);
+            var testMethod = nameof(
+                SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromConstructor
+            );
             var testSource = MvcTestSource.Read(GetType().Name, "SpecifiesModelTypeTests");
-            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+                GetType().Assembly,
+                new[] { testSource.Source }
+            );
 
             var compilation = await project.GetCompilationAsync();
-            Assert.True(TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(compilation, out var symbolCache));
+            Assert.True(
+                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
+                    compilation,
+                    out var symbolCache
+                )
+            );
 
             var type = compilation.GetTypeByMetadataName(typeof(SpecifiesModelTypeTests).FullName);
             var method = (IMethodSymbol)type.GetMembers(testMethod).First();
@@ -277,12 +365,22 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         [Fact]
         public async Task SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromProperty()
         {
-            var testMethod = nameof(SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromProperty);
+            var testMethod = nameof(
+                SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromProperty
+            );
             var testSource = MvcTestSource.Read(GetType().Name, "SpecifiesModelTypeTests");
-            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+                GetType().Assembly,
+                new[] { testSource.Source }
+            );
 
             var compilation = await project.GetCompilationAsync();
-            Assert.True(TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(compilation, out var symbolCache));
+            Assert.True(
+                TopLevelParameterNameAnalyzer.SymbolCache.TryCreate(
+                    compilation,
+                    out var symbolCache
+                )
+            );
 
             var type = compilation.GetTypeByMetadataName(typeof(SpecifiesModelTypeTests).FullName);
             var method = (IMethodSymbol)type.GetMembers(testMethod).First();
@@ -305,10 +403,15 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             Assert.Empty(result);
         }
 
-        private async Task RunTest(string typeName, string parameterName, [CallerMemberName] string testMethod = "")
+        private async Task RunTest(
+            string typeName,
+            string parameterName,
+            [CallerMemberName] string testMethod = ""
+        )
         {
             // Arrange
-            var descriptor = DiagnosticDescriptors.MVC1004_ParameterNameCollidesWithTopLevelProperty;
+            var descriptor =
+                DiagnosticDescriptors.MVC1004_ParameterNameCollidesWithTopLevelProperty;
             var testSource = MvcTestSource.Read(GetType().Name, testMethod);
             var expectedLocation = testSource.DefaultMarkerLocation;
 
@@ -323,8 +426,17 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                     Assert.Equal(descriptor.Id, diagnostic.Id);
                     Assert.Same(descriptor, diagnostic.Descriptor);
                     AnalyzerAssert.DiagnosticLocation(expectedLocation, diagnostic.Location);
-                    Assert.Equal(string.Format(CultureInfo.InvariantCulture, descriptor.MessageFormat.ToString(CultureInfo.InvariantCulture), typeName, parameterName), diagnostic.GetMessage(CultureInfo.InvariantCulture));
-                });
+                    Assert.Equal(
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            descriptor.MessageFormat.ToString(CultureInfo.InvariantCulture),
+                            typeName,
+                            parameterName
+                        ),
+                        diagnostic.GetMessage(CultureInfo.InvariantCulture)
+                    );
+                }
+            );
         }
     }
 }

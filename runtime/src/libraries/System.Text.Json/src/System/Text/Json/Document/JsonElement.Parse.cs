@@ -46,7 +46,12 @@ namespace System.Text.Json
         /// </exception>
         public static JsonElement ParseValue(ref Utf8JsonReader reader)
         {
-            bool ret = JsonDocument.TryParseValue(ref reader, out JsonDocument? document, shouldThrow: true, useArrayPools: false);
+            bool ret = JsonDocument.TryParseValue(
+                ref reader,
+                out JsonDocument? document,
+                shouldThrow: true,
+                useArrayPools: false
+            );
 
             Debug.Assert(ret, "TryParseValue returned false with shouldThrow: true.");
             Debug.Assert(document != null, "null document returned with shouldThrow: true.");
@@ -59,7 +64,10 @@ namespace System.Text.Json
             return document.RootElement;
         }
 
-        internal static JsonElement ParseValue(ReadOnlySpan<byte> utf8Json, JsonDocumentOptions options)
+        internal static JsonElement ParseValue(
+            ReadOnlySpan<byte> utf8Json,
+            JsonDocumentOptions options
+        )
         {
             JsonDocument document = JsonDocument.ParseValue(utf8Json, options);
             return document.RootElement;
@@ -109,9 +117,17 @@ namespace System.Text.Json
         /// <exception cref="JsonException">
         ///   A value could not be read from the reader.
         /// </exception>
-        public static bool TryParseValue(ref Utf8JsonReader reader, [NotNullWhen(true)] out JsonElement? element)
+        public static bool TryParseValue(
+            ref Utf8JsonReader reader,
+            [NotNullWhen(true)] out JsonElement? element
+        )
         {
-            bool ret = JsonDocument.TryParseValue(ref reader, out JsonDocument? document, shouldThrow: false, useArrayPools: false);
+            bool ret = JsonDocument.TryParseValue(
+                ref reader,
+                out JsonDocument? document,
+                shouldThrow: false,
+                useArrayPools: false
+            );
             element = document?.RootElement;
             return ret;
         }

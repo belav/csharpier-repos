@@ -15,13 +15,11 @@ namespace Microsoft.EntityFrameworkCore.Query
     public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : QueryFilterFuncletizationFixtureBase, new()
     {
-        protected QueryFilterFuncletizationTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected QueryFilterFuncletizationTestBase(TFixture fixture) => Fixture = fixture;
 
         protected TFixture Fixture { get; }
 
-        protected QueryFilterFuncletizationContext CreateContext()
-            => Fixture.CreateContext();
+        protected QueryFilterFuncletizationContext CreateContext() => Fixture.CreateContext();
 
         [ConditionalFact]
         public virtual void DbContext_property_parameter_does_not_clash_with_closure_parameter_name()
@@ -91,7 +89,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             // This throws because IndirectionFlag is null
-            Assert.Throws<NullReferenceException>(() => context.Set<PropertyChainFilter>().ToList());
+            Assert.Throws<NullReferenceException>(
+                () => context.Set<PropertyChainFilter>().ToList()
+            );
 
             context.IndirectionFlag = new Indirection { Enabled = false };
             var entity = Assert.Single(context.Set<PropertyChainFilter>().ToList());
@@ -107,7 +107,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             // This throws because IndirectionFlag is null
-            Assert.Throws<NullReferenceException>(() => context.Set<PropertyMethodCallFilter>().ToList());
+            Assert.Throws<NullReferenceException>(
+                () => context.Set<PropertyMethodCallFilter>().ToList()
+            );
 
             context.IndirectionFlag = new Indirection();
             var entity = Assert.Single(context.Set<PropertyMethodCallFilter>().ToList());
@@ -170,7 +172,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void EntityTypeConfiguration_DbContext_property_is_parameterized()
         {
             using var context = CreateContext();
-            var entity = Assert.Single(context.Set<EntityTypeConfigurationPropertyFilter>().ToList());
+            var entity = Assert.Single(
+                context.Set<EntityTypeConfigurationPropertyFilter>().ToList()
+            );
             Assert.False(entity.IsEnabled);
 
             context.Property = true;
@@ -183,7 +187,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void EntityTypeConfiguration_DbContext_method_call_is_parameterized()
         {
             using var context = CreateContext();
-            var entity = Assert.Single(context.Set<EntityTypeConfigurationMethodCallFilter>().ToList());
+            var entity = Assert.Single(
+                context.Set<EntityTypeConfigurationMethodCallFilter>().ToList()
+            );
             Assert.Equal(2, entity.Tenant);
         }
 
@@ -192,14 +198,20 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             // This throws because IndirectionFlag is null
-            Assert.Throws<NullReferenceException>(() => context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList());
+            Assert.Throws<NullReferenceException>(
+                () => context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList()
+            );
 
             context.IndirectionFlag = new Indirection { Enabled = false };
-            var entity = Assert.Single(context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList());
+            var entity = Assert.Single(
+                context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList()
+            );
             Assert.False(entity.IsEnabled);
 
             context.IndirectionFlag = new Indirection { Enabled = true };
-            entity = Assert.Single(context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList());
+            entity = Assert.Single(
+                context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList()
+            );
             Assert.True(entity.IsEnabled);
         }
 
@@ -234,7 +246,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             // This throws because IndirectionFlag is null
-            Assert.Throws<NullReferenceException>(() => context.Set<RemoteMethodParamsFilter>().ToList());
+            Assert.Throws<NullReferenceException>(
+                () => context.Set<RemoteMethodParamsFilter>().ToList()
+            );
 
             context.IndirectionFlag = new Indirection();
             var entity = Assert.Single(context.Set<RemoteMethodParamsFilter>().ToList());
@@ -259,7 +273,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
             // This throws because IndirectionFlag is null
-            Assert.Throws<NullReferenceException>(() => context.Set<ExtensionContextFilter>().ToList());
+            Assert.Throws<NullReferenceException>(
+                () => context.Set<ExtensionContextFilter>().ToList()
+            );
 
             context.IndirectionFlag = new Indirection { Enabled = false };
             var entity = Assert.Single(context.Set<ExtensionContextFilter>().ToList());
@@ -319,9 +335,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             using var context = CreateContext();
             Assert.Equal(
                 CoreStrings.ExpressionParameterizationExceptionSensitive(
-                    "value(Microsoft.EntityFrameworkCore.Query.QueryFilterFuncletizationContext+<>c__DisplayClass29_0).flag.Enabled"),
+                    "value(Microsoft.EntityFrameworkCore.Query.QueryFilterFuncletizationContext+<>c__DisplayClass29_0).flag.Enabled"
+                ),
                 Assert.Throws<InvalidOperationException>(
-                    () => context.Set<LocalVariableErrorFilter>().ToList()).Message);
+                    () => context.Set<LocalVariableErrorFilter>().ToList()
+                ).Message
+            );
         }
 
         [ConditionalFact]

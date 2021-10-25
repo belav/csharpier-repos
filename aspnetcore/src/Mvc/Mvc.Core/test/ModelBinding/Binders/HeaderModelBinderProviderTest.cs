@@ -52,7 +52,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(typeof(DateTime))]
         [InlineData(typeof(double))]
         [InlineData(typeof(CarEnumType))]
-        public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForSimpleTypes(Type modelType)
+        public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForSimpleTypes(
+            Type modelType
+        )
         {
             // Arrange
             var provider = new HeaderModelBinderProvider();
@@ -75,7 +77,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(typeof(DateTime?))]
         [InlineData(typeof(double?))]
         [InlineData(typeof(CarEnumType?))]
-        public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForNullableSimpleTypes(Type modelType)
+        public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForNullableSimpleTypes(
+            Type modelType
+        )
         {
             // Arrange
             var provider = new HeaderModelBinderProvider();
@@ -101,7 +105,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(typeof(IEnumerable<decimal>))]
         [InlineData(typeof(List<double>))]
         [InlineData(typeof(ICollection<CarEnumType>))]
-        public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForCollectionOfSimpleTypes(Type modelType)
+        public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForCollectionOfSimpleTypes(
+            Type modelType
+        )
         {
             // Arrange
             var provider = new HeaderModelBinderProvider();
@@ -123,7 +129,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(typeof(IEnumerable<CustomerStruct>))]
         [InlineData(typeof(Person))]
         [InlineData(typeof(IEnumerable<Person>))]
-        public void Create_WhenBindingSourceIsFromHeader_ReturnsNull_ForNonSimpleModelType(Type modelType)
+        public void Create_WhenBindingSourceIsFromHeader_ReturnsNull_ForNonSimpleModelType(
+            Type modelType
+        )
         {
             // Arrange
             var provider = new HeaderModelBinderProvider();
@@ -145,7 +153,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         [InlineData(typeof(CustomerStructWithTypeConverter))]
         [InlineData(typeof(IEnumerable<CustomerStructWithTypeConverter>))]
         public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForNonSimpleModelType_HavingTypeConverter(
-            Type modelType)
+            Type modelType
+        )
         {
             // Arrange
             var provider = new HeaderModelBinderProvider();

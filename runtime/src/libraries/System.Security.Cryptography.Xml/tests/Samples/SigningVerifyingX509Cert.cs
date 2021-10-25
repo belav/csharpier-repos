@@ -14,17 +14,15 @@ namespace System.Security.Cryptography.Xml.Tests
 {
     public class SigningVerifyingX509Cert
     {
-        const string ExampleXml = @"<?xml version=""1.0""?>
+        const string ExampleXml =
+            @"<?xml version=""1.0""?>
 <example>
 <test>some text node</test>
 </example>";
 
         private static void SignXml(XmlDocument doc, AsymmetricAlgorithm key)
         {
-            var signedXml = new SignedXml(doc)
-            {
-                SigningKey = key
-            };
+            var signedXml = new SignedXml(doc) { SigningKey = key };
 
             // Note: Adding KeyInfo (KeyInfoX509Data) does not provide more security
             //       Signing with private key is enough

@@ -17,12 +17,13 @@ namespace System.Data
         internal ZeroOpNode(int op) : base(null)
         {
             _op = op;
-            Debug.Assert(op == Operators.True || op == Operators.False || op == Operators.Null, "Invalid zero-op");
+            Debug.Assert(
+                op == Operators.True || op == Operators.False || op == Operators.Null,
+                "Invalid zero-op"
+            );
         }
 
-        internal override void Bind(DataTable table, List<DataColumn> list)
-        {
-        }
+        internal override void Bind(DataTable table, List<DataColumn> list) { }
 
         internal override object Eval()
         {
@@ -35,7 +36,10 @@ namespace System.Data
                 case Operators.Null:
                     return DBNull.Value;
                 default:
-                    Debug.Assert(_op == Operators.True || _op == Operators.False || _op == Operators.Null, "Invalid zero-op");
+                    Debug.Assert(
+                        _op == Operators.True || _op == Operators.False || _op == Operators.Null,
+                        "Invalid zero-op"
+                    );
                     return DBNull.Value;
             }
         }

@@ -9,7 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 {
     internal class DefaultBoundAttributeDescriptorBuilder : BoundAttributeDescriptorBuilder
     {
-        private static readonly IReadOnlyDictionary<string, string> PrimitiveDisplayTypeNameLookups = new Dictionary<string, string>(StringComparer.Ordinal)
+        private static readonly IReadOnlyDictionary<
+            string,
+            string
+        > PrimitiveDisplayTypeNameLookups = new Dictionary<string, string>(StringComparer.Ordinal)
         {
             [typeof(byte).FullName] = "byte",
             [typeof(sbyte).FullName] = "sbyte",
@@ -35,7 +38,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private RazorDiagnosticCollection _diagnostics;
 
-        public DefaultBoundAttributeDescriptorBuilder(DefaultTagHelperDescriptorBuilder parent, string kind)
+        public DefaultBoundAttributeDescriptorBuilder(
+            DefaultTagHelperDescriptorBuilder parent,
+            string kind
+        )
         {
             _parent = parent;
             _kind = kind;
@@ -76,7 +82,9 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         internal bool CaseSensitive => _parent.CaseSensitive;
 
-        public override void BindAttributeParameter(Action<BoundAttributeParameterDescriptorBuilder> configure)
+        public override void BindAttributeParameter(
+            Action<BoundAttributeParameterDescriptorBuilder> configure
+        )
         {
             if (configure == null)
             {
@@ -103,7 +111,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             if (_attributeParameterBuilders != null)
             {
                 // Attribute parameters are case-sensitive.
-                var parameterset = new HashSet<BoundAttributeParameterDescriptor>(BoundAttributeParameterDescriptorComparer.Default);
+                var parameterset = new HashSet<BoundAttributeParameterDescriptor>(
+                    BoundAttributeParameterDescriptorComparer.Default
+                );
                 for (var i = 0; i < _attributeParameterBuilders.Count; i++)
                 {
                     parameterset.Add(_attributeParameterBuilders[i].Build());
@@ -125,7 +135,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 CaseSensitive,
                 parameters,
                 new Dictionary<string, string>(Metadata),
-                diagnostics.ToArray());
+                diagnostics.ToArray()
+            );
 
             return descriptor;
         }
@@ -140,9 +151,7 @@ namespace Microsoft.AspNetCore.Razor.Language
             var parentTypeName = _parent.GetTypeName();
             var propertyName = this.GetPropertyName();
 
-            if (TypeName != null &&
-                propertyName != null &&
-                parentTypeName != null)
+            if (TypeName != null && propertyName != null && parentTypeName != null)
             {
                 // This looks like a normal c# property, so lets compute a display name based on that.
                 if (!PrimitiveDisplayTypeNameLookups.TryGetValue(TypeName, out var simpleTypeName))
@@ -167,9 +176,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 if (IndexerAttributeNamePrefix == null)
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNullOrWhitespace(
-                        _parent.GetDisplayName(),
-                        GetDisplayName());
+                    var diagnostic =
+                        RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNullOrWhitespace(
+                            _parent.GetDisplayName(),
+                            GetDisplayName()
+                        );
 
                     yield return diagnostic;
                 }
@@ -178,10 +189,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 if (Name.StartsWith(DataDashPrefix, StringComparison.OrdinalIgnoreCase))
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNameStartsWith(
-                        _parent.GetDisplayName(),
-                        GetDisplayName(),
-                        Name);
+                    var diagnostic =
+                        RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNameStartsWith(
+                            _parent.GetDisplayName(),
+                            GetDisplayName(),
+                            Name
+                        );
 
                     yield return diagnostic;
                 }
@@ -193,23 +206,30 @@ namespace Microsoft.AspNetCore.Razor.Language
                 }
                 else if (isDirectiveAttribute)
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundDirectiveAttributeName(
+                    var diagnostic =
+                        RazorDiagnosticFactory.CreateTagHelper_InvalidBoundDirectiveAttributeName(
                             _parent.GetDisplayName(),
                             GetDisplayName(),
-                            Name);
+                            Name
+                        );
 
                     yield return diagnostic;
                 }
 
                 foreach (var character in name)
                 {
-                    if (char.IsWhiteSpace(character) || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character))
+                    if (
+                        char.IsWhiteSpace(character)
+                        || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character)
+                    )
                     {
-                        var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeName(
-                            _parent.GetDisplayName(),
-                            GetDisplayName(),
-                            name,
-                            character);
+                        var diagnostic =
+                            RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeName(
+                                _parent.GetDisplayName(),
+                                GetDisplayName(),
+                                name,
+                                character
+                            );
 
                         yield return diagnostic;
                     }
@@ -218,49 +238,73 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             if (IndexerAttributeNamePrefix != null)
             {
-                if (IndexerAttributeNamePrefix.StartsWith(DataDashPrefix, StringComparison.OrdinalIgnoreCase))
+                if (
+                    IndexerAttributeNamePrefix.StartsWith(
+                        DataDashPrefix,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributePrefixStartsWith(
-                        _parent.GetDisplayName(),
-                        GetDisplayName(),
-                        IndexerAttributeNamePrefix);
+                    var diagnostic =
+                        RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributePrefixStartsWith(
+                            _parent.GetDisplayName(),
+                            GetDisplayName(),
+                            IndexerAttributeNamePrefix
+                        );
 
                     yield return diagnostic;
                 }
-                else if (IndexerAttributeNamePrefix.Length > 0 && string.IsNullOrWhiteSpace(IndexerAttributeNamePrefix))
+                else if (
+                    IndexerAttributeNamePrefix.Length > 0
+                    && string.IsNullOrWhiteSpace(IndexerAttributeNamePrefix)
+                )
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNullOrWhitespace(
-                        _parent.GetDisplayName(),
-                        GetDisplayName());
+                    var diagnostic =
+                        RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeNullOrWhitespace(
+                            _parent.GetDisplayName(),
+                            GetDisplayName()
+                        );
 
                     yield return diagnostic;
                 }
                 else
                 {
                     var indexerPrefix = IndexerAttributeNamePrefix;
-                    if (isDirectiveAttribute && indexerPrefix.StartsWith("@", StringComparison.Ordinal))
+                    if (
+                        isDirectiveAttribute
+                        && indexerPrefix.StartsWith("@", StringComparison.Ordinal)
+                    )
                     {
                         indexerPrefix = indexerPrefix.Substring(1);
                     }
                     else if (isDirectiveAttribute)
                     {
-                        var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundDirectiveAttributePrefix(
-                            _parent.GetDisplayName(),
-                            GetDisplayName(),
-                            indexerPrefix);
+                        var diagnostic =
+                            RazorDiagnosticFactory.CreateTagHelper_InvalidBoundDirectiveAttributePrefix(
+                                _parent.GetDisplayName(),
+                                GetDisplayName(),
+                                indexerPrefix
+                            );
 
                         yield return diagnostic;
                     }
 
                     foreach (var character in indexerPrefix)
                     {
-                        if (char.IsWhiteSpace(character) || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character))
+                        if (
+                            char.IsWhiteSpace(character)
+                            || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(
+                                character
+                            )
+                        )
                         {
-                            var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributePrefix(
-                                _parent.GetDisplayName(),
-                                GetDisplayName(),
-                                indexerPrefix,
-                                character);
+                            var diagnostic =
+                                RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributePrefix(
+                                    _parent.GetDisplayName(),
+                                    GetDisplayName(),
+                                    indexerPrefix,
+                                    character
+                                );
 
                             yield return diagnostic;
                         }
@@ -273,7 +317,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             if (_attributeParameterBuilders == null)
             {
-                _attributeParameterBuilders = new List<DefaultBoundAttributeParameterDescriptorBuilder>();
+                _attributeParameterBuilders =
+                    new List<DefaultBoundAttributeParameterDescriptorBuilder>();
             }
         }
     }

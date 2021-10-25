@@ -13,14 +13,20 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
         private readonly IHtmlAnchorElement _enableAuthenticatorLink;
         private readonly IHtmlAnchorElement _resetAuthenticatorLink;
 
-        public TwoFactorAuthentication(HttpClient client, IHtmlDocument twoFactor, DefaultUIContext context)
-            : base(client, twoFactor, context)
+        public TwoFactorAuthentication(
+            HttpClient client,
+            IHtmlDocument twoFactor,
+            DefaultUIContext context
+        ) : base(client, twoFactor, context)
         {
             if (Context.CookiePolicyAccepted)
             {
                 if (!Context.TwoFactorEnabled)
                 {
-                    _enableAuthenticatorLink = HtmlAssert.HasLink("#enable-authenticator", twoFactor);
+                    _enableAuthenticatorLink = HtmlAssert.HasLink(
+                        "#enable-authenticator",
+                        twoFactor
+                    );
                 }
                 else
                 {
@@ -29,7 +35,10 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
             }
             else
             {
-                Assert.Contains("You must accept the policy before you can enable two factor authentication.", twoFactor.DocumentElement.TextContent);
+                Assert.Contains(
+                    "You must accept the policy before you can enable two factor authentication.",
+                    twoFactor.DocumentElement.TextContent
+                );
             }
         }
 
@@ -38,7 +47,9 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
             Assert.False(Context.TwoFactorEnabled);
 
             var goToEnableAuthenticator = await Client.GetAsync(_enableAuthenticatorLink.Href);
-            var enableAuthenticator = await ResponseAssert.IsHtmlDocumentAsync(goToEnableAuthenticator);
+            var enableAuthenticator = await ResponseAssert.IsHtmlDocumentAsync(
+                goToEnableAuthenticator
+            );
 
             return new EnableAuthenticator(Client, enableAuthenticator, Context);
         }
@@ -46,7 +57,9 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
         internal async Task<ResetAuthenticator> ClickResetAuthenticatorLinkAsync()
         {
             var goToResetAuthenticator = await Client.GetAsync(_resetAuthenticatorLink.Href);
-            var resetAuthenticator = await ResponseAssert.IsHtmlDocumentAsync(goToResetAuthenticator);
+            var resetAuthenticator = await ResponseAssert.IsHtmlDocumentAsync(
+                goToResetAuthenticator
+            );
 
             return new ResetAuthenticator(Client, resetAuthenticator, Context);
         }

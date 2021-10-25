@@ -209,9 +209,11 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentException">If partUri parameter does not conform to the valid partUri syntax</exception>
         /// <exception cref="ArgumentOutOfRangeException">If CompressionOption enumeration [compressionOption] does not have one of the valid values</exception>
         /// <exception cref="InvalidOperationException">If a PackagePart with the given partUri already exists in the Package</exception>
-        public PackagePart CreatePart(Uri partUri,
-                            string contentType,
-                            CompressionOption compressionOption)
+        public PackagePart CreatePart(
+            Uri partUri,
+            string contentType,
+            CompressionOption compressionOption
+        )
         {
             ThrowIfObjectDisposed();
             ThrowIfReadOnly();
@@ -224,7 +226,9 @@ namespace System.IO.Packaging
 
             ThrowIfCompressionOptionInvalid(compressionOption);
 
-            PackUriHelper.ValidatedPartUri validatedPartUri = PackUriHelper.ValidatePartUri(partUri);
+            PackUriHelper.ValidatedPartUri validatedPartUri = PackUriHelper.ValidatePartUri(
+                partUri
+            );
 
             if (_partList.ContainsKey(validatedPartUri))
                 throw new InvalidOperationException(SR.PartAlreadyExists);
@@ -232,19 +236,22 @@ namespace System.IO.Packaging
             // Add the part to the _partList if there is no prefix collision
             // Note: This is the only place where we pass a null to this method for the part and if the
             // methods returns successfully then we replace the null with an actual part.
-            AddIfNoPrefixCollisionDetected(validatedPartUri, null /* since we don't have a part yet */);
+            AddIfNoPrefixCollisionDetected(
+                validatedPartUri,
+                null /* since we don't have a part yet */
+            );
 
-            PackagePart addedPart = CreatePartCore(validatedPartUri,
-                                                            contentType,
-                                                            compressionOption);
+            PackagePart addedPart = CreatePartCore(
+                validatedPartUri,
+                contentType,
+                compressionOption
+            );
 
             //Set the entry for this Uri with the actual part
             _partList[validatedPartUri] = addedPart;
 
             return addedPart;
         }
-
-
 
         /// <summary>
         /// Returns a part that already exists in the package. If the part
@@ -266,7 +273,6 @@ namespace System.IO.Packaging
             else
                 return returnedPart;
         }
-
 
         /// <summary>
         /// This is a convenient method to check whether a given part exists in the
@@ -293,7 +299,6 @@ namespace System.IO.Packaging
             return _partList.ContainsKey(validatePartUri);
         }
 
-
         /// <summary>
         /// This method will do all the house keeping required when a part is deleted
         /// Then the DeletePartCore method will be called which will have the actual logic to
@@ -314,7 +319,8 @@ namespace System.IO.Packaging
             if (partUri == null)
                 throw new ArgumentNullException(nameof(partUri));
 
-            PackUriHelper.ValidatedPartUri validatedPartUri = (PackUriHelper.ValidatedPartUri)PackUriHelper.ValidatePartUri(partUri);
+            PackUriHelper.ValidatedPartUri validatedPartUri =
+                (PackUriHelper.ValidatedPartUri)PackUriHelper.ValidatePartUri(partUri);
 
             if (_partList.ContainsKey(validatedPartUri))
             {
@@ -352,9 +358,19 @@ namespace System.IO.Packaging
                 //And thus we will not try to recreate it just in case there was some data in the
                 //memory structure.
 
-                Uri owningPartUri = PackUriHelper.GetSourcePartUriFromRelationshipPartUri(validatedPartUri);
+                Uri owningPartUri = PackUriHelper.GetSourcePartUriFromRelationshipPartUri(
+                    validatedPartUri
+                );
                 //Package-level relationships in /_rels/.rels
-                if (Uri.Compare(owningPartUri, PackUriHelper.PackageRootUri, UriComponents.SerializationInfoString, UriFormat.UriEscaped, StringComparison.Ordinal) == 0)
+                if (
+                    Uri.Compare(
+                        owningPartUri,
+                        PackUriHelper.PackageRootUri,
+                        UriComponents.SerializationInfoString,
+                        UriFormat.UriEscaped,
+                        StringComparison.Ordinal
+                    ) == 0
+                )
                 {
                     //Clear any data in memory
                     this.ClearRelationships();
@@ -398,8 +414,10 @@ namespace System.IO.Packaging
                 PackagePart[] parts = GetPartsCore();
 
                 //making sure that we get a valid array
-                Debug.Assert((parts != null),
-                    "Subclass is expected to return an array [an empty one if there are no parts] as a result of GetPartsCore method call. ");
+                Debug.Assert(
+                    (parts != null),
+                    "Subclass is expected to return an array [an empty one if there are no parts] as a result of GetPartsCore method call. "
+                );
 
                 PackUriHelper.ValidatedPartUri partUri;
 
@@ -409,7 +427,8 @@ namespace System.IO.Packaging
                 //Note: We cannot use the _partList member variable, as that gets updated incrementally and so its
                 //not possible to find the collisions using that list.
                 //PackUriHelper.ValidatedPartUri implements the IComparable interface.
-                Dictionary<PackUriHelper.ValidatedPartUri, PackagePart> seenPartUris = new Dictionary<PackUriHelper.ValidatedPartUri, PackagePart>(parts.Length);
+                Dictionary<PackUriHelper.ValidatedPartUri, PackagePart> seenPartUris =
+                    new Dictionary<PackUriHelper.ValidatedPartUri, PackagePart>(parts.Length);
 
                 for (int i = 0; i < parts.Length; i++)
                 {
@@ -546,7 +565,11 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentOutOfRangeException">If parameter "targetMode" enumeration does not have a valid value</exception>
         /// <exception cref="ArgumentException">If TargetMode is TargetMode.Internal and the targetUri is an absolute Uri </exception>
         /// <exception cref="ArgumentException">If relationship is being targeted to a relationship part</exception>
-        public PackageRelationship CreateRelationship(Uri targetUri, TargetMode targetMode, string relationshipType)
+        public PackageRelationship CreateRelationship(
+            Uri targetUri,
+            TargetMode targetMode,
+            string relationshipType
+        )
         {
             return CreateRelationship(targetUri, targetMode, relationshipType, null);
         }
@@ -570,7 +593,12 @@ namespace System.IO.Packaging
         /// <exception cref="ArgumentException">If relationship is being targeted to a relationship part</exception>
         /// <exception cref="System.Xml.XmlException">If parameter "id" is not a valid Xsd Id</exception>
         /// <exception cref="System.Xml.XmlException">If an id is provided in the method, and its not unique</exception>
-        public PackageRelationship CreateRelationship(Uri targetUri, TargetMode targetMode, string relationshipType, string? id)
+        public PackageRelationship CreateRelationship(
+            Uri targetUri,
+            TargetMode targetMode,
+            string relationshipType,
+            string? id
+        )
         {
             ThrowIfObjectDisposed();
             ThrowIfReadOnly();
@@ -697,9 +725,11 @@ namespace System.IO.Packaging
         /// <param name="contentType"></param>
         /// <param name="compressionOption"></param>
         /// <returns></returns>
-        protected abstract PackagePart CreatePartCore(Uri partUri,
-                                                            string contentType,
-                                                            CompressionOption compressionOption);
+        protected abstract PackagePart CreatePartCore(
+            Uri partUri,
+            string contentType,
+            CompressionOption compressionOption
+        );
 
         /// <summary>
         /// This method is for custom implementation corresponding to the underlying file format.
@@ -808,7 +838,10 @@ namespace System.IO.Packaging
         internal static void ThrowIfCompressionOptionInvalid(CompressionOption compressionOption)
         {
             //We do the enum check as suggested by the following condition for performance reasons.
-            if (compressionOption < CompressionOption.NotCompressed || compressionOption > CompressionOption.SuperFast)
+            if (
+                compressionOption < CompressionOption.NotCompressed
+                || compressionOption > CompressionOption.SuperFast
+            )
                 throw new ArgumentOutOfRangeException(nameof(compressionOption));
         }
 
@@ -826,7 +859,8 @@ namespace System.IO.Packaging
             string path,
             FileMode packageMode,
             FileAccess packageAccess,
-            FileShare packageShare)
+            FileShare packageShare
+        )
         {
             Package? package = null;
             if (path == null)
@@ -856,7 +890,12 @@ namespace System.IO.Packaging
 
             try
             {
-                package = new ZipPackage(packageFileInfo.FullName, packageMode, packageAccess, packageShare);
+                package = new ZipPackage(
+                    packageFileInfo.FullName,
+                    packageMode,
+                    packageAccess,
+                    packageShare
+                );
                 package._openFileMode = packageMode;
 
                 //We need to get all the parts if any exists from the underlying file
@@ -865,7 +904,10 @@ namespace System.IO.Packaging
                 //Note: If ever this call is removed, each individual call to GetPartCore,
                 //may result in undefined behavior as the underlying ZipArchive, maintains the
                 //files list as being case-sensitive.
-                if (package.FileOpenAccess == FileAccess.ReadWrite || package.FileOpenAccess == FileAccess.Read)
+                if (
+                    package.FileOpenAccess == FileAccess.ReadWrite
+                    || package.FileOpenAccess == FileAccess.Read
+                )
                     package.GetParts();
             }
             catch
@@ -910,7 +952,10 @@ namespace System.IO.Packaging
                 //Note: If ever this call is removed, each individual call to GetPartCore,
                 //may result in undefined behavior as the underlying ZipArchive, maintains the
                 //files list as being case-sensitive.
-                if (package.FileOpenAccess == FileAccess.ReadWrite || package.FileOpenAccess == FileAccess.Read)
+                if (
+                    package.FileOpenAccess == FileAccess.ReadWrite
+                    || package.FileOpenAccess == FileAccess.Read
+                )
                     package.GetParts();
             }
             catch
@@ -952,7 +997,10 @@ namespace System.IO.Packaging
         // As an example - Adding any of the following parts will throw an exception -
         // 1. /abc.xaml/new.xaml
         // 2. /xyz/pqr
-        private void AddIfNoPrefixCollisionDetected(PackUriHelper.ValidatedPartUri partUri, PackagePart? part)
+        private void AddIfNoPrefixCollisionDetected(
+            PackUriHelper.ValidatedPartUri partUri,
+            PackagePart? part
+        )
         {
             //Add the Normalized Uri to the sorted _partList tentatively to see where it will get inserted
             _partList.Add(partUri, part!);
@@ -976,14 +1024,22 @@ namespace System.IO.Packaging
                 followingPartName = _partList.Keys[index + 1].NormalizedPartUriString;
             }
 
-            if ((precedingPartName != null
-                && normalizedPartName.StartsWith(precedingPartName, StringComparison.Ordinal)
-                && normalizedPartName.Length > precedingPartName.Length
-                && normalizedPartName[precedingPartName.Length] == PackUriHelper.ForwardSlashChar) ||
-                (followingPartName != null
-                && followingPartName.StartsWith(normalizedPartName, StringComparison.Ordinal)
-                && followingPartName.Length > normalizedPartName.Length
-                && followingPartName[normalizedPartName.Length] == PackUriHelper.ForwardSlashChar))
+            if (
+                (
+                    precedingPartName != null
+                    && normalizedPartName.StartsWith(precedingPartName, StringComparison.Ordinal)
+                    && normalizedPartName.Length > precedingPartName.Length
+                    && normalizedPartName[precedingPartName.Length]
+                        == PackUriHelper.ForwardSlashChar
+                )
+                || (
+                    followingPartName != null
+                    && followingPartName.StartsWith(normalizedPartName, StringComparison.Ordinal)
+                    && followingPartName.Length > normalizedPartName.Length
+                    && followingPartName[normalizedPartName.Length]
+                        == PackUriHelper.ForwardSlashChar
+                )
+            )
             {
                 //Removing the invalid entry from the _partList.
                 _partList.Remove(partUri);
@@ -1041,7 +1097,9 @@ namespace System.IO.Packaging
             if (_partList.Count > 0)
             {
                 int partCount = 0;
-                PackUriHelper.ValidatedPartUri[] partKeys = new PackUriHelper.ValidatedPartUri[_partList.Keys.Count];
+                PackUriHelper.ValidatedPartUri[] partKeys = new PackUriHelper.ValidatedPartUri[
+                    _partList.Keys.Count
+                ];
 
                 foreach (PackUriHelper.ValidatedPartUri uri in _partList.Keys)
                 {
@@ -1076,14 +1134,22 @@ namespace System.IO.Packaging
         {
             if (!p.IsClosed)
             {
-                if (PackUriHelper.IsRelationshipPartUri(p.Uri) && PackUriHelper.ComparePartUri(p.Uri, PackageRelationship.ContainerRelationshipPartName) != 0)
+                if (
+                    PackUriHelper.IsRelationshipPartUri(p.Uri)
+                    && PackUriHelper.ComparePartUri(
+                        p.Uri,
+                        PackageRelationship.ContainerRelationshipPartName
+                    ) != 0
+                )
                 {
                     //First we close the source part.
                     //Note - we can safely do this as DoClose is being called on all parts. So ultimately we will end up
                     //closing the source part as well.
                     //This logic only takes care of out of order parts.
                     PackUriHelper.ValidatedPartUri owningPartUri =
-                        (PackUriHelper.ValidatedPartUri)PackUriHelper.GetSourcePartUriFromRelationshipPartUri(p.Uri);
+                        (PackUriHelper.ValidatedPartUri)PackUriHelper.GetSourcePartUriFromRelationshipPartUri(
+                            p.Uri
+                        );
                     //If the source part for this rels part exists then we close it.
                     if (_partList.TryGetValue(owningPartUri, out PackagePart? sourcePart))
                         sourcePart.Close();
@@ -1205,8 +1271,6 @@ namespace System.IO.Packaging
         private PackagePartCollection? _partCollection;
         private InternalRelationshipCollection? _relationships;
         private PartBasedPackageProperties? _packageProperties;
-
-
         #endregion Private Members
     }
 }

@@ -38,14 +38,19 @@ namespace ILVerification.Tests
         /// <returns></returns>
         public static TheoryData<TestCase> GetTypesWithValidType()
         {
-            var typeSelector = new Func<string[], TypeDefinitionHandle, TestCase>((mparams, typeDefinitionHandle) =>
-            {
-                if (mparams[1] == "ValidType")
+            var typeSelector = new Func<string[], TypeDefinitionHandle, TestCase>(
+                (mparams, typeDefinitionHandle) =>
                 {
-                    return new ValidTypeTestCase { MetadataToken = MetadataTokens.GetToken(typeDefinitionHandle) };
+                    if (mparams[1] == "ValidType")
+                    {
+                        return new ValidTypeTestCase
+                        {
+                            MetadataToken = MetadataTokens.GetToken(typeDefinitionHandle)
+                        };
+                    }
+                    return null;
                 }
-                return null;
-            });
+            );
             return GetTestTypeFromDll(typeSelector);
         }
 
@@ -56,25 +61,34 @@ namespace ILVerification.Tests
         /// <returns></returns>
         public static TheoryData<TestCase> GetTypesWithInvalidType()
         {
-            var typeSelector = new Func<string[], TypeDefinitionHandle, TestCase>((mparams, typeDefinitionHandle) =>
-            {
-                if (mparams[1] == "InvalidType")
+            var typeSelector = new Func<string[], TypeDefinitionHandle, TestCase>(
+                (mparams, typeDefinitionHandle) =>
                 {
-                    var verificationErros = new List<VerifierError>();
-                    foreach (var expectedError in mparams[2].Split('@'))
+                    if (mparams[1] == "InvalidType")
                     {
-                        verificationErros.Add((VerifierError)Enum.Parse(typeof(VerifierError), expectedError));
+                        var verificationErros = new List<VerifierError>();
+                        foreach (var expectedError in mparams[2].Split('@'))
+                        {
+                            verificationErros.Add(
+                                (VerifierError)Enum.Parse(typeof(VerifierError), expectedError)
+                            );
+                        }
+                        var newItem = new InvalidTypeTestCase
+                        {
+                            MetadataToken = MetadataTokens.GetToken(typeDefinitionHandle)
+                        };
+                        newItem.ExpectedVerifierErrors = verificationErros;
+                        return newItem;
                     }
-                    var newItem = new InvalidTypeTestCase { MetadataToken = MetadataTokens.GetToken(typeDefinitionHandle) };
-                    newItem.ExpectedVerifierErrors = verificationErros;
-                    return newItem;
+                    return null;
                 }
-                return null;
-            });
+            );
             return GetTestTypeFromDll(typeSelector);
         }
 
-        private static TheoryData<TestCase> GetTestTypeFromDll(Func<string[], TypeDefinitionHandle, TestCase> typeSelector)
+        private static TheoryData<TestCase> GetTestTypeFromDll(
+            Func<string[], TypeDefinitionHandle, TestCase> typeSelector
+        )
         {
             var retVal = new TheoryData<TestCase>();
 
@@ -112,14 +126,19 @@ namespace ILVerification.Tests
         /// </summary>
         public static TheoryData<TestCase> GetMethodsWithValidIL()
         {
-            var methodSelector = new Func<string[], MethodDefinitionHandle, TestCase>((mparams, methodHandle) =>
-            {
-                if (mparams.Length == 2 && mparams[1] == "Valid")
+            var methodSelector = new Func<string[], MethodDefinitionHandle, TestCase>(
+                (mparams, methodHandle) =>
                 {
-                    return new ValidILTestCase { MetadataToken = MetadataTokens.GetToken(methodHandle) };
+                    if (mparams.Length == 2 && mparams[1] == "Valid")
+                    {
+                        return new ValidILTestCase
+                        {
+                            MetadataToken = MetadataTokens.GetToken(methodHandle)
+                        };
+                    }
+                    return null;
                 }
-                return null;
-            });
+            );
             return GetTestMethodsFromDll(methodSelector);
         }
 
@@ -131,39 +150,46 @@ namespace ILVerification.Tests
         /// 2. part: must be the word 'Invalid' (Case sensitive)
         /// 3. part: the expected VerifierErrors as string separated by '.'.      
         /// E.g.: SimpleAdd_Invalid_ExpectedNumericType
-        /// </summary>      
+        /// </summary>
         public static TheoryData<TestCase> GetMethodsWithInvalidIL()
         {
-            var methodSelector = new Func<string[], MethodDefinitionHandle, TestCase>((mparams, methodHandle) =>
-            {
-                if (mparams.Length == 3 && mparams[1] == "Invalid")
+            var methodSelector = new Func<string[], MethodDefinitionHandle, TestCase>(
+                (mparams, methodHandle) =>
                 {
-                    var expectedErrors = mparams[2].Split('.');
-                    var verificationErros = new List<VerifierError>();
-
-                    foreach (var item in expectedErrors)
+                    if (mparams.Length == 3 && mparams[1] == "Invalid")
                     {
-                        if (Enum.TryParse(item, out VerifierError expectedError))
+                        var expectedErrors = mparams[2].Split('.');
+                        var verificationErros = new List<VerifierError>();
+
+                        foreach (var item in expectedErrors)
                         {
-                            verificationErros.Add(expectedError);
+                            if (Enum.TryParse(item, out VerifierError expectedError))
+                            {
+                                verificationErros.Add(expectedError);
+                            }
                         }
+
+                        var newItem = new InvalidILTestCase
+                        {
+                            MetadataToken = MetadataTokens.GetToken(methodHandle)
+                        };
+
+                        if (expectedErrors.Length > 0)
+                        {
+                            newItem.ExpectedVerifierErrors = verificationErros;
+                        }
+
+                        return newItem;
                     }
-
-                    var newItem = new InvalidILTestCase { MetadataToken = MetadataTokens.GetToken(methodHandle) };
-
-                    if (expectedErrors.Length > 0)
-                    {
-                        newItem.ExpectedVerifierErrors = verificationErros;
-                    }
-
-                    return newItem;
+                    return null;
                 }
-                return null;
-            });
+            );
             return GetTestMethodsFromDll(methodSelector);
         }
 
-        private static TheoryData<TestCase> GetTestMethodsFromDll(Func<string[], MethodDefinitionHandle, TestCase> methodSelector)
+        private static TheoryData<TestCase> GetTestMethodsFromDll(
+            Func<string[], MethodDefinitionHandle, TestCase> methodSelector
+        )
         {
             var retVal = new TheoryData<TestCase>();
 
@@ -196,7 +222,10 @@ namespace ILVerification.Tests
             return retVal;
         }
 
-        private static MethodDefinitionHandle HandleSpecialTests(string[] methodParams, EcmaMethod method)
+        private static MethodDefinitionHandle HandleSpecialTests(
+            string[] methodParams,
+            EcmaMethod method
+        )
         {
             if (!methodParams[0].StartsWith(SpecialTestPrefix))
                 return method.Handle;
@@ -215,7 +244,10 @@ namespace ILVerification.Tests
             // Substitute method parameters with friendly name
             methodParams[0] = friendlyName;
 
-            var specialMethodHandle = (EcmaMethod)method.OwningType.GetMethod(specialName, method.Signature);
+            var specialMethodHandle = (EcmaMethod)method.OwningType.GetMethod(
+                specialName,
+                method.Signature
+            );
             return specialMethodHandle == null ? method.Handle : specialMethodHandle.Handle;
         }
 
@@ -236,7 +268,10 @@ namespace ILVerification.Tests
 
             foreach (var fileName in GetAllTestDlls())
             {
-                simpleNameToPathMap.Add(Path.GetFileNameWithoutExtension(fileName), Path.Combine(TestAssemblyPath, fileName));
+                simpleNameToPathMap.Add(
+                    Path.GetFileNameWithoutExtension(fileName),
+                    Path.Combine(TestAssemblyPath, fileName)
+                );
             }
 
             Assembly coreAssembly = typeof(object).GetTypeInfo().Assembly;
@@ -247,9 +282,15 @@ namespace ILVerification.Tests
 
             var resolver = new TestResolver(simpleNameToPathMap);
             var typeSystemContext = new ILVerifyTypeSystemContext(resolver);
-            typeSystemContext.SetSystemModule(typeSystemContext.GetModule(resolver.Resolve(coreAssembly.GetName().Name)));
+            typeSystemContext.SetSystemModule(
+                typeSystemContext.GetModule(resolver.Resolve(coreAssembly.GetName().Name))
+            );
 
-            return typeSystemContext.GetModule(resolver.Resolve(new AssemblyName(Path.GetFileNameWithoutExtension(assemblyName)).Name));
+            return typeSystemContext.GetModule(
+                resolver.Resolve(
+                    new AssemblyName(Path.GetFileNameWithoutExtension(assemblyName)).Name
+                )
+            );
         }
 
         private sealed class TestResolver : ResolverBase
@@ -327,7 +368,9 @@ namespace ILVerification.Tests
         {
             base.Deserialize(info);
             var serializedExpectedErrors = info.GetValue<string>(nameof(ExpectedVerifierErrors));
-            ExpectedVerifierErrors = JsonConvert.DeserializeObject<List<VerifierError>>(serializedExpectedErrors);
+            ExpectedVerifierErrors = JsonConvert.DeserializeObject<List<VerifierError>>(
+                serializedExpectedErrors
+            );
         }
 
         public override string ToString()
@@ -369,7 +412,9 @@ namespace ILVerification.Tests
         {
             base.Deserialize(info);
             var serializedExpectedErrors = info.GetValue<string>(nameof(ExpectedVerifierErrors));
-            ExpectedVerifierErrors = JsonConvert.DeserializeObject<List<VerifierError>>(serializedExpectedErrors);
+            ExpectedVerifierErrors = JsonConvert.DeserializeObject<List<VerifierError>>(
+                serializedExpectedErrors
+            );
         }
 
         public override string ToString()

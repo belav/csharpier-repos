@@ -33,8 +33,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
                 return;
             }
 
-            var dataMemberAttribute = context
-                .PropertyAttributes
+            var dataMemberAttribute = context.PropertyAttributes
                 .OfType<DataMemberAttribute>()
                 .FirstOrDefault();
             if (dataMemberAttribute == null || !dataMemberAttribute.IsRequired)

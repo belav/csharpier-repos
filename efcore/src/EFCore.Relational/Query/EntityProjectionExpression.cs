@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     public class EntityProjectionExpression : Expression
     {
         private readonly IReadOnlyDictionary<IProperty, ColumnExpression> _propertyExpressionMap;
-        private readonly Dictionary<INavigation, EntityShaperExpression> _ownedNavigationMap = new();
+        private readonly Dictionary<INavigation, EntityShaperExpression> _ownedNavigationMap =
+            new();
 
         /// <summary>
         ///     Creates a new instance of the <see cref="EntityProjectionExpression" /> class.
@@ -34,9 +35,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="innerTable"> The table from which entity columns are being projected out. </param>
         /// <param name="nullable"> A bool value indicating whether this entity instance can be null. </param>
         [Obsolete("Use the constructor which takes populated column expressions map.", error: true)]
-        public EntityProjectionExpression(IEntityType entityType, TableExpressionBase innerTable, bool nullable)
+        public EntityProjectionExpression(
+            IEntityType entityType,
+            TableExpressionBase innerTable,
+            bool nullable
+        )
         {
-            throw new NotSupportedException("Obsolete: Use the constructor which takes populated column expressions map.");
+            throw new NotSupportedException(
+                "Obsolete: Use the constructor which takes populated column expressions map."
+            );
         }
 
         /// <summary>
@@ -48,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public EntityProjectionExpression(
             IEntityType entityType,
             IReadOnlyDictionary<IProperty, ColumnExpression> propertyExpressionMap,
-            SqlExpression? discriminatorExpression = null)
+            SqlExpression? discriminatorExpression = null
+        )
         {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(propertyExpressionMap, nameof(propertyExpressionMap));
@@ -69,12 +77,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual SqlExpression? DiscriminatorExpression { get; }
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
-        public override Type Type
-            => EntityType.ClrType;
+        public override Type Type => EntityType.ClrType;
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -95,8 +101,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             changed |= discriminatorExpression != DiscriminatorExpression;
 
             return changed
-                ? new EntityProjectionExpression(EntityType, propertyExpressionMap, discriminatorExpression)
-                : this;
+              ? new EntityProjectionExpression(
+                    EntityType,
+                    propertyExpressionMap,
+                    discriminatorExpression
+                )
+              : this;
         }
 
         /// <summary>
@@ -112,7 +122,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             // We don't need to process DiscriminatorExpression because they are already nullable
-            return new EntityProjectionExpression(EntityType, propertyExpressionMap, DiscriminatorExpression);
+            return new EntityProjectionExpression(
+                EntityType,
+                propertyExpressionMap,
+                DiscriminatorExpression
+            );
         }
 
         /// <summary>
@@ -128,15 +142,20 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 throw new InvalidOperationException(
                     RelationalStrings.InvalidDerivedTypeInEntityProjection(
-                        derivedType.DisplayName(), EntityType.DisplayName()));
+                        derivedType.DisplayName(),
+                        EntityType.DisplayName()
+                    )
+                );
             }
 
             var propertyExpressionMap = new Dictionary<IProperty, ColumnExpression>();
             foreach (var kvp in _propertyExpressionMap)
             {
                 var property = kvp.Key;
-                if (derivedType.IsAssignableFrom(property.DeclaringEntityType)
-                    || property.DeclaringEntityType.IsAssignableFrom(derivedType))
+                if (
+                    derivedType.IsAssignableFrom(property.DeclaringEntityType)
+                    || property.DeclaringEntityType.IsAssignableFrom(derivedType)
+                )
                 {
                     propertyExpressionMap[property] = kvp.Value;
                 }
@@ -147,13 +166,26 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 var entityTypesToSelect = derivedType.GetTptDiscriminatorValues();
                 var whenClauses = caseExpression.WhenClauses
-                    .Where(wc => entityTypesToSelect.Contains((string)((SqlConstantExpression)wc.Result).Value!))
+                    .Where(
+                        wc =>
+                            entityTypesToSelect.Contains(
+                                (string)((SqlConstantExpression)wc.Result).Value!
+                            )
+                    )
                     .ToList();
 
-                discriminatorExpression = caseExpression.Update(operand: null, whenClauses, elseResult: null);
+                discriminatorExpression = caseExpression.Update(
+                    operand: null,
+                    whenClauses,
+                    elseResult: null
+                );
             }
 
-            return new EntityProjectionExpression(derivedType, propertyExpressionMap, discriminatorExpression);
+            return new EntityProjectionExpression(
+                derivedType,
+                propertyExpressionMap,
+                discriminatorExpression
+            );
         }
 
         /// <summary>
@@ -165,11 +197,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(property, nameof(property));
 
-            if (!EntityType.IsAssignableFrom(property.DeclaringEntityType)
-                && !property.DeclaringEntityType.IsAssignableFrom(EntityType))
+            if (
+                !EntityType.IsAssignableFrom(property.DeclaringEntityType)
+                && !property.DeclaringEntityType.IsAssignableFrom(EntityType)
+            )
             {
                 throw new InvalidOperationException(
-                    RelationalStrings.UnableToBindMemberToEntityProjection("property", property.Name, EntityType.DisplayName()));
+                    RelationalStrings.UnableToBindMemberToEntityProjection(
+                        "property",
+                        property.Name,
+                        EntityType.DisplayName()
+                    )
+                );
             }
 
             return _propertyExpressionMap[property];
@@ -180,16 +219,26 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="navigation"> A navigation to add binding for. </param>
         /// <param name="entityShaper"> An entity shaper expression for the target type. </param>
-        public virtual void AddNavigationBinding(INavigation navigation, EntityShaperExpression entityShaper)
+        public virtual void AddNavigationBinding(
+            INavigation navigation,
+            EntityShaperExpression entityShaper
+        )
         {
             Check.NotNull(navigation, nameof(navigation));
             Check.NotNull(entityShaper, nameof(entityShaper));
 
-            if (!EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
-                && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType))
+            if (
+                !EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
+                && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType)
+            )
             {
                 throw new InvalidOperationException(
-                    RelationalStrings.UnableToBindMemberToEntityProjection("navigation", navigation.Name, EntityType.DisplayName()));
+                    RelationalStrings.UnableToBindMemberToEntityProjection(
+                        "navigation",
+                        navigation.Name,
+                        EntityType.DisplayName()
+                    )
+                );
             }
 
             _ownedNavigationMap[navigation] = entityShaper;
@@ -205,16 +254,23 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Check.NotNull(navigation, nameof(navigation));
 
-            if (!EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
-                && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType))
+            if (
+                !EntityType.IsAssignableFrom(navigation.DeclaringEntityType)
+                && !navigation.DeclaringEntityType.IsAssignableFrom(EntityType)
+            )
             {
                 throw new InvalidOperationException(
-                    RelationalStrings.UnableToBindMemberToEntityProjection("navigation", navigation.Name, EntityType.DisplayName()));
+                    RelationalStrings.UnableToBindMemberToEntityProjection(
+                        "navigation",
+                        navigation.Name,
+                        EntityType.DisplayName()
+                    )
+                );
             }
 
             return _ownedNavigationMap.TryGetValue(navigation, out var expression)
-                ? expression
-                : null;
+              ? expression
+              : null;
         }
     }
 }

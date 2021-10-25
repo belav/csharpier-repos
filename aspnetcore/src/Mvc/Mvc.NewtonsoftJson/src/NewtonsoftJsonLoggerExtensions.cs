@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             _jsonInputFormatterException = LoggerMessage.Define(
                 LogLevel.Debug,
                 new EventId(1, "JsonInputException"),
-                "JSON input formatter threw an exception.");
+                "JSON input formatter threw an exception."
+            );
         }
 
         public static void JsonInputException(this ILogger logger, Exception exception)

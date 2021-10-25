@@ -14,7 +14,9 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     ///     A <see cref="DiagnosticSource" /> event payload class for events that indicate
     ///     a skip collection navigation property has had entities added and/or removed.
     /// </summary>
-    public class SkipCollectionChangedEventData : SkipNavigationEventData, ICollectionChangedEventData
+    public class SkipCollectionChangedEventData
+        : SkipNavigationEventData,
+          ICollectionChangedEventData
     {
         /// <summary>
         ///     Constructs the event payload.
@@ -31,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EntityEntry entityEntry,
             ISkipNavigation navigation,
             IEnumerable<object> added,
-            IEnumerable<object> removed)
-            : base(eventDefinition, messageGenerator, navigation)
+            IEnumerable<object> removed
+        ) : base(eventDefinition, messageGenerator, navigation)
         {
             Check.NotNull(entityEntry, nameof(entityEntry));
             Check.NotNull(added, nameof(added));

@@ -8,13 +8,21 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal class JsonObjectConverter : JsonConverter<JsonObject>
     {
-        public override void Write(Utf8JsonWriter writer, JsonObject value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            JsonObject value,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(value != null);
             value.WriteTo(writer, options);
         }
 
-        public override JsonObject? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override JsonObject? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             switch (reader.TokenType)
             {

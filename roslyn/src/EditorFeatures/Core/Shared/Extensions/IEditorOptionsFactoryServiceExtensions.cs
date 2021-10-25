@@ -9,7 +9,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
     internal static class IEditorOptionsFactoryServiceExtensions
     {
-        public static IEditorOptions GetEditorOptions(this IEditorOptionsFactoryService editorOptionsFactory, SourceText text)
+        public static IEditorOptions GetEditorOptions(
+            this IEditorOptionsFactoryService editorOptionsFactory,
+            SourceText text
+        )
         {
             var textBuffer = text.Container.TryGetTextBuffer();
             if (textBuffer != null)
@@ -20,7 +23,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             return editorOptionsFactory.GlobalOptions;
         }
 
-        public static IEditorOptions GetEditorOptions(this IEditorOptionsFactoryService editorOptionsFactory, Document document)
+        public static IEditorOptions GetEditorOptions(
+            this IEditorOptionsFactoryService editorOptionsFactory,
+            Document document
+        )
         {
             if (document.TryGetText(out var text))
             {
@@ -29,7 +35,6 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             return editorOptionsFactory.GlobalOptions;
         }
-
         // This particular section is commented for future reference if there arises a need to implement a option serializer in the editor layer
         // public static IOptionService GetFormattingOptions(this IEditorOptionsFactoryService editorOptionsFactory, Document document)
         // {

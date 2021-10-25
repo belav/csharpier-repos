@@ -46,13 +46,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             var trailingTrivia = node.GetTrailingTrivia();
 
             // Trivia is either null or a non-empty list (there's no such thing as an empty green list)
-            Debug.Assert(leadingTrivia == null || !leadingTrivia.IsList || leadingTrivia.SlotCount > 0);
-            Debug.Assert(trailingTrivia == null || !trailingTrivia.IsList || trailingTrivia.SlotCount > 0);
+            Debug.Assert(
+                leadingTrivia == null || !leadingTrivia.IsList || leadingTrivia.SlotCount > 0
+            );
+            Debug.Assert(
+                trailingTrivia == null || !trailingTrivia.IsList || trailingTrivia.SlotCount > 0
+            );
 
             if (leadingTrivia != null)
             {
                 // PERF: Expand token.LeadingTrivia when node is not null.
-                var leading = VisitList(new SyntaxTriviaList(leadingTrivia.CreateRed(token, token.Position)));
+                var leading = VisitList(
+                    new SyntaxTriviaList(leadingTrivia.CreateRed(token, token.Position))
+                );
 
                 if (trailingTrivia != null)
                 {
@@ -62,19 +68,29 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                     // Also avoid node.Width because it makes a virtual call to GetText. Instead use node.FullWidth - trailingTrivia.FullWidth.
                     var index = leadingTrivia.IsList ? leadingTrivia.SlotCount : 1;
                     var position = token.Position + node.FullWidth - trailingTrivia.FullWidth;
-                    var trailing = VisitList(new SyntaxTriviaList(trailingTrivia.CreateRed(token, position), position, index));
+                    var trailing = VisitList(
+                        new SyntaxTriviaList(
+                            trailingTrivia.CreateRed(token, position),
+                            position,
+                            index
+                        )
+                    );
 
                     if (leading.Node.Green != leadingTrivia)
                     {
                         token = token.WithLeadingTrivia(leading);
                     }
 
-                    return trailing.Node.Green != trailingTrivia ? token.WithTrailingTrivia(trailing) : token;
+                    return trailing.Node.Green != trailingTrivia
+                      ? token.WithTrailingTrivia(trailing)
+                      : token;
                 }
                 else
                 {
                     // Leading trivia only
-                    return leading.Node.Green != leadingTrivia ? token.WithLeadingTrivia(leading) : token;
+                    return leading.Node.Green != leadingTrivia
+                      ? token.WithLeadingTrivia(leading)
+                      : token;
                 }
             }
             else if (trailingTrivia != null)
@@ -83,8 +99,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 // PERF: Expand token.TrailingTrivia when node is not null and leading is null.
                 // Also avoid node.Width because it makes a virtual call to GetText. Instead use node.FullWidth - trailingTrivia.FullWidth.
                 var position = token.Position + node.FullWidth - trailingTrivia.FullWidth;
-                var trailing = VisitList(new SyntaxTriviaList(trailingTrivia.CreateRed(token, position), position, index: 0));
-                return trailing.Node.Green != trailingTrivia ? token.WithTrailingTrivia(trailing) : token;
+                var trailing = VisitList(
+                    new SyntaxTriviaList(
+                        trailingTrivia.CreateRed(token, position),
+                        position,
+                        index: 0
+                    )
+                );
+                return trailing.Node.Green != trailingTrivia
+                  ? token.WithTrailingTrivia(trailing)
+                  : token;
             }
             else
             {
@@ -93,7 +117,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             }
         }
 
-        public virtual SyntaxList<TNode> VisitList<TNode>(SyntaxList<TNode> list) where TNode : SyntaxNode
+        public virtual SyntaxList<TNode> VisitList<TNode>(SyntaxList<TNode> list)
+            where TNode : SyntaxNode
         {
             SyntaxListBuilder alternate = null;
             for (int i = 0, n = list.Count; i < n; i++)

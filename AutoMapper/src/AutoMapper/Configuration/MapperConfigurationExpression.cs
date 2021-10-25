@@ -104,7 +104,7 @@ namespace AutoMapper
         /// Add an action to be called when validating the configuration.
         /// </summary>
         /// <param name="validator">the validation callback</param>
-        void IGlobalConfigurationExpression.Validator(Validator validator) => 
+        void IGlobalConfigurationExpression.Validator(Validator validator) =>
             _validators.Add(validator ?? throw new ArgumentNullException(nameof(validator)));
 
         /// <summary>
@@ -121,7 +121,8 @@ namespace AutoMapper
 
         Validator[] IGlobalConfigurationExpression.GetValidators() => _validators.ToArray();
 
-        List<IProjectionMapper> IGlobalConfigurationExpression.ProjectionMappers { get; } = ProjectionBuilder.DefaultProjectionMappers();
+        List<IProjectionMapper> IGlobalConfigurationExpression.ProjectionMappers { get; } =
+            ProjectionBuilder.DefaultProjectionMappers();
 
         /// <summary>
         /// How many levels deep should recursive queries be expanded.
@@ -129,32 +130,33 @@ namespace AutoMapper
         /// </summary>
         int IGlobalConfigurationExpression.RecursiveQueriesMaxDepth { get; set; }
 
-        IReadOnlyCollection<IProfileConfiguration> IGlobalConfigurationExpression.Profiles => _profiles;
+        IReadOnlyCollection<IProfileConfiguration> IGlobalConfigurationExpression.Profiles =>
+            _profiles;
         Func<Type, object> IGlobalConfigurationExpression.ServiceCtor => _serviceCtor;
 
-        public void CreateProfile(string profileName, Action<IProfileExpression> config)
-            => AddProfile(new NamedProfile(profileName, config));
+        public void CreateProfile(string profileName, Action<IProfileExpression> config) =>
+            AddProfile(new NamedProfile(profileName, config));
 
         List<IObjectMapper> IGlobalConfigurationExpression.Mappers => _mappers;
 
-        Features<IGlobalFeature> IGlobalConfigurationExpression.Features { get; } = new Features<IGlobalFeature>();
+        Features<IGlobalFeature> IGlobalConfigurationExpression.Features { get; } =
+            new Features<IGlobalFeature>();
 
         private class NamedProfile : Profile
         {
-            public NamedProfile(string profileName) : base(profileName)
-            {
-            }
+            public NamedProfile(string profileName) : base(profileName) { }
 
-            public NamedProfile(string profileName, Action<IProfileExpression> config) : base(profileName, config)
-            {
-            }
+            public NamedProfile(string profileName, Action<IProfileExpression> config)
+                : base(profileName, config) { }
         }
 
         public void AddProfile(Profile profile) => _profiles.Add(profile);
 
-        public void AddProfile<TProfile>() where TProfile : Profile, new() => AddProfile(new TProfile());
+        public void AddProfile<TProfile>() where TProfile : Profile, new() =>
+            AddProfile(new TProfile());
 
-        public void AddProfile(Type profileType) => AddProfile((Profile)Activator.CreateInstance(profileType));
+        public void AddProfile(Type profileType) =>
+            AddProfile((Profile)Activator.CreateInstance(profileType));
 
         public void AddProfiles(IEnumerable<Profile> enumerableOfProfiles)
         {
@@ -164,27 +166,33 @@ namespace AutoMapper
             }
         }
 
-        public void AddMaps(IEnumerable<Assembly> assembliesToScan)
-            => AddMapsCore(assembliesToScan);
+        public void AddMaps(IEnumerable<Assembly> assembliesToScan) =>
+            AddMapsCore(assembliesToScan);
 
-        public void AddMaps(params Assembly[] assembliesToScan)
-            => AddMapsCore(assembliesToScan);
+        public void AddMaps(params Assembly[] assembliesToScan) => AddMapsCore(assembliesToScan);
 
-        public void AddMaps(IEnumerable<string> assemblyNamesToScan)
-            => AddMapsCore(assemblyNamesToScan.Select(Assembly.Load));
+        public void AddMaps(IEnumerable<string> assemblyNamesToScan) =>
+            AddMapsCore(assemblyNamesToScan.Select(Assembly.Load));
 
-        public void AddMaps(params string[] assemblyNamesToScan)
-            => AddMaps((IEnumerable<string>)assemblyNamesToScan);
+        public void AddMaps(params string[] assemblyNamesToScan) =>
+            AddMaps((IEnumerable<string>)assemblyNamesToScan);
 
-        public void AddMaps(IEnumerable<Type> typesFromAssembliesContainingMappingDefinitions)
-            => AddMapsCore(typesFromAssembliesContainingMappingDefinitions.Select(t => t.GetTypeInfo().Assembly));
+        public void AddMaps(IEnumerable<Type> typesFromAssembliesContainingMappingDefinitions) =>
+            AddMapsCore(
+                typesFromAssembliesContainingMappingDefinitions.Select(
+                    t => t.GetTypeInfo().Assembly
+                )
+            );
 
-        public void AddMaps(params Type[] typesFromAssembliesContainingMappingDefinitions)
-            => AddMaps((IEnumerable<Type>)typesFromAssembliesContainingMappingDefinitions);
+        public void AddMaps(params Type[] typesFromAssembliesContainingMappingDefinitions) =>
+            AddMaps((IEnumerable<Type>)typesFromAssembliesContainingMappingDefinitions);
 
         private void AddMapsCore(IEnumerable<Assembly> assembliesToScan)
         {
-            var allTypes = assembliesToScan.Where(a => !a.IsDynamic && a != typeof(NamedProfile).Assembly).SelectMany(a => a.DefinedTypes).ToArray();
+            var allTypes = assembliesToScan
+                .Where(a => !a.IsDynamic && a != typeof(NamedProfile).Assembly)
+                .SelectMany(a => a.DefinedTypes)
+                .ToArray();
             var autoMapAttributeProfile = new NamedProfile(nameof(AutoMapAttribute));
 
             foreach (var type in allTypes)
@@ -196,13 +204,27 @@ namespace AutoMapper
 
                 foreach (var autoMapAttribute in type.GetCustomAttributes<AutoMapAttribute>())
                 {
-                    var mappingExpression = (MappingExpression) autoMapAttributeProfile.CreateMap(autoMapAttribute.SourceType, type);
-                
-                    foreach (var memberInfo in type.GetMembers(BindingFlags.Public | BindingFlags.Instance))
+                    var mappingExpression = (MappingExpression)autoMapAttributeProfile.CreateMap(
+                        autoMapAttribute.SourceType,
+                        type
+                    );
+
+                    foreach (
+                        var memberInfo in type.GetMembers(
+                            BindingFlags.Public | BindingFlags.Instance
+                        )
+                    )
                     {
-                        foreach (var memberConfigurationProvider in memberInfo.GetCustomAttributes().OfType<IMemberConfigurationProvider>())
+                        foreach (
+                            var memberConfigurationProvider in memberInfo
+                                .GetCustomAttributes()
+                                .OfType<IMemberConfigurationProvider>()
+                        )
                         {
-                            mappingExpression.ForMember(memberInfo, cfg => memberConfigurationProvider.ApplyConfiguration(cfg));
+                            mappingExpression.ForMember(
+                                memberInfo,
+                                cfg => memberConfigurationProvider.ApplyConfiguration(cfg)
+                            );
                         }
                     }
 
@@ -213,6 +235,7 @@ namespace AutoMapper
             AddProfile(autoMapAttributeProfile);
         }
 
-        public void ConstructServicesUsing(Func<Type, object> constructor) => _serviceCtor = constructor;
+        public void ConstructServicesUsing(Func<Type, object> constructor) =>
+            _serviceCtor = constructor;
     }
 }

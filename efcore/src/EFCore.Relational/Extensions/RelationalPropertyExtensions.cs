@@ -28,16 +28,18 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <returns> The name of the table column to which the property is mapped. </returns>
         [Obsolete("Use the overload that takes a StoreObjectIdentifier")]
-        public static string GetColumnName(this IProperty property)
-            => (string?)property.FindAnnotation(RelationalAnnotationNames.ColumnName)?.Value ?? property.GetDefaultColumnName();
+        public static string GetColumnName(this IProperty property) =>
+            (string?)property.FindAnnotation(RelationalAnnotationNames.ColumnName)?.Value
+            ?? property.GetDefaultColumnName();
 
         /// <summary>
         ///     Returns the base name of the column to which the property would be mapped.
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The the base name of the column to which the property would be mapped. </returns>
-        public static string GetColumnBaseName(this IReadOnlyProperty property)
-            => (string?)property.FindAnnotation(RelationalAnnotationNames.ColumnName)?.Value ?? property.GetDefaultColumnBaseName();
+        public static string GetColumnBaseName(this IReadOnlyProperty property) =>
+            (string?)property.FindAnnotation(RelationalAnnotationNames.ColumnName)?.Value
+            ?? property.GetDefaultColumnBaseName();
 
         /// <summary>
         ///     Returns the name of the column to which the property is mapped for a particular table.
@@ -45,7 +47,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The name of the column to which the property is mapped. </returns>
-        public static string? GetColumnName(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static string? GetColumnName(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             Check.NotNull(property, nameof(property));
 
@@ -55,15 +60,24 @@ namespace Microsoft.EntityFrameworkCore
                 return overrides.ColumnName;
             }
 
-            if (storeObject.StoreObjectType != StoreObjectType.Function
-                && storeObject.StoreObjectType != StoreObjectType.SqlQuery)
+            if (
+                storeObject.StoreObjectType != StoreObjectType.Function
+                && storeObject.StoreObjectType != StoreObjectType.SqlQuery
+            )
             {
                 if (property.IsPrimaryKey())
                 {
                     var tableFound = false;
-                    foreach (var containingType in property.DeclaringEntityType.GetDerivedTypesInclusive())
+                    foreach (
+                        var containingType in property.DeclaringEntityType.GetDerivedTypesInclusive()
+                    )
                     {
-                        if (StoreObjectIdentifier.Create(containingType, storeObject.StoreObjectType) == storeObject)
+                        if (
+                            StoreObjectIdentifier.Create(
+                                containingType,
+                                storeObject.StoreObjectType
+                            ) == storeObject
+                        )
                         {
                             tableFound = true;
                             break;
@@ -75,7 +89,12 @@ namespace Microsoft.EntityFrameworkCore
                         return null;
                     }
                 }
-                else if (StoreObjectIdentifier.Create(property.DeclaringEntityType, storeObject.StoreObjectType) != storeObject)
+                else if (
+                    StoreObjectIdentifier.Create(
+                        property.DeclaringEntityType,
+                        storeObject.StoreObjectType
+                    ) != storeObject
+                )
                 {
                     return null;
                 }
@@ -98,8 +117,13 @@ namespace Microsoft.EntityFrameworkCore
         [Obsolete("Use the overload that takes a StoreObjectIdentifier")]
         public static string GetDefaultColumnName(this IProperty property)
         {
-            var table = StoreObjectIdentifier.Create(property.DeclaringEntityType, StoreObjectType.Table);
-            return table == null ? property.GetDefaultColumnBaseName() : property.GetDefaultColumnName(table.Value);
+            var table = StoreObjectIdentifier.Create(
+                property.DeclaringEntityType,
+                StoreObjectType.Table
+            );
+            return table == null
+              ? property.GetDefaultColumnBaseName()
+              : property.GetDefaultColumnName(table.Value);
         }
 
         /// <summary>
@@ -107,8 +131,11 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The default base column name to which the property would be mapped. </returns>
-        public static string GetDefaultColumnBaseName(this IReadOnlyProperty property)
-            => Uniquifier.Truncate(property.Name, property.DeclaringEntityType.Model.GetMaxIdentifierLength());
+        public static string GetDefaultColumnBaseName(this IReadOnlyProperty property) =>
+            Uniquifier.Truncate(
+                property.Name,
+                property.DeclaringEntityType.Model.GetMaxIdentifierLength()
+            );
 
         /// <summary>
         ///     Returns the default column name to which the property would be mapped.
@@ -116,15 +143,22 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The default column name to which the property would be mapped. </returns>
-        public static string GetDefaultColumnName(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static string GetDefaultColumnName(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
-            var sharedTablePrincipalPrimaryKeyProperty = FindSharedObjectRootPrimaryKeyProperty(property, storeObject);
+            var sharedTablePrincipalPrimaryKeyProperty = FindSharedObjectRootPrimaryKeyProperty(
+                property,
+                storeObject
+            );
             if (sharedTablePrincipalPrimaryKeyProperty != null)
             {
                 return sharedTablePrincipalPrimaryKeyProperty.GetColumnName(storeObject)!;
             }
 
-            var sharedTablePrincipalConcurrencyProperty = FindSharedObjectRootConcurrencyTokenProperty(property, storeObject);
+            var sharedTablePrincipalConcurrencyProperty =
+                FindSharedObjectRootConcurrencyTokenProperty(property, storeObject);
             if (sharedTablePrincipalConcurrencyProperty != null)
             {
                 return sharedTablePrincipalConcurrencyProperty.GetColumnName(storeObject)!;
@@ -146,27 +180,22 @@ namespace Microsoft.EntityFrameworkCore
                 switch (storeObject.StoreObjectType)
                 {
                     case StoreObjectType.Table:
-                        if (name != ownerType.GetTableName()
-                            || schema != ownerType.GetSchema())
+                        if (name != ownerType.GetTableName() || schema != ownerType.GetSchema())
                         {
                             entityType = null;
                         }
-
                         break;
                     case StoreObjectType.View:
-                        if (name != ownerType.GetViewName()
-                            || schema != ownerType.GetViewSchema())
+                        if (name != ownerType.GetViewName() || schema != ownerType.GetViewSchema())
                         {
                             entityType = null;
                         }
-
                         break;
                     case StoreObjectType.Function:
                         if (name != ownerType.GetFunctionName())
                         {
                             entityType = null;
                         }
-
                         break;
                     default:
                         throw new NotSupportedException(storeObject.StoreObjectType.ToString());
@@ -196,7 +225,10 @@ namespace Microsoft.EntityFrameworkCore
             builder.Append(baseName);
             baseName = builder.ToString();
 
-            return Uniquifier.Truncate(baseName, property.DeclaringEntityType.Model.GetMaxIdentifierLength());
+            return Uniquifier.Truncate(
+                baseName,
+                property.DeclaringEntityType.Model.GetMaxIdentifierLength()
+            );
         }
 
         /// <summary>
@@ -204,10 +236,11 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <param name="name"> The name to set. </param>
-        public static void SetColumnName(this IMutableProperty property, string? name)
-            => property.SetOrRemoveAnnotation(
+        public static void SetColumnName(this IMutableProperty property, string? name) =>
+            property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.ColumnName,
-                Check.NullButNotEmpty(name, nameof(name)));
+                Check.NullButNotEmpty(name, nameof(name))
+            );
 
         /// <summary>
         ///     Sets the column to which the property is mapped.
@@ -219,12 +252,14 @@ namespace Microsoft.EntityFrameworkCore
         public static string? SetColumnName(
             this IConventionProperty property,
             string? name,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.ColumnName,
                 Check.NullButNotEmpty(name, nameof(name)),
-                fromDataAnnotation);
+                fromDataAnnotation
+            );
 
             return name;
         }
@@ -238,8 +273,10 @@ namespace Microsoft.EntityFrameworkCore
         public static void SetColumnName(
             this IMutableProperty property,
             string? name,
-            in StoreObjectIdentifier storeObject)
-            => RelationalPropertyOverrides.GetOrCreate(property, storeObject)
+            in StoreObjectIdentifier storeObject
+        ) =>
+            RelationalPropertyOverrides
+                .GetOrCreate(property, storeObject)
                 .SetColumnName(name, ConfigurationSource.Explicit);
 
         /// <summary>
@@ -254,17 +291,26 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionProperty property,
             string? name,
             in StoreObjectIdentifier storeObject,
-            bool fromDataAnnotation = false)
-            => RelationalPropertyOverrides.GetOrCreate(property, storeObject)
-                .SetColumnName(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            bool fromDataAnnotation = false
+        ) =>
+            RelationalPropertyOverrides
+                .GetOrCreate(property, storeObject)
+                .SetColumnName(
+                    name,
+                    fromDataAnnotation
+                      ? ConfigurationSource.DataAnnotation
+                      : ConfigurationSource.Convention
+                );
 
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for the column name.
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The <see cref="ConfigurationSource" /> for the column name. </returns>
-        public static ConfigurationSource? GetColumnNameConfigurationSource(this IConventionProperty property)
-            => property.FindAnnotation(RelationalAnnotationNames.ColumnName)?.GetConfigurationSource();
+        public static ConfigurationSource? GetColumnNameConfigurationSource(
+            this IConventionProperty property
+        ) =>
+            property.FindAnnotation(RelationalAnnotationNames.ColumnName)?.GetConfigurationSource();
 
         /// <summary>
         ///     Gets the <see cref="ConfigurationSource" /> for the column name for a particular table-like store object.
@@ -274,8 +320,14 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The <see cref="ConfigurationSource" /> for the column name for a particular table-like store object. </returns>
         public static ConfigurationSource? GetColumnNameConfigurationSource(
             this IConventionProperty property,
-            in StoreObjectIdentifier storeObject)
-            => ((RelationalPropertyOverrides?)RelationalPropertyOverrides.Find(property, storeObject))?.GetColumnNameConfigurationSource();
+            in StoreObjectIdentifier storeObject
+        ) =>
+            (
+                (RelationalPropertyOverrides?)RelationalPropertyOverrides.Find(
+                    property,
+                    storeObject
+                )
+            )?.GetColumnNameConfigurationSource();
 
         /// <summary>
         ///     Returns the database type of the column to which the property is mapped, or <see langword="null" /> if the database type
@@ -290,8 +342,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             Check.NotNull(property, nameof(property));
 
-            return (string?)(property.FindRelationalTypeMapping()?.StoreType
-                ?? property.FindAnnotation(RelationalAnnotationNames.ColumnType)?.Value);
+            return (string?)(
+                property.FindRelationalTypeMapping()?.StoreType
+                ?? property.FindAnnotation(RelationalAnnotationNames.ColumnType)?.Value
+            );
         }
 
         /// <summary>
@@ -299,8 +353,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The database type of the column to which the property is mapped. </returns>
-        public static string GetColumnType(this IProperty property)
-            => ((IReadOnlyProperty)property).GetColumnType()!;
+        public static string GetColumnType(this IProperty property) =>
+            ((IReadOnlyProperty)property).GetColumnType()!;
 
         /// <summary>
         ///     Returns the database type of the column to which the property is mapped, or <see langword="null" /> if the database type
@@ -312,7 +366,10 @@ namespace Microsoft.EntityFrameworkCore
         ///     The database type of the column to which the property is mapped, or <see langword="null" /> if the database type could not
         ///     be found.
         /// </returns>
-        public static string? GetColumnType(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static string? GetColumnType(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.ColumnType);
             if (annotation != null)
@@ -329,15 +386,20 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The database type of the column to which the property is mapped. </returns>
-        public static string GetColumnType(this IProperty property, in StoreObjectIdentifier storeObject)
-            => ((IReadOnlyProperty)property).GetColumnType(storeObject)!;
+        public static string GetColumnType(
+            this IProperty property,
+            in StoreObjectIdentifier storeObject
+        ) => ((IReadOnlyProperty)property).GetColumnType(storeObject)!;
 
-        private static string? GetDefaultColumnType(IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        private static string? GetDefaultColumnType(
+            IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
             return sharedTableRootProperty != null
-                ? sharedTableRootProperty.GetColumnType(storeObject)
-                : property.FindRelationalTypeMapping(storeObject)?.StoreType;
+              ? sharedTableRootProperty.GetColumnType(storeObject)
+              : property.FindRelationalTypeMapping(storeObject)?.StoreType;
         }
 
         /// <summary>
@@ -345,10 +407,11 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <param name="value"> The value to set. </param>
-        public static void SetColumnType(this IMutableProperty property, string? value)
-            => property.SetOrRemoveAnnotation(
+        public static void SetColumnType(this IMutableProperty property, string? value) =>
+            property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.ColumnType,
-                Check.NullButNotEmpty(value, nameof(value)));
+                Check.NullButNotEmpty(value, nameof(value))
+            );
 
         /// <summary>
         ///     Sets the database type of the column to which the property is mapped.
@@ -360,12 +423,14 @@ namespace Microsoft.EntityFrameworkCore
         public static string? SetColumnType(
             this IConventionProperty property,
             string? value,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.ColumnType,
                 Check.NullButNotEmpty(value, nameof(value)),
-                fromDataAnnotation);
+                fromDataAnnotation
+            );
 
             return value;
         }
@@ -375,58 +440,68 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The <see cref="ConfigurationSource" /> for the column name. </returns>
-        public static ConfigurationSource? GetColumnTypeConfigurationSource(this IConventionProperty property)
-            => property.FindAnnotation(RelationalAnnotationNames.ColumnType)?.GetConfigurationSource();
+        public static ConfigurationSource? GetColumnTypeConfigurationSource(
+            this IConventionProperty property
+        ) =>
+            property.FindAnnotation(RelationalAnnotationNames.ColumnType)?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the default columns to which the property would be mapped.
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The default columns to which the property would be mapped. </returns>
-        public static IEnumerable<IColumnMappingBase> GetDefaultColumnMappings(this IProperty property)
-            => (IEnumerable<IColumnMappingBase>?)property.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.DefaultColumnMappings)
-                ?? Enumerable.Empty<IColumnMappingBase>();
+        public static IEnumerable<IColumnMappingBase> GetDefaultColumnMappings(
+            this IProperty property
+        ) =>
+            (IEnumerable<IColumnMappingBase>?)property.FindRuntimeAnnotationValue(
+                RelationalAnnotationNames.DefaultColumnMappings
+            ) ?? Enumerable.Empty<IColumnMappingBase>();
 
         /// <summary>
         ///     Returns the table columns to which the property is mapped.
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The table columns to which the property is mapped. </returns>
-        public static IEnumerable<IColumnMapping> GetTableColumnMappings(this IProperty property)
-            => (IEnumerable<IColumnMapping>?)property.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.TableColumnMappings)
-                ?? Enumerable.Empty<IColumnMapping>();
+        public static IEnumerable<IColumnMapping> GetTableColumnMappings(this IProperty property) =>
+            (IEnumerable<IColumnMapping>?)property.FindRuntimeAnnotationValue(
+                RelationalAnnotationNames.TableColumnMappings
+            ) ?? Enumerable.Empty<IColumnMapping>();
 
         /// <summary>
         ///     Returns the view columns to which the property is mapped.
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The view columns to which the property is mapped. </returns>
-        public static IEnumerable<IViewColumnMapping> GetViewColumnMappings(this IProperty property)
-            => (IEnumerable<IViewColumnMapping>?)property.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.ViewColumnMappings)
-                ?? Enumerable.Empty<IViewColumnMapping>();
+        public static IEnumerable<IViewColumnMapping> GetViewColumnMappings(
+            this IProperty property
+        ) =>
+            (IEnumerable<IViewColumnMapping>?)property.FindRuntimeAnnotationValue(
+                RelationalAnnotationNames.ViewColumnMappings
+            ) ?? Enumerable.Empty<IViewColumnMapping>();
 
         /// <summary>
         ///     Returns the SQL query columns to which the property is mapped.
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The SQL query columns to which the property is mapped. </returns>
-        public static IEnumerable<ISqlQueryColumnMapping> GetSqlQueryColumnMappings(this IProperty property)
-            => (IEnumerable<ISqlQueryColumnMapping>?)property.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.SqlQueryColumnMappings)
-                ?? Enumerable.Empty<ISqlQueryColumnMapping>();
+        public static IEnumerable<ISqlQueryColumnMapping> GetSqlQueryColumnMappings(
+            this IProperty property
+        ) =>
+            (IEnumerable<ISqlQueryColumnMapping>?)property.FindRuntimeAnnotationValue(
+                RelationalAnnotationNames.SqlQueryColumnMappings
+            ) ?? Enumerable.Empty<ISqlQueryColumnMapping>();
 
         /// <summary>
         ///     Returns the function columns to which the property is mapped.
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The function columns to which the property is mapped. </returns>
-        public static IEnumerable<IFunctionColumnMapping> GetFunctionColumnMappings(this IProperty property)
-            => (IEnumerable<IFunctionColumnMapping>?)property.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.FunctionColumnMappings)
-                ?? Enumerable.Empty<IFunctionColumnMapping>();
+        public static IEnumerable<IFunctionColumnMapping> GetFunctionColumnMappings(
+            this IProperty property
+        ) =>
+            (IEnumerable<IFunctionColumnMapping>?)property.FindRuntimeAnnotationValue(
+                RelationalAnnotationNames.FunctionColumnMappings
+            ) ?? Enumerable.Empty<IFunctionColumnMapping>();
 
         /// <summary>
         ///     Returns the column corresponding to this property if it's mapped to the given table-like store object.
@@ -434,14 +509,20 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The column to which the property is mapped. </returns>
-        public static IColumnBase? FindColumn(this IProperty property, in StoreObjectIdentifier storeObject)
+        public static IColumnBase? FindColumn(
+            this IProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             switch (storeObject.StoreObjectType)
             {
                 case StoreObjectType.Table:
                     foreach (var mapping in property.GetTableColumnMappings())
                     {
-                        if (mapping.TableMapping.Table.Name == storeObject.Name && mapping.TableMapping.Table.Schema == storeObject.Schema)
+                        if (
+                            mapping.TableMapping.Table.Name == storeObject.Name
+                            && mapping.TableMapping.Table.Schema == storeObject.Schema
+                        )
                         {
                             return mapping.Column;
                         }
@@ -451,7 +532,10 @@ namespace Microsoft.EntityFrameworkCore
                 case StoreObjectType.View:
                     foreach (var mapping in property.GetViewColumnMappings())
                     {
-                        if (mapping.TableMapping.Table.Name == storeObject.Name && mapping.TableMapping.Table.Schema == storeObject.Schema)
+                        if (
+                            mapping.TableMapping.Table.Name == storeObject.Name
+                            && mapping.TableMapping.Table.Schema == storeObject.Schema
+                        )
                         {
                             return mapping.Column;
                         }
@@ -488,8 +572,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The SQL expression that is used as the default value for the column this property is mapped to. </returns>
-        public static string? GetDefaultValueSql(this IReadOnlyProperty property)
-            => (string?)property.FindAnnotation(RelationalAnnotationNames.DefaultValueSql)?.Value;
+        public static string? GetDefaultValueSql(this IReadOnlyProperty property) =>
+            (string?)property.FindAnnotation(RelationalAnnotationNames.DefaultValueSql)?.Value;
 
         /// <summary>
         ///     Returns the SQL expression that is used as the default value for the column this property is mapped to.
@@ -497,7 +581,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The SQL expression that is used as the default value for the column this property is mapped to. </returns>
-        public static string? GetDefaultValueSql(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static string? GetDefaultValueSql(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.DefaultValueSql);
             if (annotation != null)
@@ -519,10 +606,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <param name="value"> The value to set. </param>
-        public static void SetDefaultValueSql(this IMutableProperty property, string? value)
-            => property.SetOrRemoveAnnotation(
-                RelationalAnnotationNames.DefaultValueSql,
-                value);
+        public static void SetDefaultValueSql(this IMutableProperty property, string? value) =>
+            property.SetOrRemoveAnnotation(RelationalAnnotationNames.DefaultValueSql, value);
 
         /// <summary>
         ///     Sets the SQL expression that is used as the default value for the column this property is mapped to.
@@ -534,12 +619,14 @@ namespace Microsoft.EntityFrameworkCore
         public static string? SetDefaultValueSql(
             this IConventionProperty property,
             string? value,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.DefaultValueSql,
                 value,
-                fromDataAnnotation);
+                fromDataAnnotation
+            );
 
             return value;
         }
@@ -549,16 +636,20 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The <see cref="ConfigurationSource" /> for the default value SQL expression. </returns>
-        public static ConfigurationSource? GetDefaultValueSqlConfigurationSource(this IConventionProperty property)
-            => property.FindAnnotation(RelationalAnnotationNames.DefaultValueSql)?.GetConfigurationSource();
+        public static ConfigurationSource? GetDefaultValueSqlConfigurationSource(
+            this IConventionProperty property
+        ) =>
+            property.FindAnnotation(
+                RelationalAnnotationNames.DefaultValueSql
+            )?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the SQL expression that is used as the computed value for the column this property is mapped to.
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The SQL expression that is used as the computed value for the column this property is mapped to. </returns>
-        public static string? GetComputedColumnSql(this IReadOnlyProperty property)
-            => (string?)property.FindAnnotation(RelationalAnnotationNames.ComputedColumnSql)?.Value;
+        public static string? GetComputedColumnSql(this IReadOnlyProperty property) =>
+            (string?)property.FindAnnotation(RelationalAnnotationNames.ComputedColumnSql)?.Value;
 
         /// <summary>
         ///     Returns the SQL expression that is used as the computed value for the column this property is mapped to.
@@ -566,7 +657,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The SQL expression that is used as the computed value for the column this property is mapped to. </returns>
-        public static string? GetComputedColumnSql(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static string? GetComputedColumnSql(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.ComputedColumnSql);
             if (annotation != null)
@@ -588,10 +682,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <param name="value"> The value to set. </param>
-        public static void SetComputedColumnSql(this IMutableProperty property, string? value)
-            => property.SetOrRemoveAnnotation(
-                RelationalAnnotationNames.ComputedColumnSql,
-                value);
+        public static void SetComputedColumnSql(this IMutableProperty property, string? value) =>
+            property.SetOrRemoveAnnotation(RelationalAnnotationNames.ComputedColumnSql, value);
 
         /// <summary>
         ///     Sets the SQL expression that is used as the computed value for the column this property is mapped to.
@@ -603,12 +695,14 @@ namespace Microsoft.EntityFrameworkCore
         public static string? SetComputedColumnSql(
             this IConventionProperty property,
             string? value,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             property.SetOrRemoveAnnotation(
                 RelationalAnnotationNames.ComputedColumnSql,
                 value,
-                fromDataAnnotation);
+                fromDataAnnotation
+            );
 
             return value;
         }
@@ -618,8 +712,12 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The <see cref="ConfigurationSource" /> for the computed value SQL expression. </returns>
-        public static ConfigurationSource? GetComputedColumnSqlConfigurationSource(this IConventionProperty property)
-            => property.FindAnnotation(RelationalAnnotationNames.ComputedColumnSql)?.GetConfigurationSource();
+        public static ConfigurationSource? GetComputedColumnSqlConfigurationSource(
+            this IConventionProperty property
+        ) =>
+            property.FindAnnotation(
+                RelationalAnnotationNames.ComputedColumnSql
+            )?.GetConfigurationSource();
 
         /// <summary>
         ///     Gets whether the value of the computed column this property is mapped to is stored in the database, or calculated when
@@ -630,8 +728,8 @@ namespace Microsoft.EntityFrameworkCore
         ///     Whether the value of the computed column this property is mapped to is stored in the database,
         ///     or calculated when it is read.
         /// </returns>
-        public static bool? GetIsStored(this IReadOnlyProperty property)
-            => (bool?)property.FindAnnotation(RelationalAnnotationNames.IsStored)?.Value;
+        public static bool? GetIsStored(this IReadOnlyProperty property) =>
+            (bool?)property.FindAnnotation(RelationalAnnotationNames.IsStored)?.Value;
 
         /// <summary>
         ///     Gets whether the value of the computed column this property is mapped to is stored in the database, or calculated when
@@ -643,7 +741,10 @@ namespace Microsoft.EntityFrameworkCore
         ///     Whether the value of the computed column this property is mapped to is stored in the database,
         ///     or calculated when it is read.
         /// </returns>
-        public static bool? GetIsStored(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static bool? GetIsStored(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.IsStored);
             if (annotation != null)
@@ -666,8 +767,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <param name="value"> The value to set. </param>
-        public static void SetIsStored(this IMutableProperty property, bool? value)
-            => property.SetOrRemoveAnnotation(RelationalAnnotationNames.IsStored, value);
+        public static void SetIsStored(this IMutableProperty property, bool? value) =>
+            property.SetOrRemoveAnnotation(RelationalAnnotationNames.IsStored, value);
 
         /// <summary>
         ///     Sets whether the value of the computed column this property is mapped to is stored in the database, or calculated when
@@ -680,9 +781,14 @@ namespace Microsoft.EntityFrameworkCore
         public static bool? SetIsStored(
             this IConventionProperty property,
             bool? value,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
-            property.SetOrRemoveAnnotation(RelationalAnnotationNames.IsStored, value, fromDataAnnotation);
+            property.SetOrRemoveAnnotation(
+                RelationalAnnotationNames.IsStored,
+                value,
+                fromDataAnnotation
+            );
 
             return value;
         }
@@ -692,16 +798,17 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The <see cref="ConfigurationSource" /> for the computed value SQL expression. </returns>
-        public static ConfigurationSource? GetIsStoredConfigurationSource(this IConventionProperty property)
-            => property.FindAnnotation(RelationalAnnotationNames.IsStored)?.GetConfigurationSource();
+        public static ConfigurationSource? GetIsStoredConfigurationSource(
+            this IConventionProperty property
+        ) => property.FindAnnotation(RelationalAnnotationNames.IsStored)?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the object that is used as the default value for the column this property is mapped to.
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The object that is used as the default value for the column this property is mapped to. </returns>
-        public static object? GetDefaultValue(this IReadOnlyProperty property)
-            => property.FindAnnotation(RelationalAnnotationNames.DefaultValue)?.Value;
+        public static object? GetDefaultValue(this IReadOnlyProperty property) =>
+            property.FindAnnotation(RelationalAnnotationNames.DefaultValue)?.Value;
 
         /// <summary>
         ///     Returns the object that is used as the default value for the column this property is mapped to.
@@ -709,7 +816,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The object that is used as the default value for the column this property is mapped to. </returns>
-        public static object? GetDefaultValue(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static object? GetDefaultValue(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.DefaultValue);
             if (annotation != null)
@@ -731,8 +841,11 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <param name="value"> The value to set. </param>
-        public static void SetDefaultValue(this IMutableProperty property, object? value)
-            => property.SetOrRemoveAnnotation(RelationalAnnotationNames.DefaultValue, ConvertDefaultValue(property, value));
+        public static void SetDefaultValue(this IMutableProperty property, object? value) =>
+            property.SetOrRemoveAnnotation(
+                RelationalAnnotationNames.DefaultValue,
+                ConvertDefaultValue(property, value)
+            );
 
         /// <summary>
         ///     Sets the object that is used as the default value for the column this property is mapped to.
@@ -744,18 +857,21 @@ namespace Microsoft.EntityFrameworkCore
         public static object? SetDefaultValue(
             this IConventionProperty property,
             object? value,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             property.SetOrRemoveAnnotation(
-                RelationalAnnotationNames.DefaultValue, ConvertDefaultValue(property, value), fromDataAnnotation);
+                RelationalAnnotationNames.DefaultValue,
+                ConvertDefaultValue(property, value),
+                fromDataAnnotation
+            );
 
             return value;
         }
 
         private static object? ConvertDefaultValue(IReadOnlyProperty property, object? value)
         {
-            if (value == null
-                || value == DBNull.Value)
+            if (value == null || value == DBNull.Value)
             {
                 return value;
             }
@@ -765,13 +881,23 @@ namespace Microsoft.EntityFrameworkCore
             {
                 try
                 {
-                    return Convert.ChangeType(value, property.ClrType, CultureInfo.InvariantCulture);
+                    return Convert.ChangeType(
+                        value,
+                        property.ClrType,
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 catch (Exception)
                 {
                     throw new InvalidOperationException(
                         RelationalStrings.IncorrectDefaultValueType(
-                            value, valueType, property.Name, property.ClrType, property.DeclaringEntityType.DisplayName()));
+                            value,
+                            valueType,
+                            property.Name,
+                            property.ClrType,
+                            property.DeclaringEntityType.DisplayName()
+                        )
+                    );
                 }
             }
 
@@ -783,8 +909,12 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The <see cref="ConfigurationSource" /> for the default value. </returns>
-        public static ConfigurationSource? GetDefaultValueConfigurationSource(this IConventionProperty property)
-            => property.FindAnnotation(RelationalAnnotationNames.DefaultValue)?.GetConfigurationSource();
+        public static ConfigurationSource? GetDefaultValueConfigurationSource(
+            this IConventionProperty property
+        ) =>
+            property.FindAnnotation(
+                RelationalAnnotationNames.DefaultValue
+            )?.GetConfigurationSource();
 
         /// <summary>
         ///     Gets the maximum length of data that is allowed in this property. For example, if the property is a <see cref="string" />
@@ -793,7 +923,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The maximum length, or <see langword="null" /> if none if defined. </returns>
-        public static int? GetMaxLength(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static int? GetMaxLength(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             Check.NotNull(property, nameof(property));
 
@@ -804,7 +937,9 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return sharedTableRootProperty != null ? GetMaxLength(sharedTableRootProperty, storeObject) : null;
+            return sharedTableRootProperty != null
+              ? GetMaxLength(sharedTableRootProperty, storeObject)
+              : null;
         }
 
         /// <summary>
@@ -814,7 +949,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The precision, or <see langword="null" /> if none is defined. </returns>
-        public static int? GetPrecision(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static int? GetPrecision(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             Check.NotNull(property, nameof(property));
 
@@ -825,7 +963,9 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return sharedTableRootProperty != null ? GetPrecision(sharedTableRootProperty, storeObject) : null;
+            return sharedTableRootProperty != null
+              ? GetPrecision(sharedTableRootProperty, storeObject)
+              : null;
         }
 
         /// <summary>
@@ -835,7 +975,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The scale, or <see langword="null" /> if none is defined. </returns>
-        public static int? GetScale(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static int? GetScale(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             Check.NotNull(property, nameof(property));
 
@@ -846,7 +989,9 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return sharedTableRootProperty != null ? GetScale(sharedTableRootProperty, storeObject) : null;
+            return sharedTableRootProperty != null
+              ? GetScale(sharedTableRootProperty, storeObject)
+              : null;
         }
 
         /// <summary>
@@ -855,7 +1000,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The Unicode setting, or <see langword="null" /> if none is defined. </returns>
-        public static bool? IsUnicode(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static bool? IsUnicode(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             Check.NotNull(property, nameof(property));
 
@@ -866,7 +1014,9 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
-            return sharedTableRootProperty != null ? IsUnicode(sharedTableRootProperty, storeObject) : null;
+            return sharedTableRootProperty != null
+              ? IsUnicode(sharedTableRootProperty, storeObject)
+              : null;
         }
 
         /// <summary>
@@ -874,8 +1024,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> A flag indicating if the property as capable of storing only fixed-length data, such as strings. </returns>
-        public static bool? IsFixedLength(this IReadOnlyProperty property)
-            => (bool?)property.FindAnnotation(RelationalAnnotationNames.IsFixedLength)?.Value;
+        public static bool? IsFixedLength(this IReadOnlyProperty property) =>
+            (bool?)property.FindAnnotation(RelationalAnnotationNames.IsFixedLength)?.Value;
 
         /// <summary>
         ///     Returns a flag indicating if the property as capable of storing only fixed-length data, such as strings.
@@ -883,7 +1033,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> A flag indicating if the property as capable of storing only fixed-length data, such as strings. </returns>
-        public static bool? IsFixedLength(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static bool? IsFixedLength(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.IsFixedLength);
             if (annotation != null)
@@ -905,8 +1058,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <param name="fixedLength"> A value indicating whether the property is constrained to fixed length values. </param>
-        public static void SetIsFixedLength(this IMutableProperty property, bool? fixedLength)
-            => property.SetOrRemoveAnnotation(RelationalAnnotationNames.IsFixedLength, fixedLength);
+        public static void SetIsFixedLength(this IMutableProperty property, bool? fixedLength) =>
+            property.SetOrRemoveAnnotation(RelationalAnnotationNames.IsFixedLength, fixedLength);
 
         /// <summary>
         ///     Sets a flag indicating whether the property as capable of storing only fixed-length data, such as strings.
@@ -918,9 +1071,14 @@ namespace Microsoft.EntityFrameworkCore
         public static bool? SetIsFixedLength(
             this IConventionProperty property,
             bool? fixedLength,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
-            property.SetOrRemoveAnnotation(RelationalAnnotationNames.IsFixedLength, fixedLength, fromDataAnnotation);
+            property.SetOrRemoveAnnotation(
+                RelationalAnnotationNames.IsFixedLength,
+                fixedLength,
+                fromDataAnnotation
+            );
 
             return fixedLength;
         }
@@ -930,8 +1088,12 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The <see cref="ConfigurationSource" /> for <see cref="IsFixedLength(IReadOnlyProperty)" />. </returns>
-        public static ConfigurationSource? GetIsFixedLengthConfigurationSource(this IConventionProperty property)
-            => property.FindAnnotation(RelationalAnnotationNames.IsFixedLength)?.GetConfigurationSource();
+        public static ConfigurationSource? GetIsFixedLengthConfigurationSource(
+            this IConventionProperty property
+        ) =>
+            property.FindAnnotation(
+                RelationalAnnotationNames.IsFixedLength
+            )?.GetConfigurationSource();
 
         /// <summary>
         ///     <para>
@@ -946,9 +1108,12 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The <see cref="IReadOnlyProperty" />. </param>
         /// <returns> <see langword="true" /> if the mapped column is nullable; <see langword="false" /> otherwise. </returns>
-        public static bool IsColumnNullable(this IReadOnlyProperty property)
-            => property.IsNullable
-                || (property.DeclaringEntityType.BaseType != null && property.DeclaringEntityType.FindDiscriminatorProperty() != null);
+        public static bool IsColumnNullable(this IReadOnlyProperty property) =>
+            property.IsNullable
+            || (
+                property.DeclaringEntityType.BaseType != null
+                && property.DeclaringEntityType.FindDiscriminatorProperty() != null
+            );
 
         /// <summary>
         ///     <para>
@@ -964,7 +1129,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> <see langword="true" /> if the mapped column is nullable; <see langword="false" /> otherwise. </returns>
-        public static bool IsColumnNullable(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static bool IsColumnNullable(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             if (property.IsPrimaryKey())
             {
@@ -978,13 +1146,23 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             return property.IsNullable
-                || (property.DeclaringEntityType.BaseType != null && property.DeclaringEntityType.FindDiscriminatorProperty() != null)
+                || (
+                    property.DeclaringEntityType.BaseType != null
+                    && property.DeclaringEntityType.FindDiscriminatorProperty() != null
+                )
                 || IsOptionalSharingDependent(property.DeclaringEntityType, storeObject, 0);
         }
 
-        private static bool IsOptionalSharingDependent(IReadOnlyEntityType entityType, in StoreObjectIdentifier storeObject, int recursionDepth)
+        private static bool IsOptionalSharingDependent(
+            IReadOnlyEntityType entityType,
+            in StoreObjectIdentifier storeObject,
+            int recursionDepth
+        )
         {
-            if (recursionDepth++ == Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable)
+            if (
+                recursionDepth++
+                == Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable
+            )
             {
                 return true;
             }
@@ -992,12 +1170,20 @@ namespace Microsoft.EntityFrameworkCore
             bool? optional = null;
             foreach (var linkingForeignKey in entityType.FindRowInternalForeignKeys(storeObject))
             {
-                optional = (optional ?? true)
-                    && (!linkingForeignKey.IsRequiredDependent
-                        || IsOptionalSharingDependent(linkingForeignKey.PrincipalEntityType, storeObject, recursionDepth));
+                optional =
+                    (optional ?? true)
+                    && (
+                        !linkingForeignKey.IsRequiredDependent
+                        || IsOptionalSharingDependent(
+                            linkingForeignKey.PrincipalEntityType,
+                            storeObject,
+                            recursionDepth
+                        )
+                    );
             }
 
-            return optional ?? (entityType.BaseType != null && entityType.FindDiscriminatorProperty() != null);
+            return optional
+                ?? (entityType.BaseType != null && entityType.FindDiscriminatorProperty() != null);
         }
 
         /// <summary>
@@ -1005,8 +1191,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The comment for the column this property is mapped to. </returns>
-        public static string? GetComment(this IReadOnlyProperty property)
-            => (string?)property.FindAnnotation(RelationalAnnotationNames.Comment)?.Value;
+        public static string? GetComment(this IReadOnlyProperty property) =>
+            (string?)property.FindAnnotation(RelationalAnnotationNames.Comment)?.Value;
 
         /// <summary>
         ///     Returns the comment for the column this property is mapped to.
@@ -1014,7 +1200,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The comment for the column this property is mapped to. </returns>
-        public static string? GetComment(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static string? GetComment(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.Comment);
             if (annotation != null)
@@ -1036,8 +1225,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <param name="comment"> The comment for the column. </param>
-        public static void SetComment(this IMutableProperty property, string? comment)
-            => property.SetOrRemoveAnnotation(RelationalAnnotationNames.Comment, comment);
+        public static void SetComment(this IMutableProperty property, string? comment) =>
+            property.SetOrRemoveAnnotation(RelationalAnnotationNames.Comment, comment);
 
         /// <summary>
         ///     Configures a comment to be applied to the column this property is mapped to.
@@ -1049,9 +1238,14 @@ namespace Microsoft.EntityFrameworkCore
         public static string? SetComment(
             this IConventionProperty property,
             string? comment,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
-            property.SetOrRemoveAnnotation(RelationalAnnotationNames.Comment, comment, fromDataAnnotation);
+            property.SetOrRemoveAnnotation(
+                RelationalAnnotationNames.Comment,
+                comment,
+                fromDataAnnotation
+            );
 
             return comment;
         }
@@ -1061,16 +1255,17 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The <see cref="ConfigurationSource" /> for the column comment. </returns>
-        public static ConfigurationSource? GetCommentConfigurationSource(this IConventionProperty property)
-            => property.FindAnnotation(RelationalAnnotationNames.Comment)?.GetConfigurationSource();
+        public static ConfigurationSource? GetCommentConfigurationSource(
+            this IConventionProperty property
+        ) => property.FindAnnotation(RelationalAnnotationNames.Comment)?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the collation to be used for the column.
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The collation for the column this property is mapped to. </returns>
-        public static string? GetCollation(this IReadOnlyProperty property)
-            => (string?)property.FindAnnotation(RelationalAnnotationNames.Collation)?.Value;
+        public static string? GetCollation(this IReadOnlyProperty property) =>
+            (string?)property.FindAnnotation(RelationalAnnotationNames.Collation)?.Value;
 
         /// <summary>
         ///     Returns the collation to be used for the column.
@@ -1078,7 +1273,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> The collation for the column this property is mapped to. </returns>
-        public static string? GetCollation(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        public static string? GetCollation(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             var annotation = property.FindAnnotation(RelationalAnnotationNames.Collation);
             if (annotation != null)
@@ -1100,8 +1298,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <param name="collation"> The collation for the column. </param>
-        public static void SetCollation(this IMutableProperty property, string? collation)
-            => property.SetOrRemoveAnnotation(RelationalAnnotationNames.Collation, collation);
+        public static void SetCollation(this IMutableProperty property, string? collation) =>
+            property.SetOrRemoveAnnotation(RelationalAnnotationNames.Collation, collation);
 
         /// <summary>
         ///     Configures a collation to be used for the column this property is mapped to.
@@ -1113,9 +1311,14 @@ namespace Microsoft.EntityFrameworkCore
         public static string? SetCollation(
             this IConventionProperty property,
             string? collation,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
-            property.SetOrRemoveAnnotation(RelationalAnnotationNames.Collation, collation, fromDataAnnotation);
+            property.SetOrRemoveAnnotation(
+                RelationalAnnotationNames.Collation,
+                collation,
+                fromDataAnnotation
+            );
             return collation;
         }
 
@@ -1124,8 +1327,9 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The <see cref="ConfigurationSource" /> for the column collation. </returns>
-        public static ConfigurationSource? GetCollationConfigurationSource(this IConventionProperty property)
-            => property.FindAnnotation(RelationalAnnotationNames.Collation)?.GetConfigurationSource();
+        public static ConfigurationSource? GetCollationConfigurationSource(
+            this IConventionProperty property
+        ) => property.FindAnnotation(RelationalAnnotationNames.Collation)?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the <see cref="RelationalTypeMapping" /> for the given property on a finalized model.
@@ -1133,8 +1337,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <returns> The type mapping. </returns>
         [DebuggerStepThrough]
-        public static RelationalTypeMapping GetRelationalTypeMapping(this IReadOnlyProperty property)
-            => (RelationalTypeMapping)property.GetTypeMapping();
+        public static RelationalTypeMapping GetRelationalTypeMapping(
+            this IReadOnlyProperty property
+        ) => (RelationalTypeMapping)property.GetTypeMapping();
 
         /// <summary>
         ///     Returns the <see cref="RelationalTypeMapping" /> for the given property on a finalized model.
@@ -1143,8 +1348,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The type mapping, or <see langword="null" /> if none was found. </returns>
         [DebuggerStepThrough]
         [Obsolete("Use FindRelationalTypeMapping")]
-        public static RelationalTypeMapping? FindRelationalMapping(this IProperty property)
-            => property.FindRelationalTypeMapping();
+        public static RelationalTypeMapping? FindRelationalMapping(this IProperty property) =>
+            property.FindRelationalTypeMapping();
 
         /// <summary>
         ///     Returns the <see cref="RelationalTypeMapping" /> for the given property on a finalized model.
@@ -1152,8 +1357,9 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <returns> The type mapping, or <see langword="null" /> if none was found. </returns>
         [DebuggerStepThrough]
-        public static RelationalTypeMapping? FindRelationalTypeMapping(this IReadOnlyProperty property)
-            => (RelationalTypeMapping?)property.FindTypeMapping();
+        public static RelationalTypeMapping? FindRelationalTypeMapping(
+            this IReadOnlyProperty property
+        ) => (RelationalTypeMapping?)property.FindTypeMapping();
 
         /// <summary>
         ///     Returns the <see cref="RelationalTypeMapping" /> for the given property on a finalized model.
@@ -1163,8 +1369,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The type mapping, or <see langword="null" /> if none was found. </returns>
         public static RelationalTypeMapping? FindRelationalTypeMapping(
             this IReadOnlyProperty property,
-            in StoreObjectIdentifier storeObject)
-            => property.FindRelationalTypeMapping();
+            in StoreObjectIdentifier storeObject
+        ) => property.FindRelationalTypeMapping();
 
         /// <summary>
         ///     <para>
@@ -1180,8 +1386,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The property found, or <see langword="null" /> if none was found.</returns>
         public static IReadOnlyProperty? FindSharedStoreObjectRootProperty(
             this IReadOnlyProperty property,
-            in StoreObjectIdentifier storeObject)
-            => FindSharedObjectRootProperty(property, storeObject);
+            in StoreObjectIdentifier storeObject
+        ) => FindSharedObjectRootProperty(property, storeObject);
 
         /// <summary>
         ///     <para>
@@ -1197,8 +1403,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The property found, or <see langword="null" /> if none was found.</returns>
         public static IMutableProperty? FindSharedStoreObjectRootProperty(
             this IMutableProperty property,
-            in StoreObjectIdentifier storeObject)
-            => (IMutableProperty?)FindSharedObjectRootProperty(property, storeObject);
+            in StoreObjectIdentifier storeObject
+        ) => (IMutableProperty?)FindSharedObjectRootProperty(property, storeObject);
 
         /// <summary>
         ///     <para>
@@ -1214,8 +1420,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The property found, or <see langword="null" /> if none was found.</returns>
         public static IConventionProperty? FindSharedStoreObjectRootProperty(
             this IConventionProperty property,
-            in StoreObjectIdentifier storeObject)
-            => (IConventionProperty?)FindSharedObjectRootProperty(property, storeObject);
+            in StoreObjectIdentifier storeObject
+        ) => (IConventionProperty?)FindSharedObjectRootProperty(property, storeObject);
 
         /// <summary>
         ///     <para>
@@ -1231,10 +1437,13 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The property found, or <see langword="null" /> if none was found.</returns>
         public static IProperty? FindSharedStoreObjectRootProperty(
             this IProperty property,
-            in StoreObjectIdentifier storeObject)
-            => (IProperty?)FindSharedObjectRootProperty(property, storeObject);
+            in StoreObjectIdentifier storeObject
+        ) => (IProperty?)FindSharedObjectRootProperty(property, storeObject);
 
-        private static IReadOnlyProperty? FindSharedObjectRootProperty(IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+        private static IReadOnlyProperty? FindSharedObjectRootProperty(
+            IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             Check.NotNull(property, nameof(property));
 
@@ -1244,19 +1453,29 @@ namespace Microsoft.EntityFrameworkCore
             {
                 throw new InvalidOperationException(
                     RelationalStrings.PropertyNotMappedToTable(
-                        property.Name, property.DeclaringEntityType.DisplayName(), storeObject.DisplayName()));
+                        property.Name,
+                        property.DeclaringEntityType.DisplayName(),
+                        storeObject.DisplayName()
+                    )
+                );
             }
 
             var rootProperty = property;
 
             // Limit traversal to avoid getting stuck in a cycle (validation will throw for these later)
             // Using a hashset is detrimental to the perf when there are no cycles
-            for (var i = 0; i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable; i++)
+            for (
+                var i = 0;
+                i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
+                i++
+            )
             {
                 IReadOnlyProperty? linkedProperty = null;
-                foreach (var p in rootProperty.DeclaringEntityType
-                    .FindRowInternalForeignKeys(storeObject)
-                    .SelectMany(fk => fk.PrincipalEntityType.GetProperties()))
+                foreach (
+                    var p in rootProperty.DeclaringEntityType
+                        .FindRowInternalForeignKeys(storeObject)
+                        .SelectMany(fk => fk.PrincipalEntityType.GetProperties())
+                )
                 {
                     if (p.GetColumnName(storeObject) == column)
                     {
@@ -1277,7 +1496,9 @@ namespace Microsoft.EntityFrameworkCore
         }
 
         private static IReadOnlyProperty? FindSharedObjectRootPrimaryKeyProperty(
-            IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+            IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             if (!property.IsPrimaryKey())
             {
@@ -1288,16 +1509,23 @@ namespace Microsoft.EntityFrameworkCore
 
             // Limit traversal to avoid getting stuck in a cycle (validation will throw for these later)
             // Using a hashset is detrimental to the perf when there are no cycles
-            for (var i = 0; i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable; i++)
+            for (
+                var i = 0;
+                i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
+                i++
+            )
             {
                 var linkingRelationship = principalProperty.DeclaringEntityType
-                    .FindRowInternalForeignKeys(storeObject).FirstOrDefault();
+                    .FindRowInternalForeignKeys(storeObject)
+                    .FirstOrDefault();
                 if (linkingRelationship == null)
                 {
                     break;
                 }
 
-                principalProperty = linkingRelationship.PrincipalKey.Properties[linkingRelationship.Properties.IndexOf(principalProperty)];
+                principalProperty = linkingRelationship.PrincipalKey.Properties[
+                    linkingRelationship.Properties.IndexOf(principalProperty)
+                ];
             }
 
             return principalProperty == property ? null : principalProperty;
@@ -1305,7 +1533,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private static IReadOnlyProperty? FindSharedObjectRootConcurrencyTokenProperty(
             IReadOnlyProperty property,
-            in StoreObjectIdentifier storeObject)
+            in StoreObjectIdentifier storeObject
+        )
         {
             if (!property.IsConcurrencyToken)
             {
@@ -1315,18 +1544,24 @@ namespace Microsoft.EntityFrameworkCore
             var principalProperty = property;
             // Limit traversal to avoid getting stuck in a cycle (validation will throw for these later)
             // Using a hashset is detrimental to the perf when there are no cycles
-            for (var i = 0; i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable; i++)
+            for (
+                var i = 0;
+                i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable;
+                i++
+            )
             {
                 var linkingRelationship = principalProperty.DeclaringEntityType
-                    .FindRowInternalForeignKeys(storeObject).FirstOrDefault();
+                    .FindRowInternalForeignKeys(storeObject)
+                    .FirstOrDefault();
                 if (linkingRelationship == null)
                 {
                     break;
                 }
 
-                principalProperty = linkingRelationship.PrincipalEntityType.FindProperty(property.Name);
-                if (principalProperty == null
-                    || !principalProperty.IsConcurrencyToken)
+                principalProperty = linkingRelationship.PrincipalEntityType.FindProperty(
+                    property.Name
+                );
+                if (principalProperty == null || !principalProperty.IsConcurrencyToken)
                 {
                     return null;
                 }
@@ -1347,8 +1582,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> An object that stores property facet overrides. </returns>
-        public static IReadOnlyAnnotatable? FindOverrides(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
-            => RelationalPropertyOverrides.Find(property, storeObject);
+        public static IReadOnlyAnnotatable? FindOverrides(
+            this IReadOnlyProperty property,
+            in StoreObjectIdentifier storeObject
+        ) => RelationalPropertyOverrides.Find(property, storeObject);
 
         /// <summary>
         ///     <para>
@@ -1362,8 +1599,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> An object that stores property facet overrides. </returns>
-        public static IMutableAnnotatable? FindOverrides(this IMutableProperty property, in StoreObjectIdentifier storeObject)
-            => (IMutableAnnotatable?)RelationalPropertyOverrides.Find(property, storeObject);
+        public static IMutableAnnotatable? FindOverrides(
+            this IMutableProperty property,
+            in StoreObjectIdentifier storeObject
+        ) => (IMutableAnnotatable?)RelationalPropertyOverrides.Find(property, storeObject);
 
         /// <summary>
         ///     <para>
@@ -1377,8 +1616,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> An object that stores property facet overrides. </returns>
-        public static IConventionAnnotatable? FindOverrides(this IConventionProperty property, in StoreObjectIdentifier storeObject)
-            => (IConventionAnnotatable?)RelationalPropertyOverrides.Find(property, storeObject);
+        public static IConventionAnnotatable? FindOverrides(
+            this IConventionProperty property,
+            in StoreObjectIdentifier storeObject
+        ) => (IConventionAnnotatable?)RelationalPropertyOverrides.Find(property, storeObject);
 
         /// <summary>
         ///     <para>
@@ -1392,8 +1633,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="property"> The property. </param>
         /// <param name="storeObject"> The identifier of the table-like store object containing the column. </param>
         /// <returns> An object that stores property facet overrides. </returns>
-        public static IAnnotatable? FindOverrides(this IProperty property, in StoreObjectIdentifier storeObject)
-            => (IAnnotatable?)RelationalPropertyOverrides.Find(property, storeObject);
+        public static IAnnotatable? FindOverrides(
+            this IProperty property,
+            in StoreObjectIdentifier storeObject
+        ) => (IAnnotatable?)RelationalPropertyOverrides.Find(property, storeObject);
 
         /// <summary>
         ///     <para>
@@ -1409,8 +1652,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> An object that stores property facet overrides. </returns>
         public static IMutableAnnotatable GetOrCreateOverrides(
             this IMutableProperty property,
-            in StoreObjectIdentifier storeObject)
-            => (IMutableAnnotatable)RelationalPropertyOverrides.GetOrCreate(property, storeObject);
+            in StoreObjectIdentifier storeObject
+        ) => (IMutableAnnotatable)RelationalPropertyOverrides.GetOrCreate(property, storeObject);
 
         /// <summary>
         ///     <para>
@@ -1426,7 +1669,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> An object that stores property facet overrides. </returns>
         public static IConventionAnnotatable GetOrCreateOverrides(
             this IConventionProperty property,
-            in StoreObjectIdentifier storeObject)
-            => (IConventionAnnotatable)RelationalPropertyOverrides.GetOrCreate(property, storeObject);
+            in StoreObjectIdentifier storeObject
+        ) => (IConventionAnnotatable)RelationalPropertyOverrides.GetOrCreate(property, storeObject);
     }
 }

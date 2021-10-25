@@ -35,8 +35,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             this IExecutionStrategy strategy,
             Action operation,
             Func<bool> verifySucceeded,
-            IsolationLevel isolationLevel)
-            => strategy.ExecuteInTransaction<object?>(null, s => operation(), s => verifySucceeded(), isolationLevel);
+            IsolationLevel isolationLevel
+        ) =>
+            strategy.ExecuteInTransaction<object?>(
+                null,
+                s => operation(),
+                s => verifySucceeded(),
+                isolationLevel
+            );
 
         /// <summary>
         ///     Executes the specified asynchronous operation in a transaction. Allows to check whether
@@ -63,8 +69,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             this IExecutionStrategy strategy,
             Func<Task> operation,
             Func<Task<bool>> verifySucceeded,
-            IsolationLevel isolationLevel)
-            => strategy.ExecuteInTransactionAsync<object?>(null, (s, ct) => operation(), (s, ct) => verifySucceeded(), isolationLevel);
+            IsolationLevel isolationLevel
+        ) =>
+            strategy.ExecuteInTransactionAsync<object?>(
+                null,
+                (s, ct) => operation(),
+                (s, ct) => verifySucceeded(),
+                isolationLevel
+            );
 
         /// <summary>
         ///     Executes the specified asynchronous operation in a transaction. Allows to check whether
@@ -97,9 +109,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Func<CancellationToken, Task> operation,
             Func<CancellationToken, Task<bool>> verifySucceeded,
             IsolationLevel isolationLevel,
-            CancellationToken cancellationToken = default)
-            => strategy.ExecuteInTransactionAsync<object?>(
-                null, (s, ct) => operation(ct), (s, ct) => verifySucceeded(ct), isolationLevel, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) =>
+            strategy.ExecuteInTransactionAsync<object?>(
+                null,
+                (s, ct) => operation(ct),
+                (s, ct) => verifySucceeded(ct),
+                isolationLevel,
+                cancellationToken
+            );
 
         /// <summary>
         ///     Executes the specified operation in a transaction and returns the result. Allows to check whether
@@ -123,8 +141,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             this IExecutionStrategy strategy,
             Func<TResult> operation,
             Func<bool> verifySucceeded,
-            IsolationLevel isolationLevel)
-            => strategy.ExecuteInTransaction<object?, TResult>(null, s => operation(), s => verifySucceeded(), isolationLevel);
+            IsolationLevel isolationLevel
+        ) =>
+            strategy.ExecuteInTransaction<object?, TResult>(
+                null,
+                s => operation(),
+                s => verifySucceeded(),
+                isolationLevel
+            );
 
         /// <summary>
         ///     Executes the specified asynchronous operation in a transaction and returns the result. Allows to check whether
@@ -158,9 +182,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Func<CancellationToken, Task<TResult>> operation,
             Func<CancellationToken, Task<bool>> verifySucceeded,
             IsolationLevel isolationLevel,
-            CancellationToken cancellationToken = default)
-            => strategy.ExecuteInTransactionAsync<object?, TResult>(
-                null, (s, ct) => operation(ct), (s, ct) => verifySucceeded(ct), isolationLevel, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) =>
+            strategy.ExecuteInTransactionAsync<object?, TResult>(
+                null,
+                (s, ct) => operation(ct),
+                (s, ct) => verifySucceeded(ct),
+                isolationLevel,
+                cancellationToken
+            );
 
         /// <summary>
         ///     Executes the specified operation in a transaction. Allows to check whether
@@ -185,14 +215,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
             TState state,
             Action<TState> operation,
             Func<TState, bool> verifySucceeded,
-            IsolationLevel isolationLevel)
-            => strategy.ExecuteInTransaction(
+            IsolationLevel isolationLevel
+        ) =>
+            strategy.ExecuteInTransaction(
                 state,
                 s =>
                 {
                     operation(s);
                     return true;
-                }, verifySucceeded, isolationLevel);
+                },
+                verifySucceeded,
+                isolationLevel
+            );
 
         /// <summary>
         ///     Executes the specified asynchronous operation in a transaction. Allows to check whether
@@ -228,14 +262,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Func<TState, CancellationToken, Task> operation,
             Func<TState, CancellationToken, Task<bool>> verifySucceeded,
             IsolationLevel isolationLevel,
-            CancellationToken cancellationToken = default)
-            => strategy.ExecuteInTransactionAsync(
+            CancellationToken cancellationToken = default
+        ) =>
+            strategy.ExecuteInTransactionAsync(
                 state,
                 async (s, ct) =>
                 {
                     await operation(s, ct).ConfigureAwait(false);
                     return true;
-                }, verifySucceeded, isolationLevel, cancellationToken);
+                },
+                verifySucceeded,
+                isolationLevel,
+                cancellationToken
+            );
 
         /// <summary>
         ///     Executes the specified operation in a transaction and returns the result. Allows to check whether
@@ -262,9 +301,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             TState state,
             Func<TState, TResult> operation,
             Func<TState, bool> verifySucceeded,
-            IsolationLevel isolationLevel)
-            => ExecutionStrategyExtensions.ExecuteInTransaction(
-                strategy, state, operation, verifySucceeded, c => c.Database.BeginTransaction(isolationLevel));
+            IsolationLevel isolationLevel
+        ) =>
+            ExecutionStrategyExtensions.ExecuteInTransaction(
+                strategy,
+                state,
+                operation,
+                verifySucceeded,
+                c => c.Database.BeginTransaction(isolationLevel)
+            );
 
         /// <summary>
         ///     Executes the specified asynchronous operation and returns the result. Allows to check whether
@@ -301,9 +346,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Func<TState, CancellationToken, Task<TResult>> operation,
             Func<TState, CancellationToken, Task<bool>> verifySucceeded,
             IsolationLevel isolationLevel,
-            CancellationToken cancellationToken = default)
-            => ExecutionStrategyExtensions.ExecuteInTransactionAsync(
-                strategy, state, operation, verifySucceeded, (c, ct) => c.Database.BeginTransactionAsync(isolationLevel, ct),
-                cancellationToken);
+            CancellationToken cancellationToken = default
+        ) =>
+            ExecutionStrategyExtensions.ExecuteInTransactionAsync(
+                strategy,
+                state,
+                operation,
+                verifySucceeded,
+                (c, ct) => c.Database.BeginTransactionAsync(isolationLevel, ct),
+                cancellationToken
+            );
     }
 }

@@ -8,15 +8,37 @@ using System.Diagnostics;
 namespace System.Xml
 {
     // Array index to indicate the meaning of the each byte.
-    internal enum TernaryTreeByte { characterByte = 0, leftTree = 1, rightTree = 2, data = 3 };
+    internal enum TernaryTreeByte
+    {
+        characterByte = 0,
+        leftTree = 1,
+        rightTree = 2,
+        data = 3
+    };
 
     //
     // XSL HTML output method properties
     //
     // Keep the first four bits in sync, so that the element and attribute mask operation can be combined.
-    internal enum ElementProperties : uint { DEFAULT = 0, URI_PARENT = 1, BOOL_PARENT = 2, NAME_PARENT = 4, EMPTY = 8, NO_ENTITIES = 16, HEAD = 32, BLOCK_WS = 64, HAS_NS = 128 }
-    internal enum AttributeProperties : uint { DEFAULT = 0, URI = 1, BOOLEAN = 2, NAME = 4 }
-
+    internal enum ElementProperties : uint
+    {
+        DEFAULT = 0,
+        URI_PARENT = 1,
+        BOOL_PARENT = 2,
+        NAME_PARENT = 4,
+        EMPTY = 8,
+        NO_ENTITIES = 16,
+        HEAD = 32,
+        BLOCK_WS = 64,
+        HAS_NS = 128
+    }
+    internal enum AttributeProperties : uint
+    {
+        DEFAULT = 0,
+        URI = 1,
+        BOOLEAN = 2,
+        NAME = 4
+    }
 
     /**
      * TernaryTreeRO
@@ -49,14 +71,18 @@ namespace System.Xml
         {
             //Debug.Assert(wszFind != null && wszFind.Length != 0);
 
-            int stringPos = 0, nodePos = 0;
-            int charToFind, charInTheTree;
+            int stringPos = 0,
+                nodePos = 0;
+            int charToFind,
+                charInTheTree;
             byte[] node = _nodeBuffer;
 
             charToFind = stringToFind[stringPos];
 
-            if (charToFind > 'z') return 0;                    // Ternary tree only stores ASCII strings
-            if (charToFind >= 'a') charToFind -= ('a' - 'A');     // Normalize to upper case
+            if (charToFind > 'z')
+                return 0; // Ternary tree only stores ASCII strings
+            if (charToFind >= 'a')
+                charToFind -= ('a' - 'A'); // Normalize to upper case
 
             while (true)
             {
@@ -99,8 +125,10 @@ namespace System.Xml
                     else
                     {
                         charToFind = stringToFind[stringPos];
-                        if (charToFind > 'z') return 0;                     // Ternary tree only stores ASCII strings
-                        if (charToFind >= 'a') charToFind -= ('a' - 'A');   // Normalize to upper case
+                        if (charToFind > 'z')
+                            return 0; // Ternary tree only stores ASCII strings
+                        if (charToFind >= 'a')
+                            charToFind -= ('a' - 'A'); // Normalize to upper case
                     }
                 }
             }

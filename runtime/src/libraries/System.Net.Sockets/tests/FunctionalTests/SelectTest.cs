@@ -21,9 +21,12 @@ namespace System.Net.Sockets.Tests
         }
 
         private const int SmallTimeoutMicroseconds = 10 * 1000;
-        private const int FailTimeoutMicroseconds  = 30 * 1000 * 1000;
+        private const int FailTimeoutMicroseconds = 30 * 1000 * 1000;
 
-        [SkipOnPlatform(TestPlatforms.OSX, "typical OSX install has very low max open file descriptors value")]
+        [SkipOnPlatform(
+            TestPlatforms.OSX,
+            "typical OSX install has very low max open file descriptors value"
+        )]
         [Theory]
         [InlineData(90, 0)]
         [InlineData(0, 90)]
@@ -39,8 +42,14 @@ namespace System.Net.Sockets.Tests
         [InlineData(2, 2)]
         public void Select_ReadWrite_AllReady(int reads, int writes)
         {
-            var readPairs = Enumerable.Range(0, reads).Select(_ => CreateConnectedSockets()).ToArray();
-            var writePairs = Enumerable.Range(0, writes).Select(_ => CreateConnectedSockets()).ToArray();
+            var readPairs = Enumerable
+                .Range(0, reads)
+                .Select(_ => CreateConnectedSockets())
+                .ToArray();
+            var writePairs = Enumerable
+                .Range(0, writes)
+                .Select(_ => CreateConnectedSockets())
+                .ToArray();
             try
             {
                 foreach (var pair in readPairs)
@@ -85,18 +94,34 @@ namespace System.Net.Sockets.Tests
         [InlineData(2, 3)]
         [InlineData(2, 4)]
         [InlineData(2, 5)]
-        public void Select_SocketAlreadyClosed_AllSocketsClosableAfterException(int socketsPerType, int indexToDispose)
+        public void Select_SocketAlreadyClosed_AllSocketsClosableAfterException(
+            int socketsPerType,
+            int indexToDispose
+        )
         {
-            KeyValuePair<Socket, Socket>[] socketPairs = Enumerable.Range(0, socketsPerType * 3).Select(_ => CreateConnectedSockets()).ToArray();
+            KeyValuePair<Socket, Socket>[] socketPairs = Enumerable
+                .Range(0, socketsPerType * 3)
+                .Select(_ => CreateConnectedSockets())
+                .ToArray();
             try
             {
                 Socket[] reads = socketPairs.Take(socketsPerType).Select(p => p.Key).ToArray();
-                Socket[] writes = socketPairs.Skip(socketsPerType).Take(socketsPerType).Select(p => p.Key).ToArray();
-                Socket[] errors = socketPairs.Skip(socketsPerType * 2).Take(socketsPerType).Select(p => p.Key).ToArray();
+                Socket[] writes = socketPairs
+                    .Skip(socketsPerType)
+                    .Take(socketsPerType)
+                    .Select(p => p.Key)
+                    .ToArray();
+                Socket[] errors = socketPairs
+                    .Skip(socketsPerType * 2)
+                    .Take(socketsPerType)
+                    .Select(p => p.Key)
+                    .ToArray();
 
                 socketPairs[indexToDispose].Key.Dispose();
 
-                Assert.Throws<ObjectDisposedException>(() => Socket.Select(reads, writes, errors, 1_000));
+                Assert.Throws<ObjectDisposedException>(
+                    () => Socket.Select(reads, writes, errors, 1_000)
+                );
 
                 for (int i = 0; i < socketPairs.Length; i++)
                 {
@@ -109,7 +134,10 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        [SkipOnPlatform(TestPlatforms.OSX, "typical OSX install has very low max open file descriptors value")]
+        [SkipOnPlatform(
+            TestPlatforms.OSX,
+            "typical OSX install has very low max open file descriptors value"
+        )]
         [Fact]
         public void Select_ReadError_NoneReady_ManySockets()
         {
@@ -122,8 +150,14 @@ namespace System.Net.Sockets.Tests
         [InlineData(2, 2)]
         public void Select_ReadError_NoneReady(int reads, int errors)
         {
-            var readPairs = Enumerable.Range(0, reads).Select(_ => CreateConnectedSockets()).ToArray();
-            var errorPairs = Enumerable.Range(0, errors).Select(_ => CreateConnectedSockets()).ToArray();
+            var readPairs = Enumerable
+                .Range(0, reads)
+                .Select(_ => CreateConnectedSockets())
+                .ToArray();
+            var errorPairs = Enumerable
+                .Range(0, errors)
+                .Select(_ => CreateConnectedSockets())
+                .ToArray();
             try
             {
                 var readList = new List<Socket>(readPairs.Select(p => p.Key).ToArray());
@@ -142,7 +176,10 @@ namespace System.Net.Sockets.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.OSX, "typical OSX install has very low max open file descriptors value")]
+        [SkipOnPlatform(
+            TestPlatforms.OSX,
+            "typical OSX install has very low max open file descriptors value"
+        )]
         public void Select_Read_OneReadyAtATime_ManySockets()
         {
             Select_Read_OneReadyAtATime(90); // value larger than the internal value in SocketPal.Unix that swaps between stack and heap allocation
@@ -153,7 +190,10 @@ namespace System.Net.Sockets.Tests
         public void Select_Read_OneReadyAtATime(int reads)
         {
             var rand = new Random(42);
-            var readPairs = Enumerable.Range(0, reads).Select(_ => CreateConnectedSockets()).ToList();
+            var readPairs = Enumerable
+                .Range(0, reads)
+                .Select(_ => CreateConnectedSockets())
+                .ToList();
             try
             {
                 while (readPairs.Count > 0)
@@ -176,13 +216,22 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        [SkipOnPlatform(TestPlatforms.OSX, "typical OSX install has very low max open file descriptors value")]
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
+        [SkipOnPlatform(
+            TestPlatforms.OSX,
+            "typical OSX install has very low max open file descriptors value"
+        )]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/18258")]
         public void Select_Error_OneReadyAtATime()
         {
             const int Errors = 90; // value larger than the internal value in SocketPal.Unix that swaps between stack and heap allocation
             var rand = new Random(42);
-            var errorPairs = Enumerable.Range(0, Errors).Select(_ => CreateConnectedSockets()).ToList();
+            var errorPairs = Enumerable
+                .Range(0, Errors)
+                .Select(_ => CreateConnectedSockets())
+                .ToList();
             try
             {
                 while (errorPairs.Count > 0)
@@ -230,8 +279,13 @@ namespace System.Net.Sockets.Tests
             KeyValuePair<Socket, Socket> pair = CreateConnectedSockets();
             try
             {
-                Task.Delay(1).ContinueWith(_ => pair.Value.Send(new byte[1] { 42 }),
-                    CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                Task.Delay(1)
+                    .ContinueWith(
+                        _ => pair.Value.Send(new byte[1] { 42 }),
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    );
 
                 Assert.True(pair.Key.Poll(microsecondsTimeout, SelectMode.SelectRead));
             }
@@ -244,13 +298,23 @@ namespace System.Net.Sockets.Tests
 
         private static KeyValuePair<Socket, Socket> CreateConnectedSockets()
         {
-            using (Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listener.LingerState = new LingerOption(true, 0);
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
-                Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                Socket client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 client.LingerState = new LingerOption(true, 0);
 
                 Task<Socket> acceptTask = listener.AcceptAsync();
@@ -277,7 +341,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public static async Task Select_AcceptNonBlocking_Success()
         {
-            using (Socket listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket listenSocket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 int port = listenSocket.BindToAnonymousPort(IPAddress.Loopback);
 
@@ -285,13 +355,24 @@ namespace System.Net.Sockets.Tests
 
                 listenSocket.Listen(5);
 
-                Task t = Task.Run(() => { DoAccept(listenSocket, 5); });
+                Task t = Task.Run(
+                    () =>
+                    {
+                        DoAccept(listenSocket, 5);
+                    }
+                );
 
                 // Loop, doing connections and pausing between
                 for (int i = 0; i < 5; i++)
                 {
                     Thread.Sleep(50);
-                    using (Socket connectSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                    using (
+                        Socket connectSocket = new Socket(
+                            AddressFamily.InterNetwork,
+                            SocketType.Stream,
+                            ProtocolType.Tcp
+                        )
+                    )
                     {
                         connectSocket.Connect(listenSocket.LocalEndPoint);
                     }
@@ -322,7 +403,6 @@ namespace System.Net.Sockets.Tests
                         catch (SocketException e)
                         {
                             Assert.Equal(SocketError.WouldBlock, e.SocketErrorCode);
-
                             //No more requests in queue
                             break;
                         }

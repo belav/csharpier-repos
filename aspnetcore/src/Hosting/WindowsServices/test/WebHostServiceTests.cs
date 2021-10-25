@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Hosting
     public class WebHostServiceTests
     {
         // Reasonable timeout for our test operations to complete.
-        private static readonly TimeSpan OperationTimeout = TimeSpan.FromSeconds( 5 );
+        private static readonly TimeSpan OperationTimeout = TimeSpan.FromSeconds(5);
 
         [ConditionalFact]
         public async Task StopBeforeServiceStarted()
@@ -32,13 +32,14 @@ namespace Microsoft.AspNetCore.Hosting
             webHostService.Start();
 
             await Assert.ThrowsAsync<TaskCanceledException>(
-                () => Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped));
+                () => Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped)
+            );
         }
 
         [ConditionalFact]
         public async Task StopAfterServiceStarted()
         {
-            var host = new WebHostBuilder().UseServer( new FakeServer() ).Configure( x => { } ).Build();
+            var host = new WebHostBuilder().UseServer(new FakeServer()).Configure(x => { }).Build();
             var webHostService = new WebHostService(host);
             var applicationLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Hosting
             applicationLifetime.StopApplication();
 
             await Assert.ThrowsAsync<TaskCanceledException>(
-                () => Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped));
+                () => Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped)
+            );
         }
 
         private sealed class FakeServer : IServer
@@ -56,7 +58,10 @@ namespace Microsoft.AspNetCore.Hosting
 
             public void Dispose() { }
 
-            public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken)
+            public Task StartAsync<TContext>(
+                IHttpApplication<TContext> application,
+                CancellationToken cancellationToken
+            )
             {
                 RequestDelegate = ctx => throw new NotSupportedException();
 

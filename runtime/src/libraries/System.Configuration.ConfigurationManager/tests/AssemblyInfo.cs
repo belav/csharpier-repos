@@ -4,4 +4,7 @@
 using System;
 using Xunit;
 
-[assembly: SkipOnPlatform(TestPlatforms.Browser, "System.Configuration.ConfigurationManager is not supported on Browser")]
+[assembly: SkipOnPlatform(
+    TestPlatforms.Browser,
+    "System.Configuration.ConfigurationManager is not supported on Browser"
+)]

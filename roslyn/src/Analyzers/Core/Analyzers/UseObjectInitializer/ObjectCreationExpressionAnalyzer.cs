@@ -20,9 +20,20 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
         TObjectCreationExpressionSyntax,
         TMemberAccessExpressionSyntax,
         TAssignmentStatementSyntax,
-        TVariableDeclaratorSyntax> : AbstractObjectCreationExpressionAnalyzer<
-            TExpressionSyntax, TStatementSyntax, TObjectCreationExpressionSyntax, TVariableDeclaratorSyntax,
-            Match<TExpressionSyntax, TStatementSyntax, TMemberAccessExpressionSyntax, TAssignmentStatementSyntax>>
+        TVariableDeclaratorSyntax
+    >
+        : AbstractObjectCreationExpressionAnalyzer<
+              TExpressionSyntax,
+              TStatementSyntax,
+              TObjectCreationExpressionSyntax,
+              TVariableDeclaratorSyntax,
+              Match<
+                  TExpressionSyntax,
+                  TStatementSyntax,
+                  TMemberAccessExpressionSyntax,
+                  TAssignmentStatementSyntax
+              >
+          >
         where TExpressionSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
         where TObjectCreationExpressionSyntax : TExpressionSyntax
@@ -30,17 +41,47 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
         where TAssignmentStatementSyntax : TStatementSyntax
         where TVariableDeclaratorSyntax : SyntaxNode
     {
-        private static readonly ObjectPool<ObjectCreationExpressionAnalyzer<TExpressionSyntax, TStatementSyntax, TObjectCreationExpressionSyntax, TMemberAccessExpressionSyntax, TAssignmentStatementSyntax, TVariableDeclaratorSyntax>> s_pool
-            = SharedPools.Default<ObjectCreationExpressionAnalyzer<TExpressionSyntax, TStatementSyntax, TObjectCreationExpressionSyntax, TMemberAccessExpressionSyntax, TAssignmentStatementSyntax, TVariableDeclaratorSyntax>>();
+        private static readonly ObjectPool<
+            ObjectCreationExpressionAnalyzer<
+                TExpressionSyntax,
+                TStatementSyntax,
+                TObjectCreationExpressionSyntax,
+                TMemberAccessExpressionSyntax,
+                TAssignmentStatementSyntax,
+                TVariableDeclaratorSyntax
+            >
+        > s_pool = SharedPools.Default<
+            ObjectCreationExpressionAnalyzer<
+                TExpressionSyntax,
+                TStatementSyntax,
+                TObjectCreationExpressionSyntax,
+                TMemberAccessExpressionSyntax,
+                TAssignmentStatementSyntax,
+                TVariableDeclaratorSyntax
+            >
+        >();
 
-        public static ImmutableArray<Match<TExpressionSyntax, TStatementSyntax, TMemberAccessExpressionSyntax, TAssignmentStatementSyntax>>? Analyze(
+        public static ImmutableArray<
+            Match<
+                TExpressionSyntax,
+                TStatementSyntax,
+                TMemberAccessExpressionSyntax,
+                TAssignmentStatementSyntax
+            >
+        >? Analyze(
             SemanticModel semanticModel,
             ISyntaxFacts syntaxFacts,
             TObjectCreationExpressionSyntax objectCreationExpression,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var analyzer = s_pool.Allocate();
-            analyzer.Initialize(semanticModel, syntaxFacts, objectCreationExpression, cancellationToken);
+            analyzer.Initialize(
+                semanticModel,
+                syntaxFacts,
+                objectCreationExpression,
+                cancellationToken
+            );
             try
             {
                 return analyzer.AnalyzeWorker();
@@ -52,7 +93,16 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
             }
         }
 
-        protected override void AddMatches(ArrayBuilder<Match<TExpressionSyntax, TStatementSyntax, TMemberAccessExpressionSyntax, TAssignmentStatementSyntax>> matches)
+        protected override void AddMatches(
+            ArrayBuilder<
+                Match<
+                    TExpressionSyntax,
+                    TStatementSyntax,
+                    TMemberAccessExpressionSyntax,
+                    TAssignmentStatementSyntax
+                >
+            > matches
+        )
         {
             var containingBlock = _containingStatement.Parent;
             var foundStatement = false;
@@ -68,7 +118,6 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                         foundStatement = true;
                         continue;
                     }
-
                     continue;
                 }
 
@@ -87,8 +136,7 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                     break;
                 }
 
-                _syntaxFacts.GetPartsOfAssignmentStatement(
-                    statement, out var left, out var right);
+                _syntaxFacts.GetPartsOfAssignmentStatement(statement, out var left, out var right);
 
                 var rightExpression = right as TExpressionSyntax;
                 var leftMemberAccess = left as TMemberAccessExpressionSyntax;
@@ -98,20 +146,29 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                     break;
                 }
 
-                var expression = (TExpressionSyntax)_syntaxFacts.GetExpressionOfMemberAccessExpression(leftMemberAccess);
+                var expression =
+                    (TExpressionSyntax)_syntaxFacts.GetExpressionOfMemberAccessExpression(
+                        leftMemberAccess
+                    );
                 if (!ValuePatternMatches(expression))
                 {
                     break;
                 }
 
-                var leftSymbol = _semanticModel.GetSymbolInfo(leftMemberAccess, _cancellationToken).GetAnySymbol();
+                var leftSymbol = _semanticModel
+                    .GetSymbolInfo(leftMemberAccess, _cancellationToken)
+                    .GetAnySymbol();
                 if (leftSymbol?.IsStatic == true)
                 {
                     // Static members cannot be initialized through an object initializer.
                     break;
                 }
 
-                var type = _semanticModel.GetSymbolInfo(_syntaxFacts.GetObjectCreationType(_objectCreationExpression), _cancellationToken).Symbol as INamedTypeSymbol;
+                var type =
+                    _semanticModel.GetSymbolInfo(
+                        _syntaxFacts.GetObjectCreationType(_objectCreationExpression),
+                        _cancellationToken
+                    ).Symbol as INamedTypeSymbol;
                 if (IsExplicitlyImplemented(type, leftSymbol, out var typeMember))
                 {
                     break;
@@ -128,10 +185,10 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                 //      v = new X();
                 //      v.Prop = v.Prop.WithSomething();
                 //
-                // In the first case, 'v' is being initialized, and so will not be available 
+                // In the first case, 'v' is being initialized, and so will not be available
                 // in the object initializer we create.
-                // 
-                // In the second case we'd change semantics because we'd access the old value 
+                //
+                // In the second case we'd change semantics because we'd access the old value
                 // before the new value got written.
                 if (ExpressionContainsValuePatternOrReferencesInitializedSymbol(rightExpression))
                 {
@@ -143,7 +200,7 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                 //
                 //      var x = new Whatever() With { .v = .Length.ToString() }
                 //
-                // The problem here is that .Length will change it's meaning to now refer to the 
+                // The problem here is that .Length will change it's meaning to now refer to the
                 // object that we're creating in our object-creation expression.
                 if (ImplicitMemberAccessWouldBeAffected(rightExpression))
                 {
@@ -162,22 +219,34 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                     break;
                 }
 
-                matches.Add(new Match<TExpressionSyntax, TStatementSyntax, TMemberAccessExpressionSyntax, TAssignmentStatementSyntax>(
-                    statement, leftMemberAccess, rightExpression, typeMember?.Name ?? identifier.ValueText));
+                matches.Add(
+                    new Match<
+                        TExpressionSyntax,
+                        TStatementSyntax,
+                        TMemberAccessExpressionSyntax,
+                        TAssignmentStatementSyntax
+                    >(
+                        statement,
+                        leftMemberAccess,
+                        rightExpression,
+                        typeMember?.Name ?? identifier.ValueText
+                    )
+                );
             }
         }
 
         private static bool IsExplicitlyImplemented(
             INamedTypeSymbol classOrStructType,
             ISymbol member,
-            out ISymbol typeMember)
+            out ISymbol typeMember
+        )
         {
             if (member != null && member.ContainingType.IsInterfaceType())
             {
                 typeMember = classOrStructType?.FindImplementationForInterfaceMember(member);
-                return typeMember is IPropertySymbol property &&
-                    property.ExplicitInterfaceImplementations.Length > 0 &&
-                    property.DeclaredAccessibility == Accessibility.Private;
+                return typeMember is IPropertySymbol property
+                    && property.ExplicitInterfaceImplementations.Length > 0
+                    && property.DeclaredAccessibility == Accessibility.Private;
             }
 
             typeMember = member;
@@ -204,11 +273,16 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                 if (_syntaxFacts.IsSimpleMemberAccessExpression(node))
                 {
                     var expression = _syntaxFacts.GetExpressionOfMemberAccessExpression(
-                        node, allowImplicitTarget: true);
+                        node,
+                        allowImplicitTarget: true
+                    );
 
-                    // If we're implicitly referencing some target that is before the 
+                    // If we're implicitly referencing some target that is before the
                     // object creation expression, then our semantics will change.
-                    if (expression != null && expression.SpanStart < _objectCreationExpression.SpanStart)
+                    if (
+                        expression != null
+                        && expression.SpanStart < _objectCreationExpression.SpanStart
+                    )
                     {
                         return true;
                     }
@@ -223,7 +297,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
         TExpressionSyntax,
         TStatementSyntax,
         TMemberAccessExpressionSyntax,
-        TAssignmentStatementSyntax>
+        TAssignmentStatementSyntax
+    >
         where TExpressionSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
         where TMemberAccessExpressionSyntax : TExpressionSyntax
@@ -238,7 +313,8 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
             TAssignmentStatementSyntax statement,
             TMemberAccessExpressionSyntax memberAccessExpression,
             TExpressionSyntax initializer,
-            string memberName)
+            string memberName
+        )
         {
             Statement = statement;
             MemberAccessExpression = memberAccessExpression;

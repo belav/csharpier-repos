@@ -57,14 +57,19 @@ namespace Microsoft.AspNetCore.TestHost
         /// <returns></returns>
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var contextBuilder = new HttpContextBuilder(_application, AllowSynchronousIO, PreserveExecutionContext);
+            var contextBuilder = new HttpContextBuilder(
+                _application,
+                AllowSynchronousIO,
+                PreserveExecutionContext
+            );
 
             var requestContent = request.Content;
 
@@ -72,126 +77,147 @@ namespace Microsoft.AspNetCore.TestHost
             {
                 // Read content from the request HttpContent into a pipe in a background task. This will allow the request
                 // delegate to start before the request HttpContent is complete. A background task allows duplex streaming scenarios.
-                contextBuilder.SendRequestStream(async writer =>
-                {
-                    if (requestContent is StreamContent)
+                contextBuilder.SendRequestStream(
+                    async writer =>
                     {
-                    // This is odd but required for backwards compat. If StreamContent is passed in then seek to beginning.
-                    // This is safe because StreamContent.ReadAsStreamAsync doesn't block. It will return the inner stream.
-                    var body = await requestContent.ReadAsStreamAsync();
-                        if (body.CanSeek)
+                        if (requestContent is StreamContent)
                         {
-                        // This body may have been consumed before, rewind it.
-                        body.Seek(0, SeekOrigin.Begin);
+                            // This is odd but required for backwards compat. If StreamContent is passed in then seek to beginning.
+                            // This is safe because StreamContent.ReadAsStreamAsync doesn't block. It will return the inner stream.
+                            var body = await requestContent.ReadAsStreamAsync();
+                            if (body.CanSeek)
+                            {
+                                // This body may have been consumed before, rewind it.
+                                body.Seek(0, SeekOrigin.Begin);
+                            }
+
+                            await body.CopyToAsync(writer);
+                        }
+                        else
+                        {
+                            await requestContent.CopyToAsync(writer.AsStream());
                         }
 
-                        await body.CopyToAsync(writer);
+                        await writer.CompleteAsync();
                     }
-                    else
-                    {
-                        await requestContent.CopyToAsync(writer.AsStream());
-                    }
-
-                    await writer.CompleteAsync();
-                });
+                );
             }
 
-            contextBuilder.Configure((context, reader) =>
-            {
-                var req = context.Request;
-
-                if (request.Version == HttpVersion.Version20)
+            contextBuilder.Configure(
+                (context, reader) =>
                 {
-                    // https://tools.ietf.org/html/rfc7540
-                    req.Protocol = HttpProtocol.Http2;
-                }
-                else
-                {
-                    req.Protocol = "HTTP/" + request.Version.ToString(fieldCount: 2);
-                }
-                req.Method = request.Method.ToString();
+                    var req = context.Request;
 
-                req.Scheme = request.RequestUri!.Scheme;
-
-                var canHaveBody = false;
-                if (requestContent != null)
-                {
-                    canHaveBody = true;
-                    // Chunked takes precedence over Content-Length, don't create a request with both Content-Length and chunked.
-                    if (request.Headers.TransferEncodingChunked != true)
+                    if (request.Version == HttpVersion.Version20)
                     {
-                        // Reading the ContentLength will add it to the Headers‼
-                        // https://github.com/dotnet/runtime/blob/874399ab15e47c2b4b7c6533cc37d27d47cb5242/src/libraries/System.Net.Http/src/System/Net/Http/Headers/HttpContentHeaders.cs#L68-L87
-                        var contentLength = requestContent.Headers.ContentLength;
-                        if (!contentLength.HasValue && request.Version == HttpVersion.Version11)
-                        {
-                            // HTTP/1.1 requests with a body require either Content-Length or Transfer-Encoding: chunked.
-                            request.Headers.TransferEncodingChunked = true;
-                        }
-                        else if (contentLength == 0)
-                        {
-                            canHaveBody = false;
-                        }
-                    }
-
-                    foreach (var header in requestContent.Headers)
-                    {
-                        req.Headers.Append(header.Key, header.Value.ToArray());
-                    }
-
-                    if (canHaveBody)
-                    {
-                        req.Body = new AsyncStreamWrapper(reader.AsStream(), () => contextBuilder.AllowSynchronousIO);
-                    }
-                }
-                context.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(canHaveBody));
-
-                foreach (var header in request.Headers)
-                {
-                    // User-Agent is a space delineated single line header but HttpRequestHeaders parses it as multiple elements.
-                    if (string.Equals(header.Key, HeaderNames.UserAgent, StringComparison.OrdinalIgnoreCase))
-                    {
-                        req.Headers.Append(header.Key, string.Join(" ", header.Value));
+                        // https://tools.ietf.org/html/rfc7540
+                        req.Protocol = HttpProtocol.Http2;
                     }
                     else
                     {
-                        req.Headers.Append(header.Key, header.Value.ToArray());
+                        req.Protocol = "HTTP/" + request.Version.ToString(fieldCount: 2);
                     }
-                }
+                    req.Method = request.Method.ToString();
 
-                if (!req.Host.HasValue)
-                {
-                    // If Host wasn't explicitly set as a header, let's infer it from the Uri
-                    req.Host = HostString.FromUriComponent(request.RequestUri);
-                    if (request.RequestUri.IsDefaultPort)
+                    req.Scheme = request.RequestUri!.Scheme;
+
+                    var canHaveBody = false;
+                    if (requestContent != null)
                     {
-                        req.Host = new HostString(req.Host.Host);
-                    }
-                }
+                        canHaveBody = true;
+                        // Chunked takes precedence over Content-Length, don't create a request with both Content-Length and chunked.
+                        if (request.Headers.TransferEncodingChunked != true)
+                        {
+                            // Reading the ContentLength will add it to the Headers‼
+                            // https://github.com/dotnet/runtime/blob/874399ab15e47c2b4b7c6533cc37d27d47cb5242/src/libraries/System.Net.Http/src/System/Net/Http/Headers/HttpContentHeaders.cs#L68-L87
+                            var contentLength = requestContent.Headers.ContentLength;
+                            if (!contentLength.HasValue && request.Version == HttpVersion.Version11)
+                            {
+                                // HTTP/1.1 requests with a body require either Content-Length or Transfer-Encoding: chunked.
+                                request.Headers.TransferEncodingChunked = true;
+                            }
+                            else if (contentLength == 0)
+                            {
+                                canHaveBody = false;
+                            }
+                        }
 
-                req.Path = PathString.FromUriComponent(request.RequestUri);
-                req.PathBase = PathString.Empty;
-                if (req.Path.StartsWithSegments(_pathBase, out var remainder))
-                {
-                    req.Path = remainder;
-                    req.PathBase = _pathBase;
+                        foreach (var header in requestContent.Headers)
+                        {
+                            req.Headers.Append(header.Key, header.Value.ToArray());
+                        }
+
+                        if (canHaveBody)
+                        {
+                            req.Body = new AsyncStreamWrapper(
+                                reader.AsStream(),
+                                () => contextBuilder.AllowSynchronousIO
+                            );
+                        }
+                    }
+                    context.Features.Set<IHttpRequestBodyDetectionFeature>(
+                        new RequestBodyDetectionFeature(canHaveBody)
+                    );
+
+                    foreach (var header in request.Headers)
+                    {
+                        // User-Agent is a space delineated single line header but HttpRequestHeaders parses it as multiple elements.
+                        if (
+                            string.Equals(
+                                header.Key,
+                                HeaderNames.UserAgent,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                        {
+                            req.Headers.Append(header.Key, string.Join(" ", header.Value));
+                        }
+                        else
+                        {
+                            req.Headers.Append(header.Key, header.Value.ToArray());
+                        }
+                    }
+
+                    if (!req.Host.HasValue)
+                    {
+                        // If Host wasn't explicitly set as a header, let's infer it from the Uri
+                        req.Host = HostString.FromUriComponent(request.RequestUri);
+                        if (request.RequestUri.IsDefaultPort)
+                        {
+                            req.Host = new HostString(req.Host.Host);
+                        }
+                    }
+
+                    req.Path = PathString.FromUriComponent(request.RequestUri);
+                    req.PathBase = PathString.Empty;
+                    if (req.Path.StartsWithSegments(_pathBase, out var remainder))
+                    {
+                        req.Path = remainder;
+                        req.PathBase = _pathBase;
+                    }
+                    req.QueryString = QueryString.FromUriComponent(request.RequestUri);
                 }
-                req.QueryString = QueryString.FromUriComponent(request.RequestUri);
-            });
+            );
 
             var response = new HttpResponseMessage();
 
             // Copy trailers to the response message when the response stream is complete
-            contextBuilder.RegisterResponseReadCompleteCallback(context =>
-            {
-                var responseTrailersFeature = context.Features.Get<IHttpResponseTrailersFeature>()!;
-
-                foreach (var trailer in responseTrailersFeature.Trailers)
+            contextBuilder.RegisterResponseReadCompleteCallback(
+                context =>
                 {
-                    bool success = response.TrailingHeaders.TryAddWithoutValidation(trailer.Key, (IEnumerable<string>)trailer.Value);
-                    Contract.Assert(success, "Bad trailer");
+                    var responseTrailersFeature =
+                        context.Features.Get<IHttpResponseTrailersFeature>()!;
+
+                    foreach (var trailer in responseTrailersFeature.Trailers)
+                    {
+                        bool success = response.TrailingHeaders.TryAddWithoutValidation(
+                            trailer.Key,
+                            (IEnumerable<string>)trailer.Value
+                        );
+                        Contract.Assert(success, "Bad trailer");
+                    }
                 }
-            });
+            );
 
             var httpContext = await contextBuilder.SendAsync(cancellationToken);
 
@@ -204,9 +230,17 @@ namespace Microsoft.AspNetCore.TestHost
 
             foreach (var header in httpContext.Response.Headers)
             {
-                if (!response.Headers.TryAddWithoutValidation(header.Key, (IEnumerable<string>)header.Value))
+                if (
+                    !response.Headers.TryAddWithoutValidation(
+                        header.Key,
+                        (IEnumerable<string>)header.Value
+                    )
+                )
                 {
-                    bool success = response.Content.Headers.TryAddWithoutValidation(header.Key, (IEnumerable<string>)header.Value);
+                    bool success = response.Content.Headers.TryAddWithoutValidation(
+                        header.Key,
+                        (IEnumerable<string>)header.Value
+                    );
                     Contract.Assert(success, "Bad header");
                 }
             }

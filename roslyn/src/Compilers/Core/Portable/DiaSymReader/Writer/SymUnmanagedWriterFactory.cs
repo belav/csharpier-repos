@@ -31,7 +31,8 @@ namespace Microsoft.DiaSymReader
         /// <exception cref="SymUnmanagedWriterException">Error creating the PDB writer. See inner exception for root cause.</exception>
         public static SymUnmanagedWriter CreateWriter(
             ISymWriterMetadataProvider metadataProvider,
-            SymUnmanagedWriterCreationOptions options = SymUnmanagedWriterCreationOptions.Default)
+            SymUnmanagedWriterCreationOptions options = SymUnmanagedWriterCreationOptions.Default
+        )
         {
             if (metadataProvider == null)
             {
@@ -40,10 +41,13 @@ namespace Microsoft.DiaSymReader
 
             var symWriter = SymUnmanagedFactory.CreateObject(
                 createReader: false,
-                useAlternativeLoadPath: (options & SymUnmanagedWriterCreationOptions.UseAlternativeLoadPath) != 0,
+                useAlternativeLoadPath: (
+                    options & SymUnmanagedWriterCreationOptions.UseAlternativeLoadPath
+                ) != 0,
                 useComRegistry: (options & SymUnmanagedWriterCreationOptions.UseComRegistry) != 0,
                 moduleName: out var implModuleName,
-                loadException: out var loadException);
+                loadException: out var loadException
+            );
 
             if (symWriter == null)
             {
@@ -82,7 +86,12 @@ namespace Microsoft.DiaSymReader
                 {
                     // The file name is irrelevant as long as it's specified.
                     // SymWriter only uses it for filling CodeView debug directory data when asked for them, but we never do.
-                    symWriter5.Initialize(metadataEmitAndImport, "filename.pdb", pdbStream, fullBuild: true);
+                    symWriter5.Initialize(
+                        metadataEmitAndImport,
+                        "filename.pdb",
+                        pdbStream,
+                        fullBuild: true
+                    );
                 }
             }
             catch (Exception e)

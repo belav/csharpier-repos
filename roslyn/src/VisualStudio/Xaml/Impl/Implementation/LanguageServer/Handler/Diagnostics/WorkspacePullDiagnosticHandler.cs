@@ -20,21 +20,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
 {
     [ExportLspRequestHandlerProvider(StringConstants.XamlLanguageName), Shared]
     [ProvidesMethod(MSLSPMethods.WorkspacePullDiagnosticName)]
-    internal class WorkspacePullDiagnosticHandler : AbstractPullDiagnosticHandler<WorkspaceDocumentDiagnosticsParams, WorkspaceDiagnosticReport>
+    internal class WorkspacePullDiagnosticHandler
+        : AbstractPullDiagnosticHandler<
+              WorkspaceDocumentDiagnosticsParams,
+              WorkspaceDiagnosticReport
+          >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspacePullDiagnosticHandler(
-            IXamlPullDiagnosticService xamlPullDiagnosticService)
-            : base(xamlPullDiagnosticService)
-        { }
+        public WorkspacePullDiagnosticHandler(IXamlPullDiagnosticService xamlPullDiagnosticService)
+            : base(xamlPullDiagnosticService) { }
 
         public override string Method => MSLSPMethods.WorkspacePullDiagnosticName;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(WorkspaceDocumentDiagnosticsParams request) => null;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            WorkspaceDocumentDiagnosticsParams request
+        ) => null;
 
-        protected override WorkspaceDiagnosticReport CreateReport(TextDocumentIdentifier? identifier, VSDiagnostic[]? diagnostics, string? resultId)
-            => new WorkspaceDiagnosticReport { TextDocument = identifier, Diagnostics = diagnostics, ResultId = resultId };
+        protected override WorkspaceDiagnosticReport CreateReport(
+            TextDocumentIdentifier? identifier,
+            VSDiagnostic[]? diagnostics,
+            string? resultId
+        ) =>
+            new WorkspaceDiagnosticReport
+            {
+                TextDocument = identifier,
+                Diagnostics = diagnostics,
+                ResultId = resultId
+            };
 
         /// <summary>
         /// Collect all the opened documents from solution. 
@@ -55,10 +68,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             return result.Distinct().ToImmutableArray();
         }
 
-        protected override DiagnosticParams[]? GetPreviousResults(WorkspaceDocumentDiagnosticsParams diagnosticsParams)
-            => diagnosticsParams.PreviousResults;
+        protected override DiagnosticParams[]? GetPreviousResults(
+            WorkspaceDocumentDiagnosticsParams diagnosticsParams
+        ) => diagnosticsParams.PreviousResults;
 
-        protected override IProgress<WorkspaceDiagnosticReport[]>? GetProgress(WorkspaceDocumentDiagnosticsParams diagnosticsParams)
-            => diagnosticsParams.PartialResultToken;
+        protected override IProgress<WorkspaceDiagnosticReport[]>? GetProgress(
+            WorkspaceDocumentDiagnosticsParams diagnosticsParams
+        ) => diagnosticsParams.PartialResultToken;
     }
 }

@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.E2ETesting
         {
             if (!typeof(BrowserTestBase).IsAssignableFrom(methodUnderTest.DeclaringType))
             {
-                throw new InvalidOperationException("This should only be used with BrowserTestBase");
+                throw new InvalidOperationException(
+                    "This should only be used with BrowserTestBase"
+                );
             }
         }
 
@@ -32,7 +34,9 @@ namespace Microsoft.AspNetCore.E2ETesting
             {
                 // Put browser logs first, the test UI will truncate output after a certain length
                 // and the browser logs will include exceptions thrown by js in the browser.
-                foreach (var kind in logs.AvailableLogTypes.OrderBy(k => k == LogType.Browser ? 0 : 1))
+                foreach (
+                    var kind in logs.AvailableLogTypes.OrderBy(k => k == LogType.Browser ? 0 : 1)
+                )
                 {
                     output.WriteLine($"{kind} Logs from Selenium:");
 

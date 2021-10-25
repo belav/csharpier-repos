@@ -37,15 +37,18 @@ namespace Microsoft.AspNetCore.Components.Server.BlazorPack
         }
 
         /// <inheritdoc />
-        public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, out HubMessage message)
-            => _worker.TryParseMessage(ref input, binder, out message);
+        public bool TryParseMessage(
+            ref ReadOnlySequence<byte> input,
+            IInvocationBinder binder,
+            out HubMessage message
+        ) => _worker.TryParseMessage(ref input, binder, out message);
 
         /// <inheritdoc />
-        public void WriteMessage(HubMessage message, IBufferWriter<byte> output)
-            => _worker.WriteMessage(message, output);
+        public void WriteMessage(HubMessage message, IBufferWriter<byte> output) =>
+            _worker.WriteMessage(message, output);
 
         ///// <inheritdoc />
-        public ReadOnlyMemory<byte> GetMessageBytes(HubMessage message)
-            => _worker.GetMessageBytes(message);
+        public ReadOnlyMemory<byte> GetMessageBytes(HubMessage message) =>
+            _worker.GetMessageBytes(message);
     }
 }

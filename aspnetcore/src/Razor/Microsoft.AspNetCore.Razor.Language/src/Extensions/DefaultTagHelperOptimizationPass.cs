@@ -7,13 +7,18 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
-    internal class DefaultTagHelperOptimizationPass : IntermediateNodePassBase, IRazorOptimizationPass
+    internal class DefaultTagHelperOptimizationPass
+        : IntermediateNodePassBase,
+          IRazorOptimizationPass
     {
         // Run later than default order for user code so other passes have a chance to modify the
         // tag helper nodes.
         public override int Order => DefaultFeatureOrder + 1000;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             var @class = documentNode.FindPrimaryClass();
             if (@class == null)
@@ -50,7 +55,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 RewriteHtmlAttributes(tagHelperNode);
                 AddExecute(tagHelperNode);
 
-                // We need to find all of the 'default' kind tag helpers and rewrite their usage site to use the 
+                // We need to find all of the 'default' kind tag helpers and rewrite their usage site to use the
                 // extension nodes for the default tag helper runtime (ITagHelper).
                 foreach (var tagHelper in tagHelperNode.TagHelpers)
                 {
@@ -73,7 +78,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // We also want to preserve the ordering of the nodes for testability. So insert at the end of any existing
             // field nodes.
             var i = 0;
-            while (i < context.Class.Children.Count && context.Class.Children[i] is FieldDeclarationIntermediateNode)
+            while (
+                i < context.Class.Children.Count
+                && context.Class.Children[i] is FieldDeclarationIntermediateNode
+            )
             {
                 i++;
             }
@@ -111,12 +119,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             {
                 if (node.Children[i] is TagHelperHtmlAttributeIntermediateNode htmlAttributeNode)
                 {
-                    node.Children[i] = new DefaultTagHelperHtmlAttributeIntermediateNode(htmlAttributeNode);
+                    node.Children[i] = new DefaultTagHelperHtmlAttributeIntermediateNode(
+                        htmlAttributeNode
+                    );
                 }
             }
         }
 
-        private void RewriteUsage(Context context, TagHelperIntermediateNode node, TagHelperDescriptor tagHelper)
+        private void RewriteUsage(
+            Context context,
+            TagHelperIntermediateNode node,
+            TagHelperDescriptor tagHelper
+        )
         {
             if (!tagHelper.IsDefaultKind())
             {
@@ -137,31 +151,41 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             {
                 i++;
             }
-            while (i < node.Children.Count && node.Children[i] is DefaultTagHelperBodyIntermediateNode)
+            while (
+                i < node.Children.Count && node.Children[i] is DefaultTagHelperBodyIntermediateNode
+            )
             {
                 i++;
             }
 
             // Now find the last create node.
-            while (i < node.Children.Count && node.Children[i] is DefaultTagHelperCreateIntermediateNode)
+            while (
+                i < node.Children.Count
+                && node.Children[i] is DefaultTagHelperCreateIntermediateNode
+            )
             {
                 i++;
             }
 
             // Now i has the right insertion point.
-            node.Children.Insert(i, new DefaultTagHelperCreateIntermediateNode()
-            {
-                FieldName = context.GetFieldName(tagHelper),
-                TagHelper = tagHelper,
-                TypeName = tagHelper.GetTypeName(),
-            });
+            node.Children.Insert(
+                i,
+                new DefaultTagHelperCreateIntermediateNode()
+                {
+                    FieldName = context.GetFieldName(tagHelper),
+                    TagHelper = tagHelper,
+                    TypeName = tagHelper.GetTypeName(),
+                }
+            );
 
             // Next we need to rewrite any property nodes to use the field and property name for this
             // tag helper.
             for (i = 0; i < node.Children.Count; i++)
             {
-                if (node.Children[i] is TagHelperPropertyIntermediateNode propertyNode &&
-                    propertyNode.TagHelper == tagHelper)
+                if (
+                    node.Children[i] is TagHelperPropertyIntermediateNode propertyNode
+                    && propertyNode.TagHelper == tagHelper
+                )
                 {
                     // This belongs to the current tag helper, replace it.
                     node.Children[i] = new DefaultTagHelperPropertyIntermediateNode(propertyNode)
@@ -181,29 +205,38 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // We also want to preserve the ordering of the nodes for testability. So insert at the end of any existing
             // field nodes.
             var i = 0;
-            while (i < context.Class.Children.Count && context.Class.Children[i] is DefaultTagHelperRuntimeIntermediateNode)
+            while (
+                i < context.Class.Children.Count
+                && context.Class.Children[i] is DefaultTagHelperRuntimeIntermediateNode
+            )
             {
                 i++;
             }
 
-            while (i < context.Class.Children.Count && context.Class.Children[i] is FieldDeclarationIntermediateNode)
+            while (
+                i < context.Class.Children.Count
+                && context.Class.Children[i] is FieldDeclarationIntermediateNode
+            )
             {
                 i++;
             }
 
-            context.Class.Children.Insert(i, new FieldDeclarationIntermediateNode()
-            {
-                Annotations =
+            context.Class.Children.Insert(
+                i,
+                new FieldDeclarationIntermediateNode()
                 {
-                    { CommonAnnotations.DefaultTagHelperExtension.TagHelperField, bool.TrueString },
-                },
-                Modifiers =
-                {
-                    "private",
-                },
-                FieldName = context.GetFieldName(tagHelper),
-                FieldType = "global::" + tagHelper.GetTypeName(),
-            });
+                    Annotations =
+                    {
+                        {
+                            CommonAnnotations.DefaultTagHelperExtension.TagHelperField,
+                            bool.TrueString
+                        },
+                    },
+                    Modifiers = { "private", },
+                    FieldName = context.GetFieldName(tagHelper),
+                    FieldType = "global::" + tagHelper.GetTypeName(),
+                }
+            );
         }
 
         private bool IsTagHelperRuntimeNode(TagHelperIntermediateNode node)
@@ -227,7 +260,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             {
                 Class = @class;
 
-                _tagHelpers = new Dictionary<TagHelperDescriptor, string>(TagHelperDescriptorComparer.Default);
+                _tagHelpers = new Dictionary<TagHelperDescriptor, string>(
+                    TagHelperDescriptorComparer.Default
+                );
             }
 
             public ClassDeclarationIntermediateNode Class { get; }

@@ -19,15 +19,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
     /// </summary>
     internal class LineSeparatorTag : GraphicsTag
     {
-        public LineSeparatorTag(IEditorFormatMap editorFormatMap)
-            : base(editorFormatMap)
-        {
-        }
+        public LineSeparatorTag(IEditorFormatMap editorFormatMap) : base(editorFormatMap) { }
 
-        protected override Color? GetColor(
-            IWpfTextView view, IEditorFormatMap editorFormatMap)
+        protected override Color? GetColor(IWpfTextView view, IEditorFormatMap editorFormatMap)
         {
-            var brush = view.VisualElement.TryFindResource("outlining.verticalrule.foreground") as SolidColorBrush;
+            var brush =
+                view.VisualElement.TryFindResource("outlining.verticalrule.foreground")
+                as SolidColorBrush;
             return brush?.Color;
         }
 
@@ -57,8 +55,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
             // This makes the line separator line up with the outlining bracket.
             Canvas.SetTop(border, bounds.Bounds.Bottom - border.Height);
 
-            return new GraphicsResult(border,
-                () => view.ViewportWidthChanged -= viewportWidthChangedHandler);
+            return new GraphicsResult(
+                border,
+                () => view.ViewportWidthChanged -= viewportWidthChangedHandler
+            );
         }
     }
 }

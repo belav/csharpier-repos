@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Structure
 {
     internal class BlockStructureContext
     {
-        private readonly ImmutableArray<BlockSpan>.Builder _spans = ImmutableArray.CreateBuilder<BlockSpan>();
+        private readonly ImmutableArray<BlockSpan>.Builder _spans =
+            ImmutableArray.CreateBuilder<BlockSpan>();
 
         public SyntaxTree SyntaxTree { get; }
         public BlockStructureOptionProvider OptionProvider { get; }
@@ -19,14 +20,17 @@ namespace Microsoft.CodeAnalysis.Structure
 
         internal ImmutableArray<BlockSpan> Spans => _spans.ToImmutable();
 
-        public BlockStructureContext(SyntaxTree syntaxTree, BlockStructureOptionProvider optionProvider, CancellationToken cancellationToken)
+        public BlockStructureContext(
+            SyntaxTree syntaxTree,
+            BlockStructureOptionProvider optionProvider,
+            CancellationToken cancellationToken
+        )
         {
             SyntaxTree = syntaxTree;
             OptionProvider = optionProvider;
             CancellationToken = cancellationToken;
         }
 
-        public void AddBlockSpan(BlockSpan span)
-            => _spans.Add(span);
+        public void AddBlockSpan(BlockSpan span) => _spans.Add(span);
     }
 }

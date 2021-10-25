@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Rewrite
             RedirectToWwwHelper.SetRedirect(
                 context,
                 new HostString($"www.{context.HttpContext.Request.Host.Value}"),
-                _statusCode);
+                _statusCode
+            );
 
             context.Logger.RedirectedToWww();
         }

@@ -20,10 +20,8 @@ namespace Microsoft.AspNetCore.Antiforgery
         {
             SameSite = SameSiteMode.Strict,
             HttpOnly = true,
-
             // Check the comment on CookieBuilder for more details
             IsEssential = true,
-
             // Some browsers do not allow non-secure endpoints to set cookies with a 'secure' flag or overwrite cookies
             // whose 'secure' flag is set (http://httpwg.org/http-extensions/draft-ietf-httpbis-cookie-alone.html).
             // Since mixing secure and non-secure endpoints is a common scenario in applications, we are relaxing the

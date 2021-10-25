@@ -15,7 +15,10 @@ namespace BasicWebSite.Controllers.ContentNegotiation
             var result = context.Result as ObjectResult;
             if (result != null)
             {
-                var noContentFormatter = new HttpNoContentOutputFormatter() { TreatNullValueAsNoContent = false };
+                var noContentFormatter = new HttpNoContentOutputFormatter()
+                {
+                    TreatNullValueAsNoContent = false
+                };
                 result.Formatters.Add(noContentFormatter);
             }
 

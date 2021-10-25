@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.FileProviders
     public class EmbeddedFileProvider : IFileProvider
     {
         private static readonly char[] _invalidFileNameChars = Path.GetInvalidFileNameChars()
-            .Where(c => c != '/' && c != '\\').ToArray();
+            .Where(c => c != '/' && c != '\\')
+            .ToArray();
 
         private readonly Assembly _assembly;
         private readonly string _baseNamespace;
@@ -30,10 +31,8 @@ namespace Microsoft.Extensions.FileProviders
         /// assembly with the base namespace defaulting to the assembly name.
         /// </summary>
         /// <param name="assembly">The assembly that contains the embedded resources.</param>
-        public EmbeddedFileProvider(Assembly assembly)
-            : this(assembly, assembly?.GetName()?.Name)
-        {
-        }
+        public EmbeddedFileProvider(Assembly assembly) : this(assembly, assembly?.GetName()?.Name)
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmbeddedFileProvider" /> class using the specified
@@ -48,7 +47,9 @@ namespace Microsoft.Extensions.FileProviders
                 throw new ArgumentNullException("assembly");
             }
 
-            _baseNamespace = string.IsNullOrEmpty(baseNamespace) ? string.Empty : baseNamespace + ".";
+            _baseNamespace = string.IsNullOrEmpty(baseNamespace)
+                ? string.Empty
+                : baseNamespace + ".";
             _assembly = assembly;
 
             _lastModified = DateTimeOffset.UtcNow;
@@ -59,12 +60,8 @@ namespace Microsoft.Extensions.FileProviders
                 {
                     _lastModified = File.GetLastWriteTimeUtc(_assembly.Location);
                 }
-                catch (PathTooLongException)
-                {
-                }
-                catch (UnauthorizedAccessException)
-                {
-                }
+                catch (PathTooLongException) { }
+                catch (UnauthorizedAccessException) { }
             }
         }
 
@@ -152,11 +149,14 @@ namespace Microsoft.Extensions.FileProviders
                 var resourceName = resources[i];
                 if (resourceName.StartsWith(_baseNamespace, StringComparison.Ordinal))
                 {
-                    entries.Add(new EmbeddedResourceFileInfo(
-                        _assembly,
-                        resourceName,
-                        resourceName.Substring(_baseNamespace.Length),
-                        _lastModified));
+                    entries.Add(
+                        new EmbeddedResourceFileInfo(
+                            _assembly,
+                            resourceName,
+                            resourceName.Substring(_baseNamespace.Length),
+                            _lastModified
+                        )
+                    );
                 }
             }
 

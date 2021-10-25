@@ -13,7 +13,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             // Arrange
             var called = false;
-            var action = new DisposableAction(() => { called = true; });
+            var action = new DisposableAction(
+                () =>
+                {
+                    called = true;
+                }
+            );
 
             // Act
             action.Dispose();

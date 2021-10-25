@@ -28,12 +28,19 @@ namespace Microsoft.EntityFrameworkCore
             var connectionString1 = context1.Database.GetConnectionString();
             var connectionString2 = context2.Database.GetConnectionString();
 
-            Assert.NotEqual(context1.Database.GetConnectionString(), context2.Database.GetConnectionString());
+            Assert.NotEqual(
+                context1.Database.GetConnectionString(),
+                context2.Database.GetConnectionString()
+            );
 
             context1.Database.EnsureCreatedResiliently();
             context2.Database.EnsureCreatedResiliently();
 
-            using (var context = new TwoDatabasesContext(CreateTestOptions(new DbContextOptionsBuilder()).Options))
+            using (
+                var context = new TwoDatabasesContext(
+                    CreateTestOptions(new DbContextOptionsBuilder()).Options
+                )
+            )
             {
                 context.Database.SetConnectionString(connectionString1);
 
@@ -47,7 +54,10 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             Assert.Equal(new[] { "One", "Two" }, context1.Foos.Select(e => e.Bar).ToList());
-            Assert.Equal(new[] { "Modified One", "Modified Two" }, context2.Foos.Select(e => e.Bar).ToList());
+            Assert.Equal(
+                new[] { "Modified One", "Modified Two" },
+                context2.Foos.Select(e => e.Bar).ToList()
+            );
         }
 
         [ConditionalFact]
@@ -56,12 +66,19 @@ namespace Microsoft.EntityFrameworkCore
             using var context1 = CreateBackingContext("TwoDatabasesOneB");
             using var context2 = CreateBackingContext("TwoDatabasesTwoB");
 
-            Assert.NotSame(context1.Database.GetDbConnection(), context2.Database.GetDbConnection());
+            Assert.NotSame(
+                context1.Database.GetDbConnection(),
+                context2.Database.GetDbConnection()
+            );
 
             context1.Database.EnsureCreatedResiliently();
             context2.Database.EnsureCreatedResiliently();
 
-            using (var context = new TwoDatabasesContext(CreateTestOptions(new DbContextOptionsBuilder()).Options))
+            using (
+                var context = new TwoDatabasesContext(
+                    CreateTestOptions(new DbContextOptionsBuilder()).Options
+                )
+            )
             {
                 context.Database.SetDbConnection(context1.Database.GetDbConnection());
 
@@ -75,7 +92,10 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             Assert.Equal(new[] { "One", "Two" }, context1.Foos.Select(e => e.Bar).ToList());
-            Assert.Equal(new[] { "Modified One", "Modified Two" }, context2.Foos.Select(e => e.Bar).ToList());
+            Assert.Equal(
+                new[] { "Modified One", "Modified Two" },
+                context2.Foos.Select(e => e.Bar).ToList()
+            );
         }
 
         [ConditionalFact]
@@ -87,12 +107,17 @@ namespace Microsoft.EntityFrameworkCore
 
             context1.Database.EnsureCreatedResiliently();
 
-            using (var context = new TwoDatabasesContext(
-                CreateTestOptions(new DbContextOptionsBuilder(), withConnectionString: true)
-                    .AddInterceptors(
-                        new ConnectionStringConnectionInterceptor(
-                            connectionString1, DummyConnectionString))
-                    .Options))
+            using (
+                var context = new TwoDatabasesContext(
+                    CreateTestOptions(new DbContextOptionsBuilder(), withConnectionString: true)
+                        .AddInterceptors(
+                            new ConnectionStringConnectionInterceptor(
+                                connectionString1,
+                                DummyConnectionString
+                            )
+                        ).Options
+                )
+            )
             {
                 var data = context.Foos.ToList();
                 data[0].Bar = "Modified One";
@@ -101,7 +126,10 @@ namespace Microsoft.EntityFrameworkCore
                 context.SaveChanges();
             }
 
-            Assert.Equal(new[] { "Modified One", "Modified Two" }, context1.Foos.Select(e => e.Bar).ToList());
+            Assert.Equal(
+                new[] { "Modified One", "Modified Two" },
+                context1.Foos.Select(e => e.Bar).ToList()
+            );
         }
 
         protected class ConnectionStringConnectionInterceptor : DbConnectionInterceptor
@@ -109,7 +137,10 @@ namespace Microsoft.EntityFrameworkCore
             private readonly string _goodConnectionString;
             private readonly string _dummyConnectionString;
 
-            public ConnectionStringConnectionInterceptor(string goodConnectionString, string dummyConnectionString)
+            public ConnectionStringConnectionInterceptor(
+                string goodConnectionString,
+                string dummyConnectionString
+            )
             {
                 _goodConnectionString = goodConnectionString;
                 _dummyConnectionString = dummyConnectionString;
@@ -118,24 +149,35 @@ namespace Microsoft.EntityFrameworkCore
             public override InterceptionResult ConnectionOpening(
                 DbConnection connection,
                 ConnectionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
-                Assert.Equal(_dummyConnectionString, eventData.Context.Database.GetConnectionString());
+                Assert.Equal(
+                    _dummyConnectionString,
+                    eventData.Context.Database.GetConnectionString()
+                );
                 eventData.Context.Database.SetConnectionString(_goodConnectionString);
 
                 return result;
             }
 
-            public override void ConnectionClosed(DbConnection connection, ConnectionEndEventData eventData)
+            public override void ConnectionClosed(
+                DbConnection connection,
+                ConnectionEndEventData eventData
+            )
             {
-                Assert.Equal(_goodConnectionString, eventData.Context.Database.GetConnectionString());
+                Assert.Equal(
+                    _goodConnectionString,
+                    eventData.Context.Database.GetConnectionString()
+                );
                 eventData.Context.Database.SetConnectionString(_dummyConnectionString);
             }
         }
 
         protected abstract DbContextOptionsBuilder CreateTestOptions(
             DbContextOptionsBuilder optionsBuilder,
-            bool withConnectionString = false);
+            bool withConnectionString = false
+        );
 
         protected abstract TwoDatabasesWithDataContext CreateBackingContext(string databaseName);
 
@@ -143,26 +185,19 @@ namespace Microsoft.EntityFrameworkCore
 
         protected class TwoDatabasesContext : DbContext
         {
-            public TwoDatabasesContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public TwoDatabasesContext(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 modelBuilder.Entity<Foo>();
             }
 
-            public IQueryable<Foo> Foos
-                => Set<Foo>().OrderBy(e => e.Id);
+            public IQueryable<Foo> Foos => Set<Foo>().OrderBy(e => e.Id);
         }
 
         protected class TwoDatabasesWithDataContext : TwoDatabasesContext
         {
-            public TwoDatabasesWithDataContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public TwoDatabasesWithDataContext(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -170,9 +205,7 @@ namespace Microsoft.EntityFrameworkCore
 
                 modelBuilder
                     .Entity<Foo>()
-                    .HasData(
-                        new Foo { Id = 1, Bar = "One" },
-                        new Foo { Id = 2, Bar = "Two" });
+                    .HasData(new Foo { Id = 1, Bar = "One" }, new Foo { Id = 2, Bar = "Two" });
             }
         }
 

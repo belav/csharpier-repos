@@ -50,8 +50,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public EntityMaterializerSourceDependencies()
-        {
-        }
+        public EntityMaterializerSourceDependencies() { }
     }
 }

@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
     {
         private readonly RazorCodeGenerationOptions _options;
 
-        public DefaultCodeTarget(RazorCodeGenerationOptions options, IEnumerable<ICodeTargetExtension> extensions)
+        public DefaultCodeTarget(
+            RazorCodeGenerationOptions options,
+            IEnumerable<ICodeTargetExtension> extensions
+        )
         {
             _options = options;
             Extensions = extensions.ToArray();
@@ -20,7 +23,9 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
         public override IntermediateNodeWriter CreateNodeWriter()
         {
-            return _options.DesignTime ? (IntermediateNodeWriter)new DesignTimeNodeWriter() : new RuntimeNodeWriter();
+            return _options.DesignTime
+              ? (IntermediateNodeWriter)new DesignTimeNodeWriter()
+              : new RuntimeNodeWriter();
         }
 
         public override TExtension GetExtension<TExtension>()

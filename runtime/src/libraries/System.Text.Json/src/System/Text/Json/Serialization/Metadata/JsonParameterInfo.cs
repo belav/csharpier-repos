@@ -12,7 +12,6 @@ namespace System.Text.Json.Serialization.Metadata
     /// </summary>
     internal abstract class JsonParameterInfo
     {
-
         public JsonConverter ConverterBase { get; private set; } = null!;
 
         // The default value of the parameter. This is `DefaultValue` of the `ParameterInfo`, if specified, or the CLR `default` for the `ParameterType`.
@@ -55,7 +54,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type runtimePropertyType,
             ParameterInfo parameterInfo,
             JsonPropertyInfo matchingProperty,
-            JsonSerializerOptions options)
+            JsonSerializerOptions options
+        )
         {
             RuntimePropertyType = runtimePropertyType;
             Position = parameterInfo.Position;
@@ -69,7 +69,9 @@ namespace System.Text.Json.Serialization.Metadata
 
         // Create a parameter that is ignored at run-time. It uses the same type (typeof(sbyte)) to help
         // prevent issues with unsupported types and helps ensure we don't accidently (de)serialize it.
-        public static JsonParameterInfo CreateIgnoredParameterPlaceholder(JsonPropertyInfo matchingProperty)
+        public static JsonParameterInfo CreateIgnoredParameterPlaceholder(
+            JsonPropertyInfo matchingProperty
+        )
         {
             return new JsonParameterInfo<sbyte>
             {

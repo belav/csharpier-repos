@@ -9,6 +9,9 @@ internal static partial class Interop
     internal static partial class Advapi32
     {
         [DllImport(Libraries.Advapi32, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern SafeEventLogReadHandle OpenEventLog(string lpUNCServerName, string lpSourceName);
+        internal static extern SafeEventLogReadHandle OpenEventLog(
+            string lpUNCServerName,
+            string lpSourceName
+        );
     }
 }

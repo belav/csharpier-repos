@@ -20,12 +20,9 @@ namespace System.Threading.Tests
             const int millisec = 100;
             TimeSpan timeSpan = new TimeSpan(100);
 
-            EnsureOperationCanceledExceptionThrown(
-                () => barrier.SignalAndWait(ct), ct);
-            EnsureOperationCanceledExceptionThrown(
-                () => barrier.SignalAndWait(millisec, ct), ct);
-            EnsureOperationCanceledExceptionThrown(
-                () => barrier.SignalAndWait(timeSpan, ct), ct);
+            EnsureOperationCanceledExceptionThrown(() => barrier.SignalAndWait(ct), ct);
+            EnsureOperationCanceledExceptionThrown(() => barrier.SignalAndWait(millisec, ct), ct);
+            EnsureOperationCanceledExceptionThrown(() => barrier.SignalAndWait(timeSpan, ct), ct);
 
             barrier.Dispose();
         }
@@ -43,9 +40,9 @@ namespace System.Threading.Tests
 
             //Now wait.. the wait should abort and an exception should be thrown
             EnsureOperationCanceledExceptionThrown(
-               () => barrier.SignalAndWait(cancellationToken),
-               cancellationToken);
-
+                () => barrier.SignalAndWait(cancellationToken),
+                cancellationToken
+            );
             // the token should not have any listeners.
             // currently we don't expose this.. but it was verified manually
         }
@@ -63,12 +60,14 @@ namespace System.Threading.Tests
 
             //Test that backout occurred.
             Assert.Equal(numberParticipants, barrier.ParticipantsRemaining);
-
             // the token should not have any listeners.
             // currently we don't expose this.. but it was verified manually
         }
 
-        private static void EnsureOperationCanceledExceptionThrown(Action action, CancellationToken token)
+        private static void EnsureOperationCanceledExceptionThrown(
+            Action action,
+            CancellationToken token
+        )
         {
             OperationCanceledException operationCanceledEx =
                 Assert.Throws<OperationCanceledException>(action);

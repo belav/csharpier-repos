@@ -28,8 +28,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// Initializes a new instance of <see cref="ValidationProblemDetails"/> using the specified <paramref name="modelState"/>.
         /// </summary>
         /// <param name="modelState"><see cref="ModelStateDictionary"/> containing the validation errors.</param>
-        public ValidationProblemDetails(ModelStateDictionary modelState)
-            : this()
+        public ValidationProblemDetails(ModelStateDictionary modelState) : this()
         {
             if (modelState == null)
             {
@@ -62,9 +61,9 @@ namespace Microsoft.AspNetCore.Mvc
 
             string GetErrorMessage(ModelError error)
             {
-                return string.IsNullOrEmpty(error.ErrorMessage) ?
-                    Resources.SerializableError_DefaultError :
-                    error.ErrorMessage;
+                return string.IsNullOrEmpty(error.ErrorMessage)
+                  ? Resources.SerializableError_DefaultError
+                  : error.ErrorMessage;
             }
         }
 
@@ -72,8 +71,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// Initializes a new instance of <see cref="ValidationProblemDetails"/> using the specified <paramref name="errors"/>.
         /// </summary>
         /// <param name="errors">The validation errors.</param>
-        public ValidationProblemDetails(IDictionary<string, string[]> errors)
-            : this()
+        public ValidationProblemDetails(IDictionary<string, string[]> errors) : this()
         {
             if (errors == null)
             {
@@ -87,6 +85,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// Gets the validation errors associated with this instance of <see cref="ValidationProblemDetails"/>.
         /// </summary>
         [JsonPropertyName("errors")]
-        public IDictionary<string, string[]> Errors { get; } = new Dictionary<string, string[]>(StringComparer.Ordinal);
+        public IDictionary<string, string[]> Errors { get; } =
+            new Dictionary<string, string[]>(StringComparer.Ordinal);
     }
 }

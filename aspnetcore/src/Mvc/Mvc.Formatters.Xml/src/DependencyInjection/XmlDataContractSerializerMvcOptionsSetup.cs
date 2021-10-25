@@ -26,7 +26,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
         public XmlDataContractSerializerMvcOptionsSetup(ILoggerFactory loggerFactory)
         {
-            _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
+            _loggerFactory =
+                loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
         }
 
         /// <summary>
@@ -35,14 +36,18 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="options">The <see cref="MvcOptions"/>.</param>
         public void Configure(MvcOptions options)
         {
-            options.ModelMetadataDetailsProviders.Add(new DataMemberRequiredBindingMetadataProvider());
+            options.ModelMetadataDetailsProviders.Add(
+                new DataMemberRequiredBindingMetadataProvider()
+            );
 
             var inputFormatter = new XmlDataContractSerializerInputFormatter(options);
             inputFormatter.WrapperProviderFactories.Add(new ProblemDetailsWrapperProviderFactory());
             options.InputFormatters.Add(inputFormatter);
 
             var outputFormatter = new XmlDataContractSerializerOutputFormatter(_loggerFactory);
-            outputFormatter.WrapperProviderFactories.Add(new ProblemDetailsWrapperProviderFactory());
+            outputFormatter.WrapperProviderFactories.Add(
+                new ProblemDetailsWrapperProviderFactory()
+            );
             options.OutputFormatters.Add(outputFormatter);
 
             // Do not override any user mapping
@@ -52,11 +57,16 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 options.FormatterMappings.SetMediaTypeMappingForFormat(
                     key,
-                    MediaTypeHeaderValues.ApplicationXml);
+                    MediaTypeHeaderValues.ApplicationXml
+                );
             }
 
-            options.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider("System.Xml.Linq.XObject"));
-            options.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider("System.Xml.XmlNode"));
+            options.ModelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider("System.Xml.Linq.XObject")
+            );
+            options.ModelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider("System.Xml.XmlNode")
+            );
         }
     }
 }

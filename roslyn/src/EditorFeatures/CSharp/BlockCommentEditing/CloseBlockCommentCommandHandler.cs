@@ -24,13 +24,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CloseBlockCommentCommandHandler()
-        {
-        }
+        public CloseBlockCommentCommandHandler() { }
 
         public string DisplayName => EditorFeaturesResources.Block_Comment_Editing;
 
-        public bool ExecuteCommand(TypeCharCommandArgs args, CommandExecutionContext executionContext)
+        public bool ExecuteCommand(
+            TypeCharCommandArgs args,
+            CommandExecutionContext executionContext
+        )
         {
             if (args.TypedChar == '/')
             {
@@ -41,18 +42,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
 
                     // Check that the line is all whitespace ending with an asterisk and a single space (| marks caret position):
                     // * |
-                    if (position >= 2 &&
-                        snapshot[position - 1] == ' ' &&
-                        snapshot[position - 2] == '*')
+                    if (
+                        position >= 2
+                        && snapshot[position - 1] == ' '
+                        && snapshot[position - 2] == '*'
+                    )
                     {
                         var line = snapshot.GetLineFromPosition(position);
-                        if (line.End == position &&
-                            line.IsEmptyOrWhitespace(0, line.Length - 2))
+                        if (line.End == position && line.IsEmptyOrWhitespace(0, line.Length - 2))
                         {
-                            if (args.SubjectBuffer.GetFeatureOnOffOption(FeatureOnOffOptions.AutoInsertBlockCommentStartString) &&
-                                BlockCommentEditingCommandHandler.IsCaretInsideBlockCommentSyntax(caret.Value, out _, out _))
+                            if (
+                                args.SubjectBuffer.GetFeatureOnOffOption(
+                                    FeatureOnOffOptions.AutoInsertBlockCommentStartString
+                                )
+                                && BlockCommentEditingCommandHandler.IsCaretInsideBlockCommentSyntax(
+                                    caret.Value,
+                                    out _,
+                                    out _
+                                )
+                            )
                             {
-                                args.SubjectBuffer.Replace(new VisualStudio.Text.Span(position - 1, 1), "/");
+                                args.SubjectBuffer.Replace(
+                                    new VisualStudio.Text.Span(position - 1, 1),
+                                    "/"
+                                );
                                 return true;
                             }
                         }
@@ -63,7 +76,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
             return false;
         }
 
-        public CommandState GetCommandState(TypeCharCommandArgs args)
-            => CommandState.Unspecified;
+        public CommandState GetCommandState(TypeCharCommandArgs args) => CommandState.Unspecified;
     }
 }

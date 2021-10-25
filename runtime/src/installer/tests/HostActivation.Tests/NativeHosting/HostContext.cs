@@ -109,46 +109,42 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             }
 
             string newPropertyName = "HOST_TEST_PROPERTY";
-            string[] args =
-            {
-                HostContextArg,
-                Scenario.App,
-                checkProperties,
-                hostFxrPath
-            };
+            string[] args = { HostContextArg, Scenario.App, checkProperties, hostFxrPath };
 
-            string[] commandArgs = { };
+            string[] commandArgs = {  };
             switch (commandLine)
             {
                 case CommandLine.AppPath:
-                    commandArgs = new string[]
-                    {
-                        expectedAppPath
-                    };
+                    commandArgs = new string[] { expectedAppPath };
                     break;
                 case CommandLine.Exec:
-                    commandArgs = new string[]
-                    {
-                        "exec",
-                        expectedAppPath
-                    };
+                    commandArgs = new string[] { "exec", expectedAppPath };
                     break;
             }
 
-            string[] appArgs =
-            {
-                SharedTestState.AppPropertyName,
-                newPropertyName
-            };
-            CommandResult result = sharedState.CreateNativeHostCommand(args.Concat(commandArgs).Concat(appArgs), sharedState.DotNetRoot)
+            string[] appArgs = { SharedTestState.AppPropertyName, newPropertyName };
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(
+                    args.Concat(commandArgs).Concat(appArgs),
+                    sharedState.DotNetRoot
+                )
                 .Execute();
 
-            result.Should().Pass()
+            result
+                .Should()
+                .Pass()
                 .And.InitializeContextForApp(expectedAppPath)
                 .And.ExecuteAssemblyMock(expectedAppPath, appArgs)
-                .And.HaveStdErrContaining($"Executing as a {(isSelfContained ? "self-contained" : "framework-dependent")} app");
+                .And.HaveStdErrContaining(
+                    $"Executing as a {(isSelfContained ? "self-contained" : "framework-dependent")} app"
+                );
 
-            CheckPropertiesValidation propertyValidation = new CheckPropertiesValidation(checkProperties, LogPrefix.App, SharedTestState.AppPropertyName, SharedTestState.AppPropertyValue);
+            CheckPropertiesValidation propertyValidation = new CheckPropertiesValidation(
+                checkProperties,
+                LogPrefix.App,
+                SharedTestState.AppPropertyName,
+                SharedTestState.AppPropertyValue
+            );
             propertyValidation.ValidateActiveContext(result, newPropertyName);
         }
 
@@ -173,14 +169,22 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 SharedTestState.ConfigPropertyName,
                 newPropertyName
             };
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute();
 
-            result.Should().Pass()
+            result
+                .Should()
+                .Pass()
                 .And.InitializeContextForConfig(sharedState.RuntimeConfigPath)
                 .And.CreateDelegateMock_COM();
 
-            CheckPropertiesValidation propertyValidation = new CheckPropertiesValidation(checkProperties, LogPrefix.Config, SharedTestState.ConfigPropertyName, SharedTestState.ConfigPropertyValue);
+            CheckPropertiesValidation propertyValidation = new CheckPropertiesValidation(
+                checkProperties,
+                LogPrefix.Config,
+                SharedTestState.ConfigPropertyName,
+                SharedTestState.ConfigPropertyValue
+            );
             propertyValidation.ValidateActiveContext(result, newPropertyName);
         }
 
@@ -195,11 +199,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 sharedState.SelfContainedHostFxrPath,
                 sharedState.SelfContainedConfigPath
             };
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute();
 
-            result.Should().Fail()
-                .And.HaveStdErrContaining("Initialization for self-contained components is not supported");
+            result
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    "Initialization for self-contained components is not supported"
+                );
         }
 
         [Theory]
@@ -223,18 +232,36 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 SharedTestState.ConfigPropertyName,
                 SharedTestState.SecondaryConfigPropertyName
             };
-            CommandResult result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                 .Execute();
 
-            result.Should().Pass()
+            result
+                .Should()
+                .Pass()
                 .And.InitializeContextForConfig(sharedState.RuntimeConfigPath)
-                .And.InitializeSecondaryContext(sharedState.SecondaryRuntimeConfigPath, Success_DifferentRuntimeProperties)
+                .And.InitializeSecondaryContext(
+                    sharedState.SecondaryRuntimeConfigPath,
+                    Success_DifferentRuntimeProperties
+                )
                 .And.CreateDelegateMock_COM()
                 .And.CreateDelegateMock_InMemoryAssembly();
 
-            CheckPropertiesValidation propertyValidation = new CheckPropertiesValidation(checkProperties, LogPrefix.Config, SharedTestState.ConfigPropertyName, SharedTestState.ConfigPropertyValue);
-            propertyValidation.ValidateActiveContext(result, SharedTestState.SecondaryConfigPropertyName);
-            propertyValidation.ValidateSecondaryContext(result, SharedTestState.SecondaryConfigPropertyName, SharedTestState.SecondaryConfigPropertyValue);
+            CheckPropertiesValidation propertyValidation = new CheckPropertiesValidation(
+                checkProperties,
+                LogPrefix.Config,
+                SharedTestState.ConfigPropertyName,
+                SharedTestState.ConfigPropertyValue
+            );
+            propertyValidation.ValidateActiveContext(
+                result,
+                SharedTestState.SecondaryConfigPropertyName
+            );
+            propertyValidation.ValidateSecondaryContext(
+                result,
+                SharedTestState.SecondaryConfigPropertyName,
+                SharedTestState.SecondaryConfigPropertyValue
+            );
         }
 
         [Theory]
@@ -261,7 +288,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
         [InlineData(Scenario.NonContextMixedDotnet, CheckProperties.GetAllActive)]
         public void RunApp_GetDelegate(string scenario, string checkProperties)
         {
-            if (scenario != Scenario.Mixed && scenario != Scenario.NonContextMixedAppHost && scenario != Scenario.NonContextMixedDotnet)
+            if (
+                scenario != Scenario.Mixed
+                && scenario != Scenario.NonContextMixedAppHost
+                && scenario != Scenario.NonContextMixedDotnet
+            )
                 throw new Exception($"Unexpected scenario: {scenario}");
 
             string[] args =
@@ -278,64 +309,118 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 SharedTestState.AppPropertyName,
                 SharedTestState.ConfigPropertyName
             };
-            CommandResult result = sharedState.CreateNativeHostCommand(args.Concat(appArgs), sharedState.DotNetRoot)
+            CommandResult result = sharedState
+                .CreateNativeHostCommand(args.Concat(appArgs), sharedState.DotNetRoot)
                 .EnvironmentVariable("COREHOST_TRACE_VERBOSITY", "3")
-                .EnvironmentVariable("TEST_BLOCK_MOCK_EXECUTE_ASSEMBLY", $"{sharedState.AppPath}.block")
-                .EnvironmentVariable("TEST_SIGNAL_MOCK_EXECUTE_ASSEMBLY", $"{sharedState.AppPath}.signal")
+                .EnvironmentVariable(
+                    "TEST_BLOCK_MOCK_EXECUTE_ASSEMBLY",
+                    $"{sharedState.AppPath}.block"
+                )
+                .EnvironmentVariable(
+                    "TEST_SIGNAL_MOCK_EXECUTE_ASSEMBLY",
+                    $"{sharedState.AppPath}.signal"
+                )
                 .Execute();
 
-            result.Should().Pass()
+            result
+                .Should()
+                .Pass()
                 .And.ExecuteAssemblyMock(sharedState.AppPath, appArgs)
-                .And.InitializeSecondaryContext(sharedState.RuntimeConfigPath, Success_DifferentRuntimeProperties)
+                .And.InitializeSecondaryContext(
+                    sharedState.RuntimeConfigPath,
+                    Success_DifferentRuntimeProperties
+                )
                 .And.CreateDelegateMock_InMemoryAssembly();
 
-            CheckPropertiesValidation propertyValidation = new CheckPropertiesValidation(checkProperties, LogPrefix.App, SharedTestState.AppPropertyName, SharedTestState.AppPropertyValue);
+            CheckPropertiesValidation propertyValidation = new CheckPropertiesValidation(
+                checkProperties,
+                LogPrefix.App,
+                SharedTestState.AppPropertyName,
+                SharedTestState.AppPropertyValue
+            );
             if (scenario == Scenario.Mixed)
             {
                 result.Should().InitializeContextForApp(sharedState.AppPath);
-                propertyValidation.ValidateActiveContext(result, SharedTestState.ConfigPropertyName);
+                propertyValidation.ValidateActiveContext(
+                    result,
+                    SharedTestState.ConfigPropertyName
+                );
             }
 
-            propertyValidation.ValidateSecondaryContext(result, SharedTestState.ConfigPropertyName, SharedTestState.ConfigPropertyValue);
+            propertyValidation.ValidateSecondaryContext(
+                result,
+                SharedTestState.ConfigPropertyName,
+                SharedTestState.ConfigPropertyValue
+            );
         }
 
         [Theory]
         [MemberData(nameof(GetFrameworkCompatibilityTestData), parameters: Scenario.ConfigMultiple)]
         [MemberData(nameof(GetFrameworkCompatibilityTestData), parameters: Scenario.Mixed)]
-        [MemberData(nameof(GetFrameworkCompatibilityTestData), parameters: Scenario.NonContextMixedAppHost)]
-        [MemberData(nameof(GetFrameworkCompatibilityTestData), parameters: Scenario.NonContextMixedDotnet)]
-        public void CompatibilityCheck_Frameworks(string scenario, FrameworkCompatibilityTestData testData)
+        [MemberData(
+            nameof(GetFrameworkCompatibilityTestData),
+            parameters: Scenario.NonContextMixedAppHost
+        )]
+        [MemberData(
+            nameof(GetFrameworkCompatibilityTestData),
+            parameters: Scenario.NonContextMixedDotnet
+        )]
+        public void CompatibilityCheck_Frameworks(
+            string scenario,
+            FrameworkCompatibilityTestData testData
+        )
         {
-            if (scenario != Scenario.ConfigMultiple && scenario != Scenario.Mixed && scenario != Scenario.NonContextMixedAppHost && scenario != Scenario.NonContextMixedDotnet)
+            if (
+                scenario != Scenario.ConfigMultiple
+                && scenario != Scenario.Mixed
+                && scenario != Scenario.NonContextMixedAppHost
+                && scenario != Scenario.NonContextMixedDotnet
+            )
                 throw new Exception($"Unexpected scenario: {scenario}");
 
             string frameworkName = testData.Name;
             string version = testData.Version;
-            string frameworkCompatConfig = Path.Combine(sharedState.BaseDirectory, "frameworkCompat.runtimeconfig.json");
-            RuntimeConfig.FromFile(frameworkCompatConfig)
+            string frameworkCompatConfig = Path.Combine(
+                sharedState.BaseDirectory,
+                "frameworkCompat.runtimeconfig.json"
+            );
+            RuntimeConfig
+                .FromFile(frameworkCompatConfig)
                 .WithFramework(new RuntimeConfig.Framework(frameworkName, version))
                 .WithRollForward(testData.RollForward)
                 .Save();
 
-            string appOrConfigPath = scenario == Scenario.ConfigMultiple
-                ? sharedState.RuntimeConfigPath
-                : testData.ExistingContext switch
-                    {
-                        ExistingContextType.FrameworkDependent => sharedState.AppPath,
-                        ExistingContextType.SelfContained_NoIncludedFrameworks => sharedState.SelfContainedAppPath,
-                        ExistingContextType.SelfContained_WithIncludedFrameworks => sharedState.SelfContainedWithIncludedFrameworksAppPath,
-                        _ => throw new Exception($"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}")
-                    };
+            string appOrConfigPath =
+                scenario == Scenario.ConfigMultiple
+                    ? sharedState.RuntimeConfigPath
+                    : testData.ExistingContext switch
+                      {
+                          ExistingContextType.FrameworkDependent => sharedState.AppPath,
+                          ExistingContextType.SelfContained_NoIncludedFrameworks
+                            => sharedState.SelfContainedAppPath,
+                          ExistingContextType.SelfContained_WithIncludedFrameworks
+                            => sharedState.SelfContainedWithIncludedFrameworksAppPath,
+                          _
+                            => throw new Exception(
+                                $"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}"
+                            )
+                      };
 
-            string hostfxrPath = scenario == Scenario.NonContextMixedDotnet
-                ? sharedState.HostFxrPath // Imitating dotnet - always use the non-self-contained hostfxr
-                : testData.ExistingContext switch
-                    {
-                        ExistingContextType.FrameworkDependent => sharedState.HostFxrPath,
-                        ExistingContextType.SelfContained_NoIncludedFrameworks => sharedState.SelfContainedHostFxrPath,
-                        ExistingContextType.SelfContained_WithIncludedFrameworks => sharedState.SelfContainedWithIncludedFrameworksHostFxrPath,
-                        _ => throw new Exception($"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}")
-                    };
+            string hostfxrPath =
+                scenario == Scenario.NonContextMixedDotnet
+                    ? sharedState.HostFxrPath // Imitating dotnet - always use the non-self-contained hostfxr
+                    : testData.ExistingContext switch
+                      {
+                          ExistingContextType.FrameworkDependent => sharedState.HostFxrPath,
+                          ExistingContextType.SelfContained_NoIncludedFrameworks
+                            => sharedState.SelfContainedHostFxrPath,
+                          ExistingContextType.SelfContained_WithIncludedFrameworks
+                            => sharedState.SelfContainedWithIncludedFrameworksHostFxrPath,
+                          _
+                            => throw new Exception(
+                                $"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}"
+                            )
+                      };
 
             string[] args =
             {
@@ -350,10 +435,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             CommandResult result;
             try
             {
-                result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+                result = sharedState
+                    .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                     .EnvironmentVariable("COREHOST_TRACE_VERBOSITY", "3")
-                    .EnvironmentVariable("TEST_BLOCK_MOCK_EXECUTE_ASSEMBLY", $"{sharedState.AppPath}.block")
-                    .EnvironmentVariable("TEST_SIGNAL_MOCK_EXECUTE_ASSEMBLY", $"{sharedState.AppPath}.signal")
+                    .EnvironmentVariable(
+                        "TEST_BLOCK_MOCK_EXECUTE_ASSEMBLY",
+                        $"{sharedState.AppPath}.block"
+                    )
+                    .EnvironmentVariable(
+                        "TEST_SIGNAL_MOCK_EXECUTE_ASSEMBLY",
+                        $"{sharedState.AppPath}.signal"
+                    )
                     .Execute();
             }
             finally
@@ -364,20 +456,25 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             switch (scenario)
             {
                 case Scenario.ConfigMultiple:
-                    result.Should()
+                    result
+                        .Should()
                         .InitializeContextForConfig(appOrConfigPath)
                         .And.CreateDelegateMock_COM();
                     break;
                 case Scenario.Mixed:
-                    result.Should()
+                    result
+                        .Should()
                         .InitializeContextForApp(appOrConfigPath)
                         .And.ExecuteAssemblyMock(appOrConfigPath, new string[0]);
                     break;
                 case Scenario.NonContextMixedAppHost:
                 case Scenario.NonContextMixedDotnet:
-                    result.Should()
+                    result
+                        .Should()
                         .ExecuteAssemblyMock(appOrConfigPath, new string[0])
-                        .And.HaveStdErrContaining($"Mode: {(scenario == Scenario.NonContextMixedAppHost ? "apphost" : "muxer")}");
+                        .And.HaveStdErrContaining(
+                            $"Mode: {(scenario == Scenario.NonContextMixedAppHost ? "apphost" : "muxer")}"
+                        );
                     break;
             }
 
@@ -386,42 +483,97 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             {
                 if (isCompatibleVersion.Value)
                 {
-                    result.Should().Pass()
-                        .And.InitializeSecondaryContext(frameworkCompatConfig, Success_HostAlreadyInitialized)
+                    result
+                        .Should()
+                        .Pass()
+                        .And.InitializeSecondaryContext(
+                            frameworkCompatConfig,
+                            Success_HostAlreadyInitialized
+                        )
                         .And.CreateDelegateMock_InMemoryAssembly();
                 }
                 else
                 {
-                    result.Should().Fail()
+                    result
+                        .Should()
+                        .Fail()
                         .And.FailToInitializeContextForConfig(CoreHostIncompatibleConfig)
-                        .And.HaveStdErrMatching($".*The specified framework '{frameworkName}', version '{version}', apply_patches=[0-1], version_compatibility_range=[^ ]* is incompatible with the previously loaded version '{SharedTestState.NetCoreAppVersion}'.*");
+                        .And.HaveStdErrMatching(
+                            $".*The specified framework '{frameworkName}', version '{version}', apply_patches=[0-1], version_compatibility_range=[^ ]* is incompatible with the previously loaded version '{SharedTestState.NetCoreAppVersion}'.*"
+                        );
                 }
             }
             else
             {
-                result.Should().Fail()
+                result
+                    .Should()
+                    .Fail()
                     .And.FailToInitializeContextForConfig(CoreHostIncompatibleConfig)
-                    .And.HaveStdErrContaining($"The specified framework '{frameworkName}' is not present in the previously loaded runtime");
+                    .And.HaveStdErrContaining(
+                        $"The specified framework '{frameworkName}' is not present in the previously loaded runtime"
+                    );
             }
         }
 
         [Theory]
-        [MemberData(nameof(GetPropertyCompatibilityTestData), parameters: new object[] { Scenario.ConfigMultiple, false })]
-        [MemberData(nameof(GetPropertyCompatibilityTestData), parameters: new object[] { Scenario.ConfigMultiple, true })]
-        [MemberData(nameof(GetPropertyCompatibilityTestData), parameters: new object[] { Scenario.Mixed, false })]
-        [MemberData(nameof(GetPropertyCompatibilityTestData), parameters: new object[] { Scenario.Mixed, true })]
-        [MemberData(nameof(GetPropertyCompatibilityTestData), parameters: new object[] { Scenario.NonContextMixedAppHost, false })]
-        [MemberData(nameof(GetPropertyCompatibilityTestData), parameters: new object[] { Scenario.NonContextMixedAppHost, true })]
-        [MemberData(nameof(GetPropertyCompatibilityTestData), parameters: new object[] { Scenario.NonContextMixedDotnet, false })]
-        [MemberData(nameof(GetPropertyCompatibilityTestData), parameters: new object[] { Scenario.NonContextMixedDotnet, true })]
-        public void CompatibilityCheck_Properties(string scenario, bool hasMultipleProperties, PropertyTestData[] properties)
+        [MemberData(
+            nameof(GetPropertyCompatibilityTestData),
+            parameters: new object[] { Scenario.ConfigMultiple, false }
+        )]
+        [MemberData(
+            nameof(GetPropertyCompatibilityTestData),
+            parameters: new object[] { Scenario.ConfigMultiple, true }
+        )]
+        [MemberData(
+            nameof(GetPropertyCompatibilityTestData),
+            parameters: new object[] { Scenario.Mixed, false }
+        )]
+        [MemberData(
+            nameof(GetPropertyCompatibilityTestData),
+            parameters: new object[] { Scenario.Mixed, true }
+        )]
+        [MemberData(
+            nameof(GetPropertyCompatibilityTestData),
+            parameters: new object[] { Scenario.NonContextMixedAppHost, false }
+        )]
+        [MemberData(
+            nameof(GetPropertyCompatibilityTestData),
+            parameters: new object[] { Scenario.NonContextMixedAppHost, true }
+        )]
+        [MemberData(
+            nameof(GetPropertyCompatibilityTestData),
+            parameters: new object[] { Scenario.NonContextMixedDotnet, false }
+        )]
+        [MemberData(
+            nameof(GetPropertyCompatibilityTestData),
+            parameters: new object[] { Scenario.NonContextMixedDotnet, true }
+        )]
+        public void CompatibilityCheck_Properties(
+            string scenario,
+            bool hasMultipleProperties,
+            PropertyTestData[] properties
+        )
         {
-            if (scenario != Scenario.ConfigMultiple && scenario != Scenario.Mixed && scenario != Scenario.NonContextMixedAppHost && scenario != Scenario.NonContextMixedDotnet)
+            if (
+                scenario != Scenario.ConfigMultiple
+                && scenario != Scenario.Mixed
+                && scenario != Scenario.NonContextMixedAppHost
+                && scenario != Scenario.NonContextMixedDotnet
+            )
                 throw new Exception($"Unexpected scenario: {scenario}");
 
-            string propertyCompatConfig = Path.Combine(sharedState.BaseDirectory, "propertyCompat.runtimeconfig.json");
-            var config = RuntimeConfig.FromFile(propertyCompatConfig)
-                .WithFramework(new RuntimeConfig.Framework(Constants.MicrosoftNETCoreApp, SharedTestState.NetCoreAppVersion));
+            string propertyCompatConfig = Path.Combine(
+                sharedState.BaseDirectory,
+                "propertyCompat.runtimeconfig.json"
+            );
+            var config = RuntimeConfig
+                .FromFile(propertyCompatConfig)
+                .WithFramework(
+                    new RuntimeConfig.Framework(
+                        Constants.MicrosoftNETCoreApp,
+                        SharedTestState.NetCoreAppVersion
+                    )
+                );
 
             foreach (var kv in properties)
             {
@@ -430,9 +582,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 
             config.Save();
 
-            string appOrConfigPath = scenario == Scenario.ConfigMultiple
-                ? hasMultipleProperties ? sharedState.RuntimeConfigPath_MultiProperty : sharedState.RuntimeConfigPath
-                : hasMultipleProperties ? sharedState.AppPath_MultiProperty : sharedState.AppPath;
+            string appOrConfigPath =
+                scenario == Scenario.ConfigMultiple
+                    ? hasMultipleProperties
+                        ? sharedState.RuntimeConfigPath_MultiProperty
+                        : sharedState.RuntimeConfigPath
+                    : hasMultipleProperties
+                        ? sharedState.AppPath_MultiProperty
+                        : sharedState.AppPath;
             string[] args =
             {
                 HostContextArg,
@@ -446,10 +603,17 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             CommandResult result;
             try
             {
-                result = sharedState.CreateNativeHostCommand(args, sharedState.DotNetRoot)
+                result = sharedState
+                    .CreateNativeHostCommand(args, sharedState.DotNetRoot)
                     .EnvironmentVariable("COREHOST_TRACE_VERBOSITY", "3")
-                    .EnvironmentVariable("TEST_BLOCK_MOCK_EXECUTE_ASSEMBLY", $"{sharedState.AppPath}.block")
-                    .EnvironmentVariable("TEST_SIGNAL_MOCK_EXECUTE_ASSEMBLY", $"{sharedState.AppPath}.signal")
+                    .EnvironmentVariable(
+                        "TEST_BLOCK_MOCK_EXECUTE_ASSEMBLY",
+                        $"{sharedState.AppPath}.block"
+                    )
+                    .EnvironmentVariable(
+                        "TEST_SIGNAL_MOCK_EXECUTE_ASSEMBLY",
+                        $"{sharedState.AppPath}.signal"
+                    )
                     .Execute();
             }
             finally
@@ -457,60 +621,80 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 File.Delete(propertyCompatConfig);
             }
 
-            result.Should().Pass()
-                .And.CreateDelegateMock_InMemoryAssembly();
+            result.Should().Pass().And.CreateDelegateMock_InMemoryAssembly();
 
             switch (scenario)
             {
                 case Scenario.ConfigMultiple:
-                    result.Should()
+                    result
+                        .Should()
                         .InitializeContextForConfig(appOrConfigPath)
                         .And.CreateDelegateMock_COM();
                     break;
                 case Scenario.Mixed:
-                    result.Should()
+                    result
+                        .Should()
                         .InitializeContextForApp(appOrConfigPath)
                         .And.ExecuteAssemblyMock(appOrConfigPath, new string[0]);
                     break;
                 case Scenario.NonContextMixedAppHost:
                 case Scenario.NonContextMixedDotnet:
-                    result.Should()
-                        .ExecuteAssemblyMock(appOrConfigPath, new string[0]);
+                    result.Should().ExecuteAssemblyMock(appOrConfigPath, new string[0]);
                     break;
             }
 
             bool shouldHaveDifferentProperties = false;
-            foreach(var prop in properties)
+            foreach (var prop in properties)
             {
                 if (prop.ExistingValue == null)
                 {
                     shouldHaveDifferentProperties = true;
-                    result.Should()
-                        .HaveStdErrContaining($"The property [{prop.Name}] is not present in the previously loaded runtime");
+                    result
+                        .Should()
+                        .HaveStdErrContaining(
+                            $"The property [{prop.Name}] is not present in the previously loaded runtime"
+                        );
                 }
                 else if (!prop.ExistingValue.Equals(prop.NewValue))
                 {
                     shouldHaveDifferentProperties = true;
-                    result.Should()
-                        .InitializeSecondaryContext(propertyCompatConfig, Success_DifferentRuntimeProperties)
-                        .And.HaveStdErrContaining($"The property [{prop.Name}] has a different value [{prop.NewValue}] from that in the previously loaded runtime [{prop.ExistingValue}]");
+                    result
+                        .Should()
+                        .InitializeSecondaryContext(
+                            propertyCompatConfig,
+                            Success_DifferentRuntimeProperties
+                        )
+                        .And.HaveStdErrContaining(
+                            $"The property [{prop.Name}] has a different value [{prop.NewValue}] from that in the previously loaded runtime [{prop.ExistingValue}]"
+                        );
                 }
             }
 
             if (shouldHaveDifferentProperties)
             {
-                result.Should()
-                    .InitializeSecondaryContext(propertyCompatConfig, Success_DifferentRuntimeProperties);
+                result
+                    .Should()
+                    .InitializeSecondaryContext(
+                        propertyCompatConfig,
+                        Success_DifferentRuntimeProperties
+                    );
             }
             else
             {
-                result.Should()
-                    .InitializeSecondaryContext(propertyCompatConfig, Success_HostAlreadyInitialized);
+                result
+                    .Should()
+                    .InitializeSecondaryContext(
+                        propertyCompatConfig,
+                        Success_HostAlreadyInitialized
+                    );
 
                 if (properties.Length > 0)
                 {
-                    result.Should()
-                        .HaveStdErrContaining("All specified properties match those in the previously loaded runtime");
+                    result
+                        .Should()
+                        .HaveStdErrContaining(
+                            "All specified properties match those in the previously loaded runtime"
+                        );
                 }
             }
         }
@@ -523,7 +707,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             private readonly string propertyValue;
             private readonly string checkProperties;
 
-            public CheckPropertiesValidation(string checkProperties, string logPrefix, string propertyName, string propertyValue)
+            public CheckPropertiesValidation(
+                string checkProperties,
+                string logPrefix,
+                string propertyName,
+                string propertyValue
+            )
             {
                 this.checkProperties = checkProperties;
                 this.logPrefix = logPrefix;
@@ -536,42 +725,59 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 switch (checkProperties)
                 {
                     case CheckProperties.None:
-                        result.Should()
-                            .HavePropertyMock(PropertyName, propertyValue);
+                        result.Should().HavePropertyMock(PropertyName, propertyValue);
                         break;
                     case CheckProperties.Get:
-                        result.Should()
+                        result
+                            .Should()
                             .GetRuntimePropertyValue(logPrefix, PropertyName, propertyValue)
-                            .And.FailToGetRuntimePropertyValue(logPrefix, newPropertyName, HostPropertyNotFound)
+                            .And.FailToGetRuntimePropertyValue(
+                                logPrefix,
+                                newPropertyName,
+                                HostPropertyNotFound
+                            )
                             .And.HavePropertyMock(PropertyName, propertyValue);
                         break;
                     case CheckProperties.Set:
-                        result.Should()
+                        result
+                            .Should()
                             .SetRuntimePropertyValue(logPrefix, PropertyName)
                             .And.SetRuntimePropertyValue(logPrefix, newPropertyName)
                             .And.HavePropertyMock(PropertyName, PropertyValueFromHost)
                             .And.HavePropertyMock(newPropertyName, PropertyValueFromHost);
                         break;
                     case CheckProperties.Remove:
-                        result.Should()
+                        result
+                            .Should()
                             .SetRuntimePropertyValue(logPrefix, PropertyName)
                             .And.SetRuntimePropertyValue(logPrefix, newPropertyName)
                             .And.NotHavePropertyMock(PropertyName)
                             .And.NotHavePropertyMock(newPropertyName);
                         break;
                     case CheckProperties.GetAll:
-                        result.Should()
+                        result
+                            .Should()
                             .GetRuntimePropertiesIncludes(logPrefix, PropertyName, propertyValue)
                             .And.HavePropertyMock(PropertyName, propertyValue);
                         break;
                     case CheckProperties.GetActive:
-                        result.Should()
-                            .FailToGetRuntimePropertyValue(logPrefix, PropertyName, HostInvalidState)
-                            .And.FailToGetRuntimePropertyValue(logPrefix, newPropertyName, HostInvalidState)
+                        result
+                            .Should()
+                            .FailToGetRuntimePropertyValue(
+                                logPrefix,
+                                PropertyName,
+                                HostInvalidState
+                            )
+                            .And.FailToGetRuntimePropertyValue(
+                                logPrefix,
+                                newPropertyName,
+                                HostInvalidState
+                            )
                             .And.HavePropertyMock(PropertyName, propertyValue);
                         break;
                     case CheckProperties.GetAllActive:
-                        result.Should()
+                        result
+                            .Should()
                             .FailToGetRuntimeProperties(logPrefix, HostInvalidState)
                             .And.HavePropertyMock(PropertyName, propertyValue);
                         break;
@@ -580,41 +786,94 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 }
             }
 
-            public void ValidateSecondaryContext(CommandResult result, string secondaryPropertyName, string secondaryPropertyValue)
+            public void ValidateSecondaryContext(
+                CommandResult result,
+                string secondaryPropertyName,
+                string secondaryPropertyValue
+            )
             {
                 switch (checkProperties)
                 {
                     case CheckProperties.None:
                         break;
                     case CheckProperties.Get:
-                        result.Should()
-                            .FailToGetRuntimePropertyValue(LogPrefix.Secondary, PropertyName, HostPropertyNotFound)
-                            .And.GetRuntimePropertyValue(LogPrefix.Secondary, secondaryPropertyName, secondaryPropertyValue);
+                        result
+                            .Should()
+                            .FailToGetRuntimePropertyValue(
+                                LogPrefix.Secondary,
+                                PropertyName,
+                                HostPropertyNotFound
+                            )
+                            .And.GetRuntimePropertyValue(
+                                LogPrefix.Secondary,
+                                secondaryPropertyName,
+                                secondaryPropertyValue
+                            );
                         break;
                     case CheckProperties.Set:
-                        result.Should()
-                            .FailToSetRuntimePropertyValue(LogPrefix.Secondary, PropertyName, InvalidArgFailure)
-                            .And.FailToSetRuntimePropertyValue(LogPrefix.Secondary, secondaryPropertyName, InvalidArgFailure);
+                        result
+                            .Should()
+                            .FailToSetRuntimePropertyValue(
+                                LogPrefix.Secondary,
+                                PropertyName,
+                                InvalidArgFailure
+                            )
+                            .And.FailToSetRuntimePropertyValue(
+                                LogPrefix.Secondary,
+                                secondaryPropertyName,
+                                InvalidArgFailure
+                            );
                         break;
                     case CheckProperties.Remove:
-                        result.Should()
-                            .FailToSetRuntimePropertyValue(LogPrefix.Secondary, PropertyName, InvalidArgFailure)
-                            .And.FailToSetRuntimePropertyValue(LogPrefix.Secondary, secondaryPropertyName, InvalidArgFailure);
+                        result
+                            .Should()
+                            .FailToSetRuntimePropertyValue(
+                                LogPrefix.Secondary,
+                                PropertyName,
+                                InvalidArgFailure
+                            )
+                            .And.FailToSetRuntimePropertyValue(
+                                LogPrefix.Secondary,
+                                secondaryPropertyName,
+                                InvalidArgFailure
+                            );
                         break;
                     case CheckProperties.GetAll:
-                        result.Should()
-                            .GetRuntimePropertiesIncludes(LogPrefix.Secondary, secondaryPropertyName, secondaryPropertyValue)
+                        result
+                            .Should()
+                            .GetRuntimePropertiesIncludes(
+                                LogPrefix.Secondary,
+                                secondaryPropertyName,
+                                secondaryPropertyValue
+                            )
                             .And.GetRuntimePropertiesExcludes(LogPrefix.Secondary, PropertyName);
                         break;
                     case CheckProperties.GetActive:
-                        result.Should()
-                            .GetRuntimePropertyValue(LogPrefix.Secondary, PropertyName, propertyValue)
-                            .And.FailToGetRuntimePropertyValue(LogPrefix.Secondary, secondaryPropertyName, HostPropertyNotFound);
+                        result
+                            .Should()
+                            .GetRuntimePropertyValue(
+                                LogPrefix.Secondary,
+                                PropertyName,
+                                propertyValue
+                            )
+                            .And.FailToGetRuntimePropertyValue(
+                                LogPrefix.Secondary,
+                                secondaryPropertyName,
+                                HostPropertyNotFound
+                            );
                         break;
                     case CheckProperties.GetAllActive:
-                        result.Should()
-                            .GetRuntimePropertiesIncludes(LogPrefix.Secondary, PropertyName, propertyValue)
-                            .And.GetRuntimePropertiesExcludes(LogPrefix.Secondary, secondaryPropertyName);
+                        result
+                            .Should()
+                            .GetRuntimePropertiesIncludes(
+                                LogPrefix.Secondary,
+                                PropertyName,
+                                propertyValue
+                            )
+                            .And.GetRuntimePropertiesExcludes(
+                                LogPrefix.Secondary,
+                                secondaryPropertyName
+                            );
                         break;
                     default:
                         throw new Exception($"Unknown option: {checkProperties}");
@@ -661,87 +920,154 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
 
             public SharedTestState()
             {
-                var dotNet = new DotNetBuilder(BaseDirectory, Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"), "mockRuntime")
+                var dotNet = new DotNetBuilder(
+                    BaseDirectory,
+                    Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"),
+                    "mockRuntime"
+                )
                     .AddMicrosoftNETCoreAppFrameworkMockCoreClr(NetCoreAppVersion)
                     .Build();
                 DotNetRoot = dotNet.BinPath;
 
                 HostFxrPath = Path.Combine(
                     dotNet.GreatestVersionHostFxrPath,
-                    RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostfxr"));
+                    RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                        "hostfxr"
+                    )
+                );
 
                 string appDir = Path.Combine(BaseDirectory, "app");
                 Directory.CreateDirectory(appDir);
                 AppPath = Path.Combine(appDir, "App.dll");
                 File.WriteAllText(AppPath, string.Empty);
 
-                RuntimeConfig.FromFile(Path.Combine(appDir, "App.runtimeconfig.json"))
-                    .WithFramework(new RuntimeConfig.Framework(Constants.MicrosoftNETCoreApp, NetCoreAppVersion))
+                RuntimeConfig
+                    .FromFile(Path.Combine(appDir, "App.runtimeconfig.json"))
+                    .WithFramework(
+                        new RuntimeConfig.Framework(
+                            Constants.MicrosoftNETCoreApp,
+                            NetCoreAppVersion
+                        )
+                    )
                     .WithProperty(AppPropertyName, AppPropertyValue)
                     .Save();
 
                 AppPath_MultiProperty = Path.Combine(appDir, "App_MultiProperty.dll");
                 File.WriteAllText(AppPath_MultiProperty, string.Empty);
 
-                RuntimeConfig.FromFile(Path.Combine(appDir, "App_MultiProperty.runtimeconfig.json"))
-                    .WithFramework(new RuntimeConfig.Framework(Constants.MicrosoftNETCoreApp, NetCoreAppVersion))
+                RuntimeConfig
+                    .FromFile(Path.Combine(appDir, "App_MultiProperty.runtimeconfig.json"))
+                    .WithFramework(
+                        new RuntimeConfig.Framework(
+                            Constants.MicrosoftNETCoreApp,
+                            NetCoreAppVersion
+                        )
+                    )
                     .WithProperty(AppPropertyName, AppPropertyValue)
                     .WithProperty(AppMultiPropertyName, AppMultiPropertyValue)
                     .Save();
 
-                CreateSelfContainedApp(dotNet, "SelfContained", out string selfContainedAppPath, out string selfContainedHostFxrPath, out string selfContainedConfigPath);
+                CreateSelfContainedApp(
+                    dotNet,
+                    "SelfContained",
+                    out string selfContainedAppPath,
+                    out string selfContainedHostFxrPath,
+                    out string selfContainedConfigPath
+                );
                 SelfContainedAppPath = selfContainedAppPath;
                 SelfContainedHostFxrPath = selfContainedHostFxrPath;
                 SelfContainedConfigPath = selfContainedConfigPath;
 
-                CreateSelfContainedApp(dotNet, "SelfContainedWithIncludedFrameworks", out selfContainedAppPath, out selfContainedHostFxrPath, out selfContainedConfigPath);
+                CreateSelfContainedApp(
+                    dotNet,
+                    "SelfContainedWithIncludedFrameworks",
+                    out selfContainedAppPath,
+                    out selfContainedHostFxrPath,
+                    out selfContainedConfigPath
+                );
                 SelfContainedWithIncludedFrameworksAppPath = selfContainedAppPath;
                 SelfContainedWithIncludedFrameworksHostFxrPath = selfContainedHostFxrPath;
                 SelfContainedWithIncludedFrameworksConfigPath = selfContainedConfigPath;
-                RuntimeConfig.FromFile(SelfContainedWithIncludedFrameworksConfigPath)
+                RuntimeConfig
+                    .FromFile(SelfContainedWithIncludedFrameworksConfigPath)
                     .WithIncludedFramework(Constants.MicrosoftNETCoreApp, NetCoreAppVersion)
                     .Save();
 
                 string configDir = Path.Combine(BaseDirectory, "config");
                 Directory.CreateDirectory(configDir);
                 RuntimeConfigPath = Path.Combine(configDir, "Component.runtimeconfig.json");
-                RuntimeConfig.FromFile(RuntimeConfigPath)
-                    .WithFramework(new RuntimeConfig.Framework(Constants.MicrosoftNETCoreApp, NetCoreAppVersion))
+                RuntimeConfig
+                    .FromFile(RuntimeConfigPath)
+                    .WithFramework(
+                        new RuntimeConfig.Framework(
+                            Constants.MicrosoftNETCoreApp,
+                            NetCoreAppVersion
+                        )
+                    )
                     .WithProperty(ConfigPropertyName, ConfigPropertyValue)
                     .Save();
 
-                RuntimeConfigPath_MultiProperty = Path.Combine(configDir, "Component_MultiProperty.runtimeconfig.json");
-                RuntimeConfig.FromFile(RuntimeConfigPath_MultiProperty)
-                    .WithFramework(new RuntimeConfig.Framework(Constants.MicrosoftNETCoreApp, NetCoreAppVersion))
+                RuntimeConfigPath_MultiProperty = Path.Combine(
+                    configDir,
+                    "Component_MultiProperty.runtimeconfig.json"
+                );
+                RuntimeConfig
+                    .FromFile(RuntimeConfigPath_MultiProperty)
+                    .WithFramework(
+                        new RuntimeConfig.Framework(
+                            Constants.MicrosoftNETCoreApp,
+                            NetCoreAppVersion
+                        )
+                    )
                     .WithProperty(ConfigPropertyName, ConfigPropertyValue)
                     .WithProperty(ConfigMultiPropertyName, ConfigMultiPropertyValue)
                     .Save();
 
                 string secondaryDir = Path.Combine(BaseDirectory, "secondary");
                 Directory.CreateDirectory(secondaryDir);
-                SecondaryRuntimeConfigPath = Path.Combine(secondaryDir, "Secondary.runtimeconfig.json");
-                RuntimeConfig.FromFile(SecondaryRuntimeConfigPath)
-                    .WithFramework(new RuntimeConfig.Framework(Constants.MicrosoftNETCoreApp, NetCoreAppVersion))
+                SecondaryRuntimeConfigPath = Path.Combine(
+                    secondaryDir,
+                    "Secondary.runtimeconfig.json"
+                );
+                RuntimeConfig
+                    .FromFile(SecondaryRuntimeConfigPath)
+                    .WithFramework(
+                        new RuntimeConfig.Framework(
+                            Constants.MicrosoftNETCoreApp,
+                            NetCoreAppVersion
+                        )
+                    )
                     .WithProperty(SecondaryConfigPropertyName, SecondaryConfigPropertyValue)
                     .Save();
             }
 
-            public void CreateSelfContainedApp(DotNetCli dotNet, string name, out string appPath, out string hostFxrPath, out string configPath)
+            public void CreateSelfContainedApp(
+                DotNetCli dotNet,
+                string name,
+                out string appPath,
+                out string hostFxrPath,
+                out string configPath
+            )
             {
                 string selfContainedDir = Path.Combine(BaseDirectory, name);
                 Directory.CreateDirectory(selfContainedDir);
                 appPath = Path.Combine(selfContainedDir, name + ".dll");
                 File.WriteAllText(appPath, string.Empty);
-                var toCopy = Directory.GetFiles(dotNet.GreatestVersionSharedFxPath)
+                var toCopy = Directory
+                    .GetFiles(dotNet.GreatestVersionSharedFxPath)
                     .Concat(Directory.GetFiles(dotNet.GreatestVersionHostFxrPath));
                 foreach (string file in toCopy)
                 {
                     File.Copy(file, Path.Combine(selfContainedDir, Path.GetFileName(file)));
                 }
 
-                hostFxrPath = Path.Combine(selfContainedDir, Path.GetFileName(dotNet.GreatestVersionHostFxrFilePath));
+                hostFxrPath = Path.Combine(
+                    selfContainedDir,
+                    Path.GetFileName(dotNet.GreatestVersionHostFxrFilePath)
+                );
                 configPath = Path.Combine(selfContainedDir, name + ".runtimeconfig.json");
-                RuntimeConfig.FromFile(configPath)
+                RuntimeConfig
+                    .FromFile(configPath)
                     .WithProperty(AppPropertyName, AppPropertyValue)
                     .Save();
             }

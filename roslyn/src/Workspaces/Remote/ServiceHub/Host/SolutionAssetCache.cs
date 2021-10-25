@@ -34,16 +34,16 @@ namespace Microsoft.CodeAnalysis.Remote
         /// </summary>
         private readonly TimeSpan _gcAfterTimeSpan;
 
-        private readonly ConcurrentDictionary<Checksum, Entry> _assets =
-            new ConcurrentDictionary<Checksum, Entry>(concurrencyLevel: 4, capacity: 10);
+        private readonly ConcurrentDictionary<Checksum, Entry> _assets = new ConcurrentDictionary<
+            Checksum,
+            Entry
+        >(concurrencyLevel: 4, capacity: 10);
 
         private DateTime _lastGCRun;
         private DateTime _lastActivityTime;
 
         // constructor for testing
-        public SolutionAssetCache()
-        {
-        }
+        public SolutionAssetCache() { }
 
         /// <summary>
         /// Create central data cache
@@ -74,7 +74,14 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             UpdateLastActivityTime();
 
-            using (Logger.LogBlock(FunctionId.AssetStorage_TryGetAsset, Checksum.GetChecksumLogInfo, checksum, CancellationToken.None))
+            using (
+                Logger.LogBlock(
+                    FunctionId.AssetStorage_TryGetAsset,
+                    Checksum.GetChecksumLogInfo,
+                    checksum,
+                    CancellationToken.None
+                )
+            )
             {
                 if (!_assets.TryGetValue(checksum, out var entry))
                 {
@@ -90,12 +97,11 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        public void UpdateLastActivityTime()
-            => _lastActivityTime = DateTime.UtcNow;
+        public void UpdateLastActivityTime() => _lastActivityTime = DateTime.UtcNow;
 
         private static void Update(Entry entry)
         {
-            // entry is reference type. we update it directly. 
+            // entry is reference type. we update it directly.
             // we don't care about race.
             entry.LastAccessed = DateTime.UtcNow;
         }
@@ -129,7 +135,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
             using (Logger.LogBlock(FunctionId.AssetStorage_ForceGC, CancellationToken.None))
             {
-                // we didn't have activity for 5 min. spend some time to drop 
+                // we didn't have activity for 5 min. spend some time to drop
                 // unused memory
                 for (var i = 0; i < 3; i++)
                 {

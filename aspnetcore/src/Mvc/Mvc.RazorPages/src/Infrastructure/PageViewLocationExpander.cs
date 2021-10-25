@@ -12,9 +12,15 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
     public class PageViewLocationExpander : IViewLocationExpander
     {
         /// <inheritdoc/>
-        public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
+        public IEnumerable<string> ExpandViewLocations(
+            ViewLocationExpanderContext context,
+            IEnumerable<string> viewLocations
+        )
         {
-            if ((context.ActionContext.ActionDescriptor is PageActionDescriptor) && !string.IsNullOrEmpty(context.PageName))
+            if (
+                (context.ActionContext.ActionDescriptor is PageActionDescriptor)
+                && !string.IsNullOrEmpty(context.PageName)
+            )
             {
                 return ExpandPageHierarchy();
             }
@@ -28,14 +34,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 {
                     // For pages, we only handle the 'page' token when it's surrounded by slashes.
                     //
-                    // Explanation: 
+                    // Explanation:
                     //      We need the ability to 'collapse' the segment which requires us to understand slashes.
                     //      Imagine a path like /{1}/{0} - we might end up with //{0} if we don't do *something* with
                     //      the slashes. Instead of picking on (leading or trailing), we choose both. This seems
                     //      less arbitrary.
                     //
                     //
-                    // So given a Page like /Account/Manage/Index using /Pages as the root, and the default set of 
+                    // So given a Page like /Account/Manage/Index using /Pages as the root, and the default set of
                     // search paths, this will produce the expanded paths:
                     //
                     //  /Pages/Account/Manage/{0}.cshtml
@@ -59,7 +65,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     while (end > 0 && (end = context.PageName.LastIndexOf('/', end - 1)) != -1)
                     {
                         // PageName always starts with `/`
-                        yield return location.Replace("/{1}/", context.PageName.Substring(0, end + 1));
+                        yield return location.Replace(
+                            "/{1}/",
+                            context.PageName.Substring(0, end + 1)
+                        );
                     }
                 }
             }

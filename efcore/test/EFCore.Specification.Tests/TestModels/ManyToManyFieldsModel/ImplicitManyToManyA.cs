@@ -11,6 +11,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         public int Id;
         public string Name;
 
-        public ICollection<ImplicitManyToManyB> Bs = new ObservableCollection<ImplicitManyToManyB>();
+        public ICollection<ImplicitManyToManyB> Bs =
+            new ObservableCollection<ImplicitManyToManyB>();
     }
 }

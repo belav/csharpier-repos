@@ -27,9 +27,7 @@ namespace System.Data.Common
             Marshal.Copy(zeroes, 0, ptr, length);
         }
 
-        internal static unsafe IntPtr InterlockedExchangePointer(
-                IntPtr lpAddress,
-                IntPtr lpValue)
+        internal static unsafe IntPtr InterlockedExchangePointer(IntPtr lpAddress, IntPtr lpValue)
         {
             IntPtr previousPtr;
             IntPtr actualPtr = *(IntPtr*)lpAddress.ToPointer();
@@ -37,14 +35,20 @@ namespace System.Data.Common
             do
             {
                 previousPtr = actualPtr;
-                actualPtr = Interlocked.CompareExchange(ref *(IntPtr*)lpAddress.ToPointer(), lpValue, previousPtr);
-            }
-            while (actualPtr != previousPtr);
+                actualPtr = Interlocked.CompareExchange(
+                    ref *(IntPtr*)lpAddress.ToPointer(),
+                    lpValue,
+                    previousPtr
+                );
+            } while (actualPtr != previousPtr);
 
             return actualPtr;
         }
 
-        [DllImport(Interop.Libraries.Kernel32, CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport(
+            Interop.Libraries.Kernel32,
+            CharSet = System.Runtime.InteropServices.CharSet.Auto
+        )]
         internal static extern int GetCurrentProcessId();
 
         [DllImport(Interop.Libraries.Kernel32, SetLastError = true)]
@@ -54,7 +58,7 @@ namespace System.Data.Common
         internal static extern IntPtr LocalFree(IntPtr handle);
 
         [DllImport(Interop.Libraries.OleAut32, CharSet = CharSet.Unicode)]
-        internal static extern IntPtr SysAllocStringLen(string src, int len);  // BSTR
+        internal static extern IntPtr SysAllocStringLen(string src, int len); // BSTR
 
         [DllImport(Interop.Libraries.OleAut32)]
         internal static extern void SysFreeString(IntPtr bstr);
@@ -65,13 +69,29 @@ namespace System.Data.Common
         private static extern void SetErrorInfo(int dwReserved, IntPtr pIErrorInfo);
 
         [DllImport(Interop.Libraries.Kernel32, SetLastError = true)]
-        internal static extern int ReleaseSemaphore(IntPtr handle, int releaseCount, IntPtr previousCount);
+        internal static extern int ReleaseSemaphore(
+            IntPtr handle,
+            int releaseCount,
+            IntPtr previousCount
+        );
 
         [DllImport(Interop.Libraries.Kernel32, SetLastError = true)]
-        internal static extern int WaitForMultipleObjectsEx(uint nCount, IntPtr lpHandles, bool bWaitAll, uint dwMilliseconds, bool bAlertable);
+        internal static extern int WaitForMultipleObjectsEx(
+            uint nCount,
+            IntPtr lpHandles,
+            bool bWaitAll,
+            uint dwMilliseconds,
+            bool bAlertable
+        );
 
-        [DllImport(Interop.Libraries.Kernel32/*, SetLastError=true*/)]
-        internal static extern int WaitForSingleObjectEx(IntPtr lpHandles, uint dwMilliseconds, bool bAlertable);
+        [DllImport(
+            Interop.Libraries.Kernel32 /*, SetLastError=true*/
+        )]
+        internal static extern int WaitForSingleObjectEx(
+            IntPtr lpHandles,
+            uint dwMilliseconds,
+            bool bAlertable
+        );
 
         [DllImport(Interop.Libraries.Ole32, PreserveSig = false)]
         internal static extern void PropVariantClear(IntPtr pObject);

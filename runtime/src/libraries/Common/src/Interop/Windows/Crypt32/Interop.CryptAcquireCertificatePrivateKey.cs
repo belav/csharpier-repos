@@ -16,6 +16,7 @@ internal static partial class Interop
             IntPtr pvParameters,
             out IntPtr phCryptProvOrNCryptKey,
             out CryptKeySpec pdwKeySpec,
-            out bool pfCallerFreeProvOrNCryptKey);
+            out bool pfCallerFreeProvOrNCryptKey
+        );
     }
 }

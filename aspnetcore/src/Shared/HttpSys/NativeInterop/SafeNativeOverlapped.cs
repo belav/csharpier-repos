@@ -13,13 +13,12 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
         internal static readonly SafeNativeOverlapped Zero = new SafeNativeOverlapped();
         private ThreadPoolBoundHandle? _boundHandle;
 
-        internal SafeNativeOverlapped()
-            : base(IntPtr.Zero, true)
-        {
-        }
+        internal SafeNativeOverlapped() : base(IntPtr.Zero, true) { }
 
-        internal unsafe SafeNativeOverlapped(ThreadPoolBoundHandle boundHandle, NativeOverlapped* handle)
-            : base(IntPtr.Zero, true)
+        internal unsafe SafeNativeOverlapped(
+            ThreadPoolBoundHandle boundHandle,
+            NativeOverlapped* handle
+        ) : base(IntPtr.Zero, true)
         {
             SetHandle((IntPtr)handle);
             _boundHandle = boundHandle;
@@ -32,7 +31,10 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
 
         protected override bool ReleaseHandle()
         {
-            Debug.Assert(_boundHandle != null, "ReleaseHandle can't be called on SafeNativeOverlapped.Zero.");
+            Debug.Assert(
+                _boundHandle != null,
+                "ReleaseHandle can't be called on SafeNativeOverlapped.Zero."
+            );
 
             IntPtr oldHandle = Interlocked.Exchange(ref handle, IntPtr.Zero);
             // Do not call free durring AppDomain shutdown, there may be an outstanding operation.

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void IInvocation_StaticMethodWithInstanceReceiver()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M1() { }
@@ -28,25 +29,34 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax: 'c.M1()')
   Children(1):
       ILocalReferenceOperation: c (OperationKind.LocalReference, Type: C, IsInvalid) (Syntax: 'c')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(9,19): error CS0176: Member 'C.M1()' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         /*<bind>*/c.M1()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.M1").WithArguments("C.M1()").WithLocation(9, 19)
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.M1")
+                    .WithArguments("C.M1()")
+                    .WithLocation(9, 19)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IInvocation_StaticMethodAccessOnType()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M1() { }
@@ -57,7 +67,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void C.M1()) (OperationKind.Invocation, Type: System.Void) (Syntax: 'C.M1()')
   Instance Receiver: 
     null
@@ -65,14 +76,19 @@ IInvocationOperation (void C.M1()) (OperationKind.Invocation, Type: System.Void)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IInvocation_InstanceMethodAccessOnType()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M1() { }
@@ -83,25 +99,34 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax: 'C.M1()')
   Children(1):
       IOperation:  (OperationKind.None, Type: null, IsInvalid) (Syntax: 'C')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(8,19): error CS0120: An object reference is required for the non-static field, method, or property 'C.M1()'
                 //         /*<bind>*/C.M1()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "C.M1").WithArguments("C.M1()").WithLocation(8, 19)
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "C.M1")
+                    .WithArguments("C.M1()")
+                    .WithLocation(8, 19)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InvocationFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(bool b, object o1, object o2, object o3, object o4)
@@ -113,7 +138,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -187,14 +213,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InvocationFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(bool b, object o1, object o2, object o3, object o4)
@@ -206,7 +237,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -276,14 +308,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InvocationFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(bool b, object o1, object o2)
@@ -294,7 +331,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -344,15 +382,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
-
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InvocationFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(bool b, object o1, object o2, object o3, object o4)
@@ -364,7 +406,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -438,14 +481,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InvocationFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(bool b, object o1, object o2, object o3, object o4)
@@ -458,7 +506,8 @@ public class MyClass
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -528,14 +577,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InvocationFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(MyClass c1, MyClass c2, object o1, object o2)
@@ -547,16 +601,22 @@ public class MyClass
 }
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,9): error CS0176: Member 'MyClass.M2(object)' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         c1.M2(o1);
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c1.M2").WithArguments("MyClass.M2(object)").WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "c1.M2")
+                    .WithArguments("MyClass.M2(object)")
+                    .WithLocation(6, 9),
                 // file.cs(7,9): error CS0176: Member 'MyClass.M2(object)' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         (c1 ?? c2).M2(o2);
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).M2").WithArguments("MyClass.M2(object)").WithLocation(7, 9)
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).M2")
+                    .WithArguments("MyClass.M2(object)")
+                    .WithLocation(7, 9)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -630,14 +690,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InvocationFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(object o1, object o2, object o3, object o4, object o5)
@@ -651,7 +716,8 @@ public class MyClass
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -793,14 +859,19 @@ Block[B10] - Exit
     Predecessors: [B9]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InvocationFlow_08()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(object o2, object o3, object o4)
@@ -814,7 +885,8 @@ public class MyClass
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -892,14 +964,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InvocationFlow_09()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(object o2, object o3, object o4, object o5)
@@ -913,7 +990,8 @@ public class MyClass
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1041,14 +1119,19 @@ Block[B9] - Exit
     Predecessors: [B8]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InvocationFlow_10()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(object o1, object o2, object o3, object o4, object o5)
@@ -1061,7 +1144,8 @@ public class MyClass
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1182,14 +1266,19 @@ Block[B9] - Exit
     Predecessors: [B8]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void InvocationFlow_11()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(bool b, object o1, object o2, object o3, object o4, object o5)
@@ -1202,7 +1291,8 @@ public class MyClass
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1310,7 +1400,11 @@ Block[B9] - Exit
     Predecessors: [B8]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry rootEntry,
             EntityState targetState,
             EntityState storeGeneratedWithKeySetTargetState,
-            bool forceStateWhenUnknownKey);
+            bool forceStateWhenUnknownKey
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -46,6 +47,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             EntityState targetState,
             EntityState storeGeneratedWithKeySetTargetState,
             bool forceStateWhenUnknownKey,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
     }
 }

@@ -15,25 +15,21 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestErrorReportingService()
-        {
-        }
+        public TestErrorReportingService() { }
 
         public Action<string> OnError { get; set; } = message => Assert.False(true, message);
 
-        public string HostDisplayName
-            => "Test Host";
+        public string HostDisplayName => "Test Host";
 
-        public void ShowDetailedErrorInfo(Exception exception)
-            => OnError(exception.Message);
+        public void ShowDetailedErrorInfo(Exception exception) => OnError(exception.Message);
 
-        public void ShowGlobalErrorInfo(string message, params InfoBarUI[] items)
-            => OnError(message);
+        public void ShowGlobalErrorInfo(string message, params InfoBarUI[] items) =>
+            OnError(message);
 
-        public void ShowRemoteHostCrashedErrorInfo(Exception? exception)
-            => OnError(exception?.Message ?? "Unexpected error");
+        public void ShowRemoteHostCrashedErrorInfo(Exception? exception) =>
+            OnError(exception?.Message ?? "Unexpected error");
 
-        public void ShowFeatureNotAvailableErrorInfo(string message, Exception? exception)
-            => OnError($"{message} {exception}");
+        public void ShowFeatureNotAvailableErrorInfo(string message, Exception? exception) =>
+            OnError($"{message} {exception}");
     }
 }

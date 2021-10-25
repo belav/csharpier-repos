@@ -36,7 +36,7 @@ namespace Microsoft.AspNetCore.ResponseCompression
         public bool SupportsFlush => true;
 
         /// <inheritdoc />
-        public Stream CreateStream(Stream outputStream)
-            => new GZipStream(outputStream, Options.Level, leaveOpen: true);
+        public Stream CreateStream(Stream outputStream) =>
+            new GZipStream(outputStream, Options.Level, leaveOpen: true);
     }
 }

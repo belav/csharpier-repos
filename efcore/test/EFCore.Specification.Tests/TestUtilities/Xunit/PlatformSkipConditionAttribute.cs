@@ -17,8 +17,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit
             _excludedPlatforms = excludedPlatforms;
         }
 
-        public ValueTask<bool> IsMetAsync()
-            => new(CanRunOnThisPlatform(_excludedPlatforms));
+        public ValueTask<bool> IsMetAsync() => new(CanRunOnThisPlatform(_excludedPlatforms));
 
         public string SkipReason { get; set; } = "Test cannot run on this platform.";
 
@@ -29,14 +28,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit
                 return true;
             }
 
-            if (excludedFrameworks.HasFlag(TestPlatform.Windows)
-                && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (
+                excludedFrameworks.HasFlag(TestPlatform.Windows)
+                && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            )
             {
                 return false;
             }
 
-            if (excludedFrameworks.HasFlag(TestPlatform.Linux)
-                && RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            if (
+                excludedFrameworks.HasFlag(TestPlatform.Linux)
+                && RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+            )
             {
                 return false;
             }

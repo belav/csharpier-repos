@@ -11,6 +11,6 @@ namespace FunctionalTests
         public int[] IntArray { get; set; }
         public byte[] ByteArray { get; set; }
         public Guid Guid { get; set; }
-        public DateTime DateTime { get;set; }
+        public DateTime DateTime { get; set; }
     }
 }

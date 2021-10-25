@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             ExceptionAssert.ThrowsArgument(
                 () => activatorProvider.CreateActivator(actionDescriptor),
                 "actionDescriptor",
-                "The 'ModelTypeInfo' property of 'actionDescriptor' must not be null.");
+                "The 'ModelTypeInfo' property of 'actionDescriptor' must not be null."
+            );
         }
 
         [Fact]
@@ -46,10 +47,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             {
                 RequestServices = serviceCollection.BuildServiceProvider(),
             };
-            var pageContext = new PageContext
-            {
-                HttpContext = httpContext
-            };
+            var pageContext = new PageContext { HttpContext = httpContext };
 
             // Act
             var activator = activatorProvider.CreateActivator(actionDescriptor);
@@ -76,10 +74,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             {
                 RequestServices = serviceCollection.BuildServiceProvider(),
             };
-            var pageContext = new PageContext
-            {
-                HttpContext = httpContext
-            };
+            var pageContext = new PageContext { HttpContext = httpContext };
 
             // Act
             var activator = activatorProvider.CreateActivator(actionDescriptor);
@@ -113,7 +108,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         [Theory]
         [InlineData(typeof(SimpleModel))]
         [InlineData(typeof(object))]
-        public void CreateAsyncReleaser_ReturnsNullForModelsThatDoNotImplementDisposable(Type pageType)
+        public void CreateAsyncReleaser_ReturnsNullForModelsThatDoNotImplementDisposable(
+            Type pageType
+        )
         {
             // Arrange
             var context = new PageContext();
@@ -162,10 +159,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var model = new DisposableModel();
 
             // Act & Assert
-            var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-            {
-                ModelTypeInfo = model.GetType().GetTypeInfo()
-            });
+            var disposer = activator.CreateAsyncReleaser(
+                new CompiledPageActionDescriptor { ModelTypeInfo = model.GetType().GetTypeInfo() }
+            );
             Assert.NotNull(disposer);
             disposer(context, model);
 
@@ -183,10 +179,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var model = new AsyncDisposableModel();
 
             // Act & Assert
-            var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-            {
-                ModelTypeInfo = model.GetType().GetTypeInfo()
-            });
+            var disposer = activator.CreateAsyncReleaser(
+                new CompiledPageActionDescriptor { ModelTypeInfo = model.GetType().GetTypeInfo() }
+            );
             Assert.NotNull(disposer);
             await disposer(context, model);
 
@@ -204,10 +199,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var model = new DisposableAndAsyncDisposableModel();
 
             // Act & Assert
-            var disposer = activator.CreateAsyncReleaser(new CompiledPageActionDescriptor
-            {
-                ModelTypeInfo = model.GetType().GetTypeInfo()
-            });
+            var disposer = activator.CreateAsyncReleaser(
+                new CompiledPageActionDescriptor { ModelTypeInfo = model.GetType().GetTypeInfo() }
+            );
             Assert.NotNull(disposer);
             await disposer(context, model);
 

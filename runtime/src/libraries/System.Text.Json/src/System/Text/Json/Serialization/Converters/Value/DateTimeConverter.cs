@@ -5,12 +5,20 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class DateTimeConverter : JsonConverter<DateTime>
     {
-        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override DateTime Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return reader.GetDateTime();
         }
 
-        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            DateTime value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteStringValue(value);
         }
@@ -20,7 +28,12 @@ namespace System.Text.Json.Serialization.Converters
             return reader.GetDateTimeNoValidation();
         }
 
-        internal override void WriteWithQuotes(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options, ref WriteStack state)
+        internal override void WriteWithQuotes(
+            Utf8JsonWriter writer,
+            DateTime value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             writer.WritePropertyName(value);
         }

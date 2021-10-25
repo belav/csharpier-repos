@@ -22,10 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
         public SqlServerStoreGenerationConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies, relationalDependencies)
-        {
-        }
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies, relationalDependencies) { }
 
         /// <summary>
         ///     Called after an annotation is changed on a property.
@@ -40,10 +38,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
-            if (annotation == null
-                || oldAnnotation?.Value != null)
+            if (annotation == null || oldAnnotation?.Value != null)
             {
                 return;
             }
@@ -53,54 +51,73 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             switch (name)
             {
                 case RelationalAnnotationNames.DefaultValue:
-                    if (propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation) == null
-                        && propertyBuilder.HasDefaultValue(null, fromDataAnnotation) != null)
+                    if (
+                        propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation) == null
+                        && propertyBuilder.HasDefaultValue(null, fromDataAnnotation) != null
+                    )
                     {
                         context.StopProcessing();
                         return;
                     }
-
                     break;
                 case RelationalAnnotationNames.DefaultValueSql:
-                    if (propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation) == null
-                        && propertyBuilder.HasDefaultValueSql(null, fromDataAnnotation) != null)
+                    if (
+                        propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation) == null
+                        && propertyBuilder.HasDefaultValueSql(null, fromDataAnnotation) != null
+                    )
                     {
                         context.StopProcessing();
                         return;
                     }
-
                     break;
                 case RelationalAnnotationNames.ComputedColumnSql:
-                    if (propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation) == null
-                        && propertyBuilder.HasComputedColumnSql(null, fromDataAnnotation) != null)
+                    if (
+                        propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation) == null
+                        && propertyBuilder.HasComputedColumnSql(null, fromDataAnnotation) != null
+                    )
                     {
                         context.StopProcessing();
                         return;
                     }
-
                     break;
                 case SqlServerAnnotationNames.ValueGenerationStrategy:
-                    if ((propertyBuilder.HasDefaultValue(null, fromDataAnnotation) == null
+                    if (
+                        (
+                            propertyBuilder.HasDefaultValue(null, fromDataAnnotation) == null
                             | propertyBuilder.HasDefaultValueSql(null, fromDataAnnotation) == null
-                            | propertyBuilder.HasComputedColumnSql(null, fromDataAnnotation) == null)
-                        && propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation) != null)
+                            | propertyBuilder.HasComputedColumnSql(null, fromDataAnnotation) == null
+                        )
+                        && propertyBuilder.HasValueGenerationStrategy(null, fromDataAnnotation)
+                            != null
+                    )
                     {
                         context.StopProcessing();
                         return;
                     }
-
                     break;
             }
 
-            base.ProcessPropertyAnnotationChanged(propertyBuilder, name, annotation, oldAnnotation, context);
+            base.ProcessPropertyAnnotationChanged(
+                propertyBuilder,
+                name,
+                annotation,
+                oldAnnotation,
+                context
+            );
         }
 
         /// <inheritdoc />
-        protected override void Validate(IConventionProperty property, in StoreObjectIdentifier storeObject)
+        protected override void Validate(
+            IConventionProperty property,
+            in StoreObjectIdentifier storeObject
+        )
         {
             if (property.GetValueGenerationStrategyConfigurationSource() != null)
             {
-                var generationStrategy = property.GetValueGenerationStrategy(storeObject, Dependencies.TypeMappingSource);
+                var generationStrategy = property.GetValueGenerationStrategy(
+                    storeObject,
+                    Dependencies.TypeMappingSource
+                );
                 if (generationStrategy == SqlServerValueGenerationStrategy.None)
                 {
                     base.Validate(property, storeObject);
@@ -110,19 +127,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 if (property.GetDefaultValue(storeObject) != null)
                 {
                     Dependencies.ValidationLogger.ConflictingValueGenerationStrategiesWarning(
-                        generationStrategy, "DefaultValue", property);
+                        generationStrategy,
+                        "DefaultValue",
+                        property
+                    );
                 }
 
                 if (property.GetDefaultValueSql(storeObject) != null)
                 {
                     Dependencies.ValidationLogger.ConflictingValueGenerationStrategiesWarning(
-                        generationStrategy, "DefaultValueSql", property);
+                        generationStrategy,
+                        "DefaultValueSql",
+                        property
+                    );
                 }
 
                 if (property.GetComputedColumnSql(storeObject) != null)
                 {
                     Dependencies.ValidationLogger.ConflictingValueGenerationStrategiesWarning(
-                        generationStrategy, "ComputedColumnSql", property);
+                        generationStrategy,
+                        "ComputedColumnSql",
+                        property
+                    );
                 }
             }
 

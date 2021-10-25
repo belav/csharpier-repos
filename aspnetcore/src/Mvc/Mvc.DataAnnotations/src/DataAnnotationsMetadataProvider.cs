@@ -18,16 +18,18 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
     /// An implementation of <see cref="IBindingMetadataProvider"/> and <see cref="IDisplayMetadataProvider"/> for
     /// the System.ComponentModel.DataAnnotations attribute classes.
     /// </summary>
-    internal class DataAnnotationsMetadataProvider :
-        IBindingMetadataProvider,
-        IDisplayMetadataProvider,
-        IValidationMetadataProvider
+    internal class DataAnnotationsMetadataProvider
+        : IBindingMetadataProvider,
+          IDisplayMetadataProvider,
+          IValidationMetadataProvider
     {
         // The [Nullable] attribute is synthesized by the compiler. It's best to just compare the type name.
-        private const string NullableAttributeFullTypeName = "System.Runtime.CompilerServices.NullableAttribute";
+        private const string NullableAttributeFullTypeName =
+            "System.Runtime.CompilerServices.NullableAttribute";
         private const string NullableFlagsFieldName = "NullableFlags";
 
-        private const string NullableContextAttributeFullName = "System.Runtime.CompilerServices.NullableContextAttribute";
+        private const string NullableContextAttributeFullName =
+            "System.Runtime.CompilerServices.NullableContextAttribute";
         private const string NullableContextFlagsFieldName = "Flag";
 
         private readonly IStringLocalizerFactory? _stringLocalizerFactory;
@@ -37,7 +39,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public DataAnnotationsMetadataProvider(
             MvcOptions options,
             IOptions<MvcDataAnnotationsLocalizationOptions> localizationOptions,
-            IStringLocalizerFactory? stringLocalizerFactory)
+            IStringLocalizerFactory? stringLocalizerFactory
+        )
         {
             if (options == null)
             {
@@ -80,11 +83,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var attributes = context.Attributes;
             var dataTypeAttribute = attributes.OfType<DataTypeAttribute>().FirstOrDefault();
             var displayAttribute = attributes.OfType<DisplayAttribute>().FirstOrDefault();
-            var displayColumnAttribute = attributes.OfType<DisplayColumnAttribute>().FirstOrDefault();
-            var displayFormatAttribute = attributes.OfType<DisplayFormatAttribute>().FirstOrDefault();
+            var displayColumnAttribute = attributes
+                .OfType<DisplayColumnAttribute>()
+                .FirstOrDefault();
+            var displayFormatAttribute = attributes
+                .OfType<DisplayFormatAttribute>()
+                .FirstOrDefault();
             var displayNameAttribute = attributes.OfType<DisplayNameAttribute>().FirstOrDefault();
             var hiddenInputAttribute = attributes.OfType<HiddenInputAttribute>().FirstOrDefault();
-            var scaffoldColumnAttribute = attributes.OfType<ScaffoldColumnAttribute>().FirstOrDefault();
+            var scaffoldColumnAttribute = attributes
+                .OfType<ScaffoldColumnAttribute>()
+                .FirstOrDefault();
             var uiHintAttribute = attributes.OfType<UIHintAttribute>().FirstOrDefault();
 
             // Special case the [DisplayFormat] attribute hanging off an applied [DataType] attribute. This property is
@@ -102,7 +111,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // ConvertEmptyStringToNull
             if (displayFormatAttribute != null)
             {
-                displayMetadata.ConvertEmptyStringToNull = displayFormatAttribute.ConvertEmptyStringToNull;
+                displayMetadata.ConvertEmptyStringToNull =
+                    displayFormatAttribute.ConvertEmptyStringToNull;
             }
 
             // DataTypeName
@@ -117,17 +127,25 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var containerType = context.Key.ContainerType ?? context.Key.ModelType;
             IStringLocalizer? localizer = null;
-            if (_stringLocalizerFactory != null && _localizationOptions.DataAnnotationLocalizerProvider != null)
+            if (
+                _stringLocalizerFactory != null
+                && _localizationOptions.DataAnnotationLocalizerProvider != null
+            )
             {
-                localizer = _localizationOptions.DataAnnotationLocalizerProvider(containerType, _stringLocalizerFactory);
+                localizer = _localizationOptions.DataAnnotationLocalizerProvider(
+                    containerType,
+                    _stringLocalizerFactory
+                );
             }
 
             // Description
             if (displayAttribute != null)
             {
-                if (localizer != null &&
-                    !string.IsNullOrEmpty(displayAttribute.Description) &&
-                    displayAttribute.ResourceType == null)
+                if (
+                    localizer != null
+                    && !string.IsNullOrEmpty(displayAttribute.Description)
+                    && displayAttribute.ResourceType == null
+                )
                 {
                     displayMetadata.Description = () => localizer[displayAttribute.Description];
                 }
@@ -147,9 +165,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // DisplayAttribute has precedence over DisplayNameAttribute.
             if (displayAttribute?.GetName() != null)
             {
-                if (localizer != null &&
-                    !string.IsNullOrEmpty(displayAttribute.Name) &&
-                    displayAttribute.ResourceType == null)
+                if (
+                    localizer != null
+                    && !string.IsNullOrEmpty(displayAttribute.Name)
+                    && displayAttribute.ResourceType == null
+                )
                 {
                     displayMetadata.DisplayName = () => localizer[displayAttribute.Name];
                 }
@@ -160,8 +180,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             }
             else if (displayNameAttribute != null)
             {
-                if (localizer != null &&
-                    !string.IsNullOrEmpty(displayNameAttribute.DisplayName))
+                if (localizer != null && !string.IsNullOrEmpty(displayNameAttribute.DisplayName))
                 {
                     displayMetadata.DisplayName = () => localizer[displayNameAttribute.DisplayName];
                 }
@@ -178,7 +197,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             }
 
             // IsEnum et cetera
-            var underlyingType = Nullable.GetUnderlyingType(context.Key.ModelType) ?? context.Key.ModelType;
+            var underlyingType =
+                Nullable.GetUnderlyingType(context.Key.ModelType) ?? context.Key.ModelType;
 
             if (underlyingType.IsEnum)
             {
@@ -186,7 +206,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 displayMetadata.IsEnum = true;
 
                 // IsFlagsEnum
-                displayMetadata.IsFlagsEnum = underlyingType.IsDefined(typeof(FlagsAttribute), inherit: false);
+                displayMetadata.IsFlagsEnum = underlyingType.IsDefined(
+                    typeof(FlagsAttribute),
+                    inherit: false
+                );
 
                 // EnumDisplayNamesAndValues and EnumNamesAndValues
                 //
@@ -194,29 +217,45 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 // That method orders by absolute value, then its behavior is undefined (but hopefully stable).
                 // Add to EnumNamesAndValues in same order but Dictionary does not guarantee order will be preserved.
 
-                var groupedDisplayNamesAndValues = new List<KeyValuePair<EnumGroupAndName, string>>();
+                var groupedDisplayNamesAndValues = new List<
+                    KeyValuePair<EnumGroupAndName, string>
+                >();
                 var namesAndValues = new Dictionary<string, string>();
 
                 IStringLocalizer? enumLocalizer = null;
-                if (_stringLocalizerFactory != null && _localizationOptions.DataAnnotationLocalizerProvider != null)
+                if (
+                    _stringLocalizerFactory != null
+                    && _localizationOptions.DataAnnotationLocalizerProvider != null
+                )
                 {
-                    enumLocalizer = _localizationOptions.DataAnnotationLocalizerProvider(underlyingType, _stringLocalizerFactory);
+                    enumLocalizer = _localizationOptions.DataAnnotationLocalizerProvider(
+                        underlyingType,
+                        _stringLocalizerFactory
+                    );
                 }
 
                 var enumFields = Enum.GetNames(underlyingType)
                     .Select(name => underlyingType.GetField(name)!)
-                    .OrderBy(field => field.GetCustomAttribute<DisplayAttribute>(inherit: false)?.GetOrder() ?? 1000);
+                    .OrderBy(
+                        field =>
+                            field.GetCustomAttribute<DisplayAttribute>(inherit: false)?.GetOrder()
+                            ?? 1000
+                    );
 
                 foreach (var field in enumFields)
                 {
                     var groupName = GetDisplayGroup(field);
                     var value = ((Enum)field.GetValue(obj: null)!).ToString("d");
 
-                    groupedDisplayNamesAndValues.Add(new KeyValuePair<EnumGroupAndName, string>(
-                        new EnumGroupAndName(
-                            groupName,
-                            () => GetDisplayName(field, enumLocalizer)),
-                        value));
+                    groupedDisplayNamesAndValues.Add(
+                        new KeyValuePair<EnumGroupAndName, string>(
+                            new EnumGroupAndName(
+                                groupName,
+                                () => GetDisplayName(field, enumLocalizer)
+                            ),
+                            value
+                        )
+                    );
                     namesAndValues.Add(field.Name, value);
                 }
 
@@ -225,8 +264,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             }
 
             // HasNonDefaultEditFormat
-            if (!string.IsNullOrEmpty(displayFormatAttribute?.DataFormatString) &&
-                displayFormatAttribute?.ApplyFormatInEditMode == true)
+            if (
+                !string.IsNullOrEmpty(displayFormatAttribute?.DataFormatString)
+                && displayFormatAttribute?.ApplyFormatInEditMode == true
+            )
             {
                 // Have a non-empty EditFormatString based on [DisplayFormat] from our cache.
                 if (dataTypeAttribute == null)
@@ -275,9 +316,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Placeholder
             if (displayAttribute != null)
             {
-                if (localizer != null &&
-                    !string.IsNullOrEmpty(displayAttribute.Prompt) &&
-                    displayAttribute.ResourceType == null)
+                if (
+                    localizer != null
+                    && !string.IsNullOrEmpty(displayAttribute.Prompt)
+                    && displayAttribute.ResourceType == null
+                )
                 {
                     displayMetadata.Placeholder = () => localizer[displayAttribute.Prompt];
                 }
@@ -349,10 +392,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // For non-nullable reference types, treat them as-if they had an implicit [Required].
             // This allows the developer to specify [Required] to customize the error message, so
             // if they already have [Required] then there's no need for us to do this check.
-            if (!_options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes &&
-                requiredAttribute == null &&
-                !context.Key.ModelType.IsValueType &&
-                context.Key.MetadataKind != ModelMetadataKind.Type)
+            if (
+                !_options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes
+                && requiredAttribute == null
+                && !context.Key.ModelType.IsValueType
+                && context.Key.MetadataKind != ModelMetadataKind.Type
+            )
             {
                 var addInferredRequiredAttribute = false;
                 if (context.Key.MetadataKind == ModelMetadataKind.Type)
@@ -370,7 +415,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                         // The only way we could arrive here is if the ModelMetadata was constructed using the non-default provider.
                         // We'll cursorily examine the attributes on the property, but not the ContainerType to make a decision about it's nullability.
 
-                        if (HasNullableAttribute(context.PropertyAttributes!, out var propertyHasNullableAttribute))
+                        if (
+                            HasNullableAttribute(
+                                context.PropertyAttributes!,
+                                out var propertyHasNullableAttribute
+                            )
+                        )
                         {
                             addInferredRequiredAttribute = propertyHasNullableAttribute;
                         }
@@ -380,7 +430,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                         addInferredRequiredAttribute = IsNullableReferenceType(
                             property.DeclaringType!,
                             member: null,
-                            context.PropertyAttributes!);
+                            context.PropertyAttributes!
+                        );
                     }
                 }
                 else if (context.Key.MetadataKind == ModelMetadataKind.Parameter)
@@ -388,11 +439,14 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     addInferredRequiredAttribute = IsNullableReferenceType(
                         context.Key.ParameterInfo!.Member.ReflectedType,
                         context.Key.ParameterInfo.Member,
-                        context.ParameterAttributes!);
+                        context.ParameterAttributes!
+                    );
                 }
                 else
                 {
-                    throw new InvalidOperationException("Unsupported ModelMetadataKind: " + context.Key.MetadataKind);
+                    throw new InvalidOperationException(
+                        "Unsupported ModelMetadataKind: " + context.Key.MetadataKind
+                    );
                 }
 
                 if (addInferredRequiredAttribute)
@@ -401,10 +455,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     // option to tolerate empty/whitespace strings. empty/whitespace INPUT will still result in
                     // a validation error by default because we convert empty/whitespace strings to null
                     // unless you say otherwise.
-                    requiredAttribute = new RequiredAttribute()
-                    {
-                        AllowEmptyStrings = true,
-                    };
+                    requiredAttribute = new RequiredAttribute() { AllowEmptyStrings = true, };
                     attributes.Add(requiredAttribute);
                 }
             }
@@ -434,7 +485,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             {
                 // Note [Display(Name = "")] is allowed but we will not attempt to localize the empty name.
                 var name = display.GetName();
-                if (stringLocalizer != null && !string.IsNullOrEmpty(name) && display.ResourceType == null)
+                if (
+                    stringLocalizer != null
+                    && !string.IsNullOrEmpty(name)
+                    && display.ResourceType == null
+                )
                 {
                     name = stringLocalizer[name];
                 }
@@ -462,7 +517,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             return string.Empty;
         }
 
-        internal static bool IsNullableReferenceType(Type? containingType, MemberInfo? member, IEnumerable<object> attributes)
+        internal static bool IsNullableReferenceType(
+            Type? containingType,
+            MemberInfo? member,
+            IEnumerable<object> attributes
+        )
         {
             if (HasNullableAttribute(attributes, out var result))
             {
@@ -473,11 +532,20 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         }
 
         // Internal for testing
-        internal static bool HasNullableAttribute(IEnumerable<object> attributes, out bool isNullable)
+        internal static bool HasNullableAttribute(
+            IEnumerable<object> attributes,
+            out bool isNullable
+        )
         {
             // [Nullable] is compiler synthesized, comparing by name.
-            var nullableAttribute = attributes
-                .FirstOrDefault(a => string.Equals(a.GetType().FullName, NullableAttributeFullTypeName, StringComparison.Ordinal));
+            var nullableAttribute = attributes.FirstOrDefault(
+                a =>
+                    string.Equals(
+                        a.GetType().FullName,
+                        NullableAttributeFullTypeName,
+                        StringComparison.Ordinal
+                    )
+            );
             if (nullableAttribute == null)
             {
                 isNullable = false;
@@ -491,10 +559,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // unbounded.
             //
             // See: https://github.com/dotnet/roslyn/blob/master/docs/features/nullable-reference-types.md#annotations
-            if (nullableAttribute.GetType().GetField(NullableFlagsFieldName) is FieldInfo field &&
-                field.GetValue(nullableAttribute) is byte[] flags &&
-                flags.Length > 0 &&
-                flags[0] == 1) // First element is the property/parameter type.
+            if (
+                nullableAttribute.GetType().GetField(NullableFlagsFieldName) is FieldInfo field
+                && field.GetValue(nullableAttribute) is byte[] flags
+                && flags.Length > 0
+                && flags[0] == 1
+            ) // First element is the property/parameter type.
             {
                 isNullable = true;
                 return true; // [Nullable] found and type is an NNRT
@@ -542,8 +612,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 }
 
                 type = type.DeclaringType;
-            }
-            while (type != null);
+            } while (type != null);
 
             // If we don't find the attribute on the declaring type then repeat at the module level
             attributes = containingType.Module.GetCustomAttributes(inherit: false);
@@ -552,12 +621,21 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             bool? AttributesHasNullableContext(object[] attributes)
             {
-                var nullableContextAttribute = attributes
-                    .FirstOrDefault(a => string.Equals(a.GetType().FullName, NullableContextAttributeFullName, StringComparison.Ordinal));
+                var nullableContextAttribute = attributes.FirstOrDefault(
+                    a =>
+                        string.Equals(
+                            a.GetType().FullName,
+                            NullableContextAttributeFullName,
+                            StringComparison.Ordinal
+                        )
+                );
                 if (nullableContextAttribute != null)
                 {
-                    if (nullableContextAttribute.GetType().GetField(NullableContextFlagsFieldName) is FieldInfo field &&
-                        field.GetValue(nullableContextAttribute) is byte @byte)
+                    if (
+                        nullableContextAttribute.GetType().GetField(NullableContextFlagsFieldName)
+                            is FieldInfo field
+                        && field.GetValue(nullableContextAttribute) is byte @byte
+                    )
                     {
                         return @byte == 1; // [NullableContext] found
                     }

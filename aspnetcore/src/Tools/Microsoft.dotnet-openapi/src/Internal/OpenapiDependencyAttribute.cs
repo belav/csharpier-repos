@@ -15,7 +15,10 @@ namespace Microsoft.DotNet.Openapi.Tools.Internal
         {
             Name = name;
             Version = version;
-            CodeGenerators = codeGenerators.Split(';', StringSplitOptions.RemoveEmptyEntries).Select(c => Enum.Parse<CodeGenerator>(c)).ToArray();
+            CodeGenerators = codeGenerators
+                .Split(';', StringSplitOptions.RemoveEmptyEntries)
+                .Select(c => Enum.Parse<CodeGenerator>(c))
+                .ToArray();
         }
 
         public string Name { get; set; }

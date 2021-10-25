@@ -86,7 +86,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        InternalEntityEntry CreateEntry(IDictionary<string, object?> values, IEntityType entityType);
+        InternalEntityEntry CreateEntry(
+            IDictionary<string, object?> values,
+            IEntityType entityType
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -97,7 +100,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         InternalEntityEntry StartTrackingFromQuery(
             IEntityType baseEntityType,
             object entity,
-            in ValueBuffer valueBuffer);
+            in ValueBuffer valueBuffer
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -113,7 +117,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        InternalEntityEntry? TryGetEntry(IKey key, object?[] keyValues, bool throwOnNullKey, out bool hasNullKey);
+        InternalEntityEntry? TryGetEntry(
+            IKey key,
+            object?[] keyValues,
+            bool throwOnNullKey,
+            out bool hasNullKey
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -129,7 +138,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        InternalEntityEntry? TryGetEntry(object entity, IEntityType type, bool throwOnTypeMismatch = true);
+        InternalEntityEntry? TryGetEntry(
+            object entity,
+            IEntityType type,
+            bool throwOnTypeMismatch = true
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -149,7 +162,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool added = false,
             bool modified = false,
             bool deleted = false,
-            bool unchanged = false);
+            bool unchanged = false
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -161,7 +175,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool added = false,
             bool modified = false,
             bool deleted = false,
-            bool unchanged = false);
+            bool unchanged = false
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -177,8 +192,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        IEnumerable<TEntity> GetNonDeletedEntities<TEntity>()
-            where TEntity : class;
+        IEnumerable<TEntity> GetNonDeletedEntities<TEntity>() where TEntity : class;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -261,7 +275,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         void RecordReferencedUntrackedEntity(
             object referencedEntity,
             INavigationBase navigation,
-            InternalEntityEntry referencedFromEntry);
+            InternalEntityEntry referencedFromEntry
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -269,7 +284,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        IEnumerable<Tuple<INavigationBase, InternalEntityEntry>> GetRecordedReferrers(object referencedEntity, bool clear);
+        IEnumerable<Tuple<INavigationBase, InternalEntityEntry>> GetRecordedReferrers(
+            object referencedEntity,
+            bool clear
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -301,7 +319,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        InternalEntityEntry? FindPrincipal(InternalEntityEntry dependentEntry, IForeignKey foreignKey);
+        InternalEntityEntry? FindPrincipal(
+            InternalEntityEntry dependentEntry,
+            IForeignKey foreignKey
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -311,7 +332,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         InternalEntityEntry? FindPrincipalUsingPreStoreGeneratedValues(
             InternalEntityEntry dependentEntry,
-            IForeignKey foreignKey);
+            IForeignKey foreignKey
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -321,7 +343,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         InternalEntityEntry? FindPrincipalUsingRelationshipSnapshot(
             InternalEntityEntry dependentEntry,
-            IForeignKey foreignKey);
+            IForeignKey foreignKey
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -347,7 +370,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         IEnumerable<IUpdateEntry>? GetDependentsFromNavigation(
             IUpdateEntry principalEntry,
-            IForeignKey foreignKey);
+            IForeignKey foreignKey
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -355,7 +379,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        IEnumerable<IUpdateEntry> GetDependents(IUpdateEntry principalEntry, IForeignKey foreignKey);
+        IEnumerable<IUpdateEntry> GetDependents(
+            IUpdateEntry principalEntry,
+            IForeignKey foreignKey
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -365,7 +392,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         IEnumerable<IUpdateEntry> GetDependentsUsingRelationshipSnapshot(
             IUpdateEntry principalEntry,
-            IForeignKey foreignKey);
+            IForeignKey foreignKey
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -389,7 +417,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default);
+        Task<int> SaveChangesAsync(
+            bool acceptAllChangesOnSuccess,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -469,7 +500,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        void CascadeDelete(InternalEntityEntry entry, bool force, IEnumerable<IForeignKey>? foreignKeys = null);
+        void CascadeDelete(
+            InternalEntityEntry entry,
+            bool force,
+            IEnumerable<IForeignKey>? foreignKeys = null
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

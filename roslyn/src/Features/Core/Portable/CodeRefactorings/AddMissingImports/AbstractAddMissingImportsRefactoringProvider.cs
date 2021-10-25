@@ -20,8 +20,9 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
         private readonly IPasteTrackingService _pasteTrackingService;
         protected abstract string CodeActionTitle { get; }
 
-        public AbstractAddMissingImportsRefactoringProvider(IPasteTrackingService pasteTrackingService)
-            => _pasteTrackingService = pasteTrackingService;
+        public AbstractAddMissingImportsRefactoringProvider(
+            IPasteTrackingService pasteTrackingService
+        ) => _pasteTrackingService = pasteTrackingService;
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -34,9 +35,12 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             }
 
             // Check pasted text span for missing imports
-            var addMissingImportsService = document.GetLanguageService<IAddMissingImportsFeatureService>();
+            var addMissingImportsService =
+                document.GetLanguageService<IAddMissingImportsFeatureService>();
 
-            var analysis = await addMissingImportsService.AnalyzeAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
+            var analysis = await addMissingImportsService
+                .AnalyzeAsync(document, textSpan, cancellationToken)
+                .ConfigureAwait(false);
             if (!analysis.CanAddMissingImports)
             {
                 return;
@@ -44,23 +48,37 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
 
             var addImportsCodeAction = new AddMissingImportsCodeAction(
                 CodeActionTitle,
-                cancellationToken => AddMissingImportsAsync(document, addMissingImportsService, analysis, cancellationToken));
+                cancellationToken =>
+                    AddMissingImportsAsync(
+                        document,
+                        addMissingImportsService,
+                        analysis,
+                        cancellationToken
+                    )
+            );
 
             context.RegisterRefactoring(addImportsCodeAction, textSpan);
         }
 
-        private static async Task<Solution> AddMissingImportsAsync(Document document, IAddMissingImportsFeatureService addMissingImportsService, AddMissingImportsAnalysisResult analysis, CancellationToken cancellationToken)
+        private static async Task<Solution> AddMissingImportsAsync(
+            Document document,
+            IAddMissingImportsFeatureService addMissingImportsService,
+            AddMissingImportsAnalysisResult analysis,
+            CancellationToken cancellationToken
+        )
         {
-            var modifiedDocument = await addMissingImportsService.AddMissingImportsAsync(document, analysis, cancellationToken).ConfigureAwait(false);
+            var modifiedDocument = await addMissingImportsService
+                .AddMissingImportsAsync(document, analysis, cancellationToken)
+                .ConfigureAwait(false);
             return modifiedDocument.Project.Solution;
         }
 
         private class AddMissingImportsCodeAction : CodeActions.CodeAction.SolutionChangeAction
         {
-            public AddMissingImportsCodeAction(string title, Func<CancellationToken, Task<Solution>> createChangedSolution)
-                : base(title, createChangedSolution)
-            {
-            }
+            public AddMissingImportsCodeAction(
+                string title,
+                Func<CancellationToken, Task<Solution>> createChangedSolution
+            ) : base(title, createChangedSolution) { }
         }
     }
 }

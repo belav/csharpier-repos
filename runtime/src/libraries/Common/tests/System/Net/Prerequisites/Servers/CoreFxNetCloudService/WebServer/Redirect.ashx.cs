@@ -23,14 +23,16 @@ namespace WebServer
                     if (statusCode < 300 || statusCode > 307)
                     {
                         context.Response.StatusCode = 500;
-                        context.Response.StatusDescription = "Invalid redirect statuscode: " + statusCodeString;
+                        context.Response.StatusDescription =
+                            "Invalid redirect statuscode: " + statusCodeString;
                         return;
                     }
                 }
                 catch (Exception)
                 {
                     context.Response.StatusCode = 500;
-                    context.Response.StatusDescription = "Error parsing statuscode: " + statusCodeString;
+                    context.Response.StatusDescription =
+                        "Error parsing statuscode: " + statusCodeString;
                     return;
                 }
             }
@@ -69,9 +71,8 @@ namespace WebServer
             {
                 context.Response.Headers.Add(
                     "Location",
-                    string.Format("/Redirect.ashx?uri={0}&hops={1}",
-                    redirectUri,
-                    hops - 1));
+                    string.Format("/Redirect.ashx?uri={0}&hops={1}", redirectUri, hops - 1)
+                );
             }
 
             context.Response.StatusCode = statusCode;
@@ -79,10 +80,7 @@ namespace WebServer
 
         public bool IsReusable
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 }

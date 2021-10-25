@@ -25,7 +25,8 @@ namespace System.Collections.Generic
             // for instance, you could allow this subset to be defined for i > 10. The set will throw if
             // anything <= 10 is added, but there is no upper bound. These features Head(), Tail(), were punted
             // in the spec, and are not available, but the framework is there to make them available at some point.
-            private readonly bool _lBoundActive, _uBoundActive;
+            private readonly bool _lBoundActive,
+                _uBoundActive;
             // used to see if the count is out of date
 
 #if DEBUG
@@ -35,8 +36,13 @@ namespace System.Collections.Generic
             }
 #endif
 
-            public TreeSubSet(SortedSet<T> Underlying, T? Min, T? Max, bool lowerBoundActive, bool upperBoundActive)
-                : base(Underlying.Comparer)
+            public TreeSubSet(
+                SortedSet<T> Underlying,
+                T? Min,
+                T? Max,
+                bool lowerBoundActive,
+                bool upperBoundActive
+            ) : base(Underlying.Comparer)
             {
                 _underlying = Underlying;
                 _min = Min;
@@ -97,7 +103,13 @@ namespace System.Collections.Generic
                 }
 
                 List<T> toRemove = new List<T>();
-                BreadthFirstTreeWalk(n => { toRemove.Add(n.Item); return true; });
+                BreadthFirstTreeWalk(
+                    n =>
+                    {
+                        toRemove.Add(n.Item);
+                        return true;
+                    }
+                );
                 while (toRemove.Count != 0)
                 {
                     _underlying.Remove(toRemove[^1]);
@@ -130,7 +142,6 @@ namespace System.Collections.Generic
 
                     while (current != null)
                     {
-
                         int comp = _lBoundActive ? Comparer.Compare(_min, current.Item) : -1;
                         if (comp == 1)
                         {
@@ -259,11 +270,17 @@ namespace System.Collections.Generic
                     {
                         return false;
                     }
-                    if (current.Left != null && (!_lBoundActive || Comparer.Compare(_min, current.Item) < 0))
+                    if (
+                        current.Left != null
+                        && (!_lBoundActive || Comparer.Compare(_min, current.Item) < 0)
+                    )
                     {
                         processQueue.Enqueue(current.Left);
                     }
-                    if (current.Right != null && (!_uBoundActive || Comparer.Compare(_max, current.Item) > 0))
+                    if (
+                        current.Right != null
+                        && (!_uBoundActive || Comparer.Compare(_max, current.Item) > 0)
+                    )
                     {
                         processQueue.Enqueue(current.Right);
                     }
@@ -306,7 +323,8 @@ namespace System.Collections.Generic
             /// Checks whether this subset is out of date, and updates it if necessary.
             /// <param name="updateCount">Updates the count variable if necessary.</param>
             /// </summary>
-            internal override void VersionCheck(bool updateCount = false) => VersionCheckImpl(updateCount);
+            internal override void VersionCheck(bool updateCount = false) =>
+                VersionCheckImpl(updateCount);
 
             private void VersionCheckImpl(bool updateCount)
             {
@@ -320,7 +338,13 @@ namespace System.Collections.Generic
                 if (updateCount && _countVersion != _underlying.version)
                 {
                     count = 0;
-                    InOrderTreeWalk(n => { count++; return true; });
+                    InOrderTreeWalk(
+                        n =>
+                        {
+                            count++;
+                            return true;
+                        }
+                    );
                     _countVersion = _underlying.version;
                 }
             }
@@ -358,7 +382,8 @@ namespace System.Collections.Generic
             }
 #endif
 
-            void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) => GetObjectData(info, context);
+            void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) =>
+                GetObjectData(info, context);
 
             protected override void GetObjectData(SerializationInfo info, StreamingContext context)
             {
@@ -370,7 +395,8 @@ namespace System.Collections.Generic
                 throw new PlatformNotSupportedException();
             }
 
-            protected override void OnDeserialization(object? sender) => throw new PlatformNotSupportedException();
+            protected override void OnDeserialization(object? sender) =>
+                throw new PlatformNotSupportedException();
         }
     }
 }

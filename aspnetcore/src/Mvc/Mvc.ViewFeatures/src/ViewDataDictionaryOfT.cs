@@ -23,10 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         // References may not show up due to Type.GetConstructor() use in RazorPageActivator.
         public ViewDataDictionary(
             IModelMetadataProvider metadataProvider,
-            ModelStateDictionary modelState)
-            : base(metadataProvider, modelState, declaredModelType: typeof(TModel))
-        {
-        }
+            ModelStateDictionary modelState
+        ) : base(metadataProvider, modelState, declaredModelType: typeof(TModel)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDataDictionary{TModel}"/> class based in part on an
@@ -47,9 +45,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// <inheritdoc />
         // References may not show up due to Type.GetConstructor() use in RazorPageActivator.
         public ViewDataDictionary(ViewDataDictionary source)
-            : base(source, declaredModelType: typeof(TModel))
-        {
-        }
+            : base(source, declaredModelType: typeof(TModel)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDataDictionary{TModel}"/> class based in part on an
@@ -71,9 +67,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         // parameter would likely require IEquatable<TModel> type restrictions to pass expected null value to the base
         // constructor.
         public ViewDataDictionary(ViewDataDictionary source, object? model)
-            : base(source, model, declaredModelType: typeof(TModel))
-        {
-        }
+            : base(source, model, declaredModelType: typeof(TModel)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewDataDictionary{TModel}"/> class.
@@ -81,21 +75,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// <remarks>Internal for testing.</remarks>
         /// <inheritdoc />
         internal ViewDataDictionary(IModelMetadataProvider metadataProvider)
-            : base(metadataProvider, declaredModelType: typeof(TModel))
-        {
-        }
+            : base(metadataProvider, declaredModelType: typeof(TModel)) { }
 
         /// <inheritdoc />
         public new TModel? Model
         {
-            get
-            {
-                return (base.Model == null) ? default(TModel) : (TModel)base.Model;
-            }
-            set
-            {
-                base.Model = value;
-            }
+            get { return (base.Model == null) ? default(TModel) : (TModel)base.Model; }
+            set { base.Model = value; }
         }
     }
 }

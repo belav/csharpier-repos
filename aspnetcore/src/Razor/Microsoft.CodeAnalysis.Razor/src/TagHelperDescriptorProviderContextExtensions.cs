@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.Razor
             return (Compilation)context.Items[typeof(Compilation)];
         }
 
-        public static void SetCompilation(this TagHelperDescriptorProviderContext context, Compilation compilation)
+        public static void SetCompilation(
+            this TagHelperDescriptorProviderContext context,
+            Compilation compilation
+        )
         {
             if (context == null)
             {

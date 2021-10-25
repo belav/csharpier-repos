@@ -35,10 +35,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         private IMemoryOwner<byte>? _fakeMemoryOwner;
 
         public Http3OutputProducer(
-             Http3FrameWriter frameWriter,
-             MemoryPool<byte> pool,
-             Http3Stream stream,
-             IKestrelTrace log)
+            Http3FrameWriter frameWriter,
+            MemoryPool<byte> pool,
+            Http3Stream stream,
+            IKestrelTrace log
+        )
         {
             _frameWriter = frameWriter;
             _memoryPool = pool;
@@ -82,7 +83,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
         void IHttpOutputAborter.OnInputOrOutputCompleted()
         {
-            _stream.Abort(new ConnectionAbortedException($"{nameof(Http3OutputProducer)}.{nameof(ProcessDataWrites)} has completed."), Http3ErrorCode.InternalError);
+            _stream.Abort(
+                new ConnectionAbortedException(
+                    $"{nameof(Http3OutputProducer)}.{nameof(ProcessDataWrites)} has completed."
+                ),
+                Http3ErrorCode.InternalError
+            );
         }
 
         public void Advance(int bytes)
@@ -115,17 +121,37 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             }
         }
 
-        public ValueTask<FlushResult> FirstWriteAsync(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+        public ValueTask<FlushResult> FirstWriteAsync(
+            int statusCode,
+            string? reasonPhrase,
+            HttpResponseHeaders responseHeaders,
+            bool autoChunk,
+            ReadOnlySpan<byte> data,
+            CancellationToken cancellationToken
+        )
         {
             lock (_dataWriterLock)
             {
-                WriteResponseHeaders(statusCode, reasonPhrase, responseHeaders, autoChunk, appCompleted: false);
+                WriteResponseHeaders(
+                    statusCode,
+                    reasonPhrase,
+                    responseHeaders,
+                    autoChunk,
+                    appCompleted: false
+                );
 
                 return WriteDataToPipeAsync(data, cancellationToken);
             }
         }
 
-        public ValueTask<FlushResult> FirstWriteChunkedAsync(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+        public ValueTask<FlushResult> FirstWriteChunkedAsync(
+            int statusCode,
+            string? reasonPhrase,
+            HttpResponseHeaders responseHeaders,
+            bool autoChunk,
+            ReadOnlySpan<byte> data,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotImplementedException();
         }
@@ -134,7 +160,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         {
             if (cancellationToken.IsCancellationRequested)
             {
-                return new ValueTask<FlushResult>(Task.FromCanceled<FlushResult>(cancellationToken));
+                return new ValueTask<FlushResult>(
+                    Task.FromCanceled<FlushResult>(cancellationToken)
+                );
             }
 
             lock (_dataWriterLock)
@@ -176,7 +204,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             }
         }
 
-
         public Span<byte> GetSpan(int sizeHint = 0)
         {
             lock (_dataWriterLock)
@@ -214,12 +241,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         [StackTraceHidden]
         private static void ThrowSuffixSent()
         {
-            throw new InvalidOperationException("Writing is not allowed after writer was completed.");
+            throw new InvalidOperationException(
+                "Writing is not allowed after writer was completed."
+            );
         }
 
-        public void Reset()
-        {
-        }
+        public void Reset() { }
 
         public void Stop()
         {
@@ -241,7 +268,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             throw new NotImplementedException();
         }
 
-        public ValueTask<FlushResult> WriteChunkAsync(ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+        public ValueTask<FlushResult> WriteChunkAsync(
+            ReadOnlySpan<byte> data,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotImplementedException();
         }
@@ -271,11 +301,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             }
         }
 
-        public ValueTask<FlushResult> WriteDataToPipeAsync(ReadOnlySpan<byte> data, CancellationToken cancellationToken)
+        public ValueTask<FlushResult> WriteDataToPipeAsync(
+            ReadOnlySpan<byte> data,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
-                return new ValueTask<FlushResult>(Task.FromCanceled<FlushResult>(cancellationToken));
+                return new ValueTask<FlushResult>(
+                    Task.FromCanceled<FlushResult>(cancellationToken)
+                );
             }
 
             lock (_dataWriterLock)
@@ -296,7 +331,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             }
         }
 
-        public void WriteResponseHeaders(int statusCode, string? reasonPhrase, HttpResponseHeaders responseHeaders, bool autoChunk, bool appCompleted)
+        public void WriteResponseHeaders(
+            int statusCode,
+            string? reasonPhrase,
+            HttpResponseHeaders responseHeaders,
+            bool autoChunk,
+            bool appCompleted
+        )
         {
             lock (_dataWriterLock)
             {
@@ -305,7 +346,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     return;
                 }
 
-                if (appCompleted && !_startedWritingDataFrames && (_stream.ResponseTrailers == null || _stream.ResponseTrailers.Count == 0))
+                if (
+                    appCompleted
+                    && !_startedWritingDataFrames
+                    && (_stream.ResponseTrailers == null || _stream.ResponseTrailers.Count == 0)
+                )
                 {
                     // TODO figure out something to do here.
                 }
@@ -352,7 +397,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                         }
 
                         _stream.ResponseTrailers.SetReadOnly();
-                        flushResult = await _frameWriter.WriteResponseTrailers(_stream.ResponseTrailers);
+                        flushResult = await _frameWriter.WriteResponseTrailers(
+                            _stream.ResponseTrailers
+                        );
                     }
                     else if (readResult.IsCompleted)
                     {
@@ -363,7 +410,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
                         // Headers have already been written and there is no other content to write
                         // TODO complete something here.
-                        flushResult = await _frameWriter.FlushAsync(outputAborter: null, cancellationToken: default);
+                        flushResult = await _frameWriter.FlushAsync(
+                            outputAborter: null,
+                            cancellationToken: default
+                        );
                         await _frameWriter.CompleteAsync();
                     }
                     else
@@ -380,7 +430,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             }
             catch (Exception ex)
             {
-                _log.LogCritical(ex, nameof(Http3OutputProducer) + "." + nameof(ProcessDataWrites) + " observed an unexpected exception.");
+                _log.LogCritical(
+                    ex,
+                    nameof(Http3OutputProducer)
+                        + "."
+                        + nameof(ProcessDataWrites)
+                        + " observed an unexpected exception."
+                );
             }
 
             await _pipeReader.CompleteAsync();
@@ -389,20 +445,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
             static void ThrowUnexpectedState()
             {
-                throw new InvalidOperationException(nameof(Http3OutputProducer) + "." + nameof(ProcessDataWrites) + " observed an unexpected state where the streams output ended with data still remaining in the pipe.");
+                throw new InvalidOperationException(
+                    nameof(Http3OutputProducer)
+                        + "."
+                        + nameof(ProcessDataWrites)
+                        + " observed an unexpected state where the streams output ended with data still remaining in the pipe."
+                );
             }
         }
 
-        private static Pipe CreateDataPipe(MemoryPool<byte> pool)
-            => new Pipe(new PipeOptions
-            (
-                pool: pool,
-                readerScheduler: PipeScheduler.Inline,
-                writerScheduler: PipeScheduler.ThreadPool,
-                pauseWriterThreshold: 1,
-                resumeWriterThreshold: 1,
-                useSynchronizationContext: false,
-                minimumSegmentSize: pool.GetMinimumSegmentSize()
-            ));
+        private static Pipe CreateDataPipe(MemoryPool<byte> pool) =>
+            new Pipe(
+                new PipeOptions(
+                    pool: pool,
+                    readerScheduler: PipeScheduler.Inline,
+                    writerScheduler: PipeScheduler.ThreadPool,
+                    pauseWriterThreshold: 1,
+                    resumeWriterThreshold: 1,
+                    useSynchronizationContext: false,
+                    minimumSegmentSize: pool.GetMinimumSegmentSize()
+                )
+            );
     }
 }

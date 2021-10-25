@@ -11,11 +11,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         Statement = 0,
         Directive = 1,
         Expression = 3,
-
         // Markup
         Markup = 5,
         Template = 7,
-
         // Special
         Comment = 8,
         Tag = 9,

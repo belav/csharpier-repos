@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Cryptography.Cng
             BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Init(out var cipherModeInfo);
 
             // Assert
-            Assert.Equal((uint)sizeof(BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO), cipherModeInfo.cbSize);
+            Assert.Equal(
+                (uint)sizeof(BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO),
+                cipherModeInfo.cbSize
+            );
             Assert.Equal(1U, cipherModeInfo.dwInfoVersion);
             Assert.Equal(IntPtr.Zero, (IntPtr)cipherModeInfo.pbNonce);
             Assert.Equal(0U, cipherModeInfo.cbNonce);

@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
         public async Task CSharpOutliningTagger(bool collapseRegionsWhenCollapsingToDefinitions)
         {
             var code =
-@"using System;
+                @"using System;
 namespace MyNamespace
 {
 #region MyRegion
@@ -42,13 +42,24 @@ namespace MyNamespace
 #endregion
 }";
 
-            using var workspace = TestWorkspace.CreateCSharp(code, composition: EditorTestCompositions.EditorFeaturesWpf);
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithOptions(workspace.Options
-                .WithChangedOption(BlockStructureOptions.CollapseRegionsWhenCollapsingToDefinitions, LanguageNames.CSharp, collapseRegionsWhenCollapsingToDefinitions)));
+            using var workspace = TestWorkspace.CreateCSharp(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options.WithChangedOption(
+                        BlockStructureOptions.CollapseRegionsWhenCollapsingToDefinitions,
+                        LanguageNames.CSharp,
+                        collapseRegionsWhenCollapsingToDefinitions
+                    )
+                )
+            );
 
             var tags = await GetTagsFromWorkspaceAsync(workspace);
 
-            Assert.Collection(tags,
+            Assert.Collection(
+                tags,
                 namespaceTag =>
                 {
                     Assert.False(namespaceTag.IsImplementation);
@@ -57,7 +68,10 @@ namespace MyNamespace
                 },
                 regionTag =>
                 {
-                    Assert.Equal(collapseRegionsWhenCollapsingToDefinitions, regionTag.IsImplementation);
+                    Assert.Equal(
+                        collapseRegionsWhenCollapsingToDefinitions,
+                        regionTag.IsImplementation
+                    );
                     Assert.Equal(9, GetCollapsedHintLineCount(regionTag));
                     Assert.Equal("#region MyRegion", GetHeaderText(regionTag));
                 },
@@ -72,13 +86,15 @@ namespace MyNamespace
                     Assert.True(methodTag.IsImplementation);
                     Assert.Equal(4, GetCollapsedHintLineCount(methodTag));
                     Assert.Equal("static void Main(string[] args)", GetHeaderText(methodTag));
-                });
+                }
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task VisualBasicOutliningTagger()
         {
-            var code = @"Imports System
+            var code =
+                @"Imports System
 Namespace MyNamespace
 #Region ""MyRegion""
     Module M
@@ -89,10 +105,14 @@ Namespace MyNamespace
 #End Region
 End Namespace";
 
-            using var workspace = TestWorkspace.CreateVisualBasic(code, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateVisualBasic(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             var tags = await GetTagsFromWorkspaceAsync(workspace);
 
-            Assert.Collection(tags,
+            Assert.Collection(
+                tags,
                 namespaceTag =>
                 {
                     Assert.False(namespaceTag.IsImplementation);
@@ -116,38 +136,50 @@ End Namespace";
                     Assert.True(methodTag.IsImplementation);
                     Assert.Equal(3, GetCollapsedHintLineCount(methodTag));
                     Assert.Equal("Sub Main(args As String())", GetHeaderText(methodTag));
-                });
-
+                }
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task OutliningTaggerTooltipText()
         {
-            var code = @"Module Module1
+            var code =
+                @"Module Module1
     Sub Main(args As String())
     End Sub
 End Module";
 
-            using var workspace = TestWorkspace.CreateVisualBasic(code, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateVisualBasic(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             var tags = await GetTagsFromWorkspaceAsync(workspace);
 
-            var hints = tags.Select(x => x.GetCollapsedHintForm()).Cast<ViewHostingControl>().ToArray();
+            var hints = tags.Select(x => x.GetCollapsedHintForm())
+                .Cast<ViewHostingControl>()
+                .ToArray();
             Assert.Equal("Sub Main(args As String())\r\nEnd Sub", hints[1].GetText_TestOnly()); // method
             hints.Do(v => v.TextView_TestOnly.Close());
         }
 
-        private static async Task<List<IStructureTag>> GetTagsFromWorkspaceAsync(TestWorkspace workspace)
+        private static async Task<List<IStructureTag>> GetTagsFromWorkspaceAsync(
+            TestWorkspace workspace
+        )
         {
             var hostdoc = workspace.Documents.First();
             var view = hostdoc.GetTextView();
 
-            var provider = workspace.ExportProvider.GetExportedValue<AbstractStructureTaggerProvider>();
+            var provider =
+                workspace.ExportProvider.GetExportedValue<AbstractStructureTaggerProvider>();
 
             var document = workspace.CurrentSolution.GetDocument(hostdoc.Id);
             var context = new TaggerContext<IStructureTag>(document, view.TextSnapshot);
             await provider.GetTestAccessor().ProduceTagsAsync(context);
 
-            return context.tagSpans.Select(x => x.Tag).OrderBy(t => t.OutliningSpan.Value.Start).ToList();
+            return context.tagSpans
+                .Select(x => x.Tag)
+                .OrderBy(t => t.OutliningSpan.Value.Start)
+                .ToList();
         }
 
         private static string GetHeaderText(IStructureTag namespaceTag)

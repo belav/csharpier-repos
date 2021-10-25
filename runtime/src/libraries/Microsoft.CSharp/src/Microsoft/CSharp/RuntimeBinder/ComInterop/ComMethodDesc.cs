@@ -15,21 +15,18 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             DispId = dispId;
         }
 
-        internal ComMethodDesc(string name, int dispId)
-            : this(dispId)
+        internal ComMethodDesc(string name, int dispId) : this(dispId)
         {
             // no ITypeInfo constructor
             Name = name;
         }
 
-        internal ComMethodDesc(string name, int dispId, INVOKEKIND invkind)
-            : this(name, dispId)
+        internal ComMethodDesc(string name, int dispId, INVOKEKIND invkind) : this(name, dispId)
         {
             _invokeKind = invkind;
         }
 
-        internal ComMethodDesc(ITypeInfo typeInfo, FUNCDESC funcDesc)
-            : this(funcDesc.memid)
+        internal ComMethodDesc(ITypeInfo typeInfo, FUNCDESC funcDesc) : this(funcDesc.memid)
         {
             _invokeKind = funcDesc.invkind;
 
@@ -52,10 +49,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         public bool IsPropertyGet
         {
-            get
-            {
-                return (_invokeKind & INVOKEKIND.INVOKE_PROPERTYGET) != 0;
-            }
+            get { return (_invokeKind & INVOKEKIND.INVOKE_PROPERTYGET) != 0; }
         }
 
         public bool IsDataMember
@@ -77,16 +71,16 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         {
             get
             {
-                return (_invokeKind & (INVOKEKIND.INVOKE_PROPERTYPUT | INVOKEKIND.INVOKE_PROPERTYPUTREF)) != 0;
+                return (
+                        _invokeKind
+                        & (INVOKEKIND.INVOKE_PROPERTYPUT | INVOKEKIND.INVOKE_PROPERTYPUTREF)
+                    ) != 0;
             }
         }
 
         public bool IsPropertyPutRef
         {
-            get
-            {
-                return (_invokeKind & INVOKEKIND.INVOKE_PROPERTYPUTREF) != 0;
-            }
+            get { return (_invokeKind & INVOKEKIND.INVOKE_PROPERTYPUTREF) != 0; }
         }
 
         internal int ParamCount { get; }

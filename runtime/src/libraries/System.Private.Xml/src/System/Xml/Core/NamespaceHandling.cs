@@ -14,7 +14,6 @@ namespace System.Xml
         // Default behavior
         //
         Default = 0x0,
-
         //
         // Duplicate namespace declarations will be removed
         //

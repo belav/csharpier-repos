@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
         [Fact]
         public void IgnoresCascadingParameterProperties()
         {
-            var test = $@"
+            var test =
+                $@"
     namespace ConsoleApplication1
     {{
         using {typeof(CascadingParameterAttribute).Namespace};
@@ -29,7 +30,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
         [Fact]
         public void IgnoresPublicSettersProperties()
         {
-            var test = $@"
+            var test =
+                $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -45,7 +47,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
         [Fact]
         public void IgnoresPrivateSettersNonParameterProperties()
         {
-            var test = $@"
+            var test =
+                $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -61,7 +64,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
         [Fact]
         public void ErrorsForNonPublicSetterParameters()
         {
-            var test = $@"
+            var test =
+                $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -73,39 +77,36 @@ namespace Microsoft.AspNetCore.Components.Analyzers
         }}
     }}" + ComponentsTestDeclarations.Source;
 
-            VerifyCSharpDiagnostic(test,
+            VerifyCSharpDiagnostic(
+                test,
                 new DiagnosticResult
                 {
                     Id = DiagnosticDescriptors.ComponentParameterSettersShouldBePublic.Id,
-                    Message = "Component parameter 'ConsoleApplication1.TypeName.MyProperty1' should have a public setter.",
+                    Message =
+                        "Component parameter 'ConsoleApplication1.TypeName.MyProperty1' should have a public setter.",
                     Severity = DiagnosticSeverity.Error,
-                    Locations = new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 7, 39)
-                    }
+                    Locations = new[] { new DiagnosticResultLocation("Test0.cs", 7, 39) }
                 },
                 new DiagnosticResult
                 {
                     Id = DiagnosticDescriptors.ComponentParameterSettersShouldBePublic.Id,
-                    Message = "Component parameter 'ConsoleApplication1.TypeName.MyProperty2' should have a public setter.",
+                    Message =
+                        "Component parameter 'ConsoleApplication1.TypeName.MyProperty2' should have a public setter.",
                     Severity = DiagnosticSeverity.Error,
-                    Locations = new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 8, 39)
-                    }
+                    Locations = new[] { new DiagnosticResultLocation("Test0.cs", 8, 39) }
                 },
                 new DiagnosticResult
                 {
                     Id = DiagnosticDescriptors.ComponentParameterSettersShouldBePublic.Id,
-                    Message = "Component parameter 'ConsoleApplication1.TypeName.MyProperty3' should have a public setter.",
+                    Message =
+                        "Component parameter 'ConsoleApplication1.TypeName.MyProperty3' should have a public setter.",
                     Severity = DiagnosticSeverity.Error,
-                    Locations = new[]
-                    {
-                        new DiagnosticResultLocation("Test0.cs", 9, 39)
-                    }
-                });
+                    Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 39) }
+                }
+            );
         }
 
-        protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() => new ComponentParameterAnalyzer();
+        protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() =>
+            new ComponentParameterAnalyzer();
     }
 }

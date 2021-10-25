@@ -50,8 +50,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.binary.overload002.overload002
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -96,8 +94,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.binary.overload003.overload003
 {
@@ -145,8 +141,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.binary.overload004.overload004
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -193,8 +187,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.binary.overload005.overload005
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -208,12 +200,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     {
         public static int?[] operator %(short x, Base b)
         {
-            return new int?[]
-            {
-            1, 2, null
-            }
-
-            ;
+            return new int?[] { 1, 2, null };
         }
     }
 
@@ -221,12 +208,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     {
         public static int?[] operator %(int x, Derived d)
         {
-            return new int?[]
-            {
-            null, null
-            }
-
-            ;
+            return new int?[] { null, null };
         }
     }
 
@@ -250,8 +232,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.binary.overload006.overload006
 {
@@ -299,8 +279,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.binary.overload007.overload007
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -314,12 +292,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     {
         public static byte[] operator |(short x, Base b)
         {
-            return new byte[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            return new byte[] { 1, 2, 3 };
         }
     }
 
@@ -327,12 +300,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     {
         public static byte[] operator |(int x, Derived d)
         {
-            return new byte[]
-            {
-            1, 2
-            }
-
-            ;
+            return new byte[] { 1, 2 };
         }
     }
 
@@ -356,8 +324,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.binary.overload008.overload008
 {
@@ -409,8 +375,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.binary.overload009.overload009
 {

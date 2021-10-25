@@ -14,10 +14,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             {
                 builder.AddNamespaceToken(
                     Resources.NamespaceDirective_NamespaceToken_Name,
-                    Resources.NamespaceDirective_NamespaceToken_Description);
+                    Resources.NamespaceDirective_NamespaceToken_Description
+                );
                 builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
                 builder.Description = Resources.NamespaceDirective_Description;
-            });
+            }
+        );
 
         public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
         {
@@ -26,7 +28,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.AddDirective(Directive, FileKinds.Legacy, FileKinds.Component, FileKinds.ComponentImport);
+            builder.AddDirective(
+                Directive,
+                FileKinds.Legacy,
+                FileKinds.Component,
+                FileKinds.ComponentImport
+            );
             return builder;
         }
     }

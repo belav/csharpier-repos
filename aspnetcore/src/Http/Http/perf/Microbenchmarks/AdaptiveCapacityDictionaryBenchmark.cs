@@ -38,9 +38,19 @@ namespace Microsoft.AspNetCore.Http
                 new KeyValuePair<string, string>("s", "t"),
             };
 
-            _smallCapDict = new AdaptiveCapacityDictionary<string, string>(capacity: 1, StringComparer.OrdinalIgnoreCase);
-            _smallCapDictTen = new AdaptiveCapacityDictionary<string, string>(capacity: 10, StringComparer.OrdinalIgnoreCase);
-            _filledSmallDictionary = new AdaptiveCapacityDictionary<string, string>(_tenValues, capacity: 10, StringComparer.OrdinalIgnoreCase);
+            _smallCapDict = new AdaptiveCapacityDictionary<string, string>(
+                capacity: 1,
+                StringComparer.OrdinalIgnoreCase
+            );
+            _smallCapDictTen = new AdaptiveCapacityDictionary<string, string>(
+                capacity: 10,
+                StringComparer.OrdinalIgnoreCase
+            );
+            _filledSmallDictionary = new AdaptiveCapacityDictionary<string, string>(
+                _tenValues,
+                capacity: 10,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             _dict = new Dictionary<string, string>(1, StringComparer.OrdinalIgnoreCase);
             _dictTen = new Dictionary<string, string>(10, StringComparer.OrdinalIgnoreCase);
@@ -77,7 +87,6 @@ namespace Microsoft.AspNetCore.Http
         {
             _dict[_oneValue.Key] = _oneValue.Value;
         }
-
 
         [Benchmark]
         public void OneValue_SmallDict_Get()
@@ -168,7 +177,6 @@ namespace Microsoft.AspNetCore.Http
             }
         }
 
-
         [Benchmark]
         public void FourValues_Dict()
         {
@@ -258,7 +266,6 @@ namespace Microsoft.AspNetCore.Http
         public void SixValues_SmallDictGetGet()
         {
             _ = _filledSmallDictionary["k"];
-
         }
 
         [Benchmark]
@@ -302,7 +309,6 @@ namespace Microsoft.AspNetCore.Http
         {
             _ = new Dictionary<string, string>(capacity: 1);
         }
-
 
         [Benchmark]
         public void SmallDictFour()

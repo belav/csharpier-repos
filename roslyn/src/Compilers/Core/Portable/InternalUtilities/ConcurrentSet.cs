@@ -13,8 +13,7 @@ namespace Roslyn.Utilities
     /// A concurrent, simplified HashSet.
     /// </summary>
     [DebuggerDisplay("Count = {Count}")]
-    internal sealed class ConcurrentSet<T> : ICollection<T>
-        where T : notnull
+    internal sealed class ConcurrentSet<T> : ICollection<T> where T : notnull
     {
         /// <summary>
         /// The default concurrency level is 2. That means the collection can cope with up to two
@@ -39,7 +38,10 @@ namespace Roslyn.Utilities
         /// </summary>
         public ConcurrentSet()
         {
-            _dictionary = new ConcurrentDictionary<T, byte>(DefaultConcurrencyLevel, DefaultCapacity);
+            _dictionary = new ConcurrentDictionary<T, byte>(
+                DefaultConcurrencyLevel,
+                DefaultCapacity
+            );
         }
 
         /// <summary>
@@ -48,7 +50,11 @@ namespace Roslyn.Utilities
         /// <param name="equalityComparer">The equality comparer for values in the set.</param>
         public ConcurrentSet(IEqualityComparer<T> equalityComparer)
         {
-            _dictionary = new ConcurrentDictionary<T, byte>(DefaultConcurrencyLevel, DefaultCapacity, equalityComparer);
+            _dictionary = new ConcurrentDictionary<T, byte>(
+                DefaultConcurrencyLevel,
+                DefaultCapacity,
+                equalityComparer
+            );
         }
 
         /// <summary>

@@ -20,7 +20,9 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
 {
     // GoToDefinition
-    internal abstract class AbstractGoToDefinitionService : AbstractFindDefinitionService, IGoToDefinitionService
+    internal abstract class AbstractGoToDefinitionService
+        : AbstractFindDefinitionService,
+          IGoToDefinitionService
     {
         private readonly IThreadingContext _threadingContext;
 
@@ -31,30 +33,56 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
 
         protected AbstractGoToDefinitionService(
             IThreadingContext threadingContext,
-            IStreamingFindUsagesPresenter streamingPresenter)
+            IStreamingFindUsagesPresenter streamingPresenter
+        )
         {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
         }
 
-        async Task<IEnumerable<INavigableItem>?> IGoToDefinitionService.FindDefinitionsAsync(Document document, int position, CancellationToken cancellationToken)
-            => await FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
+        async Task<IEnumerable<INavigableItem>?> IGoToDefinitionService.FindDefinitionsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            await FindDefinitionsAsync(document, position, cancellationToken).ConfigureAwait(false);
 
-        public bool TryGoToDefinition(Document document, int position, CancellationToken cancellationToken)
+        public bool TryGoToDefinition(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             // Try to compute the referenced symbol and attempt to go to definition for the symbol.
             var symbolService = document.GetRequiredLanguageService<IGoToDefinitionSymbolService>();
-            var (symbol, _) = symbolService.GetSymbolAndBoundSpanAsync(document, position, includeType: true, cancellationToken).WaitAndGetResult(cancellationToken);
+            var (symbol, _) = symbolService
+                .GetSymbolAndBoundSpanAsync(
+                    document,
+                    position,
+                    includeType: true,
+                    cancellationToken
+                )
+                .WaitAndGetResult(cancellationToken);
             if (symbol is null)
                 return false;
 
             // if the symbol only has a single source location, and we're already on it,
             // try to see if there's a better symbol we could navigate to.
-            var remapped = TryGoToAlternativeLocationIfAlreadyOnDefinition(document, position, symbol, cancellationToken);
+            var remapped = TryGoToAlternativeLocationIfAlreadyOnDefinition(
+                document,
+                position,
+                symbol,
+                cancellationToken
+            );
             if (remapped)
                 return true;
 
-            var isThirdPartyNavigationAllowed = IsThirdPartyNavigationAllowed(symbol, position, document, cancellationToken);
+            var isThirdPartyNavigationAllowed = IsThirdPartyNavigationAllowed(
+                symbol,
+                position,
+                document,
+                cancellationToken
+            );
 
             return GoToDefinitionHelpers.TryGoToDefinition(
                 symbol,
@@ -62,12 +90,16 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
                 _threadingContext,
                 _streamingPresenter,
                 thirdPartyNavigationAllowed: isThirdPartyNavigationAllowed,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken
+            );
         }
 
         private bool TryGoToAlternativeLocationIfAlreadyOnDefinition(
-            Document document, int position,
-            ISymbol symbol, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             var project = document.Project;
             var solution = project.Solution;
@@ -94,38 +126,69 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
             if (interfaceImpls.Length == 0)
                 return false;
 
-            var definitions = interfaceImpls.SelectMany(
-                i => GoToDefinitionHelpers.GetDefinitions(
-                    i, solution, thirdPartyNavigationAllowed: false, cancellationToken)).ToImmutableArray();
+            var definitions = interfaceImpls
+                .SelectMany(
+                    i =>
+                        GoToDefinitionHelpers.GetDefinitions(
+                            i,
+                            solution,
+                            thirdPartyNavigationAllowed: false,
+                            cancellationToken
+                        )
+                )
+                .ToImmutableArray();
 
-            var title = string.Format(EditorFeaturesResources._0_implemented_members,
-                FindUsagesHelpers.GetDisplayName(symbol));
+            var title = string.Format(
+                EditorFeaturesResources._0_implemented_members,
+                FindUsagesHelpers.GetDisplayName(symbol)
+            );
 
-            return _threadingContext.JoinableTaskFactory.Run(() =>
-                _streamingPresenter.TryNavigateToOrPresentItemsAsync(
-                    _threadingContext, solution.Workspace, title, definitions, cancellationToken));
+            return _threadingContext.JoinableTaskFactory.Run(
+                () =>
+                    _streamingPresenter.TryNavigateToOrPresentItemsAsync(
+                        _threadingContext,
+                        solution.Workspace,
+                        title,
+                        definitions,
+                        cancellationToken
+                    )
+            );
         }
 
-        private static bool IsThirdPartyNavigationAllowed(ISymbol symbolToNavigateTo, int caretPosition, Document document, CancellationToken cancellationToken)
+        private static bool IsThirdPartyNavigationAllowed(
+            ISymbol symbolToNavigateTo,
+            int caretPosition,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxRoot = document.GetSyntaxRootSynchronously(cancellationToken);
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var containingTypeDeclaration = syntaxFactsService.GetContainingTypeDeclaration(syntaxRoot, caretPosition);
+            var containingTypeDeclaration = syntaxFactsService.GetContainingTypeDeclaration(
+                syntaxRoot,
+                caretPosition
+            );
 
             if (containingTypeDeclaration != null)
             {
-                var semanticModel = document.GetSemanticModelAsync(cancellationToken).WaitAndGetResult(cancellationToken);
+                var semanticModel = document
+                    .GetSemanticModelAsync(cancellationToken)
+                    .WaitAndGetResult(cancellationToken);
                 Debug.Assert(semanticModel != null);
 
                 // Allow third parties to navigate to all symbols except types/constructors
                 // if we are navigating from the corresponding type.
 
-                if (semanticModel.GetDeclaredSymbol(containingTypeDeclaration, cancellationToken) is ITypeSymbol containingTypeSymbol &&
-                    (symbolToNavigateTo is ITypeSymbol || symbolToNavigateTo.IsConstructor()))
+                if (
+                    semanticModel.GetDeclaredSymbol(containingTypeDeclaration, cancellationToken)
+                        is ITypeSymbol containingTypeSymbol
+                    && (symbolToNavigateTo is ITypeSymbol || symbolToNavigateTo.IsConstructor())
+                )
                 {
-                    var candidateTypeSymbol = symbolToNavigateTo is ITypeSymbol
-                        ? symbolToNavigateTo
-                        : symbolToNavigateTo.ContainingType;
+                    var candidateTypeSymbol =
+                        symbolToNavigateTo is ITypeSymbol
+                            ? symbolToNavigateTo
+                            : symbolToNavigateTo.ContainingType;
 
                     if (Equals(containingTypeSymbol, candidateTypeSymbol))
                     {

@@ -18,18 +18,43 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Options
     {
         private const string LocalRegistryPath = @"Roslyn\Internal\OnOff\Components\";
 
-        public static readonly Option2<bool> Adornment = new(nameof(EditorComponentOnOffOptions), nameof(Adornment), defaultValue: true,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + "Adornment"));
+        public static readonly Option2<bool> Adornment =
+            new(
+                nameof(EditorComponentOnOffOptions),
+                nameof(Adornment),
+                defaultValue: true,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + "Adornment"
+                )
+            );
 
-        public static readonly Option2<bool> Tagger = new(nameof(EditorComponentOnOffOptions), nameof(Tagger), defaultValue: true,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + "Tagger"));
+        public static readonly Option2<bool> Tagger =
+            new(
+                nameof(EditorComponentOnOffOptions),
+                nameof(Tagger),
+                defaultValue: true,
+                storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + "Tagger")
+            );
 
-        public static readonly Option2<bool> CodeRefactorings = new(nameof(EditorComponentOnOffOptions), nameof(CodeRefactorings), defaultValue: true,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + "Code Refactorings"));
+        public static readonly Option2<bool> CodeRefactorings =
+            new(
+                nameof(EditorComponentOnOffOptions),
+                nameof(CodeRefactorings),
+                defaultValue: true,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + "Code Refactorings"
+                )
+            );
 
-        public static readonly Option2<bool> ShowCodeRefactoringsWhenQueriedForCodeFixes = new(
-            nameof(EditorComponentOnOffOptions), nameof(ShowCodeRefactoringsWhenQueriedForCodeFixes), defaultValue: false,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(ShowCodeRefactoringsWhenQueriedForCodeFixes)));
+        public static readonly Option2<bool> ShowCodeRefactoringsWhenQueriedForCodeFixes =
+            new(
+                nameof(EditorComponentOnOffOptions),
+                nameof(ShowCodeRefactoringsWhenQueriedForCodeFixes),
+                defaultValue: false,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(ShowCodeRefactoringsWhenQueriedForCodeFixes)
+                )
+            );
     }
 
     [ExportOptionProvider, Shared]
@@ -37,14 +62,14 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorComponentOnOffOptionsProvider()
-        {
-        }
+        public EditorComponentOnOffOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            EditorComponentOnOffOptions.Adornment,
-            EditorComponentOnOffOptions.Tagger,
-            EditorComponentOnOffOptions.CodeRefactorings,
-            EditorComponentOnOffOptions.ShowCodeRefactoringsWhenQueriedForCodeFixes);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(
+                EditorComponentOnOffOptions.Adornment,
+                EditorComponentOnOffOptions.Tagger,
+                EditorComponentOnOffOptions.CodeRefactorings,
+                EditorComponentOnOffOptions.ShowCodeRefactoringsWhenQueriedForCodeFixes
+            );
     }
 }

@@ -18,8 +18,9 @@ namespace RuntimeEventCounterTests
     {
         public RuntimeCounterListener()
         {
-            observedRuntimeCounters = new Dictionary<string, bool>() {
-                { "cpu-usage" , false },
+            observedRuntimeCounters = new Dictionary<string, bool>()
+            {
+                { "cpu-usage", false },
                 { "working-set", false },
                 { "gc-heap-size", false },
                 { "gen-0-gc-count", false },
@@ -53,16 +54,21 @@ namespace RuntimeEventCounterTests
             {
                 Dictionary<string, string> refreshInterval = new Dictionary<string, string>();
                 refreshInterval.Add("EventCounterIntervalSec", "1");
-                EnableEvents(source, EventLevel.Informational, (EventKeywords)(-1), refreshInterval);
+                EnableEvents(
+                    source,
+                    EventLevel.Informational,
+                    (EventKeywords)(-1),
+                    refreshInterval
+                );
             }
         }
 
         protected override void OnEventWritten(EventWrittenEventArgs eventData)
         {
-
             for (int i = 0; i < eventData.Payload.Count; i++)
             {
-                IDictionary<string, object> eventPayload = eventData.Payload[i] as IDictionary<string, object>;
+                IDictionary<string, object> eventPayload =
+                    eventData.Payload[i] as IDictionary<string, object>;
                 if (eventPayload != null)
                 {
                     foreach (KeyValuePair<string, object> payload in eventPayload)
@@ -99,7 +105,7 @@ namespace RuntimeEventCounterTests
             // Create an EventListener.
             using (RuntimeCounterListener myListener = new RuntimeCounterListener())
             {
-                Thread.Sleep(3000); 
+                Thread.Sleep(3000);
                 if (myListener.Verify())
                 {
                     Console.WriteLine("Test passed");
@@ -107,7 +113,9 @@ namespace RuntimeEventCounterTests
                 }
                 else
                 {
-                    Console.WriteLine($"Test Failed - did not see one or more of the expected runtime counters.");
+                    Console.WriteLine(
+                        $"Test Failed - did not see one or more of the expected runtime counters."
+                    );
                     return 1;
                 }
             }

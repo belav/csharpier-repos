@@ -25,7 +25,8 @@ namespace NonDISample
                     {
                         configuration.ProtectKeysWithDpapi();
                     }
-                });
+                }
+            );
 
             var protector = dataProtectionProvider.CreateProtector("Program.No-DI");
 

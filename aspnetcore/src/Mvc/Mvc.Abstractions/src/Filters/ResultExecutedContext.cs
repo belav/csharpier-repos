@@ -28,8 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             ActionContext actionContext,
             IList<IFilterMetadata> filters,
             IActionResult result,
-            object controller)
-            : base(actionContext, filters)
+            object controller
+        ) : base(actionContext, filters)
         {
             if (result == null)
             {
@@ -68,7 +68,6 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     return _exception;
                 }
             }
-
             set
             {
                 _exceptionDispatchInfo = null;
@@ -82,11 +81,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         /// </summary>
         public virtual ExceptionDispatchInfo? ExceptionDispatchInfo
         {
-            get
-            {
-                return _exceptionDispatchInfo;
-            }
-
+            get { return _exceptionDispatchInfo; }
             set
             {
                 _exception = null;

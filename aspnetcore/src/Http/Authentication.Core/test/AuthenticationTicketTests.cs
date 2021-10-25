@@ -9,15 +9,9 @@ namespace Microsoft.AspNetCore.Authentication.Core.Test
         [Fact]
         public void Clone_Copies()
         {
-            var items = new Dictionary<string, string?>
-            {
-                ["foo"] = "bar",
-            };
+            var items = new Dictionary<string, string?> { ["foo"] = "bar", };
             var value = "value";
-            var parameters = new Dictionary<string, object?>
-            {
-                ["foo2"] = value,
-            };
+            var parameters = new Dictionary<string, object?> { ["foo2"] = value, };
             var props = new AuthenticationProperties(items, parameters);
             var identity = new ClaimsIdentity();
             var principal = new ClaimsPrincipal(identity);

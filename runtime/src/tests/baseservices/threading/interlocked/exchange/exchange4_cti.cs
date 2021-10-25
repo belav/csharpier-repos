@@ -12,26 +12,28 @@ using System.Threading;
 
 // This test makes sure that Exchange(Single, Single)
 // plays nicely with other threads accessing shared state directly.
-// The test spawns a bunch of threads, then each thread tries to 
-// grab the mutex (set location=1), decrement a global resource count, 
-// then release the mutex (set location=0).  While location=0, the 
-// thread will be able to set it to 1 and enter the mutex to consume 
+// The test spawns a bunch of threads, then each thread tries to
+// grab the mutex (set location=1), decrement a global resource count,
+// then release the mutex (set location=0).  While location=0, the
+// thread will be able to set it to 1 and enter the mutex to consume
 // the resource, but if it is 1, the thread will be denied entry.
 // At the end, the test checks that:
 // the sum of all entries + denials = total potential resources
 // total potential resources = resources unconsumed + entries
 public class InterlockedExchange4
 {
-    private const int c_THREADARRAT_SIZE = 10;      // how many threads to spawn
-    private static int resource = 10;               // resources to be consumed
-    private static Int64 location = 0;              // mutex being managed thru Exchange
-    private static int entry = 0;                   // threads granted entry to the mutex
-    private static int deny = 0;                    // threads denied entry to the mutex
+    private const int c_THREADARRAT_SIZE = 10; // how many threads to spawn
+    private static int resource = 10; // resources to be consumed
+    private static Int64 location = 0; // mutex being managed thru Exchange
+    private static int entry = 0; // threads granted entry to the mutex
+    private static int deny = 0; // threads denied entry to the mutex
 
     public static int Main(string[] args)
     {
         InterlockedExchange4 exchange4 = new InterlockedExchange4();
-        TestLibrary.TestFramework.BeginTestCase("Testing System.Threading.Interlocked.Exchange(System.Single@,System.Single)...");
+        TestLibrary.TestFramework.BeginTestCase(
+            "Testing System.Threading.Interlocked.Exchange(System.Single@,System.Single)..."
+        );
 
         if (exchange4.RunTests())
         {
@@ -60,7 +62,9 @@ public class InterlockedExchange4
     public bool PosTest1()
     {
         bool retVal = true;
-        TestLibrary.TestFramework.BeginScenario("PosTest1: Verify multiple threads share the same resource by using Interlocked.Exchange method...");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: Verify multiple threads share the same resource by using Interlocked.Exchange method..."
+        );
 
         try
         {
@@ -91,11 +95,14 @@ public class InterlockedExchange4
             if (entry + deny == 10)
             {
                 // if any resources remain unconsumed, then those plus number
-                // of successful entries should equal the original value of 
+                // of successful entries should equal the original value of
                 // resource (10)
                 if (resource > 0 && resource + entry != 10)
                 {
-                    TestLibrary.TestFramework.LogError("001", "The number of resource is consumed is wrong!");
+                    TestLibrary.TestFramework.LogError(
+                        "001",
+                        "The number of resource is consumed is wrong!"
+                    );
                     retVal = false;
                 }
             }
@@ -117,14 +124,14 @@ public class InterlockedExchange4
     private static void ConsumeResource()
     {
         // This is effectively a hand-coded mutex.
-        // The thread exchanges the value 1 with the value 
-        // already at location (initially 0).  So first time, it should 
+        // The thread exchanges the value 1 with the value
+        // already at location (initially 0).  So first time, it should
         // set location=1 and return 0.  When it gets back the 0, it knows
-        // it holds the mutex.  So the thread 'consumes' a 
-        // resource and records an 'entry', after which it sets location 
-        // back to 0, effectively releasing the mutex. 
-        // Any thread hitting the first Exchange while location=1 will 
-        // be returned the 1, and thus not enter the mutex - it will 
+        // it holds the mutex.  So the thread 'consumes' a
+        // resource and records an 'entry', after which it sets location
+        // back to 0, effectively releasing the mutex.
+        // Any thread hitting the first Exchange while location=1 will
+        // be returned the 1, and thus not enter the mutex - it will
         // just record a 'denial' and not 'consume' a resource.
         // After all is said and done, denials+entries should equal total
         // original resources.
@@ -137,7 +144,9 @@ public class InterlockedExchange4
             {
                 // consume a resource
                 resource--;
-                TestLibrary.TestFramework.LogInformation(String.Format("The resource is reduced,the rest number is {0}", resource));
+                TestLibrary.TestFramework.LogInformation(
+                    String.Format("The resource is reduced,the rest number is {0}", resource)
+                );
             }
             else
             {
@@ -147,9 +156,9 @@ public class InterlockedExchange4
 
             // release the mutex (put a 0 back in location)
             Interlocked.Exchange(ref location, 0);
-            // increment the entry count - 
-            Interlocked.Increment(ref entry);   // corrected, was entry++;
-                                                // which is not thread safe;
+            // increment the entry count -
+            Interlocked.Increment(ref entry); // corrected, was entry++;
+            // which is not thread safe;
         }
         else
         {
@@ -157,8 +166,8 @@ public class InterlockedExchange4
             // thread has set the location to 1
             TestLibrary.TestFramework.LogInformation("This is not available!");
             // increment the denial count, no resource is consumed
-            Interlocked.Increment(ref deny);    // corrected, was deny++; 
-                                                // which is not thread safe;
+            Interlocked.Increment(ref deny); // corrected, was deny++;
+            // which is not thread safe;
         }
     }
 }

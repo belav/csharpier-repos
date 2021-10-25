@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention. </param>
         public SequenceUniquificationConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        )
         {
             Dependencies = dependencies;
         }
@@ -36,25 +37,33 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             var model = modelBuilder.Metadata;
-            var modelSequences =
-                (SortedDictionary<(string Name, string? Schema), ISequence>?)model[RelationalAnnotationNames.Sequences];
+            var modelSequences = (SortedDictionary<(string Name, string? Schema), ISequence>?)model[
+                RelationalAnnotationNames.Sequences
+            ];
 
             if (modelSequences != null)
             {
                 var maxLength = model.GetMaxIdentifierLength();
-                var toReplace = modelSequences
-                    .Where(s => s.Key.Name.Length > maxLength).ToList();
+                var toReplace = modelSequences.Where(s => s.Key.Name.Length > maxLength).ToList();
 
                 foreach (var sequence in toReplace)
                 {
                     var schemaName = sequence.Key.Schema;
                     var newSequenceName = Uniquifier.Uniquify(
-                        sequence.Key.Name, modelSequences,
-                        sequenceName => (sequenceName, schemaName), maxLength);
-                    Sequence.SetName((IMutableModel)model, (Sequence)sequence.Value, newSequenceName);
+                        sequence.Key.Name,
+                        modelSequences,
+                        sequenceName => (sequenceName, schemaName),
+                        maxLength
+                    );
+                    Sequence.SetName(
+                        (IMutableModel)model,
+                        (Sequence)sequence.Value,
+                        newSequenceName
+                    );
                 }
             }
         }

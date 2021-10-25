@@ -28,9 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         private static string GetDebuggerDisplay(string expr, ConsList<FieldSymbol> fields)
         {
-            return fields.Any() ?
-                $"{GetDebuggerDisplay(expr, fields.Tail)}.{fields.Head.Name}" :
-                expr;
+            return fields.Any()
+              ? $"{GetDebuggerDisplay(expr, fields.Tail)}.{fields.Head.Name}"
+              : expr;
         }
 
         protected abstract string GetInstanceName();
@@ -67,7 +67,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override BoundExpression ToBoundExpression(SyntaxNode syntax)
         {
-            return new BoundLocal(syntax, this.Local, constantValueOpt: null, type: this.Local.Type) { WasCompilerGenerated = true };
+            return new BoundLocal(syntax, this.Local, constantValueOpt: null, type: this.Local.Type)
+            {
+                WasCompilerGenerated = true
+            };
         }
 
         protected override string GetInstanceName() => Local.Name;
@@ -80,10 +83,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal DisplayClassInstanceFromParameter(ParameterSymbol parameter)
         {
             Debug.Assert((object)parameter != null);
-            Debug.Assert(parameter.Name.EndsWith("this", StringComparison.Ordinal) ||
-                parameter.Name.Length == 0 || // unnamed
-                parameter.Name.Equals("value", StringComparison.Ordinal) || // display class instance passed to local function as parameter
-                GeneratedNames.GetKind(parameter.Name) == GeneratedNameKind.TransparentIdentifier);
+            Debug.Assert(
+                parameter.Name.EndsWith("this", StringComparison.Ordinal)
+                    || parameter.Name.Length == 0
+                    || // unnamed
+                    parameter.Name.Equals("value", StringComparison.Ordinal)
+                    || // display class instance passed to local function as parameter
+                    GeneratedNames.GetKind(parameter.Name)
+                        == GeneratedNameKind.TransparentIdentifier
+            );
             this.Parameter = parameter;
         }
 

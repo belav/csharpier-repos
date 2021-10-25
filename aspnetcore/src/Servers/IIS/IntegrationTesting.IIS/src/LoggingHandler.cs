@@ -9,25 +9,28 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 {
-    public class LoggingHandler: DelegatingHandler
+    public class LoggingHandler : DelegatingHandler
     {
         private readonly int _maxBodyLogSize = 16 * 1024;
         private readonly ILogger _logger;
 
-        public LoggingHandler(HttpMessageHandler innerHandler, ILogger logger)
-            : base(innerHandler)
+        public LoggingHandler(HttpMessageHandler innerHandler, ILogger logger) : base(innerHandler)
         {
             _logger = logger;
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             _logger.LogDebug(request.ToString());
             var response = await base.SendAsync(request, cancellationToken);
 
-            await LogResponse(response.IsSuccessStatusCode ? LogLevel.Debug : LogLevel.Warning, response);
+            await LogResponse(
+                response.IsSuccessStatusCode ? LogLevel.Debug : LogLevel.Warning,
+                response
+            );
             return response;
         }
 
@@ -43,7 +46,11 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                 var count = 0;
                 do
                 {
-                    count = await readAsStreamAsync.ReadAsync(buffer, offset, buffer.Length - offset);
+                    count = await readAsStreamAsync.ReadAsync(
+                        buffer,
+                        offset,
+                        buffer.Length - offset
+                    );
                     offset += count;
                 } while (count != 0 && offset != buffer.Length);
 

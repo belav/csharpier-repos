@@ -47,10 +47,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns the configuration source for this navigation property.
         /// </summary>
         /// <returns> The configuration source. </returns>
-        ConfigurationSource IConventionPropertyBase.GetConfigurationSource()
-            => (ConfigurationSource)(IsOnDependent
-                ? ForeignKey.GetDependentToPrincipalConfigurationSource()
-                : ForeignKey.GetPrincipalToDependentConfigurationSource())!;
+        ConfigurationSource IConventionPropertyBase.GetConfigurationSource() =>
+            (ConfigurationSource)(
+                IsOnDependent
+                    ? ForeignKey.GetDependentToPrincipalConfigurationSource()
+                    : ForeignKey.GetPrincipalToDependentConfigurationSource()
+            )!;
 
         /// <summary>
         ///     Gets the foreign key that defines the relationship this navigation property will navigate.

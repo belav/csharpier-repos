@@ -12,12 +12,13 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindCompiledQuerySqlServerTest : NorthwindCompiledQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+    public class NorthwindCompiledQuerySqlServerTest
+        : NorthwindCompiledQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
     {
         public NorthwindCompiledQuerySqlServerTest(
             NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,
-            ITestOutputHelper testOutputHelper)
-            : base(fixture)
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             fixture.TestSqlLoggerFactory.Clear();
             //fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -32,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 FROM [Customers] AS [c]",
                 //
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]");
+FROM [Customers] AS [c]"
+            );
         }
 
         public override void DbSet_query_first()
@@ -42,7 +44,8 @@ FROM [Customers] AS [c]");
             AssertSql(
                 @"SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-ORDER BY [c].[CustomerID]");
+ORDER BY [c].[CustomerID]"
+            );
         }
 
         public override void Query_ending_with_include()
@@ -58,7 +61,8 @@ ORDER BY [c].[CustomerID], [o].[OrderID]",
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Customers] AS [c]
 LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-ORDER BY [c].[CustomerID], [o].[OrderID]");
+ORDER BY [c].[CustomerID], [o].[OrderID]"
+            );
         }
 
         public override void Untyped_context()
@@ -70,7 +74,8 @@ ORDER BY [c].[CustomerID], [o].[OrderID]");
 FROM [Customers] AS [c]",
                 //
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]");
+FROM [Customers] AS [c]"
+            );
         }
 
         public override void Query_with_single_parameter()
@@ -88,7 +93,8 @@ WHERE [c].[CustomerID] = @__customerID",
 
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID");
+WHERE [c].[CustomerID] = @__customerID"
+            );
         }
 
         public override void First_query_with_single_parameter()
@@ -106,7 +112,8 @@ WHERE [c].[CustomerID] = @__customerID",
 
 SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID");
+WHERE [c].[CustomerID] = @__customerID"
+            );
         }
 
         public override void Query_with_two_parameters()
@@ -124,7 +131,8 @@ WHERE [c].[CustomerID] = @__customerID",
 
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID");
+WHERE [c].[CustomerID] = @__customerID"
+            );
         }
 
         public override void Query_with_three_parameters()
@@ -142,7 +150,8 @@ WHERE [c].[CustomerID] = @__customerID",
 
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID");
+WHERE [c].[CustomerID] = @__customerID"
+            );
         }
 
         public override void Query_with_contains()
@@ -156,7 +165,8 @@ WHERE [c].[CustomerID] = N'ALFKI'",
                 //
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = N'ANATR'");
+WHERE [c].[CustomerID] = N'ANATR'"
+            );
         }
 
         public override void Query_with_closure()
@@ -170,7 +180,8 @@ WHERE [c].[CustomerID] = N'ALFKI'",
                 //
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = N'ALFKI'");
+WHERE [c].[CustomerID] = N'ALFKI'"
+            );
         }
 
         public override void Compiled_query_when_does_not_end_in_query_operator()
@@ -182,7 +193,8 @@ WHERE [c].[CustomerID] = N'ALFKI'");
 
 SELECT COUNT(*)
 FROM [Customers] AS [c]
-WHERE [c].[CustomerID] = @__customerID");
+WHERE [c].[CustomerID] = @__customerID"
+            );
         }
 
         public override async Task Compiled_query_with_max_parameters()
@@ -331,64 +343,104 @@ WHERE (((((((((((((([c].[CustomerID] = @__s1) OR ([c].[CustomerID] = @__s2)) OR 
 
 SELECT COUNT(*)
 FROM [Customers] AS [c]
-WHERE ((((((((((((([c].[CustomerID] = @__s1) OR ([c].[CustomerID] = @__s2)) OR ([c].[CustomerID] = @__s3)) OR ([c].[CustomerID] = @__s4)) OR ([c].[CustomerID] = @__s5)) OR ([c].[CustomerID] = @__s6)) OR ([c].[CustomerID] = @__s7)) OR ([c].[CustomerID] = @__s8)) OR ([c].[CustomerID] = @__s9)) OR ([c].[CustomerID] = @__s10)) OR ([c].[CustomerID] = @__s11)) OR ([c].[CustomerID] = @__s12)) OR ([c].[CustomerID] = @__s13)) OR ([c].[CustomerID] = @__s14)");
+WHERE ((((((((((((([c].[CustomerID] = @__s1) OR ([c].[CustomerID] = @__s2)) OR ([c].[CustomerID] = @__s3)) OR ([c].[CustomerID] = @__s4)) OR ([c].[CustomerID] = @__s5)) OR ([c].[CustomerID] = @__s6)) OR ([c].[CustomerID] = @__s7)) OR ([c].[CustomerID] = @__s8)) OR ([c].[CustomerID] = @__s9)) OR ([c].[CustomerID] = @__s10)) OR ([c].[CustomerID] = @__s11)) OR ([c].[CustomerID] = @__s12)) OR ([c].[CustomerID] = @__s13)) OR ([c].[CustomerID] = @__s14)"
+            );
         }
 
         public override void MakeBinary_does_not_throw_for_unsupported_operator()
         {
             Assert.Equal(
-                CoreStrings.TranslationFailed("DbSet<Customer>()    .Where(c => c.CustomerID == (string)(__parameters[0]))"),
-                Assert.Throws<InvalidOperationException>(
-                    () => base.MakeBinary_does_not_throw_for_unsupported_operator()).Message.Replace("\r", "").Replace("\n", ""));
+                CoreStrings.TranslationFailed(
+                    "DbSet<Customer>()    .Where(c => c.CustomerID == (string)(__parameters[0]))"
+                ),
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => base.MakeBinary_does_not_throw_for_unsupported_operator()
+                    )
+                    .Message.Replace("\r", "")
+                    .Replace("\n", "")
+            );
         }
 
         public override void Query_with_array_parameter()
         {
             var query = EF.CompileQuery(
-                (NorthwindContext context, string[] args)
-                    => context.Customers.Where(c => c.CustomerID == args[0]));
+                (NorthwindContext context, string[] args) =>
+                    context.Customers.Where(c => c.CustomerID == args[0])
+            );
 
             using (var context = CreateContext())
             {
                 Assert.Equal(
-                    CoreStrings.TranslationFailed("DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => query(context, new[] { "ALFKI" }).First().CustomerID).Message.Replace("\r", "").Replace("\n", ""));
+                    CoreStrings.TranslationFailed(
+                        "DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"
+                    ),
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => query(context, new[] { "ALFKI" }).First().CustomerID
+                        )
+                        .Message.Replace("\r", "")
+                        .Replace("\n", "")
+                );
             }
 
             using (var context = CreateContext())
             {
                 Assert.Equal(
-                    CoreStrings.TranslationFailed("DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"),
-                    Assert.Throws<InvalidOperationException>(
-                        () => query(context, new[] { "ANATR" }).First().CustomerID).Message.Replace("\r", "").Replace("\n", ""));
+                    CoreStrings.TranslationFailed(
+                        "DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"
+                    ),
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => query(context, new[] { "ANATR" }).First().CustomerID
+                        )
+                        .Message.Replace("\r", "")
+                        .Replace("\n", "")
+                );
             }
         }
 
         public override async Task Query_with_array_parameter_async()
         {
             var query = EF.CompileAsyncQuery(
-                            (NorthwindContext context, string[] args)
-                                => context.Customers.Where(c => c.CustomerID == args[0]));
+                (NorthwindContext context, string[] args) =>
+                    context.Customers.Where(c => c.CustomerID == args[0])
+            );
 
             using (var context = CreateContext())
             {
                 Assert.Equal(
-                    CoreStrings.TranslationFailed("DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"),
-                    (await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => Enumerate(query(context, new[] { "ALFKI" })))).Message.Replace("\r", "").Replace("\n", ""));
+                    CoreStrings.TranslationFailed(
+                        "DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"
+                    ),
+                    (
+                        await Assert.ThrowsAsync<InvalidOperationException>(
+                            () => Enumerate(query(context, new[] { "ALFKI" }))
+                        )
+                    ).Message
+                        .Replace("\r", "")
+                        .Replace("\n", "")
+                );
             }
 
             using (var context = CreateContext())
             {
                 Assert.Equal(
-                    CoreStrings.TranslationFailed("DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"),
-                    (await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => Enumerate(query(context, new[] { "ANATR" })))).Message.Replace("\r", "").Replace("\n", ""));
+                    CoreStrings.TranslationFailed(
+                        "DbSet<Customer>()    .Where(c => c.CustomerID == __args[0])"
+                    ),
+                    (
+                        await Assert.ThrowsAsync<InvalidOperationException>(
+                            () => Enumerate(query(context, new[] { "ANATR" }))
+                        )
+                    ).Message
+                        .Replace("\r", "")
+                        .Replace("\n", "")
+                );
             }
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
     }
 }

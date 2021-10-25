@@ -22,9 +22,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// </summary>
         /// <param name="principal">The claims principal containing the user claims.</param>
         public SignInResult(ClaimsPrincipal principal)
-            : this(authenticationScheme: null, principal, properties: null)
-        {
-        }
+            : this(authenticationScheme: null, principal, properties: null) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="SignInResult"/> with the
@@ -33,9 +31,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="authenticationScheme">The authentication scheme to use when signing in the user.</param>
         /// <param name="principal">The claims principal containing the user claims.</param>
         public SignInResult(string? authenticationScheme, ClaimsPrincipal principal)
-            : this(authenticationScheme, principal, properties: null)
-        {
-        }
+            : this(authenticationScheme, principal, properties: null) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="SignInResult"/> with the
@@ -44,9 +40,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="principal">The claims principal containing the user claims.</param>
         /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in operation.</param>
         public SignInResult(ClaimsPrincipal principal, AuthenticationProperties? properties)
-            : this(authenticationScheme: null, principal, properties)
-        {
-        }
+            : this(authenticationScheme: null, principal, properties) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="SignInResult"/> with the
@@ -55,7 +49,11 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="authenticationScheme">The authentication schemes to use when signing in the user.</param>
         /// <param name="principal">The claims principal containing the user claims.</param>
         /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in operation.</param>
-        public SignInResult(string? authenticationScheme, ClaimsPrincipal principal, AuthenticationProperties? properties)
+        public SignInResult(
+            string? authenticationScheme,
+            ClaimsPrincipal principal,
+            AuthenticationProperties? properties
+        )
         {
             Principal = principal ?? throw new ArgumentNullException(nameof(principal));
             AuthenticationScheme = authenticationScheme;
@@ -85,7 +83,8 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var loggerFactory = context.HttpContext.RequestServices.GetRequiredService<ILoggerFactory>();
+            var loggerFactory =
+                context.HttpContext.RequestServices.GetRequiredService<ILoggerFactory>();
             var logger = loggerFactory.CreateLogger<SignInResult>();
 
             logger.SignInResultExecuting(AuthenticationScheme, Principal);

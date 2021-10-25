@@ -64,7 +64,10 @@ namespace System
             if (_traceIPs == null)
                 return remoteStackTraceString;
 
-            return remoteStackTraceString + new StackTrace(this, needFileInfo).ToString(Diagnostics.StackTrace.TraceFormat.Normal);
+            return remoteStackTraceString
+                + new StackTrace(this, needFileInfo).ToString(
+                    Diagnostics.StackTrace.TraceFormat.Normal
+                );
         }
 
         internal DispatchState CaptureDispatchState()
@@ -79,9 +82,23 @@ namespace System
 
                 if (foreignExceptionsFrames != null)
                 {
-                    var combinedStackFrames = new MonoStackFrame[stackFrames.Length + foreignExceptionsFrames.Length];
-                    Array.Copy(foreignExceptionsFrames, 0, combinedStackFrames, 0, foreignExceptionsFrames.Length);
-                    Array.Copy(stackFrames, 0, combinedStackFrames, foreignExceptionsFrames.Length, stackFrames.Length);
+                    var combinedStackFrames = new MonoStackFrame[
+                        stackFrames.Length + foreignExceptionsFrames.Length
+                    ];
+                    Array.Copy(
+                        foreignExceptionsFrames,
+                        0,
+                        combinedStackFrames,
+                        0,
+                        foreignExceptionsFrames.Length
+                    );
+                    Array.Copy(
+                        stackFrames,
+                        0,
+                        combinedStackFrames,
+                        foreignExceptionsFrames.Length,
+                        stackFrames.Length
+                    );
 
                     stackFrames = combinedStackFrames;
                 }

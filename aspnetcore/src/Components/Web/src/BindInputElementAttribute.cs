@@ -25,7 +25,14 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="format">
         /// An optional format to use when converting values. 
         /// </param>
-        public BindInputElementAttribute(string? type, string? suffix, string? valueAttribute, string? changeAttribute, bool isInvariantCulture, string? format)
+        public BindInputElementAttribute(
+            string? type,
+            string? suffix,
+            string? valueAttribute,
+            string? changeAttribute,
+            bool isInvariantCulture,
+            string? format
+        )
         {
             if (valueAttribute == null)
             {
@@ -49,7 +56,7 @@ namespace Microsoft.AspNetCore.Components
         /// Gets the value of the element's <c>type</c> attribute.
         /// </summary>
         public string? Type { get; }
-        
+
         /// <summary>
         /// Gets the suffix value.
         /// </summary>

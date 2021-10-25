@@ -21,28 +21,22 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="storeType"> The name of the database type. </param>
         /// <param name="dbType"> The <see cref="DbType" /> to be used. </param>
-        public IntTypeMapping(
-            string storeType,
-            DbType? dbType = null)
-            : base(storeType, typeof(int), dbType)
-        {
-        }
+        public IntTypeMapping(string storeType, DbType? dbType = null)
+            : base(storeType, typeof(int), dbType) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="IntTypeMapping" /> class.
         /// </summary>
         /// <param name="parameters"> Parameter object for <see cref="RelationalTypeMapping" />. </param>
-        protected IntTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+        protected IntTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
 
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
         /// <param name="parameters"> The parameters for this mapping. </param>
         /// <returns> The newly created mapping. </returns>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new IntTypeMapping(parameters);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new IntTypeMapping(parameters);
     }
 }

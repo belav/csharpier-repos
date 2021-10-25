@@ -10,23 +10,20 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <summary>
         /// Initializes a new instance of the JavaScript Core ArrayBuffer class.
         /// </summary>
-        public ArrayBuffer() : base(Interop.Runtime.New<ArrayBuffer>())
-        { }
+        public ArrayBuffer() : base(Interop.Runtime.New<ArrayBuffer>()) { }
 
         /// <summary>
         /// Initializes a new instance of the JavaScript Core ArrayBuffer class.
         /// </summary>
         /// <param name="length">Length.</param>
-        public ArrayBuffer(int length) : base(Interop.Runtime.New<ArrayBuffer>(length))
-        { }
+        public ArrayBuffer(int length) : base(Interop.Runtime.New<ArrayBuffer>(length)) { }
 
         /// <summary>
         /// Initializes a new instance of the JavaScript Core ArrayBuffer class.
         /// </summary>
         /// <param name="jsHandle">Js handle.</param>
         /// <param name="ownsHandle">Whether or not the handle is owned by the clr or not.</param>
-        internal ArrayBuffer(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle)
-        { }
+        internal ArrayBuffer(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle) { }
 
         /// <summary>
         /// The length of an ArrayBuffer in bytes.

@@ -23,22 +23,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 {
     [ExportLspRequestHandlerProvider(StringConstants.XamlLanguageName), Shared]
     [ProvidesMethod(Methods.TextDocumentHoverName)]
-    internal class HoverHandler : AbstractStatelessRequestHandler<TextDocumentPositionParams, Hover?>
+    internal class HoverHandler
+        : AbstractStatelessRequestHandler<TextDocumentPositionParams, Hover?>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public HoverHandler()
-        {
-        }
+        public HoverHandler() { }
 
         public override string Method => Methods.TextDocumentHoverName;
 
         public override bool MutatesSolutionState => false;
         public override bool RequiresLSPSolution => true;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(TextDocumentPositionParams request) => request.TextDocument;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            TextDocumentPositionParams request
+        ) => request.TextDocument;
 
-        public override async Task<Hover?> HandleRequestAsync(TextDocumentPositionParams request, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<Hover?> HandleRequestAsync(
+            TextDocumentPositionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document == null)
@@ -46,15 +51,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return null;
             }
 
-            var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
+            var position = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var quickInfoService = document.Project.LanguageServices.GetService<IXamlQuickInfoService>();
+            var quickInfoService =
+                document.Project.LanguageServices.GetService<IXamlQuickInfoService>();
             if (quickInfoService == null)
             {
                 return null;
             }
 
-            var info = await quickInfoService.GetQuickInfoAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var info = await quickInfoService
+                .GetQuickInfoAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             if (info == null)
             {
                 return null;
@@ -63,7 +76,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             var descriptionBuilder = new List<TaggedText>(info.Description);
             if (info.Symbol != null)
             {
-                var description = await info.Symbol.GetDescriptionAsync(document, cancellationToken).ConfigureAwait(false);
+                var description = await info.Symbol
+                    .GetDescriptionAsync(document, cancellationToken)
+                    .ConfigureAwait(false);
                 if (description.Any())
                 {
                     if (descriptionBuilder.Any())
@@ -83,14 +98,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                     Kind = MarkupKind.Markdown,
                     Value = GetMarkdownString(descriptionBuilder)
                 },
-                RawContent = new ClassifiedTextElement(descriptionBuilder.Select(tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)))
+                RawContent = new ClassifiedTextElement(
+                    descriptionBuilder.Select(
+                        tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
+                    )
+                )
             };
 
             // local functions
             // TODO - This should return correctly formatted markdown from tagged text.
             // https://github.com/dotnet/roslyn/issues/43387
-            static string GetMarkdownString(IEnumerable<TaggedText> description)
-                => string.Join("\r\n", description.Select(section => section.Text).Where(text => !string.IsNullOrEmpty(text)));
+            static string GetMarkdownString(IEnumerable<TaggedText> description) =>
+                string.Join(
+                    "\r\n",
+                    description
+                        .Select(section => section.Text)
+                        .Where(text => !string.IsNullOrEmpty(text))
+                );
         }
     }
 }

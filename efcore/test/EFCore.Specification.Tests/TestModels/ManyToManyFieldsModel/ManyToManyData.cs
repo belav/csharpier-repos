@@ -35,22 +35,36 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
             context.Set<JoinCompositeKeyToLeaf>().AddRange(CreateJoinCompositeKeyToLeaves(context));
             context.Set<JoinOneSelfPayload>().AddRange(CreateJoinOneSelfPayloads(context));
             context.Set<JoinOneToBranch>().AddRange(CreateJoinOneToBranches(context));
-            context.Set<JoinOneToThreePayloadFull>().AddRange(CreateJoinOneToThreePayloadFulls(context));
+            context
+                .Set<JoinOneToThreePayloadFull>()
+                .AddRange(CreateJoinOneToThreePayloadFulls(context));
             context.Set<JoinOneToTwo>().AddRange(CreateJoinOneToTwos(context));
-            context.Set<JoinThreeToCompositeKeyFull>().AddRange(CreateJoinThreeToCompositeKeyFulls(context));
+            context
+                .Set<JoinThreeToCompositeKeyFull>()
+                .AddRange(CreateJoinThreeToCompositeKeyFulls(context));
             context.Set<JoinTwoToThree>().AddRange(CreateJoinTwoToThrees(context));
 
-            context.Set<Dictionary<string, object>>("EntityOneEntityTwo").AddRange(CreateEntityOneEntityTwos(context));
-            context.Set<Dictionary<string, object>>("JoinOneToThreePayloadFullShared")
+            context
+                .Set<Dictionary<string, object>>("EntityOneEntityTwo")
+                .AddRange(CreateEntityOneEntityTwos(context));
+            context
+                .Set<Dictionary<string, object>>("JoinOneToThreePayloadFullShared")
                 .AddRange(CreateJoinOneToThreePayloadFullShareds(context));
-            context.Set<Dictionary<string, object>>("JoinTwoSelfShared").AddRange(CreateJoinTwoSelfShareds(context));
-            context.Set<Dictionary<string, object>>("JoinTwoToCompositeKeyShared").AddRange(CreateJoinTwoToCompositeKeyShareds(context));
-            context.Set<Dictionary<string, object>>("EntityRootEntityThree").AddRange(CreateEntityRootEntityThrees(context));
-            context.Set<Dictionary<string, object>>("JoinCompositeKeyToRootShared").AddRange(CreateJoinCompositeKeyToRootShareds(context));
+            context
+                .Set<Dictionary<string, object>>("JoinTwoSelfShared")
+                .AddRange(CreateJoinTwoSelfShareds(context));
+            context
+                .Set<Dictionary<string, object>>("JoinTwoToCompositeKeyShared")
+                .AddRange(CreateJoinTwoToCompositeKeyShareds(context));
+            context
+                .Set<Dictionary<string, object>>("EntityRootEntityThree")
+                .AddRange(CreateEntityRootEntityThrees(context));
+            context
+                .Set<Dictionary<string, object>>("JoinCompositeKeyToRootShared")
+                .AddRange(CreateJoinCompositeKeyToRootShareds(context));
         }
 
-        public IQueryable<TEntity> Set<TEntity>()
-            where TEntity : class
+        public IQueryable<TEntity> Set<TEntity>() where TEntity : class
         {
             if (typeof(TEntity) == typeof(EntityOne))
             {
@@ -90,8 +104,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
             throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity));
         }
 
-        private EntityOne[] CreateOnes(ManyToManyContext context)
-            => new[]
+        private EntityOne[] CreateOnes(ManyToManyContext context) =>
+            new[]
             {
                 CreateEntityOne(context, _useGeneratedKeys ? 0 : 1, "EntityOne 1"),
                 CreateEntityOne(context, _useGeneratedKeys ? 0 : 2, "EntityOne 2"),
@@ -115,9 +129,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                 CreateEntityOne(context, _useGeneratedKeys ? 0 : 20, "EntityOne 20"),
             };
 
-        private static EntityOne CreateEntityOne(ManyToManyContext context, int id, string name)
-            => CreateInstance(
-                context?.EntityOnes, (e, p) =>
+        private static EntityOne CreateEntityOne(ManyToManyContext context, int id, string name) =>
+            CreateInstance(
+                context?.EntityOnes,
+                (e, p) =>
                 {
                     e.Id = id;
                     e.Name = name;
@@ -133,10 +148,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                     e.SelfSkipPayloadRight = CreateCollection<EntityOne>(p);
                     e.JoinSelfPayloadRight = CreateCollection<JoinOneSelfPayload>(p);
                     e.BranchSkip = CreateCollection<EntityBranch>(p);
-                });
+                }
+            );
 
-        private EntityTwo[] CreateTwos(ManyToManyContext context)
-            => new[]
+        private EntityTwo[] CreateTwos(ManyToManyContext context) =>
+            new[]
             {
                 CreateEntityTwo(context, _useGeneratedKeys ? 0 : 1, "EntityTwo 1", null, _ones[0]),
                 CreateEntityTwo(context, _useGeneratedKeys ? 0 : 2, "EntityTwo 2", null, _ones[0]),
@@ -147,17 +163,83 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                 CreateEntityTwo(context, _useGeneratedKeys ? 0 : 7, "EntityTwo 7", null, _ones[4]),
                 CreateEntityTwo(context, _useGeneratedKeys ? 0 : 8, "EntityTwo 8", null, _ones[6]),
                 CreateEntityTwo(context, _useGeneratedKeys ? 0 : 9, "EntityTwo 9", null, _ones[6]),
-                CreateEntityTwo(context, _useGeneratedKeys ? 0 : 10, "EntityTwo 10", _ones[19], _ones[8]),
-                CreateEntityTwo(context, _useGeneratedKeys ? 0 : 11, "EntityTwo 11", _ones[17], _ones[8]),
-                CreateEntityTwo(context, _useGeneratedKeys ? 0 : 12, "EntityTwo 12", _ones[15], _ones[10]),
-                CreateEntityTwo(context, _useGeneratedKeys ? 0 : 13, "EntityTwo 13", _ones[13], _ones[10]),
-                CreateEntityTwo(context, _useGeneratedKeys ? 0 : 14, "EntityTwo 14", _ones[11], _ones[12]),
-                CreateEntityTwo(context, _useGeneratedKeys ? 0 : 15, "EntityTwo 15", _ones[10], _ones[12]),
-                CreateEntityTwo(context, _useGeneratedKeys ? 0 : 16, "EntityTwo 16", _ones[8], _ones[14]),
-                CreateEntityTwo(context, _useGeneratedKeys ? 0 : 17, "EntityTwo 17", _ones[6], _ones[14]),
-                CreateEntityTwo(context, _useGeneratedKeys ? 0 : 18, "EntityTwo 18", _ones[4], _ones[15]),
-                CreateEntityTwo(context, _useGeneratedKeys ? 0 : 19, "EntityTwo 19", _ones[2], _ones[15]),
-                CreateEntityTwo(context, _useGeneratedKeys ? 0 : 20, "EntityTwo 20", _ones[0], _ones[16]),
+                CreateEntityTwo(
+                    context,
+                    _useGeneratedKeys ? 0 : 10,
+                    "EntityTwo 10",
+                    _ones[19],
+                    _ones[8]
+                ),
+                CreateEntityTwo(
+                    context,
+                    _useGeneratedKeys ? 0 : 11,
+                    "EntityTwo 11",
+                    _ones[17],
+                    _ones[8]
+                ),
+                CreateEntityTwo(
+                    context,
+                    _useGeneratedKeys ? 0 : 12,
+                    "EntityTwo 12",
+                    _ones[15],
+                    _ones[10]
+                ),
+                CreateEntityTwo(
+                    context,
+                    _useGeneratedKeys ? 0 : 13,
+                    "EntityTwo 13",
+                    _ones[13],
+                    _ones[10]
+                ),
+                CreateEntityTwo(
+                    context,
+                    _useGeneratedKeys ? 0 : 14,
+                    "EntityTwo 14",
+                    _ones[11],
+                    _ones[12]
+                ),
+                CreateEntityTwo(
+                    context,
+                    _useGeneratedKeys ? 0 : 15,
+                    "EntityTwo 15",
+                    _ones[10],
+                    _ones[12]
+                ),
+                CreateEntityTwo(
+                    context,
+                    _useGeneratedKeys ? 0 : 16,
+                    "EntityTwo 16",
+                    _ones[8],
+                    _ones[14]
+                ),
+                CreateEntityTwo(
+                    context,
+                    _useGeneratedKeys ? 0 : 17,
+                    "EntityTwo 17",
+                    _ones[6],
+                    _ones[14]
+                ),
+                CreateEntityTwo(
+                    context,
+                    _useGeneratedKeys ? 0 : 18,
+                    "EntityTwo 18",
+                    _ones[4],
+                    _ones[15]
+                ),
+                CreateEntityTwo(
+                    context,
+                    _useGeneratedKeys ? 0 : 19,
+                    "EntityTwo 19",
+                    _ones[2],
+                    _ones[15]
+                ),
+                CreateEntityTwo(
+                    context,
+                    _useGeneratedKeys ? 0 : 20,
+                    "EntityTwo 20",
+                    _ones[0],
+                    _ones[16]
+                ),
             };
 
         private static EntityTwo CreateEntityTwo(
@@ -165,9 +247,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
             int id,
             string name,
             EntityOne referenceInverse,
-            EntityOne collectionInverse)
-            => CreateInstance(
-                context?.EntityTwos, (e, p) =>
+            EntityOne collectionInverse
+        ) =>
+            CreateInstance(
+                context?.EntityTwos,
+                (e, p) =>
                 {
                     e.Id = id;
                     e.Name = name;
@@ -181,31 +265,146 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                     e.SelfSkipSharedRight = CreateCollection<EntityTwo>(p);
                     e.OneSkipShared = CreateCollection<EntityOne>(p);
                     e.CompositeKeySkipShared = CreateCollection<EntityCompositeKey>(p);
-                });
+                }
+            );
 
-        private EntityThree[] CreateThrees(ManyToManyContext context)
-            => new[]
+        private EntityThree[] CreateThrees(ManyToManyContext context) =>
+            new[]
             {
                 CreateEntityThree(context, _useGeneratedKeys ? 0 : 1, "EntityThree 1", null, null),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 2, "EntityThree 2", _twos[18], _twos[16]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 3, "EntityThree 3", _twos[1], _twos[15]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 4, "EntityThree 4", _twos[19], _twos[15]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 5, "EntityThree 5", _twos[3], _twos[14]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 6, "EntityThree 6", null, _twos[14]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 7, "EntityThree 7", _twos[5], _twos[12]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 8, "EntityThree 8", null, _twos[12]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 9, "EntityThree 9", _twos[7], _twos[10]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 10, "EntityThree 10", null, _twos[10]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 11, "EntityThree 11", _twos[18], _twos[8]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 12, "EntityThree 12", null, _twos[8]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 13, "EntityThree 13", _twos[11], _twos[6]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 14, "EntityThree 14", null, _twos[6]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 15, "EntityThree 15", _twos[13], _twos[4]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 16, "EntityThree 16", null, _twos[4]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 17, "EntityThree 17", _twos[15], _twos[2]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 18, "EntityThree 18", null, _twos[2]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 19, "EntityThree 19", _twos[17], _twos[0]),
-                CreateEntityThree(context, _useGeneratedKeys ? 0 : 20, "EntityThree 20", null, _twos[0]),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 2,
+                    "EntityThree 2",
+                    _twos[18],
+                    _twos[16]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 3,
+                    "EntityThree 3",
+                    _twos[1],
+                    _twos[15]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 4,
+                    "EntityThree 4",
+                    _twos[19],
+                    _twos[15]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 5,
+                    "EntityThree 5",
+                    _twos[3],
+                    _twos[14]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 6,
+                    "EntityThree 6",
+                    null,
+                    _twos[14]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 7,
+                    "EntityThree 7",
+                    _twos[5],
+                    _twos[12]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 8,
+                    "EntityThree 8",
+                    null,
+                    _twos[12]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 9,
+                    "EntityThree 9",
+                    _twos[7],
+                    _twos[10]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 10,
+                    "EntityThree 10",
+                    null,
+                    _twos[10]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 11,
+                    "EntityThree 11",
+                    _twos[18],
+                    _twos[8]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 12,
+                    "EntityThree 12",
+                    null,
+                    _twos[8]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 13,
+                    "EntityThree 13",
+                    _twos[11],
+                    _twos[6]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 14,
+                    "EntityThree 14",
+                    null,
+                    _twos[6]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 15,
+                    "EntityThree 15",
+                    _twos[13],
+                    _twos[4]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 16,
+                    "EntityThree 16",
+                    null,
+                    _twos[4]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 17,
+                    "EntityThree 17",
+                    _twos[15],
+                    _twos[2]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 18,
+                    "EntityThree 18",
+                    null,
+                    _twos[2]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 19,
+                    "EntityThree 19",
+                    _twos[17],
+                    _twos[0]
+                ),
+                CreateEntityThree(
+                    context,
+                    _useGeneratedKeys ? 0 : 20,
+                    "EntityThree 20",
+                    null,
+                    _twos[0]
+                ),
             };
 
         private static EntityThree CreateEntityThree(
@@ -213,9 +412,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
             int id,
             string name,
             EntityTwo referenceInverse,
-            EntityTwo collectionInverse)
-            => CreateInstance(
-                context?.EntityThrees, (e, p) =>
+            EntityTwo collectionInverse
+        ) =>
+            CreateInstance(
+                context?.EntityThrees,
+                (e, p) =>
                 {
                     e.Id = id;
                     e.Name = name;
@@ -230,31 +431,152 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                     e.CompositeKeySkipFull = CreateCollection<EntityCompositeKey>(p);
                     e.JoinCompositeKeyFull = CreateCollection<JoinThreeToCompositeKeyFull>(p);
                     e.RootSkipShared = CreateCollection<EntityRoot>(p);
-                });
+                }
+            );
 
-        private EntityCompositeKey[] CreateCompositeKeys(ManyToManyContext context)
-            => new[]
+        private EntityCompositeKey[] CreateCompositeKeys(ManyToManyContext context) =>
+            new[]
             {
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 1, "1_1", new DateTime(2001, 1, 1), "Composite 1"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 1, "1_2", new DateTime(2001, 2, 1), "Composite 2"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 3, "3_1", new DateTime(2003, 1, 1), "Composite 3"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 3, "3_2", new DateTime(2003, 2, 1), "Composite 4"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 3, "3_3", new DateTime(2003, 3, 1), "Composite 5"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 6, "6_1", new DateTime(2006, 1, 1), "Composite 6"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 7, "7_1", new DateTime(2007, 1, 1), "Composite 7"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 7, "7_2", new DateTime(2007, 2, 1), "Composite 8"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 8, "8_1", new DateTime(2008, 1, 1), "Composite 9"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 8, "8_2", new DateTime(2008, 2, 1), "Composite 10"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 8, "8_3", new DateTime(2008, 3, 1), "Composite 11"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 8, "8_4", new DateTime(2008, 4, 1), "Composite 12"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 8, "8_5", new DateTime(2008, 5, 1), "Composite 13"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 9, "9_1", new DateTime(2009, 1, 1), "Composite 14"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 9, "9_2", new DateTime(2009, 2, 1), "Composite 15"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 9, "9_3", new DateTime(2009, 3, 1), "Composite 16"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 9, "9_4", new DateTime(2009, 4, 1), "Composite 17"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 9, "9_5", new DateTime(2009, 5, 1), "Composite 18"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 9, "9_6", new DateTime(2009, 6, 1), "Composite 19"),
-                CreateEntityCompositeKey(context, _useGeneratedKeys ? 0 : 9, "9_7", new DateTime(2009, 7, 1), "Composite 20")
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 1,
+                    "1_1",
+                    new DateTime(2001, 1, 1),
+                    "Composite 1"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 1,
+                    "1_2",
+                    new DateTime(2001, 2, 1),
+                    "Composite 2"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 3,
+                    "3_1",
+                    new DateTime(2003, 1, 1),
+                    "Composite 3"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 3,
+                    "3_2",
+                    new DateTime(2003, 2, 1),
+                    "Composite 4"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 3,
+                    "3_3",
+                    new DateTime(2003, 3, 1),
+                    "Composite 5"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 6,
+                    "6_1",
+                    new DateTime(2006, 1, 1),
+                    "Composite 6"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 7,
+                    "7_1",
+                    new DateTime(2007, 1, 1),
+                    "Composite 7"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 7,
+                    "7_2",
+                    new DateTime(2007, 2, 1),
+                    "Composite 8"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 8,
+                    "8_1",
+                    new DateTime(2008, 1, 1),
+                    "Composite 9"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 8,
+                    "8_2",
+                    new DateTime(2008, 2, 1),
+                    "Composite 10"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 8,
+                    "8_3",
+                    new DateTime(2008, 3, 1),
+                    "Composite 11"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 8,
+                    "8_4",
+                    new DateTime(2008, 4, 1),
+                    "Composite 12"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 8,
+                    "8_5",
+                    new DateTime(2008, 5, 1),
+                    "Composite 13"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 9,
+                    "9_1",
+                    new DateTime(2009, 1, 1),
+                    "Composite 14"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 9,
+                    "9_2",
+                    new DateTime(2009, 2, 1),
+                    "Composite 15"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 9,
+                    "9_3",
+                    new DateTime(2009, 3, 1),
+                    "Composite 16"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 9,
+                    "9_4",
+                    new DateTime(2009, 4, 1),
+                    "Composite 17"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 9,
+                    "9_5",
+                    new DateTime(2009, 5, 1),
+                    "Composite 18"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 9,
+                    "9_6",
+                    new DateTime(2009, 6, 1),
+                    "Composite 19"
+                ),
+                CreateEntityCompositeKey(
+                    context,
+                    _useGeneratedKeys ? 0 : 9,
+                    "9_7",
+                    new DateTime(2009, 7, 1),
+                    "Composite 20"
+                )
             };
 
         private static EntityCompositeKey CreateEntityCompositeKey(
@@ -262,9 +584,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
             int key1,
             string key2,
             DateTime key3,
-            string name)
-            => CreateInstance(
-                context?.EntityCompositeKeys, (e, p) =>
+            string name
+        ) =>
+            CreateInstance(
+                context?.EntityCompositeKeys,
+                (e, p) =>
                 {
                     e.Key1 = key1;
                     e.Key2 = key2;
@@ -276,10 +600,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                     e.RootSkipShared = CreateCollection<EntityRoot>(p);
                     e.LeafSkipFull = CreateCollection<EntityLeaf>(p);
                     e.JoinLeafFull = CreateCollection<JoinCompositeKeyToLeaf>(p);
-                });
+                }
+            );
 
-        private EntityRoot[] CreateRoots(ManyToManyContext context)
-            => new[]
+        private EntityRoot[] CreateRoots(ManyToManyContext context) =>
+            new[]
             {
                 CreateEntityRoot(context, _useGeneratedKeys ? 0 : 1, "Root 1"),
                 CreateEntityRoot(context, _useGeneratedKeys ? 0 : 2, "Root 2"),
@@ -306,23 +631,28 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         private static EntityRoot CreateEntityRoot(
             ManyToManyContext context,
             int id,
-            string name)
-            => CreateInstance(
-                context?.EntityRoots, (e, p) =>
+            string name
+        ) =>
+            CreateInstance(
+                context?.EntityRoots,
+                (e, p) =>
                 {
                     e.Id = id;
                     e.Name = name;
                     e.ThreeSkipShared = CreateCollection<EntityThree>(p);
                     e.CompositeKeySkipShared = CreateCollection<EntityCompositeKey>(p);
-                });
+                }
+            );
 
         private static EntityBranch CreateEntityBranch(
             ManyToManyContext context,
             int id,
             string name,
-            long number)
-            => CreateInstance(
-                context?.Set<EntityBranch>(), (e, p) =>
+            long number
+        ) =>
+            CreateInstance(
+                context?.Set<EntityBranch>(),
+                (e, p) =>
                 {
                     e.Id = id;
                     e.Name = name;
@@ -330,16 +660,19 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                     e.ThreeSkipShared = CreateCollection<EntityThree>(p);
                     e.CompositeKeySkipShared = CreateCollection<EntityCompositeKey>(p);
                     e.OneSkip = CreateCollection<EntityOne>(p);
-                });
+                }
+            );
 
         private static EntityLeaf CreateEntityLeaf(
             ManyToManyContext context,
             int id,
             string name,
             long number,
-            bool? isGreen)
-            => CreateInstance(
-                context?.Set<EntityLeaf>(), (e, p) =>
+            bool? isGreen
+        ) =>
+            CreateInstance(
+                context?.Set<EntityLeaf>(),
+                (e, p) =>
                 {
                     e.Id = id;
                     e.Name = name;
@@ -350,10 +683,13 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                     e.OneSkip = CreateCollection<EntityOne>(p);
                     e.CompositeKeySkipFull = CreateCollection<EntityCompositeKey>(p);
                     e.JoinCompositeKeyFull = CreateCollection<JoinCompositeKeyToLeaf>(p);
-                });
+                }
+            );
 
-        private JoinCompositeKeyToLeaf[] CreateJoinCompositeKeyToLeaves(ManyToManyContext context)
-            => new[]
+        private JoinCompositeKeyToLeaf[] CreateJoinCompositeKeyToLeaves(
+            ManyToManyContext context
+        ) =>
+            new[]
             {
                 CreateJoinCompositeKeyToLeaf(context, (EntityLeaf)_roots[16], _compositeKeys[0]),
                 CreateJoinCompositeKeyToLeaf(context, (EntityLeaf)_roots[16], _compositeKeys[1]),
@@ -391,63 +727,214 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         private static JoinCompositeKeyToLeaf CreateJoinCompositeKeyToLeaf(
             ManyToManyContext context,
             EntityLeaf leaf,
-            EntityCompositeKey composite)
-            => CreateInstance(
-                context?.Set<JoinCompositeKeyToLeaf>(), (e, p) =>
+            EntityCompositeKey composite
+        ) =>
+            CreateInstance(
+                context?.Set<JoinCompositeKeyToLeaf>(),
+                (e, p) =>
                 {
                     e.Leaf = leaf;
                     e.Composite = composite;
-                });
+                }
+            );
 
-        private JoinOneSelfPayload[] CreateJoinOneSelfPayloads(ManyToManyContext context)
-            => new[]
+        private JoinOneSelfPayload[] CreateJoinOneSelfPayloads(ManyToManyContext context) =>
+            new[]
             {
-                CreateJoinOneSelfPayload(context, _ones[2], _ones[3], DateTime.Parse("2020-01-11 19:26:36")),
-                CreateJoinOneSelfPayload(context, _ones[2], _ones[5], DateTime.Parse("2005-10-03 12:57:54")),
-                CreateJoinOneSelfPayload(context, _ones[2], _ones[7], DateTime.Parse("2015-12-20 01:09:24")),
-                CreateJoinOneSelfPayload(context, _ones[2], _ones[17], DateTime.Parse("1999-12-26 02:51:57")),
-                CreateJoinOneSelfPayload(context, _ones[2], _ones[19], DateTime.Parse("2011-06-15 19:08:00")),
-                CreateJoinOneSelfPayload(context, _ones[4], _ones[2], DateTime.Parse("2019-12-08 05:40:16")),
-                CreateJoinOneSelfPayload(context, _ones[4], _ones[3], DateTime.Parse("2014-03-09 12:58:26")),
-                CreateJoinOneSelfPayload(context, _ones[5], _ones[4], DateTime.Parse("2014-05-15 16:34:38")),
-                CreateJoinOneSelfPayload(context, _ones[5], _ones[6], DateTime.Parse("2014-03-08 18:59:49")),
-                CreateJoinOneSelfPayload(context, _ones[5], _ones[12], DateTime.Parse("2013-12-10 07:01:53")),
-                CreateJoinOneSelfPayload(context, _ones[6], _ones[12], DateTime.Parse("2005-05-31 02:21:16")),
-                CreateJoinOneSelfPayload(context, _ones[7], _ones[8], DateTime.Parse("2011-12-31 19:37:25")),
-                CreateJoinOneSelfPayload(context, _ones[7], _ones[10], DateTime.Parse("2012-08-02 16:33:07")),
-                CreateJoinOneSelfPayload(context, _ones[7], _ones[11], DateTime.Parse("2018-07-19 09:10:12")),
-                CreateJoinOneSelfPayload(context, _ones[9], _ones[6], DateTime.Parse("2018-12-28 01:21:23")),
-                CreateJoinOneSelfPayload(context, _ones[12], _ones[1], DateTime.Parse("2014-03-22 02:20:06")),
-                CreateJoinOneSelfPayload(context, _ones[12], _ones[17], DateTime.Parse("2005-03-21 14:45:37")),
-                CreateJoinOneSelfPayload(context, _ones[13], _ones[8], DateTime.Parse("2016-06-26 08:03:32")),
-                CreateJoinOneSelfPayload(context, _ones[14], _ones[12], DateTime.Parse("2018-09-18 12:51:22")),
-                CreateJoinOneSelfPayload(context, _ones[15], _ones[4], DateTime.Parse("2016-12-17 14:20:25")),
-                CreateJoinOneSelfPayload(context, _ones[15], _ones[5], DateTime.Parse("2008-07-30 03:43:17")),
-                CreateJoinOneSelfPayload(context, _ones[16], _ones[13], DateTime.Parse("2019-08-01 16:26:31")),
-                CreateJoinOneSelfPayload(context, _ones[18], _ones[0], DateTime.Parse("2010-02-19 13:24:07")),
-                CreateJoinOneSelfPayload(context, _ones[18], _ones[7], DateTime.Parse("2004-07-28 09:06:02")),
-                CreateJoinOneSelfPayload(context, _ones[18], _ones[11], DateTime.Parse("2004-08-21 11:07:20")),
-                CreateJoinOneSelfPayload(context, _ones[19], _ones[0], DateTime.Parse("2014-11-21 18:13:02")),
-                CreateJoinOneSelfPayload(context, _ones[19], _ones[6], DateTime.Parse("2009-08-24 21:44:46")),
-                CreateJoinOneSelfPayload(context, _ones[19], _ones[13], DateTime.Parse("2013-02-18 02:19:19")),
-                CreateJoinOneSelfPayload(context, _ones[19], _ones[15], DateTime.Parse("2016-02-05 14:18:12"))
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[2],
+                    _ones[3],
+                    DateTime.Parse("2020-01-11 19:26:36")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[2],
+                    _ones[5],
+                    DateTime.Parse("2005-10-03 12:57:54")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[2],
+                    _ones[7],
+                    DateTime.Parse("2015-12-20 01:09:24")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[2],
+                    _ones[17],
+                    DateTime.Parse("1999-12-26 02:51:57")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[2],
+                    _ones[19],
+                    DateTime.Parse("2011-06-15 19:08:00")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[4],
+                    _ones[2],
+                    DateTime.Parse("2019-12-08 05:40:16")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[4],
+                    _ones[3],
+                    DateTime.Parse("2014-03-09 12:58:26")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[5],
+                    _ones[4],
+                    DateTime.Parse("2014-05-15 16:34:38")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[5],
+                    _ones[6],
+                    DateTime.Parse("2014-03-08 18:59:49")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[5],
+                    _ones[12],
+                    DateTime.Parse("2013-12-10 07:01:53")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[6],
+                    _ones[12],
+                    DateTime.Parse("2005-05-31 02:21:16")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[7],
+                    _ones[8],
+                    DateTime.Parse("2011-12-31 19:37:25")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[7],
+                    _ones[10],
+                    DateTime.Parse("2012-08-02 16:33:07")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[7],
+                    _ones[11],
+                    DateTime.Parse("2018-07-19 09:10:12")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[9],
+                    _ones[6],
+                    DateTime.Parse("2018-12-28 01:21:23")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[12],
+                    _ones[1],
+                    DateTime.Parse("2014-03-22 02:20:06")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[12],
+                    _ones[17],
+                    DateTime.Parse("2005-03-21 14:45:37")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[13],
+                    _ones[8],
+                    DateTime.Parse("2016-06-26 08:03:32")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[14],
+                    _ones[12],
+                    DateTime.Parse("2018-09-18 12:51:22")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[15],
+                    _ones[4],
+                    DateTime.Parse("2016-12-17 14:20:25")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[15],
+                    _ones[5],
+                    DateTime.Parse("2008-07-30 03:43:17")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[16],
+                    _ones[13],
+                    DateTime.Parse("2019-08-01 16:26:31")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[18],
+                    _ones[0],
+                    DateTime.Parse("2010-02-19 13:24:07")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[18],
+                    _ones[7],
+                    DateTime.Parse("2004-07-28 09:06:02")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[18],
+                    _ones[11],
+                    DateTime.Parse("2004-08-21 11:07:20")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[19],
+                    _ones[0],
+                    DateTime.Parse("2014-11-21 18:13:02")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[19],
+                    _ones[6],
+                    DateTime.Parse("2009-08-24 21:44:46")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[19],
+                    _ones[13],
+                    DateTime.Parse("2013-02-18 02:19:19")
+                ),
+                CreateJoinOneSelfPayload(
+                    context,
+                    _ones[19],
+                    _ones[15],
+                    DateTime.Parse("2016-02-05 14:18:12")
+                )
             };
 
         private static JoinOneSelfPayload CreateJoinOneSelfPayload(
             ManyToManyContext context,
             EntityOne left,
             EntityOne right,
-            DateTime payload)
-            => CreateInstance(
-                context?.Set<JoinOneSelfPayload>(), (e, p) =>
+            DateTime payload
+        ) =>
+            CreateInstance(
+                context?.Set<JoinOneSelfPayload>(),
+                (e, p) =>
                 {
                     e.Left = left;
                     e.Right = right;
                     e.Payload = payload;
-                });
+                }
+            );
 
-        private JoinOneToBranch[] CreateJoinOneToBranches(ManyToManyContext context)
-            => new[]
+        private JoinOneToBranch[] CreateJoinOneToBranches(ManyToManyContext context) =>
+            new[]
             {
                 CreateJoinOneToBranch(context, _ones[1], _roots[15]),
                 CreateJoinOneToBranch(context, _ones[1], _roots[19]),
@@ -501,16 +988,22 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         private static JoinOneToBranch CreateJoinOneToBranch(
             ManyToManyContext context,
             EntityOne one,
-            EntityRoot branch)
-            => CreateInstance(
-                context?.Set<JoinOneToBranch>(), (e, p) =>
+            EntityRoot branch
+        ) =>
+            CreateInstance(
+                context?.Set<JoinOneToBranch>(),
+                (e, p) =>
                 {
                     e.EntityOneId = context?.Entry(one).Property(e => e.Id).CurrentValue ?? one.Id;
-                    e.EntityBranchId = context?.Entry(branch).Property(e => e.Id).CurrentValue ?? branch.Id;
-                });
+                    e.EntityBranchId =
+                        context?.Entry(branch).Property(e => e.Id).CurrentValue ?? branch.Id;
+                }
+            );
 
-        private JoinOneToThreePayloadFull[] CreateJoinOneToThreePayloadFulls(ManyToManyContext context)
-            => new[]
+        private JoinOneToThreePayloadFull[] CreateJoinOneToThreePayloadFulls(
+            ManyToManyContext context
+        ) =>
+            new[]
             {
                 CreateJoinOneToThreePayloadFull(context, _ones[0], _threes[1], "Ira Watts"),
                 CreateJoinOneToThreePayloadFull(context, _ones[0], _threes[5], "Harold May"),
@@ -572,7 +1065,12 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                 CreateJoinOneToThreePayloadFull(context, _ones[10], _threes[9], "Ignacio Black"),
                 CreateJoinOneToThreePayloadFull(context, _ones[10], _threes[12], "Phillip Wells"),
                 CreateJoinOneToThreePayloadFull(context, _ones[10], _threes[13], "Hubert Lambert"),
-                CreateJoinOneToThreePayloadFull(context, _ones[10], _threes[18], "Courtney Gregory"),
+                CreateJoinOneToThreePayloadFull(
+                    context,
+                    _ones[10],
+                    _threes[18],
+                    "Courtney Gregory"
+                ),
                 CreateJoinOneToThreePayloadFull(context, _ones[11], _threes[1], "Esther Carter"),
                 CreateJoinOneToThreePayloadFull(context, _ones[12], _threes[5], "Thomas Benson"),
                 CreateJoinOneToThreePayloadFull(context, _ones[12], _threes[8], "Kara Baldwin"),
@@ -610,13 +1108,23 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                 CreateJoinOneToThreePayloadFull(context, _ones[17], _threes[17], "Albert Harper"),
                 CreateJoinOneToThreePayloadFull(context, _ones[18], _threes[1], "Frankie Baker"),
                 CreateJoinOneToThreePayloadFull(context, _ones[18], _threes[4], "Candace Tucker"),
-                CreateJoinOneToThreePayloadFull(context, _ones[18], _threes[5], "Willis Christensen"),
+                CreateJoinOneToThreePayloadFull(
+                    context,
+                    _ones[18],
+                    _threes[5],
+                    "Willis Christensen"
+                ),
                 CreateJoinOneToThreePayloadFull(context, _ones[18], _threes[6], "Juan Joseph"),
                 CreateJoinOneToThreePayloadFull(context, _ones[18], _threes[9], "Thelma Sanders"),
                 CreateJoinOneToThreePayloadFull(context, _ones[18], _threes[10], "Kerry West"),
                 CreateJoinOneToThreePayloadFull(context, _ones[18], _threes[14], "Sheri Castro"),
                 CreateJoinOneToThreePayloadFull(context, _ones[18], _threes[15], "Mark Schultz"),
-                CreateJoinOneToThreePayloadFull(context, _ones[18], _threes[16], "Priscilla Summers"),
+                CreateJoinOneToThreePayloadFull(
+                    context,
+                    _ones[18],
+                    _threes[16],
+                    "Priscilla Summers"
+                ),
                 CreateJoinOneToThreePayloadFull(context, _ones[18], _threes[19], "Allan Valdez"),
                 CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[2], "Bill Peters"),
                 CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[4], "Cora Stone"),
@@ -624,7 +1132,12 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                 CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[9], "Christian Young"),
                 CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[10], "Shari Brewer"),
                 CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[11], "Antonia Wolfe"),
-                CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[13], "Lawrence Matthews"),
+                CreateJoinOneToThreePayloadFull(
+                    context,
+                    _ones[19],
+                    _threes[13],
+                    "Lawrence Matthews"
+                ),
                 CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[17], "Van Hubbard"),
                 CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[19], "Lindsay Pena")
             };
@@ -633,17 +1146,20 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
             ManyToManyContext context,
             EntityOne one,
             EntityThree three,
-            string payload)
-            => CreateInstance(
-                context?.Set<JoinOneToThreePayloadFull>(), (e, p) =>
+            string payload
+        ) =>
+            CreateInstance(
+                context?.Set<JoinOneToThreePayloadFull>(),
+                (e, p) =>
                 {
                     e.One = one;
                     e.Three = three;
                     e.Payload = payload;
-                });
+                }
+            );
 
-        private JoinOneToTwo[] CreateJoinOneToTwos(ManyToManyContext context)
-            => new[]
+        private JoinOneToTwo[] CreateJoinOneToTwos(ManyToManyContext context) =>
+            new[]
             {
                 CreateJoinOneToTwo(context, _ones[0], _twos[0]),
                 CreateJoinOneToTwo(context, _ones[0], _twos[1]),
@@ -762,16 +1278,21 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         private static JoinOneToTwo CreateJoinOneToTwo(
             ManyToManyContext context,
             EntityOne one,
-            EntityTwo two)
-            => CreateInstance(
-                context?.Set<JoinOneToTwo>(), (e, p) =>
+            EntityTwo two
+        ) =>
+            CreateInstance(
+                context?.Set<JoinOneToTwo>(),
+                (e, p) =>
                 {
                     e.OneId = context?.Entry(one).Property(e => e.Id).CurrentValue ?? one.Id;
                     e.TwoId = context?.Entry(two).Property(e => e.Id).CurrentValue ?? two.Id;
-                });
+                }
+            );
 
-        private JoinThreeToCompositeKeyFull[] CreateJoinThreeToCompositeKeyFulls(ManyToManyContext context)
-            => new[]
+        private JoinThreeToCompositeKeyFull[] CreateJoinThreeToCompositeKeyFulls(
+            ManyToManyContext context
+        ) =>
+            new[]
             {
                 CreateJoinThreeToCompositeKeyFull(context, _threes[0], _compositeKeys[5]),
                 CreateJoinThreeToCompositeKeyFull(context, _threes[1], _compositeKeys[0]),
@@ -823,16 +1344,19 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         private static JoinThreeToCompositeKeyFull CreateJoinThreeToCompositeKeyFull(
             ManyToManyContext context,
             EntityThree three,
-            EntityCompositeKey composite)
-            => CreateInstance(
-                context?.Set<JoinThreeToCompositeKeyFull>(), (e, p) =>
+            EntityCompositeKey composite
+        ) =>
+            CreateInstance(
+                context?.Set<JoinThreeToCompositeKeyFull>(),
+                (e, p) =>
                 {
                     e.Three = three;
                     e.Composite = composite;
-                });
+                }
+            );
 
-        private JoinTwoToThree[] CreateJoinTwoToThrees(ManyToManyContext context)
-            => new[]
+        private JoinTwoToThree[] CreateJoinTwoToThrees(ManyToManyContext context) =>
+            new[]
             {
                 CreateJoinTwoToThree(context, _twos[0], _threes[1]),
                 CreateJoinTwoToThree(context, _twos[0], _threes[2]),
@@ -891,16 +1415,19 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         private static JoinTwoToThree CreateJoinTwoToThree(
             ManyToManyContext context,
             EntityTwo two,
-            EntityThree three)
-            => CreateInstance(
-                context?.Set<JoinTwoToThree>(), (e, p) =>
+            EntityThree three
+        ) =>
+            CreateInstance(
+                context?.Set<JoinTwoToThree>(),
+                (e, p) =>
                 {
                     e.Two = two;
                     e.Three = three;
-                });
+                }
+            );
 
-        private Dictionary<string, object>[] CreateEntityOneEntityTwos(ManyToManyContext context)
-            => new[]
+        private Dictionary<string, object>[] CreateEntityOneEntityTwos(ManyToManyContext context) =>
+            new[]
             {
                 CreateEntityOneEntityTwo(context, _ones[0], _twos[2]),
                 CreateEntityOneEntityTwo(context, _ones[0], _twos[15]),
@@ -952,30 +1479,67 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         private static Dictionary<string, object> CreateEntityOneEntityTwo(
             ManyToManyContext context,
             EntityOne one,
-            EntityTwo two)
+            EntityTwo two
+        )
         {
             return CreateInstance(
-                context?.Set<Dictionary<string, object>>("EntityOneEntityTwo"), (e, p) =>
+                context?.Set<Dictionary<string, object>>("EntityOneEntityTwo"),
+                (e, p) =>
                 {
-                    e["EntityOneId"] = context?.Entry(one).Property(e => e.Id).CurrentValue ?? one.Id;
-                    e["EntityTwoId"] = context?.Entry(two).Property(e => e.Id).CurrentValue ?? two.Id;
-                });
+                    e["EntityOneId"] =
+                        context?.Entry(one).Property(e => e.Id).CurrentValue ?? one.Id;
+                    e["EntityTwoId"] =
+                        context?.Entry(two).Property(e => e.Id).CurrentValue ?? two.Id;
+                }
+            );
         }
 
-        private Dictionary<string, object>[] CreateJoinOneToThreePayloadFullShareds(ManyToManyContext context)
-            => new[]
+        private Dictionary<string, object>[] CreateJoinOneToThreePayloadFullShareds(
+            ManyToManyContext context
+        ) =>
+            new[]
             {
                 CreateJoinOneToThreePayloadFullShared(context, _ones[2], _threes[0], "Capbrough"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[2], _threes[1], "East Eastdol"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[2], _threes[3], "Southingville"),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[2],
+                    _threes[1],
+                    "East Eastdol"
+                ),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[2],
+                    _threes[3],
+                    "Southingville"
+                ),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[2], _threes[8], "Goldbrough"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[3], _threes[4], "Readingworth"),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[3],
+                    _threes[4],
+                    "Readingworth"
+                ),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[3], _threes[17], "Skillpool"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[4], _threes[0], "Lawgrad"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[4], _threes[3], "Kettleham Park"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[4], _threes[8], "Sayford Park"),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[4],
+                    _threes[3],
+                    "Kettleham Park"
+                ),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[4],
+                    _threes[8],
+                    "Sayford Park"
+                ),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[4], _threes[15], "Hamstead"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[5], _threes[10], "North Starside"),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[5],
+                    _threes[10],
+                    "North Starside"
+                ),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[5], _threes[12], "Goldfolk"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[6], _threes[3], "Winstead"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[7], _threes[10], "Transworth"),
@@ -983,45 +1547,94 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                 CreateJoinOneToThreePayloadFullShared(context, _ones[7], _threes[18], "Fishham"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[9], _threes[0], "Passmouth"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[9], _threes[4], "Valenfield"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[9], _threes[19], "Passford Park"),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[9],
+                    _threes[19],
+                    "Passford Park"
+                ),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[10], _threes[9], "Chatfield"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[11], _threes[10], "Hosview"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[11], _threes[16], "Dodgewich"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[12], _threes[2], "Skillhampton"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[12], _threes[13], "Hardcaster"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[12], _threes[15], "Hollowmouth"),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[12],
+                    _threes[2],
+                    "Skillhampton"
+                ),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[12],
+                    _threes[13],
+                    "Hardcaster"
+                ),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[12],
+                    _threes[15],
+                    "Hollowmouth"
+                ),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[13], _threes[5], "Cruxcaster"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[13], _threes[10], "Elcaster"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[13], _threes[16], "Clambrough"),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[13],
+                    _threes[16],
+                    "Clambrough"
+                ),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[14], _threes[9], "Millwich"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[14], _threes[12], "Hapcester"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[15], _threes[6], "Sanddol Beach"),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[15],
+                    _threes[6],
+                    "Sanddol Beach"
+                ),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[15], _threes[12], "Hamcaster"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[16], _threes[8], "New Foxbrough"),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[16],
+                    _threes[8],
+                    "New Foxbrough"
+                ),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[16], _threes[12], "Chatpool"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[17], _threes[7], "Duckworth"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[17], _threes[11], "Snowham"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[17], _threes[12], "Bannview Island"),
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[17],
+                    _threes[12],
+                    "Bannview Island"
+                ),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[19], _threes[3], "Rockbrough"),
                 CreateJoinOneToThreePayloadFullShared(context, _ones[19], _threes[4], "Sweetfield"),
-                CreateJoinOneToThreePayloadFullShared(context, _ones[19], _threes[15], "Bayburgh Hills")
+                CreateJoinOneToThreePayloadFullShared(
+                    context,
+                    _ones[19],
+                    _threes[15],
+                    "Bayburgh Hills"
+                )
             };
 
         private static Dictionary<string, object> CreateJoinOneToThreePayloadFullShared(
             ManyToManyContext context,
             EntityOne one,
             EntityThree three,
-            string payload)
-            => CreateInstance(
-                context?.Set<Dictionary<string, object>>("JoinOneToThreePayloadFullShared"), (e, p) =>
+            string payload
+        ) =>
+            CreateInstance(
+                context?.Set<Dictionary<string, object>>("JoinOneToThreePayloadFullShared"),
+                (e, p) =>
                 {
                     e["OneId"] = context?.Entry(one).Property(e => e.Id).CurrentValue ?? one.Id;
-                    e["ThreeId"] = context?.Entry(three).Property(e => e.Id).CurrentValue ?? three.Id;
+                    e["ThreeId"] =
+                        context?.Entry(three).Property(e => e.Id).CurrentValue ?? three.Id;
                     e["Payload"] = payload;
-                });
+                }
+            );
 
-        private Dictionary<string, object>[] CreateJoinTwoSelfShareds(ManyToManyContext context)
-            => new[]
+        private Dictionary<string, object>[] CreateJoinTwoSelfShareds(ManyToManyContext context) =>
+            new[]
             {
                 CreateJoinTwoSelfShared(context, _twos[0], _twos[8]),
                 CreateJoinTwoSelfShared(context, _twos[0], _twos[9]),
@@ -1062,16 +1675,22 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         private static Dictionary<string, object> CreateJoinTwoSelfShared(
             ManyToManyContext context,
             EntityTwo left,
-            EntityTwo right)
-            => CreateInstance(
-                context?.Set<Dictionary<string, object>>("JoinTwoSelfShared"), (e, p) =>
+            EntityTwo right
+        ) =>
+            CreateInstance(
+                context?.Set<Dictionary<string, object>>("JoinTwoSelfShared"),
+                (e, p) =>
                 {
                     e["LeftId"] = context?.Entry(left).Property(e => e.Id).CurrentValue ?? left.Id;
-                    e["RightId"] = context?.Entry(right).Property(e => e.Id).CurrentValue ?? right.Id;
-                });
+                    e["RightId"] =
+                        context?.Entry(right).Property(e => e.Id).CurrentValue ?? right.Id;
+                }
+            );
 
-        private Dictionary<string, object>[] CreateJoinTwoToCompositeKeyShareds(ManyToManyContext context)
-            => new[]
+        private Dictionary<string, object>[] CreateJoinTwoToCompositeKeyShareds(
+            ManyToManyContext context
+        ) =>
+            new[]
             {
                 CreateJoinTwoToCompositeKeyShared(context, _twos[0], _compositeKeys[0]),
                 CreateJoinTwoToCompositeKeyShared(context, _twos[0], _compositeKeys[3]),
@@ -1114,18 +1733,25 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         private static Dictionary<string, object> CreateJoinTwoToCompositeKeyShared(
             ManyToManyContext context,
             EntityTwo two,
-            EntityCompositeKey composite)
-            => CreateInstance(
-                context?.Set<Dictionary<string, object>>("JoinTwoToCompositeKeyShared"), (e, p) =>
+            EntityCompositeKey composite
+        ) =>
+            CreateInstance(
+                context?.Set<Dictionary<string, object>>("JoinTwoToCompositeKeyShared"),
+                (e, p) =>
                 {
                     e["TwoId"] = context?.Entry(two).Property(e => e.Id).CurrentValue ?? two.Id;
-                    e["CompositeId1"] = context?.Entry(composite).Property(e => e.Key1).CurrentValue ?? composite.Key1;
+                    e["CompositeId1"] =
+                        context?.Entry(composite).Property(e => e.Key1).CurrentValue
+                        ?? composite.Key1;
                     e["CompositeId2"] = composite.Key2;
                     e["CompositeId3"] = composite.Key3;
-                });
+                }
+            );
 
-        private Dictionary<string, object>[] CreateEntityRootEntityThrees(ManyToManyContext context)
-            => new[]
+        private Dictionary<string, object>[] CreateEntityRootEntityThrees(
+            ManyToManyContext context
+        ) =>
+            new[]
             {
                 CreateEntityRootEntityThree(context, _threes[0], _roots[6]),
                 CreateEntityRootEntityThree(context, _threes[0], _roots[7]),
@@ -1161,16 +1787,23 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         private static Dictionary<string, object> CreateEntityRootEntityThree(
             ManyToManyContext context,
             EntityThree three,
-            EntityRoot root)
-            => CreateInstance(
-                context?.Set<Dictionary<string, object>>("EntityRootEntityThree"), (e, p) =>
+            EntityRoot root
+        ) =>
+            CreateInstance(
+                context?.Set<Dictionary<string, object>>("EntityRootEntityThree"),
+                (e, p) =>
                 {
-                    e["EntityThreeId"] = context?.Entry(three).Property(e => e.Id).CurrentValue ?? three.Id;
-                    e["EntityRootId"] = context?.Entry(root).Property(e => e.Id).CurrentValue ?? root.Id;
-                });
+                    e["EntityThreeId"] =
+                        context?.Entry(three).Property(e => e.Id).CurrentValue ?? three.Id;
+                    e["EntityRootId"] =
+                        context?.Entry(root).Property(e => e.Id).CurrentValue ?? root.Id;
+                }
+            );
 
-        private Dictionary<string, object>[] CreateJoinCompositeKeyToRootShareds(ManyToManyContext context)
-            => new[]
+        private Dictionary<string, object>[] CreateJoinCompositeKeyToRootShareds(
+            ManyToManyContext context
+        ) =>
+            new[]
             {
                 CreateJoinCompositeKeyToRootShared(context, _roots[5], _compositeKeys[0]),
                 CreateJoinCompositeKeyToRootShared(context, _roots[8], _compositeKeys[0]),
@@ -1213,24 +1846,31 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
                 CreateJoinCompositeKeyToRootShared(context, _roots[5], _compositeKeys[19])
             };
 
-        private static ICollection<TEntity> CreateCollection<TEntity>(bool proxy)
-            => proxy ? (ICollection<TEntity>)new ObservableCollection<TEntity>() : new List<TEntity>();
+        private static ICollection<TEntity> CreateCollection<TEntity>(bool proxy) =>
+            proxy ? (ICollection<TEntity>)new ObservableCollection<TEntity>() : new List<TEntity>();
 
         private static Dictionary<string, object> CreateJoinCompositeKeyToRootShared(
             ManyToManyContext context,
             EntityRoot root,
-            EntityCompositeKey composite)
-            => CreateInstance(
-                context?.Set<Dictionary<string, object>>("JoinCompositeKeyToRootShared"), (e, p) =>
+            EntityCompositeKey composite
+        ) =>
+            CreateInstance(
+                context?.Set<Dictionary<string, object>>("JoinCompositeKeyToRootShared"),
+                (e, p) =>
                 {
                     e["RootId"] = context?.Entry(root).Property(e => e.Id).CurrentValue ?? root.Id;
-                    e["CompositeId1"] = context?.Entry(composite).Property(e => e.Key1).CurrentValue ?? composite.Key1;
+                    e["CompositeId1"] =
+                        context?.Entry(composite).Property(e => e.Key1).CurrentValue
+                        ?? composite.Key1;
                     e["CompositeId2"] = composite.Key2;
                     e["CompositeId3"] = composite.Key3;
-                });
+                }
+            );
 
-        private static TEntity CreateInstance<TEntity>(DbSet<TEntity> set, Action<TEntity, bool> configureEntity)
-            where TEntity : class, new()
+        private static TEntity CreateInstance<TEntity>(
+            DbSet<TEntity> set,
+            Action<TEntity, bool> configureEntity
+        ) where TEntity : class, new()
         {
             if (set != null)
             {

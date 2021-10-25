@@ -13,9 +13,18 @@ namespace Microsoft.AspNetCore.Analyzers
     {
         [Theory]
         [InlineData(nameof(BasicStartup), nameof(BasicStartup.ConfigureServices))]
-        [InlineData(nameof(EnvironmentStartup), nameof(EnvironmentStartup.ConfigureDevelopmentServices))]
-        [InlineData(nameof(EnvironmentStartup), nameof(EnvironmentStartup.configurePRODUCTIONservices))]
-        public async Task IsConfigureServices_FindsConfigureServicesMethod(string source, string methodName)
+        [InlineData(
+            nameof(EnvironmentStartup),
+            nameof(EnvironmentStartup.ConfigureDevelopmentServices)
+        )]
+        [InlineData(
+            nameof(EnvironmentStartup),
+            nameof(EnvironmentStartup.configurePRODUCTIONservices)
+        )]
+        public async Task IsConfigureServices_FindsConfigureServicesMethod(
+            string source,
+            string methodName
+        )
         {
             // Arrange
             var compilation = await CreateCompilationAsync(source);
@@ -37,10 +46,15 @@ namespace Microsoft.AspNetCore.Analyzers
         [Theory]
         [InlineData(nameof(NotAStartupClass), nameof(NotAStartupClass.ConfigureServices))]
         [InlineData(nameof(NotAStartupClass), nameof(NotAStartupClass.ConfigureSrvces))]
-
         // This is an interesting case where a method follows both naming conventions.
-        [InlineData(nameof(EnvironmentStartup), nameof(EnvironmentStartup.ConfigureDevelopmentServices2))]
-        public async Task IsConfigureServices_RejectsNonConfigureServicesMethod(string source, string methodName)
+        [InlineData(
+            nameof(EnvironmentStartup),
+            nameof(EnvironmentStartup.ConfigureDevelopmentServices2)
+        )]
+        public async Task IsConfigureServices_RejectsNonConfigureServicesMethod(
+            string source,
+            string methodName
+        )
         {
             // Arrange
             var compilation = await CreateCompilationAsync(source);
@@ -62,7 +76,10 @@ namespace Microsoft.AspNetCore.Analyzers
         [Theory]
         [InlineData(nameof(BasicStartup), nameof(BasicStartup.Configure))]
         [InlineData(nameof(EnvironmentStartup), nameof(EnvironmentStartup.configurePRODUCTION))]
-        [InlineData(nameof(EnvironmentStartup), nameof(EnvironmentStartup.ConfigureDevelopmentServices2))]
+        [InlineData(
+            nameof(EnvironmentStartup),
+            nameof(EnvironmentStartup.ConfigureDevelopmentServices2)
+        )]
         public async Task IsConfigure_FindsConfigureMethod(string source, string methodName)
         {
             // Arrange

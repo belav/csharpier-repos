@@ -72,9 +72,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         /// <summary>
         /// Initializes a new instance of <see cref="ClientBuilder"/>.
         /// </summary>
-        public ClientBuilder() : this(new Client())
-        {
-        }
+        public ClientBuilder() : this(new Client()) { }
 
         /// <summary>
         /// Initializes a new intance of <see cref="ClientBuilder"/>.
@@ -128,7 +126,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         /// Adds the <paramref name="redirectUri"/> to the list of valid redirect uris for the client.
         /// </summary>
         /// <param name="redirectUri">The redirect uri to add.</param>
-        /// <returns>The <see cref="ClientBuilder"/>.</returns>        
+        /// <returns>The <see cref="ClientBuilder"/>.</returns>
         public ClientBuilder WithRedirectUri(string redirectUri)
         {
             _client.RedirectUris.Add(redirectUri);
@@ -139,7 +137,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         /// Adds the <paramref name="logoutUri"/> to the list of valid logout redirect uris for the client.
         /// </summary>
         /// <param name="logoutUri">The logout uri to add.</param>
-        /// <returns>The <see cref="ClientBuilder"/>.</returns>        
+        /// <returns>The <see cref="ClientBuilder"/>.</returns>
         public ClientBuilder WithLogoutRedirectUri(string logoutUri)
         {
             _client.PostLogoutRedirectUris.Add(logoutUri);
@@ -197,7 +195,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
         internal ClientBuilder FromConfiguration()
         {
-            _client.Properties[ApplicationProfilesPropertyNames.Source] = ApplicationProfilesPropertyValues.Configuration;
+            _client.Properties[ApplicationProfilesPropertyNames.Source] =
+                ApplicationProfilesPropertyValues.Configuration;
             return this;
         }
 
@@ -221,12 +220,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
         private static Client CreateClient(string name)
         {
-            var client = new Client
-            {
-                ClientId = name,
-                ClientName = name,
-                RequireConsent = false
-            };
+            var client = new Client { ClientId = name, ClientName = name, RequireConsent = false };
 
             return client;
         }

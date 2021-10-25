@@ -28,7 +28,7 @@ namespace Tests
             }
             return 0;
 #else
-return 100;
+            return 100;
 #endif
         }
         [MethodImpl(MethodImplOptions.NoInlining)]

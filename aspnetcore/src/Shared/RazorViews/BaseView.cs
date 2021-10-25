@@ -21,7 +21,10 @@ namespace Microsoft.Extensions.RazorViews
     /// </summary>
     internal abstract class BaseView
     {
-        private static readonly Encoding UTF8NoBOM = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+        private static readonly Encoding UTF8NoBOM = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: true
+        );
         private static readonly char[] NewLineChars = new[] { '\r', '\n' };
         private readonly Stack<TextWriter> _textWriterStack = new Stack<TextWriter>();
 
@@ -59,7 +62,6 @@ namespace Microsoft.Extensions.RazorViews
         /// JavaScript encoder used to encode content.
         /// </summary>
         protected JavaScriptEncoder JavaScriptEncoder { get; set; } = JavaScriptEncoder.Default;
-
 
         /// <summary>
         /// Execute an individual request
@@ -140,7 +142,14 @@ namespace Microsoft.Extensions.RazorViews
 
         private List<string>? AttributeValues { get; set; }
 
-        protected void WriteAttributeValue(string thingy, int startPostion, object value, int endValue, int dealyo, bool yesno)
+        protected void WriteAttributeValue(
+            string thingy,
+            int startPostion,
+            object value,
+            int endValue,
+            int dealyo,
+            bool yesno
+        )
         {
             if (AttributeValues == null)
             {
@@ -152,7 +161,14 @@ namespace Microsoft.Extensions.RazorViews
 
         private string? AttributeEnding { get; set; }
 
-        protected void BeginWriteAttribute(string name, string beginning, int startPosition, string ending, int endPosition, int thingy)
+        protected void BeginWriteAttribute(
+            string name,
+            string beginning,
+            int startPosition,
+            string ending,
+            int endPosition,
+            int thingy
+        )
         {
             Debug.Assert(string.IsNullOrEmpty(AttributeEnding));
 
@@ -184,7 +200,8 @@ namespace Microsoft.Extensions.RazorViews
             string name,
             string leader,
             string trailer,
-            params AttributeValue[] values)
+            params AttributeValue[] values
+        )
         {
             if (name == null)
             {
@@ -248,7 +265,7 @@ namespace Microsoft.Extensions.RazorViews
             WriteLiteral(trailer);
         }
 
-       /// <summary>
+        /// <summary>
         /// <see cref="HelperResult.WriteTo(TextWriter)"/> is invoked
         /// </summary>
         /// <param name="result">The <see cref="HelperResult"/> to invoke</param>
@@ -298,10 +315,13 @@ namespace Microsoft.Extensions.RazorViews
             }
 
             // Split on line breaks before passing it through the encoder.
-            return string.Join("<br />" + Environment.NewLine,
-                input.Split("\r\n", StringSplitOptions.None)
-                .SelectMany(s => s.Split(NewLineChars, StringSplitOptions.None))
-                .Select(HtmlEncoder.Encode));
+            return string.Join(
+                "<br />" + Environment.NewLine,
+                input
+                    .Split("\r\n", StringSplitOptions.None)
+                    .SelectMany(s => s.Split(NewLineChars, StringSplitOptions.None))
+                    .Select(HtmlEncoder.Encode)
+            );
         }
     }
 }

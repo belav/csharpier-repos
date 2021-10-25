@@ -8,16 +8,25 @@ using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common;
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers.ViewModel
 {
-    internal partial class AnalyzerSettingsViewModel : SettingsViewModelBase<
-        AnalyzerSetting,
-        AnalyzerSettingsViewModel.SettingsSnapshotFactory,
-        AnalyzerSettingsViewModel.SettingsEntriesSnapshot>
+    internal partial class AnalyzerSettingsViewModel
+        : SettingsViewModelBase<
+              AnalyzerSetting,
+              AnalyzerSettingsViewModel.SettingsSnapshotFactory,
+              AnalyzerSettingsViewModel.SettingsEntriesSnapshot
+          >
     {
         internal sealed class SettingsEntriesSnapshot : SettingsEntriesSnapshotBase<AnalyzerSetting>
         {
-            public SettingsEntriesSnapshot(ImmutableArray<AnalyzerSetting> data, int currentVersionNumber) : base(data, currentVersionNumber) { }
+            public SettingsEntriesSnapshot(
+                ImmutableArray<AnalyzerSetting> data,
+                int currentVersionNumber
+            ) : base(data, currentVersionNumber) { }
 
-            protected override bool TryGetValue(AnalyzerSetting result, string keyName, out object? content)
+            protected override bool TryGetValue(
+                AnalyzerSetting result,
+                string keyName,
+                out object? content
+            )
             {
                 content = keyName switch
                 {

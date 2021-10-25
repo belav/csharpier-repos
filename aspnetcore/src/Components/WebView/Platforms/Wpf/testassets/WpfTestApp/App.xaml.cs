@@ -15,7 +15,12 @@ namespace WpfTestApp
         {
             AppDomain.CurrentDomain.UnhandledException += (sender, error) =>
             {
-                MessageBox.Show(error.ExceptionObject.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(
+                    error.ExceptionObject.ToString(),
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
             };
         }
     }

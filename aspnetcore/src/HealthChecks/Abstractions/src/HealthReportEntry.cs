@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
     /// </summary>
     public struct HealthReportEntry
     {
-        private static readonly IReadOnlyDictionary<string, object> _emptyReadOnlyDictionary = new Dictionary<string, object>();
+        private static readonly IReadOnlyDictionary<string, object> _emptyReadOnlyDictionary =
+            new Dictionary<string, object>();
 
         /// <summary>
         /// Creates a new <see cref="HealthReportEntry"/> with the specified values for <paramref name="status"/>, <paramref name="exception"/>,
@@ -23,10 +24,13 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         /// <param name="duration">A value indicating the health execution duration.</param>
         /// <param name="exception">An <see cref="Exception"/> representing the exception that was thrown when checking for status (if any).</param>
         /// <param name="data">Additional key-value pairs describing the health of the component.</param>
-        public HealthReportEntry(HealthStatus status, string? description, TimeSpan duration, Exception? exception, IReadOnlyDictionary<string, object>? data)
-            : this(status, description, duration, exception, data, null)
-        {
-        }
+        public HealthReportEntry(
+            HealthStatus status,
+            string? description,
+            TimeSpan duration,
+            Exception? exception,
+            IReadOnlyDictionary<string, object>? data
+        ) : this(status, description, duration, exception, data, null) { }
 
         /// <summary>
         /// Creates a new <see cref="HealthReportEntry"/> with the specified values for <paramref name="status"/>, <paramref name="exception"/>,
@@ -38,7 +42,14 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         /// <param name="exception">An <see cref="Exception"/> representing the exception that was thrown when checking for status (if any).</param>
         /// <param name="data">Additional key-value pairs describing the health of the component.</param>
         /// <param name="tags">Tags associated with the health check that generated the report entry.</param>
-        public HealthReportEntry(HealthStatus status, string? description, TimeSpan duration, Exception? exception, IReadOnlyDictionary<string, object>? data, IEnumerable<string>? tags = null)
+        public HealthReportEntry(
+            HealthStatus status,
+            string? description,
+            TimeSpan duration,
+            Exception? exception,
+            IReadOnlyDictionary<string, object>? data,
+            IEnumerable<string>? tags = null
+        )
         {
             Status = status;
             Description = description;
@@ -47,7 +58,6 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
             Data = data ?? _emptyReadOnlyDictionary;
             Tags = tags ?? Enumerable.Empty<string>();
         }
-
 
         /// <summary>
         /// Gets additional key-value pairs describing the health of the component.

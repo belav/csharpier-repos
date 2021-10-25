@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddHealthChecks();
 
             // Assert
-            Assert.Collection(services.OrderBy(s => s.ServiceType.FullName),
+            Assert.Collection(
+                services.OrderBy(s => s.ServiceType.FullName),
                 actual =>
                 {
                     Assert.Equal(ServiceLifetime.Singleton, actual.Lifetime);
@@ -36,10 +37,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     Assert.Equal(ServiceLifetime.Singleton, actual.Lifetime);
                     Assert.Equal(typeof(IHostedService), actual.ServiceType);
-                    Assert.Equal(typeof(HealthCheckPublisherHostedService), actual.ImplementationType);
+                    Assert.Equal(
+                        typeof(HealthCheckPublisherHostedService),
+                        actual.ImplementationType
+                    );
                     Assert.Null(actual.ImplementationInstance);
                     Assert.Null(actual.ImplementationFactory);
-                });
+                }
+            );
         }
 
         [Fact] // see: https://github.com/dotnet/extensions/issues/639
@@ -53,7 +58,10 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddHealthChecks();
 
             // Assert
-            Assert.Collection(services.OrderBy(s => s.ServiceType.FullName).ThenBy(s => s.ImplementationType!.FullName),
+            Assert.Collection(
+                services
+                    .OrderBy(s => s.ServiceType.FullName)
+                    .ThenBy(s => s.ImplementationType!.FullName),
                 actual =>
                 {
                     Assert.Equal(ServiceLifetime.Singleton, actual.Lifetime);
@@ -74,10 +82,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     Assert.Equal(ServiceLifetime.Singleton, actual.Lifetime);
                     Assert.Equal(typeof(IHostedService), actual.ServiceType);
-                    Assert.Equal(typeof(HealthCheckPublisherHostedService), actual.ImplementationType);
+                    Assert.Equal(
+                        typeof(HealthCheckPublisherHostedService),
+                        actual.ImplementationType
+                    );
                     Assert.Null(actual.ImplementationInstance);
                     Assert.Null(actual.ImplementationFactory);
-                });
+                }
+            );
         }
 
         private class DummyHostedService : IHostedService

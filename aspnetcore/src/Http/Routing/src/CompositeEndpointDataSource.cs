@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Routing
             _lock = new object();
         }
 
-        internal CompositeEndpointDataSource(ObservableCollection<EndpointDataSource> dataSources) : this()
+        internal CompositeEndpointDataSource(ObservableCollection<EndpointDataSource> dataSources)
+            : this()
         {
             dataSources.CollectionChanged += OnDataSourcesChanged;
 
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Routing
         /// </summary>
         /// <param name="endpointDataSources">An collection of <see cref="EndpointDataSource" /> objects.</param>
         /// <returns>A <see cref="CompositeEndpointDataSource"/> </returns>
-        public CompositeEndpointDataSource(IEnumerable<EndpointDataSource> endpointDataSources) : this()
+        public CompositeEndpointDataSource(IEnumerable<EndpointDataSource> endpointDataSources)
+            : this()
         {
             _dataSources = new List<EndpointDataSource>();
 
@@ -116,9 +118,7 @@ namespace Microsoft.AspNetCore.Routing
 
                     foreach (var dataSource in _dataSources)
                     {
-                        ChangeToken.OnChange(
-                            dataSource.GetChangeToken,
-                            HandleChange);
+                        ChangeToken.OnChange(dataSource.GetChangeToken, HandleChange);
                     }
                 }
             }
@@ -177,7 +177,8 @@ namespace Microsoft.AspNetCore.Routing
                         sb.Append(", Defaults: new { ");
                         sb.AppendJoin(", ", FormatValues(routeEndpoint.RoutePattern.Defaults));
                         sb.Append(" }");
-                        var routeNameMetadata = routeEndpoint.Metadata.GetMetadata<IRouteNameMetadata>();
+                        var routeNameMetadata =
+                            routeEndpoint.Metadata.GetMetadata<IRouteNameMetadata>();
                         sb.Append(", Route Name: ");
                         sb.Append(routeNameMetadata?.RouteName);
                         var routeValues = routeEndpoint.RoutePattern.RequiredValues;
@@ -190,7 +191,8 @@ namespace Microsoft.AspNetCore.Routing
                         sb.Append(", Order: ");
                         sb.Append(routeEndpoint.Order);
 
-                        var httpMethodMetadata = routeEndpoint.Metadata.GetMetadata<IHttpMethodMetadata>();
+                        var httpMethodMetadata =
+                            routeEndpoint.Metadata.GetMetadata<IHttpMethodMetadata>();
                         if (httpMethodMetadata != null)
                         {
                             sb.Append(", Http Methods: ");
@@ -219,7 +221,8 @@ namespace Microsoft.AspNetCore.Routing
                                 value = "\"" + kvp.Value.ToString() + "\"";
                             }
                             return kvp.Key + " = " + value;
-                        });
+                        }
+                    );
                 }
             }
         }

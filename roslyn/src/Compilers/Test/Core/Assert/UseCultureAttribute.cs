@@ -23,7 +23,11 @@ namespace Roslyn.Test.Utilities
     /// The original code is (c) 2014 Outercurve Foundation and licensed under the Apache License,
     /// Version 2.0.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        AllowMultiple = false,
+        Inherited = true
+    )]
     public class UseCultureAttribute : BeforeAfterTestAttribute
     {
         private readonly Lazy<CultureInfo> _culture;
@@ -42,10 +46,7 @@ namespace Roslyn.Test.Utilities
         /// <see cref="Culture" /> and <see cref="UICulture" />.
         /// </para>
         /// </remarks>
-        public UseCultureAttribute(string culture)
-            : this(culture, culture)
-        {
-        }
+        public UseCultureAttribute(string culture) : this(culture, culture) { }
 
         /// <summary>
         /// Replaces the culture and UI culture of the current thread with
@@ -55,8 +56,12 @@ namespace Roslyn.Test.Utilities
         /// <param name="uiCulture">The name of the UI culture.</param>
         public UseCultureAttribute(string culture, string uiCulture)
         {
-            _culture = new Lazy<CultureInfo>(() => new CultureInfo(culture, useUserOverride: false));
-            _uiCulture = new Lazy<CultureInfo>(() => new CultureInfo(uiCulture, useUserOverride: false));
+            _culture = new Lazy<CultureInfo>(
+                () => new CultureInfo(culture, useUserOverride: false)
+            );
+            _uiCulture = new Lazy<CultureInfo>(
+                () => new CultureInfo(uiCulture, useUserOverride: false)
+            );
         }
 
         /// <summary>

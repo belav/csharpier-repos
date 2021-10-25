@@ -37,15 +37,24 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
         }
 
         public override void AddClassifications(
-            Workspace workspace, SyntaxToken token, SemanticModel semanticModel,
-            ArrayBuilder<ClassifiedSpan> result, CancellationToken cancellationToken)
+            Workspace workspace,
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            ArrayBuilder<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             if (_info.StringLiteralTokenKind != token.RawKind)
             {
                 return;
             }
 
-            if (!workspace.Options.GetOption(RegularExpressionsOptions.ColorizeRegexPatterns, semanticModel.Language))
+            if (
+                !workspace.Options.GetOption(
+                    RegularExpressionsOptions.ColorizeRegexPatterns,
+                    semanticModel.Language
+                )
+            )
             {
                 return;
             }
@@ -76,7 +85,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             }
         }
 
-        private static void AddClassifications(RegexNode node, Visitor visitor, ArrayBuilder<ClassifiedSpan> result)
+        private static void AddClassifications(
+            RegexNode node,
+            Visitor visitor,
+            ArrayBuilder<ClassifiedSpan> result
+        )
         {
             node.Accept(visitor);
 
@@ -93,7 +106,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             }
         }
 
-        private static void AddTriviaClassifications(RegexToken token, ArrayBuilder<ClassifiedSpan> result)
+        private static void AddTriviaClassifications(
+            RegexToken token,
+            ArrayBuilder<ClassifiedSpan> result
+        )
         {
             foreach (var trivia in token.LeadingTrivia)
             {
@@ -101,13 +117,19 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             }
         }
 
-        private static void AddTriviaClassifications(RegexTrivia trivia, ArrayBuilder<ClassifiedSpan> result)
+        private static void AddTriviaClassifications(
+            RegexTrivia trivia,
+            ArrayBuilder<ClassifiedSpan> result
+        )
         {
-            if (trivia.Kind == RegexKind.CommentTrivia &&
-                trivia.VirtualChars.Length > 0)
+            if (trivia.Kind == RegexKind.CommentTrivia && trivia.VirtualChars.Length > 0)
             {
-                result.Add(new ClassifiedSpan(
-                    ClassificationTypeNames.RegexComment, GetSpan(trivia.VirtualChars)));
+                result.Add(
+                    new ClassifiedSpan(
+                        ClassificationTypeNames.RegexComment,
+                        GetSpan(trivia.VirtualChars)
+                    )
+                );
             }
         }
 
@@ -145,54 +167,66 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
 
             public void Visit(RegexSequenceNode node)
             {
-                // Nothing to highlight.   
+                // Nothing to highlight.
             }
 
             #region Character classes
 
-            public void Visit(RegexWildcardNode node)
-                => AddClassification(node.DotToken, ClassificationTypeNames.RegexCharacterClass);
+            public void Visit(RegexWildcardNode node) =>
+                AddClassification(node.DotToken, ClassificationTypeNames.RegexCharacterClass);
 
             public void Visit(RegexCharacterClassNode node)
             {
-                AddClassification(node.OpenBracketToken, ClassificationTypeNames.RegexCharacterClass);
-                AddClassification(node.CloseBracketToken, ClassificationTypeNames.RegexCharacterClass);
+                AddClassification(
+                    node.OpenBracketToken,
+                    ClassificationTypeNames.RegexCharacterClass
+                );
+                AddClassification(
+                    node.CloseBracketToken,
+                    ClassificationTypeNames.RegexCharacterClass
+                );
             }
 
             public void Visit(RegexNegatedCharacterClassNode node)
             {
-                AddClassification(node.OpenBracketToken, ClassificationTypeNames.RegexCharacterClass);
+                AddClassification(
+                    node.OpenBracketToken,
+                    ClassificationTypeNames.RegexCharacterClass
+                );
                 AddClassification(node.CaretToken, ClassificationTypeNames.RegexCharacterClass);
-                AddClassification(node.CloseBracketToken, ClassificationTypeNames.RegexCharacterClass);
+                AddClassification(
+                    node.CloseBracketToken,
+                    ClassificationTypeNames.RegexCharacterClass
+                );
             }
 
-            public void Visit(RegexCharacterClassRangeNode node)
-                => AddClassification(node.MinusToken, ClassificationTypeNames.RegexCharacterClass);
+            public void Visit(RegexCharacterClassRangeNode node) =>
+                AddClassification(node.MinusToken, ClassificationTypeNames.RegexCharacterClass);
 
-            public void Visit(RegexCharacterClassSubtractionNode node)
-                => AddClassification(node.MinusToken, ClassificationTypeNames.RegexCharacterClass);
+            public void Visit(RegexCharacterClassSubtractionNode node) =>
+                AddClassification(node.MinusToken, ClassificationTypeNames.RegexCharacterClass);
 
-            public void Visit(RegexCharacterClassEscapeNode node)
-                => ClassifyWholeNode(node, ClassificationTypeNames.RegexCharacterClass);
+            public void Visit(RegexCharacterClassEscapeNode node) =>
+                ClassifyWholeNode(node, ClassificationTypeNames.RegexCharacterClass);
 
-            public void Visit(RegexCategoryEscapeNode node)
-                => ClassifyWholeNode(node, ClassificationTypeNames.RegexCharacterClass);
+            public void Visit(RegexCategoryEscapeNode node) =>
+                ClassifyWholeNode(node, ClassificationTypeNames.RegexCharacterClass);
 
             #endregion
 
             #region Quantifiers
 
-            public void Visit(RegexZeroOrMoreQuantifierNode node)
-                => AddClassification(node.AsteriskToken, ClassificationTypeNames.RegexQuantifier);
+            public void Visit(RegexZeroOrMoreQuantifierNode node) =>
+                AddClassification(node.AsteriskToken, ClassificationTypeNames.RegexQuantifier);
 
-            public void Visit(RegexOneOrMoreQuantifierNode node)
-                => AddClassification(node.PlusToken, ClassificationTypeNames.RegexQuantifier);
+            public void Visit(RegexOneOrMoreQuantifierNode node) =>
+                AddClassification(node.PlusToken, ClassificationTypeNames.RegexQuantifier);
 
-            public void Visit(RegexZeroOrOneQuantifierNode node)
-                => AddClassification(node.QuestionToken, ClassificationTypeNames.RegexQuantifier);
+            public void Visit(RegexZeroOrOneQuantifierNode node) =>
+                AddClassification(node.QuestionToken, ClassificationTypeNames.RegexQuantifier);
 
-            public void Visit(RegexLazyQuantifierNode node)
-                => AddClassification(node.QuestionToken, ClassificationTypeNames.RegexQuantifier);
+            public void Visit(RegexLazyQuantifierNode node) =>
+                AddClassification(node.QuestionToken, ClassificationTypeNames.RegexQuantifier);
 
             public void Visit(RegexExactNumericQuantifierNode node)
             {
@@ -222,54 +256,42 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
 
             #region Groupings
 
-            public void Visit(RegexSimpleGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexSimpleGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexSimpleOptionsGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexSimpleOptionsGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexNestedOptionsGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexNestedOptionsGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexNonCapturingGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexNonCapturingGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexPositiveLookaheadGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexPositiveLookaheadGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexNegativeLookaheadGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexNegativeLookaheadGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexPositiveLookbehindGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexPositiveLookbehindGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexNegativeLookbehindGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexNegativeLookbehindGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexAtomicGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexAtomicGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexCaptureGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexCaptureGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexBalancingGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexBalancingGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexConditionalCaptureGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexConditionalCaptureGroupingNode node) => ClassifyGrouping(node);
 
-            public void Visit(RegexConditionalExpressionGroupingNode node)
-                => ClassifyGrouping(node);
+            public void Visit(RegexConditionalExpressionGroupingNode node) =>
+                ClassifyGrouping(node);
 
             // Captures and backreferences refer to groups.  So we classify them the same way as groups.
-            public void Visit(RegexCaptureEscapeNode node)
-                => ClassifyWholeNode(node, ClassificationTypeNames.RegexGrouping);
+            public void Visit(RegexCaptureEscapeNode node) =>
+                ClassifyWholeNode(node, ClassificationTypeNames.RegexGrouping);
 
-            public void Visit(RegexKCaptureEscapeNode node)
-                => ClassifyWholeNode(node, ClassificationTypeNames.RegexGrouping);
+            public void Visit(RegexKCaptureEscapeNode node) =>
+                ClassifyWholeNode(node, ClassificationTypeNames.RegexGrouping);
 
-            public void Visit(RegexBackreferenceEscapeNode node)
-                => ClassifyWholeNode(node, ClassificationTypeNames.RegexGrouping);
+            public void Visit(RegexBackreferenceEscapeNode node) =>
+                ClassifyWholeNode(node, ClassificationTypeNames.RegexGrouping);
 
             private void ClassifyGrouping(RegexGroupingNode node)
             {
@@ -286,53 +308,60 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
 
             #region Other Escapes
 
-            public void Visit(RegexControlEscapeNode node)
-                => ClassifyOtherEscape(node);
+            public void Visit(RegexControlEscapeNode node) => ClassifyOtherEscape(node);
 
-            public void Visit(RegexHexEscapeNode node)
-                => ClassifyOtherEscape(node);
+            public void Visit(RegexHexEscapeNode node) => ClassifyOtherEscape(node);
 
-            public void Visit(RegexUnicodeEscapeNode node)
-                => ClassifyOtherEscape(node);
+            public void Visit(RegexUnicodeEscapeNode node) => ClassifyOtherEscape(node);
 
-            public void Visit(RegexOctalEscapeNode node)
-                => ClassifyOtherEscape(node);
+            public void Visit(RegexOctalEscapeNode node) => ClassifyOtherEscape(node);
 
-            public void ClassifyOtherEscape(RegexNode node)
-                => ClassifyWholeNode(node, ClassificationTypeNames.RegexOtherEscape);
-
-            #endregion 
-
-            #region Anchors
-
-            public void Visit(RegexAnchorNode node)
-                => AddClassification(node.AnchorToken, ClassificationTypeNames.RegexAnchor);
-
-            public void Visit(RegexAnchorEscapeNode node)
-                => ClassifyWholeNode(node, ClassificationTypeNames.RegexAnchor);
+            public void ClassifyOtherEscape(RegexNode node) =>
+                ClassifyWholeNode(node, ClassificationTypeNames.RegexOtherEscape);
 
             #endregion
 
-            public void Visit(RegexTextNode node)
-                => AddClassification(node.TextToken, ClassificationTypeNames.RegexText);
+            #region Anchors
+
+            public void Visit(RegexAnchorNode node) =>
+                AddClassification(node.AnchorToken, ClassificationTypeNames.RegexAnchor);
+
+            public void Visit(RegexAnchorEscapeNode node) =>
+                ClassifyWholeNode(node, ClassificationTypeNames.RegexAnchor);
+
+            #endregion
+
+            public void Visit(RegexTextNode node) =>
+                AddClassification(node.TextToken, ClassificationTypeNames.RegexText);
 
             public void Visit(RegexPosixPropertyNode node)
             {
                 // The .NET parser just interprets the [ of the node, and skips the rest. So
                 // classify the end part as a comment.
-                Result.Add(new ClassifiedSpan(node.TextToken.VirtualChars[0].Span, ClassificationTypeNames.RegexText));
-                Result.Add(new ClassifiedSpan(
-                    GetSpan(node.TextToken.VirtualChars[1], node.TextToken.VirtualChars.Last()),
-                    ClassificationTypeNames.RegexComment));
+                Result.Add(
+                    new ClassifiedSpan(
+                        node.TextToken.VirtualChars[0].Span,
+                        ClassificationTypeNames.RegexText
+                    )
+                );
+                Result.Add(
+                    new ClassifiedSpan(
+                        GetSpan(node.TextToken.VirtualChars[1], node.TextToken.VirtualChars.Last()),
+                        ClassificationTypeNames.RegexComment
+                    )
+                );
             }
 
-            public void Visit(RegexAlternationNode node)
-                => AddClassification(node.BarToken, ClassificationTypeNames.RegexAlternation);
+            public void Visit(RegexAlternationNode node) =>
+                AddClassification(node.BarToken, ClassificationTypeNames.RegexAlternation);
 
-            public void Visit(RegexSimpleEscapeNode node)
-                => ClassifyWholeNode(node, node.IsSelfEscape()
-                    ? ClassificationTypeNames.RegexSelfEscapedCharacter
-                    : ClassificationTypeNames.RegexOtherEscape);
+            public void Visit(RegexSimpleEscapeNode node) =>
+                ClassifyWholeNode(
+                    node,
+                    node.IsSelfEscape()
+                      ? ClassificationTypeNames.RegexSelfEscapedCharacter
+                      : ClassificationTypeNames.RegexOtherEscape
+                );
         }
     }
 }

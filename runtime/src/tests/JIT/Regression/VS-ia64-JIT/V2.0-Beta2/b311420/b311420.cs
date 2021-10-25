@@ -4,21 +4,21 @@
 
 // <Area> Nullable - Lifting - Operators </Area>
 // <Title> general lifting of builtin operators on bool </Title>
-// <Description>  
+// <Description>
 // Logical AND	&
 // Logical XOR	^
 // Logical OR	|
 // Equality	==  !=
-// Conditional AND	&& 
+// Conditional AND	&&
 // Conditional OR	||
 // Conditional	?:
 // Assignment	=  &=  ^=  |=
-// </Description> 
-// <RelatedBugs> </RelatedBugs>  
+// </Description>
+// <RelatedBugs> </RelatedBugs>
 
 //<Expects Status=success></Expects>
 
-// <Code> 
+// <Code>
 
 #pragma warning disable 458, 169
 using System;
@@ -100,10 +100,7 @@ public class NullableTest
         }
     }
 
-
     static bool? nub;
-
-
 
     // Logical 	& |
 
@@ -11272,7 +11269,6 @@ public class NullableTest
         Test.Eval((!nub.HasValue) && (counter == 2));
     }
 
-
     public static void Run()
     {
         And();
@@ -11292,25 +11288,25 @@ public class Test
             result = false;
             Console.WriteLine("Test Failed at location {0}", counter);
         }
-
     }
 
     public static void Eval(object obj1, object obj2)
     {
         counter++;
 
-        if ((!(null == obj1 && null == obj2)) && (null == obj1 || null == obj2 || !obj1.Equals(obj2)))
+        if (
+            (!(null == obj1 && null == obj2))
+            && (null == obj1 || null == obj2 || !obj1.Equals(obj2))
+        )
         {
             result = false;
             Console.WriteLine("Test Failed at location: " + counter);
             Console.WriteLine("While Comparing {0} to {1}", obj1, obj2);
         }
-
     }
 
     public static int Main()
     {
-
         NullableTest.Run();
 
         if (result)
@@ -11324,7 +11320,6 @@ public class Test
             return 101;
         }
     }
-
 }
 
 // </Code>

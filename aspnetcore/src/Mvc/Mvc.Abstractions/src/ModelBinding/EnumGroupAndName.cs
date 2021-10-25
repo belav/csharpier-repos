@@ -39,9 +39,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </summary>
         /// <param name="group">The group name.</param>
         /// <param name="name">A <see cref="Func{String}"/> which will return the name.</param>
-        public EnumGroupAndName(
-            string group,
-            Func<string> name)
+        public EnumGroupAndName(string group, Func<string> name)
         {
             if (group == null)
             {

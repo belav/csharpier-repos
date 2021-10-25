@@ -28,12 +28,27 @@ namespace System.Diagnostics
             var processes = new List<Process>();
             foreach (int pid in ProcessManager.EnumerateProcessIds())
             {
-                if (Interop.procfs.TryReadStatFile(pid, out Interop.procfs.ParsedStat parsedStat) &&
-                    string.Equals(processName, Process.GetUntruncatedProcessName(ref parsedStat), StringComparison.OrdinalIgnoreCase) &&
-                    Interop.procfs.TryReadStatusFile(pid, out Interop.procfs.ParsedStatus parsedStatus))
+                if (
+                    Interop.procfs.TryReadStatFile(pid, out Interop.procfs.ParsedStat parsedStat)
+                    && string.Equals(
+                        processName,
+                        Process.GetUntruncatedProcessName(ref parsedStat),
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && Interop.procfs.TryReadStatusFile(
+                        pid,
+                        out Interop.procfs.ParsedStatus parsedStatus
+                    )
+                )
                 {
-                    ProcessInfo processInfo = ProcessManager.CreateProcessInfo(ref parsedStat, ref parsedStatus, processName);
-                    processes.Add(new Process(machineName, false, processInfo.ProcessId, processInfo));
+                    ProcessInfo processInfo = ProcessManager.CreateProcessInfo(
+                        ref parsedStat,
+                        ref parsedStatus,
+                        processName
+                    );
+                    processes.Add(
+                        new Process(machineName, false, processInfo.ProcessId, processInfo)
+                    );
                 }
             }
 
@@ -43,19 +58,13 @@ namespace System.Diagnostics
         /// <summary>Gets the amount of time the process has spent running code inside the operating system core.</summary>
         public TimeSpan PrivilegedProcessorTime
         {
-            get
-            {
-                return TicksToTimeSpan(GetStat().stime);
-            }
+            get { return TicksToTimeSpan(GetStat().stime); }
         }
 
         /// <summary>Gets the time the associated process was started.</summary>
         internal DateTime StartTimeCore
         {
-            get
-            {
-                return BootTimeToDateTime(TicksToTimeSpan(GetStat().starttime));
-            }
+            get { return BootTimeToDateTime(TicksToTimeSpan(GetStat().starttime)); }
         }
 
         /// <summary>Computes a time based on a number of ticks since boot.</summary>
@@ -88,7 +97,12 @@ namespace System.Diagnostics
                     int btimeEnd = text.IndexOf('\n', btimeStart);
                     if (btimeEnd > btimeStart)
                     {
-                        if (long.TryParse(text.AsSpan(btimeStart, btimeEnd - btimeStart), out long bootTimeSeconds))
+                        if (
+                            long.TryParse(
+                                text.AsSpan(btimeStart, btimeEnd - btimeStart),
+                                out long bootTimeSeconds
+                            )
+                        )
                         {
                             return DateTime.UnixEpoch + TimeSpan.FromSeconds(bootTimeSeconds);
                         }
@@ -100,8 +114,7 @@ namespace System.Diagnostics
         }
 
         /// <summary>Gets the parent process ID</summary>
-        private int ParentProcessId =>
-            GetStat().ppid;
+        private int ParentProcessId => GetStat().ppid;
 
         /// <summary>Gets execution path</summary>
         private string? GetPathToOpenFile()
@@ -138,10 +151,7 @@ namespace System.Diagnostics
         /// </summary>
         public TimeSpan UserProcessorTime
         {
-            get
-            {
-                return TicksToTimeSpan(GetStat().utime);
-            }
+            get { return TicksToTimeSpan(GetStat().utime); }
         }
 
         partial void EnsureHandleCountPopulated()
@@ -158,11 +168,11 @@ namespace System.Diagnostics
                 {
                     try
                     {
-                        _processInfo.HandleCount = Directory.GetFiles(path, "*", SearchOption.TopDirectoryOnly).Length;
+                        _processInfo.HandleCount =
+                            Directory.GetFiles(path, "*", SearchOption.TopDirectoryOnly).Length;
                     }
                     catch (DirectoryNotFoundException) // Occurs when the process is deleted between the Exists check and the GetFiles call.
-                    {
-                    }
+                    { }
                 }
             }
         }
@@ -234,7 +244,12 @@ namespace System.Diagnostics
         /// <param name="newMax">The new maximum working set limit, or null not to change it.</param>
         /// <param name="resultingMin">The resulting minimum working set limit after any changes applied.</param>
         /// <param name="resultingMax">The resulting maximum working set limit after any changes applied.</param>
-        private void SetWorkingSetLimitsCore(IntPtr? newMin, IntPtr? newMax, out IntPtr resultingMin, out IntPtr resultingMax)
+        private void SetWorkingSetLimitsCore(
+            IntPtr? newMin,
+            IntPtr? newMax,
+            out IntPtr resultingMin,
+            out IntPtr resultingMax
+        )
         {
             // RLIMIT_RSS with setrlimit not supported on Linux > 2.4.30.
             throw new PlatformNotSupportedException(SR.MinimumWorkingSetNotSupported);
@@ -244,9 +259,10 @@ namespace System.Diagnostics
         /// <param name="processId">The pid for the target process, or -1 for the current process.</param>
         internal static string? GetExePath(int processId = -1)
         {
-            string exeFilePath = processId == -1 ?
-                Interop.procfs.SelfExeFilePath :
-                Interop.procfs.GetExeFilePathForProcess(processId);
+            string exeFilePath =
+                processId == -1
+                    ? Interop.procfs.SelfExeFilePath
+                    : Interop.procfs.GetExeFilePathForProcess(processId);
 
             return Interop.Sys.ReadLink(exeFilePath);
         }
@@ -261,7 +277,16 @@ namespace System.Diagnostics
             try
             {
                 // bufferSize == 1 used to avoid unnecessary buffer in FileStream
-                using (var fs = new FileStream(cmdLineFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1, useAsync: false))
+                using (
+                    var fs = new FileStream(
+                        cmdLineFilePath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read,
+                        bufferSize: 1,
+                        useAsync: false
+                    )
+                )
                 {
                     Span<byte> buffer = stackalloc byte[512];
                     int bytesRead = 0;
@@ -295,7 +320,10 @@ namespace System.Diagnostics
                         if (argEnd != -1)
                         {
                             // Check if argv[0] has the process name.
-                            string? name = GetUntruncatedNameFromArg(argRemainder.Slice(0, argEnd), prefix: stat.comm);
+                            string? name = GetUntruncatedNameFromArg(
+                                argRemainder.Slice(0, argEnd),
+                                prefix: stat.comm
+                            );
                             if (name != null)
                             {
                                 return name;
@@ -306,7 +334,10 @@ namespace System.Diagnostics
                             argEnd = argRemainder.IndexOf((byte)'\0');
                             if (argEnd != -1)
                             {
-                                name = GetUntruncatedNameFromArg(argRemainder.Slice(0, argEnd), prefix: stat.comm);
+                                name = GetUntruncatedNameFromArg(
+                                    argRemainder.Slice(0, argEnd),
+                                    prefix: stat.comm
+                                );
                                 return name ?? stat.comm;
                             }
                         }

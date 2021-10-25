@@ -32,7 +32,10 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             return new GroupProxy<THub>(_lifetimeManager, groupName);
         }
 
-        public IClientProxy GroupExcept(string groupName, IReadOnlyList<string> excludedConnectionIds)
+        public IClientProxy GroupExcept(
+            string groupName,
+            IReadOnlyList<string> excludedConnectionIds
+        )
         {
             return new GroupExceptProxy<THub>(_lifetimeManager, groupName, excludedConnectionIds);
         }

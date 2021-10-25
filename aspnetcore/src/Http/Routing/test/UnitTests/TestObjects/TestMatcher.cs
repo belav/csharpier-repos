@@ -21,8 +21,16 @@ namespace Microsoft.AspNetCore.Routing.TestObjects
         {
             if (_isHandled)
             {
-                httpContext.Request.RouteValues = new RouteValueDictionary(new { controller = "Home", action = "Index" });
-                httpContext.SetEndpoint(new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "Test endpoint"));
+                httpContext.Request.RouteValues = new RouteValueDictionary(
+                    new { controller = "Home", action = "Index" }
+                );
+                httpContext.SetEndpoint(
+                    new Endpoint(
+                        TestConstants.EmptyRequestDelegate,
+                        EndpointMetadataCollection.Empty,
+                        "Test endpoint"
+                    )
+                );
             }
 
             return Task.CompletedTask;

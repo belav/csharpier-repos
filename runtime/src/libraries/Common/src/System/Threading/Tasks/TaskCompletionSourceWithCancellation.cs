@@ -10,13 +10,20 @@ namespace System.Threading.Tasks
     /// </summary>
     internal sealed class TaskCompletionSourceWithCancellation<T> : TaskCompletionSource<T>
     {
-        public TaskCompletionSourceWithCancellation() : base(TaskCreationOptions.RunContinuationsAsynchronously)
-        {
-        }
+        public TaskCompletionSourceWithCancellation()
+            : base(TaskCreationOptions.RunContinuationsAsynchronously) { }
 
         public async ValueTask<T> WaitWithCancellationAsync(CancellationToken cancellationToken)
         {
-            using (cancellationToken.UnsafeRegister(static (s, cancellationToken) => ((TaskCompletionSourceWithCancellation<T>)s!).TrySetCanceled(cancellationToken), this))
+            using (
+                cancellationToken.UnsafeRegister(
+                    static (s, cancellationToken) =>
+                        ((TaskCompletionSourceWithCancellation<T>)s!).TrySetCanceled(
+                            cancellationToken
+                        ),
+                    this
+                )
+            )
             {
                 return await Task.ConfigureAwait(false);
             }

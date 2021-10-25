@@ -12,8 +12,7 @@ namespace VersioningWebSite
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(ConfigureMvcOptions)
-                .AddNewtonsoftJson();
+            services.AddControllers(ConfigureMvcOptions).AddNewtonsoftJson();
 
             services.AddScoped<TestResponseGenerator>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -22,14 +21,14 @@ namespace VersioningWebSite
         public virtual void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
+                }
+            );
         }
 
-        protected virtual void ConfigureMvcOptions(MvcOptions options)
-        {
-        }
+        protected virtual void ConfigureMvcOptions(MvcOptions options) { }
     }
 }

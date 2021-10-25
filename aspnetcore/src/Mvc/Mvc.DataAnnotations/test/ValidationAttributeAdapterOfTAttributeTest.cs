@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 modelMetadata,
                 metadataProvider,
                 container: null,
-                model: null);
+                model: null
+            );
 
             // Act
             adapter.GetErrorMessage(validationContext);
@@ -53,11 +54,13 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             }
         }
 
-        public class TestValidationAttributeAdapter : ValidationAttributeAdapter<TestValidationAttribute>
+        public class TestValidationAttributeAdapter
+            : ValidationAttributeAdapter<TestValidationAttribute>
         {
-            public TestValidationAttributeAdapter(TestValidationAttribute attribute, IStringLocalizer stringLocalizer)
-                : base(attribute, stringLocalizer)
-            { }
+            public TestValidationAttributeAdapter(
+                TestValidationAttribute attribute,
+                IStringLocalizer stringLocalizer
+            ) : base(attribute, stringLocalizer) { }
 
             public override void AddValidation(ClientModelValidationContext context)
             {

@@ -37,7 +37,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return true;
         }
 
-        public override StringValues HeaderConnection { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        public override StringValues HeaderConnection
+        {
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
+        }
 
         public partial struct Enumerator : IEnumerator<KeyValuePair<string, StringValues>>
         {
@@ -68,9 +72,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             object IEnumerator.Current => _current;
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void Reset()
             {

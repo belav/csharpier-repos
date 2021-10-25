@@ -13,7 +13,10 @@ namespace System.Xml.Xsl.XsltOld
         internal InputScopeManager _ScopeManager;
         private readonly CompiledXpathExpr _CompiledQuery;
 
-        internal CompiledXpathExpr CompiledQuery { get { return _CompiledQuery; } }
+        internal CompiledXpathExpr CompiledQuery
+        {
+            get { return _CompiledQuery; }
+        }
 
         internal TheQuery(CompiledXpathExpr compiledQuery, InputScopeManager manager)
         {

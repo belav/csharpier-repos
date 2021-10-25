@@ -26,7 +26,11 @@ namespace Microsoft.AspNetCore.Routing
             // Assert
             var convention = Assert.Single(builder.Conventions);
 
-            var endpointModel = new RouteEndpointBuilder((context) => Task.CompletedTask, RoutePatternFactory.Parse("/"), 0);
+            var endpointModel = new RouteEndpointBuilder(
+                (context) => Task.CompletedTask,
+                RoutePatternFactory.Parse("/"),
+                0
+            );
             convention(endpointModel);
 
             var hostMetadata = Assert.IsType<HostAttribute>(Assert.Single(endpointModel.Metadata));
@@ -36,7 +40,8 @@ namespace Microsoft.AspNetCore.Routing
 
         private class TestEndpointConventionBuilder : IEndpointConventionBuilder
         {
-            public IList<Action<EndpointBuilder>> Conventions { get; } = new List<Action<EndpointBuilder>>();
+            public IList<Action<EndpointBuilder>> Conventions { get; } =
+                new List<Action<EndpointBuilder>>();
 
             public void Add(Action<EndpointBuilder> convention)
             {

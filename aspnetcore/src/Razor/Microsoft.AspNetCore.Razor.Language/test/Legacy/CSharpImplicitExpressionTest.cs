@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using Microsoft.AspNetCore.Razor.Language.Extensions;
@@ -229,7 +229,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void ParsesNullForgivenessOperatorImplicitExpression_DirectiveCodeBlock()
         {
             // Act & Assert
-            ParseDocumentTest("@functions { public void Foo() { @Model!.Name![0]!?.Bar } }", new[] { FunctionsDirective.Directive });
+            ParseDocumentTest(
+                "@functions { public void Foo() { @Model!.Name![0]!?.Bar } }",
+                new[] { FunctionsDirective.Directive }
+            );
         }
 
         [Fact]
@@ -434,7 +437,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void SupportsSlashesWithinComplexImplicitExpressions()
         {
-            ParseDocumentTest("@DataGridColumn.Template(\"Years of Service\", e => (int)Math.Round((DateTime.Now - dt).TotalDays / 365))");
+            ParseDocumentTest(
+                "@DataGridColumn.Template(\"Years of Service\", e => (int)Math.Round((DateTime.Now - dt).TotalDays / 365))"
+            );
         }
 
         [Fact]
@@ -503,7 +508,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void ProperlyParsesParenthesesAndBalancesThemInImplicitExpression()
         {
-            ParseDocumentTest(@"@foo().bar(""bi\""z"", 4)(""chained method; call"").baz(@""bo""""z"", '\'', () => { return 4; }, (4+5+new { foo = bar[4] }))");
+            ParseDocumentTest(
+                @"@foo().bar(""bi\""z"", 4)(""chained method; call"").baz(@""bo""""z"", '\'', () => { return 4; }, (4+5+new { foo = bar[4] }))"
+            );
         }
 
         [Fact]

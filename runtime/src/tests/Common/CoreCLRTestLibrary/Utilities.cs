@@ -18,7 +18,6 @@ namespace TestLibrary
 {
     public static partial class Utilities
     {
-
         static volatile bool verbose;
         static volatile bool verboseSet = false;
         const char HIGH_SURROGATE_START = '\ud800';
@@ -30,14 +29,8 @@ namespace TestLibrary
 
         public static string TestDirectory
         {
-            get
-            {
-                return sTestDirectory;
-            }
-            set
-            {
-                sTestDirectory = value;
-            }
+            get { return sTestDirectory; }
+            set { sTestDirectory = value; }
         }
 
         public static bool Verbose
@@ -51,26 +44,34 @@ namespace TestLibrary
                 }
                 return (bool)verbose;
             }
-            set
-            {
-                verbose = value;
-            }
+            set { verbose = value; }
         }
 
         public static bool IsX86 => (RuntimeInformation.ProcessArchitecture == Architecture.X86);
         public static bool IsX64 => (RuntimeInformation.ProcessArchitecture == Architecture.X64);
         public static bool IsArm => (RuntimeInformation.ProcessArchitecture == Architecture.Arm);
-        public static bool IsArm64 => (RuntimeInformation.ProcessArchitecture == Architecture.Arm64);
+        public static bool IsArm64 =>
+            (RuntimeInformation.ProcessArchitecture == Architecture.Arm64);
 
         public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         public static bool IsLinux => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
         public static bool IsMacOSX => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
-        public static bool IsWindows7 => IsWindows && Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1;
-        public static bool IsWindowsNanoServer => (!IsWindowsIoTCore && GetInstallationType().Equals("Nano Server", StringComparison.OrdinalIgnoreCase));
+        public static bool IsWindows7 =>
+            IsWindows
+            && Environment.OSVersion.Version.Major == 6
+            && Environment.OSVersion.Version.Minor == 1;
+        public static bool IsWindowsNanoServer =>
+            (
+                !IsWindowsIoTCore
+                && GetInstallationType().Equals("Nano Server", StringComparison.OrdinalIgnoreCase)
+            );
 
         // Windows 10 October 2018 Update
         public static bool IsWindows10Version1809OrGreater =>
-            IsWindows && GetWindowsVersion() == 10 && GetWindowsMinorVersion() == 0 && GetWindowsBuildNumber() >= 17763;
+            IsWindows
+            && GetWindowsVersion() == 10
+            && GetWindowsMinorVersion() == 0
+            && GetWindowsBuildNumber() >= 17763;
 
         public static bool IsWindowsIoTCore
         {
@@ -107,19 +108,27 @@ namespace TestLibrary
 
         public static bool CompareBytes(byte[] arr1, byte[] arr2)
         {
-            if (arr1 == null) return (arr2 == null);
-            if (arr2 == null) return false;
+            if (arr1 == null)
+                return (arr2 == null);
+            if (arr2 == null)
+                return false;
 
-            if (arr1.Length != arr2.Length) return false;
+            if (arr1.Length != arr2.Length)
+                return false;
 
-            for (int i = 0; i < arr1.Length; i++) if (arr1[i] != arr2[i]) return false;
+            for (int i = 0; i < arr1.Length; i++)
+                if (arr1[i] != arr2[i])
+                    return false;
 
             return true;
         }
 
         // Given a string, display the unicode characters in hex format, optionally displaying each
         // characters unicode category
-        public static string FormatHexStringFromUnicodeString(string string1, bool includeUnicodeCategory)
+        public static string FormatHexStringFromUnicodeString(
+            string string1,
+            bool includeUnicodeCategory
+        )
         {
             string returnString = "";
             if (null == string1)
@@ -156,16 +165,21 @@ namespace TestLibrary
         public static CultureInfo CurrentCulture
         {
             get { return System.Globalization.CultureInfo.CurrentCulture; }
-            set
-            {
-                System.Globalization.CultureInfo.DefaultThreadCurrentCulture = value;
-            }
+            set { System.Globalization.CultureInfo.DefaultThreadCurrentCulture = value; }
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static int GetWindowsProductType()
         {
-            if (!Kernel32.GetProductInfo(Environment.OSVersion.Version.Major, Environment.OSVersion.Version.Minor, 0, 0, out int productType))
+            if (
+                !Kernel32.GetProductInfo(
+                    Environment.OSVersion.Version.Major,
+                    Environment.OSVersion.Version.Minor,
+                    0,
+                    0,
+                    out int productType
+                )
+            )
             {
                 return Kernel32.PRODUCT_UNDEFINED;
             }
@@ -241,10 +255,13 @@ namespace TestLibrary
                 Advapi32.RFlags.RRF_RT_REG_SZ,
                 out type,
                 IntPtr.Zero,
-                ref dataSize);
+                ref dataSize
+            );
             if (result != 0 || type != Advapi32.RType.RegSz)
             {
-                throw new Exception($"Invalid {nameof(Advapi32.RegGetValueW)} result: 0x{result:x} type: {type}");
+                throw new Exception(
+                    $"Invalid {nameof(Advapi32.RegGetValueW)} result: 0x{result:x} type: {type}"
+                );
             }
 
             IntPtr data = Marshal.AllocCoTaskMem(dataSize + 1);
@@ -255,10 +272,13 @@ namespace TestLibrary
                 Advapi32.RFlags.RRF_RT_REG_SZ,
                 out type,
                 data,
-                ref dataSize);
+                ref dataSize
+            );
             if (result != 0 || type != Advapi32.RType.RegSz)
             {
-                throw new Exception($"Invalid {nameof(Advapi32.RegGetValueW)} result: 0x{result:x} type: {type}");
+                throw new Exception(
+                    $"Invalid {nameof(Advapi32.RegGetValueW)} result: 0x{result:x} type: {type}"
+                );
             }
 
             string stringValue = Marshal.PtrToStringUni(data);
@@ -269,7 +289,7 @@ namespace TestLibrary
 
         private static class Ntdll
         {
-            [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
+            [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             internal unsafe struct RTL_OSVERSIONINFOEX
             {
                 internal uint dwOSVersionInfoSize;
@@ -280,7 +300,7 @@ namespace TestLibrary
                 internal fixed char szCSDVersion[128];
             }
 
-            [DllImport(nameof(Ntdll), ExactSpelling=true)]
+            [DllImport(nameof(Ntdll), ExactSpelling = true)]
             private static extern int RtlGetVersion(ref RTL_OSVERSIONINFOEX lpVersionInformation);
 
             internal static unsafe int RtlGetVersionEx(out RTL_OSVERSIONINFOEX osvi)
@@ -295,9 +315,22 @@ namespace TestLibrary
                 const string Version = "Microsoft Windows";
                 if (RtlGetVersionEx(out RTL_OSVERSIONINFOEX osvi) == 0)
                 {
-                    return osvi.szCSDVersion[0] != '\0' ?
-                        string.Format("{0} {1}.{2}.{3} {4}", Version, osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber, new string(&(osvi.szCSDVersion[0]))) :
-                        string.Format("{0} {1}.{2}.{3}", Version, osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber);
+                    return osvi.szCSDVersion[0] != '\0'
+                      ? string.Format(
+                            "{0} {1}.{2}.{3} {4}",
+                            Version,
+                            osvi.dwMajorVersion,
+                            osvi.dwMinorVersion,
+                            osvi.dwBuildNumber,
+                            new string(&(osvi.szCSDVersion[0]))
+                        )
+                      : string.Format(
+                            "{0} {1}.{2}.{3}",
+                            Version,
+                            osvi.dwMajorVersion,
+                            osvi.dwMinorVersion,
+                            osvi.dwBuildNumber
+                        );
                 }
                 else
                 {
@@ -329,7 +362,8 @@ namespace TestLibrary
                 int dwOSMinorVersion,
                 int dwSpMajorVersion,
                 int dwSpMinorVersion,
-                out int pdwReturnedProductType);
+                out int pdwReturnedProductType
+            );
         }
 
         private sealed class Advapi32
@@ -343,7 +377,6 @@ namespace TestLibrary
                 /// Any
                 /// </summary>
                 Any = 0xffff,
-
                 /// <summary>
                 /// A null-terminated string.
                 /// This will be either a Unicode or an ANSI string, depending on whether you use the Unicode or ANSI function.
@@ -360,7 +393,6 @@ namespace TestLibrary
                 /// No defined value type
                 /// </summary>
                 RegNone = 0,
-
                 /// <summary>
                 /// A null-terminated string.
                 /// This will be either a Unicode or an ANSI string, depending on whether you use the Unicode or ANSI function.
@@ -376,17 +408,15 @@ namespace TestLibrary
                 RFlags dwFlags,
                 out RType pdwType,
                 IntPtr pvData,
-                ref int pcbData);
+                ref int pcbData
+            );
 
             public static IntPtr HKEY_LOCAL_MACHINE => new IntPtr(unchecked((int)0x80000002));
         }
 
         class TestAssemblyLoadContext : AssemblyLoadContext
         {
-            public TestAssemblyLoadContext() : base(isCollectible: true)
-            {
-
-            }
+            public TestAssemblyLoadContext() : base(isCollectible: true) { }
 
             protected override Assembly Load(AssemblyName assemblyName)
             {
@@ -395,7 +425,12 @@ namespace TestLibrary
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static int ExecuteAndUnloadInternal(string assemblyPath, string[] args, Action<AssemblyLoadContext> unloadingCallback, out WeakReference alcWeakRef)
+        static int ExecuteAndUnloadInternal(
+            string assemblyPath,
+            string[] args,
+            Action<AssemblyLoadContext> unloadingCallback,
+            out WeakReference alcWeakRef
+        )
         {
             TestAssemblyLoadContext alc = new TestAssemblyLoadContext();
             if (unloadingCallback != null)
@@ -406,20 +441,32 @@ namespace TestLibrary
 
             Assembly a = alc.LoadFromAssemblyPath(assemblyPath);
 
-            object[] argsObjArray = (a.EntryPoint.GetParameters().Length != 0) ? new object[] { args } : null;
+            object[] argsObjArray =
+                (a.EntryPoint.GetParameters().Length != 0) ? new object[] { args } : null;
             object res = a.EntryPoint.Invoke(null, argsObjArray);
 
             alc.Unload();
 
-            return (a.EntryPoint.ReturnType == typeof(void)) ? Environment.ExitCode : Convert.ToInt32(res);
+            return (a.EntryPoint.ReturnType == typeof(void))
+              ? Environment.ExitCode
+              : Convert.ToInt32(res);
         }
 
-        public static int ExecuteAndUnload(string assemblyPath, string[] args, Action<AssemblyLoadContext> unloadingCallback = null)
+        public static int ExecuteAndUnload(
+            string assemblyPath,
+            string[] args,
+            Action<AssemblyLoadContext> unloadingCallback = null
+        )
         {
             WeakReference alcWeakRef;
             int exitCode;
 
-            exitCode = ExecuteAndUnloadInternal(assemblyPath, args, unloadingCallback, out alcWeakRef);
+            exitCode = ExecuteAndUnloadInternal(
+                assemblyPath,
+                args,
+                unloadingCallback,
+                out alcWeakRef
+            );
 
             for (int i = 0; i < 8 && alcWeakRef.IsAlive; i++)
             {

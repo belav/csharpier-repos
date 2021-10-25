@@ -23,11 +23,13 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 RelationalEventId.CommandExecuted,
                 null,
                 null,
-                (_, __) => "-- Can't stop the SQL");
+                (_, __) => "-- Can't stop the SQL"
+            );
 
             Assert.Collection(
                 reporter.Messages,
-                x => Assert.Equal("verbose: -- Can't stop the SQL", x));
+                x => Assert.Equal("verbose: -- Can't stop the SQL", x)
+            );
         }
     }
 }

@@ -16,15 +16,27 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal abstract partial class AbstractCodeGenerationService
     {
-        protected abstract IList<bool> GetAvailableInsertionIndices(SyntaxNode destination, CancellationToken cancellationToken);
+        protected abstract IList<bool> GetAvailableInsertionIndices(
+            SyntaxNode destination,
+            CancellationToken cancellationToken
+        );
 
-        private IList<bool> GetAvailableInsertionIndices<TDeclarationNode>(TDeclarationNode destination, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => GetAvailableInsertionIndices((SyntaxNode)destination, cancellationToken);
+        private IList<bool> GetAvailableInsertionIndices<TDeclarationNode>(
+            TDeclarationNode destination,
+            CancellationToken cancellationToken
+        ) where TDeclarationNode : SyntaxNode =>
+            GetAvailableInsertionIndices((SyntaxNode)destination, cancellationToken);
 
-        public bool CanAddTo(ISymbol destination, Solution solution, CancellationToken cancellationToken)
+        public bool CanAddTo(
+            ISymbol destination,
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             var declarations = _symbolDeclarationService.GetDeclarations(destination);
-            return declarations.Any(r => CanAddTo(r.GetSyntax(cancellationToken), solution, cancellationToken));
+            return declarations.Any(
+                r => CanAddTo(r.GetSyntax(cancellationToken), solution, cancellationToken)
+            );
         }
 
         protected static SyntaxToken GetEndToken(SyntaxNode node)
@@ -33,7 +45,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
             if (lastToken.IsMissing)
             {
-                var nextToken = lastToken.GetNextToken(includeZeroWidth: true, includeSkipped: true);
+                var nextToken = lastToken.GetNextToken(
+                    includeZeroWidth: true,
+                    includeSkipped: true
+                );
                 if (nextToken.RawKind != 0)
                 {
                     return nextToken;
@@ -51,11 +66,19 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             return TextSpan.FromBounds(start.SpanStart, end.Span.End);
         }
 
-        public bool CanAddTo(SyntaxNode destination, Solution solution, CancellationToken cancellationToken)
-            => CanAddTo(destination, solution, cancellationToken, out _);
+        public bool CanAddTo(
+            SyntaxNode destination,
+            Solution solution,
+            CancellationToken cancellationToken
+        ) => CanAddTo(destination, solution, cancellationToken, out _);
 
-        private bool CanAddTo(SyntaxNode? destination, Solution solution, CancellationToken cancellationToken,
-            out IList<bool>? availableIndices, bool checkGeneratedCode = false)
+        private bool CanAddTo(
+            SyntaxNode? destination,
+            Solution solution,
+            CancellationToken cancellationToken,
+            out IList<bool>? availableIndices,
+            bool checkGeneratedCode = false
+        )
         {
             availableIndices = null;
             if (destination == null)
@@ -125,10 +148,17 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Solution solution,
             INamespaceOrTypeSymbol namespaceOrType,
             CodeGenerationOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var option = options ?? CodeGenerationOptions.Default;
-            var (declaration, _) = await FindMostRelevantDeclarationAsync(solution, namespaceOrType, option, cancellationToken).ConfigureAwait(false);
+            var (declaration, _) = await FindMostRelevantDeclarationAsync(
+                    solution,
+                    namespaceOrType,
+                    option,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return declaration;
         }
 
@@ -136,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Solution solution,
             INamespaceOrTypeSymbol namespaceOrType,
             CodeGenerationOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var declaration = (SyntaxNode?)null;
             IList<bool>? availableIndices = null;
@@ -151,7 +182,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             {
                 var token = locationOpt.FindToken(cancellationToken);
 
-                // Prefer a declaration that the context node is contained within. 
+                // Prefer a declaration that the context node is contained within.
                 //
                 // Note: This behavior is slightly suboptimal in some cases.  For example, when the
                 // user has the pattern:
@@ -177,7 +208,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 // container isn't really used by the user to place code, but is instead just
                 // used to separate out the nested type.  It would be nice to detect this and do the
                 // right thing.
-                declaration = await SelectFirstOrDefaultAsync(declarations, token.GetRequiredParent().AncestorsAndSelf().Contains, cancellationToken).ConfigureAwait(false);
+                declaration = await SelectFirstOrDefaultAsync(
+                        declarations,
+                        token.GetRequiredParent().AncestorsAndSelf().Contains,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 fallbackDeclaration = declaration;
                 if (CanAddTo(declaration, solution, cancellationToken, out availableIndices))
                 {
@@ -185,7 +221,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 }
 
                 // Then, prefer a declaration from the same file.
-                declaration = await SelectFirstOrDefaultAsync(declarations.Where(r => r.SyntaxTree == locationOpt.SourceTree), node => true, cancellationToken).ConfigureAwait(false);
+                declaration = await SelectFirstOrDefaultAsync(
+                        declarations.Where(r => r.SyntaxTree == locationOpt.SourceTree),
+                        node => true,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 fallbackDeclaration ??= declaration;
                 if (CanAddTo(declaration, solution, cancellationToken, out availableIndices))
                 {
@@ -197,7 +238,15 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             foreach (var decl in declarations)
             {
                 declaration = await decl.GetSyntaxAsync(cancellationToken).ConfigureAwait(false);
-                if (CanAddTo(declaration, solution, cancellationToken, out availableIndices, checkGeneratedCode: true))
+                if (
+                    CanAddTo(
+                        declaration,
+                        solution,
+                        cancellationToken,
+                        out availableIndices,
+                        checkGeneratedCode: true
+                    )
+                )
                 {
                     return (declaration, availableIndices);
                 }
@@ -205,12 +254,19 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
             // Generate into any declaration we can find.
             availableIndices = null;
-            declaration = fallbackDeclaration ?? await SelectFirstOrDefaultAsync(declarations, node => true, cancellationToken).ConfigureAwait(false);
+            declaration =
+                fallbackDeclaration
+                ?? await SelectFirstOrDefaultAsync(declarations, node => true, cancellationToken)
+                    .ConfigureAwait(false);
 
             return (declaration, availableIndices);
         }
 
-        private static async Task<SyntaxNode?> SelectFirstOrDefaultAsync(IEnumerable<SyntaxReference> references, Func<SyntaxNode, bool> predicate, CancellationToken cancellationToken)
+        private static async Task<SyntaxNode?> SelectFirstOrDefaultAsync(
+            IEnumerable<SyntaxReference> references,
+            Func<SyntaxNode, bool> predicate,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var r in references)
             {

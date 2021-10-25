@@ -26,15 +26,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioProvider(VisualStudioWorkspace workspace)
-            => _workspace = workspace;
+        public VisualStudioProvider(VisualStudioWorkspace workspace) => _workspace = workspace;
 
         public Workspace PrimaryWorkspace
         {
-            get
-            {
-                return _workspace;
-            }
+            get { return _workspace; }
         }
     }
 }

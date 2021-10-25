@@ -20,9 +20,7 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     [Collection(PublishedSitesCollection.Name)]
     public class FrebTests : IISFunctionalTestBase
     {
-        public FrebTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public FrebTests(PublishedSitesFixture fixture) : base(fixture) { }
 
         public static IList<FrebLogItem> FrebChecks()
         {
@@ -36,7 +34,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [RequiresIIS(IISCapability.FailedRequestTracingModule)]
         public async Task CheckCommonFrebEvents()
         {
@@ -50,7 +52,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [RequiresNewShim]
         [RequiresIIS(IISCapability.FailedRequestTracingModule)]
         public async Task FrebIncludesHResultFailures()
@@ -63,11 +69,19 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
             StopServer();
 
-            AssertFrebLogs(result, new FrebLogItem("ANCM_HRESULT_FAILED"), new FrebLogItem("ANCM_EXCEPTION_CAUGHT"));
+            AssertFrebLogs(
+                result,
+                new FrebLogItem("ANCM_HRESULT_FAILED"),
+                new FrebLogItem("ANCM_EXCEPTION_CAUGHT")
+            );
         }
 
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [RequiresIIS(IISCapability.FailedRequestTracingModule)]
         public async Task CheckFailedRequestEvents()
         {
@@ -83,7 +97,11 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         // I think this test is flaky due to freb file not being created quickly enough.
         // Adding extra logging, marking as flaky, and repeating should help
         [ConditionalFact]
-        [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
+        [MaximumOSVersion(
+            OperatingSystems.Windows,
+            WindowsVersions.Win10_20H2,
+            SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+        )]
         [Repeat(10)]
         [RequiresIIS(IISCapability.FailedRequestTracingModule)]
         [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/29428")]
@@ -98,18 +116,28 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     "Host: localhost",
                     "Connection: close",
                     "",
-                    "");
-                await result.HttpClient.RetryRequestAsync("/WaitingRequestCount", async message => await message.Content.ReadAsStringAsync() == "1");
+                    ""
+                );
+                await result.HttpClient.RetryRequestAsync(
+                    "/WaitingRequestCount",
+                    async message => await message.Content.ReadAsStringAsync() == "1"
+                );
             }
 
             StopServer();
 
             // The order of freb logs is based on when the requests are complete.
             // This is non-deterministic here, so we need to check both freb files for a request that was disconnected.
-            AssertFrebLogs(result, new FrebLogItem("ANCM_INPROC_REQUEST_DISCONNECT"), new FrebLogItem("ANCM_INPROC_MANAGED_REQUEST_COMPLETION"));
+            AssertFrebLogs(
+                result,
+                new FrebLogItem("ANCM_INPROC_REQUEST_DISCONNECT"),
+                new FrebLogItem("ANCM_INPROC_MANAGED_REQUEST_COMPLETION")
+            );
         }
 
-        private async Task<IISDeploymentResult> SetupFrebApp(IISDeploymentParameters parameters = null)
+        private async Task<IISDeploymentResult> SetupFrebApp(
+            IISDeploymentParameters parameters = null
+        )
         {
             parameters = parameters ?? Fixture.GetBaseDeploymentParameters();
             parameters.EnableFreb("Verbose", LogFolderPath);
@@ -119,12 +147,18 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             return result;
         }
 
-        private void AssertFrebLogs(IISDeploymentResult result, params FrebLogItem[] expectedFrebEvents)
+        private void AssertFrebLogs(
+            IISDeploymentResult result,
+            params FrebLogItem[] expectedFrebEvents
+        )
         {
             AssertFrebLogs(result, (IEnumerable<FrebLogItem>)expectedFrebEvents);
         }
 
-        private void AssertFrebLogs(IISDeploymentResult result, IEnumerable<FrebLogItem> expectedFrebEvents)
+        private void AssertFrebLogs(
+            IISDeploymentResult result,
+            IEnumerable<FrebLogItem> expectedFrebEvents
+        )
         {
             var frebEvent = GetFrebLogItems(result);
             foreach (var expectedEvent in expectedFrebEvents)
@@ -137,7 +171,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         private IEnumerable<FrebLogItem> GetFrebLogItems(IISDeploymentResult result)
         {
             var folderPath = Helpers.GetFrebFolder(LogFolderPath, result);
-            var xmlFiles = Directory.GetFiles(folderPath).Where(f => f.EndsWith("xml", StringComparison.Ordinal)).ToList();
+            var xmlFiles = Directory
+                .GetFiles(folderPath)
+                .Where(f => f.EndsWith("xml", StringComparison.Ordinal))
+                .ToList();
             var frebEvents = new List<FrebLogItem>();
 
             result.Logger.LogInformation($"Number of freb files available {xmlFiles.Count}.");
@@ -148,9 +185,19 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 var eventElements = xDocument.Descendants(nameSpace + "Event");
                 foreach (var eventElement in eventElements)
                 {
-                    var eventElementWithOpCode = eventElement.Descendants(nameSpace + "RenderingInfo").Single().Descendants(nameSpace + "Opcode").Single();
-                    var requestStatus = eventElement.Element(nameSpace + "EventData").Descendants().Where(el => el.Attribute("Name").Value == "requestStatus").SingleOrDefault();
-                    frebEvents.Add(new FrebLogItem(eventElementWithOpCode.Value, requestStatus?.Value));
+                    var eventElementWithOpCode = eventElement
+                        .Descendants(nameSpace + "RenderingInfo")
+                        .Single()
+                        .Descendants(nameSpace + "Opcode")
+                        .Single();
+                    var requestStatus = eventElement
+                        .Element(nameSpace + "EventData")
+                        .Descendants()
+                        .Where(el => el.Attribute("Name").Value == "requestStatus")
+                        .SingleOrDefault();
+                    frebEvents.Add(
+                        new FrebLogItem(eventElementWithOpCode.Value, requestStatus?.Value)
+                    );
                 }
             }
 
@@ -176,9 +223,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             public override bool Equals(object obj)
             {
                 var item = obj as FrebLogItem;
-                return item != null &&
-                       _opCode == item._opCode &&
-                       _requestStatus == item._requestStatus;
+                return item != null
+                    && _opCode == item._opCode
+                    && _requestStatus == item._requestStatus;
             }
 
             public override int GetHashCode()

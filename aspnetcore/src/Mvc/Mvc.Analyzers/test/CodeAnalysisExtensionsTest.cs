@@ -19,9 +19,15 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var attribute = compilation.GetTypeByMetadataName(typeof(ProducesResponseTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.{nameof(GetAttributes_OnMethodWithoutAttributesClass)}");
-            var method = (IMethodSymbol)testClass.GetMembers(nameof(GetAttributes_OnMethodWithoutAttributesClass.Method)).First();
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ProducesResponseTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.{nameof(GetAttributes_OnMethodWithoutAttributesClass)}"
+            );
+            var method = (IMethodSymbol)testClass
+                .GetMembers(nameof(GetAttributes_OnMethodWithoutAttributesClass.Method))
+                .First();
 
             // Act
             var attributes = CodeAnalysisExtensions.GetAttributes(method, attribute, inherit: true);
@@ -35,9 +41,15 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation("GetAttributes_WithoutMethodOverriding");
-            var attribute = compilation.GetTypeByMetadataName(typeof(ProducesResponseTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.{nameof(GetAttributes_WithoutMethodOverriding)}");
-            var method = (IMethodSymbol)testClass.GetMembers(nameof(GetAttributes_WithoutMethodOverriding.Method)).First();
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ProducesResponseTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.{nameof(GetAttributes_WithoutMethodOverriding)}"
+            );
+            var method = (IMethodSymbol)testClass
+                .GetMembers(nameof(GetAttributes_WithoutMethodOverriding.Method))
+                .First();
 
             // Act
             var attributes = CodeAnalysisExtensions.GetAttributes(method, attribute, inherit: true);
@@ -45,7 +57,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             // Assert
             Assert.Collection(
                 attributes,
-                attributeData => Assert.Equal(201, attributeData.ConstructorArguments[0].Value));
+                attributeData => Assert.Equal(201, attributeData.ConstructorArguments[0].Value)
+            );
         }
 
         [Fact]
@@ -53,17 +66,32 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation("GetAttributes_WithMethodOverridding");
-            var attribute = compilation.GetTypeByMetadataName(typeof(ProducesResponseTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.{nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass)}");
-            var method = (IMethodSymbol)testClass.GetMembers(nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method)).First();
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ProducesResponseTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.{nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass)}"
+            );
+            var method = (IMethodSymbol)testClass
+                .GetMembers(
+                    nameof(
+                        GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method
+                    )
+                )
+                .First();
 
             // Act
-            var attributes = CodeAnalysisExtensions.GetAttributes(method, attribute, inherit: false);
+            var attributes = CodeAnalysisExtensions.GetAttributes(
+                method,
+                attribute,
+                inherit: false
+            );
 
             // Assert
             Assert.Collection(
                 attributes,
-                attributeData => Assert.Equal(400, attributeData.ConstructorArguments[0].Value));
+                attributeData => Assert.Equal(400, attributeData.ConstructorArguments[0].Value)
+            );
         }
 
         [Fact]
@@ -71,17 +99,31 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation("GetAttributes_WithMethodOverridding");
-            var attribute = compilation.GetTypeByMetadataName(typeof(ProducesResponseTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.{nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass)}");
-            var method = (IMethodSymbol)testClass.GetMembers(nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method)).First();
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ProducesResponseTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.{nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass)}"
+            );
+            var method = (IMethodSymbol)testClass
+                .GetMembers(
+                    nameof(
+                        GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method
+                    )
+                )
+                .First();
 
             // Act
-            var attributes = CodeAnalysisExtensions.GetAttributes(symbol: method, attribute: attribute);
+            var attributes = CodeAnalysisExtensions.GetAttributes(
+                symbol: method,
+                attribute: attribute
+            );
 
             // Assert
             Assert.Collection(
                 attributes,
-                attributeData => Assert.Equal(400, attributeData.ConstructorArguments[0].Value));
+                attributeData => Assert.Equal(400, attributeData.ConstructorArguments[0].Value)
+            );
         }
 
         [Fact]
@@ -89,9 +131,19 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation("GetAttributes_WithMethodOverridding");
-            var attribute = compilation.GetTypeByMetadataName(typeof(ProducesResponseTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.{nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass)}");
-            var method = (IMethodSymbol)testClass.GetMembers(nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method)).First();
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ProducesResponseTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.{nameof(GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass)}"
+            );
+            var method = (IMethodSymbol)testClass
+                .GetMembers(
+                    nameof(
+                        GetAttributes_WithInheritFalse_ReturnsAllAttributesOnCurrentActionClass.Method
+                    )
+                )
+                .First();
 
             // Act
             var attributes = CodeAnalysisExtensions.GetAttributes(method, attribute, inherit: true);
@@ -101,7 +153,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 attributes,
                 attributeData => Assert.Equal(400, attributeData.ConstructorArguments[0].Value),
                 attributeData => Assert.Equal(200, attributeData.ConstructorArguments[0].Value),
-                attributeData => Assert.Equal(404, attributeData.ConstructorArguments[0].Value));
+                attributeData => Assert.Equal(404, attributeData.ConstructorArguments[0].Value)
+            );
         }
 
         [Fact]
@@ -109,9 +162,15 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation("GetAttributes_WithNewMethod");
-            var attribute = compilation.GetTypeByMetadataName(typeof(ProducesResponseTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.{nameof(GetAttributes_WithNewMethodDerived)}");
-            var method = (IMethodSymbol)testClass.GetMembers(nameof(GetAttributes_WithNewMethodDerived.VirtualMethod)).First();
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ProducesResponseTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.{nameof(GetAttributes_WithNewMethodDerived)}"
+            );
+            var method = (IMethodSymbol)testClass
+                .GetMembers(nameof(GetAttributes_WithNewMethodDerived.VirtualMethod))
+                .First();
 
             // Act
             var attributes = CodeAnalysisExtensions.GetAttributes(method, attribute, inherit: true);
@@ -119,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             // Assert
             Assert.Collection(
                 attributes,
-                attributeData => Assert.Equal(400, attributeData.ConstructorArguments[0].Value));
+                attributeData => Assert.Equal(400, attributeData.ConstructorArguments[0].Value)
+            );
         }
 
         [Fact]
@@ -127,9 +187,15 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation("GetAttributes_WithNewMethod");
-            var attribute = compilation.GetTypeByMetadataName(typeof(ProducesResponseTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.{nameof(GetAttributes_WithNewMethodDerived)}");
-            var method = (IMethodSymbol)testClass.GetMembers(nameof(GetAttributes_WithNewMethodDerived.NotVirtualMethod)).First();
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ProducesResponseTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.{nameof(GetAttributes_WithNewMethodDerived)}"
+            );
+            var method = (IMethodSymbol)testClass
+                .GetMembers(nameof(GetAttributes_WithNewMethodDerived.NotVirtualMethod))
+                .First();
 
             // Act
             var attributes = CodeAnalysisExtensions.GetAttributes(method, attribute, inherit: true);
@@ -137,7 +203,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
             // Assert
             Assert.Collection(
                 attributes,
-                attributeData => Assert.Equal(401, attributeData.ConstructorArguments[0].Value));
+                attributeData => Assert.Equal(401, attributeData.ConstructorArguments[0].Value)
+            );
         }
 
         [Fact]
@@ -145,11 +212,19 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var attribute = compilation.GetTypeByMetadataName(typeof(ApiConventionTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName(typeof(GetAttributes_OnTypeWithoutAttributesType).FullName);
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ApiConventionTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                typeof(GetAttributes_OnTypeWithoutAttributesType).FullName
+            );
 
             // Act
-            var attributes = CodeAnalysisExtensions.GetAttributes(testClass, attribute, inherit: true);
+            var attributes = CodeAnalysisExtensions.GetAttributes(
+                testClass,
+                attribute,
+                inherit: true
+            );
 
             // Assert
             Assert.Empty(attributes);
@@ -160,11 +235,19 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var attribute = compilation.GetTypeByMetadataName(typeof(ApiConventionTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName(typeof(GetAttributes_OnTypeWithAttributes).FullName);
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ApiConventionTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                typeof(GetAttributes_OnTypeWithAttributes).FullName
+            );
 
             // Act
-            var attributes = CodeAnalysisExtensions.GetAttributes(testClass, attribute, inherit: true);
+            var attributes = CodeAnalysisExtensions.GetAttributes(
+                testClass,
+                attribute,
+                inherit: true
+            );
 
             // Assert
             Assert.Collection(
@@ -172,13 +255,20 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 attributeData =>
                 {
                     Assert.Same(attribute, attributeData.AttributeClass);
-                    Assert.Equal(attributeData.ConstructorArguments[0].Value, compilation.GetSpecialType(SpecialType.System_Object));
+                    Assert.Equal(
+                        attributeData.ConstructorArguments[0].Value,
+                        compilation.GetSpecialType(SpecialType.System_Object)
+                    );
                 },
                 attributeData =>
                 {
                     Assert.Same(attribute, attributeData.AttributeClass);
-                    Assert.Equal(attributeData.ConstructorArguments[0].Value, compilation.GetSpecialType(SpecialType.System_String));
-                });
+                    Assert.Equal(
+                        attributeData.ConstructorArguments[0].Value,
+                        compilation.GetSpecialType(SpecialType.System_String)
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -186,11 +276,19 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var attribute = compilation.GetTypeByMetadataName(typeof(ApiConventionTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName(typeof(GetAttributes_BaseTypeWithAttributesDerived).FullName);
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ApiConventionTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                typeof(GetAttributes_BaseTypeWithAttributesDerived).FullName
+            );
 
             // Act
-            var attributes = CodeAnalysisExtensions.GetAttributes(testClass, attribute, inherit: true);
+            var attributes = CodeAnalysisExtensions.GetAttributes(
+                testClass,
+                attribute,
+                inherit: true
+            );
 
             // Assert
             Assert.Collection(
@@ -198,18 +296,28 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 attributeData =>
                 {
                     Assert.Same(attribute, attributeData.AttributeClass);
-                    Assert.Equal(attributeData.ConstructorArguments[0].Value, compilation.GetSpecialType(SpecialType.System_Int32));
+                    Assert.Equal(
+                        attributeData.ConstructorArguments[0].Value,
+                        compilation.GetSpecialType(SpecialType.System_Int32)
+                    );
                 },
                 attributeData =>
                 {
                     Assert.Same(attribute, attributeData.AttributeClass);
-                    Assert.Equal(attributeData.ConstructorArguments[0].Value, compilation.GetSpecialType(SpecialType.System_Object));
+                    Assert.Equal(
+                        attributeData.ConstructorArguments[0].Value,
+                        compilation.GetSpecialType(SpecialType.System_Object)
+                    );
                 },
                 attributeData =>
                 {
                     Assert.Same(attribute, attributeData.AttributeClass);
-                    Assert.Equal(attributeData.ConstructorArguments[0].Value, compilation.GetSpecialType(SpecialType.System_String));
-                });
+                    Assert.Equal(
+                        attributeData.ConstructorArguments[0].Value,
+                        compilation.GetSpecialType(SpecialType.System_String)
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -217,11 +325,19 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation(nameof(GetAttributes_BaseTypeWithAttributes));
-            var attribute = compilation.GetTypeByMetadataName(typeof(ApiConventionTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName(typeof(GetAttributes_BaseTypeWithAttributesDerived).FullName);
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ApiConventionTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                typeof(GetAttributes_BaseTypeWithAttributesDerived).FullName
+            );
 
             // Act
-            var attributes = CodeAnalysisExtensions.GetAttributes(testClass, attribute, inherit: false);
+            var attributes = CodeAnalysisExtensions.GetAttributes(
+                testClass,
+                attribute,
+                inherit: false
+            );
 
             // Assert
             Assert.Collection(
@@ -229,8 +345,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 attributeData =>
                 {
                     Assert.Same(attribute, attributeData.AttributeClass);
-                    Assert.Equal(attributeData.ConstructorArguments[0].Value, compilation.GetSpecialType(SpecialType.System_Int32));
-                });
+                    Assert.Equal(
+                        attributeData.ConstructorArguments[0].Value,
+                        compilation.GetSpecialType(SpecialType.System_Int32)
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -238,11 +358,18 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation(nameof(GetAttributes_BaseTypeWithAttributes));
-            var attribute = compilation.GetTypeByMetadataName(typeof(ApiConventionTypeAttribute).FullName);
-            var testClass = compilation.GetTypeByMetadataName(typeof(GetAttributes_BaseTypeWithAttributesDerived).FullName);
+            var attribute = compilation.GetTypeByMetadataName(
+                typeof(ApiConventionTypeAttribute).FullName
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                typeof(GetAttributes_BaseTypeWithAttributesDerived).FullName
+            );
 
             // Act
-            var attributes = CodeAnalysisExtensions.GetAttributes(symbol: testClass, attribute: attribute);
+            var attributes = CodeAnalysisExtensions.GetAttributes(
+                symbol: testClass,
+                attribute: attribute
+            );
 
             // Assert
             Assert.Collection(
@@ -250,8 +377,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 attributeData =>
                 {
                     Assert.Same(attribute, attributeData.AttributeClass);
-                    Assert.Equal(attributeData.ConstructorArguments[0].Value, compilation.GetSpecialType(SpecialType.System_Int32));
-                });
+                    Assert.Equal(
+                        attributeData.ConstructorArguments[0].Value,
+                        compilation.GetSpecialType(SpecialType.System_Int32)
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -259,15 +390,31 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var attribute = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsFalseIfTypeDoesNotHaveAttribute");
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsFalseIfTypeDoesNotHaveAttributeTest");
+            var attribute = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsFalseIfTypeDoesNotHaveAttribute"
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsFalseIfTypeDoesNotHaveAttributeTest"
+            );
             var testMethod = (IMethodSymbol)testClass.GetMembers("SomeMethod").First();
             var testProperty = (IPropertySymbol)testClass.GetMembers("SomeProperty").First();
 
             // Act
-            var classHasAttribute = CodeAnalysisExtensions.HasAttribute(testClass, attribute, inherit: false);
-            var methodHasAttribute = CodeAnalysisExtensions.HasAttribute(testMethod, attribute, inherit: false);
-            var propertyHasAttribute = CodeAnalysisExtensions.HasAttribute(testProperty, attribute, inherit: false);
+            var classHasAttribute = CodeAnalysisExtensions.HasAttribute(
+                testClass,
+                attribute,
+                inherit: false
+            );
+            var methodHasAttribute = CodeAnalysisExtensions.HasAttribute(
+                testMethod,
+                attribute,
+                inherit: false
+            );
+            var propertyHasAttribute = CodeAnalysisExtensions.HasAttribute(
+                testProperty,
+                attribute,
+                inherit: false
+            );
 
             // AssertControllerAttribute
             Assert.False(classHasAttribute);
@@ -280,11 +427,19 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var attribute = compilation.GetTypeByMetadataName("Microsoft.AspNetCore.Mvc.ControllerAttribute");
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.{nameof(HasAttribute_ReturnsTrueIfTypeHasAttribute)}");
+            var attribute = compilation.GetTypeByMetadataName(
+                "Microsoft.AspNetCore.Mvc.ControllerAttribute"
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.{nameof(HasAttribute_ReturnsTrueIfTypeHasAttribute)}"
+            );
 
             // Act
-            var hasAttribute = CodeAnalysisExtensions.HasAttribute(testClass, attribute, inherit: false);
+            var hasAttribute = CodeAnalysisExtensions.HasAttribute(
+                testClass,
+                attribute,
+                inherit: false
+            );
 
             // Assert
             Assert.True(hasAttribute);
@@ -295,12 +450,24 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var attribute = compilation.GetTypeByMetadataName("Microsoft.AspNetCore.Mvc.ControllerAttribute");
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.{nameof(HasAttribute_ReturnsTrueIfBaseTypeHasAttribute)}");
+            var attribute = compilation.GetTypeByMetadataName(
+                "Microsoft.AspNetCore.Mvc.ControllerAttribute"
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.{nameof(HasAttribute_ReturnsTrueIfBaseTypeHasAttribute)}"
+            );
 
             // Act
-            var hasAttributeWithoutInherit = CodeAnalysisExtensions.HasAttribute(testClass, attribute, inherit: false);
-            var hasAttributeWithInherit = CodeAnalysisExtensions.HasAttribute(testClass, attribute, inherit: true);
+            var hasAttributeWithoutInherit = CodeAnalysisExtensions.HasAttribute(
+                testClass,
+                attribute,
+                inherit: false
+            );
+            var hasAttributeWithInherit = CodeAnalysisExtensions.HasAttribute(
+                testClass,
+                attribute,
+                inherit: true
+            );
 
             // Assert
             Assert.False(hasAttributeWithoutInherit);
@@ -312,13 +479,27 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var @interface = compilation.GetTypeByMetadataName($"{Namespace}.IHasAttribute_ReturnsTrueForInterfaceContractOnAttribute");
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsTrueForInterfaceContractOnAttributeTest");
-            var derivedClass = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsTrueForInterfaceContractOnAttributeDerived");
+            var @interface = compilation.GetTypeByMetadataName(
+                $"{Namespace}.IHasAttribute_ReturnsTrueForInterfaceContractOnAttribute"
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsTrueForInterfaceContractOnAttributeTest"
+            );
+            var derivedClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsTrueForInterfaceContractOnAttributeDerived"
+            );
 
             // Act
-            var hasAttribute = CodeAnalysisExtensions.HasAttribute(testClass, @interface, inherit: true);
-            var hasAttributeOnDerived = CodeAnalysisExtensions.HasAttribute(testClass, @interface, inherit: true);
+            var hasAttribute = CodeAnalysisExtensions.HasAttribute(
+                testClass,
+                @interface,
+                inherit: true
+            );
+            var hasAttributeOnDerived = CodeAnalysisExtensions.HasAttribute(
+                testClass,
+                @interface,
+                inherit: true
+            );
 
             // Assert
             Assert.True(hasAttribute);
@@ -330,12 +511,20 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var attribute = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnMethodsAttribute");
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnMethodsTest");
+            var attribute = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnMethodsAttribute"
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnMethodsTest"
+            );
             var method = (IMethodSymbol)testClass.GetMembers("SomeMethod").First();
 
             // Act
-            var hasAttribute = CodeAnalysisExtensions.HasAttribute(method, attribute, inherit: false);
+            var hasAttribute = CodeAnalysisExtensions.HasAttribute(
+                method,
+                attribute,
+                inherit: false
+            );
 
             // Assert
             Assert.True(hasAttribute);
@@ -346,14 +535,25 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var attribute = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnOverriddenMethodsAttribute");
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnOverriddenMethodsTest");
+            var attribute = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnOverriddenMethodsAttribute"
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnOverriddenMethodsTest"
+            );
             var method = (IMethodSymbol)testClass.GetMembers("SomeMethod").First();
 
-
             // Act
-            var hasAttributeWithoutInherit = CodeAnalysisExtensions.HasAttribute(method, attribute, inherit: false);
-            var hasAttributeWithInherit = CodeAnalysisExtensions.HasAttribute(method, attribute, inherit: true);
+            var hasAttributeWithoutInherit = CodeAnalysisExtensions.HasAttribute(
+                method,
+                attribute,
+                inherit: false
+            );
+            var hasAttributeWithInherit = CodeAnalysisExtensions.HasAttribute(
+                method,
+                attribute,
+                inherit: true
+            );
 
             // Assert
             Assert.False(hasAttributeWithoutInherit);
@@ -365,12 +565,20 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var attribute = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnPropertiesAttribute");
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnProperties");
+            var attribute = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnPropertiesAttribute"
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnProperties"
+            );
             var property = (IPropertySymbol)testClass.GetMembers("SomeProperty").First();
 
             // Act
-            var hasAttribute = CodeAnalysisExtensions.HasAttribute(property, attribute, inherit: false);
+            var hasAttribute = CodeAnalysisExtensions.HasAttribute(
+                property,
+                attribute,
+                inherit: false
+            );
 
             // Assert
             Assert.True(hasAttribute);
@@ -381,13 +589,25 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var attribute = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnOverriddenPropertiesAttribute");
-            var testClass = compilation.GetTypeByMetadataName($"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnOverriddenProperties");
+            var attribute = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnOverriddenPropertiesAttribute"
+            );
+            var testClass = compilation.GetTypeByMetadataName(
+                $"{Namespace}.HasAttribute_ReturnsTrueForAttributesOnOverriddenProperties"
+            );
             var property = (IPropertySymbol)testClass.GetMembers("SomeProperty").First();
 
             // Act
-            var hasAttributeWithoutInherit = CodeAnalysisExtensions.HasAttribute(property, attribute, inherit: false);
-            var hasAttributeWithInherit = CodeAnalysisExtensions.HasAttribute(property, attribute, inherit: true);
+            var hasAttributeWithoutInherit = CodeAnalysisExtensions.HasAttribute(
+                property,
+                attribute,
+                inherit: false
+            );
+            var hasAttributeWithInherit = CodeAnalysisExtensions.HasAttribute(
+                property,
+                attribute,
+                inherit: true
+            );
 
             // Assert
             Assert.False(hasAttributeWithoutInherit);
@@ -399,8 +619,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var source = compilation.GetTypeByMetadataName($"{Namespace}.IsAssignable_ReturnsFalseForDifferentTypesA");
-            var target = compilation.GetTypeByMetadataName($"{Namespace}.IsAssignable_ReturnsFalseForDifferentTypesB");
+            var source = compilation.GetTypeByMetadataName(
+                $"{Namespace}.IsAssignable_ReturnsFalseForDifferentTypesA"
+            );
+            var target = compilation.GetTypeByMetadataName(
+                $"{Namespace}.IsAssignable_ReturnsFalseForDifferentTypesB"
+            );
 
             // Act
             var isAssignableFrom = CodeAnalysisExtensions.IsAssignableFrom(source, target);
@@ -413,8 +637,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         public async Task IsAssignable_ReturnsFalseIfTypeDoesNotImplementInterface()
         {
             // Arrange
-            var compilation = await GetCompilation(nameof(IsAssignable_ReturnsFalseForDifferentTypes));
-            var source = compilation.GetTypeByMetadataName($"{Namespace}.IsAssignable_ReturnsFalseForDifferentTypesA");
+            var compilation = await GetCompilation(
+                nameof(IsAssignable_ReturnsFalseForDifferentTypes)
+            );
+            var source = compilation.GetTypeByMetadataName(
+                $"{Namespace}.IsAssignable_ReturnsFalseForDifferentTypesA"
+            );
             var target = compilation.GetTypeByMetadataName($"System.IDisposable");
 
             // Act
@@ -429,8 +657,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var source = compilation.GetTypeByMetadataName($"{Namespace}.IsAssignable_ReturnsTrueIfTypesAreExact");
-            var target = compilation.GetTypeByMetadataName($"{Namespace}.IsAssignable_ReturnsTrueIfTypesAreExact");
+            var source = compilation.GetTypeByMetadataName(
+                $"{Namespace}.IsAssignable_ReturnsTrueIfTypesAreExact"
+            );
+            var target = compilation.GetTypeByMetadataName(
+                $"{Namespace}.IsAssignable_ReturnsTrueIfTypesAreExact"
+            );
 
             // Act
             var isAssignableFrom = CodeAnalysisExtensions.IsAssignableFrom(source, target);
@@ -444,8 +676,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var source = compilation.GetTypeByMetadataName($"{Namespace}.IsAssignable_ReturnsTrueIfTypeImplementsInterface");
-            var target = compilation.GetTypeByMetadataName($"{Namespace}.IsAssignable_ReturnsTrueIfTypeImplementsInterfaceTest");
+            var source = compilation.GetTypeByMetadataName(
+                $"{Namespace}.IsAssignable_ReturnsTrueIfTypeImplementsInterface"
+            );
+            var target = compilation.GetTypeByMetadataName(
+                $"{Namespace}.IsAssignable_ReturnsTrueIfTypeImplementsInterfaceTest"
+            );
 
             // Act
             var isAssignableFrom = CodeAnalysisExtensions.IsAssignableFrom(source, target);
@@ -460,9 +696,15 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         public async Task IsAssignable_ReturnsTrue_IfSourceAndDestinationAreTheSameInterface()
         {
             // Arrange
-            var compilation = await GetCompilation(nameof(IsAssignable_ReturnsTrueIfTypeImplementsInterface));
-            var source = compilation.GetTypeByMetadataName(typeof(IsAssignable_ReturnsTrueIfTypeImplementsInterface).FullName);
-            var target = compilation.GetTypeByMetadataName(typeof(IsAssignable_ReturnsTrueIfTypeImplementsInterface).FullName);
+            var compilation = await GetCompilation(
+                nameof(IsAssignable_ReturnsTrueIfTypeImplementsInterface)
+            );
+            var source = compilation.GetTypeByMetadataName(
+                typeof(IsAssignable_ReturnsTrueIfTypeImplementsInterface).FullName
+            );
+            var target = compilation.GetTypeByMetadataName(
+                typeof(IsAssignable_ReturnsTrueIfTypeImplementsInterface).FullName
+            );
 
             // Act
             var isAssignableFrom = CodeAnalysisExtensions.IsAssignableFrom(source, target);
@@ -476,8 +718,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         {
             // Arrange
             var compilation = await GetCompilation();
-            var source = compilation.GetTypeByMetadataName($"{Namespace}.IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterface");
-            var target = compilation.GetTypeByMetadataName($"{Namespace}.IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceTest");
+            var source = compilation.GetTypeByMetadataName(
+                $"{Namespace}.IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterface"
+            );
+            var target = compilation.GetTypeByMetadataName(
+                $"{Namespace}.IsAssignable_ReturnsTrueIfAncestorTypeImplementsInterfaceTest"
+            );
 
             // Act
             var isAssignableFrom = CodeAnalysisExtensions.IsAssignableFrom(source, target);
@@ -491,7 +737,10 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         private Task<Compilation> GetCompilation([CallerMemberName] string testMethod = "")
         {
             var testSource = MvcTestSource.Read(GetType().Name, testMethod);
-            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+            var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+                GetType().Assembly,
+                new[] { testSource.Source }
+            );
 
             return project.GetCompilationAsync();
         }

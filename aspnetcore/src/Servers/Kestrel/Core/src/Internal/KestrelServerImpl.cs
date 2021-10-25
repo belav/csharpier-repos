@@ -33,38 +33,42 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         private bool _hasStarted;
         private int _stopping;
         private readonly CancellationTokenSource _stopCts = new CancellationTokenSource();
-        private readonly TaskCompletionSource _stoppedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _stoppedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         private IDisposable? _configChangedRegistration;
 
         public KestrelServerImpl(
             IOptions<KestrelServerOptions> options,
             IEnumerable<IConnectionListenerFactory> transportFactories,
-            ILoggerFactory loggerFactory)
-            : this(transportFactories, null, CreateServiceContext(options, loggerFactory))
-        {
-        }
+            ILoggerFactory loggerFactory
+        ) : this(transportFactories, null, CreateServiceContext(options, loggerFactory)) { }
 
         public KestrelServerImpl(
             IOptions<KestrelServerOptions> options,
             IEnumerable<IConnectionListenerFactory> transportFactories,
             IEnumerable<IMultiplexedConnectionListenerFactory> multiplexedFactories,
-            ILoggerFactory loggerFactory)
-            : this(transportFactories, multiplexedFactories, CreateServiceContext(options, loggerFactory))
-        {
-        }
+            ILoggerFactory loggerFactory
+        )
+            : this(
+                transportFactories,
+                multiplexedFactories,
+                CreateServiceContext(options, loggerFactory)
+            ) { }
 
         // For testing
-        internal KestrelServerImpl(IConnectionListenerFactory transportFactory, ServiceContext serviceContext)
-            : this(new[] { transportFactory }, null, serviceContext)
-        {
-        }
+        internal KestrelServerImpl(
+            IConnectionListenerFactory transportFactory,
+            ServiceContext serviceContext
+        ) : this(new[] { transportFactory }, null, serviceContext) { }
 
         // For testing
         internal KestrelServerImpl(
             IEnumerable<IConnectionListenerFactory> transportFactories,
             IEnumerable<IMultiplexedConnectionListenerFactory>? multiplexedFactories,
-            ServiceContext serviceContext)
+            ServiceContext serviceContext
+        )
         {
             if (transportFactories == null)
             {
@@ -85,12 +89,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             _serverAddresses = new ServerAddressesFeature();
             Features.Set<IServerAddressesFeature>(_serverAddresses);
 
-            _transportManager = new TransportManager(_transportFactory, _multiplexedTransportFactory, ServiceContext);
+            _transportManager = new TransportManager(
+                _transportFactory,
+                _multiplexedTransportFactory,
+                ServiceContext
+            );
 
             HttpCharacters.Initialize();
         }
 
-        private static ServiceContext CreateServiceContext(IOptions<KestrelServerOptions> options, ILoggerFactory loggerFactory)
+        private static ServiceContext CreateServiceContext(
+            IOptions<KestrelServerOptions> options,
+            ILoggerFactory loggerFactory
+        )
         {
             if (options == null)
             {
@@ -106,7 +117,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             var trace = new KestrelTrace(logger);
             var connectionManager = new ConnectionManager(
                 trace,
-                serverOptions.Limits.MaxConcurrentUpgradedConnections);
+                serverOptions.Limits.MaxConcurrentUpgradedConnections
+            );
 
             var heartbeatManager = new HeartbeatManager(connectionManager);
             var dateHeaderValueManager = new DateHeaderValueManager();
@@ -115,13 +127,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                 new IHeartbeatHandler[] { dateHeaderValueManager, heartbeatManager },
                 new SystemClock(),
                 DebuggerWrapper.Singleton,
-                trace);
+                trace
+            );
 
             return new ServiceContext
             {
                 Log = trace,
                 Scheduler = PipeScheduler.ThreadPool,
-                HttpParser = new HttpParser<Http1ParsingHandler>(trace.IsEnabled(LogLevel.Information)),
+                HttpParser = new HttpParser<Http1ParsingHandler>(
+                    trace.IsEnabled(LogLevel.Information)
+                ),
                 SystemClock = heartbeatManager,
                 DateHeaderValueManager = dateHeaderValueManager,
                 ConnectionManager = connectionManager,
@@ -140,7 +155,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
 
         private AddressBindContext? AddressBindContext { get; set; }
 
-        public async Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken) where TContext : notnull
+        public async Task StartAsync<TContext>(
+            IHttpApplication<TContext> application,
+            CancellationToken cancellationToken
+        ) where TContext : notnull
         {
             try
             {
@@ -168,40 +186,75 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                     {
                         if (_multiplexedTransportFactory is null)
                         {
-                            throw new InvalidOperationException($"Cannot start HTTP/3 server if no {nameof(IMultiplexedConnectionListenerFactory)} is registered.");
+                            throw new InvalidOperationException(
+                                $"Cannot start HTTP/3 server if no {nameof(IMultiplexedConnectionListenerFactory)} is registered."
+                            );
                         }
 
                         options.UseHttp3Server(ServiceContext, application, options.Protocols);
-                        var multiplexedConnectionDelegate = ((IMultiplexedConnectionBuilder)options).Build();
+                        var multiplexedConnectionDelegate = (
+                            (IMultiplexedConnectionBuilder)options
+                        ).Build();
 
                         // Add the connection limit middleware
-                        multiplexedConnectionDelegate = EnforceConnectionLimit(multiplexedConnectionDelegate, Options.Limits.MaxConcurrentConnections, Trace);
+                        multiplexedConnectionDelegate = EnforceConnectionLimit(
+                            multiplexedConnectionDelegate,
+                            Options.Limits.MaxConcurrentConnections,
+                            Trace
+                        );
 
-                        options.EndPoint = await _transportManager.BindAsync(options.EndPoint, multiplexedConnectionDelegate, options, onBindCancellationToken).ConfigureAwait(false);
+                        options.EndPoint = await _transportManager
+                            .BindAsync(
+                                options.EndPoint,
+                                multiplexedConnectionDelegate,
+                                options,
+                                onBindCancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
 
                     // Add the HTTP middleware as the terminal connection middleware
-                    if ((options.Protocols & HttpProtocols.Http1) == HttpProtocols.Http1
+                    if (
+                        (options.Protocols & HttpProtocols.Http1) == HttpProtocols.Http1
                         || (options.Protocols & HttpProtocols.Http2) == HttpProtocols.Http2
-                        || options.Protocols == HttpProtocols.None) // TODO a test fails because it doesn't throw an exception in the right place
-                                                                    // when there is no HttpProtocols in KestrelServer, can we remove/change the test?
+                        || options.Protocols == HttpProtocols.None
+                    ) // TODO a test fails because it doesn't throw an exception in the right place
+                    // when there is no HttpProtocols in KestrelServer, can we remove/change the test?
                     {
                         if (_transportFactory is null)
                         {
-                            throw new InvalidOperationException($"Cannot start HTTP/1.x or HTTP/2 server if no {nameof(IConnectionListenerFactory)} is registered.");
+                            throw new InvalidOperationException(
+                                $"Cannot start HTTP/1.x or HTTP/2 server if no {nameof(IConnectionListenerFactory)} is registered."
+                            );
                         }
 
                         options.UseHttpServer(ServiceContext, application, options.Protocols);
                         var connectionDelegate = options.Build();
 
                         // Add the connection limit middleware
-                        connectionDelegate = EnforceConnectionLimit(connectionDelegate, Options.Limits.MaxConcurrentConnections, Trace);
+                        connectionDelegate = EnforceConnectionLimit(
+                            connectionDelegate,
+                            Options.Limits.MaxConcurrentConnections,
+                            Trace
+                        );
 
-                        options.EndPoint = await _transportManager.BindAsync(options.EndPoint, connectionDelegate, options.EndpointConfig, onBindCancellationToken).ConfigureAwait(false);
+                        options.EndPoint = await _transportManager
+                            .BindAsync(
+                                options.EndPoint,
+                                connectionDelegate,
+                                options.EndpointConfig,
+                                onBindCancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                 }
 
-                AddressBindContext = new AddressBindContext(_serverAddresses, Options, Trace, OnBind);
+                AddressBindContext = new AddressBindContext(
+                    _serverAddresses,
+                    Options,
+                    Trace,
+                    OnBind
+                );
 
                 await BindAsync(cancellationToken).ConfigureAwait(false);
             }
@@ -268,15 +321,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
 
                 _serverAddresses.InternalCollection.PreventPublicMutation();
 
-                if (Options.ConfigurationLoader?.ReloadOnChange == true && (!_serverAddresses.PreferHostingUrls || _serverAddresses.InternalCollection.Count == 0))
+                if (
+                    Options.ConfigurationLoader?.ReloadOnChange == true
+                    && (
+                        !_serverAddresses.PreferHostingUrls
+                        || _serverAddresses.InternalCollection.Count == 0
+                    )
+                )
                 {
                     reloadToken = Options.ConfigurationLoader.Configuration.GetReloadToken();
                 }
 
                 Options.ConfigurationLoader?.Load();
 
-                await AddressBinder.BindAsync(Options.ListenOptions, AddressBindContext!, cancellationToken).ConfigureAwait(false);
-                _configChangedRegistration = reloadToken?.RegisterChangeCallback(TriggerRebind, this);
+                await AddressBinder
+                    .BindAsync(Options.ListenOptions, AddressBindContext!, cancellationToken)
+                    .ConfigureAwait(false);
+                _configChangedRegistration = reloadToken?.RegisterChangeCallback(
+                    TriggerRebind,
+                    this
+                );
             }
             finally
             {
@@ -305,7 +369,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                     return;
                 }
 
-                Debug.Assert(Options.ConfigurationLoader != null, "Rebind can only happen when there is a ConfigurationLoader.");
+                Debug.Assert(
+                    Options.ConfigurationLoader != null,
+                    "Rebind can only happen when there is a ConfigurationLoader."
+                );
 
                 reloadToken = Options.ConfigurationLoader.Configuration.GetReloadToken();
                 var (endpointsToStop, endpointsToStart) = Options.ConfigurationLoader.Reload();
@@ -315,16 +382,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                 if (endpointsToStop.Count > 0)
                 {
                     var urlsToStop = endpointsToStop.Select(lo => lo.EndpointConfig!.Url);
-                    Trace.LogInformation("Config changed. Stopping the following endpoints: '{endpoints}'", string.Join("', '", urlsToStop));
+                    Trace.LogInformation(
+                        "Config changed. Stopping the following endpoints: '{endpoints}'",
+                        string.Join("', '", urlsToStop)
+                    );
 
                     // 5 is the default value for WebHost's "shutdownTimeoutSeconds", so use that.
                     using var timeoutCts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
-                    using var combinedCts = CancellationTokenSource.CreateLinkedTokenSource(_stopCts.Token, timeoutCts.Token);
+                    using var combinedCts = CancellationTokenSource.CreateLinkedTokenSource(
+                        _stopCts.Token,
+                        timeoutCts.Token
+                    );
 
                     // TODO: It would be nice to start binding to new endpoints immediately and reconfigured endpoints as soon
                     // as the unbinding finished for the given endpoint rather than wait for all transports to unbind first.
                     var configsToStop = endpointsToStop.Select(lo => lo.EndpointConfig!).ToList();
-                    await _transportManager.StopEndpointsAsync(configsToStop, combinedCts.Token).ConfigureAwait(false);
+                    await _transportManager
+                        .StopEndpointsAsync(configsToStop, combinedCts.Token)
+                        .ConfigureAwait(false);
 
                     foreach (var listenOption in endpointsToStop)
                     {
@@ -336,17 +411,27 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                 if (endpointsToStart.Count > 0)
                 {
                     var urlsToStart = endpointsToStart.Select(lo => lo.EndpointConfig!.Url);
-                    Trace.LogInformation("Config changed. Starting the following endpoints: '{endpoints}'", string.Join("', '", urlsToStart));
+                    Trace.LogInformation(
+                        "Config changed. Starting the following endpoints: '{endpoints}'",
+                        string.Join("', '", urlsToStart)
+                    );
 
                     foreach (var listenOption in endpointsToStart)
                     {
                         try
                         {
-                            await listenOption.BindAsync(AddressBindContext!, _stopCts.Token).ConfigureAwait(false);
+                            await listenOption
+                                .BindAsync(AddressBindContext!, _stopCts.Token)
+                                .ConfigureAwait(false);
                         }
                         catch (Exception ex)
                         {
-                            Trace.LogCritical(0, ex, "Unable to bind to '{url}' on config reload.", listenOption.EndpointConfig!.Url);
+                            Trace.LogCritical(
+                                0,
+                                ex,
+                                "Unable to bind to '{url}' on config reload.",
+                                listenOption.EndpointConfig!.Url
+                            );
                         }
                     }
                 }
@@ -357,46 +442,77 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             }
             finally
             {
-                _configChangedRegistration = reloadToken?.RegisterChangeCallback(TriggerRebind, this);
+                _configChangedRegistration = reloadToken?.RegisterChangeCallback(
+                    TriggerRebind,
+                    this
+                );
                 _bindSemaphore.Release();
             }
         }
 
         private void ValidateOptions()
         {
-            if (Options.Limits.MaxRequestBufferSize.HasValue &&
-                Options.Limits.MaxRequestBufferSize < Options.Limits.MaxRequestLineSize)
+            if (
+                Options.Limits.MaxRequestBufferSize.HasValue
+                && Options.Limits.MaxRequestBufferSize < Options.Limits.MaxRequestLineSize
+            )
             {
                 throw new InvalidOperationException(
-                    CoreStrings.FormatMaxRequestBufferSmallerThanRequestLineBuffer(Options.Limits.MaxRequestBufferSize.Value, Options.Limits.MaxRequestLineSize));
+                    CoreStrings.FormatMaxRequestBufferSmallerThanRequestLineBuffer(
+                        Options.Limits.MaxRequestBufferSize.Value,
+                        Options.Limits.MaxRequestLineSize
+                    )
+                );
             }
 
-            if (Options.Limits.MaxRequestBufferSize.HasValue &&
-                Options.Limits.MaxRequestBufferSize < Options.Limits.MaxRequestHeadersTotalSize)
+            if (
+                Options.Limits.MaxRequestBufferSize.HasValue
+                && Options.Limits.MaxRequestBufferSize < Options.Limits.MaxRequestHeadersTotalSize
+            )
             {
                 throw new InvalidOperationException(
-                    CoreStrings.FormatMaxRequestBufferSmallerThanRequestHeaderBuffer(Options.Limits.MaxRequestBufferSize.Value, Options.Limits.MaxRequestHeadersTotalSize));
+                    CoreStrings.FormatMaxRequestBufferSmallerThanRequestHeaderBuffer(
+                        Options.Limits.MaxRequestBufferSize.Value,
+                        Options.Limits.MaxRequestHeadersTotalSize
+                    )
+                );
             }
         }
 
-        private static ConnectionDelegate EnforceConnectionLimit(ConnectionDelegate innerDelegate, long? connectionLimit, IKestrelTrace trace)
+        private static ConnectionDelegate EnforceConnectionLimit(
+            ConnectionDelegate innerDelegate,
+            long? connectionLimit,
+            IKestrelTrace trace
+        )
         {
             if (!connectionLimit.HasValue)
             {
                 return innerDelegate;
             }
 
-            return new ConnectionLimitMiddleware<ConnectionContext>(c => innerDelegate(c), connectionLimit.Value, trace).OnConnectionAsync;
+            return new ConnectionLimitMiddleware<ConnectionContext>(
+                c => innerDelegate(c),
+                connectionLimit.Value,
+                trace
+            ).OnConnectionAsync;
         }
 
-        private static MultiplexedConnectionDelegate EnforceConnectionLimit(MultiplexedConnectionDelegate innerDelegate, long? connectionLimit, IKestrelTrace trace)
+        private static MultiplexedConnectionDelegate EnforceConnectionLimit(
+            MultiplexedConnectionDelegate innerDelegate,
+            long? connectionLimit,
+            IKestrelTrace trace
+        )
         {
             if (!connectionLimit.HasValue)
             {
                 return innerDelegate;
             }
 
-            return new ConnectionLimitMiddleware<MultiplexedConnectionContext>(c => innerDelegate(c), connectionLimit.Value, trace).OnConnectionAsync;
+            return new ConnectionLimitMiddleware<MultiplexedConnectionContext>(
+                c => innerDelegate(c),
+                connectionLimit.Value,
+                trace
+            ).OnConnectionAsync;
         }
     }
 }

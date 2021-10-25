@@ -11,12 +11,14 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         internal override string FileKind => FileKinds.Component;
 
         internal override bool UseTwoPhaseCompilation => true;
-        
+
         [Fact]
         public void ComponentDiscovery_CanFindComponent_DefinedinCSharp()
         {
             // Arrange
-            AdditionalSyntaxTrees.Add(Parse(@"
+            AdditionalSyntaxTrees.Add(
+                Parse(
+                    @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test
@@ -25,7 +27,9 @@ namespace Test
     {
     }
 }
-"));
+"
+                )
+            );
 
             // Act
             var result = CompileToCSharp(string.Empty);
@@ -39,7 +43,9 @@ namespace Test
         public void ComponentDiscovery_CanFindComponent_WithNamespace_DefinedinCSharp()
         {
             // Arrange
-            AdditionalSyntaxTrees.Add(Parse(@"
+            AdditionalSyntaxTrees.Add(
+                Parse(
+                    @"
 using Microsoft.AspNetCore.Components;
 
 namespace Test.AnotherNamespace
@@ -48,7 +54,9 @@ namespace Test.AnotherNamespace
     {
     }
 }
-"));
+"
+                )
+            );
 
             // Act
             var result = CompileToCSharp(string.Empty);
@@ -56,17 +64,23 @@ namespace Test.AnotherNamespace
             // Assert
             var bindings = result.CodeDocument.GetTagHelperContext();
 
-            Assert.Contains(bindings.TagHelpers, t =>
-            {
-                return t.Name == "Test.AnotherNamespace.MyComponent" &&
-                    t.IsComponentFullyQualifiedNameMatch();
-            });
+            Assert.Contains(
+                bindings.TagHelpers,
+                t =>
+                {
+                    return t.Name == "Test.AnotherNamespace.MyComponent"
+                        && t.IsComponentFullyQualifiedNameMatch();
+                }
+            );
 
-            Assert.DoesNotContain(bindings.TagHelpers, t =>
-            {
-                return t.Name == "Test.AnotherNamespace.MyComponent" &&
-                    !t.IsComponentFullyQualifiedNameMatch();
-            });
+            Assert.DoesNotContain(
+                bindings.TagHelpers,
+                t =>
+                {
+                    return t.Name == "Test.AnotherNamespace.MyComponent"
+                        && !t.IsComponentFullyQualifiedNameMatch();
+                }
+            );
         }
 
         [Fact]
@@ -88,11 +102,14 @@ namespace Test.AnotherNamespace
             // Arrange
 
             // Act
-            var result = CompileToCSharp("UniqueName.cshtml", @"
+            var result = CompileToCSharp(
+                "UniqueName.cshtml",
+                @"
 @typeparam TItem
 @functions {
     [Parameter] public TItem Item { get; set; }
-}");
+}"
+            );
 
             // Assert
             var bindings = result.CodeDocument.GetTagHelperContext();
@@ -105,17 +122,23 @@ namespace Test.AnotherNamespace
             // Arrange
 
             // Act
-            var result = CompileToCSharp("UniqueName.cshtml", @"
+            var result = CompileToCSharp(
+                "UniqueName.cshtml",
+                @"
 @typeparam TItem1
 @typeparam TItem2
 @typeparam TItem3
 @functions {
     [Parameter] public TItem1 Item { get; set; }
-}");
+}"
+            );
 
             // Assert
             var bindings = result.CodeDocument.GetTagHelperContext();
-            Assert.Contains(bindings.TagHelpers, t => t.Name == "Test.UniqueName<TItem1, TItem2, TItem3>");
+            Assert.Contains(
+                bindings.TagHelpers,
+                t => t.Name == "Test.UniqueName<TItem1, TItem2, TItem3>"
+            );
         }
     }
 }

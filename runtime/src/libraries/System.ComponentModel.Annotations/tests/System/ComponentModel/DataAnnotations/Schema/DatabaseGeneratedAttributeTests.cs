@@ -11,18 +11,27 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         [InlineData(DatabaseGeneratedOption.None)]
         [InlineData(DatabaseGeneratedOption.Identity)]
         [InlineData(DatabaseGeneratedOption.Computed)]
-        public static void Ctor_DatabaseGeneratedOption(DatabaseGeneratedOption databaseGeneratedOption)
+        public static void Ctor_DatabaseGeneratedOption(
+            DatabaseGeneratedOption databaseGeneratedOption
+        )
         {
-            DatabaseGeneratedAttribute attribute = new DatabaseGeneratedAttribute(databaseGeneratedOption);
+            DatabaseGeneratedAttribute attribute = new DatabaseGeneratedAttribute(
+                databaseGeneratedOption
+            );
             Assert.Equal(databaseGeneratedOption, attribute.DatabaseGeneratedOption);
         }
 
         [Theory]
         [InlineData((DatabaseGeneratedOption)(-1))]
         [InlineData((DatabaseGeneratedOption)10)]
-        public static void Ctor_DatabaseGeneratedOption_UndefinedOption_ThrowsArgumentOutOfRangeException(DatabaseGeneratedOption databaseGeneratedOption)
+        public static void Ctor_DatabaseGeneratedOption_UndefinedOption_ThrowsArgumentOutOfRangeException(
+            DatabaseGeneratedOption databaseGeneratedOption
+        )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("databaseGeneratedOption", () => new DatabaseGeneratedAttribute(databaseGeneratedOption));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "databaseGeneratedOption",
+                () => new DatabaseGeneratedAttribute(databaseGeneratedOption)
+            );
         }
     }
 }

@@ -12,17 +12,26 @@ using Xunit;
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 {
     [SkipIfHostableWebCoreNotAvailable]
-    [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8, SkipReason = "https://github.com/aspnet/IISIntegration/issues/866")]
+    [MinimumOSVersion(
+        OperatingSystems.Windows,
+        WindowsVersions.Win8,
+        SkipReason = "https://github.com/aspnet/IISIntegration/issues/866"
+    )]
     public class ResponseAbortTests : StrictTestServerTests
     {
         [ConditionalFact]
         public async Task ClosesWithoutSendingAnything()
         {
-            using (var testServer = await TestServer.Create(
-                ctx => {
-                    ctx.Abort();
-                    return Task.CompletedTask;
-                }, LoggerFactory))
+            using (
+                var testServer = await TestServer.Create(
+                    ctx =>
+                    {
+                        ctx.Abort();
+                        return Task.CompletedTask;
+                    },
+                    LoggerFactory
+                )
+            )
             {
                 using (var connection = testServer.CreateConnection())
                 {
@@ -37,22 +46,24 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public async Task ClosesAfterDataSent()
         {
             var bodyReceived = CreateTaskCompletionSource();
-            using (var testServer = await TestServer.Create(
-                async ctx => {
-                    await ctx.Response.WriteAsync("Abort");
-                    await ctx.Response.Body.FlushAsync();
-                    await bodyReceived.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
-                    ctx.Abort();
-                }, LoggerFactory))
+            using (
+                var testServer = await TestServer.Create(
+                    async ctx =>
+                    {
+                        await ctx.Response.WriteAsync("Abort");
+                        await ctx.Response.Body.FlushAsync();
+                        await bodyReceived.Task.TimeoutAfter(TimeoutExtensions.DefaultTimeoutValue);
+                        ctx.Abort();
+                    },
+                    LoggerFactory
+                )
+            )
             {
                 using (var connection = testServer.CreateConnection())
                 {
                     await SendContentLength1Post(connection);
-                    await connection.Receive(
-                        "HTTP/1.1 200 OK",
-                        "");
-                    await connection.ReceiveHeaders(
-                        "Transfer-Encoding: chunked");
+                    await connection.Receive("HTTP/1.1 200 OK", "");
+                    await connection.ReceiveHeaders("Transfer-Encoding: chunked");
 
                     await connection.ReceiveChunk("Abort");
                     bodyReceived.SetResult(true);
@@ -66,19 +77,24 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             Exception exception = null;
 
-            using (var testServer = await TestServer.Create(
-                async ctx => {
-                    ctx.Abort();
-                    try
+            using (
+                var testServer = await TestServer.Create(
+                    async ctx =>
                     {
-                        var a = new byte[10];
-                        await ctx.Request.Body.ReadAsync(a);
-                    }
-                    catch (Exception e)
-                    {
-                        exception = e;
-                    }
-                }, LoggerFactory))
+                        ctx.Abort();
+                        try
+                        {
+                            var a = new byte[10];
+                            await ctx.Request.Body.ReadAsync(a);
+                        }
+                        catch (Exception e)
+                        {
+                            exception = e;
+                        }
+                    },
+                    LoggerFactory
+                )
+            )
             {
                 using (var connection = testServer.CreateConnection())
                 {
@@ -95,18 +111,23 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             Exception exception = null;
 
-            using (var testServer = await TestServer.Create(
-                async ctx => {
-                    ctx.Abort();
-                    try
+            using (
+                var testServer = await TestServer.Create(
+                    async ctx =>
                     {
-                        await ctx.Response.Body.WriteAsync(new byte[10]);
-                    }
-                    catch (Exception e)
-                    {
-                        exception = e;
-                    }
-                }, LoggerFactory))
+                        ctx.Abort();
+                        try
+                        {
+                            await ctx.Response.Body.WriteAsync(new byte[10]);
+                        }
+                        catch (Exception e)
+                        {
+                            exception = e;
+                        }
+                    },
+                    LoggerFactory
+                )
+            )
             {
                 using (var connection = testServer.CreateConnection())
                 {
@@ -122,12 +143,17 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         public async Task RequestAbortedIsTrippedAfterAbort()
         {
             bool tokenAborted = false;
-            using (var testServer = await TestServer.Create(
-                ctx => {
-                    ctx.Abort();
-                    tokenAborted = ctx.RequestAborted.IsCancellationRequested;
-                    return Task.CompletedTask;
-                }, LoggerFactory))
+            using (
+                var testServer = await TestServer.Create(
+                    ctx =>
+                    {
+                        ctx.Abort();
+                        tokenAborted = ctx.RequestAborted.IsCancellationRequested;
+                        return Task.CompletedTask;
+                    },
+                    LoggerFactory
+                )
+            )
             {
                 using (var connection = testServer.CreateConnection())
                 {
@@ -142,19 +168,24 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [ConditionalFact]
         public async Task CancellationTokenIsUsableAfterAbortingRequest()
         {
-            using (var testServer = await TestServer.Create(async ctx =>
-            {
-                var token = ctx.RequestAborted;
-                var originalRegistration = token.Register(() => { });
+            using (
+                var testServer = await TestServer.Create(
+                    async ctx =>
+                    {
+                        var token = ctx.RequestAborted;
+                        var originalRegistration = token.Register(() => { });
 
-                ctx.Abort();
+                        ctx.Abort();
 
-                Assert.True(token.WaitHandle.WaitOne(10000));
-                Assert.True(ctx.RequestAborted.WaitHandle.WaitOne(10000));
-                Assert.Equal(token, originalRegistration.Token);
+                        Assert.True(token.WaitHandle.WaitOne(10000));
+                        Assert.True(ctx.RequestAborted.WaitHandle.WaitOne(10000));
+                        Assert.Equal(token, originalRegistration.Token);
 
-                await Task.CompletedTask;
-            }, LoggerFactory))
+                        await Task.CompletedTask;
+                    },
+                    LoggerFactory
+                )
+            )
             {
                 using (var connection = testServer.CreateConnection())
                 {
@@ -171,7 +202,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 "Content-Length: 1",
                 "Host: localhost",
                 "",
-                "");
+                ""
+            );
         }
     }
 }

@@ -3,8 +3,10 @@
 
 namespace System.ComponentModel.DataAnnotations
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public sealed class PhoneAttribute : DataTypeAttribute
     {
         private const string AdditionalPhoneNumberCharacters = "-.()";
@@ -12,8 +14,7 @@ namespace System.ComponentModel.DataAnnotations
         private const string ExtensionAbbreviationExt = "ext";
         private const string ExtensionAbbreviationX = "x";
 
-        public PhoneAttribute()
-            : base(DataType.PhoneNumber)
+        public PhoneAttribute() : base(DataType.PhoneNumber)
         {
             // Set DefaultErrorMessage not ErrorMessage, allowing user to set
             // ErrorMessageResourceType and ErrorMessageResourceName to use localized messages.
@@ -52,9 +53,13 @@ namespace System.ComponentModel.DataAnnotations
 
             foreach (char c in valueAsString)
             {
-                if (!(char.IsDigit(c)
-                    || char.IsWhiteSpace(c)
-                    || AdditionalPhoneNumberCharacters.IndexOf(c) != -1))
+                if (
+                    !(
+                        char.IsDigit(c)
+                        || char.IsWhiteSpace(c)
+                        || AdditionalPhoneNumberCharacters.IndexOf(c) != -1
+                    )
+                )
                 {
                     return false;
                 }
@@ -65,36 +70,45 @@ namespace System.ComponentModel.DataAnnotations
 
         private static string RemoveExtension(string potentialPhoneNumber)
         {
-            var lastIndexOfExtension = potentialPhoneNumber
-                .LastIndexOf(ExtensionAbbreviationExtDot, StringComparison.OrdinalIgnoreCase);
+            var lastIndexOfExtension = potentialPhoneNumber.LastIndexOf(
+                ExtensionAbbreviationExtDot,
+                StringComparison.OrdinalIgnoreCase
+            );
             if (lastIndexOfExtension >= 0)
             {
                 var extension = potentialPhoneNumber.Substring(
-                    lastIndexOfExtension + ExtensionAbbreviationExtDot.Length);
+                    lastIndexOfExtension + ExtensionAbbreviationExtDot.Length
+                );
                 if (MatchesExtension(extension))
                 {
                     return potentialPhoneNumber.Substring(0, lastIndexOfExtension);
                 }
             }
 
-            lastIndexOfExtension = potentialPhoneNumber
-                .LastIndexOf(ExtensionAbbreviationExt, StringComparison.OrdinalIgnoreCase);
+            lastIndexOfExtension = potentialPhoneNumber.LastIndexOf(
+                ExtensionAbbreviationExt,
+                StringComparison.OrdinalIgnoreCase
+            );
             if (lastIndexOfExtension >= 0)
             {
                 var extension = potentialPhoneNumber.Substring(
-                    lastIndexOfExtension + ExtensionAbbreviationExt.Length);
+                    lastIndexOfExtension + ExtensionAbbreviationExt.Length
+                );
                 if (MatchesExtension(extension))
                 {
                     return potentialPhoneNumber.Substring(0, lastIndexOfExtension);
                 }
             }
 
-            lastIndexOfExtension = potentialPhoneNumber
-                .LastIndexOf(ExtensionAbbreviationX, StringComparison.OrdinalIgnoreCase);
+            lastIndexOfExtension = potentialPhoneNumber.LastIndexOf(
+                ExtensionAbbreviationX,
+                StringComparison.OrdinalIgnoreCase
+            );
             if (lastIndexOfExtension >= 0)
             {
                 var extension = potentialPhoneNumber.Substring(
-                    lastIndexOfExtension + ExtensionAbbreviationX.Length);
+                    lastIndexOfExtension + ExtensionAbbreviationX.Length
+                );
                 if (MatchesExtension(extension))
                 {
                     return potentialPhoneNumber.Substring(0, lastIndexOfExtension);

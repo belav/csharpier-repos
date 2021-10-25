@@ -12,33 +12,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3.QPack
 
     internal class DynamicTable
     {
-
         // The encoder sends a Set Dynamic Table Capacity
         // instruction(Section 4.3.1) with a non-zero capacity to begin using
         // the dynamic table.
-        public DynamicTable(int maxSize)
-        {
-        }
+        public DynamicTable(int maxSize) { }
 
         public HeaderField this[int index]
         {
-            get
-            {
-                return new HeaderField();
-            }
+            get { return new HeaderField(); }
         }
 
         // TODO
-        public void Insert(Span<byte> name, Span<byte> value)
-        {
-        }
+        public void Insert(Span<byte> name, Span<byte> value) { }
 
-        // TODO 
-        public void Resize(int maxSize)
-        {
-        }
+        // TODO
+        public void Resize(int maxSize) { }
 
-        // TODO 
+        // TODO
         internal void Duplicate(int index)
         {
             throw new NotImplementedException();

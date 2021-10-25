@@ -24,10 +24,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(KeyValuePair<string, int>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Key=key0&parameter.Value=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Key=key0&parameter.Value=10");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -63,10 +65,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 Name = "parameter",
                 ParameterType = typeof(KeyValuePair<string, int>)
             };
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Value=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Value=10");
+                }
+            );
             var modelState = testContext.ModelState;
 
             // Act
@@ -97,22 +101,30 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider
                 .ForType(typeof(KeyValuePair<string, int>))
-                .BindingDetails((System.Action<ModelBinding.Metadata.BindingMetadata>)(binding =>
-                {
-                    // A real details provider could customize message based on BindingMetadataProviderContext.
-                    binding.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(
-                        () => $"Hurts when nothing is provided.");
-                }));
+                .BindingDetails(
+                    (System.Action<ModelBinding.Metadata.BindingMetadata>)(
+                        binding =>
+                        {
+                            // A real details provider could customize message based on BindingMetadataProviderContext.
+                            binding.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(
+                                () => $"Hurts when nothing is provided."
+                            );
+                        }
+                    )
+                );
 
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {
                     request.QueryString = new QueryString("?parameter.Value=10");
                 },
-                metadataProvider: metadataProvider);
+                metadataProvider: metadataProvider
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor
             {
                 Name = "parameter",
@@ -150,10 +162,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 Name = "parameter",
                 ParameterType = typeof(KeyValuePair<string, int>)
             };
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Key=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter.Key=10");
+                }
+            );
             var modelState = testContext.ModelState;
 
             // Act
@@ -184,22 +198,30 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider
                 .ForType(typeof(KeyValuePair<string, int>))
-                .BindingDetails((System.Action<ModelBinding.Metadata.BindingMetadata>)(binding =>
-                {
-                    // A real details provider could customize message based on BindingMetadataProviderContext.
-                    binding.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(
-                        () => $"Hurts when nothing is provided.");
-                }));
+                .BindingDetails(
+                    (System.Action<ModelBinding.Metadata.BindingMetadata>)(
+                        binding =>
+                        {
+                            // A real details provider could customize message based on BindingMetadataProviderContext.
+                            binding.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(
+                                () => $"Hurts when nothing is provided."
+                            );
+                        }
+                    )
+                );
 
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {
                     request.QueryString = new QueryString("?parameter.Key=10");
                 },
-                metadataProvider: metadataProvider);
+                metadataProvider: metadataProvider
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor
             {
                 Name = "parameter",
@@ -235,17 +257,16 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderModelName = "prefix",
-                },
+                BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
                 ParameterType = typeof(KeyValuePair<string, int>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?prefix.Key=key0&prefix.Value=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?prefix.Key=key0&prefix.Value=10");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -282,10 +303,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(KeyValuePair<string, int>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Key=key0&Value=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Key=key0&Value=10");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -322,10 +345,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(KeyValuePair<string, int>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -360,10 +385,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(KeyValuePair<string, Person>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Key=key0&parameter.Value.Id=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter.Key=key0&parameter.Value.Id=10"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -398,17 +427,16 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderModelName = "prefix",
-                },
+                BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
                 ParameterType = typeof(KeyValuePair<string, Person>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?prefix.Key=key0&prefix.Value.Id=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?prefix.Key=key0&prefix.Value.Id=10");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -446,10 +474,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(KeyValuePair<string, Person>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Key=key0&Value.Id=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?Key=key0&Value.Id=10");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -487,10 +517,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(KeyValuePair<string, Person>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -523,10 +555,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(KeyValuePair<string, string[]>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?p.Key=key1&p.Value[0]=value1&p.Value[1]=value2");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?p.Key=key1&p.Value[0]=value1&p.Value[1]=value2"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 

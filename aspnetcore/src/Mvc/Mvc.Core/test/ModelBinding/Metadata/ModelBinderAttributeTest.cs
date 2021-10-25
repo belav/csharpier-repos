@@ -25,10 +25,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void BinderType_DefaultCustomBindingSource()
         {
             // Arrange
-            var attribute = new ModelBinderAttribute
-            {
-                BinderType = typeof(ByteArrayModelBinder),
-            };
+            var attribute = new ModelBinderAttribute { BinderType = typeof(ByteArrayModelBinder), };
 
             // Act
             var source = attribute.BindingSource;

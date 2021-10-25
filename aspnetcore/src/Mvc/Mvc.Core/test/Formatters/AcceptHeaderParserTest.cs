@@ -17,7 +17,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var header = "application/json";
             var expected = new List<MediaTypeSegmentWithQuality>
             {
-                new MediaTypeSegmentWithQuality(new StringSegment("application/json"),1.0)
+                new MediaTypeSegmentWithQuality(new StringSegment("application/json"), 1.0)
             };
 
             // Act
@@ -34,8 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var header = "application/json, application/xml;q=0.8";
             var expected = new List<MediaTypeSegmentWithQuality>
             {
-                new MediaTypeSegmentWithQuality(new StringSegment("application/json"),1.0),
-                new MediaTypeSegmentWithQuality(new StringSegment("application/xml;q=0.8"),0.8)
+                new MediaTypeSegmentWithQuality(new StringSegment("application/json"), 1.0),
+                new MediaTypeSegmentWithQuality(new StringSegment("application/xml;q=0.8"), 0.8)
             };
 
             // Act
@@ -56,8 +56,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var header = "application/json, application/xml,;q=0.8";
             var expectedMediaTypes = new List<MediaTypeSegmentWithQuality>
             {
-                new MediaTypeSegmentWithQuality(new StringSegment("application/json"),1.0),
-                new MediaTypeSegmentWithQuality(new StringSegment("application/xml"),1.0),
+                new MediaTypeSegmentWithQuality(new StringSegment("application/json"), 1.0),
+                new MediaTypeSegmentWithQuality(new StringSegment("application/xml"), 1.0),
             };
 
             // Act
@@ -70,32 +70,35 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public static TheoryData<string[], string[]> ParseAcceptHeaderWithInvalidMediaTypesData =>
             new TheoryData<string[], string[]>
             {
-                { new [] { ";q=0.9" }, new string[] { } },
-                { new [] { "/" }, new string[] { } },
-                { new [] { "*/" }, new string[] { } },
-                { new [] { "/*" }, new string[] { } },
-                { new [] { "/;q=0.9" }, new string[] { } },
-                { new [] { "*/;q=0.9" }, new string[] { } },
-                { new [] { "/*;q=0.9" }, new string[] { } },
-                { new [] { "/;q=0.9,text/html" }, new string[] { "text/html" } },
-                { new [] { "*/;q=0.9,text/html" }, new string[] { "text/html" } },
-                { new [] { "/*;q=0.9,text/html" }, new string[] { "text/html" } },
-                { new [] { "img/png,/;q=0.9,text/html" }, new string[] { "img/png", "text/html" } },
-                { new [] { "img/png,*/;q=0.9,text/html" }, new string[] { "img/png", "text/html" } },
-                { new [] { "img/png,/*;q=0.9,text/html" }, new string[] { "img/png", "text/html" } },
-                { new [] { "img/png, /;q=0.9" }, new string[] { "img/png", } },
-                { new [] { "img/png, */;q=0.9" }, new string[] { "img/png", } },
-                { new [] { "img/png;q=1.0, /*;q=0.9" }, new string[] { "img/png;q=1.0", } },
+                { new[] { ";q=0.9" }, new string[] {  } },
+                { new[] { "/" }, new string[] {  } },
+                { new[] { "*/" }, new string[] {  } },
+                { new[] { "/*" }, new string[] {  } },
+                { new[] { "/;q=0.9" }, new string[] {  } },
+                { new[] { "*/;q=0.9" }, new string[] {  } },
+                { new[] { "/*;q=0.9" }, new string[] {  } },
+                { new[] { "/;q=0.9,text/html" }, new string[] { "text/html" } },
+                { new[] { "*/;q=0.9,text/html" }, new string[] { "text/html" } },
+                { new[] { "/*;q=0.9,text/html" }, new string[] { "text/html" } },
+                { new[] { "img/png,/;q=0.9,text/html" }, new string[] { "img/png", "text/html" } },
+                { new[] { "img/png,*/;q=0.9,text/html" }, new string[] { "img/png", "text/html" } },
+                { new[] { "img/png,/*;q=0.9,text/html" }, new string[] { "img/png", "text/html" } },
+                { new[] { "img/png, /;q=0.9" }, new string[] { "img/png", } },
+                { new[] { "img/png, */;q=0.9" }, new string[] { "img/png", } },
+                { new[] { "img/png;q=1.0, /*;q=0.9" }, new string[] { "img/png;q=1.0", } },
             };
 
         [Theory]
         [MemberData(nameof(ParseAcceptHeaderWithInvalidMediaTypesData))]
         public void ParseAcceptHeader_GracefullyRecoversFromInvalidMediaTypeValues_AndReturnsValidMediaTypes(
             string[] acceptHeader,
-            string[] expected)
+            string[] expected
+        )
         {
             // Arrange
-            var expectedMediaTypes = expected.Select(e => new MediaTypeSegmentWithQuality(new StringSegment(e), 1.0)).ToList();
+            var expectedMediaTypes = expected
+                .Select(e => new MediaTypeSegmentWithQuality(new StringSegment(e), 1.0))
+                .ToList();
 
             // Act
             var parsed = AcceptHeaderParser.ParseAcceptHeader(acceptHeader);
@@ -116,7 +119,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             // Act
             var parsed = AcceptHeaderParser.ParseAcceptHeader(
-                new List<string> { "application/json", "", "application/xml;q=0.8" });
+                new List<string> { "application/json", "", "application/xml;q=0.8" }
+            );
 
             // Assert
             Assert.Equal(expected, parsed);

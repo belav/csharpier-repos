@@ -23,7 +23,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseStatusCodePages(this IApplicationBuilder app, StatusCodePagesOptions options)
+        public static IApplicationBuilder UseStatusCodePages(
+            this IApplicationBuilder app,
+            StatusCodePagesOptions options
+        )
         {
             if (app == null)
             {
@@ -60,7 +63,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="handler"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseStatusCodePages(this IApplicationBuilder app, Func<StatusCodeContext, Task> handler)
+        public static IApplicationBuilder UseStatusCodePages(
+            this IApplicationBuilder app,
+            Func<StatusCodeContext, Task> handler
+        )
         {
             if (app == null)
             {
@@ -71,10 +77,7 @@ namespace Microsoft.AspNetCore.Builder
                 throw new ArgumentNullException(nameof(handler));
             }
 
-            return app.UseStatusCodePages(new StatusCodePagesOptions
-            {
-                HandleAsync = handler
-            });
+            return app.UseStatusCodePages(new StatusCodePagesOptions { HandleAsync = handler });
         }
 
         /// <summary>
@@ -85,19 +88,29 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="contentType"></param>
         /// <param name="bodyFormat"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseStatusCodePages(this IApplicationBuilder app, string contentType, string bodyFormat)
+        public static IApplicationBuilder UseStatusCodePages(
+            this IApplicationBuilder app,
+            string contentType,
+            string bodyFormat
+        )
         {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
-            return app.UseStatusCodePages(context =>
-            {
-                var body = string.Format(CultureInfo.InvariantCulture, bodyFormat, context.HttpContext.Response.StatusCode);
-                context.HttpContext.Response.ContentType = contentType;
-                return context.HttpContext.Response.WriteAsync(body);
-            });
+            return app.UseStatusCodePages(
+                context =>
+                {
+                    var body = string.Format(
+                        CultureInfo.InvariantCulture,
+                        bodyFormat,
+                        context.HttpContext.Response.StatusCode
+                    );
+                    context.HttpContext.Response.ContentType = contentType;
+                    return context.HttpContext.Response.WriteAsync(body);
+                }
+            );
         }
 
         /// <summary>
@@ -108,7 +121,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="locationFormat"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseStatusCodePagesWithRedirects(this IApplicationBuilder app, string locationFormat)
+        public static IApplicationBuilder UseStatusCodePagesWithRedirects(
+            this IApplicationBuilder app,
+            string locationFormat
+        )
         {
             if (app == null)
             {
@@ -118,21 +134,35 @@ namespace Microsoft.AspNetCore.Builder
             if (locationFormat.StartsWith('~'))
             {
                 locationFormat = locationFormat.Substring(1);
-                return app.UseStatusCodePages(context =>
-                {
-                    var location = string.Format(CultureInfo.InvariantCulture, locationFormat, context.HttpContext.Response.StatusCode);
-                    context.HttpContext.Response.Redirect(context.HttpContext.Request.PathBase + location);
-                    return Task.CompletedTask;
-                });
+                return app.UseStatusCodePages(
+                    context =>
+                    {
+                        var location = string.Format(
+                            CultureInfo.InvariantCulture,
+                            locationFormat,
+                            context.HttpContext.Response.StatusCode
+                        );
+                        context.HttpContext.Response.Redirect(
+                            context.HttpContext.Request.PathBase + location
+                        );
+                        return Task.CompletedTask;
+                    }
+                );
             }
             else
             {
-                return app.UseStatusCodePages(context =>
-                {
-                    var location = string.Format(CultureInfo.InvariantCulture, locationFormat, context.HttpContext.Response.StatusCode);
-                    context.HttpContext.Response.Redirect(location);
-                    return Task.CompletedTask;
-                });
+                return app.UseStatusCodePages(
+                    context =>
+                    {
+                        var location = string.Format(
+                            CultureInfo.InvariantCulture,
+                            locationFormat,
+                            context.HttpContext.Response.StatusCode
+                        );
+                        context.HttpContext.Response.Redirect(location);
+                        return Task.CompletedTask;
+                    }
+                );
             }
         }
 
@@ -143,7 +173,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseStatusCodePages(this IApplicationBuilder app, Action<IApplicationBuilder> configuration)
+        public static IApplicationBuilder UseStatusCodePages(
+            this IApplicationBuilder app,
+            Action<IApplicationBuilder> configuration
+        )
         {
             if (app == null)
             {
@@ -167,50 +200,72 @@ namespace Microsoft.AspNetCore.Builder
         public static IApplicationBuilder UseStatusCodePagesWithReExecute(
             this IApplicationBuilder app,
             string pathFormat,
-            string? queryFormat = null)
+            string? queryFormat = null
+        )
         {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
-            return app.UseStatusCodePages(async context =>
-            {
-                var newPath = new PathString(
-                    string.Format(CultureInfo.InvariantCulture, pathFormat, context.HttpContext.Response.StatusCode));
-                var formatedQueryString = queryFormat == null ? null :
-                    string.Format(CultureInfo.InvariantCulture, queryFormat, context.HttpContext.Response.StatusCode);
-                var newQueryString = queryFormat == null ? QueryString.Empty : new QueryString(formatedQueryString);
-
-                var originalPath = context.HttpContext.Request.Path;
-                var originalQueryString = context.HttpContext.Request.QueryString;
-                // Store the original paths so the app can check it.
-                context.HttpContext.Features.Set<IStatusCodeReExecuteFeature>(new StatusCodeReExecuteFeature()
+            return app.UseStatusCodePages(
+                async context =>
                 {
-                    OriginalPathBase = context.HttpContext.Request.PathBase.Value!,
-                    OriginalPath = originalPath.Value!,
-                    OriginalQueryString = originalQueryString.HasValue ? originalQueryString.Value : null,
-                });
+                    var newPath = new PathString(
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            pathFormat,
+                            context.HttpContext.Response.StatusCode
+                        )
+                    );
+                    var formatedQueryString =
+                        queryFormat == null
+                            ? null
+                            : string.Format(
+                                  CultureInfo.InvariantCulture,
+                                  queryFormat,
+                                  context.HttpContext.Response.StatusCode
+                              );
+                    var newQueryString =
+                        queryFormat == null
+                            ? QueryString.Empty
+                            : new QueryString(formatedQueryString);
 
-                // An endpoint may have already been set. Since we're going to re-invoke the middleware pipeline we need to reset
-                // the endpoint and route values to ensure things are re-calculated.
-                context.HttpContext.SetEndpoint(endpoint: null);
-                var routeValuesFeature = context.HttpContext.Features.Get<IRouteValuesFeature>();
-                routeValuesFeature?.RouteValues?.Clear();
+                    var originalPath = context.HttpContext.Request.Path;
+                    var originalQueryString = context.HttpContext.Request.QueryString;
+                    // Store the original paths so the app can check it.
+                    context.HttpContext.Features.Set<IStatusCodeReExecuteFeature>(
+                        new StatusCodeReExecuteFeature()
+                        {
+                            OriginalPathBase = context.HttpContext.Request.PathBase.Value!,
+                            OriginalPath = originalPath.Value!,
+                            OriginalQueryString = originalQueryString.HasValue
+                                ? originalQueryString.Value
+                                : null,
+                        }
+                    );
 
-                context.HttpContext.Request.Path = newPath;
-                context.HttpContext.Request.QueryString = newQueryString;
-                try
-                {
-                    await context.Next(context.HttpContext);
+                    // An endpoint may have already been set. Since we're going to re-invoke the middleware pipeline we need to reset
+                    // the endpoint and route values to ensure things are re-calculated.
+                    context.HttpContext.SetEndpoint(endpoint: null);
+                    var routeValuesFeature =
+                        context.HttpContext.Features.Get<IRouteValuesFeature>();
+                    routeValuesFeature?.RouteValues?.Clear();
+
+                    context.HttpContext.Request.Path = newPath;
+                    context.HttpContext.Request.QueryString = newQueryString;
+                    try
+                    {
+                        await context.Next(context.HttpContext);
+                    }
+                    finally
+                    {
+                        context.HttpContext.Request.QueryString = originalQueryString;
+                        context.HttpContext.Request.Path = originalPath;
+                        context.HttpContext.Features.Set<IStatusCodeReExecuteFeature?>(null);
+                    }
                 }
-                finally
-                {
-                    context.HttpContext.Request.QueryString = originalQueryString;
-                    context.HttpContext.Request.Path = originalPath;
-                    context.HttpContext.Features.Set<IStatusCodeReExecuteFeature?>(null);
-                }
-            });
+            );
         }
     }
 }

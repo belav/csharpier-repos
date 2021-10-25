@@ -9,7 +9,9 @@ using Mono.Cecil;
 
 namespace Mono.Linker
 {
-    public readonly struct MessageContainer : IComparable<MessageContainer>, IEquatable<MessageContainer>
+    public readonly struct MessageContainer
+        : IComparable<MessageContainer>,
+          IEquatable<MessageContainer>
     {
         public static readonly MessageContainer Empty;
 
@@ -45,10 +47,18 @@ namespace Mono.Linker
         /// <param name="subcategory">Optionally, further categorize this error</param>
         /// <param name="origin">Filename, line, and column where the error was found</param>
         /// <returns>New MessageContainer of 'Error' category</returns>
-        internal static MessageContainer CreateErrorMessage(string text, int code, string subcategory = MessageSubCategory.None, MessageOrigin? origin = null)
+        internal static MessageContainer CreateErrorMessage(
+            string text,
+            int code,
+            string subcategory = MessageSubCategory.None,
+            MessageOrigin? origin = null
+        )
         {
             if (!(code >= 1000 && code <= 2000))
-                throw new ArgumentOutOfRangeException(nameof(code), $"The provided code '{code}' does not fall into the error category, which is in the range of 1000 to 2000 (inclusive).");
+                throw new ArgumentOutOfRangeException(
+                    nameof(code),
+                    $"The provided code '{code}' does not fall into the error category, which is in the range of 1000 to 2000 (inclusive)."
+                );
 
             return new MessageContainer(MessageCategory.Error, text, code, subcategory, origin);
         }
@@ -62,15 +72,25 @@ namespace Mono.Linker
         /// <param name="subcategory">Optionally, further categorize this error</param>
         /// <param name="origin">Filename or member where the error is coming from</param>
         /// <returns>Custom MessageContainer of 'Error' category</returns>
-        public static MessageContainer CreateCustomErrorMessage(string text, int code, string subcategory = MessageSubCategory.None, MessageOrigin? origin = null)
+        public static MessageContainer CreateCustomErrorMessage(
+            string text,
+            int code,
+            string subcategory = MessageSubCategory.None,
+            MessageOrigin? origin = null
+        )
         {
 #if DEBUG
-			Debug.Assert (Assembly.GetCallingAssembly () != typeof (MessageContainer).Assembly,
-				"'CreateCustomErrorMessage' is intended to be used by external assemblies only. Use 'CreateErrorMessage' instead.");
+            Debug.Assert(
+                Assembly.GetCallingAssembly() != typeof(MessageContainer).Assembly,
+                "'CreateCustomErrorMessage' is intended to be used by external assemblies only. Use 'CreateErrorMessage' instead."
+            );
 #endif
             if (code <= 6000)
-                throw new ArgumentOutOfRangeException(nameof(code), $"The provided code '{code}' does not fall into the permitted range for external errors. To avoid possible collisions " +
-                    "with existing and future {Constants.ILLink} errors, external messages should use codes starting from 6001.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(code),
+                    $"The provided code '{code}' does not fall into the permitted range for external errors. To avoid possible collisions "
+                        + "with existing and future {Constants.ILLink} errors, external messages should use codes starting from 6001."
+                );
 
             return new MessageContainer(MessageCategory.Error, text, code, subcategory, origin);
         }
@@ -87,10 +107,20 @@ namespace Mono.Linker
         /// <param name="version">Optional warning version number. Versioned warnings can be controlled with the
         /// warning wave option --warn VERSION. Unversioned warnings are unaffected by this option. </param>
         /// <returns>New MessageContainer of 'Warning' category</returns>
-        internal static MessageContainer CreateWarningMessage(LinkContext context, string text, int code, MessageOrigin origin, WarnVersion version, string subcategory = MessageSubCategory.None)
+        internal static MessageContainer CreateWarningMessage(
+            LinkContext context,
+            string text,
+            int code,
+            MessageOrigin origin,
+            WarnVersion version,
+            string subcategory = MessageSubCategory.None
+        )
         {
             if (!(code > 2000 && code <= 6000))
-                throw new ArgumentOutOfRangeException(nameof(code), $"The provided code '{code}' does not fall into the warning category, which is in the range of 2001 to 6000 (inclusive).");
+                throw new ArgumentOutOfRangeException(
+                    nameof(code),
+                    $"The provided code '{code}' does not fall into the warning category, which is in the range of 2001 to 6000 (inclusive)."
+                );
 
             return CreateWarningMessageContainer(context, text, code, origin, version, subcategory);
         }
@@ -107,23 +137,44 @@ namespace Mono.Linker
         /// warning wave option --warn VERSION. Unversioned warnings are unaffected by this option</param>
         /// <param name="subcategory"></param>
         /// <returns>Custom MessageContainer of 'Warning' category</returns>
-        public static MessageContainer CreateCustomWarningMessage(LinkContext context, string text, int code, MessageOrigin origin, WarnVersion version, string subcategory = MessageSubCategory.None)
+        public static MessageContainer CreateCustomWarningMessage(
+            LinkContext context,
+            string text,
+            int code,
+            MessageOrigin origin,
+            WarnVersion version,
+            string subcategory = MessageSubCategory.None
+        )
         {
 #if DEBUG
-			Debug.Assert (Assembly.GetCallingAssembly () != typeof (MessageContainer).Assembly,
-				"'CreateCustomWarningMessage' is intended to be used by external assemblies only. Use 'CreateWarningMessage' instead.");
+            Debug.Assert(
+                Assembly.GetCallingAssembly() != typeof(MessageContainer).Assembly,
+                "'CreateCustomWarningMessage' is intended to be used by external assemblies only. Use 'CreateWarningMessage' instead."
+            );
 #endif
             if (code <= 6000)
-                throw new ArgumentOutOfRangeException(nameof(code), $"The provided code '{code}' does not fall into the permitted range for external warnings. To avoid possible collisions " +
-                    $"with existing and future {Constants.ILLink} warnings, external messages should use codes starting from 6001.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(code),
+                    $"The provided code '{code}' does not fall into the permitted range for external warnings. To avoid possible collisions "
+                        + $"with existing and future {Constants.ILLink} warnings, external messages should use codes starting from 6001."
+                );
 
             return CreateWarningMessageContainer(context, text, code, origin, version, subcategory);
         }
 
-        private static MessageContainer CreateWarningMessageContainer(LinkContext context, string text, int code, MessageOrigin origin, WarnVersion version, string subcategory = MessageSubCategory.None)
+        private static MessageContainer CreateWarningMessageContainer(
+            LinkContext context,
+            string text,
+            int code,
+            MessageOrigin origin,
+            WarnVersion version,
+            string subcategory = MessageSubCategory.None
+        )
         {
             if (!(version >= WarnVersion.ILLink0 && version <= WarnVersion.Latest))
-                throw new ArgumentException($"The provided warning version '{version}' is invalid.");
+                throw new ArgumentException(
+                    $"The provided warning version '{version}' is invalid."
+                );
 
             if (context.IsWarningSuppressed(code, origin))
                 return Empty;
@@ -132,7 +183,13 @@ namespace Mono.Linker
                 return Empty;
 
             if (context.IsWarningAsError(code))
-                return new MessageContainer(MessageCategory.WarningAsError, text, code, subcategory, origin);
+                return new MessageContainer(
+                    MessageCategory.WarningAsError,
+                    text,
+                    code,
+                    subcategory,
+                    origin
+                );
 
             return new MessageContainer(MessageCategory.Warning, text, code, subcategory, origin);
         }
@@ -157,7 +214,13 @@ namespace Mono.Linker
             return new MessageContainer(MessageCategory.Diagnostic, text, null);
         }
 
-        private MessageContainer(MessageCategory category, string text, int? code, string subcategory = MessageSubCategory.None, MessageOrigin? origin = null)
+        private MessageContainer(
+            MessageCategory category,
+            string text,
+            int? code,
+            string subcategory = MessageSubCategory.None,
+            MessageOrigin? origin = null
+        )
         {
             Code = code;
             Category = category;
@@ -223,10 +286,13 @@ namespace Mono.Linker
         }
 
         public bool Equals(MessageContainer other) =>
-            (Category, Text, Code, SubCategory, Origin) == (other.Category, other.Text, other.Code, other.SubCategory, other.Origin);
+            (Category, Text, Code, SubCategory, Origin)
+            == (other.Category, other.Text, other.Code, other.SubCategory, other.Origin);
 
-        public override bool Equals(object obj) => obj is MessageContainer messageContainer && Equals(messageContainer);
-        public override int GetHashCode() => (Category, Text, Code, SubCategory, Origin).GetHashCode();
+        public override bool Equals(object obj) =>
+            obj is MessageContainer messageContainer && Equals(messageContainer);
+        public override int GetHashCode() =>
+            (Category, Text, Code, SubCategory, Origin).GetHashCode();
 
         public int CompareTo(MessageContainer other)
         {
@@ -242,7 +308,9 @@ namespace Mono.Linker
             return (Origin == null) ? 1 : -1;
         }
 
-        public static bool operator ==(MessageContainer lhs, MessageContainer rhs) => lhs.Equals(rhs);
-        public static bool operator !=(MessageContainer lhs, MessageContainer rhs) => !lhs.Equals(rhs);
+        public static bool operator ==(MessageContainer lhs, MessageContainer rhs) =>
+            lhs.Equals(rhs);
+        public static bool operator !=(MessageContainer lhs, MessageContainer rhs) =>
+            !lhs.Equals(rhs);
     }
 }

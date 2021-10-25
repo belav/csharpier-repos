@@ -11,7 +11,11 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.Test
 {
-    [ExportWorkspaceService(typeof(IDocumentTrackingService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceService(typeof(IDocumentTrackingService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal sealed class TestDocumentTrackingService : IDocumentTrackingService
     {
         private readonly object _gate = new object();
@@ -20,9 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.Test
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestDocumentTrackingService()
-        {
-        }
+        public TestDocumentTrackingService() { }
 
         public event EventHandler<DocumentId> ActiveDocumentChanged
         {
@@ -33,7 +35,6 @@ namespace Microsoft.CodeAnalysis.Editor.Test
                     _activeDocumentChangedEventHandler += value;
                 }
             }
-
             remove
             {
                 lock (_gate)
@@ -55,10 +56,11 @@ namespace Microsoft.CodeAnalysis.Editor.Test
             _activeDocumentChangedEventHandler?.Invoke(this, newActiveDocumentId);
         }
 
-        public DocumentId TryGetActiveDocument()
-            => _activeDocumentId;
+        public DocumentId TryGetActiveDocument() => _activeDocumentId;
 
-        public ImmutableArray<DocumentId> GetVisibleDocuments()
-            => _activeDocumentId != null ? ImmutableArray.Create(_activeDocumentId) : ImmutableArray<DocumentId>.Empty;
+        public ImmutableArray<DocumentId> GetVisibleDocuments() =>
+            _activeDocumentId != null
+                ? ImmutableArray.Create(_activeDocumentId)
+                : ImmutableArray<DocumentId>.Empty;
     }
 }

@@ -44,7 +44,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         [Benchmark]
         public Task WriteAsync()
         {
-            return _http1Connection.ResponseBody.WriteAsync(_writeData, 0, _writeData.Length, default);
+            return _http1Connection.ResponseBody.WriteAsync(
+                _writeData,
+                0,
+                _writeData.Length,
+                default
+            );
         }
 
         [Benchmark]
@@ -56,10 +61,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             for (int i = 0; i < 9; i++)
             {
                 // Ignore the first nine tasks.
-                _ = _http1Connection.ResponseBody.WriteAsync(_writeData, i * segmentSize, segmentSize, default);
+                _ = _http1Connection.ResponseBody.WriteAsync(
+                    _writeData,
+                    i * segmentSize,
+                    segmentSize,
+                    default
+                );
             }
 
-            return _http1Connection.ResponseBody.WriteAsync(_writeData, 9 * segmentSize, segmentSize, default);
+            return _http1Connection.ResponseBody.WriteAsync(
+                _writeData,
+                9 * segmentSize,
+                segmentSize,
+                default
+            );
         }
 
         private TestHttp1Connection MakeHttp1Connection()
@@ -72,7 +87,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                 serverOptions: new KestrelServerOptions(),
                 httpParser: new HttpParser<Http1ParsingHandler>(),
                 dateHeaderValueManager: new DateHeaderValueManager(),
-                log: new MockTrace());
+                log: new MockTrace()
+            );
 
             var connectionContext = TestContextFactory.CreateHttpConnectionContext(
                 serviceContext: serviceContext,
@@ -80,7 +96,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                 transport: pair.Transport,
                 timeoutControl: new TimeoutControl(timeoutHandler: null),
                 memoryPool: _memoryPool,
-                connectionFeatures: new FeatureCollection());
+                connectionFeatures: new FeatureCollection()
+            );
 
             var http1Connection = new TestHttp1Connection(connectionContext);
 

@@ -19,7 +19,15 @@ namespace DebuggerTests
         {
             await SetBreakpoint("dotnet://debugger-test.dll/debugger-test.cs", 100, 0);
             var tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                         async () => await EvaluateAndCheck("window.setTimeout(function() { invoke_add(); }, 1);", null, -1, -1, null));
+                async () =>
+                    await EvaluateAndCheck(
+                        "window.setTimeout(function() { invoke_add(); }, 1);",
+                        null,
+                        -1,
+                        -1,
+                        null
+                    )
+            );
             Assert.Contains("timed out", tce.Message);
         }
 
@@ -27,17 +35,29 @@ namespace DebuggerTests
         public async Task ExceptionThrown()
         {
             var ae = await Assert.ThrowsAsync<ArgumentException>(
-                        async () => await EvaluateAndCheck("window.setTimeout(function() { non_existant_fn(); }, 1);", null, -1, -1, null));
+                async () =>
+                    await EvaluateAndCheck(
+                        "window.setTimeout(function() { non_existant_fn(); }, 1);",
+                        null,
+                        -1,
+                        -1,
+                        null
+                    )
+            );
             Assert.Contains("non_existant_fn is not defined", ae.Message);
         }
 
         [Fact]
-        public async Task BrowserCrash() => await Assert.ThrowsAsync<WebSocketException>(async () =>
-            await SendCommandAndCheck(null, "Browser.crash", null, -1, -1, null));
+        public async Task BrowserCrash() =>
+            await Assert.ThrowsAsync<WebSocketException>(
+                async () => await SendCommandAndCheck(null, "Browser.crash", null, -1, -1, null)
+            );
 
         [Fact]
-        public async Task BrowserClose() => await Assert.ThrowsAsync<WebSocketException>(async () =>
-                await SendCommandAndCheck(null, "Browser.close", null, -1, -1, null));
+        public async Task BrowserClose() =>
+            await Assert.ThrowsAsync<WebSocketException>(
+                async () => await SendCommandAndCheck(null, "Browser.close", null, -1, -1, null)
+            );
 
         [Fact]
         public async Task InspectorWaitForAfterMessageAlreadyReceived()
@@ -47,8 +67,11 @@ namespace DebuggerTests
 
             res = await cli.SendCommand(
                 "Runtime.evaluate",
-                JObject.FromObject(new { expression = "window.setTimeout(function() { invoke_add(); }, 0);" }),
-                token);
+                JObject.FromObject(
+                    new { expression = "window.setTimeout(function() { invoke_add(); }, 0);" }
+                ),
+                token
+            );
             Assert.True(res.IsOk, $"evaluating the function failed with {res}");
 
             // delay, so that we can get the Debugger.pause event
@@ -60,7 +83,9 @@ namespace DebuggerTests
         [Fact]
         public async Task InspectorWaitForMessageThatNeverArrives()
         {
-            var tce = await Assert.ThrowsAsync<TaskCanceledException>(async () => await insp.WaitFor("Message.that.never.arrives"));
+            var tce = await Assert.ThrowsAsync<TaskCanceledException>(
+                async () => await insp.WaitFor("Message.that.never.arrives")
+            );
             Assert.Contains("timed out", tce.Message);
         }
     }

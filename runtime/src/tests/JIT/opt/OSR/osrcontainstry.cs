@@ -17,13 +17,11 @@ class OSRContainsTry
         int result = 0;
         for (int i = from; i < to; i++)
         {
-            try 
+            try
             {
                 result = I(ref result) + i;
             }
-            catch (Exception e)
-            {
-            }
+            catch (Exception e) { }
         }
         return result;
     }
@@ -34,5 +32,5 @@ class OSRContainsTry
         int result = F(0, 1_000_000);
         Console.WriteLine($"done, sum is {result}");
         return result == 1783293664 ? 100 : -1;
-    }  
+    }
 }

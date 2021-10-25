@@ -11,12 +11,13 @@ namespace Microsoft.AspNetCore.Razor.Language
         private readonly string _fileKind;
 
         public TestRazorProjectItem(
-            string filePath, 
+            string filePath,
             string physicalPath = null,
             string relativePhysicalPath = null,
             string basePath = "/",
             string fileKind = null,
-            string cssScope = null)
+            string cssScope = null
+        )
         {
             FilePath = filePath;
             PhysicalPath = physicalPath;

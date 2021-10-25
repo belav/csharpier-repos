@@ -15,8 +15,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public ModelBuilderAssemblyScanTest()
         {
             _mockEntityTypeAssembly = MockAssembly.Create(
-                typeof(ScannerCustomerEntityConfiguration), typeof(ScannerCustomerEntityConfiguration2),
-                typeof(AbstractCustomerEntityConfiguration), typeof(AbstractCustomerEntityConfigurationImpl));
+                typeof(ScannerCustomerEntityConfiguration),
+                typeof(ScannerCustomerEntityConfiguration2),
+                typeof(AbstractCustomerEntityConfiguration),
+                typeof(AbstractCustomerEntityConfigurationImpl)
+            );
         }
 
         [ConditionalFact]
@@ -27,9 +30,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             var entityType = builder.Model.FindEntityType(typeof(ScannerCustomer));
             // ScannerCustomerEntityConfiguration called
-            Assert.Equal(200, entityType.FindProperty(nameof(ScannerCustomer.FirstName)).GetMaxLength());
+            Assert.Equal(
+                200,
+                entityType.FindProperty(nameof(ScannerCustomer.FirstName)).GetMaxLength()
+            );
             // ScannerCustomerEntityConfiguration2 called
-            Assert.Equal(1000, entityType.FindProperty(nameof(ScannerCustomer.LastName)).GetMaxLength());
+            Assert.Equal(
+                1000,
+                entityType.FindProperty(nameof(ScannerCustomer.LastName)).GetMaxLength()
+            );
             // AbstractCustomerEntityConfiguration not called
             Assert.Null(entityType.FindProperty(nameof(ScannerCustomer.MiddleName)).GetMaxLength());
             // AbstractCustomerEntityConfigurationImpl called
@@ -41,11 +50,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             var builder = CreateModelBuilder();
             builder.ApplyConfigurationsFromAssembly(
-                _mockEntityTypeAssembly, type => type.Name == nameof(ScannerCustomerEntityConfiguration));
+                _mockEntityTypeAssembly,
+                type => type.Name == nameof(ScannerCustomerEntityConfiguration)
+            );
 
             var entityType = builder.Model.FindEntityType(typeof(ScannerCustomer));
             // ScannerCustomerEntityConfiguration called
-            Assert.Equal(200, entityType.FindProperty(nameof(ScannerCustomer.FirstName)).GetMaxLength());
+            Assert.Equal(
+                200,
+                entityType.FindProperty(nameof(ScannerCustomer.FirstName)).GetMaxLength()
+            );
             // ScannerCustomerEntityConfiguration2 not called
             Assert.Null(entityType.FindProperty(nameof(ScannerCustomer.LastName)).GetMaxLength());
             // AbstractCustomerEntityConfiguration not called
@@ -59,15 +73,17 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         {
             var builder = CreateModelBuilder();
             builder.ApplyConfigurationsFromAssembly(
-                _mockEntityTypeAssembly, type => type.Name == nameof(AbstractCustomerEntityConfiguration));
+                _mockEntityTypeAssembly,
+                type => type.Name == nameof(AbstractCustomerEntityConfiguration)
+            );
 
             var entityType = builder.Model.FindEntityType(typeof(ScannerCustomer));
             // No configuration should occur
             Assert.Null(entityType);
         }
 
-        protected virtual ModelBuilder CreateModelBuilder()
-            => InMemoryTestHelpers.Instance.CreateConventionBuilder();
+        protected virtual ModelBuilder CreateModelBuilder() =>
+            InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
         protected class ScannerCustomer
         {
@@ -97,7 +113,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             }
         }
 
-        private class ScannerCustomerEntityConfiguration2 : IEntityTypeConfiguration<ScannerCustomer>
+        private class ScannerCustomerEntityConfiguration2
+            : IEntityTypeConfiguration<ScannerCustomer>
         {
             public void Configure(EntityTypeBuilder<ScannerCustomer> builder)
             {
@@ -105,7 +122,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             }
         }
 
-        private abstract class AbstractCustomerEntityConfiguration : IEntityTypeConfiguration<ScannerCustomer>
+        private abstract class AbstractCustomerEntityConfiguration
+            : IEntityTypeConfiguration<ScannerCustomer>
         {
             public virtual void Configure(EntityTypeBuilder<ScannerCustomer> builder)
             {

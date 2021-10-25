@@ -7,7 +7,11 @@ using System.Security.Permissions;
 namespace System.Data.Common
 {
 #if NET50_OBSOLETIONS
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public abstract class DBDataPermission : CodeAccessPermission, IUnrestrictedPermission
     {
@@ -17,7 +21,11 @@ namespace System.Data.Common
         protected DBDataPermission(PermissionState state) { }
         protected DBDataPermission(PermissionState state, bool allowBlankPassword) { }
         public bool AllowBlankPassword { get; set; }
-        public virtual void Add(string connectionString, string restrictions, KeyRestrictionBehavior behavior) { }
+        public virtual void Add(
+            string connectionString,
+            string restrictions,
+            KeyRestrictionBehavior behavior
+        ) { }
         protected void Clear() { }
         protected virtual DBDataPermission CreateInstance() => null;
         public override IPermission Copy() => null;
@@ -26,6 +34,9 @@ namespace System.Data.Common
         public override bool IsSubsetOf(IPermission target) => false;
         public bool IsUnrestricted() => false;
         public override SecurityElement ToXml() => null;
-        public override IPermission Union(IPermission target) { return default(IPermission); }
+        public override IPermission Union(IPermission target)
+        {
+            return default(IPermission);
+        }
     }
 }

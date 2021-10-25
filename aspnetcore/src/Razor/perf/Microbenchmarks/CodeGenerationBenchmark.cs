@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Razor.Microbenchmarks
         public CodeGenerationBenchmark()
         {
             var current = new DirectoryInfo(AppContext.BaseDirectory);
-            while  (current != null && !File.Exists(Path.Combine(current.FullName, "MSN.cshtml")))
+            while (current != null && !File.Exists(Path.Combine(current.FullName, "MSN.cshtml")))
             {
                 current = current.Parent;
             }
@@ -22,7 +22,12 @@ namespace Microsoft.AspNetCore.Razor.Microbenchmarks
             var root = current;
             var fileSystem = RazorProjectFileSystem.Create(root.FullName);
 
-            ProjectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, fileSystem, b => RazorExtensions.Register(b)); ;
+            ProjectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                fileSystem,
+                b => RazorExtensions.Register(b)
+            );
+            ;
 
             MSN = fileSystem.GetItem(Path.Combine(root.FullName, "MSN.cshtml"), FileKinds.Legacy);
         }
@@ -39,7 +44,11 @@ namespace Microsoft.AspNetCore.Razor.Microbenchmarks
 
             if (generated.Diagnostics.Count != 0)
             {
-                throw new Exception("Error!" + Environment.NewLine + string.Join(Environment.NewLine, generated.Diagnostics));
+                throw new Exception(
+                    "Error!"
+                        + Environment.NewLine
+                        + string.Join(Environment.NewLine, generated.Diagnostics)
+                );
             }
         }
 
@@ -51,7 +60,11 @@ namespace Microsoft.AspNetCore.Razor.Microbenchmarks
 
             if (generated.Diagnostics.Count != 0)
             {
-                throw new Exception("Error!" + Environment.NewLine + string.Join(Environment.NewLine, generated.Diagnostics));
+                throw new Exception(
+                    "Error!"
+                        + Environment.NewLine
+                        + string.Join(Environment.NewLine, generated.Diagnostics)
+                );
             }
         }
     }

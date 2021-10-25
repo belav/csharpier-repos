@@ -13,14 +13,24 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
     internal partial class SQLitePersistentStorage
     {
-        public override Task<bool> ChecksumMatchesAsync(string name, Checksum checksum, CancellationToken cancellationToken)
-            => _solutionAccessor.ChecksumMatchesAsync(name, checksum, cancellationToken);
+        public override Task<bool> ChecksumMatchesAsync(
+            string name,
+            Checksum checksum,
+            CancellationToken cancellationToken
+        ) => _solutionAccessor.ChecksumMatchesAsync(name, checksum, cancellationToken);
 
-        public override Task<Stream?> ReadStreamAsync(string name, Checksum? checksum, CancellationToken cancellationToken)
-            => _solutionAccessor.ReadStreamAsync(name, checksum, cancellationToken);
+        public override Task<Stream?> ReadStreamAsync(
+            string name,
+            Checksum? checksum,
+            CancellationToken cancellationToken
+        ) => _solutionAccessor.ReadStreamAsync(name, checksum, cancellationToken);
 
-        public override Task<bool> WriteStreamAsync(string name, Stream stream, Checksum? checksum, CancellationToken cancellationToken)
-            => _solutionAccessor.WriteStreamAsync(name, stream, checksum, cancellationToken);
+        public override Task<bool> WriteStreamAsync(
+            string name,
+            Stream stream,
+            Checksum? checksum,
+            CancellationToken cancellationToken
+        ) => _solutionAccessor.WriteStreamAsync(name, stream, checksum, cancellationToken);
 
         /// <summary>
         /// <see cref="Accessor{TKey, TWriteQueueKey, TDatabaseId}"/> responsible for storing and 
@@ -29,31 +39,37 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// </summary>
         private class SolutionAccessor : Accessor<string, string, string>
         {
-            public SolutionAccessor(SQLitePersistentStorage storage) : base(storage)
-            {
-            }
+            public SolutionAccessor(SQLitePersistentStorage storage) : base(storage) { }
 
             protected override Table Table => Table.Solution;
 
-            protected override string GetWriteQueueKey(string key)
-                => key;
+            protected override string GetWriteQueueKey(string key) => key;
 
-            protected override bool TryGetDatabaseId(SqlConnection connection, string key, out string dataId)
+            protected override bool TryGetDatabaseId(
+                SqlConnection connection,
+                string key,
+                out string dataId
+            )
             {
                 // For the SolutionDataTable the key itself acts as the data-id.
                 dataId = key;
                 return true;
             }
 
-            protected override bool TryGetRowId(SqlConnection connection, Database database, string dataId, out long rowId)
+            protected override bool TryGetRowId(
+                SqlConnection connection,
+                Database database,
+                string dataId,
+                out long rowId
+            )
             {
                 // For the solution table, we have whatever user string that was passed in as our 'key'.  So we actually
                 // have to  go to the DB to find the row for this.
                 return GetActualRowIdFromDatabase(connection, database, dataId, out rowId);
             }
 
-            protected override void BindFirstParameter(SqlStatement statement, string dataId)
-                => statement.BindStringParameter(parameterIndex: 1, value: dataId);
+            protected override void BindFirstParameter(SqlStatement statement, string dataId) =>
+                statement.BindStringParameter(parameterIndex: 1, value: dataId);
         }
     }
 }

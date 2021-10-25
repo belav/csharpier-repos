@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -91,7 +91,12 @@ namespace Microsoft.Net.Http.Headers
             pair0.Value = "othervalue";
             Assert.Equal("othervalue", pair0.Value);
             Assert.Null(pair1.Value.Value);
-            Assert.Throws<InvalidOperationException>(() => { pair1.Value = "othervalue"; });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    pair1.Value = "othervalue";
+                }
+            );
         }
 
         [Fact]
@@ -124,7 +129,12 @@ namespace Microsoft.Net.Http.Headers
             pair0.Value = "othervalue";
             Assert.Equal("othervalue", pair0.Value);
             Assert.Equal("value", pair1.Value);
-            Assert.Throws<InvalidOperationException>(() => { pair1.Value = "othervalue"; });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    pair1.Value = "othervalue";
+                }
+            );
         }
 
         [Fact]
@@ -147,8 +157,20 @@ namespace Microsoft.Net.Http.Headers
         public void Value_CallSetterWithInvalidValues_Throw()
         {
             // Just verify that the setter calls the same validation the ctor invokes.
-            Assert.Throws<FormatException>(() => { var x = new NameValueHeaderValue("name"); x.Value = " x "; });
-            Assert.Throws<FormatException>(() => { var x = new NameValueHeaderValue("name"); x.Value = "x y"; });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    var x = new NameValueHeaderValue("name");
+                    x.Value = " x ";
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    var x = new NameValueHeaderValue("name");
+                    x.Value = "x y";
+                }
+            );
         }
 
         [Fact]
@@ -275,7 +297,10 @@ namespace Microsoft.Net.Http.Headers
             CheckValidParse(" name   ", new NameValueHeaderValue("name"));
             CheckValidParse(" name=\"value\"", new NameValueHeaderValue("name", "\"value\""));
             CheckValidParse("name=value", new NameValueHeaderValue("name", "value"));
-            CheckValidParse("name=\"quoted str\"", new NameValueHeaderValue("name", "\"quoted str\""));
+            CheckValidParse(
+                "name=\"quoted str\"",
+                new NameValueHeaderValue("name", "\"quoted str\"")
+            );
             CheckValidParse("name\t =va1ue", new NameValueHeaderValue("name", "va1ue"));
             CheckValidParse("name= va*ue ", new NameValueHeaderValue("name", "va*ue"));
             CheckValidParse("name=", new NameValueHeaderValue("name", ""));
@@ -596,7 +621,10 @@ namespace Microsoft.Net.Http.Headers
         [InlineData("\"value\"", "\"value\"")]
         [InlineData("\"assumes already encoded \\\"\"", "\"assumes already encoded \\\"\"")]
         [InlineData("unquoted \"value", "\"unquoted \\\"value\"")]
-        [InlineData("value\\morevalues\\evenmorevalues", "\"value\\\\morevalues\\\\evenmorevalues\"")]
+        [InlineData(
+            "value\\morevalues\\evenmorevalues",
+            "\"value\\\\morevalues\\\\evenmorevalues\""
+        )]
         // We have to assume that the input needs to be quoted here
         [InlineData("\"\"double quoted string\"\"", "\"\\\"\\\"double quoted string\\\"\\\"\"")]
         [InlineData("\t", "\"\t\"")]
@@ -609,7 +637,6 @@ namespace Microsoft.Net.Http.Headers
 
             Assert.Equal(expected, actual);
         }
-
 
         [Theory]
         [InlineData("\n")]
@@ -651,7 +678,6 @@ namespace Microsoft.Net.Http.Headers
             Assert.NotEqual(input, actual);
         }
 
-
         #region Helper methods
 
         private void CheckValidParse(string? input, NameValueHeaderValue expectedResult)
@@ -687,7 +713,6 @@ namespace Microsoft.Net.Http.Headers
         {
             Assert.Throws<FormatException>(() => new NameValueHeaderValue(name, value));
         }
-
         #endregion
     }
 }

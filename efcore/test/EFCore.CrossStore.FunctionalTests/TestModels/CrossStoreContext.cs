@@ -5,14 +5,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels
 {
     public class CrossStoreContext : DbContext
     {
-        public CrossStoreContext()
-        {
-        }
+        public CrossStoreContext() { }
 
-        public CrossStoreContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public CrossStoreContext(DbContextOptions options) : base(options) { }
 
         public virtual DbSet<SimpleEntity> SimpleEntities { get; set; }
 
@@ -25,10 +20,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels
                     eb.Property(typeof(string), SimpleEntity.ShadowPropertyName);
                     eb.HasKey(e => e.Id);
                     eb.Property(e => e.Id).UseIdentityColumn();
-                });
+                }
+            );
         }
 
-        public static void RemoveAllEntities(CrossStoreContext context)
-            => context.SimpleEntities.RemoveRange(context.SimpleEntities);
+        public static void RemoveAllEntities(CrossStoreContext context) =>
+            context.SimpleEntities.RemoveRange(context.SimpleEntities);
     }
 }

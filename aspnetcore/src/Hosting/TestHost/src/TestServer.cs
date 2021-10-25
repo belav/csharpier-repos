@@ -28,10 +28,7 @@ namespace Microsoft.AspNetCore.TestHost
         /// <param name="services"></param>
         /// <param name="optionsAccessor"></param>
         public TestServer(IServiceProvider services, IOptions<TestServerOptions> optionsAccessor)
-            : this(services, new FeatureCollection(), optionsAccessor)
-        {
-
-        }
+            : this(services, new FeatureCollection(), optionsAccessor) { }
 
         /// <summary>
         /// For use with IHostBuilder.
@@ -39,24 +36,27 @@ namespace Microsoft.AspNetCore.TestHost
         /// <param name="services"></param>
         /// <param name="featureCollection"></param>
         /// <param name="optionsAccessor"></param>
-        public TestServer(IServiceProvider services, IFeatureCollection featureCollection, IOptions<TestServerOptions> optionsAccessor)
+        public TestServer(
+            IServiceProvider services,
+            IFeatureCollection featureCollection,
+            IOptions<TestServerOptions> optionsAccessor
+        )
         {
             Services = services ?? throw new ArgumentNullException(nameof(services));
-            Features = featureCollection ?? throw new ArgumentNullException(nameof(featureCollection));
-            var options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
+            Features =
+                featureCollection ?? throw new ArgumentNullException(nameof(featureCollection));
+            var options =
+                optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
             AllowSynchronousIO = options.AllowSynchronousIO;
             PreserveExecutionContext = options.PreserveExecutionContext;
             BaseAddress = options.BaseAddress;
-    }
+        }
 
         /// <summary>
         /// For use with IHostBuilder.
         /// </summary>
         /// <param name="services"></param>
-        public TestServer(IServiceProvider services)
-            : this(services, new FeatureCollection())
-        {
-        }
+        public TestServer(IServiceProvider services) : this(services, new FeatureCollection()) { }
 
         /// <summary>
         /// For use with IHostBuilder.
@@ -67,17 +67,15 @@ namespace Microsoft.AspNetCore.TestHost
             : this(services, featureCollection, Options.Create(new TestServerOptions()))
         {
             Services = services ?? throw new ArgumentNullException(nameof(services));
-            Features = featureCollection ?? throw new ArgumentNullException(nameof(featureCollection));
+            Features =
+                featureCollection ?? throw new ArgumentNullException(nameof(featureCollection));
         }
 
         /// <summary>
         /// For use with IWebHostBuilder.
         /// </summary>
         /// <param name="builder"></param>
-        public TestServer(IWebHostBuilder builder)
-            : this(builder, new FeatureCollection())
-        {
-        }
+        public TestServer(IWebHostBuilder builder) : this(builder, new FeatureCollection()) { }
 
         /// <summary>
         /// For use with IWebHostBuilder.
@@ -91,7 +89,8 @@ namespace Microsoft.AspNetCore.TestHost
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            Features = featureCollection ?? throw new ArgumentNullException(nameof(featureCollection));
+            Features =
+                featureCollection ?? throw new ArgumentNullException(nameof(featureCollection));
 
             var host = builder.UseServer(this).Build();
             host.StartAsync().GetAwaiter().GetResult();
@@ -113,7 +112,9 @@ namespace Microsoft.AspNetCore.TestHost
             get
             {
                 return _hostInstance
-                    ?? throw new InvalidOperationException("The TestServer constructor was not called with a IWebHostBuilder so IWebHost is not available.");
+                    ?? throw new InvalidOperationException(
+                        "The TestServer constructor was not called with a IWebHostBuilder so IWebHost is not available."
+                    );
             }
         }
 
@@ -139,7 +140,11 @@ namespace Microsoft.AspNetCore.TestHost
 
         private ApplicationWrapper Application
         {
-            get => _application ?? throw new InvalidOperationException("The server has not been started or no web application was configured.");
+            get =>
+                _application
+                ?? throw new InvalidOperationException(
+                    "The server has not been started or no web application was configured."
+                );
         }
 
         /// <summary>
@@ -147,8 +152,13 @@ namespace Microsoft.AspNetCore.TestHost
         /// </summary>
         public HttpMessageHandler CreateHandler()
         {
-            var pathBase = BaseAddress == null ? PathString.Empty : PathString.FromUriComponent(BaseAddress);
-            return new ClientHandler(pathBase, Application) { AllowSynchronousIO = AllowSynchronousIO, PreserveExecutionContext = PreserveExecutionContext };
+            var pathBase =
+                BaseAddress == null ? PathString.Empty : PathString.FromUriComponent(BaseAddress);
+            return new ClientHandler(pathBase, Application)
+            {
+                AllowSynchronousIO = AllowSynchronousIO,
+                PreserveExecutionContext = PreserveExecutionContext
+            };
         }
 
         /// <summary>
@@ -164,8 +174,13 @@ namespace Microsoft.AspNetCore.TestHost
         /// </summary>
         public WebSocketClient CreateWebSocketClient()
         {
-            var pathBase = BaseAddress == null ? PathString.Empty : PathString.FromUriComponent(BaseAddress);
-            return new WebSocketClient(pathBase, Application) { AllowSynchronousIO = AllowSynchronousIO, PreserveExecutionContext = PreserveExecutionContext };
+            var pathBase =
+                BaseAddress == null ? PathString.Empty : PathString.FromUriComponent(BaseAddress);
+            return new WebSocketClient(pathBase, Application)
+            {
+                AllowSynchronousIO = AllowSynchronousIO,
+                PreserveExecutionContext = PreserveExecutionContext
+            };
         }
 
         /// <summary>
@@ -182,30 +197,39 @@ namespace Microsoft.AspNetCore.TestHost
         /// Creates, configures, sends, and returns a <see cref="HttpContext"/>. This completes as soon as the response is started.
         /// </summary>
         /// <returns></returns>
-        public async Task<HttpContext> SendAsync(Action<HttpContext> configureContext, CancellationToken cancellationToken = default)
+        public async Task<HttpContext> SendAsync(
+            Action<HttpContext> configureContext,
+            CancellationToken cancellationToken = default
+        )
         {
             if (configureContext == null)
             {
                 throw new ArgumentNullException(nameof(configureContext));
             }
 
-            var builder = new HttpContextBuilder(Application, AllowSynchronousIO, PreserveExecutionContext);
-            builder.Configure((context, reader) =>
-            {
-                var request = context.Request;
-                request.Scheme = BaseAddress.Scheme;
-                request.Host = HostString.FromUriComponent(BaseAddress);
-                if (BaseAddress.IsDefaultPort)
+            var builder = new HttpContextBuilder(
+                Application,
+                AllowSynchronousIO,
+                PreserveExecutionContext
+            );
+            builder.Configure(
+                (context, reader) =>
                 {
-                    request.Host = new HostString(request.Host.Host);
+                    var request = context.Request;
+                    request.Scheme = BaseAddress.Scheme;
+                    request.Host = HostString.FromUriComponent(BaseAddress);
+                    if (BaseAddress.IsDefaultPort)
+                    {
+                        request.Host = new HostString(request.Host.Host);
+                    }
+                    var pathBase = PathString.FromUriComponent(BaseAddress);
+                    if (pathBase.HasValue && pathBase.Value.EndsWith('/'))
+                    {
+                        pathBase = new PathString(pathBase.Value[..^1]); // All but the last character.
+                    }
+                    request.PathBase = pathBase;
                 }
-                var pathBase = PathString.FromUriComponent(BaseAddress);
-                if (pathBase.HasValue && pathBase.Value.EndsWith('/'))
-                {
-                    pathBase = new PathString(pathBase.Value[..^1]); // All but the last character.
-                }
-                request.PathBase = pathBase;
-            });
+            );
             builder.Configure((context, reader) => configureContext(context));
             // TODO: Wrap the request body if any?
             return await builder.SendAsync(cancellationToken).ConfigureAwait(false);
@@ -223,15 +247,21 @@ namespace Microsoft.AspNetCore.TestHost
             }
         }
 
-        Task IServer.StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken)
+        Task IServer.StartAsync<TContext>(
+            IHttpApplication<TContext> application,
+            CancellationToken cancellationToken
+        )
         {
-            _application = new ApplicationWrapper<TContext>(application, () =>
-            {
-                if (_disposed)
+            _application = new ApplicationWrapper<TContext>(
+                application,
+                () =>
                 {
-                    throw new ObjectDisposedException(GetType().FullName);
+                    if (_disposed)
+                    {
+                        throw new ObjectDisposedException(GetType().FullName);
+                    }
                 }
-            });
+            );
 
             return Task.CompletedTask;
         }

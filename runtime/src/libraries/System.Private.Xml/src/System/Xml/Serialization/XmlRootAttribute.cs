@@ -9,13 +9,18 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Xml.Schema;
 
-
 namespace System.Xml.Serialization
 {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.ReturnValue | AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Struct)]
+    [AttributeUsage(
+        AttributeTargets.ReturnValue
+            | AttributeTargets.Class
+            | AttributeTargets.Enum
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct
+    )]
     public class XmlRootAttribute : System.Attribute
     {
         private string? _elementName;
@@ -27,9 +32,7 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlRootAttribute()
-        {
-        }
+        public XmlRootAttribute() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -92,7 +95,14 @@ namespace System.Xml.Serialization
 
         internal string Key
         {
-            get { return (_ns == null ? string.Empty : _ns) + ":" + ElementName + ":" + _nullable.ToString(); }
+            get
+            {
+                return (_ns == null ? string.Empty : _ns)
+                    + ":"
+                    + ElementName
+                    + ":"
+                    + _nullable.ToString();
+            }
         }
 
         internal string GetKey()

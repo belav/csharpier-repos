@@ -15,8 +15,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
     public class DefaultViewComponentFactory : IViewComponentFactory
     {
         private readonly IViewComponentActivator _activator;
-        private readonly Func<Type, PropertyActivator<ViewComponentContext>[]> _getPropertiesToActivate;
-        private readonly ConcurrentDictionary<Type, PropertyActivator<ViewComponentContext>[]> _injectActions;
+        private readonly Func<
+            Type,
+            PropertyActivator<ViewComponentContext>[]
+        > _getPropertiesToActivate;
+        private readonly ConcurrentDictionary<
+            Type,
+            PropertyActivator<ViewComponentContext>[]
+        > _injectActions;
 
         /// <summary>
         /// Creates a new instance of <see cref="DefaultViewComponentFactory"/>
@@ -33,12 +39,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
             _activator = activator;
 
-            _getPropertiesToActivate = type => PropertyActivator<ViewComponentContext>.GetPropertiesToActivate(
-                type,
-                typeof(ViewComponentContextAttribute),
-                CreateActivateInfo);
+            _getPropertiesToActivate = type =>
+                PropertyActivator<ViewComponentContext>.GetPropertiesToActivate(
+                    type,
+                    typeof(ViewComponentContextAttribute),
+                    CreateActivateInfo
+                );
 
-            _injectActions = new ConcurrentDictionary<Type, PropertyActivator<ViewComponentContext>[]>();
+            _injectActions = new ConcurrentDictionary<
+                Type,
+                PropertyActivator<ViewComponentContext>[]
+            >();
         }
 
         /// <inheritdoc />
@@ -60,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         {
             var propertiesToActivate = _injectActions.GetOrAdd(
                 viewComponent.GetType(),
-                _getPropertiesToActivate);
+                _getPropertiesToActivate
+            );
 
             for (var i = 0; i < propertiesToActivate.Length; i++)
             {
@@ -69,7 +81,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             }
         }
 
-        private static PropertyActivator<ViewComponentContext> CreateActivateInfo(PropertyInfo property)
+        private static PropertyActivator<ViewComponentContext> CreateActivateInfo(
+            PropertyInfo property
+        )
         {
             return new PropertyActivator<ViewComponentContext>(property, context => context);
         }

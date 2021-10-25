@@ -10,7 +10,6 @@ namespace Test
     // See the comment in Setting<T>.HasValue for details.
     class Program
     {
-
         static int Main(string[] args)
         {
             Test t = new Test();
@@ -39,9 +38,7 @@ namespace Test
 
     public class Setting<T>
     {
-        Setting()
-        {
-        }
+        Setting() { }
 
         public Setting(T value)
         {

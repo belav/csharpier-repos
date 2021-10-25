@@ -26,7 +26,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 if (index == -1)
                 {
                     throw new InvalidOperationException(
-                        CoreStrings.OriginalValueNotTracked(property.Name, property.DeclaringEntityType.DisplayName()));
+                        CoreStrings.OriginalValueNotTracked(
+                            property.Name,
+                            property.DeclaringEntityType.DisplayName()
+                        )
+                    );
                 }
 
                 return IsEmpty ? entry[property] : _values[index];
@@ -37,7 +41,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 if (index == -1)
                 {
                     throw new InvalidOperationException(
-                        CoreStrings.OriginalValueNotTracked(property.Name, property.DeclaringEntityType.DisplayName()));
+                        CoreStrings.OriginalValueNotTracked(
+                            property.Name,
+                            property.DeclaringEntityType.DisplayName()
+                        )
+                    );
                 }
 
                 return IsEmpty ? entry.GetCurrentValue<T>(property) : _values.GetValue<T>(index);
@@ -54,16 +62,23 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     if (index == -1)
                     {
                         throw new InvalidOperationException(
-                            CoreStrings.OriginalValueNotTracked(property.Name, property.DeclaringEntityType.DisplayName()));
+                            CoreStrings.OriginalValueNotTracked(
+                                property.Name,
+                                property.DeclaringEntityType.DisplayName()
+                            )
+                        );
                     }
                 }
 
-                if (value == null
-                    && !property.ClrType.IsNullableType())
+                if (value == null && !property.ClrType.IsNullableType())
                 {
                     throw new InvalidOperationException(
                         CoreStrings.ValueCannotBeNull(
-                            property.Name, property.DeclaringEntityType.DisplayName(), property.ClrType.DisplayName()));
+                            property.Name,
+                            property.DeclaringEntityType.DisplayName(),
+                            property.ClrType.DisplayName()
+                        )
+                    );
                 }
 
                 _values[index] = SnapshotValue(property, value);
@@ -110,8 +125,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 return comparer == null ? value : comparer.Snapshot(value);
             }
 
-            public bool IsEmpty
-                => _values == null;
+            public bool IsEmpty => _values == null;
         }
     }
 }

@@ -56,9 +56,9 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             object result = typeof(Vector64<Byte>)
-                                .GetProperty(nameof(Vector64<Byte>.AllBitsSet), new Type[] { })
-                                .GetGetMethod()
-                                .Invoke(null, new object[] { });
+                .GetProperty(nameof(Vector64<Byte>.AllBitsSet), new Type[] {  })
+                .GetGetMethod()
+                .Invoke(null, new object[] {  });
 
             ValidateResult((Vector64<Byte>)(result));
         }
@@ -70,7 +70,10 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, method);
         }
 
-        private unsafe void ValidateResult(Byte[] resultElements, [CallerMemberName] string method = "")
+        private unsafe void ValidateResult(
+            Byte[] resultElements,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
             for (var i = 0; i < ElementCount; i++)
@@ -84,8 +87,12 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64.AllBitsSet(Byte): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64.AllBitsSet(Byte): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

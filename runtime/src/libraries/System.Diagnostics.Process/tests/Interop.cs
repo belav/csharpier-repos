@@ -52,7 +52,12 @@ namespace System.Diagnostics.Tests
         }
 
         [DllImport("kernel32.dll")]
-        public static extern bool GetProcessWorkingSetSizeEx(SafeProcessHandle hProcess, out IntPtr lpMinimumWorkingSetSize, out IntPtr lpMaximumWorkingSetSize, out uint flags);
+        public static extern bool GetProcessWorkingSetSizeEx(
+            SafeProcessHandle hProcess,
+            out IntPtr lpMinimumWorkingSetSize,
+            out IntPtr lpMaximumWorkingSetSize,
+            out uint flags
+        );
 
         [DllImport("kernel32.dll")]
         internal static extern bool ProcessIdToSessionId(uint dwProcessId, out uint pSessionId);
@@ -73,19 +78,39 @@ namespace System.Diagnostics.Tests
         internal static extern int SetConsoleOutputCP(int codePage);
 
         [DllImport("netapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern uint NetUserAdd(string servername, uint level, ref USER_INFO_1 buf, out uint parm_err);
+        internal static extern uint NetUserAdd(
+            string servername,
+            uint level,
+            ref USER_INFO_1 buf,
+            out uint parm_err
+        );
 
         [DllImport("netapi32.dll", CharSet = CharSet.Unicode)]
         internal static extern uint NetUserDel(string servername, string username);
 
         [DllImport("advapi32.dll")]
-        internal static extern bool OpenProcessToken(SafeProcessHandle ProcessHandle, uint DesiredAccess, out SafeProcessHandle TokenHandle);
+        internal static extern bool OpenProcessToken(
+            SafeProcessHandle ProcessHandle,
+            uint DesiredAccess,
+            out SafeProcessHandle TokenHandle
+        );
 
         [DllImport("advapi32.dll")]
-        internal static extern bool GetTokenInformation(SafeProcessHandle TokenHandle, uint TokenInformationClass, IntPtr TokenInformation, int TokenInformationLength, ref int ReturnLength);
+        internal static extern bool GetTokenInformation(
+            SafeProcessHandle TokenHandle,
+            uint TokenInformationClass,
+            IntPtr TokenInformation,
+            int TokenInformationLength,
+            ref int ReturnLength
+        );
 
         [DllImport("shell32.dll")]
-        internal static extern int SHChangeNotify(int eventId, int flags, IntPtr item1, IntPtr item2);
+        internal static extern int SHChangeNotify(
+            int eventId,
+            int flags,
+            IntPtr item1,
+            IntPtr item2
+        );
 
         internal static void NetUserAdd(string username, string password)
         {

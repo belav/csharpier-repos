@@ -30,7 +30,11 @@ namespace Internal.Cryptography
 
         public static class OneShotHashProvider
         {
-            public static unsafe int HashData(string hashAlgorithmId, ReadOnlySpan<byte> source, Span<byte> destination)
+            public static unsafe int HashData(
+                string hashAlgorithmId,
+                ReadOnlySpan<byte> source,
+                Span<byte> destination
+            )
             {
                 int hashSize; // in bytes
 
@@ -43,10 +47,12 @@ namespace Internal.Cryptography
                 else
                 {
                     // Pseudo-handle not available. Fall back to a shared handle with no using or dispose.
-                    SafeBCryptAlgorithmHandle cachedAlgorithmHandle = BCryptAlgorithmCache.GetCachedBCryptAlgorithmHandle(
-                        hashAlgorithmId,
-                        BCryptOpenAlgorithmProviderFlags.None,
-                        out hashSize);
+                    SafeBCryptAlgorithmHandle cachedAlgorithmHandle =
+                        BCryptAlgorithmCache.GetCachedBCryptAlgorithmHandle(
+                            hashAlgorithmId,
+                            BCryptOpenAlgorithmProviderFlags.None,
+                            out hashSize
+                        );
 
                     if (destination.Length < hashSize)
                     {
@@ -60,7 +66,12 @@ namespace Internal.Cryptography
                 }
             }
 
-            private static unsafe void HashDataUsingPseudoHandle(string hashAlgorithmId, ReadOnlySpan<byte> source, Span<byte> destination, out int hashSize)
+            private static unsafe void HashDataUsingPseudoHandle(
+                string hashAlgorithmId,
+                ReadOnlySpan<byte> source,
+                Span<byte> destination,
+                out int hashSize
+            )
             {
                 hashSize = default;
 
@@ -107,7 +118,15 @@ namespace Internal.Cryptography
                 fixed (byte* pSrc = &MemoryMarshal.GetReference(source))
                 fixed (byte* pDest = &MemoryMarshal.GetReference(destination))
                 {
-                    NTSTATUS ntStatus = Interop.BCrypt.BCryptHash((uint)algHandle, pbSecret: null, cbSecret: 0, pSrc, source.Length, pDest, digestSizeInBytes);
+                    NTSTATUS ntStatus = Interop.BCrypt.BCryptHash(
+                        (uint)algHandle,
+                        pbSecret: null,
+                        cbSecret: 0,
+                        pSrc,
+                        source.Length,
+                        pDest,
+                        digestSizeInBytes
+                    );
 
                     if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                     {
@@ -122,7 +141,8 @@ namespace Internal.Cryptography
                 SafeBCryptAlgorithmHandle algHandle,
                 int hashSize,
                 ReadOnlySpan<byte> source,
-                Span<byte> destination)
+                Span<byte> destination
+            )
             {
                 NTSTATUS ntStatus = Interop.BCrypt.BCryptCreateHash(
                     algHandle,
@@ -131,7 +151,8 @@ namespace Internal.Cryptography
                     0,
                     default,
                     0,
-                    BCryptCreateHashFlags.None);
+                    BCryptCreateHashFlags.None
+                );
 
                 if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 {

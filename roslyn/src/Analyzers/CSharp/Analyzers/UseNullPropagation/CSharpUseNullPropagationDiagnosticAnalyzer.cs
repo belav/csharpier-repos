@@ -14,29 +14,36 @@ using Microsoft.CodeAnalysis.UseNullPropagation;
 namespace Microsoft.CodeAnalysis.CSharp.UseNullPropagation
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpUseNullPropagationDiagnosticAnalyzer :
-        AbstractUseNullPropagationDiagnosticAnalyzer<
-            SyntaxKind,
-            ExpressionSyntax,
-            ConditionalExpressionSyntax,
-            BinaryExpressionSyntax,
-            InvocationExpressionSyntax,
-            MemberAccessExpressionSyntax,
-            ConditionalAccessExpressionSyntax,
-            ElementAccessExpressionSyntax>
+    internal class CSharpUseNullPropagationDiagnosticAnalyzer
+        : AbstractUseNullPropagationDiagnosticAnalyzer<
+              SyntaxKind,
+              ExpressionSyntax,
+              ConditionalExpressionSyntax,
+              BinaryExpressionSyntax,
+              InvocationExpressionSyntax,
+              MemberAccessExpressionSyntax,
+              ConditionalAccessExpressionSyntax,
+              ElementAccessExpressionSyntax
+          >
     {
-        protected override bool ShouldAnalyze(ParseOptions options)
-            => ((CSharpParseOptions)options).LanguageVersion >= LanguageVersion.CSharp6;
+        protected override bool ShouldAnalyze(ParseOptions options) =>
+            ((CSharpParseOptions)options).LanguageVersion >= LanguageVersion.CSharp6;
 
-        protected override ISyntaxFacts GetSyntaxFacts()
-            => CSharpSyntaxFacts.Instance;
+        protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
 
-        protected override bool IsInExpressionTree(SemanticModel semanticModel, SyntaxNode node, INamedTypeSymbol? expressionTypeOpt, CancellationToken cancellationToken)
-            => node.IsInExpressionTree(semanticModel, expressionTypeOpt, cancellationToken);
+        protected override bool IsInExpressionTree(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            INamedTypeSymbol? expressionTypeOpt,
+            CancellationToken cancellationToken
+        ) => node.IsInExpressionTree(semanticModel, expressionTypeOpt, cancellationToken);
 
         protected override bool TryAnalyzePatternCondition(
-            ISyntaxFacts syntaxFacts, SyntaxNode conditionNode,
-            [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck, out bool isEquals)
+            ISyntaxFacts syntaxFacts,
+            SyntaxNode conditionNode,
+            [NotNullWhen(true)] out SyntaxNode? conditionPartToCheck,
+            out bool isEquals
+        )
         {
             conditionPartToCheck = null;
             isEquals = true;
