@@ -262,7 +262,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Assert.IsType<ExplicitGenericClass<string>>(v);
         }
 
-        [Export(typeof(ExplicitGenericClass<, >))]
+        [Export(typeof(ExplicitGenericClass<,>))]
         private class ExplicitGenericClass<T, U> { }
 
         [Fact]
@@ -270,7 +270,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public void ExplicitGenericArity2ExportInRegistrationBuilder()
         {
             CompositionContainer container = CreateRegistrationBuilderContainer(
-                typeof(ExplicitGenericClass<, >)
+                typeof(ExplicitGenericClass<,>)
             );
             ExplicitGenericClass<int, string> v = container.GetExportedValue<
                 ExplicitGenericClass<int, string>

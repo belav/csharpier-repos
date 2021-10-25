@@ -156,7 +156,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
         public static TheoryData CreateOpenGenericsTestData()
         {
-            var openDictionaryType = typeof(Dictionary<, >);
+            var openDictionaryType = typeof(Dictionary<,>);
             var genArgsDictionary = openDictionaryType.GetGenericArguments();
             genArgsDictionary[0] = typeof(B<>);
             var closedDictionaryType = openDictionaryType.MakeGenericType(genArgsDictionary);
@@ -166,7 +166,6 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             var closedLevelType = openLevelType.MakeGenericType(genArgsLevel);
             var openInnerType = typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<
                 ,
-
             >.InnerGenericLeafNode<>);
             var genArgsInnerType = openInnerType.GetGenericArguments();
             genArgsInnerType[3] = typeof(bool);
@@ -174,9 +173,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             return new TheoryData<Type, bool, string>
             {
                 { typeof(List<>), false, "List<>" },
-                { typeof(Dictionary<, >), false, "Dictionary<,>" },
+                { typeof(Dictionary<,>), false, "Dictionary<,>" },
                 { typeof(List<>), true, "System.Collections.Generic.List<>" },
-                { typeof(Dictionary<, >), true, "System.Collections.Generic.Dictionary<,>" },
+                { typeof(Dictionary<,>), true, "System.Collections.Generic.Dictionary<,>" },
                 {
                     typeof(Level1<>.Level2<>.Level3<>),
                     true,
@@ -188,7 +187,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                     "Microsoft.EntityFrameworkCore.Utilities.TypeNameHelperTest+C<, int>"
                 },
                 {
-                    typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<, >.InnerGenericLeafNode<>),
+                    typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<,>.InnerGenericLeafNode<>),
                     true,
                     "Microsoft.EntityFrameworkCore.Utilities.TypeNameHelperTest+OuterGeneric<>+InnerNonGeneric+InnerGeneric<,>+InnerGenericLeafNode<>"
                 },

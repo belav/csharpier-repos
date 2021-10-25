@@ -433,7 +433,7 @@ namespace Microsoft.TestCommon
         private static readonly Type OpenIEnumerableType = typeof(IEnumerable<>);
         private static readonly Type OpenListType = typeof(List<>);
         private static readonly Type OpenIQueryableType = typeof(IQueryable<>);
-        private static readonly Type OpenDictionaryType = typeof(Dictionary<, >);
+        private static readonly Type OpenDictionaryType = typeof(Dictionary<,>);
         private static readonly Type OpenTestDataHolderType = typeof(TestDataHolder<>);
 
         /// <summary>

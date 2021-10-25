@@ -149,8 +149,8 @@ namespace System.ComponentModel.Composition.Hosting
         public void IncludeDependentsOpenGenericToOpenGeneric()
         {
             var catalog = CreateCatalog(
-                typeof(OpenGenericExporter<, >),
-                typeof(OpenGenericImporter<, >),
+                typeof(OpenGenericExporter<,>),
+                typeof(OpenGenericImporter<,>),
                 typeof(Other)
             );
             var filteredCatalog = catalog.Filter(p => p.Imports<IContract2>());
@@ -164,8 +164,8 @@ namespace System.ComponentModel.Composition.Hosting
         public void IncludeDependentsOpenGenericToOpenGenericReverse()
         {
             var catalog = CreateCatalog(
-                typeof(OpenGenericExporter<, >),
-                typeof(OpenGenericImporterReverseOrder<, >),
+                typeof(OpenGenericExporter<,>),
+                typeof(OpenGenericImporterReverseOrder<,>),
                 typeof(Other)
             );
             var filteredCatalog = catalog.Filter(p => p.Imports<IContract2>());
@@ -179,7 +179,7 @@ namespace System.ComponentModel.Composition.Hosting
         public void IncludeDependentsOpenGenericToClosedGeneric()
         {
             var catalog = CreateCatalog(
-                typeof(OpenGenericExporter<, >),
+                typeof(OpenGenericExporter<,>),
                 typeof(ClosedGenericImporter),
                 typeof(Other)
             );
@@ -340,8 +340,8 @@ namespace System.ComponentModel.Composition.Hosting
         public void IncludeDependciesOpenGenericToOpenGeneric()
         {
             var catalog = CreateCatalog(
-                typeof(OpenGenericExporter<, >),
-                typeof(OpenGenericImporter<, >),
+                typeof(OpenGenericExporter<,>),
+                typeof(OpenGenericImporter<,>),
                 typeof(Other)
             );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract3>());
@@ -355,8 +355,8 @@ namespace System.ComponentModel.Composition.Hosting
         public void IncludeDependenciesOpenGenericToOpenGenericReverse()
         {
             var catalog = CreateCatalog(
-                typeof(OpenGenericExporter<, >),
-                typeof(OpenGenericImporterReverseOrder<, >),
+                typeof(OpenGenericExporter<,>),
+                typeof(OpenGenericImporterReverseOrder<,>),
                 typeof(Other)
             );
             var filteredCatalog = catalog.Filter(p => p.Exports<IContract3>());
@@ -370,7 +370,7 @@ namespace System.ComponentModel.Composition.Hosting
         public void IncludeDependenciesOpenGenericToClosedGeneric()
         {
             var catalog = CreateCatalog(
-                typeof(OpenGenericExporter<, >),
+                typeof(OpenGenericExporter<,>),
                 typeof(ClosedGenericImporter),
                 typeof(Other)
             );
@@ -490,7 +490,7 @@ namespace System.ComponentModel.Composition.Hosting
 
         public interface IContract<T1, T2> { }
 
-        [Export(typeof(IContract<, >))]
+        [Export(typeof(IContract<,>))]
         public class OpenGenericExporter<T1, T2> : IContract<T1, T2>
         {
             [Import]

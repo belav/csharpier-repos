@@ -28,11 +28,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var modelType = context.Metadata.ModelType;
             var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(
                 modelType,
-                typeof(IDictionary<, >)
+                typeof(IDictionary<,>)
             );
             if (dictionaryType != null)
             {
-                var binderType = typeof(DictionaryModelBinder<, >).MakeGenericType(
+                var binderType = typeof(DictionaryModelBinder<,>).MakeGenericType(
                     dictionaryType.GenericTypeArguments
                 );
 

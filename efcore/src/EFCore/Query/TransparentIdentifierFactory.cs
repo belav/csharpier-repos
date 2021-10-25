@@ -31,7 +31,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(outerType, nameof(outerType));
             Check.NotNull(innerType, nameof(innerType));
 
-            return typeof(TransparentIdentifier<, >).MakeGenericType(outerType, innerType);
+            return typeof(TransparentIdentifier<,>).MakeGenericType(outerType, innerType);
         }
 
         private readonly struct TransparentIdentifier<TOuter, TInner>

@@ -47,7 +47,7 @@ namespace System.Collections.Generic
     // has a constructor that allows a specific IComparer implementation to
     // be specified.
     //
-    [DebuggerTypeProxy(typeof(IDictionaryDebugView<, >))]
+    [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
     [System.Runtime.CompilerServices.TypeForwardedFrom(
@@ -1040,7 +1040,7 @@ namespace System.Collections.Generic
             }
         }
 
-        [DebuggerTypeProxy(typeof(DictionaryKeyCollectionDebugView<, >))]
+        [DebuggerTypeProxy(typeof(DictionaryKeyCollectionDebugView<,>))]
         [DebuggerDisplay("Count = {Count}")]
         [Serializable]
         public sealed class KeyList : IList<TKey>, ICollection
@@ -1153,7 +1153,7 @@ namespace System.Collections.Generic
             }
         }
 
-        [DebuggerTypeProxy(typeof(DictionaryValueCollectionDebugView<, >))]
+        [DebuggerTypeProxy(typeof(DictionaryValueCollectionDebugView<,>))]
         [DebuggerDisplay("Count = {Count}")]
         [Serializable]
         public sealed class ValueList : IList<TValue>, ICollection

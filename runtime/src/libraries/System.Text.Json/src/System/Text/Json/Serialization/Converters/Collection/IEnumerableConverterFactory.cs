@@ -46,7 +46,7 @@ namespace System.Text.Json.Serialization.Converters
                     ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(typeToConvert);
                 }
 
-                converterType = typeof(ArrayConverter<, >);
+                converterType = typeof(ArrayConverter<,>);
                 elementType = typeToConvert.GetElementType();
             }
             // List<> or deriving from List<>
@@ -55,20 +55,20 @@ namespace System.Text.Json.Serialization.Converters
                 != null
             )
             {
-                converterType = typeof(ListOfTConverter<, >);
+                converterType = typeof(ListOfTConverter<,>);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
             // Dictionary<TKey, TValue> or deriving from Dictionary<TKey, TValue>
             else if (
                 (
                     actualTypeToConvert = typeToConvert.GetCompatibleGenericBaseClass(
-                        typeof(Dictionary<, >)
+                        typeof(Dictionary<,>)
                     )
                 ) != null
             )
             {
                 genericArgs = actualTypeToConvert.GetGenericArguments();
-                converterType = typeof(DictionaryOfTKeyTValueConverter<, , >);
+                converterType = typeof(DictionaryOfTKeyTValueConverter<,,>);
                 dictionaryKeyType = genericArgs[0];
                 elementType = genericArgs[1];
             }
@@ -76,7 +76,7 @@ namespace System.Text.Json.Serialization.Converters
             else if (typeToConvert.IsImmutableDictionaryType())
             {
                 genericArgs = typeToConvert.GetGenericArguments();
-                converterType = typeof(ImmutableDictionaryOfTKeyTValueConverter<, , >);
+                converterType = typeof(ImmutableDictionaryOfTKeyTValueConverter<,,>);
                 dictionaryKeyType = genericArgs[0];
                 elementType = genericArgs[1];
             }
@@ -84,13 +84,13 @@ namespace System.Text.Json.Serialization.Converters
             else if (
                 (
                     actualTypeToConvert = typeToConvert.GetCompatibleGenericInterface(
-                        typeof(IDictionary<, >)
+                        typeof(IDictionary<,>)
                     )
                 ) != null
             )
             {
                 genericArgs = actualTypeToConvert.GetGenericArguments();
-                converterType = typeof(IDictionaryOfTKeyTValueConverter<, , >);
+                converterType = typeof(IDictionaryOfTKeyTValueConverter<,,>);
                 dictionaryKeyType = genericArgs[0];
                 elementType = genericArgs[1];
             }
@@ -98,20 +98,20 @@ namespace System.Text.Json.Serialization.Converters
             else if (
                 (
                     actualTypeToConvert = typeToConvert.GetCompatibleGenericInterface(
-                        typeof(IReadOnlyDictionary<, >)
+                        typeof(IReadOnlyDictionary<,>)
                     )
                 ) != null
             )
             {
                 genericArgs = actualTypeToConvert.GetGenericArguments();
-                converterType = typeof(IReadOnlyDictionaryOfTKeyTValueConverter<, , >);
+                converterType = typeof(IReadOnlyDictionaryOfTKeyTValueConverter<,,>);
                 dictionaryKeyType = genericArgs[0];
                 elementType = genericArgs[1];
             }
             // Immutable non-dictionaries from System.Collections.Immutable, e.g. ImmutableStack<T>
             else if (typeToConvert.IsImmutableEnumerableType())
             {
-                converterType = typeof(ImmutableEnumerableOfTConverter<, >);
+                converterType = typeof(ImmutableEnumerableOfTConverter<,>);
                 elementType = typeToConvert.GetGenericArguments()[0];
             }
             // IList<>
@@ -120,7 +120,7 @@ namespace System.Text.Json.Serialization.Converters
                 != null
             )
             {
-                converterType = typeof(IListOfTConverter<, >);
+                converterType = typeof(IListOfTConverter<,>);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
             // ISet<>
@@ -129,7 +129,7 @@ namespace System.Text.Json.Serialization.Converters
                 != null
             )
             {
-                converterType = typeof(ISetOfTConverter<, >);
+                converterType = typeof(ISetOfTConverter<,>);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
             // ICollection<>
@@ -141,7 +141,7 @@ namespace System.Text.Json.Serialization.Converters
                 ) != null
             )
             {
-                converterType = typeof(ICollectionOfTConverter<, >);
+                converterType = typeof(ICollectionOfTConverter<,>);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
             // Stack<> or deriving from Stack<>
@@ -150,7 +150,7 @@ namespace System.Text.Json.Serialization.Converters
                 != null
             )
             {
-                converterType = typeof(StackOfTConverter<, >);
+                converterType = typeof(StackOfTConverter<,>);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
             // Queue<> or deriving from Queue<>
@@ -159,7 +159,7 @@ namespace System.Text.Json.Serialization.Converters
                 != null
             )
             {
-                converterType = typeof(QueueOfTConverter<, >);
+                converterType = typeof(QueueOfTConverter<,>);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
             // ConcurrentStack<> or deriving from ConcurrentStack<>
@@ -171,7 +171,7 @@ namespace System.Text.Json.Serialization.Converters
                 ) != null
             )
             {
-                converterType = typeof(ConcurrentStackOfTConverter<, >);
+                converterType = typeof(ConcurrentStackOfTConverter<,>);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
             // ConcurrentQueue<> or deriving from ConcurrentQueue<>
@@ -183,7 +183,7 @@ namespace System.Text.Json.Serialization.Converters
                 ) != null
             )
             {
-                converterType = typeof(ConcurrentQueueOfTConverter<, >);
+                converterType = typeof(ConcurrentQueueOfTConverter<,>);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
             // IEnumerable<>, types assignable from List<>
@@ -195,7 +195,7 @@ namespace System.Text.Json.Serialization.Converters
                 ) != null
             )
             {
-                converterType = typeof(IEnumerableOfTConverter<, >);
+                converterType = typeof(IEnumerableOfTConverter<,>);
                 elementType = actualTypeToConvert.GetGenericArguments()[0];
             }
             // Check for non-generics after checking for generics.

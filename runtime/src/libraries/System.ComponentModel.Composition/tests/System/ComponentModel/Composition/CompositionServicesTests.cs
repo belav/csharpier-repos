@@ -93,7 +93,7 @@ namespace System.ComponentModel.Composition
                 "System.ComponentModel.Composition.GenericContract4(System.Int32,System.Double)+GenericContract5(System.Double,System.Int32)+GenericContract6(System.Int32,System.Double)"
             );
             expectations.Add(
-                typeof(GenericContract4<, >.GenericContract5<, >.GenericContract6<, >),
+                typeof(GenericContract4<,>.GenericContract5<,>.GenericContract6<,>),
                 "System.ComponentModel.Composition.GenericContract4({0},{1})+GenericContract5({2},{3})+GenericContract6({4},{5})"
             );
             expectations.Add(

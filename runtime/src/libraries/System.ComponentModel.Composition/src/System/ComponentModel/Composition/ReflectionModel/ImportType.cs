@@ -12,7 +12,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
     internal sealed class ImportType
     {
         private static readonly Type LazyOfTType = typeof(Lazy<>);
-        private static readonly Type LazyOfTMType = typeof(Lazy<, >);
+        private static readonly Type LazyOfTMType = typeof(Lazy<,>);
         private static readonly Type ExportFactoryOfTType = typeof(ExportFactory<>);
 
         private readonly Type _type;

@@ -197,7 +197,7 @@ namespace Microsoft.AspNetCore.Identity
             Services.TryAddScoped<RoleManager<TRole>>();
             Services.AddScoped(
                 typeof(IUserClaimsPrincipalFactory<>).MakeGenericType(UserType),
-                typeof(UserClaimsPrincipalFactory<, >).MakeGenericType(UserType, RoleType)
+                typeof(UserClaimsPrincipalFactory<,>).MakeGenericType(UserType, RoleType)
             );
             return this;
         }

@@ -71,7 +71,7 @@ namespace AutoMapper.Execution
                 {
                     return null;
                 }
-                var converterInterfaceType = typeof(ITypeConverter<, >).MakeGenericType(
+                var converterInterfaceType = typeof(ITypeConverter<,>).MakeGenericType(
                     _typeMap.SourceType,
                     DestinationType
                 );

@@ -25,7 +25,7 @@ namespace System.Threading.Tasks.Dataflow
     /// <typeparam name="T1">Specifies the type of data accepted by the block's first target.</typeparam>
     /// <typeparam name="T2">Specifies the type of data accepted by the block's second target.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
-    [DebuggerTypeProxy(typeof(BatchedJoinBlock<, >.DebugView))]
+    [DebuggerTypeProxy(typeof(BatchedJoinBlock<,>.DebugView))]
     public sealed class BatchedJoinBlock<T1, T2>
         : IReceivableSourceBlock<Tuple<IList<T1>, IList<T2>>>,
           IDebuggerDisplay
@@ -396,7 +396,7 @@ namespace System.Threading.Tasks.Dataflow
     /// <typeparam name="T2">Specifies the type of data accepted by the block's second target.</typeparam>
     /// <typeparam name="T3">Specifies the type of data accepted by the block's third target.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
-    [DebuggerTypeProxy(typeof(BatchedJoinBlock<, , >.DebugView))]
+    [DebuggerTypeProxy(typeof(BatchedJoinBlock<,,>.DebugView))]
     public sealed class BatchedJoinBlock<T1, T2, T3>
         : IReceivableSourceBlock<Tuple<IList<T1>, IList<T2>, IList<T3>>>,
           IDebuggerDisplay

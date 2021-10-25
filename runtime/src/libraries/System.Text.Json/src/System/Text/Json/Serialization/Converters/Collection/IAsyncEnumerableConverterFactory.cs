@@ -28,7 +28,7 @@ namespace System.Text.Json.Serialization
             );
 
             Type elementType = asyncEnumerableInterface.GetGenericArguments()[0];
-            Type converterType = typeof(IAsyncEnumerableOfTConverter<, >).MakeGenericType(
+            Type converterType = typeof(IAsyncEnumerableOfTConverter<,>).MakeGenericType(
                 typeToConvert,
                 elementType
             );

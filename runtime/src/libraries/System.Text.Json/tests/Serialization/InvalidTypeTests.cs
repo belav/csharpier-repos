@@ -144,14 +144,14 @@ namespace System.Text.Json.Serialization.Tests
             yield return new object[] { typeof(List<>) };
             yield return new object[] { typeof(List<>).MakeGenericType(typeof(Test<>)) };
             yield return new object[] { typeof(Test<>).MakeGenericType(typeof(List<>)) };
-            yield return new object[] { typeof(Dictionary<, >) };
+            yield return new object[] { typeof(Dictionary<,>) };
             yield return new object[]
             {
-                typeof(Dictionary<, >).MakeGenericType(typeof(string), typeof(Nullable<>))
+                typeof(Dictionary<,>).MakeGenericType(typeof(string), typeof(Nullable<>))
             };
             yield return new object[]
             {
-                typeof(Dictionary<, >).MakeGenericType(typeof(Nullable<>), typeof(string))
+                typeof(Dictionary<,>).MakeGenericType(typeof(Nullable<>), typeof(string))
             };
         }
 
@@ -159,7 +159,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             yield return new object[] { typeof(Test<>) };
             yield return new object[] { typeof(List<>) };
-            yield return new object[] { typeof(Dictionary<, >) };
+            yield return new object[] { typeof(Dictionary<,>) };
         }
 
         public static IEnumerable<object[]> RefStructTypes()

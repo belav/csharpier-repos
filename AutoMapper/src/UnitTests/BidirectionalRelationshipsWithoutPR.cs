@@ -61,7 +61,7 @@ namespace AutoMapper.UnitTests
                     cfg.CreateMap(typeof(FlowSwitch<>), typeof(FlowNodeModel));
                     cfg.CreateMap<FlowNode, Connection>()
                         .ForMember(d => d.Node, o => o.MapFrom(s => s));
-                    cfg.CreateMap(typeof(KeyValuePair<, >), typeof(Connection))
+                    cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Connection))
                         .ForMember("Node", o => o.MapFrom("Key"));
                 }
             );

@@ -139,7 +139,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             memberInfo is PropertyInfo property
                             && property.IsIndexerProperty()
                             && type.IsGenericType
-                            && type.GetGenericTypeDefinition() == typeof(Dictionary<, >)
+                            && type.GetGenericTypeDefinition() == typeof(Dictionary<,>)
                         )
                         {
                             return false;

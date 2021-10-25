@@ -102,7 +102,7 @@ namespace AutoMapper.Configuration
             {
                 var config = new ValueResolverConfiguration(
                     valueResolverType,
-                    valueResolverType.GetGenericInterface(typeof(IValueResolver<, , >))
+                    valueResolverType.GetGenericInterface(typeof(IValueResolver<,,>))
                 );
 
                 PropertyMapActions.Add(pm => pm.ValueResolverConfig = config);
@@ -112,7 +112,7 @@ namespace AutoMapper.Configuration
             {
                 var config = new ValueResolverConfiguration(
                     valueResolverType,
-                    valueResolverType.GetGenericInterface(typeof(IMemberValueResolver<, , , >))
+                    valueResolverType.GetGenericInterface(typeof(IMemberValueResolver<,,,>))
                 ) {
                     SourceMemberName = sourceMemberName
                 };
@@ -171,7 +171,7 @@ namespace AutoMapper.Configuration
             {
                 var config = new ValueResolverConfiguration(
                     valueConverterType,
-                    valueConverterType.GetGenericInterface(typeof(IValueConverter<, >))
+                    valueConverterType.GetGenericInterface(typeof(IValueConverter<,>))
                 ) {
                     SourceMemberName = sourceMemberName
                 };

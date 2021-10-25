@@ -222,7 +222,7 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                 else if (
                     ClosedGenericMatcher.ExtractGenericInterface(
                         typeToSerialize,
-                        typeof(IDictionary<, >)
+                        typeof(IDictionary<,>)
                     ) != null
                 )
                 {

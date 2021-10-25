@@ -26,7 +26,7 @@ namespace System.Reflection.Emit.Tests
         [InlineData(
             "Method",
             typeof(string),
-            new Type[] { typeof(GenericClass2<, >), typeof(GenericClass2<, >) }
+            new Type[] { typeof(GenericClass2<,>), typeof(GenericClass2<,>) }
         )]
         [InlineData("Method", typeof(string), new Type[] { typeof(TestInterface) })]
         public void String_Type_TypeArray_Module(

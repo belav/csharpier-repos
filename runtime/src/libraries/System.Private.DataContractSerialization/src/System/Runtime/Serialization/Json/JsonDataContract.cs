@@ -375,7 +375,7 @@ namespace System.Runtime.Serialization.Json
                             if (
                                 collectionDataContract.ItemType.IsGenericType
                                 && collectionDataContract.ItemType.GetGenericTypeDefinition()
-                                    == typeof(KeyValue<, >)
+                                    == typeof(KeyValue<,>)
                             )
                             {
                                 DataContract itemDataContract = DataContract.GetDataContract(

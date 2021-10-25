@@ -150,9 +150,9 @@ namespace System.Linq
             // new constants which have public types.
             if (
                 t.IsGenericType
-                && t.GetGenericTypeDefinition().GetInterfaces().Contains(typeof(IGrouping<, >))
+                && t.GetGenericTypeDefinition().GetInterfaces().Contains(typeof(IGrouping<,>))
             )
-                return typeof(IGrouping<, >).MakeGenericType(t.GetGenericArguments());
+                return typeof(IGrouping<,>).MakeGenericType(t.GetGenericArguments());
             if (!t.IsNestedPrivate)
                 return t;
             foreach (Type iType in t.GetInterfaces())

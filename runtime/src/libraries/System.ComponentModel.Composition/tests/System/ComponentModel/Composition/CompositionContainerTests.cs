@@ -3322,7 +3322,7 @@ namespace System.ComponentModel.Composition
         public void TestExportedValueUsingWhereClause_ExportSuccessful()
         {
             CompositionContainer container = new CompositionContainer(
-                new TypeCatalog(typeof(MefCollection<, >))
+                new TypeCatalog(typeof(MefCollection<,>))
             );
             IMefCollection<DerivedClass, BaseClass> actualValue = container.GetExportedValue<
                 IMefCollection<DerivedClass, BaseClass>
@@ -3336,7 +3336,7 @@ namespace System.ComponentModel.Composition
         public class BaseClass { }
         public class DerivedClass : BaseClass { }
 
-        [Export("UsingWhereClause", typeof(IMefCollection<, >))]
+        [Export("UsingWhereClause", typeof(IMefCollection<,>))]
         public class MefCollection<TC, TP> : ObservableCollection<TC>, IMefCollection<TC, TP>
             where TC : TP { }
 

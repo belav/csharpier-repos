@@ -461,7 +461,7 @@ namespace Newtonsoft.Json.Utilities
             if (
                 ImplementsGenericDefinition(
                     dictionaryType,
-                    typeof(IDictionary<, >),
+                    typeof(IDictionary<,>),
                     out Type? genericDictionaryType
                 )
             )

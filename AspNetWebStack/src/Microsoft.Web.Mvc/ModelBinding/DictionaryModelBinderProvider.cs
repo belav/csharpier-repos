@@ -18,9 +18,9 @@ namespace Microsoft.Web.Mvc.ModelBinding
             if (bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
             {
                 return CollectionModelBinderUtil.GetGenericBinder(
-                    typeof(IDictionary<, >),
-                    typeof(Dictionary<, >),
-                    typeof(DictionaryModelBinder<, >),
+                    typeof(IDictionary<,>),
+                    typeof(Dictionary<,>),
+                    typeof(DictionaryModelBinder<,>),
                     bindingContext.ModelMetadata
                 );
             }

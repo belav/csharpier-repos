@@ -838,9 +838,9 @@ namespace System.Text.Json.Serialization.Tests
 
             List<Type> genericDictTypes = new List<Type>()
             {
-                typeof(IDictionary<, >),
-                typeof(ConcurrentDictionary<, >),
-                typeof(GenericIDictionaryWrapper<, >),
+                typeof(IDictionary<,>),
+                typeof(ConcurrentDictionary<,>),
+                typeof(GenericIDictionaryWrapper<,>),
             };
 
             List<Type> nonGenericDictTypes = new List<Type>()

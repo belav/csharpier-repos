@@ -38,7 +38,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericArguments4()
         {
-            VerifyGenericTypeArguments(typeof(Test_IG2<, >).Project(), new string[] {  }, null);
+            VerifyGenericTypeArguments(typeof(Test_IG2<,>).Project(), new string[] {  }, null);
         }
 
         // Verify Generic Arguments
@@ -82,7 +82,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericArguments9()
         {
-            VerifyGenericTypeArguments(typeof(Test_SG2<, >).Project(), new string[] {  }, null);
+            VerifyGenericTypeArguments(typeof(Test_SG2<,>).Project(), new string[] {  }, null);
         }
 
         // Verify Generic Arguments
@@ -134,7 +134,7 @@ namespace System.Reflection.Tests
         public static void TestGenericArguments14()
         {
             VerifyGenericTypeArguments(
-                typeof(Test_SIG2<, >).Project(),
+                typeof(Test_SIG2<,>).Project(),
                 new string[] {  },
                 new string[] { "TS", "VS" }
             );
@@ -226,7 +226,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericArguments23()
         {
-            VerifyGenericTypeArguments(typeof(Test_CG2<, >).Project(), new string[] {  }, null);
+            VerifyGenericTypeArguments(typeof(Test_CG2<,>).Project(), new string[] {  }, null);
         }
 
         // Verify Generic Arguments
@@ -267,7 +267,7 @@ namespace System.Reflection.Tests
         public static void TestGenericArguments27()
         {
             VerifyGenericTypeArguments(
-                typeof(Test_CIG2<, >).Project(),
+                typeof(Test_CIG2<,>).Project(),
                 new string[] {  },
                 new string[] { "T", "V" }
             );

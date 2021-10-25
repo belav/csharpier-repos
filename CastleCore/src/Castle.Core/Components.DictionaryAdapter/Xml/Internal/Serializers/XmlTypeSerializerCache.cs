@@ -67,16 +67,16 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 if (genericType == typeof(ISet<>))
                     return XmlSetSerializer.Instance;
                 if ( // Dictionaries are not supported
-                    genericType == typeof(IDictionary<, >)
-                    || genericType == typeof(Dictionary<, >)
-                    || genericType == typeof(SortedDictionary<, >)
+                    genericType == typeof(IDictionary<,>)
+                    || genericType == typeof(Dictionary<,>)
+                    || genericType == typeof(SortedDictionary<,>)
                     ||
                     // Concrete list types are not supported
                     genericType == typeof(List<>)
                     || genericType == typeof(Stack<>)
                     || genericType == typeof(Queue<>)
                     || genericType == typeof(LinkedList<>)
-                    || genericType == typeof(SortedList<, >)
+                    || genericType == typeof(SortedList<,>)
                     ||
                     // Concrete set types are not supported
                     genericType == typeof(HashSet<>)

@@ -39,7 +39,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestContainsGenericParameter1()
         {
-            Type t = typeof(ClassWithConstraints<, >).Project();
+            Type t = typeof(ClassWithConstraints<,>).Project();
             TypeInfo ti = t.GetTypeInfo();
 
             bool hasgenericParam = ti.ContainsGenericParameters;

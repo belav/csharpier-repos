@@ -3058,7 +3058,7 @@ public class C { public static FrameworkName Goo() { return null; }}";
         public void SubmissionCompilation_Errors()
         {
             var genericParameter = typeof(List<>).GetGenericArguments()[0];
-            var open = typeof(Dictionary<, >).MakeGenericType(typeof(int), genericParameter);
+            var open = typeof(Dictionary<,>).MakeGenericType(typeof(int), genericParameter);
             var ptr = typeof(int).MakePointerType();
             var byref = typeof(int).MakeByRefType();
 

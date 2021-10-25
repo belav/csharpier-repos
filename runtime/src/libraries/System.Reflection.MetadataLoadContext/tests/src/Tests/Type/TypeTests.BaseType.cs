@@ -29,10 +29,10 @@ namespace System.Reflection.Tests
                 };
 
                 {
-                    Type derived3 = typeof(Derived3<, >).Project();
+                    Type derived3 = typeof(Derived3<,>).Project();
                     Type theT = derived3.GetTypeInfo().GenericTypeParameters[0];
                     Type theU = derived3.GetTypeInfo().GenericTypeParameters[1];
-                    Type baseType = typeof(GenericClass2<, >).Project();
+                    Type baseType = typeof(GenericClass2<,>).Project();
                     yield return new object[] { derived3, baseType.MakeGenericType(theU, theT) };
 
                     Type t1 = typeof(int).Project();

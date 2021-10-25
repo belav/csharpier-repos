@@ -74,7 +74,7 @@ namespace Newtonsoft.Json.Tests.Utilities
             Assert.AreEqual("System.Collections.Generic.IList`1, mscorlib", typeName);
 
             typeName = ReflectionUtils.GetTypeName(
-                typeof(IDictionary<, >),
+                typeof(IDictionary<,>),
                 TypeNameAssemblyFormatHandling.Simple,
                 null
             );

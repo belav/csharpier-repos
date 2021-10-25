@@ -427,7 +427,7 @@ namespace System.Diagnostics.Tracing
             if (
                 eventAttrib != null
                 || Statics.GetCustomAttribute<CompilerGeneratedAttribute>(dataType) != null
-                || IsGenericMatch(dataType, typeof(KeyValuePair<, >))
+                || IsGenericMatch(dataType, typeof(KeyValuePair<,>))
             )
             {
                 var analysis = new TypeAnalysis(dataType, eventAttrib, recursionCheck);

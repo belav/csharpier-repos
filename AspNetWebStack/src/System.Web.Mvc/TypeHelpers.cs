@@ -96,7 +96,7 @@ namespace System.Web.Mvc
                 _tryGetValueDelegateCacheLock.ExitReadLock();
             }
 
-            Type dictionaryType = ExtractGenericInterface(targetType, typeof(IDictionary<, >));
+            Type dictionaryType = ExtractGenericInterface(targetType, typeof(IDictionary<,>));
 
             // just wrap a call to the underlying IDictionary<TKey, TValue>.TryGetValue() where string can be cast to TKey
             if (dictionaryType != null)

@@ -55,7 +55,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(
                 targetType,
-                typeof(IDictionary<, >)
+                typeof(IDictionary<,>)
             );
 
             // Just wrap a call to the underlying IDictionary<TKey, TValue>.TryGetValue() where string can be cast to

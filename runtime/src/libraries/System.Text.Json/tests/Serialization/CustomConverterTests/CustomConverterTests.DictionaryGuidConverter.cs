@@ -23,7 +23,7 @@ namespace System.Text.Json.Serialization.Tests
                     return false;
                 }
 
-                if (typeToConvert.GetGenericTypeDefinition() != typeof(Dictionary<, >))
+                if (typeToConvert.GetGenericTypeDefinition() != typeof(Dictionary<,>))
                 {
                     return false;
                 }

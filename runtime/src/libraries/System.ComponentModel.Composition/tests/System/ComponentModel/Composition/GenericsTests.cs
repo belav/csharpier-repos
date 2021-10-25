@@ -40,7 +40,7 @@ namespace System.ComponentModel.Composition
             object GetValue();
         }
 
-        [Export(typeof(IImport<, >))]
+        [Export(typeof(IImport<,>))]
         public class SelfImport<T1, T2> : IImport<T1, T2>
         {
         }
@@ -50,14 +50,14 @@ namespace System.ComponentModel.Composition
         {
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class SelfExport<T1, T2> : IExport<T1, T2>
         {
         }
 
         public class PropertyExport<T1, T2> : IExport<T1, T2>
         {
-            [Export(typeof(IExport<, >))]
+            [Export(typeof(IExport<,>))]
             IExport<T1, T2> Property
             {
                 get { return this; }
@@ -73,10 +73,10 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class SelfExportWithPropertyImport<T1, T2> : IExport<T1, T2>, IPartWithImport
         {
-            [Import(typeof(IImport<, >))]
+            [Import(typeof(IImport<,>))]
             IImport<T1, T2> Value { get; set; }
 
             public object GetValue()
@@ -96,7 +96,7 @@ namespace System.ComponentModel.Composition
             public IExport<T2, T1> Export { get; set; }
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class SelfExportWithLazyPropertyImport<T1, T2> : IExport<T1, T2>, IPartWithImport
         {
             [Import]
@@ -120,7 +120,7 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class SelfExportWithExportFactoryPropertyImport<T1, T2>
             : IExport<T1, T2>,
               IPartWithImport
@@ -146,7 +146,7 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class SelfExportWithExportFactoryParameterImport<T1, T2>
             : IExport<T1, T2>,
               IPartWithImport
@@ -165,7 +165,7 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class SelfExportWithCollectionPropertyImport<T1, T2>
             : IExport<T1, T2>,
               IPartWithImport
@@ -179,7 +179,7 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class SelfExportWithLazyCollectionPropertyImport<T1, T2>
             : IExport<T1, T2>,
               IPartWithImport
@@ -193,7 +193,7 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class SelfExportWithParameterImport<T1, T2> : IExport<T1, T2>, IPartWithImport
         {
             [ImportingConstructor]
@@ -210,7 +210,7 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class SelfExportWithPropertyImportWithContractInferred<T1, T2>
             : IExport<T1, T2>,
               IPartWithImport
@@ -224,7 +224,7 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class SelfExportWithMultipleGenericImports<T1, T2> : IExport<T1, T2>
         {
             [Import]
@@ -256,7 +256,7 @@ namespace System.ComponentModel.Composition
             public static int Count { get; set; }
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class SingletonExport<T1, T2> : IExport<T1, T2>
         {
             public SingletonExport()
@@ -296,13 +296,13 @@ namespace System.ComponentModel.Composition
         {
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class PartWithGenericConstraint<T1, T2> : IExport<T1, T2>
             where T2 : IDictionary<string, T1>
         {
         }
 
-        [Export(typeof(IExport<, >))]
+        [Export(typeof(IExport<,>))]
         public class PartWithNakedConstraint<T1, T2> : IExport<T1, T2> where T2 : T1
         {
         }
@@ -335,7 +335,7 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void SelfExportTest()
         {
-            TypeCatalog catalog = new TypeCatalog(typeof(SelfExport<, >));
+            TypeCatalog catalog = new TypeCatalog(typeof(SelfExport<,>));
             CompositionContainer container = new CompositionContainer(catalog);
 
             var export = container.GetExportedValueOrDefault<IExport<IFoo, IBar>>();
@@ -348,7 +348,7 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void PropertyExportTest()
         {
-            TypeCatalog catalog = new TypeCatalog(typeof(PropertyExport<, >));
+            TypeCatalog catalog = new TypeCatalog(typeof(PropertyExport<,>));
             CompositionContainer container = new CompositionContainer(catalog);
 
             var export = container.GetExportedValueOrDefault<IExport<IFoo, IBar>>();
@@ -361,7 +361,7 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void PropertyExportWithContractInferredTest()
         {
-            TypeCatalog catalog = new TypeCatalog(typeof(PropertyExportWithContractInferred<, >));
+            TypeCatalog catalog = new TypeCatalog(typeof(PropertyExportWithContractInferred<,>));
             CompositionContainer container = new CompositionContainer(catalog);
 
             var export = container.GetExportedValueOrDefault<IExport<IFoo, IBar>>();
@@ -375,8 +375,8 @@ namespace System.ComponentModel.Composition
         public void SelfExportWithPropertyImportTest()
         {
             TypeCatalog catalog = new TypeCatalog(
-                typeof(SelfExportWithPropertyImport<, >),
-                typeof(SelfImport<, >)
+                typeof(SelfExportWithPropertyImport<,>),
+                typeof(SelfImport<,>)
             );
             CompositionContainer container = new CompositionContainer(catalog);
 
@@ -392,8 +392,8 @@ namespace System.ComponentModel.Composition
         public void SelfExportWithLazyPropertyImportTest()
         {
             TypeCatalog catalog = new TypeCatalog(
-                typeof(SelfExportWithLazyPropertyImport<, >),
-                typeof(SelfImport<, >)
+                typeof(SelfExportWithLazyPropertyImport<,>),
+                typeof(SelfImport<,>)
             );
             CompositionContainer container = new CompositionContainer(catalog);
 
@@ -426,8 +426,8 @@ namespace System.ComponentModel.Composition
         public void SelfExportWithExportFactoryPropertyImportTest()
         {
             TypeCatalog catalog = new TypeCatalog(
-                typeof(SelfExportWithExportFactoryPropertyImport<, >),
-                typeof(SelfImport<, >)
+                typeof(SelfExportWithExportFactoryPropertyImport<,>),
+                typeof(SelfImport<,>)
             );
             CompositionContainer container = new CompositionContainer(catalog);
 
@@ -474,8 +474,8 @@ namespace System.ComponentModel.Composition
         public void SelfExportWithExportFactoryParameterImportTest()
         {
             TypeCatalog catalog = new TypeCatalog(
-                typeof(SelfExportWithExportFactoryParameterImport<, >),
-                typeof(SelfImport<, >)
+                typeof(SelfExportWithExportFactoryParameterImport<,>),
+                typeof(SelfImport<,>)
             );
             CompositionContainer container = new CompositionContainer(catalog);
 
@@ -498,8 +498,8 @@ namespace System.ComponentModel.Composition
         public void SelfExportWithCollectionPropertyImportTest()
         {
             TypeCatalog catalog = new TypeCatalog(
-                typeof(SelfExportWithCollectionPropertyImport<, >),
-                typeof(SelfImport<, >)
+                typeof(SelfExportWithCollectionPropertyImport<,>),
+                typeof(SelfImport<,>)
             );
             CompositionContainer container = new CompositionContainer(catalog);
 
@@ -515,8 +515,8 @@ namespace System.ComponentModel.Composition
         public void SelfExportWithLazyCollectionPropertyImportTest()
         {
             TypeCatalog catalog = new TypeCatalog(
-                typeof(SelfExportWithLazyCollectionPropertyImport<, >),
-                typeof(SelfImport<, >)
+                typeof(SelfExportWithLazyCollectionPropertyImport<,>),
+                typeof(SelfImport<,>)
             );
             CompositionContainer container = new CompositionContainer(catalog);
 
@@ -532,8 +532,8 @@ namespace System.ComponentModel.Composition
         public void SelfExportWithPropertyImportWithContractInferredTest()
         {
             TypeCatalog catalog = new TypeCatalog(
-                typeof(SelfExportWithPropertyImportWithContractInferred<, >),
-                typeof(SelfImport<, >)
+                typeof(SelfExportWithPropertyImportWithContractInferred<,>),
+                typeof(SelfImport<,>)
             );
             CompositionContainer container = new CompositionContainer(catalog);
 
@@ -549,8 +549,8 @@ namespace System.ComponentModel.Composition
         public void SelfExportWithParameterImportTest()
         {
             TypeCatalog catalog = new TypeCatalog(
-                typeof(SelfExportWithParameterImport<, >),
-                typeof(SelfImport<, >)
+                typeof(SelfExportWithParameterImport<,>),
+                typeof(SelfImport<,>)
             );
             CompositionContainer container = new CompositionContainer(catalog);
 
@@ -566,8 +566,8 @@ namespace System.ComponentModel.Composition
         public void SelfExportWithMultipleGenericImportsTest()
         {
             TypeCatalog catalog = new TypeCatalog(
-                typeof(SelfExportWithMultipleGenericImports<, >),
-                typeof(SelfImport<, >),
+                typeof(SelfExportWithMultipleGenericImports<,>),
+                typeof(SelfImport<,>),
                 typeof(SelfImport<>),
                 typeof(Foo)
             );
@@ -591,7 +591,7 @@ namespace System.ComponentModel.Composition
         public void SpecilzationMakesGeneric()
         {
             TypeCatalog catalog = new TypeCatalog(
-                typeof(SelfExport<, >),
+                typeof(SelfExport<,>),
                 typeof(ExportFooBar),
                 typeof(SelfExport<IFoo, IBar>)
             );
@@ -605,7 +605,7 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void SingletonBehavior()
         {
-            TypeCatalog catalog = new TypeCatalog(typeof(SingletonExport<, >));
+            TypeCatalog catalog = new TypeCatalog(typeof(SingletonExport<,>));
             CompositionContainer container = new CompositionContainer(catalog);
 
             SingletonExportExportCount.Count = 0;
@@ -728,7 +728,7 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void PartWithGenericConstraintTest()
         {
-            TypeCatalog catalog = new TypeCatalog(typeof(PartWithGenericConstraint<, >));
+            TypeCatalog catalog = new TypeCatalog(typeof(PartWithGenericConstraint<,>));
             CompositionContainer container = new CompositionContainer(catalog);
 
             // int, Dictionary<string, int> should work
@@ -758,7 +758,7 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void PartWithNakedConstraintTest()
         {
-            TypeCatalog catalog = new TypeCatalog(typeof(PartWithNakedConstraint<, >));
+            TypeCatalog catalog = new TypeCatalog(typeof(PartWithNakedConstraint<,>));
             CompositionContainer container = new CompositionContainer(catalog);
 
             // Bar, Bar2 should work
@@ -772,7 +772,7 @@ namespace System.ComponentModel.Composition
         public void PartWithExportParametersInReverseOrder()
         {
             TypeCatalog catalog = new TypeCatalog(
-                typeof(PropertyExportWithChangedParameterOrder<, >)
+                typeof(PropertyExportWithChangedParameterOrder<,>)
             );
             CompositionContainer container = new CompositionContainer(catalog);
 

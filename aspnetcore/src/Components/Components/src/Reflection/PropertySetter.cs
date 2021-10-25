@@ -36,7 +36,7 @@ namespace Microsoft.AspNetCore.Components.Reflection
             var setMethod = property.SetMethod;
 
             var propertySetterAsAction = setMethod.CreateDelegate(
-                typeof(Action<, >).MakeGenericType(targetType, property.PropertyType)
+                typeof(Action<,>).MakeGenericType(targetType, property.PropertyType)
             );
             var callPropertySetterClosedGenericMethod =
                 CallPropertySetterOpenGenericMethod.MakeGenericMethod(

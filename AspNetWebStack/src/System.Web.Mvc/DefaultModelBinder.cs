@@ -134,7 +134,7 @@ namespace System.Web.Mvc
             // special-case IDictionary<,> and ICollection<>
             Type dictionaryType = TypeHelpers.ExtractGenericInterface(
                 modelType,
-                typeof(IDictionary<, >)
+                typeof(IDictionary<,>)
             );
             if (dictionaryType != null)
             {
@@ -574,9 +574,9 @@ namespace System.Web.Mvc
             if (modelType.IsGenericType)
             {
                 Type genericTypeDefinition = modelType.GetGenericTypeDefinition();
-                if (genericTypeDefinition == typeof(IDictionary<, >))
+                if (genericTypeDefinition == typeof(IDictionary<,>))
                 {
-                    typeToCreate = typeof(Dictionary<, >).MakeGenericType(
+                    typeToCreate = typeof(Dictionary<,>).MakeGenericType(
                         modelType.GetGenericArguments()
                     );
                 }

@@ -12,8 +12,8 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             return ModelBindingHelper.GetPossibleBinderInstance(
                 closedModelType: modelType,
-                openModelType: typeof(KeyValuePair<, >),
-                openBinderType: typeof(KeyValuePairModelBinder<, >)
+                openModelType: typeof(KeyValuePair<,>),
+                openBinderType: typeof(KeyValuePairModelBinder<,>)
             );
         }
     }

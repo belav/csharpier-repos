@@ -285,7 +285,7 @@ namespace Microsoft.Extensions.Internal
             {
                 // Create a delegate (ref TDeclaringType) -> TValue
                 return MakeFastPropertyGetter(
-                    typeof(ByRefFunc<, >),
+                    typeof(ByRefFunc<,>),
                     getMethod,
                     propertyGetterByRefWrapperMethod
                 );
@@ -294,7 +294,7 @@ namespace Microsoft.Extensions.Internal
             {
                 // Create a delegate TDeclaringType -> TValue
                 return MakeFastPropertyGetter(
-                    typeof(Func<, >),
+                    typeof(Func<,>),
                     getMethod,
                     propertyGetterWrapperMethod
                 );
@@ -354,7 +354,7 @@ namespace Microsoft.Extensions.Internal
 
             // Create a delegate TDeclaringType -> { TDeclaringType.Property = TValue; }
             var propertySetterAsAction = setMethod.CreateDelegate(
-                typeof(Action<, >).MakeGenericType(typeInput, parameterType)
+                typeof(Action<,>).MakeGenericType(typeInput, parameterType)
             );
             var callPropertySetterClosedGenericMethod =
                 CallPropertySetterOpenGenericMethod.MakeGenericMethod(typeInput, parameterType);

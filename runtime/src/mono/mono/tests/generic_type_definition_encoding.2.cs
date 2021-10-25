@@ -27,8 +27,8 @@ class TypeofTest
 {
     public bool Bla()
     {
-        Type t = typeof(Dictionary<, >);
-        Type t2 = typeof(C<, >);
+        Type t = typeof(Dictionary<,>);
+        Type t2 = typeof(C<,>);
         return t.IsGenericTypeDefinition && t2.IsGenericTypeDefinition;
     }
 }
@@ -37,8 +37,8 @@ class TypeofTest2<X, Y>
 {
     public bool Bla()
     {
-        Type t = typeof(Dictionary<, >);
-        Type t2 = typeof(C<, >);
+        Type t = typeof(Dictionary<,>);
+        Type t2 = typeof(C<,>);
         return t.IsGenericTypeDefinition && t2.IsGenericTypeDefinition;
     }
 }

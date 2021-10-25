@@ -122,7 +122,7 @@ namespace System.Text.Json
 #if DEBUG
                 Type underlyingIDictionaryType =
                     jsonPropertyInfo.DeclaredPropertyType.GetCompatibleGenericInterface(
-                        typeof(IDictionary<, >)
+                        typeof(IDictionary<,>)
                     )!;
                 Type[] genericArgs = underlyingIDictionaryType.GetGenericArguments();
 

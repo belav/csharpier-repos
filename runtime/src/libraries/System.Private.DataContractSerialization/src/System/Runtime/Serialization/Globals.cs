@@ -567,7 +567,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfIDictionaryGeneric == null)
-                    s_typeOfIDictionaryGeneric = typeof(IDictionary<, >);
+                    s_typeOfIDictionaryGeneric = typeof(IDictionary<,>);
                 return s_typeOfIDictionaryGeneric;
             }
         }
@@ -677,7 +677,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfKeyValuePair == null)
-                    s_typeOfKeyValuePair = typeof(KeyValuePair<, >);
+                    s_typeOfKeyValuePair = typeof(KeyValuePair<,>);
                 return s_typeOfKeyValuePair;
             }
         }
@@ -688,7 +688,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfKeyValuePairAdapter == null)
-                    s_typeOfKeyValuePairAdapter = typeof(KeyValuePairAdapter<, >);
+                    s_typeOfKeyValuePairAdapter = typeof(KeyValuePairAdapter<,>);
                 return s_typeOfKeyValuePairAdapter;
             }
         }
@@ -699,7 +699,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfKeyValue == null)
-                    s_typeOfKeyValue = typeof(KeyValue<, >);
+                    s_typeOfKeyValue = typeof(KeyValue<,>);
                 return s_typeOfKeyValue;
             }
         }
@@ -734,7 +734,7 @@ namespace System.Runtime.Serialization
             {
                 if (s_typeOfGenericDictionaryEnumerator == null)
                     s_typeOfGenericDictionaryEnumerator =
-                        typeof(CollectionDataContract.GenericDictionaryEnumerator<, >);
+                        typeof(CollectionDataContract.GenericDictionaryEnumerator<,>);
                 return s_typeOfGenericDictionaryEnumerator;
             }
         }
@@ -745,7 +745,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfDictionaryGeneric == null)
-                    s_typeOfDictionaryGeneric = typeof(Dictionary<, >);
+                    s_typeOfDictionaryGeneric = typeof(Dictionary<,>);
                 return s_typeOfDictionaryGeneric;
             }
         }

@@ -1080,27 +1080,21 @@ namespace Microsoft.EntityFrameworkCore
             public virtual Dictionary<Type, Type> GenericFluentApiTypes { get; } =
                 new()
                 {
-                    {
-                        typeof(CollectionCollectionBuilder),
-                        typeof(CollectionCollectionBuilder<, >)
-                    },
-                    {
-                        typeof(CollectionNavigationBuilder),
-                        typeof(CollectionNavigationBuilder<, >)
-                    },
+                    { typeof(CollectionCollectionBuilder), typeof(CollectionCollectionBuilder<,>) },
+                    { typeof(CollectionNavigationBuilder), typeof(CollectionNavigationBuilder<,>) },
                     { typeof(DataBuilder), typeof(DataBuilder<>) },
                     { typeof(DiscriminatorBuilder), typeof(DiscriminatorBuilder<>) },
                     { typeof(EntityTypeBuilder), typeof(EntityTypeBuilder<>) },
                     { typeof(IndexBuilder), typeof(IndexBuilder<>) },
                     { typeof(KeyBuilder), typeof(KeyBuilder<>) },
-                    { typeof(NavigationBuilder), typeof(NavigationBuilder<, >) },
-                    { typeof(OwnedNavigationBuilder), typeof(OwnedNavigationBuilder<, >) },
+                    { typeof(NavigationBuilder), typeof(NavigationBuilder<,>) },
+                    { typeof(OwnedNavigationBuilder), typeof(OwnedNavigationBuilder<,>) },
                     { typeof(OwnedEntityTypeBuilder), typeof(OwnedEntityTypeBuilder<>) },
-                    { typeof(OwnershipBuilder), typeof(OwnershipBuilder<, >) },
+                    { typeof(OwnershipBuilder), typeof(OwnershipBuilder<,>) },
                     { typeof(PropertyBuilder), typeof(PropertyBuilder<>) },
-                    { typeof(ReferenceCollectionBuilder), typeof(ReferenceCollectionBuilder<, >) },
-                    { typeof(ReferenceNavigationBuilder), typeof(ReferenceNavigationBuilder<, >) },
-                    { typeof(ReferenceReferenceBuilder), typeof(ReferenceReferenceBuilder<, >) },
+                    { typeof(ReferenceCollectionBuilder), typeof(ReferenceCollectionBuilder<,>) },
+                    { typeof(ReferenceNavigationBuilder), typeof(ReferenceNavigationBuilder<,>) },
+                    { typeof(ReferenceReferenceBuilder), typeof(ReferenceReferenceBuilder<,>) },
                     { typeof(DbContextOptionsBuilder), typeof(DbContextOptionsBuilder<>) }
                 };
 

@@ -56,18 +56,18 @@ namespace Microsoft.Extensions.DependencyInjection
                 Type roleStoreType = null;
                 var identityContext = FindGenericBaseType(
                     contextType,
-                    typeof(IdentityDbContext<, , , , , , , >)
+                    typeof(IdentityDbContext<,,,,,,,>)
                 );
                 if (identityContext == null)
                 {
                     // If its a custom DbContext, we can only add the default POCOs
-                    userStoreType = typeof(UserStore<, , , >).MakeGenericType(
+                    userStoreType = typeof(UserStore<,,,>).MakeGenericType(
                         userType,
                         roleType,
                         contextType,
                         keyType
                     );
-                    roleStoreType = typeof(RoleStore<, , >).MakeGenericType(
+                    roleStoreType = typeof(RoleStore<,,>).MakeGenericType(
                         roleType,
                         contextType,
                         keyType
@@ -75,7 +75,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
                 else
                 {
-                    userStoreType = typeof(UserStore<, , , , , , , , >).MakeGenericType(
+                    userStoreType = typeof(UserStore<,,,,,,,,>).MakeGenericType(
                         userType,
                         roleType,
                         contextType,
@@ -86,7 +86,7 @@ namespace Microsoft.Extensions.DependencyInjection
                         identityContext.GenericTypeArguments[7],
                         identityContext.GenericTypeArguments[6]
                     );
-                    roleStoreType = typeof(RoleStore<, , , , >).MakeGenericType(
+                    roleStoreType = typeof(RoleStore<,,,,>).MakeGenericType(
                         roleType,
                         contextType,
                         identityContext.GenericTypeArguments[2],
@@ -108,12 +108,12 @@ namespace Microsoft.Extensions.DependencyInjection
                 Type userStoreType = null;
                 var identityContext = FindGenericBaseType(
                     contextType,
-                    typeof(IdentityUserContext<, , , , >)
+                    typeof(IdentityUserContext<,,,,>)
                 );
                 if (identityContext == null)
                 {
                     // If its a custom DbContext, we can only add the default POCOs
-                    userStoreType = typeof(UserOnlyStore<, , >).MakeGenericType(
+                    userStoreType = typeof(UserOnlyStore<,,>).MakeGenericType(
                         userType,
                         contextType,
                         keyType
@@ -121,7 +121,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
                 else
                 {
-                    userStoreType = typeof(UserOnlyStore<, , , , , >).MakeGenericType(
+                    userStoreType = typeof(UserOnlyStore<,,,,,>).MakeGenericType(
                         userType,
                         contextType,
                         identityContext.GenericTypeArguments[1],

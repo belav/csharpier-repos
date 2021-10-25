@@ -32,8 +32,8 @@ namespace System.Reflection.Tests
             );
             Assert.Equal(GetMetadataTokens(typeof(int)), GetMetadataTokens(typeof(int)));
             Assert.Equal(
-                GetMetadataTokens(typeof(Dictionary<, >)),
-                GetMetadataTokens(typeof(Dictionary<, >))
+                GetMetadataTokens(typeof(Dictionary<,>)),
+                GetMetadataTokens(typeof(Dictionary<,>))
             );
         }
 
@@ -204,7 +204,7 @@ namespace System.Reflection.Tests
             yield return new object[] { typeof(SampleClass) };
             yield return new object[] { new MemberInfoTests().GetType() };
             yield return new object[] { typeof(int) };
-            yield return new object[] { typeof(Dictionary<, >) };
+            yield return new object[] { typeof(Dictionary<,>) };
         }
 
         [Theory]

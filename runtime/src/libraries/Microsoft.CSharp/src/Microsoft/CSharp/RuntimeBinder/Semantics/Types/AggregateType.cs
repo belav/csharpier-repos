@@ -189,8 +189,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         || genType == typeof(IEnumerable<>)
                         || genType == typeof(IReadOnlyList<>)
                         || genType == typeof(IReadOnlyCollection<>)
-                        || genType == typeof(IDictionary<, >)
-                        || genType == typeof(IReadOnlyDictionary<, >);
+                        || genType == typeof(IDictionary<,>)
+                        || genType == typeof(IReadOnlyDictionary<,>);
                 }
 
                 return sysType == typeof(System.Collections.IList)

@@ -138,8 +138,8 @@ public partial class Program
         IsTrue(typeof(decimal).IsAssignableFrom(typeof(decimal)));
         IsTrue(typeof(Struct1).IsAssignableFrom(typeof(Struct1)));
         IsTrue(typeof(IDisposable).IsAssignableFrom(typeof(Struct3)));
-        IsTrue(typeof(Dictionary<, >).IsAssignableFrom(typeof(Dictionary<, >)));
-        IsTrue(typeof(IDictionary<, >).IsAssignableFrom(typeof(IDictionary<, >)));
+        IsTrue(typeof(Dictionary<,>).IsAssignableFrom(typeof(Dictionary<,>)));
+        IsTrue(typeof(IDictionary<,>).IsAssignableFrom(typeof(IDictionary<,>)));
         IsTrue(typeof(GenericStruct1<>).IsAssignableFrom(typeof(GenericStruct1<>)));
         IsTrue(typeof(GenericStruct1<int>).IsAssignableFrom(typeof(GenericStruct1<int>)));
         IsTrue(typeof(GenericStruct1<string>).IsAssignableFrom(typeof(GenericStruct1<string>)));
@@ -155,7 +155,7 @@ public partial class Program
         IsFalse(typeof(Action).IsAssignableFrom(typeof(CustomAction)));
         IsFalse(typeof(Action<int>).IsAssignableFrom(typeof(void)));
         IsFalse(typeof(ClassB).IsAssignableFrom(typeof(ClassD)));
-        IsFalse(typeof(Dictionary<, >).IsAssignableFrom(typeof(Dictionary<int, int>)));
+        IsFalse(typeof(Dictionary<,>).IsAssignableFrom(typeof(Dictionary<int, int>)));
         IsFalse(typeof(GenericStruct1<ClassA>).IsAssignableFrom(typeof(GenericStruct1<ClassB>)));
         IsFalse(typeof(Struct1).IsAssignableFrom(typeof(Struct2)));
         IsFalse(typeof(GenericStruct1<>).IsAssignableFrom(typeof(GenericStruct2<>)));

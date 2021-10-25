@@ -70,7 +70,7 @@ namespace System.Reflection.Tests
 
                 yield return new object[]
                 {
-                    typeof(GenericClassWithQuirkyConstraints1<, >)
+                    typeof(GenericClassWithQuirkyConstraints1<,>)
                         .Project()
                         .GetTypeInfo().GenericTypeParameters[0],
                     new Type[] { typeof(IConstrained1).Project() }

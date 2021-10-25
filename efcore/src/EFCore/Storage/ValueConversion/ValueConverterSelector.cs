@@ -123,7 +123,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     var converterInfo in FindNumericConventions(
                         modelClrType,
                         providerClrType,
-                        typeof(EnumToNumberConverter<, >),
+                        typeof(EnumToNumberConverter<,>),
                         EnumToStringOrBytes
                     )
                 )
@@ -403,7 +403,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     var converterInfo in FindNumericConventions(
                         modelClrType,
                         providerClrType,
-                        typeof(CastingConverter<, >),
+                        typeof(CastingConverter<,>),
                         NumberToStringOrBytes
                     )
                 )
@@ -430,7 +430,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 var converterInfo in FindNumericConventions(
                     underlyingModelType,
                     underlyingProviderType,
-                    typeof(CastingConverter<, >),
+                    typeof(CastingConverter<,>),
                     CharToBytes
                 )
             )
@@ -476,7 +476,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     k =>
                     {
                         var toNumber = GetDefaultValueConverterInfo(
-                            typeof(EnumToNumberConverter<, >).MakeGenericType(
+                            typeof(EnumToNumberConverter<,>).MakeGenericType(
                                 k.ModelClrType,
                                 k.ModelClrType.GetEnumUnderlyingType()
                             )

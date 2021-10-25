@@ -159,7 +159,7 @@ namespace Microsoft.Extensions.Internal
 
         public static TheoryData GetOpenGenericsTestData()
         {
-            var openDictionaryType = typeof(Dictionary<, >);
+            var openDictionaryType = typeof(Dictionary<,>);
             var genArgsDictionary = openDictionaryType.GetGenericArguments();
             genArgsDictionary[0] = typeof(B<>);
             var closedDictionaryType = openDictionaryType.MakeGenericType(genArgsDictionary);
@@ -171,7 +171,6 @@ namespace Microsoft.Extensions.Internal
 
             var openInnerType = typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<
                 ,
-
             >.InnerGenericLeafNode<>);
             var genArgsInnerType = openInnerType.GetGenericArguments();
             genArgsInnerType[3] = typeof(bool);
@@ -180,9 +179,9 @@ namespace Microsoft.Extensions.Internal
             return new TheoryData<Type, bool, string>
             {
                 { typeof(List<>), false, "List<>" },
-                { typeof(Dictionary<, >), false, "Dictionary<,>" },
+                { typeof(Dictionary<,>), false, "Dictionary<,>" },
                 { typeof(List<>), true, "System.Collections.Generic.List<>" },
-                { typeof(Dictionary<, >), true, "System.Collections.Generic.Dictionary<,>" },
+                { typeof(Dictionary<,>), true, "System.Collections.Generic.Dictionary<,>" },
                 {
                     typeof(Level1<>.Level2<>.Level3<>),
                     true,
@@ -194,7 +193,7 @@ namespace Microsoft.Extensions.Internal
                     "Microsoft.Extensions.Internal.TypeNameHelperTest+C<, int>"
                 },
                 {
-                    typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<, >.InnerGenericLeafNode<>),
+                    typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<,>.InnerGenericLeafNode<>),
                     true,
                     "Microsoft.Extensions.Internal.TypeNameHelperTest+OuterGeneric<>+InnerNonGeneric+InnerGeneric<,>+InnerGenericLeafNode<>"
                 },
@@ -227,7 +226,7 @@ namespace Microsoft.Extensions.Internal
             new TheoryData<Type, string>
             {
                 { typeof(B<>), "Microsoft.Extensions.Internal.TypeNameHelperTest+B<T>" },
-                { typeof(C<, >), "Microsoft.Extensions.Internal.TypeNameHelperTest+C<T1, T2>" },
+                { typeof(C<,>), "Microsoft.Extensions.Internal.TypeNameHelperTest+C<T1, T2>" },
                 {
                     typeof(PartiallyClosedGeneric<>).BaseType,
                     "Microsoft.Extensions.Internal.TypeNameHelperTest+C<T, int>"
@@ -260,7 +259,7 @@ namespace Microsoft.Extensions.Internal
             new TheoryData<Type, string>
             {
                 { typeof(B<>), "B<T>" },
-                { typeof(C<, >), "C<T1, T2>" },
+                { typeof(C<,>), "C<T1, T2>" },
                 { typeof(PartiallyClosedGeneric<>).BaseType, "C<T, int>" },
                 { typeof(Level1<>.Level2<>), "Level2<T2>" },
             };

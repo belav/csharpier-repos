@@ -25,7 +25,7 @@ namespace System.Net.Http.Formatting
     /// </summary>
     public class BsonMediaTypeFormatter : BaseJsonMediaTypeFormatter
     {
-        private static readonly Type OpenDictionaryType = typeof(Dictionary<, >);
+        private static readonly Type OpenDictionaryType = typeof(Dictionary<,>);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BsonMediaTypeFormatter"/> class.

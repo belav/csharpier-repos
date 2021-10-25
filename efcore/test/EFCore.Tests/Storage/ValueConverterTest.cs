@@ -264,7 +264,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 foreach (var toType in types)
                 {
                     var converter = (ValueConverter)Activator.CreateInstance(
-                        typeof(CastingConverter<, >).MakeGenericType(fromType, toType),
+                        typeof(CastingConverter<,>).MakeGenericType(fromType, toType),
                         new object[] { null }
                     );
 

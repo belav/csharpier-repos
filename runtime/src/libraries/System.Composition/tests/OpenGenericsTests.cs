@@ -135,7 +135,7 @@ namespace System.Composition.UnitTests
         public void TypesWithMismatchedGenericParameterListsAreDetectedDuringDiscovery()
         {
             var x = Assert.Throws<CompositionFailedException>(
-                () => CreateContainer(typeof(RepositoryWithKey<, >))
+                () => CreateContainer(typeof(RepositoryWithKey<,>))
             );
             Assert.Equal(
                 "Exported contract 'IRepository`1' of open generic part 'RepositoryWithKey`2' does not match the generic arguments of the class.",

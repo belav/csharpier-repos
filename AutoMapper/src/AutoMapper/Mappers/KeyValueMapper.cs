@@ -8,7 +8,7 @@ namespace AutoMapper.Internal.Mappers
     {
         public bool IsMatch(in TypePair context) =>
             IsKeyValue(context.SourceType) && IsKeyValue(context.DestinationType);
-        public static bool IsKeyValue(Type type) => type.IsGenericType(typeof(KeyValuePair<, >));
+        public static bool IsKeyValue(Type type) => type.IsGenericType(typeof(KeyValuePair<,>));
         public Expression MapExpression(
             IGlobalConfiguration configurationProvider,
             ProfileMap profileMap,

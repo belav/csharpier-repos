@@ -68,7 +68,7 @@ namespace Microsoft.AspNetCore.DataProtection
 
         [Theory]
         [InlineData(typeof(GenericType<>))]
-        [InlineData(typeof(GenericType<, >))]
+        [InlineData(typeof(GenericType<,>))]
         public void CreateInstance_ThrowsForOpenGenerics(Type type)
         {
             // Arrange

@@ -75,7 +75,7 @@ namespace System.Linq
     }
 
     [DebuggerDisplay("Count = {Count}")]
-    [DebuggerTypeProxy(typeof(SystemLinq_LookupDebugView<, >))]
+    [DebuggerTypeProxy(typeof(SystemLinq_LookupDebugView<,>))]
     public partial class Lookup<TKey, TElement> : ILookup<TKey, TElement>
     {
         private readonly IEqualityComparer<TKey> _comparer;

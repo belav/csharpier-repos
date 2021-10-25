@@ -13,7 +13,7 @@ namespace AutoMapper.UnitTests.Bug
 
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
-                c => c.CreateMap(typeof(List<>), typeof(List<>)).ConvertUsing(typeof(Converter<, >))
+                c => c.CreateMap(typeof(List<>), typeof(List<>)).ConvertUsing(typeof(Converter<,>))
             );
 
         protected override void Because_of()
@@ -173,8 +173,8 @@ namespace AutoMapper.UnitTests.Bug
                         .ConvertUsing(typeof(Converter<>));
                     cfg.CreateMap(typeof(Source<object>), typeof(OtherDestination<>))
                         .ConvertUsing(typeof(Converter<>));
-                    cfg.CreateMap(typeof(Hashtable), typeof(IReadOnlyDictionary<, >))
-                        .ConvertUsing(typeof(Converter<, >));
+                    cfg.CreateMap(typeof(Hashtable), typeof(IReadOnlyDictionary<,>))
+                        .ConvertUsing(typeof(Converter<,>));
                 }
             );
 

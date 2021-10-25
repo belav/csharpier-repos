@@ -111,7 +111,7 @@ namespace System.ComponentModel.Composition.Hosting
         public void GetExportsWithGenerics()
         {
             var originalCatalog = new TypeCatalog(
-                typeof(GenericExporter<, >),
+                typeof(GenericExporter<,>),
                 typeof(Exporter11),
                 typeof(Exporter22)
             );
@@ -450,7 +450,7 @@ namespace System.ComponentModel.Composition.Hosting
         public interface IContract2 { }
         public interface IGenericContract<T1, T2> { }
 
-        [Export(typeof(IGenericContract<, >))]
+        [Export(typeof(IGenericContract<,>))]
         public class GenericExporter<T1, T2> : IGenericContract<T1, T2>
         {
             [Import]

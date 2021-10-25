@@ -1348,7 +1348,7 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap(typeof(Source<, >), typeof(Destination), MemberList.None)
+                    cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None)
                         .IncludeMembers("InnerSource", "OtherInnerSource");
                     cfg.CreateMap<InnerSource, Destination>(MemberList.None);
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);
@@ -1392,7 +1392,7 @@ namespace AutoMapper.UnitTests
                 {
                     Assert.Throws<ArgumentOutOfRangeException>(
                         () =>
-                            cfg.CreateMap(typeof(Source<, >), typeof(Destination), MemberList.None)
+                            cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None)
                                 .IncludeMembers("dInnerSource", "fOtherInnerSource")
                     );
                 }
@@ -1429,7 +1429,7 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap(typeof(Source<, >), typeof(Destination), MemberList.None)
+                    cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None)
                         .IncludeMembers("InnerSource", "OtherInnerSource")
                         .ReverseMap();
                     cfg.CreateMap<InnerSource, Destination>(MemberList.None).ReverseMap();
@@ -1479,7 +1479,7 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap(typeof(Source<, >), typeof(Destination), MemberList.None)
+                    cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.None)
                         .IncludeMembers("InnerSource", "OtherInnerSource")
                         .ReverseMap()
                         .ForMember("InnerSource", o => o.Ignore())
@@ -1528,7 +1528,7 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap(typeof(Destination), typeof(Source<, >))
+                    cfg.CreateMap(typeof(Destination), typeof(Source<,>))
                         .ForMember("InnerSource", o => o.MapFrom(s => s))
                         .ForMember("OtherInnerSource", o => o.MapFrom(s => s))
                         .ReverseMap();
@@ -1580,7 +1580,7 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap(typeof(Destination), typeof(Source<, >))
+                    cfg.CreateMap(typeof(Destination), typeof(Source<,>))
                         .ForMember("InnerSource", o => o.MapFrom(s => s))
                         .ForMember("OtherInnerSource", o => o.MapFrom(s => s))
                         .ReverseMap()
@@ -1669,7 +1669,7 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap(typeof(Source<, >), typeof(Destination), MemberList.Source)
+                    cfg.CreateMap(typeof(Source<,>), typeof(Destination), MemberList.Source)
                         .IncludeMembers("InnerSource", "OtherInnerSource");
                     cfg.CreateMap<InnerSource, Destination>(MemberList.None);
                     cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None);

@@ -29,7 +29,7 @@ namespace System.Text.Json.Serialization.Tests
                     return false;
                 }
 
-                if (typeToConvert.GetGenericTypeDefinition() != typeof(Dictionary<, >))
+                if (typeToConvert.GetGenericTypeDefinition() != typeof(Dictionary<,>))
                 {
                     return false;
                 }
@@ -43,7 +43,7 @@ namespace System.Text.Json.Serialization.Tests
                 Type valueType = type.GetGenericArguments()[1];
 
                 JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                    typeof(DictionaryEnumConverterInner<, >).MakeGenericType(
+                    typeof(DictionaryEnumConverterInner<,>).MakeGenericType(
                         new Type[] { keyType, valueType }
                     ),
                     BindingFlags.Instance | BindingFlags.Public,

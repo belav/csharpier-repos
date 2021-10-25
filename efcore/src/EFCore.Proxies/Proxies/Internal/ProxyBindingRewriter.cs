@@ -185,7 +185,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                                         if (
                                             clrType.IsGenericType
                                             && clrType.GetGenericTypeDefinition()
-                                                == typeof(Dictionary<, >)
+                                                == typeof(Dictionary<,>)
                                             && clrType.GenericTypeArguments[0] == typeof(string)
                                         )
                                         {
@@ -199,7 +199,7 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                                                     ProxiesStrings.DictionaryCannotBeProxied(
                                                         clrType.ShortDisplayName(),
                                                         entityType.DisplayName(),
-                                                        typeof(IDictionary<, >)
+                                                        typeof(IDictionary<,>)
                                                             .MakeGenericType(
                                                                 clrType.GenericTypeArguments
                                                             )

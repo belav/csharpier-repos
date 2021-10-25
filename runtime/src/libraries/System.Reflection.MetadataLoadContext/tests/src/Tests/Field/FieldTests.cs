@@ -92,9 +92,7 @@ namespace System.Reflection.Tests
                 FieldInfo f = fields.Single(f1 => f1.Name == "SField2");
                 Assert.Equal(FieldAttributes.Static | FieldAttributes.Family, f.Attributes);
                 Assert.Equal(
-                    typeof(GenericClass2<, >)
-                        .Project()
-                        .MakeGenericType(typeof(int).Project(), theT),
+                    typeof(GenericClass2<,>).Project().MakeGenericType(typeof(int).Project(), theT),
                     f.FieldType
                 );
             }

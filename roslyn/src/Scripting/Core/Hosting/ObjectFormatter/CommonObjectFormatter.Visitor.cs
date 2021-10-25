@@ -131,7 +131,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 //
                 if (
                     typeInfo.IsGenericType
-                    && typeInfo.GetGenericTypeDefinition() == typeof(KeyValuePair<, >)
+                    && typeInfo.GetGenericTypeDefinition() == typeof(KeyValuePair<,>)
                 )
                 {
                     if (isRoot)

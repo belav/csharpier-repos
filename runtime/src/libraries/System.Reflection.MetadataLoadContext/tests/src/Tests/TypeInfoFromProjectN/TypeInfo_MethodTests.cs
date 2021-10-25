@@ -296,7 +296,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGetGenericParameterConstraints1()
         {
-            Type def = typeof(TypeInfoMethodClassWithConstraints<, >).Project();
+            Type def = typeof(TypeInfoMethodClassWithConstraints<,>).Project();
             TypeInfo ti = def.GetTypeInfo();
 
             Type[] defparams = ti.GenericTypeParameters;
@@ -315,7 +315,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGetGenericParameterConstraints2()
         {
-            Type def = typeof(TypeInfoMethodClassWithConstraints<, >).Project();
+            Type def = typeof(TypeInfoMethodClassWithConstraints<,>).Project();
             TypeInfo ti = def.GetTypeInfo();
 
             Type[] defparams = ti.GenericTypeParameters;

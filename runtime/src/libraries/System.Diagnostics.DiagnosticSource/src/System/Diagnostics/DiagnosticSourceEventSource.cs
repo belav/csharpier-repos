@@ -1804,8 +1804,8 @@ namespace System.Diagnostics
                                 return new PropertyFetch(type);
                             }
                             Type typedPropertyFetcher = typeInfo.IsValueType
-                                ? typeof(ValueTypedFetchProperty<, >)
-                                : typeof(RefTypedFetchProperty<, >);
+                                ? typeof(ValueTypedFetchProperty<,>)
+                                : typeof(RefTypedFetchProperty<,>);
                             Type instantiatedTypedPropertyFetcher = typedPropertyFetcher
                                 .GetTypeInfo()
                                 .MakeGenericType(

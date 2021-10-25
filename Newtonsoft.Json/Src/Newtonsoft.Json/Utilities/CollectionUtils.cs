@@ -102,12 +102,12 @@ namespace Newtonsoft.Json.Utilities
             {
                 return true;
             }
-            if (ReflectionUtils.ImplementsGenericDefinition(type, typeof(IDictionary<, >)))
+            if (ReflectionUtils.ImplementsGenericDefinition(type, typeof(IDictionary<,>)))
             {
                 return true;
             }
 #if HAVE_READ_ONLY_COLLECTIONS
-            if (ReflectionUtils.ImplementsGenericDefinition(type, typeof(IReadOnlyDictionary<, >)))
+            if (ReflectionUtils.ImplementsGenericDefinition(type, typeof(IReadOnlyDictionary<,>)))
             {
                 return true;
             }

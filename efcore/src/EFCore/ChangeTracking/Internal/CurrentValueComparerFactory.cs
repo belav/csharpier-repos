@@ -57,18 +57,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     if (IsGenericComparable(providerType, nonNullableProviderType))
                     {
                         var comparerType = modelType.IsClass
-                            ? typeof(NullableClassCurrentProviderValueComparer<, >).MakeGenericType(
+                            ? typeof(NullableClassCurrentProviderValueComparer<,>).MakeGenericType(
                                   modelType,
                                   converter.ProviderClrType
                               )
                             : modelType == converter.ModelClrType
-                                ? typeof(CurrentProviderValueComparer<, >).MakeGenericType(
+                                ? typeof(CurrentProviderValueComparer<,>).MakeGenericType(
                                       modelType,
                                       converter.ProviderClrType
                                   )
                                 : typeof(NullableStructCurrentProviderValueComparer<
                                       ,
-
                                   >).MakeGenericType(
                                       nonNullableModelType,
                                       converter.ProviderClrType

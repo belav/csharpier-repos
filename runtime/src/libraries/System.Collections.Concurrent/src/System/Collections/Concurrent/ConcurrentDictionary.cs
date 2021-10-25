@@ -17,7 +17,7 @@ namespace System.Collections.Concurrent
     /// All public and protected members of <see cref="ConcurrentDictionary{TKey,TValue}"/> are thread-safe and may be used
     /// concurrently from multiple threads.
     /// </remarks>
-    [DebuggerTypeProxy(typeof(IDictionaryDebugView<, >))]
+    [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
     public class ConcurrentDictionary<TKey, TValue>
         : IDictionary<TKey, TValue>,

@@ -2319,7 +2319,7 @@ namespace Microsoft.AspNetCore.Mvc
                 var elementType = enumerableType.GenericTypeArguments[0];
                 if (
                     elementType.IsGenericType
-                    && elementType.GetGenericTypeDefinition() == typeof(KeyValuePair<, >)
+                    && elementType.GetGenericTypeDefinition() == typeof(KeyValuePair<,>)
                 )
                 {
                     _attemptingToBindCollectionOfKeyValuePair(

@@ -25,7 +25,7 @@ namespace System.Collections.Immutable
         /// </para>
         /// </remarks>
         [DebuggerDisplay("Count = {Count}")]
-        [DebuggerTypeProxy(typeof(ImmutableSortedDictionaryBuilderDebuggerProxy<, >))]
+        [DebuggerTypeProxy(typeof(ImmutableSortedDictionaryBuilderDebuggerProxy<,>))]
         public sealed class Builder
             : IDictionary<TKey, TValue>,
               IReadOnlyDictionary<TKey, TValue>,

@@ -23,7 +23,7 @@ namespace System.Threading.Tasks.Dataflow
     /// <typeparam name="TInput">Specifies the type of data received and operated on by this <see cref="TransformManyBlock{TInput,TOutput}"/>.</typeparam>
     /// <typeparam name="TOutput">Specifies the type of data output by this <see cref="TransformManyBlock{TInput,TOutput}"/>.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
-    [DebuggerTypeProxy(typeof(TransformManyBlock<, >.DebugView))]
+    [DebuggerTypeProxy(typeof(TransformManyBlock<,>.DebugView))]
     public sealed class TransformManyBlock<TInput, TOutput>
         : IPropagatorBlock<TInput, TOutput>,
           IReceivableSourceBlock<TOutput>,

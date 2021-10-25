@@ -24,7 +24,7 @@ namespace System.Composition.Hosting.Providers.Lazy
         {
             if (
                 !exportKey.ContractType.IsConstructedGenericType
-                || exportKey.ContractType.GetGenericTypeDefinition() != typeof(Lazy<, >)
+                || exportKey.ContractType.GetGenericTypeDefinition() != typeof(Lazy<,>)
             )
                 return NoExportDescriptors;
 

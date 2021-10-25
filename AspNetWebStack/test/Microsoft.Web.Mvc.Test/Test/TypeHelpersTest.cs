@@ -100,7 +100,7 @@ namespace Microsoft.Web.Mvc.Test
         [Fact]
         public void TypeAllowsNullValueReturnsFalseForNonNullableGenericValueTypeDefinition()
         {
-            Assert.False(TypeHelpers.TypeAllowsNullValue(typeof(KeyValuePair<, >)));
+            Assert.False(TypeHelpers.TypeAllowsNullValue(typeof(KeyValuePair<,>)));
         }
 
         [Fact]

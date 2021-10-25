@@ -182,7 +182,7 @@ namespace Newtonsoft.Json.Converters
 
             if (t.IsValueType() && t.IsGenericType())
             {
-                return (t.GetGenericTypeDefinition() == typeof(KeyValuePair<, >));
+                return (t.GetGenericTypeDefinition() == typeof(KeyValuePair<,>));
             }
 
             return false;

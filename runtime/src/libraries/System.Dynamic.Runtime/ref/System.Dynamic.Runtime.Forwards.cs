@@ -68,5 +68,5 @@
     typeof(System.Dynamic.IInvokeOnGetBinder)
 )]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(
-    typeof(System.Runtime.CompilerServices.ConditionalWeakTable<, >)
+    typeof(System.Runtime.CompilerServices.ConditionalWeakTable<,>)
 )]

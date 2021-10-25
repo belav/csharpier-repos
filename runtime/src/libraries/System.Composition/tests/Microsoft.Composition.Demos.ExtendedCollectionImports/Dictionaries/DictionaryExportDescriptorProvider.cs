@@ -31,7 +31,7 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.Dictionaries
             if (
                 !(
                     contract.ContractType.IsConstructedGenericType
-                    && contract.ContractType.GetGenericTypeDefinition() == typeof(IDictionary<, >)
+                    && contract.ContractType.GetGenericTypeDefinition() == typeof(IDictionary<,>)
                 )
             )
                 return NoExportDescriptors;

@@ -807,7 +807,7 @@ namespace System.Linq.Expressions.Compiler
             return true;
         }
 
-        [DynamicDependency("TryGetValue", typeof(Dictionary<, >))]
+        [DynamicDependency("TryGetValue", typeof(Dictionary<,>))]
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2026:RequiresUnreferencedCode",

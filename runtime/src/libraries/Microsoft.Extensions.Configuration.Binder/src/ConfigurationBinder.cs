@@ -280,10 +280,10 @@ namespace Microsoft.Extensions.Configuration
                 return BindToCollection(type, config, options);
             }
 
-            collectionInterface = FindOpenGenericInterface(typeof(IReadOnlyDictionary<, >), type);
+            collectionInterface = FindOpenGenericInterface(typeof(IReadOnlyDictionary<,>), type);
             if (collectionInterface != null)
             {
-                Type dictionaryType = typeof(Dictionary<, >).MakeGenericType(
+                Type dictionaryType = typeof(Dictionary<,>).MakeGenericType(
                     type.GenericTypeArguments[0],
                     type.GenericTypeArguments[1]
                 );
@@ -292,11 +292,11 @@ namespace Microsoft.Extensions.Configuration
                 return instance;
             }
 
-            collectionInterface = FindOpenGenericInterface(typeof(IDictionary<, >), type);
+            collectionInterface = FindOpenGenericInterface(typeof(IDictionary<,>), type);
             if (collectionInterface != null)
             {
                 object instance = Activator.CreateInstance(
-                    typeof(Dictionary<, >).MakeGenericType(
+                    typeof(Dictionary<,>).MakeGenericType(
                         type.GenericTypeArguments[0],
                         type.GenericTypeArguments[1]
                     )
@@ -376,7 +376,7 @@ namespace Microsoft.Extensions.Configuration
                 }
 
                 // See if its a Dictionary
-                Type collectionInterface = FindOpenGenericInterface(typeof(IDictionary<, >), type);
+                Type collectionInterface = FindOpenGenericInterface(typeof(IDictionary<,>), type);
                 if (collectionInterface != null)
                 {
                     BindDictionary(instance, collectionInterface, config, options);

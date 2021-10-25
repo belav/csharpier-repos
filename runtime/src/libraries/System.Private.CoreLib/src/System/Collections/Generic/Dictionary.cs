@@ -10,7 +10,7 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Collections.Generic
 {
-    [DebuggerTypeProxy(typeof(IDictionaryDebugView<, >))]
+    [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
     [TypeForwardedFrom(
@@ -1450,7 +1450,7 @@ namespace System.Collections.Generic
             }
         }
 
-        [DebuggerTypeProxy(typeof(DictionaryKeyCollectionDebugView<, >))]
+        [DebuggerTypeProxy(typeof(DictionaryKeyCollectionDebugView<,>))]
         [DebuggerDisplay("Count = {Count}")]
         public sealed class KeyCollection
             : ICollection<TKey>,
@@ -1655,7 +1655,7 @@ namespace System.Collections.Generic
             }
         }
 
-        [DebuggerTypeProxy(typeof(DictionaryValueCollectionDebugView<, >))]
+        [DebuggerTypeProxy(typeof(DictionaryValueCollectionDebugView<,>))]
         [DebuggerDisplay("Count = {Count}")]
         public sealed class ValueCollection
             : ICollection<TValue>,

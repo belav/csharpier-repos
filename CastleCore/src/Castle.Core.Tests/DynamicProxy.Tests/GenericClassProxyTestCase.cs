@@ -396,7 +396,7 @@ namespace Castle.DynamicProxy.Tests
             Assert.Throws<ArgumentException>(
                 delegate
                 {
-                    generator.CreateClassProxy(typeof(GenClassWithGenReturn<, >), interceptor);
+                    generator.CreateClassProxy(typeof(GenClassWithGenReturn<,>), interceptor);
                 }
             );
         }

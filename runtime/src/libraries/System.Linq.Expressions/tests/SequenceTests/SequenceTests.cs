@@ -529,7 +529,7 @@ namespace System.Linq.Expressions.Tests
             // 2 type arg Func
             type = Expression.GetFuncType(new Type[] { typeof(int), typeof(string) });
             Assert.True(type.IsGenericType);
-            Assert.Equal(typeof(Func<, >), type.GetGenericTypeDefinition());
+            Assert.Equal(typeof(Func<,>), type.GetGenericTypeDefinition());
             Assert.Equal(typeof(int), type.GetGenericArguments()[0]);
             Assert.Equal(typeof(string), type.GetGenericArguments()[1]);
 
@@ -538,7 +538,7 @@ namespace System.Linq.Expressions.Tests
                 new Type[] { typeof(string), typeof(int), typeof(decimal) }
             );
             Assert.True(type.IsGenericType);
-            Assert.Equal(typeof(Func<, , >), type.GetGenericTypeDefinition());
+            Assert.Equal(typeof(Func<,,>), type.GetGenericTypeDefinition());
             Assert.Equal(typeof(string), type.GetGenericArguments()[0]);
             Assert.Equal(typeof(int), type.GetGenericArguments()[1]);
             Assert.Equal(typeof(decimal), type.GetGenericArguments()[2]);
@@ -548,7 +548,7 @@ namespace System.Linq.Expressions.Tests
                 new Type[] { typeof(string), typeof(int), typeof(decimal), typeof(float) }
             );
             Assert.True(type.IsGenericType);
-            Assert.Equal(typeof(Func<, , , >), type.GetGenericTypeDefinition());
+            Assert.Equal(typeof(Func<,,,>), type.GetGenericTypeDefinition());
             Assert.Equal(typeof(string), type.GetGenericArguments()[0]);
             Assert.Equal(typeof(int), type.GetGenericArguments()[1]);
             Assert.Equal(typeof(decimal), type.GetGenericArguments()[2]);
@@ -566,7 +566,7 @@ namespace System.Linq.Expressions.Tests
                 }
             );
             Assert.True(type.IsGenericType);
-            Assert.Equal(typeof(Func<, , , , >), type.GetGenericTypeDefinition());
+            Assert.Equal(typeof(Func<,,,,>), type.GetGenericTypeDefinition());
             Assert.Equal(typeof(NWindProxy.Customer), type.GetGenericArguments()[0]);
             Assert.Equal(typeof(string), type.GetGenericArguments()[1]);
             Assert.Equal(typeof(int), type.GetGenericArguments()[2]);

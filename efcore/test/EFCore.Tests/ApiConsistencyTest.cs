@@ -40,9 +40,9 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     typeof(ModelBuilder),
                     typeof(CollectionCollectionBuilder),
-                    typeof(CollectionCollectionBuilder<, >),
+                    typeof(CollectionCollectionBuilder<,>),
                     typeof(CollectionNavigationBuilder),
-                    typeof(CollectionNavigationBuilder<, >),
+                    typeof(CollectionNavigationBuilder<,>),
                     typeof(DataBuilder),
                     typeof(DataBuilder<>),
                     typeof(DiscriminatorBuilder),
@@ -55,21 +55,21 @@ namespace Microsoft.EntityFrameworkCore
                     typeof(KeyBuilder),
                     typeof(KeyBuilder<>),
                     typeof(NavigationBuilder),
-                    typeof(NavigationBuilder<, >),
+                    typeof(NavigationBuilder<,>),
                     typeof(OwnedNavigationBuilder),
-                    typeof(OwnedNavigationBuilder<, >),
+                    typeof(OwnedNavigationBuilder<,>),
                     typeof(OwnedEntityTypeBuilder),
                     typeof(OwnedEntityTypeBuilder<>),
                     typeof(OwnershipBuilder),
-                    typeof(OwnershipBuilder<, >),
+                    typeof(OwnershipBuilder<,>),
                     typeof(PropertyBuilder),
                     typeof(PropertyBuilder<>),
                     typeof(ReferenceCollectionBuilder),
-                    typeof(ReferenceCollectionBuilder<, >),
+                    typeof(ReferenceCollectionBuilder<,>),
                     typeof(ReferenceNavigationBuilder),
-                    typeof(ReferenceNavigationBuilder<, >),
+                    typeof(ReferenceNavigationBuilder<,>),
                     typeof(ReferenceReferenceBuilder),
-                    typeof(ReferenceReferenceBuilder<, >),
+                    typeof(ReferenceReferenceBuilder<,>),
                     typeof(RelationshipBuilderBase),
                     typeof(DbContextOptionsBuilder),
                     typeof(DbContextOptionsBuilder<>),
@@ -106,32 +106,32 @@ namespace Microsoft.EntityFrameworkCore
             public override HashSet<MethodInfo> UnmatchedMetadataMethods { get; } =
                 new()
                 {
-                    typeof(OwnedNavigationBuilder<, >).GetMethod(
+                    typeof(OwnedNavigationBuilder<,>).GetMethod(
                         nameof(OwnedNavigationBuilder.OwnsOne),
                         0,
                         new[] { typeof(string), typeof(string) }
                     ),
-                    typeof(OwnedNavigationBuilder<, >).GetMethod(
+                    typeof(OwnedNavigationBuilder<,>).GetMethod(
                         nameof(OwnedNavigationBuilder.OwnsOne),
                         0,
                         new[] { typeof(string), typeof(Type), typeof(string) }
                     ),
-                    typeof(OwnedNavigationBuilder<, >).GetMethod(
+                    typeof(OwnedNavigationBuilder<,>).GetMethod(
                         nameof(OwnedNavigationBuilder.OwnsOne),
                         0,
                         new[] { typeof(Type), typeof(string) }
                     ),
-                    typeof(OwnedNavigationBuilder<, >).GetMethod(
+                    typeof(OwnedNavigationBuilder<,>).GetMethod(
                         nameof(OwnedNavigationBuilder.OwnsMany),
                         0,
                         new[] { typeof(string), typeof(string) }
                     ),
-                    typeof(OwnedNavigationBuilder<, >).GetMethod(
+                    typeof(OwnedNavigationBuilder<,>).GetMethod(
                         nameof(OwnedNavigationBuilder.OwnsMany),
                         0,
                         new[] { typeof(string), typeof(Type), typeof(string) }
                     ),
-                    typeof(OwnedNavigationBuilder<, >).GetMethod(
+                    typeof(OwnedNavigationBuilder<,>).GetMethod(
                         nameof(OwnedNavigationBuilder.OwnsMany),
                         0,
                         new[] { typeof(Type), typeof(string) }

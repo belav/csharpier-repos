@@ -18,7 +18,7 @@ public static class Program
 
     public static int Main(string[] args)
     {
-        MethodInfo method = typeof(BaseType<, >).GetMethod("blah");
+        MethodInfo method = typeof(BaseType<,>).GetMethod("blah");
         Delegate del = Delegate.CreateDelegate(typeof(Action), null, method, true);
         bool caught = false;
 

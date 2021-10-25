@@ -153,7 +153,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 ProviderClrType.IsNullableType() && !secondConverter.ModelClrType.IsNullableType()
                     ? ComposeWith(
                           (ValueConverter)Activator.CreateInstance(
-                              typeof(CastingConverter<, >).MakeGenericType(
+                              typeof(CastingConverter<,>).MakeGenericType(
                                   ProviderClrType,
                                   secondConverter.ModelClrType
                               ),
@@ -163,7 +163,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     : this;
 
             return (ValueConverter)Activator.CreateInstance(
-                typeof(CompositeValueConverter<, , >).MakeGenericType(
+                typeof(CompositeValueConverter<,,>).MakeGenericType(
                     firstConverter.ModelClrType,
                     firstConverter.ProviderClrType,
                     secondConverter.ProviderClrType

@@ -27,7 +27,7 @@ namespace System.Threading.Tasks.Dataflow
     /// <typeparam name="T1">Specifies the type of data accepted by the block's first target.</typeparam>
     /// <typeparam name="T2">Specifies the type of data accepted by the block's second target.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
-    [DebuggerTypeProxy(typeof(JoinBlock<, >.DebugView))]
+    [DebuggerTypeProxy(typeof(JoinBlock<,>.DebugView))]
     public sealed class JoinBlock<T1, T2> : IReceivableSourceBlock<Tuple<T1, T2>>, IDebuggerDisplay
     {
         /// <summary>Resources shared by all targets for this join block.</summary>
@@ -372,7 +372,7 @@ namespace System.Threading.Tasks.Dataflow
     /// <typeparam name="T2">Specifies the type of data accepted by the block's second target.</typeparam>
     /// <typeparam name="T3">Specifies the type of data accepted by the block's third target.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
-    [DebuggerTypeProxy(typeof(JoinBlock<, , >.DebugView))]
+    [DebuggerTypeProxy(typeof(JoinBlock<,,>.DebugView))]
     public sealed class JoinBlock<T1, T2, T3>
         : IReceivableSourceBlock<Tuple<T1, T2, T3>>,
           IDebuggerDisplay

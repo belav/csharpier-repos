@@ -44,14 +44,11 @@ namespace AutoMapper.Internal.Mappers
                 return MapReadOnlyCollection(typeof(List<>), typeof(ReadOnlyCollection<>));
             }
             if (
-                destinationType.IsGenericType(typeof(ReadOnlyDictionary<, >))
-                || destinationType.IsGenericType(typeof(IReadOnlyDictionary<, >))
+                destinationType.IsGenericType(typeof(ReadOnlyDictionary<,>))
+                || destinationType.IsGenericType(typeof(IReadOnlyDictionary<,>))
             )
             {
-                return MapReadOnlyCollection(
-                    typeof(Dictionary<, >),
-                    typeof(ReadOnlyDictionary<, >)
-                );
+                return MapReadOnlyCollection(typeof(Dictionary<,>), typeof(ReadOnlyDictionary<,>));
             }
             if (
                 destinationType == sourceExpression.Type

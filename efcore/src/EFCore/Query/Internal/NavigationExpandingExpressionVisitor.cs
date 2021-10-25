@@ -1443,10 +1443,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             // This is to apply aggregate operator on GroupBy right away rather than deferring
             if (
                 source.SourceElementType.IsGenericType
-                && source.SourceElementType.GetGenericTypeDefinition() == typeof(IGrouping<, >)
+                && source.SourceElementType.GetGenericTypeDefinition() == typeof(IGrouping<,>)
                 && !(
                     selector.ReturnType.IsGenericType
-                    && selector.ReturnType.GetGenericTypeDefinition() == typeof(IGrouping<, >)
+                    && selector.ReturnType.GetGenericTypeDefinition() == typeof(IGrouping<,>)
                 )
             )
             {
@@ -1510,7 +1510,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 // Collection selector body is IQueryable, we need to adjust the type to IEnumerable, to match the SelectMany signature
                 // therefore the delegate type is specified explicitly
-                var collectionSelectorLambdaType = typeof(Func<, >).MakeGenericType(
+                var collectionSelectorLambdaType = typeof(Func<,>).MakeGenericType(
                     source.SourceElementType,
                     typeof(IEnumerable<>).MakeGenericType(collectionElementType)
                 );
@@ -1860,7 +1860,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             static LambdaExpression ChangeReturnType(LambdaExpression lambdaExpression, Type type)
             {
-                var delegateType = typeof(Func<, >).MakeGenericType(
+                var delegateType = typeof(Func<,>).MakeGenericType(
                     lambdaExpression.Parameters[0].Type,
                     type
                 );

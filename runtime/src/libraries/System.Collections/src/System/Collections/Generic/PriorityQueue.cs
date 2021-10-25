@@ -17,7 +17,7 @@ namespace System.Collections.Generic
     ///  that determines the dequeue order: elements with the lowest priority get dequeued first.
     /// </remarks>
     [DebuggerDisplay("Count = {Count}")]
-    [DebuggerTypeProxy(typeof(PriorityQueueDebugView<, >))]
+    [DebuggerTypeProxy(typeof(PriorityQueueDebugView<,>))]
     public class PriorityQueue<TElement, TPriority>
     {
         /// <summary>
@@ -835,7 +835,7 @@ namespace System.Collections.Generic
         ///  Enumerates the contents of a <see cref="PriorityQueue{TElement, TPriority}"/>, without any ordering guarantees.
         /// </summary>
         [DebuggerDisplay("Count = {Count}")]
-        [DebuggerTypeProxy(typeof(PriorityQueueDebugView<, >))]
+        [DebuggerTypeProxy(typeof(PriorityQueueDebugView<,>))]
         public sealed class UnorderedItemsCollection
             : IReadOnlyCollection<(TElement Element, TPriority Priority)>,
               ICollection

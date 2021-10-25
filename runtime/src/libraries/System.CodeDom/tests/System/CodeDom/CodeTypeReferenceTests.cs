@@ -158,7 +158,7 @@ namespace System.CodeDom.Tests
             yield return new object[]
             {
                 "System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version = 2.0.0.0, Culture = neutral, PublicKeyToken = b77a5c561934e089], [System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]",
-                typeof(Dictionary<, >).FullName,
+                typeof(Dictionary<,>).FullName,
                 null,
                 0,
                 new string[] { "System.String", "System.Collections.Generic.List`1" }

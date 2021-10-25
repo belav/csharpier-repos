@@ -301,7 +301,7 @@ namespace Moq
             bool IsInvocationFunc(Delegate callback)
             {
                 var type = callback.GetType();
-                if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Func<, >))
+                if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Func<,>))
                 {
                     var typeArguments = type.GetGenericArguments();
                     return typeArguments[0] == typeof(IInvocation)

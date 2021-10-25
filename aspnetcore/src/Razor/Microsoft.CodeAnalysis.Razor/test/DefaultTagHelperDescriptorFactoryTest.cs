@@ -2544,7 +2544,7 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
         {
             get
             {
-                var dictionaryNamespace = typeof(IDictionary<, >).FullName;
+                var dictionaryNamespace = typeof(IDictionary<,>).FullName;
                 dictionaryNamespace = dictionaryNamespace.Substring(
                     0,
                     dictionaryNamespace.IndexOf('`')
@@ -2627,7 +2627,7 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
                                             )
                                         )
                                         .TypeName(
-                                            $"{typeof(Dictionary<, >).Namespace}.Dictionary<System.String, System.Object>"
+                                            $"{typeof(Dictionary<,>).Namespace}.Dictionary<System.String, System.Object>"
                                         )
                                         .AsDictionaryAttribute(
                                             "valid-prefix1-",
@@ -2829,7 +2829,7 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
                                             )
                                         )
                                         .TypeName(
-                                            $"{typeof(Dictionary<, >).Namespace}.Dictionary<System.Int32, System.String>"
+                                            $"{typeof(Dictionary<,>).Namespace}.Dictionary<System.Int32, System.String>"
                                         )
                                         .AsDictionaryAttribute(
                                             "valid-prefix2-",
@@ -2857,7 +2857,7 @@ namespace Microsoft.CodeAnalysis.Razor.Workspaces
                                             )
                                         )
                                         .TypeName(
-                                            $"{typeof(IReadOnlyDictionary<, >).Namespace}.IReadOnlyDictionary<System.String, System.Object>"
+                                            $"{typeof(IReadOnlyDictionary<,>).Namespace}.IReadOnlyDictionary<System.String, System.Object>"
                                         )
                                         .AddDiagnostic(
                                             RazorDiagnosticFactory.CreateTagHelper_InvalidAttributePrefixNotNull(

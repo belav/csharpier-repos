@@ -117,7 +117,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
                     {
                         return (contractType.GenericTypeArguments[0], null, false);
                     }
-                    else if (contractType.GetGenericTypeDefinition() == typeof(Lazy<, >))
+                    else if (contractType.GetGenericTypeDefinition() == typeof(Lazy<,>))
                     {
                         return (
                             contractType.GenericTypeArguments[0],

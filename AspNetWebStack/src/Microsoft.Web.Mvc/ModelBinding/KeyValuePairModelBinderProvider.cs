@@ -33,10 +33,9 @@ namespace Microsoft.Web.Mvc.ModelBinding
                     bindingContext.ModelType,
                     typeof(KeyValuePair<
                         ,
-
                     >) /* supported model type */
                     ,
-                    typeof(KeyValuePairModelBinder<, >) /* binder type */
+                    typeof(KeyValuePairModelBinder<,>) /* binder type */
                 );
             }
             else

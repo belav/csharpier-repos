@@ -152,12 +152,12 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap(typeof(KeyValuePair<, >), typeof(Destination))
+                    cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
                         .ForMember("MyKey", o => o.MapFrom(typeof(KeyResolver<>)))
-                        .ForMember("MyValue", o => o.MapFrom(typeof(ValueResolver<, >)));
-                    cfg.CreateMap(typeof(KeyValuePair<, >), typeof(Destination<, >))
-                        .ForMember("MyKey", o => o.MapFrom(typeof(KeyResolver<, , >)))
-                        .ForMember("MyValue", o => o.MapFrom(typeof(ValueResolver<, , , >)));
+                        .ForMember("MyValue", o => o.MapFrom(typeof(ValueResolver<,>)));
+                    cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination<,>))
+                        .ForMember("MyKey", o => o.MapFrom(typeof(KeyResolver<,,>)))
+                        .ForMember("MyValue", o => o.MapFrom(typeof(ValueResolver<,,,>)));
                 }
             );
         private class KeyResolver<TKey>
@@ -240,12 +240,12 @@ namespace AutoMapper.UnitTests
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap(typeof(KeyValuePair<, >), typeof(Destination))
+                    cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
                         .ForMember("MyKey", o => o.MapFrom(typeof(Resolver<>), "Key"))
-                        .ForMember("MyValue", o => o.MapFrom(typeof(Resolver<, >), "Value"));
-                    cfg.CreateMap(typeof(KeyValuePair<, >), typeof(Destination<, >))
-                        .ForMember("MyKey", o => o.MapFrom(typeof(Resolver<, , >), "Key"))
-                        .ForMember("MyValue", o => o.MapFrom(typeof(Resolver<, , , >), "Value"));
+                        .ForMember("MyValue", o => o.MapFrom(typeof(Resolver<,>), "Value"));
+                    cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination<,>))
+                        .ForMember("MyKey", o => o.MapFrom(typeof(Resolver<,,>), "Key"))
+                        .ForMember("MyValue", o => o.MapFrom(typeof(Resolver<,,,>), "Value"));
                 }
             );
         private class Resolver<TKey>

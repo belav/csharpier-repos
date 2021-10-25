@@ -68,11 +68,7 @@ namespace System.Text.Json.Serialization.Converters
                     }
 
                     converterType = typeof(SmallObjectWithParameterizedConstructorConverter<
-                        ,
-                        ,
-                        ,
-                        ,
-
+                        ,,,,
                     >).MakeGenericType(typeArguments);
                 }
                 else
@@ -102,7 +98,7 @@ namespace System.Text.Json.Serialization.Converters
                 return false;
 
             Type generic = typeToConvert.GetGenericTypeDefinition();
-            return (generic == typeof(KeyValuePair<, >));
+            return (generic == typeof(KeyValuePair<,>));
         }
 
         private JsonConverter CreateKeyValuePairConverter(Type type, JsonSerializerOptions options)
@@ -113,9 +109,7 @@ namespace System.Text.Json.Serialization.Converters
             Type valueType = type.GetGenericArguments()[1];
 
             JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                typeof(KeyValuePairConverter<, >).MakeGenericType(
-                    new Type[] { keyType, valueType }
-                ),
+                typeof(KeyValuePairConverter<,>).MakeGenericType(new Type[] { keyType, valueType }),
                 BindingFlags.Instance | BindingFlags.Public,
                 binder: null,
                 args: null,

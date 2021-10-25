@@ -173,8 +173,8 @@ namespace AutoMapper.UnitTests.CustomMapping
             new MapperConfiguration(
                 cfg =>
                 {
-                    cfg.CreateMap(typeof(IDictionary<, >), typeof(IDictionary<, >))
-                        .ConvertUsing(typeof(DictionaryConverter<, >));
+                    cfg.CreateMap(typeof(IDictionary<,>), typeof(IDictionary<,>))
+                        .ConvertUsing(typeof(DictionaryConverter<,>));
                     cfg.CreateMap<Source, Destination>();
                 }
             );

@@ -113,9 +113,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             static Type MakeClosedCollectionType(Type openCollectionType, Type elementType)
             {
-                if (openCollectionType == typeof(Dictionary<, >))
+                if (openCollectionType == typeof(Dictionary<,>))
                 {
-                    return typeof(Dictionary<, >).MakeGenericType(typeof(string), elementType);
+                    return typeof(Dictionary<,>).MakeGenericType(typeof(string), elementType);
                 }
                 else
                 {
@@ -140,7 +140,7 @@ namespace System.Text.Json.Serialization.Tests
                 typeof(ClassWithParameterizedCtor_WithDictionaryOfPocoList),
             };
 
-            Type[] collectionTypes = new Type[] { typeof(List<>), typeof(Dictionary<, >), };
+            Type[] collectionTypes = new Type[] { typeof(List<>), typeof(Dictionary<,>), };
 
             foreach (Type type in elementTypes)
             {
@@ -218,7 +218,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     elementType = type.GetGenericArguments()[0];
                 }
-                else if (genericTypeDef == typeof(Dictionary<, >))
+                else if (genericTypeDef == typeof(Dictionary<,>))
                 {
                     elementType = type.GetGenericArguments()[1];
                 }

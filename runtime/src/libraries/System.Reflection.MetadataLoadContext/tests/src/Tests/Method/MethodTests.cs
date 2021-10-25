@@ -159,7 +159,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericMethods1()
         {
-            TestGenericMethods1Worker(typeof(GenericClassWithGenericMethods1<, >).Project());
+            TestGenericMethods1Worker(typeof(GenericClassWithGenericMethods1<,>).Project());
             TestGenericMethods1Worker(
                 typeof(GenericClassWithGenericMethods1<int, string>).Project()
             );
@@ -202,7 +202,7 @@ namespace System.Reflection.Tests
             Type actual = p.ParameterType;
 
             //GenericClass5<N, M[], IEnumerable<U>, T[,], int>
-            Type expected = typeof(GenericClass5<, , , , >)
+            Type expected = typeof(GenericClass5<,,,,>)
                 .Project()
                 .MakeGenericType(
                     theN,
@@ -220,7 +220,7 @@ namespace System.Reflection.Tests
         public static void TestConstructedGenericMethods1()
         {
             TestConstructedGenericMethods1Worker(
-                typeof(GenericClassWithGenericMethods1<, >).Project()
+                typeof(GenericClassWithGenericMethods1<,>).Project()
             );
             TestConstructedGenericMethods1Worker(
                 typeof(GenericClassWithGenericMethods1<int, string>).Project()
@@ -264,7 +264,7 @@ namespace System.Reflection.Tests
             Type actual = p.ParameterType;
 
             //GenericClass5<N, M[], IEnumerable<U>, T[,], int>
-            Type expected = typeof(GenericClass5<, , , , >)
+            Type expected = typeof(GenericClass5<,,,,>)
                 .Project()
                 .MakeGenericType(
                     theN,

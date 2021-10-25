@@ -25,7 +25,7 @@ namespace System.Composition.Hosting.Providers.ExportFactory
         {
             if (
                 !contract.ContractType.IsConstructedGenericType
-                || contract.ContractType.GetGenericTypeDefinition() != typeof(ExportFactory<, >)
+                || contract.ContractType.GetGenericTypeDefinition() != typeof(ExportFactory<,>)
             )
                 return NoExportDescriptors;
 

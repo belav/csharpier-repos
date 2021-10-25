@@ -377,7 +377,7 @@ namespace System.Reflection.Tests
                 yield return new object[] { typeof(object).Project(), TypeCode.Object };
                 yield return new object[] { typeof(System.Nullable).Project(), TypeCode.Object };
                 yield return new object[] { typeof(Nullable<int>).Project(), TypeCode.Object };
-                yield return new object[] { typeof(Dictionary<, >).Project(), TypeCode.Object };
+                yield return new object[] { typeof(Dictionary<,>).Project(), TypeCode.Object };
                 yield return new object[] { typeof(Exception).Project(), TypeCode.Object };
                 yield return new object[] { typeof(sbyte).Project(), TypeCode.SByte };
                 yield return new object[] { typeof(float).Project(), TypeCode.Single };
@@ -461,7 +461,7 @@ namespace System.Reflection.Tests
             Assert.False(typeof(bool).Project().MakeArrayType(1).IsValueType);
             Assert.False(typeof(bool).Project().MakeByRefType().IsValueType);
             Assert.False(typeof(bool).Project().MakePointerType().IsValueType);
-            Assert.True(typeof(KeyValuePair<, >).Project().IsValueType);
+            Assert.True(typeof(KeyValuePair<,>).Project().IsValueType);
             Assert.True(typeof(KeyValuePair<object, object>).Project().IsValueType);
             Assert.False(typeof(object).Project().IsValueType);
             Assert.False(typeof(IEnumerable<>).Project().IsValueType);

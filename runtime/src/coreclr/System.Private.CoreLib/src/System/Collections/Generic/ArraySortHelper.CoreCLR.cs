@@ -58,7 +58,7 @@ namespace System.Collections.Generic
 
         public static IArraySortHelper<TKey, TValue> Default => s_defaultArraySortHelper;
 
-        [DynamicDependency("#ctor", typeof(GenericArraySortHelper<, >))]
+        [DynamicDependency("#ctor", typeof(GenericArraySortHelper<,>))]
         private static IArraySortHelper<TKey, TValue> CreateArraySortHelper()
         {
             IArraySortHelper<TKey, TValue> defaultArraySortHelper;

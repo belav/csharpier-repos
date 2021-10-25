@@ -59,9 +59,9 @@ namespace AutoMapper.Execution
             return New(ctorWithOptionalArgs, args);
         }
         private static Expression CreateInterfaceExpression(Type type) =>
-            type.IsGenericType(typeof(IDictionary<, >))
-                ? CreateCollection(type, typeof(Dictionary<, >))
-                : type.IsGenericType(typeof(IReadOnlyDictionary<, >))
+            type.IsGenericType(typeof(IDictionary<,>))
+                ? CreateCollection(type, typeof(Dictionary<,>))
+                : type.IsGenericType(typeof(IReadOnlyDictionary<,>))
                     ? CreateReadOnlyDictionary(type.GenericTypeArguments)
                     : type.IsGenericType(typeof(ISet<>))
                         ? CreateCollection(type, typeof(HashSet<>))
@@ -84,10 +84,10 @@ namespace AutoMapper.Execution
             );
         private static Expression CreateReadOnlyDictionary(Type[] typeArguments)
         {
-            var ctor = typeof(ReadOnlyDictionary<, >)
+            var ctor = typeof(ReadOnlyDictionary<,>)
                 .MakeGenericType(typeArguments)
                 .GetConstructors()[0];
-            return New(ctor, New(typeof(Dictionary<, >).MakeGenericType(typeArguments)));
+            return New(ctor, New(typeof(Dictionary<,>).MakeGenericType(typeArguments)));
         }
         private static Expression InvalidType(Type type, string message) =>
             Throw(Constant(new ArgumentException(message, "type")), type);

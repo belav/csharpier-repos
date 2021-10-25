@@ -132,7 +132,7 @@ namespace System.Runtime.Serialization
         {
             if (
                 typeof(DeclaringType).IsGenericType
-                && typeof(DeclaringType).GetGenericTypeDefinition() == typeof(KeyValue<, >)
+                && typeof(DeclaringType).GetGenericTypeDefinition() == typeof(KeyValue<,>)
             )
             {
                 if (propInfo.Name == "Key")
@@ -182,7 +182,7 @@ namespace System.Runtime.Serialization
         {
             if (
                 typeof(DeclaringType).IsGenericType
-                && typeof(DeclaringType).GetGenericTypeDefinition() == typeof(KeyValue<, >)
+                && typeof(DeclaringType).GetGenericTypeDefinition() == typeof(KeyValue<,>)
             )
             {
                 if (propInfo.Name == "Key")

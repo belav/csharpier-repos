@@ -137,7 +137,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 {
                     new GenericModelBinderProvider(
                         typeof(List<>),
-                        typeof(DictionaryModelBinder<, >)
+                        typeof(DictionaryModelBinder<,>)
                     );
                 },
                 "The open model type 'System.Collections.Generic.List`1[T]' has 1 generic type argument(s), but the open binder type 'Microsoft.Web.Mvc.ModelBinding.DictionaryModelBinder`2[TKey,TValue]' has 2 generic type argument(s). The binder type must not be an open generic type or must have the same number of generic arguments as the open model type."

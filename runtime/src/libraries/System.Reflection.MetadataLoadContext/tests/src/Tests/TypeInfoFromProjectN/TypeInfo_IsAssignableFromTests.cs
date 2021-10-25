@@ -274,8 +274,8 @@ namespace System.Reflection.Tests
                 true
             );
 
-            TypeInfo theTThatDerivesFromU = typeof(Gen5<, >).Project().Gp(0);
-            TypeInfo theU = typeof(Gen5<, >).Project().Gp(1);
+            TypeInfo theTThatDerivesFromU = typeof(Gen5<,>).Project().Gp(0);
+            TypeInfo theU = typeof(Gen5<,>).Project().Gp(1);
             VerifyIsAssignableFrom("U T", theU, theTThatDerivesFromU, true);
         }
 
@@ -486,8 +486,8 @@ namespace System.Reflection.Tests
                 false
             );
 
-            Type theT = typeof(G5<, >).Project().Gp(0).AsType();
-            Type theU = typeof(G5<, >).Project().Gp(1).AsType();
+            Type theT = typeof(G5<,>).Project().Gp(0).AsType();
+            Type theU = typeof(G5<,>).Project().Gp(1).AsType();
 
             // Variance checks do check castability between generic type parameters but only if it can be proven that the type parameter never binds to a valuetype.
             // (either the type parameter has a "class" constraint (not one "inherited" from an ancestor), or has a non-interface, non-valuetype constraint.)
@@ -545,8 +545,8 @@ namespace System.Reflection.Tests
                 false
             );
 
-            Type theT = typeof(G5<, >).Project().Gp(0).AsType();
-            Type theU = typeof(G5<, >).Project().Gp(1).AsType();
+            Type theT = typeof(G5<,>).Project().Gp(0).AsType();
+            Type theU = typeof(G5<,>).Project().Gp(1).AsType();
 
             // Variance checks do check castability between generic type parameters but only if it can be proven that the type parameter never binds to a valuetype.
             // (either the type parameter has a "class" constraint (not one "inherited" from an ancestor), or has a non-interface, non-valuetype constraint.)

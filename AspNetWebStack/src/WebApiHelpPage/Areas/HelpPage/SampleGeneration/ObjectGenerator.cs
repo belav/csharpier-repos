@@ -132,7 +132,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                 return GenerateNullable(type, createdObjectReferences);
             }
 
-            if (genericTypeDefinition == typeof(KeyValuePair<, >))
+            if (genericTypeDefinition == typeof(KeyValuePair<,>))
             {
                 return GenerateKeyValuePair(type, createdObjectReferences);
             }
@@ -175,9 +175,9 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
 
             if (genericArguments.Length == 2)
             {
-                if (genericTypeDefinition == typeof(IDictionary<, >))
+                if (genericTypeDefinition == typeof(IDictionary<,>))
                 {
-                    Type dictionaryType = typeof(Dictionary<, >).MakeGenericType(genericArguments);
+                    Type dictionaryType = typeof(Dictionary<,>).MakeGenericType(genericArguments);
                     return GenerateDictionary(
                         dictionaryType,
                         collectionSize,
@@ -185,7 +185,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                     );
                 }
 
-                Type closedDictionaryType = typeof(IDictionary<, >).MakeGenericType(
+                Type closedDictionaryType = typeof(IDictionary<,>).MakeGenericType(
                     genericArguments[0],
                     genericArguments[1]
                 );
@@ -231,13 +231,13 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         private static bool IsTuple(Type genericTypeDefinition)
         {
             return genericTypeDefinition == typeof(Tuple<>)
-                || genericTypeDefinition == typeof(Tuple<, >)
-                || genericTypeDefinition == typeof(Tuple<, , >)
-                || genericTypeDefinition == typeof(Tuple<, , , >)
-                || genericTypeDefinition == typeof(Tuple<, , , , >)
-                || genericTypeDefinition == typeof(Tuple<, , , , , >)
-                || genericTypeDefinition == typeof(Tuple<, , , , , , >)
-                || genericTypeDefinition == typeof(Tuple<, , , , , , , >);
+                || genericTypeDefinition == typeof(Tuple<,>)
+                || genericTypeDefinition == typeof(Tuple<,,>)
+                || genericTypeDefinition == typeof(Tuple<,,,>)
+                || genericTypeDefinition == typeof(Tuple<,,,,>)
+                || genericTypeDefinition == typeof(Tuple<,,,,,>)
+                || genericTypeDefinition == typeof(Tuple<,,,,,,>)
+                || genericTypeDefinition == typeof(Tuple<,,,,,,,>);
         }
 
         private static object GenerateKeyValuePair(

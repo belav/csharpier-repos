@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 typeof(DefaultHubProtocolResolver)
             );
             services.TryAddSingleton(typeof(IHubContext<>), typeof(HubContext<>));
-            services.TryAddSingleton(typeof(IHubContext<, >), typeof(HubContext<, >));
+            services.TryAddSingleton(typeof(IHubContext<,>), typeof(HubContext<,>));
             services.TryAddSingleton(
                 typeof(HubConnectionHandler<>),
                 typeof(HubConnectionHandler<>)

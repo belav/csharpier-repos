@@ -209,7 +209,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                 }
                 if (genericArguments.Length == 2)
                 {
-                    Type dictionaryType = typeof(IDictionary<, >).MakeGenericType(genericArguments);
+                    Type dictionaryType = typeof(IDictionary<,>).MakeGenericType(genericArguments);
                     if (dictionaryType.IsAssignableFrom(modelType))
                     {
                         return GenerateDictionaryModelDescription(
@@ -219,7 +219,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                         );
                     }
 
-                    Type keyValuePairType = typeof(KeyValuePair<, >).MakeGenericType(
+                    Type keyValuePairType = typeof(KeyValuePair<,>).MakeGenericType(
                         genericArguments
                     );
                     if (keyValuePairType.IsAssignableFrom(modelType))

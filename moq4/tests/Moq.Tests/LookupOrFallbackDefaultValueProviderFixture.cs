@@ -219,7 +219,7 @@ namespace Moq.Tests
             var provider = new Provider();
             provider.Register(typeof(string), (_, __) => unexpectedString);
             provider.Register(typeof(int), (_, __) => unexpectedInt);
-            provider.Deregister(typeof(ValueTuple<, >));
+            provider.Deregister(typeof(ValueTuple<,>));
 
             var actual = ((string, int))provider.GetDefaultValue(typeof((string, int)));
 

@@ -22,7 +22,7 @@ namespace System.Reflection.Tests
             typeof(object).TestTypeDefinitionInvariants();
             typeof(OuterType1.InnerType1).TestTypeDefinitionInvariants();
             typeof(IList<>).TestTypeDefinitionInvariants();
-            typeof(IDictionary<, >).TestTypeDefinitionInvariants();
+            typeof(IDictionary<,>).TestTypeDefinitionInvariants();
             typeof(object[]).TestSzArrayInvariants();
             typeof(object).MakeArrayType(1).TestMdArrayInvariants();
             typeof(object[,]).TestMdArrayInvariants();
@@ -35,7 +35,7 @@ namespace System.Reflection.Tests
             Type theT = typeof(IList<>).GetTypeInfo().GenericTypeParameters[0];
             theT.TestGenericTypeParameterInvariants();
 
-            Type theV = typeof(IDictionary<, >).GetTypeInfo().GenericTypeParameters[1];
+            Type theV = typeof(IDictionary<,>).GetTypeInfo().GenericTypeParameters[1];
             theT.TestGenericTypeParameterInvariants();
 
             MethodInfo genericMethod = typeof(ClassWithGenericMethods1).GetMethod(
@@ -63,7 +63,7 @@ namespace System.Reflection.Tests
             Type openPointer = theN.MakePointerType();
             openPointer.TestPointerInvariants();
 
-            Type openDictionary = typeof(IDictionary<, >).MakeGenericType(typeof(int), theN);
+            Type openDictionary = typeof(IDictionary<,>).MakeGenericType(typeof(int), theN);
             openDictionary.TestConstructedGenericTypeInvariants();
         }
 

@@ -34,7 +34,7 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             serviceCollection.AddSingleton<IHubProtocolResolver, CustomHubProtocolResolver>();
             serviceCollection.AddScoped(typeof(IHubActivator<>), typeof(CustomHubActivator<>));
             serviceCollection.AddSingleton(typeof(IHubContext<>), typeof(CustomHubContext<>));
-            serviceCollection.AddSingleton(typeof(IHubContext<, >), typeof(CustomHubContext<, >));
+            serviceCollection.AddSingleton(typeof(IHubContext<,>), typeof(CustomHubContext<,>));
             var hubOptions = new HubOptionsSetup(new List<IHubProtocol>());
             serviceCollection.AddSingleton<IConfigureOptions<HubOptions>>(hubOptions);
             serviceCollection.AddSignalR();
@@ -83,7 +83,7 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             serviceCollection.AddSingleton<IHubProtocolResolver, CustomHubProtocolResolver>();
             serviceCollection.AddScoped(typeof(IHubActivator<>), typeof(CustomHubActivator<>));
             serviceCollection.AddSingleton(typeof(IHubContext<>), typeof(CustomHubContext<>));
-            serviceCollection.AddSingleton(typeof(IHubContext<, >), typeof(CustomHubContext<, >));
+            serviceCollection.AddSingleton(typeof(IHubContext<,>), typeof(CustomHubContext<,>));
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             Assert.IsType<CustomIdProvider>(serviceProvider.GetRequiredService<IUserIdProvider>());

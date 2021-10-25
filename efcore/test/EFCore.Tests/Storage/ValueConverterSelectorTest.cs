@@ -353,7 +353,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     else
                     {
                         Assert.Equal(
-                            typeof(CastingConverter<, >).MakeGenericType(fromType, toType),
+                            typeof(CastingConverter<,>).MakeGenericType(fromType, toType),
                             converterInfos.Single().Create().GetType()
                         );
                     }

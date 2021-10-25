@@ -2459,11 +2459,11 @@ namespace SerializationTestTypes
         internal static Type TypeOfCollectionDataContractAttribute =
             typeof(CollectionDataContractAttribute);
         internal static Type TypeOfIEnumerable = typeof(IEnumerable);
-        internal static Type TypeOfIDictionaryGeneric = typeof(IDictionary<, >);
+        internal static Type TypeOfIDictionaryGeneric = typeof(IDictionary<,>);
         internal static Type TypeOfIEnumerableGeneric = typeof(IEnumerable<>);
         internal static Type TypeOfIDictionary = typeof(IDictionary);
-        internal static Type TypeOfKeyValuePair = typeof(KeyValuePair<, >);
-        internal static Type TypeOfKeyValue = typeof(KeyValue<, >);
+        internal static Type TypeOfKeyValuePair = typeof(KeyValuePair<,>);
+        internal static Type TypeOfKeyValue = typeof(KeyValue<,>);
         internal static Type TypeOfIListGeneric = typeof(IList<>);
         internal static Type TypeOfICollectionGeneric = typeof(ICollection<>);
         internal static Type TypeOfIList = typeof(IList);

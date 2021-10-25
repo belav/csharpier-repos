@@ -58,7 +58,7 @@ public class Tests
     // stack overflow in unmanaged code
     static void Recurse()
     {
-        Type t = typeof(Dictionary<, >);
+        Type t = typeof(Dictionary<,>);
         t.GetGenericArguments();
         Recurse();
     }

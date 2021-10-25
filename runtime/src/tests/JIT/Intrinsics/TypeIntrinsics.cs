@@ -41,7 +41,7 @@ public partial class Program
         IsTrue(typeof(void).IsValueType);
         IsFalse(typeof(ValueType).IsValueType);
         IsFalse(typeof(List<>).IsValueType);
-        IsFalse(typeof(IDictionary<, >).IsValueType);
+        IsFalse(typeof(IDictionary<,>).IsValueType);
         IsTrue(typeof(Vector128<>).IsValueType);
         IsTrue(typeof(Vector128<byte>).IsValueType);
 

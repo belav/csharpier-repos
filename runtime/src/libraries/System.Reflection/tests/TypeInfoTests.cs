@@ -412,7 +412,7 @@ namespace System.Reflection.Tests
                 new Type[] { typeof(int) },
                 null
             };
-            yield return new object[] { typeof(GenericInterface2<, >), new Type[0], null };
+            yield return new object[] { typeof(GenericInterface2<,>), new Type[0], null };
             yield return new object[]
             {
                 typeof(GenericInterface2<int, string>),
@@ -441,7 +441,7 @@ namespace System.Reflection.Tests
             };
             yield return new object[]
             {
-                typeof(GenericStructWithNoInterfaces2<, >),
+                typeof(GenericStructWithNoInterfaces2<,>),
                 new Type[0],
                 null
             };
@@ -472,7 +472,7 @@ namespace System.Reflection.Tests
             };
             yield return new object[]
             {
-                typeof(GenericStructWithGenericInterface2<, >),
+                typeof(GenericStructWithGenericInterface2<,>),
                 new Type[0],
                 new string[] { "TS", "VS" }
             };
@@ -529,7 +529,7 @@ namespace System.Reflection.Tests
             };
             yield return new object[]
             {
-                typeof(GenericClassWithNoInterfaces2<, >),
+                typeof(GenericClassWithNoInterfaces2<,>),
                 new Type[0],
                 null
             };
@@ -555,7 +555,7 @@ namespace System.Reflection.Tests
 
             yield return new object[]
             {
-                typeof(GenericClassWithGenericInterface2<, >),
+                typeof(GenericClassWithGenericInterface2<,>),
                 new Type[0],
                 new string[] { "T", "V" }
             };
@@ -635,7 +635,7 @@ namespace System.Reflection.Tests
             yield return new object[] { typeof(GenericInterface1<int>), new string[0], null };
             yield return new object[]
             {
-                typeof(GenericInterface2<, >),
+                typeof(GenericInterface2<,>),
                 new string[] { "TI", "VI" },
                 null
             };
@@ -667,7 +667,7 @@ namespace System.Reflection.Tests
             };
             yield return new object[]
             {
-                typeof(GenericStructWithNoInterfaces2<, >),
+                typeof(GenericStructWithNoInterfaces2<,>),
                 new string[] { "TS", "VS" },
                 null
             };
@@ -698,7 +698,7 @@ namespace System.Reflection.Tests
             };
             yield return new object[]
             {
-                typeof(GenericStructWithGenericInterface2<, >),
+                typeof(GenericStructWithGenericInterface2<,>),
                 new string[] { "TS", "VS" },
                 new string[0]
             };
@@ -755,7 +755,7 @@ namespace System.Reflection.Tests
             };
             yield return new object[]
             {
-                typeof(GenericClassWithNoInterfaces2<, >),
+                typeof(GenericClassWithNoInterfaces2<,>),
                 new string[] { "T", "V" },
                 null
             };
@@ -786,7 +786,7 @@ namespace System.Reflection.Tests
             };
             yield return new object[]
             {
-                typeof(GenericClassWithGenericInterface2<, >),
+                typeof(GenericClassWithGenericInterface2<,>),
                 new string[] { "T", "V" },
                 new string[0]
             };
@@ -1287,7 +1287,7 @@ namespace System.Reflection.Tests
 
             // illegal type construction due to T->T?
             Assert.Throws<ArgumentException>(
-                () => typeof(G<, >).MakeGenericType(typeof(int), typeof(int?))
+                () => typeof(G<,>).MakeGenericType(typeof(int), typeof(int?))
             );
 
             // Test trivial object casts
@@ -1296,7 +1296,7 @@ namespace System.Reflection.Tests
 
             // test construction again to catch caching issues
             Assert.Throws<ArgumentException>(
-                () => typeof(G<, >).MakeGenericType(typeof(int), typeof(int?))
+                () => typeof(G<,>).MakeGenericType(typeof(int), typeof(int?))
             );
         }
 
@@ -1334,14 +1334,12 @@ namespace System.Reflection.Tests
             Assert.True(a.IsAssignableTo(typeof(IFace[])));
             Assert.True(a.IsAssignableTo(typeof(IEnumerable<IFace>)));
 
-            Type a1 = typeof(GG<, >).GetGenericArguments()[0].MakeArrayType();
-            Type a2 = typeof(GG<, >).GetGenericArguments()[1].MakeArrayType();
+            Type a1 = typeof(GG<,>).GetGenericArguments()[0].MakeArrayType();
+            Type a2 = typeof(GG<,>).GetGenericArguments()[1].MakeArrayType();
             Assert.True(a2.IsAssignableFrom(a1));
             Assert.True(a1.IsAssignableTo(a2));
 
-            Type ie = typeof(IEnumerable<>).MakeGenericType(
-                typeof(GG<, >).GetGenericArguments()[1]
-            );
+            Type ie = typeof(IEnumerable<>).MakeGenericType(typeof(GG<,>).GetGenericArguments()[1]);
             Assert.True(ie.IsAssignableFrom(a1));
             Assert.True(a1.IsAssignableTo(ie));
         }
@@ -1723,8 +1721,8 @@ namespace System.Reflection.Tests
 
         [Theory]
         [InlineData(typeof(List<>), new string[] { "T" })]
-        [InlineData(typeof(Dictionary<, >), new string[] { "TKey", "TValue" })]
-        [InlineData(typeof(GenericClassWithNoInterfaces2<, >), new string[] { "T", "V" })]
+        [InlineData(typeof(Dictionary<,>), new string[] { "TKey", "TValue" })]
+        [InlineData(typeof(GenericClassWithNoInterfaces2<,>), new string[] { "T", "V" })]
         [InlineData(
             typeof(GenericClassWithNoInterfaces2<int, string>),
             new string[] { "Int32", "String" }
@@ -1943,7 +1941,7 @@ namespace System.Reflection.Tests
         public void GenericParameterConstraints()
         {
             Type[] genericTypeParameters =
-                typeof(MethodClassWithConstraints<, >).GetTypeInfo().GenericTypeParameters;
+                typeof(MethodClassWithConstraints<,>).GetTypeInfo().GenericTypeParameters;
             Assert.Equal(2, genericTypeParameters.Length);
 
             Assert.Equal(
@@ -2060,7 +2058,7 @@ namespace System.Reflection.Tests
         }
 
         [Theory]
-        [InlineData(typeof(MethodClassWithConstraints<, >), true)]
+        [InlineData(typeof(MethodClassWithConstraints<,>), true)]
         [InlineData(typeof(TI_BaseClass), false)]
         public void ContainsGenericParameter(Type type, bool expected)
         {

@@ -887,7 +887,7 @@ namespace System.Tests.Types
 
         public override Type[] GenericTypeArguments => new Type[] { typeof(int), typeof(string) };
 
-        public override Type GenericTypeDefinition => typeof(GenericClass<, >);
+        public override Type GenericTypeDefinition => typeof(GenericClass<,>);
     }
 
     public class OpenGenericClassTypeTests : ClassTypeTestBase
@@ -965,7 +965,7 @@ namespace System.Tests.Types
 
         public override Type[] GenericTypeArguments => new Type[] { typeof(int), typeof(string) };
 
-        public override Type GenericTypeDefinition => typeof(GenericStruct<, >);
+        public override Type GenericTypeDefinition => typeof(GenericStruct<,>);
     }
 
     public class NonGenericInterfaceTests : InterfaceTypeTestBase
@@ -1000,7 +1000,7 @@ namespace System.Tests.Types
 
         public override Type[] GenericTypeArguments => new Type[] { typeof(int), typeof(string) };
 
-        public override Type GenericTypeDefinition => typeof(GenericInterface<, >);
+        public override Type GenericTypeDefinition => typeof(GenericInterface<,>);
     }
 
     public class AbstractClassTypeTests : ClassTypeTestBase
@@ -1117,7 +1117,7 @@ namespace System.Tests.Types
     public class GenericTypeParameter1Of2Tests : TypePropertyTestBase
     {
         public override Type CreateType() =>
-            typeof(GenericClass<, >).GetTypeInfo().GenericTypeParameters[0];
+            typeof(GenericClass<,>).GetTypeInfo().GenericTypeParameters[0];
 
         public override TypeAttributes Attributes =>
             TypeAttributes.AutoLayout
@@ -1127,7 +1127,7 @@ namespace System.Tests.Types
 
         public override bool ContainsGenericParameters => true;
 
-        public override Type DeclaringType => typeof(GenericClass<, >);
+        public override Type DeclaringType => typeof(GenericClass<,>);
 
         public override GenericParameterAttributes? GenericParameterAttributes =>
             Reflection.GenericParameterAttributes.None;
@@ -1142,7 +1142,7 @@ namespace System.Tests.Types
     public class GenericTypeParameter2Of2Tests : TypePropertyTestBase
     {
         public override Type CreateType() =>
-            typeof(GenericClass<, >).GetTypeInfo().GenericTypeParameters[1];
+            typeof(GenericClass<,>).GetTypeInfo().GenericTypeParameters[1];
 
         public override TypeAttributes Attributes =>
             TypeAttributes.AutoLayout
@@ -1152,7 +1152,7 @@ namespace System.Tests.Types
 
         public override bool ContainsGenericParameters => true;
 
-        public override Type DeclaringType => typeof(GenericClass<, >);
+        public override Type DeclaringType => typeof(GenericClass<,>);
 
         public override GenericParameterAttributes? GenericParameterAttributes =>
             Reflection.GenericParameterAttributes.None;

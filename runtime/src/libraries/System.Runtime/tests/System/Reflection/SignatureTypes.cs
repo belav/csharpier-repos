@@ -208,7 +208,7 @@ namespace System.Reflection.Tests
         [InlineData(false)]
         public static void SignatureTypeComparisonLogicCodeCoverage(bool exactBinding)
         {
-            Type t = typeof(TestClass3<, >);
+            Type t = typeof(TestClass3<,>);
             MethodInfo[] methods = t.GetMethods(
                 BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly
             );

@@ -63,7 +63,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestMakeGenericType()
         {
-            Type gt = typeof(GenericClass3<, , >).Project();
+            Type gt = typeof(GenericClass3<,,>).Project();
             Type[] gas =
             {
                 typeof(int).Project(),
@@ -82,7 +82,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestMakeGenericTypeParameter()
         {
-            Type gt = typeof(GenericClass3<, , >).Project();
+            Type gt = typeof(GenericClass3<,,>).Project();
             Type[] gps = gt.GetTypeInfo().GenericTypeParameters;
             Assert.Equal(3, gps.Length);
             Assert.Equal("T", gps[0].Name);
@@ -104,7 +104,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestMakeGenericTypeNegativeInput()
         {
-            Type t = typeof(GenericClass3<, , >).Project();
+            Type t = typeof(GenericClass3<,,>).Project();
             Type[] typeArguments = null;
             Assert.Throws<ArgumentNullException>(() => t.MakeGenericType(typeArguments));
 

@@ -76,9 +76,9 @@ namespace System.Runtime.Tests
         public static IEnumerable<object[]> NullableMetadataTypesTestData()
         {
             yield return new object[] { typeof(string) };
-            yield return new object[] { typeof(Dictionary<, >) };
+            yield return new object[] { typeof(Dictionary<,>) };
             yield return new object[] { typeof(Uri) };
-            yield return new object[] { typeof(ConcurrentDictionary<, >) };
+            yield return new object[] { typeof(ConcurrentDictionary<,>) };
             yield return new object[] { typeof(ArrayPool<>) };
         }
 

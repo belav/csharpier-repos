@@ -52,7 +52,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
 
             var declaredElementType = enumerableOfT.GenericTypeArguments[0];
             var wrappedElementType = elementWrapperProvider?.WrappingType ?? declaredElementType;
-            WrappingType = typeof(DelegatingEnumerable<, >).MakeGenericType(
+            WrappingType = typeof(DelegatingEnumerable<,>).MakeGenericType(
                 wrappedElementType,
                 declaredElementType
             );

@@ -22,7 +22,7 @@ namespace AutoMapper.UnitTests
         protected override MapperConfiguration Configuration =>
             new MapperConfiguration(
                 c =>
-                    c.CreateMap(typeof(KeyValuePair<, >), typeof(Destination))
+                    c.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
                         .ForCtorParam("value1", o => o.MapFrom("Value"))
                         .ForCtorParam("key1", o => o.MapFrom("Key"))
             );

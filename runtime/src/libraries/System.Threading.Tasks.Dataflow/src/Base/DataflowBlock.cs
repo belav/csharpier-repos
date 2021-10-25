@@ -2017,7 +2017,7 @@ namespace System.Threading.Tasks.Dataflow
 
         /// <summary>Provides a dataflow block that encapsulates a target and a source to form a single propagator.</summary>
         [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
-        [DebuggerTypeProxy(typeof(EncapsulatingPropagator<, >.DebugView))]
+        [DebuggerTypeProxy(typeof(EncapsulatingPropagator<,>.DebugView))]
         private sealed class EncapsulatingPropagator<TInput, TOutput>
             : IPropagatorBlock<TInput, TOutput>,
               IReceivableSourceBlock<TOutput>,

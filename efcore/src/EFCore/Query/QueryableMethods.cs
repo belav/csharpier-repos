@@ -485,7 +485,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -504,7 +504,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -548,7 +548,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -608,7 +608,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -627,7 +627,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -640,7 +640,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[1])
+                            typeof(Func<,>).MakeGenericType(types[0], types[1])
                         )
                     }
             );
@@ -653,10 +653,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[1])
+                            typeof(Func<,>).MakeGenericType(types[0], types[1])
                         ),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[2])
+                            typeof(Func<,>).MakeGenericType(types[0], types[2])
                         )
                     }
             );
@@ -669,13 +669,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[1])
+                            typeof(Func<,>).MakeGenericType(types[0], types[1])
                         ),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[2])
+                            typeof(Func<,>).MakeGenericType(types[0], types[2])
                         ),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, , >).MakeGenericType(
+                            typeof(Func<,,>).MakeGenericType(
                                 types[1],
                                 typeof(IEnumerable<>).MakeGenericType(types[2]),
                                 types[3]
@@ -692,10 +692,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[1])
+                            typeof(Func<,>).MakeGenericType(types[0], types[1])
                         ),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, , >).MakeGenericType(
+                            typeof(Func<,,>).MakeGenericType(
                                 types[1],
                                 typeof(IEnumerable<>).MakeGenericType(types[0]),
                                 types[2]
@@ -713,13 +713,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(IEnumerable<>).MakeGenericType(types[1]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[2])
+                            typeof(Func<,>).MakeGenericType(types[0], types[2])
                         ),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[1], types[2])
+                            typeof(Func<,>).MakeGenericType(types[1], types[2])
                         ),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, , >).MakeGenericType(
+                            typeof(Func<,,>).MakeGenericType(
                                 types[0],
                                 typeof(IEnumerable<>).MakeGenericType(types[1]),
                                 types[3]
@@ -748,13 +748,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(IEnumerable<>).MakeGenericType(types[1]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[2])
+                            typeof(Func<,>).MakeGenericType(types[0], types[2])
                         ),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[1], types[2])
+                            typeof(Func<,>).MakeGenericType(types[1], types[2])
                         ),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, , >).MakeGenericType(types[0], types[1], types[3])
+                            typeof(Func<,,>).MakeGenericType(types[0], types[1], types[3])
                         )
                     }
             );
@@ -773,7 +773,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -792,7 +792,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -811,7 +811,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -830,7 +830,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[1])
+                            typeof(Func<,>).MakeGenericType(types[0], types[1])
                         )
                     }
             );
@@ -849,7 +849,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[1])
+                            typeof(Func<,>).MakeGenericType(types[0], types[1])
                         )
                     }
             );
@@ -864,7 +864,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[1])
+                            typeof(Func<,>).MakeGenericType(types[0], types[1])
                         )
                     }
             );
@@ -877,7 +877,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[1])
+                            typeof(Func<,>).MakeGenericType(types[0], types[1])
                         )
                     }
             );
@@ -896,7 +896,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[1])
+                            typeof(Func<,>).MakeGenericType(types[0], types[1])
                         )
                     }
             );
@@ -909,7 +909,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(
+                            typeof(Func<,>).MakeGenericType(
                                 types[0],
                                 typeof(IEnumerable<>).MakeGenericType(types[1])
                             )
@@ -925,13 +925,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(
+                            typeof(Func<,>).MakeGenericType(
                                 types[0],
                                 typeof(IEnumerable<>).MakeGenericType(types[1])
                             )
                         ),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, , >).MakeGenericType(types[0], types[1], types[2])
+                            typeof(Func<,,>).MakeGenericType(types[0], types[1], types[2])
                         )
                     }
             );
@@ -950,7 +950,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -969,7 +969,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -988,7 +988,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -1007,7 +1007,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -1020,7 +1020,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IOrderedQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[1])
+                            typeof(Func<,>).MakeGenericType(types[0], types[1])
                         )
                     }
             );
@@ -1033,7 +1033,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IOrderedQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], types[1])
+                            typeof(Func<,>).MakeGenericType(types[0], types[1])
                         )
                     }
             );
@@ -1057,7 +1057,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     {
                         typeof(IQueryable<>).MakeGenericType(types[0]),
                         typeof(Expression<>).MakeGenericType(
-                            typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                            typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                         )
                     }
             );
@@ -1096,7 +1096,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         {
                             typeof(IQueryable<>).MakeGenericType(types[0]),
                             typeof(Expression<>).MakeGenericType(
-                                typeof(Func<, >).MakeGenericType(types[0], type)
+                                typeof(Func<,>).MakeGenericType(types[0], type)
                             )
                         }
                 );
@@ -1113,7 +1113,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                         {
                             typeof(IQueryable<>).MakeGenericType(types[0]),
                             typeof(Expression<>).MakeGenericType(
-                                typeof(Func<, >).MakeGenericType(types[0], type)
+                                typeof(Func<,>).MakeGenericType(types[0], type)
                             )
                         }
                 );

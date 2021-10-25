@@ -387,7 +387,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         // Selector body is IQueryable, we need to adjust the type to IEnumerable, to match the SelectMany signature
                         // therefore the delegate type is specified explicitly
-                        var selectorLambdaType = typeof(Func<, >).MakeGenericType(
+                        var selectorLambdaType = typeof(Func<,>).MakeGenericType(
                             sourceElementType,
                             typeof(IEnumerable<>).MakeGenericType(innerSourceElementType)
                         );

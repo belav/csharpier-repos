@@ -102,7 +102,7 @@ namespace System.Composition.Hosting.Core.Tests
         [InlineData(typeof(string[]), new Type[] { typeof(string[]) })]
         [InlineData(typeof(Lazy<>), new Type[] { typeof(Lazy<>) })]
         [InlineData(typeof(Lazy<int>), new Type[] { typeof(int), typeof(Lazy<int>) })]
-        [InlineData(typeof(Lazy<, >), new Type[] { typeof(Lazy<, >) })]
+        [InlineData(typeof(Lazy<,>), new Type[] { typeof(Lazy<,>) })]
         [InlineData(
             typeof(Lazy<int, IDictionary<string, object>>),
             new Type[] { typeof(int), typeof(Lazy<int, IDictionary<string, object>>) }
@@ -120,7 +120,7 @@ namespace System.Composition.Hosting.Core.Tests
             typeof(ExportFactory<int>),
             new Type[] { typeof(int), typeof(ExportFactory<int>) }
         )]
-        [InlineData(typeof(ExportFactory<, >), new Type[] { typeof(ExportFactory<, >) })]
+        [InlineData(typeof(ExportFactory<,>), new Type[] { typeof(ExportFactory<,>) })]
         [InlineData(
             typeof(ExportFactory<int, IDictionary<string, object>>),
             new Type[] { typeof(int), typeof(ExportFactory<int, IDictionary<string, object>>) }

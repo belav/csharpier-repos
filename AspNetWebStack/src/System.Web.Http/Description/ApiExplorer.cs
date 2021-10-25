@@ -768,7 +768,7 @@ namespace System.Web.Http.Description
         {
             Contract.Assert(type != null);
 
-            return TypeHelper.GetTypeArgumentsIfMatch(type, typeof(KeyValuePair<, >)) != null;
+            return TypeHelper.GetTypeArgumentsIfMatch(type, typeof(KeyValuePair<,>)) != null;
         }
 
         private static void AddPlaceholder(

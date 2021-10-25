@@ -169,7 +169,7 @@ namespace System
             Assert.NotNull(ptrSym);
             Assert.Equal("char**", ptrSym.ToDisplayString());
 
-            string testType1 = typeof(C<, >).DeclaringType.FullName;
+            string testType1 = typeof(C<,>).DeclaringType.FullName;
             var nestedSym1 = c.Assembly.GetTypeByReflectionType(
                 typeof(C<int, bool>.D.E<double, float>.F<byte>),
                 includeReferences: true

@@ -653,7 +653,7 @@ namespace System.Tests
         [InlineData(typeof(object), TypeCode.Object)]
         [InlineData(typeof(System.Nullable), TypeCode.Object)]
         [InlineData(typeof(Nullable<int>), TypeCode.Object)]
-        [InlineData(typeof(Dictionary<, >), TypeCode.Object)]
+        [InlineData(typeof(Dictionary<,>), TypeCode.Object)]
         [InlineData(typeof(Exception), TypeCode.Object)]
         [InlineData(typeof(sbyte), TypeCode.SByte)]
         [InlineData(typeof(float), TypeCode.Single)]

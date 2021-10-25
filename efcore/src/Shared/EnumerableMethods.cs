@@ -268,7 +268,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -285,7 +285,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -327,7 +327,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -385,7 +385,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -402,7 +402,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -413,7 +413,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[1])
+                        typeof(Func<,>).MakeGenericType(types[0], types[1])
                     }
             );
 
@@ -424,8 +424,8 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[1]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[2])
+                        typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                        typeof(Func<,>).MakeGenericType(types[0], types[2])
                     }
             );
 
@@ -436,9 +436,9 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[1]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[2]),
-                        typeof(Func<, , >).MakeGenericType(
+                        typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                        typeof(Func<,>).MakeGenericType(types[0], types[2]),
+                        typeof(Func<,,>).MakeGenericType(
                             types[1],
                             typeof(IEnumerable<>).MakeGenericType(types[2]),
                             types[3]
@@ -453,8 +453,8 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[1]),
-                        typeof(Func<, , >).MakeGenericType(
+                        typeof(Func<,>).MakeGenericType(types[0], types[1]),
+                        typeof(Func<,,>).MakeGenericType(
                             types[1],
                             typeof(IEnumerable<>).MakeGenericType(types[0]),
                             types[2]
@@ -470,9 +470,9 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
                         typeof(IEnumerable<>).MakeGenericType(types[1]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[2]),
-                        typeof(Func<, >).MakeGenericType(types[1], types[2]),
-                        typeof(Func<, , >).MakeGenericType(
+                        typeof(Func<,>).MakeGenericType(types[0], types[2]),
+                        typeof(Func<,>).MakeGenericType(types[1], types[2]),
+                        typeof(Func<,,>).MakeGenericType(
                             types[0],
                             typeof(IEnumerable<>).MakeGenericType(types[1]),
                             types[3]
@@ -499,9 +499,9 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
                         typeof(IEnumerable<>).MakeGenericType(types[1]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[2]),
-                        typeof(Func<, >).MakeGenericType(types[1], types[2]),
-                        typeof(Func<, , >).MakeGenericType(types[0], types[1], types[3])
+                        typeof(Func<,>).MakeGenericType(types[0], types[2]),
+                        typeof(Func<,>).MakeGenericType(types[1], types[2]),
+                        typeof(Func<,,>).MakeGenericType(types[0], types[1], types[3])
                     }
             );
 
@@ -518,7 +518,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -535,7 +535,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -552,7 +552,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -569,7 +569,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[1])
+                        typeof(Func<,>).MakeGenericType(types[0], types[1])
                     }
             );
 
@@ -586,7 +586,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[1])
+                        typeof(Func<,>).MakeGenericType(types[0], types[1])
                     }
             );
 
@@ -603,7 +603,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[1])
+                        typeof(Func<,>).MakeGenericType(types[0], types[1])
                     }
             );
 
@@ -614,7 +614,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[1])
+                        typeof(Func<,>).MakeGenericType(types[0], types[1])
                     }
             );
 
@@ -631,7 +631,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[1])
+                        typeof(Func<,>).MakeGenericType(types[0], types[1])
                     }
             );
 
@@ -642,7 +642,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, , >).MakeGenericType(types[0], typeof(int), types[1])
+                        typeof(Func<,,>).MakeGenericType(types[0], typeof(int), types[1])
                     }
             );
 
@@ -653,7 +653,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(
+                        typeof(Func<,>).MakeGenericType(
                             types[0],
                             typeof(IEnumerable<>).MakeGenericType(types[1])
                         )
@@ -667,11 +667,11 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(
+                        typeof(Func<,>).MakeGenericType(
                             types[0],
                             typeof(IEnumerable<>).MakeGenericType(types[1])
                         ),
-                        typeof(Func<, , >).MakeGenericType(types[0], types[1], types[2])
+                        typeof(Func<,,>).MakeGenericType(types[0], types[1], types[2])
                     }
             );
 
@@ -699,7 +699,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -716,7 +716,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -733,7 +733,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -762,7 +762,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -773,7 +773,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IOrderedEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[1])
+                        typeof(Func<,>).MakeGenericType(types[0], types[1])
                     }
             );
 
@@ -784,7 +784,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IOrderedEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], types[1])
+                        typeof(Func<,>).MakeGenericType(types[0], types[1])
                     }
             );
 
@@ -806,7 +806,7 @@ namespace Microsoft.EntityFrameworkCore
                     new[]
                     {
                         typeof(IEnumerable<>).MakeGenericType(types[0]),
-                        typeof(Func<, >).MakeGenericType(types[0], typeof(bool))
+                        typeof(Func<,>).MakeGenericType(types[0], typeof(bool))
                     }
             );
 
@@ -847,7 +847,7 @@ namespace Microsoft.EntityFrameworkCore
                         new[]
                         {
                             typeof(IEnumerable<>).MakeGenericType(types[0]),
-                            typeof(Func<, >).MakeGenericType(types[0], type)
+                            typeof(Func<,>).MakeGenericType(types[0], type)
                         }
                 );
                 MaxWithoutSelectorMethods[type] = GetMethod(
@@ -862,7 +862,7 @@ namespace Microsoft.EntityFrameworkCore
                         new[]
                         {
                             typeof(IEnumerable<>).MakeGenericType(types[0]),
-                            typeof(Func<, >).MakeGenericType(types[0], type)
+                            typeof(Func<,>).MakeGenericType(types[0], type)
                         }
                 );
                 MinWithoutSelectorMethods[type] = GetMethod(
@@ -877,7 +877,7 @@ namespace Microsoft.EntityFrameworkCore
                         new[]
                         {
                             typeof(IEnumerable<>).MakeGenericType(types[0]),
-                            typeof(Func<, >).MakeGenericType(types[0], type)
+                            typeof(Func<,>).MakeGenericType(types[0], type)
                         }
                 );
                 SumWithoutSelectorMethods[type] = GetMethod(
@@ -892,7 +892,7 @@ namespace Microsoft.EntityFrameworkCore
                         new[]
                         {
                             typeof(IEnumerable<>).MakeGenericType(types[0]),
-                            typeof(Func<, >).MakeGenericType(types[0], type)
+                            typeof(Func<,>).MakeGenericType(types[0], type)
                         }
                 );
             }

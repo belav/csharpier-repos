@@ -394,7 +394,7 @@ namespace System.Reflection
             else
             {
                 typeVector = new Type[] { method.DeclaringType!, method.ReturnType };
-                getterDelegateType = typeof(Getter<, >);
+                getterDelegateType = typeof(Getter<,>);
                 frameName = "GetterAdapterFrame";
             }
 

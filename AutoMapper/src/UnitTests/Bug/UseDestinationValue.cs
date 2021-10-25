@@ -89,8 +89,8 @@ namespace AutoMapper.UnitTests.Bug
                         .ForMember(d => d.BranchCollection, o => o.UseDestinationValue());
                     cfg.CreateMap<BranchDTO, Branch>();
                     cfg.CreateMap(
-                        typeof(CollectionDTOController<, >),
-                        typeof(CollectionController<, , >),
+                        typeof(CollectionDTOController<,>),
+                        typeof(CollectionController<,,>),
                         MemberList.None
                     );
                 }
@@ -189,8 +189,8 @@ namespace AutoMapper.UnitTests.Bug
                     cfg.CreateMap<OrganizationDTO, Organization>();
                     cfg.CreateMap<BranchDTO, Branch>();
                     cfg.CreateMap(
-                        typeof(CollectionDTOController<, >),
-                        typeof(CollectionController<, , >),
+                        typeof(CollectionDTOController<,>),
+                        typeof(CollectionController<,,>),
                         MemberList.None
                     );
                 }

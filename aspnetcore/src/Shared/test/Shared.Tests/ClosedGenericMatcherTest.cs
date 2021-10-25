@@ -31,7 +31,7 @@ namespace Microsoft.Extensions.Internal
                     },
                     {
                         typeof(KeyValuePair<string, object>),
-                        typeof(KeyValuePair<, >),
+                        typeof(KeyValuePair<,>),
                         typeof(KeyValuePair<string, object>)
                     },
                     // Closed generic interfaces that implement sub-interface of given open generic type.
@@ -49,7 +49,7 @@ namespace Microsoft.Extensions.Internal
                     // Class that implements closed generic based on given open generic interface.
                     {
                         typeof(BaseClass),
-                        typeof(IDictionary<, >),
+                        typeof(IDictionary<,>),
                         typeof(IDictionary<string, object>)
                     },
                     { typeof(BaseClass), typeof(IEquatable<>), typeof(IEquatable<BaseClass>) },
@@ -61,7 +61,7 @@ namespace Microsoft.Extensions.Internal
                     // Derived class that implements closed generic based on given open generic interface.
                     {
                         typeof(DerivedClass),
-                        typeof(IDictionary<, >),
+                        typeof(IDictionary<,>),
                         typeof(IDictionary<string, object>)
                     },
                     { typeof(DerivedClass), typeof(IEquatable<>), typeof(IEquatable<BaseClass>) },
@@ -73,7 +73,7 @@ namespace Microsoft.Extensions.Internal
                     // Derived class that also implements another interface.
                     {
                         typeof(DerivedClassWithComparable),
-                        typeof(IDictionary<, >),
+                        typeof(IDictionary<,>),
                         typeof(IDictionary<string, object>)
                     },
                     {
@@ -111,11 +111,11 @@ namespace Microsoft.Extensions.Internal
                     { typeof(IEnumerable<BaseClass>), typeof(IEnumerable<BaseClass>), null },
                     { typeof(IEnumerable<BaseClass>), typeof(IEnumerable), null },
                     { typeof(IReadOnlyList<int>), typeof(BaseClass), null },
-                    { typeof(KeyValuePair<, >), typeof(KeyValuePair<string, object>), null },
+                    { typeof(KeyValuePair<,>), typeof(KeyValuePair<string, object>), null },
                     // Not a match.
                     { typeof(IEnumerable<BaseClass>), typeof(IReadOnlyList<>), null },
                     { typeof(IList<int>), typeof(IReadOnlyList<>), null },
-                    { typeof(IDictionary<string, object>), typeof(KeyValuePair<, >), null },
+                    { typeof(IDictionary<string, object>), typeof(KeyValuePair<,>), null },
                 };
             }
         }

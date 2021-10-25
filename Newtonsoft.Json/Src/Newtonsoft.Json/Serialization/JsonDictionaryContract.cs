@@ -128,7 +128,7 @@ namespace Newtonsoft.Json.Serialization
             if (
                 ReflectionUtils.ImplementsGenericDefinition(
                     NonNullableUnderlyingType,
-                    typeof(IDictionary<, >),
+                    typeof(IDictionary<,>),
                     out _genericCollectionDefinitionType
                 )
             )
@@ -139,11 +139,11 @@ namespace Newtonsoft.Json.Serialization
                 if (
                     ReflectionUtils.IsGenericDefinition(
                         NonNullableUnderlyingType,
-                        typeof(IDictionary<, >)
+                        typeof(IDictionary<,>)
                     )
                 )
                 {
-                    CreatedType = typeof(Dictionary<, >).MakeGenericType(keyType, valueType);
+                    CreatedType = typeof(Dictionary<,>).MakeGenericType(keyType, valueType);
                 }
                 else if (NonNullableUnderlyingType.IsGenericType())
                 {
@@ -159,7 +159,7 @@ namespace Newtonsoft.Json.Serialization
 #if HAVE_READ_ONLY_COLLECTIONS
                 IsReadOnlyOrFixedSize = ReflectionUtils.InheritsGenericDefinition(
                     NonNullableUnderlyingType,
-                    typeof(ReadOnlyDictionary<, >)
+                    typeof(ReadOnlyDictionary<,>)
                 );
 #endif
 
@@ -168,7 +168,7 @@ namespace Newtonsoft.Json.Serialization
             else if (
                 ReflectionUtils.ImplementsGenericDefinition(
                     NonNullableUnderlyingType,
-                    typeof(IReadOnlyDictionary<, >),
+                    typeof(IReadOnlyDictionary<,>),
                     out _genericCollectionDefinitionType
                 )
             )
@@ -179,14 +179,11 @@ namespace Newtonsoft.Json.Serialization
                 if (
                     ReflectionUtils.IsGenericDefinition(
                         NonNullableUnderlyingType,
-                        typeof(IReadOnlyDictionary<, >)
+                        typeof(IReadOnlyDictionary<,>)
                     )
                 )
                 {
-                    CreatedType = typeof(ReadOnlyDictionary<, >).MakeGenericType(
-                        keyType,
-                        valueType
-                    );
+                    CreatedType = typeof(ReadOnlyDictionary<,>).MakeGenericType(keyType, valueType);
                 }
 
                 IsReadOnlyOrFixedSize = true;
@@ -210,8 +207,8 @@ namespace Newtonsoft.Json.Serialization
             {
                 _parameterizedConstructor = CollectionUtils.ResolveEnumerableCollectionConstructor(
                     CreatedType,
-                    typeof(KeyValuePair<, >).MakeGenericType(keyType, valueType),
-                    typeof(IDictionary<, >).MakeGenericType(keyType, valueType)
+                    typeof(KeyValuePair<,>).MakeGenericType(keyType, valueType),
+                    typeof(IDictionary<,>).MakeGenericType(keyType, valueType)
                 );
 #if HAVE_FSHARP_TYPES
                 if (
@@ -241,7 +238,7 @@ namespace Newtonsoft.Json.Serialization
                 if (
                     ReflectionUtils.InheritsGenericDefinition(
                         CreatedType,
-                        typeof(Dictionary<, >),
+                        typeof(Dictionary<,>),
                         out _
                     )
                 )
@@ -273,7 +270,7 @@ namespace Newtonsoft.Json.Serialization
         {
             if (_genericWrapperCreator == null)
             {
-                _genericWrapperType = typeof(DictionaryWrapper<, >).MakeGenericType(
+                _genericWrapperType = typeof(DictionaryWrapper<,>).MakeGenericType(
                     DictionaryKeyType,
                     DictionaryValueType
                 );
@@ -294,7 +291,7 @@ namespace Newtonsoft.Json.Serialization
         {
             if (_genericTemporaryDictionaryCreator == null)
             {
-                Type temporaryDictionaryType = typeof(Dictionary<, >).MakeGenericType(
+                Type temporaryDictionaryType = typeof(Dictionary<,>).MakeGenericType(
                     DictionaryKeyType ?? typeof(object),
                     DictionaryValueType ?? typeof(object)
                 );

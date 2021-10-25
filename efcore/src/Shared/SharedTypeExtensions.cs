@@ -56,7 +56,7 @@ namespace System
                 return false;
             }
 
-            var types = GetGenericTypeImplementations(type, typeof(IDictionary<, >));
+            var types = GetGenericTypeImplementations(type, typeof(IDictionary<,>));
             return types.Any(
                 t =>
                     t.GetGenericArguments()[0] == typeof(string)
@@ -120,14 +120,14 @@ namespace System
                 var genericDefinition = type.GetGenericTypeDefinition();
                 if (
                     genericDefinition == typeof(Tuple<>)
-                    || genericDefinition == typeof(Tuple<, >)
-                    || genericDefinition == typeof(Tuple<, , >)
-                    || genericDefinition == typeof(Tuple<, , , >)
-                    || genericDefinition == typeof(Tuple<, , , , >)
-                    || genericDefinition == typeof(Tuple<, , , , , >)
-                    || genericDefinition == typeof(Tuple<, , , , , , >)
-                    || genericDefinition == typeof(Tuple<, , , , , , , >)
-                    || genericDefinition == typeof(Tuple<, , , , , , , >)
+                    || genericDefinition == typeof(Tuple<,>)
+                    || genericDefinition == typeof(Tuple<,,>)
+                    || genericDefinition == typeof(Tuple<,,,>)
+                    || genericDefinition == typeof(Tuple<,,,,>)
+                    || genericDefinition == typeof(Tuple<,,,,,>)
+                    || genericDefinition == typeof(Tuple<,,,,,,>)
+                    || genericDefinition == typeof(Tuple<,,,,,,,>)
+                    || genericDefinition == typeof(Tuple<,,,,,,,>)
                 )
                 {
                     return true;

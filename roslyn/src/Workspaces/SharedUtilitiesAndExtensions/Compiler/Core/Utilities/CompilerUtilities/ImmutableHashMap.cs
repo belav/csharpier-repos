@@ -23,7 +23,7 @@ namespace Roslyn.Collections.Immutable
     /// <typeparam name="TKey">The type of the key.</typeparam>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     [DebuggerDisplay("Count = {Count}")]
-    [DebuggerTypeProxy(typeof(ImmutableHashMap<, >.DebuggerProxy))]
+    [DebuggerTypeProxy(typeof(ImmutableHashMap<,>.DebuggerProxy))]
     [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
     internal sealed class ImmutableHashMap<TKey, TValue> : IImmutableDictionary<TKey, TValue>
         where TKey : notnull

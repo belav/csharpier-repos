@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Collections
     /// </remarks>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
-    [DebuggerTypeProxy(typeof(IDictionaryDebugView<, >))]
+    [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
     internal sealed class SegmentedDictionary<TKey, TValue>
         : IDictionary<TKey, TValue>,
@@ -1309,7 +1309,7 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        [DebuggerTypeProxy(typeof(DictionaryKeyCollectionDebugView<, >))]
+        [DebuggerTypeProxy(typeof(DictionaryKeyCollectionDebugView<,>))]
         [DebuggerDisplay("Count = {Count}")]
         public sealed class KeyCollection
             : ICollection<TKey>,
@@ -1514,7 +1514,7 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        [DebuggerTypeProxy(typeof(DictionaryValueCollectionDebugView<, >))]
+        [DebuggerTypeProxy(typeof(DictionaryValueCollectionDebugView<,>))]
         [DebuggerDisplay("Count = {Count}")]
         public sealed class ValueCollection
             : ICollection<TValue>,

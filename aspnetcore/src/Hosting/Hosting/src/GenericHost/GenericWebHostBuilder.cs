@@ -378,7 +378,7 @@ namespace Microsoft.AspNetCore.Hosting
                     _builder.Properties[typeof(ConfigureContainerBuilder)] =
                         configureContainerBuilder;
 
-                    var actionType = typeof(Action<, >).MakeGenericType(
+                    var actionType = typeof(Action<,>).MakeGenericType(
                         typeof(HostBuilderContext),
                         containerType
                     );

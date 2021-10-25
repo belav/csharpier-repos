@@ -69,7 +69,7 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
 
         private void UpdateStaticAssets(IWebHostBuilder builder)
         {
-            var manifestPath = Path.GetDirectoryName(typeof(ServerFactory<, >).Assembly.Location);
+            var manifestPath = Path.GetDirectoryName(typeof(ServerFactory<,>).Assembly.Location);
             builder.ConfigureAppConfiguration(
                 (ctx, cb) =>
                 {
@@ -110,7 +110,7 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         {
             var content = File.ReadAllText(versionedPath);
             var path =
-                typeof(ServerFactory<, >).Assembly
+                typeof(ServerFactory<,>).Assembly
                     .GetCustomAttributes<AssemblyMetadataAttribute>()
                     .Single(
                         a => a.Key == "Microsoft.AspNetCore.Testing.IdentityUIProjectPath"
@@ -127,9 +127,7 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
 
         private string FindHelixSlnFileDirectory()
         {
-            var applicationPath = Path.GetDirectoryName(
-                typeof(ServerFactory<, >).Assembly.Location
-            );
+            var applicationPath = Path.GetDirectoryName(typeof(ServerFactory<,>).Assembly.Location);
             var directoryInfo = new DirectoryInfo(applicationPath);
             do
             {

@@ -66,7 +66,7 @@ namespace System.Web.WebPages
 
             // Create a delegate TValue -> "TDeclaringType.Property"
             var propertySetterAsAction = setMethod.CreateDelegate(
-                typeof(Action<, >).MakeGenericType(typeInput, typeValue)
+                typeof(Action<,>).MakeGenericType(typeInput, typeValue)
             );
             var callPropertySetterClosedGenericMethod =
                 _callPropertySetterOpenGenericMethod.MakeGenericMethod(typeInput, typeValue);
@@ -124,7 +124,7 @@ namespace System.Web.WebPages
             {
                 // Create a delegate (ref TDeclaringType) -> TValue
                 Delegate propertyGetterAsFunc = getMethod.CreateDelegate(
-                    typeof(ByRefFunc<, >).MakeGenericType(typeInput, typeOutput)
+                    typeof(ByRefFunc<,>).MakeGenericType(typeInput, typeOutput)
                 );
                 MethodInfo callPropertyGetterClosedGenericMethod =
                     _callPropertyGetterByReferenceOpenGenericMethod.MakeGenericMethod(
@@ -141,7 +141,7 @@ namespace System.Web.WebPages
             {
                 // Create a delegate TDeclaringType -> TValue
                 Delegate propertyGetterAsFunc = getMethod.CreateDelegate(
-                    typeof(Func<, >).MakeGenericType(typeInput, typeOutput)
+                    typeof(Func<,>).MakeGenericType(typeInput, typeOutput)
                 );
                 MethodInfo callPropertyGetterClosedGenericMethod =
                     _callPropertyGetterOpenGenericMethod.MakeGenericMethod(typeInput, typeOutput);

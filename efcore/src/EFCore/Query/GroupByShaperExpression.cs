@@ -45,7 +45,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         /// <inheritdoc />
         public override Type Type =>
-            typeof(IGrouping<, >).MakeGenericType(KeySelector.Type, ElementSelector.Type);
+            typeof(IGrouping<,>).MakeGenericType(KeySelector.Type, ElementSelector.Type);
 
         /// <inheritdoc />
         public sealed override ExpressionType NodeType => ExpressionType.Extension;

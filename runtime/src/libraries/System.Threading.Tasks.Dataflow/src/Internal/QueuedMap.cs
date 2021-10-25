@@ -27,7 +27,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
     /// <typeparam name="TValue">Specifies the type of values in the map.</typeparam>
     /// <remarks>This type is not thread-safe.</remarks>
     [DebuggerDisplay("Count = {Count}")]
-    [DebuggerTypeProxy(typeof(EnumerableDebugView<, >))]
+    [DebuggerTypeProxy(typeof(EnumerableDebugView<,>))]
     internal sealed class QueuedMap<TKey, TValue> where TKey : notnull
     {
         /// <summary>

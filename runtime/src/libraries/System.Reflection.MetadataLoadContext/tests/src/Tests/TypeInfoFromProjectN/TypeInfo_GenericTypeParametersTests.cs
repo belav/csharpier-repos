@@ -35,7 +35,7 @@ namespace System.Reflection.Tests
         public static void TestGenericParameters4()
         {
             VerifyGenericTypeParameters(
-                typeof(Test_IG21<, >).Project(),
+                typeof(Test_IG21<,>).Project(),
                 new string[] { "TI", "VI" },
                 null
             );
@@ -79,7 +79,7 @@ namespace System.Reflection.Tests
         public static void TestGenericParameters9()
         {
             VerifyGenericTypeParameters(
-                typeof(Test_SG21<, >).Project(),
+                typeof(Test_SG21<,>).Project(),
                 new string[] { "TS", "VS" },
                 null
             );
@@ -134,7 +134,7 @@ namespace System.Reflection.Tests
         public static void TestGenericParameters14()
         {
             VerifyGenericTypeParameters(
-                typeof(Test_SIG21<, >).Project(),
+                typeof(Test_SIG21<,>).Project(),
                 new string[] { "TS", "VS" },
                 new string[] {  }
             );
@@ -223,7 +223,7 @@ namespace System.Reflection.Tests
         public static void TestGenericParameters23()
         {
             VerifyGenericTypeParameters(
-                typeof(Test_CG21<, >).Project(),
+                typeof(Test_CG21<,>).Project(),
                 new string[] { "T", "V" },
                 null
             );
@@ -278,7 +278,7 @@ namespace System.Reflection.Tests
         public static void TestGenericParameters28()
         {
             VerifyGenericTypeParameters(
-                typeof(Test_CIG21<, >).Project(),
+                typeof(Test_CIG21<,>).Project(),
                 new string[] { "T", "V" },
                 new string[] {  }
             );

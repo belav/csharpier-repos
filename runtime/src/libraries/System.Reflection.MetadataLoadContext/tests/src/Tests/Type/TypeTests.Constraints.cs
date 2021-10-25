@@ -99,10 +99,10 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericTypeParameterConstraints_Quirky1()
         {
-            Type theT = typeof(GenericClassWithQuirkyConstraints1<, >)
+            Type theT = typeof(GenericClassWithQuirkyConstraints1<,>)
                 .Project()
                 .GetTypeInfo().GenericTypeParameters[0];
-            Type theU = typeof(GenericClassWithQuirkyConstraints1<, >)
+            Type theU = typeof(GenericClassWithQuirkyConstraints1<,>)
                 .Project()
                 .GetTypeInfo().GenericTypeParameters[1];
             Assert.Equal(GenericParameterAttributes.None, theT.GenericParameterAttributes);
@@ -117,10 +117,10 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericTypeParameterConstraints_Quirky2()
         {
-            Type theT = typeof(GenericClassWithQuirkyConstraints2<, >)
+            Type theT = typeof(GenericClassWithQuirkyConstraints2<,>)
                 .Project()
                 .GetTypeInfo().GenericTypeParameters[0];
-            Type theU = typeof(GenericClassWithQuirkyConstraints2<, >)
+            Type theU = typeof(GenericClassWithQuirkyConstraints2<,>)
                 .Project()
                 .GetTypeInfo().GenericTypeParameters[1];
             Assert.Equal(GenericParameterAttributes.None, theT.GenericParameterAttributes);
