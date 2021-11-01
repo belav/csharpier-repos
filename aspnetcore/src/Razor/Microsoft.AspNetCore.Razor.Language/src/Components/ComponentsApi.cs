@@ -90,13 +90,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             public static readonly string AddMultipleAttributes = nameof(AddMultipleAttributes);
 
-            public static readonly string AddElementReferenceCapture = nameof(
-                AddElementReferenceCapture
-            );
+            public static readonly string AddElementReferenceCapture =
+                nameof(AddElementReferenceCapture);
 
-            public static readonly string AddComponentReferenceCapture = nameof(
-                AddComponentReferenceCapture
-            );
+            public static readonly string AddComponentReferenceCapture =
+                nameof(AddComponentReferenceCapture);
 
             public static readonly string Clear = nameof(Clear);
 
@@ -108,13 +106,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             public static readonly string SetUpdatesAttributeName = nameof(SetUpdatesAttributeName);
 
-            public static readonly string AddEventPreventDefaultAttribute = nameof(
-                AddEventPreventDefaultAttribute
-            );
+            public static readonly string AddEventPreventDefaultAttribute =
+                nameof(AddEventPreventDefaultAttribute);
 
-            public static readonly string AddEventStopPropagationAttribute = nameof(
-                AddEventStopPropagationAttribute
-            );
+            public static readonly string AddEventStopPropagationAttribute =
+                nameof(AddEventStopPropagationAttribute);
         }
 
         public static class RuntimeHelpers

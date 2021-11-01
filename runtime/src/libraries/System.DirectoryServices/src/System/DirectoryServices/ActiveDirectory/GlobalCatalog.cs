@@ -243,9 +243,8 @@ namespace System.DirectoryServices.ActiveDirectory
             CheckIfDisabled();
 
             // bind to the server object
-            DirectoryEntry serverNtdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                NtdsaObjectName
-            );
+            DirectoryEntry serverNtdsaEntry =
+                directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
 
             // reset the NTDSDSA_OPT_IS_GC flag on the "options" property
             int options = 0;

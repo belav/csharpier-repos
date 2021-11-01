@@ -2311,9 +2311,7 @@ namespace System.IO.Tests
             using StreamPair streams = await CreateConnectedStreamsAsync();
             (Stream writeable, Stream readable) = GetReadWritePair(streams);
 
-            await ValidateCancelableReadAsyncTask_AfterInvocation_ThrowsCancellationException(
-                readable
-            );
+            await ValidateCancelableReadAsyncTask_AfterInvocation_ThrowsCancellationException(readable);
         }
 
         [Fact]
@@ -2322,9 +2320,7 @@ namespace System.IO.Tests
             using StreamPair streams = await CreateConnectedStreamsAsync();
             (Stream writeable, Stream readable) = GetReadWritePair(streams);
 
-            await ValidateCancelableReadAsyncValueTask_AfterInvocation_ThrowsCancellationException(
-                readable
-            );
+            await ValidateCancelableReadAsyncValueTask_AfterInvocation_ThrowsCancellationException(readable);
         }
 
         [Fact]

@@ -109,9 +109,8 @@ namespace System.Net.Http.Handlers
             bool addReceiveProgressHandler
         )
         {
-            ShortCircuitMessageHandler innerHandler = new ShortCircuitMessageHandler(
-                includeResponseEntity
-            );
+            ShortCircuitMessageHandler innerHandler =
+                new ShortCircuitMessageHandler(includeResponseEntity);
             ProgressMessageHandler progress = new ProgressMessageHandler(innerHandler);
             if (addSendProgressHandler)
             {

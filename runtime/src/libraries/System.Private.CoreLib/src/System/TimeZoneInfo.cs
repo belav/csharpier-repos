@@ -1012,9 +1012,8 @@ namespace System
                         }
                     );
 
-                    cachedData._readOnlySystemTimeZones = new ReadOnlyCollection<TimeZoneInfo>(
-                        list
-                    );
+                    cachedData._readOnlySystemTimeZones =
+                        new ReadOnlyCollection<TimeZoneInfo>(list);
                 }
             }
             return cachedData._readOnlySystemTimeZones;

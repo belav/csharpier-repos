@@ -189,9 +189,8 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
                 return;
             }
 
-            var applicableOption = QualifyMembersHelpers.GetApplicableOptionFromSymbolKind(
-                operation
-            );
+            var applicableOption =
+                QualifyMembersHelpers.GetApplicableOptionFromSymbolKind(operation);
             var optionValue = context.GetOption(
                 applicableOption,
                 context.Operation.Syntax.Language

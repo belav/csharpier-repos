@@ -55,9 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                             return base.VisitTrivia(trivia);
                         }
 
-                        var parsedNewTrivia = SyntaxFactory.DocumentationCommentExterior(
-                            newTriviaText
-                        );
+                        var parsedNewTrivia =
+                            SyntaxFactory.DocumentationCommentExterior(newTriviaText);
 
                         return parsedNewTrivia;
                     }

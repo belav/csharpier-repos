@@ -268,9 +268,8 @@ namespace System.Reflection.Tests
                                             if (mark2 == null)
                                                 return;
 
-                                            bool hasSameMetadata = m1.HasSameMetadataDefinitionAs(
-                                                m2
-                                            );
+                                            bool hasSameMetadata =
+                                                m1.HasSameMetadataDefinitionAs(m2);
                                             Assert.Equal(
                                                 hasSameMetadata,
                                                 m2.HasSameMetadataDefinitionAs(m1)

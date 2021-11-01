@@ -68,9 +68,8 @@ namespace Microsoft.CodeAnalysis
             );
 
             // resolve all metadata references.
-            var boundMetadataReferences = commandLineArguments.ResolveMetadataReferences(
-                commandLineMetadataReferenceResolver
-            );
+            var boundMetadataReferences =
+                commandLineArguments.ResolveMetadataReferences(commandLineMetadataReferenceResolver);
             var unresolvedMetadataReferences = boundMetadataReferences.FirstOrDefault(
                 r => r is UnresolvedMetadataReference
             );
@@ -92,9 +91,8 @@ namespace Microsoft.CodeAnalysis
                 );
             }
 
-            var boundAnalyzerReferences = commandLineArguments.ResolveAnalyzerReferences(
-                analyzerLoader
-            );
+            var boundAnalyzerReferences =
+                commandLineArguments.ResolveAnalyzerReferences(analyzerLoader);
             var unresolvedAnalyzerReferences = boundAnalyzerReferences.FirstOrDefault(
                 r => r is UnresolvedAnalyzerReference
             );
@@ -119,9 +117,8 @@ namespace Microsoft.CodeAnalysis
                         FileAccess.Read
                     );
 
-                    assemblyIdentityComparer = DesktopAssemblyIdentityComparer.LoadFromXml(
-                        appConfigStream
-                    );
+                    assemblyIdentityComparer =
+                        DesktopAssemblyIdentityComparer.LoadFromXml(appConfigStream);
                 }
                 catch (Exception e)
                 {

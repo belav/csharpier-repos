@@ -453,9 +453,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 );
 
                 using (
-                    var resettableStatement = connection.GetResettableStatement(
-                        _insert_or_replace_into_writecache_table_values_0_1_2
-                    )
+                    var resettableStatement =
+                        connection.GetResettableStatement(_insert_or_replace_into_writecache_table_values_0_1_2)
                 )
                 {
                     var statement = resettableStatement.Statement;
@@ -485,9 +484,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 // Efficient call to sqlite to just fully copy all data from one table to the
                 // other.  No need to actually do any reading/writing of the data ourselves.
                 using (
-                    var statement = connection.GetResettableStatement(
-                        _insert_or_replace_into_main_table_select_star_from_writecache_table
-                    )
+                    var statement =
+                        connection.GetResettableStatement(_insert_or_replace_into_main_table_select_star_from_writecache_table)
                 )
                 {
                     statement.Statement.Step();

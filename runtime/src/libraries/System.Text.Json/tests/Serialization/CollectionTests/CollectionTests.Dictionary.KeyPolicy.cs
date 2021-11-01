@@ -19,9 +19,10 @@ namespace System.Text.Json.Serialization.Tests
             const string JsonString = @"[{""Key1"":1,""Key2"":2},{""Key1"":3,""Key2"":4}]";
 
             // Without key policy, deserialize keys as they are.
-            Dictionary<string, int>[] obj = JsonSerializer.Deserialize<Dictionary<string, int>[]>(
-                JsonString
-            );
+            Dictionary<string, int>[] obj = JsonSerializer.Deserialize<Dictionary<
+                    string,
+                    int
+                >[]>(JsonString);
 
             Assert.Equal(2, obj.Length);
 

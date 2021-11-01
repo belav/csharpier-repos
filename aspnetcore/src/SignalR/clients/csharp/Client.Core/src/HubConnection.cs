@@ -1459,9 +1459,8 @@ namespace Microsoft.AspNetCore.SignalR.Client
 
             var uploadStreamSource = new CancellationTokenSource();
             connectionState.UploadStreamToken = uploadStreamSource.Token;
-            var invocationMessageChannel = Channel.CreateUnbounded<InvocationMessage>(
-                _receiveLoopOptions
-            );
+            var invocationMessageChannel =
+                Channel.CreateUnbounded<InvocationMessage>(_receiveLoopOptions);
 
             // We can't safely wait for this task when closing without introducing deadlock potential when calling StopAsync in a .On method
             connectionState.InvocationMessageReceiveTask = StartProcessingInvocationMessages(

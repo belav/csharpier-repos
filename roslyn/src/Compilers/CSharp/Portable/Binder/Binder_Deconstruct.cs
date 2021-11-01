@@ -442,9 +442,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var single = variable.Single;
                     Debug.Assert(single is object);
-                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                        diagnostics
-                    );
+                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                        GetNewCompoundUseSiteInfo(diagnostics);
                     nestedConversion = this.Conversions.ClassifyConversionFromType(
                         tupleOrDeconstructedTypes[i],
                         single.Type,
@@ -660,9 +659,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int leftLength = lhsVariables.Count;
             int rightLength = rhsLiteral.Arguments.Length;
 
-            var typesWithAnnotationsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                leftLength
-            );
+            var typesWithAnnotationsBuilder =
+                ArrayBuilder<TypeWithAnnotations>.GetInstance(leftLength);
             var locationsBuilder = ArrayBuilder<Location?>.GetInstance(leftLength);
             for (int i = 0; i < rightLength; i++)
             {
@@ -853,9 +851,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             receiver = BindToNaturalType(receiver, diagnostics);
             var analyzedArguments = AnalyzedArguments.GetInstance();
-            var outVars = ArrayBuilder<OutDeconstructVarPendingInference>.GetInstance(
-                numCheckedVariables
-            );
+            var outVars =
+                ArrayBuilder<OutDeconstructVarPendingInference>.GetInstance(numCheckedVariables);
 
             try
             {

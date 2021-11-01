@@ -28,9 +28,8 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ActionMethodSelectorAttribute attribute = new THttpVerb();
-            ControllerContext context = AcceptVerbsAttributeTest.GetControllerContextWithHttpVerb(
-                validVerb
-            );
+            ControllerContext context =
+                AcceptVerbsAttributeTest.GetControllerContextWithHttpVerb(validVerb);
 
             // Act
             bool result = attribute.IsValidForRequest(context, null);
@@ -44,9 +43,8 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ActionMethodSelectorAttribute attribute = new THttpVerb();
-            ControllerContext context = AcceptVerbsAttributeTest.GetControllerContextWithHttpVerb(
-                invalidVerb
-            );
+            ControllerContext context =
+                AcceptVerbsAttributeTest.GetControllerContextWithHttpVerb(invalidVerb);
 
             // Act
             bool result = attribute.IsValidForRequest(context, null);

@@ -164,9 +164,8 @@ namespace System.Net.Http
                 Debug.Assert(_connection != null);
                 Debug.Assert(buffer.Length > 0);
 
-                CancellationTokenRegistration ctr = _connection.RegisterCancellation(
-                    cancellationToken
-                );
+                CancellationTokenRegistration ctr =
+                    _connection.RegisterCancellation(cancellationToken);
                 try
                 {
                     while (true)
@@ -263,9 +262,8 @@ namespace System.Net.Http
                 CancellationToken cancellationToken
             )
             {
-                CancellationTokenRegistration ctr = _connection!.RegisterCancellation(
-                    cancellationToken
-                );
+                CancellationTokenRegistration ctr =
+                    _connection!.RegisterCancellation(cancellationToken);
                 try
                 {
                     while (true)

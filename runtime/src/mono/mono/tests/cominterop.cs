@@ -685,9 +685,8 @@ public class Tests
             if (mono_test_marshal_variant_out_bstr_byref(out obj) != 0 || (string)obj != "PI")
                 return 107;
 
-            var svfunc = new CheckStructWithVariantFunc(
-                mono_test_marshal_struct_with_variant_callback
-            );
+            var svfunc =
+                new CheckStructWithVariantFunc(mono_test_marshal_struct_with_variant_callback);
             if (mono_test_marshal_struct_with_variant_in_unmanaged(svfunc) != 0)
                 return 108;
 

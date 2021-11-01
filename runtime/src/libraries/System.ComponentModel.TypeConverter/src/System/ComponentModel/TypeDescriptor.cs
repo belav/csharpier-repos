@@ -3326,9 +3326,8 @@ namespace System.ComponentModel
                     "System.Windows.Forms.ComponentModel.Com2Interop.ComNativeDescriptor, System.Windows.Forms",
                     throwOnError: true
                 );
-                _comNativeDescriptor = (TypeDescriptionProvider)Activator.CreateInstance(
-                    realComNativeDescriptor
-                );
+                _comNativeDescriptor =
+                    (TypeDescriptionProvider)Activator.CreateInstance(realComNativeDescriptor);
             }
 
             public override ICustomTypeDescriptor GetTypeDescriptor(

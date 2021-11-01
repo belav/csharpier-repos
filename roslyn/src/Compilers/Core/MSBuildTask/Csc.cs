@@ -706,9 +706,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     );
                     CheckHostObjectSupport(
                         param = nameof(PotentialAnalyzerConfigFiles),
-                        analyzerConfigFilesHostObject.SetPotentialAnalyzerConfigFiles(
-                            PotentialAnalyzerConfigFiles
-                        )
+                        analyzerConfigFilesHostObject.SetPotentialAnalyzerConfigFiles(PotentialAnalyzerConfigFiles)
                     );
                 }
 
@@ -922,9 +920,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     {
                         ICscHostObject cscHostObject = hostObject.RCW;
 
-                        bool hostObjectSuccessfullyInitialized = InitializeHostCompiler(
-                            cscHostObject
-                        );
+                        bool hostObjectSuccessfullyInitialized =
+                            InitializeHostCompiler(cscHostObject);
 
                         // If we're currently only in design-time (as opposed to build-time),
                         // then we're done.  We've initialized the host compiler as best we

@@ -252,9 +252,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             try
                             {
                                 foreach (
-                                    var customAttributeHandle in Module.GetCustomAttributesOrThrow(
-                                        typerefAssemblyAttributesGoHere
-                                    )
+                                    var customAttributeHandle in Module.GetCustomAttributesOrThrow(typerefAssemblyAttributesGoHere)
                                 )
                                 {
                                     if (moduleAssemblyAttributesBuilder == null)

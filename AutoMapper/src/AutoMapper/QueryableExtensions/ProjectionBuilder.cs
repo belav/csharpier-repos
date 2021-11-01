@@ -73,9 +73,10 @@ namespace AutoMapper.QueryableExtensions.Impl
         {
             _configurationProvider = configurationProvider;
             _projectionMappers = projectionMappers;
-            _projectionCache = new LockingConcurrentDictionary<ProjectionRequest, QueryExpressions>(
-                CreateProjection
-            );
+            _projectionCache = new LockingConcurrentDictionary<
+                ProjectionRequest,
+                QueryExpressions
+            >(CreateProjection);
         }
         public QueryExpressions GetProjection(
             Type sourceType,

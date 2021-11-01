@@ -826,9 +826,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 {
                     foreach (var changedDocumentId in projectChanges.GetChangedDocuments())
                     {
-                        var oldDocument = projectChanges.OldProject.GetRequiredDocument(
-                            changedDocumentId
-                        );
+                        var oldDocument =
+                            projectChanges.OldProject.GetRequiredDocument(changedDocumentId);
                         if (
                             !ShouldApplyChangesToMappedDocuments(
                                 oldDocument,
@@ -839,9 +838,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             continue;
                         }
 
-                        var newDocument = projectChanges.NewProject.GetRequiredDocument(
-                            changedDocumentId
-                        );
+                        var newDocument =
+                            projectChanges.NewProject.GetRequiredDocument(changedDocumentId);
                         var textChanges = (
                             await newDocument
                                 .GetTextChangesAsync(oldDocument, CancellationToken.None)
@@ -2034,9 +2032,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _threadingContext.RunWithShutdownBlockAsync(
                     async cancellationToken =>
                     {
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationToken
-                        );
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
                         RefreshProjectExistsUIContextForLanguage(languageName);
                     }
                 );
@@ -2135,9 +2131,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     // PERF: call GetProjectState instead of GetProject, otherwise creating a new project might force all
                     // Project instances to get created.
                     foreach (
-                        PortableExecutableReference reference in modifiedSolution.GetProjectState(
-                            projectIdToRetarget
-                        )!.MetadataReferences
+                        PortableExecutableReference reference in modifiedSolution.GetProjectState(projectIdToRetarget)!.MetadataReferences
                     )
                     {
                         if (
@@ -2161,9 +2155,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                             projectIdsChanged.Add(projectIdToRetarget);
 
-                            GetReferenceInfo_NoLock(
-                                projectIdToRetarget
-                            ).ConvertedProjectReferences.Add(
+                            GetReferenceInfo_NoLock(projectIdToRetarget).ConvertedProjectReferences.Add(
                                 (reference.FilePath!, projectReference)
                             );
                             // We have converted one, but you could have more than one reference with different aliases
@@ -2198,9 +2190,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             // PERF: call GetProjectState instead of GetProject, otherwise creating a new project might force all
             // Project instances to get created.
-            var projectWithMetadataReference = CurrentSolution.GetProjectState(
-                projectIdWithMetadataReference
-            );
+            var projectWithMetadataReference =
+                CurrentSolution.GetProjectState(projectIdWithMetadataReference);
             var referencedProject = CurrentSolution.GetProjectState(referencedProjectId);
 
             Contract.ThrowIfNull(projectWithMetadataReference);
@@ -2488,9 +2479,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     {
                         if (portableExecutableReference.FilePath == fullFilePath)
                         {
-                            FileWatchedReferenceFactory.StopWatchingReference(
-                                portableExecutableReference
-                            );
+                            FileWatchedReferenceFactory.StopWatchingReference(portableExecutableReference);
 
                             var newPortableExecutableReference =
                                 FileWatchedReferenceFactory.CreateReferenceAndStartWatchingFile(

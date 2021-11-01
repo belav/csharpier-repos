@@ -190,9 +190,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal
             IReadOnlyProperty property
         )
         {
-            var definition = SqlServerResources.LogConflictingValueGenerationStrategies(
-                diagnostics
-            );
+            var definition =
+                SqlServerResources.LogConflictingValueGenerationStrategies(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {

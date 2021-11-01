@@ -53,9 +53,8 @@ namespace System.IO
             using var directory = new TempAclDirectory();
             var directoryInfo = new DirectoryInfo(directory.Path);
             var accessControlSections = new AccessControlSections();
-            DirectorySecurity directorySecurity = directoryInfo.GetAccessControl(
-                accessControlSections
-            );
+            DirectorySecurity directorySecurity =
+                directoryInfo.GetAccessControl(accessControlSections);
             Assert.NotNull(directorySecurity);
             Assert.Equal(typeof(FileSystemRights), directorySecurity.AccessRightType);
         }

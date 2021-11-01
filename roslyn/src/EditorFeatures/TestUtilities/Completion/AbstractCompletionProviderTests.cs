@@ -1696,9 +1696,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                     .First()
                     .GetTextBuffer()
                     .AsTextContainer();
-                var currentContextDocumentId = testWorkspace.GetDocumentIdInCurrentContext(
-                    textContainer
-                );
+                var currentContextDocumentId =
+                    testWorkspace.GetDocumentIdInCurrentContext(textContainer);
                 var document = solution.GetDocument(currentContextDocumentId);
 
                 var triggerInfo = RoslynCompletion.CompletionTrigger.Invoke;

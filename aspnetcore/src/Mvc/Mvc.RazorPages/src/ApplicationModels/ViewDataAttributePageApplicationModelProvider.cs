@@ -26,9 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             var handlerType = context.PageApplicationModel.HandlerType.AsType();
 
-            var viewDataProperties = ViewDataAttributePropertyProvider.GetViewDataProperties(
-                handlerType
-            );
+            var viewDataProperties =
+                ViewDataAttributePropertyProvider.GetViewDataProperties(handlerType);
             if (viewDataProperties == null)
             {
                 return;

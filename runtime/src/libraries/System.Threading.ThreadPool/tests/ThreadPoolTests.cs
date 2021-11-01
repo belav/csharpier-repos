@@ -987,9 +987,8 @@ namespace System.Threading.ThreadPools.Tests
                         int startedWorkItemCount = 0;
                         WaitCallback workItem = _ =>
                         {
-                            int newStartedWorkItemCount = Interlocked.Increment(
-                                ref startedWorkItemCount
-                            );
+                            int newStartedWorkItemCount =
+                                Interlocked.Increment(ref startedWorkItemCount);
                             if (newStartedWorkItemCount == minWorkerThreads)
                             {
                                 allWorkItemsExceptOneStarted.Set();

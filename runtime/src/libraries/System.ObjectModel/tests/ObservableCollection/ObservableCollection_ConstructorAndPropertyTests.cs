@@ -129,9 +129,8 @@ namespace System.Collections.ObjectModel.Tests
         {
             ObservableCollection<int> col = new ObservableCollection<int>(new[] { 1, 2, 3, 4 });
             DebuggerAttributes.ValidateDebuggerDisplayReferences(col);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                col
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(col);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State

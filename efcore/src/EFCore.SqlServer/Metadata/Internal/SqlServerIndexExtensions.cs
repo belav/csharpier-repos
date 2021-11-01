@@ -127,9 +127,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     .SequenceEqual(
                         duplicateIndex.GetIncludeProperties()!.Select(
                             p =>
-                                duplicateIndex.DeclaringEntityType.FindProperty(p)!.GetColumnName(
-                                    storeObject
-                                )
+                                duplicateIndex.DeclaringEntityType.FindProperty(p)!.GetColumnName(storeObject)
                         )
                     );
         }

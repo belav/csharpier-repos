@@ -2101,9 +2101,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (subPatternCount >= 2)
                     {
                         // infer a tuple type for this deconstruction.
-                        var elementTypesBuilder = ArrayBuilder<ITypeSymbol>.GetInstance(
-                            subPatternCount
-                        );
+                        var elementTypesBuilder =
+                            ArrayBuilder<ITypeSymbol>.GetInstance(subPatternCount);
                         var elementNamesBuilder = ArrayBuilder<string>.GetInstance(subPatternCount);
 
                         foreach (var subPattern in positionalPart.Subpatterns)
@@ -2279,9 +2278,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(expressionOpt != null);
                     if (expressionOpt == memberAccessExpression.Expression)
                     {
-                        return InferTypeForExpressionOfMemberAccessExpression(
-                            memberAccessExpression
-                        );
+                        return InferTypeForExpressionOfMemberAccessExpression(memberAccessExpression);
                     }
 
                     // We're right after the dot in "Goo.Bar".  The type for "Bar" should be

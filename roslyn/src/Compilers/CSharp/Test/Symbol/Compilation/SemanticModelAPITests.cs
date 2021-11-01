@@ -5131,9 +5131,8 @@ class C
             var model = comp.GetSemanticModel(syntaxTree);
 
             var ifStatement = root.DescendantNodes().OfType<IfStatementSyntax>().Single();
-            var replacementIfStatement = (IfStatementSyntax)SyntaxFactory.ParseStatement(
-                replacementSource
-            );
+            var replacementIfStatement =
+                (IfStatementSyntax)SyntaxFactory.ParseStatement(replacementSource);
 
             Assert.True(
                 model.TryGetSpeculativeSemanticModel(

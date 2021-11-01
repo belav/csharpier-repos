@@ -294,9 +294,7 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     {
                         if (_logger.IsTraceLevelEnabled())
                         {
-                            _logger.KeyWasNotFoundInTheKeyRingUnprotectOperationCannotProceed(
-                                keyIdFromPayload
-                            );
+                            _logger.KeyWasNotFoundInTheKeyRingUnprotectOperationCannotProceed(keyIdFromPayload);
                         }
                         throw Error.Common_KeyNotFound(keyIdFromPayload);
                     }
@@ -316,9 +314,7 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     {
                         if (_logger.IsDebugLevelEnabled())
                         {
-                            _logger.KeyWasRevokedCallerRequestedUnprotectOperationProceedRegardless(
-                                keyIdFromPayload
-                            );
+                            _logger.KeyWasRevokedCallerRequestedUnprotectOperationProceedRegardless(keyIdFromPayload);
                         }
                         status = UnprotectStatus.DecryptionKeyWasRevoked;
                     }

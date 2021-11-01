@@ -1469,9 +1469,7 @@ namespace System.Net.Tests
                     {
                         var wc = new WebClient();
                         Task download = DownloadFileAsync(wc, url.ToString(), tempPath);
-                        await server.AcceptConnectionSendResponseAndCloseAsync(
-                            content: ExpectedText
-                        );
+                        await server.AcceptConnectionSendResponseAndCloseAsync(content: ExpectedText);
 
                         await download;
                         Assert.Equal(ExpectedText, File.ReadAllText(tempPath));

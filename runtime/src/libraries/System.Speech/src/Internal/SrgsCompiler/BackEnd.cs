@@ -80,9 +80,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     sb.Append(s);
                 }
                 _symbols.Add(sb.ToString(), out semanticInterpretationGlobals);
-                semanticInterpretationGlobals = _symbols.OffsetFromId(
-                    semanticInterpretationGlobals
-                );
+                semanticInterpretationGlobals =
+                    _symbols.OffsetFromId(semanticInterpretationGlobals);
                 if (semanticInterpretationGlobals > ushort.MaxValue)
                 {
                     throw new OverflowException(SR.Get(SRID.TooManyRulesWithSemanticsGlobals));

@@ -301,9 +301,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             var runningDocumentTableForEvents = (IVsRunningDocumentTable)_runningDocumentTable;
-            runningDocumentTableForEvents.UnadviseRunningDocTableEvents(
-                _runningDocumentTableEventsCookie
-            );
+            runningDocumentTableForEvents.UnadviseRunningDocTableEvents(_runningDocumentTableEventsCookie);
             _runningDocumentTableEventsCookie = 0;
 
             _isDisposed = true;

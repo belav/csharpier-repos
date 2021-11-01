@@ -31,9 +31,8 @@ namespace System.Collections.ObjectModel
         {
             ((INotifyCollectionChanged)Items).CollectionChanged +=
                 new NotifyCollectionChangedEventHandler(HandleCollectionChanged);
-            ((INotifyPropertyChanged)Items).PropertyChanged += new PropertyChangedEventHandler(
-                HandlePropertyChanged
-            );
+            ((INotifyPropertyChanged)Items).PropertyChanged +=
+                new PropertyChangedEventHandler(HandlePropertyChanged);
         }
 
         /// <summary>

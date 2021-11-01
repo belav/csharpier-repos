@@ -867,9 +867,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
             if (TestWorkspace.IsWorkspaceElement(expectedText))
             {
-                var newSolutionWithLinkedFiles = await newSolution.WithMergedLinkedFileChangesAsync(
-                    oldSolution
-                );
+                var newSolutionWithLinkedFiles =
+                    await newSolution.WithMergedLinkedFileChangesAsync(oldSolution);
                 await VerifyAgainstWorkspaceDefinitionAsync(
                     expectedText,
                     newSolutionWithLinkedFiles,

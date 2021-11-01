@@ -15,9 +15,8 @@ namespace Microsoft.Extensions.Logging
 
         internal static string GetAlias(Type providerType)
         {
-            IList<CustomAttributeData> attributes = CustomAttributeData.GetCustomAttributes(
-                providerType
-            );
+            IList<CustomAttributeData> attributes =
+                CustomAttributeData.GetCustomAttributes(providerType);
 
             for (int i = 0; i < attributes.Count; i++)
             {

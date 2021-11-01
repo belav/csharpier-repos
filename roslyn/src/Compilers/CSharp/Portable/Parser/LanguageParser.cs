@@ -5959,9 +5959,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 case SyntaxKind.OpenBracketToken:
                     bool sawNonOmittedSize;
                     _termState |= TerminatorState.IsPossibleEndOfVariableDeclaration;
-                    var specifier = this.ParseArrayRankSpecifier(
-                        sawNonOmittedSize: out sawNonOmittedSize
-                    );
+                    var specifier =
+                        this.ParseArrayRankSpecifier(sawNonOmittedSize: out sawNonOmittedSize);
                     _termState = saveTerm;
                     var open = specifier.OpenBracketToken;
                     var sizes = specifier.Sizes;
@@ -6903,9 +6902,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             // Note: we check if we got 'MustBeType' which triggers for predefined types,
                             // (int, string, etc.), or array types (Goo[], A<T>[][] etc.), or pointer types
                             // of things that must be types (int*, void**, etc.).
-                            isDefinitelyTypeArgumentList = DetermineIfDefinitelyTypeArgumentList(
-                                isDefinitelyTypeArgumentList
-                            );
+                            isDefinitelyTypeArgumentList =
+                                DetermineIfDefinitelyTypeArgumentList(isDefinitelyTypeArgumentList);
                             result = ScanTypeFlags.GenericTypeOrMethod;
                             break;
 
@@ -6932,9 +6930,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                         case ScanTypeFlags.NullableType:
                             // See above.  If we have X<Y?,  or X<Y?>, then this is definitely a type argument list.
-                            isDefinitelyTypeArgumentList = DetermineIfDefinitelyTypeArgumentList(
-                                isDefinitelyTypeArgumentList
-                            );
+                            isDefinitelyTypeArgumentList =
+                                DetermineIfDefinitelyTypeArgumentList(isDefinitelyTypeArgumentList);
                             if (isDefinitelyTypeArgumentList)
                             {
                                 result = ScanTypeFlags.GenericTypeOrMethod;
@@ -14363,9 +14360,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             }
 
                             list.Add(
-                                this.ParseObjectOrCollectionInitializerMember(
-                                    ref isObjectInitializer
-                                )
+                                this.ParseObjectOrCollectionInitializerMember(ref isObjectInitializer)
                             );
                             continue;
                         }

@@ -87,9 +87,9 @@ namespace System.Data
         }
         private static EvaluateException _Eval(string error, Exception? innerException)
         {
-            EvaluateException e = new EvaluateException(
-                error /*, innerException*/
-            );
+            EvaluateException e =
+                new EvaluateException(error /*, innerException*/
+                );
             ExceptionBuilder.TraceExceptionAsReturnValue(e);
             return e;
         }

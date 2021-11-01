@@ -58,9 +58,8 @@ namespace System.CommandLine.Tests.Binding
         {
             var complexParameterType = typeof(ClassWithSetter<>).MakeGenericType(type);
 
-            var handlerType = typeof(ClassWithMethodHavingParameter<>).MakeGenericType(
-                complexParameterType
-            );
+            var handlerType =
+                typeof(ClassWithMethodHavingParameter<>).MakeGenericType(complexParameterType);
 
             var handlerMethod = handlerType.GetMethod("HandleAsync");
 
@@ -88,9 +87,8 @@ namespace System.CommandLine.Tests.Binding
         {
             var complexParameterType = typeof(ClassWithCtorParameter<>).MakeGenericType(type);
 
-            var handlerType = typeof(ClassWithMethodHavingParameter<>).MakeGenericType(
-                complexParameterType
-            );
+            var handlerType =
+                typeof(ClassWithMethodHavingParameter<>).MakeGenericType(complexParameterType);
 
             var handlerMethod = handlerType.GetMethod("HandleAsync");
 

@@ -88,9 +88,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
 
             // use telemetry API directly rather than Logger abstraction for PII data
             var telemetryEvent = new TelemetryEvent(EventName);
-            telemetryEvent.Properties[ApiPropertyName] = new TelemetryComplexProperty(
-                apiPerAssembly
-            );
+            telemetryEvent.Properties[ApiPropertyName] =
+                new TelemetryComplexProperty(apiPerAssembly);
             telemetryEvent.Properties[SessionIdPropertyName] = new TelemetryPiiProperty(
                 solutionSessionId.ToString("B")
             );

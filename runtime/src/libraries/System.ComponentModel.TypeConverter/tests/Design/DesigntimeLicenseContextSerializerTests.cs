@@ -64,9 +64,8 @@ namespace System.ComponentModel.Design.Tests
                             "System.ComponentModel.Design.RuntimeLicenseContext"
                         );
                         Assert.NotNull(runtimeLicenseContextType);
-                        object runtimeLicenseContext = Activator.CreateInstance(
-                            runtimeLicenseContextType
-                        );
+                        object runtimeLicenseContext =
+                            Activator.CreateInstance(runtimeLicenseContextType);
                         FieldInfo _savedLicenseKeys = runtimeLicenseContextType.GetField(
                             "_savedLicenseKeys",
                             BindingFlags.NonPublic | BindingFlags.Instance
@@ -155,9 +154,8 @@ namespace System.ComponentModel.Design.Tests
                             "System.ComponentModel.Design.RuntimeLicenseContext"
                         );
                         Assert.NotNull(runtimeLicenseContextType);
-                        object runtimeLicenseContext = Activator.CreateInstance(
-                            runtimeLicenseContextType
-                        );
+                        object runtimeLicenseContext =
+                            Activator.CreateInstance(runtimeLicenseContextType);
                         Assert.NotNull(runtimeLicenseContext);
                         FieldInfo _savedLicenseKeys = runtimeLicenseContextType.GetField(
                             "_savedLicenseKeys",

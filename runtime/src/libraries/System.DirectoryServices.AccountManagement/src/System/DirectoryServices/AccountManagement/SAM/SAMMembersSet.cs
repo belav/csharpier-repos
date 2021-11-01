@@ -377,9 +377,8 @@ namespace System.DirectoryServices.AccountManagement
                     );
 
                     // foreignPrincipal is a principal from _another_ store (e.g., it's backed by an ADStoreCtx)
-                    Principal foreignPrincipal = _storeCtx.ResolveCrossStoreRefToPrincipal(
-                        foreignDE
-                    );
+                    Principal foreignPrincipal =
+                        _storeCtx.ResolveCrossStoreRefToPrincipal(foreignDE);
 
                     // If we're not enumerating recursively, return the principal.
                     // If we are enumerating recursively, and it's a group, save it off for later.

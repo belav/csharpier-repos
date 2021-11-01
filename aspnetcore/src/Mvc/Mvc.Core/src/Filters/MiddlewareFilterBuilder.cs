@@ -54,9 +54,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var nestedAppBuilder = ApplicationBuilder.New();
 
             // Get the 'Configure' method from the user provided type.
-            var configureDelegate = _configurationProvider.CreateConfigureDelegate(
-                middlewarePipelineProviderType
-            );
+            var configureDelegate =
+                _configurationProvider.CreateConfigureDelegate(middlewarePipelineProviderType);
             configureDelegate(nestedAppBuilder);
 
             // The middleware resource filter, after receiving the request executes the user configured middleware

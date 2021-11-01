@@ -137,9 +137,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                         // the parents should bring us to the class definition
                         var parentTypeNode = documentToken.Parent?.Parent?.Parent?.Parent;
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
-                        var compilation = await document.Project.GetCompilationAsync(
-                            cancellationToken
-                        );
+                        var compilation =
+                            await document.Project.GetCompilationAsync(cancellationToken);
 #pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
 
                         // let's finally get our implementing type

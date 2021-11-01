@@ -710,9 +710,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                 httpMessageHandler = httpClientHandler;
                 if (_httpConnectionOptions.HttpMessageHandlerFactory != null)
                 {
-                    httpMessageHandler = _httpConnectionOptions.HttpMessageHandlerFactory(
-                        httpClientHandler
-                    );
+                    httpMessageHandler =
+                        _httpConnectionOptions.HttpMessageHandlerFactory(httpClientHandler);
                     if (httpMessageHandler == null)
                     {
                         throw new InvalidOperationException(

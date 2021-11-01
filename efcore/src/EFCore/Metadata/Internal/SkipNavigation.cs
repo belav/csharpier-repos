@@ -280,9 +280,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual void UpdateForeignKeyConfigurationSource(
             ConfigurationSource configurationSource
         ) =>
-            _foreignKeyConfigurationSource = _foreignKeyConfigurationSource.Max(
-                configurationSource
-            );
+            _foreignKeyConfigurationSource =
+                _foreignKeyConfigurationSource.Max(configurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

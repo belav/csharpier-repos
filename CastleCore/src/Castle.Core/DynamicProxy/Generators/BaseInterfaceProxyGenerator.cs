@@ -160,9 +160,8 @@ namespace Castle.DynamicProxy.Generators
             CompleteInitCacheMethod(cctor.CodeBuilder);
 
             // non-inheritable attributes from proxied type
-            var nonInheritableAttributesContributor = new NonInheritableAttributesContributor(
-                targetType
-            );
+            var nonInheritableAttributesContributor =
+                new NonInheritableAttributesContributor(targetType);
             nonInheritableAttributesContributor.Generate(emitter);
 
             // Crosses fingers and build type
@@ -240,9 +239,8 @@ namespace Castle.DynamicProxy.Generators
             // 3. then additional interfaces
             if (interfaces.Length > 0)
             {
-                var additionalInterfacesContributor = GetContributorForAdditionalInterfaces(
-                    namingScope
-                );
+                var additionalInterfacesContributor =
+                    GetContributorForAdditionalInterfaces(namingScope);
                 contributorsList.Add(additionalInterfacesContributor);
 
                 foreach (var @interface in interfaces)

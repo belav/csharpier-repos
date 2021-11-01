@@ -361,9 +361,8 @@ namespace Castle.DynamicProxy.Tests
         public void MethodInfoClosedInNongenTypeGenMethod()
         {
             KeepDataInterceptor interceptor = new KeepDataInterceptor();
-            OnlyGenMethodsClass proxy = generator.CreateClassProxy<OnlyGenMethodsClass>(
-                interceptor
-            );
+            OnlyGenMethodsClass proxy =
+                generator.CreateClassProxy<OnlyGenMethodsClass>(interceptor);
 
             proxy.DoSomething(1);
             GenericTestUtility.CheckMethodInfoIsClosed(

@@ -284,9 +284,10 @@ namespace Newtonsoft.Json.Utilities
         private static readonly ThreadSafeStore<
             StructMultiKey<Type, Type>,
             Func<object?, object?>?
-        > CastConverters = new ThreadSafeStore<StructMultiKey<Type, Type>, Func<object?, object?>?>(
-            CreateCastConverter
-        );
+        > CastConverters = new ThreadSafeStore<
+            StructMultiKey<Type, Type>,
+            Func<object?, object?>?
+        >(CreateCastConverter);
 
         private static Func<object?, object?>? CreateCastConverter(StructMultiKey<Type, Type> t)
         {
@@ -302,9 +303,7 @@ namespace Newtonsoft.Json.Utilities
             }
 
             MethodCall<object?, object?> call =
-                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                    castMethodInfo
-                );
+                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(castMethodInfo);
 
             return o => call(null, o);
         }

@@ -33,9 +33,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
             var goToManageExternalLogin = ResponseAssert.IsRedirect(externalLoginResponse);
             var manageExternalLoginResponse = await Client.GetAsync(goToManageExternalLogin);
 
-            var manageExternalLoginDocument = await ResponseAssert.IsHtmlDocumentAsync(
-                manageExternalLoginResponse
-            );
+            var manageExternalLoginDocument =
+                await ResponseAssert.IsHtmlDocumentAsync(manageExternalLoginResponse);
             return new RemoveExternalLogin(Client, manageExternalLoginDocument, Context);
         }
     }

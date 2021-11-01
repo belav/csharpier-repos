@@ -19,18 +19,16 @@ namespace Microsoft.AspNetCore.Cryptography
     internal unsafe static class UnsafeNativeMethods
     {
         private const string BCRYPT_LIB = "bcrypt.dll";
-        private static readonly Lazy<SafeLibraryHandle> _lazyBCryptLibHandle = GetLazyLibraryHandle(
-            BCRYPT_LIB
-        );
+        private static readonly Lazy<SafeLibraryHandle> _lazyBCryptLibHandle =
+            GetLazyLibraryHandle(BCRYPT_LIB);
 
         private const string CRYPT32_LIB = "crypt32.dll";
         private static readonly Lazy<SafeLibraryHandle> _lazyCrypt32LibHandle =
             GetLazyLibraryHandle(CRYPT32_LIB);
 
         private const string NCRYPT_LIB = "ncrypt.dll";
-        private static readonly Lazy<SafeLibraryHandle> _lazyNCryptLibHandle = GetLazyLibraryHandle(
-            NCRYPT_LIB
-        );
+        private static readonly Lazy<SafeLibraryHandle> _lazyNCryptLibHandle =
+            GetLazyLibraryHandle(NCRYPT_LIB);
 
         private static Lazy<SafeLibraryHandle> GetLazyLibraryHandle(string libraryName)
         {

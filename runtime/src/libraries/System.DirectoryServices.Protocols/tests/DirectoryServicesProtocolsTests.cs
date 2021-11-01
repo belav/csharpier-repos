@@ -502,9 +502,8 @@ namespace System.DirectoryServices.Protocols.Tests
                         dn2 + "," + LdapConfiguration.Configuration.SearchDn,
                         "cn=protocolUser7.2"
                     );
-                    ModifyDNResponse modDnResponse = (ModifyDNResponse)connection.SendRequest(
-                        modDnRequest
-                    );
+                    ModifyDNResponse modDnResponse =
+                        (ModifyDNResponse)connection.SendRequest(modDnRequest);
                     Assert.Equal(ResultCode.Success, modDnResponse.ResultCode);
 
                     sre = SearchUser(connection, user1Root, "protocolUser7.1");
@@ -612,9 +611,8 @@ namespace System.DirectoryServices.Protocols.Tests
                 }
                 else
                 {
-                    SearchResponse response = (SearchResponse)state.Connection.EndSendRequest(
-                        asyncResult
-                    );
+                    SearchResponse response =
+                        (SearchResponse)state.Connection.EndSendRequest(asyncResult);
 
                     if (response != null)
                     {
@@ -676,9 +674,8 @@ namespace System.DirectoryServices.Protocols.Tests
                     searchRequest.Controls.Add(searchOptions);
                     while (true)
                     {
-                        SearchResponse searchResponse = (SearchResponse)connection.SendRequest(
-                            searchRequest
-                        );
+                        SearchResponse searchResponse =
+                            (SearchResponse)connection.SendRequest(searchRequest);
                         Assert.Equal(1, searchResponse.Controls.Length);
                         Assert.True(searchResponse.Controls[0] is PageResultResponseControl);
 

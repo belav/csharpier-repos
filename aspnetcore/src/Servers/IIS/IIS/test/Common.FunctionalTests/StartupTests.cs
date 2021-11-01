@@ -152,9 +152,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             var deploymentParameters = Fixture.GetBaseDeploymentParameters();
 
-            deploymentParameters.EnvironmentVariables["PATH"] = Path.GetDirectoryName(
-                _dotnetLocation
-            );
+            deploymentParameters.EnvironmentVariables["PATH"] =
+                Path.GetDirectoryName(_dotnetLocation);
             deploymentParameters.WebConfigActionList.Add(
                 WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", path)
             );

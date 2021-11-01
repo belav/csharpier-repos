@@ -377,9 +377,8 @@ namespace System.Security.Cryptography.Xml
                 if (key == null)
                     throw new CryptographicException(SR.Cryptography_Xml_MissingDecryptionKey);
 
-                SymmetricAlgorithm symAlg = CryptoHelpers.CreateFromName<SymmetricAlgorithm>(
-                    symmetricAlgorithmUri
-                );
+                SymmetricAlgorithm symAlg =
+                    CryptoHelpers.CreateFromName<SymmetricAlgorithm>(symmetricAlgorithmUri);
                 if (symAlg == null)
                 {
                     throw new CryptographicException(SR.Cryptography_Xml_MissingAlgorithm);
@@ -1016,16 +1015,14 @@ namespace System.Security.Cryptography.Xml
 
             if (useOAEP)
             {
-                RSAOAEPKeyExchangeDeformatter rsaDeformatter = new RSAOAEPKeyExchangeDeformatter(
-                    rsa
-                );
+                RSAOAEPKeyExchangeDeformatter rsaDeformatter =
+                    new RSAOAEPKeyExchangeDeformatter(rsa);
                 return rsaDeformatter.DecryptKeyExchange(keyData);
             }
             else
             {
-                RSAPKCS1KeyExchangeDeformatter rsaDeformatter = new RSAPKCS1KeyExchangeDeformatter(
-                    rsa
-                );
+                RSAPKCS1KeyExchangeDeformatter rsaDeformatter =
+                    new RSAPKCS1KeyExchangeDeformatter(rsa);
                 return rsaDeformatter.DecryptKeyExchange(keyData);
             }
         }

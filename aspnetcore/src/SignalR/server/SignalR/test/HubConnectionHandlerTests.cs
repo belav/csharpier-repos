@@ -913,9 +913,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     var exception = await Assert.ThrowsAsync<InvalidOperationException>(
                         async () =>
                         {
-                            var connectionHandlerTask = await client.ConnectAsync(
-                                connectionHandler
-                            );
+                            var connectionHandlerTask =
+                                await client.ConnectAsync(connectionHandler);
                             await connectionHandlerTask.DefaultTimeout();
                         }
                     );
@@ -1823,12 +1822,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var firstClient = new TestClient())
                 using (var secondClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(firstClient.Connected, secondClient.Connected)
                         .DefaultTimeout();
@@ -1878,12 +1875,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var firstClient = new TestClient())
                 using (var secondClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(firstClient.Connected, secondClient.Connected)
                         .DefaultTimeout();
@@ -1933,12 +1928,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var firstClient = new TestClient())
                 using (var secondClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(firstClient.Connected, secondClient.Connected)
                         .DefaultTimeout();
@@ -1987,12 +1980,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var firstClient = new TestClient())
                 using (var secondClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(firstClient.Connected, secondClient.Connected)
                         .DefaultTimeout();
@@ -2068,15 +2059,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var secondClient = new TestClient())
                 using (var thirdClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var thirdConnectionHandlerTask = await thirdClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
+                    var thirdConnectionHandlerTask =
+                        await thirdClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(
                             firstClient.Connected,
@@ -2137,15 +2125,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var secondClient = new TestClient())
                 using (var thirdClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var thirdConnectionHandlerTask = await thirdClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
+                    var thirdConnectionHandlerTask =
+                        await thirdClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(
                             firstClient.Connected,
@@ -2213,15 +2198,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var secondClient = new TestClient(userIdentifier: "userB"))
                 using (var thirdClient = new TestClient(userIdentifier: "userC"))
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var thirdConnectionHandlerTask = await thirdClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
+                    var thirdConnectionHandlerTask =
+                        await thirdClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(
                             firstClient.Connected,
@@ -2282,12 +2264,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var firstClient = new TestClient())
                 using (var secondClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(firstClient.Connected, secondClient.Connected)
                         .DefaultTimeout();
@@ -2347,12 +2327,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var firstClient = new TestClient())
                 using (var secondClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(firstClient.Connected, secondClient.Connected)
                         .DefaultTimeout();
@@ -2428,12 +2406,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var firstClient = new TestClient())
                 using (var secondClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(firstClient.Connected, secondClient.Connected)
                         .DefaultTimeout();
@@ -2499,12 +2475,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var firstClient = new TestClient())
                 using (var secondClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(firstClient.Connected, secondClient.Connected)
                         .DefaultTimeout();
@@ -2592,12 +2566,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var firstClient = new TestClient(userIdentifier: "userA"))
                 using (var secondClient = new TestClient(userIdentifier: "userB"))
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(firstClient.Connected, secondClient.Connected)
                         .DefaultTimeout();
@@ -2637,12 +2609,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var firstClient = new TestClient())
                 using (var secondClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(firstClient.Connected, secondClient.Connected)
                         .DefaultTimeout();
@@ -2685,12 +2655,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 using (var firstClient = new TestClient())
                 using (var secondClient = new TestClient())
                 {
-                    var firstConnectionHandlerTask = await firstClient.ConnectAsync(
-                        connectionHandler
-                    );
-                    var secondConnectionHandlerTask = await secondClient.ConnectAsync(
-                        connectionHandler
-                    );
+                    var firstConnectionHandlerTask =
+                        await firstClient.ConnectAsync(connectionHandler);
+                    var secondConnectionHandlerTask =
+                        await secondClient.ConnectAsync(connectionHandler);
 
                     await Task.WhenAll(firstClient.Connected, secondClient.Connected)
                         .DefaultTimeout();
@@ -5102,9 +5070,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             {
                 // NOTE -- json.net is flexible here, and casts for us
 
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-                    loggerFactory: LoggerFactory
-                );
+                var serviceProvider =
+                    HubConnectionHandlerTestUtils.CreateServiceProvider(loggerFactory: LoggerFactory);
                 var connectionHandler = serviceProvider.GetService<
                     HubConnectionHandler<MethodHub>
                 >();
@@ -5177,9 +5144,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             using (StartVerifiableLog())
             {
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-                    loggerFactory: LoggerFactory
-                );
+                var serviceProvider =
+                    HubConnectionHandlerTestUtils.CreateServiceProvider(loggerFactory: LoggerFactory);
                 var connectionHandler = serviceProvider.GetService<
                     HubConnectionHandler<MethodHub>
                 >();
@@ -5299,9 +5265,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             using (StartVerifiableLog())
             {
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-                    loggerFactory: LoggerFactory
-                );
+                var serviceProvider =
+                    HubConnectionHandlerTestUtils.CreateServiceProvider(loggerFactory: LoggerFactory);
                 var connectionHandler = serviceProvider.GetService<
                     HubConnectionHandler<MethodHub>
                 >();
@@ -5332,9 +5297,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             using (StartVerifiableLog())
             {
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-                    loggerFactory: LoggerFactory
-                );
+                var serviceProvider =
+                    HubConnectionHandlerTestUtils.CreateServiceProvider(loggerFactory: LoggerFactory);
                 var connectionHandler = serviceProvider.GetService<
                     HubConnectionHandler<MethodHub>
                 >();
@@ -5365,9 +5329,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             using (StartVerifiableLog())
             {
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-                    loggerFactory: LoggerFactory
-                );
+                var serviceProvider =
+                    HubConnectionHandlerTestUtils.CreateServiceProvider(loggerFactory: LoggerFactory);
                 var connectionHandler = serviceProvider.GetService<
                     HubConnectionHandler<MethodHub>
                 >();
@@ -5520,9 +5483,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             using (StartVerifiableLog())
             {
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-                    loggerFactory: LoggerFactory
-                );
+                var serviceProvider =
+                    HubConnectionHandlerTestUtils.CreateServiceProvider(loggerFactory: LoggerFactory);
                 var connectionHandler = serviceProvider.GetService<
                     HubConnectionHandler<MethodHub>
                 >();
@@ -5579,9 +5541,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             using (StartVerifiableLog())
             {
-                var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-                    loggerFactory: LoggerFactory
-                );
+                var serviceProvider =
+                    HubConnectionHandlerTestUtils.CreateServiceProvider(loggerFactory: LoggerFactory);
                 var connectionHandler = serviceProvider.GetService<
                     HubConnectionHandler<MethodHub>
                 >();
@@ -5862,9 +5823,7 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             using (StartVerifiableLog())
             {
                 IServiceProvider serviceProvider =
-                    HubConnectionHandlerTestUtils.CreateServiceProvider(
-                        loggerFactory: LoggerFactory
-                    );
+                    HubConnectionHandlerTestUtils.CreateServiceProvider(loggerFactory: LoggerFactory);
                 HubConnectionHandler<StreamingHub> connectionHandler = serviceProvider.GetService<
                     HubConnectionHandler<StreamingHub>
                 >();

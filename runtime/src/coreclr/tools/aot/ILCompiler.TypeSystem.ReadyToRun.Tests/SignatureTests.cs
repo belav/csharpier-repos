@@ -127,9 +127,8 @@ namespace TypeSystemTests
                 .GetMethods()
                 .Single(m => string.Equals(m.Name, "Method"));
             MethodSignature baseClassMethodSignature = baseClassMethod.Signature;
-            MethodSignatureBuilder matchingSignatureBuilder = new MethodSignatureBuilder(
-                baseClassMethodSignature
-            );
+            MethodSignatureBuilder matchingSignatureBuilder =
+                new MethodSignatureBuilder(baseClassMethodSignature);
             matchingSignatureBuilder[0] = aOfAtomType;
             matchingSignatureBuilder[1] = atomType;
             MethodSignature matchingSignature = matchingSignatureBuilder.ToSignature();

@@ -570,9 +570,8 @@ namespace System.Net.Security
 
             while (extensions.Length >= ExtensionHeader)
             {
-                ExtensionType extensionType = (ExtensionType)BinaryPrimitives.ReadUInt16BigEndian(
-                    extensions
-                );
+                ExtensionType extensionType =
+                    (ExtensionType)BinaryPrimitives.ReadUInt16BigEndian(extensions);
                 extensions = SkipBytes(extensions, sizeof(ushort));
 
                 ushort extensionLength = BinaryPrimitives.ReadUInt16BigEndian(extensions);
@@ -667,9 +666,8 @@ namespace System.Net.Security
                 return false;
             }
 
-            int serverNameListLength = BinaryPrimitives.ReadUInt16BigEndian(
-                serverNameListExtension
-            );
+            int serverNameListLength =
+                BinaryPrimitives.ReadUInt16BigEndian(serverNameListExtension);
             ReadOnlySpan<byte> serverNameList = serverNameListExtension.Slice(ServerNameListOffset);
 
             if (serverNameListLength != serverNameList.Length)

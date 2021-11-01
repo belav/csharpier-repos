@@ -885,9 +885,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             // Subquery case
             var subqueryTranslation =
-                _queryableMethodTranslatingExpressionVisitor.TranslateSubquery(
-                    methodCallExpression
-                );
+                _queryableMethodTranslatingExpressionVisitor.TranslateSubquery(methodCallExpression);
             if (subqueryTranslation != null)
             {
                 var subquery = (InMemoryQueryExpression)subqueryTranslation.QueryExpression;
@@ -1508,9 +1506,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     return null;
                 }
 
-                var result = ((EntityProjectionExpression)valueBufferExpression).BindProperty(
-                    property
-                );
+                var result = (
+                    (EntityProjectionExpression)valueBufferExpression
+                ).BindProperty(property);
 
                 // if the result type change was just nullability change e.g from int to int?
                 // we want to preserve the new type for null propagation

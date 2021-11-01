@@ -261,9 +261,8 @@ namespace System.Web.WebPages.Deployment.Test
             Dictionary<string, IEnumerable<string>> assemblyReferences = null;
 
             // Act
-            var referencedAssemblies = AssemblyUtils.GetAssembliesMatchingOtherVersions(
-                assemblyReferences
-            );
+            var referencedAssemblies =
+                AssemblyUtils.GetAssembliesMatchingOtherVersions(assemblyReferences);
 
             // Assert
             Assert.Empty(referencedAssemblies);
@@ -276,9 +275,8 @@ namespace System.Web.WebPages.Deployment.Test
             var assemblyReferences = new Dictionary<string, IEnumerable<string>>();
 
             // Act
-            var referencedAssemblies = AssemblyUtils.GetAssembliesMatchingOtherVersions(
-                assemblyReferences
-            );
+            var referencedAssemblies =
+                AssemblyUtils.GetAssembliesMatchingOtherVersions(assemblyReferences);
 
             // Assert
             Assert.Empty(referencedAssemblies);
@@ -307,9 +305,8 @@ namespace System.Web.WebPages.Deployment.Test
             };
 
             // Act
-            var referencedAssemblies = AssemblyUtils.GetAssembliesMatchingOtherVersions(
-                assemblyReferences
-            );
+            var referencedAssemblies =
+                AssemblyUtils.GetAssembliesMatchingOtherVersions(assemblyReferences);
 
             // Assert
             Assert.Empty(referencedAssemblies);
@@ -337,9 +334,8 @@ namespace System.Web.WebPages.Deployment.Test
             };
 
             // Act
-            var referencedAssemblies = AssemblyUtils.GetAssembliesMatchingOtherVersions(
-                assemblyReferences
-            );
+            var referencedAssemblies =
+                AssemblyUtils.GetAssembliesMatchingOtherVersions(assemblyReferences);
 
             // Assert
             Assert.Equal(1, referencedAssemblies.Count);
@@ -386,9 +382,8 @@ namespace System.Web.WebPages.Deployment.Test
             };
 
             // Act
-            var referencedAssemblies = AssemblyUtils.GetAssembliesMatchingOtherVersions(
-                assemblyReferences
-            );
+            var referencedAssemblies =
+                AssemblyUtils.GetAssembliesMatchingOtherVersions(assemblyReferences);
 
             // Assert
             Assert.Equal(1, referencedAssemblies.Count);

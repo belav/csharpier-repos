@@ -296,9 +296,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         candidates.Clear();
                         interfaces =
-                            operatorSourceOpt.AllInterfacesWithDefinitionUseSiteDiagnostics(
-                                ref useSiteInfo
-                            );
+                            operatorSourceOpt.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
                     }
                 }
             }
@@ -337,9 +335,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             // this interface "shadows" all its base interfaces
                             shadowedInterfaces.AddAll(
-                                @interface.AllInterfacesWithDefinitionUseSiteDiagnostics(
-                                    ref useSiteInfo
-                                )
+                                @interface.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
                             );
                         }
                         // no need to perform another lookup in this interface
@@ -364,9 +360,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         candidates.AddRange(results);
                         // this interface "shadows" all its base interfaces
                         shadowedInterfaces.AddAll(
-                            @interface.AllInterfacesWithDefinitionUseSiteDiagnostics(
-                                ref useSiteInfo
-                            )
+                            @interface.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
                         );
                     }
                 }

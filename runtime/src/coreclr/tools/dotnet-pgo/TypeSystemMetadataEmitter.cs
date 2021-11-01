@@ -98,9 +98,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             signatureEncoder.MethodSignature(SignatureCallingConvention.Default, 0, false);
             noArgsNoReturnStaticMethodSig.WriteCompressedInteger(0);
             noArgsNoReturnStaticMethodSig.WriteByte((byte)SignatureTypeCode.Void);
-            _noArgsVoidReturnStaticMethodSigHandle = _metadataBuilder.GetOrAddBlob(
-                noArgsNoReturnStaticMethodSig
-            );
+            _noArgsVoidReturnStaticMethodSigHandle =
+                _metadataBuilder.GetOrAddBlob(noArgsNoReturnStaticMethodSig);
         }
 
         public MethodDefinitionHandle AddGlobalMethod(

@@ -62,9 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 );
             }
 
-            var parameterDefaultValues = ParameterDefaultValues.GetParameterDefaultValues(
-                methodInfo
-            );
+            var parameterDefaultValues =
+                ParameterDefaultValues.GetParameterDefaultValues(methodInfo);
 
             executor = ObjectMethodExecutor.Create(
                 viewComponentDescriptor.MethodInfo,

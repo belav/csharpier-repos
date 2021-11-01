@@ -125,9 +125,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
             _getWorkspaceFixersMap = workspace =>
                 GetFixerPerLanguageMap(fixersPerLanguageMap, workspace);
-            _configurationProvidersMap = GetConfigurationProvidersPerLanguageMap(
-                configurationProvidersPerLanguageMap
-            );
+            _configurationProvidersMap =
+                GetConfigurationProvidersPerLanguageMap(configurationProvidersPerLanguageMap);
 
             // REVIEW: currently, fixer's priority is statically defined by the fixer itself. might considering making it more dynamic or configurable.
             _getFixerPriorityMap = workspace =>
@@ -166,9 +165,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             }
 
             using var _ = ArrayBuilder<DiagnosticData>.GetInstance(out var diagnostics);
-            using var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
-                cancellationToken
-            );
+            using var linkedTokenSource =
+                CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
             var linkedToken = linkedTokenSource.Token;
 

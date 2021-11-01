@@ -279,9 +279,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                                         is IOutboundParameterTransformer parameterTransformer
                                     )
                                     {
-                                        requiredValue = parameterTransformer.TransformOutbound(
-                                            requiredValue
-                                        );
+                                        requiredValue =
+                                            parameterTransformer.TransformOutbound(requiredValue);
                                         break;
                                     }
                                 }

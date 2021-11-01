@@ -619,9 +619,8 @@ namespace System.Diagnostics
                 )
             )
             {
-                CounterDefinitionSample counterSample = categorySample.GetCounterDefinitionSample(
-                    _counterName
-                );
+                CounterDefinitionSample counterSample =
+                    categorySample.GetCounterDefinitionSample(_counterName);
                 _counterType = counterSample._counterType;
                 if (!categorySample._isMultiInstance)
                 {

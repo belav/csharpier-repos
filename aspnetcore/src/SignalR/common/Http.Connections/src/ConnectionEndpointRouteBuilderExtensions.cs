@@ -136,9 +136,8 @@ namespace Microsoft.AspNetCore.Builder
             var executeBuilder = endpoints.Map(pattern, executehandler);
             conventionBuilders.Add(executeBuilder);
 
-            var compositeConventionBuilder = new CompositeEndpointConventionBuilder(
-                conventionBuilders
-            );
+            var compositeConventionBuilder =
+                new CompositeEndpointConventionBuilder(conventionBuilders);
 
             // Add metadata to all of Endpoints
             compositeConventionBuilder.Add(

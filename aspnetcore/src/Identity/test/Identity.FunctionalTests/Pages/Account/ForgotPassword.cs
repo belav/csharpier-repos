@@ -25,12 +25,10 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
                 new Dictionary<string, string> { ["Input_Email"] = email }
             );
             var goToForgotPasswordConfirmation = ResponseAssert.IsRedirect(response);
-            var forgotPasswordConfirmationResponse = await Client.GetAsync(
-                goToForgotPasswordConfirmation
-            );
-            var forgotPasswordConfirmation = await ResponseAssert.IsHtmlDocumentAsync(
-                forgotPasswordConfirmationResponse
-            );
+            var forgotPasswordConfirmationResponse =
+                await Client.GetAsync(goToForgotPasswordConfirmation);
+            var forgotPasswordConfirmation =
+                await ResponseAssert.IsHtmlDocumentAsync(forgotPasswordConfirmationResponse);
 
             return new ForgotPasswordConfirmation(Client, forgotPasswordConfirmation, Context);
         }

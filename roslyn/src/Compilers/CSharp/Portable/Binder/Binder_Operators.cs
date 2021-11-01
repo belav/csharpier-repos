@@ -72,9 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
 
             if (left.HasDynamicType() || right.HasDynamicType())
             {
@@ -377,9 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             TypeSymbol delegateType = left.Type;
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             Conversion argumentConversion = this.Conversions.ClassifyConversionFromExpression(
                 right,
                 delegateType,
@@ -546,9 +544,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // We need to make sure left is either implicitly convertible to Boolean or has user defined truth operator.
                 //   left && right is lowered to {op_False|op_Implicit}(left) ? left : And(left, right)
                 //   left || right is lowered to {op_True|!op_Implicit}(left) ? left : Or(left, right)
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 if (
                     !IsValidDynamicCondition(
                         left,
@@ -989,9 +986,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else
                 {
                     resultSignature = signature;
-                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                        diagnostics
-                    );
+                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                        GetNewCompoundUseSiteInfo(diagnostics);
                     bool leftDefault = left.IsLiteralDefault();
                     bool rightDefault = right.IsLiteralDefault();
                     foundOperator =
@@ -1566,9 +1562,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // As mentioned above, we need more than just op true and op false existing; we need
             // to know that the first operand can be passed to it.
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             if (
                 !HasApplicableBooleanOperator(
                     t,
@@ -1744,9 +1739,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var result = BinaryOperatorOverloadResolutionResult.GetInstance();
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             this.OverloadResolution.BinaryOperatorOverloadResolution(
                 kind,
                 left,
@@ -1867,9 +1861,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             var result = UnaryOperatorOverloadResolutionResult.GetInstance();
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             this.OverloadResolution.UnaryOperatorOverloadResolution(
                 kind,
                 operand,
@@ -2884,9 +2877,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             CheckNativeIntegerFeatureAvailability(signature.Kind, node, diagnostics);
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             var resultConversion = Conversions.ClassifyConversionFromType(
                 signature.ReturnType,
                 operandType,
@@ -3082,9 +3074,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 "BindValue should have caught a null operand type"
             );
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             ManagedKind managedKind = operandType.GetManagedKind(ref useSiteInfo);
             diagnostics.Add(node.Location, useSiteInfo);
 
@@ -4042,9 +4033,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // We store the conversion from expression's operand type to target type to enable these
             // optimizations during is/as operator rewrite.
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
 
             if (
                 operand.ConstantValue == ConstantValue.Null
@@ -4655,9 +4645,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 targetTypeKind = targetType.TypeKind;
             }
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             Conversion conversion = Conversions.ClassifyBuiltInConversion(
                 operandType,
                 targetType,
@@ -4955,9 +4944,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC:    the result. Otherwise, b is evaluated, and the outcome becomes the result.
             //
             // Note that there is no runtime dynamic dispatch since comparison with null is not a dynamic operation.
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
 
             if ((object)optRightType != null && optRightType.IsDynamic())
             {
@@ -5214,9 +5202,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
 
             // If A0 exists and B is implicitly convertible to A0, then the result type of this expression is A0, except if B is dynamic.
             // This differs from most assignments such that you cannot directly replace a with (a ??= b).
@@ -5398,9 +5385,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression condition = BindBooleanExpression(node.Condition, diagnostics);
             BoundExpression trueExpr = BindValue(whenTrue, diagnostics, BindValueKind.RValue);
             BoundExpression falseExpr = BindValue(whenFalse, diagnostics, BindValueKind.RValue);
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             ConstantValue? constantValue = null;
             TypeSymbol? bestType = BestTypeInferrer.InferBestTypeForConditionalOperator(
                 trueExpr,
@@ -5506,9 +5492,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 type = BestTypeInferrer.InferBestTypeForConditionalOperator(
                     trueExpr,
                     falseExpr,

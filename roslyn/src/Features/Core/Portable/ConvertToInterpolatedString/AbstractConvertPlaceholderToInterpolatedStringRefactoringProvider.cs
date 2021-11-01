@@ -415,9 +415,7 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                                 if (index >= 0 && index < expandedArguments.Length)
                                 {
                                     return interpolationSyntaxNode.ReplaceNode(
-                                        syntaxFactsService.GetExpressionOfInterpolation(
-                                            interpolationSyntaxNode
-                                        ),
+                                        syntaxFactsService.GetExpressionOfInterpolation(interpolationSyntaxNode),
                                         syntaxFactsService
                                             .ConvertToSingleLine(
                                                 expandedArguments[index],

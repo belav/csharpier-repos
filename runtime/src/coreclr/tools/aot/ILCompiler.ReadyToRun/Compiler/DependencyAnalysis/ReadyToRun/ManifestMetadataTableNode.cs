@@ -98,9 +98,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         AssemblyReferenceHandle assemblyRefHandle =
                             MetadataTokens.AssemblyReferenceHandle(assemblyRefIndex);
-                        AssemblyReference assemblyRef = mdReader.GetAssemblyReference(
-                            assemblyRefHandle
-                        );
+                        AssemblyReference assemblyRef =
+                            mdReader.GetAssemblyReference(assemblyRefHandle);
                         string assemblyName = mdReader.GetString(assemblyRef.Name);
                         _assemblyRefToModuleIdMap[assemblyName] = assemblyRefIndex;
                     }

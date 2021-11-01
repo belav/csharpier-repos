@@ -320,9 +320,8 @@ namespace CoreclrTestLib
             int timeout = environmentVar != null ? int.Parse(environmentVar) : DEFAULT_TIMEOUT_MS;
             bool collectCrashDumps =
                 Environment.GetEnvironmentVariable(COLLECT_DUMPS_ENVIRONMENT_VAR) != null;
-            string crashDumpFolder = Environment.GetEnvironmentVariable(
-                CRASH_DUMP_FOLDER_ENVIRONMENT_VAR
-            );
+            string crashDumpFolder =
+                Environment.GetEnvironmentVariable(CRASH_DUMP_FOLDER_ENVIRONMENT_VAR);
 
             var outputStream = new FileStream(outputFile, FileMode.Create);
             var errorStream = new FileStream(errorFile, FileMode.Create);

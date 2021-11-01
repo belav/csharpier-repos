@@ -152,9 +152,8 @@ namespace System.Runtime.Serialization
                 XmlSchemaElement element = new XmlSchemaElement();
                 element.Name = dataMember.Name;
                 XmlElement? actualTypeElement = null;
-                DataContract memberTypeContract = _dataContractSet.GetMemberTypeDataContract(
-                    dataMember
-                );
+                DataContract memberTypeContract =
+                    _dataContractSet.GetMemberTypeDataContract(dataMember);
                 if (CheckIfMemberHasConflict(dataMember))
                 {
                     element.SchemaTypeName = AnytypeQualifiedName;
@@ -480,9 +479,8 @@ namespace System.Runtime.Serialization
             {
                 if (collectionDataContract.IsItemTypeNullable)
                     element.IsNillable = true;
-                DataContract itemContract = _dataContractSet.GetItemTypeDataContract(
-                    collectionDataContract
-                );
+                DataContract itemContract =
+                    _dataContractSet.GetItemTypeDataContract(collectionDataContract);
                 SetElementType(element, itemContract, schema);
             }
             SchemaHelper.AddElementForm(element, schema);
@@ -929,9 +927,8 @@ namespace System.Runtime.Serialization
             XmlQualifiedName stableName
         )
         {
-            IXmlSerializable ixmlSerializable = (IXmlSerializable)Activator.CreateInstance(
-                clrType
-            )!;
+            IXmlSerializable ixmlSerializable =
+                (IXmlSerializable)Activator.CreateInstance(clrType)!;
             XmlSchema? schema = ixmlSerializable.GetSchema();
             if (schema == null)
             {

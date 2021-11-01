@@ -55,9 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                     }
                 }
 
-                var committerOperation = new RenameTrackingCommitterOperation(
-                    _renameTrackingCommitter
-                );
+                var committerOperation =
+                    new RenameTrackingCommitterOperation(_renameTrackingCommitter);
                 return Task.FromResult(
                     SpecializedCollections.SingletonEnumerable(
                         committerOperation as CodeActionOperation

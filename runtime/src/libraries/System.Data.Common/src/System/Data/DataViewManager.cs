@@ -36,12 +36,10 @@ namespace System.Data
             _dataSet = dataSet;
             if (_dataSet != null)
             {
-                _dataSet.Tables.CollectionChanged += new CollectionChangeEventHandler(
-                    TableCollectionChanged
-                );
-                _dataSet.Relations.CollectionChanged += new CollectionChangeEventHandler(
-                    RelationCollectionChanged
-                );
+                _dataSet.Tables.CollectionChanged +=
+                    new CollectionChangeEventHandler(TableCollectionChanged);
+                _dataSet.Relations.CollectionChanged +=
+                    new CollectionChangeEventHandler(RelationCollectionChanged);
             }
             _locked = locked;
             _item = new DataViewManagerListItemTypeDescriptor(this);
@@ -72,21 +70,17 @@ namespace System.Data
                         throw ExceptionBuilder.CanNotSetDataSet();
                     }
 
-                    _dataSet.Tables.CollectionChanged -= new CollectionChangeEventHandler(
-                        TableCollectionChanged
-                    );
-                    _dataSet.Relations.CollectionChanged -= new CollectionChangeEventHandler(
-                        RelationCollectionChanged
-                    );
+                    _dataSet.Tables.CollectionChanged -=
+                        new CollectionChangeEventHandler(TableCollectionChanged);
+                    _dataSet.Relations.CollectionChanged -=
+                        new CollectionChangeEventHandler(RelationCollectionChanged);
                 }
 
                 _dataSet = value;
-                _dataSet.Tables.CollectionChanged += new CollectionChangeEventHandler(
-                    TableCollectionChanged
-                );
-                _dataSet.Relations.CollectionChanged += new CollectionChangeEventHandler(
-                    RelationCollectionChanged
-                );
+                _dataSet.Tables.CollectionChanged +=
+                    new CollectionChangeEventHandler(TableCollectionChanged);
+                _dataSet.Relations.CollectionChanged +=
+                    new CollectionChangeEventHandler(RelationCollectionChanged);
                 _dataViewSettingsCollection = new DataViewSettingCollection(this);
                 _item.Reset();
             }

@@ -104,9 +104,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                         )
                         || (
                             columnTypeConfigurationSource != null
-                            && ConfigurationSource.Convention.Overrides(
-                                columnTypeConfigurationSource
-                            )
+                            && ConfigurationSource.Convention.Overrides(columnTypeConfigurationSource)
                         )
                     )
                     && (
@@ -377,9 +375,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
             base.ValidateCompatible(property, duplicateProperty, columnName, storeObject, logger);
 
             var propertyStrategy = property.GetValueGenerationStrategy(storeObject);
-            var duplicatePropertyStrategy = duplicateProperty.GetValueGenerationStrategy(
-                storeObject
-            );
+            var duplicatePropertyStrategy =
+                duplicateProperty.GetValueGenerationStrategy(storeObject);
             if (propertyStrategy != duplicatePropertyStrategy)
             {
                 var isConflicting =
@@ -413,9 +410,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal
                 {
                     case SqlServerValueGenerationStrategy.IdentityColumn:
                         var increment = property.GetIdentityIncrement(storeObject);
-                        var duplicateIncrement = duplicateProperty.GetIdentityIncrement(
-                            storeObject
-                        );
+                        var duplicateIncrement =
+                            duplicateProperty.GetIdentityIncrement(storeObject);
                         if (increment != duplicateIncrement)
                         {
                             throw new InvalidOperationException(

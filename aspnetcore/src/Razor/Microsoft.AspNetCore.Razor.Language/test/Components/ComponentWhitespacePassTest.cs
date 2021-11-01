@@ -95,9 +95,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 },
                 node =>
                 {
-                    var csharpExpressionNode = Assert.IsType<CSharpExpressionIntermediateNode>(
-                        node
-                    );
+                    var csharpExpressionNode =
+                        Assert.IsType<CSharpExpressionIntermediateNode>(node);
                     Assert.Equal(@""" w o r l d """, GetContent(csharpExpressionNode));
                 }
             );

@@ -2316,9 +2316,8 @@ namespace System.Net.Http
                     : cancellationToken;
 
                 // Start sending request body, if any.
-                Task requestBodyTask = http2Stream.SendRequestBodyAsync(
-                    requestBodyCancellationToken
-                );
+                Task requestBodyTask =
+                    http2Stream.SendRequestBodyAsync(requestBodyCancellationToken);
 
                 // Start receiving the response headers.
                 Task responseHeadersTask = http2Stream.ReadResponseHeadersAsync(cancellationToken);

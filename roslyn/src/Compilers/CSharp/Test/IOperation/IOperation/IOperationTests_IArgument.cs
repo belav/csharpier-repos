@@ -3703,9 +3703,8 @@ class P
 }
 ";
             var compilation = CreateCompilation(source);
-            var (operation, syntaxNode) = GetOperationAndSyntaxForTest<InvocationExpressionSyntax>(
-                compilation
-            );
+            var (operation, syntaxNode) =
+                GetOperationAndSyntaxForTest<InvocationExpressionSyntax>(compilation);
 
             var invocation = (IInvocationOperation)operation;
             var argument = invocation.Arguments[0];

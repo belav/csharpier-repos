@@ -180,9 +180,7 @@ namespace System.Net.NetworkInformation
 
                             // The table info just gives us the number of rows.
                             ref readonly Interop.IpHlpApi.MibTcp6TableOwnerPid tcpTable6OwnerPid =
-                                ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcp6TableOwnerPid>(
-                                    span
-                                );
+                                ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcp6TableOwnerPid>(span);
 
                             if (tcpTable6OwnerPid.numberOfEntries > 0)
                             {
@@ -193,9 +191,7 @@ namespace System.Net.NetworkInformation
                                 {
                                     tcpConnections.Add(
                                         new SystemTcpConnectionInformation(
-                                            in MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcp6RowOwnerPid>(
-                                                span
-                                            )
+                                            in MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcp6RowOwnerPid>(span)
                                         )
                                     );
 
@@ -323,9 +319,7 @@ namespace System.Net.NetworkInformation
 
                             // The table info just gives us the number of rows.
                             ref readonly Interop.IpHlpApi.MibUdp6TableOwnerPid udp6TableOwnerPid =
-                                ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdp6TableOwnerPid>(
-                                    span
-                                );
+                                ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdp6TableOwnerPid>(span);
 
                             if (udp6TableOwnerPid.numberOfEntries > 0)
                             {
@@ -335,9 +329,7 @@ namespace System.Net.NetworkInformation
                                 for (int i = 0; i < udp6TableOwnerPid.numberOfEntries; i++)
                                 {
                                     ref readonly Interop.IpHlpApi.MibUdp6RowOwnerPid udp6RowOwnerPid =
-                                        ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdp6RowOwnerPid>(
-                                            span
-                                        );
+                                        ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdp6RowOwnerPid>(span);
                                     int localPort =
                                         udp6RowOwnerPid.localPort1 << 8
                                         | udp6RowOwnerPid.localPort2;

@@ -67,9 +67,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             // Exception 2: Similar behavior for do-while
             if (common.ContainsDiagnostics && !CloseBraceOfTryOrDoBlock(endToken))
             {
-                smartTokenformattingRules = (new NoLineChangeFormattingRule()).Concat(
-                    _formattingRules
-                );
+                smartTokenformattingRules = (
+                    new NoLineChangeFormattingRule()
+                ).Concat(_formattingRules);
             }
 
             return Formatter.GetFormattedTextChanges(
@@ -131,9 +131,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                 }
             }
 
-            var smartTokenformattingRules = (new SmartTokenFormattingRule()).Concat(
-                _formattingRules
-            );
+            var smartTokenformattingRules = (
+                new SmartTokenFormattingRule()
+            ).Concat(_formattingRules);
             var adjustedStartPosition = previousToken.SpanStart;
             var indentStyle = _optionSet.GetOption(
                 FormattingOptions.SmartIndent,

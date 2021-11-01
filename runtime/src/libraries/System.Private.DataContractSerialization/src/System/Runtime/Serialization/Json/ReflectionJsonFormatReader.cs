@@ -281,9 +281,8 @@ namespace System.Runtime.Serialization.Json
                 }
 
                 context.IncrementItemCount(1);
-                string keyString = XmlObjectSerializerReadContextComplexJson.GetJsonMemberName(
-                    xmlReader
-                );
+                string keyString =
+                    XmlObjectSerializerReadContextComplexJson.GetJsonMemberName(xmlReader);
                 object pairKey;
 
                 if (keyParseMode == KeyParseMode.UsingParseEnum)

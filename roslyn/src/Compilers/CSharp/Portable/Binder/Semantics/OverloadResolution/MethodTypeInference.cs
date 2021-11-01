@@ -2462,9 +2462,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case TypeKind.Struct:
                 case TypeKind.Class:
                 case TypeKind.Interface:
-                    allInterfaces = source.AllInterfacesWithDefinitionUseSiteDiagnostics(
-                        ref useSiteInfo
-                    );
+                    allInterfaces =
+                        source.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
                     break;
 
                 case TypeKind.TypeParameter:
@@ -2473,9 +2472,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         .EffectiveBaseClass(ref useSiteInfo)
                         .AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
                         .Concat(
-                            typeParameter.AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(
-                                ref useSiteInfo
-                            )
+                            typeParameter.AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
                         );
                     break;
 

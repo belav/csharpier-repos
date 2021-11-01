@@ -66,9 +66,10 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
         {
             _workspace = workspace;
             _installerService = workspace.Services.GetService<IPackageInstallerService>();
-            _localSettingsDirectory = new ShellSettingsManager(
-                serviceProvider
-            ).GetApplicationDataFolder(ApplicationDataFolder.LocalSettings);
+            _localSettingsDirectory =
+                new ShellSettingsManager(serviceProvider).GetApplicationDataFolder(
+                    ApplicationDataFolder.LocalSettings
+                );
 
             _logService = new LogService(
                 threadingContext,

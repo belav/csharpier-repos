@@ -84,9 +84,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     string json = @"{Name:""Name!""}";
 
                     PrivateConstructorWithPublicParameterizedConstructorTestClass c =
-                        JsonConvert.DeserializeObject<PrivateConstructorWithPublicParameterizedConstructorTestClass>(
-                            json
-                        );
+                        JsonConvert.DeserializeObject<PrivateConstructorWithPublicParameterizedConstructorTestClass>(json);
                 }
             );
         }
@@ -125,9 +123,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{nameParameter:""Name!""}";
 
             PublicParameterizedConstructorWithNonPropertyParameterTestClass c =
-                JsonConvert.DeserializeObject<PublicParameterizedConstructorWithNonPropertyParameterTestClass>(
-                    json
-                );
+                JsonConvert.DeserializeObject<PublicParameterizedConstructorWithNonPropertyParameterTestClass>(json);
             Assert.IsNotNull(c);
             Assert.AreEqual("Name!", c.Name);
         }
@@ -152,9 +148,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{nameParameter:""Name!""}";
 
             PublicParameterizedConstructorRequiringConverterWithParameterAttributeTestClass c =
-                JsonConvert.DeserializeObject<PublicParameterizedConstructorRequiringConverterWithParameterAttributeTestClass>(
-                    json
-                );
+                JsonConvert.DeserializeObject<PublicParameterizedConstructorRequiringConverterWithParameterAttributeTestClass>(json);
             Assert.IsNotNull(c);
             Assert.AreEqual("Name!", c.Name.Value);
         }
@@ -165,9 +159,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{name:""Name!""}";
 
             PublicParameterizedConstructorRequiringConverterWithPropertyAttributeTestClass c =
-                JsonConvert.DeserializeObject<PublicParameterizedConstructorRequiringConverterWithPropertyAttributeTestClass>(
-                    json
-                );
+                JsonConvert.DeserializeObject<PublicParameterizedConstructorRequiringConverterWithPropertyAttributeTestClass>(json);
             Assert.IsNotNull(c);
             Assert.AreEqual("Name!", c.Name.Value);
         }
@@ -178,9 +170,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{name:""1""}";
 
             PublicParameterizedConstructorWithPropertyNameConflict c =
-                JsonConvert.DeserializeObject<PublicParameterizedConstructorWithPropertyNameConflict>(
-                    json
-                );
+                JsonConvert.DeserializeObject<PublicParameterizedConstructorWithPropertyNameConflict>(json);
             Assert.IsNotNull(c);
             Assert.AreEqual(1, c.Name);
         }
@@ -191,9 +181,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json = @"{name:""1""}";
 
             PublicParameterizedConstructorWithPropertyNameConflictWithAttribute c =
-                JsonConvert.DeserializeObject<PublicParameterizedConstructorWithPropertyNameConflictWithAttribute>(
-                    json
-                );
+                JsonConvert.DeserializeObject<PublicParameterizedConstructorWithPropertyNameConflictWithAttribute>(json);
             Assert.IsNotNull(c);
             Assert.AreEqual(1, c.Name);
         }

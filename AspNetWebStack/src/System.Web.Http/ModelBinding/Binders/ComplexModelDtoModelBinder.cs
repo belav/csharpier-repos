@@ -20,14 +20,15 @@ namespace System.Web.Http.ModelBinding.Binders
             ComplexModelDto dto = (ComplexModelDto)bindingContext.Model;
             foreach (ModelMetadata propertyMetadata in dto.PropertyMetadata)
             {
-                ModelBindingContext propertyBindingContext = new ModelBindingContext(bindingContext)
-                {
-                    ModelMetadata = propertyMetadata,
-                    ModelName = ModelBindingHelper.CreatePropertyModelName(
-                        bindingContext.ModelName,
-                        propertyMetadata.PropertyName
-                    )
-                };
+                ModelBindingContext propertyBindingContext =
+                    new ModelBindingContext(bindingContext)
+                    {
+                        ModelMetadata = propertyMetadata,
+                        ModelName = ModelBindingHelper.CreatePropertyModelName(
+                            bindingContext.ModelName,
+                            propertyMetadata.PropertyName
+                        )
+                    };
 
                 // bind and propagate the values
                 // If we can't bind, then leave the result missing (don't add a null).

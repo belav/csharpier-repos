@@ -189,9 +189,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             where
                 (string?)nameSyntax.Identifier.Value == localOrParameter.Name
                 && (
-                    model.GetSymbolInfo(nameSyntax, cancellationToken).Symbol?.Equals(
-                        localOrParameter
-                    ) ?? false
+                    model.GetSymbolInfo(
+                        nameSyntax,
+                        cancellationToken
+                    ).Symbol?.Equals(localOrParameter) ?? false
                 )
             select node;
         }
@@ -1080,9 +1081,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         {
             var direction = +1;
             SyntaxNodeOrToken nodeOrToken = statement;
-            var fieldOrPropertyModifiers = SyntaxUtilities.TryGetFieldOrPropertyModifiers(
-                statement
-            );
+            var fieldOrPropertyModifiers =
+                SyntaxUtilities.TryGetFieldOrPropertyModifiers(statement);
 
             while (true)
             {
@@ -1134,9 +1134,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     }
 
                     nodeOrToken = statement = parent;
-                    fieldOrPropertyModifiers = SyntaxUtilities.TryGetFieldOrPropertyModifiers(
-                        statement
-                    );
+                    fieldOrPropertyModifiers =
+                        SyntaxUtilities.TryGetFieldOrPropertyModifiers(statement);
                     direction = +1;
 
                     yield return (nodeOrToken.AsNode()!, DefaultStatementPart);

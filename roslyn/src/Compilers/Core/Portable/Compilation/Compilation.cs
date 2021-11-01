@@ -2624,9 +2624,8 @@ namespace Microsoft.CodeAnalysis
                         text.FilePath,
                         basePath: null
                     );
-                    var existingDoc = documentsBuilder.TryGetDebugDocumentForNormalizedPath(
-                        normalizedPath
-                    );
+                    var existingDoc =
+                        documentsBuilder.TryGetDebugDocumentForNormalizedPath(normalizedPath);
                     if (existingDoc == null)
                     {
                         var document = new Cci.DebugSourceDocument(
@@ -2651,9 +2650,8 @@ namespace Microsoft.CodeAnalysis
                         tree.FilePath,
                         basePath: null
                     );
-                    var existingDoc = documentsBuilder.TryGetDebugDocumentForNormalizedPath(
-                        normalizedPath
-                    );
+                    var existingDoc =
+                        documentsBuilder.TryGetDebugDocumentForNormalizedPath(normalizedPath);
                     if (existingDoc == null)
                     {
                         documentsBuilder.AddDebugDocument(
@@ -2791,9 +2789,7 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                this.ScriptCompilationInfo?.PreviousScriptCompilation?.EnsureAnonymousTypeTemplates(
-                    cancellationToken
-                );
+                this.ScriptCompilationInfo?.PreviousScriptCompilation?.EnsureAnonymousTypeTemplates(cancellationToken);
             }
         }
 
@@ -3531,9 +3527,8 @@ namespace Microsoft.CodeAnalysis
                     {
                         if (nativePdbWriter != null)
                         {
-                            var nativePdbStream = pdbStreamProvider!.GetOrCreateStream(
-                                metadataDiagnostics
-                            );
+                            var nativePdbStream =
+                                pdbStreamProvider!.GetOrCreateStream(metadataDiagnostics);
                             Debug.Assert(
                                 nativePdbStream != null || metadataDiagnostics.HasAnyErrors()
                             );
@@ -3846,9 +3841,7 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return RoslynLazyInitializer.EnsureInitialized(
-                    ref _lazyTreeToUsedImportDirectivesMap
-                );
+                return RoslynLazyInitializer.EnsureInitialized(ref _lazyTreeToUsedImportDirectivesMap);
             }
         }
 

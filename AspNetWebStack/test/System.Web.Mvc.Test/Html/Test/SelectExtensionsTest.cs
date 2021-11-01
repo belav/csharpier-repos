@@ -1724,11 +1724,11 @@ namespace System.Web.Mvc.Html.Test
             {
                 inner = new FooModel { foo = "Bravo" }
             };
-            ViewDataDictionary<FooContainerModel> vdd = new ViewDataDictionary<FooContainerModel>(
-                model
-            ) {
-                { "foo", new SelectList(MultiSelectListTest.GetSampleStrings()) }
-            };
+            ViewDataDictionary<FooContainerModel> vdd =
+                new ViewDataDictionary<FooContainerModel>(model)
+                {
+                    { "foo", new SelectList(MultiSelectListTest.GetSampleStrings()) }
+                };
 
             ViewDataDictionary<FooModel> nestedViewData = MvcHelper.GetNestedViewData(
                 vdd,
@@ -2510,9 +2510,8 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForUsesViewDataDefaultValue_Unrecognized()
         {
             // Arrange
-            ViewDataDictionary<EnumModel> viewData = new ViewDataDictionary<EnumModel>(
-                _enumDropDownListViewData
-            );
+            ViewDataDictionary<EnumModel> viewData =
+                new ViewDataDictionary<EnumModel>(_enumDropDownListViewData);
             viewData["WithDisplay"] = (EnumWithDisplay)34;
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -2568,9 +2567,8 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForUsesViewDataDefaultValue_NullableNotNull()
         {
             // Arrange
-            ViewDataDictionary<EnumModel> viewData = new ViewDataDictionary<EnumModel>(
-                _enumDropDownListViewData
-            );
+            ViewDataDictionary<EnumModel> viewData =
+                new ViewDataDictionary<EnumModel>(_enumDropDownListViewData);
             viewData["WithNullable"] = EnumWithDisplay.Three;
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -2599,9 +2597,8 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForUsesViewDataDefaultValue_NullableUnrecognized()
         {
             // Arrange
-            ViewDataDictionary<EnumModel> viewData = new ViewDataDictionary<EnumModel>(
-                _enumDropDownListViewData
-            );
+            ViewDataDictionary<EnumModel> viewData =
+                new ViewDataDictionary<EnumModel>(_enumDropDownListViewData);
             viewData["WithNullable"] = (EnumWithDisplay)34;
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -2685,9 +2682,8 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForWithTitle_Unrecognized()
         {
             // Arrange
-            ViewDataDictionary<EnumModel> viewData = new ViewDataDictionary<EnumModel>(
-                _enumDropDownListViewData
-            );
+            ViewDataDictionary<EnumModel> viewData =
+                new ViewDataDictionary<EnumModel>(_enumDropDownListViewData);
             viewData["WithDisplay"] = (EnumWithDisplay)34;
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -2749,9 +2745,8 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForWithTitle_NullableNotNull()
         {
             // Arrange
-            ViewDataDictionary<EnumModel> viewData = new ViewDataDictionary<EnumModel>(
-                _enumDropDownListViewData
-            );
+            ViewDataDictionary<EnumModel> viewData =
+                new ViewDataDictionary<EnumModel>(_enumDropDownListViewData);
             viewData["WithNullable"] = EnumWithDisplay.Three;
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -2783,9 +2778,8 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForWithTitle_NullableUnrecognized()
         {
             // Arrange
-            ViewDataDictionary<EnumModel> viewData = new ViewDataDictionary<EnumModel>(
-                _enumDropDownListViewData
-            );
+            ViewDataDictionary<EnumModel> viewData =
+                new ViewDataDictionary<EnumModel>(_enumDropDownListViewData);
             viewData["WithNullable"] = (EnumWithDisplay)34;
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -2876,9 +2870,8 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForWithErrors()
         {
             // Arrange
-            ViewDataDictionary<EnumModel> viewData = new ViewDataDictionary<EnumModel>(
-                _enumDropDownListViewData
-            );
+            ViewDataDictionary<EnumModel> viewData =
+                new ViewDataDictionary<EnumModel>(_enumDropDownListViewData);
             ModelState modelState = new ModelState
             {
                 Errors =
@@ -2917,9 +2910,8 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForWithErrorsAndValue()
         {
             // Arrange
-            ViewDataDictionary<EnumModel> viewData = new ViewDataDictionary<EnumModel>(
-                _enumDropDownListViewData
-            );
+            ViewDataDictionary<EnumModel> viewData =
+                new ViewDataDictionary<EnumModel>(_enumDropDownListViewData);
             ModelState modelState = new ModelState
             {
                 Errors =
@@ -3078,11 +3070,11 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForWithPrefix()
         {
             // Arrange
-            ViewDataDictionary<EnumModel> viewData = new ViewDataDictionary<EnumModel>(
-                _enumDropDownListViewData
-            ) {
-                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyPrefix", },
-            };
+            ViewDataDictionary<EnumModel> viewData =
+                new ViewDataDictionary<EnumModel>(_enumDropDownListViewData)
+                {
+                    TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyPrefix", },
+                };
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(viewData);
 
             // Act

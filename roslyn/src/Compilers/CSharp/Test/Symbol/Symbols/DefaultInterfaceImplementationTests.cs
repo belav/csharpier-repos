@@ -19974,9 +19974,7 @@ set_P6
                     var compilation3 = CreateCompilation(
                         source2,
                         new[] { reference },
-                        options: TestOptions.DebugExe.WithMetadataImportOptions(
-                            metadataImportOptions
-                        ),
+                        options: TestOptions.DebugExe.WithMetadataImportOptions(metadataImportOptions),
                         parseOptions: TestOptions.Regular,
                         targetFramework: TargetFramework.NetCoreApp
                     );

@@ -176,9 +176,8 @@ namespace Microsoft.CodeAnalysis
                 )
                 .EmitToArray();
 
-            var minSystemCollectionsImmutableRef = MetadataReference.CreateFromImage(
-                minSystemCollectionsImmutableImage
-            );
+            var minSystemCollectionsImmutableRef =
+                MetadataReference.CreateFromImage(minSystemCollectionsImmutableImage);
 
             var minCodeAnalysisImage = CSharpCompilation
                 .Create(

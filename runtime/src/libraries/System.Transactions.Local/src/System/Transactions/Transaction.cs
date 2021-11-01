@@ -491,9 +491,8 @@ namespace System.Transactions
             lock (_internalTransaction)
             {
                 Debug.Assert(_internalTransaction.State != null);
-                internalPromotedToken = _internalTransaction.State.PromotedToken(
-                    _internalTransaction
-                );
+                internalPromotedToken =
+                    _internalTransaction.State.PromotedToken(_internalTransaction);
             }
 
             byte[] toReturn = new byte[internalPromotedToken.Length];

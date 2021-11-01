@@ -57,9 +57,7 @@ namespace System.Web.Http.Validation
                 foreach (ModelMetadata propertyMetadata in metadata.Properties)
                 {
                     foreach (
-                        ModelValidator propertyValidator in propertyMetadata.GetValidators(
-                            ValidatorProviders
-                        )
+                        ModelValidator propertyValidator in propertyMetadata.GetValidators(ValidatorProviders)
                     )
                     {
                         foreach (

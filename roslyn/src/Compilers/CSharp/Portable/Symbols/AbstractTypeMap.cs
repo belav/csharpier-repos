@@ -278,9 +278,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var substitutedRefCustomModifiers = SubstituteCustomModifiers(refCustomModifiers);
 
             var parameterTypesWithAnnotations = f.Signature.ParameterTypesWithAnnotations;
-            ImmutableArray<TypeWithAnnotations> substitutedParamTypes = SubstituteTypes(
-                parameterTypesWithAnnotations
-            );
+            ImmutableArray<TypeWithAnnotations> substitutedParamTypes =
+                SubstituteTypes(parameterTypesWithAnnotations);
 
             ImmutableArray<ImmutableArray<CustomModifier>> substitutedParamModifiers = default;
 
@@ -417,9 +416,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (
                         ignoreTypesDependentOnTypeParametersOpt == null
-                        || !type.Type.ContainsTypeParameters(
-                            ignoreTypesDependentOnTypeParametersOpt
-                        )
+                        || !type.Type.ContainsTypeParameters(ignoreTypesDependentOnTypeParametersOpt)
                     )
                     {
                         var substituted = substituteConstraintType(type);

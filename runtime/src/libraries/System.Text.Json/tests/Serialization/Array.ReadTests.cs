@@ -600,9 +600,8 @@ namespace System.Text.Json.Serialization.Tests
         )]
         public static void ClassWithMixedSettersIsParsed(string json)
         {
-            ClassWithMixedSetters parsedObject = JsonSerializer.Deserialize<ClassWithMixedSetters>(
-                json
-            );
+            ClassWithMixedSetters parsedObject =
+                JsonSerializer.Deserialize<ClassWithMixedSetters>(json);
 
             Assert.Null(parsedObject.SkippedChild1);
 
@@ -719,9 +718,7 @@ namespace System.Text.Json.Serialization.Tests
                 }";
 
             ClassWithNonNullEnumerableGetters obj =
-                JsonSerializer.Deserialize<ClassWithNonNullEnumerableGetters>(
-                    inputJsonWithCollectionElements
-                );
+                JsonSerializer.Deserialize<ClassWithNonNullEnumerableGetters>(inputJsonWithCollectionElements);
             Assert.Equal(1, obj.Array.Length);
             Assert.Equal("1", obj.Array[0]);
 
@@ -748,9 +745,8 @@ namespace System.Text.Json.Serialization.Tests
                     ""MyImmutableList"":[]
                 }";
 
-            obj = JsonSerializer.Deserialize<ClassWithNonNullEnumerableGetters>(
-                inputJsonWithoutCollectionElements
-            );
+            obj =
+                JsonSerializer.Deserialize<ClassWithNonNullEnumerableGetters>(inputJsonWithoutCollectionElements);
             Assert.Equal(0, obj.Array.Length);
             Assert.Equal(0, obj.List.Count);
             Assert.Equal(0, obj.ListWrapper.Count);
@@ -766,18 +762,15 @@ namespace System.Text.Json.Serialization.Tests
                     ""MyImmutableList"":null
                 }";
 
-            obj = JsonSerializer.Deserialize<ClassWithNonNullEnumerableGetters>(
-                inputJsonWithNullCollections
-            );
+            obj =
+                JsonSerializer.Deserialize<ClassWithNonNullEnumerableGetters>(inputJsonWithNullCollections);
             TestRoundTrip(obj);
 
             // ImmutableArray<T> is a struct and cannot be null.
             inputJsonWithNullCollections = @"{""MyImmutableArray"":null}";
             Assert.Throws<JsonException>(
                 () =>
-                    JsonSerializer.Deserialize<ClassWithNonNullEnumerableGetters>(
-                        inputJsonWithNullCollections
-                    )
+                    JsonSerializer.Deserialize<ClassWithNonNullEnumerableGetters>(inputJsonWithNullCollections)
             );
         }
 

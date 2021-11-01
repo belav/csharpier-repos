@@ -66,9 +66,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
 
             Contract.ThrowIfNull(_snippetExpansionClient.ExpansionSession);
 
-            var subjectBufferFieldSpan = _snippetExpansionClient.ExpansionSession.GetFieldSpan(
-                SwitchExpressionField
-            );
+            var subjectBufferFieldSpan =
+                _snippetExpansionClient.ExpansionSession.GetFieldSpan(SwitchExpressionField);
 
             var expressionSpan = subjectBufferFieldSpan.Span.ToTextSpan();
 
@@ -127,9 +126,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
                 .WithChanges(textChange);
             var documentWithCaseAdded = document.WithText(textWithCaseAdded);
 
-            var syntaxRoot = documentWithCaseAdded.GetRequiredSyntaxRootSynchronously(
-                cancellationToken
-            );
+            var syntaxRoot =
+                documentWithCaseAdded.GetRequiredSyntaxRootSynchronously(cancellationToken);
             var nodeToReplace = syntaxRoot
                 .DescendantNodes()
                 .FirstOrDefault(n => n.Span == typeSpanToAnnotate);

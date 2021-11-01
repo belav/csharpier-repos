@@ -19,13 +19,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 bindingContext.ModelName,
                 "index"
             );
-            ValueProviderResult valueProviderResultIndex = bindingContext.ValueProvider.GetValue(
-                indexPropertyName
-            );
+            ValueProviderResult valueProviderResultIndex =
+                bindingContext.ValueProvider.GetValue(indexPropertyName);
             IEnumerable<string> indexNames =
-                CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(
-                    valueProviderResultIndex
-                );
+                CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(valueProviderResultIndex);
             return BindComplexCollectionFromIndexes(controllerContext, bindingContext, indexNames);
         }
 

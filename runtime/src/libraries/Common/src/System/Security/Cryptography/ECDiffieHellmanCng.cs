@@ -84,9 +84,8 @@ namespace System.Security.Cryptography
                     );
 
                 using (
-                    SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(
-                        otherPartyPublicKey
-                    )
+                    SafeNCryptSecretHandle secretAgreement =
+                        DeriveSecretAgreementHandle(otherPartyPublicKey)
                 )
                 {
                     return Interop.NCrypt.DeriveKeyMaterialHash(
@@ -116,9 +115,8 @@ namespace System.Security.Cryptography
                     );
 
                 using (
-                    SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(
-                        otherPartyPublicKey
-                    )
+                    SafeNCryptSecretHandle secretAgreement =
+                        DeriveSecretAgreementHandle(otherPartyPublicKey)
                 )
                 {
                     Interop.NCrypt.SecretAgreementFlags flags =
@@ -151,9 +149,8 @@ namespace System.Security.Cryptography
                     throw new ArgumentNullException(nameof(prfSeed));
 
                 using (
-                    SafeNCryptSecretHandle secretAgreement = DeriveSecretAgreementHandle(
-                        otherPartyPublicKey
-                    )
+                    SafeNCryptSecretHandle secretAgreement =
+                        DeriveSecretAgreementHandle(otherPartyPublicKey)
                 )
                 {
                     return Interop.NCrypt.DeriveKeyMaterialTls(

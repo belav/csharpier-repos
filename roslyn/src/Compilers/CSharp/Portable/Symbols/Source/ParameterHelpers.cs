@@ -744,9 +744,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // IntelliSense purposes.
 
             TypeSymbol parameterType = parameter.Type;
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = binder.GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                binder.GetNewCompoundUseSiteInfo(diagnostics);
             Conversion conversion = binder.Conversions.ClassifyImplicitConversionFromExpression(
                 defaultExpression,
                 parameterType,

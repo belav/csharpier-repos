@@ -48,9 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         protected void AddAssemblyLink(IAssemblySymbol assemblySymbol)
         {
             var name = assemblySymbol.Identity.Name;
-            var navInfo = _libraryManager.LibraryService.NavInfoFactory.CreateForAssembly(
-                assemblySymbol
-            );
+            var navInfo =
+                _libraryManager.LibraryService.NavInfoFactory.CreateForAssembly(assemblySymbol);
 
             _description.AddDescriptionText3(name, VSOBDESCRIPTIONSECTION.OBDS_TYPE, navInfo);
         }
@@ -377,9 +376,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 {
                     AddLineBreak();
 
-                    var typeParameterText = documentationComment.GetTypeParameterText(
-                        typeParameterName
-                    );
+                    var typeParameterText =
+                        documentationComment.GetTypeParameterText(typeParameterName);
                     if (typeParameterText != null)
                     {
                         AddParam(typeParameterName);

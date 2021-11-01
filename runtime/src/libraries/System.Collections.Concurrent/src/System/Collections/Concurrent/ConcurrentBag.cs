@@ -216,9 +216,8 @@ namespace System.Collections.Concurrent
                 // We work around this by looking at the number of times any list transitions from == 0 to > 0,
                 // checking that before and after the steal attempts.  We don't care about > 0 to > 0 transitions,
                 // because a steal from a list with > 0 elements would have been successful.
-                long initialEmptyToNonEmptyCounts = Interlocked.Read(
-                    ref _emptyToNonEmptyListTransitionCount
-                );
+                long initialEmptyToNonEmptyCounts =
+                    Interlocked.Read(ref _emptyToNonEmptyListTransitionCount);
 
                 // If there's no local queue for this thread, just start from the head queue
                 // and try to steal from each queue until we get a result. If there is a local queue from this thread,

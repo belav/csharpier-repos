@@ -169,9 +169,8 @@ namespace Microsoft.CodeAnalysis
             _metadataPointerOpt = metadataOpt;
             _metadataSizeOpt = metadataSizeOpt;
             _lazyTypeNameCollection = new Lazy<IdentifierCollection>(ComputeTypeNameCollection);
-            _lazyNamespaceNameCollection = new Lazy<IdentifierCollection>(
-                ComputeNamespaceNameCollection
-            );
+            _lazyNamespaceNameCollection =
+                new Lazy<IdentifierCollection>(ComputeNamespaceNameCollection);
             _hashesOpt = (peReader != null) ? new PEHashProvider(peReader) : null;
             _lazyContainsNoPiaLocalTypes = includeEmbeddedInteropTypes
                 ? ThreeState.False
@@ -1340,9 +1339,7 @@ namespace Microsoft.CodeAnalysis
                     for (int i = 0; i < numNamed; i++)
                     {
                         var ((name, value), isProperty, typeCode, elementTypeCode) =
-                            attributeArgumentDecoder.DecodeCustomAttributeNamedArgumentOrThrow(
-                                ref sigReader
-                            );
+                            attributeArgumentDecoder.DecodeCustomAttributeNamedArgumentOrThrow(ref sigReader);
                         if (
                             typeCode != SerializationTypeCode.SZArray
                             || elementTypeCode != SerializationTypeCode.Type
@@ -3320,9 +3317,8 @@ namespace Microsoft.CodeAnalysis
                             _lazyContainsNoPiaLocalTypes = ThreeState.True;
 
                             // We excluded attributes not applied on TypeDefs above:
-                            var parent = (TypeDefinitionHandle)MetadataReader.GetCustomAttribute(
-                                attributeHandle
-                            ).Parent;
+                            var parent =
+                                (TypeDefinitionHandle)MetadataReader.GetCustomAttribute(attributeHandle).Parent;
 
                             RegisterNoPiaLocalType(parent, attributeHandle, signatureIndex);
                             return true;
@@ -4012,9 +4008,8 @@ namespace Microsoft.CodeAnalysis
                         int referencedAssemblyIndex;
                         try
                         {
-                            referencedAssemblyIndex = this.GetAssemblyReferenceIndexOrThrow(
-                                refHandle
-                            );
+                            referencedAssemblyIndex =
+                                this.GetAssemblyReferenceIndexOrThrow(refHandle);
                         }
                         catch (BadImageFormatException)
                         {

@@ -373,9 +373,8 @@ namespace Moq.Protected
                     // go wrong, then obviously the duck-type method doesn't correspond to the candidate.
                     try
                     {
-                        candidateTargetMethod = candidateTargetMethod.MakeGenericMethod(
-                            duckGenericArgs
-                        );
+                        candidateTargetMethod =
+                            candidateTargetMethod.MakeGenericMethod(duckGenericArgs);
                     }
                     catch
                     {

@@ -47,9 +47,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             internal bool TryGetFileCodeModelInstanceWithoutCaringWhetherRcwIsAlive(
                 out FileCodeModel fileCodeModel
             ) =>
-                _fileCodeModelWeakComHandle.TryGetManagedObjectWithoutCaringWhetherNativeObjectIsAlive(
-                    out fileCodeModel
-                );
+                _fileCodeModelWeakComHandle.TryGetManagedObjectWithoutCaringWhetherNativeObjectIsAlive(out fileCodeModel);
 
             public ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel>? ComHandle
             {

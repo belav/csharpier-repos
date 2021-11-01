@@ -609,9 +609,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         value.Type.GetDebuggerCustomUIVisualizerInfo();
                     if (customUIVisualizerInfo != null)
                     {
-                        customUIVisualizers = new ReadOnlyCollection<DkmCustomUIVisualizerInfo>(
-                            customUIVisualizerInfo
-                        );
+                        customUIVisualizers =
+                            new ReadOnlyCollection<DkmCustomUIVisualizerInfo>(customUIVisualizerInfo);
                     }
                 }
 

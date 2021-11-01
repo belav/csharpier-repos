@@ -258,9 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 TypeSymbol typeSymbol = (
                     new MetadataDecoder(moduleSymbol, _containingType)
                 ).DecodeFieldSignature(_handle, out customModifiers);
-                ImmutableArray<CustomModifier> customModifiersArray = CSharpCustomModifier.Convert(
-                    customModifiers
-                );
+                ImmutableArray<CustomModifier> customModifiersArray =
+                    CSharpCustomModifier.Convert(customModifiers);
 
                 typeSymbol = DynamicTypeDecoder.TransformType(
                     typeSymbol,
@@ -460,9 +459,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 if ((_flags & FieldAttributes.Literal) != 0)
                 {
-                    value = _containingType.ContainingPEModule.Module.GetConstantFieldValue(
-                        _handle
-                    );
+                    value =
+                        _containingType.ContainingPEModule.Module.GetConstantFieldValue(_handle);
                 }
 
                 // If this is a Decimal, the constant value may come from DecimalConstantAttribute
@@ -643,9 +641,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (!_lazyCachedUseSiteInfo.IsInitialized)
             {
-                UseSiteInfo<AssemblySymbol> result = new UseSiteInfo<AssemblySymbol>(
-                    primaryDependency
-                );
+                UseSiteInfo<AssemblySymbol> result =
+                    new UseSiteInfo<AssemblySymbol>(primaryDependency);
                 CalculateUseSiteDiagnostic(ref result);
                 _lazyCachedUseSiteInfo.Initialize(primaryDependency, result);
             }

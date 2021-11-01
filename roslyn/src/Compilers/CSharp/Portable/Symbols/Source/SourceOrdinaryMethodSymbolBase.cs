@@ -228,16 +228,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else if ((object)ExplicitInterfaceType != null)
             {
                 //do this last so that it can assume the method symbol is constructed (except for ExplicitInterfaceImplementation)
-                overriddenOrExplicitlyImplementedMethod = FindExplicitlyImplementedMethod(
-                    diagnostics
-                );
+                overriddenOrExplicitlyImplementedMethod =
+                    FindExplicitlyImplementedMethod(diagnostics);
 
                 if ((object)overriddenOrExplicitlyImplementedMethod != null)
                 {
                     Debug.Assert(_lazyExplicitInterfaceImplementations.IsDefault);
-                    _lazyExplicitInterfaceImplementations = ImmutableArray.Create<MethodSymbol>(
-                        overriddenOrExplicitlyImplementedMethod
-                    );
+                    _lazyExplicitInterfaceImplementations =
+                        ImmutableArray.Create<MethodSymbol>(overriddenOrExplicitlyImplementedMethod);
 
                     CustomModifierUtils.CopyMethodCustomModifiers(
                         overriddenOrExplicitlyImplementedMethod,

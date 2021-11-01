@@ -258,9 +258,8 @@ namespace System.Diagnostics.Eventing.Reader
 
             SeekReset();
             using (
-                EventLogHandle bookmarkHandle = EventLogRecord.GetBookmarkHandleFromBookmark(
-                    bookmark
-                )
+                EventLogHandle bookmarkHandle =
+                    EventLogRecord.GetBookmarkHandleFromBookmark(bookmark)
             )
             {
                 NativeWrapper.EvtSeek(

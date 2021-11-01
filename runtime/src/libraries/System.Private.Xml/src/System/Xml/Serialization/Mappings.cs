@@ -1440,9 +1440,8 @@ namespace System.Xml.Serialization
                     }
 
                     // make sure that user-specified schemas are valid
-                    _schemas.ValidationEventHandler += new ValidationEventHandler(
-                        ValidationCallbackWithErrorCode
-                    );
+                    _schemas.ValidationEventHandler +=
+                        new ValidationEventHandler(ValidationCallbackWithErrorCode);
                     _schemas.Compile();
 
                     // at this point we verified that the information returned by the IXmlSerializable is valid

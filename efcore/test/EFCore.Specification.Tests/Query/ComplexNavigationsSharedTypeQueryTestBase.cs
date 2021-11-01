@@ -42,9 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return base.Multiple_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_joined_together(
-                async
-            );
+            return base.Multiple_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_joined_together(async);
         }
 
         [ConditionalTheory(Skip = "issue #13560")]
@@ -52,9 +50,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return base.SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany(
-                async
-            );
+            return base.SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany(async);
         }
 
         [ConditionalTheory(Skip = "issue #13560")]
@@ -62,9 +58,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return base.SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany2(
-                async
-            );
+            return base.SelectMany_with_nested_navigations_explicit_DefaultIfEmpty_and_additional_joins_outside_of_SelectMany2(async);
         }
 
         [ConditionalTheory(Skip = "issue #13560")]
@@ -72,9 +66,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return base.SelectMany_with_nested_navigations_and_additional_joins_outside_of_SelectMany(
-                async
-            );
+            return base.SelectMany_with_nested_navigations_and_additional_joins_outside_of_SelectMany(async);
         }
 
         [ConditionalTheory(Skip = "issue #13560")]
@@ -82,9 +74,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return base.Complex_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_with_other_query_operators_composed_on_top(
-                async
-            );
+            return base.Complex_SelectMany_with_nested_navigations_and_explicit_DefaultIfEmpty_with_other_query_operators_composed_on_top(async);
         }
 
         [ConditionalTheory(Skip = "Issue#16752")]
@@ -172,9 +162,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool async
         )
         {
-            return base.Multiple_collection_FirstOrDefault_followed_by_member_access_in_projection(
-                async
-            );
+            return base.Multiple_collection_FirstOrDefault_followed_by_member_access_in_projection(async);
         }
 
         public override Task Project_shadow_properties(bool async) => Task.CompletedTask;

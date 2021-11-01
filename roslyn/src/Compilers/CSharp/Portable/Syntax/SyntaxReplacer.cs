@@ -324,9 +324,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             IEnumerable<SyntaxTrivia> newTrivia
         )
         {
-            return new TriviaListEditor(triviaInList, newTrivia, ListEditKind.Replace).VisitToken(
-                root
-            );
+            return new TriviaListEditor(
+                triviaInList,
+                newTrivia,
+                ListEditKind.Replace
+            ).VisitToken(root);
         }
 
         public static SyntaxToken InsertTriviaInList(

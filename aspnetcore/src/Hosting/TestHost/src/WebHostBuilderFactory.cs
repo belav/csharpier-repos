@@ -23,9 +23,8 @@ namespace Microsoft.AspNetCore.TestHost
             string[] args
         )
         {
-            var factory = HostFactoryResolver.ResolveWebHostBuilderFactory<IWebHostBuilder>(
-                assembly
-            );
+            var factory =
+                HostFactoryResolver.ResolveWebHostBuilderFactory<IWebHostBuilder>(assembly);
             return factory?.Invoke(args);
         }
 

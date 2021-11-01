@@ -226,9 +226,8 @@ namespace System.IO.Packaging
 
             ThrowIfCompressionOptionInvalid(compressionOption);
 
-            PackUriHelper.ValidatedPartUri validatedPartUri = PackUriHelper.ValidatePartUri(
-                partUri
-            );
+            PackUriHelper.ValidatedPartUri validatedPartUri =
+                PackUriHelper.ValidatePartUri(partUri);
 
             if (_partList.ContainsKey(validatedPartUri))
                 throw new InvalidOperationException(SR.PartAlreadyExists);
@@ -358,9 +357,8 @@ namespace System.IO.Packaging
                 //And thus we will not try to recreate it just in case there was some data in the
                 //memory structure.
 
-                Uri owningPartUri = PackUriHelper.GetSourcePartUriFromRelationshipPartUri(
-                    validatedPartUri
-                );
+                Uri owningPartUri =
+                    PackUriHelper.GetSourcePartUriFromRelationshipPartUri(validatedPartUri);
                 //Package-level relationships in /_rels/.rels
                 if (
                     Uri.Compare(

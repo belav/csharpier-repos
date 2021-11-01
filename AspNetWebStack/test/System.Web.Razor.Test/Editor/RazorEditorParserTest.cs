@@ -155,9 +155,10 @@ namespace System.Web.Razor.Test.Editor
             TextChange change = new TextChange();
             Assert.ThrowsArgument(
                 () =>
-                    new RazorEditorParser(CreateHost(), "C:\\Foo.cshtml").CheckForStructureChanges(
-                        change
-                    ),
+                    new RazorEditorParser(
+                        CreateHost(),
+                        "C:\\Foo.cshtml"
+                    ).CheckForStructureChanges(change),
                 "change",
                 String.Format(RazorResources.Structure_Member_CannotBeNull, "Buffer", "TextChange")
             );

@@ -124,9 +124,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 ignoreNonGoAwayFrames: true,
                 expectedLastStreamId: 0,
                 expectedErrorCode: Http3ErrorCode.StreamCreationError,
-                expectedErrorMessage: CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams(
-                    name
-                )
+                expectedErrorMessage: CoreStrings.FormatHttp3ControlStreamErrorMultipleInboundStreams(name)
             );
         }
 

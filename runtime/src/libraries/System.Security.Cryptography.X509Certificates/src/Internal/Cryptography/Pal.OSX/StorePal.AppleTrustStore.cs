@@ -47,9 +47,8 @@ namespace Internal.Cryptography.Pal
                 else if (_storeName == StoreName.Disallowed)
                 {
                     using (
-                        SafeCFArrayHandle certs = Interop.AppleCrypto.StoreEnumerateDisallowed(
-                            _location
-                        )
+                        SafeCFArrayHandle certs =
+                            Interop.AppleCrypto.StoreEnumerateDisallowed(_location)
                     )
                     {
                         ReadCollection(certs, dedupedCerts);

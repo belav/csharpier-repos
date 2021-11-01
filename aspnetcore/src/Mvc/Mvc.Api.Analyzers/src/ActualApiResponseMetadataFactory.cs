@@ -377,9 +377,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 }
             }
 
-            var implementedProperty = property.ContainingType.FindImplementationForInterfaceMember(
-                statusCodeActionResultStatusProperty
-            );
+            var implementedProperty =
+                property.ContainingType.FindImplementationForInterfaceMember(statusCodeActionResultStatusProperty);
             return SymbolEqualityComparer.Default.Equals(implementedProperty, property);
         }
 

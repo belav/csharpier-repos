@@ -4050,9 +4050,7 @@ namespace Microsoft.AspNetCore.Components.Test
                                 {
                                     Event = NestedAsyncComponent.EventType.OnInitAsyncAsync,
                                     EventAction = () =>
-                                        Task.FromException<(int, NestedAsyncComponent.EventType)>(
-                                            exception
-                                        ),
+                                        Task.FromException<(int, NestedAsyncComponent.EventType)>(exception),
                                 },
                             }
                         },
@@ -5055,9 +5053,9 @@ namespace Microsoft.AspNetCore.Components.Test
 
             // Act/Assert
             var capturingComponent =
-                (ParameterViewIllegalCapturingComponent)renderer.GetCurrentRenderTreeFrames(
-                    rootComponentId
-                ).Array[0].Component;
+                (ParameterViewIllegalCapturingComponent)renderer.GetCurrentRenderTreeFrames(rootComponentId).Array[
+                    0
+                ].Component;
             var parameterView = capturingComponent.CapturedParameterView;
 
             // All public APIs on capturingComponent should be electrified now

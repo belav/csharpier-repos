@@ -532,9 +532,8 @@ namespace System.Xml.Xsl
                             break;
 
                         default:
-                            XmlSchemaType builtInType = XmlSchemaType.GetBuiltInSimpleType(
-                                typeCode
-                            );
+                            XmlSchemaType builtInType =
+                                XmlSchemaType.GetBuiltInSimpleType(typeCode);
                             s_builtInItemTypes[i] = new ItemType(
                                 typeCode,
                                 XmlQualifiedNameTest.Wildcard,

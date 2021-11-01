@@ -19,9 +19,8 @@ namespace Microsoft.AspNetCore.DataProtection.Repositories
     [SupportedOSPlatform("windows")]
     public class RegistryXmlRepository : IXmlRepository
     {
-        private static readonly Lazy<RegistryKey?> _defaultRegistryKeyLazy = new Lazy<RegistryKey?>(
-            GetDefaultHklmStorageKey
-        );
+        private static readonly Lazy<RegistryKey?> _defaultRegistryKeyLazy =
+            new Lazy<RegistryKey?>(GetDefaultHklmStorageKey);
 
         private readonly ILogger _logger;
 

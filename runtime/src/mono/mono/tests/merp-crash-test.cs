@@ -236,9 +236,8 @@ class C
 
         public static void MerpCrashUnhandledExceptionHook()
         {
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(
-                HandleException
-            );
+            AppDomain.CurrentDomain.UnhandledException +=
+                new UnhandledExceptionEventHandler(HandleException);
             throw new Exception("This is Unhandled");
         }
 

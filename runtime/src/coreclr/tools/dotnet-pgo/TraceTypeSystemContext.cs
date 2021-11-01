@@ -157,9 +157,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 if (PgoTraceProcess.CompareModuleAgainstSimpleName(simpleName, managedModule))
                 {
-                    string filePathTemp = PgoTraceProcess.ComputeFilePathOnDiskForModule(
-                        managedModule
-                    );
+                    string filePathTemp =
+                        PgoTraceProcess.ComputeFilePathOnDiskForModule(managedModule);
 
                     // This path may be normalized
                     if (
@@ -366,9 +365,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 {
                     if (useForBinding)
                     {
-                        ModuleData actualModuleData = _simpleNameHashtable.AddOrGetExisting(
-                            moduleData
-                        );
+                        ModuleData actualModuleData =
+                            _simpleNameHashtable.AddOrGetExisting(moduleData);
                         if (actualModuleData != moduleData)
                         {
                             if (actualModuleData.FilePath != filePath)

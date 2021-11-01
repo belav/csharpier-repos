@@ -238,9 +238,8 @@ namespace Microsoft.CodeAnalysis
 
                 if (!architectureFilter.IsDefault)
                 {
-                    var assemblyArchitecture = FusionAssemblyIdentity.GetProcessorArchitecture(
-                        nameObject
-                    );
+                    var assemblyArchitecture =
+                        FusionAssemblyIdentity.GetProcessorArchitecture(nameObject);
                     if (!architectureFilter.Contains(assemblyArchitecture))
                     {
                         continue;

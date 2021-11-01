@@ -147,9 +147,7 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
                 }
 
                 var expression =
-                    (TExpressionSyntax)_syntaxFacts.GetExpressionOfMemberAccessExpression(
-                        leftMemberAccess
-                    );
+                    (TExpressionSyntax)_syntaxFacts.GetExpressionOfMemberAccessExpression(leftMemberAccess);
                 if (!ValuePatternMatches(expression))
                 {
                     break;

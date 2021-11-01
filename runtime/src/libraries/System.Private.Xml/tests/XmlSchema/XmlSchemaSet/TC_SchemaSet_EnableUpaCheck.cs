@@ -63,9 +63,8 @@ namespace System.Xml.Tests
 
             settings.Schemas = new XmlSchemaSet();
             settings.Schemas.CompilationSettings.EnableUpaCheck = UpaCheck;
-            settings.Schemas.ValidationEventHandler += new ValidationEventHandler(
-                ValidationCallback
-            );
+            settings.Schemas.ValidationEventHandler +=
+                new ValidationEventHandler(ValidationCallback);
             settings.Schemas.Add(ss);
             settings.ValidationType = ValidationType.Schema;
             settings.ValidationFlags |=

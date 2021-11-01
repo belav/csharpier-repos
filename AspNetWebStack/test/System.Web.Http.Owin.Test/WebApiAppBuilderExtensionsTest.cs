@@ -243,9 +243,8 @@ namespace System.Web.Http.Owin
             using (CancellationTokenSource tokenSource = CreateCancellationTokenSource())
             {
                 CancellationToken expectedOnAppDisposing = tokenSource.Token;
-                IDictionary<string, object> properties = CreateStubOnAppDisposingDictionary(
-                    expectedOnAppDisposing
-                );
+                IDictionary<string, object> properties =
+                    CreateStubOnAppDisposingDictionary(expectedOnAppDisposing);
                 IAppBuilder builder = CreateStubAppBuilder(properties);
 
                 // Act
@@ -264,9 +263,8 @@ namespace System.Web.Http.Owin
             IAppBuilder builder = CreateStubAppBuilder(properties);
 
             // Act
-            CancellationToken onAppDisposing = WebApiAppBuilderExtensions.GetOnAppDisposingProperty(
-                builder
-            );
+            CancellationToken onAppDisposing =
+                WebApiAppBuilderExtensions.GetOnAppDisposingProperty(builder);
 
             // Assert
             Assert.Equal(CancellationToken.None, onAppDisposing);
@@ -283,9 +281,8 @@ namespace System.Web.Http.Owin
             IAppBuilder builder = CreateStubAppBuilder(properties);
 
             // Act
-            CancellationToken onAppDisposing = WebApiAppBuilderExtensions.GetOnAppDisposingProperty(
-                builder
-            );
+            CancellationToken onAppDisposing =
+                WebApiAppBuilderExtensions.GetOnAppDisposingProperty(builder);
 
             // Assert
             Assert.Equal(CancellationToken.None, onAppDisposing);
@@ -296,15 +293,13 @@ namespace System.Web.Http.Owin
         {
             // Arrange
             object nonCancellationToken = new object();
-            IDictionary<string, object> properties = CreateStubOnAppDisposingDictionary(
-                nonCancellationToken
-            );
+            IDictionary<string, object> properties =
+                CreateStubOnAppDisposingDictionary(nonCancellationToken);
             IAppBuilder builder = CreateStubAppBuilder(properties);
 
             // Act
-            CancellationToken onAppDisposing = WebApiAppBuilderExtensions.GetOnAppDisposingProperty(
-                builder
-            );
+            CancellationToken onAppDisposing =
+                WebApiAppBuilderExtensions.GetOnAppDisposingProperty(builder);
 
             // Assert
             Assert.Equal(CancellationToken.None, onAppDisposing);

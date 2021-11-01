@@ -55,9 +55,7 @@ namespace System.Reflection.TypeLoading
                         && roDefinitionType.GetGenericParameterCount() == 1
                     )
                     {
-                        yield return roDefinitionType.GetUniqueConstructedGenericType(
-                            typeArguments
-                        );
+                        yield return roDefinitionType.GetUniqueConstructedGenericType(typeArguments);
                     }
                 }
             }

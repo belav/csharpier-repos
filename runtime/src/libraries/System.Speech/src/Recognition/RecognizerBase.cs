@@ -2932,9 +2932,8 @@ namespace System.Speech.Recognition
                     {
                         if (
                             (
-                                formatInfo = AudioFormatConverter.ToSpeechAudioFormatInfo(
-                                    waveFormatPtr
-                                )
+                                formatInfo =
+                                    AudioFormatConverter.ToSpeechAudioFormatInfo(waveFormatPtr)
                             ) != null
                         )
                         {

@@ -64,9 +64,8 @@ namespace System.Threading
                         int cpuUtilization = cpuUtilizationReader.CurrentUtilization;
                         threadPoolInstance._cpuUtilization = cpuUtilization;
 
-                        needGateThreadForRuntime = ThreadPool.PerformRuntimeSpecificGateActivities(
-                            cpuUtilization
-                        );
+                        needGateThreadForRuntime =
+                            ThreadPool.PerformRuntimeSpecificGateActivities(cpuUtilization);
 
                         if (
                             !disableStarvationDetection

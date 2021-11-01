@@ -579,9 +579,8 @@ namespace Microsoft.Cci
         {
             foreach (ILocalDefinition scopeConstant in currentScope.Constants)
             {
-                var signatureHandle = _metadataWriter.SerializeLocalConstantStandAloneSignature(
-                    scopeConstant
-                );
+                var signatureHandle =
+                    _metadataWriter.SerializeLocalConstantStandAloneSignature(scopeConstant);
                 if (!_metadataWriter.IsLocalNameTooLong(scopeConstant))
                 {
                     _symWriter.DefineLocalConstant(

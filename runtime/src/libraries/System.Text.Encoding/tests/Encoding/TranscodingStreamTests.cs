@@ -329,9 +329,8 @@ namespace System.Text.Tests
             // Act & assert - async flush
             // This also validates that we flowed the CancellationToken as expected
 
-            Task actualFlushAsyncReturnedTask = transcodingStream.FlushAsync(
-                expectedCancellationToken
-            );
+            Task actualFlushAsyncReturnedTask =
+                transcodingStream.FlushAsync(expectedCancellationToken);
             Assert.Same(expectedFlushAsyncTask, actualFlushAsyncReturnedTask);
             innerStreamMock.Verify(o => o.Flush(), Times.Once);
             innerStreamMock.Verify(o => o.FlushAsync(expectedCancellationToken), Times.Once);
@@ -562,9 +561,8 @@ namespace System.Text.Tests
                             {
                                 try
                                 {
-                                    int numBytesReadJustNow = transcodingStream.EndRead(
-                                        asyncResult
-                                    );
+                                    int numBytesReadJustNow =
+                                        transcodingStream.EndRead(asyncResult);
                                     Assert.True(numBytesReadJustNow >= 0);
                                     Assert.True(numBytesReadJustNow < buffer.Length - 3);
                                     sink.Write(buffer, 1, numBytesReadJustNow);

@@ -180,9 +180,8 @@ namespace System.Resources.Tests
             System.Runtime.Loader.AssemblyLoadContext.Default.Resolving +=
                 AssemblyResolvingEventHandler;
 #endif
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(
-                AssemblyResolveEventHandler
-            );
+            AppDomain.CurrentDomain.AssemblyResolve +=
+                new ResolveEventHandler(AssemblyResolveEventHandler);
 
             ResourcesAfAZEvents = 0;
 

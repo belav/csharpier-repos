@@ -38,9 +38,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                     >
                 > callbackDispatchers
             ) =>
-                _callbackDispatchers = new RemoteServiceCallbackDispatcherRegistry(
-                    callbackDispatchers
-                );
+                _callbackDispatchers =
+                    new RemoteServiceCallbackDispatcherRegistry(callbackDispatchers);
 
             public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
                 new InProcRemoteHostClientProvider(workspaceServices, _callbackDispatchers);

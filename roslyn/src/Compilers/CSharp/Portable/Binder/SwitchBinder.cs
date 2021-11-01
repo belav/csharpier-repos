@@ -64,9 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (_switchGoverningExpression == null)
             {
                 var switchGoverningDiagnostics = new BindingDiagnosticBag();
-                var boundSwitchExpression = BindSwitchGoverningExpression(
-                    switchGoverningDiagnostics
-                );
+                var boundSwitchExpression =
+                    BindSwitchGoverningExpression(switchGoverningDiagnostics);
                 _switchGoverningDiagnostics = switchGoverningDiagnostics;
                 Interlocked.CompareExchange(
                     ref _switchGoverningExpression,
@@ -293,9 +292,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // but there exists an explicit conversion, Dev10 compiler generates a warning "WRN_GotoCaseShouldConvert"
                 // instead of an error. See test "CS0469_NoImplicitConversionWarning".
 
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 Conversion conversion = Conversions.ClassifyConversionFromExpression(
                     caseExpression,
                     SwitchGoverningType,
@@ -484,9 +482,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else
                 {
                     TypeSymbol resultantGoverningType;
-                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                        diagnostics
-                    );
+                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                        GetNewCompoundUseSiteInfo(diagnostics);
                     Conversion conversion =
                         binder.Conversions.ClassifyImplicitUserDefinedConversionForV6SwitchGoverningType(
                             switchGoverningType,

@@ -72,9 +72,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         ),
                       InvokedRenderModes.Mode.ServerAndWebAssembly
                         => throw new InvalidOperationException(
-                            Resources.FormatPersistComponentStateTagHelper_FailedToInferComponentPersistenceMode(
-                                PersistenceModeName
-                            )
+                            Resources.FormatPersistComponentStateTagHelper_FailedToInferComponentPersistenceMode(PersistenceModeName)
                         ),
                       _ => throw new InvalidOperationException("Invalid InvokedRenderMode.")
                   },

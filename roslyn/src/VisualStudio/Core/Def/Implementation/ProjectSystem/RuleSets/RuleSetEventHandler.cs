@@ -414,12 +414,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
                             codeAnalysisRuleSetFileName,
                             projectDirectoryFullPath
                         );
-                        codeAnalysisRuleSetFullPath = FileUtilities.NormalizeAbsolutePath(
-                            codeAnalysisRuleSetFullPath
-                        );
-                        var oldRuleSetFilePath = FileUtilities.NormalizeAbsolutePath(
-                            codeAnalysisRuleSetFullPath
-                        );
+                        codeAnalysisRuleSetFullPath =
+                            FileUtilities.NormalizeAbsolutePath(codeAnalysisRuleSetFullPath);
+                        var oldRuleSetFilePath =
+                            FileUtilities.NormalizeAbsolutePath(codeAnalysisRuleSetFullPath);
 
                         if (
                             codeAnalysisRuleSetFullPath.Equals(

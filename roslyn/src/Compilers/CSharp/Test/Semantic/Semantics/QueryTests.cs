@@ -3808,9 +3808,8 @@ class Query
             from int y in c2
             select x + y;
 ";
-            var queryStatement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                speculatedSource
-            );
+            var queryStatement =
+                (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(speculatedSource);
 
             var compilation = CreateCompilation(csSource);
             compilation.VerifyDiagnostics();
@@ -3868,9 +3867,8 @@ class Query
             select x;
 ";
 
-            var queryStatement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(
-                speculatedSource
-            );
+            var queryStatement =
+                (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(speculatedSource);
 
             var compilation = CreateCompilation(csSource);
             compilation.VerifyDiagnostics();

@@ -51,9 +51,10 @@ namespace Newtonsoft.Json.Serialization
         private readonly ThreadSafeStore<
             string,
             CallSite<Func<CallSite, object, object>>
-        > _callSiteGetters = new ThreadSafeStore<string, CallSite<Func<CallSite, object, object>>>(
-            CreateCallSiteGetter
-        );
+        > _callSiteGetters = new ThreadSafeStore<
+            string,
+            CallSite<Func<CallSite, object, object>>
+        >(CreateCallSiteGetter);
 
         private readonly ThreadSafeStore<
             string,

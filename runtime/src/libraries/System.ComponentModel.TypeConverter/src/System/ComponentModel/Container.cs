@@ -171,9 +171,8 @@ namespace System.ComponentModel
 
                     if (_filter != null)
                     {
-                        ComponentCollection filteredComponents = _filter.FilterComponents(
-                            _components
-                        );
+                        ComponentCollection filteredComponents =
+                            _filter.FilterComponents(_components);
                         if (filteredComponents != null)
                         {
                             _components = filteredComponents;

@@ -141,9 +141,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                 body: new SyntaxList<RazorSyntaxNode>(),
                                 endTag: null
                             );
-                            var rewrittenTagHelper = tagHelperElement.WithTagHelperInfo(
-                                tagHelperInfo
-                            );
+                            var rewrittenTagHelper =
+                                tagHelperElement.WithTagHelperInfo(tagHelperInfo);
                             if (node.Body.Count == 0 && node.EndTag == null)
                             {
                                 return rewrittenTagHelper;

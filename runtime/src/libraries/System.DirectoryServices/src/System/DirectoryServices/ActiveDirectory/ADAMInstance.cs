@@ -586,9 +586,8 @@ namespace System.DirectoryServices.ActiveDirectory
             // only thing to be saved is the ntdsa entry (for default partition)
             if (_defaultPartitionModified)
             {
-                DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                    NtdsaObjectName
-                );
+                DirectoryEntry ntdsaEntry =
+                    directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
                 try
                 {
                     ntdsaEntry.CommitChanges();
@@ -633,9 +632,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (_cachedHostName == null)
                 {
-                    DirectoryEntry serverEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                        ServerObjectName
-                    );
+                    DirectoryEntry serverEntry =
+                        directoryEntryMgr.GetCachedDirectoryEntry(ServerObjectName);
                     _cachedHostName = (string)PropertyManager.GetPropertyValue(
                         context,
                         serverEntry,
@@ -653,9 +651,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (_cachedLdapPort == -1)
                 {
-                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                        NtdsaObjectName
-                    );
+                    DirectoryEntry ntdsaEntry =
+                        directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
                     _cachedLdapPort = (int)PropertyManager.GetPropertyValue(
                         context,
                         ntdsaEntry,
@@ -673,9 +670,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (_cachedSslPort == -1)
                 {
-                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                        NtdsaObjectName
-                    );
+                    DirectoryEntry ntdsaEntry =
+                        directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
                     _cachedSslPort = (int)PropertyManager.GetPropertyValue(
                         context,
                         ntdsaEntry,
@@ -767,9 +763,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (!_defaultPartitionInitialized || _defaultPartitionModified)
                 {
-                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                        NtdsaObjectName
-                    );
+                    DirectoryEntry ntdsaEntry =
+                        directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
                     try
                     {
                         ntdsaEntry.RefreshCache();
@@ -802,9 +797,8 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 CheckIfDisposed();
 
-                DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                    NtdsaObjectName
-                );
+                DirectoryEntry ntdsaEntry =
+                    directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
                 if (value == null)
                 {
                     if (ntdsaEntry.Properties.Contains(PropertyManager.MsDSDefaultNamingContext))
@@ -980,9 +974,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 CheckIfDisposed();
                 if (cachedNtdsaObjectGuid == Guid.Empty)
                 {
-                    DirectoryEntry ntdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                        NtdsaObjectName
-                    );
+                    DirectoryEntry ntdsaEntry =
+                        directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
                     byte[] guidByteArray = (byte[])PropertyManager.GetPropertyValue(
                         context,
                         ntdsaEntry,

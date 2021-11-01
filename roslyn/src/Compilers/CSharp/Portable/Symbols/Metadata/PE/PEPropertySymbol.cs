@@ -721,13 +721,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 }
 
                 var propertiesWithImplementedGetters =
-                    PEPropertyOrEventHelpers.GetPropertiesForExplicitlyImplementedAccessor(
-                        _getMethod
-                    );
+                    PEPropertyOrEventHelpers.GetPropertiesForExplicitlyImplementedAccessor(_getMethod);
                 var propertiesWithImplementedSetters =
-                    PEPropertyOrEventHelpers.GetPropertiesForExplicitlyImplementedAccessor(
-                        _setMethod
-                    );
+                    PEPropertyOrEventHelpers.GetPropertiesForExplicitlyImplementedAccessor(_setMethod);
 
                 var builder = ArrayBuilder<PropertySymbol>.GetInstance();
 

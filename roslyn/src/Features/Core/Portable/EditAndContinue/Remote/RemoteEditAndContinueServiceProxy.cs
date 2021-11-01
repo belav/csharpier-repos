@@ -59,9 +59,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 RemoteServiceCallbackId callbackId,
                 CancellationToken cancellationToken
             ) =>
-                ((EditSessionCallback)GetCallback(callbackId)).GetActiveStatementsAsync(
-                    cancellationToken
-                );
+                (
+                    (EditSessionCallback)GetCallback(callbackId)
+                ).GetActiveStatementsAsync(cancellationToken);
 
             public ValueTask<ManagedEditAndContinueAvailability> GetAvailabilityAsync(
                 RemoteServiceCallbackId callbackId,
@@ -367,9 +367,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             document.Id,
                             cancellationToken
                         ),
-                    callbackTarget: new DocumentActiveStatementSpanProviderCallback(
-                        activeStatementSpanProvider
-                    ),
+                    callbackTarget: new DocumentActiveStatementSpanProviderCallback(activeStatementSpanProvider),
                     cancellationToken
                 )
                 .ConfigureAwait(false);
@@ -423,9 +421,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             sourceFilePath,
                             cancellationToken
                         ),
-                    callbackTarget: new SolutionActiveStatementSpanProviderCallback(
-                        activeStatementSpanProvider
-                    ),
+                    callbackTarget: new SolutionActiveStatementSpanProviderCallback(activeStatementSpanProvider),
                     cancellationToken
                 )
                 .ConfigureAwait(false);
@@ -472,9 +468,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 callbackId,
                                 cancellationToken
                             ),
-                        callbackTarget: new SolutionActiveStatementSpanProviderCallback(
-                            activeStatementSpanProvider
-                        ),
+                        callbackTarget: new SolutionActiveStatementSpanProviderCallback(activeStatementSpanProvider),
                         cancellationToken
                     )
                     .ConfigureAwait(false);
@@ -597,9 +591,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             instructionId,
                             cancellationToken
                         ),
-                    callbackTarget: new SolutionActiveStatementSpanProviderCallback(
-                        activeStatementSpanProvider
-                    ),
+                    callbackTarget: new SolutionActiveStatementSpanProviderCallback(activeStatementSpanProvider),
                     cancellationToken
                 )
                 .ConfigureAwait(false);
@@ -717,9 +709,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             document.Id,
                             cancellationToken
                         ),
-                    callbackTarget: new DocumentActiveStatementSpanProviderCallback(
-                        activeStatementSpanProvider
-                    ),
+                    callbackTarget: new DocumentActiveStatementSpanProviderCallback(activeStatementSpanProvider),
                     cancellationToken
                 )
                 .ConfigureAwait(false);

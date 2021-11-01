@@ -29,9 +29,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             };
 
             ModelBinderProviderCollection binderProviders = new ModelBinderProviderCollection();
-            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(
-                binderProviders
-            );
+            ExtensibleModelBinderAdapter shimBinder =
+                new ExtensibleModelBinderAdapter(binderProviders);
 
             // Act & assert
 
@@ -91,9 +90,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 mockIntBinder.Object,
                 false /* suppressPrefixCheck */
             );
-            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(
-                binderProviders
-            );
+            ExtensibleModelBinderAdapter shimBinder =
+                new ExtensibleModelBinderAdapter(binderProviders);
 
             // Act
             object retVal = shimBinder.BindModel(controllerContext, bindingContext);
@@ -153,9 +151,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 mockIntBinder.Object,
                 false /* suppressPrefixCheck */
             );
-            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(
-                binderProviders
-            );
+            ExtensibleModelBinderAdapter shimBinder =
+                new ExtensibleModelBinderAdapter(binderProviders);
 
             // Act
             object retVal = shimBinder.BindModel(controllerContext, bindingContext);
@@ -185,9 +182,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 mockListBinder.Object,
                 true /* suppressPrefixCheck */
             );
-            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(
-                binderProviders
-            );
+            ExtensibleModelBinderAdapter shimBinder =
+                new ExtensibleModelBinderAdapter(binderProviders);
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {
@@ -224,9 +220,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             {
                 mockBinderProvider.Object
             };
-            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(
-                binderProviders
-            );
+            ExtensibleModelBinderAdapter shimBinder =
+                new ExtensibleModelBinderAdapter(binderProviders);
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {

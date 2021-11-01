@@ -505,9 +505,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         protected override TextInputFormatter GetInputFormatter(
             bool allowInputFormatterExceptionMessages = true
         ) =>
-            CreateFormatter(
-                allowInputFormatterExceptionMessages: allowInputFormatterExceptionMessages
-            );
+            CreateFormatter(allowInputFormatterExceptionMessages: allowInputFormatterExceptionMessages);
 
         private NewtonsoftJsonInputFormatter CreateFormatter(
             JsonSerializerSettings serializerSettings = null,

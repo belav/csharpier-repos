@@ -4284,9 +4284,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 var oldType = updatesInCurrentDocument.OldType;
 
                 var anyInitializerUpdatesInCurrentDocument =
-                    updatesInCurrentDocument.ChangedDeclarations.Keys.Any(
-                        IsDeclarationWithInitializer
-                    );
+                    updatesInCurrentDocument.ChangedDeclarations.Keys.Any(IsDeclarationWithInitializer);
 
                 // If any of the partial declarations of the new or the old type are in another document
                 // the edit will need to be merged with other partial edits with matching partial type
@@ -4357,9 +4355,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             // be reported in the document they were made in.
                             if (
                                 !anyInitializerUpdatesInCurrentDocument
-                                && !updatesInCurrentDocument.ChangedDeclarations.ContainsKey(
-                                    newDeclaration
-                                )
+                                && !updatesInCurrentDocument.ChangedDeclarations.ContainsKey(newDeclaration)
                             )
                             {
                                 continue;

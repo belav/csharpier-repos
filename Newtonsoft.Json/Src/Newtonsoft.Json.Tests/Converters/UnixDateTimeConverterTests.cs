@@ -237,9 +237,9 @@ namespace Newtonsoft.Json.Tests.Converters
                 json
             );
 
-            UnixConverterList<object> l2 = JsonConvert.DeserializeObject<UnixConverterList<object>>(
-                json
-            );
+            UnixConverterList<object> l2 = JsonConvert.DeserializeObject<
+                UnixConverterList<object>
+            >(json);
             Assert.IsNotNull(l2);
 
             Assert.AreEqual(new DateTime(2018, 1, 1, 21, 1, 16, DateTimeKind.Utc), l2[0]);

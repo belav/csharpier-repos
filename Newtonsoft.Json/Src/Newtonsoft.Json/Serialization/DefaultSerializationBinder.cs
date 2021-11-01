@@ -52,9 +52,10 @@ namespace Newtonsoft.Json.Serialization
         /// </summary>
         public DefaultSerializationBinder()
         {
-            _typeCache = new ThreadSafeStore<StructMultiKey<string?, string>, Type>(
-                GetTypeFromTypeNameKey
-            );
+            _typeCache = new ThreadSafeStore<
+                StructMultiKey<string?, string>,
+                Type
+            >(GetTypeFromTypeNameKey);
         }
 
         private Type GetTypeFromTypeNameKey(StructMultiKey<string?, string> typeNameKey)
@@ -185,9 +186,7 @@ namespace Newtonsoft.Json.Serialization
                                     );
 
                                     StructMultiKey<string?, string> typeNameKey =
-                                        ReflectionUtils.SplitFullyQualifiedTypeName(
-                                            typeArgAssemblyQualifiedName
-                                        );
+                                        ReflectionUtils.SplitFullyQualifiedTypeName(typeArgAssemblyQualifiedName);
                                     genericTypeArguments.Add(GetTypeByName(typeNameKey));
                                 }
                                 break;

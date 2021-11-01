@@ -52,9 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             {
                 foreach (var documentId in changedDocumentIDs)
                 {
-                    var containedDocument = visualStudioWorkspace.TryGetContainedDocument(
-                        documentId
-                    );
+                    var containedDocument =
+                        visualStudioWorkspace.TryGetContainedDocument(documentId);
                     if (containedDocument != null)
                     {
                         var containedLanguageHost = containedDocument.ContainedLanguageHost;

@@ -382,52 +382,41 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
 
             var dynamicFlagsCustomTypeInfo = new ReadOnlyCollection<byte>(new byte[] { 0x80 });
 
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
-                dynamicFlagsCustomTypeInfo
-            );
+            dynamicFlagsCustomTypeInfo =
+                DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x40);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
-                dynamicFlagsCustomTypeInfo
-            );
+            dynamicFlagsCustomTypeInfo =
+                DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x20);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
-                dynamicFlagsCustomTypeInfo
-            );
+            dynamicFlagsCustomTypeInfo =
+                DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x10);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
-                dynamicFlagsCustomTypeInfo
-            );
+            dynamicFlagsCustomTypeInfo =
+                DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x08);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
-                dynamicFlagsCustomTypeInfo
-            );
+            dynamicFlagsCustomTypeInfo =
+                DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x04);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
-                dynamicFlagsCustomTypeInfo
-            );
+            dynamicFlagsCustomTypeInfo =
+                DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x02);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
-                dynamicFlagsCustomTypeInfo
-            );
+            dynamicFlagsCustomTypeInfo =
+                DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x01);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
-                dynamicFlagsCustomTypeInfo
-            );
+            dynamicFlagsCustomTypeInfo =
+                DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
             ValidateBytes(dynamicFlagsCustomTypeInfo);
 
             dynamicFlagsCustomTypeInfo = new ReadOnlyCollection<byte>(new byte[] { 0x00, 0x02 });
 
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
-                dynamicFlagsCustomTypeInfo
-            );
+            dynamicFlagsCustomTypeInfo =
+                DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x00, 0x01);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
-                dynamicFlagsCustomTypeInfo
-            );
+            dynamicFlagsCustomTypeInfo =
+                DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x80, 0x00);
-            dynamicFlagsCustomTypeInfo = DynamicFlagsCustomTypeInfo.SkipOne(
-                dynamicFlagsCustomTypeInfo
-            );
+            dynamicFlagsCustomTypeInfo =
+                DynamicFlagsCustomTypeInfo.SkipOne(dynamicFlagsCustomTypeInfo);
             ValidateBytes(dynamicFlagsCustomTypeInfo, 0x40, 0x00);
         }
 

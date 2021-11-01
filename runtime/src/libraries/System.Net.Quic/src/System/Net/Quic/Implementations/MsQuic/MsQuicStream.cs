@@ -170,10 +170,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         {
             ThrowIfDisposed();
 
-            using CancellationTokenRegistration registration = await HandleWriteStartState(
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+            using CancellationTokenRegistration registration =
+                await HandleWriteStartState(cancellationToken).ConfigureAwait(false);
 
             await SendReadOnlySequenceAsync(
                     buffers,
@@ -200,10 +198,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         {
             ThrowIfDisposed();
 
-            using CancellationTokenRegistration registration = await HandleWriteStartState(
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+            using CancellationTokenRegistration registration =
+                await HandleWriteStartState(cancellationToken).ConfigureAwait(false);
             await SendReadOnlyMemoryListAsync(
                     buffers,
                     endStream ? QUIC_SEND_FLAGS.FIN : QUIC_SEND_FLAGS.NONE
@@ -221,10 +217,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         {
             ThrowIfDisposed();
 
-            using CancellationTokenRegistration registration = await HandleWriteStartState(
-                    cancellationToken
-                )
-                .ConfigureAwait(false);
+            using CancellationTokenRegistration registration =
+                await HandleWriteStartState(cancellationToken).ConfigureAwait(false);
 
             await SendReadOnlyMemoryAsync(
                     buffer,

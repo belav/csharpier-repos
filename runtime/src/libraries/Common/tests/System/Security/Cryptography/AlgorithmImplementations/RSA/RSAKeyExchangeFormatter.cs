@@ -65,9 +65,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                     + "ba63d1d0d9e486668270c2dbf73ab33055dfc0b797938557b99c0e9a535605c0a4bceefe5a37594732bb566ab026e4e8d5ce47d0967d"
                     + "f1c66e7ee4d39d804f6d558670222d708f943eb0"
                 ).HexToByteArray();
-                RSAPKCS1KeyExchangeDeformatter deformatter = new RSAPKCS1KeyExchangeDeformatter(
-                    rsa
-                );
+                RSAPKCS1KeyExchangeDeformatter deformatter =
+                    new RSAPKCS1KeyExchangeDeformatter(rsa);
                 byte[] plain = deformatter.DecryptKeyExchange(encrypted);
                 byte[] expectedPlain = { 0x41, 0x42, 0x43 };
                 Assert.Equal(expectedPlain, plain);

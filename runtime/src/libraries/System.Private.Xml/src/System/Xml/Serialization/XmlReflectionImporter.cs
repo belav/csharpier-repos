@@ -2442,13 +2442,12 @@ namespace System.Xml.Serialization
                     for (int i = 0; i < a.XmlAnyElements.Count; i++)
                     {
                         XmlAnyElementAttribute xmlAnyElement = a.XmlAnyElements[i]!;
-                        Type targetType = typeof(IXmlSerializable).IsAssignableFrom(
-                            arrayElementType
-                        )
-                            ? arrayElementType
-                            : typeof(XmlNode).IsAssignableFrom(arrayElementType)
+                        Type targetType =
+                            typeof(IXmlSerializable).IsAssignableFrom(arrayElementType)
                                 ? arrayElementType
-                                : typeof(XmlElement);
+                                : typeof(XmlNode).IsAssignableFrom(arrayElementType)
+                                    ? arrayElementType
+                                    : typeof(XmlElement);
                         if (!arrayElementType.IsAssignableFrom(targetType))
                             throw new InvalidOperationException(
                                 SR.Format(SR.XmlIllegalAnyElement, arrayElementType.FullName)

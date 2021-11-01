@@ -28,9 +28,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             ServiceCallSite callSite
         )
         {
-            Func<ServiceProviderEngineScope, object> realizedService = ResolverBuilder.Build(
-                callSite
-            );
+            Func<ServiceProviderEngineScope, object> realizedService =
+                ResolverBuilder.Build(callSite);
             RealizedServices[callSite.ServiceType] = realizedService;
             return realizedService;
         }

@@ -318,9 +318,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 }
             }
 
-            return syntaxFactsService.GetContainingVariableDeclaratorOfFieldDeclaration(
-                parameterNode
-            );
+            return syntaxFactsService.GetContainingVariableDeclaratorOfFieldDeclaration(parameterNode);
         }
 
         private static void CascadeBetweenPropertyAndAccessorParameters(

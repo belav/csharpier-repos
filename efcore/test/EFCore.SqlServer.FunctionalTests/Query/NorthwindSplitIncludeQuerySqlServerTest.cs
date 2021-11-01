@@ -1355,9 +1355,7 @@ LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]"
             bool async
         )
         {
-            await base.Include_with_complex_projection_does_not_change_ordering_of_projection(
-                async
-            );
+            await base.Include_with_complex_projection_does_not_change_ordering_of_projection(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID] AS [Id], (
@@ -1777,9 +1775,7 @@ ORDER BY [t].[c], [t].[CustomerID]"
             bool async
         )
         {
-            await base.Include_is_not_ignored_when_projection_contains_client_method_and_complex_expression(
-                async
-            );
+            await base.Include_is_not_ignored_when_projection_contains_client_method_and_complex_expression(async);
 
             AssertSql(
                 @"SELECT CASE
@@ -1905,9 +1901,7 @@ ORDER BY [c].[CustomerID], [t0].[OrderDate] DESC"
             bool async
         )
         {
-            await base.Outer_idenfier_correctly_determined_when_doing_include_on_right_side_of_left_join(
-                async
-            );
+            await base.Outer_idenfier_correctly_determined_when_doing_include_on_right_side_of_left_join(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]

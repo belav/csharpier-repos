@@ -34,10 +34,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 IEnumerable<CodeActionOperation>
             > ComputeOperationsAsync(CancellationToken cancellationToken)
             {
-                var changedSuppressionDocument = await GetChangedSuppressionDocumentAsync(
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+                var changedSuppressionDocument =
+                    await GetChangedSuppressionDocumentAsync(cancellationToken)
+                        .ConfigureAwait(false);
                 return new CodeActionOperation[]
                 {
                     new ApplyChangesOperation(changedSuppressionDocument.Project.Solution),

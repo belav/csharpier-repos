@@ -132,9 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol constructor
         )
         {
-            var thisArguments = CodeGenerationConstructorInfo.GetThisConstructorArgumentsOpt(
-                constructor
-            );
+            var thisArguments =
+                CodeGenerationConstructorInfo.GetThisConstructorArgumentsOpt(constructor);
 
             var arguments = !thisArguments.IsDefault
                 ? thisArguments

@@ -67,18 +67,16 @@ namespace Newtonsoft.Json.Utilities
                 "IsUnion",
                 BindingFlags.Public | BindingFlags.Static
             );
-            IsUnion = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                isUnionMethodInfo
-            )!;
+            IsUnion =
+                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(isUnionMethodInfo)!;
 
             MethodInfo getUnionCasesMethodInfo = GetMethodWithNonPublicFallback(
                 fsharpType,
                 "GetUnionCases",
                 BindingFlags.Public | BindingFlags.Static
             );
-            GetUnionCases = JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                getUnionCasesMethodInfo
-            )!;
+            GetUnionCases =
+                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(getUnionCasesMethodInfo)!;
 
             Type fsharpValue = fsharpCoreAssembly.GetType(
                 "Microsoft.FSharp.Reflection.FSharpValue"
@@ -202,9 +200,7 @@ namespace Newtonsoft.Json.Utilities
             );
 
             MethodCall<object?, object?> call =
-                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                    innerMethodInfo
-                );
+                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(innerMethodInfo);
             MethodCall<object?, object> invoke =
                 JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(invokeFunc)!;
 
@@ -223,9 +219,7 @@ namespace Newtonsoft.Json.Utilities
         {
             MethodInfo seqType = _ofSeq.MakeGenericMethod(t);
 
-            return JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                seqType
-            );
+            return JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(seqType);
         }
 
         public ObjectConstructor<object> CreateMap(Type keyType, Type valueType)

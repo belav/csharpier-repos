@@ -203,9 +203,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             );
 
             var c2 =
-                JsonConvert.DeserializeObject<ExtensionDataDeserializeWithNonDefaultConstructor>(
-                    json
-                );
+                JsonConvert.DeserializeObject<ExtensionDataDeserializeWithNonDefaultConstructor>(json);
 
             Assert.AreEqual("Name!", c2.Name);
             Assert.IsNotNull(c2._extensionData);

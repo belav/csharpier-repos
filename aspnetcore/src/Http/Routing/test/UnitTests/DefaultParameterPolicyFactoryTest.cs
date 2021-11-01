@@ -302,9 +302,8 @@ namespace Microsoft.AspNetCore.Routing
             );
 
             // Assert
-            var constraint = Assert.IsType<CustomParameterPolicyWithMultipleArguments>(
-                parameterPolicy
-            );
+            var constraint =
+                Assert.IsType<CustomParameterPolicyWithMultipleArguments>(parameterPolicy);
             Assert.Equal(20, constraint.First);
             Assert.Equal(-1, constraint.Second);
             Assert.NotNull(constraint.TestService1);
@@ -333,9 +332,8 @@ namespace Microsoft.AspNetCore.Routing
             );
 
             // Assert
-            var constraint = Assert.IsType<CustomParameterPolicyWithOnlyServiceArguments>(
-                parameterPolicy
-            );
+            var constraint =
+                Assert.IsType<CustomParameterPolicyWithOnlyServiceArguments>(parameterPolicy);
             Assert.NotNull(constraint.TestService1);
             Assert.NotNull(constraint.TestService2);
         }

@@ -37,9 +37,8 @@ namespace Microsoft.AspNetCore.Cryptography.Cng
         private static CachedAlgorithmInfo _sha512 = new CachedAlgorithmInfo(
             () => GetHashAlgorithm(algorithm: Constants.BCRYPT_SHA512_ALGORITHM)
         );
-        private static CachedAlgorithmInfo _sp800_108_ctr_hmac = new CachedAlgorithmInfo(
-            GetSP800_108_CTR_HMACAlgorithm
-        );
+        private static CachedAlgorithmInfo _sp800_108_ctr_hmac =
+            new CachedAlgorithmInfo(GetSP800_108_CTR_HMACAlgorithm);
 
         public static BCryptAlgorithmHandle AES_CBC =>
             CachedAlgorithmInfo.GetAlgorithmHandle(ref _aesCbc);

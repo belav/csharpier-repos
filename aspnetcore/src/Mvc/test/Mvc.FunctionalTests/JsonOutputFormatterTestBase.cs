@@ -63,9 +63,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var actualContent = await response.Content.ReadAsStringAsync();
             Assert.Equal(expectedOutput, actualContent);
 
-            var modelStateErrors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(
-                actualContent
-            );
+            var modelStateErrors = JsonConvert.DeserializeObject<
+                Dictionary<string, string[]>
+            >(actualContent);
             Assert.Equal(2, modelStateErrors.Count);
 
             var errors = Assert.Single(modelStateErrors, kvp => kvp.Key == "Id").Value;

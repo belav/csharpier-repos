@@ -104,9 +104,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             CancellationToken cancellationToken
         )
         {
-            var configOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                syntaxTree
-            );
+            var configOptions =
+                analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(syntaxTree);
 #pragma warning disable CS0612 // Type or member is obsolete
             var optionSet = await GetDocumentOptionSetAsync(
                     analyzerOptions,

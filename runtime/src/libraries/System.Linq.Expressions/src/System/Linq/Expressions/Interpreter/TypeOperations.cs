@@ -655,9 +655,12 @@ namespace System.Linq.Expressions.Interpreter
                 // Otherwise, we need to return an object that merges them.
                 return Expression.Invoke(
                     Expression.Constant(
-                        new Func<IRuntimeVariables, IRuntimeVariables, int[], IRuntimeVariables>(
-                            MergeRuntimeVariables
-                        )
+                        new Func<
+                            IRuntimeVariables,
+                            IRuntimeVariables,
+                            int[],
+                            IRuntimeVariables
+                        >(MergeRuntimeVariables)
                     ),
                     Expression.RuntimeVariables(
                         new TrueReadOnlyCollection<ParameterExpression>(vars.ToArray())

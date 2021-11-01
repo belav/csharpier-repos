@@ -122,9 +122,8 @@ namespace System.Text.Tests
             bool expected
         )
         {
-            EncoderFallbackBuffer buffer = new EncoderReplacementFallback(
-                replacement
-            ).CreateFallbackBuffer();
+            EncoderFallbackBuffer buffer =
+                new EncoderReplacementFallback(replacement).CreateFallbackBuffer();
             Assert.Equal(expected, buffer.Fallback(charUnknown, 0));
         }
 
@@ -135,9 +134,8 @@ namespace System.Text.Tests
             string replacement
         )
         {
-            EncoderFallbackBuffer buffer = new EncoderReplacementFallback(
-                replacement
-            ).CreateFallbackBuffer();
+            EncoderFallbackBuffer buffer =
+                new EncoderReplacementFallback(replacement).CreateFallbackBuffer();
             buffer.Fallback('a', 0);
 
             AssertExtensions.Throws<ArgumentException>("chars", () => buffer.Fallback('a', 0));
@@ -152,9 +150,8 @@ namespace System.Text.Tests
         [InlineData("a", true)]
         public void CreateFallbackBuffer_Fallback_Char_Char(string replacement, bool expected)
         {
-            EncoderFallbackBuffer buffer = new EncoderReplacementFallback(
-                replacement
-            ).CreateFallbackBuffer();
+            EncoderFallbackBuffer buffer =
+                new EncoderReplacementFallback(replacement).CreateFallbackBuffer();
             Assert.Equal(expected, buffer.Fallback('\uD800', '\uDC00', 0));
         }
 

@@ -165,9 +165,8 @@ namespace System.Data
         private SerializationFormat _remotingFormat = SerializationFormat.Xml;
 
         private static int s_objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        private readonly int _objectID =
+            System.Threading.Interlocked.Increment(ref s_objectTypeCount);
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DataTable'/> class with no arguments.
@@ -4523,9 +4522,9 @@ namespace System.Data
                 {
                     if ((states & _indexes[indexCount].RecordStates) != DataViewRowState.None)
                     {
-                        positionIndexes[indexCount] = _indexes[indexCount].InsertRecordToIndex(
-                            recordNo
-                        );
+                        positionIndexes[indexCount] = _indexes[
+                            indexCount
+                        ].InsertRecordToIndex(recordNo);
                     }
                     else
                     {

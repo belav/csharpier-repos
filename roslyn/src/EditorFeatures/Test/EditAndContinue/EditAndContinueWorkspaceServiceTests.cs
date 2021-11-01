@@ -4062,12 +4062,10 @@ class C { int Y => 1; }
             var activeLineSpan12 = sourceTextV1.Lines.GetLinePositionSpan(activeSpan12);
             var activeLineSpan21 = sourceTextV2.Lines.GetLinePositionSpan(activeSpan21);
             var activeLineSpan22 = sourceTextV2.Lines.GetLinePositionSpan(activeSpan22);
-            var adjustedActiveLineSpan1 = sourceTextV2.Lines.GetLinePositionSpan(
-                adjustedActiveSpan1
-            );
-            var adjustedActiveLineSpan2 = sourceTextV2.Lines.GetLinePositionSpan(
-                adjustedActiveSpan2
-            );
+            var adjustedActiveLineSpan1 =
+                sourceTextV2.Lines.GetLinePositionSpan(adjustedActiveSpan1);
+            var adjustedActiveLineSpan2 =
+                sourceTextV2.Lines.GetLinePositionSpan(adjustedActiveSpan2);
 
             // default if not called in a break state
             Assert.True(

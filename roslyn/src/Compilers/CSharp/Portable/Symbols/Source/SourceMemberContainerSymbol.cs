@@ -813,9 +813,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var managedKind = _flags.ManagedKind;
             if (managedKind == ManagedKind.Unknown)
             {
-                var managedKindUseSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
-                    ContainingAssembly
-                );
+                var managedKindUseSiteInfo =
+                    new CompoundUseSiteInfo<AssemblySymbol>(ContainingAssembly);
                 managedKind = base.GetManagedKind(ref managedKindUseSiteInfo);
                 ImmutableInterlocked.InterlockedInitialize(
                     ref _managedKindUseSiteDiagnostics,
@@ -2972,18 +2971,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpSyntaxNode syntax
             )
             {
-                ref bool isNullableEnabled = ref GetIsNullableEnabledForConstructorsAndFields(
-                    useStatic
-                );
+                ref bool isNullableEnabled =
+                    ref GetIsNullableEnabledForConstructorsAndFields(useStatic);
                 isNullableEnabled =
                     isNullableEnabled || compilation.IsNullableAnalysisEnabledIn(syntax);
             }
 
             public void UpdateIsNullableEnabledForConstructorsAndFields(bool useStatic, bool value)
             {
-                ref bool isNullableEnabled = ref GetIsNullableEnabledForConstructorsAndFields(
-                    useStatic
-                );
+                ref bool isNullableEnabled =
+                    ref GetIsNullableEnabledForConstructorsAndFields(useStatic);
                 isNullableEnabled = isNullableEnabled || value;
             }
 
@@ -3331,9 +3328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpSyntaxNode syntax
             )
             {
-                ref bool isNullableEnabled = ref GetIsNullableEnabledForConstructorsAndFields(
-                    useStatic
-                );
+                ref bool isNullableEnabled =
+                    ref GetIsNullableEnabledForConstructorsAndFields(useStatic);
                 isNullableEnabled =
                     isNullableEnabled || compilation.IsNullableAnalysisEnabledIn(syntax);
             }
@@ -3385,9 +3381,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return null;
             }
 
-            var membersAndInitializersBuilder = new MembersAndInitializersBuilder(
-                declaredMembersAndInitializers
-            );
+            var membersAndInitializersBuilder =
+                new MembersAndInitializersBuilder(declaredMembersAndInitializers);
             AddSynthesizedMembers(
                 membersAndInitializersBuilder,
                 declaredMembersAndInitializers,
@@ -3719,9 +3714,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             )
                             {
                                 // Avoid mutating the cached dictionary and especially avoid doing this possibly on multiple threads in parallel.
-                                membersByName = new Dictionary<string, ImmutableArray<Symbol>>(
-                                    membersByName
-                                );
+                                membersByName = new Dictionary<
+                                    string,
+                                    ImmutableArray<Symbol>
+                                >(membersByName);
                             }
 
                             membersByName[name] = FixPartialMember(
@@ -5347,9 +5343,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 );
                             }
 
-                            bool isNullableEnabled = compilation.IsNullableAnalysisEnabledIn(
-                                constructorSyntax
-                            );
+                            bool isNullableEnabled =
+                                compilation.IsNullableAnalysisEnabledIn(constructorSyntax);
                             var constructor = SourceConstructorSymbol.CreateConstructorSymbol(
                                 this,
                                 constructorSyntax,
@@ -5626,9 +5621,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 SourceUserDefinedConversionSymbol.CreateUserDefinedConversionSymbol(
                                     this,
                                     conversionOperatorSyntax,
-                                    compilation.IsNullableAnalysisEnabledIn(
-                                        conversionOperatorSyntax
-                                    ),
+                                    compilation.IsNullableAnalysisEnabledIn(conversionOperatorSyntax),
                                     diagnostics
                                 );
                             builder.NonTypeMembers.Add(method);

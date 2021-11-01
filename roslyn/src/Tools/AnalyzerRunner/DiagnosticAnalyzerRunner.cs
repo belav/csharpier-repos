@@ -53,9 +53,7 @@ namespace AnalyzerRunner
                         .SetItem("AD0001", ReportDiagnostic.Error)
                         .SetItem("AD0002", ReportDiagnostic.Error);
                 var modifiedCompilationOptions =
-                    project.CompilationOptions.WithSpecificDiagnosticOptions(
-                        modifiedSpecificDiagnosticOptions
-                    );
+                    project.CompilationOptions.WithSpecificDiagnosticOptions(modifiedSpecificDiagnosticOptions);
                 solution = solution.WithProjectCompilationOptions(
                     projectId,
                     modifiedCompilationOptions

@@ -42,9 +42,8 @@ namespace System.Linq.Parallel
             {
                 // The type overrides the partitioning algorithm, so we will use it instead of the default.
                 // The returned enumerator must be the same size that we requested, otherwise we throw.
-                QueryOperatorEnumerator<T, int>[] enumerators = sourceAsPartitionable.GetPartitions(
-                    partitionCount
-                );
+                QueryOperatorEnumerator<T, int>[] enumerators =
+                    sourceAsPartitionable.GetPartitions(partitionCount);
                 if (enumerators == null)
                 {
                     throw new InvalidOperationException(SR.ParallelPartitionable_NullReturn);

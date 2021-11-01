@@ -2086,9 +2086,8 @@ namespace System.ServiceModel.Syndication.Tests
                 using (var stringReader = new StringReader(xmlString))
                 using (XmlReader reader = XmlReader.Create(stringReader))
                 {
-                    SyndicationItemSubclass item = SyndicationItem.Load<SyndicationItemSubclass>(
-                        reader
-                    );
+                    SyndicationItemSubclass item =
+                        SyndicationItem.Load<SyndicationItemSubclass>(reader);
                     verifyAction(item);
                 }
             }

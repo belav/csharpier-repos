@@ -259,9 +259,8 @@ namespace System.Formats.Cbor.Tests
             string hexExpectedEncoding
         )
         {
-            var writer = new CborWriter(
-                convertIndefiniteLengthEncodings: useDefiniteLengthEncoding
-            );
+            var writer =
+                new CborWriter(convertIndefiniteLengthEncodings: useDefiniteLengthEncoding);
 
             Helpers.WriteValue(
                 writer,

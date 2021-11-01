@@ -495,9 +495,9 @@ namespace System.Text.Json.Serialization.Tests
                 json = JsonSerializer.Serialize(myEnumFlagsIntDictionary);
                 Assert.Equal(@"{""-1"":1}", json);
 
-                myEnumFlagsIntDictionary = JsonSerializer.Deserialize<Dictionary<MyEnumFlags, int>>(
-                    json
-                );
+                myEnumFlagsIntDictionary = JsonSerializer.Deserialize<
+                    Dictionary<MyEnumFlags, int>
+                >(json);
                 Assert.Equal(1, myEnumFlagsIntDictionary[(MyEnumFlags)(-1)]);
             }
 

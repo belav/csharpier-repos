@@ -28,9 +28,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         public void GenerateMethodInClosedFile()
         {
             var project =
-                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(
-                    ProjectName
-                );
+                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.AddFile(
                 project,
                 "Goo.vb",

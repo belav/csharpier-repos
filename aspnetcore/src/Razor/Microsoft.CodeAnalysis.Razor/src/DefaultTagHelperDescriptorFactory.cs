@@ -138,19 +138,16 @@ namespace Microsoft.CodeAnalysis.Razor
                         var tagName = HtmlTargetElementAttribute_Tag(targetElementAttribute);
                         ruleBuilder.TagName = tagName;
 
-                        var parentTag = HtmlTargetElementAttribute_ParentTag(
-                            targetElementAttribute
-                        );
+                        var parentTag =
+                            HtmlTargetElementAttribute_ParentTag(targetElementAttribute);
                         ruleBuilder.ParentTag = parentTag;
 
-                        var tagStructure = HtmlTargetElementAttribute_TagStructure(
-                            targetElementAttribute
-                        );
+                        var tagStructure =
+                            HtmlTargetElementAttribute_TagStructure(targetElementAttribute);
                         ruleBuilder.TagStructure = tagStructure;
 
-                        var requiredAttributeString = HtmlTargetElementAttribute_Attributes(
-                            targetElementAttribute
-                        );
+                        var requiredAttributeString =
+                            HtmlTargetElementAttribute_Attributes(targetElementAttribute);
                         RequiredAttributeParser.AddRequiredAttributes(
                             requiredAttributeString,
                             ruleBuilder

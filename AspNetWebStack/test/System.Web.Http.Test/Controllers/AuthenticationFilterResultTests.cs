@@ -41,9 +41,8 @@ namespace System.Web.Http.Controllers
                 CancellationToken expectedCancellationToken = CreateCancellationToken();
 
                 // Act
-                HttpResponseMessage response = await product.ExecuteAsync(
-                    expectedCancellationToken
-                );
+                HttpResponseMessage response =
+                    await product.ExecuteAsync(expectedCancellationToken);
 
                 // Assert
                 Assert.Equal(1, calls);
@@ -169,9 +168,8 @@ namespace System.Web.Http.Controllers
                 CancellationToken expectedCancellationToken = CreateCancellationToken();
 
                 // Act
-                HttpResponseMessage response = await product.ExecuteAsync(
-                    expectedCancellationToken
-                );
+                HttpResponseMessage response =
+                    await product.ExecuteAsync(expectedCancellationToken);
 
                 // Assert
                 Assert.Equal(1, calls);

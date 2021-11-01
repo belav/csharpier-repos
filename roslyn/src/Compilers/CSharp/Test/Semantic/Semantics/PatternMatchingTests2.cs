@@ -2160,9 +2160,8 @@ class Blah
                 "return obj is global::Class1 @class && this.i == @class.i;",
                 returnStatement.ToString()
             );
-            var modifiedReturnStatement = (ReturnStatementSyntax)new RemoveAliasQualifiers().Visit(
-                returnStatement
-            );
+            var modifiedReturnStatement =
+                (ReturnStatementSyntax)new RemoveAliasQualifiers().Visit(returnStatement);
             Assert.Equal(
                 "return obj is Class1 @class && this.i == @class.i;",
                 modifiedReturnStatement.ToString()
@@ -2212,9 +2211,8 @@ class Blah
                 .OfType<ReturnStatementSyntax>()
                 .Single();
             Assert.Equal("return obj is global::Class1 @class;", returnStatement.ToString());
-            var modifiedReturnStatement = (ReturnStatementSyntax)new RemoveAliasQualifiers().Visit(
-                returnStatement
-            );
+            var modifiedReturnStatement =
+                (ReturnStatementSyntax)new RemoveAliasQualifiers().Visit(returnStatement);
             Assert.Equal("return obj is Class1 @class;", modifiedReturnStatement.ToString());
             var gotModel = model.TryGetSpeculativeSemanticModel(
                 returnStatement.Location.SourceSpan.Start,

@@ -198,9 +198,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             var cancellationTokenSource = new CancellationTokenSource();
 
-            using var connection = client.CreateConnection<IRemoteTodoCommentsDiscoveryService>(
-                callback
-            );
+            using var connection =
+                client.CreateConnection<IRemoteTodoCommentsDiscoveryService>(callback);
 
             var invokeTask = connection.TryInvokeAsync(
                 (service, callbackId, cancellationToken) =>

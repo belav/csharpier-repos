@@ -73,9 +73,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 if (indexClose == -1)
                 {
                     throw new ArgumentException(
-                        message: Resources.FormatJQueryFormValueProviderFactory_MissingClosingBracket(
-                            key
-                        ),
+                        message: Resources.FormatJQueryFormValueProviderFactory_MissingClosingBracket(key),
                         paramName: nameof(key)
                     );
                 }

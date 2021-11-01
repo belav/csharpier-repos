@@ -66,9 +66,8 @@ namespace System.Security.Cryptography.X509Certificates
         private static void DisplayX509Certificate(X509Certificate2 certificate, IntPtr hwndParent)
         {
             using (
-                SafeCertContextHandle safeCertContext = X509Utils.DuplicateCertificateContext(
-                    certificate
-                )
+                SafeCertContextHandle safeCertContext =
+                    X509Utils.DuplicateCertificateContext(certificate)
             )
             {
                 if (safeCertContext.IsInvalid)
@@ -128,9 +127,8 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new ArgumentException(SR.Format(SR.Enum_InvalidValue, nameof(selectionFlag)));
 
             using (
-                SafeCertStoreHandle safeSourceStoreHandle = X509Utils.ExportToMemoryStore(
-                    certificates
-                )
+                SafeCertStoreHandle safeSourceStoreHandle =
+                    X509Utils.ExportToMemoryStore(certificates)
             )
             using (
                 SafeCertStoreHandle safeTargetStoreHandle = SelectFromStore(

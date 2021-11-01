@@ -902,9 +902,8 @@ namespace System.Collections.Immutable.Tests
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableList.Create<int>());
             ImmutableList<double> list = ImmutableList.Create<double>(1, 2, 3);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                list
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(list);
 
             object rootNode = DebuggerAttributes.GetFieldValue(
                 ImmutableList.Create<string>("1", "2", "3"),

@@ -668,9 +668,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             );
             Assert.NotNull(exportDefinition);
 
-            LazyMemberInfo lazyMember = ReflectionModelServices.GetExportingMember(
-                exportDefinition
-            );
+            LazyMemberInfo lazyMember =
+                ReflectionModelServices.GetExportingMember(exportDefinition);
             Assert.Equal(expectedLazyMember, lazyMember);
         }
 
@@ -812,9 +811,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             );
             Assert.NotNull(importDefinition);
 
-            LazyMemberInfo lazyMember = ReflectionModelServices.GetImportingMember(
-                importDefinition
-            );
+            LazyMemberInfo lazyMember =
+                ReflectionModelServices.GetImportingMember(importDefinition);
             Assert.Equal(expectedLazyMember, lazyMember);
         }
 
@@ -965,9 +963,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             );
             Assert.NotNull(importDefinition);
 
-            Lazy<ParameterInfo> lazyParameter = ReflectionModelServices.GetImportingParameter(
-                importDefinition
-            );
+            Lazy<ParameterInfo> lazyParameter =
+                ReflectionModelServices.GetImportingParameter(importDefinition);
             Assert.Equal(expectedLazyParameter, lazyParameter);
         }
 
@@ -1209,9 +1206,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 null
             );
 
-            var productImport = ReflectionModelServices.GetExportFactoryProductImportDefinition(
-                import
-            );
+            var productImport =
+                ReflectionModelServices.GetExportFactoryProductImportDefinition(import);
 
             var import2 = ReflectionModelServices.CreateImportDefinition(
                 bogusMember,

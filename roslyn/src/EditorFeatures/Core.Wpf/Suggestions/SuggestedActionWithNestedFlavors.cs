@@ -89,10 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             var builder = ArrayBuilder<SuggestedActionSet>.GetInstance();
 
             // We use ConfigureAwait(true) to stay on the UI thread.
-            var previewChangesSuggestedActionSet = await GetPreviewChangesFlavorAsync(
-                    cancellationToken
-                )
-                .ConfigureAwait(true);
+            var previewChangesSuggestedActionSet =
+                await GetPreviewChangesFlavorAsync(cancellationToken).ConfigureAwait(true);
             if (previewChangesSuggestedActionSet != null)
             {
                 builder.Add(previewChangesSuggestedActionSet);

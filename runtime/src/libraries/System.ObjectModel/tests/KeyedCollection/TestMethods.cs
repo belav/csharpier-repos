@@ -1508,9 +1508,10 @@ namespace System.Collections.ObjectModel.Tests
             IKeyedItem<TKey, TValue>[] itemsWithKeys;
             if (collectionDictionaryThreshold >= 0)
             {
-                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
-                    collectionDictionaryThreshold
-                );
+                var collection = new TestKeyedCollectionOfIKeyedItem<
+                    TKey,
+                    TValue
+                >(collectionDictionaryThreshold);
                 // dictionary is created when the threshold is exceeded
                 addItems.Value(
                     collection,
@@ -1523,9 +1524,10 @@ namespace System.Collections.ObjectModel.Tests
                 );
                 Assert.Null(collection.GetDictionary());
 
-                collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
-                    collectionDictionaryThreshold
-                );
+                collection = new TestKeyedCollectionOfIKeyedItem<
+                    TKey,
+                    TValue
+                >(collectionDictionaryThreshold);
                 addItems.Value(
                     collection,
                     GetNeverNullKeyMethod.Value.Bind(GenerateValue, GetKeyForItem),
@@ -1540,9 +1542,10 @@ namespace System.Collections.ObjectModel.Tests
             }
             else
             {
-                var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
-                    collectionDictionaryThreshold
-                );
+                var collection = new TestKeyedCollectionOfIKeyedItem<
+                    TKey,
+                    TValue
+                >(collectionDictionaryThreshold);
                 // dictionary is created when the threshold is exceeded
                 addItems.Value(
                     collection,
@@ -1555,9 +1558,10 @@ namespace System.Collections.ObjectModel.Tests
                 );
                 Assert.Null(collection.GetDictionary());
 
-                collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
-                    collectionDictionaryThreshold
-                );
+                collection = new TestKeyedCollectionOfIKeyedItem<
+                    TKey,
+                    TValue
+                >(collectionDictionaryThreshold);
                 addItems.Value(
                     collection,
                     GetNeverNullKeyMethod.Value.Bind(GenerateValue, GetKeyForItem),
@@ -1763,9 +1767,10 @@ namespace System.Collections.ObjectModel.Tests
             int collectionDictionaryThreshold
         )
         {
-            var collection = new TestKeyedCollectionOfIKeyedItem<TKey, TValue>(
-                collectionDictionaryThreshold
-            );
+            var collection = new TestKeyedCollectionOfIKeyedItem<
+                TKey,
+                TValue
+            >(collectionDictionaryThreshold);
             TKey[] tempKeys;
             IKeyedItem<TKey, TValue>[] tempItems;
             IKeyedItem<TKey, TValue>[] tempItemsWithKeys;

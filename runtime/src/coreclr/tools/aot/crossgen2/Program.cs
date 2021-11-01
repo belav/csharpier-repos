@@ -293,9 +293,7 @@ namespace ILCompiler
                     else
                     {
                         if (
-                            !instructionSetSupportBuilder.RemoveInstructionSetSupport(
-                                instructionSet
-                            )
+                            !instructionSetSupportBuilder.RemoveInstructionSetSupport(instructionSet)
                         )
                             throw new CommandLineException(
                                 String.Format(SR.InstructionSetMustNotBe, instructionSet)
@@ -357,9 +355,7 @@ namespace ILCompiler
                 supportedInstructionSet,
                 unsupportedInstructionSet,
                 optimisticInstructionSet,
-                InstructionSetSupportBuilder.GetNonSpecifiableInstructionSetsForArch(
-                    _targetArchitecture
-                ),
+                InstructionSetSupportBuilder.GetNonSpecifiableInstructionSetsForArch(_targetArchitecture),
                 _targetArchitecture
             );
         }
@@ -575,9 +571,8 @@ namespace ILCompiler
                     //
 
                     // Single method mode?
-                    MethodDesc singleMethod = CheckAndParseSingleMethodModeArguments(
-                        _typeSystemContext
-                    );
+                    MethodDesc singleMethod =
+                        CheckAndParseSingleMethodModeArguments(_typeSystemContext);
 
                     var logger = new Logger(Console.Out, _commandLineOptions.Verbose);
 
@@ -607,9 +602,8 @@ namespace ILCompiler
                         catch { } // Ignore non-managed pe files
                     }
 
-                    List<ModuleDesc> versionBubbleModules = new List<ModuleDesc>(
-                        versionBubbleModulesHash
-                    );
+                    List<ModuleDesc> versionBubbleModules =
+                        new List<ModuleDesc>(versionBubbleModulesHash);
 
                     if (!_commandLineOptions.Composite && inputModules.Count != 1)
                     {
@@ -689,9 +683,7 @@ namespace ILCompiler
                     );
 
                     if (_commandLineOptions.Partial)
-                        compilationGroup.ApplyProfilerGuidedCompilationRestriction(
-                            profileDataManager
-                        );
+                        compilationGroup.ApplyProfilerGuidedCompilationRestriction(profileDataManager);
                     else
                         compilationGroup.ApplyProfilerGuidedCompilationRestriction(null);
 

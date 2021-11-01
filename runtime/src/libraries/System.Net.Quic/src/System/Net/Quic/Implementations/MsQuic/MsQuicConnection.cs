@@ -123,9 +123,8 @@ namespace System.Net.Quic.Implementations.MsQuic
             try
             {
                 // this handle is ref counted by MsQuic, so safe to dispose here.
-                using SafeMsQuicConfigurationHandle config = SafeMsQuicConfigurationHandle.Create(
-                    options
-                );
+                using SafeMsQuicConfigurationHandle config =
+                    SafeMsQuicConfigurationHandle.Create(options);
 
                 uint status = MsQuicApi.Api.ConnectionOpenDelegate(
                     MsQuicApi.Api.Registration,
@@ -166,9 +165,8 @@ namespace System.Net.Quic.Implementations.MsQuic
                 );
 
                 Debug.Assert(state.Connection != null);
-                state.Connection._localEndPoint = MsQuicAddressHelpers.INetToIPEndPoint(
-                    ref inetAddress
-                );
+                state.Connection._localEndPoint =
+                    MsQuicAddressHelpers.INetToIPEndPoint(ref inetAddress);
                 state.Connection.SetNegotiatedAlpn(
                     connectionEvent.Data.Connected.NegotiatedAlpn,
                     connectionEvent.Data.Connected.NegotiatedAlpnLength

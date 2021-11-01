@@ -90,9 +90,8 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             _collectionChangedFlag = false;
-            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(
-                Constraints_CollectionChangedHandler
-            );
+            dt.Constraints.CollectionChanged +=
+                new CollectionChangeEventHandler(Constraints_CollectionChangedHandler);
             dt = DataProvider.CreateUniqueConstraint(dt);
             Assert.True(_collectionChangedFlag);
         }
@@ -316,9 +315,8 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateUniqueConstraint();
             _collectionChangedFlag = false;
-            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(
-                Constraints_CollectionChangedHandler
-            );
+            dt.Constraints.CollectionChanged +=
+                new CollectionChangeEventHandler(Constraints_CollectionChangedHandler);
             dt.Constraints.Remove(dt.Constraints[0]);
             Assert.True(_collectionChangedFlag);
         }
@@ -328,9 +326,8 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateUniqueConstraint();
             _collectionChangedFlag = false;
-            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(
-                Constraints_CollectionChangedHandler
-            );
+            dt.Constraints.CollectionChanged +=
+                new CollectionChangeEventHandler(Constraints_CollectionChangedHandler);
             dt.Constraints.Remove("constraint1");
             Assert.True(_collectionChangedFlag);
         }
@@ -340,9 +337,8 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             _collectionChangedFlag = false;
-            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(
-                Constraints_CollectionChangedHandler
-            );
+            dt.Constraints.CollectionChanged +=
+                new CollectionChangeEventHandler(Constraints_CollectionChangedHandler);
             dt = DataProvider.CreateUniqueConstraint(dt);
             Assert.True(_collectionChangedFlag);
         }
@@ -596,9 +592,8 @@ namespace System.Data.Tests
             Assert.Equal("constraint2", dt.Constraints[0].ConstraintName);
 
             dt = DataProvider.CreateUniqueConstraint();
-            dt.Constraints.CollectionChanged += new CollectionChangeEventHandler(
-                Constraints_CollectionChanged
-            );
+            dt.Constraints.CollectionChanged +=
+                new CollectionChangeEventHandler(Constraints_CollectionChanged);
             dt.Constraints.RemoveAt(0);
             Assert.True(_collectionChanged);
 

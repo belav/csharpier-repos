@@ -153,9 +153,8 @@ namespace System.Web.WebPages
                     // Can we build a file from the current path?
                     if (virtualPathFactory.Exists(virtualPath))
                     {
-                        var parentStartPage = virtualPathFactory.CreateInstance<StartPage>(
-                            virtualPath
-                        );
+                        var parentStartPage =
+                            virtualPathFactory.CreateInstance<StartPage>(virtualPath);
                         parentStartPage.VirtualPath = virtualPath;
                         parentStartPage.ChildPage = currentPage;
                         parentStartPage.VirtualPathFactory = virtualPathFactory;

@@ -312,9 +312,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
 
                 _containsCollectionMaterialization =
-                    new CollectionShaperFindingExpressionVisitor().ContainsCollectionMaterialization(
-                        shaperExpression
-                    );
+                    new CollectionShaperFindingExpressionVisitor().ContainsCollectionMaterialization(shaperExpression);
 
                 if (!_containsCollectionMaterialization)
                 {
@@ -428,9 +426,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             )
                         };
 
-                        conditionalMaterializationExpressions.AddRange(
-                            _collectionPopulatingExpressions
-                        );
+                        conditionalMaterializationExpressions.AddRange(_collectionPopulatingExpressions);
 
                         conditionalMaterializationExpressions.Add(
                             Expression.Condition(
@@ -484,9 +480,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                         (ProjectionBindingExpression)newExpression.Arguments[0];
 
                     var propertyMap =
-                        (IDictionary<IProperty, int>)GetProjectionIndex(
-                            projectionBindingExpression
-                        );
+                        (IDictionary<
+                            IProperty,
+                            int
+                        >)GetProjectionIndex(projectionBindingExpression);
                     _materializationContextBindings[parameterExpression] = propertyMap;
                     entityTypeIdentifyingExpressionOffsets[parameterExpression] =
                         propertyMap.Values.Max() + 1;
@@ -528,9 +525,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             _variables.Add(entityParameter);
                             var entityMaterializationExpression =
                                 _parentVisitor.InjectEntityMaterializers(entityShaperExpression);
-                            entityMaterializationExpression = Visit(
-                                entityMaterializationExpression
-                            );
+                            entityMaterializationExpression =
+                                Visit(entityMaterializationExpression);
 
                             _expressions.Add(
                                 Expression.Assign(entityParameter, entityMaterializationExpression)

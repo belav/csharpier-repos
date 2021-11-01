@@ -31,9 +31,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void Oneary()
         {
             CryptographicAttributeObject a0 = s_ca0;
-            CryptographicAttributeObjectCollection c = new CryptographicAttributeObjectCollection(
-                a0
-            );
+            CryptographicAttributeObjectCollection c =
+                new CryptographicAttributeObjectCollection(a0);
             AssertEquals(c, new CryptographicAttributeObject[] { a0 });
         }
 

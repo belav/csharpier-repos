@@ -448,12 +448,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 _severityFilter
                             )
                             .ConfigureAwait(false);
-                        _lazyNonConfigurableAnalyzers = ComputeNonConfigurableAnalyzers(
-                            UnsuppressedAnalyzers
-                        );
-                        _lazySymbolStartAnalyzers = ComputeSymbolStartAnalyzers(
-                            UnsuppressedAnalyzers
-                        );
+                        _lazyNonConfigurableAnalyzers =
+                            ComputeNonConfigurableAnalyzers(UnsuppressedAnalyzers);
+                        _lazySymbolStartAnalyzers =
+                            ComputeSymbolStartAnalyzers(UnsuppressedAnalyzers);
                         _lazyGeneratedCodeAnalysisFlagsMap =
                             await CreateGeneratedCodeAnalysisFlagsMapAsync(
                                     UnsuppressedAnalyzers,
@@ -509,9 +507,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         _lazyCompilationEndActions = MakeActionsByAnalyzer(
                             this.AnalyzerActions.CompilationEndActions
                         );
-                        _lazyCompilationEndAnalyzers = MakeCompilationEndAnalyzers(
-                            _lazyCompilationEndActions
-                        );
+                        _lazyCompilationEndAnalyzers =
+                            MakeCompilationEndAnalyzers(_lazyCompilationEndActions);
 
                         if (this.AnalyzerActions.SymbolStartActionsCount > 0)
                         {
@@ -908,9 +905,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
             else if (!WhenInitializedTask.IsCanceled)
             {
-                _lazyAnalyzerExecutor = this.AnalyzerExecutor.WithCancellationToken(
-                    cancellationToken
-                );
+                _lazyAnalyzerExecutor =
+                    this.AnalyzerExecutor.WithCancellationToken(cancellationToken);
 
                 await ProcessCompilationEventsAsync(
                         analysisScope,
@@ -1301,9 +1297,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     {
                         Debug.Assert(suppressableDiagnostics.Contains(diagnostic));
                         Debug.Assert(!diagnostic.IsSuppressed);
-                        var suppressedDiagnostic = diagnostic.WithProgrammaticSuppression(
-                            programmaticSuppressionInfo
-                        );
+                        var suppressedDiagnostic =
+                            diagnostic.WithProgrammaticSuppression(programmaticSuppressionInfo);
                         Debug.Assert(suppressedDiagnostic.IsSuppressed);
                         builder.Add(suppressedDiagnostic);
                     }
@@ -3841,9 +3836,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                         semanticModel,
                                         cancellationToken
                                     );
-                                    var operationsToAnalyze = getOperationsToAnalyzeWithStackGuard(
-                                        operationBlocksToAnalyze
-                                    );
+                                    var operationsToAnalyze =
+                                        getOperationsToAnalyzeWithStackGuard(operationBlocksToAnalyze);
 
                                     if (!operationsToAnalyze.IsEmpty)
                                     {
@@ -3858,9 +3852,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                         }
                                         finally
                                         {
-                                            AnalyzerExecutor.OnOperationBlockActionsExecuted(
-                                                operationBlocksToAnalyze
-                                            );
+                                            AnalyzerExecutor.OnOperationBlockActionsExecuted(operationBlocksToAnalyze);
                                         }
                                     }
                                 }

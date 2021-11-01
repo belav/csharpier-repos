@@ -23,9 +23,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void StringCtor()
         {
             string message = "This is a test message.";
-            RuntimeBinderInternalCompilerException rbe = new RuntimeBinderInternalCompilerException(
-                message
-            );
+            RuntimeBinderInternalCompilerException rbe =
+                new RuntimeBinderInternalCompilerException(message);
             Assert.Null(rbe.InnerException);
             Assert.Empty(rbe.Data);
             Assert.True((rbe.HResult & 0xFFFF0000) == 0x80130000); // Error from .NET

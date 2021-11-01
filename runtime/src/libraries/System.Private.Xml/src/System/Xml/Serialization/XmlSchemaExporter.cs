@@ -894,9 +894,8 @@ namespace System.Xml.Serialization
                         XmlSchemaSimpleTypeList list = new XmlSchemaSimpleTypeList();
                         if (pm.IsAnonymousType)
                         {
-                            list.ItemType = (XmlSchemaSimpleType)ExportAnonymousPrimitiveMapping(
-                                pm
-                            );
+                            list.ItemType =
+                                (XmlSchemaSimpleType)ExportAnonymousPrimitiveMapping(pm);
                         }
                         else
                         {

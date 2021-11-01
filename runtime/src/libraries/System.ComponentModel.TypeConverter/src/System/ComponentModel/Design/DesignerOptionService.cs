@@ -217,9 +217,8 @@ namespace System.ComponentModel.Design
 
                         if (_value != null)
                         {
-                            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(
-                                _value
-                            );
+                            PropertyDescriptorCollection props =
+                                TypeDescriptor.GetProperties(_value);
                             propList = new ArrayList(props.Count);
                             foreach (PropertyDescriptor prop in props)
                             {

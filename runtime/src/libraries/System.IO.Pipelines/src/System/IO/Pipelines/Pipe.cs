@@ -922,9 +922,7 @@ namespace System.IO.Pipelines
                     }
 
                     cancellationTokenRegistration =
-                        _readerAwaitable.ReleaseCancellationTokenRegistration(
-                            out cancellationToken
-                        );
+                        _readerAwaitable.ReleaseCancellationTokenRegistration(out cancellationToken);
                     GetReadResult(out result);
                 }
             }
@@ -1007,9 +1005,7 @@ namespace System.IO.Pipelines
                     GetFlushResult(ref result);
 
                     cancellationTokenRegistration =
-                        _writerAwaitable.ReleaseCancellationTokenRegistration(
-                            out cancellationToken
-                        );
+                        _writerAwaitable.ReleaseCancellationTokenRegistration(out cancellationToken);
                 }
             }
             finally

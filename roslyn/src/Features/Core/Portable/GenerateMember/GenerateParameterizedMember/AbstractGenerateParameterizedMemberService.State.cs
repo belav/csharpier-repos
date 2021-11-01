@@ -115,9 +115,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     );
                 var syntaxFacts = destinationProvider.GetService<ISyntaxFactsService>();
                 var syntaxFactory = destinationProvider.GetService<SyntaxGenerator>();
-                IsContainedInUnsafeType = service.ContainingTypesOrSelfHasUnsafeKeyword(
-                    TypeToGenerateIn
-                );
+                IsContainedInUnsafeType =
+                    service.ContainingTypesOrSelfHasUnsafeKeyword(TypeToGenerateIn);
                 var generatedMethod = await SignatureInfo
                     .GenerateMethodAsync(syntaxFactory, false, cancellationToken)
                     .ConfigureAwait(false);

@@ -182,9 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         )
                     )
                     {
-                        assemblyIdentityComparer = DesktopAssemblyIdentityComparer.LoadFromXml(
-                            appConfigStream
-                        );
+                        assemblyIdentityComparer =
+                            DesktopAssemblyIdentityComparer.LoadFromXml(appConfigStream);
                     }
 
                     if (touchedFilesLogger != null)

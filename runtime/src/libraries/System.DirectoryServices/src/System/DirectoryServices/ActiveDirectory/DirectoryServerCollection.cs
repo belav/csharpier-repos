@@ -316,9 +316,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             (server is DomainController)
                                 ? ((DomainController)server).NtdsaObjectName
                                 : ((AdamInstance)server).NtdsaObjectName;
-                        _crossRefEntry.Properties[PropertyManager.MsDSNCReplicaLocations].Add(
-                            ntdsaName
-                        );
+                        _crossRefEntry.Properties[
+                            PropertyManager.MsDSNCReplicaLocations
+                        ].Add(ntdsaName);
                     }
                     catch (COMException e)
                     {
@@ -375,9 +375,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             (value is DomainController)
                                 ? ((DomainController)value).NtdsaObjectName
                                 : ((AdamInstance)value).NtdsaObjectName;
-                        _crossRefEntry.Properties[PropertyManager.MsDSNCReplicaLocations].Remove(
-                            ntdsaName
-                        );
+                        _crossRefEntry.Properties[
+                            PropertyManager.MsDSNCReplicaLocations
+                        ].Remove(ntdsaName);
                     }
                 }
                 catch (COMException e)

@@ -42,9 +42,8 @@ namespace System.Net.NetworkInformation
                 try
                 {
                     string resolverConfig = File.ReadAllText(NetworkFiles.EtcResolvConfFile);
-                    DnsSuffix = StringParsingHelpers.ParseDnsSuffixFromResolvConfFile(
-                        resolverConfig
-                    );
+                    DnsSuffix =
+                        StringParsingHelpers.ParseDnsSuffixFromResolvConfFile(resolverConfig);
                     DnsAddresses = new InternalIPAddressCollection(
                         StringParsingHelpers.ParseDnsAddressesFromResolvConfFile(resolverConfig)
                     );

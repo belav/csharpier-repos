@@ -232,9 +232,9 @@ namespace System.Web.Http.Results
                     Assert.NotNull(response);
                     Assert.Equal(expectedStatusCode, response.StatusCode);
                     HttpContent content = response.Content;
-                    ObjectContent<object> typedContent = Assert.IsType<ObjectContent<object>>(
-                        content
-                    );
+                    ObjectContent<object> typedContent = Assert.IsType<
+                        ObjectContent<object>
+                    >(content);
                     Assert.Same(expectedContent, typedContent.Value);
                     Assert.Same(expectedFormatter, typedContent.Formatter);
                     Assert.NotNull(typedContent.Headers);
@@ -302,9 +302,9 @@ namespace System.Web.Http.Results
                     Assert.NotNull(response);
                     Assert.Equal(expectedStatusCode, response.StatusCode);
                     HttpContent content = response.Content;
-                    ObjectContent<object> typedContent = Assert.IsType<ObjectContent<object>>(
-                        content
-                    );
+                    ObjectContent<object> typedContent = Assert.IsType<
+                        ObjectContent<object>
+                    >(content);
                     Assert.Same(expectedContent, typedContent.Value);
                     Assert.Same(expectedFormatter, typedContent.Formatter);
                     Assert.NotNull(typedContent.Headers);

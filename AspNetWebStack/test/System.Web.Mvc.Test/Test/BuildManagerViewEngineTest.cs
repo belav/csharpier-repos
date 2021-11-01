@@ -175,9 +175,8 @@ namespace System.Web.Mvc.Test
             var activatorResolver = new Resolver<IViewPageActivator> { Current = activator.Object };
 
             // Act
-            TestableBuildManagerViewEngine engine = new TestableBuildManagerViewEngine(
-                activatorResolver: activatorResolver
-            );
+            TestableBuildManagerViewEngine engine =
+                new TestableBuildManagerViewEngine(activatorResolver: activatorResolver);
 
             // Assert
             Assert.Equal(activator.Object, engine.ViewPageActivator);

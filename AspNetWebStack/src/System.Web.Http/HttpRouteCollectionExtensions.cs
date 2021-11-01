@@ -109,9 +109,8 @@ namespace System.Web.Http
             }
 
             HttpRouteValueDictionary defaultsDictionary = new HttpRouteValueDictionary(defaults);
-            HttpRouteValueDictionary constraintsDictionary = new HttpRouteValueDictionary(
-                constraints
-            );
+            HttpRouteValueDictionary constraintsDictionary =
+                new HttpRouteValueDictionary(constraints);
             IHttpRoute route = routes.CreateRoute(
                 routeTemplate,
                 defaultsDictionary,

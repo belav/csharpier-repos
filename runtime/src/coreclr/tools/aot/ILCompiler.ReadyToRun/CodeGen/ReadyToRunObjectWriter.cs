@@ -362,13 +362,11 @@ namespace ILCompiler.DependencyAnalysis
                     {
                         peStream.Seek(0, SeekOrigin.Begin);
                         byte[] hash = md5Hash.ComputeHash(peStream);
-                        byte[] rsdsEntry = nativeDebugDirectoryEntryNode.GenerateRSDSEntryData(
-                            hash
-                        );
+                        byte[] rsdsEntry =
+                            nativeDebugDirectoryEntryNode.GenerateRSDSEntryData(hash);
 
-                        int offsetToUpdate = r2rPeBuilder.GetSymbolFilePosition(
-                            nativeDebugDirectoryEntryNode
-                        );
+                        int offsetToUpdate =
+                            r2rPeBuilder.GetSymbolFilePosition(nativeDebugDirectoryEntryNode);
                         peStream.Seek(offsetToUpdate, SeekOrigin.Begin);
                         peStream.Write(rsdsEntry);
                     }

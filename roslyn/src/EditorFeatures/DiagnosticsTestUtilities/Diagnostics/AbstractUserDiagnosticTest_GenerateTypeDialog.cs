@@ -95,9 +95,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 isCancelled: isCancelled
             );
 
-            testState.TestProjectManagementService.SetDefaultNamespace(
-                defaultNamespace: defaultNamespace
-            );
+            testState.TestProjectManagementService.SetDefaultNamespace(defaultNamespace: defaultNamespace);
 
             var generateTypeDiagFixes = diagnostics.SingleOrDefault(
                 df => GenerateTypeTestState.FixIds.Contains(df.Id)

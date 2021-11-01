@@ -159,9 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
                 );
             }
 
-            var sections = RemoveUnreachableCodeHelpers.GetSubsequentUnreachableSections(
-                firstUnreachableStatement
-            );
+            var sections =
+                RemoveUnreachableCodeHelpers.GetSubsequentUnreachableSections(firstUnreachableStatement);
             foreach (var section in sections)
             {
                 var span = TextSpan.FromBounds(

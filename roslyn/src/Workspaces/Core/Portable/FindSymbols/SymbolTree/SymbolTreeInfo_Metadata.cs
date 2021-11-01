@@ -623,9 +623,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 {
                     if (!interfaceImplHandle.IsNil)
                     {
-                        var interfaceImpl = _metadataReader.GetInterfaceImplementation(
-                            interfaceImplHandle
-                        );
+                        var interfaceImpl =
+                            _metadataReader.GetInterfaceImplementation(interfaceImplHandle);
                         PopulateInheritance(derivedTypeSimpleName, interfaceImpl.Interface);
                     }
                 }

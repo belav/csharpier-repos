@@ -44,9 +44,8 @@ namespace System.Runtime.Serialization.Json
                             }
                             else
                             {
-                                tempDelegate = new JsonFormatReaderGenerator().GenerateClassReader(
-                                    TraditionalClassDataContract
-                                );
+                                tempDelegate =
+                                    new JsonFormatReaderGenerator().GenerateClassReader(TraditionalClassDataContract);
                             }
 
                             Interlocked.MemoryBarrier();
@@ -81,9 +80,8 @@ namespace System.Runtime.Serialization.Json
                             }
                             else
                             {
-                                tempDelegate = new JsonFormatWriterGenerator().GenerateClassWriter(
-                                    TraditionalClassDataContract
-                                );
+                                tempDelegate =
+                                    new JsonFormatWriterGenerator().GenerateClassWriter(TraditionalClassDataContract);
                             }
 
                             Interlocked.MemoryBarrier();
@@ -195,9 +193,10 @@ namespace System.Runtime.Serialization.Json
                 if (_traditionalClassDataContract.MemberNames != null)
                 {
                     int memberCount = _traditionalClassDataContract.MemberNames.Length;
-                    Dictionary<string, object?> memberTable = new Dictionary<string, object?>(
-                        memberCount
-                    );
+                    Dictionary<string, object?> memberTable = new Dictionary<
+                        string,
+                        object?
+                    >(memberCount);
                     XmlDictionaryString[] decodedMemberNames = new XmlDictionaryString[memberCount];
                     for (int i = 0; i < memberCount; i++)
                     {

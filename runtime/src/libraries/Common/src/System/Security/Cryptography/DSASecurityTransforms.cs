@@ -351,9 +351,8 @@ namespace System.Security.Cryptography
                     ReadOnlySpan<byte> signature
                 )
                 {
-                    byte[] derFormatSignature = AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(
-                        signature
-                    );
+                    byte[] derFormatSignature =
+                        AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(signature);
 
                     return Interop.AppleCrypto.VerifySignature(
                         GetKeys().PublicKey,

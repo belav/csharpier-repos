@@ -1554,9 +1554,8 @@ class C
                     context =>
                     {
                         var declarator = (VariableDeclaratorSyntax)context.Node;
-                        var declaredSymbol = (ILocalSymbol)context.SemanticModel.GetDeclaredSymbol(
-                            declarator
-                        );
+                        var declaredSymbol =
+                            (ILocalSymbol)context.SemanticModel.GetDeclaredSymbol(declarator);
                         Assert.Equal(
                             declaredSymbol.Type.NullableAnnotation,
                             declaredSymbol.NullableAnnotation
@@ -1834,9 +1833,8 @@ class C
                     )
                 );
 
-                var speculativeTypeInfo = speculativeModel.GetTypeInfoAndVerifyIOperation(
-                    inCondition
-                );
+                var speculativeTypeInfo =
+                    speculativeModel.GetTypeInfoAndVerifyIOperation(inCondition);
                 Assert.Equal(conditionFlowState, speculativeTypeInfo.Nullability.FlowState);
 
                 speculativeTypeInfo = speculativeModel.GetTypeInfoAndVerifyIOperation(whenTrue);

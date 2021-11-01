@@ -310,9 +310,8 @@ namespace Microsoft.AspNetCore.Components
                     frames,
                     ownerIndex
                 );
-                _cascadingParameterEnumerator = new CascadingParameterEnumerator(
-                    cascadingParameters
-                );
+                _cascadingParameterEnumerator =
+                    new CascadingParameterEnumerator(cascadingParameters);
                 _isEnumeratingDirectParams = true;
             }
 

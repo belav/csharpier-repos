@@ -71,9 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     reportAnError =
                         (object)leastOverridden
-                            != overriding.ContainingAssembly.GetSpecialTypeMember(
-                                overriddenSpecialMember
-                            )
+                            != overriding.ContainingAssembly.GetSpecialTypeMember(overriddenSpecialMember)
                         && leastOverridden.ReturnType.Equals(
                             overriding.ReturnType,
                             TypeCompareKind.AllIgnoreOptions

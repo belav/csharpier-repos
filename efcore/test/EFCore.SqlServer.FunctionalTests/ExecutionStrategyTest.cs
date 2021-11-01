@@ -451,9 +451,7 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (externalStrategy)
                     {
-                        await new TestSqlServerRetryingExecutionStrategy(
-                            context
-                        ).ExecuteInTransactionAsync(
+                        await new TestSqlServerRetryingExecutionStrategy(context).ExecuteInTransactionAsync(
                             context,
                             (c, ct) => c.SaveChangesAsync(false, ct),
                             (c, _) =>
@@ -553,9 +551,12 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (externalStrategy)
                     {
-                        list = await new TestSqlServerRetryingExecutionStrategy(
-                            context
-                        ).ExecuteAsync(context, (c, ct) => c.Products.ToListAsync(ct), null);
+                        list =
+                            await new TestSqlServerRetryingExecutionStrategy(context).ExecuteAsync(
+                                context,
+                                (c, ct) => c.Products.ToListAsync(ct),
+                                null
+                            );
                     }
                     else
                     {
@@ -618,19 +619,18 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (externalStrategy)
                     {
-                        list = await new TestSqlServerRetryingExecutionStrategy(
-                            context
-                        ).ExecuteAsync(
-                            context,
-                            (c, ct) =>
-                                c.Set<Product>()
-                                    .FromSqlRaw(
-                                        @"SELECT [ID], [name]
+                        list =
+                            await new TestSqlServerRetryingExecutionStrategy(context).ExecuteAsync(
+                                context,
+                                (c, ct) =>
+                                    c.Set<Product>()
+                                        .FromSqlRaw(
+                                            @"SELECT [ID], [name]
                               FROM [Products]"
-                                    )
-                                    .ToListAsync(ct),
-                            null
-                        );
+                                        )
+                                        .ToListAsync(ct),
+                                null
+                            );
                     }
                     else
                     {
@@ -754,9 +754,11 @@ namespace Microsoft.EntityFrameworkCore
 
             if (async)
             {
-                var transaction = await new TestSqlServerRetryingExecutionStrategy(
-                    context
-                ).ExecuteAsync(context, c => context.Database.BeginTransactionAsync());
+                var transaction =
+                    await new TestSqlServerRetryingExecutionStrategy(context).ExecuteAsync(
+                        context,
+                        c => context.Database.BeginTransactionAsync()
+                    );
 
                 transaction.Dispose();
             }

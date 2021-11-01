@@ -370,9 +370,7 @@ class C { }";
                             value: DiagnosticDescriptor.MapSeverityToReport(effectiveSeverity)
                         );
                         compilation = compilation.WithOptions(
-                            compilation.Options.WithSpecificDiagnosticOptions(
-                                specificDiagnosticOptions
-                            )
+                            compilation.Options.WithSpecificDiagnosticOptions(specificDiagnosticOptions)
                         );
 
                         // Verify analyzer diagnostic without suppressor, also verify no suppressions.
@@ -414,9 +412,8 @@ class C { }";
                 DiagnosticSeverity.Warning,
                 configurable: true
             );
-            var suppressor = new DiagnosticSuppressorThrowsExceptionFromSupportedSuppressions(
-                expectedException
-            );
+            var suppressor =
+                new DiagnosticSuppressorThrowsExceptionFromSupportedSuppressions(expectedException);
             var exceptions = new List<Exception>();
             EventHandler<FirstChanceExceptionEventArgs> firstChanceException = (sender, e) =>
             {

@@ -299,9 +299,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             if (_lazySyntaxDiagnostics == null)
             {
-                var analysisScope = AnalysisScope.WithAnalyzers(
-                    _compilationBasedAnalyzersInAnalysisScope
-                );
+                var analysisScope =
+                    AnalysisScope.WithAnalyzers(_compilationBasedAnalyzersInAnalysisScope);
                 var syntaxDiagnostics = await GetAnalysisResultAsync(
                         analysisScope,
                         cancellationToken
@@ -352,9 +351,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             if (_lazySemanticDiagnostics == null)
             {
-                var analysisScope = AnalysisScope.WithAnalyzers(
-                    _compilationBasedAnalyzersInAnalysisScope
-                );
+                var analysisScope =
+                    AnalysisScope.WithAnalyzers(_compilationBasedAnalyzersInAnalysisScope);
                 var semanticDiagnostics = await GetAnalysisResultAsync(
                         analysisScope,
                         cancellationToken

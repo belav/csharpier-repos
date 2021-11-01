@@ -53,9 +53,8 @@ namespace System.Text.Json
                     && dataExtProperty.HasSetter
                 )
                 {
-                    state.Current.JsonPropertyNameAsString = JsonHelpers.Utf8GetString(
-                        unescapedPropertyName
-                    );
+                    state.Current.JsonPropertyNameAsString =
+                        JsonHelpers.Utf8GetString(unescapedPropertyName);
 
                     if (createExtensionProperty)
                     {

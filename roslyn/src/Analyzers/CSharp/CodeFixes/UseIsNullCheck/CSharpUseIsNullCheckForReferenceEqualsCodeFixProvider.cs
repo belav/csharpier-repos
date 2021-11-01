@@ -42,9 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             SyntaxKind.NullLiteralExpression
         );
 
-        private static readonly ConstantPatternSyntax s_nullLiteralPattern = ConstantPattern(
-            s_nullLiteralExpression
-        );
+        private static readonly ConstantPatternSyntax s_nullLiteralPattern =
+            ConstantPattern(s_nullLiteralExpression);
 
         private static SyntaxNode CreateEqualsNullCheck(ExpressionSyntax argument) =>
             BinaryExpression(SyntaxKind.EqualsExpression, argument, s_nullLiteralExpression)

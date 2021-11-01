@@ -1605,9 +1605,7 @@ WHERE ((c[""Discriminator""] = ""Product"") AND (NOT(c[""Discontinued""]) = NOT(
             bool async
         )
         {
-            await base.Where_negated_boolean_expression_compared_to_another_negated_boolean_expression(
-                async
-            );
+            await base.Where_negated_boolean_expression_compared_to_another_negated_boolean_expression(async);
 
             AssertSql(
                 @"SELECT c

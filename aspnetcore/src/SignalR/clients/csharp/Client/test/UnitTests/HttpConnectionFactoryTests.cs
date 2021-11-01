@@ -137,9 +137,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 property.SetValue(options, testValues[property.Name]);
             }
 
-            var shallowCopiedOptions = HttpConnectionFactory.ShallowCopyHttpConnectionOptions(
-                options
-            );
+            var shallowCopiedOptions =
+                HttpConnectionFactory.ShallowCopyHttpConnectionOptions(options);
 
             foreach (var property in properties)
             {

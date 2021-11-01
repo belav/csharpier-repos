@@ -205,16 +205,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 case AssignmentExpressionSyntax assignmentExpression:
                     if (assignmentExpression.IsDeconstruction())
                     {
-                        deconstructionInfoOpt = semanticModel.GetDeconstructionInfo(
-                            assignmentExpression
-                        );
+                        deconstructionInfoOpt =
+                            semanticModel.GetDeconstructionInfo(assignmentExpression);
                     }
                     break;
 
                 case ForEachVariableStatementSyntax forEachVariableStatement:
-                    deconstructionInfoOpt = semanticModel.GetDeconstructionInfo(
-                        forEachVariableStatement
-                    );
+                    deconstructionInfoOpt =
+                        semanticModel.GetDeconstructionInfo(forEachVariableStatement);
                     break;
             }
 

@@ -108,9 +108,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string newContent
         )
         {
-            return new SourceLocationTracker(lastPosition).UpdateLocation(
-                newContent
-            ).CurrentLocation;
+            return new SourceLocationTracker(lastPosition).UpdateLocation(newContent).CurrentLocation;
         }
     }
 }

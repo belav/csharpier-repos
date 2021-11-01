@@ -568,9 +568,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     services =>
                     {
-                        services.AddSingleton<IMultiplexedConnectionListenerFactory>(
-                            multiplexedConnectionListenerFactory
-                        );
+                        services.AddSingleton<IMultiplexedConnectionListenerFactory>(multiplexedConnectionListenerFactory);
                     }
                 )
             ) { }
@@ -614,9 +612,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     services =>
                     {
-                        services.AddSingleton<IMultiplexedConnectionListenerFactory>(
-                            multiplexedConnectionListenerFactory
-                        );
+                        services.AddSingleton<IMultiplexedConnectionListenerFactory>(multiplexedConnectionListenerFactory);
                     }
                 )
             ) { }
@@ -673,9 +669,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     },
                     services =>
                     {
-                        services.AddSingleton<IMultiplexedConnectionListenerFactory>(
-                            multiplexedConnectionListenerFactory
-                        );
+                        services.AddSingleton<IMultiplexedConnectionListenerFactory>(multiplexedConnectionListenerFactory);
                     }
                 )
             ) { }

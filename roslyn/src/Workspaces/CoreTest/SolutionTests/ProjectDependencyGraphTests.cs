@@ -337,9 +337,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             var projectId = solution.GetProjectsByName(project).Single().Id;
-            var projectIds = projectDependencyGraph.GetProjectsThatThisProjectDirectlyDependsOn(
-                projectId
-            );
+            var projectIds =
+                projectDependencyGraph.GetProjectsThatThisProjectDirectlyDependsOn(projectId);
 
             var actualResults = projectIds.Select(id => solution.GetRequiredProject(id).Name);
             Assert.Equal<string>(expectedResults.OrderBy(n => n), actualResults.OrderBy(n => n));
@@ -363,9 +362,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         )
         {
             var projectId = solution.GetProjectsByName(project).Single().Id;
-            var projectIds = projectDependencyGraph.GetProjectsThatThisProjectTransitivelyDependsOn(
-                projectId
-            );
+            var projectIds =
+                projectDependencyGraph.GetProjectsThatThisProjectTransitivelyDependsOn(projectId);
 
             var actualResults = projectIds.Select(id => solution.GetRequiredProject(id).Name);
             Assert.Equal<string>(expectedResults.OrderBy(n => n), actualResults.OrderBy(n => n));
@@ -773,9 +771,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             var projectId = solution.GetProjectsByName(project).Single().Id;
-            var projectIds = projectDependencyGraph.GetProjectsThatDirectlyDependOnThisProject(
-                projectId
-            );
+            var projectIds =
+                projectDependencyGraph.GetProjectsThatDirectlyDependOnThisProject(projectId);
 
             var actualResults = projectIds.Select(id => solution.GetRequiredProject(id).Name);
             Assert.Equal<string>(expectedResults.OrderBy(n => n), actualResults.OrderBy(n => n));
@@ -789,9 +786,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         {
             var projectDependencyGraph = solution.GetProjectDependencyGraph();
             var projectId = solution.GetProjectsByName(project).Single().Id;
-            var projectIds = projectDependencyGraph.GetProjectsThatTransitivelyDependOnThisProject(
-                projectId
-            );
+            var projectIds =
+                projectDependencyGraph.GetProjectsThatTransitivelyDependOnThisProject(projectId);
 
             var actualResults = projectIds.Select(id => solution.GetRequiredProject(id).Name);
 

@@ -85,9 +85,10 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
                     )
                 };
 
-                return new CngGcmAuthenticatedEncryptorFactory(
-                    _loggerFactory
-                ).CreateAuthenticatedEncryptorInstance(secret, configuration);
+                return new CngGcmAuthenticatedEncryptorFactory(_loggerFactory).CreateAuthenticatedEncryptorInstance(
+                    secret,
+                    configuration
+                );
 #endif
             }
             else
@@ -109,9 +110,10 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
                         )
                     };
 
-                    return new CngCbcAuthenticatedEncryptorFactory(
-                        _loggerFactory
-                    ).CreateAuthenticatedEncryptorInstance(secret, configuration);
+                    return new CngCbcAuthenticatedEncryptorFactory(_loggerFactory).CreateAuthenticatedEncryptorInstance(
+                        secret,
+                        configuration
+                    );
                 }
                 else
                 {
@@ -129,9 +131,10 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
                         )
                     };
 
-                    return new ManagedAuthenticatedEncryptorFactory(
-                        _loggerFactory
-                    ).CreateAuthenticatedEncryptorInstance(secret, configuration);
+                    return new ManagedAuthenticatedEncryptorFactory(_loggerFactory).CreateAuthenticatedEncryptorInstance(
+                        secret,
+                        configuration
+                    );
                 }
             }
         }

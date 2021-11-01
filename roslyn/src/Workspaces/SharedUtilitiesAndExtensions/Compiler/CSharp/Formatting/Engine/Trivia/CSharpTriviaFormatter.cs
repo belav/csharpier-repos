@@ -321,9 +321,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         ,
                         this.Options
                     );
-                var newTrivia = singleLineDocumentationCommentExteriorCommentRewriter.VisitTrivia(
-                    trivia
-                );
+                var newTrivia =
+                    singleLineDocumentationCommentExteriorCommentRewriter.VisitTrivia(trivia);
 
                 return newTrivia;
             }

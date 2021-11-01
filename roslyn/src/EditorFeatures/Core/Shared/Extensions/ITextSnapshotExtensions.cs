@@ -136,9 +136,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             return threadingContext.JoinableTaskFactory.Run(
                 () =>
-                    snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
-                        operationContext
-                    )
+                    snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(operationContext)
             );
         }
     }

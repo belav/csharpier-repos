@@ -717,9 +717,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 delegateType.DelegateInvokeMethod
             );
             var overloadResolutionResult = OverloadResolutionResult<MethodSymbol>.GetInstance();
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             OverloadResolution.MethodInvocationOverloadResolution(
                 methods: methodGroup.Methods,
                 typeArguments: methodGroup.TypeArguments,
@@ -795,9 +794,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             BoundExpression result;
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             var resolution = this.ResolveMethodGroup(
                 methodGroup,
                 expression,
@@ -2033,9 +2031,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     };
                 }
 
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 Conversion conversion = Conversions.ClassifyConversionFromExpression(
                     defaultValue,
                     parameterType,
@@ -2362,9 +2359,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var discardedDiagnostics = DiagnosticBag.GetInstance();
             int argumentCount = analyzedArguments.Arguments.Count;
-            ArrayBuilder<BoundExpression> newArguments = ArrayBuilder<BoundExpression>.GetInstance(
-                argumentCount
-            );
+            ArrayBuilder<BoundExpression> newArguments =
+                ArrayBuilder<BoundExpression>.GetInstance(argumentCount);
             newArguments.AddRange(analyzedArguments.Arguments);
             for (int i = 0; i < argumentCount; i++)
             {
@@ -2703,9 +2699,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             // Check that the method group contains something applicable. Otherwise error.
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             var resolution = ResolveMethodGroup(
                 methodGroup,
                 analyzedArguments: null,
@@ -2835,9 +2830,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var overloadResolutionResult =
                 OverloadResolutionResult<FunctionPointerMethodSymbol>.GetInstance();
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             var methodsBuilder = ArrayBuilder<FunctionPointerMethodSymbol>.GetInstance(1);
             methodsBuilder.Add(funcPtr.Signature);
             OverloadResolution.FunctionPointerOverloadResolution(

@@ -540,9 +540,8 @@ namespace System.Reflection
                     {
                         ss[i] = ts[i].Name;
                     }
-                    GenericTypeParameterBuilder[] genericParameters = mdb.DefineGenericParameters(
-                        ss
-                    );
+                    GenericTypeParameterBuilder[] genericParameters =
+                        mdb.DefineGenericParameters(ss);
                     for (int i = 0; i < genericParameters.Length; i++)
                     {
                         genericParameters[i].SetGenericParameterAttributes(

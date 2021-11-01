@@ -1150,9 +1150,7 @@ internal unsafe class testout1
                                                                 Convert.ToInt32(asgop119)
                                                                     + Convert.ToInt64(
                                                                         Convert.ToInt64(
-                                                                            Convert.ToUInt16(
-                                                                                s_a65_0
-                                                                            )
+                                                                            Convert.ToUInt16(s_a65_0)
                                                                                 - Convert.ToInt64(
                                                                                     -4681581972397180400L
                                                                                 )
@@ -1169,12 +1167,8 @@ internal unsafe class testout1
                                                                 - Convert.ToInt64(
                                                                     (
                                                                         Convert.ToInt64(
-                                                                            Convert.ToUInt32(
-                                                                                s_a92_0
-                                                                            )
-                                                                                - Convert.ToInt64(
-                                                                                    a206_0
-                                                                                )
+                                                                            Convert.ToUInt32(s_a92_0)
+                                                                                - Convert.ToInt64(a206_0)
                                                                         )
                                                                     )
                                                                 )
@@ -1322,9 +1316,7 @@ internal unsafe class testout1
                                                                 - Convert.ToInt64(
                                                                     Convert.ToInt64(
                                                                         Convert.ToUInt32(s_a105_0)
-                                                                            - Convert.ToInt64(
-                                                                                a452_0
-                                                                            )
+                                                                            - Convert.ToInt64(a452_0)
                                                                     )
                                                                 )
                                                         )
@@ -1403,9 +1395,7 @@ internal unsafe class testout1
                                                                 Convert.ToInt64(
                                                                     Convert.ToDouble(
                                                                         Convert.ToInt64(
-                                                                            Convert.ToInt32(
-                                                                                s_a158_0
-                                                                            )
+                                                                            Convert.ToInt32(s_a158_0)
                                                                                 - Convert.ToInt64(
                                                                                     -1731287084L
                                                                                 )
@@ -1688,9 +1678,7 @@ internal unsafe class testout1
                                                                     (
                                                                         Convert.ToInt64(
                                                                             Convert.ToInt64(
-                                                                                Convert.ToUInt32(
-                                                                                    s_a105_0
-                                                                                )
+                                                                                Convert.ToUInt32(s_a105_0)
                                                                                     - Convert.ToInt64(
                                                                                         Convert.ToInt64(
                                                                                             Convert.ToUInt16(
@@ -1783,9 +1771,7 @@ internal unsafe class testout1
                                                                     Convert.ToInt32(
                                                                         Convert.ToInt64(
                                                                             Convert.ToInt64(
-                                                                                Convert.ToUInt32(
-                                                                                    s_a105_0
-                                                                                )
+                                                                                Convert.ToUInt32(s_a105_0)
                                                                                     - Convert.ToInt64(
                                                                                         -2453101145507960936L
                                                                                     )
@@ -1793,12 +1779,8 @@ internal unsafe class testout1
                                                                         )
                                                                             + Convert.ToInt64(
                                                                                 Convert.ToInt64(
-                                                                                    Convert.ToUInt16(
-                                                                                        s_a65_0
-                                                                                    )
-                                                                                        - Convert.ToInt64(
-                                                                                            s_a15_0
-                                                                                        )
+                                                                                    Convert.ToUInt16(s_a65_0)
+                                                                                        - Convert.ToInt64(s_a15_0)
                                                                                 )
                                                                             )
                                                                     )
@@ -1819,9 +1801,7 @@ internal unsafe class testout1
                                                                                             - vtstatic_0.a119_0
                                                                                     )
                                                                                 )
-                                                                                    + Convert.ToInt64(
-                                                                                        asgop73
-                                                                                    )
+                                                                                    + Convert.ToInt64(asgop73)
                                                                             )
                                                                         )
                                                                 )
@@ -1975,9 +1955,7 @@ internal unsafe class testout1
                                                                 Convert.ToDouble(
                                                                     Convert.ToUInt64(
                                                                         Convert.ToUInt16(s_a65_0)
-                                                                            - Convert.ToInt64(
-                                                                                asgop105
-                                                                            )
+                                                                            - Convert.ToInt64(asgop105)
                                                                     ) * 0.47619047619047616
                                                                 )
                                                             )
@@ -2142,14 +2120,10 @@ internal unsafe class testout1
                                                                     Convert.ToInt64(
                                                                         Convert.ToDouble(
                                                                             Convert.ToInt64(
-                                                                                Convert.ToInt32(
-                                                                                    asgop119
-                                                                                )
+                                                                                Convert.ToInt32(asgop119)
                                                                                     + Convert.ToInt64(
                                                                                         Convert.ToInt64(
-                                                                                            Convert.ToUInt16(
-                                                                                                s_a65_0
-                                                                                            )
+                                                                                            Convert.ToUInt16(s_a65_0)
                                                                                                 - Convert.ToInt64(
                                                                                                     -4681581972397180400L
                                                                                                 )
@@ -2168,12 +2142,8 @@ internal unsafe class testout1
                                                                                 - Convert.ToInt64(
                                                                                     (
                                                                                         Convert.ToInt64(
-                                                                                            Convert.ToUInt32(
-                                                                                                s_a92_0
-                                                                                            )
-                                                                                                - Convert.ToInt64(
-                                                                                                    a206_0
-                                                                                                )
+                                                                                            Convert.ToUInt32(s_a92_0)
+                                                                                                - Convert.ToInt64(a206_0)
                                                                                         )
                                                                                     )
                                                                                 )
@@ -2229,9 +2199,8 @@ internal unsafe class testout1
                                                                     (
                                                                         Convert.ToInt64(
                                                                             Convert.ToInt64(
-                                                                                Convert.ToDouble(
-                                                                                    a206_0
-                                                                                ) / -107819633.03125
+                                                                                Convert.ToDouble(a206_0)
+                                                                                    / -107819633.03125
                                                                             )
                                                                         )
                                                                         * Convert.ToInt64(
@@ -2516,9 +2485,7 @@ internal unsafe class testout1
                                                                                 Convert.ToInt64(
                                                                                     Convert.ToInt16(
                                                                                         Convert.ToInt16(
-                                                                                            Convert.ToInt64(
-                                                                                                s_a116_0
-                                                                                            )
+                                                                                            Convert.ToInt64(s_a116_0)
                                                                                                 + Convert.ToInt64(
                                                                                                     4225041378952953975L
                                                                                                 )
@@ -2766,9 +2733,7 @@ internal unsafe class testout1
                                                                     Convert.ToInt32(asgop119)
                                                                         + Convert.ToInt64(
                                                                             Convert.ToInt64(
-                                                                                Convert.ToUInt16(
-                                                                                    s_a65_0
-                                                                                )
+                                                                                Convert.ToUInt16(s_a65_0)
                                                                                     - Convert.ToInt64(
                                                                                         -4681581972397180400L
                                                                                     )
@@ -2785,12 +2750,8 @@ internal unsafe class testout1
                                                                     - Convert.ToInt64(
                                                                         (
                                                                             Convert.ToInt64(
-                                                                                Convert.ToUInt32(
-                                                                                    s_a92_0
-                                                                                )
-                                                                                    - Convert.ToInt64(
-                                                                                        a206_0
-                                                                                    )
+                                                                                Convert.ToUInt32(s_a92_0)
+                                                                                    - Convert.ToInt64(a206_0)
                                                                             )
                                                                         )
                                                                     )
@@ -3079,9 +3040,7 @@ internal unsafe class testout1
                                                                         Convert.ToInt32(asgop119)
                                                                             + Convert.ToInt64(
                                                                                 Convert.ToInt64(
-                                                                                    Convert.ToUInt16(
-                                                                                        s_a65_0
-                                                                                    )
+                                                                                    Convert.ToUInt16(s_a65_0)
                                                                                         - Convert.ToInt64(
                                                                                             -4681581972397180400L
                                                                                         )
@@ -3100,12 +3059,8 @@ internal unsafe class testout1
                                                                         - Convert.ToInt64(
                                                                             (
                                                                                 Convert.ToInt64(
-                                                                                    Convert.ToUInt32(
-                                                                                        s_a92_0
-                                                                                    )
-                                                                                        - Convert.ToInt64(
-                                                                                            a206_0
-                                                                                        )
+                                                                                    Convert.ToUInt32(s_a92_0)
+                                                                                        - Convert.ToInt64(a206_0)
                                                                                 )
                                                                             )
                                                                         )
@@ -3409,14 +3364,10 @@ internal unsafe class testout1
                                                                 Convert.ToInt64(
                                                                     Convert.ToDouble(
                                                                         Convert.ToInt64(
-                                                                            Convert.ToInt32(
-                                                                                asgop119
-                                                                            )
+                                                                            Convert.ToInt32(asgop119)
                                                                                 + Convert.ToInt64(
                                                                                     Convert.ToInt64(
-                                                                                        Convert.ToUInt16(
-                                                                                            s_a65_0
-                                                                                        )
+                                                                                        Convert.ToUInt16(s_a65_0)
                                                                                             - Convert.ToInt64(
                                                                                                 -4681581972397180400L
                                                                                             )
@@ -3435,12 +3386,8 @@ internal unsafe class testout1
                                                                             - Convert.ToInt64(
                                                                                 (
                                                                                     Convert.ToInt64(
-                                                                                        Convert.ToUInt32(
-                                                                                            s_a92_0
-                                                                                        )
-                                                                                            - Convert.ToInt64(
-                                                                                                a206_0
-                                                                                            )
+                                                                                        Convert.ToUInt32(s_a92_0)
+                                                                                            - Convert.ToInt64(a206_0)
                                                                                     )
                                                                                 )
                                                                             )
@@ -3950,9 +3897,7 @@ internal unsafe class testout1
                                                                 (
                                                                     Convert.ToInt64(
                                                                         Convert.ToInt64(
-                                                                            Convert.ToUInt32(
-                                                                                s_a105_0
-                                                                            )
+                                                                            Convert.ToUInt32(s_a105_0)
                                                                                 - Convert.ToInt64(
                                                                                     Convert.ToInt64(
                                                                                         Convert.ToUInt16(
@@ -4042,9 +3987,7 @@ internal unsafe class testout1
                                                                 Convert.ToInt32(
                                                                     Convert.ToInt64(
                                                                         Convert.ToInt64(
-                                                                            Convert.ToUInt32(
-                                                                                s_a105_0
-                                                                            )
+                                                                            Convert.ToUInt32(s_a105_0)
                                                                                 - Convert.ToInt64(
                                                                                     -2453101145507960936L
                                                                                 )
@@ -4052,12 +3995,8 @@ internal unsafe class testout1
                                                                     )
                                                                         + Convert.ToInt64(
                                                                             Convert.ToInt64(
-                                                                                Convert.ToUInt16(
-                                                                                    s_a65_0
-                                                                                )
-                                                                                    - Convert.ToInt64(
-                                                                                        s_a15_0
-                                                                                    )
+                                                                                Convert.ToUInt16(s_a65_0)
+                                                                                    - Convert.ToInt64(s_a15_0)
                                                                             )
                                                                         )
                                                                 )
@@ -4078,9 +4017,7 @@ internal unsafe class testout1
                                                                                         - vtstatic_0.a119_0
                                                                                 )
                                                                             )
-                                                                                + Convert.ToInt64(
-                                                                                    asgop73
-                                                                                )
+                                                                                + Convert.ToInt64(asgop73)
                                                                         )
                                                                     )
                                                             )
@@ -4387,14 +4324,10 @@ internal unsafe class testout1
                                                                 Convert.ToInt64(
                                                                     Convert.ToDouble(
                                                                         Convert.ToInt64(
-                                                                            Convert.ToInt32(
-                                                                                asgop119
-                                                                            )
+                                                                            Convert.ToInt32(asgop119)
                                                                                 + Convert.ToInt64(
                                                                                     Convert.ToInt64(
-                                                                                        Convert.ToUInt16(
-                                                                                            s_a65_0
-                                                                                        )
+                                                                                        Convert.ToUInt16(s_a65_0)
                                                                                             - Convert.ToInt64(
                                                                                                 -4681581972397180400L
                                                                                             )
@@ -4413,12 +4346,8 @@ internal unsafe class testout1
                                                                             - Convert.ToInt64(
                                                                                 (
                                                                                     Convert.ToInt64(
-                                                                                        Convert.ToUInt32(
-                                                                                            s_a92_0
-                                                                                        )
-                                                                                            - Convert.ToInt64(
-                                                                                                a206_0
-                                                                                            )
+                                                                                        Convert.ToUInt32(s_a92_0)
+                                                                                            - Convert.ToInt64(a206_0)
                                                                                     )
                                                                                 )
                                                                             )
@@ -4733,9 +4662,7 @@ internal unsafe class testout1
                                                                             Convert.ToInt64(
                                                                                 Convert.ToInt16(
                                                                                     Convert.ToInt16(
-                                                                                        Convert.ToInt64(
-                                                                                            s_a116_0
-                                                                                        )
+                                                                                        Convert.ToInt64(s_a116_0)
                                                                                             + Convert.ToInt64(
                                                                                                 4225041378952953975L
                                                                                             )

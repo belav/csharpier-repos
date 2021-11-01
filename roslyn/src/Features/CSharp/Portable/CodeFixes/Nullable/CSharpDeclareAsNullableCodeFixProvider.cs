@@ -34,15 +34,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
         // 1. local null assignments: `return null;`, `local = null;`, `parameter = null;` (high confidence that the null is introduced deliberately and the API should be updated)
         // 2. invocation with null: `M(null);`, or assigning null to field or property (test code might do this even though the API should remain not-nullable, so FixAll should be invoked with care)
         // 3. conditional: `return x?.ToString();`
-        private const string AssigningNullLiteralLocallyEquivalenceKey = nameof(
-            AssigningNullLiteralLocallyEquivalenceKey
-        );
-        private const string AssigningNullLiteralRemotelyEquivalenceKey = nameof(
-            AssigningNullLiteralRemotelyEquivalenceKey
-        );
-        private const string ConditionalOperatorEquivalenceKey = nameof(
-            ConditionalOperatorEquivalenceKey
-        );
+        private const string AssigningNullLiteralLocallyEquivalenceKey =
+            nameof(AssigningNullLiteralLocallyEquivalenceKey);
+        private const string AssigningNullLiteralRemotelyEquivalenceKey =
+            nameof(AssigningNullLiteralRemotelyEquivalenceKey);
+        private const string ConditionalOperatorEquivalenceKey =
+            nameof(ConditionalOperatorEquivalenceKey);
 
         [ImportingConstructor]
         [SuppressMessage(

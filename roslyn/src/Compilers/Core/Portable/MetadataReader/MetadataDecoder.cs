@@ -180,9 +180,8 @@ namespace Microsoft.CodeAnalysis
 
             try
             {
-                BlobReader memoryReader = this.Module.GetTypeSpecificationSignatureReaderOrThrow(
-                    typeSpec
-                );
+                BlobReader memoryReader =
+                    this.Module.GetTypeSpecificationSignatureReaderOrThrow(typeSpec);
 
                 bool refersToNoPiaLocalType;
                 ptype = DecodeTypeOrThrow(ref memoryReader, out refersToNoPiaLocalType);
@@ -449,9 +448,8 @@ namespace Microsoft.CodeAnalysis
             var argumentsBuilder = ArrayBuilder<
                 KeyValuePair<TypeSymbol, ImmutableArray<ModifierInfo<TypeSymbol>>>
             >.GetInstance(argumentCount);
-            var argumentRefersToNoPiaLocalTypeBuilder = ArrayBuilder<bool>.GetInstance(
-                argumentCount
-            );
+            var argumentRefersToNoPiaLocalTypeBuilder =
+                ArrayBuilder<bool>.GetInstance(argumentCount);
 
             for (int argumentIndex = 0; argumentIndex < argumentCount; argumentIndex++)
             {
@@ -733,9 +731,8 @@ namespace Microsoft.CodeAnalysis
                 if (Module.IsNestedTypeDefOrThrow(typeDef))
                 {
                     // first resolve nesting type
-                    TypeDefinitionHandle containerTypeDef = Module.GetContainingTypeOrThrow(
-                        typeDef
-                    );
+                    TypeDefinitionHandle containerTypeDef =
+                        Module.GetContainingTypeOrThrow(typeDef);
 
                     // invalid metadata?
                     if (containerTypeDef.IsNil)
@@ -2136,9 +2133,8 @@ namespace Microsoft.CodeAnalysis
 
                         for (int i = 0; i < namedArgs.Length; i++)
                         {
-                            (namedArgs[i], _, _, _) = DecodeCustomAttributeNamedArgumentOrThrow(
-                                ref argsReader
-                            );
+                            (namedArgs[i], _, _, _) =
+                                DecodeCustomAttributeNamedArgumentOrThrow(ref argsReader);
                         }
                     }
 
@@ -2543,9 +2539,7 @@ namespace Microsoft.CodeAnalysis
                             visitedTypeDefTokens.Add(typeDef);
 
                             foreach (
-                                MethodDefinitionHandle methodDef in Module.GetMethodsOfTypeOrThrow(
-                                    typeDef
-                                )
+                                MethodDefinitionHandle methodDef in Module.GetMethodsOfTypeOrThrow(typeDef)
                             )
                             {
                                 if (methodDef == targetMethodDef)
@@ -2604,9 +2598,8 @@ namespace Microsoft.CodeAnalysis
                 var interfaceImplHandle in Module.GetInterfaceImplementationsOrThrow(searchTypeDef)
             )
             {
-                var interfaceImpl = Module.MetadataReader.GetInterfaceImplementation(
-                    interfaceImplHandle
-                );
+                var interfaceImpl =
+                    Module.MetadataReader.GetInterfaceImplementation(interfaceImplHandle);
                 EnqueueTypeToken(typeDefsToSearch, typeSymbolsToSearch, interfaceImpl.Interface);
             }
 

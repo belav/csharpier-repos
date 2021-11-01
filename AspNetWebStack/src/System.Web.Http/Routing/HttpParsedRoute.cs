@@ -204,9 +204,8 @@ namespace System.Web.Http.Routing
             }
 
             // All other default values must match if they are explicitly defined in the new values
-            HttpRouteValueDictionary otherDefaultValues = new HttpRouteValueDictionary(
-                defaultValues
-            );
+            HttpRouteValueDictionary otherDefaultValues =
+                new HttpRouteValueDictionary(defaultValues);
             ForEachParameter(
                 PathSegments,
                 delegate(PathParameterSubsegment parameterSubsegment)

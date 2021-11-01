@@ -708,9 +708,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     arguments.AttributeSyntax = attributesToBind[i];
 
                     // Early bind some well-known attributes
-                    CSharpAttributeData earlyBoundAttributeOpt = this.EarlyDecodeWellKnownAttribute(
-                        ref arguments
-                    );
+                    CSharpAttributeData earlyBoundAttributeOpt =
+                        this.EarlyDecodeWellKnownAttribute(ref arguments);
                     Debug.Assert(
                         earlyBoundAttributeOpt == null || !earlyBoundAttributeOpt.HasErrors
                     );

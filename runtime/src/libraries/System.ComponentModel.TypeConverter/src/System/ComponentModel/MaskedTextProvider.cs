@@ -117,9 +117,8 @@ namespace System.ComponentModel
         // Bit masks for bool properties.
         private static readonly int s_ASCII_ONLY = BitVector32.CreateMask();
         private static readonly int s_ALLOW_PROMPT_AS_INPUT = BitVector32.CreateMask(s_ASCII_ONLY);
-        private static readonly int s_INCLUDE_PROMPT = BitVector32.CreateMask(
-            s_ALLOW_PROMPT_AS_INPUT
-        );
+        private static readonly int s_INCLUDE_PROMPT =
+            BitVector32.CreateMask(s_ALLOW_PROMPT_AS_INPUT);
         private static readonly int s_INCLUDE_LITERALS = BitVector32.CreateMask(s_INCLUDE_PROMPT);
         private static readonly int s_RESET_ON_PROMPT = BitVector32.CreateMask(s_INCLUDE_LITERALS);
         private static readonly int s_RESET_ON_LITERALS = BitVector32.CreateMask(s_RESET_ON_PROMPT);

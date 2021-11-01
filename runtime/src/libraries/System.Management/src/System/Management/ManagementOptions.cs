@@ -181,14 +181,12 @@ namespace System.Management
                     context = new ManagementNamedValueCollection();
 
                 if (null != oldContext)
-                    oldContext.IdentifierChanged -= new IdentifierChangedEventHandler(
-                        HandleIdentifierChange
-                    );
+                    oldContext.IdentifierChanged -=
+                        new IdentifierChangedEventHandler(HandleIdentifierChange);
 
                 //register for change events in this object
-                context.IdentifierChanged += new IdentifierChangedEventHandler(
-                    HandleIdentifierChange
-                );
+                context.IdentifierChanged +=
+                    new IdentifierChangedEventHandler(HandleIdentifierChange);
 
                 //the context property has changed so act like we fired the event
                 HandleIdentifierChange(this, null);
@@ -1832,9 +1830,7 @@ namespace System.Management
             {
                 try
                 {
-                    return System.Runtime.InteropServices.Marshal.SecureStringToBSTR(
-                        securePassword
-                    );
+                    return System.Runtime.InteropServices.Marshal.SecureStringToBSTR(securePassword);
                 }
                 catch (OutOfMemoryException)
                 {

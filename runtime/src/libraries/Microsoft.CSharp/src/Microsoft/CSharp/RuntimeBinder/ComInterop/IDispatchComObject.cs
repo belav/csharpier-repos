@@ -409,9 +409,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             }
 
             // check type info in the type descriptions cache
-            ComTypes.ITypeInfo typeInfo = ComRuntimeHelpers.GetITypeInfoFromIDispatch(
-                DispatchObject
-            );
+            ComTypes.ITypeInfo typeInfo =
+                ComRuntimeHelpers.GetITypeInfoFromIDispatch(DispatchObject);
             if (typeInfo == null)
             {
                 _comTypeDesc = ComTypeDesc.CreateEmptyTypeDesc();
@@ -455,9 +454,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 events = new Dictionary<string, ComEventDesc>();
 
-                ComTypes.TYPEATTR classTypeAttr = ComRuntimeHelpers.GetTypeAttrForTypeInfo(
-                    classTypeInfo
-                );
+                ComTypes.TYPEATTR classTypeAttr =
+                    ComRuntimeHelpers.GetTypeAttrForTypeInfo(classTypeInfo);
                 for (int i = 0; i < classTypeAttr.cImplTypes; i++)
                 {
                     classTypeInfo.GetRefTypeOfImplType(i, out int hRefType);
@@ -500,9 +498,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             ref Dictionary<string, ComEventDesc> events
         )
         {
-            ComTypes.TYPEATTR sourceTypeAttribute = ComRuntimeHelpers.GetTypeAttrForTypeInfo(
-                sourceTypeInfo
-            );
+            ComTypes.TYPEATTR sourceTypeAttribute =
+                ComRuntimeHelpers.GetTypeAttrForTypeInfo(sourceTypeInfo);
 
             for (int index = 0; index < sourceTypeAttribute.cFuncs; index++)
             {
@@ -612,9 +609,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 return;
             }
 
-            ComTypes.ITypeInfo typeInfo = ComRuntimeHelpers.GetITypeInfoFromIDispatch(
-                DispatchObject
-            );
+            ComTypes.ITypeInfo typeInfo =
+                ComRuntimeHelpers.GetITypeInfoFromIDispatch(DispatchObject);
             if (typeInfo == null)
             {
                 _comTypeDesc = ComTypeDesc.CreateEmptyTypeDesc();

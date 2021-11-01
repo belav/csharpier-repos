@@ -73,9 +73,8 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
                 );
             }
 
-            var compositeDetailsProvider = new DefaultCompositeMetadataDetailsProvider(
-                detailsProviders
-            );
+            var compositeDetailsProvider =
+                new DefaultCompositeMetadataDetailsProvider(detailsProviders);
             return new DefaultModelMetadataProvider(
                 compositeDetailsProvider,
                 Options.Create(new MvcOptions())

@@ -178,9 +178,8 @@ namespace System.Data.Common
             }
 
             StringReader strreader = new StringReader(s);
-            XmlSerializer deserializerWithOutRootAttribute = ObjectStorage.GetXmlSerializer(
-                _dataType
-            );
+            XmlSerializer deserializerWithOutRootAttribute =
+                ObjectStorage.GetXmlSerializer(_dataType);
             return (deserializerWithOutRootAttribute.Deserialize(strreader))!;
         }
 

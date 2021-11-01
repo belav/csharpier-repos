@@ -35,9 +35,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal void RaiseDiagnosticsUpdated(DiagnosticsUpdatedArgs args)
         {
             // all diagnostics events are serialized.
-            var ev = _eventMap.GetEventHandlers<EventHandler<DiagnosticsUpdatedArgs>>(
-                DiagnosticsUpdatedEventName
-            );
+            var ev = _eventMap.GetEventHandlers<
+                EventHandler<DiagnosticsUpdatedArgs>
+            >(DiagnosticsUpdatedEventName);
             if (ev.HasHandlers)
             {
                 _eventQueue.ScheduleTask(
@@ -53,9 +53,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         )
         {
             // all diagnostics events are serialized.
-            var ev = _eventMap.GetEventHandlers<EventHandler<DiagnosticsUpdatedArgs>>(
-                DiagnosticsUpdatedEventName
-            );
+            var ev = _eventMap.GetEventHandlers<
+                EventHandler<DiagnosticsUpdatedArgs>
+            >(DiagnosticsUpdatedEventName);
             if (ev.HasHandlers)
             {
                 // we do this bulk update to reduce number of tasks (with captured data) enqueued.
@@ -77,9 +77,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         )
         {
             // all diagnostics events are serialized.
-            var ev = _eventMap.GetEventHandlers<EventHandler<DiagnosticsUpdatedArgs>>(
-                DiagnosticsUpdatedEventName
-            );
+            var ev = _eventMap.GetEventHandlers<
+                EventHandler<DiagnosticsUpdatedArgs>
+            >(DiagnosticsUpdatedEventName);
             if (ev.HasHandlers)
             {
                 // we do this bulk update to reduce number of tasks (with captured data) enqueued.

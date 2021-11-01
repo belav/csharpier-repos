@@ -22,9 +22,8 @@ namespace System.Reflection.TypeLoading.Ecma
             string? culture = a.Culture.GetStringOrNull(reader);
             byte[]? pkOrPkt = a.PublicKeyOrToken.GetBlobBytes(reader);
             AssemblyFlags flags = a.Flags;
-            AssemblyNameFlags assemblyNameFlags = Helpers.ConvertAssemblyFlagsToAssemblyNameFlags(
-                flags
-            );
+            AssemblyNameFlags assemblyNameFlags =
+                Helpers.ConvertAssemblyFlagsToAssemblyNameFlags(flags);
             if ((flags & AssemblyFlags.PublicKey) != 0)
             {
                 pkOrPkt = pkOrPkt.ComputePublicKeyToken();

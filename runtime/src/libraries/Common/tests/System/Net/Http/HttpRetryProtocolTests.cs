@@ -52,9 +52,7 @@ namespace System.Net.Http.Functional.Tests
                         async connection =>
                         {
                             // Initial response
-                            await connection.ReadRequestHeaderAndSendResponseAsync(
-                                content: s_simpleContent
-                            );
+                            await connection.ReadRequestHeaderAndSendResponseAsync(content: s_simpleContent);
 
                             // Second response: Read request headers, then close connection
                             await connection.ReadRequestHeaderAsync();
@@ -62,9 +60,7 @@ namespace System.Net.Http.Functional.Tests
                     );
 
                     // Client should reconnect.  Accept that connection and send response.
-                    await server.AcceptConnectionSendResponseAndCloseAsync(
-                        content: s_simpleContent
-                    );
+                    await server.AcceptConnectionSendResponseAndCloseAsync(content: s_simpleContent);
                 }
             );
         }
@@ -119,9 +115,7 @@ namespace System.Net.Http.Functional.Tests
                             server.ListenSocket.Close();
 
                             // Initial response
-                            await connection.ReadRequestHeaderAndSendResponseAsync(
-                                content: s_simpleContent
-                            );
+                            await connection.ReadRequestHeaderAndSendResponseAsync(content: s_simpleContent);
 
                             // Second response: Read request headers, then close connection
                             List<string> lines = await connection.ReadRequestHeaderAsync();

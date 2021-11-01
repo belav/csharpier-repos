@@ -93,9 +93,8 @@ namespace System.Xml.Serialization
                 {
                     _schemaSet = new XmlSchemaSet();
                     _schemaSet.XmlResolver = null;
-                    _schemaSet.ValidationEventHandler += new ValidationEventHandler(
-                        IgnoreCompileErrors
-                    );
+                    _schemaSet.ValidationEventHandler +=
+                        new ValidationEventHandler(IgnoreCompileErrors);
                 }
                 return _schemaSet;
             }

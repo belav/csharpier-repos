@@ -401,12 +401,12 @@ namespace System.Buffers.Text
             Vector256<sbyte> mask2F = Vector256.Create((sbyte)'/');
             Vector256<sbyte> mergeConstant0 = Vector256.Create(0x01400140).AsSByte();
             Vector256<short> mergeConstant1 = Vector256.Create(0x00011000).AsInt16();
-            Vector256<sbyte> packBytesInLaneMask = ReadVector<Vector256<sbyte>>(
-                s_avxDecodePackBytesInLaneMask
-            );
-            Vector256<int> packLanesControl = ReadVector<Vector256<sbyte>>(
-                    s_avxDecodePackLanesControl
-                )
+            Vector256<sbyte> packBytesInLaneMask = ReadVector<
+                Vector256<sbyte>
+            >(s_avxDecodePackBytesInLaneMask);
+            Vector256<int> packLanesControl = ReadVector<
+                Vector256<sbyte>
+            >(s_avxDecodePackLanesControl)
                 .AsInt32();
 
             byte* src = srcBytes;

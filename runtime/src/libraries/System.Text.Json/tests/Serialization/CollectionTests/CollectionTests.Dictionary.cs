@@ -161,9 +161,8 @@ namespace System.Text.Json.Serialization.Tests
             const string ReorderedJsonString = @"{""Hello2"":""World2"",""Hello"":""World""}";
 
             {
-                WrapperForIDictionary obj = JsonSerializer.Deserialize<WrapperForIDictionary>(
-                    JsonString
-                );
+                WrapperForIDictionary obj =
+                    JsonSerializer.Deserialize<WrapperForIDictionary>(JsonString);
                 Assert.Equal("World", ((JsonElement)obj["Hello"]).GetString());
                 Assert.Equal("World2", ((JsonElement)obj["Hello2"]).GetString());
 
@@ -240,9 +239,7 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Assert.Throws<NotSupportedException>(
                     () =>
-                        JsonSerializer.Deserialize<StringToStringIImmutableDictionaryWrapper>(
-                            JsonString
-                        )
+                        JsonSerializer.Deserialize<StringToStringIImmutableDictionaryWrapper>(JsonString)
                 );
 
                 StringToStringIImmutableDictionaryWrapper obj =
@@ -301,9 +298,10 @@ namespace System.Text.Json.Serialization.Tests
 
             {
                 GenericStructIDictionaryWrapper<string, string>? obj =
-                    JsonSerializer.Deserialize<GenericStructIDictionaryWrapper<string, string>?>(
-                        JsonString
-                    );
+                    JsonSerializer.Deserialize<GenericStructIDictionaryWrapper<
+                            string,
+                            string
+                        >?>(JsonString);
                 Assert.True(obj.HasValue);
                 Assert.Equal("World", obj.Value["Hello"]);
                 Assert.Equal("World2", obj.Value["Hello2"]);
@@ -523,9 +521,9 @@ namespace System.Text.Json.Serialization.Tests
         public static void DictionaryOfArray()
         {
             const string JsonString = @"{""Key1"":[1,2],""Key2"":[3,4]}";
-            Dictionary<string, int[]> obj = JsonSerializer.Deserialize<Dictionary<string, int[]>>(
-                JsonString
-            );
+            Dictionary<string, int[]> obj = JsonSerializer.Deserialize<
+                Dictionary<string, int[]>
+            >(JsonString);
 
             Assert.Equal(2, obj.Count);
             Assert.Equal(2, obj["Key1"].Length);
@@ -612,9 +610,10 @@ namespace System.Text.Json.Serialization.Tests
 
             {
                 ImmutableSortedDictionary<string, int>[] obj =
-                    JsonSerializer.Deserialize<ImmutableSortedDictionary<string, int>[]>(
-                        JsonString
-                    );
+                    JsonSerializer.Deserialize<ImmutableSortedDictionary<
+                            string,
+                            int
+                        >[]>(JsonString);
 
                 Assert.Equal(2, obj.Length);
                 Assert.Equal(2, obj[0].Count);
@@ -1628,9 +1627,7 @@ namespace System.Text.Json.Serialization.Tests
             var json =
                 "{\"Test\":\"value1\",\"Dict\":null,\"Child\":{\"Test\":null,\"Dict\":null}}";
             ClassWithDictionaryOfString_ChildWithDictionaryOfString actual =
-                JsonSerializer.Deserialize<ClassWithDictionaryOfString_ChildWithDictionaryOfString>(
-                    json
-                );
+                JsonSerializer.Deserialize<ClassWithDictionaryOfString_ChildWithDictionaryOfString>(json);
 
             Assert.Equal("value1", actual.Test);
             Assert.Null(actual.Dict);
@@ -1662,9 +1659,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var json = "{\"Test\":\"value1\",\"Child\":{}}";
             ClassWithDictionaryOfString_ChildWithDictionaryOfString actual =
-                JsonSerializer.Deserialize<ClassWithDictionaryOfString_ChildWithDictionaryOfString>(
-                    json
-                );
+                JsonSerializer.Deserialize<ClassWithDictionaryOfString_ChildWithDictionaryOfString>(json);
 
             Assert.Equal("value1", actual.Test);
             Assert.Null(actual.Dict);
@@ -1986,9 +1981,7 @@ namespace System.Text.Json.Serialization.Tests
             DictionaryThatOnlyImplementsIDictionaryOfStringPoco dictionary;
 
             dictionary =
-                JsonSerializer.Deserialize<DictionaryThatOnlyImplementsIDictionaryOfStringPoco>(
-                    Json
-                );
+                JsonSerializer.Deserialize<DictionaryThatOnlyImplementsIDictionaryOfStringPoco>(Json);
             Assert.Equal(1, dictionary["One"].Id);
             Assert.Equal(2, dictionary["Two"].Id);
 

@@ -18,9 +18,8 @@ namespace System
             out int result
         );
 
-        private static readonly MatchNumberDelegate s_hebrewNumberParser = new MatchNumberDelegate(
-            MatchHebrewDigits
-        );
+        private static readonly MatchNumberDelegate s_hebrewNumberParser =
+            new MatchNumberDelegate(MatchHebrewDigits);
 
         internal static DateTime ParseExact(
             ReadOnlySpan<char> s,

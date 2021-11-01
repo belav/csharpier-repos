@@ -56,9 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             _options = options;
             _lazyLoaderParameterBindingFactoryDependencies =
                 lazyLoaderParameterBindingFactoryDependencies;
-            _directBindingConvention = new ConstructorBindingConvention(
-                conventionSetBuilderDependencies
-            );
+            _directBindingConvention =
+                new ConstructorBindingConvention(conventionSetBuilderDependencies);
         }
 
         /// <inheritdoc />
@@ -278,9 +277,11 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                 {
                     serviceProperty = entityType.AddServiceProperty(_lazyLoaderProperty);
                     serviceProperty.SetParameterBinding(
-                        (ServiceParameterBinding)new LazyLoaderParameterBindingFactory(
-                            _lazyLoaderParameterBindingFactoryDependencies
-                        ).Bind(entityType, typeof(ILazyLoader), nameof(IProxyLazyLoader.LazyLoader))
+                        (ServiceParameterBinding)new LazyLoaderParameterBindingFactory(_lazyLoaderParameterBindingFactoryDependencies).Bind(
+                            entityType,
+                            typeof(ILazyLoader),
+                            nameof(IProxyLazyLoader.LazyLoader)
+                        )
                     );
                 }
 

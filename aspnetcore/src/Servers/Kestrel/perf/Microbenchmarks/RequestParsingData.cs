@@ -67,24 +67,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             Encoding.ASCII.GetBytes(
                 string.Concat(Enumerable.Repeat(_plaintextTechEmpowerRequest, Pipelining))
             );
-        public static readonly byte[] PlaintextTechEmpowerRequest = Encoding.ASCII.GetBytes(
-            _plaintextTechEmpowerRequest
-        );
+        public static readonly byte[] PlaintextTechEmpowerRequest =
+            Encoding.ASCII.GetBytes(_plaintextTechEmpowerRequest);
 
-        public static readonly byte[] JsonTechEmpowerRequest = Encoding.ASCII.GetBytes(
-            _jsonTechEmpowerRequest
-        );
+        public static readonly byte[] JsonTechEmpowerRequest =
+            Encoding.ASCII.GetBytes(_jsonTechEmpowerRequest);
 
-        public static readonly byte[] PlaintextAbsoluteUriRequest = Encoding.ASCII.GetBytes(
-            _plaintextAbsoluteUriRequest
-        );
+        public static readonly byte[] PlaintextAbsoluteUriRequest =
+            Encoding.ASCII.GetBytes(_plaintextAbsoluteUriRequest);
 
         public static readonly byte[] LiveaspnetPipelinedRequests = Encoding.ASCII.GetBytes(
             string.Concat(Enumerable.Repeat(_liveaspnetRequest, Pipelining))
         );
-        public static readonly byte[] LiveaspnetRequest = Encoding.ASCII.GetBytes(
-            _liveaspnetRequest
-        );
+        public static readonly byte[] LiveaspnetRequest =
+            Encoding.ASCII.GetBytes(_liveaspnetRequest);
 
         public static readonly byte[] UnicodePipelinedRequests = Encoding.ASCII.GetBytes(
             string.Concat(Enumerable.Repeat(_unicodeRequest, Pipelining))

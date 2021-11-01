@@ -974,17 +974,15 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                 showUI: UIOption.AllDialogs,
                 onUserCancel: UICancelOption.ThrowException
             );
-            string[] RemainingSourceFilesWithPath = System.IO.Directory.GetFiles(
-                FullPathToSourceDirectory
-            );
+            string[] RemainingSourceFilesWithPath =
+                System.IO.Directory.GetFiles(FullPathToSourceDirectory);
             // We couldn't move one file
             Assert.Equal(1, RemainingSourceFilesWithPath.Length);
             // Ensure the file left has correct data
             Assert.True(HasExpectedData(RemainingSourceFilesWithPath[0], SourceData));
 
-            string[] DestinationFilesWithPath = System.IO.Directory.GetFiles(
-                FullPathToTargetDirectory
-            );
+            string[] DestinationFilesWithPath =
+                System.IO.Directory.GetFiles(FullPathToTargetDirectory);
             Assert.Equal(6, DestinationFilesWithPath.Length);
             foreach (var CurrentFile in DestinationFilesWithPath)
             {
@@ -1081,17 +1079,15 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                         overwrite: false
                     )
             );
-            string[] RemainingSourceFilesWithPath = System.IO.Directory.GetFiles(
-                FullPathToSourceDirectory
-            );
+            string[] RemainingSourceFilesWithPath =
+                System.IO.Directory.GetFiles(FullPathToSourceDirectory);
             // We couldn't move one file
             Assert.Equal(1, RemainingSourceFilesWithPath.Length);
             // Ensure the file left has correct data
             Assert.True(HasExpectedData(RemainingSourceFilesWithPath[0], SourceData));
 
-            string[] DestinationFilesWithPath = System.IO.Directory.GetFiles(
-                FullPathToTargetDirectory
-            );
+            string[] DestinationFilesWithPath =
+                System.IO.Directory.GetFiles(FullPathToTargetDirectory);
             Assert.Equal(6, DestinationFilesWithPath.Length);
             foreach (var CurrentFile in DestinationFilesWithPath)
             {

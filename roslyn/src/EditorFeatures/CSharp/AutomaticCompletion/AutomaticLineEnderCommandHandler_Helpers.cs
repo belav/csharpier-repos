@@ -417,9 +417,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         {
             // 1. Add '()' after the type.
             // e.g. var c = new Bar => var c = new Bar()
-            var objectCreationNodeWithArgumentList = WithArgumentListIfNeeded(
-                objectCreationExpressionNode
-            );
+            var objectCreationNodeWithArgumentList =
+                WithArgumentListIfNeeded(objectCreationExpressionNode);
 
             // 2. Add or remove initializer
             // e.g. var c = new Bar() => var c = new Bar() { }

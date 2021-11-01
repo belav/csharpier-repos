@@ -27,9 +27,8 @@ namespace System.Net
             get { return _memoryBlob; }
         }
 
-        private static readonly IOCompletionCallback s_IOCallback = new IOCompletionCallback(
-            WaitCallback
-        );
+        private static readonly IOCompletionCallback s_IOCallback =
+            new IOCompletionCallback(WaitCallback);
 
         internal ListenerClientCertAsyncResult(
             ThreadPoolBoundHandle boundHandle,
@@ -205,9 +204,7 @@ namespace System.Net
         )
         {
             ListenerClientCertAsyncResult asyncResult =
-                (ListenerClientCertAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                    nativeOverlapped
-                )!;
+                (ListenerClientCertAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(
                     null,

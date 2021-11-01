@@ -45,9 +45,9 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                         groupName,
                         EmptyGroupConnectionList
                     );
-                    ((ICollection<KeyValuePair<string, GroupConnectionList>>)(_groups)).Remove(
-                        groupToRemove
-                    );
+                    (
+                        (ICollection<KeyValuePair<string, GroupConnectionList>>)(_groups)
+                    ).Remove(groupToRemove);
                 }
             }
         }

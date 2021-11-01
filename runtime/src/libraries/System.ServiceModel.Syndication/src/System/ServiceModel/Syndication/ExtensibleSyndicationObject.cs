@@ -86,9 +86,8 @@ namespace System.ServiceModel.Syndication
                 throw new ArgumentOutOfRangeException(nameof(maxExtensionSize));
             }
 
-            XmlDictionaryReader r = XmlDictionaryReader.CreateDictionaryReader(
-                readerOverUnparsedExtensions
-            );
+            XmlDictionaryReader r =
+                XmlDictionaryReader.CreateDictionaryReader(readerOverUnparsedExtensions);
             _elementExtensions = new SyndicationElementExtensionCollection(
                 CreateXmlBuffer(r, maxExtensionSize)
             );

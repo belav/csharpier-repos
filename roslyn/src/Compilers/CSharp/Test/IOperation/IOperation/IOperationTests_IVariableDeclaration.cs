@@ -746,9 +746,8 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(
-                compilation
-            );
+            (var operation, _) =
+                GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(compilation);
             var declarator = (IVariableDeclaratorOperation)operation;
             Assert.Equal(2, declarator.Children.Count());
             Assert.Equal(OperationKind.Literal, declarator.Children.First().Kind);
@@ -771,9 +770,8 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(
-                compilation
-            );
+            (var operation, _) =
+                GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(compilation);
             var declarator = (IVariableDeclaratorOperation)operation;
             Assert.Equal(1, declarator.Children.Count());
             Assert.Equal(OperationKind.Literal, declarator.Children.First().Kind);
@@ -795,9 +793,8 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(
-                compilation
-            );
+            (var operation, _) =
+                GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(compilation);
             var declarator = (IVariableDeclaratorOperation)operation;
             Assert.Equal(1, declarator.Children.Count());
             Assert.Equal(OperationKind.VariableInitializer, declarator.Children.ElementAt(0).Kind);
@@ -819,9 +816,8 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(
-                compilation
-            );
+            (var operation, _) =
+                GetOperationAndSyntaxForTest<VariableDeclaratorSyntax>(compilation);
             Assert.Empty(operation.Children);
         }
 
@@ -1030,9 +1026,8 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclarationSyntax>(
-                compilation
-            );
+            (var operation, _) =
+                GetOperationAndSyntaxForTest<VariableDeclarationSyntax>(compilation);
             var declaration = (IVariableDeclarationOperation)operation;
             Assert.Equal(2, declaration.Children.Count());
             Assert.Equal(OperationKind.Literal, declaration.Children.First().Kind);
@@ -1055,9 +1050,8 @@ class C
 ";
 
             var compilation = CreateEmptyCompilation(source);
-            (var operation, _) = GetOperationAndSyntaxForTest<VariableDeclarationSyntax>(
-                compilation
-            );
+            (var operation, _) =
+                GetOperationAndSyntaxForTest<VariableDeclarationSyntax>(compilation);
             var declaration = (IVariableDeclarationOperation)operation;
             Assert.Equal(2, declaration.Children.Count());
             Assert.Equal(OperationKind.Literal, declaration.Children.First().Kind);

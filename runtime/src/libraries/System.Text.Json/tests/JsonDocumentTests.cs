@@ -3976,9 +3976,8 @@ namespace System.Text.Json.Tests
             }
 
             TextReader reader = new StringReader(jsonString);
-            return s_expectedConcat[testCaseType] = JsonTestHelper.NewtonsoftReturnStringHelper(
-                reader
-            );
+            return s_expectedConcat[testCaseType] =
+                JsonTestHelper.NewtonsoftReturnStringHelper(reader);
         }
 
         private static string GetCompactJson(TestCaseType testCaseType, string jsonString)

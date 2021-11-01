@@ -407,17 +407,14 @@ namespace Microsoft.Extensions.Caching.SqlServer
             var key = Guid.NewGuid().ToString();
             var cache = GetSqlServerCache(GetCacheOptions(testClock));
             var expectedValue = Encoding.UTF8.GetBytes("Hello, World!");
-            var expectedAbsoluteExpiration = testClock.UtcNow.Add(
-                absoluteExpirationRelativeToUtcNow
-            );
+            var expectedAbsoluteExpiration =
+                testClock.UtcNow.Add(absoluteExpirationRelativeToUtcNow);
 
             // Act
             await cache.SetAsync(
                 key,
                 expectedValue,
-                new DistributedCacheEntryOptions().SetAbsoluteExpiration(
-                    relative: absoluteExpirationRelativeToUtcNow
-                )
+                new DistributedCacheEntryOptions().SetAbsoluteExpiration(relative: absoluteExpirationRelativeToUtcNow)
             );
 
             // Assert
@@ -446,9 +443,7 @@ namespace Microsoft.Extensions.Caching.SqlServer
             await cache.SetAsync(
                 key,
                 expectedValue,
-                new DistributedCacheEntryOptions().SetAbsoluteExpiration(
-                    absolute: expectedAbsoluteExpiration
-                )
+                new DistributedCacheEntryOptions().SetAbsoluteExpiration(absolute: expectedAbsoluteExpiration)
             );
 
             // Assert
@@ -644,9 +639,7 @@ namespace Microsoft.Extensions.Caching.SqlServer
             await cache.SetAsync(
                 key,
                 expectedValue,
-                new DistributedCacheEntryOptions().SetAbsoluteExpiration(
-                    absoluteExpirationRelativeToNow
-                )
+                new DistributedCacheEntryOptions().SetAbsoluteExpiration(absoluteExpirationRelativeToNow)
             );
             testClock.Add(TimeSpan.FromSeconds(25));
 

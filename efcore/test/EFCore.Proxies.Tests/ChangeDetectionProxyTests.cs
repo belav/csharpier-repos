@@ -200,9 +200,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public void Raises_changed_event_when_changed(bool useLazyLoading)
         {
-            using var context = new ChangeContext<ChangeValueEntity>(
-                useLazyLoading: useLazyLoading
-            );
+            using var context =
+                new ChangeContext<ChangeValueEntity>(useLazyLoading: useLazyLoading);
             var proxy = context.CreateProxy<ChangeValueEntity>();
             context.Add(proxy);
             context.SaveChanges();
@@ -229,9 +228,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public void Raises_changing_event_before_change(bool useLazyLoading)
         {
-            using var context = new ChangeContext<ChangeValueEntity>(
-                useLazyLoading: useLazyLoading
-            );
+            using var context =
+                new ChangeContext<ChangeValueEntity>(useLazyLoading: useLazyLoading);
             var proxy = context.CreateProxy<ChangeValueEntity>();
             proxy.Value = 5;
             context.Add(proxy);

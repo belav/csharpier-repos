@@ -176,9 +176,8 @@ namespace System.Collections.Immutable.Tests
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableHashSet.Create<string>());
             ImmutableHashSet<int> set = ImmutableHashSet.Create(1, 2, 3);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                set
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(set);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State

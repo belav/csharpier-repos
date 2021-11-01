@@ -52,9 +52,8 @@ public class MulticastDelegateCombineImpl
             dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
                 dd.TestValueParameterVoidCallback
             );
-            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback
-            );
+            dd.ValueParameterVoidDelegate +=
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
 
             dd.ValueParameterVoidDelegate(
                 DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
@@ -81,12 +80,10 @@ public class MulticastDelegateCombineImpl
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback1
-            );
-            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback
-            );
+            dd.ValueParameterVoidDelegate =
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback1);
+            dd.ValueParameterVoidDelegate +=
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
 
             dd.ValueParameterVoidDelegate(
                 DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
@@ -148,9 +145,8 @@ public class MulticastDelegateCombineImpl
             dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
                 DelegateDefinitions.TestValueParameterVoidStaticCallback
             );
-            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback
-            );
+            dd.ValueParameterVoidDelegate +=
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
 
             dd.ValueParameterVoidDelegate(
                 DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
@@ -180,9 +176,8 @@ public class MulticastDelegateCombineImpl
             dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
                 MulticastDelegateCombineImpl.TestValueParameterVoidStaticCallback
             );
-            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback1
-            );
+            dd.ValueParameterVoidDelegate +=
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback1);
 
             dd.ValueParameterVoidDelegate(
                 DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER
@@ -424,9 +419,8 @@ public class MulticastDelegateCombineImpl
                 dd.TestValueParameterVoidCallback
             );
             dd.ValueParameterVoidDelegate += null;
-            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback
-            );
+            dd.ValueParameterVoidDelegate +=
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
 
             dd.ValueParameterVoidDelegate(
                 DelegateDefinitions.c_DELEGATE_TEST_DEFAULT_VALUE_PARAMETER

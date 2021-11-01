@@ -93,9 +93,8 @@ namespace System.Web.Http.Validation.Validators
         public void GetUseLegacyValidationMemberName_ReturnsFalse(NameValueCollection appSettings)
         {
             // Arrange & Act
-            var result = DataAnnotationsModelValidator.GetUseLegacyValidationMemberName(
-                appSettings
-            );
+            var result =
+                DataAnnotationsModelValidator.GetUseLegacyValidationMemberName(appSettings);
 
             // Assert
             Assert.False(result);
@@ -146,9 +145,8 @@ namespace System.Web.Http.Validation.Validators
         public void GetUseLegacyValidationMemberName_ReturnsTrue(NameValueCollection appSettings)
         {
             // Arrange & Act
-            var result = DataAnnotationsModelValidator.GetUseLegacyValidationMemberName(
-                appSettings
-            );
+            var result =
+                DataAnnotationsModelValidator.GetUseLegacyValidationMemberName(appSettings);
 
             // Assert
             Assert.True(result);
@@ -230,9 +228,7 @@ namespace System.Web.Http.Validation.Validators
         [Fact]
         public void ValidateSetsMemberNameProperty_UsingDisplayName()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                ValidateSetsMemberNameProperty_UsingDisplayName_Inner
-            );
+            AppDomainUtils.RunInSeparateAppDomain(ValidateSetsMemberNameProperty_UsingDisplayName_Inner);
         }
 
         private static void ValidateSetsMemberNameProperty_UsingDisplayName_Inner()
@@ -278,9 +274,7 @@ namespace System.Web.Http.Validation.Validators
         [Fact]
         public void ValidateSetsMemberNameProperty_NotUsingDisplayName()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                ValidateSetsMemberNameProperty_NotUsingDisplayName_Inner
-            );
+            AppDomainUtils.RunInSeparateAppDomain(ValidateSetsMemberNameProperty_NotUsingDisplayName_Inner);
         }
 
         private static void ValidateSetsMemberNameProperty_NotUsingDisplayName_Inner()

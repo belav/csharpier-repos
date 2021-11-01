@@ -182,9 +182,8 @@ namespace System.Text.Unicode
                                     );
                                     if (mask != 0)
                                     {
-                                        trailingZeroCount = (nuint)BitOperations.TrailingZeroCount(
-                                            mask
-                                        );
+                                        trailingZeroCount =
+                                            (nuint)BitOperations.TrailingZeroCount(mask);
                                         goto LoopTerminatedEarlyDueToNonAsciiData;
                                     }
                                 }
@@ -269,9 +268,7 @@ namespace System.Text.Unicode
 
                 {
                     uint numLeadingAsciiBytes =
-                        ASCIIUtility.CountNumberOfLeadingAsciiBytesFromUInt32WithSomeNonAsciiData(
-                            thisDWord
-                        );
+                        ASCIIUtility.CountNumberOfLeadingAsciiBytesFromUInt32WithSomeNonAsciiData(thisDWord);
                     pInputBuffer += numLeadingAsciiBytes;
 
                     if (pFinalPosWhereCanReadDWordFromInputBuffer < pInputBuffer)

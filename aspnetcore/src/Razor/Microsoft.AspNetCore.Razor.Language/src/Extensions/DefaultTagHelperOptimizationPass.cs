@@ -119,9 +119,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             {
                 if (node.Children[i] is TagHelperHtmlAttributeIntermediateNode htmlAttributeNode)
                 {
-                    node.Children[i] = new DefaultTagHelperHtmlAttributeIntermediateNode(
-                        htmlAttributeNode
-                    );
+                    node.Children[i] =
+                        new DefaultTagHelperHtmlAttributeIntermediateNode(htmlAttributeNode);
                 }
             }
         }

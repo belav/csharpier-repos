@@ -1020,9 +1020,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         [EntityFrameworkInternal]
         protected virtual EntityType FindRelatedEntityType(Type relatedType, string? navigationName)
         {
-            var relatedEntityType = (EntityType?)DependentEntityType.FindInOwnershipPath(
-                relatedType
-            );
+            var relatedEntityType =
+                (EntityType?)DependentEntityType.FindInOwnershipPath(relatedType);
             if (relatedEntityType != null)
             {
                 return relatedEntityType;

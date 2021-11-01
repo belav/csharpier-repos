@@ -26,9 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var result = factory.CreateViewComponent(context);
 
             // Assert
-            var activablePropertiesComponent = Assert.IsType<ActivablePropertiesViewComponent>(
-                result
-            );
+            var activablePropertiesComponent =
+                Assert.IsType<ActivablePropertiesViewComponent>(result);
 
             Assert.Same(component, activablePropertiesComponent);
             Assert.Same(component.Context, activablePropertiesComponent.Context);

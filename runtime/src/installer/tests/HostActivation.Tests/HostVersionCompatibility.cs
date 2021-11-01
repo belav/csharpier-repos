@@ -226,9 +226,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 string mnaVersion
             )
             {
-                var repoDirectories = new RepoDirectoriesProvider(
-                    microsoftNETCoreAppVersion: mnaVersion
-                );
+                var repoDirectories =
+                    new RepoDirectoriesProvider(microsoftNETCoreAppVersion: mnaVersion);
 
                 // Use standalone instead of framework-dependent for ease of deployment.
                 var publishFixture = new TestProjectFixture(

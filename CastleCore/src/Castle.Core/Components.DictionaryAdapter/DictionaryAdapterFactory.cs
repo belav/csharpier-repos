@@ -183,16 +183,14 @@ namespace Castle.Components.DictionaryAdapter
             typeBuilder.SetParent(typeof(DictionaryAdapterBase));
 
             var attribCtorParams = new[] { typeof(Type) };
-            var attribCtorInfo = typeof(DictionaryAdapterAttribute).GetConstructor(
-                attribCtorParams
-            );
+            var attribCtorInfo =
+                typeof(DictionaryAdapterAttribute).GetConstructor(attribCtorParams);
             var attribBuilder = new CustomAttributeBuilder(attribCtorInfo, new[] { type });
             typeBuilder.SetCustomAttribute(attribBuilder);
 
             var debugAttribCtorParams = new[] { typeof(string) };
-            var debugAttribCtorInfo = typeof(DebuggerDisplayAttribute).GetConstructor(
-                debugAttribCtorParams
-            );
+            var debugAttribCtorInfo =
+                typeof(DebuggerDisplayAttribute).GetConstructor(debugAttribCtorParams);
             var debugAttribBuilder = new CustomAttributeBuilder(
                 debugAttribCtorInfo,
                 new[] { "Type: {Meta.Type.FullName,nq}" }

@@ -1104,9 +1104,8 @@ namespace Internal.JitInterface
             if (
                 methodDesc != null
                 && (
-                    _compilation.NodeFactory.CompilationModuleGroup.VersionsWithMethodBody(
-                        methodDesc
-                    ) || methodDesc.IsPInvoke
+                    _compilation.NodeFactory.CompilationModuleGroup.VersionsWithMethodBody(methodDesc)
+                    || methodDesc.IsPInvoke
                 )
             )
             {
@@ -1193,9 +1192,7 @@ namespace Internal.JitInterface
                     if (resultDef is EcmaType ecmaType)
                     {
                         Debug.Assert(
-                            _compilation.NodeFactory.CompilationModuleGroup.VersionsWithType(
-                                ecmaType
-                            )
+                            _compilation.NodeFactory.CompilationModuleGroup.VersionsWithType(ecmaType)
                         );
                         token = (mdToken)MetadataTokens.GetToken(ecmaType.Handle);
                         module = ecmaType.EcmaModule;
@@ -1757,9 +1754,7 @@ namespace Internal.JitInterface
             }
 
             if (
-                !_compilation.NodeFactory.CompilationModuleGroup.VersionsWithMethodBody(
-                    callerMethod
-                )
+                !_compilation.NodeFactory.CompilationModuleGroup.VersionsWithMethodBody(callerMethod)
             )
             {
                 // We must abort inline attempts calling from outside of the version bubble being compiled
@@ -1815,9 +1810,7 @@ namespace Internal.JitInterface
                 if (constrainedType.IsEnum && originalMethod.Name == "GetHashCode")
                 {
                     MethodDesc methodOnUnderlyingType =
-                        constrainedType.UnderlyingType.FindVirtualFunctionTargetMethodOnObjectType(
-                            originalMethod
-                        );
+                        constrainedType.UnderlyingType.FindVirtualFunctionTargetMethodOnObjectType(originalMethod);
                     Debug.Assert(methodOnUnderlyingType != null);
 
                     constrainedType = constrainedType.UnderlyingType;
@@ -1944,9 +1937,7 @@ namespace Internal.JitInterface
                 // if their assemblies are in the same bubble, or if the NonVersionableTypeAttribute is present on the type.
                 // CG2 checks a method cache that it builds with a bunch of new code.
                 else if (
-                    !_compilation.NodeFactory.CompilationModuleGroup.VersionsWithMethodBody(
-                        callerMethod
-                    )
+                    !_compilation.NodeFactory.CompilationModuleGroup.VersionsWithMethodBody(callerMethod)
                     ||
                     // check the Typical TargetMethod, not the Instantiation
                     !_compilation.NodeFactory.CompilationModuleGroup.VersionsWithMethodBody(
@@ -2837,9 +2828,7 @@ namespace Internal.JitInterface
         )
         {
             if (
-                !_compilation.NodeFactory.CompilationModuleGroup.VersionsWithMethodBody(
-                    callerMethod
-                )
+                !_compilation.NodeFactory.CompilationModuleGroup.VersionsWithMethodBody(callerMethod)
             )
             {
                 // Prevent recursive inline attempts where an inlined method outside of the version bubble is
@@ -3163,9 +3152,7 @@ namespace Internal.JitInterface
                     {
                         // This is the case of a PInvoke method that requires marshallers, which we can't use in this compilation
                         Debug.Assert(
-                            !_compilation.NodeFactory.CompilationModuleGroup.GeneratesPInvoke(
-                                method
-                            )
+                            !_compilation.NodeFactory.CompilationModuleGroup.GeneratesPInvoke(method)
                         );
                         return true;
                     }

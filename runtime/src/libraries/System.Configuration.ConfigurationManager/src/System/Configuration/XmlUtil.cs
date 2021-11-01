@@ -736,9 +736,8 @@ namespace System.Configuration
                                         // Write the attribute and value
                                         int charactersWritten = utilWriter.Write(Reader.Name);
                                         charactersWritten += utilWriter.Write('=');
-                                        charactersWritten += utilWriter.AppendAttributeValue(
-                                            Reader
-                                        );
+                                        charactersWritten +=
+                                            utilWriter.AppendAttributeValue(Reader);
 
                                         // Update position. Note that the attribute value is escaped to always be on a single line.
                                         lineNumber = attrLineNumber;
@@ -844,9 +843,7 @@ namespace System.Configuration
                                                             {
                                                                 Reader.MoveToAttribute(1);
                                                                 utilWriter.AppendSpace();
-                                                                utilWriter.AppendAttributeValue(
-                                                                    Reader
-                                                                );
+                                                                utilWriter.AppendAttributeValue(Reader);
                                                                 Reader.MoveToAttribute(1);
                                                             }
                                                         }

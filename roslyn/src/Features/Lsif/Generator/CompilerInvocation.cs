@@ -38,9 +38,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
         public static async Task<CompilerInvocation> CreateFromJsonAsync(string jsonContents)
         {
-            var invocationInfo = JsonConvert.DeserializeObject<CompilerInvocationInfo>(
-                jsonContents
-            );
+            var invocationInfo =
+                JsonConvert.DeserializeObject<CompilerInvocationInfo>(jsonContents);
 
             // We will use a Workspace to simplify the creation of the compilation, but will be careful not to return the Workspace instance from this class.
             // We will still provide the language services which are used by the generator itself, but we don't tie it to a Workspace object so we can
@@ -130,9 +129,10 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
             workspace.AddProject(projectInfo);
 
-            var compilation = await workspace.CurrentSolution.GetProject(
-                projectId
-            )!.GetRequiredCompilationAsync(CancellationToken.None);
+            var compilation =
+                await workspace.CurrentSolution.GetProject(projectId)!.GetRequiredCompilationAsync(
+                    CancellationToken.None
+                );
 
             return new CompilerInvocation(
                 compilation,

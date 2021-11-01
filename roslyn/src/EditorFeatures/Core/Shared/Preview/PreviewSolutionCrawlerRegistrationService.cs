@@ -93,9 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
                 var workerBackOffTimeSpanInMS = _workspace.Options.GetOption(
                     InternalSolutionCrawlerOptions.PreviewBackOffTimeSpanInMS
                 );
-                var incrementalAnalyzer = _owner._analyzerService.CreateIncrementalAnalyzer(
-                    _workspace
-                );
+                var incrementalAnalyzer =
+                    _owner._analyzerService.CreateIncrementalAnalyzer(_workspace);
 
                 var solution = _workspace.CurrentSolution;
                 var documentIds = _workspace.GetOpenDocumentIds().ToImmutableArray();

@@ -33,9 +33,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 try
                 {
                     var declaredSymbolCount = reader.ReadInt32();
-                    var builder = ImmutableArray.CreateBuilder<DeclaredSymbolInfo>(
-                        declaredSymbolCount
-                    );
+                    var builder =
+                        ImmutableArray.CreateBuilder<DeclaredSymbolInfo>(declaredSymbolCount);
                     for (var i = 0; i < declaredSymbolCount; i++)
                     {
                         builder.Add(

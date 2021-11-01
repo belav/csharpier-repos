@@ -244,9 +244,8 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
 
             foreach (var returnSyntax in returns)
             {
-                var returnExpression = generator.SyntaxFacts.GetExpressionOfReturnStatement(
-                    returnSyntax
-                );
+                var returnExpression =
+                    generator.SyntaxFacts.GetExpressionOfReturnStatement(returnSyntax);
                 if (returnExpression is null)
                 {
                     // Convert return; into return Task.CompletedTask;

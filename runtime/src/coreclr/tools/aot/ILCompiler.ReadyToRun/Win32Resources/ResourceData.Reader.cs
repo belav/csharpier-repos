@@ -55,9 +55,8 @@ namespace ILCompiler.Win32Resources
                             throw new ArgumentException();
 
                         resourceReader.Offset = checked((int)offsetOfLanguageListEntry);
-                        IMAGE_RESOURCE_DATA_ENTRY resourceData = new IMAGE_RESOURCE_DATA_ENTRY(
-                            ref resourceReader
-                        );
+                        IMAGE_RESOURCE_DATA_ENTRY resourceData =
+                            new IMAGE_RESOURCE_DATA_ENTRY(ref resourceReader);
 
                         // The actual resource data offset is relative to the start address of the file
                         BlobReader resourceDataBlob = peFile
@@ -89,9 +88,8 @@ namespace ILCompiler.Win32Resources
             IMAGE_RESOURCE_DIRECTORY directory = new IMAGE_RESOURCE_DIRECTORY(ref resourceReader);
             for (uint i = 0; i < directory.NumberOfNamedEntries + directory.NumberOfIdEntries; i++)
             {
-                IMAGE_RESOURCE_DIRECTORY_ENTRY directoryEntry = new IMAGE_RESOURCE_DIRECTORY_ENTRY(
-                    ref resourceReader
-                );
+                IMAGE_RESOURCE_DIRECTORY_ENTRY directoryEntry =
+                    new IMAGE_RESOURCE_DIRECTORY_ENTRY(ref resourceReader);
 
                 object name;
                 if ((directoryEntry.Name & 0x80000000) != 0)

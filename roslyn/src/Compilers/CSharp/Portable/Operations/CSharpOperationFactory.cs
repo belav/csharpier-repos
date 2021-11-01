@@ -890,9 +890,8 @@ namespace Microsoft.CodeAnalysis.Operations
             BoundEventAssignmentOperator boundEventAssignmentOperator
         )
         {
-            IOperation eventReference = CreateBoundEventAccessOperation(
-                boundEventAssignmentOperator
-            );
+            IOperation eventReference =
+                CreateBoundEventAccessOperation(boundEventAssignmentOperator);
             IOperation handlerValue = Create(boundEventAssignmentOperator.Argument);
             SyntaxNode syntax = boundEventAssignmentOperator.Syntax;
             bool adds = boundEventAssignmentOperator.IsAddition;
@@ -1012,9 +1011,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 );
             }
 
-            ImmutableArray<IArgumentOperation> arguments = DeriveArguments(
-                boundObjectCreationExpression
-            );
+            ImmutableArray<IArgumentOperation> arguments =
+                DeriveArguments(boundObjectCreationExpression);
             IObjectOrCollectionInitializerOperation? initializer =
                 (IObjectOrCollectionInitializerOperation?)Create(
                     boundObjectCreationExpression.InitializerExpressionOpt
@@ -1189,12 +1187,10 @@ namespace Microsoft.CodeAnalysis.Operations
             BoundDynamicIndexerAccess boundDynamicIndexerAccess
         )
         {
-            IOperation operation = CreateBoundDynamicIndexerAccessExpressionReceiver(
-                boundDynamicIndexerAccess
-            );
-            ImmutableArray<IOperation> arguments = CreateBoundDynamicIndexerAccessArguments(
-                boundDynamicIndexerAccess
-            );
+            IOperation operation =
+                CreateBoundDynamicIndexerAccessExpressionReceiver(boundDynamicIndexerAccess);
+            ImmutableArray<IOperation> arguments =
+                CreateBoundDynamicIndexerAccessArguments(boundDynamicIndexerAccess);
             ImmutableArray<string> argumentNames =
                 boundDynamicIndexerAccess.ArgumentNamesOpt.NullToEmpty();
             ImmutableArray<RefKind> argumentRefKinds =
@@ -1238,9 +1234,7 @@ namespace Microsoft.CodeAnalysis.Operations
         )
         {
             ImmutableArray<IOperation> initializers = CreateFromArray<BoundExpression, IOperation>(
-                BoundObjectCreationExpression.GetChildInitializers(
-                    boundCollectionInitializerExpression
-                )
+                BoundObjectCreationExpression.GetChildInitializers(boundCollectionInitializerExpression)
             );
             SyntaxNode syntax = boundCollectionInitializerExpression.Syntax;
             ITypeSymbol? type = boundCollectionInitializerExpression.GetPublicTypeSymbol();
@@ -1268,12 +1262,10 @@ namespace Microsoft.CodeAnalysis.Operations
             {
                 Debug.Assert(boundObjectInitializerMember.Type.IsDynamic());
 
-                IOperation operation = CreateBoundDynamicIndexerAccessExpressionReceiver(
-                    boundObjectInitializerMember
-                );
-                ImmutableArray<IOperation> arguments = CreateBoundDynamicIndexerAccessArguments(
-                    boundObjectInitializerMember
-                );
+                IOperation operation =
+                    CreateBoundDynamicIndexerAccessExpressionReceiver(boundObjectInitializerMember);
+                ImmutableArray<IOperation> arguments =
+                    CreateBoundDynamicIndexerAccessArguments(boundObjectInitializerMember);
                 ImmutableArray<string> argumentNames =
                     boundObjectInitializerMember.ArgumentNamesOpt.NullToEmpty();
                 ImmutableArray<RefKind> argumentRefKinds =
@@ -1417,9 +1409,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 boundCollectionElementInitializer.ImplicitReceiverOpt,
                 addMethod
             );
-            ImmutableArray<IArgumentOperation> arguments = DeriveArguments(
-                boundCollectionElementInitializer
-            );
+            ImmutableArray<IArgumentOperation> arguments =
+                DeriveArguments(boundCollectionElementInitializer);
             SyntaxNode syntax = boundCollectionElementInitializer.Syntax;
             ITypeSymbol? type = boundCollectionElementInitializer.GetPublicTypeSymbol();
             ConstantValue? constantValue = boundCollectionElementInitializer.ConstantValue;
@@ -2864,9 +2855,8 @@ namespace Microsoft.CodeAnalysis.Operations
             BoundForEachStatement boundForEachStatement
         )
         {
-            IOperation loopControlVariable = CreateBoundForEachStatementLoopControlVariable(
-                boundForEachStatement
-            );
+            IOperation loopControlVariable =
+                CreateBoundForEachStatementLoopControlVariable(boundForEachStatement);
             IOperation collection = Create(boundForEachStatement.Expression);
             var nextVariables = ImmutableArray<IOperation>.Empty;
             IOperation body = Create(boundForEachStatement.Body);

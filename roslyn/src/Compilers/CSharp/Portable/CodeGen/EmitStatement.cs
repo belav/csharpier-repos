@@ -419,9 +419,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 _diagnostics.Add(
                     ErrorCode.ERR_InsufficientStack,
-                    BoundTreeVisitor.CancelledByStackGuardException.GetTooLongOrComplexExpressionErrorLocation(
-                        condition
-                    )
+                    BoundTreeVisitor.CancelledByStackGuardException.GetTooLongOrComplexExpressionErrorLocation(condition)
                 );
                 throw new EmitCancelledException();
             }

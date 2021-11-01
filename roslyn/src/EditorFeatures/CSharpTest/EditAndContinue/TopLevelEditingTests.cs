@@ -4963,9 +4963,8 @@ class D<T>
                 new[]
                 {
                     DocumentResults(
-                        // delegate does not have any user-defined method body and this does not need a PDB update
-                        semanticEdits: NoSemanticEdits
-                    ),
+                    // delegate does not have any user-defined method body and this does not need a PDB update
+                    semanticEdits: NoSemanticEdits),
                     DocumentResults()
                 }
             );

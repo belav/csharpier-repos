@@ -574,9 +574,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 if (readerColumns != null)
                 {
-                    reader = new BufferedDataReader(reader, detailedErrorsEnabled).Initialize(
-                        readerColumns
-                    );
+                    reader = new BufferedDataReader(
+                        reader,
+                        detailedErrorsEnabled
+                    ).Initialize(readerColumns);
                 }
 
                 _relationalReader.Initialize(

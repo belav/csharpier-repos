@@ -44,9 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.Test
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var controller = new TestableController();
-            var originalViewData = controller.ViewData = new ViewDataDictionary<object>(
-                metadataProvider
-            );
+            var originalViewData = controller.ViewData =
+                new ViewDataDictionary<object>(metadataProvider);
             var replacementViewData = new ViewDataDictionary<object>(metadataProvider);
 
             // Act

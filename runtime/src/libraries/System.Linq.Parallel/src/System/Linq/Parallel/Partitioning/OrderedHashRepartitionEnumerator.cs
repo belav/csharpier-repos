@@ -296,9 +296,8 @@ namespace System.Linq.Parallel
                     privateBuffers[destinationIndex] = buffer = new ListChunk<
                         Pair<TInputOutput, THashKey>
                     >(INITIAL_PRIVATE_BUFFER_SIZE);
-                    privateKeyBuffers[destinationIndex] = keyBuffer = new ListChunk<TOrderKey>(
-                        INITIAL_PRIVATE_BUFFER_SIZE
-                    );
+                    privateKeyBuffers[destinationIndex] = keyBuffer =
+                        new ListChunk<TOrderKey>(INITIAL_PRIVATE_BUFFER_SIZE);
                 }
 
                 buffer.Add(new Pair<TInputOutput, THashKey>(element, elementHashKey));

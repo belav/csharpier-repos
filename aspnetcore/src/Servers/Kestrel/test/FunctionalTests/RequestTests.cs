@@ -490,9 +490,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                                         {
                                             requestStarted.Release();
                                             Assert.True(
-                                                await connectionReset.WaitAsync(
-                                                    _semaphoreWaitTimeout
-                                                )
+                                                await connectionReset.WaitAsync(_semaphoreWaitTimeout)
                                             );
 
                                             try

@@ -29,9 +29,8 @@ namespace System.Reflection.TypeLoading.Ecma
 
             _handle = handle;
             _module = (EcmaModule)(declaringType.Module);
-            _neverAccessThisExceptThroughPropertyDefinitionProperty = handle.GetPropertyDefinition(
-                Reader
-            );
+            _neverAccessThisExceptThroughPropertyDefinitionProperty =
+                handle.GetPropertyDefinition(Reader);
         }
 
         internal sealed override RoModule GetRoModule() => _module;

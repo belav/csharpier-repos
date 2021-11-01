@@ -160,9 +160,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     return false;
                 }
 
-                IsContainedInUnsafeType = service.ContainingTypesOrSelfHasUnsafeKeyword(
-                    TypeToGenerateIn
-                );
+                IsContainedInUnsafeType =
+                    service.ContainingTypesOrSelfHasUnsafeKeyword(TypeToGenerateIn);
 
                 return CanGenerateLocal()
                     || CodeGenerator.CanAdd(
@@ -381,9 +380,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 IsInConstructor = DetermineIsInConstructor(semanticDocument, simpleName);
                 IsInMemberContext =
                     simpleName != SimpleNameOrMemberAccessExpressionOpt
-                    || syntaxFacts.IsMemberInitializerNamedAssignmentIdentifier(
-                        SimpleNameOrMemberAccessExpressionOpt
-                    );
+                    || syntaxFacts.IsMemberInitializerNamedAssignmentIdentifier(SimpleNameOrMemberAccessExpressionOpt);
 
                 ContainingMethod = semanticModel.GetEnclosingSymbol<IMethodSymbol>(
                     IdentifierToken.SpanStart,
@@ -554,9 +551,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 if (inferredType.IsDelegateType() && !inferredType.CanBeReferencedByName)
                 {
-                    var namedDelegateType = inferredType.GetDelegateType(
-                        compilation
-                    )?.DelegateInvokeMethod?.ConvertToType(compilation);
+                    var namedDelegateType =
+                        inferredType.GetDelegateType(compilation)?.DelegateInvokeMethod?.ConvertToType(compilation);
                     if (namedDelegateType != null)
                     {
                         inferredType = namedDelegateType;

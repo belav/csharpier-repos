@@ -201,9 +201,8 @@ namespace IlasmPortablePdbTests
                 ? "TestMethodDebugInformation_unix.il"
                 : "TestMethodDebugInformation_win.il";
 
-            var expected = IlasmPortablePdbTesterCommon.GetExpectedForTestMethodDebugInformation(
-                ilSource
-            );
+            var expected =
+                IlasmPortablePdbTesterCommon.GetExpectedForTestMethodDebugInformation(ilSource);
             var ilasm = IlasmPortablePdbTesterCommon.GetIlasmFullPath(CoreRootVar, IlasmFile);
             IlasmPortablePdbTesterCommon.Assemble(
                 ilasm,
@@ -235,9 +234,8 @@ namespace IlasmPortablePdbTests
                         foreach (var methodDefinitionHandle in peMdReader.MethodDefinitions)
                         {
                             // get method definition from pe file metadata
-                            var methodDefinition = peMdReader.GetMethodDefinition(
-                                methodDefinitionHandle
-                            );
+                            var methodDefinition =
+                                peMdReader.GetMethodDefinition(methodDefinitionHandle);
                             var methodName = peMdReader.GetString(methodDefinition.Name);
                             Assert.True(
                                 expected.TryGetValue(methodName, out var expectedMethodDbgInfo)
@@ -245,9 +243,7 @@ namespace IlasmPortablePdbTests
 
                             // verify method debug information from portable pdb metadata
                             var methodDebugInformation =
-                                portablePdbMdReader.GetMethodDebugInformation(
-                                    methodDefinitionHandle
-                                );
+                                portablePdbMdReader.GetMethodDebugInformation(methodDefinitionHandle);
                             var methodDocument = portablePdbMdReader.GetDocument(
                                 methodDebugInformation.Document
                             );
@@ -346,15 +342,13 @@ namespace IlasmPortablePdbTests
                         foreach (var methodDefinitionHandle in peMdReader.MethodDefinitions)
                         {
                             // get method definition from pe file metadata
-                            var methodDefinition = peMdReader.GetMethodDefinition(
-                                methodDefinitionHandle
-                            );
+                            var methodDefinition =
+                                peMdReader.GetMethodDefinition(methodDefinitionHandle);
                             var methodName = peMdReader.GetString(methodDefinition.Name);
 
                             // verify local scopes from portable pdb metadata
-                            var localScopeHandles = portablePdbMdReader.GetLocalScopes(
-                                methodDefinitionHandle
-                            );
+                            var localScopeHandles =
+                                portablePdbMdReader.GetLocalScopes(methodDefinitionHandle);
 
                             int i = 0;
                             foreach (var localScopeHandle in localScopeHandles)
@@ -362,9 +356,8 @@ namespace IlasmPortablePdbTests
                                 Assert.True(i < expected.Count);
                                 Assert.Equal(expected[i].MethodName, methodName);
 
-                                var localScope = portablePdbMdReader.GetLocalScope(
-                                    localScopeHandle
-                                );
+                                var localScope =
+                                    portablePdbMdReader.GetLocalScope(localScopeHandle);
                                 Assert.Equal(expected[i].StartOffset, localScope.StartOffset);
                                 Assert.Equal(expected[i].EndOffset, localScope.EndOffset);
                                 Assert.Equal(expected[i].Length, localScope.Length);
@@ -375,9 +368,8 @@ namespace IlasmPortablePdbTests
                                 foreach (var variableHandle in localScope.GetLocalVariables())
                                 {
                                     Assert.True(j < expected[i].Variables.Count);
-                                    var variable = portablePdbMdReader.GetLocalVariable(
-                                        variableHandle
-                                    );
+                                    var variable =
+                                        portablePdbMdReader.GetLocalVariable(variableHandle);
                                     var variableName = portablePdbMdReader.GetString(variable.Name);
                                     Assert.Equal(expected[i].Variables[j].Name, variableName);
                                     Assert.Equal(expected[i].Variables[j].Index, variable.Index);

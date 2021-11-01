@@ -160,9 +160,7 @@ namespace System.Web.Mvc
         /// <returns>A dictionary that represents HTML attributes.</returns>
         public static RouteValueDictionary AnonymousObjectToHtmlAttributes(object htmlAttributes)
         {
-            return System.Web.WebPages.Html.HtmlHelper.AnonymousObjectToHtmlAttributes(
-                htmlAttributes
-            );
+            return System.Web.WebPages.Html.HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
         }
 
         [SuppressMessage(

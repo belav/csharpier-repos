@@ -244,9 +244,9 @@ namespace System.Reflection.Metadata.Tests
 
     internal static class SynthesizedPeImages
     {
-        private static Lazy<ImmutableArray<byte>> _image1 = new Lazy<ImmutableArray<byte>>(
-            GenerateImage
-        );
+        private static Lazy<ImmutableArray<byte>> _image1 = new Lazy<
+            ImmutableArray<byte>
+        >(GenerateImage);
         public static ImmutableArray<byte> Image1 => _image1.Value;
 
         private sealed class TestPEBuilder : PEBuilder

@@ -391,9 +391,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             cancellationToken.ThrowIfCancellationRequested();
 
                             if (
-                                EditAndContinueWorkspaceService.SupportsEditAndContinue(
-                                    documentState
-                                )
+                                EditAndContinueWorkspaceService.SupportsEditAndContinue(documentState)
                             )
                             {
                                 var sourceFilePath = documentState.FilePath;

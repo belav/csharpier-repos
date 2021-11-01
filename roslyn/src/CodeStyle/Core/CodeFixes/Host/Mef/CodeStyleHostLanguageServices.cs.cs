@@ -28,9 +28,8 @@ namespace Microsoft.CodeAnalysis.Host
             public static MefHostExportProvider Create(string languageName)
             {
                 var assemblies = CreateAssemblies(languageName);
-                var compositionConfiguration = new ContainerConfiguration().WithAssemblies(
-                    assemblies
-                );
+                var compositionConfiguration =
+                    new ContainerConfiguration().WithAssemblies(assemblies);
                 return new MefHostExportProvider(compositionConfiguration.CreateContainer());
             }
 

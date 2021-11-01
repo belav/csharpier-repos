@@ -373,11 +373,8 @@ namespace System.Net.Security
             const int NumSecBuffers = 4; // header + data + trailer + empty
             Interop.SspiCli.SecBuffer* unmanagedBuffer =
                 stackalloc Interop.SspiCli.SecBuffer[NumSecBuffers];
-            Interop.SspiCli.SecBufferDesc sdcInOut = new Interop.SspiCli.SecBufferDesc(
-                NumSecBuffers
-            ) {
-                pBuffers = unmanagedBuffer
-            };
+            Interop.SspiCli.SecBufferDesc sdcInOut =
+                new Interop.SspiCli.SecBufferDesc(NumSecBuffers) { pBuffers = unmanagedBuffer };
             fixed (byte* outputPtr = output)
             {
                 Interop.SspiCli.SecBuffer* headerSecBuffer = &unmanagedBuffer[0];
@@ -459,11 +456,8 @@ namespace System.Net.Security
                     emptyBuffer->cbBuffer = 0;
                 }
 
-                Interop.SspiCli.SecBufferDesc sdcInOut = new Interop.SspiCli.SecBufferDesc(
-                    NumSecBuffers
-                ) {
-                    pBuffers = unmanagedBuffer
-                };
+                Interop.SspiCli.SecBufferDesc sdcInOut =
+                    new Interop.SspiCli.SecBufferDesc(NumSecBuffers) { pBuffers = unmanagedBuffer };
                 Interop.SECURITY_STATUS errorCode =
                     (Interop.SECURITY_STATUS)GlobalSSPI.SSPISecureChannel.DecryptMessage(
                         securityContext!,

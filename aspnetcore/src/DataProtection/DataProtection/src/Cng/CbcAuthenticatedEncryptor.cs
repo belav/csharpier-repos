@@ -46,9 +46,8 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
         )
         {
             _genRandom = genRandom ?? BCryptGenRandomImpl.Instance;
-            _sp800_108_ctr_hmac_provider = SP800_108_CTR_HMACSHA512Util.CreateProvider(
-                keyDerivationKey
-            );
+            _sp800_108_ctr_hmac_provider =
+                SP800_108_CTR_HMACSHA512Util.CreateProvider(keyDerivationKey);
             _symmetricAlgorithmHandle = symmetricAlgorithmHandle;
             _symmetricAlgorithmBlockSizeInBytes = symmetricAlgorithmHandle.GetCipherBlockLength();
             _symmetricAlgorithmSubkeyLengthInBytes = symmetricAlgorithmKeySizeInBytes;

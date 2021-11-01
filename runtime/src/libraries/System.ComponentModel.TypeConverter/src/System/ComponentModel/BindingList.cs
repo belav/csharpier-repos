@@ -478,9 +478,8 @@ namespace System.ComponentModel
             {
                 if (_propertyChangedEventHandler == null)
                 {
-                    _propertyChangedEventHandler = new PropertyChangedEventHandler(
-                        Child_PropertyChanged
-                    );
+                    _propertyChangedEventHandler =
+                        new PropertyChangedEventHandler(Child_PropertyChanged);
                 }
                 inpc.PropertyChanged += _propertyChangedEventHandler;
             }

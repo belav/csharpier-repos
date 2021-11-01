@@ -156,9 +156,8 @@ namespace Microsoft.CodeAnalysis
                 InfoBuilder.SyntaxContextReceiverCreator,
                 $"{nameof(SyntaxReceiverCreator)} / {nameof(SyntaxContextReceiverCreator)}"
             );
-            InfoBuilder.SyntaxContextReceiverCreator = SyntaxContextReceiverAdaptor.Create(
-                receiverCreator
-            );
+            InfoBuilder.SyntaxContextReceiverCreator =
+                SyntaxContextReceiverAdaptor.Create(receiverCreator);
         }
 
         /// <summary>

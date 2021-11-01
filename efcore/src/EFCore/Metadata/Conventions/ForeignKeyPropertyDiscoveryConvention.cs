@@ -324,9 +324,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                             foreignKey.PrincipalEntityType
                                         )!;
                                     return batch.Run(
-                                        invertedRelationshipBuilder.HasForeignKey(
-                                            candidatePropertiesOnPrincipal
-                                        )!.Metadata
+                                        invertedRelationshipBuilder.HasForeignKey(candidatePropertiesOnPrincipal)!.Metadata
                                     )?.Builder;
                                 }
 

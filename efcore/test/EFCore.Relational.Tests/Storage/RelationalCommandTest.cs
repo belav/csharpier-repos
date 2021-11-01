@@ -121,9 +121,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -171,9 +170,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -221,9 +219,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -271,9 +268,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -323,9 +319,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -382,9 +377,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1114,9 +1108,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1162,9 +1155,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 new FakeCommandExecutor()
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1268,9 +1260,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1334,9 +1325,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1463,9 +1453,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool async
         )
         {
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnectionString(
-                ConnectionString
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString);
 
             var options = CreateOptions(optionsExtension);
 
@@ -1640,9 +1629,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 

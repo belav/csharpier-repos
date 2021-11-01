@@ -33,9 +33,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
         [Benchmark(Description = "No Files are Formatted (folder)")]
         public void NoFilesFormattedFolder()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
-                FormattedProjectPath
-            );
+            var (workspacePath, workspaceType) =
+                WorkspacePathHelper.GetWorkspaceInfo(FormattedProjectPath);
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,
@@ -60,9 +59,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
         [Benchmark(Description = "No Files are Formatted (project)")]
         public void NoFilesFormattedProject()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
-                FormattedProjectFilePath
-            );
+            var (workspacePath, workspaceType) =
+                WorkspacePathHelper.GetWorkspaceInfo(FormattedProjectFilePath);
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,
@@ -87,9 +85,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
         [Benchmark(Description = "No Files are Formatted (solution)")]
         public void NoFilesFormattedSolution()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
-                FormattedSolutionFilePath
-            );
+            var (workspacePath, workspaceType) =
+                WorkspacePathHelper.GetWorkspaceInfo(FormattedSolutionFilePath);
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,

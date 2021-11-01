@@ -42,9 +42,7 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.True(
-                ReturnsValidator<ClientDataTypeModelValidatorProvider.NumericModelValidator>(
-                    propertyName
-                )
+                ReturnsValidator<ClientDataTypeModelValidatorProvider.NumericModelValidator>(propertyName)
             );
         }
 
@@ -59,9 +57,7 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.False(
-                ReturnsValidator<ClientDataTypeModelValidatorProvider.NumericModelValidator>(
-                    propertyName
-                )
+                ReturnsValidator<ClientDataTypeModelValidatorProvider.NumericModelValidator>(propertyName)
             );
         }
 
@@ -71,9 +67,7 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.True(
-                ReturnsValidator<ClientDataTypeModelValidatorProvider.DateModelValidator>(
-                    propertyName
-                )
+                ReturnsValidator<ClientDataTypeModelValidatorProvider.DateModelValidator>(propertyName)
             );
         }
 
@@ -89,9 +83,7 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.False(
-                ReturnsValidator<ClientDataTypeModelValidatorProvider.DateModelValidator>(
-                    propertyName
-                )
+                ReturnsValidator<ClientDataTypeModelValidatorProvider.DateModelValidator>(propertyName)
             );
         }
 

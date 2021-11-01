@@ -4030,9 +4030,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     path,
                     basePath: tree.FilePath
                 );
-                var existingDoc = documentsBuilder.TryGetDebugDocumentForNormalizedPath(
-                    normalizedPath
-                );
+                var existingDoc =
+                    documentsBuilder.TryGetDebugDocumentForNormalizedPath(normalizedPath);
 
                 // duplicate checksum pragmas are valid as long as values match
                 // if we have seen this document already, check for matching values.

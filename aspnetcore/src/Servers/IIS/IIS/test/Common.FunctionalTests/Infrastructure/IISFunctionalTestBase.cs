@@ -32,9 +32,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities
             HostingModel hostingModel = HostingModel.InProcess
         )
         {
-            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
-                hostingModel: hostingModel
-            );
+            var deploymentParameters =
+                Fixture.GetBaseDeploymentParameters(hostingModel: hostingModel);
 
             return await DeployAsync(deploymentParameters);
         }

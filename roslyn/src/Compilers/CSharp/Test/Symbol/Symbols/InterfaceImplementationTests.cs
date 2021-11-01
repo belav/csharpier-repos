@@ -153,9 +153,8 @@ class Class : Interface
             Assert.NotSame(classImplicitImplementation, classExplicitImplementation);
             Assert.NotSame(classImplicitImplementation, classExplicitImplementationBase);
 
-            var implementingMethodBase = @class.FindImplementationForInterfaceMember(
-                baseInterfaceMethod
-            );
+            var implementingMethodBase =
+                @class.FindImplementationForInterfaceMember(baseInterfaceMethod);
             Assert.Same(classExplicitImplementationBase, implementingMethodBase);
 
             var implementingMethod = @class.FindImplementationForInterfaceMember(interfaceMethod);
@@ -207,9 +206,8 @@ class Class : Interface
             Assert.NotSame(classImplicitImplementation, classExplicitImplementation);
             Assert.NotSame(classImplicitImplementation, classExplicitImplementationBase);
 
-            var implementingMethodBase = @class.FindImplementationForInterfaceMember(
-                baseInterfaceIndexer
-            );
+            var implementingMethodBase =
+                @class.FindImplementationForInterfaceMember(baseInterfaceIndexer);
             Assert.Same(classExplicitImplementationBase, implementingMethodBase);
 
             var implementingMethod = @class.FindImplementationForInterfaceMember(interfaceIndexer);
@@ -286,14 +284,12 @@ class Class : Interface
             var implementingMethod = @class.FindImplementationForInterfaceMember(interfaceMethod);
             Assert.Same(classImplicitImplementation, implementingMethod);
 
-            var implementingMethodBase1 = @class.FindImplementationForInterfaceMember(
-                baseInterface1Method
-            );
+            var implementingMethodBase1 =
+                @class.FindImplementationForInterfaceMember(baseInterface1Method);
             Assert.Same(classImplicitImplementationBase, implementingMethodBase1);
 
-            var implementingMethodBase2 = @class.FindImplementationForInterfaceMember(
-                baseInterface2Method
-            );
+            var implementingMethodBase2 =
+                @class.FindImplementationForInterfaceMember(baseInterface2Method);
             Assert.Same(classImplicitImplementationBase, implementingMethodBase2);
         }
 
@@ -363,14 +359,12 @@ class Class : Interface
             var implementingIndexer = @class.FindImplementationForInterfaceMember(interfaceIndexer);
             Assert.Same(classImplicitImplementation, implementingIndexer);
 
-            var implementingIndexerBase1 = @class.FindImplementationForInterfaceMember(
-                baseInterface1Indexer
-            );
+            var implementingIndexerBase1 =
+                @class.FindImplementationForInterfaceMember(baseInterface1Indexer);
             Assert.Same(classImplicitImplementationBase, implementingIndexerBase1);
 
-            var implementingIndexerBase2 = @class.FindImplementationForInterfaceMember(
-                baseInterface2Indexer
-            );
+            var implementingIndexerBase2 =
+                @class.FindImplementationForInterfaceMember(baseInterface2Indexer);
             Assert.Same(classImplicitImplementationBase, implementingIndexerBase2);
         }
 
@@ -503,26 +497,22 @@ class Class2 : BaseClass //does not declare interface
 
             var class1 = (NamedTypeSymbol)global.GetMembers("Class1").Single();
 
-            var class1ImplementingMethodBase = class1.FindImplementationForInterfaceMember(
-                baseInterfaceMethod
-            );
+            var class1ImplementingMethodBase =
+                class1.FindImplementationForInterfaceMember(baseInterfaceMethod);
             Assert.Same(baseClassExplicitImplementationBase, class1ImplementingMethodBase);
 
-            var class1ImplementingMethod = class1.FindImplementationForInterfaceMember(
-                interfaceMethod
-            );
+            var class1ImplementingMethod =
+                class1.FindImplementationForInterfaceMember(interfaceMethod);
             Assert.Same(baseClassExplicitImplementation, class1ImplementingMethod);
 
             var class2 = (NamedTypeSymbol)global.GetMembers("Class2").Single();
 
-            var class2ImplementingMethodBase = class2.FindImplementationForInterfaceMember(
-                baseInterfaceMethod
-            );
+            var class2ImplementingMethodBase =
+                class2.FindImplementationForInterfaceMember(baseInterfaceMethod);
             Assert.Same(baseClassExplicitImplementationBase, class2ImplementingMethodBase);
 
-            var class2ImplementingMethod = class2.FindImplementationForInterfaceMember(
-                interfaceMethod
-            );
+            var class2ImplementingMethod =
+                class2.FindImplementationForInterfaceMember(interfaceMethod);
             Assert.Same(baseClassExplicitImplementation, class2ImplementingMethod);
         }
 
@@ -589,36 +579,30 @@ class Class2 : BaseClass //does not declare interface
 
             var class1 = (NamedTypeSymbol)global.GetMembers("Class1").Single();
 
-            var class1ImplementingMethod = class1.FindImplementationForInterfaceMember(
-                interfaceMethod
-            );
+            var class1ImplementingMethod =
+                class1.FindImplementationForInterfaceMember(interfaceMethod);
             Assert.Same(baseClassImplicitImplementation, class1ImplementingMethod);
 
-            var class1ImplementingMethodBase1 = class1.FindImplementationForInterfaceMember(
-                baseInterface1Method
-            );
+            var class1ImplementingMethodBase1 =
+                class1.FindImplementationForInterfaceMember(baseInterface1Method);
             Assert.Same(baseClassImplicitImplementationBase, class1ImplementingMethodBase1);
 
-            var class1ImplementingMethodBase2 = class1.FindImplementationForInterfaceMember(
-                baseInterface2Method
-            );
+            var class1ImplementingMethodBase2 =
+                class1.FindImplementationForInterfaceMember(baseInterface2Method);
             Assert.Same(baseClassImplicitImplementationBase, class1ImplementingMethodBase2);
 
             var class2 = (NamedTypeSymbol)global.GetMembers("Class2").Single();
 
-            var class2ImplementingMethod = class2.FindImplementationForInterfaceMember(
-                interfaceMethod
-            );
+            var class2ImplementingMethod =
+                class2.FindImplementationForInterfaceMember(interfaceMethod);
             Assert.Same(baseClassImplicitImplementation, class2ImplementingMethod);
 
-            var class2ImplementingMethodBase1 = class2.FindImplementationForInterfaceMember(
-                baseInterface1Method
-            );
+            var class2ImplementingMethodBase1 =
+                class2.FindImplementationForInterfaceMember(baseInterface1Method);
             Assert.Same(baseClassImplicitImplementationBase, class2ImplementingMethodBase1);
 
-            var class2ImplementingMethodBase2 = class2.FindImplementationForInterfaceMember(
-                baseInterface2Method
-            );
+            var class2ImplementingMethodBase2 =
+                class2.FindImplementationForInterfaceMember(baseInterface2Method);
             Assert.Same(baseClassImplicitImplementationBase, class2ImplementingMethodBase2);
         }
 
@@ -767,18 +751,16 @@ class Class2 : BaseClass //does not declare interface
             var baseClassMethod = (MethodSymbol)baseClass.GetMembers("Interface.Method").Single();
             Assert.Equal(MethodKind.ExplicitInterfaceImplementation, baseClassMethod.MethodKind);
 
-            var baseClassImplementingMethod = baseClass.FindImplementationForInterfaceMember(
-                interfaceMethod
-            );
+            var baseClassImplementingMethod =
+                baseClass.FindImplementationForInterfaceMember(interfaceMethod);
             Assert.Same(baseClassMethod, baseClassImplementingMethod);
 
             var class1 = (NamedTypeSymbol)global.GetMembers("Class1").Single();
             var class1Method = (MethodSymbol)class1.GetMembers("Method").Single();
             Assert.Equal(MethodKind.Ordinary, class1Method.MethodKind);
 
-            var class1ImplementingMethod = class1.FindImplementationForInterfaceMember(
-                interfaceMethod
-            );
+            var class1ImplementingMethod =
+                class1.FindImplementationForInterfaceMember(interfaceMethod);
             Assert.Same(class1Method, class1ImplementingMethod);
             Assert.NotSame(baseClassMethod, class1ImplementingMethod);
 
@@ -786,9 +768,8 @@ class Class2 : BaseClass //does not declare interface
             var class2Method = (MethodSymbol)class2.GetMembers("Method").Single();
             Assert.Equal(MethodKind.Ordinary, class2Method.MethodKind);
 
-            var class2ImplementingMethod = class2.FindImplementationForInterfaceMember(
-                interfaceMethod
-            );
+            var class2ImplementingMethod =
+                class2.FindImplementationForInterfaceMember(interfaceMethod);
             Assert.Same(baseClassMethod, class2ImplementingMethod);
             Assert.NotSame(class2Method, class1ImplementingMethod);
         }
@@ -844,9 +825,8 @@ class Class2 : BaseClass //does not declare interface
             Assert.Equal(MethodKind.Ordinary, baseClassMethodNonVirtual.MethodKind);
             Assert.False(baseClassMethodNonVirtual.IsVirtual);
 
-            var baseClassImplementingMethodVirtual = baseClass.FindImplementationForInterfaceMember(
-                interfaceMethodVirtual
-            );
+            var baseClassImplementingMethodVirtual =
+                baseClass.FindImplementationForInterfaceMember(interfaceMethodVirtual);
             Assert.Same(baseClassMethodVirtual, baseClassImplementingMethodVirtual);
 
             var baseClassImplementingMethodNonVirtual =
@@ -863,15 +843,13 @@ class Class2 : BaseClass //does not declare interface
             Assert.Equal(MethodKind.Ordinary, class1MethodNonVirtual.MethodKind);
             Assert.False(class1MethodNonVirtual.IsOverride);
 
-            var class1ImplementingMethodVirtual = class1.FindImplementationForInterfaceMember(
-                interfaceMethodVirtual
-            );
+            var class1ImplementingMethodVirtual =
+                class1.FindImplementationForInterfaceMember(interfaceMethodVirtual);
             Assert.Same(class1MethodVirtual, class1ImplementingMethodVirtual);
             Assert.NotSame(baseClassMethodVirtual, class1ImplementingMethodVirtual);
 
-            var class1ImplementingMethodNonVirtual = class1.FindImplementationForInterfaceMember(
-                interfaceMethodNonVirtual
-            );
+            var class1ImplementingMethodNonVirtual =
+                class1.FindImplementationForInterfaceMember(interfaceMethodNonVirtual);
             Assert.Same(class1MethodNonVirtual, class1ImplementingMethodNonVirtual);
             Assert.NotSame(baseClassMethodNonVirtual, class1ImplementingMethodNonVirtual);
 
@@ -885,15 +863,13 @@ class Class2 : BaseClass //does not declare interface
             Assert.Equal(MethodKind.Ordinary, class2MethodNonVirtual.MethodKind);
             Assert.False(class2MethodNonVirtual.IsOverride);
 
-            var class2ImplementingMethodVirtual = class2.FindImplementationForInterfaceMember(
-                interfaceMethodVirtual
-            );
+            var class2ImplementingMethodVirtual =
+                class2.FindImplementationForInterfaceMember(interfaceMethodVirtual);
             Assert.Same(baseClassMethodVirtual, class2ImplementingMethodVirtual);
             Assert.NotSame(class2MethodVirtual, class2ImplementingMethodVirtual);
 
-            var class2ImplementingMethodNonVirtual = class2.FindImplementationForInterfaceMember(
-                interfaceMethodNonVirtual
-            );
+            var class2ImplementingMethodNonVirtual =
+                class2.FindImplementationForInterfaceMember(interfaceMethodNonVirtual);
             Assert.Same(baseClassMethodNonVirtual, class2ImplementingMethodNonVirtual);
             Assert.NotSame(class2MethodNonVirtual, class2ImplementingMethodNonVirtual);
         }
@@ -937,26 +913,20 @@ class DeclaringClass2 : NonDeclaringClass2, Interface
 
             var nonDeclaring1 = (NamedTypeSymbol)global.GetMembers("NonDeclaringClass1").Single();
             Assert.False(
-                nonDeclaring1.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                nonDeclaring1.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(@interface)
             );
 
             var nonDeclaring1Method = nonDeclaring1.GetMembers("Method").Single();
 
             var declaring1 = (NamedTypeSymbol)global.GetMembers("DeclaringClass1").Single();
             Assert.True(
-                declaring1.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                declaring1.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(@interface)
             );
             Assert.Equal(nonDeclaring1, declaring1.BaseType());
 
             var nonDeclaring2 = (NamedTypeSymbol)global.GetMembers("NonDeclaringClass2").Single();
             Assert.False(
-                nonDeclaring2.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                nonDeclaring2.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(@interface)
             );
             Assert.Equal(declaring1, nonDeclaring2.BaseType());
 
@@ -964,9 +934,7 @@ class DeclaringClass2 : NonDeclaringClass2, Interface
 
             var declaring2 = (NamedTypeSymbol)global.GetMembers("DeclaringClass2").Single();
             Assert.True(
-                declaring2.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                declaring2.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(@interface)
             );
             Assert.Equal(nonDeclaring2, declaring2.BaseType());
 
@@ -1013,9 +981,7 @@ class DeclaringClass2 : NonDeclaringClass2, Interface
                 .GetMembers("DerivedExplicitlyImplementsInterface")
                 .Single();
             Assert.False(
-                derivedClass.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(
-                    @interface
-                )
+                derivedClass.InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics.ContainsKey(@interface)
             );
             Assert.True(derivedClass.AllInterfaces().Contains(@interface));
 
@@ -3203,9 +3169,8 @@ public interface I
             );
 
             var interfaceMember = comp.GetMember<MethodSymbol>(interfaceMemberName);
-            var implementingMember = derivedType.FindImplementationForInterfaceMember(
-                interfaceMember
-            );
+            var implementingMember =
+                derivedType.FindImplementationForInterfaceMember(interfaceMember);
             Assert.Equal(expectedImplementingMember, implementingMember.ToTestDisplayString());
         }
 

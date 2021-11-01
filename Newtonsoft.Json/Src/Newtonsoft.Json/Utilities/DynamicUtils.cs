@@ -116,9 +116,8 @@ namespace Newtonsoft.Json.Utilities
                 Type csharpBinderFlagsType = Type.GetType(CSharpBinderFlagsTypeName, true);
                 Type binderType = Type.GetType(BinderTypeName, true);
 
-                Type csharpArgumentInfoTypeEnumerableType = typeof(IEnumerable<>).MakeGenericType(
-                    csharpArgumentInfoType
-                );
+                Type csharpArgumentInfoTypeEnumerableType =
+                    typeof(IEnumerable<>).MakeGenericType(csharpArgumentInfoType);
 
                 MethodInfo getMemberMethod = binderType.GetMethod(
                     "GetMember",
@@ -131,9 +130,7 @@ namespace Newtonsoft.Json.Utilities
                     }
                 );
                 _getMemberCall =
-                    JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                        getMemberMethod
-                    );
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(getMemberMethod);
 
                 MethodInfo setMemberMethod = binderType.GetMethod(
                     "SetMember",
@@ -146,9 +143,7 @@ namespace Newtonsoft.Json.Utilities
                     }
                 );
                 _setMemberCall =
-                    JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(
-                        setMemberMethod
-                    );
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object?>(setMemberMethod);
             }
 #endif
 

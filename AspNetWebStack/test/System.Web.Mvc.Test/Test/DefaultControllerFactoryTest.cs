@@ -948,9 +948,7 @@ namespace System.Web.Mvc.Test
             var requestContext = new RequestContext();
             requestContext.RouteData = new RouteData();
             SubRouteCollection subRoutes = new SubRouteCollection();
-            DirectRouteTestHelpers.AddDirectRouteFromController<AttributeRouteAtControllerLevelController>(
-                subRoutes
-            );
+            DirectRouteTestHelpers.AddDirectRouteFromController<AttributeRouteAtControllerLevelController>(subRoutes);
             DirectRouteTestHelpers.AddDirectRouteFromMethod<WithRoutingAttributeController>(
                 subRoutes,
                 c => c.Action()

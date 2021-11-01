@@ -33,9 +33,8 @@ public class App
 
         public int DoSomething()
         {
-            AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(
-                MyReflectionResolveEventHandler
-            );
+            AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve +=
+                new ResolveEventHandler(MyReflectionResolveEventHandler);
             bool caught = false;
             try
             {

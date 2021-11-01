@@ -320,9 +320,8 @@ namespace System.Web.Mvc.Async
                 );
 
                 const int StartingFilterIndex = 0;
-                endContinuation = invocation.InvokeActionMethodFilterAsynchronouslyRecursive(
-                    StartingFilterIndex
-                );
+                endContinuation =
+                    invocation.InvokeActionMethodFilterAsynchronouslyRecursive(StartingFilterIndex);
 
                 if (invocation.InnerAsyncResult != null)
                 {

@@ -296,9 +296,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         var expressionLiteral = SyntaxFactory.CSharpCodeBlock(
                             OutputTokensAsExpressionLiteral()
                         );
-                        var expressionBody = SyntaxFactory.CSharpImplicitExpressionBody(
-                            expressionLiteral
-                        );
+                        var expressionBody =
+                            SyntaxFactory.CSharpImplicitExpressionBody(expressionLiteral);
                         var expressionBlock = SyntaxFactory.CSharpImplicitExpression(
                             transition,
                             expressionBody
@@ -1645,9 +1644,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                     // Add a marker token to provide CSharp intellisense when we start typing the directive token.
                                     // We want CSharp intellisense only if there is whitespace after the directive keyword.
                                     AcceptMarkerTokenIfNecessary();
-                                    SpanContext.ChunkGenerator = new DirectiveTokenChunkGenerator(
-                                        tokenDescriptor
-                                    );
+                                    SpanContext.ChunkGenerator =
+                                        new DirectiveTokenChunkGenerator(tokenDescriptor);
                                     SpanContext.EditHandler = new DirectiveTokenEditHandler(
                                         Language.TokenizeString
                                     );
@@ -1879,9 +1877,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                                 break;
                         }
 
-                        SpanContext.ChunkGenerator = new DirectiveTokenChunkGenerator(
-                            tokenDescriptor
-                        );
+                        SpanContext.ChunkGenerator =
+                            new DirectiveTokenChunkGenerator(tokenDescriptor);
                         SpanContext.EditHandler = new DirectiveTokenEditHandler(
                             Language.TokenizeString
                         );

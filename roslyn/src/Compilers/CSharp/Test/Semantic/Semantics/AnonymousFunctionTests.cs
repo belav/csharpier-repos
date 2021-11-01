@@ -1156,15 +1156,12 @@ public class C
                 .OfType<ParenthesizedLambdaExpressionSyntax>()
                 .Single();
 
-            var anonymousMethod = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                anonymousMethodSyntax
-            ).Symbol!;
-            var simpleLambda = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                simpleLambdaSyntax
-            ).Symbol!;
-            var parenthesizedLambda = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                parenthesizedLambdaSyntax
-            ).Symbol!;
+            var anonymousMethod =
+                (IMethodSymbol)semanticModel.GetSymbolInfo(anonymousMethodSyntax).Symbol!;
+            var simpleLambda =
+                (IMethodSymbol)semanticModel.GetSymbolInfo(simpleLambdaSyntax).Symbol!;
+            var parenthesizedLambda =
+                (IMethodSymbol)semanticModel.GetSymbolInfo(parenthesizedLambdaSyntax).Symbol!;
 
             Assert.True(anonymousMethod.IsStatic);
             Assert.True(simpleLambda.IsStatic);
@@ -1203,15 +1200,12 @@ public class C
                 .OfType<ParenthesizedLambdaExpressionSyntax>()
                 .Single();
 
-            var anonymousMethod = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                anonymousMethodSyntax
-            ).Symbol!;
-            var simpleLambda = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                simpleLambdaSyntax
-            ).Symbol!;
-            var parenthesizedLambda = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                parenthesizedLambdaSyntax
-            ).Symbol!;
+            var anonymousMethod =
+                (IMethodSymbol)semanticModel.GetSymbolInfo(anonymousMethodSyntax).Symbol!;
+            var simpleLambda =
+                (IMethodSymbol)semanticModel.GetSymbolInfo(simpleLambdaSyntax).Symbol!;
+            var parenthesizedLambda =
+                (IMethodSymbol)semanticModel.GetSymbolInfo(parenthesizedLambdaSyntax).Symbol!;
 
             Assert.False(anonymousMethod.IsStatic);
             Assert.False(simpleLambda.IsStatic);

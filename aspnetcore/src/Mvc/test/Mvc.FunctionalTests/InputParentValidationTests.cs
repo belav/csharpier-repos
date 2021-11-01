@@ -56,9 +56,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var actualErrors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(
-                    responseContent
-                );
+                var actualErrors = JsonConvert.DeserializeObject<
+                    Dictionary<string, string[]>
+                >(responseContent);
 
                 Assert.Equal(expectedErrors, actualErrors);
             }
@@ -80,9 +80,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var actualErrors = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(
-                    responseContent
-                );
+                var actualErrors = JsonConvert.DeserializeObject<
+                    Dictionary<string, string[]>
+                >(responseContent);
 
                 Assert.Equal(expectedErrors, actualErrors);
             }

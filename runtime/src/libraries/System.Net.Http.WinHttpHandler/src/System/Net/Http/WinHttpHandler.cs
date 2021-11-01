@@ -1349,9 +1349,8 @@ namespace System.Net.Http
             X509Certificate2 clientCertificate = null;
             if (_clientCertificateOption == ClientCertificateOption.Manual)
             {
-                clientCertificate = CertificateHelper.GetEligibleClientCertificate(
-                    ClientCertificates
-                );
+                clientCertificate =
+                    CertificateHelper.GetEligibleClientCertificate(ClientCertificates);
             }
             else
             {

@@ -282,9 +282,8 @@ namespace System.Collections.Immutable.Tests
             >();
             builder.Add(1, "One");
             builder.Add(2, "Two");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                builder
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(builder);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State

@@ -247,9 +247,8 @@ namespace Castle.DynamicProxy
 
             var message = string.Format(messageFormat, inaccessibleMethod);
 
-            var instructions = ExceptionMessageBuilder.CreateInstructionsToMakeVisible(
-                targetAssembly
-            );
+            var instructions =
+                ExceptionMessageBuilder.CreateInstructionsToMakeVisible(targetAssembly);
             return message + instructions;
         }
     }

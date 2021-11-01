@@ -445,9 +445,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             var result = ComputeSortedCrefMembers(
                 containerOpt,
                 memberName,
@@ -989,9 +988,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // CONSIDER: we might want to reuse this method symbol (as long as the MethodKind and Vararg-ness match).
                         signatureMember = new SignatureOnlyMethodSymbol(
                             methodKind: candidateMethodKind,
-                            typeParameters: IndexedTypeParameterSymbol.TakeSymbols(
-                                signatureMemberArity
-                            ),
+                            typeParameters: IndexedTypeParameterSymbol.TakeSymbols(signatureMemberArity),
                             parameters: parameterSymbols,
                             // This specific comparer only looks for varargs.
                             callingConvention: candidateMethodIsVararg
@@ -1109,9 +1106,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(typeArgumentListSyntax is object);
                 SeparatedSyntaxList<TypeSyntax> typeArgumentSyntaxes =
                     typeArgumentListSyntax.Arguments;
-                var typeArgumentsWithAnnotations = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                    arity
-                );
+                var typeArgumentsWithAnnotations =
+                    ArrayBuilder<TypeWithAnnotations>.GetInstance(arity);
 
                 var unusedDiagnostics =
 #if DEBUG

@@ -757,21 +757,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration.Kind() switch
             {
                 SyntaxKind.MethodDeclaration
-                  => ((MethodDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                  => (
+                      (MethodDeclarationSyntax)declaration
+                  ).WithExplicitInterfaceSpecifier(specifier),
                 SyntaxKind.PropertyDeclaration
-                  => ((PropertyDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                  => (
+                      (PropertyDeclarationSyntax)declaration
+                  ).WithExplicitInterfaceSpecifier(specifier),
                 SyntaxKind.IndexerDeclaration
-                  => ((IndexerDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                  => (
+                      (IndexerDeclarationSyntax)declaration
+                  ).WithExplicitInterfaceSpecifier(specifier),
                 SyntaxKind.EventDeclaration
-                  => ((EventDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                  => (
+                      (EventDeclarationSyntax)declaration
+                  ).WithExplicitInterfaceSpecifier(specifier),
                 _ => declaration,
             };
 
@@ -2740,9 +2740,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 case SyntaxKind.OperatorDeclaration:
                     return ((OperatorDeclarationSyntax)declaration).WithParameterList(list);
                 case SyntaxKind.ConversionOperatorDeclaration:
-                    return ((ConversionOperatorDeclarationSyntax)declaration).WithParameterList(
-                        list
-                    );
+                    return (
+                        (ConversionOperatorDeclarationSyntax)declaration
+                    ).WithParameterList(list);
                 case SyntaxKind.ConstructorDeclaration:
                     return ((ConstructorDeclarationSyntax)declaration).WithParameterList(list);
                 case SyntaxKind.DestructorDeclaration:

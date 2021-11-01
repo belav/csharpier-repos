@@ -346,9 +346,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                 new CacheControlHeaderValue() { Public = true }.ToString();
 
             var utcNow = DateTimeOffset.UtcNow;
-            context.HttpContext.Response.Headers[HeaderNames.Date] = HeaderUtilities.FormatDate(
-                utcNow
-            );
+            context.HttpContext.Response.Headers[HeaderNames.Date] =
+                HeaderUtilities.FormatDate(utcNow);
             context.ResponseTime = DateTimeOffset.MaxValue;
 
             Assert.True(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
@@ -364,13 +363,11 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.HttpContext.Response.Headers[HeaderNames.CacheControl] =
                 new CacheControlHeaderValue() { Public = true }.ToString();
             var utcNow = DateTimeOffset.UtcNow;
-            context.HttpContext.Response.Headers[HeaderNames.Expires] = HeaderUtilities.FormatDate(
-                utcNow
-            );
+            context.HttpContext.Response.Headers[HeaderNames.Expires] =
+                HeaderUtilities.FormatDate(utcNow);
 
-            context.HttpContext.Response.Headers[HeaderNames.Date] = HeaderUtilities.FormatDate(
-                utcNow
-            );
+            context.HttpContext.Response.Headers[HeaderNames.Date] =
+                HeaderUtilities.FormatDate(utcNow);
             context.ResponseTime = utcNow;
 
             Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
@@ -390,12 +387,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                     Public = true,
                     MaxAge = TimeSpan.FromSeconds(10)
                 }.ToString();
-            context.HttpContext.Response.Headers[HeaderNames.Expires] = HeaderUtilities.FormatDate(
-                utcNow
-            );
-            context.HttpContext.Response.Headers[HeaderNames.Date] = HeaderUtilities.FormatDate(
-                utcNow
-            );
+            context.HttpContext.Response.Headers[HeaderNames.Expires] =
+                HeaderUtilities.FormatDate(utcNow);
+            context.HttpContext.Response.Headers[HeaderNames.Date] =
+                HeaderUtilities.FormatDate(utcNow);
             context.ResponseTime = utcNow + TimeSpan.FromSeconds(9);
 
             Assert.True(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
@@ -415,12 +410,10 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                     Public = true,
                     MaxAge = TimeSpan.FromSeconds(10)
                 }.ToString();
-            context.HttpContext.Response.Headers[HeaderNames.Expires] = HeaderUtilities.FormatDate(
-                utcNow
-            );
-            context.HttpContext.Response.Headers[HeaderNames.Date] = HeaderUtilities.FormatDate(
-                utcNow
-            );
+            context.HttpContext.Response.Headers[HeaderNames.Expires] =
+                HeaderUtilities.FormatDate(utcNow);
+            context.HttpContext.Response.Headers[HeaderNames.Date] =
+                HeaderUtilities.FormatDate(utcNow);
             context.ResponseTime = utcNow + TimeSpan.FromSeconds(10);
 
             Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
@@ -441,9 +434,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                     MaxAge = TimeSpan.FromSeconds(10),
                     SharedMaxAge = TimeSpan.FromSeconds(15)
                 }.ToString();
-            context.HttpContext.Response.Headers[HeaderNames.Date] = HeaderUtilities.FormatDate(
-                utcNow
-            );
+            context.HttpContext.Response.Headers[HeaderNames.Date] =
+                HeaderUtilities.FormatDate(utcNow);
             context.ResponseTime = utcNow + TimeSpan.FromSeconds(11);
 
             Assert.True(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
@@ -464,9 +456,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                     MaxAge = TimeSpan.FromSeconds(10),
                     SharedMaxAge = TimeSpan.FromSeconds(5)
                 }.ToString();
-            context.HttpContext.Response.Headers[HeaderNames.Date] = HeaderUtilities.FormatDate(
-                utcNow
-            );
+            context.HttpContext.Response.Headers[HeaderNames.Date] =
+                HeaderUtilities.FormatDate(utcNow);
             context.ResponseTime = utcNow + TimeSpan.FromSeconds(5);
 
             Assert.False(new ResponseCachingPolicyProvider().IsResponseCacheable(context));
@@ -538,9 +529,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                     Public = true,
                     MaxAge = TimeSpan.FromSeconds(10)
                 }.ToString();
-            context.HttpContext.Response.Headers[HeaderNames.Expires] = HeaderUtilities.FormatDate(
-                utcNow
-            );
+            context.HttpContext.Response.Headers[HeaderNames.Expires] =
+                HeaderUtilities.FormatDate(utcNow);
 
             Assert.True(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
             Assert.Empty(sink.Writes);
@@ -561,9 +551,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
                     Public = true,
                     MaxAge = TimeSpan.FromSeconds(10)
                 }.ToString();
-            context.HttpContext.Response.Headers[HeaderNames.Expires] = HeaderUtilities.FormatDate(
-                utcNow
-            );
+            context.HttpContext.Response.Headers[HeaderNames.Expires] =
+                HeaderUtilities.FormatDate(utcNow);
 
             Assert.False(new ResponseCachingPolicyProvider().IsCachedEntryFresh(context));
             TestUtils.AssertLoggedMessages(sink.Writes, LoggedMessage.ExpirationMaxAgeExceeded);

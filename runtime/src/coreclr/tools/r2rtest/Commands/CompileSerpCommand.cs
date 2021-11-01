@@ -623,9 +623,7 @@ namespace R2RTest
             foreach (string referenceFolder in folders)
             {
                 foreach (
-                    string reference in ComputeManagedAssemblies.GetManagedAssembliesInFolder(
-                        referenceFolder
-                    )
+                    string reference in ComputeManagedAssemblies.GetManagedAssembliesInFolder(referenceFolder)
                 )
                 {
                     yield return reference;

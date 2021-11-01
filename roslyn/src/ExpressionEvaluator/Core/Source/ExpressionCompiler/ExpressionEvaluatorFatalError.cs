@@ -79,9 +79,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
     internal static class ExpressionEvaluatorFatalError
     {
         private const string RegistryValue = "EnableFailFast";
-        internal static bool IsFailFastEnabled = RegistryHelpers.GetBoolRegistryValue(
-            RegistryValue
-        );
+        internal static bool IsFailFastEnabled =
+            RegistryHelpers.GetBoolRegistryValue(RegistryValue);
 
         internal static bool CrashIfFailFastEnabled(Exception exception)
         {

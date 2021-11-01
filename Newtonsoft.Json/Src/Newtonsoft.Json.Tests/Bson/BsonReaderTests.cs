@@ -1468,9 +1468,8 @@ namespace Newtonsoft.Json.Tests.Bson
 
             var bsonReader = new BsonReader(memoryStream);
 
-            UriGuidTimeSpanTestClass c2 = serializer.Deserialize<UriGuidTimeSpanTestClass>(
-                bsonReader
-            );
+            UriGuidTimeSpanTestClass c2 =
+                serializer.Deserialize<UriGuidTimeSpanTestClass>(bsonReader);
             Assert.AreEqual(c1.Guid, c2.Guid);
             Assert.AreEqual(c1.NullableGuid, c2.NullableGuid);
             Assert.AreEqual(c1.TimeSpan, c2.TimeSpan);
@@ -1499,9 +1498,8 @@ namespace Newtonsoft.Json.Tests.Bson
 
             var bsonReader = new BsonReader(memoryStream);
 
-            UriGuidTimeSpanTestClass c2 = serializer.Deserialize<UriGuidTimeSpanTestClass>(
-                bsonReader
-            );
+            UriGuidTimeSpanTestClass c2 =
+                serializer.Deserialize<UriGuidTimeSpanTestClass>(bsonReader);
             Assert.AreEqual(c1.Guid, c2.Guid);
             Assert.AreEqual(c1.NullableGuid, c2.NullableGuid);
             Assert.AreEqual(c1.TimeSpan, c2.TimeSpan);

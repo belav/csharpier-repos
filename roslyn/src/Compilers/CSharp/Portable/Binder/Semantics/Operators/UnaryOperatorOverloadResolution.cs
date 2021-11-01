@@ -505,9 +505,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<NamedTypeSymbol> interfaces = default;
                 if (type0.IsInterfaceType())
                 {
-                    interfaces = type0.AllInterfacesWithDefinitionUseSiteDiagnostics(
-                        ref useSiteInfo
-                    );
+                    interfaces =
+                        type0.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
                 }
                 else if (type0.IsTypeParameter())
                 {
@@ -554,9 +553,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                             // this interface "shadows" all its base interfaces
                             shadowedInterfaces.AddAll(
-                                @interface.AllInterfacesWithDefinitionUseSiteDiagnostics(
-                                    ref useSiteInfo
-                                )
+                                @interface.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
                             );
                         }
                     }

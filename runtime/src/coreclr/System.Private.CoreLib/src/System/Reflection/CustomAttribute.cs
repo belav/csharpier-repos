@@ -260,9 +260,8 @@ namespace System.Reflection
         }
         private static CustomAttributeType InitCustomAttributeType(RuntimeType parameterType)
         {
-            CustomAttributeEncoding encodedType = CustomAttributeData.TypeToCustomAttributeEncoding(
-                parameterType
-            );
+            CustomAttributeEncoding encodedType =
+                CustomAttributeData.TypeToCustomAttributeEncoding(parameterType);
             CustomAttributeEncoding encodedArrayType = CustomAttributeEncoding.Undefined;
             CustomAttributeEncoding encodedEnumType = CustomAttributeEncoding.Undefined;
             string? enumName = null;
@@ -2529,11 +2528,13 @@ namespace System.Reflection
                 out int iidParamIndex
             );
 
-            RuntimeType? safeArrayUserDefinedType = string.IsNullOrEmpty(
-                safeArrayUserDefinedTypeName
-            )
-                ? null
-                : RuntimeTypeHandle.GetTypeByNameUsingCARules(safeArrayUserDefinedTypeName, scope);
+            RuntimeType? safeArrayUserDefinedType =
+                string.IsNullOrEmpty(safeArrayUserDefinedTypeName)
+                    ? null
+                    : RuntimeTypeHandle.GetTypeByNameUsingCARules(
+                          safeArrayUserDefinedTypeName,
+                          scope
+                      );
             RuntimeType? marshalTypeRef = null;
 
             try

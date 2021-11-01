@@ -21,9 +21,8 @@ namespace System.Web.Mvc.Test
             };
 
             // Act
-            ModelValidatorProviderCollection collection = new ModelValidatorProviderCollection(
-                list
-            );
+            ModelValidatorProviderCollection collection =
+                new ModelValidatorProviderCollection(list);
 
             // Assert
             Assert.Equal(list, collection.ToList());

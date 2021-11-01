@@ -326,9 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             // local.$builder.Start(ref local) -- binding to the method AsyncTaskMethodBuilder<typeArgs>.Start()
-            var startMethod = methodScopeAsyncMethodBuilderMemberCollection.Start.Construct(
-                frameType
-            );
+            var startMethod =
+                methodScopeAsyncMethodBuilderMemberCollection.Start.Construct(frameType);
             if (methodScopeAsyncMethodBuilderMemberCollection.CheckGenericMethodConstraints)
             {
                 startMethod.CheckConstraints(

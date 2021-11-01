@@ -1178,9 +1178,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             );
             var legacyDescriptor = Valid_PlainTagHelperDescriptor;
             var descriptors = new[] { legacyDescriptor, componentDescriptor, };
-            var visitor = new DefaultRazorTagHelperBinderPhase.TagHelperDirectiveVisitor(
-                descriptors
-            );
+            var visitor =
+                new DefaultRazorTagHelperBinderPhase.TagHelperDirectiveVisitor(descriptors);
             var sourceDocument = CreateTestSourceDocument();
             var tree = RazorSyntaxTree.Parse(sourceDocument);
 
@@ -1556,9 +1555,7 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // Act
             var result =
-                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTagHelperFromMangledClass(
-                    descriptor
-                );
+                DefaultRazorTagHelperBinderPhase.ComponentDirectiveVisitor.IsTagHelperFromMangledClass(descriptor);
 
             // Assert
             Assert.True(result);

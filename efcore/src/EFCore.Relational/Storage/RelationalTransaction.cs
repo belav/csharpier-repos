@@ -305,9 +305,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateCreateSavepointStatement(
-                        name
-                    );
+                    command.CommandText =
+                        _sqlGenerationHelper.GenerateCreateSavepointStatement(name);
                     command.ExecuteNonQuery();
                 }
 
@@ -359,9 +358,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateCreateSavepointStatement(
-                        name
-                    );
+                    command.CommandText =
+                        _sqlGenerationHelper.GenerateCreateSavepointStatement(name);
                     await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
                 }
 
@@ -413,9 +411,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateRollbackToSavepointStatement(
-                        name
-                    );
+                    command.CommandText =
+                        _sqlGenerationHelper.GenerateRollbackToSavepointStatement(name);
                     command.ExecuteNonQuery();
                 }
 
@@ -467,9 +464,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateRollbackToSavepointStatement(
-                        name
-                    );
+                    command.CommandText =
+                        _sqlGenerationHelper.GenerateRollbackToSavepointStatement(name);
                     await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
                 }
 
@@ -521,9 +517,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateReleaseSavepointStatement(
-                        name
-                    );
+                    command.CommandText =
+                        _sqlGenerationHelper.GenerateReleaseSavepointStatement(name);
                     command.ExecuteNonQuery();
                 }
 
@@ -575,9 +570,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     using var command = Connection.DbConnection.CreateCommand();
                     command.Transaction = _dbTransaction;
-                    command.CommandText = _sqlGenerationHelper.GenerateReleaseSavepointStatement(
-                        name
-                    );
+                    command.CommandText =
+                        _sqlGenerationHelper.GenerateReleaseSavepointStatement(name);
                     await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
                 }
 

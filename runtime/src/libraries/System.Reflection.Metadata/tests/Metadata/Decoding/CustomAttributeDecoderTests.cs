@@ -36,9 +36,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
 
                 int i = 0;
                 foreach (
-                    CustomAttributeHandle attributeHandle in reader.GetCustomAttributes(
-                        typeDefHandle
-                    )
+                    CustomAttributeHandle attributeHandle in reader.GetCustomAttributes(typeDefHandle)
                 )
                 {
                     CustomAttribute attribute = reader.GetCustomAttribute(attributeHandle);

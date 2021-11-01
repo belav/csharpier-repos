@@ -139,9 +139,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                             .WaitAndGetResult(cancellationToken);
                                         if (!dataTipInfo.IsDefault)
                                         {
-                                            var resultSpan = dataTipInfo.Span.ToSnapshotSpan(
-                                                textSnapshot
-                                            );
+                                            var resultSpan =
+                                                dataTipInfo.Span.ToSnapshotSpan(textSnapshot);
                                             var textOpt = dataTipInfo.Text;
 
                                             pSpan[0] = resultSpan.ToVsTextSpan();

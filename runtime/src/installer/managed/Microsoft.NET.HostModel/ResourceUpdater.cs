@@ -433,9 +433,8 @@ namespace Microsoft.NET.HostModel
             IntPtr lParam
         )
         {
-            var enumLanguagesCallback = new Kernel32.EnumResLangProc(
-                EnumAndUpdateLanguagesCallback
-            );
+            var enumLanguagesCallback =
+                new Kernel32.EnumResLangProc(EnumAndUpdateLanguagesCallback);
             if (
                 !Kernel32.EnumResourceLanguages(
                     hModule,

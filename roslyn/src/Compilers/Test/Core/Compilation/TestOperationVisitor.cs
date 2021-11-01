@@ -761,9 +761,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             switch (operation.Language)
             {
                 case LanguageNames.CSharp:
-                    CSharp.Conversion csharpConversion = CSharp.CSharpExtensions.GetConversion(
-                        operation
-                    );
+                    CSharp.Conversion csharpConversion =
+                        CSharp.CSharpExtensions.GetConversion(operation);
                     Assert.Throws<ArgumentException>(
                         () => VisualBasic.VisualBasicExtensions.GetConversion(operation)
                     );
@@ -1111,12 +1110,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     "compoundAssignment",
                     () => CSharp.CSharpExtensions.GetOutConversion(operation)
                 );
-                var inConversionInternal = VisualBasic.VisualBasicExtensions.GetInConversion(
-                    operation
-                );
-                var outConversionInternal = VisualBasic.VisualBasicExtensions.GetOutConversion(
-                    operation
-                );
+                var inConversionInternal =
+                    VisualBasic.VisualBasicExtensions.GetInConversion(operation);
+                var outConversionInternal =
+                    VisualBasic.VisualBasicExtensions.GetOutConversion(operation);
             }
 
             var isLifted = operation.IsLifted;

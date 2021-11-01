@@ -48,15 +48,11 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
                     );
 
                     foreach (
-                        var defaultCompileLibrary in DependencyContext.Load(
-                            testAssembly
-                        ).CompileLibraries
+                        var defaultCompileLibrary in DependencyContext.Load(testAssembly).CompileLibraries
                     )
                     {
                         foreach (
-                            var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(
-                                _assemblyResolver
-                            )
+                            var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(_assemblyResolver)
                         )
                         {
                             solution = solution.AddMetadataReference(

@@ -745,9 +745,8 @@ namespace System.Collections.Immutable.Tests
             // Verify that CreateRange is smart enough to reuse the underlying array when possible.
 
             ImmutableArray<string> derivedImmutable = ImmutableArray.Create("a", "b", "c");
-            ImmutableArray<object> baseImmutable = ImmutableArray.CreateRange<object>(
-                derivedImmutable
-            );
+            ImmutableArray<object> baseImmutable =
+                ImmutableArray.CreateRange<object>(derivedImmutable);
             // Must cast to object or the IEnumerable<object> overload of Equals would be used
             Assert.Equal((object)derivedImmutable, baseImmutable, EqualityComparer<object>.Default);
 

@@ -82,9 +82,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.SelectMany_with_selecting_outer_entity_column_and_inner_column(
-                                async
-                            )
+                            base.SelectMany_with_selecting_outer_entity_column_and_inner_column(async)
                     )
                 ).Message
             );

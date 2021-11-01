@@ -1842,9 +1842,8 @@ namespace System.Reflection.Metadata.Tests
             {
                 Assert.False(subNamespaceHandle.IsNil);
                 string subNamespaceFullName = reader.GetString(subNamespaceHandle);
-                NamespaceDefinition subNamespace = reader.GetNamespaceDefinition(
-                    subNamespaceHandle
-                );
+                NamespaceDefinition subNamespace =
+                    reader.GetNamespaceDefinition(subNamespaceHandle);
 
                 string subNamespaceName = subNamespaceFullName.Split('.').Last();
                 Assert.Equal(subNamespaceName, reader.GetString(subNamespace.Name));

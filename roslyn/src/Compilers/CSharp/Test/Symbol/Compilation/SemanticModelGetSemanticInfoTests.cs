@@ -5422,9 +5422,8 @@ class Class1
     private Class1(int a, long b) { }
 }
 ";
-            var semanticInfo = GetSemanticInfoForTest<ImplicitObjectCreationExpressionSyntax>(
-                sourceCode
-            );
+            var semanticInfo =
+                GetSemanticInfoForTest<ImplicitObjectCreationExpressionSyntax>(sourceCode);
 
             Assert.Equal("Class1", semanticInfo.Type.ToTestDisplayString());
             Assert.Equal(TypeKind.Class, semanticInfo.Type.TypeKind);
@@ -13009,9 +13008,8 @@ namespace Test
     }
 }
 ";
-            var semanticInfo = GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(
-                sourceCode
-            );
+            var semanticInfo =
+                GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(sourceCode);
 
             Assert.Equal("System.Int32[]", semanticInfo.Type.ToTestDisplayString());
             Assert.Equal(TypeKind.Array, semanticInfo.Type.TypeKind);
@@ -13084,9 +13082,8 @@ namespace Test
     }
 }
 ";
-            var semanticInfo = GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(
-                sourceCode
-            );
+            var semanticInfo =
+                GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(sourceCode);
 
             Assert.Equal("System.Int32[,,]", semanticInfo.Type.ToTestDisplayString());
             Assert.Equal(TypeKind.Array, semanticInfo.Type.TypeKind);
@@ -13159,9 +13156,8 @@ public class C
     }
 }
 ";
-            var semanticInfo = GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(
-                sourceCode
-            );
+            var semanticInfo =
+                GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(sourceCode);
 
             Assert.Equal("?[]", semanticInfo.Type.ToTestDisplayString());
             Assert.Equal(TypeKind.Array, semanticInfo.Type.TypeKind);
@@ -13234,9 +13230,8 @@ namespace Test
     }
 }
 ";
-            var semanticInfo = GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(
-                sourceCode
-            );
+            var semanticInfo =
+                GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(sourceCode);
 
             Assert.Equal("?[,,]", semanticInfo.Type.ToTestDisplayString());
             Assert.Equal(TypeKind.Array, semanticInfo.Type.TypeKind);
@@ -13272,9 +13267,8 @@ namespace Test
     }
 }
 ";
-            var semanticInfo = GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(
-                sourceCode
-            );
+            var semanticInfo =
+                GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(sourceCode);
 
             Assert.Equal("?[,,]", semanticInfo.Type.ToTestDisplayString());
             Assert.Equal(TypeKind.Array, semanticInfo.Type.TypeKind);
@@ -13311,9 +13305,8 @@ public class C
     }
 }
 ";
-            var semanticInfo = GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(
-                sourceCode
-            );
+            var semanticInfo =
+                GetSemanticInfoForTest<ImplicitArrayCreationExpressionSyntax>(sourceCode);
 
             Assert.Equal("System.Int32[]", semanticInfo.Type.ToTestDisplayString());
             Assert.Equal(TypeKind.Array, semanticInfo.Type.TypeKind);

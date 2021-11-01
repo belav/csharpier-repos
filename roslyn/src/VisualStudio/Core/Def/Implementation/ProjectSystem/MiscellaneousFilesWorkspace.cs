@@ -313,9 +313,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             if (_monikerToWorkspaceRegistration.TryGetValue(moniker, out var registration))
             {
                 registration.WorkspaceChanged -= Registration_WorkspaceChanged;
-                _monikerToWorkspaceRegistration = _monikerToWorkspaceRegistration.RemoveKey(
-                    moniker
-                );
+                _monikerToWorkspaceRegistration =
+                    _monikerToWorkspaceRegistration.RemoveKey(moniker);
                 unregisteredRegistration = true;
             }
 

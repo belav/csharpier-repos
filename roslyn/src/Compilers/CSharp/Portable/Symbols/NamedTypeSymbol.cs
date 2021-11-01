@@ -1685,9 +1685,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (
                         arity > 0
                         && arity < ValueTupleRestPosition
-                        && ((NamedTypeSymbol)typeToCheck).IsTupleTypeOfCardinality(
-                            out tupleCardinality
-                        )
+                        && (
+                            (NamedTypeSymbol)typeToCheck
+                        ).IsTupleTypeOfCardinality(out tupleCardinality)
                     )
                     {
                         Debug.Assert(tupleCardinality < ValueTupleRestPosition);

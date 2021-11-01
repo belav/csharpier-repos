@@ -192,17 +192,15 @@ public class MulticastDelegateEquals
             dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
                 dd.TestValueParameterVoidCallback
             );
-            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback
-            );
+            dd.ValueParameterVoidDelegate +=
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
 
             DelegateDefinitions dd1 = new DelegateDefinitions();
             dd1.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
                 dd.TestValueParameterVoidCallback
             );
-            dd1.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback
-            );
+            dd1.ValueParameterVoidDelegate +=
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
 
             if (!dd.ValueParameterVoidDelegate.Equals(dd1.ValueParameterVoidDelegate))
             {
@@ -288,13 +286,11 @@ public class MulticastDelegateEquals
         try
         {
             DelegateDefinitions dd = new DelegateDefinitions();
-            dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback
-            );
+            dd.ValueParameterVoidDelegate =
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
             DelegateDefinitions dd1 = new DelegateDefinitions();
-            dd1.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback1
-            );
+            dd1.ValueParameterVoidDelegate =
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback1);
 
             if (dd.ValueParameterVoidDelegate.Equals(dd1.ValueParameterVoidDelegate))
             {
@@ -330,9 +326,8 @@ public class MulticastDelegateEquals
                 dd.TestValueParameterVoidCallback
             );
             DelegateDefinitions dd1 = new DelegateDefinitions();
-            dd1.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback
-            );
+            dd1.ValueParameterVoidDelegate =
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
 
             if (dd.ValueParameterVoidDelegate.Equals(dd1.ValueParameterVoidDelegate))
             {
@@ -406,20 +401,17 @@ public class MulticastDelegateEquals
             dd.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
                 dd.TestValueParameterVoidCallback
             );
-            dd.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback
-            );
+            dd.ValueParameterVoidDelegate +=
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
 
             DelegateDefinitions dd1 = new DelegateDefinitions();
             dd1.ValueParameterVoidDelegate = new ValueParameterVoidDelegate(
                 dd.TestValueParameterVoidCallback
             );
-            dd1.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback
-            );
-            dd1.ValueParameterVoidDelegate += new ValueParameterVoidDelegate(
-                TestValueParameterVoidCallback
-            );
+            dd1.ValueParameterVoidDelegate +=
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
+            dd1.ValueParameterVoidDelegate +=
+                new ValueParameterVoidDelegate(TestValueParameterVoidCallback);
 
             if (dd.ValueParameterVoidDelegate.Equals(dd1.ValueParameterVoidDelegate))
             {

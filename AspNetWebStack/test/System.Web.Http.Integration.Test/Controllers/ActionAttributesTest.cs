@@ -74,9 +74,8 @@ namespace System.Web.Http
             var exception = Assert.Throws<HttpResponseException>(
                 () =>
                 {
-                    HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
-                        controllerContext
-                    );
+                    HttpActionDescriptor descriptor =
+                        ApiControllerHelper.SelectAction(controllerContext);
                 }
             );
 
@@ -124,9 +123,8 @@ namespace System.Web.Http
             var exception = Assert.Throws<HttpResponseException>(
                 () =>
                 {
-                    HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
-                        controllerContext
-                    );
+                    HttpActionDescriptor descriptor =
+                        ApiControllerHelper.SelectAction(controllerContext);
                 }
             );
 
@@ -212,9 +210,8 @@ namespace System.Web.Http
             var exception = Assert.Throws<HttpResponseException>(
                 () =>
                 {
-                    HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
-                        controllerContext
-                    );
+                    HttpActionDescriptor descriptor =
+                        ApiControllerHelper.SelectAction(controllerContext);
                 }
             );
 

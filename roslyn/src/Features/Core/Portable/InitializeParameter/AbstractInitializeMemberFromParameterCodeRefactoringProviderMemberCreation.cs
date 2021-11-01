@@ -545,9 +545,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                     .GetRequiredSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
 
-                var currentConstructorDeclaration = currentRoot.GetCurrentNode(
-                    constructorDeclaration
-                );
+                var currentConstructorDeclaration =
+                    currentRoot.GetCurrentNode(constructorDeclaration);
                 if (currentConstructorDeclaration == null)
                     continue;
 
@@ -709,9 +708,9 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
 
                 if (statement != null && fieldOrProperty is TSymbol symbol)
                 {
-                    var symbolSyntax = symbol.DeclaringSyntaxReferences[0].GetSyntax(
-                        cancellationToken
-                    );
+                    var symbolSyntax = symbol.DeclaringSyntaxReferences[
+                        0
+                    ].GetSyntax(cancellationToken);
                     if (symbolSyntax.Ancestors().Contains(typeDeclaration))
                     {
                         if (before)

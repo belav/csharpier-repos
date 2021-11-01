@@ -287,9 +287,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ImmutableArray<TypeWithAnnotations> typeArguments =
                 namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics;
 
-            ImmutableArray<TypeWithAnnotations> transformedTypeArguments = TransformTypeArguments(
-                typeArguments
-            ); // Note, modifiers are not involved, this is behavior of the native compiler.
+            ImmutableArray<TypeWithAnnotations> transformedTypeArguments =
+                TransformTypeArguments(typeArguments); // Note, modifiers are not involved, this is behavior of the native compiler.
 
             if (transformedTypeArguments.IsDefault)
             {

@@ -184,9 +184,8 @@ namespace System.Web.Mvc.Async.Test
             );
 
             // Assert
-            var castActionDescriptor = Assert.IsType<ReflectedAsyncActionDescriptor>(
-                actionDescriptor
-            );
+            var castActionDescriptor =
+                Assert.IsType<ReflectedAsyncActionDescriptor>(actionDescriptor);
             Assert.Equal("EventPatternAsync", castActionDescriptor.AsyncMethodInfo.Name);
             Assert.Equal("EventPatternCompleted", castActionDescriptor.CompletedMethodInfo.Name);
         }

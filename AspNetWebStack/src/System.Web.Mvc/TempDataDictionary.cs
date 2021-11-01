@@ -76,9 +76,8 @@ namespace System.Web.Mvc
 
         public void Load(ControllerContext controllerContext, ITempDataProvider tempDataProvider)
         {
-            IDictionary<string, object> providerDictionary = tempDataProvider.LoadTempData(
-                controllerContext
-            );
+            IDictionary<string, object> providerDictionary =
+                tempDataProvider.LoadTempData(controllerContext);
             _data =
                 (providerDictionary != null)
                     ? new Dictionary<string, object>(

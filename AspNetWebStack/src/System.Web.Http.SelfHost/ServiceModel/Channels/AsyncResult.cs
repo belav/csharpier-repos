@@ -246,9 +246,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             _nextAsyncCompletion = callback;
             if (AsyncResult._asyncCompletionWrapperCallback == null)
             {
-                AsyncResult._asyncCompletionWrapperCallback = new AsyncCallback(
-                    AsyncCompletionWrapperCallback
-                );
+                AsyncResult._asyncCompletionWrapperCallback =
+                    new AsyncCallback(AsyncCompletionWrapperCallback);
             }
             return AsyncResult._asyncCompletionWrapperCallback;
         }

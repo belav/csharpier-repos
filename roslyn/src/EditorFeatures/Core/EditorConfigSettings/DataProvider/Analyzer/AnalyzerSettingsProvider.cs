@@ -100,9 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
                         g =>
                         {
                             var selectedDiagnostic = g.First();
-                            var severity = selectedDiagnostic.GetEffectiveSeverity(
-                                editorConfigOptions
-                            );
+                            var severity =
+                                selectedDiagnostic.GetEffectiveSeverity(editorConfigOptions);
                             return new AnalyzerSetting(
                                 selectedDiagnostic,
                                 severity,

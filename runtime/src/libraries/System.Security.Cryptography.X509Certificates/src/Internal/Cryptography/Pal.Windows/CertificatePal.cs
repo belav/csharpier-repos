@@ -446,9 +446,8 @@ namespace Internal.Cryptography.Pal
                 {
                     byte[] encodedSubjectName =
                         _certContext.CertContext->pCertInfo->Subject.ToByteArray();
-                    X500DistinguishedName subjectName = new X500DistinguishedName(
-                        encodedSubjectName
-                    );
+                    X500DistinguishedName subjectName =
+                        new X500DistinguishedName(encodedSubjectName);
                     GC.KeepAlive(this);
                     return subjectName;
                 }

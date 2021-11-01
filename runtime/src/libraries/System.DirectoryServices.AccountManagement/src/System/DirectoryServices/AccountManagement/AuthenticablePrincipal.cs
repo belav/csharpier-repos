@@ -741,9 +741,8 @@ namespace System.DirectoryServices.AccountManagement
             }
 
             // Make a copy of the thumbprint list, so we can alter the copy without effecting the original.
-            List<string> remainingOriginalThumbprints = new List<string>(
-                _certificateOriginalThumbprints
-            );
+            List<string> remainingOriginalThumbprints =
+                new List<string>(_certificateOriginalThumbprints);
 
             foreach (X509Certificate2 certificate in _certificates)
             {

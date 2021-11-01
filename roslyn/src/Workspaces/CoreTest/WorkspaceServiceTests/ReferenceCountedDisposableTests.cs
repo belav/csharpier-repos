@@ -104,9 +104,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var target = new DisposableObject();
 
             var reference = new ReferenceCountedDisposable<DisposableObject>(target);
-            var weakReference = new ReferenceCountedDisposable<DisposableObject>.WeakReference(
-                reference
-            );
+            var weakReference =
+                new ReferenceCountedDisposable<DisposableObject>.WeakReference(reference);
 
             var reference2 = reference.TryAddReference();
             Assert.NotNull(reference2);

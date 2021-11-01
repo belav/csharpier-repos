@@ -53,18 +53,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var wrapperProviderFactories = GetWrapperProviderFactories();
-            var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(
-                wrapperProviderFactories
-            );
+            var enumerableWrapperProviderFactory =
+                new EnumerableWrapperProviderFactory(wrapperProviderFactories);
             var wrapperProviderContext = new WrapperProviderContext(
                 declaredType,
                 isSerialization: true
             );
 
             // Act
-            var wrapperProvider = enumerableWrapperProviderFactory.GetProvider(
-                wrapperProviderContext
-            );
+            var wrapperProvider =
+                enumerableWrapperProviderFactory.GetProvider(wrapperProviderContext);
 
             // Assert
             Assert.NotNull(wrapperProvider);
@@ -114,18 +112,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var wrapperProviderFactories = GetWrapperProviderFactories();
-            var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(
-                wrapperProviderFactories
-            );
+            var enumerableWrapperProviderFactory =
+                new EnumerableWrapperProviderFactory(wrapperProviderFactories);
             var wrapperProviderContext = new WrapperProviderContext(
                 declaredType,
                 isSerialization: true
             );
 
             // Act
-            var wrapperProvider = enumerableWrapperProviderFactory.GetProvider(
-                wrapperProviderContext
-            );
+            var wrapperProvider =
+                enumerableWrapperProviderFactory.GetProvider(wrapperProviderContext);
 
             // Assert
             Assert.NotNull(wrapperProvider);
@@ -165,18 +161,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var wrapperProviderFactories = GetWrapperProviderFactories();
-            var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(
-                wrapperProviderFactories
-            );
+            var enumerableWrapperProviderFactory =
+                new EnumerableWrapperProviderFactory(wrapperProviderFactories);
             var wrapperProviderContext = new WrapperProviderContext(
                 declaredType,
                 isSerialization: true
             );
 
             // Act
-            var wrapperProvider = enumerableWrapperProviderFactory.GetProvider(
-                wrapperProviderContext
-            );
+            var wrapperProvider =
+                enumerableWrapperProviderFactory.GetProvider(wrapperProviderContext);
 
             // Assert
             Assert.Null(wrapperProvider);

@@ -47,9 +47,8 @@ namespace System.Security.Cryptography.X509Certificates
             Debug.Assert(Subject != null);
             Debug.Assert(PublicKey != null);
 
-            byte[] signatureAlgorithm = signatureGenerator.GetSignatureAlgorithmIdentifier(
-                hashAlgorithm
-            );
+            byte[] signatureAlgorithm =
+                signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm);
             AlgorithmIdentifierAsn signatureAlgorithmAsn;
 
             // Deserialization also does validation of the value (except for Parameters, which have to be validated separately).

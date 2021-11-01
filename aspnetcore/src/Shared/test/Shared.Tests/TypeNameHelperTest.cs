@@ -267,9 +267,7 @@ namespace Microsoft.Extensions.Internal
 
         [Theory]
         [MemberData(
-            nameof(
-                GetTypeDisplayName_WithoutFullName_IncludesGenericParameterNamesWhenOptionIsSetData
-            )
+            nameof(GetTypeDisplayName_WithoutFullName_IncludesGenericParameterNamesWhenOptionIsSetData)
         )]
         public void GetTypeDisplayName_WithoutFullName_IncludesGenericParameterNamesWhenOptionIsSet(
             Type type,

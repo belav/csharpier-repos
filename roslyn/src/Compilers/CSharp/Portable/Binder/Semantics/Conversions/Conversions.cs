@@ -244,9 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var (invokeMethodOpt, isFunctionPointer, callingConventionInfo) =
                 GetDelegateInvokeOrFunctionPointerMethodIfAvailable(targetType);
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = binder.GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                binder.GetNewCompoundUseSiteInfo(diagnostics);
             var resolution = ResolveDelegateOrFunctionPointerMethodGroup(
                 binder,
                 expr,

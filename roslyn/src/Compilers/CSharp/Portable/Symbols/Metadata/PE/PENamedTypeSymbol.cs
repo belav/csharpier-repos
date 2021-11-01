@@ -234,9 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             try
             {
-                genericParameterHandles = moduleSymbol.Module.GetTypeDefGenericParamsOrThrow(
-                    handle
-                );
+                genericParameterHandles =
+                    moduleSymbol.Module.GetTypeDefGenericParamsOrThrow(handle);
                 arity = (ushort)genericParameterHandles.Count;
                 mrEx = null;
             }
@@ -583,9 +582,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             try
             {
                 var moduleSymbol = ContainingPEModule;
-                var interfaceImpls = moduleSymbol.Module.GetInterfaceImplementationsOrThrow(
-                    _handle
-                );
+                var interfaceImpls =
+                    moduleSymbol.Module.GetInterfaceImplementationsOrThrow(_handle);
 
                 if (interfaceImpls.Count > 0)
                 {
@@ -595,9 +593,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     foreach (var interfaceImpl in interfaceImpls)
                     {
                         EntityHandle interfaceHandle =
-                            moduleSymbol.Module.MetadataReader.GetInterfaceImplementation(
-                                interfaceImpl
-                            ).Interface;
+                            moduleSymbol.Module.MetadataReader.GetInterfaceImplementation(interfaceImpl).Interface;
                         TypeSymbol typeSymbol = tokenDecoder.GetTypeOfToken(interfaceHandle);
 
                         typeSymbol = NativeIntegerTypeDecoder.TransformType(

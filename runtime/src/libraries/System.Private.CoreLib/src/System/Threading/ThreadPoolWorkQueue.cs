@@ -1032,12 +1032,10 @@ namespace System.Threading
         private readonly WaitOrTimerCallback _waitOrTimerCallback;
         private readonly ExecutionContext? _executionContext;
         private readonly object? _state;
-        private static readonly ContextCallback _ccbt = new ContextCallback(
-            WaitOrTimerCallback_Context_t
-        );
-        private static readonly ContextCallback _ccbf = new ContextCallback(
-            WaitOrTimerCallback_Context_f
-        );
+        private static readonly ContextCallback _ccbt =
+            new ContextCallback(WaitOrTimerCallback_Context_t);
+        private static readonly ContextCallback _ccbf =
+            new ContextCallback(WaitOrTimerCallback_Context_f);
 
         internal _ThreadPoolWaitOrTimerCallback(
             WaitOrTimerCallback waitOrTimerCallback,

@@ -240,9 +240,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            SpecifiedTestClass deserialized = JsonConvert.DeserializeObject<SpecifiedTestClass>(
-                json
-            );
+            SpecifiedTestClass deserialized =
+                JsonConvert.DeserializeObject<SpecifiedTestClass>(json);
             Assert.IsNull(deserialized.Name);
             Assert.IsFalse(deserialized.NameSpecified);
             Assert.IsFalse(deserialized.WeightSpecified);

@@ -189,9 +189,8 @@ namespace System.IO.Packaging
                         )
                     )
                     {
-                        ContentType? contentType = _contentTypeHelper.GetContentType(
-                            validatedPartUri
-                        );
+                        ContentType? contentType =
+                            _contentTypeHelper.GetContentType(validatedPartUri);
                         if (contentType != null)
                         {
                             // In case there was some redundancy between pieces and/or the atomic

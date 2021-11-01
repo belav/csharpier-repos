@@ -1550,9 +1550,8 @@ class Bar : Bar.IGoo
             Assert.Empty(comp.GetDiagnostics());
             var bar = comp.GetTypeByMetadataName("Bar");
             var iGooGetGoo = comp.GetTypeByMetadataName("Bar+IGoo").GetMembers("GetGoo").Single();
-            MethodSymbol getGoo = (MethodSymbol)bar.FindImplementationForInterfaceMember(
-                iGooGetGoo
-            );
+            MethodSymbol getGoo =
+                (MethodSymbol)bar.FindImplementationForInterfaceMember(iGooGetGoo);
             Assert.Equal("Bar.GetGoo()", getGoo.ToString());
         }
 

@@ -319,9 +319,7 @@ namespace Microsoft.CodeAnalysis.Razor
                 else if (AtEnd)
                 {
                     var diagnostic =
-                        RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace(
-                            _requiredAttributes
-                        );
+                        RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace(_requiredAttributes);
                     attributeBuilder.Diagnostics.Add(diagnostic);
                 }
                 else
@@ -342,9 +340,7 @@ namespace Microsoft.CodeAnalysis.Razor
                 if (AtEnd)
                 {
                     var diagnostic =
-                        RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace(
-                            _requiredAttributes
-                        );
+                        RazorDiagnosticFactory.CreateTagHelper_CouldNotFindMatchingEndBrace(_requiredAttributes);
                     builder.Diagnostics.Add(diagnostic);
 
                     return false;

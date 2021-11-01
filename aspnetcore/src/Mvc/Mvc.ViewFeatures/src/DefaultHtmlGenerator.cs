@@ -1789,9 +1789,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 htmlAttributeDictionary = htmlAttributes as IDictionary<string, object>;
                 if (htmlAttributeDictionary == null)
                 {
-                    htmlAttributeDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(
-                        htmlAttributes
-                    );
+                    htmlAttributeDictionary =
+                        HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
                 }
             }
 

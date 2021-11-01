@@ -492,16 +492,14 @@ namespace System.Web.Http.WebHost
 
             // Act
             using (
-                HttpRequestMessage expectedRequest = HttpControllerHandler.ConvertRequest(
-                    contextBase
-                )
+                HttpRequestMessage expectedRequest =
+                    HttpControllerHandler.ConvertRequest(contextBase)
             )
             {
                 // Assert
                 HttpRequestContext context = expectedRequest.GetRequestContext();
-                WebHostHttpRequestContext typedContext = Assert.IsType<WebHostHttpRequestContext>(
-                    context
-                );
+                WebHostHttpRequestContext typedContext =
+                    Assert.IsType<WebHostHttpRequestContext>(context);
                 Assert.Same(contextBase, typedContext.Context);
                 Assert.Same(requestBase, typedContext.WebRequest);
                 Assert.Same(expectedRequest, typedContext.Request);
@@ -2652,9 +2650,8 @@ namespace System.Web.Http.WebHost
         {
             NameValueCollection testHeaders = new NameValueCollection();
 
-            Mock<HttpResponseBase> responseBaseMock = CreateMockHttpResponseBaseForResponse(
-                outputStream
-            );
+            Mock<HttpResponseBase> responseBaseMock =
+                CreateMockHttpResponseBaseForResponse(outputStream);
             HttpResponseBase responseBase = responseBaseMock.Object;
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {

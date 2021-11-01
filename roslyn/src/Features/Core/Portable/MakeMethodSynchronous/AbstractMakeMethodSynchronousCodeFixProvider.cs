@@ -338,9 +338,7 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                     syntaxFacts.GetNameOfMemberAccessExpression(parentMemberAccessExpression);
 
                 var parentMemberAccessExpressionName =
-                    syntaxFacts.GetIdentifierOfSimpleName(
-                        parentMemberAccessExpressionNameNode
-                    ).ValueText;
+                    syntaxFacts.GetIdentifierOfSimpleName(parentMemberAccessExpressionNameNode).ValueText;
                 if (parentMemberAccessExpressionName == nameof(Task.ConfigureAwait))
                 {
                     var parentExpression = parentMemberAccessExpression.Parent;
@@ -352,20 +350,12 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                             (currentAwaitExpression, generator) =>
                             {
                                 var currentConfigureAwaitInvocation =
-                                    syntaxFacts.GetExpressionOfAwaitExpression(
-                                        currentAwaitExpression
-                                    );
+                                    syntaxFacts.GetExpressionOfAwaitExpression(currentAwaitExpression);
                                 var currentMemberAccess =
-                                    syntaxFacts.GetExpressionOfInvocationExpression(
-                                        currentConfigureAwaitInvocation
-                                    );
+                                    syntaxFacts.GetExpressionOfInvocationExpression(currentConfigureAwaitInvocation);
                                 var currentInvocationExpression =
-                                    syntaxFacts.GetExpressionOfMemberAccessExpression(
-                                        currentMemberAccess
-                                    );
-                                return currentInvocationExpression.WithTriviaFrom(
-                                    currentAwaitExpression
-                                );
+                                    syntaxFacts.GetExpressionOfMemberAccessExpression(currentMemberAccess);
+                                return currentInvocationExpression.WithTriviaFrom(currentAwaitExpression);
                             }
                         );
                     }

@@ -20,9 +20,8 @@ namespace System.Reflection.TypeLoading.Ecma
 
             Handle = handle;
             _ecmaModule = module;
-            _neverAccessThisExceptThroughGenericParameterProperty = handle.GetGenericParameter(
-                Reader
-            );
+            _neverAccessThisExceptThroughGenericParameterProperty =
+                handle.GetGenericParameter(Reader);
         }
 
         internal sealed override RoModule GetRoModule() => _ecmaModule;

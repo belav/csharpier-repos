@@ -310,9 +310,10 @@ namespace System.Web.TestUtil
             public void TestCopyTo()
             {
                 // Arrange
-                IDictionary<TKey, TValue> controlDictionary = new Dictionary<TKey, TValue>(
-                    Comparer
-                );
+                IDictionary<TKey, TValue> controlDictionary = new Dictionary<
+                    TKey,
+                    TValue
+                >(Comparer);
                 IDictionary<TKey, TValue> testDictionary = Creator();
 
                 foreach (var entry in MakeKeyValuePairs())

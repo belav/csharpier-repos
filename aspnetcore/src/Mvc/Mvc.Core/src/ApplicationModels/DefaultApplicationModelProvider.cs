@@ -499,9 +499,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             BindingInfo? bindingInfo;
             if (_modelMetadataProvider is ModelMetadataProvider modelMetadataProviderBase)
             {
-                var modelMetadata = modelMetadataProviderBase.GetMetadataForParameter(
-                    parameterInfo
-                );
+                var modelMetadata =
+                    modelMetadataProviderBase.GetMetadataForParameter(parameterInfo);
                 bindingInfo = BindingInfo.GetBindingInfo(attributes, modelMetadata);
             }
             else

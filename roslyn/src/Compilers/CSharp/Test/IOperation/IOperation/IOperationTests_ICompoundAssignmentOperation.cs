@@ -49,9 +49,8 @@ class C
 
             var syntaxTree = Parse(source);
             var compilation = CreateCompilationWithMscorlib45(new[] { syntaxTree });
-            (IOperation operation, _) = GetOperationAndSyntaxForTest<AssignmentExpressionSyntax>(
-                compilation
-            );
+            (IOperation operation, _) =
+                GetOperationAndSyntaxForTest<AssignmentExpressionSyntax>(compilation);
             var compoundAssignment = (ICompoundAssignmentOperation)operation;
 
             Assert.Equal(Conversion.Identity, compoundAssignment.GetInConversion());

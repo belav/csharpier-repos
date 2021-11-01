@@ -35,9 +35,8 @@ namespace System.Web.Http.WebHost.Routing
             IHttpHandler handler = product.GetHttpHandler(requestContext);
 
             // Assert
-            HttpRouteExceptionHandler typedHandler = Assert.IsType<HttpRouteExceptionHandler>(
-                handler
-            );
+            HttpRouteExceptionHandler typedHandler =
+                Assert.IsType<HttpRouteExceptionHandler>(handler);
             Assert.Same(expectedExceptionInfo, typedHandler.ExceptionInfo);
         }
 

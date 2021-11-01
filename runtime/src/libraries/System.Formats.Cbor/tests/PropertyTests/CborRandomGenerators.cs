@@ -32,9 +32,7 @@ namespace System.Formats.Cbor.Tests
                 );
 
                 foreach (
-                    NonEmptyArray<CborDocument> shrunkDoc in documentArb.Shrinker(
-                        nonEmptyArrayInput
-                    )
+                    NonEmptyArray<CborDocument> shrunkDoc in documentArb.Shrinker(nonEmptyArrayInput)
                 )
                 {
                     yield return CborPropertyTestContextHelper.create(

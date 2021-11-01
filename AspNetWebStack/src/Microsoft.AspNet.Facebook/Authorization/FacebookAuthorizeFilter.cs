@@ -90,9 +90,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
             }
 
             NameValueCollection parsedQueries = HttpUtility.ParseQueryString(request.Url.Query);
-            HashSet<string> requiredPermissions = PermissionHelper.GetRequiredPermissions(
-                authorizeAttributes
-            );
+            HashSet<string> requiredPermissions =
+                PermissionHelper.GetRequiredPermissions(authorizeAttributes);
 
             bool handleError = !String.IsNullOrEmpty(parsedQueries["error"]);
 
@@ -149,21 +148,18 @@ namespace Microsoft.AspNet.Facebook.Authorization
                 PermissionsStatus currentPermissionsStatus =
                     _config.PermissionService.GetUserPermissionsStatus(userId, accessToken);
                 // Instead of performing another request to gather "granted" permissions just parse the status
-                IEnumerable<string> currentPermissions = PermissionHelper.GetGrantedPermissions(
-                    currentPermissionsStatus
-                );
-                IEnumerable<string> missingPermissions = requiredPermissions.Except(
-                    currentPermissions
-                );
+                IEnumerable<string> currentPermissions =
+                    PermissionHelper.GetGrantedPermissions(currentPermissionsStatus);
+                IEnumerable<string> missingPermissions =
+                    requiredPermissions.Except(currentPermissions);
 
                 // If we have missing permissions than we need to present a prompt or redirect to an error
                 // page if there's an error.
                 if (missingPermissions.Any())
                 {
                     permissionContext.MissingPermissions = missingPermissions;
-                    permissionContext.DeclinedPermissions = PermissionHelper.GetDeclinedPermissions(
-                        currentPermissionsStatus
-                    );
+                    permissionContext.DeclinedPermissions =
+                        PermissionHelper.GetDeclinedPermissions(currentPermissionsStatus);
                     permissionContext.SkippedPermissions = PermissionHelper.GetSkippedPermissions(
                         filterContext.HttpContext.Request,
                         missingPermissions,

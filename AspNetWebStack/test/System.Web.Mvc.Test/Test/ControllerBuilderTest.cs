@@ -39,11 +39,8 @@ namespace System.Web.Mvc.Test
                         new RouteData()
                     );
                     reqContext.RouteData.Values["controller"] = "foo";
-                    MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(
-                        reqContext
-                    ) {
-                        ControllerBuilder = cb
-                    };
+                    MvcHandlerWithNoVersionHeader handler =
+                        new MvcHandlerWithNoVersionHeader(reqContext) { ControllerBuilder = cb };
                     handler.ProcessRequest(reqContext.HttpContext);
                 },
                 "An error occurred when trying to create the IControllerFactory 'System.Web.Mvc.Test.ControllerBuilderTest+ControllerFactoryThrowsFromConstructor'. Make sure that the controller factory has a public parameterless constructor."
@@ -66,11 +63,8 @@ namespace System.Web.Mvc.Test
                         new RouteData()
                     );
                     reqContext.RouteData.Values["controller"] = "boo";
-                    MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(
-                        reqContext
-                    ) {
-                        ControllerBuilder = cb
-                    };
+                    MvcHandlerWithNoVersionHeader handler =
+                        new MvcHandlerWithNoVersionHeader(reqContext) { ControllerBuilder = cb };
                     handler.ProcessRequest(reqContext.HttpContext);
                 },
                 "The IControllerFactory 'System.Web.Mvc.Test.ControllerBuilderTest+ControllerFactoryReturnsNull' did not return a controller for the name 'boo'."
@@ -93,11 +87,8 @@ namespace System.Web.Mvc.Test
                         new RouteData()
                     );
                     reqContext.RouteData.Values["controller"] = "foo";
-                    MvcHandlerWithNoVersionHeader handler = new MvcHandlerWithNoVersionHeader(
-                        reqContext
-                    ) {
-                        ControllerBuilder = cb
-                    };
+                    MvcHandlerWithNoVersionHeader handler =
+                        new MvcHandlerWithNoVersionHeader(reqContext) { ControllerBuilder = cb };
                     handler.ProcessRequest(reqContext.HttpContext);
                 },
                 "ControllerFactoryThrows"

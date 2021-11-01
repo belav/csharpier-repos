@@ -21,9 +21,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineGenericParameters(string[] typeParamNames)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            GenericTypeParameterBuilder[] genericParameters = type.DefineGenericParameters(
-                typeParamNames
-            );
+            GenericTypeParameterBuilder[] genericParameters =
+                type.DefineGenericParameters(typeParamNames);
             Assert.True(type.IsGenericType);
             Assert.True(type.IsGenericTypeDefinition);
             for (int i = 0; i < typeParamNames.Length; i++)

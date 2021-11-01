@@ -131,9 +131,8 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                TestClassWithStringArray obj = JsonSerializer.Deserialize<TestClassWithStringArray>(
-                    json
-                );
+                TestClassWithStringArray obj =
+                    JsonSerializer.Deserialize<TestClassWithStringArray>(json);
                 obj.Verify();
             }
 
@@ -158,9 +157,8 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                TestClassWithObjectList obj = JsonSerializer.Deserialize<TestClassWithObjectList>(
-                    json
-                );
+                TestClassWithObjectList obj =
+                    JsonSerializer.Deserialize<TestClassWithObjectList>(json);
                 obj.Verify();
             }
 
@@ -185,9 +183,8 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                TestClassWithGenericList obj = JsonSerializer.Deserialize<TestClassWithGenericList>(
-                    json
-                );
+                TestClassWithGenericList obj =
+                    JsonSerializer.Deserialize<TestClassWithGenericList>(json);
                 obj.Verify();
             }
 
@@ -486,9 +483,7 @@ namespace System.Text.Json.Serialization.Tests
 
             {
                 TestClassWithObjectIEnumerableConstructibleTypes obj =
-                    JsonSerializer.Deserialize<TestClassWithObjectIEnumerableConstructibleTypes>(
-                        json
-                    );
+                    JsonSerializer.Deserialize<TestClassWithObjectIEnumerableConstructibleTypes>(json);
                 obj.Verify();
             }
 

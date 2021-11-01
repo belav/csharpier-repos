@@ -357,9 +357,7 @@ namespace System.Xml.Tests
             // for function XmlExceptionAndXmlTextReaderLineNumberShouldBeSameAfterExceptionIsThrown
             {
                 this.AddChild(
-                    new CVariation(
-                        XmlExceptionAndXmlTextReaderLineNumberShouldBeSameAfterExceptionIsThrown
-                    ) {
+                    new CVariation(XmlExceptionAndXmlTextReaderLineNumberShouldBeSameAfterExceptionIsThrown) {
                         Attribute = new Variation(
                             "When an XmlException is thrown both XmlException.LineNumber and XmlTextReader.LineNumber should be same"
                         )

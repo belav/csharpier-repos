@@ -17,9 +17,8 @@ namespace System.Resources.Tests
         [InlineData("")]
         public static void ConstructorBasic(string cultureName)
         {
-            NeutralResourcesLanguageAttribute nrla = new NeutralResourcesLanguageAttribute(
-                cultureName
-            );
+            NeutralResourcesLanguageAttribute nrla =
+                new NeutralResourcesLanguageAttribute(cultureName);
             Assert.Equal(cultureName, nrla.CultureName);
         }
 

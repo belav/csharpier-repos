@@ -243,9 +243,8 @@ namespace System.Web.WebPages.Deployment.Test
 
                         // Act
                         Version ver = WebPagesDeployment.GetVersionWithoutEnabledCheck(path);
-                        Version explicitVersion = WebPagesDeployment.GetExplicitWebPagesVersion(
-                            path
-                        );
+                        Version explicitVersion =
+                            WebPagesDeployment.GetExplicitWebPagesVersion(path);
 
                         // Assert
                         Assert.Equal(new Version(1, 0, 0, 0), ver);
@@ -277,9 +276,8 @@ namespace System.Web.WebPages.Deployment.Test
 
                         // Act
                         Version ver = WebPagesDeployment.GetVersionWithoutEnabledCheck(path);
-                        Version explicitVersion = WebPagesDeployment.GetExplicitWebPagesVersion(
-                            path
-                        );
+                        Version explicitVersion =
+                            WebPagesDeployment.GetExplicitWebPagesVersion(path);
 
                         // Assert
                         Assert.Equal(new Version(1, 0, 0, 0), ver);
@@ -344,9 +342,8 @@ namespace System.Web.WebPages.Deployment.Test
 
                         // Act
                         Version ver = WebPagesDeployment.GetVersionWithoutEnabledCheck(path);
-                        Version explicitVersion = WebPagesDeployment.GetExplicitWebPagesVersion(
-                            path
-                        );
+                        Version explicitVersion =
+                            WebPagesDeployment.GetExplicitWebPagesVersion(path);
 
                         // Assert
                         Assert.Equal(new Version("1.0.0.0"), ver);

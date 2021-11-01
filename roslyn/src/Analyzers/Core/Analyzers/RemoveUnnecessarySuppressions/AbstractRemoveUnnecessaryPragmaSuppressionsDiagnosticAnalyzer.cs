@@ -147,9 +147,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     cancellationToken
                 )
                 .Trim();
-            var (userIdExclusions, userCategoryExclusions, analyzerDisabled) = ParseUserExclusions(
-                option
-            );
+            var (userIdExclusions, userCategoryExclusions, analyzerDisabled) =
+                ParseUserExclusions(option);
             if (analyzerDisabled)
             {
                 return;

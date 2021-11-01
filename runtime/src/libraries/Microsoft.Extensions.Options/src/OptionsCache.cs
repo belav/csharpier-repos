@@ -96,8 +96,7 @@ namespace Microsoft.Extensions.Options
 #if !NETSTANDARD2_1
                     () =>
 #endif
-                    options
-                )
+                options)
             );
         }
 

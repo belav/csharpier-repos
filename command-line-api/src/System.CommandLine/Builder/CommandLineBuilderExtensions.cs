@@ -132,9 +132,8 @@ namespace System.CommandLine.Builder
             builder.AddMiddleware(
                 async (context, next) =>
                 {
-                    context.BindingContext.ConsoleFactory = new AnonymousConsoleFactory(
-                        createConsole
-                    );
+                    context.BindingContext.ConsoleFactory =
+                        new AnonymousConsoleFactory(createConsole);
                     await next(context);
                 },
                 MiddlewareOrderInternal.ConfigureConsole
@@ -234,9 +233,8 @@ namespace System.CommandLine.Builder
                         const string environmentVariableName = "DOTNET_COMMANDLINE_DEBUG_PROCESSES";
 
                         var process = Diagnostics.Process.GetCurrentProcess();
-                        string debuggableProcessNames = GetEnvironmentVariable(
-                            environmentVariableName
-                        );
+                        string debuggableProcessNames =
+                            GetEnvironmentVariable(environmentVariableName);
                         if (string.IsNullOrWhiteSpace(debuggableProcessNames))
                         {
                             context.Console.Error.WriteLine(

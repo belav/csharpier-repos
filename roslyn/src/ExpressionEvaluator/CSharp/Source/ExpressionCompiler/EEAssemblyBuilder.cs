@@ -65,9 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 )
                 {
                     var identity = module.ReadAssemblyIdentityOrThrow();
-                    return new Microsoft.CodeAnalysis.ExpressionEvaluator.AssemblyReference(
-                        identity
-                    );
+                    return new Microsoft.CodeAnalysis.ExpressionEvaluator.AssemblyReference(identity);
                 }
             }
             return base.TranslateModule(symbol, diagnostics);

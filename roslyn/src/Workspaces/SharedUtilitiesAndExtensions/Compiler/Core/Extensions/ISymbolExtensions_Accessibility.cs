@@ -483,9 +483,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     Debug.Assert(current.IsDefinition);
 
                     if (
-                        current.InheritsFromOrImplementsOrEqualsIgnoringConstruction(
-                            originalContainingType
-                        )
+                        current.InheritsFromOrImplementsOrEqualsIgnoringConstruction(originalContainingType)
                     )
                     {
                         // NOTE(cyrusn): We're continually walking up the 'throughType's inheritance
@@ -496,9 +494,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         // inheritance chain.
                         if (
                             originalThroughType == null
-                            || originalThroughType.InheritsFromOrImplementsOrEqualsIgnoringConstruction(
-                                current
-                            )
+                            || originalThroughType.InheritsFromOrImplementsOrEqualsIgnoringConstruction(current)
                         )
                         {
                             return true;

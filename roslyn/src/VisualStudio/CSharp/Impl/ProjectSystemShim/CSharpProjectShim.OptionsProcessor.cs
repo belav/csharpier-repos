@@ -93,9 +93,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 }
 
                 // Start with the rule set options
-                var diagnosticOptions = new Dictionary<string, ReportDiagnostic>(
-                    ruleSetSpecificDiagnosticOptions
-                );
+                var diagnosticOptions = new Dictionary<
+                    string,
+                    ReportDiagnostic
+                >(ruleSetSpecificDiagnosticOptions);
 
                 // Update the specific options based on the general settings
                 if (warningsAreErrors.HasValue && warningsAreErrors.Value == true)

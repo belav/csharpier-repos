@@ -177,9 +177,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
         )
         {
             var setAccessorDeclaration =
-                (AccessorDeclarationSyntax)setMethod.DeclaringSyntaxReferences[0].GetSyntax(
-                    cancellationToken
-                );
+                (AccessorDeclarationSyntax)setMethod.DeclaringSyntaxReferences[
+                    0
+                ].GetSyntax(cancellationToken);
             var methodDeclaration = (MethodDeclarationSyntax)generator.MethodDeclaration(
                 setMethod,
                 desiredSetMethodName
@@ -391,9 +391,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             else
             {
                 var getAccessorDeclaration =
-                    (AccessorDeclarationSyntax)getMethod.DeclaringSyntaxReferences[0].GetSyntax(
-                        cancellationToken
-                    );
+                    (AccessorDeclarationSyntax)getMethod.DeclaringSyntaxReferences[
+                        0
+                    ].GetSyntax(cancellationToken);
                 if (getAccessorDeclaration?.ExpressionBody != null)
                 {
                     return methodDeclaration

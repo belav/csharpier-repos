@@ -71,9 +71,8 @@ namespace System.Web.Http.Controllers
                     }
                     else if (actionResult != null)
                     {
-                        HttpResponseMessage response = await actionResult.ExecuteAsync(
-                            cancellationToken
-                        );
+                        HttpResponseMessage response =
+                            await actionResult.ExecuteAsync(cancellationToken);
                         if (response == null)
                         {
                             throw Error.InvalidOperation(

@@ -56,9 +56,16 @@ public static partial class DataContractSerializerTests
                 new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Local).AddMinutes(offsetMinutes)
             ),
             new DateTimeOffset(
-                new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Unspecified).AddMinutes(
-                    offsetMinutes
-                )
+                new DateTime(
+                    2013,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    DateTimeKind.Unspecified
+                ).AddMinutes(offsetMinutes)
             ),
             new DateTimeOffset(new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Utc)),
             new DateTimeOffset(DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc)),

@@ -315,9 +315,8 @@ namespace System.Net.Http.Json.Functional.Tests
                 )
             )
             {
-                string deserializedMessage = await JsonSerializer.DeserializeAsync<string>(
-                    transcodingStream
-                );
+                string deserializedMessage =
+                    await JsonSerializer.DeserializeAsync<string>(transcodingStream);
                 Assert.Equal(message.Trim('"'), deserializedMessage);
             }
         }

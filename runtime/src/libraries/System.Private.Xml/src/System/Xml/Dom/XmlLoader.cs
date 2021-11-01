@@ -1075,9 +1075,8 @@ namespace System.Xml
                 else
                 {
                     IDtdParser dtdParser = DtdParser.Create();
-                    XmlTextReaderImpl.DtdParserProxy proxy = new XmlTextReaderImpl.DtdParserProxy(
-                        tr
-                    );
+                    XmlTextReaderImpl.DtdParserProxy proxy =
+                        new XmlTextReaderImpl.DtdParserProxy(tr);
 
                     IDtdInfo dtdInfo = dtdParser.ParseFreeFloatingDtd(
                         context.BaseURI,

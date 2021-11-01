@@ -131,9 +131,8 @@ namespace Microsoft.CodeAnalysis.InlineMethod
 
             var symbolDeclarationService =
                 document.GetRequiredLanguageService<ISymbolDeclarationService>();
-            var calleeMethodDeclarationSyntaxReferences = symbolDeclarationService.GetDeclarations(
-                calleeMethodSymbol
-            );
+            var calleeMethodDeclarationSyntaxReferences =
+                symbolDeclarationService.GetDeclarations(calleeMethodSymbol);
             if (calleeMethodDeclarationSyntaxReferences.Length != 1)
             {
                 return;

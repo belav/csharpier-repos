@@ -16,9 +16,8 @@ namespace System.Net.Sockets
         private SafeNativeOverlapped? _nativeOverlapped;
 
         // The WinNT Completion Port callback.
-        private static readonly unsafe IOCompletionCallback s_ioCallback = new IOCompletionCallback(
-            CompletionPortCallback
-        );
+        private static readonly unsafe IOCompletionCallback s_ioCallback =
+            new IOCompletionCallback(CompletionPortCallback);
 
         internal BaseOverlappedAsyncResult(
             Socket socket,
@@ -79,9 +78,7 @@ namespace System.Net.Sockets
         {
             Debug.Assert(OperatingSystem.IsWindows());
             BaseOverlappedAsyncResult asyncResult =
-                (BaseOverlappedAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                    nativeOverlapped
-                )!;
+                (BaseOverlappedAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
 
             Debug.Assert(
                 !asyncResult.InternalPeekCompleted,

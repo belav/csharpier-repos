@@ -409,9 +409,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 {
                     case ExistingParameterViewModel existingParameter:
                         displayParts.AddRange(
-                            existingParameter.ParameterSymbol.ToDisplayParts(
-                                s_parameterDisplayFormat
-                            )
+                            existingParameter.ParameterSymbol.ToDisplayParts(s_parameterDisplayFormat)
                         );
                         break;
 

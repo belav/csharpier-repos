@@ -475,9 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             if (wellKnownMember is null && !isOptional)
             {
-                RuntimeMembers.MemberDescriptor memberDescriptor = WellKnownMembers.GetDescriptor(
-                    wm
-                );
+                RuntimeMembers.MemberDescriptor memberDescriptor =
+                    WellKnownMembers.GetDescriptor(wm);
                 var diagnostic = new CSDiagnostic(
                     new CSDiagnosticInfo(
                         ErrorCode.ERR_MissingPredefinedMember,
@@ -1832,9 +1831,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // whether or not to call a method with a value type receiver directly).
             if (
                 !method.ContainingType.IsValueType
-                || !Microsoft.CodeAnalysis.CSharp.CodeGen.CodeGenerator.MayUseCallForStructMethod(
-                    method
-                )
+                || !Microsoft.CodeAnalysis.CSharp.CodeGen.CodeGenerator.MayUseCallForStructMethod(method)
             )
             {
                 method = method.GetConstructedLeastOverriddenMethod(

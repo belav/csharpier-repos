@@ -19,8 +19,7 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
         public const string guidToolWindowPersistanceString =
             "b2da68d7-fd1c-491a-a9a0-24f597b9f56c";
 
-        public static readonly Guid guidVisualStudioDiagnosticsWindowCmdSet = new Guid(
-            guidVisualStudioDiagnosticsWindowCmdSetString
-        );
+        public static readonly Guid guidVisualStudioDiagnosticsWindowCmdSet =
+            new Guid(guidVisualStudioDiagnosticsWindowCmdSetString);
     };
 }

@@ -59,9 +59,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var reporter = new TestOperationReporter();
 
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(
+                reporter,
+                DummyModelRuntimeInitializer.Instance
+            ).Process(model);
 
             AssertAnnotations(model);
             AssertAnnotations(entityType);
@@ -103,9 +104,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var reporter = new TestOperationReporter();
 
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(
+                reporter,
+                DummyModelRuntimeInitializer.Instance
+            ).Process(model);
 
             Assert.Equal(
                 "warn: " + DesignStrings.MultipleAnnotationConflict("DefaultSchema"),
@@ -129,9 +131,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var reporter = new TestOperationReporter();
 
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(
+                reporter,
+                DummyModelRuntimeInitializer.Instance
+            ).Process(model);
 
             Assert.Equal(
                 "warn: " + DesignStrings.MultipleAnnotationConflict("DefaultSchema"),
@@ -155,9 +158,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var reporter = new TestOperationReporter();
 
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(
+                reporter,
+                DummyModelRuntimeInitializer.Instance
+            ).Process(model);
 
             Assert.Empty(reporter.Messages);
 
@@ -176,9 +180,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
             var reporter = new TestOperationReporter();
 
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(
+                reporter,
+                DummyModelRuntimeInitializer.Instance
+            ).Process(model);
 
             Assert.Empty(reporter.Messages);
 
@@ -205,9 +210,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             );
 
             var reporter = new TestOperationReporter();
-            new SnapshotModelProcessor(reporter, DummyModelRuntimeInitializer.Instance).Process(
-                model
-            );
+            new SnapshotModelProcessor(
+                reporter,
+                DummyModelRuntimeInitializer.Instance
+            ).Process(model);
 
             Assert.Empty(reporter.Messages);
             Assert.Equal(

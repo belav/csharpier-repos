@@ -679,9 +679,8 @@ namespace System.Text
                             out decoderFinished
                         );
 
-                        remainingOuterEncodedBytes = remainingOuterEncodedBytes.Slice(
-                            bytesConsumed
-                        );
+                        remainingOuterEncodedBytes =
+                            remainingOuterEncodedBytes.Slice(bytesConsumed);
 
                         // convert chars -> bytes [inner]
 

@@ -69,9 +69,9 @@ namespace Microsoft.CodeAnalysis.Notification
 
         private Task RaiseGlobalOperationStoppedAsync(ImmutableArray<string> operations)
         {
-            var ev = _eventMap.GetEventHandlers<EventHandler<GlobalOperationEventArgs>>(
-                GlobalOperationStoppedEventName
-            );
+            var ev = _eventMap.GetEventHandlers<
+                EventHandler<GlobalOperationEventArgs>
+            >(GlobalOperationStoppedEventName);
             if (ev.HasHandlers)
             {
                 var args = new GlobalOperationEventArgs(operations);

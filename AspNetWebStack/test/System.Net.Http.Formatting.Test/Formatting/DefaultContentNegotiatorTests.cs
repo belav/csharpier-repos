@@ -1179,9 +1179,8 @@ namespace System.Net.Http.Formatting
             MockContentNegotiator negotiator = new MockContentNegotiator();
 
             // Act
-            MediaTypeFormatterMatch actualWinner = negotiator.SelectResponseMediaTypeFormatter(
-                matches
-            );
+            MediaTypeFormatterMatch actualWinner =
+                negotiator.SelectResponseMediaTypeFormatter(matches);
 
             // Assert
             Assert.Same(expectedWinner, actualWinner);

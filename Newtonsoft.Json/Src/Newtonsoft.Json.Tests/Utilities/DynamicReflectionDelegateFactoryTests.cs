@@ -57,9 +57,8 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 1);
 
-            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                constructor
-            );
+            var creator =
+                DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Value" };
             InTestClass o = (InTestClass)creator(args);
@@ -74,9 +73,8 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors(typeof(InTestClass))
                 .Single(c => c.GetParameters().Count() == 2);
 
-            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                constructor
-            );
+            var creator =
+                DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Value", true };
             InTestClass o = (InTestClass)creator(args);
@@ -92,9 +90,8 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors()
                 .Single(c => c.GetParameters().Count() == 1);
 
-            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                constructor
-            );
+            var creator =
+                DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input" };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -109,9 +106,8 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors()
                 .Single(c => c.GetParameters().Count() == 2);
 
-            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                constructor
-            );
+            var creator =
+                DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input", false };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -127,9 +123,8 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .GetConstructors()
                 .Single(c => c.GetParameters().Count() == 3);
 
-            var creator = DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                constructor
-            );
+            var creator =
+                DynamicReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input", true, null };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -250,9 +245,8 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             Assert.IsNotNull(namePropertyInfo);
 
-            var call = DynamicReflectionDelegateFactory.Instance.CreateGet<Person>(
-                namePropertyInfo
-            );
+            var call =
+                DynamicReflectionDelegateFactory.Instance.CreateGet<Person>(namePropertyInfo);
 
             Person p = new Person();
             p.Name = "Name!";

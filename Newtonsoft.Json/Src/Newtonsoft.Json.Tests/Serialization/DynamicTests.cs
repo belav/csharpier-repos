@@ -95,9 +95,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            TestDynamicObject newDynamicObject = JsonConvert.DeserializeObject<TestDynamicObject>(
-                json
-            );
+            TestDynamicObject newDynamicObject =
+                JsonConvert.DeserializeObject<TestDynamicObject>(json);
             Assert.AreEqual(true, newDynamicObject.Explicit);
 
             d = newDynamicObject;

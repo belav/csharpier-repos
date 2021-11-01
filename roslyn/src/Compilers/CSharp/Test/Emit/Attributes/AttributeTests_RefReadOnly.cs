@@ -2073,9 +2073,8 @@ namespace System.Runtime.CompilerServices
                     var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
                         WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
                     );
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(
-                        isReadOnlyAttributeName
-                    );
+                    var type =
+                        module.ContainingAssembly.GetTypeByMetadataName(isReadOnlyAttributeName);
 
                     var method = type.GetMethod("Method");
                     Assert.Empty(method.GetReturnTypeAttributes());
@@ -2124,9 +2123,8 @@ namespace System.Runtime.CompilerServices
                     var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
                         WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
                     );
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(
-                        isReadOnlyAttributeName
-                    );
+                    var type =
+                        module.ContainingAssembly.GetTypeByMetadataName(isReadOnlyAttributeName);
 
                     var method = type.GetMethod("Method");
                     Assert.Empty(method.GetReturnTypeAttributes());
@@ -2444,9 +2442,8 @@ namespace System.Runtime.CompilerServices
                     var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
                         WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
                     );
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(
-                        isReadOnlyAttributeName
-                    );
+                    var type =
+                        module.ContainingAssembly.GetTypeByMetadataName(isReadOnlyAttributeName);
 
                     var method = type.GetMethod("Method");
                     Assert.Empty(method.GetReturnTypeAttributes());

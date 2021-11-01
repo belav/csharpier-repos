@@ -440,9 +440,13 @@ namespace DebuggerTests
             ArrayTestsClass.EntryPointForStructMethod(true).Wait();
 
             var sc = new SimpleClass { X = 10, Y = 45, Id = "sc#Id", Color = RGB.Blue };
-            new Point { X = 90, Y = -4, Id = "point#Id", Color = RGB.Green }.GenericInstanceMethod(
-                sc
-            );
+            new Point
+            {
+                X = 90,
+                Y = -4,
+                Id = "point#Id",
+                Color = RGB.Green
+            }.GenericInstanceMethod(sc);
         }
     }
 }

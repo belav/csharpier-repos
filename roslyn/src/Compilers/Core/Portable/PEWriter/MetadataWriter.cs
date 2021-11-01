@@ -3916,9 +3916,7 @@ namespace Microsoft.Cci
                 genericMethodInstanceReference.GetGenericMethod(Context).GenericParameterCount
             );
             foreach (
-                ITypeReference genericArgument in genericMethodInstanceReference.GetGenericArguments(
-                    Context
-                )
+                ITypeReference genericArgument in genericMethodInstanceReference.GetGenericArguments(Context)
             )
             {
                 ITypeReference typeRef = genericArgument;
@@ -4286,9 +4284,10 @@ namespace Microsoft.Cci
                 writer.WriteSerializedString(typeName);
 
                 var customAttributeArgsBuilder = PooledBlobBuilder.GetInstance();
-                var namedArgsEncoder = new BlobEncoder(
-                    customAttributeArgsBuilder
-                ).PermissionSetArguments(customAttribute.NamedArgumentCount);
+                var namedArgsEncoder =
+                    new BlobEncoder(customAttributeArgsBuilder).PermissionSetArguments(
+                        customAttribute.NamedArgumentCount
+                    );
                 SerializeCustomAttributeNamedArguments(namedArgsEncoder, customAttribute);
                 writer.WriteCompressedInteger(customAttributeArgsBuilder.Count);
 

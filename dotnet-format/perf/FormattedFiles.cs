@@ -33,9 +33,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
         [Benchmark(Description = "Whitespace Formatting (folder)")]
         public void FilesFormattedFolder()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
-                UnformattedProjectPath
-            );
+            var (workspacePath, workspaceType) =
+                WorkspacePathHelper.GetWorkspaceInfo(UnformattedProjectPath);
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,
@@ -60,9 +59,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
         [Benchmark(Description = "Whitespace Formatting (project)")]
         public void FilesFormattedProject()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
-                UnformattedProjectFilePath
-            );
+            var (workspacePath, workspaceType) =
+                WorkspacePathHelper.GetWorkspaceInfo(UnformattedProjectFilePath);
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,
@@ -87,9 +85,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
         [Benchmark(Description = "Whitespace Formatting (solution)")]
         public void FilesFormattedSolution()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
-                UnformattedSolutionFilePath
-            );
+            var (workspacePath, workspaceType) =
+                WorkspacePathHelper.GetWorkspaceInfo(UnformattedSolutionFilePath);
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,

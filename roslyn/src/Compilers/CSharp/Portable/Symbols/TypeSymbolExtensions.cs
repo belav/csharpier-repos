@@ -21,9 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             foreach (
-                NamedTypeSymbol @interface in subType.AllInterfacesWithDefinitionUseSiteDiagnostics(
-                    ref useSiteInfo
-                )
+                NamedTypeSymbol @interface in subType.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
             )
             {
                 if (

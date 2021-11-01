@@ -26,9 +26,8 @@ namespace System.Text.Tests
         [InlineData(".")]
         public void Ctor_String(string message)
         {
-            DecoderFallbackException decoderFallbackException = new DecoderFallbackException(
-                message
-            );
+            DecoderFallbackException decoderFallbackException =
+                new DecoderFallbackException(message);
             Assert.Null(decoderFallbackException.BytesUnknown);
             Assert.Equal(0, decoderFallbackException.Index);
             Assert.Null(decoderFallbackException.StackTrace);

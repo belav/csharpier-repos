@@ -58,9 +58,8 @@ namespace System.Web.Http.Dispatcher
             IHttpControllerTypeResolver controllersResolver =
                 _configuration.Services.GetHttpControllerTypeResolver();
 
-            ICollection<Type> controllerTypes = controllersResolver.GetControllerTypes(
-                assembliesResolver
-            );
+            ICollection<Type> controllerTypes =
+                controllersResolver.GetControllerTypes(assembliesResolver);
             var groupedByName = controllerTypes.GroupBy(
                 t =>
                     t.Name.Substring(

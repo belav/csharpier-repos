@@ -687,9 +687,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // Don't compute IsAttributeType if IncludePrivateMembers is true, as we'll include it anyway.
             bool alwaysIncludeConstructors =
                 context.IncludePrivateMembers
-                || AdaptedNamedTypeSymbol.DeclaringCompilation.IsAttributeType(
-                    AdaptedNamedTypeSymbol
-                );
+                || AdaptedNamedTypeSymbol.DeclaringCompilation.IsAttributeType(AdaptedNamedTypeSymbol);
 
             foreach (var method in AdaptedNamedTypeSymbol.GetMethodsToEmit())
             {

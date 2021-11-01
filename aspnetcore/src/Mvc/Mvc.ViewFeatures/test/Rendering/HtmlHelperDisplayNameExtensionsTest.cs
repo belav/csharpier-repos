@@ -102,9 +102,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 .DisplayDetails(dd => dd.DisplayName = () => displayName);
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(provider: provider);
-            var enumerableHelper = DefaultTemplatesUtilities.GetHtmlHelperForEnumerable(
-                provider: provider
-            );
+            var enumerableHelper =
+                DefaultTemplatesUtilities.GetHtmlHelperForEnumerable(provider: provider);
 
             // Act
             var displayNameResult = helper.DisplayName(expression: string.Empty);
@@ -133,9 +132,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 .DisplayDetails(dd => dd.DisplayName = () => displayName);
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(provider: provider);
-            var enumerableHelper = DefaultTemplatesUtilities.GetHtmlHelperForEnumerable(
-                provider: provider
-            );
+            var enumerableHelper =
+                DefaultTemplatesUtilities.GetHtmlHelperForEnumerable(provider: provider);
 
             // Act
             var displayNameResult = helper.DisplayName("Property1");

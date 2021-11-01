@@ -111,21 +111,79 @@ namespace ABIStress
                 case 12:
                     return typeof(Func<, , , , , , , , , , , , >).MakeGenericType(genericArguments);
                 case 13:
-                    return typeof(Func<, , , , , , , , , , , , , >).MakeGenericType(
-                        genericArguments
-                    );
+                    return typeof(Func<
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+
+                    >).MakeGenericType(genericArguments);
                 case 14:
-                    return typeof(Func<, , , , , , , , , , , , , , >).MakeGenericType(
-                        genericArguments
-                    );
+                    return typeof(Func<
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+
+                    >).MakeGenericType(genericArguments);
                 case 15:
-                    return typeof(Func<, , , , , , , , , , , , , , , >).MakeGenericType(
-                        genericArguments
-                    );
+                    return typeof(Func<
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+
+                    >).MakeGenericType(genericArguments);
                 case 16:
-                    return typeof(Func<, , , , , , , , , , , , , , , , >).MakeGenericType(
-                        genericArguments
-                    );
+                    return typeof(Func<
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+                        ,
+
+                    >).MakeGenericType(genericArguments);
 
                 default:
                     throw new Exception();

@@ -398,9 +398,8 @@ namespace BasicEventSourceTests
                             Assert.Equal("EventWithStringDict_C", evt.EventName);
 
                             var keyValues = evt.PayloadValue(0, "myDict");
-                            IDictionary<string, object> vDict = GetDictionaryFromKeyValueArray(
-                                keyValues
-                            );
+                            IDictionary<string, object> vDict =
+                                GetDictionaryFromKeyValueArray(keyValues);
                             Assert.Equal("10", vDict["elem1"]);
                             Assert.Equal("20", vDict["elem2"]);
                             Assert.Equal("end", evt.PayloadValue(1, "s"));

@@ -822,9 +822,8 @@ namespace System.Security.Cryptography
                 }
                 else if (padding == RSASignaturePadding.Pss)
                 {
-                    RsaPaddingProcessor processor = RsaPaddingProcessor.OpenProcessor(
-                        hashAlgorithm
-                    );
+                    RsaPaddingProcessor processor =
+                        RsaPaddingProcessor.OpenProcessor(hashAlgorithm);
                     SafeRsaHandle rsa = GetKey();
 
                     int requiredBytes = Interop.Crypto.RsaSize(rsa);

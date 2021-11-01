@@ -545,9 +545,9 @@ namespace System.Runtime.CompilerServices
         )
         {
             // Get the task (forcing initialization if not already initialized), and set debug notification
-            (taskField ??= CreateWeaklyTypedStateMachineBox()).SetNotificationForWaitCompletion(
-                enabled
-            );
+            (
+                taskField ??= CreateWeaklyTypedStateMachineBox()
+            ).SetNotificationForWaitCompletion(enabled);
             // NOTE: It's important that the debugger use builder.SetNotificationForWaitCompletion
             // rather than builder.Task.SetNotificationForWaitCompletion.  Even though the latter will
             // lazily-initialize the task as well, it'll initialize it to a Task<T> (which is important

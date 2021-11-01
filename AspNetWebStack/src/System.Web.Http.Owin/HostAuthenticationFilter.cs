@@ -61,9 +61,8 @@ namespace System.Web.Http
             IAuthenticationManager authenticationManager = GetAuthenticationManagerOrThrow(request);
 
             cancellationToken.ThrowIfCancellationRequested();
-            AuthenticateResult result = await authenticationManager.AuthenticateAsync(
-                _authenticationType
-            );
+            AuthenticateResult result =
+                await authenticationManager.AuthenticateAsync(_authenticationType);
 
             if (result != null)
             {

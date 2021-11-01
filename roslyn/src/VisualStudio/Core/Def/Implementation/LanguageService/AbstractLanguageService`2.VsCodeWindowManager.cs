@@ -134,9 +134,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     return;
                 }
 
-                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    buffer
-                );
+                var textBuffer =
+                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(buffer);
                 var document = textBuffer?
                     .AsTextContainer()?.GetRelatedDocuments()
                     .FirstOrDefault();
@@ -241,9 +240,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     _languageService.SystemServiceProvider,
                     _languageService.Workspace
                 );
-                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    buffer
-                );
+                var textBuffer =
+                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(buffer);
                 var controllerFactoryService =
                     _languageService.Package.ComponentModel.GetService<INavigationBarControllerFactoryService>();
                 var newController = controllerFactoryService.CreateController(
@@ -294,12 +292,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 }
 
                 ErrorHandler.ThrowOnFailure(_codeWindow.GetBuffer(out var buffer));
-                var textContainer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    buffer
-                )?.AsTextContainer();
-                _workspaceRegistration = CodeAnalysis.Workspace.GetWorkspaceRegistration(
-                    textContainer
-                );
+                var textContainer =
+                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(buffer)?.AsTextContainer();
+                _workspaceRegistration =
+                    CodeAnalysis.Workspace.GetWorkspaceRegistration(textContainer);
                 _workspaceRegistration.WorkspaceChanged += OnWorkspaceRegistrationChanged;
 
                 UpdateOptionChangedSource(_workspaceRegistration.Workspace);

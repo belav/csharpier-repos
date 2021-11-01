@@ -10966,9 +10966,9 @@ ORDER BY [t].[Id]"
                 querySplittingBehaviorFieldInfo.SetValue(extension, null);
             }
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension);
 
             return optionsBuilder;
         }

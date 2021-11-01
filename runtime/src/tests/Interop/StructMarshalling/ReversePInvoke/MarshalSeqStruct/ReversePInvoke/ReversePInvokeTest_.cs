@@ -2059,9 +2059,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructComplexStructByRef_Cdecl(
-                        new ComplexStructByRefCdeclcaller(
-                            TestMethodForStructComplexStruct_ReversePInvokeByRef_Cdecl
-                        )
+                        new ComplexStructByRefCdeclcaller(TestMethodForStructComplexStruct_ReversePInvokeByRef_Cdecl)
                     )
                 );
                 break;
@@ -2071,9 +2069,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructInnerSequentialByRef_Cdecl(
-                        new InnerSequentialByRefCdeclcaller(
-                            TestMethodForStructInnerSequential_ReversePInvokeByRef_Cdecl
-                        )
+                        new InnerSequentialByRefCdeclcaller(TestMethodForStructInnerSequential_ReversePInvokeByRef_Cdecl)
                     )
                 );
                 break;
@@ -2083,9 +2079,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructInnerArraySequentialByRef_Cdecl(
-                        new InnerArraySequentialByRefCdeclcaller(
-                            TestMethodForStructInnerArraySequential_ReversePInvokeByRef_Cdecl
-                        )
+                        new InnerArraySequentialByRefCdeclcaller(TestMethodForStructInnerArraySequential_ReversePInvokeByRef_Cdecl)
                     )
                 );
                 break;
@@ -2095,9 +2089,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructCharSetAnsiSequentialByRef_Cdecl(
-                        new CharSetAnsiSequentialByRefCdeclcaller(
-                            TestMethodForStructCharSetAnsiSequential_ReversePInvokeByRef_Cdecl
-                        )
+                        new CharSetAnsiSequentialByRefCdeclcaller(TestMethodForStructCharSetAnsiSequential_ReversePInvokeByRef_Cdecl)
                     )
                 );
                 break;
@@ -2107,9 +2099,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructCharSetUnicodeSequentialByRef_Cdecl(
-                        new CharSetUnicodeSequentialByRefCdeclcaller(
-                            TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByRef_Cdecl
-                        )
+                        new CharSetUnicodeSequentialByRefCdeclcaller(TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByRef_Cdecl)
                     )
                 );
                 break;
@@ -2119,9 +2109,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructNumberSequentialByRef_Cdecl(
-                        new NumberSequentialByRefCdeclcaller(
-                            TestMethodForStructNumberSequential_ReversePInvokeByRef_Cdecl
-                        )
+                        new NumberSequentialByRefCdeclcaller(TestMethodForStructNumberSequential_ReversePInvokeByRef_Cdecl)
                     )
                 );
                 break;
@@ -2147,9 +2135,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructStringStructSequentialAnsiByRef_Cdecl(
-                        new StringStructSequentialAnsiByRefCdeclcaller(
-                            TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByRef_Cdecl
-                        )
+                        new StringStructSequentialAnsiByRefCdeclcaller(TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByRef_Cdecl)
                     )
                 );
                 break;
@@ -2159,9 +2145,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructStringStructSequentialUnicodeByRef_Cdecl(
-                        new StringStructSequentialUnicodeByRefCdeclcaller(
-                            TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByRef_Cdecl
-                        )
+                        new StringStructSequentialUnicodeByRefCdeclcaller(TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByRef_Cdecl)
                     )
                 );
                 break;
@@ -2187,9 +2171,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructIncludeOuterIntergerStructSequentialByRef_Cdecl(
-                        new IncludeOuterIntergerStructSequentialByRefCdeclcaller(
-                            TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByRef_Cdecl
-                        )
+                        new IncludeOuterIntergerStructSequentialByRefCdeclcaller(TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByRef_Cdecl)
                     )
                 );
                 break;
@@ -2219,9 +2201,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructComplexStructByRef_StdCall(
-                        new ComplexStructByRefStdCallcaller(
-                            TestMethodForStructComplexStruct_ReversePInvokeByRef_StdCall
-                        )
+                        new ComplexStructByRefStdCallcaller(TestMethodForStructComplexStruct_ReversePInvokeByRef_StdCall)
                     )
                 );
                 break;
@@ -2231,9 +2211,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructInnerSequentialByRef_StdCall(
-                        new InnerSequentialByRefStdCallcaller(
-                            TestMethodForStructInnerSequential_ReversePInvokeByRef_StdCall
-                        )
+                        new InnerSequentialByRefStdCallcaller(TestMethodForStructInnerSequential_ReversePInvokeByRef_StdCall)
                     )
                 );
                 break;
@@ -2243,9 +2221,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructInnerArraySequentialByRef_StdCall(
-                        new InnerArraySequentialByRefStdCallcaller(
-                            TestMethodForStructInnerArraySequential_ReversePInvokeByRef_StdCall
-                        )
+                        new InnerArraySequentialByRefStdCallcaller(TestMethodForStructInnerArraySequential_ReversePInvokeByRef_StdCall)
                     )
                 );
                 break;
@@ -2255,9 +2231,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructCharSetAnsiSequentialByRef_StdCall(
-                        new CharSetAnsiSequentialByRefStdCallcaller(
-                            TestMethodForStructCharSetAnsiSequential_ReversePInvokeByRef_StdCall
-                        )
+                        new CharSetAnsiSequentialByRefStdCallcaller(TestMethodForStructCharSetAnsiSequential_ReversePInvokeByRef_StdCall)
                     )
                 );
                 break;
@@ -2267,9 +2241,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructCharSetUnicodeSequentialByRef_StdCall(
-                        new CharSetUnicodeSequentialByRefStdCallcaller(
-                            TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByRef_StdCall
-                        )
+                        new CharSetUnicodeSequentialByRefStdCallcaller(TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByRef_StdCall)
                     )
                 );
                 break;
@@ -2279,9 +2251,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructNumberSequentialByRef_StdCall(
-                        new NumberSequentialByRefStdCallcaller(
-                            TestMethodForStructNumberSequential_ReversePInvokeByRef_StdCall
-                        )
+                        new NumberSequentialByRefStdCallcaller(TestMethodForStructNumberSequential_ReversePInvokeByRef_StdCall)
                     )
                 );
                 break;
@@ -2307,9 +2277,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructStringStructSequentialAnsiByRef_StdCall(
-                        new StringStructSequentialAnsiByRefStdCallcaller(
-                            TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByRef_StdCall
-                        )
+                        new StringStructSequentialAnsiByRefStdCallcaller(TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByRef_StdCall)
                     )
                 );
                 break;
@@ -2319,9 +2287,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructStringStructSequentialUnicodeByRef_StdCall(
-                        new StringStructSequentialUnicodeByRefStdCallcaller(
-                            TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByRef_StdCall
-                        )
+                        new StringStructSequentialUnicodeByRefStdCallcaller(TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByRef_StdCall)
                     )
                 );
                 break;
@@ -2347,9 +2313,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructIncludeOuterIntergerStructSequentialByRef_StdCall(
-                        new IncludeOuterIntergerStructSequentialByRefStdCallcaller(
-                            TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByRef_StdCall
-                        )
+                        new IncludeOuterIntergerStructSequentialByRefStdCallcaller(TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByRef_StdCall)
                     )
                 );
                 break;
@@ -2357,9 +2321,7 @@ public class MarshalStructTest
                 Console.WriteLine("Calling ReversePInvoke_MarshalStructS11ByRef_StdCall...");
                 Assert.IsTrue(
                     DoCallBack_MarshalStructS11ByRef_StdCall(
-                        new S11ByRefStdCallcaller(
-                            TestMethodForStructS11_ReversePInvokeByRef_StdCall
-                        )
+                        new S11ByRefStdCallcaller(TestMethodForStructS11_ReversePInvokeByRef_StdCall)
                     )
                 );
                 break;
@@ -2422,9 +2384,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructComplexStructByVal_Cdecl(
-                        new ComplexStructByValCdeclcaller(
-                            TestMethodForStructComplexStruct_ReversePInvokeByVal_Cdecl
-                        )
+                        new ComplexStructByValCdeclcaller(TestMethodForStructComplexStruct_ReversePInvokeByVal_Cdecl)
                     )
                 );
                 break;
@@ -2434,9 +2394,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructInnerSequentialByVal_Cdecl(
-                        new InnerSequentialByValCdeclcaller(
-                            TestMethodForStructInnerSequential_ReversePInvokeByVal_Cdecl
-                        )
+                        new InnerSequentialByValCdeclcaller(TestMethodForStructInnerSequential_ReversePInvokeByVal_Cdecl)
                     )
                 );
                 break;
@@ -2446,9 +2404,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructInnerArraySequentialByVal_Cdecl(
-                        new InnerArraySequentialByValCdeclcaller(
-                            TestMethodForStructInnerArraySequential_ReversePInvokeByVal_Cdecl
-                        )
+                        new InnerArraySequentialByValCdeclcaller(TestMethodForStructInnerArraySequential_ReversePInvokeByVal_Cdecl)
                     )
                 );
                 break;
@@ -2458,9 +2414,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructCharSetAnsiSequentialByVal_Cdecl(
-                        new CharSetAnsiSequentialByValCdeclcaller(
-                            TestMethodForStructCharSetAnsiSequential_ReversePInvokeByVal_Cdecl
-                        )
+                        new CharSetAnsiSequentialByValCdeclcaller(TestMethodForStructCharSetAnsiSequential_ReversePInvokeByVal_Cdecl)
                     )
                 );
                 break;
@@ -2470,9 +2424,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructCharSetUnicodeSequentialByVal_Cdecl(
-                        new CharSetUnicodeSequentialByValCdeclcaller(
-                            TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByVal_Cdecl
-                        )
+                        new CharSetUnicodeSequentialByValCdeclcaller(TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByVal_Cdecl)
                     )
                 );
                 break;
@@ -2482,9 +2434,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructNumberSequentialByVal_Cdecl(
-                        new NumberSequentialByValCdeclcaller(
-                            TestMethodForStructNumberSequential_ReversePInvokeByVal_Cdecl
-                        )
+                        new NumberSequentialByValCdeclcaller(TestMethodForStructNumberSequential_ReversePInvokeByVal_Cdecl)
                     )
                 );
                 break;
@@ -2510,9 +2460,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructStringStructSequentialAnsiByVal_Cdecl(
-                        new StringStructSequentialAnsiByValCdeclcaller(
-                            TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByVal_Cdecl
-                        )
+                        new StringStructSequentialAnsiByValCdeclcaller(TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByVal_Cdecl)
                     )
                 );
                 break;
@@ -2522,9 +2470,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructStringStructSequentialUnicodeByVal_Cdecl(
-                        new StringStructSequentialUnicodeByValCdeclcaller(
-                            TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByVal_Cdecl
-                        )
+                        new StringStructSequentialUnicodeByValCdeclcaller(TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByVal_Cdecl)
                     )
                 );
                 break;
@@ -2550,9 +2496,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructIncludeOuterIntergerStructSequentialByVal_Cdecl(
-                        new IncludeOuterIntergerStructSequentialByValCdeclcaller(
-                            TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByVal_Cdecl
-                        )
+                        new IncludeOuterIntergerStructSequentialByValCdeclcaller(TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByVal_Cdecl)
                     )
                 );
                 break;
@@ -2568,9 +2512,7 @@ public class MarshalStructTest
                 Console.WriteLine("Calling DoCallBack_MarshalStructByVal_Cdecl_ByteStruct3Byte...");
                 Assert.IsTrue(
                     DoCallBack_MarshalStructByVal_Cdecl_ByteStruct3Byte(
-                        new ByValCdeclcaller_ByteStruct3Byte(
-                            TestMethod_DoCallBack_MarshalStructByVal_ByteStruct3Byte_Cdecl
-                        )
+                        new ByValCdeclcaller_ByteStruct3Byte(TestMethod_DoCallBack_MarshalStructByVal_ByteStruct3Byte_Cdecl)
                     )
                 );
                 break;
@@ -2592,9 +2534,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructComplexStructByVal_StdCall(
-                        new ComplexStructByValStdCallcaller(
-                            TestMethodForStructComplexStruct_ReversePInvokeByVal_StdCall
-                        )
+                        new ComplexStructByValStdCallcaller(TestMethodForStructComplexStruct_ReversePInvokeByVal_StdCall)
                     )
                 );
                 break;
@@ -2604,9 +2544,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructInnerSequentialByVal_StdCall(
-                        new InnerSequentialByValStdCallcaller(
-                            TestMethodForStructInnerSequential_ReversePInvokeByVal_StdCall
-                        )
+                        new InnerSequentialByValStdCallcaller(TestMethodForStructInnerSequential_ReversePInvokeByVal_StdCall)
                     )
                 );
                 break;
@@ -2616,9 +2554,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructInnerArraySequentialByVal_StdCall(
-                        new InnerArraySequentialByValStdCallcaller(
-                            TestMethodForStructInnerArraySequential_ReversePInvokeByVal_StdCall
-                        )
+                        new InnerArraySequentialByValStdCallcaller(TestMethodForStructInnerArraySequential_ReversePInvokeByVal_StdCall)
                     )
                 );
                 break;
@@ -2628,9 +2564,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructCharSetAnsiSequentialByVal_StdCall(
-                        new CharSetAnsiSequentialByValStdCallcaller(
-                            TestMethodForStructCharSetAnsiSequential_ReversePInvokeByVal_StdCall
-                        )
+                        new CharSetAnsiSequentialByValStdCallcaller(TestMethodForStructCharSetAnsiSequential_ReversePInvokeByVal_StdCall)
                     )
                 );
                 break;
@@ -2640,9 +2574,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructCharSetUnicodeSequentialByVal_StdCall(
-                        new CharSetUnicodeSequentialByValStdCallcaller(
-                            TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByVal_StdCall
-                        )
+                        new CharSetUnicodeSequentialByValStdCallcaller(TestMethodForStructCharSetUnicodeSequential_ReversePInvokeByVal_StdCall)
                     )
                 );
                 break;
@@ -2652,9 +2584,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructNumberSequentialByVal_StdCall(
-                        new NumberSequentialByValStdCallcaller(
-                            TestMethodForStructNumberSequential_ReversePInvokeByVal_StdCall
-                        )
+                        new NumberSequentialByValStdCallcaller(TestMethodForStructNumberSequential_ReversePInvokeByVal_StdCall)
                     )
                 );
                 break;
@@ -2680,9 +2610,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructStringStructSequentialAnsiByVal_StdCall(
-                        new StringStructSequentialAnsiByValStdCallcaller(
-                            TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByVal_StdCall
-                        )
+                        new StringStructSequentialAnsiByValStdCallcaller(TestMethodForStructStringStructSequentialAnsi_ReversePInvokeByVal_StdCall)
                     )
                 );
                 break;
@@ -2692,9 +2620,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructStringStructSequentialUnicodeByVal_StdCall(
-                        new StringStructSequentialUnicodeByValStdCallcaller(
-                            TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByVal_StdCall
-                        )
+                        new StringStructSequentialUnicodeByValStdCallcaller(TestMethodForStructStringStructSequentialUnicode_ReversePInvokeByVal_StdCall)
                     )
                 );
                 break;
@@ -2720,9 +2646,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructIncludeOuterIntergerStructSequentialByVal_StdCall(
-                        new IncludeOuterIntergerStructSequentialByValStdCallcaller(
-                            TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByVal_StdCall
-                        )
+                        new IncludeOuterIntergerStructSequentialByValStdCallcaller(TestMethodForStructIncludeOuterIntergerStructSequential_ReversePInvokeByVal_StdCall)
                     )
                 );
                 break;
@@ -2730,9 +2654,7 @@ public class MarshalStructTest
                 Console.WriteLine("Calling ReversePInvoke_MarshalStructS11ByVal_StdCall...");
                 Assert.IsTrue(
                     DoCallBack_MarshalStructS11ByVal_StdCall(
-                        new S11ByValStdCallcaller(
-                            TestMethodForStructS11_ReversePInvokeByVal_StdCall
-                        )
+                        new S11ByValStdCallcaller(TestMethodForStructS11_ReversePInvokeByVal_StdCall)
                     )
                 );
                 break;
@@ -2742,9 +2664,7 @@ public class MarshalStructTest
                 );
                 Assert.IsTrue(
                     DoCallBack_MarshalStructByVal_StdCall_ByteStruct3Byte(
-                        new ByValStdCallcaller_ByteStruct3Byte(
-                            TestMethod_DoCallBack_MarshalStructByVal_ByteStruct3Byte_StdCall
-                        )
+                        new ByValStdCallcaller_ByteStruct3Byte(TestMethod_DoCallBack_MarshalStructByVal_ByteStruct3Byte_StdCall)
                     )
                 );
                 break;

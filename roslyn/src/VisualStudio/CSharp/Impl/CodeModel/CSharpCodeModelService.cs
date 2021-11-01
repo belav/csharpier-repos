@@ -1108,16 +1108,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             {
                 if (member.Kind() == SyntaxKind.ConstructorDeclaration)
                 {
-                    var constructor = ((ConstructorDeclarationSyntax)member).WithIdentifier(
-                        newIdentifier
-                    );
+                    var constructor = (
+                        (ConstructorDeclarationSyntax)member
+                    ).WithIdentifier(newIdentifier);
                     typeNode = typeNode.ReplaceNode(member, constructor);
                 }
                 else if (member.Kind() == SyntaxKind.DestructorDeclaration)
                 {
-                    var destructor = ((DestructorDeclarationSyntax)member).WithIdentifier(
-                        newIdentifier
-                    );
+                    var destructor = (
+                        (DestructorDeclarationSyntax)member
+                    ).WithIdentifier(newIdentifier);
                     typeNode = typeNode.ReplaceNode(member, destructor);
                 }
             }
@@ -3580,9 +3580,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     // make sure to return the index of the last attribute in the declaration.
                     if (attributeDeclaration.Attributes.Count > 1)
                     {
-                        var indexOfAttributeInDeclaration = attributeDeclaration.Attributes.IndexOf(
-                            attribute
-                        );
+                        var indexOfAttributeInDeclaration =
+                            attributeDeclaration.Attributes.IndexOf(attribute);
                         return index
                             + (
                                 attributeDeclaration.Attributes.Count
@@ -3676,9 +3675,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     )
                     {
                         var variableDeclaration = (VariableDeclarationSyntax)member.Parent;
-                        var indexOfDeclaratorInField = variableDeclaration.Variables.IndexOf(
-                            variableDeclarator
-                        );
+                        var indexOfDeclaratorInField =
+                            variableDeclaration.Variables.IndexOf(variableDeclarator);
                         return index
                             + (variableDeclaration.Variables.Count - indexOfDeclaratorInField);
                     }

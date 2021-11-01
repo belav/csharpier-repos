@@ -20,9 +20,8 @@ namespace System.Reflection.Tests
         public void GetCustomAttributes_thisAsm()
         {
             Assembly thisAsm = typeof(GetCustomAttributes_Assembly).GetTypeInfo().Assembly;
-            IEnumerable<Attribute> attributes = CustomAttributeExtensions.GetCustomAttributes(
-                thisAsm
-            );
+            IEnumerable<Attribute> attributes =
+                CustomAttributeExtensions.GetCustomAttributes(thisAsm);
             //There are other attributes added as default:
 
             Assert.Equal(
@@ -150,9 +149,8 @@ namespace System.Reflection.Tests
             Assembly thisAsm = typeof(GetCustomAttributes_Assembly).GetTypeInfo().Assembly;
             Attribute attribute;
 
-            attribute = CustomAttributeExtensions.GetCustomAttribute<SecurityCriticalAttribute>(
-                thisAsm
-            );
+            attribute =
+                CustomAttributeExtensions.GetCustomAttribute<SecurityCriticalAttribute>(thisAsm);
             Assert.Null(attribute);
 
             AssertExtensions.Throws<ArgumentException>(
@@ -180,9 +178,8 @@ namespace System.Reflection.Tests
             Assembly thisAsm = typeof(GetCustomAttributes_Assembly).GetTypeInfo().Assembly;
             IEnumerable<Attribute> attributes;
 
-            attributes = CustomAttributeExtensions.GetCustomAttributes<MyAttribute_AllowMultiple>(
-                thisAsm
-            );
+            attributes =
+                CustomAttributeExtensions.GetCustomAttributes<MyAttribute_AllowMultiple>(thisAsm);
             Assert.Equal(2, attributes.Count());
             Assert.Equal(
                 1,
@@ -207,9 +204,8 @@ namespace System.Reflection.Tests
                 )
             );
 
-            attributes = CustomAttributeExtensions.GetCustomAttributes<SecurityCriticalAttribute>(
-                thisAsm
-            );
+            attributes =
+                CustomAttributeExtensions.GetCustomAttributes<SecurityCriticalAttribute>(thisAsm);
             Assert.Equal(0, attributes.Count());
         }
 

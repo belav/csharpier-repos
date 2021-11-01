@@ -183,8 +183,8 @@ namespace System.CommandLine
         }
 
         public static ParseResult Parse(this Argument argument, string commandLine) =>
-            new Parser(new CommandLineConfiguration(new[] { new RootCommand { argument }, })).Parse(
-                commandLine
-            );
+            new Parser(
+                new CommandLineConfiguration(new[] { new RootCommand { argument }, })
+            ).Parse(commandLine);
     }
 }

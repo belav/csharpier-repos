@@ -2543,9 +2543,7 @@ namespace System.Xml.Serialization
                                         )!;
                                     ilg.Ldarg(0);
                                     ilg.Ldstr(GetCSharpString(member.Mapping.TypeDesc.CSharpName));
-                                    ilg.Call(
-                                        XmlSerializationReader_CreateReadOnlyCollectionException
-                                    );
+                                    ilg.Call(XmlSerializationReader_CreateReadOnlyCollectionException);
                                     ilg.Throw();
                                 }
                                 else
@@ -3314,9 +3312,9 @@ namespace System.Xml.Serialization
                     !localA.LocalType.IsGenericType
                         || (
                             localA.LocalType.GetGenericArguments().Length == 1
-                            && localA.LocalType.GetGenericArguments()[0].IsAssignableFrom(
-                                elementType
-                            )
+                            && localA.LocalType.GetGenericArguments()[
+                                0
+                            ].IsAssignableFrom(elementType)
                         )
                 );
                 MethodInfo Add = localA.LocalType.GetMethod(

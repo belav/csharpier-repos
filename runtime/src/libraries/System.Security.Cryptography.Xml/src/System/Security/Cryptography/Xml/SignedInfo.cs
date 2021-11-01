@@ -94,9 +94,8 @@ namespace System.Security.Cryptography.Xml
             {
                 if (_canonicalizationMethodTransform == null)
                 {
-                    _canonicalizationMethodTransform = CryptoHelpers.CreateFromName<Transform>(
-                        CanonicalizationMethod
-                    );
+                    _canonicalizationMethodTransform =
+                        CryptoHelpers.CreateFromName<Transform>(CanonicalizationMethod);
                     if (_canonicalizationMethodTransform == null)
                         throw new CryptographicException(
                             SR.Format(

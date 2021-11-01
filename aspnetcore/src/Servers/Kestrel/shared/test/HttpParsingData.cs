@@ -364,9 +364,13 @@ namespace Microsoft.AspNetCore.Testing
         {
             get
             {
-                return new[] { "\0", "/\0", "/\0\0", "/%C8\0", }.Concat(
-                    QueryStringWithNullCharData
-                );
+                return new[]
+                {
+                    "\0",
+                    "/\0",
+                    "/\0\0",
+                    "/%C8\0",
+                }.Concat(QueryStringWithNullCharData);
             }
         }
 

@@ -845,9 +845,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         break;
 
                     default:
-                        declaredInterfaces = derived.InterfacesNoUseSiteDiagnostics(
-                            basesBeingResolved
-                        );
+                        declaredInterfaces =
+                            derived.InterfacesNoUseSiteDiagnostics(basesBeingResolved);
                         break;
                 }
 

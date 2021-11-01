@@ -76,9 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                                 classOrStructType =
                                     model.GetDeclaredSymbol(classOrStructDecl, cancellationToken)
                                     as INamedTypeSymbol;
-                                interfaceTypes = SpecializedCollections.SingletonEnumerable(
-                                    interfaceType
-                                );
+                                interfaceTypes =
+                                    SpecializedCollections.SingletonEnumerable(interfaceType);
 
                                 return interfaceTypes != null && classOrStructType != null;
                             }

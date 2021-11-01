@@ -109,9 +109,8 @@ namespace Microsoft.CodeAnalysis
                 info => new AnalyzerConfigDocumentState(info, solutionServices)
             );
 
-            _lazyAnalyzerConfigSet = ComputeAnalyzerConfigSetValueSource(
-                AnalyzerConfigDocumentStates
-            );
+            _lazyAnalyzerConfigSet =
+                ComputeAnalyzerConfigSetValueSource(AnalyzerConfigDocumentStates);
 
             // Add analyzer config information to the compilation options
             if (projectInfoFixed.CompilationOptions != null)
@@ -843,9 +842,8 @@ namespace Microsoft.CodeAnalysis
             TextDocumentStates<AnalyzerConfigDocumentState> newAnalyzerConfigDocumentStates
         )
         {
-            var newAnalyzerConfigSet = ComputeAnalyzerConfigSetValueSource(
-                newAnalyzerConfigDocumentStates
-            );
+            var newAnalyzerConfigSet =
+                ComputeAnalyzerConfigSetValueSource(newAnalyzerConfigDocumentStates);
             var projectInfo = ProjectInfo.WithVersion(Version.GetNewerVersion());
 
             // Changing analyzer configs changes compilation options
@@ -885,9 +883,8 @@ namespace Microsoft.CodeAnalysis
 
         public ProjectState RemoveAnalyzerConfigDocuments(ImmutableArray<DocumentId> documentIds)
         {
-            var newAnalyzerConfigDocumentStates = AnalyzerConfigDocumentStates.RemoveRange(
-                documentIds
-            );
+            var newAnalyzerConfigDocumentStates =
+                AnalyzerConfigDocumentStates.RemoveRange(documentIds);
 
             return CreateNewStateForChangedAnalyzerConfigDocuments(newAnalyzerConfigDocumentStates);
         }

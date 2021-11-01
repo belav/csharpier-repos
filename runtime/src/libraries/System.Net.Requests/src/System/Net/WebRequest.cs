@@ -296,9 +296,8 @@ namespace System.Net
             {
                 // Clone the object and update the clone, thus
                 // allowing other threads to still read from the original.
-                List<WebRequestPrefixElement> prefixList = new List<WebRequestPrefixElement>(
-                    PrefixList
-                );
+                List<WebRequestPrefixElement> prefixList =
+                    new List<WebRequestPrefixElement>(PrefixList);
 
                 // As AbsoluteUri is used later for Create, account for formating changes
                 // like Unicode escaping, default ports, etc.

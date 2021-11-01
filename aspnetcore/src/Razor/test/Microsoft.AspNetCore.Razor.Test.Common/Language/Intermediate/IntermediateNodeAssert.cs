@@ -244,9 +244,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             IntermediateNode node
         )
         {
-            var attributeValue = Assert.IsType<CSharpExpressionAttributeValueIntermediateNode>(
-                node
-            );
+            var attributeValue =
+                Assert.IsType<CSharpExpressionAttributeValueIntermediateNode>(node);
 
             try
             {
@@ -437,9 +436,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             params Action<IntermediateNode>[] valueValidators
         )
         {
-            var tagHelperHtmlAttribute = Assert.IsType<TagHelperHtmlAttributeIntermediateNode>(
-                node
-            );
+            var tagHelperHtmlAttribute =
+                Assert.IsType<TagHelperHtmlAttributeIntermediateNode>(node);
 
             try
             {

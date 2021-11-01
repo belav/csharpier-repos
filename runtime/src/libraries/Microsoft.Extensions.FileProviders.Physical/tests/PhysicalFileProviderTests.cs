@@ -117,9 +117,8 @@ namespace Microsoft.Extensions.FileProviders
                 var oldPollingInterval = PhysicalFilesWatcher.DefaultPollingInterval;
                 try
                 {
-                    PhysicalFilesWatcher.DefaultPollingInterval = TimeSpan.FromMilliseconds(
-                        WaitTimeForTokenToFire
-                    );
+                    PhysicalFilesWatcher.DefaultPollingInterval =
+                        TimeSpan.FromMilliseconds(WaitTimeForTokenToFire);
                     for (int i = 0; i < instances; i++)
                     {
                         PhysicalFileProvider pfp = new PhysicalFileProvider(root.RootPath)
@@ -718,9 +717,7 @@ namespace Microsoft.Extensions.FileProviders
             string path
         )
         {
-            GetDirectoryContentsReturnsEnumerableDirectoryContentsForValidPathWithLeadingSlashes(
-                path
-            );
+            GetDirectoryContentsReturnsEnumerableDirectoryContentsForValidPathWithLeadingSlashes(path);
         }
 
         [Theory]
@@ -732,9 +729,7 @@ namespace Microsoft.Extensions.FileProviders
             string path
         )
         {
-            GetDirectoryContentsReturnsEnumerableDirectoryContentsForValidPathWithLeadingSlashes(
-                path
-            );
+            GetDirectoryContentsReturnsEnumerableDirectoryContentsForValidPathWithLeadingSlashes(path);
         }
 
         private void GetDirectoryContentsReturnsEnumerableDirectoryContentsForValidPathWithLeadingSlashes(

@@ -74,9 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // When the input is constant, we use that to reshape the decision dag that is returned
             // so that flow analysis will see that some of the cases may be unreachable.
-            decisionDag = decisionDag.SimplifyDecisionDagIfConstantInput(
-                boundSwitchGoverningExpression
-            );
+            decisionDag =
+                decisionDag.SimplifyDecisionDagIfConstantInput(boundSwitchGoverningExpression);
 
             return new BoundSwitchStatement(
                 syntax: node,

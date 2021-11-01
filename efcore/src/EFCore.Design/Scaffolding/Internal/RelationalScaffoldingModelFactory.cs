@@ -619,9 +619,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 );
                 if (property != null)
                 {
-                    var conventionalValueGenerated = ValueGenerationConvention.GetValueGenerated(
-                        property
-                    );
+                    var conventionalValueGenerated =
+                        ValueGenerationConvention.GetValueGenerated(property);
                     if (conventionalValueGenerated == ValueGenerated.OnAdd)
                     {
                         property.ValueGenerated = ValueGenerated.Never;

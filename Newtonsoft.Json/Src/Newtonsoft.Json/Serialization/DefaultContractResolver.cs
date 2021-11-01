@@ -417,9 +417,8 @@ namespace Newtonsoft.Json.Serialization
 
                 if (attribute.NamingStrategyType != null)
                 {
-                    NamingStrategy namingStrategy = JsonTypeReflector.GetContainerNamingStrategy(
-                        attribute
-                    )!;
+                    NamingStrategy namingStrategy =
+                        JsonTypeReflector.GetContainerNamingStrategy(attribute)!;
                     extensionDataNameResolver = s => namingStrategy.GetDictionaryKey(s);
                 }
             }
@@ -441,9 +440,7 @@ namespace Newtonsoft.Json.Serialization
                 if (overrideConstructor != null)
                 {
                     contract.OverrideCreator =
-                        JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                            overrideConstructor
-                        );
+                        JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(overrideConstructor);
                     contract.CreatorParameters.AddRange(
                         CreateConstructorParameters(overrideConstructor, contract.Properties)
                     );
@@ -467,9 +464,7 @@ namespace Newtonsoft.Json.Serialization
                     if (constructor != null)
                     {
                         contract.ParameterizedCreator =
-                            JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                                constructor
-                            );
+                            JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(constructor);
                         contract.CreatorParameters.AddRange(
                             CreateConstructorParameters(constructor, contract.Properties)
                         );
@@ -486,9 +481,7 @@ namespace Newtonsoft.Json.Serialization
                     if (constructor != null)
                     {
                         contract.OverrideCreator =
-                            JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                                constructor
-                            );
+                            JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(constructor);
                         contract.CreatorParameters.AddRange(
                             CreateConstructorParameters(constructor, contract.Properties)
                         );
@@ -658,9 +651,7 @@ namespace Newtonsoft.Json.Serialization
                         ? JsonTypeReflector.ReflectionDelegateFactory.CreateSet<object>(member)
                         : null;
                 Func<object> createExtensionDataDictionary =
-                    JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<object>(
-                        createdType
-                    );
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<object>(createdType);
                 MethodInfo? setMethod = t.GetProperty(
                     "Item",
                     BindingFlags.Public | BindingFlags.Instance,
@@ -721,9 +712,7 @@ namespace Newtonsoft.Json.Serialization
                 );
                 ConstructorInfo constructors = enumerableWrapper.GetConstructors().First();
                 ObjectConstructor<object> createEnumerableWrapper =
-                    JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                        constructors
-                    );
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(constructors);
 
                 ExtensionDataGetter extensionDataGetter = o =>
                 {
@@ -733,9 +722,9 @@ namespace Newtonsoft.Json.Serialization
                         return null;
                     }
 
-                    return (IEnumerable<KeyValuePair<object, object>>)createEnumerableWrapper(
-                        dictionary
-                    );
+                    return (IEnumerable<
+                        KeyValuePair<object, object>
+                    >)createEnumerableWrapper(dictionary);
                 };
 
                 contract.ExtensionDataGetter = extensionDataGetter;
@@ -1015,9 +1004,7 @@ namespace Newtonsoft.Json.Serialization
 
         private Func<object> GetDefaultCreator(Type createdType)
         {
-            return JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<object>(
-                createdType
-            );
+            return JsonTypeReflector.ReflectionDelegateFactory.CreateDefaultConstructor<object>(createdType);
         }
 
 #if NET35
@@ -1321,9 +1308,8 @@ namespace Newtonsoft.Json.Serialization
                 JsonTypeReflector.GetAttribute<JsonContainerAttribute>(objectType);
             if (containerAttribute?.NamingStrategyType != null)
             {
-                NamingStrategy namingStrategy = JsonTypeReflector.GetContainerNamingStrategy(
-                    containerAttribute
-                )!;
+                NamingStrategy namingStrategy =
+                    JsonTypeReflector.GetContainerNamingStrategy(containerAttribute)!;
                 contract.DictionaryKeyResolver = s => namingStrategy.GetDictionaryKey(s);
             }
             else
@@ -1371,9 +1357,7 @@ namespace Newtonsoft.Json.Serialization
                 }
 
                 contract.OverrideCreator =
-                    JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                        overrideConstructor
-                    );
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(overrideConstructor);
             }
 
             return contract;
@@ -1424,9 +1408,7 @@ namespace Newtonsoft.Json.Serialization
                 }
 
                 contract.OverrideCreator =
-                    JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                        overrideConstructor
-                    );
+                    JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(overrideConstructor);
             }
 
             return contract;
@@ -1480,9 +1462,7 @@ namespace Newtonsoft.Json.Serialization
                 if (constructorInfo != null)
                 {
                     ObjectConstructor<object> creator =
-                        JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(
-                            constructorInfo
-                        );
+                        JsonTypeReflector.ReflectionDelegateFactory.CreateParameterizedConstructor(constructorInfo);
 
                     contract.ISerializableCreator = creator;
                 }
@@ -1507,9 +1487,8 @@ namespace Newtonsoft.Json.Serialization
                 JsonTypeReflector.GetAttribute<JsonContainerAttribute>(objectType);
             if (containerAttribute?.NamingStrategyType != null)
             {
-                NamingStrategy namingStrategy = JsonTypeReflector.GetContainerNamingStrategy(
-                    containerAttribute
-                )!;
+                NamingStrategy namingStrategy =
+                    JsonTypeReflector.GetContainerNamingStrategy(containerAttribute)!;
                 contract.PropertyNameResolver = s => namingStrategy.GetDictionaryKey(s);
             }
             else
@@ -2127,9 +2106,7 @@ namespace Newtonsoft.Json.Serialization
             }
 
             MethodCall<object, object?> shouldSerializeCall =
-                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object>(
-                    shouldSerializeMethod
-                );
+                JsonTypeReflector.ReflectionDelegateFactory.CreateMethodCall<object>(shouldSerializeMethod);
 
             return o => (bool)shouldSerializeCall(o)!;
         }

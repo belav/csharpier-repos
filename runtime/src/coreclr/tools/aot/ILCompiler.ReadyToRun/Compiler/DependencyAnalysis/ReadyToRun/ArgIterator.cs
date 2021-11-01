@@ -1735,9 +1735,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     }
                     else
                     {
-                        pLoc.m_idxStack = _transitionBlock.GetStackArgumentIndexFromOffset(
-                            argOffset
-                        );
+                        pLoc.m_idxStack =
+                            _transitionBlock.GetStackArgumentIndexFromOffset(argOffset);
                         pLoc.m_cStack = cSlots;
                     }
                     return pLoc;
@@ -1770,9 +1769,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         }
                         else if (!_transitionBlock.IsStackArgumentOffset(argOffset))
                         {
-                            pLoc.m_idxGenReg = _transitionBlock.GetArgumentIndexFromOffset(
-                                argOffset
-                            );
+                            pLoc.m_idxGenReg =
+                                _transitionBlock.GetArgumentIndexFromOffset(argOffset);
                             pLoc.m_cGenReg = 1;
                         }
                         else

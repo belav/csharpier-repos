@@ -162,9 +162,8 @@ namespace System.Runtime.Loader.Tests
             SetPreConditions();
 
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
-            AssemblyLoadContext executingAlc = AssemblyLoadContext.GetLoadContext(
-                executingAssembly
-            );
+            AssemblyLoadContext executingAlc =
+                AssemblyLoadContext.GetLoadContext(executingAssembly);
 
             defaultAlc = AssemblyLoadContext.Default;
             defaultAlcAssembly = AssemblyLoadContext.Default.LoadFromAssemblyName(
@@ -184,9 +183,7 @@ namespace System.Runtime.Loader.Tests
                 );
 
                 isolatedAlcFixtureInstance =
-                    (IContextualReflectionTestFixture)Activator.CreateInstance(
-                        isolatedAlcFixtureType
-                    );
+                    (IContextualReflectionTestFixture)Activator.CreateInstance(isolatedAlcFixtureType);
             }
             else
             {

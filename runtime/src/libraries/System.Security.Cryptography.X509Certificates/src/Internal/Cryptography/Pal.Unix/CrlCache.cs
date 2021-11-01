@@ -119,9 +119,8 @@ namespace Internal.Cryptography.Pal
                     }
                     else
                     {
-                        nextUpdate = OpenSslX509CertificateReader.ExtractValidityDateTime(
-                            nextUpdatePtr
-                        );
+                        nextUpdate =
+                            OpenSslX509CertificateReader.ExtractValidityDateTime(nextUpdatePtr);
                     }
 
                     // OpenSSL is going to convert our input time to universal, so we should be in Local or

@@ -189,9 +189,7 @@ namespace ILCompiler
         {
             var support = new Dictionary<string, InstructionSet>();
             foreach (
-                var instructionSet in InstructionSetFlags.ArchitectureToValidInstructionSets(
-                    architecture
-                )
+                var instructionSet in InstructionSetFlags.ArchitectureToValidInstructionSets(architecture)
             )
             {
                 // Only instruction sets with associated R2R enum values are are specifiable
@@ -208,9 +206,7 @@ namespace ILCompiler
         {
             var support = new InstructionSetFlags();
             foreach (
-                var instructionSet in InstructionSetFlags.ArchitectureToValidInstructionSets(
-                    architecture
-                )
+                var instructionSet in InstructionSetFlags.ArchitectureToValidInstructionSets(architecture)
             )
             {
                 // Only instruction sets with associated R2R enum values are are specifiable
@@ -292,9 +288,7 @@ namespace ILCompiler
                 (_architecture == TargetArchitecture.X86)
                 || (_architecture == TargetArchitecture.ARM)
             )
-                unsupportedInstructionSets.Set64BitInstructionSetVariantsUnconditionally(
-                    _architecture
-                );
+                unsupportedInstructionSets.Set64BitInstructionSetVariantsUnconditionally(_architecture);
 
             foreach (string supported in _supportedInstructionSets)
             {
@@ -307,9 +301,7 @@ namespace ILCompiler
                     checkForExplictUnsupport.AddInstructionSet(
                         instructionSetConversion[unsupported]
                     );
-                    checkForExplictUnsupport.ExpandInstructionSetByReverseImplication(
-                        _architecture
-                    );
+                    checkForExplictUnsupport.ExpandInstructionSetByReverseImplication(_architecture);
                     checkForExplictUnsupport.Set64BitInstructionSetVariants(_architecture);
 
                     InstructionSetFlags supportedTemp = supportedInstructionSets;

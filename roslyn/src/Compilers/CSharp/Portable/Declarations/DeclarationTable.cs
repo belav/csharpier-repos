@@ -55,9 +55,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             _cache = cache ?? new Cache(this);
             _typeNames = new Lazy<ICollection<string>>(GetMergedTypeNames);
             _namespaceNames = new Lazy<ICollection<string>>(GetMergedNamespaceNames);
-            _referenceDirectives = new Lazy<ICollection<ReferenceDirective>>(
-                GetMergedReferenceDirectives
-            );
+            _referenceDirectives = new Lazy<
+                ICollection<ReferenceDirective>
+            >(GetMergedReferenceDirectives);
         }
 
         public DeclarationTable AddRootDeclaration(

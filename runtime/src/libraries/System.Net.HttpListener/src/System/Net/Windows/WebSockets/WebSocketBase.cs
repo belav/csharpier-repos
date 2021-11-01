@@ -335,9 +335,7 @@ namespace System.Net.WebSockets
                             // Check whether there is still another outstanding send operation
                             // Potentially the keepAlive operation has completed before this thread
                             // was able to enter the SessionHandle-lock.
-                            _sendOutstandingOperationHelper.CompleteOperation(
-                                ownsCancellationTokenSource
-                            );
+                            _sendOutstandingOperationHelper.CompleteOperation(ownsCancellationTokenSource);
                             if (
                                 ownsCancellationTokenSource =
                                     _sendOutstandingOperationHelper.TryStartOperation(
@@ -597,9 +595,7 @@ namespace System.Net.WebSockets
                             );
                         }
 
-                        _sendOutstandingOperationHelper.CompleteOperation(
-                            ownsSendCancellationTokenSource
-                        );
+                        _sendOutstandingOperationHelper.CompleteOperation(ownsSendCancellationTokenSource);
                     }
 
                     EnsureCloseOutputOperation();
@@ -657,15 +653,11 @@ namespace System.Net.WebSockets
             }
             finally
             {
-                _closeOutputOutstandingOperationHelper.CompleteOperation(
-                    ownsCloseOutputCancellationTokenSource
-                );
+                _closeOutputOutstandingOperationHelper.CompleteOperation(ownsCloseOutputCancellationTokenSource);
 
                 if (needToCompleteSendOperation)
                 {
-                    _sendOutstandingOperationHelper.CompleteOperation(
-                        ownsSendCancellationTokenSource
-                    );
+                    _sendOutstandingOperationHelper.CompleteOperation(ownsSendCancellationTokenSource);
                 }
 
                 _closeOutputTask = null;
@@ -729,9 +721,7 @@ namespace System.Net.WebSockets
                     if (_closeNetworkConnectionTask == null)
                     {
                         _closeNetworkConnectionTask =
-                            _innerStreamAsWebSocketStream.CloseNetworkConnectionAsync(
-                                cancellationToken
-                            );
+                            _innerStreamAsWebSocketStream.CloseNetworkConnectionAsync(cancellationToken);
                     }
 
                     if (thisLockTaken && sessionHandleLockTaken)
@@ -991,9 +981,7 @@ namespace System.Net.WebSockets
                 }
                 else
                 {
-                    _receiveOutstandingOperationHelper.CompleteOperation(
-                        ownsReceiveCancellationTokenSource
-                    );
+                    _receiveOutstandingOperationHelper.CompleteOperation(ownsReceiveCancellationTokenSource);
                     ReleaseLock(_thisLock, ref lockTaken);
                     await _closeReceivedTaskCompletionSource!.Task.SuppressContextFlow();
                 }
@@ -1051,9 +1039,7 @@ namespace System.Net.WebSockets
                     }
                     finally
                     {
-                        _sendOutstandingOperationHelper.CompleteOperation(
-                            ownsSendCancellationSource
-                        );
+                        _sendOutstandingOperationHelper.CompleteOperation(ownsSendCancellationSource);
                     }
                 }
             }
@@ -1071,9 +1057,7 @@ namespace System.Net.WebSockets
             }
             finally
             {
-                _closeOutstandingOperationHelper.CompleteOperation(
-                    ownsCloseCancellationTokenSource
-                );
+                _closeOutstandingOperationHelper.CompleteOperation(ownsCloseCancellationTokenSource);
                 ReleaseLock(_thisLock, ref lockTaken);
             }
         }
@@ -1649,9 +1633,7 @@ namespace System.Net.WebSockets
                         {
                             Monitor.Enter(thisPtr.SessionHandle, ref lockTaken);
                         }
-                        thisPtr._sendOutstandingOperationHelper.CompleteOperation(
-                            ownsCancellationTokenSource
-                        );
+                        thisPtr._sendOutstandingOperationHelper.CompleteOperation(ownsCancellationTokenSource);
                         thisPtr._keepAliveTask = null;
                     }
 
@@ -2422,9 +2404,7 @@ namespace System.Net.WebSockets
                             out _BufferHasBeenPinned
                         );
                         payloadBuffer.CloseStatus.ReasonData =
-                            _webSocket._internalBuffer.ConvertPinnedSendPayloadToNative(
-                                closeBuffer
-                            );
+                            _webSocket._internalBuffer.ConvertPinnedSendPayloadToNative(closeBuffer);
                         payloadBuffer.CloseStatus.ReasonLength = (uint)closeBuffer.Count;
                     }
 
@@ -2599,9 +2579,8 @@ namespace System.Net.WebSockets
 
                     if (operationsOutstanding == 1)
                     {
-                        linkedCancellationToken = CreateLinkedCancellationToken(
-                            userCancellationToken
-                        );
+                        linkedCancellationToken =
+                            CreateLinkedCancellationToken(userCancellationToken);
                         return true;
                     }
 
@@ -2649,9 +2628,8 @@ namespace System.Net.WebSockets
                 CancellationToken cancellationToken
             )
             {
-                var linkedCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
-                    cancellationToken
-                );
+                var linkedCancellationTokenSource =
+                    CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
                 Debug.Assert(
                     _cancellationTokenSource == null,

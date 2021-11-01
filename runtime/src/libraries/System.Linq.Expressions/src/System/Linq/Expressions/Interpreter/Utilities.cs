@@ -66,9 +66,24 @@ namespace System.Linq.Expressions.Interpreter
                     case 15:
                         return typeof(Action<, , , , , , , , , , , , , , >).MakeGenericType(types);
                     case 16:
-                        return typeof(Action<, , , , , , , , , , , , , , , >).MakeGenericType(
-                            types
-                        );
+                        return typeof(Action<
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+
+                        >).MakeGenericType(types);
                 }
             }
             else
@@ -108,9 +123,25 @@ namespace System.Linq.Expressions.Interpreter
                     case 16:
                         return typeof(Func<, , , , , , , , , , , , , , , >).MakeGenericType(types);
                     case 17:
-                        return typeof(Func<, , , , , , , , , , , , , , , , >).MakeGenericType(
-                            types
-                        );
+                        return typeof(Func<
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+                            ,
+
+                        >).MakeGenericType(types);
                 }
             }
             throw ContractUtils.Unreachable;

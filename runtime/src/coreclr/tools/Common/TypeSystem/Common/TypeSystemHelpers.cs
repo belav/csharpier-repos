@@ -242,15 +242,13 @@ namespace Internal.TypeSystem
                 // TODO: this code assumes no shared generics
                 Debug.Assert(interfaceType == interfaceMethod.OwningType);
 
-                method = constrainedType.ResolveInterfaceMethodToVirtualMethodOnType(
-                    genInterfaceMethod
-                );
+                method =
+                    constrainedType.ResolveInterfaceMethodToVirtualMethodOnType(genInterfaceMethod);
             }
             else if (genInterfaceMethod.IsVirtual)
             {
-                method = constrainedType.FindVirtualFunctionTargetMethodOnObjectType(
-                    genInterfaceMethod
-                );
+                method =
+                    constrainedType.FindVirtualFunctionTargetMethodOnObjectType(genInterfaceMethod);
             }
             else
             {
@@ -425,9 +423,8 @@ namespace Internal.TypeSystem
             TypeDesc currentType = thisType;
             do
             {
-                result = currentType.ResolveInterfaceMethodToVirtualMethodOnType(
-                    interfaceMethodToResolve
-                );
+                result =
+                    currentType.ResolveInterfaceMethodToVirtualMethodOnType(interfaceMethodToResolve);
                 currentType = currentType.BaseType;
             } while (result == null && currentType != null);
 
@@ -445,24 +442,22 @@ namespace Internal.TypeSystem
                 case TypeFlags.SzArray:
                 case TypeFlags.ByRef:
                 case TypeFlags.Pointer:
-                    return ((ParameterizedType)thisType).ParameterType.ContainsSignatureVariables(
-                        treatGenericParameterLikeSignatureVariable
-                    );
+                    return (
+                        (ParameterizedType)thisType
+                    ).ParameterType.ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable);
 
                 case TypeFlags.FunctionPointer:
                     MethodSignature pointerSignature = ((FunctionPointerType)thisType).Signature;
 
                     for (int i = 0; i < pointerSignature.Length; i++)
                         if (
-                            pointerSignature[i].ContainsSignatureVariables(
-                                treatGenericParameterLikeSignatureVariable
-                            )
+                            pointerSignature[
+                                i
+                            ].ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable)
                         )
                             return true;
 
-                    return pointerSignature.ReturnType.ContainsSignatureVariables(
-                        treatGenericParameterLikeSignatureVariable
-                    );
+                    return pointerSignature.ReturnType.ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable);
 
                 case TypeFlags.SignatureMethodVariable:
                 case TypeFlags.SignatureTypeVariable:
@@ -481,9 +476,7 @@ namespace Internal.TypeSystem
                     foreach (TypeDesc arg in thisType.Instantiation)
                     {
                         if (
-                            arg.ContainsSignatureVariables(
-                                treatGenericParameterLikeSignatureVariable
-                            )
+                            arg.ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable)
                         )
                             return true;
                     }

@@ -31,9 +31,8 @@ namespace System.Web.WebPages.Administration
 
         // These only needs to be computed once per app domain
         private static readonly Lazy<bool?> _adminEnabled = new Lazy<bool?>(GetAdminEnabledSetting);
-        private static readonly Lazy<string> _adminVirtualPath = new Lazy<string>(
-            GetDefaultVirtualPath
-        );
+        private static readonly Lazy<string> _adminVirtualPath =
+            new Lazy<string>(GetDefaultVirtualPath);
 
         private SiteAdmin(string startPageVirtualPath, string displayName, string description)
         {

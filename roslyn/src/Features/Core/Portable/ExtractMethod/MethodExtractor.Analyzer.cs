@@ -1062,9 +1062,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 AppendMethodTypeParameterUsedDirectly(symbolMap, sortedMap);
 
                 // recursively dive into constraints to find all constraints needed
-                AppendTypeParametersInConstraintsUsedByConstructedTypeWithItsOwnConstraints(
-                    sortedMap
-                );
+                AppendTypeParametersInConstraintsUsedByConstructedTypeWithItsOwnConstraints(sortedMap);
 
                 return sortedMap.Values.ToList();
             }

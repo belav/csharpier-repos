@@ -135,9 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         ImmutableHashSet<SourceFieldSymbolWithSyntaxReference>.Empty;
                 }
 
-                var dependencies = field.GetConstantValueDependencies(
-                    earlyDecodingWellKnownAttributes
-                );
+                var dependencies =
+                    field.GetConstantValueDependencies(earlyDecodingWellKnownAttributes);
                 // GetConstantValueDependencies will return an empty set if
                 // the constant value has already been calculated. That avoids
                 // calculating the full graph repeatedly. For instance with

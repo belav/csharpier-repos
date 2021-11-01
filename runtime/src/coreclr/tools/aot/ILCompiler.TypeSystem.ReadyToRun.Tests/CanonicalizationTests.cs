@@ -59,9 +59,8 @@ namespace TypeSystemTests
 
             // Canonical forms of reference type over two different reference types are equivalent
             var referenceOverReference = _genericReferenceType.MakeInstantiatedType(_referenceType);
-            var referenceOverOtherReference = _genericReferenceType.MakeInstantiatedType(
-                _otherReferenceType
-            );
+            var referenceOverOtherReference =
+                _genericReferenceType.MakeInstantiatedType(_otherReferenceType);
             Assert.Same(
                 referenceOverReference.ConvertToCanonForm(CanonicalFormKind.Specific),
                 referenceOverOtherReference.ConvertToCanonForm(CanonicalFormKind.Specific)
@@ -71,9 +70,8 @@ namespace TypeSystemTests
                 referenceOverOtherReference.ConvertToCanonForm(CanonicalFormKind.Universal)
             );
 
-            var referenceOverReferenceOverReference = _genericReferenceType.MakeInstantiatedType(
-                referenceOverReference
-            );
+            var referenceOverReferenceOverReference =
+                _genericReferenceType.MakeInstantiatedType(referenceOverReference);
             Assert.Same(
                 referenceOverReference.ConvertToCanonForm(CanonicalFormKind.Specific),
                 referenceOverReferenceOverReference.ConvertToCanonForm(CanonicalFormKind.Specific)
@@ -116,21 +114,18 @@ namespace TypeSystemTests
 
             // Universal canonical forms of reference type over reference and value types are equivalent
             var referenceOverStruct = _genericReferenceType.MakeInstantiatedType(_structType);
-            var referenceOverOtherStruct = _genericReferenceType.MakeInstantiatedType(
-                _otherStructType
-            );
+            var referenceOverOtherStruct =
+                _genericReferenceType.MakeInstantiatedType(_otherStructType);
             Assert.Same(
                 referenceOverStruct.ConvertToCanonForm(CanonicalFormKind.Universal),
                 referenceOverOtherStruct.ConvertToCanonForm(CanonicalFormKind.Universal)
             );
 
             // Canon forms of reference type instantiated over a generic valuetype over any reference type
-            var genericStructOverReference = _genericStructType.MakeInstantiatedType(
-                _referenceType
-            );
-            var genericStructOverOtherReference = _genericStructType.MakeInstantiatedType(
-                _otherReferenceType
-            );
+            var genericStructOverReference =
+                _genericStructType.MakeInstantiatedType(_referenceType);
+            var genericStructOverOtherReference =
+                _genericStructType.MakeInstantiatedType(_otherReferenceType);
             var referenceOverGenericStructOverReference =
                 _genericReferenceType.MakeInstantiatedType(genericStructOverReference);
             var referenceOverGenericStructOverOtherReference =
@@ -200,9 +195,8 @@ namespace TypeSystemTests
 
             // Specific canonical forms of reference type over reference and value types are not equivalent
             var referenceOverStruct = _genericReferenceType.MakeInstantiatedType(_structType);
-            var referenceOverOtherStruct = _genericReferenceType.MakeInstantiatedType(
-                _otherStructType
-            );
+            var referenceOverOtherStruct =
+                _genericReferenceType.MakeInstantiatedType(_otherStructType);
             Assert.NotSame(
                 referenceOverStruct.ConvertToCanonForm(CanonicalFormKind.Specific),
                 referenceOverOtherStruct.ConvertToCanonForm(CanonicalFormKind.Specific)
@@ -237,9 +231,8 @@ namespace TypeSystemTests
             var genericStructOverArrayOfInt = _genericStructType.MakeInstantiatedType(
                 _context.GetWellKnownType(WellKnownType.Int32).MakeArrayType()
             );
-            var genericStructOverReferenceType = _genericStructType.MakeInstantiatedType(
-                _referenceType
-            );
+            var genericStructOverReferenceType =
+                _genericStructType.MakeInstantiatedType(_referenceType);
             Assert.Same(
                 genericStructOverArrayOfInt.ConvertToCanonForm(CanonicalFormKind.Specific),
                 genericStructOverReferenceType.ConvertToCanonForm(CanonicalFormKind.Specific)
@@ -292,9 +285,8 @@ namespace TypeSystemTests
             _context.CanonMode = algorithmType;
 
             var referenceOverReference = _genericReferenceType.MakeInstantiatedType(_referenceType);
-            var referenceOverOtherReference = _genericReferenceType.MakeInstantiatedType(
-                _otherReferenceType
-            );
+            var referenceOverOtherReference =
+                _genericReferenceType.MakeInstantiatedType(_otherReferenceType);
             Assert.NotSame(
                 referenceOverReference.GetMethod("Method", null),
                 referenceOverOtherReference.GetMethod("Method", null)
@@ -497,18 +489,16 @@ namespace TypeSystemTests
             var grtOverUniversalCanon = _genericReferenceType.MakeInstantiatedType(
                 _context.UniversalCanonType
             );
-            var gstOverGrtOverUniversalCanon = _genericStructType.MakeInstantiatedType(
-                grtOverUniversalCanon
-            );
+            var gstOverGrtOverUniversalCanon =
+                _genericStructType.MakeInstantiatedType(grtOverUniversalCanon);
             var gstOverCanon = _genericStructType.MakeInstantiatedType(_context.CanonType);
             Assert.Same(
                 gstOverCanon,
                 gstOverGrtOverUniversalCanon.ConvertToCanonForm(CanonicalFormKind.Specific)
             );
 
-            var gstOverGstOverGrtOverUniversalCanon = _genericStructType.MakeInstantiatedType(
-                gstOverGrtOverUniversalCanon
-            );
+            var gstOverGstOverGrtOverUniversalCanon =
+                _genericStructType.MakeInstantiatedType(gstOverGrtOverUniversalCanon);
             var gstOverGstOverCanon = _genericStructType.MakeInstantiatedType(gstOverCanon);
             Assert.Same(
                 gstOverGstOverCanon,
@@ -528,9 +518,8 @@ namespace TypeSystemTests
                 ];
             Assert.Same(_context.UniversalCanonType, rdtUniversalCanon.CanonicalType);
 
-            var gstOverRdtUniversalCanon = _genericStructType.MakeInstantiatedType(
-                rdtUniversalCanon
-            );
+            var gstOverRdtUniversalCanon =
+                _genericStructType.MakeInstantiatedType(rdtUniversalCanon);
             Assert.Same(
                 gstOverUniversalCanon,
                 gstOverRdtUniversalCanon.ConvertToCanonForm(CanonicalFormKind.Specific)

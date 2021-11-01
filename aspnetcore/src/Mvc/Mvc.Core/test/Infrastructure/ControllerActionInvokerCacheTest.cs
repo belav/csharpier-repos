@@ -32,12 +32,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             );
 
             // Act
-            var (cacheEntry, filters) = controllerActionInvokerCache.GetCachedResult(
-                controllerContext
-            );
-            var (cacheEntry2, filters2) = controllerActionInvokerCache.GetCachedResult(
-                controllerContext
-            );
+            var (cacheEntry, filters) =
+                controllerActionInvokerCache.GetCachedResult(controllerContext);
+            var (cacheEntry2, filters2) =
+                controllerActionInvokerCache.GetCachedResult(controllerContext);
 
             // Assert
             Assert.Equal(filters, filters2);
@@ -56,12 +54,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             );
 
             // Act
-            var (cacheEntry, filters) = controllerActionInvokerCache.GetCachedResult(
-                controllerContext
-            );
-            var (cacheEntry2, filters2) = controllerActionInvokerCache.GetCachedResult(
-                controllerContext
-            );
+            var (cacheEntry, filters) =
+                controllerActionInvokerCache.GetCachedResult(controllerContext);
+            var (cacheEntry2, filters2) =
+                controllerActionInvokerCache.GetCachedResult(controllerContext);
 
             // Assert
             Assert.Same(cacheEntry, cacheEntry2);

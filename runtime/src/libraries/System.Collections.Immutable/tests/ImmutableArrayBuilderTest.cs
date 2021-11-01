@@ -796,9 +796,8 @@ namespace System.Collections.Immutable.Tests
             );
             ImmutableArray<string>.Builder builder = ImmutableArray.CreateBuilder<string>(4);
             builder.AddRange("One", "Two", "Three", "Four");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                builder
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(builder);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State

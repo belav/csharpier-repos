@@ -906,9 +906,8 @@ namespace System.Xml
                 _nsManager,
                 XmlSchemaValidationFlags.None
             );
-            findTypeValidator.ValidationEventHandler += new ValidationEventHandler(
-                TypeFinderCallBack
-            );
+            findTypeValidator.ValidationEventHandler +=
+                new ValidationEventHandler(TypeFinderCallBack);
             if (partialValidationType != null)
             {
                 findTypeValidator.Initialize(partialValidationType);

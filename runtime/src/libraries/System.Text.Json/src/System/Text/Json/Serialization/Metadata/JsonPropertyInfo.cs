@@ -76,9 +76,8 @@ namespace System.Text.Json.Serialization.Metadata
                 DeterminePropertyName();
                 DetermineIgnoreCondition(ignoreCondition);
 
-                JsonNumberHandlingAttribute? attribute = GetAttribute<JsonNumberHandlingAttribute>(
-                    MemberInfo
-                );
+                JsonNumberHandlingAttribute? attribute =
+                    GetAttribute<JsonNumberHandlingAttribute>(MemberInfo);
                 DetermineNumberHandlingForProperty(
                     attribute?.Handling,
                     declaringTypeNumberHandling
@@ -90,9 +89,8 @@ namespace System.Text.Json.Serialization.Metadata
         {
             Debug.Assert(MemberInfo != null);
 
-            JsonPropertyNameAttribute? nameAttribute = GetAttribute<JsonPropertyNameAttribute>(
-                MemberInfo
-            );
+            JsonPropertyNameAttribute? nameAttribute =
+                GetAttribute<JsonPropertyNameAttribute>(MemberInfo);
             if (nameAttribute != null)
             {
                 string name = nameAttribute.Name;

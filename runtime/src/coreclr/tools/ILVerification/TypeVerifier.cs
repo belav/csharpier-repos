@@ -45,9 +45,8 @@ namespace Internal.TypeVerifier
 
         public void VerifyInterfaces()
         {
-            TypeDefinition typeDefinition = _module.MetadataReader.GetTypeDefinition(
-                _typeDefinitionHandle
-            );
+            TypeDefinition typeDefinition =
+                _module.MetadataReader.GetTypeDefinition(_typeDefinitionHandle);
             EcmaType type = (EcmaType)_module.GetType(_typeDefinitionHandle);
 
             if (type.IsInterface)

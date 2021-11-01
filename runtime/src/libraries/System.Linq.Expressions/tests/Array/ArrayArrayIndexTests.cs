@@ -1245,9 +1245,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithClassRestrictionArrayArrayIndexTestHelper<object>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithClassRestrictionArrayArrayIndexTestHelper<object>(useInterpreter);
         }
 
         [Theory]
@@ -1265,9 +1263,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithClassAndNewRestrictionArrayArrayIndexTestHelper<C>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithClassAndNewRestrictionArrayArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
@@ -1285,9 +1281,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithClassAndNewRestrictionArrayArrayIndexTestHelper<object>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithClassAndNewRestrictionArrayArrayIndexTestHelper<object>(useInterpreter);
         }
 
         [Theory]
@@ -1305,9 +1299,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithSubClassRestrictionArrayArrayIndexTestHelper<C>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithSubClassRestrictionArrayArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
@@ -1325,9 +1317,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithSubClassAndNewRestrictionArrayArrayIndexTestHelper<C>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithSubClassAndNewRestrictionArrayArrayIndexTestHelper<C>(useInterpreter);
         }
 
         #endregion

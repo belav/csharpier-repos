@@ -166,9 +166,8 @@ namespace System.Net.Tests
         public async Task TestBasicAuthenticationWithDelegate()
         {
             _listener.AuthenticationSchemes = AuthenticationSchemes.None;
-            AuthenticationSchemeSelector selector = new AuthenticationSchemeSelector(
-                SelectAnonymousAndBasicSchemes
-            );
+            AuthenticationSchemeSelector selector =
+                new AuthenticationSchemeSelector(SelectAnonymousAndBasicSchemes);
             _listener.AuthenticationSchemeSelectorDelegate += selector;
 
             await ValidateValidUser();
@@ -194,9 +193,8 @@ namespace System.Net.Tests
         public async Task TestAnonymousAuthenticationWithDelegate()
         {
             _listener.AuthenticationSchemes = AuthenticationSchemes.None;
-            AuthenticationSchemeSelector selector = new AuthenticationSchemeSelector(
-                SelectAnonymousScheme
-            );
+            AuthenticationSchemeSelector selector =
+                new AuthenticationSchemeSelector(SelectAnonymousScheme);
             _listener.AuthenticationSchemeSelectorDelegate += selector;
 
             await ValidateNullUser();

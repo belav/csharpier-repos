@@ -93,9 +93,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             var mock = new MockLogService();
             var client = await service.TryGetRemoteHostClientAsync(CancellationToken.None);
 
-            using var connection = client.CreateConnection<IRemoteSymbolSearchUpdateService>(
-                callbackTarget: mock
-            );
+            using var connection =
+                client.CreateConnection<IRemoteSymbolSearchUpdateService>(callbackTarget: mock);
             Assert.True(
                 await connection.TryInvokeAsync(
                     (service, callbackId, cancellationToken) =>

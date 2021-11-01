@@ -239,9 +239,8 @@ namespace System.Web.Http
             HttpRequestMessage request = new HttpRequestMessage();
 
             HttpConfiguration config = new HttpConfiguration();
-            Mock<HttpControllerDispatcher> dispatcherMock = new Mock<HttpControllerDispatcher>(
-                config
-            );
+            Mock<HttpControllerDispatcher> dispatcherMock =
+                new Mock<HttpControllerDispatcher>(config);
             dispatcherMock
                 .Protected()
                 .Setup<Task<HttpResponseMessage>>("SendAsync", request, CancellationToken.None)
@@ -272,9 +271,8 @@ namespace System.Web.Http
             HttpRequestMessage request = new HttpRequestMessage();
 
             HttpConfiguration config = new HttpConfiguration();
-            Mock<HttpControllerDispatcher> dispatcherMock = new Mock<HttpControllerDispatcher>(
-                config
-            );
+            Mock<HttpControllerDispatcher> dispatcherMock =
+                new Mock<HttpControllerDispatcher>(config);
             dispatcherMock
                 .Protected()
                 .Setup<Task<HttpResponseMessage>>("SendAsync", request, CancellationToken.None)

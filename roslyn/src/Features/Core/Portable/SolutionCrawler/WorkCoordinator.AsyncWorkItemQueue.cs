@@ -288,9 +288,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         // prefer project that directly depends on the given project and has diagnostics as next project to
                         // process
                         foreach (
-                            var dependingProjectId in dependencyGraph.GetProjectsThatDirectlyDependOnThisProject(
-                                projectId
-                            )
+                            var dependingProjectId in dependencyGraph.GetProjectsThatDirectlyDependOnThisProject(projectId)
                         )
                         {
                             if (

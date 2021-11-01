@@ -57,9 +57,8 @@ namespace Internal.TypeSystem
 
         public override MethodImplRecord[] FindMethodsImplWithMatchingDeclName(string name)
         {
-            MethodImplRecord[] uninstMethodImpls = _typeDef.FindMethodsImplWithMatchingDeclName(
-                name
-            );
+            MethodImplRecord[] uninstMethodImpls =
+                _typeDef.FindMethodsImplWithMatchingDeclName(name);
             return InstantiateMethodImpls(uninstMethodImpls);
         }
     }

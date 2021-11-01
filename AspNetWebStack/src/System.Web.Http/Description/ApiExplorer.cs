@@ -227,9 +227,8 @@ namespace System.Web.Http.Description
                 {
                     CandidateAction[] directRouteCandidates = route.GetDirectRouteCandidates();
 
-                    HttpControllerDescriptor directRouteController = GetDirectRouteController(
-                        directRouteCandidates
-                    );
+                    HttpControllerDescriptor directRouteController =
+                        GetDirectRouteController(directRouteCandidates);
                     Collection<ApiDescription> descriptionsFromRoute =
                         (directRouteController != null && directRouteCandidates != null)
                             ? ExploreDirectRoute(
@@ -542,9 +541,8 @@ namespace System.Web.Http.Description
                         SupportedRequestBodyFormatters = new Collection<MediaTypeFormatter>(
                             supportedRequestBodyFormatters.ToList()
                         ),
-                        ParameterDescriptions = new Collection<ApiParameterDescription>(
-                            parameterDescriptions
-                        ),
+                        ParameterDescriptions =
+                            new Collection<ApiParameterDescription>(parameterDescriptions),
                         ResponseDescription = responseDescription
                     }
                 );

@@ -20,18 +20,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         private const string Committed = nameof(Committed);
         private const string Canceled = nameof(Canceled);
 
-        private const string ConflictResolutionFinishedComputing = nameof(
-            ConflictResolutionFinishedComputing
-        );
+        private const string ConflictResolutionFinishedComputing =
+            nameof(ConflictResolutionFinishedComputing);
         private const string PreviewChanges = nameof(PreviewChanges);
 
-        private const string RenamedIdentifiersWithoutConflicts = nameof(
-            RenamedIdentifiersWithoutConflicts
-        );
+        private const string RenamedIdentifiersWithoutConflicts =
+            nameof(RenamedIdentifiersWithoutConflicts);
         private const string ResolvableReferenceConflicts = nameof(ResolvableReferenceConflicts);
-        private const string ResolvableNonReferenceConflicts = nameof(
-            ResolvableNonReferenceConflicts
-        );
+        private const string ResolvableNonReferenceConflicts =
+            nameof(ResolvableNonReferenceConflicts);
         private const string UnresolvableConflicts = nameof(UnresolvableConflicts);
 
         public static KeyValueLogMessage Create(

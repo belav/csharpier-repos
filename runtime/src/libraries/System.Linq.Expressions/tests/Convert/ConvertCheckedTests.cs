@@ -22486,9 +22486,8 @@ namespace System.Linq.Expressions.Tests
             {
                 Expression<Func<IReadOnlyCollection<IInterface>[], NonSealed[][]>> e = a =>
                     (NonSealed[][])a;
-                Func<IReadOnlyCollection<IInterface>[], NonSealed[][]> f = e.Compile(
-                    useInterpreter
-                );
+                Func<IReadOnlyCollection<IInterface>[], NonSealed[][]> f =
+                    e.Compile(useInterpreter);
                 Derived[][] arr = new[]
                 {
                     new[] { new Derived(), new Derived(), new Derived(), new Derived() }

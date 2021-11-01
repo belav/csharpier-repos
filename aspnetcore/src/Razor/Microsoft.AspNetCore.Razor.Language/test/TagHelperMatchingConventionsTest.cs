@@ -186,9 +186,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 "TestTagHelper",
                 "Test"
             );
-            var tagMatchingRuleBuilder = new DefaultTagMatchingRuleDescriptorBuilder(
-                tagHelperBuilder
-            );
+            var tagMatchingRuleBuilder =
+                new DefaultTagMatchingRuleDescriptorBuilder(tagHelperBuilder);
             var builder = new DefaultRequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
 
             configure(builder);

@@ -387,9 +387,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                     }
                     else
                     {
-                        var declarationSyntax = originalMemberEditor.Generator.GetDeclaration(
-                            syntax
-                        );
+                        var declarationSyntax =
+                            originalMemberEditor.Generator.GetDeclaration(syntax);
                         originalMemberEditor.ReplaceNode(
                             declarationSyntax,
                             (node, generator) =>
@@ -554,9 +553,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             foreach (var interfaceMember in destination.GetMembers())
             {
                 var implementationOfMember =
-                    selectedMember.ContainingType.FindImplementationForInterfaceMember(
-                        interfaceMember
-                    );
+                    selectedMember.ContainingType.FindImplementationForInterfaceMember(interfaceMember);
                 if (
                     SymbolEquivalenceComparer.Instance.Equals(
                         selectedMember,

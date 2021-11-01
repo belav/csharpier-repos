@@ -32,9 +32,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _computeValue = computeValue;
             KeyComparer = keyComparer ?? EqualityComparer<TKey>.Default;
             _valueCache = new ConditionalWeakTable<TKey, WrappedValue>();
-            _valueCacheCallback = new ConditionalWeakTable<TKey, WrappedValue>.CreateValueCallback(
-                ComputeValue
-            );
+            _valueCacheCallback = new ConditionalWeakTable<
+                TKey,
+                WrappedValue
+            >.CreateValueCallback(ComputeValue);
         }
 
         private sealed class WrappedValue

@@ -247,9 +247,9 @@ namespace Newtonsoft.Json.Tests
             var nameTable = jsonTextReader.PropertyNameTable = new CustonNameTable();
 
             JsonSerializer serializer = new JsonSerializer();
-            Dictionary<string, string> o = serializer.Deserialize<Dictionary<string, string>>(
-                jsonTextReader
-            );
+            Dictionary<string, string> o = serializer.Deserialize<
+                Dictionary<string, string>
+            >(jsonTextReader);
             Assert.AreEqual("hi", o["_property"]);
 
             Assert.AreEqual(nameTable, jsonTextReader.PropertyNameTable);

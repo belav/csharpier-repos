@@ -192,9 +192,7 @@ namespace System.Web.Http.Validation
                 if (modelState.IsValidField(propertyKeyRoot))
                 {
                     foreach (
-                        ModelValidator propertyValidator in actionContext.GetValidators(
-                            propertyMetadata
-                        )
+                        ModelValidator propertyValidator in actionContext.GetValidators(propertyMetadata)
                     )
                     {
                         foreach (

@@ -25,18 +25,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             {
                 Compilation = compilation;
                 HideModuleNameAttribute = compilation.HideModuleNameAttribute();
-                EditorBrowsableAttributeConstructor = GetSpecialEditorBrowsableAttributeConstructor(
-                    compilation
-                );
-                TypeLibTypeAttributeConstructors = GetSpecialTypeLibTypeAttributeConstructors(
-                    compilation
-                );
-                TypeLibFuncAttributeConstructors = GetSpecialTypeLibFuncAttributeConstructors(
-                    compilation
-                );
-                TypeLibVarAttributeConstructors = GetSpecialTypeLibVarAttributeConstructors(
-                    compilation
-                );
+                EditorBrowsableAttributeConstructor =
+                    GetSpecialEditorBrowsableAttributeConstructor(compilation);
+                TypeLibTypeAttributeConstructors =
+                    GetSpecialTypeLibTypeAttributeConstructors(compilation);
+                TypeLibFuncAttributeConstructors =
+                    GetSpecialTypeLibFuncAttributeConstructors(compilation);
+                TypeLibVarAttributeConstructors =
+                    GetSpecialTypeLibVarAttributeConstructors(compilation);
             }
         }
 

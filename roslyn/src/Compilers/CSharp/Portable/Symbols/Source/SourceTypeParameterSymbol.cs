@@ -1040,9 +1040,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return ((object)typeParameter != null)
                     && (
                         typeParameter.IsValueTypeFromConstraintTypes
-                        || CalculateIsValueTypeFromConstraintTypes(
-                            ConstraintTypesNoUseSiteDiagnostics
-                        )
+                        || CalculateIsValueTypeFromConstraintTypes(ConstraintTypesNoUseSiteDiagnostics)
                     );
             }
         }
@@ -1064,9 +1062,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return ((object)typeParameter != null)
                     && (
                         typeParameter.IsReferenceTypeFromConstraintTypes
-                        || CalculateIsReferenceTypeFromConstraintTypes(
-                            ConstraintTypesNoUseSiteDiagnostics
-                        )
+                        || CalculateIsReferenceTypeFromConstraintTypes(ConstraintTypesNoUseSiteDiagnostics)
                     );
             }
         }

@@ -609,9 +609,8 @@ namespace Microsoft.AspNetCore.Http.Features
         [Fact]
         public async Task ReadFormAsync_MultipartWithInvalidContentDisposition_Throw()
         {
-            var formContent = Encoding.UTF8.GetBytes(
-                MultipartFormWithInvalidContentDispositionValue
-            );
+            var formContent =
+                Encoding.UTF8.GetBytes(MultipartFormWithInvalidContentDispositionValue);
             var context = new DefaultHttpContext();
             var responseFeature = new FakeResponseFeature();
             context.Features.Set<IHttpResponseFeature>(responseFeature);

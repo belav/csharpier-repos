@@ -27,9 +27,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             };
 
             // Act
-            ExtensibleModelBindingContext newBindingContext = new ExtensibleModelBindingContext(
-                originalBindingContext
-            );
+            ExtensibleModelBindingContext newBindingContext =
+                new ExtensibleModelBindingContext(originalBindingContext);
 
             // Assert
             Assert.Null(newBindingContext.ModelMetadata);

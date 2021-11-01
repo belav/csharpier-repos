@@ -168,9 +168,16 @@ public static partial class DataContractJsonSerializerTests
         );
         Assert.StrictEqual(
             SerializeAndDeserialize<DateTime>(
-                new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Unspecified).AddMinutes(
-                    offsetMinutes
-                ),
+                new DateTime(
+                    2013,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    DateTimeKind.Unspecified
+                ).AddMinutes(offsetMinutes),
                 string.Format(@"""\/Date(1357095845006{0})\/""", timeZoneString)
             ),
             new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Unspecified).AddMinutes(offsetMinutes)

@@ -693,9 +693,7 @@ namespace Microsoft.CodeAnalysis.Formatting
                     var tokenPairIndex = tokenWithIndex.IndexInStream - 1;
                     if (
                         tokenPairIndex < 0
-                        || _context.TokenStream.GetTriviaData(
-                            tokenPairIndex
-                        ).SecondTokenIsFirstTokenOnLine
+                        || _context.TokenStream.GetTriviaData(tokenPairIndex).SecondTokenIsFirstTokenOnLine
                     )
                     {
                         return false;

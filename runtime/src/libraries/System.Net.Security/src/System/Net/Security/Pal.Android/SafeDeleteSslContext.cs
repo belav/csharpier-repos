@@ -258,9 +258,8 @@ namespace System.Net
                     );
                 }
 
-                (int minIndex, int maxIndex) = protocolsToEnable.ValidateContiguous(
-                    s_orderedSslProtocols
-                );
+                (int minIndex, int maxIndex) =
+                    protocolsToEnable.ValidateContiguous(s_orderedSslProtocols);
                 Interop.AndroidCrypto.SSLStreamSetEnabledProtocols(
                     handle,
                     s_orderedSslProtocols.AsSpan(minIndex, maxIndex - minIndex + 1)

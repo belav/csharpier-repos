@@ -106,9 +106,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 );
             }
 
-            var resolvedConnectionString = _connectionStringResolver.ResolveConnectionString(
-                connectionString
-            );
+            var resolvedConnectionString =
+                _connectionStringResolver.ResolveConnectionString(connectionString);
             if (resolvedConnectionString != connectionString)
             {
                 codeOptions.SuppressConnectionStringWarning = true;

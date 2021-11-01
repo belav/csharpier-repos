@@ -276,9 +276,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             ConfigurationSource configurationSource
         )
         {
-            _propertiesConfigurationSource = configurationSource.Max(
-                _propertiesConfigurationSource
-            );
+            _propertiesConfigurationSource =
+                configurationSource.Max(_propertiesConfigurationSource);
             foreach (var property in Properties)
             {
                 property.UpdateConfigurationSource(configurationSource);
@@ -305,9 +304,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             ConfigurationSource configurationSource
         )
         {
-            _principalKeyConfigurationSource = configurationSource.Max(
-                _principalKeyConfigurationSource
-            );
+            _principalKeyConfigurationSource =
+                configurationSource.Max(_principalKeyConfigurationSource);
             PrincipalKey.UpdateConfigurationSource(configurationSource);
         }
 
@@ -340,9 +338,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual void UpdatePrincipalEndConfigurationSource(
             ConfigurationSource configurationSource
         ) =>
-            _principalEndConfigurationSource = configurationSource.Max(
-                _principalEndConfigurationSource
-            );
+            _principalEndConfigurationSource =
+                configurationSource.Max(_principalEndConfigurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -403,9 +400,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual void UpdateDependentToPrincipalConfigurationSource(
             ConfigurationSource? configurationSource
         ) =>
-            _dependentToPrincipalConfigurationSource = configurationSource.Max(
-                _dependentToPrincipalConfigurationSource
-            );
+            _dependentToPrincipalConfigurationSource =
+                configurationSource.Max(_dependentToPrincipalConfigurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -466,9 +462,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual void UpdatePrincipalToDependentConfigurationSource(
             ConfigurationSource? configurationSource
         ) =>
-            _principalToDependentConfigurationSource = configurationSource.Max(
-                _principalToDependentConfigurationSource
-            );
+            _principalToDependentConfigurationSource =
+                configurationSource.Max(_principalToDependentConfigurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -666,9 +661,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     : (ConfigurationSource?)configurationSource.Max(_isUniqueConfigurationSource);
 
             return IsUnique != oldUnique
-              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyUniquenessChanged(
-                    Builder
-                )
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyUniquenessChanged(Builder)
               : oldUnique;
         }
 
@@ -715,9 +708,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     : (ConfigurationSource?)configurationSource.Max(_isRequiredConfigurationSource);
 
             return IsRequired != oldRequired
-              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(
-                    Builder
-                )
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(Builder)
               : oldRequired;
         }
 
@@ -787,9 +778,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     : (ConfigurationSource?)configurationSource.Max(_isRequiredConfigurationSource);
 
             return IsRequiredDependent != oldRequired
-              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(
-                    Builder
-                )
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(Builder)
               : oldRequired;
         }
 
@@ -881,9 +870,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual void UpdateDeleteBehaviorConfigurationSource(
             ConfigurationSource configurationSource
         ) =>
-            _deleteBehaviorConfigurationSource = configurationSource.Max(
-                _deleteBehaviorConfigurationSource
-            );
+            _deleteBehaviorConfigurationSource =
+                configurationSource.Max(_deleteBehaviorConfigurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -948,9 +936,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual void UpdateIsOwnershipConfigurationSource(
             ConfigurationSource configurationSource
         ) =>
-            _isOwnershipConfigurationSource = configurationSource.Max(
-                _isOwnershipConfigurationSource
-            );
+            _isOwnershipConfigurationSource =
+                configurationSource.Max(_isOwnershipConfigurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

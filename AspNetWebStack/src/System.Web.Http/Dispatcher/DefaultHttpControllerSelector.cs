@@ -43,9 +43,9 @@ namespace System.Web.Http.Dispatcher
                 throw Error.ArgumentNull("configuration");
             }
 
-            _controllerInfoCache = new Lazy<ConcurrentDictionary<string, HttpControllerDescriptor>>(
-                InitializeControllerInfoCache
-            );
+            _controllerInfoCache = new Lazy<
+                ConcurrentDictionary<string, HttpControllerDescriptor>
+            >(InitializeControllerInfoCache);
             _configuration = configuration;
             _controllerTypeCache = new HttpControllerTypeCache(_configuration);
         }
@@ -90,9 +90,8 @@ namespace System.Web.Http.Dispatcher
                 return controllerDescriptor;
             }
 
-            ICollection<Type> matchingTypes = _controllerTypeCache.GetControllerTypes(
-                controllerName
-            );
+            ICollection<Type> matchingTypes =
+                _controllerTypeCache.GetControllerTypes(controllerName);
 
             // ControllerInfoCache is already initialized.
             Contract.Assert(matchingTypes.Count != 1);

@@ -32,9 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
         private static readonly CSharpParseOptions s_parseOptions =
             CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_1);
 
-        private static readonly TestParameters s_testParameters = new TestParameters(
-            parseOptions: s_parseOptions
-        );
+        private static readonly TestParameters s_testParameters =
+            new TestParameters(parseOptions: s_parseOptions);
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseDefaultLiteral)]
         public async Task TestNotInCSharp7()

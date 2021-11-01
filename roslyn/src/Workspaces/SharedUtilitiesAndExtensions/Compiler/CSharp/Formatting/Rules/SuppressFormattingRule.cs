@@ -492,9 +492,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             }
 
             if (
-                !pragmaWarningDirectiveTrivia.DisableOrRestoreKeyword.IsKind(
-                    disableOrRestoreKeyword
-                )
+                !pragmaWarningDirectiveTrivia.DisableOrRestoreKeyword.IsKind(disableOrRestoreKeyword)
             )
             {
                 return false;

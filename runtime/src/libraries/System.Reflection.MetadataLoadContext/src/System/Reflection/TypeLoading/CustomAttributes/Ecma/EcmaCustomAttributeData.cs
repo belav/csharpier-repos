@@ -20,9 +20,8 @@ namespace System.Reflection.TypeLoading.Ecma
         {
             _handle = handle;
             _module = module;
-            _neverAccessThisExceptThroughCustomAttributeProperty = handle.GetCustomAttribute(
-                Reader
-            );
+            _neverAccessThisExceptThroughCustomAttributeProperty =
+                handle.GetCustomAttribute(Reader);
         }
 
         public sealed override IList<CustomAttributeTypedArgument> ConstructorArguments
@@ -76,9 +75,9 @@ namespace System.Reflection.TypeLoading.Ecma
                 case HandleKind.MemberReference:
                 {
                     TypeContext typeContext = default;
-                    MemberReference mr = ((MemberReferenceHandle)ctorHandle).GetMemberReference(
-                        Reader
-                    );
+                    MemberReference mr = (
+                        (MemberReferenceHandle)ctorHandle
+                    ).GetMemberReference(Reader);
                     MethodSignature<RoType> sig = mr.DecodeMethodSignature(_module, typeContext);
                     Type[] parameterTypes = sig.ParameterTypes.ToArray();
                     Type declaringType = mr.Parent.ResolveTypeDefRefOrSpec(_module, typeContext);

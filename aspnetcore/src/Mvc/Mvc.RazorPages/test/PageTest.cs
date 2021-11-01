@@ -889,9 +889,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var page = new TestPage();
 
             // Act
-            var resultPermanent = page.RedirectToRoutePermanentPreserveMethod(
-                routeValues: routeValues
-            );
+            var resultPermanent =
+                page.RedirectToRoutePermanentPreserveMethod(routeValues: routeValues);
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(resultPermanent);

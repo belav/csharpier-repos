@@ -56,9 +56,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             get
             {
                 if (_typeThatBlockedBrowsing != null)
-                    throw ReflectionCoreExecution.ExecutionDomain.CreateMissingMetadataException(
-                        _typeThatBlockedBrowsing
-                    );
+                    throw ReflectionCoreExecution.ExecutionDomain.CreateMissingMetadataException(_typeThatBlockedBrowsing);
                 return _totalCount;
             }
         }

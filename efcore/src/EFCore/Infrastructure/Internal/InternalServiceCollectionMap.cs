@@ -161,9 +161,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
 
                     if (implementationType != null)
                     {
-                        var implementationIndexes = GetOrCreateDescriptorIndexes(
-                            implementationType
-                        );
+                        var implementationIndexes =
+                            GetOrCreateDescriptorIndexes(implementationType);
                         if (!implementationIndexes.Any())
                         {
                             AddNewDescriptor(

@@ -137,9 +137,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             {
                                 var location = contentChild.GetSourceSpan(source);
                                 var diagnostic =
-                                    RazorDiagnosticFactory.CreateParsing_TagHelperAttributeListMustBeWellFormed(
-                                        location
-                                    );
+                                    RazorDiagnosticFactory.CreateParsing_TagHelperAttributeListMustBeWellFormed(location);
                                 errorSink.OnError(diagnostic);
                                 break;
                             }
@@ -753,9 +751,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             new SyntaxList<SyntaxToken>(node.Transition.Transition)
                         )
                         .WithSpanContext(newContext);
-                    expression = (CSharpExpressionLiteralSyntax)VisitCSharpExpressionLiteral(
-                        expression
-                    );
+                    expression =
+                        (CSharpExpressionLiteralSyntax)VisitCSharpExpressionLiteral(expression);
                     builder.Add(expression);
 
                     var rewrittenBody = (CSharpCodeBlockSyntax)VisitCSharpCodeBlock(
@@ -802,9 +799,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             new SyntaxList<SyntaxToken>(node.Transition.Transition)
                         )
                         .WithSpanContext(newContext);
-                    expression = (CSharpExpressionLiteralSyntax)VisitCSharpExpressionLiteral(
-                        expression
-                    );
+                    expression =
+                        (CSharpExpressionLiteralSyntax)VisitCSharpExpressionLiteral(expression);
                     builder.Add(expression);
 
                     // Since the original transition is part of the body, we need something to take it's place.

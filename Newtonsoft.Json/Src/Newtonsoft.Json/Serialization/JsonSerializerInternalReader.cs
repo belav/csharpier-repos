@@ -2928,9 +2928,8 @@ namespace Newtonsoft.Json.Serialization
                             }
 
                             // first attempt to find a settable property, otherwise fall back to a dynamic set without type
-                            JsonProperty? property = contract.Properties.GetClosestMatchProperty(
-                                memberName
-                            );
+                            JsonProperty? property =
+                                contract.Properties.GetClosestMatchProperty(memberName);
 
                             if (property != null && property.Writable && !property.Ignored)
                             {
@@ -3271,9 +3270,8 @@ namespace Newtonsoft.Json.Serialization
                             && !propertyArrayContract.IsReadOnlyOrFixedSize
                         )
                         {
-                            object? createdObjectCollection = property.ValueProvider!.GetValue(
-                                createdObject
-                            );
+                            object? createdObjectCollection =
+                                property.ValueProvider!.GetValue(createdObject);
                             if (createdObjectCollection != null)
                             {
                                 propertyArrayContract = (JsonArrayContract)GetContract(
@@ -3282,9 +3280,7 @@ namespace Newtonsoft.Json.Serialization
 
                                 IList createdObjectCollectionWrapper =
                                     (propertyArrayContract.ShouldCreateWrapper)
-                                        ? propertyArrayContract.CreateWrapper(
-                                              createdObjectCollection
-                                          )
+                                        ? propertyArrayContract.CreateWrapper(createdObjectCollection)
                                         : (IList)createdObjectCollection;
 
                                 // Don't attempt to populate array/read-only list
@@ -3310,9 +3306,8 @@ namespace Newtonsoft.Json.Serialization
 
                         if (!dictionaryContract.IsReadOnlyOrFixedSize)
                         {
-                            object? createdObjectDictionary = property.ValueProvider!.GetValue(
-                                createdObject
-                            );
+                            object? createdObjectDictionary =
+                                property.ValueProvider!.GetValue(createdObject);
                             if (createdObjectDictionary != null)
                             {
                                 IDictionary targetDictionary =
@@ -3453,13 +3448,13 @@ namespace Newtonsoft.Json.Serialization
                     case JsonToken.PropertyName:
                         string memberName = reader.Value!.ToString();
 
-                        CreatorPropertyContext creatorPropertyContext = new CreatorPropertyContext(
-                            memberName
-                        ) {
-                            ConstructorProperty =
-                                contract.CreatorParameters.GetClosestMatchProperty(memberName),
-                            Property = contract.Properties.GetClosestMatchProperty(memberName)
-                        };
+                        CreatorPropertyContext creatorPropertyContext =
+                            new CreatorPropertyContext(memberName)
+                            {
+                                ConstructorProperty =
+                                    contract.CreatorParameters.GetClosestMatchProperty(memberName),
+                                Property = contract.Properties.GetClosestMatchProperty(memberName)
+                            };
                         propertyValues.Add(creatorPropertyContext);
 
                         JsonProperty? property =
@@ -3737,9 +3732,8 @@ namespace Newtonsoft.Json.Serialization
                         {
                             // attempt exact case match first
                             // then try match ignoring case
-                            JsonProperty? property = contract.Properties.GetClosestMatchProperty(
-                                propertyName
-                            );
+                            JsonProperty? property =
+                                contract.Properties.GetClosestMatchProperty(propertyName);
 
                             if (property == null)
                             {

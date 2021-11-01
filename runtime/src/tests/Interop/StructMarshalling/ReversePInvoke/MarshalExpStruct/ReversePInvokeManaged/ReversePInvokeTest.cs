@@ -1160,14 +1160,10 @@ public class Test
                 new ByRefCdeclcaller_INNER2(TestMethod_DoCallBack_MarshalStructByRef_INNER2_Cdecl)
             );
             DoCallBack_MarshalByRefStruct_Cdecl_InnerExplicit(
-                new ByRefCdeclcaller_InnerExplicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_InnerExplicit_Cdecl
-                )
+                new ByRefCdeclcaller_InnerExplicit(TestMethod_DoCallBack_MarshalStructByRef_InnerExplicit_Cdecl)
             );
             DoCallBack_MarshalByRefStruct_Cdecl_InnerArrayExplicit(
-                new ByRefCdeclcaller_InnerArrayExplicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_InnerArrayExplicit_Cdecl
-                )
+                new ByRefCdeclcaller_InnerArrayExplicit(TestMethod_DoCallBack_MarshalStructByRef_InnerArrayExplicit_Cdecl)
             );
             DoCallBack_MarshalByRefStruct_Cdecl_OUTER3(
                 new ByRefCdeclcaller_OUTER3(TestMethod_DoCallBack_MarshalStructByRef_OUTER3_Cdecl)
@@ -1176,69 +1172,45 @@ public class Test
                 new ByRefCdeclcaller_U(TestMethod_DoCallBack_MarshalStructByRef_U_Cdecl)
             );
             DoCallBack_MarshalByRefStruct_Cdecl_ByteStructPack2Explicit(
-                new ByRefCdeclcaller_ByteStructPack2Explicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_ByteStructPack2Explicit_Cdecl
-                )
+                new ByRefCdeclcaller_ByteStructPack2Explicit(TestMethod_DoCallBack_MarshalStructByRef_ByteStructPack2Explicit_Cdecl)
             );
             DoCallBack_MarshalByRefStruct_Cdecl_ShortStructPack4Explicit(
-                new ByRefCdeclcaller_ShortStructPack4Explicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_ShortStructPack4Explicit_Cdecl
-                )
+                new ByRefCdeclcaller_ShortStructPack4Explicit(TestMethod_DoCallBack_MarshalStructByRef_ShortStructPack4Explicit_Cdecl)
             );
             DoCallBack_MarshalByRefStruct_Cdecl_IntStructPack8Explicit(
-                new ByRefCdeclcaller_IntStructPack8Explicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_IntStructPack8Explicit_Cdecl
-                )
+                new ByRefCdeclcaller_IntStructPack8Explicit(TestMethod_DoCallBack_MarshalStructByRef_IntStructPack8Explicit_Cdecl)
             );
             DoCallBack_MarshalByRefStruct_Cdecl_LongStructPack16Explicit(
-                new ByRefCdeclcaller_LongStructPack16Explicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_LongStructPack16Explicit_Cdecl
-                )
+                new ByRefCdeclcaller_LongStructPack16Explicit(TestMethod_DoCallBack_MarshalStructByRef_LongStructPack16Explicit_Cdecl)
             );
 
             ////Reverse Pinvoke,ByRef,StdCall
             DoCallBack_MarshalByRefStruct_Stdcall_INNER2(
-                new ByRefStdcallcaller_INNER2(
-                    TestMethod_DoCallBack_MarshalStructByRef_INNER2_Stdcall
-                )
+                new ByRefStdcallcaller_INNER2(TestMethod_DoCallBack_MarshalStructByRef_INNER2_Stdcall)
             );
             DoCallBack_MarshalByRefStruct_Stdcall_InnerExplicit(
-                new ByRefStdcallcaller_InnerExplicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_InnerExplicit_Stdcall
-                )
+                new ByRefStdcallcaller_InnerExplicit(TestMethod_DoCallBack_MarshalStructByRef_InnerExplicit_Stdcall)
             );
             DoCallBack_MarshalByRefStruct_Stdcall_InnerArrayExplicit(
-                new ByRefStdcallcaller_InnerArrayExplicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_InnerArrayExplicit_Stdcall
-                )
+                new ByRefStdcallcaller_InnerArrayExplicit(TestMethod_DoCallBack_MarshalStructByRef_InnerArrayExplicit_Stdcall)
             );
             DoCallBack_MarshalByRefStruct_Stdcall_OUTER3(
-                new ByRefStdcallcaller_OUTER3(
-                    TestMethod_DoCallBack_MarshalStructByRef_OUTER3_Stdcall
-                )
+                new ByRefStdcallcaller_OUTER3(TestMethod_DoCallBack_MarshalStructByRef_OUTER3_Stdcall)
             );
             DoCallBack_MarshalByRefStruct_Stdcall_U(
                 new ByRefStdcallcaller_U(TestMethod_DoCallBack_MarshalStructByRef_U_Stdcall)
             );
             DoCallBack_MarshalByRefStruct_Stdcall_ByteStructPack2Explicit(
-                new ByRefStdcallcaller_ByteStructPack2Explicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_ByteStructPack2Explicit_Stdcall
-                )
+                new ByRefStdcallcaller_ByteStructPack2Explicit(TestMethod_DoCallBack_MarshalStructByRef_ByteStructPack2Explicit_Stdcall)
             );
             DoCallBack_MarshalByRefStruct_Stdcall_ShortStructPack4Explicit(
-                new ByRefStdcallcaller_ShortStructPack4Explicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_ShortStructPack4Explicit_Stdcall
-                )
+                new ByRefStdcallcaller_ShortStructPack4Explicit(TestMethod_DoCallBack_MarshalStructByRef_ShortStructPack4Explicit_Stdcall)
             );
             DoCallBack_MarshalByRefStruct_Stdcall_IntStructPack8Explicit(
-                new ByRefStdcallcaller_IntStructPack8Explicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_IntStructPack8Explicit_Stdcall
-                )
+                new ByRefStdcallcaller_IntStructPack8Explicit(TestMethod_DoCallBack_MarshalStructByRef_IntStructPack8Explicit_Stdcall)
             );
             DoCallBack_MarshalByRefStruct_Stdcall_LongStructPack16Explicit(
-                new ByRefStdcallcaller_LongStructPack16Explicit(
-                    TestMethod_DoCallBack_MarshalStructByRef_LongStructPack16Explicit_Stdcall
-                )
+                new ByRefStdcallcaller_LongStructPack16Explicit(TestMethod_DoCallBack_MarshalStructByRef_LongStructPack16Explicit_Stdcall)
             );
 
             ////Reverse Pinvoke,ByVal,cdecl
@@ -1246,14 +1218,10 @@ public class Test
                 new ByValCdeclcaller_INNER2(TestMethod_DoCallBack_MarshalStructByVal_INNER2_Cdecl)
             );
             DoCallBack_MarshalByValStruct_Cdecl_InnerExplicit(
-                new ByValCdeclcaller_InnerExplicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_InnerExplicit_Cdecl
-                )
+                new ByValCdeclcaller_InnerExplicit(TestMethod_DoCallBack_MarshalStructByVal_InnerExplicit_Cdecl)
             );
             DoCallBack_MarshalByValStruct_Cdecl_InnerArrayExplicit(
-                new ByValCdeclcaller_InnerArrayExplicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_InnerArrayExplicit_Cdecl
-                )
+                new ByValCdeclcaller_InnerArrayExplicit(TestMethod_DoCallBack_MarshalStructByVal_InnerArrayExplicit_Cdecl)
             );
             DoCallBack_MarshalByValStruct_Cdecl_OUTER3(
                 new ByValCdeclcaller_OUTER3(TestMethod_DoCallBack_MarshalStructByVal_OUTER3_Cdecl)
@@ -1262,69 +1230,45 @@ public class Test
                 new ByValCdeclcaller_U(TestMethod_DoCallBack_MarshalStructByVal_U_Cdecl)
             );
             DoCallBack_MarshalByValStruct_Cdecl_ByteStructPack2Explicit(
-                new ByValCdeclcaller_ByteStructPack2Explicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_ByteStructPack2Explicit_Cdecl
-                )
+                new ByValCdeclcaller_ByteStructPack2Explicit(TestMethod_DoCallBack_MarshalStructByVal_ByteStructPack2Explicit_Cdecl)
             );
             DoCallBack_MarshalByValStruct_Cdecl_ShortStructPack4Explicit(
-                new ByValCdeclcaller_ShortStructPack4Explicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_ShortStructPack4Explicit_Cdecl
-                )
+                new ByValCdeclcaller_ShortStructPack4Explicit(TestMethod_DoCallBack_MarshalStructByVal_ShortStructPack4Explicit_Cdecl)
             );
             DoCallBack_MarshalByValStruct_Cdecl_IntStructPack8Explicit(
-                new ByValCdeclcaller_IntStructPack8Explicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_IntStructPack8Explicit_Cdecl
-                )
+                new ByValCdeclcaller_IntStructPack8Explicit(TestMethod_DoCallBack_MarshalStructByVal_IntStructPack8Explicit_Cdecl)
             );
             DoCallBack_MarshalByValStruct_Cdecl_LongStructPack16Explicit(
-                new ByValCdeclcaller_LongStructPack16Explicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_LongStructPack16Explicit_Cdecl
-                )
+                new ByValCdeclcaller_LongStructPack16Explicit(TestMethod_DoCallBack_MarshalStructByVal_LongStructPack16Explicit_Cdecl)
             );
 
             ////Reverse Pinvoke,ByVal,stdcall
             DoCallBack_MarshalByValStruct_Stdcall_INNER2(
-                new ByValStdcallcaller_INNER2(
-                    TestMethod_DoCallBack_MarshalStructByVal_INNER2_Stdcall
-                )
+                new ByValStdcallcaller_INNER2(TestMethod_DoCallBack_MarshalStructByVal_INNER2_Stdcall)
             );
             DoCallBack_MarshalByValStruct_Stdcall_InnerExplicit(
-                new ByValStdcallcaller_InnerExplicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_InnerExplicit_Stdcall
-                )
+                new ByValStdcallcaller_InnerExplicit(TestMethod_DoCallBack_MarshalStructByVal_InnerExplicit_Stdcall)
             );
             DoCallBack_MarshalByValStruct_Stdcall_InnerArrayExplicit(
-                new ByValStdcallcaller_InnerArrayExplicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_InnerArrayExplicit_Stdcall
-                )
+                new ByValStdcallcaller_InnerArrayExplicit(TestMethod_DoCallBack_MarshalStructByVal_InnerArrayExplicit_Stdcall)
             );
             DoCallBack_MarshalByValStruct_Stdcall_OUTER3(
-                new ByValStdcallcaller_OUTER3(
-                    TestMethod_DoCallBack_MarshalStructByVal_OUTER3_Stdcall
-                )
+                new ByValStdcallcaller_OUTER3(TestMethod_DoCallBack_MarshalStructByVal_OUTER3_Stdcall)
             );
             DoCallBack_MarshalByValStruct_Stdcall_U(
                 new ByValStdcallcaller_U(TestMethod_DoCallBack_MarshalStructByVal_U_Stdcall)
             );
             DoCallBack_MarshalByValStruct_Stdcall_ByteStructPack2Explicit(
-                new ByValStdcallcaller_ByteStructPack2Explicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_ByteStructPack2Explicit_Stdcall
-                )
+                new ByValStdcallcaller_ByteStructPack2Explicit(TestMethod_DoCallBack_MarshalStructByVal_ByteStructPack2Explicit_Stdcall)
             );
             DoCallBack_MarshalByValStruct_Stdcall_ShortStructPack4Explicit(
-                new ByValStdcallcaller_ShortStructPack4Explicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_ShortStructPack4Explicit_Stdcall
-                )
+                new ByValStdcallcaller_ShortStructPack4Explicit(TestMethod_DoCallBack_MarshalStructByVal_ShortStructPack4Explicit_Stdcall)
             );
             DoCallBack_MarshalByValStruct_Stdcall_IntStructPack8Explicit(
-                new ByValStdcallcaller_IntStructPack8Explicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_IntStructPack8Explicit_Stdcall
-                )
+                new ByValStdcallcaller_IntStructPack8Explicit(TestMethod_DoCallBack_MarshalStructByVal_IntStructPack8Explicit_Stdcall)
             );
             DoCallBack_MarshalByValStruct_Stdcall_LongStructPack16Explicit(
-                new ByValStdcallcaller_LongStructPack16Explicit(
-                    TestMethod_DoCallBack_MarshalStructByVal_LongStructPack16Explicit_Stdcall
-                )
+                new ByValStdcallcaller_LongStructPack16Explicit(TestMethod_DoCallBack_MarshalStructByVal_LongStructPack16Explicit_Stdcall)
             );
 
             #endregion

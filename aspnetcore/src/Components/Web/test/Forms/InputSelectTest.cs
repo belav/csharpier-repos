@@ -189,9 +189,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             await inputSelectComponent.SetCurrentValueAsStringAsync("invalidNumber");
 
             // Assert
-            var validationMessages = rootComponent.EditContext.GetValidationMessages(
-                fieldIdentifier
-            );
+            var validationMessages =
+                rootComponent.EditContext.GetValidationMessages(fieldIdentifier);
             Assert.NotEmpty(validationMessages);
             Assert.Contains("The Some number field is not valid.", validationMessages);
         }

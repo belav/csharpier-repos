@@ -12,9 +12,8 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public static class WebSocketHelper
     {
-        private static readonly Lazy<bool> s_WebSocketSupported = new Lazy<bool>(
-            InitWebSocketSupported
-        );
+        private static readonly Lazy<bool> s_WebSocketSupported =
+            new Lazy<bool>(InitWebSocketSupported);
         public static bool WebSocketsSupported
         {
             get { return s_WebSocketSupported.Value; }

@@ -1383,9 +1383,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
             if (
                 token.IsKind(SyntaxKind.OpenParenToken)
-                && token.Parent.IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(
-                    includeOperators
-                )
+                && token.Parent.IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(includeOperators)
             )
             {
                 parameterIndex = 0;
@@ -1407,9 +1405,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                     SyntaxKind.ParameterList,
                     out ParameterListSyntax? parameterList
                 )
-                && parameterList.IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(
-                    includeOperators
-                )
+                && parameterList.IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(includeOperators)
             )
             {
                 var commaIndex = parameterList.Parameters.GetWithSeparators().IndexOf(token);
@@ -1437,9 +1433,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 && token.Parent.IsKind(SyntaxKind.AttributeList)
                 && token.Parent.IsParentKind(SyntaxKind.Parameter, out ParameterSyntax? parameter)
                 && parameter.IsParentKind(SyntaxKind.ParameterList, out parameterList)
-                && parameterList.IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(
-                    includeOperators
-                )
+                && parameterList.IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(includeOperators)
             )
             {
                 parameterIndex = parameterList.Parameters.IndexOf(parameter);
@@ -1456,9 +1450,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 )
                 && token.Parent.IsKind(SyntaxKind.Parameter, out parameter)
                 && parameter.IsParentKind(SyntaxKind.ParameterList, out parameterList)
-                && parameterList.IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(
-                    includeOperators
-                )
+                && parameterList.IsDelegateOrConstructorOrLocalFunctionOrMethodOrOperatorParameterList(includeOperators)
             )
             {
                 parameterIndex = parameterList.Parameters.IndexOf(parameter);

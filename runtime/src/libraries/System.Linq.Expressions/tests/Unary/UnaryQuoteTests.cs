@@ -366,9 +366,10 @@ namespace System.Linq.Expressions.Tests
 
             var expr = Block(new[] { x }, Assign(x, Constant(42)), RuntimeVariables(x));
 
-            var f = BuildQuote<Func<Expression<Func<IRuntimeVariables>>>, Func<IRuntimeVariables>>(
-                expr
-            );
+            var f = BuildQuote<
+                Func<Expression<Func<IRuntimeVariables>>>,
+                Func<IRuntimeVariables>
+            >(expr);
 
             var quote = f.Compile(useInterpreter)();
 

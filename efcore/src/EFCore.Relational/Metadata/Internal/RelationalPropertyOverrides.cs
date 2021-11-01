@@ -72,9 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             EnsureMutable();
 
             _columnName = columnName;
-            _columnNameConfigurationSource = configurationSource.Max(
-                _columnNameConfigurationSource
-            );
+            _columnNameConfigurationSource =
+                configurationSource.Max(_columnNameConfigurationSource);
 
             return columnName;
         }

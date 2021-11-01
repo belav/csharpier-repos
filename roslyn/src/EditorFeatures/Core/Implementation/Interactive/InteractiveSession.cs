@@ -289,17 +289,14 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             CompilationOptions compilationOptions;
             if (previousSubmissionProjectId != null)
             {
-                compilationOptions = solution.GetRequiredProject(
-                    previousSubmissionProjectId
-                ).CompilationOptions!;
+                compilationOptions =
+                    solution.GetRequiredProject(previousSubmissionProjectId).CompilationOptions!;
 
                 var metadataResolver =
                     (RuntimeMetadataReferenceResolver)compilationOptions.MetadataReferenceResolver!;
                 if (
                     metadataResolver.PathResolver.BaseDirectory != _workingDirectory
-                    || !metadataResolver.PathResolver.SearchPaths.SequenceEqual(
-                        _referenceSearchPaths
-                    )
+                    || !metadataResolver.PathResolver.SearchPaths.SequenceEqual(_referenceSearchPaths)
                 )
                 {
                     compilationOptions = compilationOptions.WithMetadataReferenceResolver(

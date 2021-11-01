@@ -923,9 +923,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 return;
             }
 
-            FindIdentityMap(foreignKey.DeclaringEntityType.FindPrimaryKey())?.FindDependentsMap(
-                foreignKey
-            )?.Update(entry);
+            FindIdentityMap(
+                foreignKey.DeclaringEntityType.FindPrimaryKey()
+            )?.FindDependentsMap(foreignKey)?.Update(entry);
         }
 
         /// <summary>

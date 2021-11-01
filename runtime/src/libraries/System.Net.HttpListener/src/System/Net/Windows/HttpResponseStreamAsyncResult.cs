@@ -13,9 +13,8 @@ namespace System.Net
         private readonly Interop.HttpApi.HTTP_DATA_CHUNK[]? _dataChunks;
         internal bool _sentHeaders;
 
-        private static readonly IOCompletionCallback s_IOCallback = new IOCompletionCallback(
-            Callback
-        );
+        private static readonly IOCompletionCallback s_IOCallback =
+            new IOCompletionCallback(Callback);
 
         internal ushort dataChunkCount
         {

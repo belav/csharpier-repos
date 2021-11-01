@@ -478,9 +478,8 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             MockViewUserControl vuc = new MockViewUserControl();
-            MockViewUserControlContainerPage containerPage = new MockViewUserControlContainerPage(
-                vuc
-            );
+            MockViewUserControlContainerPage containerPage =
+                new MockViewUserControlContainerPage(vuc);
             bool triggered = false;
             HtmlTextWriter writer = new HtmlTextWriter(TextWriter.Null);
             containerPage.RenderCallback = delegate()

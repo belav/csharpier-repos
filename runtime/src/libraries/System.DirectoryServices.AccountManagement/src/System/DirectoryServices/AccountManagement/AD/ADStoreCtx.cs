@@ -3255,9 +3255,9 @@ namespace System.DirectoryServices.AccountManagement
 
         internal override bool IsValidProperty(Principal p, string propertyName)
         {
-            return ((Hashtable)s_propertyMappingTableByProperty[this.MappingTableIndex]).Contains(
-                propertyName
-            );
+            return (
+                (Hashtable)s_propertyMappingTableByProperty[this.MappingTableIndex]
+            ).Contains(propertyName);
         }
     }
 }

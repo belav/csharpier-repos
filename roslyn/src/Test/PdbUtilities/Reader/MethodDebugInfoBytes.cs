@@ -61,9 +61,7 @@ namespace Roslyn.Test.Utilities
                               names =>
                                   names.Select(
                                       name =>
-                                          (ISymUnmanagedNamespace)new MockSymUnmanagedNamespace(
-                                              name
-                                          )
+                                          (ISymUnmanagedNamespace)new MockSymUnmanagedNamespace(name)
                                   )
                           )
                           .ToImmutableArray();

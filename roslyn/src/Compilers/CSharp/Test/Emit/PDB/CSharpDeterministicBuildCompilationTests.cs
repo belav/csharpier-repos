@@ -35,9 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             int sourceFileCount
         )
         {
-            var pdbOptions = DeterministicBuildCompilationTestHelpers.ParseCompilationOptions(
-                compilationOptionsBlobReader
-            );
+            var pdbOptions =
+                DeterministicBuildCompilationTestHelpers.ParseCompilationOptions(compilationOptionsBlobReader);
 
             DeterministicBuildCompilationTestHelpers.AssertCommonOptions(
                 emitOptions,

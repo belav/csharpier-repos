@@ -255,9 +255,7 @@ namespace System.Web.WebPages.Html
             if (htmlAttributes != null)
             {
                 foreach (
-                    PropertyHelper property in HtmlAttributePropertyHelper.GetProperties(
-                        htmlAttributes
-                    )
+                    PropertyHelper property in HtmlAttributePropertyHelper.GetProperties(htmlAttributes)
                 )
                 {
                     result.Add(property.Name, property.GetValue(htmlAttributes));

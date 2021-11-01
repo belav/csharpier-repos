@@ -624,9 +624,8 @@ namespace System.Diagnostics
                         );
                     }
 
-                    ProcessThreadCollection newThreads = new ProcessThreadCollection(
-                        newThreadsArray
-                    );
+                    ProcessThreadCollection newThreads =
+                        new ProcessThreadCollection(newThreadsArray);
                     _threads = newThreads;
                 }
                 return _threads;

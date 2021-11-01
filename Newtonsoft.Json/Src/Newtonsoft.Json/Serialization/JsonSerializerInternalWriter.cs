@@ -1661,9 +1661,8 @@ namespace Newtonsoft.Json.Serialization
                 }
                 else if (_rootType != null && _serializeStack.Count == _rootLevel)
                 {
-                    JsonContract rootContract = Serializer._contractResolver.ResolveContract(
-                        _rootType
-                    );
+                    JsonContract rootContract =
+                        Serializer._contractResolver.ResolveContract(_rootType);
 
                     if (contract.NonNullableUnderlyingType != rootContract.CreatedType)
                     {

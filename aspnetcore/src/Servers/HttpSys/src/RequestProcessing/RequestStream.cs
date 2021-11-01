@@ -283,9 +283,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             var cancellationRegistration = default(CancellationTokenRegistration);
             if (cancellationToken.CanBeCanceled)
             {
-                cancellationRegistration = RequestContext.RegisterForCancellation(
-                    cancellationToken
-                );
+                cancellationRegistration =
+                    RequestContext.RegisterForCancellation(cancellationToken);
             }
 
             asyncResult = new RequestStreamAsyncResult(

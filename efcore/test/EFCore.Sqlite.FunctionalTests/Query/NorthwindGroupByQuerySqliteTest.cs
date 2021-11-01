@@ -31,9 +31,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Select_uncorrelated_collection_with_groupby_multiple_collections_work(
-                                async
-                            )
+                            base.Select_uncorrelated_collection_with_groupby_multiple_collections_work(async)
                     )
                 ).Message
             );
@@ -56,9 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(
-                                async
-                            )
+                            base.Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(async)
                     )
                 ).Message
             );

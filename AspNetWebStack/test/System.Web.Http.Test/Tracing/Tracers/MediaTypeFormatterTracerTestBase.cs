@@ -97,9 +97,8 @@ namespace System.Web.Http.Tracing.Tracers
             );
 
             // Assert
-            IFormatterTracer tracerReturned = Assert.IsAssignableFrom<IFormatterTracer>(
-                valueReturned
-            );
+            IFormatterTracer tracerReturned =
+                Assert.IsAssignableFrom<IFormatterTracer>(valueReturned);
             Assert.Same(formatterObject, tracerReturned.InnerFormatter);
             mockFormatter.Verify();
         }

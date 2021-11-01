@@ -1388,9 +1388,10 @@ namespace Microsoft.EntityFrameworkCore
                                     (v1, v2) => v1.SequenceEqual(v2),
                                     v => v.GetHashCode(),
                                     v =>
-                                        (IDictionary<string, string>)new Dictionary<string, string>(
-                                            v
-                                        )
+                                        (IDictionary<string, string>)new Dictionary<
+                                            string,
+                                            string
+                                        >(v)
                                 )
                             );
                     }

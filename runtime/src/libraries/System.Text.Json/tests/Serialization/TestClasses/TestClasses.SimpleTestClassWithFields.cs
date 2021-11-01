@@ -301,15 +301,12 @@ namespace System.Text.Json.Serialization.Tests
                 { "key", "value" }
             };
 
-            MyStringToStringImmutableDict = ImmutableDictionary.CreateRange(
-                MyStringToStringGenericDict
-            );
-            MyStringToStringIImmutableDict = ImmutableDictionary.CreateRange(
-                MyStringToStringGenericDict
-            );
-            MyStringToStringImmutableSortedDict = ImmutableSortedDictionary.CreateRange(
-                MyStringToStringGenericDict
-            );
+            MyStringToStringImmutableDict =
+                ImmutableDictionary.CreateRange(MyStringToStringGenericDict);
+            MyStringToStringIImmutableDict =
+                ImmutableDictionary.CreateRange(MyStringToStringGenericDict);
+            MyStringToStringImmutableSortedDict =
+                ImmutableSortedDictionary.CreateRange(MyStringToStringGenericDict);
 
             MyStringStackT = new Stack<string>(new List<string>() { "Hello", "World" });
             MyStringQueueT = new Queue<string>(new List<string>() { "Hello", "World" });

@@ -219,9 +219,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
                 if (fallbackCertificate != null)
                 {
-                    HttpsConnectionMiddleware.EnsureCertificateIsAllowedForServerAuth(
-                        fallbackCertificate
-                    );
+                    HttpsConnectionMiddleware.EnsureCertificateIsAllowedForServerAuth(fallbackCertificate);
                 }
 
                 sslOptions.ServerCertificate = fallbackCertificate;

@@ -462,9 +462,10 @@ namespace System.Linq.Parallel
             Pair<bool, TOrderKey>
         > BuildHashLookup(CancellationToken cancellationToken)
         {
-            HashLookup<THashKey, GroupKeyData> lookup = new HashLookup<THashKey, GroupKeyData>(
-                _keyComparer
-            );
+            HashLookup<THashKey, GroupKeyData> lookup = new HashLookup<
+                THashKey,
+                GroupKeyData
+            >(_keyComparer);
             OrderedGroupJoinBaseHashBuilder baseHashBuilder = new OrderedGroupJoinBaseHashBuilder(
                 lookup,
                 _orderKeyComparer

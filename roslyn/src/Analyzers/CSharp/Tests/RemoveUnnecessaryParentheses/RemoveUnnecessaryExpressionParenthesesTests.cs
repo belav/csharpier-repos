@@ -177,9 +177,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         int x = a || b && c;
     }
 }",
-                parameters: new TestParameters(
-                    options: RequireArithmeticBinaryParenthesesForClarity
-                )
+                parameters: new TestParameters(options: RequireArithmeticBinaryParenthesesForClarity)
             );
         }
 
@@ -1072,9 +1070,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         int x =  $$(1 + 2) << 3;
     }
 }",
-                parameters: new TestParameters(
-                    options: RequireArithmeticBinaryParenthesesForClarity
-                )
+                parameters: new TestParameters(options: RequireArithmeticBinaryParenthesesForClarity)
             );
         }
 

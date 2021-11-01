@@ -298,9 +298,8 @@ class B : A
         )
         {
             var serializedItem = JsonConvert.SerializeObject(serverCompletionItem);
-            var clientCompletionItem = JsonConvert.DeserializeObject<LSP.VSCompletionItem>(
-                serializedItem
-            );
+            var clientCompletionItem =
+                JsonConvert.DeserializeObject<LSP.VSCompletionItem>(serializedItem);
             return clientCompletionItem;
         }
 

@@ -289,9 +289,8 @@ namespace System.Threading.Tasks.Tests
                 new ParallelOptions
                 {
                     MaxDegreeOfParallelism = dop,
-                    TaskScheduler = new MaxConcurrencyLevelPassthroughTaskScheduler(
-                        MaxSchedulerLimit
-                    )
+                    TaskScheduler =
+                        new MaxConcurrencyLevelPassthroughTaskScheduler(MaxSchedulerLimit)
                 },
                 async (item, cancellationToken) =>
                 {

@@ -373,9 +373,8 @@ namespace System.Collections.Immutable.Tests
             ImmutableList<string>.Builder builder = ImmutableList.CreateBuilder<string>();
             builder.Add("One");
             builder.Add("Two");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                builder
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(builder);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State

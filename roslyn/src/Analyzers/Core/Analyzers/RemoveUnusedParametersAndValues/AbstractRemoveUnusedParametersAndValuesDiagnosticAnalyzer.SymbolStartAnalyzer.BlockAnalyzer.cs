@@ -155,9 +155,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                     .DescendantNodes(descendIntoTrivia: true)
                                     .Any(
                                         n =>
-                                            symbolStartAnalyzer._compilationAnalyzer.IsIfConditionalDirective(
-                                                n
-                                            )
+                                            symbolStartAnalyzer._compilationAnalyzer.IsIfConditionalDirective(n)
                                     )
                             )
                             {
@@ -279,12 +277,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     //     an invocation by prefixing the invocation with keyword "Call".
                     //     Similarly, we do not want to flag an expression of a C# expression body.
                     if (
-                        _symbolStartAnalyzer._compilationAnalyzer.IsCallStatement(
-                            expressionStatement
-                        )
-                        || _symbolStartAnalyzer._compilationAnalyzer.IsExpressionOfExpressionBody(
-                            expressionStatement
-                        )
+                        _symbolStartAnalyzer._compilationAnalyzer.IsCallStatement(expressionStatement)
+                        || _symbolStartAnalyzer._compilationAnalyzer.IsExpressionOfExpressionBody(expressionStatement)
                     )
                     {
                         return;
@@ -707,9 +701,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                     && unusedParameter.ContainingSymbol.IsLocalFunction()
                                 )
                                 {
-                                    var hasReference = symbolUsageResult.SymbolsRead.Contains(
-                                        unusedParameter
-                                    );
+                                    var hasReference =
+                                        symbolUsageResult.SymbolsRead.Contains(unusedParameter);
 
                                     bool shouldReport;
                                     switch (unusedParameter.RefKind)
@@ -726,9 +719,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                             // Note that we always have one write for the parameter input value from the caller.
                                             shouldReport =
                                                 !hasReference
-                                                && symbolUsageResult.GetSymbolWriteCount(
-                                                    unusedParameter
-                                                ) == 1;
+                                                && symbolUsageResult.GetSymbolWriteCount(unusedParameter)
+                                                    == 1;
                                             break;
 
                                         default:
@@ -761,9 +753,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                             {
                                 var diagnostic = DiagnosticHelper.Create(
                                     s_valueAssignedIsUnusedRule,
-                                    _symbolStartAnalyzer._compilationAnalyzer.GetDefinitionLocationToFade(
-                                        unreadWriteOperation
-                                    ),
+                                    _symbolStartAnalyzer._compilationAnalyzer.GetDefinitionLocationToFade(unreadWriteOperation),
                                     _options.UnusedValueAssignmentSeverity,
                                     additionalLocations: null,
                                     properties,
@@ -809,9 +799,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                             symbol is ILocalSymbol localSymbol
                             && !resultFromFlowAnalysis.SymbolsRead.Contains(localSymbol);
 
-                        var isRemovableAssignment = IsRemovableAssignmentWithoutSideEffects(
-                            unreadWriteOperation
-                        );
+                        var isRemovableAssignment =
+                            IsRemovableAssignmentWithoutSideEffects(unreadWriteOperation);
 
                         if (
                             isUnusedLocalAssignment
@@ -842,9 +831,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     )
                     {
                         if (
-                            _symbolStartAnalyzer._compilationAnalyzer.ShouldBailOutFromRemovableAssignmentAnalysis(
-                                unusedSymbolWriteOperation
-                            )
+                            _symbolStartAnalyzer._compilationAnalyzer.ShouldBailOutFromRemovableAssignmentAnalysis(unusedSymbolWriteOperation)
                         )
                         {
                             return false;

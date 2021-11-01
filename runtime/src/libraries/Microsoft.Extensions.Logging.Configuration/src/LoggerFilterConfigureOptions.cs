@@ -46,9 +46,8 @@ namespace Microsoft.Extensions.Logging
                 }
                 else
                 {
-                    IConfigurationSection logLevelSection = configurationSection.GetSection(
-                        LogLevelKey
-                    );
+                    IConfigurationSection logLevelSection =
+                        configurationSection.GetSection(LogLevelKey);
                     if (logLevelSection != null)
                     {
                         // Load logger specific rules

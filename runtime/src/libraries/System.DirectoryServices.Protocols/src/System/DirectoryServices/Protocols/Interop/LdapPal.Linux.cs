@@ -392,9 +392,8 @@ namespace System.DirectoryServices.Protocols
             IntPtr currentInteractPtr = interactPtr;
             SaslInteractiveChallenge interactChallenge =
                 Marshal.PtrToStructure<SaslInteractiveChallenge>(currentInteractPtr);
-            SaslDefaultCredentials defaults = Marshal.PtrToStructure<SaslDefaultCredentials>(
-                defaultsPtr
-            );
+            SaslDefaultCredentials defaults =
+                Marshal.PtrToStructure<SaslDefaultCredentials>(defaultsPtr);
 
             // loop through all of the challenges that were sent through the interactChallenge.
             while (interactChallenge.saslChallengeType != (int)SaslChallengeType.SASL_CB_LIST_END)
@@ -431,9 +430,8 @@ namespace System.DirectoryServices.Protocols
                     currentInteractPtr,
                     Marshal.SizeOf<SaslInteractiveChallenge>()
                 );
-                interactChallenge = Marshal.PtrToStructure<SaslInteractiveChallenge>(
-                    currentInteractPtr
-                );
+                interactChallenge =
+                    Marshal.PtrToStructure<SaslInteractiveChallenge>(currentInteractPtr);
             }
 
             return 0;

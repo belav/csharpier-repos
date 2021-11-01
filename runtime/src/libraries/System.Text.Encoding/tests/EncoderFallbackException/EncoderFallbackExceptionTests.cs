@@ -30,9 +30,8 @@ namespace System.Text.Tests
         [InlineData("Test message.")]
         public static void Ctor_String(string message)
         {
-            EncoderFallbackException encoderFallbackException = new EncoderFallbackException(
-                message
-            );
+            EncoderFallbackException encoderFallbackException =
+                new EncoderFallbackException(message);
             Assert.Equal(default(char), encoderFallbackException.CharUnknown);
             Assert.Equal(default(char), encoderFallbackException.CharUnknownHigh);
             Assert.Equal(default(char), encoderFallbackException.CharUnknownLow);

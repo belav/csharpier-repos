@@ -282,9 +282,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             var assembly = compilation.Assembly;
                             if (
                                 assembly != null
-                                && !assembly.IsSameAssemblyOrHasFriendAccessTo(
-                                    internalVisibleToAssembly
-                                )
+                                && !assembly.IsSameAssemblyOrHasFriendAccessTo(internalVisibleToAssembly)
                             )
                             {
                                 continue;

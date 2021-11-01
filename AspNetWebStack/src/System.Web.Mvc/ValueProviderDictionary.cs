@@ -114,9 +114,9 @@ namespace System.Web.Mvc
 
         public bool Contains(KeyValuePair<string, ValueProviderResult> item)
         {
-            return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).Contains(
-                item
-            );
+            return (
+                (ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary
+            ).Contains(item);
         }
 
         public bool ContainsKey(string key)
@@ -203,9 +203,9 @@ namespace System.Web.Mvc
 
         public bool Remove(KeyValuePair<string, ValueProviderResult> item)
         {
-            return ((ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary).Remove(
-                item
-            );
+            return (
+                (ICollection<KeyValuePair<string, ValueProviderResult>>)Dictionary
+            ).Remove(item);
         }
 
         public bool Remove(string key)

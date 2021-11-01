@@ -286,9 +286,8 @@ class Class
                     var diagnosticService = Assert.IsType<DiagnosticAnalyzerService>(
                         workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
                     );
-                    var incrementalAnalyzer = diagnosticService.CreateIncrementalAnalyzer(
-                        workspace
-                    );
+                    var incrementalAnalyzer =
+                        diagnosticService.CreateIncrementalAnalyzer(workspace);
                     var suppressionProvider = CreateDiagnosticProviderAndFixer(workspace).Item2;
                     var suppressionProviderFactory = new Lazy<
                         IConfigurationFixProvider,
@@ -674,9 +673,8 @@ class Class
                             ReportDiagnostic.Warn
                         )
                     };
-                    compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
-                        specificDiagnosticOptions
-                    );
+                    compilationOptions =
+                        compilationOptions.WithSpecificDiagnosticOptions(specificDiagnosticOptions);
                     var updatedSolution = solution.WithProjectCompilationOptions(
                         solution.ProjectIds.Single(),
                         compilationOptions
@@ -986,9 +984,8 @@ class Class
                             ReportDiagnostic.Warn
                         )
                     };
-                    compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
-                        specificDiagnosticOptions
-                    );
+                    compilationOptions =
+                        compilationOptions.WithSpecificDiagnosticOptions(specificDiagnosticOptions);
                     var updatedSolution = solution.WithProjectCompilationOptions(
                         solution.ProjectIds.Single(),
                         compilationOptions

@@ -243,9 +243,8 @@ class C
             internal const string SnippetPath = nameof(SnippetPath);
 
             internal const string PreProcessorSnippetShortcut = "#PreProcessorSnippetShortcut";
-            internal const string PreProcessorSnippetDescription = nameof(
-                PreProcessorSnippetDescription
-            );
+            internal const string PreProcessorSnippetDescription =
+                nameof(PreProcessorSnippetDescription);
             internal const string PreProcessorSnippetTitle = "#PreProcessorSnippetTitle";
             internal const string PreProcessorSnippetPath = nameof(PreProcessorSnippetPath);
 

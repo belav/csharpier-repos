@@ -662,9 +662,16 @@ d.cs
             string[] references = args.MetadataReferences.Select(r => r.Reference).ToArray();
 
             AssertEx.Equal(
-                new[] { "first.cs", "second.cs", "b.cs", "a.cs", "c.cs", "d.cs", "last.cs" }.Select(
-                    prependBasePath
-                ),
+                new[]
+                {
+                    "first.cs",
+                    "second.cs",
+                    "b.cs",
+                    "a.cs",
+                    "c.cs",
+                    "d.cs",
+                    "last.cs"
+                }.Select(prependBasePath),
                 resolvedSourceFiles
             );
             AssertEx.Equal(

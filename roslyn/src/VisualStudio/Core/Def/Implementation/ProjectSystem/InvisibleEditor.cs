@@ -68,9 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             try
             {
-                _invisibleEditor = (IVsInvisibleEditor)Marshal.GetUniqueObjectForIUnknown(
-                    invisibleEditorPtr
-                );
+                _invisibleEditor =
+                    (IVsInvisibleEditor)Marshal.GetUniqueObjectForIUnknown(invisibleEditorPtr);
 
                 var docDataPtr = IntPtr.Zero;
                 Marshal.ThrowExceptionForHR(

@@ -1184,9 +1184,8 @@ namespace System.IO.Packaging.Tests
                             docPackageRelationship.TargetUri
                         );
 
-                        var docRelationshipPartUri = PackUriHelper.GetRelationshipPartUri(
-                            documentUri
-                        );
+                        var docRelationshipPartUri =
+                            PackUriHelper.GetRelationshipPartUri(documentUri);
                         Assert.Equal(
                             "/word/_rels/document.xml.rels",
                             docRelationshipPartUri.ToString()
@@ -4726,9 +4725,8 @@ namespace System.IO.Packaging.Tests
                             Assert.Equal(RelationshipType, relationship.RelationshipType)
                     );
 
-                    PackageRelationshipCollection partRelationships = part.GetRelationshipsByType(
-                        PartRelationshipType
-                    );
+                    PackageRelationshipCollection partRelationships =
+                        part.GetRelationshipsByType(PartRelationshipType);
                     Assert.Single(partRelationships);
                     Assert.All(
                         partRelationships,
@@ -4887,9 +4885,8 @@ namespace System.IO.Packaging.Tests
 
             Uri returnedPackageUri = PackUriHelper.GetPackageUri(combinedUriWithPart);
             Uri returnedPackageUriNoPart = PackUriHelper.GetPackageUri(combinedUriNoPart);
-            Uri returnedPackageUriDifferentPart = PackUriHelper.GetPackageUri(
-                combinedUriWithDifferentPart
-            );
+            Uri returnedPackageUriDifferentPart =
+                PackUriHelper.GetPackageUri(combinedUriWithDifferentPart);
 
             // Validate the PackageUri returned from PackUriHelper.GetPackageHelper matches what was given to PackUriHelper.Create
             Assert.Equal(packageUri, returnedPackageUri);
@@ -4912,9 +4909,8 @@ namespace System.IO.Packaging.Tests
             );
 
             Uri returnedPartUri = PackUriHelper.GetPartUri(combinedUriWithPart);
-            Uri returnedPartUriDifferentPart = PackUriHelper.GetPartUri(
-                combinedUriWithDifferentPart
-            );
+            Uri returnedPartUriDifferentPart =
+                PackUriHelper.GetPartUri(combinedUriWithDifferentPart);
 
             // Validate the PartUri returned from PackUriHelper.GetPartHelper matches what was given to PackUriHelper.Create
             Assert.Equal(partUri, returnedPartUri);
@@ -4963,9 +4959,8 @@ namespace System.IO.Packaging.Tests
             );
 
             Uri returnedPartUri = PackUriHelper.GetPartUri(packageUriWithPart);
-            Uri returnedPartUriDifferentPackage = PackUriHelper.GetPartUri(
-                differentPackageSamePart
-            );
+            Uri returnedPartUriDifferentPackage =
+                PackUriHelper.GetPartUri(differentPackageSamePart);
             Assert.Equal(returnedPartUri, returnedPartUriDifferentPackage);
             Assert.Equal(partUri, returnedPartUri);
 

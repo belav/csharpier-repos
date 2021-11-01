@@ -66,9 +66,9 @@ namespace Microsoft.EntityFrameworkCore
 
             var extension = (SqliteOptionsExtension)GetOrCreateExtension(optionsBuilder)
                 .WithConnectionString(connectionString);
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension);
 
             ConfigureWarnings(optionsBuilder);
 
@@ -99,9 +99,9 @@ namespace Microsoft.EntityFrameworkCore
 
             var extension = (SqliteOptionsExtension)GetOrCreateExtension(optionsBuilder)
                 .WithConnection(connection);
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension);
 
             ConfigureWarnings(optionsBuilder);
 
@@ -186,13 +186,12 @@ namespace Microsoft.EntityFrameworkCore
                 optionsBuilder.Options.FindExtension<CoreOptionsExtension>()
                 ?? new CoreOptionsExtension();
 
-            coreOptionsExtension = RelationalOptionsExtension.WithDefaultWarningConfiguration(
-                coreOptionsExtension
-            );
+            coreOptionsExtension =
+                RelationalOptionsExtension.WithDefaultWarningConfiguration(coreOptionsExtension);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                coreOptionsExtension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(coreOptionsExtension);
         }
     }
 }

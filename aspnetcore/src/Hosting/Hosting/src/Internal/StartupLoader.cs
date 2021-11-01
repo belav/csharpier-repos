@@ -167,9 +167,8 @@ namespace Microsoft.AspNetCore.Hosting
                         >();
                         var builder = serviceProviderFactory.CreateBuilder(services);
                         configureContainerCallback(builder);
-                        applicationServiceProvider = serviceProviderFactory.CreateServiceProvider(
-                            builder
-                        );
+                        applicationServiceProvider =
+                            serviceProviderFactory.CreateServiceProvider(builder);
                     }
                     else
                     {
@@ -178,9 +177,8 @@ namespace Microsoft.AspNetCore.Hosting
                             IServiceProviderFactory<IServiceCollection>
                         >();
                         var builder = serviceProviderFactory.CreateBuilder(services);
-                        applicationServiceProvider = serviceProviderFactory.CreateServiceProvider(
-                            builder
-                        );
+                        applicationServiceProvider =
+                            serviceProviderFactory.CreateServiceProvider(builder);
                     }
 
                     return applicationServiceProvider ?? services.BuildServiceProvider();

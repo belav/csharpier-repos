@@ -80,9 +80,9 @@ class Program
             ) != null
         );
         Assert(
-            CustomAttributeExtensions.GetCustomAttribute<SingleAttribute<bool>>(
-                propertyPropertyInfo
-            ) != null
+            CustomAttributeExtensions.GetCustomAttribute<
+                SingleAttribute<bool>
+            >(propertyPropertyInfo) != null
         );
         Assert(
             ((ICustomAttributeProvider)propertyPropertyInfo).GetCustomAttributes(
@@ -231,9 +231,9 @@ class Program
         );
         AssertAny(b4, a => a is SingleAttribute<int>);
 
-        var a5 = CustomAttributeExtensions.GetCustomAttributes<SingleAttribute<bool>>(
-            programTypeInfo
-        );
+        var a5 = CustomAttributeExtensions.GetCustomAttributes<
+            SingleAttribute<bool>
+        >(programTypeInfo);
         AssertAny(a5, a => a is SingleAttribute<bool>);
 
         var b5 = ((ICustomAttributeProvider)programTypeInfo).GetCustomAttributes(

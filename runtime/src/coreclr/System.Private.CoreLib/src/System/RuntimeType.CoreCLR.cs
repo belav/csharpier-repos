@@ -357,9 +357,8 @@ namespace System
                         (fieldAttributes & FieldAttributes.FieldAccessMask)
                         == FieldAttributes.Public;
                     bool isStatic = (fieldAttributes & FieldAttributes.Static) != 0;
-                    RuntimeType approxDeclaringType = RuntimeFieldHandle.GetApproxDeclaringType(
-                        field
-                    );
+                    RuntimeType approxDeclaringType =
+                        RuntimeFieldHandle.GetApproxDeclaringType(field);
                     bool isInherited = RuntimeFieldHandle.AcquiresContextFromThis(field)
                         ? !RuntimeTypeHandle.CompareCanonicalHandles(
                               approxDeclaringType,
@@ -657,9 +656,7 @@ namespace System
                         #region IsInterface
 
                         foreach (
-                            RuntimeMethodHandleInternal methodHandle in RuntimeTypeHandle.GetIntroducedMethods(
-                                declaringType
-                            )
+                            RuntimeMethodHandleInternal methodHandle in RuntimeTypeHandle.GetIntroducedMethods(declaringType)
                         )
                         {
                             if (filter.RequiresStringComparison())
@@ -684,9 +681,8 @@ namespace System
                             #region Loop through all methods on the interface
                             Debug.Assert(!methodHandle.IsNullHandle());
 
-                            MethodAttributes methodAttributes = RuntimeMethodHandle.GetAttributes(
-                                methodHandle
-                            );
+                            MethodAttributes methodAttributes =
+                                RuntimeMethodHandle.GetAttributes(methodHandle);
 
                             #region Continue if this is a constructor
                             Debug.Assert(
@@ -753,9 +749,7 @@ namespace System
                             int vtableSlots = RuntimeTypeHandle.GetNumVirtuals(declaringType);
 
                             foreach (
-                                RuntimeMethodHandleInternal methodHandle in RuntimeTypeHandle.GetIntroducedMethods(
-                                    declaringType
-                                )
+                                RuntimeMethodHandleInternal methodHandle in RuntimeTypeHandle.GetIntroducedMethods(declaringType)
                             )
                             {
                                 if (filter.RequiresStringComparison())
@@ -912,9 +906,7 @@ namespace System
                     RuntimeType declaringType = ReflectedType;
 
                     foreach (
-                        RuntimeMethodHandleInternal methodHandle in RuntimeTypeHandle.GetIntroducedMethods(
-                            declaringType
-                        )
+                        RuntimeMethodHandleInternal methodHandle in RuntimeTypeHandle.GetIntroducedMethods(declaringType)
                     )
                     {
                         if (filter.RequiresStringComparison())
@@ -936,9 +928,8 @@ namespace System
                                 continue;
                         }
 
-                        MethodAttributes methodAttributes = RuntimeMethodHandle.GetAttributes(
-                            methodHandle
-                        );
+                        MethodAttributes methodAttributes =
+                            RuntimeMethodHandle.GetAttributes(methodHandle);
 
                         Debug.Assert(!methodHandle.IsNullHandle());
 
@@ -1099,9 +1090,8 @@ namespace System
 
                         Debug.Assert(!runtimeFieldHandle.IsNullHandle());
 
-                        FieldAttributes fieldAttributes = RuntimeFieldHandle.GetAttributes(
-                            runtimeFieldHandle
-                        );
+                        FieldAttributes fieldAttributes =
+                            RuntimeFieldHandle.GetAttributes(runtimeFieldHandle);
                         FieldAttributes fieldAccess =
                             fieldAttributes & FieldAttributes.FieldAccessMask;
 
@@ -1289,9 +1279,7 @@ namespace System
                                 AddSpecialInterface(
                                     ref list,
                                     filter,
-                                    (RuntimeType)typeof(IReadOnlyCollection<>).MakeGenericType(
-                                        arrayType
-                                    ),
+                                    (RuntimeType)typeof(IReadOnlyCollection<>).MakeGenericType(arrayType),
                                     false
                                 );
                             }
@@ -1553,9 +1541,8 @@ namespace System
 
                     scope.EnumProperties(tkDeclaringType, out MetadataEnumResult tkProperties);
 
-                    RuntimeModule declaringModuleHandle = RuntimeTypeHandle.GetModule(
-                        declaringType
-                    );
+                    RuntimeModule declaringModuleHandle =
+                        RuntimeTypeHandle.GetModule(declaringType);
 
                     int numVirtuals = RuntimeTypeHandle.GetNumVirtuals(declaringType);
 
@@ -1909,9 +1896,8 @@ namespace System
                     Type DefaultMemberAttrType = typeof(DefaultMemberAttribute);
                     for (RuntimeType? t = m_runtimeType; t != null; t = t.GetBaseType())
                     {
-                        IList<CustomAttributeData> attrs = CustomAttributeData.GetCustomAttributes(
-                            t
-                        );
+                        IList<CustomAttributeData> attrs =
+                            CustomAttributeData.GetCustomAttributes(t);
                         for (int i = 0; i < attrs.Count; i++)
                         {
                             if (
@@ -2252,9 +2238,8 @@ namespace System
                     // why for everything else we need to rebind the generic method arguments.
                     if (!RuntimeMethodHandle.IsGenericMethodDefinition(methodHandle))
                     {
-                        methodInstantiation = RuntimeMethodHandle.GetMethodInstantiationInternal(
-                            methodHandle
-                        );
+                        methodInstantiation =
+                            RuntimeMethodHandle.GetMethodInstantiationInternal(methodHandle);
                     }
 
                     // lookup via v-table slot the RuntimeMethodHandle on the new declaring type
@@ -3413,9 +3398,8 @@ namespace System
                     continue;
 
                 // If we resolved to an interface method, use the interface type as reflected type. Otherwise use `this`.
-                RuntimeType reflectedType = RuntimeMethodHandle.GetDeclaringType(
-                    classRtMethodHandle
-                );
+                RuntimeType reflectedType =
+                    RuntimeMethodHandle.GetDeclaringType(classRtMethodHandle);
                 if (!reflectedType.IsInterface)
                     reflectedType = this;
 

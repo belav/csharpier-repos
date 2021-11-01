@@ -1071,9 +1071,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                var states = ArrayBuilder<(LocalState, TypeWithState, bool)>.GetInstance(
-                    numSwitchArms
-                );
+                var states =
+                    ArrayBuilder<(LocalState, TypeWithState, bool)>.GetInstance(numSwitchArms);
                 for (int i = 0; i < numSwitchArms; i++)
                 {
                     var nodeForSyntax = expressions[i];

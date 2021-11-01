@@ -182,9 +182,8 @@ namespace System.Web.Mvc.Async
                     );
                 object[] completionParametersArray = rawCompletionParameterValues.ToArray();
 
-                ActionMethodDispatcher dispatcher = DispatcherCache.GetDispatcher(
-                    CompletedMethodInfo
-                );
+                ActionMethodDispatcher dispatcher =
+                    DispatcherCache.GetDispatcher(CompletedMethodInfo);
                 object actionReturnValue = dispatcher.Execute(
                     controllerContext.Controller,
                     completionParametersArray

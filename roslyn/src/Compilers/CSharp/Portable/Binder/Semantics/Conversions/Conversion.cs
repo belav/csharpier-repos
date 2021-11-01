@@ -306,9 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         // because that causes CLR loader failure.
         private static class ConversionSingletons
         {
-            internal static ImmutableArray<Conversion> IdentityUnderlying = ImmutableArray.Create(
-                Identity
-            );
+            internal static ImmutableArray<Conversion> IdentityUnderlying =
+                ImmutableArray.Create(Identity);
             internal static ImmutableArray<Conversion> ImplicitConstantUnderlying =
                 ImmutableArray.Create(ImplicitConstant);
             internal static ImmutableArray<Conversion> ImplicitNumericUnderlying =

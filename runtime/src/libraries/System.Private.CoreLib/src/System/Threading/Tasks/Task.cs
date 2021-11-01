@@ -2160,9 +2160,7 @@ namespace System.Threading.Tasks
         internal ExceptionDispatchInfo? GetCancellationExceptionDispatchInfo()
         {
             Debug.Assert(IsCanceled, "Must only be used when the task has canceled.");
-            return Volatile.Read(
-                ref m_contingentProperties
-            )?.m_exceptionsHolder?.GetCancellationExceptionDispatchInfo(); // may be null
+            return Volatile.Read(ref m_contingentProperties)?.m_exceptionsHolder?.GetCancellationExceptionDispatchInfo(); // may be null
         }
 
         /// <summary>

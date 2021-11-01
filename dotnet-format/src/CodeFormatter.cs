@@ -252,12 +252,10 @@ namespace Microsoft.CodeAnalysis.Tools
             var totalFileCount = solution.Projects.Sum(project => project.DocumentIds.Count);
             var projectFileCount = 0;
 
-            var documentsCoveredByEditorConfig = ImmutableArray.CreateBuilder<DocumentId>(
-                totalFileCount
-            );
-            var documentsNotCoveredByEditorConfig = ImmutableArray.CreateBuilder<DocumentId>(
-                totalFileCount
-            );
+            var documentsCoveredByEditorConfig =
+                ImmutableArray.CreateBuilder<DocumentId>(totalFileCount);
+            var documentsNotCoveredByEditorConfig =
+                ImmutableArray.CreateBuilder<DocumentId>(totalFileCount);
 
             var addedFilePaths = new HashSet<string>(totalFileCount);
 
@@ -334,16 +332,13 @@ namespace Microsoft.CodeAnalysis.Tools
 
                     // Track files covered by an editorconfig separately from those not covered.
                     var analyzerConfigOptions =
-                        document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                            syntaxTree
-                        );
+                        document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(syntaxTree);
                     if (analyzerConfigOptions != null)
                     {
                         if (
                             formatOptions.IncludeGeneratedFiles
-                            || GeneratedCodeUtilities.GetIsGeneratedCodeFromOptions(
-                                analyzerConfigOptions
-                            ) != true
+                            || GeneratedCodeUtilities.GetIsGeneratedCodeFromOptions(analyzerConfigOptions)
+                                != true
                         )
                         {
                             documentsCoveredByEditorConfig.Add(document.Id);

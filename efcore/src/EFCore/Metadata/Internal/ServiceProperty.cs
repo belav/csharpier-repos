@@ -192,9 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private void UpdateParameterBindingConfigurationSource(
             ConfigurationSource configurationSource
         ) =>
-            _parameterBindingConfigurationSource = configurationSource.Max(
-                _parameterBindingConfigurationSource
-            );
+            _parameterBindingConfigurationSource =
+                configurationSource.Max(_parameterBindingConfigurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

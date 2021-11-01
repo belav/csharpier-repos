@@ -475,9 +475,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                             // value has already been mixed into the KDF used to generate the MAC key.
 
                             using (
-                                var validationAlgorithm = CreateValidationAlgorithm(
-                                    validationSubkey
-                                )
+                                var validationAlgorithm =
+                                    CreateValidationAlgorithm(validationSubkey)
                             )
                             {
                                 // As an optimization, avoid duplicating the underlying buffer

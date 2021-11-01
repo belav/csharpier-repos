@@ -186,9 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             seenTypes.Free();
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             var commonType = BestTypeInferrer.GetBestType(
                 typesInOrder,
                 Conversions,

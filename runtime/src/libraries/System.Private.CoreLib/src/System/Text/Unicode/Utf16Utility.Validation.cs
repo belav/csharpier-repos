@@ -333,9 +333,8 @@ namespace System.Text.Unicode
                             // free right now, saving the extension step a few lines below. If we're 32-bit, the
                             // convertion to nuint immediately below is a no-op, and we'll pay the cost of the real
                             // 64 -bit extension a few lines below.
-                            nuint surrogatePairsCountNuint = (uint)BitOperations.PopCount(
-                                highSurrogatesMask
-                            );
+                            nuint surrogatePairsCountNuint =
+                                (uint)BitOperations.PopCount(highSurrogatesMask);
 
                             // 2 UTF-16 chars become 1 Unicode scalar
 
@@ -394,9 +393,9 @@ namespace System.Text.Unicode
                         // performed by the SSE2 code path. This will overcount surrogates, but we'll
                         // handle that shortly.
 
-                        Vector<ushort> utf16Data = Unsafe.ReadUnaligned<Vector<ushort>>(
-                            pInputBuffer
-                        );
+                        Vector<ushort> utf16Data = Unsafe.ReadUnaligned<
+                            Vector<ushort>
+                        >(pInputBuffer);
                         Vector<ushort> twoOrMoreUtf8Bytes = Vector.GreaterThanOrEqual(
                             utf16Data,
                             vector0080

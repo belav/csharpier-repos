@@ -1822,9 +1822,8 @@ namespace System.Xml.Serialization
                             ];
                             if (newQname == null)
                             {
-                                newQname = XmlSerializationWriter.GetPrimitiveTypeNameInternal(
-                                    elementType
-                                );
+                                newQname =
+                                    XmlSerializationWriter.GetPrimitiveTypeNameInternal(elementType);
                                 isPrimitive = true;
                             }
                             else

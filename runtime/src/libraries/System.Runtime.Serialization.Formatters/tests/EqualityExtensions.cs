@@ -986,9 +986,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public static void IsEqual(this Graph<int> @this, Graph<int> other, bool isSamePlatform)
         {
             Tuple<Dictionary<int, Graph<int>>, List<List<int>>> thisFlattened = FlattenGraph(@this);
-            Tuple<Dictionary<int, Graph<int>>, List<List<int>>> otherFlattened = FlattenGraph(
-                other
-            );
+            Tuple<Dictionary<int, Graph<int>>, List<List<int>>> otherFlattened =
+                FlattenGraph(other);
 
             Assert.Equal(thisFlattened.Item1.Count, otherFlattened.Item1.Count);
             Assert.Equal(thisFlattened.Item2.Count, otherFlattened.Item2.Count);

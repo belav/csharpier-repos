@@ -370,9 +370,8 @@ namespace System.Net
             internal void* _pPinnedBuffer;
             internal uint _dataAlreadyRead;
 
-            private static readonly IOCompletionCallback s_IOCallback = new IOCompletionCallback(
-                Callback
-            );
+            private static readonly IOCompletionCallback s_IOCallback =
+                new IOCompletionCallback(Callback);
 
             internal HttpRequestStreamAsyncResult(
                 object asyncObject,
@@ -465,9 +464,7 @@ namespace System.Net
             )
             {
                 HttpRequestStreamAsyncResult asyncResult =
-                    (HttpRequestStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                        nativeOverlapped
-                    )!;
+                    (HttpRequestStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
 
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(

@@ -131,9 +131,8 @@ namespace System.Data.Odbc
                 // silently removing the old one
                 if ((null != handler) && (value!.Target is OdbcCommandBuilder))
                 {
-                    OdbcRowUpdatingEventHandler? d = (OdbcRowUpdatingEventHandler?)ADP.FindBuilder(
-                        handler
-                    );
+                    OdbcRowUpdatingEventHandler? d =
+                        (OdbcRowUpdatingEventHandler?)ADP.FindBuilder(handler);
                     if (null != d)
                     {
                         Events.RemoveHandler(s_eventRowUpdating, d);

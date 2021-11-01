@@ -123,9 +123,8 @@ namespace EncodingDataGenerator
         private bool Generate()
         {
             Dictionary<string, ushort> nameMappings = ParseNameMappings(IanaMappings);
-            Dictionary<ushort, KeyValuePair<string, string>> preferredNames = ParsePreferredNames(
-                PreferredIANANames
-            );
+            Dictionary<ushort, KeyValuePair<string, string>> preferredNames =
+                ParsePreferredNames(PreferredIANANames);
 
             if (!ValidateMappings(nameMappings, preferredNames))
             {

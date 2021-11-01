@@ -271,9 +271,7 @@ namespace System.Configuration
                     if (s_configFactory == null)
                     {
                         s_configFactory =
-                            TypeUtil.CreateInstance<IInternalConfigConfigurationFactory>(
-                                InternalConfigConfigurationFactoryTypeName
-                            );
+                            TypeUtil.CreateInstance<IInternalConfigConfigurationFactory>(InternalConfigConfigurationFactoryTypeName);
                     }
                     return s_configFactory;
                 }
@@ -303,9 +301,8 @@ namespace System.Configuration
             {
                 ConfigurationUserLevel userLevel =
                     (ConfigurationUserLevel)hostInitConfigurationParams[0];
-                Host = TypeUtil.CreateInstance<IInternalConfigHost>(
-                    ClientConfigurationHostTypeName
-                );
+                Host =
+                    TypeUtil.CreateInstance<IInternalConfigHost>(ClientConfigurationHostTypeName);
 
                 string desiredConfigPath = userLevel switch
                 {

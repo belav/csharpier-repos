@@ -117,9 +117,9 @@ namespace Microsoft.TestCommon
             );
             IEnumerable<IEnumerable<object[]>> extraDataSets = GetExtraDataSets();
 
-            IEnumerable<IEnumerable<object[]>> finalDataSets = (new[] { baseDataSet }).Concat(
-                extraDataSets
-            );
+            IEnumerable<IEnumerable<object[]>> finalDataSets = (
+                new[] { baseDataSet }
+            ).Concat(extraDataSets);
 
             var datasets = CrossProduct(finalDataSets);
 

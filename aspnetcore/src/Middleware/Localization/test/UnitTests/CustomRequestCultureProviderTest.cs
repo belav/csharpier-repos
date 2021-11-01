@@ -50,9 +50,8 @@ namespace Microsoft.Extensions.Localization
                                                     context,
                                                     options.SupportedCultures
                                                 );
-                                                var requestCulture = new ProviderCultureResult(
-                                                    culture
-                                                );
+                                                var requestCulture =
+                                                    new ProviderCultureResult(culture);
                                                 return Task.FromResult(requestCulture);
                                             }
                                         )

@@ -55,9 +55,7 @@ namespace System.Text.Json.Serialization.Tests
             }";
 
             var obj =
-                JsonSerializer.Deserialize<MyClass_WithNonPublicAccessors_WithPropertyAttributes>(
-                    json
-                );
+                JsonSerializer.Deserialize<MyClass_WithNonPublicAccessors_WithPropertyAttributes>(json);
             Assert.Equal(1, obj.MyInt);
             Assert.Equal("Hello", obj.MyString);
             Assert.Equal(2f, obj.GetMyFloat);
@@ -119,9 +117,7 @@ namespace System.Text.Json.Serialization.Tests
 
             // With attribute
             var obj2 =
-                JsonSerializer.Deserialize<ClassWithExtensionData_NonPublicSetter_WithAttribute>(
-                    json
-                );
+                JsonSerializer.Deserialize<ClassWithExtensionData_NonPublicSetter_WithAttribute>(json);
             Assert.Equal("Value", obj2.ExtensionData["Key"].GetString());
             Assert.Equal(json, JsonSerializer.Serialize(obj2));
         }
@@ -192,9 +188,7 @@ namespace System.Text.Json.Serialization.Tests
 
             string json = @"{""MYSTRING"":""Hello""}";
             Assert.Null(
-                JsonSerializer.Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(
-                    json
-                ).MyString
+                JsonSerializer.Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(json).MyString
             );
             Assert.Equal(
                 "Hello",
@@ -230,9 +224,7 @@ namespace System.Text.Json.Serialization.Tests
 
             string json = @"{""my_string"":""Hello""}";
             Assert.Null(
-                JsonSerializer.Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(
-                    json
-                ).MyString
+                JsonSerializer.Deserialize<MyStruct_WithNonPublicAccessors_WithTypeAttribute>(json).MyString
             );
             Assert.Equal(
                 "Hello",
@@ -300,9 +292,7 @@ namespace System.Text.Json.Serialization.Tests
             string json = @"{""W"":1,""X"":2,""Y"":3,""Z"":4}";
 
             var obj =
-                JsonSerializer.Deserialize<ClassWithMixedPropertyAccessors_PropertyAttributes>(
-                    json
-                );
+                JsonSerializer.Deserialize<ClassWithMixedPropertyAccessors_PropertyAttributes>(json);
             Assert.Equal(1, obj.W);
             Assert.Equal(2, obj.X);
             Assert.Equal(3, obj.Y);

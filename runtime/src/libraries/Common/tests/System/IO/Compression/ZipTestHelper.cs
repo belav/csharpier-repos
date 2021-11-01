@@ -230,9 +230,8 @@ namespace System.IO.Compression.Tests
                                 DateTime lower = file.LastModifiedDate.AddSeconds(
                                     -zipTimestampResolution
                                 );
-                                DateTime upper = file.LastModifiedDate.AddSeconds(
-                                    zipTimestampResolution
-                                );
+                                DateTime upper =
+                                    file.LastModifiedDate.AddSeconds(zipTimestampResolution);
                                 Assert.InRange(entry.LastWriteTime.Ticks, lower.Ticks, upper.Ticks);
                             }
 

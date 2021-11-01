@@ -176,9 +176,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                             else
                             {
                                 var subquery =
-                                    _queryableMethodTranslatingExpressionVisitor.TranslateSubquery(
-                                        methodCallExpression
-                                    );
+                                    _queryableMethodTranslatingExpressionVisitor.TranslateSubquery(methodCallExpression);
                                 if (subquery != null)
                                 {
                                     if (subquery.ResultCardinality == ResultCardinality.Enumerable)

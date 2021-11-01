@@ -669,9 +669,7 @@ ORDER BY [c].[CustomerID]"
             bool async
         )
         {
-            await base.Multiple_collection_navigation_with_FirstOrDefault_chained_projecting_scalar(
-                async
-            );
+            await base.Multiple_collection_navigation_with_FirstOrDefault_chained_projecting_scalar(async);
 
             AssertSql(
                 @"SELECT (
@@ -1101,9 +1099,7 @@ ORDER BY [o].[OrderID]"
             bool async
         )
         {
-            await base.Average_with_non_matching_types_in_projection_doesnt_produce_second_explicit_cast(
-                async
-            );
+            await base.Average_with_non_matching_types_in_projection_doesnt_produce_second_explicit_cast(async);
 
             AssertSql(
                 @"SELECT AVG(CAST(CAST([o].[OrderID] AS bigint) AS float))
@@ -1291,9 +1287,7 @@ WHERE [c].[CustomerID] = N'ALFKI'"
             bool async
         )
         {
-            await base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery(
-                async
-            );
+            await base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery(async);
 
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
@@ -1306,9 +1300,7 @@ WHERE 0 = 1"
             bool async
         )
         {
-            await base.Contains_over_scalar_with_null_should_rewrite_to_identity_equality_subquery(
-                async
-            );
+            await base.Contains_over_scalar_with_null_should_rewrite_to_identity_equality_subquery(async);
 
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
@@ -1324,9 +1316,7 @@ WHERE EXISTS (
             bool async
         )
         {
-            await base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_negated(
-                async
-            );
+            await base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_negated(async);
 
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
@@ -1342,9 +1332,7 @@ WHERE NOT (EXISTS (
             bool async
         )
         {
-            await base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_complex(
-                async
-            );
+            await base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_complex(async);
 
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
@@ -1369,9 +1357,7 @@ END"
             bool async
         )
         {
-            await base.Contains_over_nullable_scalar_with_null_in_subquery_translated_correctly(
-                async
-            );
+            await base.Contains_over_nullable_scalar_with_null_in_subquery_translated_correctly(async);
 
             AssertSql(
                 @"SELECT CASE
@@ -1389,9 +1375,7 @@ FROM [Orders] AS [o]"
             bool async
         )
         {
-            await base.Contains_over_non_nullable_scalar_with_null_in_subquery_simplifies_to_false(
-                async
-            );
+            await base.Contains_over_non_nullable_scalar_with_null_in_subquery_simplifies_to_false(async);
 
             AssertSql(
                 @"SELECT CAST(0 AS bit)

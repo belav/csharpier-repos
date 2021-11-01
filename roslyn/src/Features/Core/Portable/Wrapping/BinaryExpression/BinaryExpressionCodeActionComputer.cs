@@ -59,9 +59,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
 
                 var generator = SyntaxGenerator.GetGenerator(document);
 
-                _newlineBeforeOperatorTrivia = service.GetNewLineBeforeOperatorTrivia(
-                    NewLineTrivia
-                );
+                _newlineBeforeOperatorTrivia =
+                    service.GetNewLineBeforeOperatorTrivia(NewLineTrivia);
 
                 _indentAndAlignTrivia = new SyntaxTriviaList(
                     generator.Whitespace(

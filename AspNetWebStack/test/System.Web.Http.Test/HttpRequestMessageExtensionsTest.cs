@@ -993,9 +993,8 @@ namespace System.Net.Http
             // Arrange
             HttpRequestMessage request = CreateRequest();
             ContentRangeHeaderValue expectedContentRange = new ContentRangeHeaderValue(length: 128);
-            InvalidByteRangeException invalidByteRangeException = new InvalidByteRangeException(
-                expectedContentRange
-            );
+            InvalidByteRangeException invalidByteRangeException =
+                new InvalidByteRangeException(expectedContentRange);
 
             // Act
             HttpResponseMessage response = request.CreateErrorResponse(invalidByteRangeException);

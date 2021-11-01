@@ -482,9 +482,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bool wasError;
                 var plainName = node.Identifier.ValueText;
                 var result = LookupResult.GetInstance();
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 this.LookupSymbolsWithFallback(
                     result,
                     plainName,
@@ -1235,9 +1234,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node.Identifier.IsVerbatimIdentifier()
             );
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             this.LookupSymbolsSimpleName(
                 result,
                 qualifierOpt,
@@ -1296,9 +1294,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 if (bindingResult.Kind == SymbolKind.Alias)
                 {
-                    var aliasTarget = ((AliasSymbol)bindingResult).GetAliasTarget(
-                        basesBeingResolved
-                    );
+                    var aliasTarget = (
+                        (AliasSymbol)bindingResult
+                    ).GetAliasTarget(basesBeingResolved);
                     if (
                         aliasTarget.Kind == SymbolKind.NamedType
                         && ((NamedTypeSymbol)aliasTarget).ContainsDynamic()
@@ -1709,9 +1707,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var lookupResult = LookupResult.GetInstance();
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             this.LookupSymbolsSimpleName(
                 lookupResult,
                 qualifierOpt,
@@ -3430,9 +3427,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ].GetReferencedAssemblySymbols()
             )
             {
-                var forwardedType = referencedAssembly.TryLookupForwardedMetadataType(
-                    ref metadataName
-                );
+                var forwardedType =
+                    referencedAssembly.TryLookupForwardedMetadataType(ref metadataName);
                 if ((object)forwardedType != null)
                 {
                     if (forwardedType.Kind == SymbolKind.ErrorType)

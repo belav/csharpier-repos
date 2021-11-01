@@ -106,9 +106,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 {
                     if (
                         symbol.Equals(
-                            containingType.FindImplementationForInterfaceMember(
-                                implementedInterfaceMember
-                            )
+                            containingType.FindImplementationForInterfaceMember(implementedInterfaceMember)
                         )
                     )
                     {

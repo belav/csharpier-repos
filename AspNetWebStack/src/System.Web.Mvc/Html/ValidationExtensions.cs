@@ -141,9 +141,8 @@ namespace System.Web.Mvc.Html
                 return; // nothing to do
             }
 
-            string modelName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
-                expression
-            );
+            string modelName =
+                htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(expression);
             ApplyFieldValidationMetadata(htmlHelper, modelMetadata, modelName);
         }
 
@@ -601,9 +600,8 @@ namespace System.Web.Mvc.Html
             string tag
         )
         {
-            string modelName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
-                expression
-            );
+            string modelName =
+                htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(expression);
             FormContext formContext = htmlHelper.ViewContext.GetFormContextForClientValidation();
 
             if (!htmlHelper.ViewData.ModelState.ContainsKey(modelName) && formContext == null)

@@ -284,9 +284,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         )
                         {
                             var destination = branch.Destination;
-                            var currentDestinationData = analyzer.GetCurrentAnalysisData(
-                                destination
-                            );
+                            var currentDestinationData =
+                                analyzer.GetCurrentAnalysisData(destination);
                             var mergedAnalysisData = analyzer.Merge(
                                 currentDestinationData,
                                 currentAnalsisData,

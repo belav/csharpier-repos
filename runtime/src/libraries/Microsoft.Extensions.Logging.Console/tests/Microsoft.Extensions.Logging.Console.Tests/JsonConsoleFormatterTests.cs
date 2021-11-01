@@ -555,9 +555,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                     Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
                 }
             };
-            var jsonMonitor = new TestFormatterOptionsMonitor<JsonConsoleFormatterOptions>(
-                jsonOptions
-            );
+            var jsonMonitor =
+                new TestFormatterOptionsMonitor<JsonConsoleFormatterOptions>(jsonOptions);
             var jsonFormatter = new JsonConsoleFormatter(jsonMonitor);
             Func<string, Exception, string> exceptionFormatter = (state, exception) =>
                 state.ToString();

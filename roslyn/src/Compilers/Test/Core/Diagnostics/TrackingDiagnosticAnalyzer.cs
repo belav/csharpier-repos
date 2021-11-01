@@ -132,9 +132,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var actualSyntaxKinds = new HashSet<TLanguageKindEnum>(
                 _callLog.Where(a => FilterByAbstractName(a, "SyntaxNode")).Select(e => e.SyntaxKind)
             );
-            var savedSyntaxKindsPatterns = new HashSet<TLanguageKindEnum>(
-                expectedMissingSyntaxKinds
-            );
+            var savedSyntaxKindsPatterns =
+                new HashSet<TLanguageKindEnum>(expectedMissingSyntaxKinds);
             expectedMissingSyntaxKinds.IntersectWith(actualSyntaxKinds);
             Assert.True(
                 expectedMissingSyntaxKinds.Count == 0,

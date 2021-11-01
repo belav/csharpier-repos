@@ -312,9 +312,9 @@ namespace System.Web.Http.Results
                     Assert.NotNull(response);
                     Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
                     HttpContent content = response.Content;
-                    ObjectContent<HttpError> typedContent = Assert.IsType<ObjectContent<HttpError>>(
-                        content
-                    );
+                    ObjectContent<HttpError> typedContent = Assert.IsType<
+                        ObjectContent<HttpError>
+                    >(content);
                     HttpError error = (HttpError)typedContent.Value;
                     Assert.NotNull(error);
                     Assert.Equal(expectedException.Message, error.ExceptionMessage);
@@ -369,9 +369,9 @@ namespace System.Web.Http.Results
                     Assert.NotNull(response);
                     Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
                     HttpContent content = response.Content;
-                    ObjectContent<HttpError> typedContent = Assert.IsType<ObjectContent<HttpError>>(
-                        content
-                    );
+                    ObjectContent<HttpError> typedContent = Assert.IsType<
+                        ObjectContent<HttpError>
+                    >(content);
                     HttpError error = (HttpError)typedContent.Value;
                     Assert.NotNull(error);
                     Assert.Null(error.ExceptionMessage);

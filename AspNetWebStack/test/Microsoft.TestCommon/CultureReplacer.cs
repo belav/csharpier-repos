@@ -11,9 +11,8 @@ namespace Microsoft.TestCommon
     {
         private const string _defaultCultureName = "en-GB";
         private const string _defaultUICultureName = "en-US";
-        private static readonly CultureInfo _defaultCulture = CultureInfo.GetCultureInfo(
-            _defaultCultureName
-        );
+        private static readonly CultureInfo _defaultCulture =
+            CultureInfo.GetCultureInfo(_defaultCultureName);
         private readonly CultureInfo _originalCulture;
         private readonly CultureInfo _originalUICulture;
         private readonly long _threadId;

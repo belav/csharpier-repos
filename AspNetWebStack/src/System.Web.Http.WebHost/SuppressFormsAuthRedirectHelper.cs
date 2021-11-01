@@ -25,9 +25,8 @@ namespace System.Web.Http.WebHost
         /// </summary>
         internal static bool GetEnabled(NameValueCollection appSettings)
         {
-            string disableSuppressRedirect = appSettings.Get(
-                AppSettingsSuppressFormsAuthenticationRedirectKey
-            );
+            string disableSuppressRedirect =
+                appSettings.Get(AppSettingsSuppressFormsAuthenticationRedirectKey);
 
             if (!String.IsNullOrEmpty(disableSuppressRedirect))
             {

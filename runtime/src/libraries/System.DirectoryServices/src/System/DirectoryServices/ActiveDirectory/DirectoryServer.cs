@@ -106,9 +106,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             ? ((DomainController)this).ServerObjectName
                             : ((AdamInstance)this).ServerObjectName;
 
-                    DirectoryEntry serverEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                        serverName
-                    );
+                    DirectoryEntry serverEntry =
+                        directoryEntryMgr.GetCachedDirectoryEntry(serverName);
 
                     // force binding (needed otherwise S.DS throw an exception while releasing the COM interface pointer)
                     _ = (string?)PropertyManager.GetPropertyValue(
@@ -656,9 +655,8 @@ namespace System.DirectoryServices.ActiveDirectory
             LoadLibrarySafeHandle libHandle
         )
         {
-            ActiveDirectoryReplicationMetadata collection = new ActiveDirectoryReplicationMetadata(
-                server
-            );
+            ActiveDirectoryReplicationMetadata collection =
+                new ActiveDirectoryReplicationMetadata(server);
             int count = 0;
 
             if (advanced)

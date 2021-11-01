@@ -152,9 +152,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         public Func<ServiceProviderEngineScope, object> BuildNoCache(ServiceCallSite callSite)
         {
-            Expression<Func<ServiceProviderEngineScope, object>> expression = BuildExpression(
-                callSite
-            );
+            Expression<Func<ServiceProviderEngineScope, object>> expression =
+                BuildExpression(callSite);
             DependencyInjectionEventSource.Log.ExpressionTreeGenerated(
                 callSite.ServiceType,
                 expression

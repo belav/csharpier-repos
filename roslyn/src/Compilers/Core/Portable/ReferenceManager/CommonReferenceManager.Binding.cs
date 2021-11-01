@@ -1031,9 +1031,9 @@ namespace Microsoft.CodeAnalysis
 
                             // Make sure symbols represent the same assembly/binary
                             if (
-                                !assemblies[definitionIndex].IsMatchingAssembly(
-                                    currentCandidateReferencedSymbol
-                                )
+                                !assemblies[
+                                    definitionIndex
+                                ].IsMatchingAssembly(currentCandidateReferencedSymbol)
                             )
                             {
                                 // Mismatch between versions?
@@ -1105,9 +1105,9 @@ namespace Microsoft.CodeAnalysis
 
                                 // Make sure candidate COR library represent the same assembly/binary
                                 if (
-                                    !assemblies[corLibraryIndex].IsMatchingAssembly(
-                                        candidateCorLibrary
-                                    )
+                                    !assemblies[
+                                        corLibraryIndex
+                                    ].IsMatchingAssembly(candidateCorLibrary)
                                 )
                                 {
                                     // Mismatch between versions?

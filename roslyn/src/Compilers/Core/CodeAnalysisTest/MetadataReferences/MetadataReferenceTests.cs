@@ -180,9 +180,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void CreateFromAssembly()
         {
             var assembly = typeof(object).Assembly;
-            var r = (PortableExecutableReference)MetadataReference.CreateFromAssemblyInternal(
-                assembly
-            );
+            var r =
+                (PortableExecutableReference)MetadataReference.CreateFromAssemblyInternal(assembly);
             Assert.Equal(assembly.Location, r.FilePath);
             Assert.Equal(assembly.Location, r.Display);
             Assert.Equal(MetadataImageKind.Assembly, r.Properties.Kind);

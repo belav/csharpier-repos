@@ -80,15 +80,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 // Verify masks are sufficient for values.
                 Debug.Assert(
-                    EnumUtilities.ContainsAllValues<WellKnownAttributeFlags>(
-                        WellKnownAttributeDataMask
-                    )
+                    EnumUtilities.ContainsAllValues<WellKnownAttributeFlags>(WellKnownAttributeDataMask)
                 );
                 Debug.Assert(EnumUtilities.ContainsAllValues<RefKind>(RefKindMask));
                 Debug.Assert(
-                    EnumUtilities.ContainsAllValues<FlowAnalysisAnnotations>(
-                        FlowAnalysisAnnotationsMask
-                    )
+                    EnumUtilities.ContainsAllValues<FlowAnalysisAnnotations>(FlowAnalysisAnnotationsMask)
                 );
             }
 #endif

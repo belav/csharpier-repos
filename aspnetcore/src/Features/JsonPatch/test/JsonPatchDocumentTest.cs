@@ -59,9 +59,9 @@ namespace Microsoft.AspNetCore.JsonPatch
             patchDocument.Copy("StringProperty", "AnotherStringProperty");
 
             var serialized = JsonConvert.SerializeObject(patchDocument);
-            var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleObject>>(
-                serialized
-            );
+            var deserialized = JsonConvert.DeserializeObject<
+                JsonPatchDocument<SimpleObject>
+            >(serialized);
 
             // Act
             deserialized.ApplyTo(targetObject);
@@ -121,9 +121,9 @@ namespace Microsoft.AspNetCore.JsonPatch
             var serialized = JsonConvert.SerializeObject(patchDocument);
 
             // Act
-            var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleObject>>(
-                serialized
-            );
+            var deserialized = JsonConvert.DeserializeObject<
+                JsonPatchDocument<SimpleObject>
+            >(serialized);
 
             // Assert
             Assert.IsType<JsonPatchDocument<SimpleObject>>(deserialized);

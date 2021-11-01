@@ -242,9 +242,8 @@ namespace System.Data
                         if (tmpSimpleType != null)
                         {
                             SimpleType tmpDataSimpleType = new SimpleType(xmlSimpleType);
-                            string errorStr = tmpSimpleType.HasConflictingDefinition(
-                                tmpDataSimpleType
-                            );
+                            string errorStr =
+                                tmpSimpleType.HasConflictingDefinition(tmpDataSimpleType);
                             if (errorStr.Length != 0)
                             {
                                 throw ExceptionBuilder.InvalidDuplicateNamedSimpleTypeDelaration(

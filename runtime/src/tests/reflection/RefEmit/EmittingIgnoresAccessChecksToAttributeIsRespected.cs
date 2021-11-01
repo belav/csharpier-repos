@@ -17,9 +17,8 @@ class Test
             AssemblyBuilderAccess.Run
         );
         ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("testmodule");
-        ConstructorInfo ignoreAccessChecksToAttributeCtor = DefineIgnoresAccessChecksToAttribute(
-            moduleBuilder
-        );
+        ConstructorInfo ignoreAccessChecksToAttributeCtor =
+            DefineIgnoresAccessChecksToAttribute(moduleBuilder);
 
         {
             Type type = typeof(BaseClass1);

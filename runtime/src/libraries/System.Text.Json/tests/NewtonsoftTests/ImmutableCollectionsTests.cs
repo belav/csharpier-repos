@@ -78,9 +78,9 @@ namespace System.Text.Json.Tests
         ""Katarina""
       ]";
 
-            IImmutableList<string> champions = JsonSerializer.Deserialize<IImmutableList<string>>(
-                json
-            );
+            IImmutableList<string> champions = JsonSerializer.Deserialize<
+                IImmutableList<string>
+            >(json);
 
             Assert.Equal(3, champions.Count);
             Assert.Equal("Volibear", champions[0]);
@@ -178,9 +178,9 @@ namespace System.Text.Json.Tests
   ""3""
 ]";
 
-            IImmutableQueue<string> data = JsonSerializer.Deserialize<IImmutableQueue<string>>(
-                json
-            );
+            IImmutableQueue<string> data = JsonSerializer.Deserialize<
+                IImmutableQueue<string>
+            >(json);
 
             Assert.False(data.IsEmpty);
             Assert.Equal("One", data.Peek());
@@ -233,9 +233,9 @@ namespace System.Text.Json.Tests
   ""3""
 ]";
 
-            IImmutableStack<string> data = JsonSerializer.Deserialize<IImmutableStack<string>>(
-                json
-            );
+            IImmutableStack<string> data = JsonSerializer.Deserialize<
+                IImmutableStack<string>
+            >(json);
 
             Assert.False(data.IsEmpty);
             Assert.Equal("3", data.Peek());
@@ -273,9 +273,9 @@ namespace System.Text.Json.Tests
   ""3""
 ]";
 
-            ImmutableHashSet<string> data = JsonSerializer.Deserialize<ImmutableHashSet<string>>(
-                json
-            );
+            ImmutableHashSet<string> data = JsonSerializer.Deserialize<
+                ImmutableHashSet<string>
+            >(json);
 
             Assert.Equal(3, data.Count);
             Assert.Contains("3", data);

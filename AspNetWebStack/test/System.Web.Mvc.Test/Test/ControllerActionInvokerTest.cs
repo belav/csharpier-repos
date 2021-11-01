@@ -3185,9 +3185,8 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Type controllerType = typeof(WithRoutingAttributeController);
-            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             var context = new ControllerContext();
             context.RouteData = new RouteData();
@@ -3217,9 +3216,8 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Type controllerType = typeof(AttributeRoutingOnTheController);
-            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             var context = new ControllerContext();
             context.RouteData = new RouteData();
@@ -3258,9 +3256,8 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Type controllerType = typeof(AttributeRoutingOnTheController);
-            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             var context = new ControllerContext();
             context.RouteData = new RouteData();
@@ -3294,9 +3291,8 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Type controllerType = typeof(AttributeRoutingOnTheController);
-            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             var context = new ControllerContext();
             context.RouteData = new RouteData();
@@ -3325,9 +3321,8 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Type controllerType = typeof(WithRoutingAttributeController);
-            ControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             var context = new ControllerContext();
             context.RouteData = new RouteData();

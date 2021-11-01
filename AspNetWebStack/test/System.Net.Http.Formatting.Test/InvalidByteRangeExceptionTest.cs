@@ -21,9 +21,8 @@ namespace System.Net.Http
         public void Ctor_SetsContentRange()
         {
             ContentRangeHeaderValue contentRange = new ContentRangeHeaderValue(0, 20, 100);
-            InvalidByteRangeException invalidByteRangeException = new InvalidByteRangeException(
-                contentRange
-            );
+            InvalidByteRangeException invalidByteRangeException =
+                new InvalidByteRangeException(contentRange);
             Assert.Same(contentRange, invalidByteRangeException.ContentRange);
         }
     }

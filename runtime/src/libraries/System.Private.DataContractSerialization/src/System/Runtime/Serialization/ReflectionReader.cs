@@ -262,9 +262,8 @@ namespace System.Runtime.Serialization
             string itemName = GetCollectionContractItemName(collectionContract);
             string itemNs = GetCollectionContractNamespace(collectionContract);
             Type itemType = collectionContract.ItemType;
-            CollectionReadItemDelegate collectionReadItemDelegate = GetCollectionReadItemDelegate(
-                collectionContract
-            );
+            CollectionReadItemDelegate collectionReadItemDelegate =
+                GetCollectionReadItemDelegate(collectionContract);
             MethodInfo getCollectionSetItemDelegateMethod =
                 s_getCollectionSetItemDelegateMethod.MakeGenericMethod(itemType);
             CollectionSetItemDelegate collectionSetItemDelegate =

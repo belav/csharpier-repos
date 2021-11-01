@@ -742,9 +742,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         private void UpdatePrimaryKeyConfigurationSource(ConfigurationSource configurationSource) =>
-            _primaryKeyConfigurationSource = configurationSource.Max(
-                _primaryKeyConfigurationSource
-            );
+            _primaryKeyConfigurationSource =
+                configurationSource.Max(_primaryKeyConfigurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1081,9 +1080,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             removed = foreignKey.PrincipalKey.ReferencingForeignKeys!.Remove(foreignKey);
             Check.DebugAssert(removed, "removed is false");
-            removed = foreignKey.PrincipalEntityType.DeclaredReferencingForeignKeys!.Remove(
-                foreignKey
-            );
+            removed =
+                foreignKey.PrincipalEntityType.DeclaredReferencingForeignKeys!.Remove(foreignKey);
             Check.DebugAssert(removed, "removed is false");
         }
 
@@ -2046,9 +2044,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 : true;
             Check.DebugAssert(removed, "removed is false");
 
-            removed = navigation.TargetEntityType.DeclaredReferencingSkipNavigations!.Remove(
-                navigation
-            );
+            removed =
+                navigation.TargetEntityType.DeclaredReferencingSkipNavigations!.Remove(navigation);
             Check.DebugAssert(removed, "removed is false");
 
             navigation.SetRemovedFromModel();
@@ -3834,9 +3831,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private void UpdateConstructorBindingConfigurationSource(
             ConfigurationSource configurationSource
         ) =>
-            _constructorBindingConfigurationSource = configurationSource.Max(
-                _constructorBindingConfigurationSource
-            );
+            _constructorBindingConfigurationSource =
+                configurationSource.Max(_constructorBindingConfigurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3889,9 +3885,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private void UpdateServiceOnlyConstructorBindingConfigurationSource(
             ConfigurationSource configurationSource
         ) =>
-            _serviceOnlyConstructorBindingConfigurationSource = configurationSource.Max(
-                _serviceOnlyConstructorBindingConfigurationSource
-            );
+            _serviceOnlyConstructorBindingConfigurationSource =
+                configurationSource.Max(_serviceOnlyConstructorBindingConfigurationSource);
         #endregion
 
         #region Explicit interface implementations

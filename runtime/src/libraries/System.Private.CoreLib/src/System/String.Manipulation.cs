@@ -895,9 +895,10 @@ namespace System
             string result = FastAllocateString(totalWidth);
 
             Buffer.Memmove(ref result._firstChar, ref _firstChar, (nuint)oldLength);
-            new Span<char>(ref Unsafe.Add(ref result._firstChar, oldLength), count).Fill(
-                paddingChar
-            );
+            new Span<char>(
+                ref Unsafe.Add(ref result._firstChar, oldLength),
+                count
+            ).Fill(paddingChar);
 
             return result;
         }

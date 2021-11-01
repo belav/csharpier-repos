@@ -129,9 +129,8 @@ namespace System.Net.Http.Functional.Tests
                                     async (useProxyString, useVersionString, uriString) =>
                                     {
                                         using (
-                                            HttpClientHandler handler = CreateHttpClientHandler(
-                                                useVersionString
-                                            )
+                                            HttpClientHandler handler =
+                                                CreateHttpClientHandler(useVersionString)
                                         )
                                         using (
                                             HttpClient client = CreateHttpClient(
@@ -147,9 +146,8 @@ namespace System.Net.Http.Functional.Tests
                                             handler.DefaultProxyCredentials = creds;
                                             handler.UseProxy = bool.Parse(useProxyString);
 
-                                            HttpResponseMessage response = await client.GetAsync(
-                                                uriString
-                                            );
+                                            HttpResponseMessage response =
+                                                await client.GetAsync(uriString);
                                             // Correctness of user and password is done in server part.
                                             Assert.True(response.StatusCode == HttpStatusCode.OK);
                                         }

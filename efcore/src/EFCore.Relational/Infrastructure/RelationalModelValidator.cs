@@ -1695,9 +1695,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                         if (overlappingTables == null)
                         {
-                            overlappingTables = new HashSet<(string Table, string? Schema)>(
-                                tablesMappedToProperty
-                            );
+                            overlappingTables =
+                                new HashSet<(string Table, string? Schema)>(tablesMappedToProperty);
                         }
                         else
                         {

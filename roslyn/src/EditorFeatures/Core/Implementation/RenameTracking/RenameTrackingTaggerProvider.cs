@@ -209,9 +209,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
         {
             try
             {
-                return isRenamableIdentifierTask.WaitAndGetResult_CanCallOnBackground(
-                        cancellationToken
-                    ) != TriggerIdentifierKind.NotRenamable;
+                return isRenamableIdentifierTask.WaitAndGetResult_CanCallOnBackground(cancellationToken)
+                    != TriggerIdentifierKind.NotRenamable;
             }
             catch (OperationCanceledException e)
                 when (e.CancellationToken != cancellationToken

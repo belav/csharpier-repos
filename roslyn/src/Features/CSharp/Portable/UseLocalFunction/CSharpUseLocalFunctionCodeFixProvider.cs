@@ -85,13 +85,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             foreach (var diagnostic in diagnostics)
             {
                 var localDeclaration =
-                    (LocalDeclarationStatementSyntax)diagnostic.AdditionalLocations[0].FindNode(
-                        cancellationToken
-                    );
+                    (LocalDeclarationStatementSyntax)diagnostic.AdditionalLocations[
+                        0
+                    ].FindNode(cancellationToken);
                 var anonymousFunction =
-                    (AnonymousFunctionExpressionSyntax)diagnostic.AdditionalLocations[1].FindNode(
-                        cancellationToken
-                    );
+                    (AnonymousFunctionExpressionSyntax)diagnostic.AdditionalLocations[
+                        1
+                    ].FindNode(cancellationToken);
 
                 var references = new List<ExpressionSyntax>(
                     diagnostic.AdditionalLocations.Count - 2
@@ -430,9 +430,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                         return argumentNode;
                     }
 
-                    var newParameter = newParameterList.Parameters.ElementAtOrDefault(
-                        parameterIndex
-                    );
+                    var newParameter =
+                        newParameterList.Parameters.ElementAtOrDefault(parameterIndex);
                     if (newParameter == null || newParameter.Identifier.IsMissing)
                     {
                         return argumentNode;

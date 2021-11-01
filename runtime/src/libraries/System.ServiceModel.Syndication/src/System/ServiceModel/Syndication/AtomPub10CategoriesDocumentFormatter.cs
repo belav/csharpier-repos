@@ -171,9 +171,7 @@ namespace System.ServiceModel.Syndication
             }
             else
             {
-                return (ReferencedCategoriesDocument)Activator.CreateInstance(
-                    _referencedDocumentType
-                );
+                return (ReferencedCategoriesDocument)Activator.CreateInstance(_referencedDocumentType);
             }
         }
 

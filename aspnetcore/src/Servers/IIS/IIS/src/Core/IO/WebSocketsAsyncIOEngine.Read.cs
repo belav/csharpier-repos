@@ -20,9 +20,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO
                 IntPtr completionContext
             )
             {
-                var context = (WebSocketReadOperation)GCHandle.FromIntPtr(
-                    completionContext
-                ).Target!;
+                var context =
+                    (WebSocketReadOperation)GCHandle.FromIntPtr(completionContext).Target!;
 
                 NativeMethods.HttpGetCompletionInfo(completionInfo, out var cbBytes, out var hr);
 

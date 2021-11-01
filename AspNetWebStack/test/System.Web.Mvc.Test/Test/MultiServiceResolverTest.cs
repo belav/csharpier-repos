@@ -16,9 +16,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             IEnumerable<TestProvider> providersFromServiceLocation = GetProvidersFromService();
             IList<TestProvider> providersFromItemsThunk = GetProvidersFromItemsThunk().ToList();
-            IEnumerable<TestProvider> expectedProviders = providersFromServiceLocation.Concat(
-                providersFromItemsThunk
-            );
+            IEnumerable<TestProvider> expectedProviders =
+                providersFromServiceLocation.Concat(providersFromItemsThunk);
 
             Mock<IDependencyResolver> resolver = new Mock<IDependencyResolver>();
             resolver

@@ -17,9 +17,8 @@ namespace System.DirectoryServices.Tests
         public void TestSchema()
         {
             using (
-                ActiveDirectorySchema schema = ActiveDirectorySchema.GetSchema(
-                    ActiveDirectoryContext
-                )
+                ActiveDirectorySchema schema =
+                    ActiveDirectorySchema.GetSchema(ActiveDirectoryContext)
             )
             {
                 Assert.True(
@@ -176,9 +175,8 @@ namespace System.DirectoryServices.Tests
         {
             // using (ActiveDirectorySchemaClass schema = ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "user"))
             using (
-                ActiveDirectorySchema schema = ActiveDirectorySchema.GetSchema(
-                    ActiveDirectoryContext
-                )
+                ActiveDirectorySchema schema =
+                    ActiveDirectorySchema.GetSchema(ActiveDirectoryContext)
             )
             using (DirectoryEntry de = schema.GetDirectoryEntry())
             {

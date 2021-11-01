@@ -46,9 +46,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // Assert
             var feature = Assert.Single(builder.Features);
-            var codeTargetExtensionFeature = Assert.IsAssignableFrom<IRazorTargetExtensionFeature>(
-                feature
-            );
+            var codeTargetExtensionFeature =
+                Assert.IsAssignableFrom<IRazorTargetExtensionFeature>(feature);
             var extensions = Assert.Single(codeTargetExtensionFeature.TargetExtensions);
             Assert.Same(expectedExtension, extensions);
         }

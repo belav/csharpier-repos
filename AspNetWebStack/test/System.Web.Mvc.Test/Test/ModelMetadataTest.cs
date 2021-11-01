@@ -1183,9 +1183,8 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             DerivedModel derivedModel = new DerivedModel();
-            ViewDataDictionary<DerivedModel> viewData = new ViewDataDictionary<DerivedModel>(
-                derivedModel
-            );
+            ViewDataDictionary<DerivedModel> viewData =
+                new ViewDataDictionary<DerivedModel>(derivedModel);
             provider
                 .Setup(
                     p =>

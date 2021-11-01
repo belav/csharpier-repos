@@ -174,9 +174,8 @@ namespace System.Net.Http
                 }
 
                 // AppContext switch wasn't used. Check the environment variable.
-                string? envVar = Environment.GetEnvironmentVariable(
-                    Http2SupportEnvironmentVariableSettingName
-                );
+                string? envVar =
+                    Environment.GetEnvironmentVariable(Http2SupportEnvironmentVariableSettingName);
                 if (
                     envVar != null
                     && (
@@ -210,9 +209,8 @@ namespace System.Net.Http
                 }
 
                 // AppContext switch wasn't used. Check the environment variable.
-                string? envVar = Environment.GetEnvironmentVariable(
-                    Http3DraftSupportEnvironmentVariableSettingName
-                );
+                string? envVar =
+                    Environment.GetEnvironmentVariable(Http3DraftSupportEnvironmentVariableSettingName);
                 if (
                     envVar != null
                     && (

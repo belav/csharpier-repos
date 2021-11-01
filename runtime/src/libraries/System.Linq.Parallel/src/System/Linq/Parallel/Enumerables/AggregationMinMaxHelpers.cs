@@ -27,9 +27,8 @@ namespace System.Linq
 
             Func<Pair<bool, T>, T, Pair<bool, T>> intermediateReduce =
                 MakeIntermediateReduceFunction(sign);
-            Func<Pair<bool, T>, Pair<bool, T>, Pair<bool, T>> finalReduce = MakeFinalReduceFunction(
-                sign
-            );
+            Func<Pair<bool, T>, Pair<bool, T>, Pair<bool, T>> finalReduce =
+                MakeFinalReduceFunction(sign);
             Func<Pair<bool, T>, T> resultSelector = MakeResultSelectorFunction();
 
             AssociativeAggregationOperator<T, Pair<bool, T>, T> aggregation =

@@ -374,9 +374,8 @@ namespace System.Text
             int byteCount = 0;
             char* charEnd = chars + count;
 
-            EncoderFallbackBufferHelper fallbackHelper = new EncoderFallbackBufferHelper(
-                fallbackBuffer
-            );
+            EncoderFallbackBufferHelper fallbackHelper =
+                new EncoderFallbackBufferHelper(fallbackBuffer);
 
             // We may have a left over character from last time, try and process it.
             if (charLeftOver > 0)
@@ -582,9 +581,8 @@ namespace System.Text
             // prepare our end
             byte* byteEnd = bytes + byteCount;
 
-            EncoderFallbackBufferHelper fallbackHelper = new EncoderFallbackBufferHelper(
-                fallbackBuffer
-            );
+            EncoderFallbackBufferHelper fallbackHelper =
+                new EncoderFallbackBufferHelper(fallbackBuffer);
 
             // We may have a left over character from last time, try and process it.
             if (charLeftOver > 0)
@@ -761,9 +759,8 @@ namespace System.Text
 
             // Might need one of these later
             DecoderFallbackBuffer? fallbackBuffer = null;
-            DecoderFallbackBufferHelper fallbackHelper = new DecoderFallbackBufferHelper(
-                fallbackBuffer
-            );
+            DecoderFallbackBufferHelper fallbackHelper =
+                new DecoderFallbackBufferHelper(fallbackBuffer);
 
             // Have to do it the hard way.
             // Assume charCount will be == count

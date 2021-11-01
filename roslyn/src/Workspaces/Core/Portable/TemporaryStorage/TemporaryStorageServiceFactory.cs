@@ -182,9 +182,7 @@ namespace Microsoft.CodeAnalysis.Host
 
                         reference = new ReferenceCountedDisposable<MemoryMappedFile>(file);
                         _weakFileReference =
-                            new ReferenceCountedDisposable<MemoryMappedFile>.WeakReference(
-                                reference
-                            );
+                            new ReferenceCountedDisposable<MemoryMappedFile>.WeakReference(reference);
                         _name = mapName;
                         _fileSize = MultiFileBlockSize;
                         _offset = size;

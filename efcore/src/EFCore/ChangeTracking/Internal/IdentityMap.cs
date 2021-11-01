@@ -129,9 +129,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         throw new InvalidOperationException(
                             CoreStrings.InvalidKeyValue(
                                 Key.DeclaringEntityType.DisplayName(),
-                                PrincipalKeyValueFactory.FindNullPropertyInKeyValues(
-                                    keyValues
-                                )!.Name
+                                PrincipalKeyValueFactory.FindNullPropertyInKeyValues(keyValues)!.Name
                             )
                         );
                     }

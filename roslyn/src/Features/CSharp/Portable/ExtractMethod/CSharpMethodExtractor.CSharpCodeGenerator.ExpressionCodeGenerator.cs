@@ -177,9 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     CancellationToken cancellationToken
                 )
                 {
-                    var callSiteContainer = GetCallSiteContainerFromOutermostMoveInVariable(
-                        cancellationToken
-                    );
+                    var callSiteContainer =
+                        GetCallSiteContainerFromOutermostMoveInVariable(cancellationToken);
                     if (callSiteContainer != null)
                     {
                         return callSiteContainer;

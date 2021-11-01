@@ -1061,9 +1061,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             if (namedTypeSymbol.IsAnonymousType)
             {
                 Debug.Assert(!needDeclaration);
-                namedTypeSymbol = AnonymousTypeManager.TranslateAnonymousTypeSymbol(
-                    namedTypeSymbol
-                );
+                namedTypeSymbol =
+                    AnonymousTypeManager.TranslateAnonymousTypeSymbol(namedTypeSymbol);
             }
             else if (namedTypeSymbol.IsTupleType)
             {
@@ -1131,9 +1130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                         if (IsGenericType(container))
                         {
                             // Container is a generic instance too.
-                            typeRef = new SpecializedGenericNestedTypeInstanceReference(
-                                namedTypeSymbol
-                            );
+                            typeRef =
+                                new SpecializedGenericNestedTypeInstanceReference(namedTypeSymbol);
                         }
                         else
                         {
@@ -1489,9 +1487,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             if (container.IsAnonymousType)
             {
                 Debug.Assert(!needDeclaration);
-                methodSymbol = AnonymousTypeManager.TranslateAnonymousTypeMethodSymbol(
-                    methodSymbol
-                );
+                methodSymbol =
+                    AnonymousTypeManager.TranslateAnonymousTypeMethodSymbol(methodSymbol);
             }
 
             Debug.Assert(methodSymbol.IsDefinitionOrDistinct());

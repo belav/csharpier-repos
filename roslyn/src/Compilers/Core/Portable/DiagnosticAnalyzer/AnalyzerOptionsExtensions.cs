@@ -73,9 +73,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return false;
             }
 
-            var analyzerConfigOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                tree
-            );
+            var analyzerConfigOptions =
+                analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(tree);
 
             // If user has explicitly configured default severity for the diagnostic category, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.category-security.severity = error'

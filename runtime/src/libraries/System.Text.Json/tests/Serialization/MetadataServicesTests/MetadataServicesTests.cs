@@ -401,9 +401,8 @@ namespace System.Text.Json.Tests.Serialization
         {
             JsonConverter<DayOfWeek> enumConverter =
                 JsonMetadataServices.GetEnumConverter<DayOfWeek>(new JsonSerializerOptions());
-            JsonConverter<DayOfWeek?> nullableConverter = JsonMetadataServices.GetNullableConverter(
-                enumConverter
-            );
+            JsonConverter<DayOfWeek?> nullableConverter =
+                JsonMetadataServices.GetNullableConverter(enumConverter);
             Assert.NotNull(nullableConverter);
             Assert.Throws<ArgumentNullException>(
                 () => JsonMetadataServices.GetNullableConverter<DayOfWeek>(null!)

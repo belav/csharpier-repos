@@ -2931,9 +2931,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         )
         {
             var definition =
-                RelationalResources.LogQueryPossibleExceptionWithAggregateOperatorWarning(
-                    diagnostics
-                );
+                RelationalResources.LogQueryPossibleExceptionWithAggregateOperatorWarning(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -3227,9 +3225,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             if (index.Name == null)
             {
                 var definition =
-                    RelationalResources.LogUnnamedIndexAllPropertiesNotToMappedToAnyTable(
-                        diagnostics
-                    );
+                    RelationalResources.LogUnnamedIndexAllPropertiesNotToMappedToAnyTable(diagnostics);
 
                 if (diagnostics.ShouldLog(definition))
                 {
@@ -3267,9 +3263,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             else
             {
                 var definition =
-                    RelationalResources.LogNamedIndexAllPropertiesNotToMappedToAnyTable(
-                        diagnostics
-                    );
+                    RelationalResources.LogNamedIndexAllPropertiesNotToMappedToAnyTable(diagnostics);
 
                 if (diagnostics.ShouldLog(definition))
                 {
@@ -3344,9 +3338,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             if (index.Name == null)
             {
                 var definition =
-                    RelationalResources.LogUnnamedIndexPropertiesBothMappedAndNotMappedToTable(
-                        diagnostics
-                    );
+                    RelationalResources.LogUnnamedIndexPropertiesBothMappedAndNotMappedToTable(diagnostics);
 
                 if (diagnostics.ShouldLog(definition))
                 {
@@ -3386,9 +3378,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             else
             {
                 var definition =
-                    RelationalResources.LogNamedIndexPropertiesBothMappedAndNotMappedToTable(
-                        diagnostics
-                    );
+                    RelationalResources.LogNamedIndexPropertiesBothMappedAndNotMappedToTable(diagnostics);
 
                 if (diagnostics.ShouldLog(definition))
                 {
@@ -3480,9 +3470,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             if (index.Name == null)
             {
                 var definition =
-                    RelationalResources.LogUnnamedIndexPropertiesMappedToNonOverlappingTables(
-                        diagnostics
-                    );
+                    RelationalResources.LogUnnamedIndexPropertiesMappedToNonOverlappingTables(diagnostics);
 
                 if (diagnostics.ShouldLog(definition))
                 {
@@ -3528,9 +3516,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             else
             {
                 var definition =
-                    RelationalResources.LogNamedIndexPropertiesMappedToNonOverlappingTables(
-                        diagnostics
-                    );
+                    RelationalResources.LogNamedIndexPropertiesMappedToNonOverlappingTables(diagnostics);
 
                 if (diagnostics.ShouldLog(definition))
                 {
@@ -3633,9 +3619,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             IForeignKey foreignKey
         )
         {
-            var definition = RelationalResources.LogForeignKeyPropertiesMappedToUnrelatedTables(
-                diagnostics
-            );
+            var definition =
+                RelationalResources.LogForeignKeyPropertiesMappedToUnrelatedTables(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -3714,9 +3699,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             IEntityType entityType
         )
         {
-            var definition = RelationalResources.LogOptionalDependentWithoutIdentifyingProperty(
-                diagnostics
-            );
+            var definition =
+                RelationalResources.LogOptionalDependentWithoutIdentifyingProperty(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -3768,9 +3752,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Exception exception
         )
         {
-            var definition = RelationalResources.LogBatchExecutorFailedToRollbackToSavepoint(
-                diagnostics
-            );
+            var definition =
+                RelationalResources.LogBatchExecutorFailedToRollbackToSavepoint(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -3813,9 +3796,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Exception exception
         )
         {
-            var definition = RelationalResources.LogBatchExecutorFailedToReleaseSavepoint(
-                diagnostics
-            );
+            var definition =
+                RelationalResources.LogBatchExecutorFailedToReleaseSavepoint(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {

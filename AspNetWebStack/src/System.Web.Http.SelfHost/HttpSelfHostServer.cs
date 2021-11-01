@@ -31,12 +31,10 @@ namespace System.Web.Http.SelfHost
     {
         internal const string SecurityKey = "Security";
 
-        private static readonly AsyncCallback _onCloseListenerComplete = new AsyncCallback(
-            OnCloseListenerComplete
-        );
-        private static readonly AsyncCallback _onCloseChannelComplete = new AsyncCallback(
-            OnCloseChannelComplete
-        );
+        private static readonly AsyncCallback _onCloseListenerComplete =
+            new AsyncCallback(OnCloseListenerComplete);
+        private static readonly AsyncCallback _onCloseChannelComplete =
+            new AsyncCallback(OnCloseChannelComplete);
 
         private static readonly TimeSpan _acceptTimeout = TimeSpan.MaxValue;
         private static readonly TimeSpan _receiveTimeout = TimeSpan.MaxValue;
@@ -44,9 +42,10 @@ namespace System.Web.Http.SelfHost
         private static readonly Func<
             HttpRequestMessage,
             X509Certificate2
-        > _retrieveClientCertificate = new Func<HttpRequestMessage, X509Certificate2>(
-            RetrieveClientCertificate
-        );
+        > _retrieveClientCertificate = new Func<
+            HttpRequestMessage,
+            X509Certificate2
+        >(RetrieveClientCertificate);
 
         // Window size gets increased if the ratio of outstanding requests to the window size is greater than IncreaseWindowSizeRatio
         // Window size gets decreased if the ratio of outstanding requests to the window size is less than DecreaseWindowsSizeRatio

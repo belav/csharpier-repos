@@ -650,9 +650,7 @@ WHERE (
             bool async
         )
         {
-            await base.Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(
-                async
-            );
+            await base.Where_query_composition_entity_equality_multiple_elements_SingleOrDefault(async);
 
             AssertSql(
                 @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
@@ -684,9 +682,7 @@ WHERE (
             bool async
         )
         {
-            await base.Where_query_composition_entity_equality_multiple_elements_FirstOrDefault(
-                async
-            );
+            await base.Where_query_composition_entity_equality_multiple_elements_FirstOrDefault(async);
 
             AssertSql(
                 @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
@@ -2555,9 +2551,7 @@ INNER JOIN [Customers] AS [c] ON [t].[Id] = [c].[CustomerID]"
             bool async
         )
         {
-            await base.Select_DTO_with_member_init_distinct_in_subquery_translated_to_server_2(
-                async
-            );
+            await base.Select_DTO_with_member_init_distinct_in_subquery_translated_to_server_2(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
@@ -3224,9 +3218,7 @@ ORDER BY [c].[CustomerID]"
             bool async
         )
         {
-            await base.Handle_materialization_properly_when_more_than_two_query_sources_are_involved(
-                async
-            );
+            await base.Handle_materialization_properly_when_more_than_two_query_sources_are_involved(async);
 
             AssertSql(
                 @"SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
@@ -3862,9 +3854,7 @@ LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]"
             bool async
         )
         {
-            await base.No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition1(
-                async
-            );
+            await base.No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition1(async);
 
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[CustomerID] AS [Id1], [o].[EmployeeID], [o].[OrderDate], [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
@@ -3877,9 +3867,7 @@ LEFT JOIN [Customers] AS [c] ON ([o].[CustomerID] = [c].[CustomerID]) AND ([o].[
             bool async
         )
         {
-            await base.No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition2(
-                async
-            );
+            await base.No_orderby_added_for_client_side_GroupJoin_dependent_to_principal_LOJ_with_additional_join_condition2(async);
 
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[CustomerID] AS [Id1], [o].[EmployeeID], [o].[OrderDate], [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
@@ -4814,9 +4802,7 @@ ORDER BY [c].[CustomerID] DESC"
             bool async
         )
         {
-            await base.Complex_nested_query_doesnt_try_binding_to_grandparent_when_parent_returns_complex_result(
-                async
-            );
+            await base.Complex_nested_query_doesnt_try_binding_to_grandparent_when_parent_returns_complex_result(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [t].[InnerOrder], [t].[Id], [t].[OrderID]
@@ -4838,9 +4824,7 @@ ORDER BY [c].[CustomerID], [t].[OrderID]"
             bool async
         )
         {
-            await base.Complex_nested_query_properly_binds_to_grandparent_when_parent_returns_scalar_result(
-                async
-            );
+            await base.Complex_nested_query_properly_binds_to_grandparent_when_parent_returns_scalar_result(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], (
@@ -5465,9 +5449,7 @@ WHERE [c].[CustomerID] = N'ALFKI'"
             bool async
         )
         {
-            await base.MemberInitExpression_NewExpression_is_funcletized_even_when_bindings_are_not_evaluatable(
-                async
-            );
+            await base.MemberInitExpression_NewExpression_is_funcletized_even_when_bindings_are_not_evaluatable(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID]
@@ -5588,9 +5570,7 @@ ORDER BY [c].[CustomerID]"
             bool async
         )
         {
-            await base.Pending_selector_in_cardinality_reducing_method_is_applied_before_expanding_collection_navigation_member(
-                async
-            );
+            await base.Pending_selector_in_cardinality_reducing_method_is_applied_before_expanding_collection_navigation_member(async);
 
             AssertSql(
                 @"SELECT CASE
@@ -5900,9 +5880,7 @@ ORDER BY [c].[CustomerID]"
             bool async
         )
         {
-            await base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(
-                async
-            );
+            await base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [t].[First], [t].[Second]
@@ -5920,9 +5898,7 @@ ORDER BY [c].[CustomerID], [t].[First]"
             bool async
         )
         {
-            await base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(
-                async
-            );
+            await base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [t].[First], [t].[Second], [t].[Third]

@@ -98,9 +98,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             )
             {
                 eventHandlerMethodName =
-                    EventHookupSessionManager.CurrentSession.GetEventNameTask.WaitAndGetResult(
-                        cancellationToken
-                    );
+                    EventHookupSessionManager.CurrentSession.GetEventNameTask.WaitAndGetResult(cancellationToken);
             }
 
             if (

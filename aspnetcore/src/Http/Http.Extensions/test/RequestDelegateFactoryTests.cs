@@ -840,9 +840,8 @@ namespace Microsoft.AspNetCore.Routing.Internal
 
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Headers["Content-Type"] = "application/json";
-            httpContext.Request.Body = new IOExceptionThrowingRequestBodyStream(
-                invalidDataException
-            );
+            httpContext.Request.Body =
+                new IOExceptionThrowingRequestBodyStream(invalidDataException);
             httpContext.Features.Set<IHttpRequestLifetimeFeature>(
                 new TestHttpRequestLifetimeFeature()
             );

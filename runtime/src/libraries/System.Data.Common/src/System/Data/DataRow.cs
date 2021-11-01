@@ -37,9 +37,8 @@ namespace System.Data
         private int _rbTreeNodeId; // if row is not detached, Id used for computing index in rows collection
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        internal readonly int _objectID =
+            System.Threading.Interlocked.Increment(ref s_objectTypeCount);
 
         /// <summary>
         /// Initializes a new instance of the DataRow.

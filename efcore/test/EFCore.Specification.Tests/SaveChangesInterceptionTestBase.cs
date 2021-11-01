@@ -196,9 +196,8 @@ namespace Microsoft.EntityFrameworkCore
             bool noAcceptChanges
         )
         {
-            var (context, interceptor) = CreateContext<ResultMutatingSaveChangesInterceptor>(
-                inject
-            );
+            var (context, interceptor) =
+                CreateContext<ResultMutatingSaveChangesInterceptor>(inject);
 
             using var _ = context;
 

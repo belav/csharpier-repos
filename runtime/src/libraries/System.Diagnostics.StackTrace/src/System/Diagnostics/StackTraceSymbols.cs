@@ -84,9 +84,8 @@ namespace System.Diagnostics
                     MethodDebugInformationHandle methodDebugHandle = (
                         (MethodDefinitionHandle)handle
                     ).ToDebugInformationHandle();
-                    MethodDebugInformation methodInfo = reader.GetMethodDebugInformation(
-                        methodDebugHandle
-                    );
+                    MethodDebugInformation methodInfo =
+                        reader.GetMethodDebugInformation(methodDebugHandle);
 
                     if (!methodInfo.SequencePointsBlob.IsNil)
                     {

@@ -108,9 +108,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
 
                 // UI thread bound operation to show the change signature dialog.
                 var changeSignatureOptions =
-                    AbstractChangeSignatureService.GetChangeSignatureOptions(
-                        changeSignatureContext
-                    );
+                    AbstractChangeSignatureService.GetChangeSignatureOptions(changeSignatureContext);
 
                 // Async operation to compute the new solution created from the specified options.
                 var result = changeSignatureService

@@ -108,9 +108,8 @@ namespace System.CommandLine.Tests.Binding
             var parser = new Parser(command);
             var bindingContext = new BindingContext(parser.Parse(""));
 
-            var instance = (ClassWithMultiLetterCtorParameters)binder.CreateInstance(
-                bindingContext
-            );
+            var instance =
+                (ClassWithMultiLetterCtorParameters)binder.CreateInstance(bindingContext);
 
             instance.StringOption.Should().Be("the default");
         }
@@ -218,9 +217,7 @@ namespace System.CommandLine.Tests.Binding
             var bindingContext = new BindingContext(parser.Parse(""));
 
             var instance =
-                (ClassWithSettersAndCtorParametersWithDifferentNames)binder.CreateInstance(
-                    bindingContext
-                );
+                (ClassWithSettersAndCtorParametersWithDifferentNames)binder.CreateInstance(bindingContext);
 
             instance.StringOption.Should().Be("the default");
         }

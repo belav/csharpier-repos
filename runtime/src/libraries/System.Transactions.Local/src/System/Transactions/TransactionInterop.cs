@@ -240,9 +240,8 @@ namespace System.Transactions
                 return tx;
             }
 
-            DistributedTransaction dTx = GetDistributedTransactionFromTransmitterPropagationToken(
-                propagationToken
-            );
+            DistributedTransaction dTx =
+                GetDistributedTransactionFromTransmitterPropagationToken(propagationToken);
 
             // If a transaction is found then FindOrCreate will Dispose the distributed transaction created.
             Transaction returnValue = TransactionManager.FindOrCreatePromotedTransaction(txId, dTx);
@@ -359,9 +358,7 @@ namespace System.Transactions
             byte[] propagationTokenCopy = new byte[propagationToken.Length];
             Array.Copy(propagationToken, propagationTokenCopy, propagationToken.Length);
 
-            return DistributedTransactionManager.GetDistributedTransactionFromTransmitterPropagationToken(
-                propagationTokenCopy
-            );
+            return DistributedTransactionManager.GetDistributedTransactionFromTransmitterPropagationToken(propagationTokenCopy);
         }
     }
 }

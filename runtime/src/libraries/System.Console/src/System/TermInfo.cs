@@ -853,18 +853,12 @@ namespace System
                                                                           : c == 'A'
                                                                               ? AsInt(
                                                                                     AsBool(first)
-                                                                                        && AsBool(
-                                                                                            second
-                                                                                        )
+                                                                                        && AsBool(second)
                                                                                 )
                                                                               : c == 'O'
                                                                                   ? AsInt(
-                                                                                        AsBool(
-                                                                                            first
-                                                                                        )
-                                                                                            || AsBool(
-                                                                                                second
-                                                                                            )
+                                                                                        AsBool(first)
+                                                                                            || AsBool(second)
                                                                                     )
                                                                                   : 0
                             ); // not possible; we just validated above

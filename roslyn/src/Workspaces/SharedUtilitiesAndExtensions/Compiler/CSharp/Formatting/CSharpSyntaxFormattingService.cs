@@ -68,8 +68,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken token2,
             CancellationToken cancellationToken
         ) =>
-            new CSharpFormatEngine(node, options, formattingRules, token1, token2).Format(
-                cancellationToken
-            );
+            new CSharpFormatEngine(
+                node,
+                options,
+                formattingRules,
+                token1,
+                token2
+            ).Format(cancellationToken);
     }
 }

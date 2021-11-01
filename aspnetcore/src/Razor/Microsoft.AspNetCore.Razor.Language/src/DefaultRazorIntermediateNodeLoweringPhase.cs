@@ -1076,9 +1076,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                                 }
                             );
 
-                        var expectsBooleanValue = associatedAttributeDescriptor.ExpectsBooleanValue(
-                            attributeName
-                        );
+                        var expectsBooleanValue =
+                            associatedAttributeDescriptor.ExpectsBooleanValue(attributeName);
 
                         if (!expectsBooleanValue)
                         {
@@ -2133,9 +2132,7 @@ namespace Microsoft.AspNetCore.Razor.Language
                             else
                             {
                                 var expectsBooleanValue =
-                                    associatedAttributeDescriptor.ExpectsBooleanValue(
-                                        attributeName
-                                    );
+                                    associatedAttributeDescriptor.ExpectsBooleanValue(attributeName);
                                 if (!expectsBooleanValue)
                                 {
                                     // We do not allow minimized non-boolean bound attributes.

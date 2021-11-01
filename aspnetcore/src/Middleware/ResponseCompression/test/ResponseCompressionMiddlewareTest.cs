@@ -1326,9 +1326,7 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
                                             fakeSendFile = new FakeSendFileFeature(
                                                 context.Features.Get<IHttpResponseBodyFeature>()
                                             );
-                                            context.Features.Set<IHttpResponseBodyFeature>(
-                                                fakeSendFile
-                                            );
+                                            context.Features.Set<IHttpResponseBodyFeature>(fakeSendFile);
                                             return next();
                                         }
                                     );
@@ -1398,9 +1396,7 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
                                             fakeSendFile = new FakeSendFileFeature(
                                                 context.Features.Get<IHttpResponseBodyFeature>()
                                             );
-                                            context.Features.Set<IHttpResponseBodyFeature>(
-                                                fakeSendFile
-                                            );
+                                            context.Features.Set<IHttpResponseBodyFeature>(fakeSendFile);
                                             return next();
                                         }
                                     );
@@ -1470,9 +1466,7 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
                                             fakeSendFile = new FakeSendFileFeature(
                                                 context.Features.Get<IHttpResponseBodyFeature>()
                                             );
-                                            context.Features.Set<IHttpResponseBodyFeature>(
-                                                fakeSendFile
-                                            );
+                                            context.Features.Set<IHttpResponseBodyFeature>(fakeSendFile);
                                             return next();
                                         }
                                     );

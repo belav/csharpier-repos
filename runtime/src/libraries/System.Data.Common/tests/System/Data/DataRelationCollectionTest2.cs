@@ -196,9 +196,8 @@ namespace System.Data.Tests
             DataSet ds = GetDataSet();
 
             ds.Relations.Add(ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
-            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(
-                Relations_CollectionChanged
-            );
+            ds.Relations.CollectionChanged +=
+                new CollectionChangeEventHandler(Relations_CollectionChanged);
             ds.Relations.Clear();
             Assert.Equal(0, ds.Relations.Count);
             Assert.Equal(1, _changesCounter);
@@ -212,9 +211,8 @@ namespace System.Data.Tests
         {
             DataSet ds = GetDataSet();
 
-            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(
-                Relations_CollectionChanged
-            );
+            ds.Relations.CollectionChanged +=
+                new CollectionChangeEventHandler(Relations_CollectionChanged);
 
             DataRelation rel = new DataRelation(
                 "rel1",
@@ -510,9 +508,8 @@ namespace System.Data.Tests
 
             Assert.Equal(2, ds.Relations.Count);
 
-            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(
-                Relations_CollectionChanged
-            );
+            ds.Relations.CollectionChanged +=
+                new CollectionChangeEventHandler(Relations_CollectionChanged);
             //Perform remove
 
             ds.Relations.Remove(rel1);
@@ -558,9 +555,8 @@ namespace System.Data.Tests
 
             Assert.Equal(2, ds.Relations.Count);
 
-            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(
-                Relations_CollectionChanged
-            );
+            ds.Relations.CollectionChanged +=
+                new CollectionChangeEventHandler(Relations_CollectionChanged);
             //Perform remove
 
             ds.Relations.Remove("rel1");
@@ -608,9 +604,8 @@ namespace System.Data.Tests
 
             Assert.Equal(2, ds.Relations.Count);
 
-            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(
-                Relations_CollectionChanged
-            );
+            ds.Relations.CollectionChanged +=
+                new CollectionChangeEventHandler(Relations_CollectionChanged);
             //Perform remove
 
             ds.Relations.RemoveAt(0);

@@ -89,9 +89,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 >()
             );
 
-            return new MsalRemoteAuthenticationBuilder<TRemoteAuthenticationState, TAccount>(
-                services
-            );
+            return new MsalRemoteAuthenticationBuilder<
+                TRemoteAuthenticationState,
+                TAccount
+            >(services);
         }
     }
 

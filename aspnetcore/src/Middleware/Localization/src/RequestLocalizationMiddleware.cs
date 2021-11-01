@@ -75,9 +75,8 @@ namespace Microsoft.AspNetCore.Localization
             {
                 foreach (var provider in _options.RequestCultureProviders)
                 {
-                    var providerResultCulture = await provider.DetermineProviderCultureResult(
-                        context
-                    );
+                    var providerResultCulture =
+                        await provider.DetermineProviderCultureResult(context);
                     if (providerResultCulture == null)
                     {
                         continue;

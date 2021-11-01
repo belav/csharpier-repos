@@ -240,9 +240,8 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 var encryptedXml = new EncryptedXml();
                 encryptedXml.AddKeyNameMapping("aes", aesAlgo);
-                XmlElement elementToEncrypt = (XmlElement)doc.DocumentElement.SelectSingleNode(
-                    nodeToEncrypt
-                );
+                XmlElement elementToEncrypt =
+                    (XmlElement)doc.DocumentElement.SelectSingleNode(nodeToEncrypt);
                 EncryptedData encryptedData = encryptedXml.Encrypt(elementToEncrypt, "aes");
                 EncryptedXml.ReplaceElement(elementToEncrypt, encryptedData, false);
 

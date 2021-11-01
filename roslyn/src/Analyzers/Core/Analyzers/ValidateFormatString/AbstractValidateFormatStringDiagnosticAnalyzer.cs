@@ -199,9 +199,8 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
             // When calling string.Format(...), the expression will be MemberAccessExpressionSyntax
             if (syntaxFacts.IsSimpleMemberAccessExpression(expression))
             {
-                var nameOfMemberAccessExpression = syntaxFacts.GetNameOfMemberAccessExpression(
-                    expression
-                );
+                var nameOfMemberAccessExpression =
+                    syntaxFacts.GetNameOfMemberAccessExpression(expression);
                 return !syntaxFacts.IsGenericName(nameOfMemberAccessExpression)
                     && syntaxFacts.GetIdentifierOfSimpleName(nameOfMemberAccessExpression).ValueText
                         == (nameof(string.Format));
@@ -403,13 +402,11 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
             // removing escaped left brackets and replacing with space characters so they won't
             // impede the extraction of placeholders, yet the locations of the placeholders are
             // the same as in the original string.
-            var formatStringWithEscapedBracketsChangedToSpaces = RemoveEscapedBrackets(
-                formatString
-            );
+            var formatStringWithEscapedBracketsChangedToSpaces =
+                RemoveEscapedBrackets(formatString);
 
-            var matches = s_extractPlaceholdersRegex.Matches(
-                formatStringWithEscapedBracketsChangedToSpaces
-            );
+            var matches =
+                s_extractPlaceholdersRegex.Matches(formatStringWithEscapedBracketsChangedToSpaces);
             foreach (Match? match in matches)
             {
                 RoslynDebug.AssertNotNull(match);

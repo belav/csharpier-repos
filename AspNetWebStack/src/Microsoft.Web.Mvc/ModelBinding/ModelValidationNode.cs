@@ -181,15 +181,11 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 if (modelState.IsValidField(propertyKeyRoot))
                 {
                     foreach (
-                        ModelValidator propertyValidator in propertyMetadata.GetValidators(
-                            controllerContext
-                        )
+                        ModelValidator propertyValidator in propertyMetadata.GetValidators(controllerContext)
                     )
                     {
                         foreach (
-                            ModelValidationResult propertyResult in propertyValidator.Validate(
-                                model
-                            )
+                            ModelValidationResult propertyResult in propertyValidator.Validate(model)
                         )
                         {
                             string thisErrorKey = ModelBinderUtil.CreatePropertyModelName(

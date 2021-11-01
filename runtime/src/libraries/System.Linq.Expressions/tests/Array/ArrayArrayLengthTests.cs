@@ -763,9 +763,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithClassRestrictionArrayArrayLengthTestHelper<object>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithClassRestrictionArrayArrayLengthTestHelper<object>(useInterpreter);
         }
 
         [Theory]
@@ -783,9 +781,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithSubClassRestrictionArrayArrayLengthTestHelper<C>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithSubClassRestrictionArrayArrayLengthTestHelper<C>(useInterpreter);
         }
 
         [Theory]
@@ -803,9 +799,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<C>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<C>(useInterpreter);
         }
 
         [Theory]
@@ -814,9 +808,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<object>(
-                useInterpreter
-            );
+            CheckGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<object>(useInterpreter);
         }
 
         [Theory]
@@ -825,9 +817,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<object>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<object>(useInterpreter);
         }
 
         [Theory]
@@ -845,9 +835,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithSubClassAndNewRestrictionArrayArrayLengthTestHelper<C>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithSubClassAndNewRestrictionArrayArrayLengthTestHelper<C>(useInterpreter);
         }
 
         [Theory]
@@ -901,9 +889,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithStructRestrictionArrayArrayLengthTestHelper<Scs>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithStructRestrictionArrayArrayLengthTestHelper<Scs>(useInterpreter);
         }
 
         #endregion

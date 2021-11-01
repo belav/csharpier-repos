@@ -369,11 +369,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             var model = new Person();
 
-            var testableBinder = new Mock<TestableComplexTypeModelBinder>(
-                allowValidatingTopLevelNodes
-            ) {
-                CallBase = true
-            };
+            var testableBinder =
+                new Mock<TestableComplexTypeModelBinder>(allowValidatingTopLevelNodes)
+                {
+                    CallBase = true
+                };
             testableBinder
                 .Setup(o => o.CreateModelPublic(bindingContext))
                 .Returns(model)

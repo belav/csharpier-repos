@@ -4257,9 +4257,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     member = (TMember)(Symbol)method.Construct(typeArguments);
                     leastOverriddenMember =
-                        (TMember)(Symbol)leastOverriddenMethod.ConstructedFrom.Construct(
-                            typeArguments
-                        );
+                        (TMember)(Symbol)leastOverriddenMethod.ConstructedFrom.Construct(typeArguments);
 
                     // Spec (§7.6.5.1)
                     //   Once the (inferred) type arguments are substituted for the corresponding method type parameters,
@@ -4458,9 +4456,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     RefKind parameterRefKind = parameters.ParameterRefKinds.IsDefault
                         ? RefKind.None
                         : parameters.ParameterRefKinds[argumentPosition];
-                    bool forExtensionMethodThisArg = arguments.IsExtensionMethodThisArgument(
-                        argumentPosition
-                    );
+                    bool forExtensionMethodThisArg =
+                        arguments.IsExtensionMethodThisArgument(argumentPosition);
 
                     if (forExtensionMethodThisArg)
                     {

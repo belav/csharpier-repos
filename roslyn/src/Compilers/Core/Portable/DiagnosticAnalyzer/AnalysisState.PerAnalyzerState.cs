@@ -552,18 +552,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     {
                         var needsAnalysis = false;
                         var symbol = symbolEvent.Symbol;
-                        var skipSymbolAnalysis = AnalysisScope.ShouldSkipSymbolAnalysis(
-                            symbolEvent
-                        );
+                        var skipSymbolAnalysis =
+                            AnalysisScope.ShouldSkipSymbolAnalysis(symbolEvent);
                         if (!skipSymbolAnalysis && actionCounts.SymbolActionsCount > 0)
                         {
                             needsAnalysis = true;
                             _pendingSymbols[symbol] = null;
                         }
 
-                        var skipDeclarationAnalysis = AnalysisScope.ShouldSkipDeclarationAnalysis(
-                            symbol
-                        );
+                        var skipDeclarationAnalysis =
+                            AnalysisScope.ShouldSkipDeclarationAnalysis(symbol);
                         if (!skipDeclarationAnalysis && actionCounts.HasAnyExecutableCodeActions)
                         {
                             needsAnalysis = true;

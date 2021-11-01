@@ -186,9 +186,7 @@ namespace System.Net.Http.Functional.Tests
                     string serverAuthenticateHeader = $"WWW-Authenticate: {authenticateHeader}\r\n";
                     HttpClientHandler handler = CreateHttpClientHandler();
                     Task serverTask = result
-                        ? server.AcceptConnectionPerformAuthenticationAndCloseAsync(
-                              serverAuthenticateHeader
-                          )
+                        ? server.AcceptConnectionPerformAuthenticationAndCloseAsync(serverAuthenticateHeader)
                         : server.AcceptConnectionSendResponseAndCloseAsync(
                               HttpStatusCode.Unauthorized,
                               serverAuthenticateHeader
@@ -261,9 +259,8 @@ namespace System.Net.Http.Functional.Tests
                 async (server, url) =>
                 {
                     HttpClientHandler handler = CreateHttpClientHandler();
-                    Task serverTask = server.AcceptConnectionPerformAuthenticationAndCloseAsync(
-                        authenticateHeader
-                    );
+                    Task serverTask =
+                        server.AcceptConnectionPerformAuthenticationAndCloseAsync(authenticateHeader);
                     await TestHelper.WhenAllCompletedOrAnyFailed(
                         CreateAndValidateRequest(handler, url, HttpStatusCode.OK, s_credentials),
                         serverTask
@@ -320,9 +317,8 @@ namespace System.Net.Http.Functional.Tests
                         new NetworkCredential(Username, Password, Domain)
                     );
 
-                    Task serverTask = server.AcceptConnectionPerformAuthenticationAndCloseAsync(
-                        authenticateHeader
-                    );
+                    Task serverTask =
+                        server.AcceptConnectionPerformAuthenticationAndCloseAsync(authenticateHeader);
                     await TestHelper.WhenAllCompletedOrAnyFailed(
                         CreateAndValidateRequest(handler, url, HttpStatusCode.OK, credentials),
                         serverTask
@@ -348,9 +344,8 @@ namespace System.Net.Http.Functional.Tests
                 async (server, url) =>
                 {
                     HttpClientHandler handler = CreateHttpClientHandler();
-                    Task serverTask = server.AcceptConnectionPerformAuthenticationAndCloseAsync(
-                        authenticateHeader
-                    );
+                    Task serverTask =
+                        server.AcceptConnectionPerformAuthenticationAndCloseAsync(authenticateHeader);
                     await TestHelper.WhenAllCompletedOrAnyFailed(
                         CreateAndValidateRequest(
                             handler,

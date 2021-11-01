@@ -542,9 +542,8 @@ namespace Microsoft.DotNet.OpenApi.Commands
                 using var packageVersionStream = await (
                     await _httpClient.GetResponseAsync(PackageVersionUrl)
                 ).Stream;
-                using var packageVersionDocument = await JsonDocument.ParseAsync(
-                    packageVersionStream
-                );
+                using var packageVersionDocument =
+                    await JsonDocument.ParseAsync(packageVersionStream);
                 var packageVersionsElement = packageVersionDocument.RootElement.GetProperty(
                     "Packages"
                 );

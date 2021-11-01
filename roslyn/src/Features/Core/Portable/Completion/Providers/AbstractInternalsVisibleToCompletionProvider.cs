@@ -253,9 +253,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 var syntaxRoot = await document
                     .GetSyntaxRootAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var assemblyScopedAttributes = GetAssemblyScopedAttributeSyntaxNodesOfDocument(
-                    syntaxRoot
-                );
+                var assemblyScopedAttributes =
+                    GetAssemblyScopedAttributeSyntaxNodesOfDocument(syntaxRoot);
                 foreach (var attribute in assemblyScopedAttributes)
                 {
                     // Skip attributes with errors. This skips the attribute that is currently edited, until it is complete:

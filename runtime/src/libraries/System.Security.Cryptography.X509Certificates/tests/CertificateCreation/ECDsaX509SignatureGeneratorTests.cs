@@ -27,9 +27,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             using (ECDsa ecdsa = ECDsa.Create(keyParameters))
             {
-                X509SignatureGenerator signatureGenerator = X509SignatureGenerator.CreateForECDsa(
-                    ecdsa
-                );
+                X509SignatureGenerator signatureGenerator =
+                    X509SignatureGenerator.CreateForECDsa(ecdsa);
 
                 PublicKey publicKey = signatureGenerator.PublicKey;
 

@@ -71,9 +71,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 _subjectBuffer.ChangedLowPriority += OnTextBufferChanged;
 
                 foreach (
-                    var view in session._textBufferAssociatedViewService.GetAssociatedTextViews(
-                        _subjectBuffer
-                    )
+                    var view in session._textBufferAssociatedViewService.GetAssociatedTextViews(_subjectBuffer)
                 )
                 {
                     ConnectToView(view);

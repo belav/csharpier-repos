@@ -140,9 +140,7 @@ namespace System.IO.Packaging
                     if (SourceUri.Equals(PackUriHelper.PackageRootUri))
                     {
                         foreach (
-                            PackageRelationship r in package.GetRelationshipsByType(
-                                SelectionCriteria
-                            )
+                            PackageRelationship r in package.GetRelationshipsByType(SelectionCriteria)
                         )
                             relationships.Add(r);
                     }

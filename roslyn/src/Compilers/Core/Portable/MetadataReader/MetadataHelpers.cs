@@ -252,9 +252,8 @@ namespace Microsoft.CodeAnalysis
                                         Advance();
                                     }
 
-                                    assemblyName = DecodeAssemblyName(
-                                        isTypeArgumentWithAssemblyName
-                                    );
+                                    assemblyName =
+                                        DecodeAssemblyName(isTypeArgumentWithAssemblyName);
                                 }
                                 goto ExitDecodeTypeName;
 

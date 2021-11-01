@@ -52,9 +52,8 @@ namespace EventPipeTests
                 };
 
                 using (
-                    EventPipeSession session = ProfilerControlHelpers.AttachEventPipeSessionToSelf(
-                        providers
-                    )
+                    EventPipeSession session =
+                        ProfilerControlHelpers.AttachEventPipeSessionToSelf(providers)
                 )
                 {
                     TriggerMethod();

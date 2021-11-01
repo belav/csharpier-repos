@@ -101,9 +101,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
                     genericContext: null
                 );
 
-                IEnumerable<string> actualTypes = decoder.DecodeMethodSpecificationSignature(
-                    ref signatureBlob
-                );
+                IEnumerable<string> actualTypes =
+                    decoder.DecodeMethodSpecificationSignature(ref signatureBlob);
                 Assert.Equal(expectedTypes, actualTypes);
                 Assert.True(signatureBlob.RemainingBytes == 0);
                 Assert.Throws<BadImageFormatException>(() => decoder.DecodeType(ref signatureBlob));

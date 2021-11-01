@@ -56,9 +56,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                                 Console.SetOut(stringWriter);
 
                             using (
-                                var listener = new ConsoleTraceListener(
-                                    useErrorStream: setErrorStream
-                                )
+                                var listener =
+                                    new ConsoleTraceListener(useErrorStream: setErrorStream)
                             )
                             {
                                 listener.Write(message);
@@ -92,9 +91,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                                 Console.SetOut(stringWriter);
 
                             using (
-                                var listener = new ConsoleTraceListener(
-                                    useErrorStream: setErrorStream
-                                )
+                                var listener =
+                                    new ConsoleTraceListener(useErrorStream: setErrorStream)
                             )
                             {
                                 listener.WriteLine(message);

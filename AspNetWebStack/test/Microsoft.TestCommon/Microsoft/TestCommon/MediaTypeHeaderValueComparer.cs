@@ -21,12 +21,10 @@ namespace Microsoft.TestCommon
 
         public int Compare(MediaTypeHeaderValue mediaType1, MediaTypeHeaderValue mediaType2)
         {
-            ParsedMediaTypeHeaderValue parsedMediaType1 = new ParsedMediaTypeHeaderValue(
-                mediaType1
-            );
-            ParsedMediaTypeHeaderValue parsedMediaType2 = new ParsedMediaTypeHeaderValue(
-                mediaType2
-            );
+            ParsedMediaTypeHeaderValue parsedMediaType1 =
+                new ParsedMediaTypeHeaderValue(mediaType1);
+            ParsedMediaTypeHeaderValue parsedMediaType2 =
+                new ParsedMediaTypeHeaderValue(mediaType2);
 
             int returnValue = CompareBasedOnQualityFactor(parsedMediaType1, parsedMediaType2);
 

@@ -306,9 +306,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string? documentationCommentXml = null
         )
         {
-            var expectedParameterCount = CodeGenerationOperatorSymbol.GetParameterCount(
-                operatorKind
-            );
+            var expectedParameterCount =
+                CodeGenerationOperatorSymbol.GetParameterCount(operatorKind);
             if (parameters.Length != expectedParameterCount)
             {
                 var message =

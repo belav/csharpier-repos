@@ -516,9 +516,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             > BuildDescriptionSections()
             {
                 // Merge the two maps into one final result.
-                var result = new Dictionary<SymbolDescriptionGroups, ImmutableArray<TaggedText>>(
-                    _documentationMap
-                );
+                var result = new Dictionary<
+                    SymbolDescriptionGroups,
+                    ImmutableArray<TaggedText>
+                >(_documentationMap);
                 foreach (var (group, parts) in _groupMap)
                     result[group] = parts.ToTaggedText(_getNavigationHint);
 

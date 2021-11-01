@@ -73,9 +73,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 var retargetedCorrespondingDefaultFieldOpt =
                     (correspondingTupleField == (object)tupleErrorField)
                         ? null
-                        : (TupleErrorFieldSymbol)RetargetingTranslator.Retarget(
-                              correspondingTupleField
-                          );
+                        : (TupleErrorFieldSymbol)RetargetingTranslator.Retarget(correspondingTupleField);
 
                 return new TupleErrorFieldSymbol(
                     RetargetingTranslator.Retarget(
@@ -951,9 +949,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 var paramCount = signature.ParameterCount;
                 if (paramCount > 0)
                 {
-                    var newParameterTypesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                        paramCount
-                    );
+                    var newParameterTypesBuilder =
+                        ArrayBuilder<TypeWithAnnotations>.GetInstance(paramCount);
                     var newParameterCustomModifiersBuilder = ArrayBuilder<
                         ImmutableArray<CustomModifier>
                     >.GetInstance(paramCount);

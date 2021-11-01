@@ -289,9 +289,8 @@ namespace System.Data.ProviderBase
                             key,
                             poolOptions!
                         );
-                        newConnectionPoolGroup.ProviderInfo = CreateConnectionPoolGroupProviderInfo(
-                            connectionOptions
-                        );
+                        newConnectionPoolGroup.ProviderInfo =
+                            CreateConnectionPoolGroupProviderInfo(connectionOptions);
 
                         // build new dictionary with space for new connection string
                         Dictionary<

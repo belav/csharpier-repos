@@ -261,9 +261,8 @@ namespace System.Net.Http
                 requestObject.SetObjectProperty("signal", signal);
                 signal.Dispose();
 
-                CancellationTokenSource abortCts = CancellationTokenSource.CreateLinkedTokenSource(
-                    cancellationToken
-                );
+                CancellationTokenSource abortCts =
+                    CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                 CancellationTokenRegistration abortRegistration = abortCts.Token.Register(
                     (Action)(
                         () =>

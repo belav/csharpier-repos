@@ -484,9 +484,7 @@ namespace System.Text.Json
                                 )
                             )
                             {
-                                ThrowHelper.ThrowInvalidOperationException_ReadInvalidUTF16(
-                                    lowSurrogate
-                                );
+                                ThrowHelper.ThrowInvalidOperationException_ReadInvalidUTF16(lowSurrogate);
                             }
 
                             idx += bytesConsumed - 1; // The loop iteration will increment idx past the last hex digit

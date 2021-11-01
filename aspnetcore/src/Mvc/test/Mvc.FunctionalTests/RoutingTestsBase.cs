@@ -490,9 +490,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         [Theory]
         [MemberData(
-            nameof(
-                AttributeRoutedAction_RejectsRequestsWithWrongMethods_InRoutesWithoutExtraTemplateSegmentsOnTheActionData
-            )
+            nameof(AttributeRoutedAction_RejectsRequestsWithWrongMethods_InRoutesWithoutExtraTemplateSegmentsOnTheActionData)
         )]
         public virtual async Task AttributeRoutedAction_RejectsRequestsWithWrongMethods_InRoutesWithoutExtraTemplateSegmentsOnTheAction(
             string method,
@@ -644,9 +642,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         [Theory]
         [MemberData(
-            nameof(
-                AttributeRoutedAction_MultipleRouteAttributes_WithMultipleHttpAttributes_RespectsConstraintsData
-            )
+            nameof(AttributeRoutedAction_MultipleRouteAttributes_WithMultipleHttpAttributes_RespectsConstraintsData)
         )]
         public virtual async Task AttributeRoutedAction_MultipleRouteAttributes_WithMultipleHttpAttributes_RespectsConstraints(
             string url,

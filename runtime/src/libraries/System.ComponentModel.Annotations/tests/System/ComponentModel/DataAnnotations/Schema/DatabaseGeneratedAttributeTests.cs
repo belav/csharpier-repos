@@ -15,9 +15,8 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
             DatabaseGeneratedOption databaseGeneratedOption
         )
         {
-            DatabaseGeneratedAttribute attribute = new DatabaseGeneratedAttribute(
-                databaseGeneratedOption
-            );
+            DatabaseGeneratedAttribute attribute =
+                new DatabaseGeneratedAttribute(databaseGeneratedOption);
             Assert.Equal(databaseGeneratedOption, attribute.DatabaseGeneratedOption);
         }
 

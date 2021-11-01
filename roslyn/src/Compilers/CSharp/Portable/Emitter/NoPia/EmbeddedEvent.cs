@@ -139,9 +139,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
                         {
                             var useSiteInfo =
                                 CompoundUseSiteInfo<AssemblySymbol>.DiscardedDependencies;
-                            sourceInterface.AllInterfacesWithDefinitionUseSiteDiagnostics(
-                                ref useSiteInfo
-                            );
+                            sourceInterface.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
                             diagnostics.Add(
                                 syntaxNodeOpt == null
                                   ? NoLocation.Singleton

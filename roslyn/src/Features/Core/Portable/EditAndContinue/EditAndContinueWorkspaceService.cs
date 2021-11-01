@@ -224,10 +224,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
 
                 var editSession = debuggingSession.EditSession;
-                var documentActiveStatementSpans = await activeStatementSpanProvider(
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+                var documentActiveStatementSpans =
+                    await activeStatementSpanProvider(cancellationToken).ConfigureAwait(false);
                 var analysis = await editSession.Analyses
                     .GetDocumentAnalysisAsync(
                         oldProject,

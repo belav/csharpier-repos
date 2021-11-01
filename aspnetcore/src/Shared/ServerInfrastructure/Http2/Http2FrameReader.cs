@@ -143,9 +143,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
 
                     if (frame.HeadersHasPriority)
                     {
-                        frame.HeadersStreamDependency = (int)Bitshifter.ReadUInt31BigEndian(
-                            extendedHeaders
-                        );
+                        frame.HeadersStreamDependency =
+                            (int)Bitshifter.ReadUInt31BigEndian(extendedHeaders);
                         frame.HeadersPriorityWeight = extendedHeaders.Slice(4)[0];
                     }
                     else
@@ -179,9 +178,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     +-+-------------+
                 */
                 case Http2FrameType.PRIORITY:
-                    frame.PriorityStreamDependency = (int)Bitshifter.ReadUInt31BigEndian(
-                        extendedHeaders
-                    );
+                    frame.PriorityStreamDependency =
+                        (int)Bitshifter.ReadUInt31BigEndian(extendedHeaders);
                     frame.PriorityWeight = extendedHeaders.Slice(4)[0];
                     break;
 
@@ -191,9 +189,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     +---------------------------------------------------------------+
                 */
                 case Http2FrameType.RST_STREAM:
-                    frame.RstStreamErrorCode = (Http2ErrorCode)BinaryPrimitives.ReadUInt32BigEndian(
-                        extendedHeaders
-                    );
+                    frame.RstStreamErrorCode =
+                        (Http2ErrorCode)BinaryPrimitives.ReadUInt32BigEndian(extendedHeaders);
                     break;
 
                 /* https://tools.ietf.org/html/rfc7540#section-6.9
@@ -202,9 +199,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                     +-+-------------------------------------------------------------+
                 */
                 case Http2FrameType.WINDOW_UPDATE:
-                    frame.WindowUpdateSizeIncrement = (int)Bitshifter.ReadUInt31BigEndian(
-                        extendedHeaders
-                    );
+                    frame.WindowUpdateSizeIncrement =
+                        (int)Bitshifter.ReadUInt31BigEndian(extendedHeaders);
                     break;
 
                 case Http2FrameType.PING: // Opaque payload 8 bytes long

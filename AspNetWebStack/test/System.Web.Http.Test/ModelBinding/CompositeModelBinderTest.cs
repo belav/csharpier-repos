@@ -203,9 +203,8 @@ namespace System.Web.Http.ModelBinding
             {
                 mockBinderProvider.Object
             };
-            CompositeModelBinderProvider shimBinderProvider = new CompositeModelBinderProvider(
-                binderProviders
-            );
+            CompositeModelBinderProvider shimBinderProvider =
+                new CompositeModelBinderProvider(binderProviders);
             CompositeModelBinder shimBinder = new CompositeModelBinder(
                 shimBinderProvider.GetBinder(null, null)
             );

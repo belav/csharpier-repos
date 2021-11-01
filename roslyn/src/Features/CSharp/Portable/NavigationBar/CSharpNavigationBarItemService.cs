@@ -120,9 +120,7 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                                 CreateItemForMember(
                                     method.PartialImplementationPart,
                                     memberSymbolIndexProvider.GetIndexForSymbolId(
-                                        method.PartialImplementationPart.GetSymbolKey(
-                                            cancellationToken
-                                        )
+                                        method.PartialImplementationPart.GetSymbolKey(cancellationToken)
                                     ),
                                     tree,
                                     cancellationToken
@@ -166,9 +164,7 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                             glyph: type.GetGlyph(),
                             spans: GetSpansInDocument(type, tree, cancellationToken),
                             navigationSymbolId: symbolId,
-                            navigationSymbolIndex: typeSymbolIndexProvider.GetIndexForSymbolId(
-                                symbolId
-                            ),
+                            navigationSymbolIndex: typeSymbolIndexProvider.GetIndexForSymbolId(symbolId),
                             childItems: memberItems.ToImmutable()
                         )
                     );

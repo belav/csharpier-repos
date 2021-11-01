@@ -1376,15 +1376,13 @@ class D { }
             );
             workspace.AddTestProject(project1);
 
-            var documentIdsWithFilePath = workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                docFilePath
-            );
+            var documentIdsWithFilePath =
+                workspace.CurrentSolution.GetDocumentIdsWithFilePath(docFilePath);
             Assert.Single(documentIdsWithFilePath);
             Assert.Equal(document.Id, documentIdsWithFilePath.Single());
 
-            documentIdsWithFilePath = workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                additionalDocFilePath
-            );
+            documentIdsWithFilePath =
+                workspace.CurrentSolution.GetDocumentIdsWithFilePath(additionalDocFilePath);
             Assert.Single(documentIdsWithFilePath);
             Assert.Equal(additionalDoc.Id, documentIdsWithFilePath.Single());
         }
@@ -1411,15 +1409,13 @@ class D { }
             );
             workspace.AddTestProject(project1);
 
-            var documentIdsWithFilePath = workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                docFilePath
-            );
+            var documentIdsWithFilePath =
+                workspace.CurrentSolution.GetDocumentIdsWithFilePath(docFilePath);
             Assert.Single(documentIdsWithFilePath);
             Assert.Equal(document.Id, documentIdsWithFilePath.Single());
 
-            documentIdsWithFilePath = workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                analyzerConfigDocFilePath
-            );
+            documentIdsWithFilePath =
+                workspace.CurrentSolution.GetDocumentIdsWithFilePath(analyzerConfigDocFilePath);
             Assert.Single(documentIdsWithFilePath);
             Assert.Equal(analyzerConfigDoc.Id, documentIdsWithFilePath.Single());
         }

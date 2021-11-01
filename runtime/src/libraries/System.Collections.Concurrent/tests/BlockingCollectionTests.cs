@@ -190,9 +190,8 @@ namespace System.Collections.Concurrent.Tests
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(new BlockingCollection<int>());
             BlockingCollection<int> col = new BlockingCollection<int> { 1, 2, 3 };
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                col
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(col);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
@@ -258,9 +257,8 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(5, 3, 1)]
         public static void TestAddTake(int numOfAdds, int numOfTakes, int boundedCapacity)
         {
-            BlockingCollection<int> blockingCollection = ConstructBlockingCollection<int>(
-                boundedCapacity
-            );
+            BlockingCollection<int> blockingCollection =
+                ConstructBlockingCollection<int>(boundedCapacity);
             AddAnyTakeAny(numOfAdds, numOfTakes, boundedCapacity, blockingCollection, null, -1);
         }
 
@@ -401,9 +399,8 @@ namespace System.Collections.Concurrent.Tests
             int[] arrayOfRemovedElementsFromAllThreads = (int[])(
                 removedElementsFromAllThreads.ToArray()
             );
-            List<int> sortedElementsInCollection = new List<int>(
-                arrayOfRemovedElementsFromAllThreads
-            );
+            List<int> sortedElementsInCollection =
+                new List<int>(arrayOfRemovedElementsFromAllThreads);
             sortedElementsInCollection.Sort();
             VerifyElementsAreMembersOfSequence(
                 sortedElementsInCollection,
@@ -885,9 +882,8 @@ namespace System.Collections.Concurrent.Tests
             int boundedCapacity
         )
         {
-            BlockingCollection<int> blockingCollection = ConstructBlockingCollection<int>(
-                boundedCapacity
-            );
+            BlockingCollection<int> blockingCollection =
+                ConstructBlockingCollection<int>(boundedCapacity);
             BlockingCollection<int>[] blockingCollections = new BlockingCollection<int>[
                 numOfBlockingCollections
             ];
@@ -1030,9 +1026,8 @@ namespace System.Collections.Concurrent.Tests
             int[] arrayOfRemovedElementsFromAllThreads = (int[])(
                 removedElementsFromAllThreads.ToArray()
             );
-            List<int> sortedElementsInCollection = new List<int>(
-                arrayOfRemovedElementsFromAllThreads
-            );
+            List<int> sortedElementsInCollection =
+                new List<int>(arrayOfRemovedElementsFromAllThreads);
             sortedElementsInCollection.Sort();
             VerifyElementsAreMembersOfSequence(
                 sortedElementsInCollection,

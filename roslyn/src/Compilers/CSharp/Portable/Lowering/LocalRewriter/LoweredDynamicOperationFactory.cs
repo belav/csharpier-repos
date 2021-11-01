@@ -975,9 +975,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return ImmutableArray<LocalSymbol>.Empty;
             }
 
-            ArrayBuilder<LocalSymbol> temporariesBuilder = ArrayBuilder<LocalSymbol>.GetInstance(
-                discardCount
-            );
+            ArrayBuilder<LocalSymbol> temporariesBuilder =
+                ArrayBuilder<LocalSymbol>.GetInstance(discardCount);
             loweredArguments = _factory.MakeTempsForDiscardArguments(
                 loweredArguments,
                 temporariesBuilder
@@ -1031,9 +1030,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var fieldName = GeneratedNames.MakeDynamicCallSiteFieldName(_callSiteIdDispenser++);
             var delegateTypeOverContainerTypeParameters =
-                methodToContainerTypeParametersMap.SubstituteNamedType(
-                    delegateTypeOverMethodTypeParameters
-                );
+                methodToContainerTypeParametersMap.SubstituteNamedType(delegateTypeOverMethodTypeParameters);
             var callSiteType = _factory.Compilation.GetWellKnownType(
                 WellKnownType.System_Runtime_CompilerServices_CallSite_T
             );

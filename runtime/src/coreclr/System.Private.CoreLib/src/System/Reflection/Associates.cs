@@ -85,9 +85,8 @@ namespace System.Reflection
 
             if (isInherited)
             {
-                MethodAttributes methAttr = RuntimeMethodHandle.GetAttributes(
-                    associateMethodHandle
-                );
+                MethodAttributes methAttr =
+                    RuntimeMethodHandle.GetAttributes(associateMethodHandle);
 
                 // ECMA MethodSemantics: "All methods for a given Property or Event shall have the same accessibility
                 // (ie the MemberAccessMask subfield of their Flags row) and cannot be CompilerControlled  [CLS]"

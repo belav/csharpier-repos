@@ -107,9 +107,7 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                             return (originalSourceText, null);
 
                         var analyzerConfigOptions =
-                            document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                                syntaxTree
-                            );
+                            document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(syntaxTree);
                         var optionSet = await document
                             .GetOptionsAsync(cancellationToken)
                             .ConfigureAwait(false);

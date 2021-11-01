@@ -146,9 +146,8 @@ namespace Newtonsoft.Json.Serialization
 
             // search property and then search base properties if nothing is returned and the property is virtual
             PropertyInfo propertyInfo = (PropertyInfo)memberInfo;
-            DataMemberAttribute? result = CachedAttributeGetter<DataMemberAttribute>.GetAttribute(
-                propertyInfo
-            );
+            DataMemberAttribute? result =
+                CachedAttributeGetter<DataMemberAttribute>.GetAttribute(propertyInfo);
             if (result == null)
             {
                 if (propertyInfo.IsVirtual())
@@ -164,9 +163,8 @@ namespace Newtonsoft.Json.Serialization
                             );
                         if (baseProperty != null && baseProperty.IsVirtual())
                         {
-                            result = CachedAttributeGetter<DataMemberAttribute>.GetAttribute(
-                                baseProperty
-                            );
+                            result =
+                                CachedAttributeGetter<DataMemberAttribute>.GetAttribute(baseProperty);
                         }
 
                         currentType = currentType.BaseType();
@@ -183,9 +181,8 @@ namespace Newtonsoft.Json.Serialization
             bool ignoreSerializableAttribute
         )
         {
-            JsonObjectAttribute? objectAttribute = GetCachedAttribute<JsonObjectAttribute>(
-                objectType
-            );
+            JsonObjectAttribute? objectAttribute =
+                GetCachedAttribute<JsonObjectAttribute>(objectType);
             if (objectAttribute != null)
             {
                 return objectAttribute.MemberSerialization;
@@ -212,9 +209,8 @@ namespace Newtonsoft.Json.Serialization
 
         public static JsonConverter? GetJsonConverter(object attributeProvider)
         {
-            JsonConverterAttribute? converterAttribute = GetCachedAttribute<JsonConverterAttribute>(
-                attributeProvider
-            );
+            JsonConverterAttribute? converterAttribute =
+                GetCachedAttribute<JsonConverterAttribute>(attributeProvider);
 
             if (converterAttribute != null)
             {
@@ -299,16 +295,13 @@ namespace Newtonsoft.Json.Serialization
                                 }
                             )
                             .ToArray();
-                        ConstructorInfo parameterizedConstructorInfo = type.GetConstructor(
-                            paramTypes
-                        );
+                        ConstructorInfo parameterizedConstructorInfo =
+                            type.GetConstructor(paramTypes);
 
                         if (parameterizedConstructorInfo != null)
                         {
                             ObjectConstructor<object> parameterizedConstructor =
-                                ReflectionDelegateFactory.CreateParameterizedConstructor(
-                                    parameterizedConstructorInfo
-                                );
+                                ReflectionDelegateFactory.CreateParameterizedConstructor(parameterizedConstructorInfo);
                             return parameterizedConstructor(parameters);
                         }
                         else

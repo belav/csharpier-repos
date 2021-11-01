@@ -92,9 +92,8 @@ namespace TypeSystemTests
             InstantiatedType testInstance = openTestType.MakeInstantiatedType(objectType);
             MethodDesc targetOnInstance = testInstance.GetMethod("ToString", toStringSig);
 
-            MethodDesc targetMethod = testInstance.FindVirtualFunctionTargetMethodOnObjectType(
-                objectToString
-            );
+            MethodDesc targetMethod =
+                testInstance.FindVirtualFunctionTargetMethodOnObjectType(objectToString);
             Assert.Equal(targetOnInstance, targetMethod);
         }
 
@@ -191,9 +190,8 @@ namespace TypeSystemTests
                 .GetWellKnownType(WellKnownType.Object)
                 .GetMethod("GetHashCode", null);
 
-            var foundOverride = explicitOverrideClass.FindVirtualFunctionTargetMethodOnObjectType(
-                objectGetHashCodeMethod
-            );
+            var foundOverride =
+                explicitOverrideClass.FindVirtualFunctionTargetMethodOnObjectType(objectGetHashCodeMethod);
 
             Assert.Equal(myGetHashCodeMethod, foundOverride);
         }

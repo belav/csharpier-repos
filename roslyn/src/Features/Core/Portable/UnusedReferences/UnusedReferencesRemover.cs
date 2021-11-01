@@ -51,9 +51,8 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
                     continue;
                 }
 
-                var usedAssemblyReferences = compilation.GetUsedAssemblyReferences(
-                    cancellationToken
-                );
+                var usedAssemblyReferences =
+                    compilation.GetUsedAssemblyReferences(cancellationToken);
 
                 usedAssemblyFilePaths.AddRange(
                     usedAssemblyReferences

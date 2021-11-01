@@ -77,9 +77,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                     return false;
                 }
 
-                IsContainedInUnsafeType = service.ContainingTypesOrSelfHasUnsafeKeyword(
-                    containingType
-                );
+                IsContainedInUnsafeType =
+                    service.ContainingTypesOrSelfHasUnsafeKeyword(containingType);
 
                 var rules = await document
                     .GetNamingRulesAsync(cancellationToken)

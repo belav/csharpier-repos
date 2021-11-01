@@ -39,9 +39,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
                 _fixture.CleanupCertificates();
 
                 const string CertificateName =
-                    nameof(
-                        EnsureCreateHttpsCertificate_CreatesACertificate_WhenThereAreNoHttpsCertificates
-                    ) + ".cer";
+                    nameof(EnsureCreateHttpsCertificate_CreatesACertificate_WhenThereAreNoHttpsCertificates)
+                    + ".cer";
 
                 // Act
                 var now = DateTimeOffset.UtcNow;
@@ -171,9 +170,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
         {
             // Arrange
             const string CertificateName =
-                nameof(
-                    EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
-                ) + ".pfx";
+                nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates)
+                + ".pfx";
             var certificatePassword = Guid.NewGuid().ToString();
 
             _fixture.CleanupCertificates();
@@ -237,9 +235,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
             // Arrange
             var message = "plaintext";
             const string CertificateName =
-                nameof(
-                    EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
-                ) + ".pem";
+                nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates)
+                + ".pem";
             var certificatePassword = Guid.NewGuid().ToString();
 
             _fixture.CleanupCertificates();
@@ -321,9 +318,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
         {
             // Arrange
             const string CertificateName =
-                nameof(
-                    EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
-                ) + ".pem";
+                nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates)
+                + ".pem";
 
             _fixture.CleanupCertificates();
 
@@ -379,9 +375,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
         {
             // Arrange
             const string CertificateName =
-                nameof(
-                    EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
-                ) + ".pfx";
+                nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates)
+                + ".pfx";
             var certificatePassword = Guid.NewGuid().ToString();
 
             _fixture.CleanupCertificates();
@@ -444,9 +439,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
         {
             // Arrange
             const string CertificateName =
-                nameof(
-                    EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
-                ) + ".pfx";
+                nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates)
+                + ".pfx";
             var certificatePassword = Guid.NewGuid().ToString();
 
             _fixture.CleanupCertificates();
@@ -500,9 +494,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation.Tests
             // Arrange
             var message = "plaintext";
             const string CertificateName =
-                nameof(
-                    EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
-                ) + ".pem";
+                nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates)
+                + ".pem";
             _fixture.CleanupCertificates();
 
             var now = DateTimeOffset.UtcNow;

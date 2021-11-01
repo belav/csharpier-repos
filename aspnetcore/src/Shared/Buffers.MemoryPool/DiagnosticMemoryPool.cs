@@ -89,9 +89,7 @@ namespace System.Buffers
             {
                 if (!_allowLateReturn)
                 {
-                    MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockReturnedToDisposedPool(
-                        block
-                    );
+                    MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockReturnedToDisposedPool(block);
                 }
 
                 if (returnedAllBlocks)

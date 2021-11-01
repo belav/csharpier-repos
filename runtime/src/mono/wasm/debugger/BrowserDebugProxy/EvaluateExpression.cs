@@ -93,9 +93,10 @@ namespace Microsoft.WebAssembly.Diagnostics
 
                 // 2. For every unique member ref, add a corresponding method param
                 foreach (
-                    (MemberAccessExpressionSyntax maes, JObject value) in memberAccesses.Zip(
-                        ma_values
-                    )
+                    (
+                        MemberAccessExpressionSyntax maes,
+                        JObject value
+                    ) in memberAccesses.Zip(ma_values)
                 )
                 {
                     string node_str = maes.ToString();

@@ -1103,9 +1103,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             for (
-                TypeSymbol b = derivedType.BaseTypeWithDefinitionUseSiteDiagnostics(
-                    ref useSiteInfo
-                );
+                TypeSymbol b =
+                    derivedType.BaseTypeWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
                 (object)b != null;
                 b = b.BaseTypeWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
             )
@@ -2018,9 +2017,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var sourceIsPossiblyNullableTypeParameter = IsPossiblyNullableTypeTypeParameter(source);
-            var destinationIsPossiblyNullableTypeParameter = IsPossiblyNullableTypeTypeParameter(
-                destination
-            );
+            var destinationIsPossiblyNullableTypeParameter =
+                IsPossiblyNullableTypeTypeParameter(destination);
             if (
                 sourceIsPossiblyNullableTypeParameter && !destinationIsPossiblyNullableTypeParameter
             )
@@ -3444,9 +3442,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // * From T to any interface type I in T's effective interface set, and
             //   from T to any base interface of I (or any interface variance-compatible with such)
             foreach (
-                var i in source.AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(
-                    ref useSiteInfo
-                )
+                var i in source.AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
             )
             {
                 if (HasInterfaceVarianceConversion(i, destination, ref useSiteInfo))
@@ -4314,9 +4310,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            var sourceTypeArguments = sourceType.TypeArgumentsWithDefinitionUseSiteDiagnostics(
-                ref useSiteInfo
-            );
+            var sourceTypeArguments =
+                sourceType.TypeArgumentsWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
             var destinationTypeArguments =
                 destinationType.TypeArgumentsWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
 

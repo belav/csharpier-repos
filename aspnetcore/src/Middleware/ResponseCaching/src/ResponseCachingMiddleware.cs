@@ -324,9 +324,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                 {
                     // Normalize order and casing of vary by rules
                     var normalizedVaryHeaders = GetOrderCasingNormalizedStringValues(varyHeaders);
-                    var normalizedVaryQueryKeys = GetOrderCasingNormalizedStringValues(
-                        varyQueryKeys
-                    );
+                    var normalizedVaryQueryKeys =
+                        GetOrderCasingNormalizedStringValues(varyQueryKeys);
 
                     // Update vary rules if they are different
                     if (

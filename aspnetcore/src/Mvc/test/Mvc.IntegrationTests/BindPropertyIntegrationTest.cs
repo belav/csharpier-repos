@@ -245,9 +245,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder(modelMetadataProvider);
-            var modelBinderFactory = ModelBindingTestHelper.GetModelBinderFactory(
-                modelMetadataProvider
-            );
+            var modelBinderFactory =
+                ModelBindingTestHelper.GetModelBinderFactory(modelMetadataProvider);
             var modelMetadata = modelMetadataProvider.GetMetadataForProperty(
                 typeof(TestPage),
                 propertyDescriptor.Name

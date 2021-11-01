@@ -2228,9 +2228,10 @@ public static partial class XmlSerializerTests
         var soapAttributeOverrides = new SoapAttributeOverrides();
         soapAttributeOverrides.Add(typeof(SoapEncodedTestEnum), "A", soapAtts);
 
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(
-            soapAttributeOverrides
-        ).ImportTypeMapping(typeof(SoapEncodedTestEnum));
+        XmlTypeMapping myTypeMapping =
+            new SoapReflectionImporter(soapAttributeOverrides).ImportTypeMapping(
+                typeof(SoapEncodedTestEnum)
+            );
         var ser = new XmlSerializer(myTypeMapping);
         var value = SoapEncodedTestEnum.A;
 
@@ -2258,9 +2259,10 @@ public static partial class XmlSerializerTests
         var soapAttributeOverrides = new SoapAttributeOverrides();
         soapAttributeOverrides.Add(typeof(SoapEncodedTestType5), "Name", soapAtts1);
         soapAttributeOverrides.Add(typeof(SoapEncodedTestType5), "Today", soapAtts2);
-        XmlTypeMapping myTypeMapping = new SoapReflectionImporter(
-            soapAttributeOverrides
-        ).ImportTypeMapping(typeof(SoapEncodedTestType5));
+        XmlTypeMapping myTypeMapping =
+            new SoapReflectionImporter(soapAttributeOverrides).ImportTypeMapping(
+                typeof(SoapEncodedTestType5)
+            );
         var ser = new XmlSerializer(myTypeMapping);
         var value = new SoapEncodedTestType5()
         {

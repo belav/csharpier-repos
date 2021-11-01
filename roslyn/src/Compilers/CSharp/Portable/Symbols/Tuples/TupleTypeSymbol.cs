@@ -665,9 +665,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (member is null)
             {
-                MemberDescriptor relativeDescriptor = WellKnownMembers.GetDescriptor(
-                    relativeMember
-                );
+                MemberDescriptor relativeDescriptor =
+                    WellKnownMembers.GetDescriptor(relativeMember);
                 Binder.Error(
                     diagnostics,
                     ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
@@ -708,9 +707,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
                 Debug.Assert(type.IsDefinition);
 
-                MemberDescriptor relativeDescriptor = WellKnownMembers.GetDescriptor(
-                    relativeMember
-                );
+                MemberDescriptor relativeDescriptor =
+                    WellKnownMembers.GetDescriptor(relativeMember);
                 var members = type.GetMembers(relativeDescriptor.Name);
 
                 return CSharpCompilation.GetRuntimeMember(
@@ -1131,9 +1129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         && relativeMember <= WellKnownMember.System_ValueTuple_TRest__ctor
                 );
 
-                MemberDescriptor relativeDescriptor = WellKnownMembers.GetDescriptor(
-                    relativeMember
-                );
+                MemberDescriptor relativeDescriptor =
+                    WellKnownMembers.GetDescriptor(relativeMember);
                 return CSharpCompilation.GetRuntimeMember(
                     members,
                     relativeDescriptor,

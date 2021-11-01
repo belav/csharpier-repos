@@ -128,9 +128,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember
 
             if (syntaxFacts.IsConditionalAccessExpression(expression))
             {
-                var beforeDotExpression = syntaxFacts.GetExpressionOfConditionalAccessExpression(
-                    expression
-                );
+                var beforeDotExpression =
+                    syntaxFacts.GetExpressionOfConditionalAccessExpression(expression);
 
                 if (beforeDotExpression != null)
                 {
@@ -155,9 +154,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember
 
             if (syntaxFacts.IsPointerMemberAccessExpression(expression))
             {
-                var beforeArrowExpression = syntaxFacts.GetExpressionOfMemberAccessExpression(
-                    expression
-                );
+                var beforeArrowExpression =
+                    syntaxFacts.GetExpressionOfMemberAccessExpression(expression);
                 if (beforeArrowExpression != null)
                 {
                     var typeInfo = semanticModel.GetTypeInfo(

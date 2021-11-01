@@ -73,9 +73,7 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
 
             var protectionDescriptorRuleString =
                 _protectionDescriptorHandle.GetProtectionDescriptorRuleString();
-            _logger.EncryptingToWindowsDPAPINGUsingProtectionDescriptorRule(
-                protectionDescriptorRuleString
-            );
+            _logger.EncryptingToWindowsDPAPINGUsingProtectionDescriptorRule(protectionDescriptorRuleString);
 
             // Convert the XML element to a binary secret so that it can be run through DPAPI
             byte[] cngDpapiEncryptedData;

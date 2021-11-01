@@ -203,9 +203,8 @@ namespace Microsoft.CodeAnalysis
             {
                 var state = ReadState();
 
-                var baseCompilation = state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(
-                    cancellationToken
-                );
+                var baseCompilation =
+                    state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(cancellationToken);
                 if (baseCompilation != null)
                 {
                     // We have some pre-calculated state to incrementally update
@@ -393,9 +392,7 @@ namespace Microsoft.CodeAnalysis
                 if (compilationWithoutGeneratedDocuments != null && state is FinalState finalState)
                 {
                     var finalCompilation =
-                        finalState.FinalCompilationWithGeneratedDocuments.GetValueOrNull(
-                            cancellationToken
-                        );
+                        finalState.FinalCompilationWithGeneratedDocuments.GetValueOrNull(cancellationToken);
 
                     if (finalCompilation != null)
                     {
@@ -453,9 +450,7 @@ namespace Microsoft.CodeAnalysis
                             RoslynDebug.Assert(previousScriptCompilation != null);
 
                             inProgressCompilation = inProgressCompilation.WithScriptCompilationInfo(
-                                inProgressCompilation.ScriptCompilationInfo!.WithPreviousScriptCompilation(
-                                    previousScriptCompilation
-                                )
+                                inProgressCompilation.ScriptCompilationInfo!.WithPreviousScriptCompilation(previousScriptCompilation)
                             );
                         }
                         else
@@ -474,9 +469,8 @@ namespace Microsoft.CodeAnalysis
                                     inProgressCompilationNotRef.ExternalReferences.FirstOrDefault(
                                         r =>
                                             solution.GetProjectState(
-                                                inProgressCompilationNotRef.GetAssemblyOrModuleSymbol(
-                                                    r
-                                                ) as IAssemblySymbol
+                                                inProgressCompilationNotRef.GetAssemblyOrModuleSymbol(r)
+                                                    as IAssemblySymbol
                                             )?.Id == projectReference.ProjectId
                                     );
                             }
@@ -503,9 +497,8 @@ namespace Microsoft.CodeAnalysis
                     )
                 )
                 {
-                    inProgressCompilation = inProgressCompilation.WithReferences(
-                        metadataReferences
-                    );
+                    inProgressCompilation =
+                        inProgressCompilation.WithReferences(metadataReferences);
                 }
 
                 SolutionLogger.CreatePartialProjectState();
@@ -593,17 +586,14 @@ namespace Microsoft.CodeAnalysis
 
                         // we are already in the final stage. just return it.
                         var compilation =
-                            state.FinalCompilationWithGeneratedDocuments?.GetValueOrNull(
-                                cancellationToken
-                            );
+                            state.FinalCompilationWithGeneratedDocuments?.GetValueOrNull(cancellationToken);
                         if (compilation != null)
                         {
                             return compilation;
                         }
 
-                        compilation = state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(
-                            cancellationToken
-                        );
+                        compilation =
+                            state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(cancellationToken);
                         if (compilation == null)
                         {
                             // let's see whether we have declaration only compilation
@@ -680,9 +670,7 @@ namespace Microsoft.CodeAnalysis
 
                         // Try to get the built compilation.  If it exists, then we can just return that.
                         var finalCompilation =
-                            state.FinalCompilationWithGeneratedDocuments?.GetValueOrNull(
-                                cancellationToken
-                            );
+                            state.FinalCompilationWithGeneratedDocuments?.GetValueOrNull(cancellationToken);
                         if (finalCompilation != null)
                         {
                             RoslynDebug.Assert(state.HasSuccessfullyLoaded.HasValue);
@@ -736,9 +724,8 @@ namespace Microsoft.CodeAnalysis
 
                 // if we already have a compilation, we must be already done!  This can happen if two
                 // threads were waiting to build, and we came in after the other succeeded.
-                var compilation = state.FinalCompilationWithGeneratedDocuments?.GetValueOrNull(
-                    cancellationToken
-                );
+                var compilation =
+                    state.FinalCompilationWithGeneratedDocuments?.GetValueOrNull(cancellationToken);
                 if (compilation != null)
                 {
                     RoslynDebug.Assert(state.HasSuccessfullyLoaded.HasValue);
@@ -751,9 +738,8 @@ namespace Microsoft.CodeAnalysis
                     );
                 }
 
-                compilation = state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(
-                    cancellationToken
-                );
+                compilation =
+                    state.CompilationWithoutGeneratedDocuments?.GetValueOrNull(cancellationToken);
 
                 // If we have already reached FinalState in the past but the compilation was garbage collected, we still have the generated documents
                 // so we can pass those to FinalizeCompilationAsync to avoid the recomputation. This is necessary for correctness as otherwise

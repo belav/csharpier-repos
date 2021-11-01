@@ -59,9 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         )
         {
             var thisDocument = GetThisDocument();
-            var targetDocumentId = this.ContainedDocument.FindProjectDocumentIdWithItemId(
-                itemidInsertionPoint
-            );
+            var targetDocumentId =
+                this.ContainedDocument.FindProjectDocumentIdWithItemId(itemidInsertionPoint);
             var targetDocument = thisDocument.Project.Solution.GetDocument(targetDocumentId);
             if (targetDocument == null)
             {

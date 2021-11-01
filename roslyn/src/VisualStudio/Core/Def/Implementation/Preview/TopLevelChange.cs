@@ -97,9 +97,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 {
                     foreach (var linkedDocumentId in oldDocument.GetLinkedDocumentIds())
                     {
-                        var oldLinkedDocument = oldDocument.Project.Solution.GetDocument(
-                            linkedDocumentId
-                        );
+                        var oldLinkedDocument =
+                            oldDocument.Project.Solution.GetDocument(linkedDocumentId);
 
                         // Ensure that we account for document removal, i.e. updatedDocumentTextOpt == null.
                         var newLinkedDocumentIdOpt =
@@ -159,9 +158,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                                 break;
 
                             case TextDocumentKind.AnalyzerConfigDocument:
-                                solution = solution.RemoveAnalyzerConfigDocument(
-                                    updatedDocumentIdOpt
-                                );
+                                solution =
+                                    solution.RemoveAnalyzerConfigDocument(updatedDocumentIdOpt);
                                 break;
 
                             case TextDocumentKind.AdditionalDocument:

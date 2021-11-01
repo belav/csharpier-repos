@@ -1158,9 +1158,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private MemberSemanticModel GetMemberModel(int position)
         {
             AssertPositionAdjusted(position);
-            CSharpSyntaxNode node = (CSharpSyntaxNode)Root.FindTokenIncludingCrefAndNameAttributes(
-                position
-            ).Parent;
+            CSharpSyntaxNode node =
+                (CSharpSyntaxNode)Root.FindTokenIncludingCrefAndNameAttributes(position).Parent;
             CSharpSyntaxNode memberDecl = GetMemberDeclaration(node);
 
             bool outsideMemberDecl = false;
@@ -1633,9 +1632,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // (which is bad code anyway) because lambdas only appear in code with associated
                             // member models.
                             ParameterSyntax parameterDecl = (ParameterSyntax)node.Parent;
-                            ParameterSymbol parameterSymbol = GetDeclaredNonLambdaParameterSymbol(
-                                parameterDecl
-                            );
+                            ParameterSymbol parameterSymbol =
+                                GetDeclaredNonLambdaParameterSymbol(parameterDecl);
                             if ((object)parameterSymbol == null)
                                 return null;
 

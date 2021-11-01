@@ -100,9 +100,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         navigationExpression,
                         r =>
                             buildAction(
-                                new GenericTypeTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(
-                                    r
-                                )
+                                new GenericTypeTestOwnedNavigationBuilder<
+                                    TEntity,
+                                    TRelatedEntity
+                                >(r)
                             )
                     )
                 );
@@ -147,9 +148,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             protected override GenericTestReferenceReferenceBuilder<TEntity, TRelatedEntity> Wrap(
                 ReferenceReferenceBuilder<TEntity, TRelatedEntity> referenceReferenceBuilder
             ) =>
-                new GenericTypeTestReferenceReferenceBuilder<TEntity, TRelatedEntity>(
-                    referenceReferenceBuilder
-                );
+                new GenericTypeTestReferenceReferenceBuilder<
+                    TEntity,
+                    TRelatedEntity
+                >(referenceReferenceBuilder);
 
             public override TestReferenceReferenceBuilder<
                 TEntity,
@@ -221,9 +223,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             > Wrap<TNewEntity, TNewRelatedEntity>(
                 OwnedNavigationBuilder<TNewEntity, TNewRelatedEntity> ownedNavigationBuilder
             ) =>
-                new GenericTypeTestOwnedNavigationBuilder<TNewEntity, TNewRelatedEntity>(
-                    ownedNavigationBuilder
-                );
+                new GenericTypeTestOwnedNavigationBuilder<
+                    TNewEntity,
+                    TNewRelatedEntity
+                >(ownedNavigationBuilder);
 
             public override TestReferenceNavigationBuilder<
                 TRelatedEntity,

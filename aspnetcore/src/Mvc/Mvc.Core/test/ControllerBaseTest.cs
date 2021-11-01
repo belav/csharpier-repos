@@ -799,9 +799,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
             var controller = new TestableController();
 
             // Act
-            var resultTemporary = controller.RedirectToRoutePreserveMethod(
-                routeValues: routeValues
-            );
+            var resultTemporary =
+                controller.RedirectToRoutePreserveMethod(routeValues: routeValues);
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(resultTemporary);
@@ -893,9 +892,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
             var controller = new TestableController();
 
             // Act
-            var resultPermanent = controller.RedirectToRoutePermanentPreserveMethod(
-                routeValues: routeValues
-            );
+            var resultPermanent =
+                controller.RedirectToRoutePermanentPreserveMethod(routeValues: routeValues);
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(resultPermanent);
@@ -1015,9 +1013,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Test
             var routeName = "CustomRouteName";
 
             // Act
-            var resultPermanent = controller.RedirectToRoutePermanentPreserveMethod(
-                routeName: routeName
-            );
+            var resultPermanent =
+                controller.RedirectToRoutePermanentPreserveMethod(routeName: routeName);
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(resultPermanent);

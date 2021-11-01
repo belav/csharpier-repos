@@ -178,9 +178,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             );
 
             var serviceContainer = await VSShell.ServiceExtensions
-                .GetServiceAsync<SVsBrokeredServiceContainer, IBrokeredServiceContainer>(
-                    asyncServiceProvider
-                )
+                .GetServiceAsync<
+                    SVsBrokeredServiceContainer,
+                    IBrokeredServiceContainer
+                >(asyncServiceProvider)
                 .ConfigureAwait(false);
             var service = serviceContainer.GetFullAccessServiceBroker();
 

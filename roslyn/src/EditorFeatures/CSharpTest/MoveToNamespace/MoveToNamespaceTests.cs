@@ -1320,9 +1320,9 @@ namespace B
             var document = workspace.CurrentSolution.GetDocument(testDocument.Id);
             var movenamespaceService = document.GetLanguageService<IMoveToNamespaceService>();
             var moveToNamespaceOptions = new MoveToNamespaceOptionsResult("B");
-            ((TestMoveToNamespaceOptionsService)movenamespaceService.OptionsService).SetOptions(
-                moveToNamespaceOptions
-            );
+            (
+                (TestMoveToNamespaceOptionsService)movenamespaceService.OptionsService
+            ).SetOptions(moveToNamespaceOptions);
 
             var (_, action) = await GetCodeActionsAsync(workspace, default);
             var operations = await VerifyActionAndGetOperationsAsync(workspace, action, default);

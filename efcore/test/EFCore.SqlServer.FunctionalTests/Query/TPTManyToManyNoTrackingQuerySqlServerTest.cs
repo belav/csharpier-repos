@@ -916,9 +916,7 @@ ORDER BY [r].[Id], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3]
             bool async
         )
         {
-            await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(
-                async
-            );
+            await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name], [t1].[Id], [t1].[CollectionInverseId], [t1].[ExtraId], [t1].[Name], [t1].[ReferenceInverseId], [t1].[OneId], [t1].[TwoId], [t1].[Id0], [t1].[CollectionInverseId0], [t1].[Name0], [t1].[ReferenceInverseId0], [t1].[ThreeId], [t1].[TwoId0]
@@ -948,9 +946,7 @@ ORDER BY [e].[Id], [t1].[Id], [t1].[OneId], [t1].[TwoId], [t1].[ThreeId], [t1].[
             bool async
         )
         {
-            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(
-                async
-            );
+            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name], [t1].[Id], [t1].[CollectionInverseId], [t1].[ExtraId], [t1].[Name], [t1].[ReferenceInverseId], [t1].[OneId], [t1].[TwoId], [t1].[Id0], [t1].[CollectionInverseId0], [t1].[Name0], [t1].[ReferenceInverseId0], [t1].[ThreeId], [t1].[TwoId0]
@@ -997,9 +993,7 @@ ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0], [t].[Id1]"
             bool async
         )
         {
-            await base.Filter_include_on_skip_navigation_combined_with_filtered_then_includes(
-                async
-            );
+            await base.Filter_include_on_skip_navigation_combined_with_filtered_then_includes(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[CollectionInverseId], [e].[Name], [e].[ReferenceInverseId], [t3].[Id], [t3].[Name], [t3].[OneId], [t3].[ThreeId], [t3].[Id0], [t3].[CollectionInverseId], [t3].[ExtraId], [t3].[Name0], [t3].[ReferenceInverseId], [t3].[OneId0], [t3].[TwoId], [t3].[Id1], [t3].[Name1], [t3].[Number], [t3].[IsGreen], [t3].[Discriminator], [t3].[EntityBranchId], [t3].[EntityOneId]
@@ -1040,9 +1034,7 @@ ORDER BY [e].[Id], [t3].[OneId], [t3].[ThreeId], [t3].[Id], [t3].[OneId0], [t3].
             bool async
         )
         {
-            await base.Filtered_include_on_skip_navigation_then_filtered_include_on_navigation(
-                async
-            );
+            await base.Filtered_include_on_skip_navigation_then_filtered_include_on_navigation(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[CollectionInverseId], [e].[Name], [e].[ReferenceInverseId], [t0].[Id], [t0].[Name], [t0].[OneId], [t0].[ThreeId], [t0].[Id0], [t0].[CollectionInverseId], [t0].[ExtraId], [t0].[Name0], [t0].[ReferenceInverseId]
@@ -1066,9 +1058,7 @@ ORDER BY [e].[Id], [t0].[OneId], [t0].[ThreeId], [t0].[Id], [t0].[Id0]"
             bool async
         )
         {
-            await base.Filtered_include_on_navigation_then_filtered_include_on_skip_navigation(
-                async
-            );
+            await base.Filtered_include_on_navigation_then_filtered_include_on_skip_navigation(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name], [t0].[Id], [t0].[CollectionInverseId], [t0].[ExtraId], [t0].[Name], [t0].[ReferenceInverseId], [t0].[Id0], [t0].[CollectionInverseId0], [t0].[Name0], [t0].[ReferenceInverseId0], [t0].[ThreeId], [t0].[TwoId]
@@ -1203,9 +1193,7 @@ ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[Composit
             bool async
         )
         {
-            await base.Include_skip_navigation_then_include_reference_and_skip_navigation_split(
-                async
-            );
+            await base.Include_skip_navigation_then_include_reference_and_skip_navigation_split(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[CollectionInverseId], [e].[Name], [e].[ReferenceInverseId]
@@ -1469,9 +1457,7 @@ ORDER BY [r].[Id], [t].[CompositeId1], [t].[CompositeId2], [t].[CompositeId3], [
             bool async
         )
         {
-            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_split(
-                async
-            );
+            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_split(async);
 
             AssertSql(
                 @"SELECT [r].[Id], [r].[Name], [b].[Number], [l].[IsGreen]
@@ -1515,9 +1501,7 @@ ORDER BY [r].[Id], [t].[CompositeId1], [t].[CompositeId2], [t].[CompositeId3], [
             bool async
         )
         {
-            await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where_split(
-                async
-            );
+            await base.Filtered_include_skip_navigation_order_by_skip_take_then_include_skip_navigation_where_split(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name]
@@ -1562,9 +1546,7 @@ ORDER BY [e].[Id], [t0].[OneId], [t0].[TwoId], [t0].[Id]"
             bool async
         )
         {
-            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take_split(
-                async
-            );
+            await base.Filtered_include_skip_navigation_where_then_include_skip_navigation_order_by_skip_take_split(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name]
@@ -1640,9 +1622,7 @@ ORDER BY [e].[Id], [t].[OneId], [t].[TwoId], [t].[Id], [t].[Id0]"
             bool async
         )
         {
-            await base.Filter_include_on_skip_navigation_combined_with_filtered_then_includes_split(
-                async
-            );
+            await base.Filter_include_on_skip_navigation_combined_with_filtered_then_includes_split(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[CollectionInverseId], [e].[Name], [e].[ReferenceInverseId]
@@ -1707,9 +1687,7 @@ ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id]"
             bool async
         )
         {
-            await base.Filtered_include_on_skip_navigation_then_filtered_include_on_navigation_split(
-                async
-            );
+            await base.Filtered_include_on_skip_navigation_then_filtered_include_on_navigation_split(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[CollectionInverseId], [e].[Name], [e].[ReferenceInverseId]
@@ -1747,9 +1725,7 @@ ORDER BY [e].[Id], [t].[OneId], [t].[ThreeId], [t].[Id]"
             bool async
         )
         {
-            await base.Filtered_include_on_navigation_then_filtered_include_on_skip_navigation_split(
-                async
-            );
+            await base.Filtered_include_on_navigation_then_filtered_include_on_skip_navigation_split(async);
 
             AssertSql(
                 @"SELECT [e].[Id], [e].[Name]

@@ -578,9 +578,9 @@ namespace Microsoft.CodeAnalysis
                     // the item in the list is the highest version, by construction
                     for (int i = 1; i < assemblyReference.Value.Count; i++)
                     {
-                        int assemblyIndex = assemblyReference.Value[i].GetAssemblyIndex(
-                            explicitlyReferencedAssemblyCount
-                        );
+                        int assemblyIndex = assemblyReference.Value[
+                            i
+                        ].GetAssemblyIndex(explicitlyReferencedAssemblyCount);
                         aliasesOfReferencedAssembliesBuilder[assemblyIndex] = s_supersededAlias;
                     }
                 }

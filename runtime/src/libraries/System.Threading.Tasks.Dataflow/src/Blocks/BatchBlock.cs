@@ -445,9 +445,10 @@ namespace System.Threading.Tasks.Dataflow
                     // Thus, we initialize our collections to be able to store at least that many elements
                     // in order to avoid unnecessary allocations below that point.
                     Debug.Assert(batchSize > 0, "A positive batch size is required");
-                    PostponedMessages = new QueuedMap<ISourceBlock<T>, DataflowMessageHeader>(
-                        batchSize
-                    );
+                    PostponedMessages = new QueuedMap<
+                        ISourceBlock<T>,
+                        DataflowMessageHeader
+                    >(batchSize);
                     PostponedMessagesTemp = new KeyValuePair<
                         ISourceBlock<T>,
                         DataflowMessageHeader

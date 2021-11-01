@@ -792,9 +792,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                                     // and it is a common pattern to have a private serialization constructor
                                     // that is not explicitly referenced in code.
                                     if (
-                                        _deserializationConstructorCheck.IsDeserializationConstructor(
-                                            methodSymbol
-                                        )
+                                        _deserializationConstructorCheck.IsDeserializationConstructor(methodSymbol)
                                     )
                                     {
                                         return false;

@@ -25,9 +25,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             mockDescriptor.Setup(d => d.ActionName).Returns("actionName").Verifiable();
             HttpActionDescriptor actionDescriptor = mockDescriptor.Object;
             HttpControllerContext controllerContext = new Mock<HttpControllerContext>().Object;
@@ -52,9 +51,8 @@ namespace System.Web.Http.Tracing.Tracers
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
             Collection<HttpMethod> methods = new Collection<HttpMethod>() { HttpMethod.Delete };
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             mockDescriptor.Setup(d => d.SupportedHttpMethods).Returns(methods).Verifiable();
             HttpActionDescriptor actionDescriptor = mockDescriptor.Object;
             HttpControllerContext controllerContext = new Mock<HttpControllerContext>().Object;
@@ -79,9 +77,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             mockDescriptor.Setup(d => d.ActionBinding).Returns(binding).Verifiable();
             HttpActionDescriptor actionDescriptor = mockDescriptor.Object;
             HttpControllerContext controllerContext = new Mock<HttpControllerContext>().Object;
@@ -105,9 +102,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             mockDescriptor.Setup(d => d.ReturnType).Returns(typeof(string)).Verifiable();
             HttpActionDescriptor actionDescriptor = mockDescriptor.Object;
             HttpControllerContext controllerContext = new Mock<HttpControllerContext>().Object;
@@ -132,9 +128,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             mockDescriptor.Setup(d => d.ResultConverter).Returns(resultConverter).Verifiable();
             HttpActionDescriptor actionDescriptor = mockDescriptor.Object;
             HttpControllerContext controllerContext = new Mock<HttpControllerContext>().Object;
@@ -162,9 +157,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             mockDescriptor.Setup(d => d.Properties).Returns(properties).Verifiable();
             HttpActionDescriptor actionDescriptor = mockDescriptor.Object;
             HttpControllerContext controllerContext = new Mock<HttpControllerContext>().Object;
@@ -189,9 +183,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             mockDescriptor
                 .Setup(d => d.GetCustomAttributes<Attribute>())
                 .Returns(customAttributes)
@@ -220,9 +213,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             mockDescriptor.Setup(d => d.GetParameters()).Returns(parameters).Verifiable();
             HttpActionDescriptor actionDescriptor = mockDescriptor.Object;
             HttpControllerContext controllerContext = new Mock<HttpControllerContext>().Object;
@@ -247,9 +239,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             mockDescriptor.Setup(d => d.GetFilters()).Returns(filters).Verifiable();
             HttpActionDescriptor actionDescriptor = mockDescriptor.Object;
             HttpControllerContext controllerContext = new Mock<HttpControllerContext>().Object;
@@ -276,9 +267,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             mockDescriptor.Setup(d => d.GetFilterPipeline()).Returns(filters).Verifiable();
             HttpActionDescriptor actionDescriptor = mockDescriptor.Object;
             HttpControllerContext controllerContext = new Mock<HttpControllerContext>().Object;
@@ -303,9 +293,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             HttpActionDescriptor actionDescriptor = mockDescriptor.Object;
             HttpControllerContext controllerContext = new Mock<HttpControllerContext>().Object;
             controllerContext.Configuration = controllerDescriptor.Configuration;
@@ -327,9 +316,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerDescriptor controllerDescriptor =
                 new Mock<HttpControllerDescriptor>().Object;
             controllerDescriptor.Configuration = new HttpConfiguration();
-            Mock<HttpActionDescriptor> mockDescriptor = new Mock<HttpActionDescriptor>(
-                controllerDescriptor
-            );
+            Mock<HttpActionDescriptor> mockDescriptor =
+                new Mock<HttpActionDescriptor>(controllerDescriptor);
             HttpActionDescriptor actionDescriptor = mockDescriptor.Object;
             HttpControllerContext controllerContext = new Mock<HttpControllerContext>().Object;
             controllerContext.Configuration = controllerDescriptor.Configuration;

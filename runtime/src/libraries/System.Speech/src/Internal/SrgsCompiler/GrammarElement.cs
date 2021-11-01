@@ -182,9 +182,7 @@ namespace System.Speech.Internal.SrgsCompiler
             set
             {
                 _backend.GrammarOptions =
-                    System.Speech.Recognition.SrgsGrammar.SrgsDocument.TagFormat2GrammarOptions(
-                        value
-                    );
+                    System.Speech.Recognition.SrgsGrammar.SrgsDocument.TagFormat2GrammarOptions(value);
             }
         }
 

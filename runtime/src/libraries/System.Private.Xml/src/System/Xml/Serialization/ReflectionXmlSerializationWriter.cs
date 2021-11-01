@@ -1042,9 +1042,8 @@ namespace System.Xml.Serialization
             {
                 var sb = new StringBuilder();
                 TypeDesc? arrayElementTypeDesc = memberTypeDesc.ArrayElementTypeDesc;
-                bool canOptimizeWriteListSequence = CanOptimizeWriteListSequence(
-                    arrayElementTypeDesc
-                );
+                bool canOptimizeWriteListSequence =
+                    CanOptimizeWriteListSequence(arrayElementTypeDesc);
                 if (attribute.IsList)
                 {
                     if (canOptimizeWriteListSequence)

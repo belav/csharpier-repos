@@ -543,15 +543,11 @@ namespace System.Net.Http.Formatting
                     // This retrieves the T type of the IEnumerable<T> interface.
                     Type elementType = genericType.GetGenericArguments()[0];
                     Type delegatingType =
-                        FormattingUtilities.DelegatingEnumerableGenericType.MakeGenericType(
-                            elementType
-                        );
+                        FormattingUtilities.DelegatingEnumerableGenericType.MakeGenericType(elementType);
                     ConstructorInfo delegatingConstructor = delegatingType.GetConstructor(
                         new Type[]
                         {
-                            FormattingUtilities.EnumerableInterfaceGenericType.MakeGenericType(
-                                elementType
-                            )
+                            FormattingUtilities.EnumerableInterfaceGenericType.MakeGenericType(elementType)
                         }
                     );
                     _delegatingEnumerableConstructorCache.TryAdd(

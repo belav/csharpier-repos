@@ -343,9 +343,8 @@ namespace System.Net.Http
                 }
 
                 // AppContext switch wasn't used. Check the environment variable to determine which handler should be used.
-                string? envVar = Environment.GetEnvironmentVariable(
-                    EnableActivityPropagationEnvironmentVariableSettingName
-                );
+                string? envVar =
+                    Environment.GetEnvironmentVariable(EnableActivityPropagationEnvironmentVariableSettingName);
                 if (
                     envVar != null
                     && (

@@ -46,38 +46,31 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 _dispatcher = dispatcher;
                 _entityTypeBuilderConventionContext =
                     new ConventionContext<IConventionEntityTypeBuilder>(dispatcher);
-                _entityTypeConventionContext = new ConventionContext<IConventionEntityType>(
-                    dispatcher
-                );
+                _entityTypeConventionContext =
+                    new ConventionContext<IConventionEntityType>(dispatcher);
                 _relationshipBuilderConventionContext =
                     new ConventionContext<IConventionForeignKeyBuilder>(dispatcher);
-                _foreignKeyConventionContext = new ConventionContext<IConventionForeignKey>(
-                    dispatcher
-                );
+                _foreignKeyConventionContext =
+                    new ConventionContext<IConventionForeignKey>(dispatcher);
                 _skipNavigationBuilderConventionContext =
                     new ConventionContext<IConventionSkipNavigationBuilder>(dispatcher);
-                _skipNavigationConventionContext = new ConventionContext<IConventionSkipNavigation>(
-                    dispatcher
-                );
+                _skipNavigationConventionContext =
+                    new ConventionContext<IConventionSkipNavigation>(dispatcher);
                 _navigationConventionBuilderContext =
                     new ConventionContext<IConventionNavigationBuilder>(dispatcher);
-                _indexBuilderConventionContext = new ConventionContext<IConventionIndexBuilder>(
-                    dispatcher
-                );
+                _indexBuilderConventionContext =
+                    new ConventionContext<IConventionIndexBuilder>(dispatcher);
                 _indexConventionContext = new ConventionContext<IConventionIndex>(dispatcher);
-                _keyBuilderConventionContext = new ConventionContext<IConventionKeyBuilder>(
-                    dispatcher
-                );
+                _keyBuilderConventionContext =
+                    new ConventionContext<IConventionKeyBuilder>(dispatcher);
                 _keyConventionContext = new ConventionContext<IConventionKey>(dispatcher);
                 _propertyBuilderConventionContext =
                     new ConventionContext<IConventionPropertyBuilder>(dispatcher);
                 _propertyConventionContext = new ConventionContext<IConventionProperty>(dispatcher);
-                _modelBuilderConventionContext = new ConventionContext<IConventionModelBuilder>(
-                    dispatcher
-                );
-                _annotationConventionContext = new ConventionContext<IConventionAnnotation>(
-                    dispatcher
-                );
+                _modelBuilderConventionContext =
+                    new ConventionContext<IConventionModelBuilder>(dispatcher);
+                _annotationConventionContext =
+                    new ConventionContext<IConventionAnnotation>(dispatcher);
                 _propertyListConventionContext = new ConventionContext<
                     IReadOnlyList<IConventionProperty>
                 >(dispatcher);

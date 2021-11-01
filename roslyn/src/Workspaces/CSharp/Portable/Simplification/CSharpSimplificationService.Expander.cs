@@ -185,9 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                                     )
                                 )
                                 {
-                                    newNode = newReturnStatement.WithExpression(
-                                        newExpressionWithCast
-                                    );
+                                    newNode =
+                                        newReturnStatement.WithExpression(newExpressionWithCast);
                                 }
                             }
                         }
@@ -214,9 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         )
                     )
                     {
-                        parenthesizedLambda = parenthesizedLambda.WithBody(
-                            newLambdaExpressionBodyWithCast
-                        );
+                        parenthesizedLambda =
+                            parenthesizedLambda.WithBody(newLambdaExpressionBodyWithCast);
                     }
 
                     // Next, try to add a types to the lambda parameters
@@ -254,9 +252,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                                 }
 
                                 var newParameterList = parameterList.WithParameters(newParameters);
-                                var newParenthesizedLambda = parenthesizedLambda.WithParameterList(
-                                    newParameterList
-                                );
+                                var newParenthesizedLambda =
+                                    parenthesizedLambda.WithParameterList(newParameterList);
 
                                 return SimplificationHelpers.CopyAnnotations(
                                     from: parenthesizedLambda,
@@ -310,9 +307,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                                     simpleLambda.AsyncKeyword,
                                     SyntaxFactory
                                         .ParameterList(
-                                            SyntaxFactory.SingletonSeparatedList(
-                                                newSimpleLambdaParameter
-                                            )
+                                            SyntaxFactory.SingletonSeparatedList(newSimpleLambdaParameter)
                                         )
                                         .WithTrailingTrivia(
                                             simpleLambda.Parameter.GetTrailingTrivia()
@@ -429,9 +424,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             )
             {
                 var newDeclarator =
-                    (AnonymousObjectMemberDeclaratorSyntax)base.VisitAnonymousObjectMemberDeclarator(
-                        node
-                    );
+                    (AnonymousObjectMemberDeclaratorSyntax)base.VisitAnonymousObjectMemberDeclarator(node);
                 if (node.NameEquals == null)
                 {
                     var inferredName = node.Expression.TryGetInferredMemberName();
@@ -721,9 +714,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                             if (_annotationForReplacedAliasIdentifier != null)
                             {
-                                newIdentifier = newIdentifier.WithAdditionalAnnotations(
-                                    _annotationForReplacedAliasIdentifier
-                                );
+                                newIdentifier =
+                                    newIdentifier.WithAdditionalAnnotations(_annotationForReplacedAliasIdentifier);
                             }
 
                             var aliasAnnotationInfo = AliasAnnotation.Create(aliasInfo.Name);
@@ -1027,9 +1019,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                                             typeArguments.Select(
                                                 p =>
                                                     SyntaxFactory.ParseTypeName(
-                                                        p.ToDisplayParts(
-                                                                s_typeNameFormatWithGenerics
-                                                            )
+                                                        p.ToDisplayParts(s_typeNameFormatWithGenerics)
                                                             .ToDisplayString()
                                                     )
                                             )
@@ -1444,9 +1434,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     return originalNode;
                 }
 
-                var rewrittenNode = (InvocationExpressionSyntax)base.VisitInvocationExpression(
-                    originalNode
-                );
+                var rewrittenNode =
+                    (InvocationExpressionSyntax)base.VisitInvocationExpression(originalNode);
                 if (
                     originalNode.Expression.IsKind(
                         SyntaxKind.SimpleMemberAccessExpression,
@@ -1522,9 +1511,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 // It may be the case that this extension method cannot be called in static form.  For example, if the
                 // qualified name for the type containing the extension would be ambiguous.  In that case, just return
                 // the original call as is.
-                var containingTypeString = reducedExtensionMethod.ContainingType.ToDisplayString(
-                    s_typeNameFormatWithGenerics
-                );
+                var containingTypeString =
+                    reducedExtensionMethod.ContainingType.ToDisplayString(s_typeNameFormatWithGenerics);
 
                 // We use .ParseExpression here, and not .GenerateTypeSyntax as we want this to be a property
                 // MemberAccessExpression, and not a QualifiedNameSyntax.

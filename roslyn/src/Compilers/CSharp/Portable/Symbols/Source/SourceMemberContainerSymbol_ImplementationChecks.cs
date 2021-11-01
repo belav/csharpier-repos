@@ -201,9 +201,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     else
                     {
                         implementingMemberAndDiagnostics =
-                            this.FindImplementationForInterfaceMemberInNonInterfaceWithDiagnostics(
-                                interfaceMember
-                            );
+                            this.FindImplementationForInterfaceMemberInNonInterfaceWithDiagnostics(interfaceMember);
                     }
 
                     var implementingMember = implementingMemberAndDiagnostics.Symbol;
@@ -542,9 +540,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else
             {
                 implementingPropertyOrEvent =
-                    this.FindImplementationForInterfaceMemberInNonInterface(
-                        interfacePropertyOrEvent
-                    );
+                    this.FindImplementationForInterfaceMemberInNonInterface(interfacePropertyOrEvent);
             }
 
             // If the property or event wasn't implemented, then we'd prefer to report diagnostics about that.

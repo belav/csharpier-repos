@@ -111,21 +111,103 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 18 => typeof(Snapshot<, , , , , , , , , , , , , , , , , >).MakeGenericType(types),
                 19 => typeof(Snapshot<, , , , , , , , , , , , , , , , , , >).MakeGenericType(types),
                 20
-                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , >).MakeGenericType(
-                      types
-                  ),
+                  => typeof(Snapshot<
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+
+                  >).MakeGenericType(types),
                 21
-                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , >).MakeGenericType(
-                      types
-                  ),
+                  => typeof(Snapshot<
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+
+                  >).MakeGenericType(types),
                 22
-                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , >).MakeGenericType(
-                      types
-                  ),
+                  => typeof(Snapshot<
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+
+                  >).MakeGenericType(types),
                 23
-                  => typeof(Snapshot<, , , , , , , , , , , , , , , , , , , , , , >).MakeGenericType(
-                      types
-                  ),
+                  => typeof(Snapshot<
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+                      ,
+
+                  >).MakeGenericType(types),
                 24
                   => typeof(Snapshot<
                       ,

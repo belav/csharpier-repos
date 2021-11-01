@@ -135,9 +135,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             {
                 foreach (var externalRuntimeJson in ExternalRuntimeJsons)
                 {
-                    RuntimeGraph externalRuntimeGraph = JsonRuntimeFormat.ReadRuntimeGraph(
-                        externalRuntimeJson
-                    );
+                    RuntimeGraph externalRuntimeGraph =
+                        JsonRuntimeFormat.ReadRuntimeGraph(externalRuntimeJson);
 
                     foreach (var runtime in externalRuntimeGraph.Runtimes.Keys)
                     {
@@ -324,9 +323,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                 return;
             }
 
-            RuntimeGroupCollection runtimeGroupCollection = new RuntimeGroupCollection(
-                runtimeGroups
-            );
+            RuntimeGroupCollection runtimeGroupCollection =
+                new RuntimeGroupCollection(runtimeGroups);
 
             foreach (string additionalRuntimeIdentifier in AdditionalRuntimeIdentifiers)
             {
@@ -360,9 +358,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             using (var file = File.OpenText(mapFile))
             using (var jsonTextReader = new JsonTextReader(file))
             {
-                return serializer.Deserialize<IDictionary<string, IEnumerable<string>>>(
-                    jsonTextReader
-                );
+                return serializer.Deserialize<
+                    IDictionary<string, IEnumerable<string>>
+                >(jsonTextReader);
             }
         }
 

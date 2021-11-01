@@ -13,9 +13,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 {
     internal unsafe class RequestStreamAsyncResult : IAsyncResult, IDisposable
     {
-        private static readonly IOCompletionCallback IOCallback = new IOCompletionCallback(
-            Callback
-        );
+        private static readonly IOCompletionCallback IOCallback =
+            new IOCompletionCallback(Callback);
 
         private SafeNativeOverlapped? _overlapped;
         private IntPtr _pinnedBuffer;
@@ -155,9 +154,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         )
         {
             var asyncResult =
-                (RequestStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                    nativeOverlapped
-                )!;
+                (RequestStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
             IOCompleted(asyncResult, errorCode, numBytes);
         }
 

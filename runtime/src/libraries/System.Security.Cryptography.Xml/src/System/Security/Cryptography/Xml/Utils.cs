@@ -645,9 +645,8 @@ namespace System.Security.Cryptography.Xml
                                             ? "xmlns:" + attrib.Prefix
                                             : "xmlns"
                                     );
-                                    XmlAttribute nsattrib = elem.OwnerDocument.CreateAttribute(
-                                        name
-                                    );
+                                    XmlAttribute nsattrib =
+                                        elem.OwnerDocument.CreateAttribute(name);
                                     nsattrib.Value = attrib.NamespaceURI;
                                     namespaces.Add(nsattrib);
                                 }

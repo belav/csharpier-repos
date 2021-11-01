@@ -83,9 +83,8 @@ namespace System.Web.Http.Tracing.Tracers
             // Assert
             Assert.NotNull(tracers);
             IFilter untypedFilter = Assert.Single(tracers);
-            AuthenticationFilterTracer tracer = Assert.IsType<AuthenticationFilterTracer>(
-                untypedFilter
-            );
+            AuthenticationFilterTracer tracer =
+                Assert.IsType<AuthenticationFilterTracer>(untypedFilter);
             Assert.Same(expectedInner, tracer.InnerFilter);
             Assert.Same(expectedTraceWriter, tracer.TraceWriter);
         }
@@ -273,9 +272,8 @@ namespace System.Web.Http.Tracing.Tracers
             FilterInfo filterInfo = Assert.Single(filters);
             Assert.NotNull(filterInfo);
             IFilter untypedFilter = filterInfo.Instance;
-            AuthenticationFilterTracer tracer = Assert.IsType<AuthenticationFilterTracer>(
-                untypedFilter
-            );
+            AuthenticationFilterTracer tracer =
+                Assert.IsType<AuthenticationFilterTracer>(untypedFilter);
             Assert.Same(expectedInner, tracer.InnerFilter);
             Assert.Same(expectedTraceWriter, tracer.TraceWriter);
         }

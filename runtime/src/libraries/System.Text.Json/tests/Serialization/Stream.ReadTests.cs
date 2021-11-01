@@ -113,9 +113,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes("null")))
             {
-                IList<int> valueTypeCollection = await JsonSerializer.DeserializeAsync<IList<int>>(
-                    stream
-                );
+                IList<int> valueTypeCollection = await JsonSerializer.DeserializeAsync<
+                    IList<int>
+                >(stream);
                 Assert.Null(valueTypeCollection);
             }
         }

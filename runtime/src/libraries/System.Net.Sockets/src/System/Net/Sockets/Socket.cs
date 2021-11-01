@@ -259,9 +259,7 @@ namespace System.Net.Sockets
                                                 buffer.Slice(0, bufferLength)
                                             );
                                             _remoteEndPoint = new UnixDomainSocketEndPoint(
-                                                IPEndPointExtensions.GetNetSocketAddress(
-                                                    socketAddress
-                                                )
+                                                IPEndPointExtensions.GetNetSocketAddress(socketAddress)
                                             );
                                             break;
                                     }
@@ -366,9 +364,8 @@ namespace System.Net.Sockets
 
                 if (_localEndPoint == null)
                 {
-                    Internals.SocketAddress socketAddress = IPEndPointExtensions.Serialize(
-                        _rightEndPoint
-                    );
+                    Internals.SocketAddress socketAddress =
+                        IPEndPointExtensions.Serialize(_rightEndPoint);
                     unsafe
                     {
                         fixed (byte* buffer = socketAddress.Buffer)
@@ -1808,9 +1805,8 @@ namespace System.Net.Sockets
             Internals.SocketAddress socketAddress = Serialize(ref endPointSnapshot);
 
             // Save a copy of the original EndPoint.
-            Internals.SocketAddress socketAddressOriginal = IPEndPointExtensions.Serialize(
-                endPointSnapshot
-            );
+            Internals.SocketAddress socketAddressOriginal =
+                IPEndPointExtensions.Serialize(endPointSnapshot);
 
             SetReceivingPacketInformation();
 
@@ -1927,9 +1923,8 @@ namespace System.Net.Sockets
             Internals.SocketAddress socketAddress = Serialize(ref endPointSnapshot);
 
             // Save a copy of the original EndPoint.
-            Internals.SocketAddress socketAddressOriginal = IPEndPointExtensions.Serialize(
-                endPointSnapshot
-            );
+            Internals.SocketAddress socketAddressOriginal =
+                IPEndPointExtensions.Serialize(endPointSnapshot);
 
             SetReceivingPacketInformation();
 
@@ -2003,9 +1998,8 @@ namespace System.Net.Sockets
             // with the right address family.
             EndPoint endPointSnapshot = remoteEP;
             Internals.SocketAddress socketAddress = Serialize(ref endPointSnapshot);
-            Internals.SocketAddress socketAddressOriginal = IPEndPointExtensions.Serialize(
-                endPointSnapshot
-            );
+            Internals.SocketAddress socketAddressOriginal =
+                IPEndPointExtensions.Serialize(endPointSnapshot);
 
             int bytesTransferred;
             SocketError errorCode = SocketPal.ReceiveFrom(
@@ -3093,9 +3087,8 @@ namespace System.Net.Sockets
                 );
             }
 
-            SocketReceiveMessageFromResult result = TaskToApm.End<SocketReceiveMessageFromResult>(
-                asyncResult
-            );
+            SocketReceiveMessageFromResult result =
+                TaskToApm.End<SocketReceiveMessageFromResult>(asyncResult);
             if (!endPoint.Equals(result.RemoteEndPoint))
             {
                 endPoint = result.RemoteEndPoint;

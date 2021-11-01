@@ -1425,9 +1425,8 @@ namespace System.Net.Tests
                                 Exception e = await Assert.ThrowsAnyAsync<Exception>(
                                     async () =>
                                     {
-                                        using WebResponse response = await GetResponseAsync(
-                                            request
-                                        );
+                                        using WebResponse response =
+                                            await GetResponseAsync(request);
                                         using (Stream myStream = response.GetResponseStream())
                                         {
                                             while (myStream.ReadByte() != -1)
@@ -2164,9 +2163,8 @@ namespace System.Net.Tests
                     {
                         return true;
                     };
-                    using HttpWebResponse response = (HttpWebResponse)await GetResponseAsync(
-                        request
-                    );
+                    using HttpWebResponse response =
+                        (HttpWebResponse)await GetResponseAsync(request);
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 },
                 server => server.HandleRequestAsync(),
@@ -2195,9 +2193,8 @@ namespace System.Net.Tests
                         requestStream.Write(_requestBodyBytes, 0, _requestBodyBytes.Length);
                     }
 
-                    using HttpWebResponse response = (HttpWebResponse)await GetResponseAsync(
-                        request
-                    );
+                    using HttpWebResponse response =
+                        (HttpWebResponse)await GetResponseAsync(request);
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 },
                 server => server.HandleRequestAsync(),
@@ -2223,9 +2220,8 @@ namespace System.Net.Tests
                     };
                     request.ContentType = ContentType;
 
-                    using HttpWebResponse response = (HttpWebResponse)await GetResponseAsync(
-                        request
-                    );
+                    using HttpWebResponse response =
+                        (HttpWebResponse)await GetResponseAsync(request);
                     Assert.Equal(ContentType, response.Headers[HttpResponseHeader.ContentType]);
                 },
                 async server =>
@@ -2264,9 +2260,8 @@ namespace System.Net.Tests
                 .Invoke(
                     async (async, serializedParameters, connectionReusedString) =>
                     {
-                        var parameters = JsonSerializer.Deserialize<HttpWebRequestParameters>(
-                            serializedParameters
-                        );
+                        var parameters =
+                            JsonSerializer.Deserialize<HttpWebRequestParameters>(serializedParameters);
 
                         using (
                             var listener = new Socket(
@@ -2550,9 +2545,8 @@ namespace System.Net.Tests
             try
             {
                 using (
-                    HttpWebResponse response = (HttpWebResponse)state.Request.EndGetResponse(
-                        asynchronousResult
-                    )
+                    HttpWebResponse response =
+                        (HttpWebResponse)state.Request.EndGetResponse(asynchronousResult)
                 )
                 {
                     state.SavedResponseHeaders = response.Headers;

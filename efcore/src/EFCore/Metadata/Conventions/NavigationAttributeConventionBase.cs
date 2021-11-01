@@ -98,9 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var navigations = new List<(PropertyInfo, Type)>();
             foreach (var navigationPropertyInfo in type.GetRuntimeProperties())
             {
-                var targetClrType = FindCandidateNavigationWithAttributePropertyType(
-                    navigationPropertyInfo
-                );
+                var targetClrType =
+                    FindCandidateNavigationWithAttributePropertyType(navigationPropertyInfo);
                 if (targetClrType == null)
                 {
                     continue;
@@ -231,9 +230,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var navigations = new List<(PropertyInfo, Type)>();
             foreach (var navigationPropertyInfo in entityType.GetRuntimeProperties().Values)
             {
-                var targetClrType = FindCandidateNavigationWithAttributePropertyType(
-                    navigationPropertyInfo
-                );
+                var targetClrType =
+                    FindCandidateNavigationWithAttributePropertyType(navigationPropertyInfo);
                 if (targetClrType == null)
                 {
                     continue;
@@ -332,9 +330,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 return;
             }
 
-            var targetClrType = FindCandidateNavigationWithAttributePropertyType(
-                navigationPropertyInfo
-            );
+            var targetClrType =
+                FindCandidateNavigationWithAttributePropertyType(navigationPropertyInfo);
             if (targetClrType == null)
             {
                 return;
@@ -359,9 +356,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private Type? FindCandidateNavigationWithAttributePropertyType(PropertyInfo propertyInfo)
         {
-            var targetClrType = Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(
-                propertyInfo
-            );
+            var targetClrType =
+                Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(propertyInfo);
             return
                 targetClrType == null
                 || !Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)

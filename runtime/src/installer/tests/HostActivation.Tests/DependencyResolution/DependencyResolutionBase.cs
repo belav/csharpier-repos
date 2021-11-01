@@ -171,9 +171,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                                     // ./hostpolicy.dll - this is the real component and will load CoreClr library
                                     .WithAsset(
                                         (
-                                            new NetCoreAppBuilder.RuntimeFileBuilder(
-                                                hostPolicyFileName
-                                            )
+                                            new NetCoreAppBuilder.RuntimeFileBuilder(hostPolicyFileName)
                                         )
                                             .CopyFromFile(
                                                 Path.Combine(

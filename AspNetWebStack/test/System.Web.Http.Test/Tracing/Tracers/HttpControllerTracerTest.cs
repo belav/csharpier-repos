@@ -131,9 +131,8 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(Task.FromResult<HttpResponseMessage>(response));
 
             HttpRequestMessage request = new HttpRequestMessage();
-            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(
-                request: request
-            );
+            HttpControllerContext controllerContext =
+                ContextUtil.CreateControllerContext(request: request);
             controllerContext.ControllerDescriptor = _controllerDescriptor;
             controllerContext.Controller = mockController.Object;
 
@@ -203,9 +202,8 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(tcs.Task);
 
             HttpRequestMessage request = new HttpRequestMessage();
-            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(
-                request: request
-            );
+            HttpControllerContext controllerContext =
+                ContextUtil.CreateControllerContext(request: request);
             controllerContext.ControllerDescriptor = _controllerDescriptor;
             controllerContext.Controller = mockController.Object;
 
@@ -274,9 +272,8 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(TaskHelpers.Canceled<HttpResponseMessage>());
 
             HttpRequestMessage request = new HttpRequestMessage();
-            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(
-                request: request
-            );
+            HttpControllerContext controllerContext =
+                ContextUtil.CreateControllerContext(request: request);
             controllerContext.ControllerDescriptor = _controllerDescriptor;
             controllerContext.Controller = mockController.Object;
 

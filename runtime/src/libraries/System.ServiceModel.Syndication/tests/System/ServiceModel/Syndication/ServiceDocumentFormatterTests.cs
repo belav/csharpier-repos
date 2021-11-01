@@ -99,9 +99,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateInlineCategories_Invoke_ReturnsExpected()
         {
             var collection = new ResourceCollectionInfo();
-            InlineCategoriesDocument document = Formatter.CreateInlineCategoriesEntryPoint(
-                collection
-            );
+            InlineCategoriesDocument document =
+                Formatter.CreateInlineCategoriesEntryPoint(collection);
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.Categories);
@@ -123,9 +122,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateReferencedCategories_Invoke_ReturnsExpected()
         {
             var collection = new ResourceCollectionInfo();
-            ReferencedCategoriesDocument document = Formatter.CreateReferencedCategoriesEntryPoint(
-                collection
-            );
+            ReferencedCategoriesDocument document =
+                Formatter.CreateReferencedCategoriesEntryPoint(collection);
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.ElementExtensions);

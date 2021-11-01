@@ -300,7 +300,7 @@ namespace System.Text.Json.Serialization.Converters
                 // todo: optimize implementation here by leveraging https://github.com/dotnet/runtime/issues/934.
                 string[] enumValues = value.Split(
 #if BUILDING_INBOX_LIBRARY
-                    ValueSeparator
+                ValueSeparator
 #else
                     new string[]
                     {

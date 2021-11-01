@@ -152,9 +152,10 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         {
             using (var database = SqlTestStore.CreateScratch())
             {
-                using var host = await SetupServer<BloggingContext, NoMigrationsMiddleware>(
-                    database
-                );
+                using var host = await SetupServer<
+                    BloggingContext,
+                    NoMigrationsMiddleware
+                >(database);
                 using var server = host.GetTestServer();
                 HttpResponseMessage response = await server
                     .CreateClient()
@@ -207,9 +208,10 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
             using (var database = SqlTestStore.CreateScratch())
             {
                 using (
-                    var server = await SetupServer<BloggingContext, NoMigrationsMiddleware>(
-                        database
-                    )
+                    var server = await SetupServer<
+                        BloggingContext,
+                        NoMigrationsMiddleware
+                    >(database)
                 )
                 {
                     using (var db = server.Services.GetService<BloggingContext>())
@@ -453,9 +455,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
                                         app.UseDatabaseErrorPage(
                                             new DatabaseErrorPageOptions
                                             {
-                                                MigrationsEndPointPath = new PathString(
-                                                    migrationsEndpoint
-                                                )
+                                                MigrationsEndPointPath =
+                                                    new PathString(migrationsEndpoint)
                                             }
                                         );
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -634,9 +635,10 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         {
             using (var database = SqlTestStore.CreateScratch())
             {
-                using var host = await SetupServer<BloggingContext, WrappedExceptionMiddleware>(
-                    database
-                );
+                using var host = await SetupServer<
+                    BloggingContext,
+                    WrappedExceptionMiddleware
+                >(database);
                 using var server = host.GetTestServer();
                 HttpResponseMessage response = await server
                     .CreateClient()

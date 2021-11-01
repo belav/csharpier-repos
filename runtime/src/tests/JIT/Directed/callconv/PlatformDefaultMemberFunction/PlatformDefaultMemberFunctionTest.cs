@@ -112,9 +112,8 @@ unsafe class PlatformDefaultMemberFunctionTest
 
     private static void Test4ByteNonHFA(PlatformDefaultMemberFunctionNative.C* instance)
     {
-        PlatformDefaultMemberFunctionNative.IntWrapper result = instance->vtable->getHeightAsInt(
-            instance
-        );
+        PlatformDefaultMemberFunctionNative.IntWrapper result =
+            instance->vtable->getHeightAsInt(instance);
 
         Assert.AreEqual((int)instance->height, result.i);
     }

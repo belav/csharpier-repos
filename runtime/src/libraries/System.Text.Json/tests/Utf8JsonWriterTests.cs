@@ -5638,9 +5638,8 @@ namespace System.Text.Json.Tests
         [InlineData(false, false)]
         public void WriteStartEndWithPropertyNameObject(bool formatted, bool skipValidation)
         {
-            string expectedStr = GetStartEndWithPropertyObjectExpectedString(
-                prettyPrint: formatted
-            );
+            string expectedStr =
+                GetStartEndWithPropertyObjectExpectedString(prettyPrint: formatted);
 
             var options = new JsonWriterOptions
             {

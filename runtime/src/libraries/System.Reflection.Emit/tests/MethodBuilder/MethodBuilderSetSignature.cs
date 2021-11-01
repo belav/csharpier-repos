@@ -145,9 +145,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             string[] typeParamNames = new string[] { "T" };
-            GenericTypeParameterBuilder[] typeParameters = method.DefineGenericParameters(
-                typeParamNames
-            );
+            GenericTypeParameterBuilder[] typeParameters =
+                method.DefineGenericParameters(typeParamNames);
             GenericTypeParameterBuilder desiredReturnType = typeParameters[0];
             Type[] desiredParamType = new Type[] { typeof(int) };
             Type[][] parameterTypeRequiredCustomModifiers = new Type[desiredParamType.Length][];

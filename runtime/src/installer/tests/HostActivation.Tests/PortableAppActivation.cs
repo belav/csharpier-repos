@@ -326,9 +326,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string builtDotnet = fixture.BuiltDotnet.BinPath;
 
             using (
-                var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(
-                    appExe
-                )
+                var registeredInstallLocationOverride =
+                    new RegisteredInstallLocationOverride(appExe)
             )
             {
                 string architecture = fixture.CurrentRid.Split('-')[1];

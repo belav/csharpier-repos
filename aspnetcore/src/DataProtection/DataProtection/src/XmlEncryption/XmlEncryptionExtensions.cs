@@ -48,9 +48,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
                 // Decrypt the clone so that the decryptor doesn't inadvertently modify
                 // the original document or other data structures. The element we pass to
                 // the decryptor should be the child of the 'encryptedSecret' element.
-                var clonedElementWhichRequiresDecryption = new XElement(
-                    elementWhichRequiresDecryption
-                );
+                var clonedElementWhichRequiresDecryption =
+                    new XElement(elementWhichRequiresDecryption);
                 string decryptorTypeName = (string)clonedElementWhichRequiresDecryption.Attribute(
                     XmlConstants.DecryptorTypeAttributeName
                 )!;
@@ -105,9 +104,8 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
 
                 // Encrypt the clone so that the encryptor doesn't inadvertently modify
                 // the original document or other data structures.
-                var clonedElementWhichRequiresEncryption = new XElement(
-                    elementWhichRequiresEncryption
-                );
+                var clonedElementWhichRequiresEncryption =
+                    new XElement(elementWhichRequiresEncryption);
                 var innerDoc = new XDocument(clonedElementWhichRequiresEncryption);
                 var encryptedXmlInfo = encryptor.Encrypt(clonedElementWhichRequiresEncryption);
                 CryptoUtil.Assert(encryptedXmlInfo != null, "IXmlEncryptor.Encrypt returned null.");

@@ -67,9 +67,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             get
             {
                 return _sourceTypeParameter.IsReferenceTypeFromConstraintTypes
-                    || CalculateIsReferenceTypeFromConstraintTypes(
-                        ConstraintTypesNoUseSiteDiagnostics
-                    );
+                    || CalculateIsReferenceTypeFromConstraintTypes(ConstraintTypesNoUseSiteDiagnostics);
             }
         }
 

@@ -35,9 +35,8 @@ namespace Castle.DynamicProxy.Tests
         {
             var recorder = new InvocationTypeRecorder();
 
-            var proxy = generator.CreateInterfaceProxyWithoutTarget<IWithNonGenericMethod>(
-                recorder
-            );
+            var proxy =
+                generator.CreateInterfaceProxyWithoutTarget<IWithNonGenericMethod>(recorder);
             proxy.Method();
 
             Assert.AreEqual(

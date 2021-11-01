@@ -31,9 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             apiDescription.ParameterDescriptions.Add(stringParameterDescription);
 
             var actionDescriptorList = new List<ActionDescriptor>();
-            var apiDescriptionProviderContext = new ApiDescriptionProviderContext(
-                actionDescriptorList
-            );
+            var apiDescriptionProviderContext =
+                new ApiDescriptionProviderContext(actionDescriptorList);
             apiDescriptionProviderContext.Results.Add(apiDescription);
 
             // Act

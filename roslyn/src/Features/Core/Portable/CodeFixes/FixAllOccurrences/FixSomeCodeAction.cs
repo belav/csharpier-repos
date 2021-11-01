@@ -51,9 +51,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
             var fixAllContext = new FixAllContext(FixAllState, progressTracker, cancellationToken);
             if (progressTracker != null)
-                progressTracker.Description = FixAllContextHelper.GetDefaultFixAllTitle(
-                    fixAllContext
-                );
+                progressTracker.Description =
+                    FixAllContextHelper.GetDefaultFixAllTitle(fixAllContext);
 
             return service.GetFixAllOperationsAsync(fixAllContext, _showPreviewChangesDialog);
         }
@@ -74,9 +73,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
             var fixAllContext = new FixAllContext(FixAllState, progressTracker, cancellationToken);
             if (progressTracker != null)
-                progressTracker.Description = FixAllContextHelper.GetDefaultFixAllTitle(
-                    fixAllContext
-                );
+                progressTracker.Description =
+                    FixAllContextHelper.GetDefaultFixAllTitle(fixAllContext);
 
             return service.GetFixAllChangedSolutionAsync(fixAllContext);
         }

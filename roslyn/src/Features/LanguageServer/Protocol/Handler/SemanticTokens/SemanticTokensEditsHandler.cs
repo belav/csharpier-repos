@@ -294,9 +294,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 var deleteCount = 5 * (1 + (endEditIndex - startEditIndex));
                 for (var i = 0; i <= endEditIndex - startEditIndex; i++)
                 {
-                    newGroupedSemanticTokens[editIndices[startEditIndex + i]].AddToEnd(
-                        tokensToInsert
-                    );
+                    newGroupedSemanticTokens[
+                        editIndices[startEditIndex + i]
+                    ].AddToEnd(tokensToInsert);
                 }
 
                 semanticTokensEdits.Add(
@@ -330,9 +330,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
                 for (var i = 0; i <= endEditIndex - startEditIndex; i++)
                 {
-                    newGroupedSemanticTokens[editIndices[startEditIndex + i]].AddToEnd(
-                        tokensToInsert
-                    );
+                    newGroupedSemanticTokens[
+                        editIndices[startEditIndex + i]
+                    ].AddToEnd(tokensToInsert);
                 }
 
                 semanticTokensEdits.Add(

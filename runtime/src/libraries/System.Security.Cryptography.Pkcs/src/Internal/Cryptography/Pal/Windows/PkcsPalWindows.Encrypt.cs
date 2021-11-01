@@ -198,9 +198,8 @@ namespace Internal.Cryptography.Pal.Windows
                 pEnvelopedEncodeInfo->hCryptProv = IntPtr.Zero;
 
                 string algorithmOidValue = contentEncryptionAlgorithm.Oid.Value!;
-                pEnvelopedEncodeInfo->ContentEncryptionAlgorithm.pszObjId = hb.AllocAsciiString(
-                    algorithmOidValue
-                );
+                pEnvelopedEncodeInfo->ContentEncryptionAlgorithm.pszObjId =
+                    hb.AllocAsciiString(algorithmOidValue);
 
                 // .NET Framework compat: Though it seems like we could copy over the contents of contentEncryptionAlgorithm.Parameters, that property is for retrieving information from decoded Cms's only, and it
                 // massages the raw data so it wouldn't be usable here anyway. To hammer home that fact, the EncryptedCms constructor rather rudely forces contentEncryptionAlgorithm.Parameters to be the empty array.
@@ -388,9 +387,8 @@ namespace Internal.Cryptography.Pal.Windows
                         );
                         pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData =
                             (uint)s_rsaPkcsParameters.Length;
-                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData = hb.AllocBytes(
-                            s_rsaPkcsParameters
-                        );
+                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData =
+                            hb.AllocBytes(s_rsaPkcsParameters);
                     }
                     else if (padding == RSAEncryptionPadding.OaepSHA1)
                     {
@@ -399,9 +397,8 @@ namespace Internal.Cryptography.Pal.Windows
                         );
                         pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData =
                             (uint)s_rsaOaepSha1Parameters.Length;
-                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData = hb.AllocBytes(
-                            s_rsaOaepSha1Parameters
-                        );
+                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData =
+                            hb.AllocBytes(s_rsaOaepSha1Parameters);
                     }
                     else if (padding == RSAEncryptionPadding.OaepSHA256)
                     {
@@ -410,9 +407,8 @@ namespace Internal.Cryptography.Pal.Windows
                         );
                         pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData =
                             (uint)s_rsaOaepSha256Parameters.Length;
-                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData = hb.AllocBytes(
-                            s_rsaOaepSha256Parameters
-                        );
+                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData =
+                            hb.AllocBytes(s_rsaOaepSha256Parameters);
                     }
                     else if (padding == RSAEncryptionPadding.OaepSHA384)
                     {
@@ -421,9 +417,8 @@ namespace Internal.Cryptography.Pal.Windows
                         );
                         pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData =
                             (uint)s_rsaOaepSha384Parameters.Length;
-                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData = hb.AllocBytes(
-                            s_rsaOaepSha384Parameters
-                        );
+                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData =
+                            hb.AllocBytes(s_rsaOaepSha384Parameters);
                     }
                     else if (padding == RSAEncryptionPadding.OaepSHA512)
                     {
@@ -432,9 +427,8 @@ namespace Internal.Cryptography.Pal.Windows
                         );
                         pEncodeInfo->KeyEncryptionAlgorithm.Parameters.cbData =
                             (uint)s_rsaOaepSha512Parameters.Length;
-                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData = hb.AllocBytes(
-                            s_rsaOaepSha512Parameters
-                        );
+                        pEncodeInfo->KeyEncryptionAlgorithm.Parameters.pbData =
+                            hb.AllocBytes(s_rsaOaepSha512Parameters);
                     }
                     else
                     {

@@ -92,16 +92,14 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 var controllerContext = new ControllerContext(actionContext)
                 {
                     // PERF: These are rarely going to be changed, so let's go copy-on-write.
-                    ValueProviderFactories = new CopyOnWriteList<IValueProviderFactory>(
-                        _valueProviderFactories
-                    )
+                    ValueProviderFactories =
+                        new CopyOnWriteList<IValueProviderFactory>(_valueProviderFactories)
                 };
 
                 controllerContext.ModelState.MaxAllowedErrors = _maxModelValidationErrors;
 
-                var (cacheEntry, filters) = _controllerActionInvokerCache.GetCachedResult(
-                    controllerContext
-                );
+                var (cacheEntry, filters) =
+                    _controllerActionInvokerCache.GetCachedResult(controllerContext);
 
                 var invoker = new ControllerActionInvoker(
                     _logger,

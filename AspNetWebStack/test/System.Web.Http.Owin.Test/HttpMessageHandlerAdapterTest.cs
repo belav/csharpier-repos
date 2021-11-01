@@ -775,9 +775,8 @@ namespace System.Web.Http.Owin
 
                     // Assert
                     HttpRequestContext requestContext = request.GetRequestContext();
-                    OwinHttpRequestContext typedContext = Assert.IsType<OwinHttpRequestContext>(
-                        requestContext
-                    );
+                    OwinHttpRequestContext typedContext =
+                        Assert.IsType<OwinHttpRequestContext>(requestContext);
                     Assert.Same(expectedContext, typedContext.Context);
                     Assert.Same(request, typedContext.Request);
                 }
@@ -1679,9 +1678,8 @@ namespace System.Web.Http.Owin
             using (HttpContent content = CreateFaultingContent(expectedOriginalException))
             using (HttpResponseMessage expectedOriginalResponse = CreateResponse(content))
             using (
-                HttpMessageHandler messageHandler = CreateStubMessageHandler(
-                    expectedOriginalResponse
-                )
+                HttpMessageHandler messageHandler =
+                    CreateStubMessageHandler(expectedOriginalResponse)
             )
             using (HttpContent errorContent = CreateFaultingContent(expectedErrorException))
             using (
@@ -1727,9 +1725,8 @@ namespace System.Web.Http.Owin
             using (HttpContent content = CreateFaultingContent(expectedOriginalException))
             using (HttpResponseMessage expectedOriginalResponse = CreateResponse(content))
             using (
-                HttpMessageHandler messageHandler = CreateStubMessageHandler(
-                    expectedOriginalResponse
-                )
+                HttpMessageHandler messageHandler =
+                    CreateStubMessageHandler(expectedOriginalResponse)
             )
             using (HttpContent errorContent = CreateFaultingContent(expectedErrorException))
             using (HttpResponseMessage expectedErrorResponse = CreateResponse(errorContent))
@@ -1810,9 +1807,8 @@ namespace System.Web.Http.Owin
             using (HttpContent content = CreateFaultingContent(expectedOriginalException))
             using (HttpResponseMessage expectedOriginalResponse = CreateResponse(content))
             using (
-                HttpMessageHandler messageHandler = CreateStubMessageHandler(
-                    expectedOriginalResponse
-                )
+                HttpMessageHandler messageHandler =
+                    CreateStubMessageHandler(expectedOriginalResponse)
             )
             using (HttpContent errorContent = CreateFaultingContent(expectedErrorException))
             using (HttpResponseMessage expectedErrorResponse = CreateResponse(errorContent))

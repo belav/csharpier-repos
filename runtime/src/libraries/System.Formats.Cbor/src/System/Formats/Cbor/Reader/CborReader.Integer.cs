@@ -271,9 +271,7 @@ namespace System.Formats.Cbor
             {
                 if (
                     _isConformanceModeCheckEnabled
-                    && CborConformanceModeHelpers.RequiresCanonicalIntegerRepresentation(
-                        ConformanceMode
-                    )
+                    && CborConformanceModeHelpers.RequiresCanonicalIntegerRepresentation(ConformanceMode)
                 )
                 {
                     throw new CborContentException(

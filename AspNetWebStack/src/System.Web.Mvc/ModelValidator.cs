@@ -86,9 +86,7 @@ namespace System.Web.Mvc
                 {
                     ModelMetadata propertyMetadata = properties[propertyIndex];
                     foreach (
-                        ModelValidator propertyValidator in propertyMetadata.GetValidators(
-                            ControllerContext
-                        )
+                        ModelValidator propertyValidator in propertyMetadata.GetValidators(ControllerContext)
                     )
                     {
                         foreach (

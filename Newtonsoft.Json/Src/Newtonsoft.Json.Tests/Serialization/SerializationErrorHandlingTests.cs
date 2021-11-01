@@ -1288,9 +1288,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 model1: { String1: 's1', Int1: 'x' },
                 model2: { String1: 's2', Int1: 2 }
             }";
-            var dictionary = JsonConvert.DeserializeObject<TolerantDictionary<string, DataModel>>(
-                json
-            );
+            var dictionary = JsonConvert.DeserializeObject<
+                TolerantDictionary<string, DataModel>
+            >(json);
 
             Assert.AreEqual(1, dictionary.Count);
             Assert.IsTrue(dictionary.ContainsKey("model2"));

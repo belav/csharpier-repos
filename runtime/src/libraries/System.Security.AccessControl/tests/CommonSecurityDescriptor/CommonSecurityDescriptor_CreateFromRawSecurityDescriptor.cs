@@ -156,9 +156,8 @@ namespace System.Security.AccessControl.Tests
             string verifierSddl
         )
         {
-            RawSecurityDescriptor rawSecurityDescriptor = new RawSecurityDescriptor(
-                rawSecurityDescriptorSddl
-            );
+            RawSecurityDescriptor rawSecurityDescriptor =
+                new RawSecurityDescriptor(rawSecurityDescriptorSddl);
             CommonSecurityDescriptor commonSecurityDescriptor = new CommonSecurityDescriptor(
                 isContainer,
                 isDS,

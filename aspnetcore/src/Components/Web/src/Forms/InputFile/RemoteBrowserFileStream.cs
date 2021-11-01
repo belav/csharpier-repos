@@ -59,9 +59,8 @@ namespace Microsoft.AspNetCore.Components.Forms
 
                 try
                 {
-                    using var readSegmentCts = CancellationTokenSource.CreateLinkedTokenSource(
-                        cancellationToken
-                    );
+                    using var readSegmentCts =
+                        CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                     readSegmentCts.CancelAfter(_segmentFetchTimeout);
 
                     var bytes = await _jsRuntime.InvokeAsync<byte[]>(

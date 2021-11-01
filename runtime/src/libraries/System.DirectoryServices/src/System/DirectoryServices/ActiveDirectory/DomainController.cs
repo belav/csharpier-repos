@@ -328,9 +328,8 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 // bind to the server object
-                DirectoryEntry serverNtdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                    NtdsaObjectName
-                );
+                DirectoryEntry serverNtdsaEntry =
+                    directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
                 // set the NTDSDSA_OPT_IS_GC flag on the "options" property
                 int options = 0;
                 if (serverNtdsaEntry.Properties[PropertyManager.Options].Value != null)
@@ -354,9 +353,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
             try
             {
-                DirectoryEntry serverNtdsaEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                    NtdsaObjectName
-                );
+                DirectoryEntry serverNtdsaEntry =
+                    directoryEntryMgr.GetCachedDirectoryEntry(NtdsaObjectName);
                 serverNtdsaEntry.RefreshCache();
                 // check if the NTDSDSA_OPT_IS_GC flag is set in the
                 // "options" attribute (lowest bit)
@@ -829,9 +827,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (_cachedOSVersion == null)
                 {
                     // get the operating system version attribute
-                    DirectoryEntry computerEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                        ComputerObjectName
-                    );
+                    DirectoryEntry computerEntry =
+                        directoryEntryMgr.GetCachedDirectoryEntry(ComputerObjectName);
                     // is in the form Windows Server 2003
                     _cachedOSVersion = (string)PropertyManager.GetPropertyValue(
                         context,
@@ -851,9 +848,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (_cachedNumericOSVersion == 0)
                 {
                     // get the operating system version attribute
-                    DirectoryEntry computerEntry = directoryEntryMgr.GetCachedDirectoryEntry(
-                        ComputerObjectName
-                    );
+                    DirectoryEntry computerEntry =
+                        directoryEntryMgr.GetCachedDirectoryEntry(ComputerObjectName);
 
                     // is in the form Windows Server 2003
                     string osVersion = (string)PropertyManager.GetPropertyValue(

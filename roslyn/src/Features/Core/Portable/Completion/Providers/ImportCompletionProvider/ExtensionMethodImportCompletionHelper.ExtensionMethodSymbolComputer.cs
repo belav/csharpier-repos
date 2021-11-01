@@ -244,9 +244,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var assembly = compilation.Assembly;
-                var internalsVisible = originatingAssembly.IsSameAssemblyOrHasFriendAccessTo(
-                    assembly
-                );
+                var internalsVisible =
+                    originatingAssembly.IsSameAssemblyOrHasFriendAccessTo(assembly);
 
                 var matchingMethodSymbols = GetPotentialMatchingSymbolsFromAssembly(
                     compilation.Assembly,
@@ -290,9 +289,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 if (
                     !(
                         index.ContainsExtensionMethod
-                        && _originatingSemanticModel.Compilation.GetAssemblyOrModuleSymbol(
-                            peReference
-                        )
+                        && _originatingSemanticModel.Compilation.GetAssemblyOrModuleSymbol(peReference)
                             is IAssemblySymbol assembly
                     )
                 )
@@ -302,9 +299,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                 var filter = CreateAggregatedFilter(index);
                 var internalsVisible =
-                    _originatingSemanticModel.Compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
-                        assembly
-                    );
+                    _originatingSemanticModel.Compilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(assembly);
 
                 var matchingMethodSymbols = GetPotentialMatchingSymbolsFromAssembly(
                     assembly,
@@ -393,9 +388,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                                 // Since method symbols are grouped by their declared receiver type, they are either all matches to the receiver type
                                 // or all mismatches. So we only need to call ReduceExtensionMethod on one of them.
                                 var reducedMethodSymbol =
-                                    methodInOriginatingCompilation.ReduceExtensionMethod(
-                                        _receiverTypeSymbol
-                                    );
+                                    methodInOriginatingCompilation.ReduceExtensionMethod(_receiverTypeSymbol);
                                 cachedResult = reducedMethodSymbol != null;
                                 _checkedReceiverTypes[
                                     declaredReceiverTypeInOriginatingCompilation
@@ -507,9 +500,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     }
 
                     // Container of extension method (static class in C# and Module in VB) can't be generic or nested.
-                    var containerSymbol = assembly.GetTypeByMetadataName(
-                        fullyQualifiedContainerName
-                    );
+                    var containerSymbol =
+                        assembly.GetTypeByMetadataName(fullyQualifiedContainerName);
 
                     if (
                         containerSymbol == null
@@ -640,9 +632,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                 foreach (var receiverTypeName in _receiverTypeNames)
                 {
-                    var methodInfos = symbolInfo.GetExtensionMethodInfoForReceiverType(
-                        receiverTypeName
-                    );
+                    var methodInfos =
+                        symbolInfo.GetExtensionMethodInfoForReceiverType(receiverTypeName);
                     if (methodInfos.Count == 0)
                     {
                         continue;

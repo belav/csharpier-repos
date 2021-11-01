@@ -235,9 +235,8 @@ namespace System.Web.Mvc.Routing
             IDirectRouteProvider directRouteProvider
         )
         {
-            IEnumerable<ReflectedAsyncControllerDescriptor> controllers = GetControllerDescriptors(
-                controllerTypes
-            );
+            IEnumerable<ReflectedAsyncControllerDescriptor> controllers =
+                GetControllerDescriptors(controllerTypes);
 
             foreach (ReflectedAsyncControllerDescriptor controller in controllers)
             {
@@ -327,9 +326,8 @@ namespace System.Web.Mvc.Routing
             foreach (MethodInfo method in actionSelector.ActionMethods)
             {
                 string actionName = actionSelector.GetActionName(method);
-                ActionDescriptorCreator creator = actionSelector.GetActionDescriptorDelegate(
-                    method
-                );
+                ActionDescriptorCreator creator =
+                    actionSelector.GetActionDescriptorDelegate(method);
                 Debug.Assert(creator != null);
 
                 ActionDescriptor action = creator(actionName, controller);

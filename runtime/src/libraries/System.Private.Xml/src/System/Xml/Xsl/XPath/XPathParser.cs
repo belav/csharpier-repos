@@ -413,8 +413,7 @@ namespace System.Xml.Xsl.XPath
                     op,
                     opnd,
                     ParseSubExpr( /*callerPrec:*/
-                        opPrec
-                    )
+                    opPrec)
                 );
             }
             --_parseSubExprDepth;

@@ -200,12 +200,10 @@ namespace TypeSystemTests
                 "System.Collections.Generic",
                 "IEnumerable`1"
             );
-            InstantiatedType iEnumerableOfObjectType = iEnumerableOfTType.MakeInstantiatedType(
-                objectType
-            );
-            InstantiatedType iEnumerableOfExceptionType = iEnumerableOfTType.MakeInstantiatedType(
-                exceptionType
-            );
+            InstantiatedType iEnumerableOfObjectType =
+                iEnumerableOfTType.MakeInstantiatedType(objectType);
+            InstantiatedType iEnumerableOfExceptionType =
+                iEnumerableOfTType.MakeInstantiatedType(exceptionType);
 
             Assert.True(stringSzArrayType.CanCastTo(iEnumerableOfObjectType));
             Assert.False(stringSzArrayType.CanCastTo(iEnumerableOfExceptionType));
@@ -213,9 +211,8 @@ namespace TypeSystemTests
             MetadataType iContravariantOfTType = _testModule.GetType("Casting", "IContravariant`1");
             InstantiatedType iContravariantOfObjectType =
                 iContravariantOfTType.MakeInstantiatedType(objectType);
-            InstantiatedType iEnumerableOfStringType = iEnumerableOfTType.MakeInstantiatedType(
-                stringType
-            );
+            InstantiatedType iEnumerableOfStringType =
+                iEnumerableOfTType.MakeInstantiatedType(stringType);
 
             Assert.True(iContravariantOfObjectType.CanCastTo(objectType));
             Assert.True(iEnumerableOfStringType.CanCastTo(objectType));
@@ -247,9 +244,8 @@ namespace TypeSystemTests
                 "IContravariant`1"
             );
 
-            TypeDesc testType = iContravariantOfTType.MakeInstantiatedType(
-                classWithRecursiveImplementation
-            );
+            TypeDesc testType =
+                iContravariantOfTType.MakeInstantiatedType(classWithRecursiveImplementation);
 
             Assert.False(classWithRecursiveImplementation.CanCastTo(testType));
         }

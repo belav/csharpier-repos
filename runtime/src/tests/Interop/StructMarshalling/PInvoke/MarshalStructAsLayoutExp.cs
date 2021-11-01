@@ -636,9 +636,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByValLongStructPack16Explicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByValLongStructPack16Explicit(
-                            sourceLongStructPack16Explicit
-                        )
+                        !MarshalStructAsParam_AsExpByValLongStructPack16Explicit(sourceLongStructPack16Explicit)
                     )
                     {
                         Console.WriteLine(
@@ -843,9 +841,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByRefInnerArrayExplicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByRefInnerArrayExplicit(
-                            ref sourceInnerArrayExplicit
-                        )
+                        !MarshalStructAsParam_AsExpByRefInnerArrayExplicit(ref sourceInnerArrayExplicit)
                     )
                     {
                         Console.WriteLine(
@@ -1022,9 +1018,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByRefLongStructPack16Explicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByRefLongStructPack16Explicit(
-                            ref sourceLongStructPack16Explicit
-                        )
+                        !MarshalStructAsParam_AsExpByRefLongStructPack16Explicit(ref sourceLongStructPack16Explicit)
                     )
                     {
                         Console.WriteLine(
@@ -1133,9 +1127,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByValInInnerArrayExplicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByValInInnerArrayExplicit(
-                            sourceInnerArrayExplicit
-                        )
+                        !MarshalStructAsParam_AsExpByValInInnerArrayExplicit(sourceInnerArrayExplicit)
                     )
                     {
                         Console.WriteLine(
@@ -1307,9 +1299,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByValInLongStructPack16Explicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByValInLongStructPack16Explicit(
-                            sourceLongStructPack16Explicit
-                        )
+                        !MarshalStructAsParam_AsExpByValInLongStructPack16Explicit(sourceLongStructPack16Explicit)
                     )
                     {
                         Console.WriteLine(
@@ -1418,9 +1408,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByRefInInnerArrayExplicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByRefInInnerArrayExplicit(
-                            ref sourceInnerArrayExplicit
-                        )
+                        !MarshalStructAsParam_AsExpByRefInInnerArrayExplicit(ref sourceInnerArrayExplicit)
                     )
                     {
                         Console.WriteLine(
@@ -1592,9 +1580,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByRefInLongStructPack16Explicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByRefInLongStructPack16Explicit(
-                            ref sourceLongStructPack16Explicit
-                        )
+                        !MarshalStructAsParam_AsExpByRefInLongStructPack16Explicit(ref sourceLongStructPack16Explicit)
                     )
                     {
                         Console.WriteLine(
@@ -1703,9 +1689,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByValOutInnerArrayExplicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByValOutInnerArrayExplicit(
-                            sourceInnerArrayExplicit
-                        )
+                        !MarshalStructAsParam_AsExpByValOutInnerArrayExplicit(sourceInnerArrayExplicit)
                     )
                     {
                         Console.WriteLine(
@@ -1877,9 +1861,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByValOutLongStructPack16Explicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByValOutLongStructPack16Explicit(
-                            sourceLongStructPack16Explicit
-                        )
+                        !MarshalStructAsParam_AsExpByValOutLongStructPack16Explicit(sourceLongStructPack16Explicit)
                     )
                     {
                         Console.WriteLine(
@@ -1988,9 +1970,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByRefOutInnerArrayExplicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByRefOutInnerArrayExplicit(
-                            out sourceInnerArrayExplicit
-                        )
+                        !MarshalStructAsParam_AsExpByRefOutInnerArrayExplicit(out sourceInnerArrayExplicit)
                     )
                     {
                         Console.WriteLine(
@@ -2169,9 +2149,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByRefOutLongStructPack16Explicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByRefOutLongStructPack16Explicit(
-                            out sourceLongStructPack16Explicit
-                        )
+                        !MarshalStructAsParam_AsExpByRefOutLongStructPack16Explicit(out sourceLongStructPack16Explicit)
                     )
                     {
                         Console.WriteLine(
@@ -2280,9 +2258,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByValInOutInnerArrayExplicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByValInOutInnerArrayExplicit(
-                            sourceInnerArrayExplicit
-                        )
+                        !MarshalStructAsParam_AsExpByValInOutInnerArrayExplicit(sourceInnerArrayExplicit)
                     )
                     {
                         Console.WriteLine(
@@ -2454,9 +2430,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByValInOutLongStructPack16Explicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByValInOutLongStructPack16Explicit(
-                            sourceLongStructPack16Explicit
-                        )
+                        !MarshalStructAsParam_AsExpByValInOutLongStructPack16Explicit(sourceLongStructPack16Explicit)
                     )
                     {
                         Console.WriteLine(
@@ -2565,9 +2539,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByRefInOutInnerArrayExplicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByRefInOutInnerArrayExplicit(
-                            ref sourceInnerArrayExplicit
-                        )
+                        !MarshalStructAsParam_AsExpByRefInOutInnerArrayExplicit(ref sourceInnerArrayExplicit)
                     )
                     {
                         Console.WriteLine(
@@ -2666,9 +2638,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByRefInOutByteStructPack2Explicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByRefInOutByteStructPack2Explicit(
-                            ref source_bspe
-                        )
+                        !MarshalStructAsParam_AsExpByRefInOutByteStructPack2Explicit(ref source_bspe)
                     )
                     {
                         Console.WriteLine(
@@ -2700,9 +2670,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByRefInOutShortStructPack4Explicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByRefInOutShortStructPack4Explicit(
-                            ref source_sspe
-                        )
+                        !MarshalStructAsParam_AsExpByRefInOutShortStructPack4Explicit(ref source_sspe)
                     )
                     {
                         Console.WriteLine(
@@ -2756,9 +2724,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsExpByRefInOutLongStructPack16Explicit..."
                     );
                     if (
-                        !MarshalStructAsParam_AsExpByRefInOutLongStructPack16Explicit(
-                            ref sourceLongStructPack16Explicit
-                        )
+                        !MarshalStructAsParam_AsExpByRefInOutLongStructPack16Explicit(ref sourceLongStructPack16Explicit)
                     )
                     {
                         Console.WriteLine(

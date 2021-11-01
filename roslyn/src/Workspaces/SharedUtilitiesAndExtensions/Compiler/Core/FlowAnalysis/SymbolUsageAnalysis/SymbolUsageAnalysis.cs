@@ -65,9 +65,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 // Can likely be null for broken code.
                 if (localFunctionOperation != null)
                 {
-                    var operations = SpecializedCollections.SingletonEnumerable(
-                        localFunctionOperation
-                    );
+                    var operations =
+                        SpecializedCollections.SingletonEnumerable(localFunctionOperation);
                     Walker.AnalyzeOperationsAndUpdateData(
                         localFunction,
                         operations,

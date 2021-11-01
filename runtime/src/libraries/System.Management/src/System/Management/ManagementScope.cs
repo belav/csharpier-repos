@@ -1227,9 +1227,8 @@ namespace System.Management
                 if (null != value)
                 {
                     if (null != options)
-                        options.IdentifierChanged -= new IdentifierChangedEventHandler(
-                            HandleIdentifierChange
-                        );
+                        options.IdentifierChanged -=
+                            new IdentifierChangedEventHandler(HandleIdentifierChange);
 
                     options = ConnectionOptions._Clone(
                         (ConnectionOptions)value,
@@ -1273,9 +1272,8 @@ namespace System.Management
                 if (null != value)
                 {
                     if (null != prvpath)
-                        prvpath.IdentifierChanged -= new IdentifierChangedEventHandler(
-                            HandleIdentifierChange
-                        );
+                        prvpath.IdentifierChanged -=
+                            new IdentifierChangedEventHandler(HandleIdentifierChange);
 
                     IsDefaulted = false; //someone is specifically setting the scope path so it's not defaulted any more
 

@@ -127,9 +127,8 @@ namespace System.Text.Json.Serialization.Tests
             ClassWithNullableAndJsonConverterAttribute obj;
 
             const string BaselineJson = @"{""NullableValue"":""1989/01/01 11:22:33""}";
-            obj = JsonSerializer.Deserialize<ClassWithNullableAndJsonConverterAttribute>(
-                BaselineJson
-            );
+            obj =
+                JsonSerializer.Deserialize<ClassWithNullableAndJsonConverterAttribute>(BaselineJson);
             Assert.NotNull(obj.NullableValue);
 
             const string Json = @"{""NullableValue"":""""}";
@@ -155,9 +154,7 @@ namespace System.Text.Json.Serialization.Tests
             // The json is not valid with the default converter.
             Assert.Throws<JsonException>(
                 () =>
-                    JsonSerializer.Deserialize<ClassWithNullableAndWithoutJsonConverterAttribute>(
-                        Json
-                    )
+                    JsonSerializer.Deserialize<ClassWithNullableAndWithoutJsonConverterAttribute>(Json)
             );
 
             JsonSerializerOptions options = new JsonSerializerOptions();

@@ -85,12 +85,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 // members
                 var membersBuilder = ArrayBuilder<Symbol>.GetInstance(membersCount);
-                var propertiesBuilder = ArrayBuilder<AnonymousTypePropertySymbol>.GetInstance(
-                    fieldsCount
-                );
-                var typeParametersBuilder = ArrayBuilder<TypeParameterSymbol>.GetInstance(
-                    fieldsCount
-                );
+                var propertiesBuilder =
+                    ArrayBuilder<AnonymousTypePropertySymbol>.GetInstance(fieldsCount);
+                var typeParametersBuilder =
+                    ArrayBuilder<TypeParameterSymbol>.GetInstance(fieldsCount);
 
                 // Process fields
                 for (int fieldIndex = 0; fieldIndex < fieldsCount; fieldIndex++)

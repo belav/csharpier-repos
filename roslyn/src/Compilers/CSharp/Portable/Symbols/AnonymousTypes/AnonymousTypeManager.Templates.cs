@@ -157,9 +157,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         ref _lazyAnonymousTypeTemplates,
                         previousCache == null
                           ? new ConcurrentDictionary<string, AnonymousTypeTemplateSymbol>()
-                          : new ConcurrentDictionary<string, AnonymousTypeTemplateSymbol>(
-                                previousCache
-                            ),
+                          : new ConcurrentDictionary<
+                                string,
+                                AnonymousTypeTemplateSymbol
+                            >(previousCache),
                         null
                     );
                 }

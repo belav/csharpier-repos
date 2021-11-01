@@ -70,9 +70,8 @@ namespace System.Net
             bool throwIfMissing
         )
         {
-            SecurityPackageInfoClass[] supportedSecurityPackages = EnumerateSecurityPackages(
-                secModule
-            );
+            SecurityPackageInfoClass[] supportedSecurityPackages =
+                EnumerateSecurityPackages(secModule);
             if (supportedSecurityPackages != null)
             {
                 for (int i = 0; i < supportedSecurityPackages.Length; i++)

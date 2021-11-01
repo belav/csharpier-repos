@@ -1567,9 +1567,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             if (!_packedFlags.IsUseSiteDiagnosticPopulated)
             {
-                UseSiteInfo<AssemblySymbol> result = new UseSiteInfo<AssemblySymbol>(
-                    PrimaryDependency
-                );
+                UseSiteInfo<AssemblySymbol> result =
+                    new UseSiteInfo<AssemblySymbol>(PrimaryDependency);
                 CalculateUseSiteDiagnostic(ref result);
 
                 var diagnosticInfo = result.DiagnosticInfo;
@@ -1608,9 +1607,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private UseSiteInfo<AssemblySymbol> GetCachedUseSiteInfo()
         {
-            return (_uncommonFields?._lazyCachedUseSiteInfo ?? default).ToUseSiteInfo(
-                PrimaryDependency
-            );
+            return (
+                _uncommonFields?._lazyCachedUseSiteInfo ?? default
+            ).ToUseSiteInfo(PrimaryDependency);
         }
 
         private UseSiteInfo<AssemblySymbol> InitializeUseSiteDiagnostic(
@@ -1642,9 +1641,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (!_packedFlags.IsConditionalPopulated)
             {
                 var result =
-                    _containingType.ContainingPEModule.Module.GetConditionalAttributeValues(
-                        _handle
-                    );
+                    _containingType.ContainingPEModule.Module.GetConditionalAttributeValues(_handle);
                 Debug.Assert(!result.IsDefault);
                 if (!result.IsEmpty)
                 {

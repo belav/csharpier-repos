@@ -352,9 +352,8 @@ namespace SslStress
             CancellationToken token
         )
         {
-            using CancellationTokenSource cts = CancellationTokenSource.CreateLinkedTokenSource(
-                token
-            );
+            using CancellationTokenSource cts =
+                CancellationTokenSource.CreateLinkedTokenSource(token);
             DateTime lastReadTime = DateTime.Now;
 
             var serializer = new DataSegmentSerializer();

@@ -276,9 +276,8 @@ namespace System.Collections.Immutable.Tests
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableStack.Create<int>());
             ImmutableStack<string> stack = ImmutableStack.Create<string>("1", "2", "3");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                stack
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(stack);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State

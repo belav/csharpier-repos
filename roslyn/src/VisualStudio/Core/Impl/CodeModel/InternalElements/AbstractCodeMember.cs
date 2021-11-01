@@ -160,9 +160,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                     var node = LookupNode();
                     var nodePath = new SyntaxPath(node);
 
-                    var codeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
-                        element
-                    );
+                    var codeElement =
+                        ComAggregate.TryGetManagedObject<AbstractCodeElement>(element);
 
                     if (codeElement == null)
                     {

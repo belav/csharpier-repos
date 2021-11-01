@@ -429,17 +429,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 bestOrFirstMatchResult = itemsInList[0];
 
                 var longestCommonPrefixLength =
-                    bestOrFirstMatchResult.RoslynCompletionItem.FilterText.GetCaseInsensitivePrefixLength(
-                        filterText
-                    );
+                    bestOrFirstMatchResult.RoslynCompletionItem.FilterText.GetCaseInsensitivePrefixLength(filterText);
 
                 for (var i = 1; i < itemsInList.Count; ++i)
                 {
                     var item = itemsInList[i];
                     var commonPrefixLength =
-                        item.RoslynCompletionItem.FilterText.GetCaseInsensitivePrefixLength(
-                            filterText
-                        );
+                        item.RoslynCompletionItem.FilterText.GetCaseInsensitivePrefixLength(filterText);
 
                     if (commonPrefixLength > longestCommonPrefixLength)
                     {

@@ -1160,9 +1160,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // NOTE: Dev10 converts enum? to underlying?, rather than directly to underlying.
                     rewrittenOperandType = rewrittenOperandType.IsNullableType()
-                        ? ((NamedTypeSymbol)rewrittenOperandType.OriginalDefinition).Construct(
-                              typeFromUnderlying
-                          )
+                        ? (
+                              (NamedTypeSymbol)rewrittenOperandType.OriginalDefinition
+                          ).Construct(typeFromUnderlying)
                         : typeFromUnderlying;
                     rewrittenOperand = BoundConversion.SynthesizedNonUserDefined(
                         syntax,

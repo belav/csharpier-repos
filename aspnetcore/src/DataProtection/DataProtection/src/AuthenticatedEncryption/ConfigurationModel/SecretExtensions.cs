@@ -26,9 +26,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                 try
                 {
                     secret.WriteSecretIntoBuffer(new ArraySegment<byte>(unprotectedSecretRawBytes));
-                    unprotectedSecretAsBase64String = Convert.ToBase64String(
-                        unprotectedSecretRawBytes
-                    );
+                    unprotectedSecretAsBase64String =
+                        Convert.ToBase64String(unprotectedSecretRawBytes);
                 }
                 finally
                 {

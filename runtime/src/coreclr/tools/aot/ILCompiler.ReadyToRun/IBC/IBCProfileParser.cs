@@ -916,9 +916,8 @@ namespace ILCompiler.IBC
                 MethodDesc ecmaMethod = ecmaModuleOfMethod.GetMethod(
                     MetadataTokens.EntityHandle((int)methodToken)
                 );
-                MethodDesc methodOnType = methodType.FindMethodOnTypeWithMatchingTypicalMethod(
-                    ecmaMethod
-                );
+                MethodDesc methodOnType =
+                    methodType.FindMethodOnTypeWithMatchingTypicalMethod(ecmaMethod);
 
                 MethodDesc methodFound = methodOnType;
                 if (Macros.IsInstantiationNeeded(flags))

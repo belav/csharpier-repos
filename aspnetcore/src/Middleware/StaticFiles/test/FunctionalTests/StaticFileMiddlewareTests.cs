@@ -335,9 +335,7 @@ namespace Microsoft.AspNetCore.StaticFiles
                                                 requestReceived.SetResult(0);
                                                 await requestCancelled.Task.TimeoutAfter(interval);
                                                 Assert.True(
-                                                    context.RequestAborted.WaitHandle.WaitOne(
-                                                        interval
-                                                    ),
+                                                    context.RequestAborted.WaitHandle.WaitOne(interval),
                                                     "not aborted"
                                                 );
                                                 await next();

@@ -269,9 +269,8 @@ namespace System.Web.Http.Owin
                 new string[] { originalAuthenticationType },
                 originalExtra
             );
-            IAuthenticationManager authenticationManager = CreateAuthenticationManager(
-                originalChallenge
-            );
+            IAuthenticationManager authenticationManager =
+                CreateAuthenticationManager(originalChallenge);
             IOwinContext owinContext = CreateOwinContext(authenticationManager);
 
             using (HttpRequestMessage request = CreateRequest(owinContext))
@@ -310,9 +309,8 @@ namespace System.Web.Http.Owin
                 null,
                 originalExtra
             );
-            IAuthenticationManager authenticationManager = CreateAuthenticationManager(
-                originalChallenge
-            );
+            IAuthenticationManager authenticationManager =
+                CreateAuthenticationManager(originalChallenge);
             IOwinContext owinContext = CreateOwinContext(authenticationManager);
 
             using (HttpRequestMessage request = CreateRequest(owinContext))

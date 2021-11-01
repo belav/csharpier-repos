@@ -35,9 +35,8 @@ internal static partial class Interop
         internal static readonly CGroupVersion s_cgroupVersion = FindCGroupVersion();
 
         /// <summary>Path to the found cgroup memory limit path, or null if it couldn't be found.</summary>
-        internal static readonly string? s_cgroupMemoryLimitPath = FindCGroupMemoryLimitPath(
-            s_cgroupVersion
-        );
+        internal static readonly string? s_cgroupMemoryLimitPath =
+            FindCGroupMemoryLimitPath(s_cgroupVersion);
 
         /// <summary>Tries to read the memory limit from the cgroup memory location.</summary>
         /// <param name="limit">The read limit, or 0 if it couldn't be read.</param>

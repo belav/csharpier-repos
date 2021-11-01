@@ -734,9 +734,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     DirectoryContextType.DirectoryServer,
                     context
                 );
-                DirectoryEntryManager directoryEntryMgr = new DirectoryEntryManager(
-                    adamInstContext
-                );
+                DirectoryEntryManager directoryEntryMgr =
+                    new DirectoryEntryManager(adamInstContext);
                 DirectoryEntry tempRootEntry = directoryEntryMgr.GetCachedDirectoryEntry(
                     WellKnownDN.RootDSE
                 );

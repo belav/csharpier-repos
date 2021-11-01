@@ -955,9 +955,8 @@ namespace Microsoft.CodeAnalysis.Emit
             TNamedTypeSymbol container
         )
         {
-            IEnumerable<Cci.INestedTypeDefinition> declareTypes = GetSynthesizedNestedTypes(
-                container
-            );
+            IEnumerable<Cci.INestedTypeDefinition> declareTypes =
+                GetSynthesizedNestedTypes(container);
             IEnumerable<Cci.INestedTypeDefinition> compileEmitTypes = null;
 
             if (_synthesizedTypeMembers.TryGetValue(container, out var defs))

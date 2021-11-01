@@ -55,9 +55,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
             Assert.Equal(
                 "ValueA",
-                ((Func<InternalEntityEntry, string>)propertyAccessors.RelationshipSnapshotGetter)(
-                    entry
-                )
+                (
+                    (Func<InternalEntityEntry, string>)propertyAccessors.RelationshipSnapshotGetter
+                )(entry)
             );
 
             var valueBuffer = new ValueBuffer(new object[] { 1, "ValueA" });
@@ -105,9 +105,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             );
             Assert.Equal(
                 "ValueA",
-                ((Func<InternalEntityEntry, string>)propertyAccessors.RelationshipSnapshotGetter)(
-                    entry
-                )
+                (
+                    (Func<InternalEntityEntry, string>)propertyAccessors.RelationshipSnapshotGetter
+                )(entry)
             );
 
             var valueBuffer = new ValueBuffer(new object[] { 1, "ValueA" });

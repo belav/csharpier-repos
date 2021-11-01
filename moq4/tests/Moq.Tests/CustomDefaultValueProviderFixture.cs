@@ -21,9 +21,8 @@ namespace Moq.Tests
         public void Custom_DefaultValueProvider_gets_invoked()
         {
             const int expectedReturnValue = 42;
-            var constantDefaultValueProvider = new ConstantDefaultValueProvider(
-                expectedReturnValue
-            );
+            var constantDefaultValueProvider =
+                new ConstantDefaultValueProvider(expectedReturnValue);
             var mock = new Mock<IFoo>() { DefaultValueProvider = constantDefaultValueProvider };
 
             var actualReturnValue = mock.Object.GetValue();

@@ -5613,9 +5613,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            BinaryOperatorSignature signature = this.Compilation.builtInOperators.GetSignature(
-                easyOut
-            );
+            BinaryOperatorSignature signature =
+                this.Compilation.builtInOperators.GetSignature(easyOut);
 
             Conversion leftConversion = Conversions.FastClassifyConversion(
                 leftType,

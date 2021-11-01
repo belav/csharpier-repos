@@ -2160,9 +2160,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             };
 
             // No Data
-            var testContext = ModelBindingTestHelper.GetTestContext(
-                metadataProvider: metadataProvider
-            );
+            var testContext =
+                ModelBindingTestHelper.GetTestContext(metadataProvider: metadataProvider);
 
             var modelState = testContext.ModelState;
             var metadata = GetMetadata(testContext, parameter);

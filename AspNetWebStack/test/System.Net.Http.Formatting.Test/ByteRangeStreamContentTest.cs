@@ -256,9 +256,8 @@ namespace System.Net.Http
 
             // Assert
             Assert.Equal(_expectedMediatype, rangeContent.Headers.ContentType);
-            ContentRangeHeaderValue expectedContentRange = ContentRangeHeaderValue.Parse(
-                contentRange
-            );
+            ContentRangeHeaderValue expectedContentRange =
+                ContentRangeHeaderValue.Parse(contentRange);
             Assert.Equal(expectedContentRange, rangeContent.Headers.ContentRange);
         }
 
@@ -324,9 +323,8 @@ namespace System.Net.Http
             }
             catch (InvalidByteRangeException invalidByteRangeException)
             {
-                ContentRangeHeaderValue expectedContentRange = ContentRangeHeaderValue.Parse(
-                    contentRange
-                );
+                ContentRangeHeaderValue expectedContentRange =
+                    ContentRangeHeaderValue.Parse(contentRange);
                 Assert.Equal(expectedContentRange, invalidByteRangeException.ContentRange);
             }
         }

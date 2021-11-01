@@ -562,9 +562,8 @@ namespace SerializationTestTypes
             )
             {
                 object newData = property.GetValue(originalData, null);
-                SerializationMechanism fieldAttribute = ComparisonHelper.GetSerializationMechanism(
-                    newData
-                );
+                SerializationMechanism fieldAttribute =
+                    ComparisonHelper.GetSerializationMechanism(newData);
                 if (cmpType.Equals(ComparisionType.DCS))
                 {
                     if (containerTypeAttribute.Equals(SerializationMechanism.DataContractAttribute))

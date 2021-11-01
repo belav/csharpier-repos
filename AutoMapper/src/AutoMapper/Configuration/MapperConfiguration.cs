@@ -176,9 +176,12 @@ namespace AutoMapper
             ResolutionContext,
             TDestination
         > IGlobalConfiguration.GetExecutionPlan<TSource, TDestination>(in MapRequest mapRequest) =>
-            (Func<TSource, TDestination, ResolutionContext, TDestination>)GetExecutionPlan(
-                mapRequest
-            );
+            (Func<
+                TSource,
+                TDestination,
+                ResolutionContext,
+                TDestination
+            >)GetExecutionPlan(mapRequest);
 
         private Delegate GetExecutionPlan(in MapRequest mapRequest) =>
             _executionPlans.GetOrAdd(mapRequest);

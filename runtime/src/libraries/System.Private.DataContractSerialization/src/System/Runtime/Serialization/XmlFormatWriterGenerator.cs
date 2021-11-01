@@ -563,9 +563,8 @@ namespace System.Runtime.Serialization
                     {
                         isGenericDictionary = true;
                         keyValueTypes = collectionContract.ItemType.GetGenericArguments();
-                        enumeratorType = Globals.TypeOfGenericDictionaryEnumerator.MakeGenericType(
-                            keyValueTypes
-                        );
+                        enumeratorType =
+                            Globals.TypeOfGenericDictionaryEnumerator.MakeGenericType(keyValueTypes);
                     }
                     else if (collectionContract.Kind == CollectionKind.Dictionary)
                     {
@@ -1011,9 +1010,7 @@ namespace System.Runtime.Serialization
                     );
                     _ilg.Brfalse(onNull);
                     _ilg.Call(
-                        XmlFormatGeneratorStatics.GetNullableValueMethod.MakeGenericMethod(
-                            innerType
-                        )
+                        XmlFormatGeneratorStatics.GetNullableValueMethod.MakeGenericMethod(innerType)
                     );
                     memberType = innerType;
                 }

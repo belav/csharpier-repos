@@ -184,9 +184,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Internal
             string? principalTableName
         )
         {
-            var definition = SqliteResources.LogForeignKeyScaffoldErrorPrincipalTableNotFound(
-                diagnostics
-            );
+            var definition =
+                SqliteResources.LogForeignKeyScaffoldErrorPrincipalTableNotFound(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {

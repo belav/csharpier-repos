@@ -217,9 +217,7 @@ namespace Microsoft.AspNetCore.Diagnostics
                                                         httpContext.Response.Body.Position
                                                     );
 
-                                                    await httpContext.Response.WriteAsync(
-                                                        expectedResponseBody
-                                                    );
+                                                    await httpContext.Response.WriteAsync(expectedResponseBody);
                                                 }
                                             );
                                         }
@@ -303,9 +301,7 @@ namespace Microsoft.AspNetCore.Diagnostics
                                                         new[] { "12345" }
                                                     );
 
-                                                    await httpContext.Response.WriteAsync(
-                                                        expectedResponseBody
-                                                    );
+                                                    await httpContext.Response.WriteAsync(expectedResponseBody);
                                                 }
                                             );
                                         }
@@ -397,9 +393,7 @@ namespace Microsoft.AspNetCore.Diagnostics
                                                 new[] { "abcdef" }
                                             );
 
-                                            await httpContext.Response.WriteAsync(
-                                                expectedResponseBody
-                                            );
+                                            await httpContext.Response.WriteAsync(expectedResponseBody);
                                         }
                                     );
                                 }

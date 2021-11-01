@@ -480,9 +480,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             if (IsParameterNode(parentNode))
             {
-                var parentElement = fileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(
-                    parentNode
-                );
+                var parentElement =
+                    fileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(parentNode);
                 parentObject = ComAggregate.GetManagedObject<AbstractCodeElement>(parentElement);
             }
             else
@@ -503,12 +502,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 {
                     parentNode = fileCodeModel.LookupNode(nodeKey);
 
-                    var parentElement = fileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(
-                        parentNode
-                    );
-                    parentObject = ComAggregate.GetManagedObject<AbstractCodeElement>(
-                        parentElement
-                    );
+                    var parentElement =
+                        fileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(parentNode);
+                    parentObject =
+                        ComAggregate.GetManagedObject<AbstractCodeElement>(parentElement);
                 }
             }
 
@@ -819,9 +816,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 var fileCodeModel = state.Workspace.GetFileCodeModel(chosenDocumentId);
                 if (fileCodeModel != null)
                 {
-                    var underlyingFileCodeModel = ComAggregate.GetManagedObject<FileCodeModel>(
-                        fileCodeModel
-                    );
+                    var underlyingFileCodeModel =
+                        ComAggregate.GetManagedObject<FileCodeModel>(fileCodeModel);
                     element = underlyingFileCodeModel.CodeElementFromPosition(
                         chosenLocation.SourceSpan.Start,
                         GetElementKind(typeSymbol)

@@ -85,9 +85,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 b =>
                     b.ConfigureTestServices(
                         serviceCollection =>
-                            serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(
-                                ConfigureRuntimeCompilationOptions
-                            )
+                            serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(ConfigureRuntimeCompilationOptions)
                     )
             );
 

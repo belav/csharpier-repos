@@ -62,9 +62,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             )
             {
                 var syntaxFactsService = documentToEdit.GetLanguageService<ISyntaxFactsService>();
-                var childNodes = syntaxFactsService.GetMembersOfNamespaceDeclaration(
-                    namespaceDeclaration
-                );
+                var childNodes =
+                    syntaxFactsService.GetMembersOfNamespaceDeclaration(namespaceDeclaration);
 
                 if (childNodes.Count <= 1)
                 {

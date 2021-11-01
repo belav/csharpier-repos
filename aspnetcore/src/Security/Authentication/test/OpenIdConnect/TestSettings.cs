@@ -519,9 +519,8 @@ namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect
                 var resourceName =
                     "Microsoft.AspNetCore.Authentication.Test.OpenIdConnect." + resource;
                 using (
-                    var stream = typeof(MockBackchannel).Assembly.GetManifestResourceStream(
-                        resourceName
-                    )
+                    var stream =
+                        typeof(MockBackchannel).Assembly.GetManifestResourceStream(resourceName)
                 )
                 using (var reader = new StreamReader(stream))
                 {

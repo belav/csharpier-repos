@@ -523,9 +523,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                             return false;
                         }
 
-                        var outputRefFilePath = _projectMap.GetOutputRefFilePathById(
-                            projectReferenceId
-                        );
+                        var outputRefFilePath =
+                            _projectMap.GetOutputRefFilePathById(projectReferenceId);
                         var outputFilePath = _projectMap.GetOutputFilePathById(projectReferenceId);
 
                         if (builder.Contains(outputRefFilePath) || builder.Contains(outputFilePath))

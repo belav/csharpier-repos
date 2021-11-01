@@ -21,9 +21,8 @@ namespace System.Net.Security.Tests
         {
             const string passedInMessage = "base was called";
 
-            AuthenticationException authenticationException = new AuthenticationException(
-                passedInMessage
-            );
+            AuthenticationException authenticationException =
+                new AuthenticationException(passedInMessage);
 
             Assert.Equal(passedInMessage, authenticationException.Message);
         }

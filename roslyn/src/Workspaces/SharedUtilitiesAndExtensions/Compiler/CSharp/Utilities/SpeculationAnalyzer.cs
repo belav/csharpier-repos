@@ -1072,9 +1072,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             if (
                 newExpression.IsKind(SyntaxKind.ConditionalExpression)
                 && ConditionalExpressionConversionsAreAllowed(newExpression)
-                && this.SpeculativeSemanticModel.GetConversion(
-                    newExpression
-                ).IsConditionalExpression
+                && this.SpeculativeSemanticModel.GetConversion(newExpression).IsConditionalExpression
             )
             {
                 return false;

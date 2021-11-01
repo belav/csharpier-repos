@@ -44,9 +44,8 @@ namespace Internal.Cryptography.Pal.Native
                     }
                 }
 
-                SafeLocalAllocHandle safeLocalAllocHandle = SafeLocalAllocHandle.Create(
-                    allocationSize
-                );
+                SafeLocalAllocHandle safeLocalAllocHandle =
+                    SafeLocalAllocHandle.Create(allocationSize);
                 byte** pOidPointers = (byte**)(safeLocalAllocHandle.DangerousGetHandle());
                 byte* pOidContents = (byte*)(pOidPointers + oidStrings.Length);
 

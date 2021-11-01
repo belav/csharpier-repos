@@ -9084,9 +9084,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
             yield return new object[]
             {
-                new System.Collections.ObjectModel.ReadOnlyObservableCollection<int>(
-                    observableCollection
-                ),
+                new System.Collections.ObjectModel.ReadOnlyObservableCollection<int>(observableCollection),
                 new TypeSerializableValue[]
                 {
                     new TypeSerializableValue(

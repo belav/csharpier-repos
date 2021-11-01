@@ -245,9 +245,8 @@ namespace Microsoft.VisualStudio.LanguageServices
 
                 if (syntaxNode != null)
                 {
-                    var codeElement = fileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(
-                        syntaxNode
-                    );
+                    var codeElement =
+                        fileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(syntaxNode);
                     if (codeElement != null)
                     {
                         return codeElement;

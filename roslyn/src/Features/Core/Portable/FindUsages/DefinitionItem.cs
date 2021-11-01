@@ -44,12 +44,10 @@ namespace Microsoft.CodeAnalysis.FindUsages
         /// for the symbol and the project ID that originated the symbol.  With these we can correctly recover the symbol.
         /// </summary>
         private const string MetadataSymbolKey = nameof(MetadataSymbolKey);
-        private const string MetadataSymbolOriginatingProjectIdGuid = nameof(
-            MetadataSymbolOriginatingProjectIdGuid
-        );
-        private const string MetadataSymbolOriginatingProjectIdDebugName = nameof(
-            MetadataSymbolOriginatingProjectIdDebugName
-        );
+        private const string MetadataSymbolOriginatingProjectIdGuid =
+            nameof(MetadataSymbolOriginatingProjectIdGuid);
+        private const string MetadataSymbolOriginatingProjectIdDebugName =
+            nameof(MetadataSymbolOriginatingProjectIdDebugName);
 
         /// <summary>
         /// If this item is something that cannot be navigated to.  We store this in our

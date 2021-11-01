@@ -60,11 +60,11 @@ namespace System.Web.Http.Batch
 
             if (originalContext != null)
             {
-                BatchHttpRequestContext subRequestContext = new BatchHttpRequestContext(
-                    originalContext
-                ) {
-                    Url = new UrlHelper(subRequest)
-                };
+                BatchHttpRequestContext subRequestContext =
+                    new BatchHttpRequestContext(originalContext)
+                    {
+                        Url = new UrlHelper(subRequest)
+                    };
 
                 subRequest.SetRequestContext(subRequestContext);
             }

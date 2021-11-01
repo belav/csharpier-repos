@@ -42,9 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 }
             }
 
-            var allIgnorableAssemblyLists = new List<IIgnorableAssemblyList>(
-                ignorableAssemblyLists
-            );
+            var allIgnorableAssemblyLists =
+                new List<IIgnorableAssemblyList>(ignorableAssemblyLists);
             allIgnorableAssemblyLists.Add(
                 new IgnorableAssemblyIdentityList(analyzerInfos.Select(info => info.Identity))
             );

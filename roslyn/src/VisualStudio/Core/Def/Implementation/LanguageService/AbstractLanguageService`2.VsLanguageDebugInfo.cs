@@ -105,9 +105,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             {
                                 var cancellationToken = waitContext.CancellationToken;
                                 var textBuffer =
-                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                                        pBuffer
-                                    );
+                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(pBuffer);
                                 if (textBuffer != null)
                                 {
                                     var nullablePoint = textBuffer.CurrentSnapshot.TryGetPoint(
@@ -187,9 +185,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                             action: waitContext =>
                             {
                                 var textBuffer =
-                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                                        pBuffer
-                                    );
+                                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(pBuffer);
 
                                 if (textBuffer != null)
                                 {
@@ -363,9 +359,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                     return VSConstants.E_FAIL;
                 }
 
-                var textBuffer = _languageService.EditorAdaptersFactoryService.GetDataBuffer(
-                    pBuffer
-                );
+                var textBuffer =
+                    _languageService.EditorAdaptersFactoryService.GetDataBuffer(pBuffer);
                 if (textBuffer != null)
                 {
                     var snapshot = textBuffer.CurrentSnapshot;

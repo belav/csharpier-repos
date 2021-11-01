@@ -223,9 +223,8 @@ namespace System.Text
         private static readonly byte[] s_codePagesDataHeader = new byte[
             CODEPAGE_DATA_FILE_HEADER_SIZE
         ];
-        protected static Stream s_codePagesEncodingDataStream = GetEncodingDataStream(
-            CODE_PAGE_DATA_FILE_NAME
-        );
+        protected static Stream s_codePagesEncodingDataStream =
+            GetEncodingDataStream(CODE_PAGE_DATA_FILE_NAME);
         protected static readonly object s_streamLock = new object(); // this lock used when reading from s_codePagesEncodingDataStream
 
         // Real variables
@@ -243,9 +242,8 @@ namespace System.Text
             // NOTE: We must reflect on a public type that is exposed in the contract here
             // (i.e. CodePagesEncodingProvider), otherwise we will not get a reference to
             // the right assembly.
-            Stream? stream = typeof(CodePagesEncodingProvider).Assembly.GetManifestResourceStream(
-                tableName
-            );
+            Stream? stream =
+                typeof(CodePagesEncodingProvider).Assembly.GetManifestResourceStream(tableName);
 
             if (stream == null)
             {

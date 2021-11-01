@@ -111,9 +111,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     return;
                 }
 
-                var queuedDurationCounter = _queuedDurationLogAggregator.GetValue(
-                    QueuedDurationKey
-                );
+                var queuedDurationCounter =
+                    _queuedDurationLogAggregator.GetValue(QueuedDurationKey);
                 Logger.Log(
                     FunctionId.LSP_TimeInQueue,
                     KeyValueLogMessage.Create(

@@ -81,9 +81,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
             var ifStatement = (IfStatementSyntax)ifStatementLocation.FindNode(cancellationToken);
             var localDeclaration =
-                (LocalDeclarationStatementSyntax)localDeclarationLocation.FindNode(
-                    cancellationToken
-                );
+                (LocalDeclarationStatementSyntax)localDeclarationLocation.FindNode(cancellationToken);
             var isExpression = (BinaryExpressionSyntax)ifStatement.Condition;
 
             var updatedCondition = SyntaxFactory.IsPatternExpression(

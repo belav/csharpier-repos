@@ -34,9 +34,7 @@ namespace Microsoft.AspNetCore.Components.Authorization
             _testAuthorizationService = new TestAuthorizationService();
 
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddSingleton<AuthenticationStateProvider>(
-                _authenticationStateProvider
-            );
+            serviceCollection.AddSingleton<AuthenticationStateProvider>(_authenticationStateProvider);
             serviceCollection.AddSingleton<
                 IAuthorizationPolicyProvider,
                 TestAuthorizationPolicyProvider
@@ -45,9 +43,8 @@ namespace Microsoft.AspNetCore.Components.Authorization
 
             _renderer = new TestRenderer(serviceCollection.BuildServiceProvider());
             _authorizeRouteViewComponent = new AuthorizeRouteView();
-            _authorizeRouteViewComponentId = _renderer.AssignRootComponentId(
-                _authorizeRouteViewComponent
-            );
+            _authorizeRouteViewComponentId =
+                _renderer.AssignRootComponentId(_authorizeRouteViewComponent);
         }
 
         [Fact]

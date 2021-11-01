@@ -20,17 +20,15 @@ namespace SafeHandleTests
             Assert.IsTrue(SafeHandleNative.SafeHandleByRef(ref testHandle, initialValue, newValue));
             Assert.AreEqual(newValue, testHandle.DangerousGetHandle());
 
-            AbstractDerivedSafeHandle abstrHandle = new AbstractDerivedSafeHandleImplementation(
-                initialValue
-            );
+            AbstractDerivedSafeHandle abstrHandle =
+                new AbstractDerivedSafeHandleImplementation(initialValue);
             Assert.IsTrue(SafeHandleNative.SafeHandleInByRef(abstrHandle, initialValue));
             Assert.Throws<MarshalDirectiveException>(
                 () => SafeHandleNative.SafeHandleByRef(ref abstrHandle, initialValue, newValue)
             );
 
-            NoDefaultConstructorSafeHandle noDefaultCtorHandle = new NoDefaultConstructorSafeHandle(
-                initialValue
-            );
+            NoDefaultConstructorSafeHandle noDefaultCtorHandle =
+                new NoDefaultConstructorSafeHandle(initialValue);
             Assert.Throws<MissingMethodException>(
                 () =>
                     SafeHandleNative.SafeHandleByRef(

@@ -55,9 +55,7 @@ namespace System.Text.Json.Serialization.Converters
         {
             if (!state.SupportContinuation)
             {
-                ThrowHelper.ThrowNotSupportedException_TypeRequiresAsyncSerialization(
-                    TypeToConvert
-                );
+                ThrowHelper.ThrowNotSupportedException_TypeRequiresAsyncSerialization(TypeToConvert);
             }
 
             return base.OnTryWrite(writer, value, options, ref state);

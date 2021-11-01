@@ -26,9 +26,8 @@ namespace System.Data.Common
         private readonly bool _useOdbcRules;
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        internal readonly int _objectID =
+            System.Threading.Interlocked.Increment(ref s_objectTypeCount);
 
         public DbConnectionStringBuilder() { }
 

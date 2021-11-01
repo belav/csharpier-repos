@@ -59,12 +59,10 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                     return false;
             }
 
-            trueStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(
-                trueStatement
-            );
-            falseStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(
-                falseStatement
-            );
+            trueStatement =
+                UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(trueStatement);
+            falseStatement =
+                UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(falseStatement);
 
             // Both return-statements must be of the form "return value"
             if (!IsReturnExprOrThrow(trueStatement) || !IsReturnExprOrThrow(falseStatement))

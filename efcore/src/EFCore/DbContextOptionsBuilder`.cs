@@ -247,9 +247,7 @@ namespace Microsoft.EntityFrameworkCore
         public new virtual DbContextOptionsBuilder<TContext> DisableConcurrencyDetection(
             bool concurrencyDetectionDisabled = true
         ) =>
-            (DbContextOptionsBuilder<TContext>)base.DisableConcurrencyDetection(
-                concurrencyDetectionDisabled
-            );
+            (DbContextOptionsBuilder<TContext>)base.DisableConcurrencyDetection(concurrencyDetectionDisabled);
 
         /// <summary>
         ///     <para>
@@ -346,9 +344,7 @@ namespace Microsoft.EntityFrameworkCore
         public new virtual DbContextOptionsBuilder<TContext> EnableSensitiveDataLogging(
             bool sensitiveDataLoggingEnabled = true
         ) =>
-            (DbContextOptionsBuilder<TContext>)base.EnableSensitiveDataLogging(
-                sensitiveDataLoggingEnabled
-            );
+            (DbContextOptionsBuilder<TContext>)base.EnableSensitiveDataLogging(sensitiveDataLoggingEnabled);
 
         /// <summary>
         ///     <para>
@@ -366,9 +362,7 @@ namespace Microsoft.EntityFrameworkCore
         public new virtual DbContextOptionsBuilder<TContext> EnableServiceProviderCaching(
             bool cacheServiceProvider = true
         ) =>
-            (DbContextOptionsBuilder<TContext>)base.EnableServiceProviderCaching(
-                cacheServiceProvider
-            );
+            (DbContextOptionsBuilder<TContext>)base.EnableServiceProviderCaching(cacheServiceProvider);
 
         /// <summary>
         ///     <para>
@@ -425,9 +419,7 @@ namespace Microsoft.EntityFrameworkCore
         public new virtual DbContextOptionsBuilder<TContext> ConfigureWarnings(
             Action<WarningsConfigurationBuilder> warningsConfigurationBuilderAction
         ) =>
-            (DbContextOptionsBuilder<TContext>)base.ConfigureWarnings(
-                warningsConfigurationBuilderAction
-            );
+            (DbContextOptionsBuilder<TContext>)base.ConfigureWarnings(warningsConfigurationBuilderAction);
 
         /// <summary>
         ///     <para>

@@ -78,9 +78,7 @@ namespace System.Xml.Tests
             // for function InvalidEncodingCharacterThrowsExceptionWithCorrectLineNumberAndPosition
             {
                 this.AddChild(
-                    new CVariation(
-                        InvalidEncodingCharacterThrowsExceptionWithCorrectLineNumberAndPosition
-                    ) {
+                    new CVariation(InvalidEncodingCharacterThrowsExceptionWithCorrectLineNumberAndPosition) {
                         Attribute = new Variation(
                             "XmlReader: scanner error on invalid character for an encoding give pointer to scanner buffer, not file position"
                         )

@@ -41,9 +41,8 @@ namespace System.Drawing.Internal
                 {
                     Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
                     addedTracker = true;
-                    SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(
-                        OnUserPreferenceChanged
-                    );
+                    SystemEvents.UserPreferenceChanged +=
+                        new UserPreferenceChangedEventHandler(OnUserPreferenceChanged);
                 }
 
                 // Strictly speaking, we should grab a lock on this class.  But since the chances

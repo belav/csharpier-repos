@@ -22,9 +22,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
     internal unsafe sealed partial class ClientCertLoader : IAsyncResult, IDisposable
     {
         private const uint CertBoblSize = 1500;
-        private static readonly IOCompletionCallback IOCallback = new IOCompletionCallback(
-            WaitCallback
-        );
+        private static readonly IOCompletionCallback IOCallback =
+            new IOCompletionCallback(WaitCallback);
         private static readonly int RequestChannelBindStatusSize =
             Marshal.SizeOf<HttpApiTypes.HTTP_REQUEST_CHANNEL_BIND_STATUS>();
 
@@ -53,9 +52,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
             if (cancellationToken.CanBeCanceled)
             {
-                _cancellationRegistration = RequestContext.RegisterForCancellation(
-                    cancellationToken
-                );
+                _cancellationRegistration =
+                    RequestContext.RegisterForCancellation(cancellationToken);
             }
         }
 
@@ -340,9 +338,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             NativeOverlapped* nativeOverlapped
         )
         {
-            var asyncResult = (ClientCertLoader)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                nativeOverlapped
-            )!;
+            var asyncResult =
+                (ClientCertLoader)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
             IOCompleted(asyncResult, errorCode, numBytes);
         }
 

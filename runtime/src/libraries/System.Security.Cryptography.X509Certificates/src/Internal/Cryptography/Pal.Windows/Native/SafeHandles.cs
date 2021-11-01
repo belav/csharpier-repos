@@ -132,9 +132,8 @@ namespace Internal.Cryptography.Pal.Native
         protected sealed override bool ReleaseHandle()
         {
             using (
-                SafeCertContextHandle certContext = Interop.crypt32.CertDuplicateCertificateContext(
-                    handle
-                )
+                SafeCertContextHandle certContext =
+                    Interop.crypt32.CertDuplicateCertificateContext(handle)
             )
             {
                 DeleteKeyContainer(certContext);

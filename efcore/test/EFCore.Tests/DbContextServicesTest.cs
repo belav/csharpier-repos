@@ -2939,9 +2939,7 @@ namespace Microsoft.EntityFrameworkCore
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
             var options =
-                new DbContextOptionsBuilder<ConstructorTestContextWithSets>().UseInternalServiceProvider(
-                    serviceProvider
-                ).Options;
+                new DbContextOptionsBuilder<ConstructorTestContextWithSets>().UseInternalServiceProvider(serviceProvider).Options;
 
             using var context = new ConstructorTestContextWithSets(options);
             Assert.Equal(
@@ -2981,9 +2979,7 @@ namespace Microsoft.EntityFrameworkCore
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
             var options =
-                new DbContextOptionsBuilder<ConstructorTestContext1A>().UseInternalServiceProvider(
-                    serviceProvider
-                ).Options;
+                new DbContextOptionsBuilder<ConstructorTestContext1A>().UseInternalServiceProvider(serviceProvider).Options;
 
             using var context = new ConstructorTestContext1A(options);
             Assert.Equal(

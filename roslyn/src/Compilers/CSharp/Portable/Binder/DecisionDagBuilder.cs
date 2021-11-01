@@ -954,9 +954,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             )
                         )
                         {
-                            var newExistingValuesForTemp = existingValuesForTemp.Union(
-                                valuesForTemp
-                            );
+                            var newExistingValuesForTemp =
+                                existingValuesForTemp.Union(valuesForTemp);
                             newRemainingValues.Add(dagTemp, newExistingValuesForTemp);
                         }
                     }

@@ -301,9 +301,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                     // determine its final value.
 
                     // Attribute value is not plain text, must be buffered to determine its final value.
-                    context.CodeWriter.WriteMethodInvocation(
-                        BeginWriteTagHelperAttributeMethodName
-                    );
+                    context.CodeWriter.WriteMethodInvocation(BeginWriteTagHelperAttributeMethodName);
 
                     // We're building a writing scope around the provided chunks which captures everything written from the
                     // page. Therefore, we do not want to write to any other buffer since we're using the pages buffer to
@@ -421,9 +419,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 }
                 else
                 {
-                    context.CodeWriter.WriteMethodInvocation(
-                        BeginWriteTagHelperAttributeMethodName
-                    );
+                    context.CodeWriter.WriteMethodInvocation(BeginWriteTagHelperAttributeMethodName);
 
                     context.RenderChildren(node, new LiteralRuntimeNodeWriter());
 

@@ -195,9 +195,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     {
                         // Once we can make the new entry, add it to the appropriate list.
                         if (addToEntriesWhenGroupingByDefinition)
-                            EntriesWhenGroupingByDefinition = EntriesWhenGroupingByDefinition.Add(
-                                entry
-                            );
+                            EntriesWhenGroupingByDefinition =
+                                EntriesWhenGroupingByDefinition.Add(entry);
 
                         if (addToEntriesWhenNotGroupingByDefinition)
                             EntriesWhenNotGroupingByDefinition =
@@ -234,9 +233,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 // Go through and add dummy entries for any definitions that
                 // that we didn't find any references for.
 
-                var definitions = GetDefinitionsToCreateMissingReferenceItemsFor(
-                    whenGroupingByDefinition
-                );
+                var definitions =
+                    GetDefinitionsToCreateMissingReferenceItemsFor(whenGroupingByDefinition);
                 foreach (var definition in definitions)
                 {
                     if (definition.IsExternal)

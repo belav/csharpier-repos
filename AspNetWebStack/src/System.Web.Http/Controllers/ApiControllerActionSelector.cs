@@ -65,9 +65,8 @@ namespace System.Web.Http.Controllers
             // HttpControllerDescriptor.Properties cache
             if (_fastCache == null)
             {
-                ActionSelectorCacheItem selector = new ActionSelectorCacheItem(
-                    controllerDescriptor
-                );
+                ActionSelectorCacheItem selector =
+                    new ActionSelectorCacheItem(controllerDescriptor);
                 Interlocked.CompareExchange(ref _fastCache, selector, null);
                 return selector;
             }
@@ -86,9 +85,8 @@ namespace System.Web.Http.Controllers
                     return (ActionSelectorCacheItem)cacheValue;
                 }
                 // Race condition on initialization has no side effects
-                ActionSelectorCacheItem selector = new ActionSelectorCacheItem(
-                    controllerDescriptor
-                );
+                ActionSelectorCacheItem selector =
+                    new ActionSelectorCacheItem(controllerDescriptor);
                 controllerDescriptor.Properties.TryAdd(_cacheKey, selector);
                 return selector;
             }
@@ -252,9 +250,8 @@ namespace System.Web.Http.Controllers
             {
                 InitializeStandardActions();
 
-                List<CandidateActionWithParams> selectedCandidates = FindMatchingActions(
-                    controllerContext
-                );
+                List<CandidateActionWithParams> selectedCandidates =
+                    FindMatchingActions(controllerContext);
 
                 switch (selectedCandidates.Count)
                 {
@@ -309,12 +306,10 @@ namespace System.Web.Http.Controllers
                 List<CandidateActionWithParams> actionsFoundByParams =
                     FindActionMatchRequiredRouteAndQueryParameters(actionsWithParameters);
 
-                List<CandidateActionWithParams> orderCandidates = RunOrderFilter(
-                    actionsFoundByParams
-                );
-                List<CandidateActionWithParams> precedenceCandidates = RunPrecedenceFilter(
-                    orderCandidates
-                );
+                List<CandidateActionWithParams> orderCandidates =
+                    RunOrderFilter(actionsFoundByParams);
+                List<CandidateActionWithParams> precedenceCandidates =
+                    RunPrecedenceFilter(orderCandidates);
 
                 // Overload resolution logic is applied when needed.
                 List<CandidateActionWithParams> selectedCandidates =

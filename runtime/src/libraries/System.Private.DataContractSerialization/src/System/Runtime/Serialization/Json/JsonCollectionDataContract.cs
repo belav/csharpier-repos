@@ -45,9 +45,7 @@ namespace System.Runtime.Serialization.Json
                             else
                             {
                                 tempDelegate =
-                                    new JsonFormatReaderGenerator().GenerateCollectionReader(
-                                        TraditionalCollectionDataContract
-                                    );
+                                    new JsonFormatReaderGenerator().GenerateCollectionReader(TraditionalCollectionDataContract);
                             }
 
                             Interlocked.MemoryBarrier();
@@ -103,9 +101,7 @@ namespace System.Runtime.Serialization.Json
                             else
                             {
                                 tempDelegate =
-                                    new JsonFormatReaderGenerator().GenerateGetOnlyCollectionReader(
-                                        TraditionalCollectionDataContract
-                                    );
+                                    new JsonFormatReaderGenerator().GenerateGetOnlyCollectionReader(TraditionalCollectionDataContract);
                             }
 
                             Interlocked.MemoryBarrier();
@@ -142,9 +138,7 @@ namespace System.Runtime.Serialization.Json
                             else
                             {
                                 tempDelegate =
-                                    new JsonFormatWriterGenerator().GenerateCollectionWriter(
-                                        TraditionalCollectionDataContract
-                                    );
+                                    new JsonFormatWriterGenerator().GenerateCollectionWriter(TraditionalCollectionDataContract);
                             }
 
                             Interlocked.MemoryBarrier();

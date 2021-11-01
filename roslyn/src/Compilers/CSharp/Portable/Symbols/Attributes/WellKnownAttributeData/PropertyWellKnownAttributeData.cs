@@ -132,15 +132,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             VerifySealed(expected: false);
             if (sense)
             {
-                _memberNotNullWhenTrueAttributeData = _memberNotNullWhenTrueAttributeData.Add(
-                    memberName
-                );
+                _memberNotNullWhenTrueAttributeData =
+                    _memberNotNullWhenTrueAttributeData.Add(memberName);
             }
             else
             {
-                _memberNotNullWhenFalseAttributeData = _memberNotNullWhenFalseAttributeData.Add(
-                    memberName
-                );
+                _memberNotNullWhenFalseAttributeData =
+                    _memberNotNullWhenFalseAttributeData.Add(memberName);
             }
             SetDataStored();
         }
@@ -150,9 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             VerifySealed(expected: false);
             if (sense)
             {
-                _memberNotNullWhenTrueAttributeData = _memberNotNullWhenTrueAttributeData.AddRange(
-                    memberNames
-                );
+                _memberNotNullWhenTrueAttributeData =
+                    _memberNotNullWhenTrueAttributeData.AddRange(memberNames);
             }
             else
             {

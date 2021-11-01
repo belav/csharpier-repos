@@ -2152,9 +2152,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             private IHtmlContent HelperName(string name, object htmlAttributes)
             {
-                var htmlAttributesDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(
-                    htmlAttributes
-                );
+                var htmlAttributesDictionary =
+                    HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
                 var htmlAttributesString = string.Join(
                     " ",
                     htmlAttributesDictionary.Select(entry => $"{entry.Key}='{entry.Value}'")

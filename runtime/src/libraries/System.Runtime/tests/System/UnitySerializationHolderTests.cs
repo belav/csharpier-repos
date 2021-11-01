@@ -19,9 +19,7 @@ namespace System.Tests
                 "AAEAAAD/////AQAAAAAAAAAEAQAAAB9TeXN0ZW0uVW5pdHlTZXJpYWxpemF0aW9uSG9sZGVyAwAAAAREYXRhCVVuaXR5VHlwZQxBc3NlbWJseU5hbWUBAAEIBgIAAABLbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5BgAAAAkCAAAACw==";
             SerializationException se = AssertExtensions.Throws<SerializationException>(
                 () =>
-                    BinaryFormatterHelpers.FromBase64String(
-                        UnitySerializationHolderAssemblyBase64String
-                    )
+                    BinaryFormatterHelpers.FromBase64String(UnitySerializationHolderAssemblyBase64String)
             );
             Assert.IsAssignableFrom<ArgumentException>(se.InnerException);
         }

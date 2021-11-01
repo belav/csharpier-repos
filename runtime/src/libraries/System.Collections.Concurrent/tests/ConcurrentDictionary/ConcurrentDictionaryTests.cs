@@ -748,9 +748,8 @@ namespace System.Collections.Concurrent.Tests
             ConcurrentDictionary<string, int> dict = new ConcurrentDictionary<string, int>();
             dict.TryAdd("One", 1);
             dict.TryAdd("Two", 2);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                dict
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(dict);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State

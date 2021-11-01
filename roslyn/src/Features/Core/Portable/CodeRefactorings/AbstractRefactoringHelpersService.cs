@@ -449,9 +449,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 // is wanted.
                 // `var a = 1, `c = 2, d = 3`;
                 // -> `var a = 1`, c = 2, d = 3;
-                var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
-                    localDeclarationStatement
-                );
+                var variables =
+                    syntaxFacts.GetVariablesOfLocalDeclarationStatement(localDeclarationStatement);
                 if (variables.Count == 1)
                 {
                     var declaredVariable = variables.First();
@@ -460,9 +459,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     yield return declaredVariable;
 
                     // -> `b`
-                    var initializer = syntaxFacts.GetInitializerOfVariableDeclarator(
-                        declaredVariable
-                    );
+                    var initializer =
+                        syntaxFacts.GetInitializerOfVariableDeclarator(declaredVariable);
                     if (initializer != null)
                     {
                         var value = syntaxFacts.GetValueOfEqualsValueClause(initializer);

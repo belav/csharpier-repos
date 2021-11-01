@@ -253,9 +253,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 indexExpression
             );
 
-            valueExpression = materializationInfo.Mapping.CustomizeDataReaderExpression(
-                valueExpression
-            );
+            valueExpression =
+                materializationInfo.Mapping.CustomizeDataReaderExpression(valueExpression);
 
             var converter = materializationInfo.Mapping.Converter;
 

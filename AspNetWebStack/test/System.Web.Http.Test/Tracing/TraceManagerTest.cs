@@ -29,9 +29,8 @@ namespace System.Web.Http.Tracing
                     messageHandler,
                     traceWriter
                 );
-                RequestMessageHandlerTracer requestMsgtracer = new RequestMessageHandlerTracer(
-                    traceWriter
-                );
+                RequestMessageHandlerTracer requestMsgtracer =
+                    new RequestMessageHandlerTracer(traceWriter);
                 DelegatingHandler messageHandlerDummy = new Mock<DelegatingHandler>().Object;
                 DelegatingHandler msgHandlerTracerDummy = new MessageHandlerTracer(
                     messageHandlerDummy,
@@ -327,9 +326,8 @@ namespace System.Web.Http.Tracing
             traceManager.Initialize(config);
             Collection<DelegatingHandler> expectedMessageHandlers = config.MessageHandlers;
             HttpRequestMessage request = new HttpRequestMessage();
-            Mock<HttpControllerDispatcher> dispatcherMock = new Mock<HttpControllerDispatcher>(
-                config
-            );
+            Mock<HttpControllerDispatcher> dispatcherMock =
+                new Mock<HttpControllerDispatcher>(config);
             dispatcherMock
                 .Protected()
                 .Setup<Task<HttpResponseMessage>>("SendAsync", request, CancellationToken.None)
@@ -358,9 +356,8 @@ namespace System.Web.Http.Tracing
             TraceManager traceManager = new TraceManager();
             Collection<DelegatingHandler> expectedMessageHandlers = config.MessageHandlers;
             HttpRequestMessage request = new HttpRequestMessage();
-            Mock<HttpControllerDispatcher> dispatcherMock = new Mock<HttpControllerDispatcher>(
-                config
-            );
+            Mock<HttpControllerDispatcher> dispatcherMock =
+                new Mock<HttpControllerDispatcher>(config);
             dispatcherMock
                 .Protected()
                 .Setup<Task<HttpResponseMessage>>("SendAsync", request, CancellationToken.None)
@@ -401,9 +398,8 @@ namespace System.Web.Http.Tracing
             config.MessageHandlers.Add(messageHandler2);
             config.MessageHandlers.Add(messageHandler3);
             config.MessageHandlers.Add(messageHandler4);
-            Mock<HttpControllerDispatcher> dispatcherMock = new Mock<HttpControllerDispatcher>(
-                config
-            );
+            Mock<HttpControllerDispatcher> dispatcherMock =
+                new Mock<HttpControllerDispatcher>(config);
             dispatcherMock
                 .Protected()
                 .Setup<Task<HttpResponseMessage>>("SendAsync", request, CancellationToken.None)
@@ -451,9 +447,8 @@ namespace System.Web.Http.Tracing
                 messageHandler,
                 traceWriter
             );
-            RequestMessageHandlerTracer requestMsgtracer = new RequestMessageHandlerTracer(
-                traceWriter
-            );
+            RequestMessageHandlerTracer requestMsgtracer =
+                new RequestMessageHandlerTracer(traceWriter);
             List<DelegatingHandler> handlerList = new List<DelegatingHandler>()
             {
                 messageHandler,
@@ -490,9 +485,8 @@ namespace System.Web.Http.Tracing
                 messageHandler,
                 traceWriter
             );
-            RequestMessageHandlerTracer requestMsgtracer = new RequestMessageHandlerTracer(
-                traceWriter
-            );
+            RequestMessageHandlerTracer requestMsgtracer =
+                new RequestMessageHandlerTracer(traceWriter);
             List<DelegatingHandler> handlerList = new List<DelegatingHandler>()
             {
                 messageHandler,
@@ -530,9 +524,8 @@ namespace System.Web.Http.Tracing
                 messageHandler,
                 traceWriter
             );
-            RequestMessageHandlerTracer requestMsgtracer = new RequestMessageHandlerTracer(
-                traceWriter
-            );
+            RequestMessageHandlerTracer requestMsgtracer =
+                new RequestMessageHandlerTracer(traceWriter);
             List<DelegatingHandler> handlerList = new List<DelegatingHandler>()
             {
                 messageHandler,
@@ -569,9 +562,8 @@ namespace System.Web.Http.Tracing
                 messageHandler,
                 traceWriter
             );
-            RequestMessageHandlerTracer requestMsgtracer = new RequestMessageHandlerTracer(
-                traceWriter
-            );
+            RequestMessageHandlerTracer requestMsgtracer =
+                new RequestMessageHandlerTracer(traceWriter);
             List<DelegatingHandler> handlerList = new List<DelegatingHandler>()
             {
                 messageHandler,
@@ -608,9 +600,8 @@ namespace System.Web.Http.Tracing
                 messageHandler,
                 traceWriter
             );
-            RequestMessageHandlerTracer requestMsgtracer = new RequestMessageHandlerTracer(
-                traceWriter
-            );
+            RequestMessageHandlerTracer requestMsgtracer =
+                new RequestMessageHandlerTracer(traceWriter);
             List<DelegatingHandler> handlerList = new List<DelegatingHandler>()
             {
                 messageHandler,
@@ -647,9 +638,8 @@ namespace System.Web.Http.Tracing
                 messageHandler,
                 traceWriter
             );
-            RequestMessageHandlerTracer requestMsgtracer = new RequestMessageHandlerTracer(
-                traceWriter
-            );
+            RequestMessageHandlerTracer requestMsgtracer =
+                new RequestMessageHandlerTracer(traceWriter);
             List<DelegatingHandler> handlerList = new List<DelegatingHandler>()
             {
                 messageHandler,

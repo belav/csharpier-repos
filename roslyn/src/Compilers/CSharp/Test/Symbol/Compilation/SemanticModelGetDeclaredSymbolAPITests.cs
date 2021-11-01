@@ -3372,9 +3372,8 @@ class C : I
             var explicitPropertyNode = (PropertyDeclarationSyntax)classMemberNodes[1];
             Assert.Equal("P", explicitPropertyNode.Identifier.ValueText);
 
-            var explicitPropertySymbol = (IPropertySymbol)model.GetDeclaredSymbol(
-                explicitPropertyNode
-            );
+            var explicitPropertySymbol =
+                (IPropertySymbol)model.GetDeclaredSymbol(explicitPropertyNode);
             Assert.NotNull(explicitPropertySymbol);
             Assert.Equal("I.P", explicitPropertySymbol.Name);
             Assert.Equal(1, explicitPropertySymbol.ExplicitInterfaceImplementations.Length);
@@ -3385,9 +3384,8 @@ class C : I
             var explicitPropertyGetterNode = explicitPropertyAccessors[0];
             Assert.Equal("get", explicitPropertyGetterNode.Keyword.ValueText);
 
-            var explicitPropertyGetterSymbol = (IMethodSymbol)model.GetDeclaredSymbol(
-                explicitPropertyGetterNode
-            );
+            var explicitPropertyGetterSymbol =
+                (IMethodSymbol)model.GetDeclaredSymbol(explicitPropertyGetterNode);
             Assert.NotNull(explicitPropertyGetterSymbol);
             Assert.Equal(MethodKind.PropertyGet, explicitPropertyGetterSymbol.MethodKind);
             Assert.Equal("I.get_P", explicitPropertyGetterSymbol.Name);
@@ -3397,9 +3395,8 @@ class C : I
             var explicitPropertySetterNode = explicitPropertyAccessors[1];
             Assert.Equal("set", explicitPropertySetterNode.Keyword.ValueText);
 
-            var explicitPropertySetterSymbol = (IMethodSymbol)model.GetDeclaredSymbol(
-                explicitPropertySetterNode
-            );
+            var explicitPropertySetterSymbol =
+                (IMethodSymbol)model.GetDeclaredSymbol(explicitPropertySetterNode);
             Assert.NotNull(explicitPropertySetterSymbol);
             Assert.Equal(MethodKind.PropertySet, explicitPropertySetterSymbol.MethodKind);
             Assert.Equal("I.set_P", explicitPropertySetterSymbol.Name);

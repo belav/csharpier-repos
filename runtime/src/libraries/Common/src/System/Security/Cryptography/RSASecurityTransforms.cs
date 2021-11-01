@@ -764,9 +764,8 @@ namespace System.Security.Cryptography
                 }
                 else if (padding.Mode == RSASignaturePaddingMode.Pss)
                 {
-                    RsaPaddingProcessor processor = RsaPaddingProcessor.OpenProcessor(
-                        hashAlgorithm
-                    );
+                    RsaPaddingProcessor processor =
+                        RsaPaddingProcessor.OpenProcessor(hashAlgorithm);
                     SafeSecKeyRefHandle publicKey = GetKeys().PublicKey;
 
                     int keySize = KeySize;

@@ -240,9 +240,8 @@ namespace System.Web.Http.Routing
             // Set up routes
             var routes = new HttpRouteCollection("/somerootpath");
             IHttpRoute route = routes.MapHttpRoute("route1", "{controller}/{id}");
-            request.Properties[HttpPropertyKeys.HttpConfigurationKey] = new HttpConfiguration(
-                routes
-            );
+            request.Properties[HttpPropertyKeys.HttpConfigurationKey] =
+                new HttpConfiguration(routes);
             request.Properties[HttpPropertyKeys.HttpRouteDataKey] = new HttpRouteData(
                 route,
                 new HttpRouteValueDictionary(new { controller = "people", id = "123" })

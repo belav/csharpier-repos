@@ -186,9 +186,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         )
         {
             _typeMapping = typeMapping;
-            _typeMappingConfigurationSource = configurationSource.Max(
-                _typeMappingConfigurationSource
-            );
+            _typeMappingConfigurationSource =
+                configurationSource.Max(_typeMappingConfigurationSource);
 
             return typeMapping;
         }
@@ -227,9 +226,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             _propagatesNullability = propagatesNullability;
-            _propagatesNullabilityConfigurationSource = configurationSource.Max(
-                _storeTypeConfigurationSource
-            );
+            _propagatesNullabilityConfigurationSource =
+                configurationSource.Max(_storeTypeConfigurationSource);
 
             return propagatesNullability;
         }

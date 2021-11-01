@@ -50,9 +50,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             );
 
             var expectedDiagnostic =
-                RazorExtensionsDiagnosticFactory.CreatePageDirective_MustExistAtTheTopOfFile(
-                    sourceSpan
-                );
+                RazorExtensionsDiagnosticFactory.CreatePageDirective_MustExistAtTheTopOfFile(sourceSpan);
             var content =
                 Environment.NewLine
                 + "@somethingelse"

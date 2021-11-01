@@ -51,9 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             _metadataProvider = metadataProvider;
 
             var clientValidatorProviders = optionsAccessor.Value.ClientModelValidatorProviders;
-            _clientModelValidatorProvider = new CompositeClientModelValidatorProvider(
-                clientValidatorProviders
-            );
+            _clientModelValidatorProvider =
+                new CompositeClientModelValidatorProvider(clientValidatorProviders);
         }
 
         /// <inheritdoc />

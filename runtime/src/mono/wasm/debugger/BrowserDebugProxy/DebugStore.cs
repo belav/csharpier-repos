@@ -440,9 +440,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                     var localVariables = localScope.GetLocalVariables();
                     foreach (var localVariableHandle in localVariables)
                     {
-                        var localVariable = Assembly.pdbMetadataReader.GetLocalVariable(
-                            localVariableHandle
-                        );
+                        var localVariable =
+                            Assembly.pdbMetadataReader.GetLocalVariable(localVariableHandle);
                         if (localVariable.Attributes != LocalVariableAttributes.DebuggerHidden)
                             res.Add(new VarInfo(localVariable, Assembly.pdbMetadataReader));
                     }

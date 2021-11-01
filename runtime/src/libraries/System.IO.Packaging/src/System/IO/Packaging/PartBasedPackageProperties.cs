@@ -371,9 +371,7 @@ namespace System.IO.Packaging
 
             propertiesPart = _package.GetPart(propertiesPartUri);
             if (
-                !propertiesPart.ValidatedContentType.AreTypeAndSubTypeEqual(
-                    s_coreDocumentPropertiesContentType
-                )
+                !propertiesPart.ValidatedContentType.AreTypeAndSubTypeEqual(s_coreDocumentPropertiesContentType)
             )
             {
                 throw new FileFormatException(SR.WrongContentTypeForPropertyPart);
@@ -387,9 +385,7 @@ namespace System.IO.Packaging
         {
             PackageRelationship? propertiesPartRelationship = null;
             foreach (
-                PackageRelationship rel in _package.GetRelationshipsByType(
-                    CoreDocumentPropertiesRelationshipType
-                )
+                PackageRelationship rel in _package.GetRelationshipsByType(CoreDocumentPropertiesRelationshipType)
             )
             {
                 if (propertiesPartRelationship != null)

@@ -272,9 +272,7 @@ namespace Microsoft.AspNetCore.Builder
                 if (parameterType.IsByRef)
                 {
                     throw new NotSupportedException(
-                        Resources.FormatException_InvokeDoesNotSupportRefOrOutParams(
-                            InvokeMethodName
-                        )
+                        Resources.FormatException_InvokeDoesNotSupportRefOrOutParams(InvokeMethodName)
                     );
                 }
 

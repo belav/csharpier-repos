@@ -561,9 +561,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                 if (apiParameter.Source == ApiParameterSource.FromBody)
                 {
                     Type parameterType = apiParameter.ParameterDescriptor.ParameterType;
-                    apiModel.RequestModelDescription = modelGenerator.GetOrCreateModelDescription(
-                        parameterType
-                    );
+                    apiModel.RequestModelDescription =
+                        modelGenerator.GetOrCreateModelDescription(parameterType);
                     apiModel.RequestDocumentation = apiParameter.Documentation;
                 }
                 else if (
@@ -571,9 +570,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                     && apiParameter.ParameterDescriptor.ParameterType == typeof(HttpRequestMessage)
                 )
                 {
-                    Type parameterType = sampleGenerator.ResolveHttpRequestMessageType(
-                        apiDescription
-                    );
+                    Type parameterType =
+                        sampleGenerator.ResolveHttpRequestMessageType(apiDescription);
 
                     if (parameterType != null)
                     {
@@ -593,9 +591,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             Type responseType = response.ResponseType ?? response.DeclaredType;
             if (responseType != null && responseType != typeof(void))
             {
-                apiModel.ResourceDescription = modelGenerator.GetOrCreateModelDescription(
-                    responseType
-                );
+                apiModel.ResourceDescription =
+                    modelGenerator.GetOrCreateModelDescription(responseType);
             }
         }
 

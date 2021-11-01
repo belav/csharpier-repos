@@ -700,9 +700,8 @@ namespace System.Threading.Tasks
                 IAsyncStateMachine stateMachine = stateMachineBox.GetStateMachineObject();
                 if (stateMachine != null)
                 {
-                    string description = AsyncMethodBuilderCore.GetAsyncStateMachineDescription(
-                        stateMachine
-                    );
+                    string description =
+                        AsyncMethodBuilderCore.GetAsyncStateMachineDescription(stateMachine);
                     IncompleteAsyncMethod(description);
                 }
             }

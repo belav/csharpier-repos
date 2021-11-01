@@ -129,9 +129,9 @@ namespace Microsoft.AspNet.Facebook.Client
         )
         {
             FacebookGroupConnection<IDictionary<string, string>> permissionResults =
-                await client.GetTaskAsync<FacebookGroupConnection<IDictionary<string, string>>>(
-                    PermissionsEndPoint
-                );
+                await client.GetTaskAsync<
+                    FacebookGroupConnection<IDictionary<string, string>>
+                >(PermissionsEndPoint);
             PermissionsStatus permissionsStatus = new PermissionsStatus(permissionResults.Data);
 
             return PermissionHelper.GetGrantedPermissions(permissionsStatus).ToList();

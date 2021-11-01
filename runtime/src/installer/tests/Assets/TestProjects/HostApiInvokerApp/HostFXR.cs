@@ -269,9 +269,7 @@ namespace HostApiInvokerApp
                             + (i * Marshal.SizeOf<hostfxr.hostfxr_dotnet_environment_sdk_info>())
                     );
                     sdks.Add(
-                        Marshal.PtrToStructure<hostfxr.hostfxr_dotnet_environment_sdk_info>(
-                            pSdkInfo
-                        )
+                        Marshal.PtrToStructure<hostfxr.hostfxr_dotnet_environment_sdk_info>(pSdkInfo)
                     );
 
                     if ((nuint)Marshal.SizeOf(sdks[i]) != sdks[i].size)
@@ -290,9 +288,7 @@ namespace HostApiInvokerApp
                             )
                     );
                     frameworks.Add(
-                        Marshal.PtrToStructure<hostfxr.hostfxr_dotnet_environment_framework_info>(
-                            pFrameworkInfo
-                        )
+                        Marshal.PtrToStructure<hostfxr.hostfxr_dotnet_environment_framework_info>(pFrameworkInfo)
                     );
 
                     if ((nuint)Marshal.SizeOf(frameworks[i]) != frameworks[i].size)

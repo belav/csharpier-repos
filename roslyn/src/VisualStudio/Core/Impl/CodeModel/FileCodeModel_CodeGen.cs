@@ -153,9 +153,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             var element = CodeModelService.CreateInternalCodeElement(state, fileCodeModel, node);
             if (IsBatchOpen)
             {
-                var codeElement = ComAggregate.TryGetManagedObject<AbstractKeyedCodeElement>(
-                    element
-                );
+                var codeElement =
+                    ComAggregate.TryGetManagedObject<AbstractKeyedCodeElement>(element);
                 if (codeElement != null)
                 {
                     _batchElements.Add(codeElement);

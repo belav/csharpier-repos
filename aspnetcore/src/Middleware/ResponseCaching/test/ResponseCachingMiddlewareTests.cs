@@ -258,9 +258,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             context.CachedResponseHeaders[HeaderNames.Date] = HeaderUtilities.FormatDate(
                 utcNow + TimeSpan.FromSeconds(10)
             );
-            context.CachedResponseHeaders[HeaderNames.LastModified] = HeaderUtilities.FormatDate(
-                utcNow
-            );
+            context.CachedResponseHeaders[HeaderNames.LastModified] =
+                HeaderUtilities.FormatDate(utcNow);
             Assert.True(ResponseCachingMiddleware.ContentIsNotModified(context));
             Assert.Equal(2, sink.Writes.Count);
 
@@ -709,9 +708,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var middleware = TestUtils.CreateTestMiddleware(testSink: sink);
             var context = TestUtils.CreateTestContext();
 
-            context.HttpContext.Response.Headers[HeaderNames.Date] = HeaderUtilities.FormatDate(
-                utcNow
-            );
+            context.HttpContext.Response.Headers[HeaderNames.Date] =
+                HeaderUtilities.FormatDate(utcNow);
             context.ResponseTime = utcNow + TimeSpan.FromSeconds(10);
 
             Assert.Equal(
@@ -1003,9 +1001,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var uppercaseStrings = new StringValues(new[] { "STRINGA", "STRINGB" });
             var lowercaseStrings = new StringValues(new[] { "stringA", "stringB" });
 
-            var normalizedStrings = ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(
-                lowercaseStrings
-            );
+            var normalizedStrings =
+                ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(lowercaseStrings);
 
             Assert.Equal(uppercaseStrings, normalizedStrings);
         }
@@ -1016,9 +1013,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
             var orderedStrings = new StringValues(new[] { "STRINGA", "STRINGB" });
             var reverseOrderStrings = new StringValues(new[] { "STRINGB", "STRINGA" });
 
-            var normalizedStrings = ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(
-                reverseOrderStrings
-            );
+            var normalizedStrings =
+                ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(reverseOrderStrings);
 
             Assert.Equal(orderedStrings, normalizedStrings);
         }
@@ -1028,9 +1024,8 @@ namespace Microsoft.AspNetCore.ResponseCaching.Tests
         {
             var originalStrings = new StringValues(new[] { "STRINGA, STRINGB" });
 
-            var normalizedStrings = ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(
-                originalStrings
-            );
+            var normalizedStrings =
+                ResponseCachingMiddleware.GetOrderCasingNormalizedStringValues(originalStrings);
 
             Assert.Equal(originalStrings, normalizedStrings);
         }

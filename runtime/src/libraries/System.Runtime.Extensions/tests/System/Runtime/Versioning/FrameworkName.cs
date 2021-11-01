@@ -16,9 +16,8 @@ namespace System.Runtime.Versioning.Tests
         private static readonly string s_testNameNoProfileString =
             $"{TestIdentifier},Version=v{s_testVersion}";
         private static readonly FrameworkName s_testName = new FrameworkName(s_testNameString);
-        private static readonly FrameworkName s_testNameNoProfile = new FrameworkName(
-            s_testNameNoProfileString
-        );
+        private static readonly FrameworkName s_testNameNoProfile =
+            new FrameworkName(s_testNameNoProfileString);
 
         [Fact]
         public static void ConstructFromString()

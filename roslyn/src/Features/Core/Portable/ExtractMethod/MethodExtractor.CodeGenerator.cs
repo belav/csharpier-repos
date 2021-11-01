@@ -323,9 +323,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
                 // add invocation expression
                 return statements.Concat(
-                    (TStatement)(SyntaxNode)await GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
-                            cancellationToken
-                        )
+                    (TStatement)(SyntaxNode)await GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(cancellationToken)
                         .ConfigureAwait(false)
                 );
             }
@@ -355,9 +353,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         CreateCallSignature(),
                         cancellationToken
                     );
-                    declarationStatement = declarationStatement.WithAdditionalAnnotations(
-                        CallSiteAnnotation
-                    );
+                    declarationStatement =
+                        declarationStatement.WithAdditionalAnnotations(CallSiteAnnotation);
 
                     return statements.Concat(declarationStatement);
                 }
@@ -389,9 +386,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 using var _ = ArrayBuilder<TStatement>.GetInstance(out var list);
 
                 foreach (
-                    var variable in AnalyzerResult.GetVariablesToSplitOrMoveOutToCallSite(
-                        cancellationToken
-                    )
+                    var variable in AnalyzerResult.GetVariablesToSplitOrMoveOutToCallSite(cancellationToken)
                 )
                 {
                     if (variable.UseAsReturnValue)

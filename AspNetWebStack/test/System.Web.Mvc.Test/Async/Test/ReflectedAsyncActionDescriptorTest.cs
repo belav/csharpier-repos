@@ -308,9 +308,8 @@ namespace System.Web.Mvc.Async.Test
             Assert.Equal(pDescsFirstCall, pDescsSecondCall);
 
             ParameterDescriptor parameterDescriptor = Assert.Single(pDescsFirstCall);
-            ReflectedParameterDescriptor pDesc = Assert.IsType<ReflectedParameterDescriptor>(
-                parameterDescriptor
-            );
+            ReflectedParameterDescriptor pDesc =
+                Assert.IsType<ReflectedParameterDescriptor>(parameterDescriptor);
 
             Assert.NotNull(pDesc);
             Assert.Same(ad, pDesc.ActionDescriptor);

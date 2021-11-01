@@ -114,9 +114,7 @@ namespace System.Net.Http
                         );
 
                         var asyncResult =
-                            Marshal.PtrToStructure<Interop.WinHttp.WINHTTP_ASYNC_RESULT>(
-                                statusInformation
-                            );
+                            Marshal.PtrToStructure<Interop.WinHttp.WINHTTP_ASYNC_RESULT>(statusInformation);
                         OnRequestError(state, asyncResult);
                         return;
 

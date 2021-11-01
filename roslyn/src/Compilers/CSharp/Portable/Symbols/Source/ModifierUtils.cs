@@ -129,9 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     DeclarationModifiers errorModifiers =
                         modifiers & defaultInterfaceImplementationModifiers;
-                    var requiredVersionArgument = new CSharpRequiredLanguageVersion(
-                        requiredVersion
-                    );
+                    var requiredVersionArgument =
+                        new CSharpRequiredLanguageVersion(requiredVersion);
                     var availableVersionArgument = availableVersion.ToDisplayString();
                     while (errorModifiers != DeclarationModifiers.None)
                     {

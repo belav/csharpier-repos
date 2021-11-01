@@ -348,10 +348,8 @@ namespace System.Net.Http
             {
                 _headerState = HeaderState.StatusHeader;
 
-                (Http3FrameType? frameType, long payloadLength) = await ReadFrameEnvelopeAsync(
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+                (Http3FrameType? frameType, long payloadLength) =
+                    await ReadFrameEnvelopeAsync(cancellationToken).ConfigureAwait(false);
 
                 if (frameType != Http3FrameType.Headers)
                 {

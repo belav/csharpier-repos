@@ -52,9 +52,8 @@ namespace System.Reflection.Emit.Tests
         )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            GenericTypeParameterBuilder[] typeGenParam = type.DefineGenericParameters(
-                genericParams
-            );
+            GenericTypeParameterBuilder[] typeGenParam =
+                type.DefineGenericParameters(genericParams);
             Type genericType = type.MakeGenericType(typeArguments);
             Assert.Equal(expectedFullName, genericType.FullName);
         }

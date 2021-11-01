@@ -585,9 +585,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             var newScope = scope.ReplaceToken(nextToken, newNextToken);
 
-            var newLocalDeclaration = (LocalDeclarationStatementSyntax)FindDeclarator(
-                newScope
-            ).Parent.Parent;
+            var newLocalDeclaration =
+                (LocalDeclarationStatementSyntax)FindDeclarator(newScope).Parent.Parent;
 
             // If the local is parented by a label statement, we can't remove this statement. Instead,
             // we'll replace the local declaration with an empty expression statement.
@@ -796,9 +795,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             var syntaxRootAfterInline = await inlinedDocument
                 .GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
-            var inlinedExprNodes = syntaxRootAfterInline.GetAnnotatedNodesAndTokens(
-                ExpressionToInlineAnnotation
-            );
+            var inlinedExprNodes =
+                syntaxRootAfterInline.GetAnnotatedNodesAndTokens(ExpressionToInlineAnnotation);
             Debug.Assert(originalIdentifierNodes.Count() == inlinedExprNodes.Count());
 
             Dictionary<SyntaxNode, SyntaxNode> replacementNodesWithChangedSemantics = null;

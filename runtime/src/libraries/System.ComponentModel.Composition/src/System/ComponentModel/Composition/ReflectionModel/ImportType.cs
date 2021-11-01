@@ -220,12 +220,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 {
                     if (!isOpenGeneric)
                     {
-                        castFunction = new ExportFactoryCreator(
-                            genericType
-                        ).CreateStronglyTypedExportFactoryFactory(
-                            arguments[0].UnderlyingSystemType,
-                            null
-                        );
+                        castFunction =
+                            new ExportFactoryCreator(genericType).CreateStronglyTypedExportFactoryFactory(
+                                arguments[0].UnderlyingSystemType,
+                                null
+                            );
                     }
                     return true;
                 }
@@ -233,12 +232,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 {
                     if (!isOpenGeneric)
                     {
-                        castFunction = new ExportFactoryCreator(
-                            genericType
-                        ).CreateStronglyTypedExportFactoryFactory(
-                            arguments[0].UnderlyingSystemType,
-                            arguments[1].UnderlyingSystemType
-                        );
+                        castFunction =
+                            new ExportFactoryCreator(genericType).CreateStronglyTypedExportFactoryFactory(
+                                arguments[0].UnderlyingSystemType,
+                                arguments[1].UnderlyingSystemType
+                            );
                     }
                     return true;
                 }

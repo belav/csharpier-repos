@@ -312,9 +312,8 @@ namespace System.Runtime.CompilerServices
         public TupleElementNamesAttribute(string[] transformNames) { }
     }
 }";
-            var tupleElementNamesAttribute_comp = CreateCompilationWithMscorlib40(
-                tupleElementNamesAttribute_source
-            );
+            var tupleElementNamesAttribute_comp =
+                CreateCompilationWithMscorlib40(tupleElementNamesAttribute_source);
             tupleElementNamesAttribute_comp.VerifyDiagnostics();
 
             var lib1_source =

@@ -98,9 +98,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
                     generator.Whitespace(GetSmartIndentationAfter(firstPeriod))
                 );
 
-                _newlineBeforeOperatorTrivia = service.GetNewLineBeforeOperatorTrivia(
-                    NewLineTrivia
-                );
+                _newlineBeforeOperatorTrivia =
+                    service.GetNewLineBeforeOperatorTrivia(NewLineTrivia);
             }
 
             protected override async Task<

@@ -414,9 +414,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             bool? fromNonTypeConstraints = CalculateIsNotNullableFromNonTypeConstraints();
 
-            ImmutableArray<TypeWithAnnotations> constraintTypes = this.GetDeclaredConstraintTypes(
-                inProgress
-            );
+            ImmutableArray<TypeWithAnnotations> constraintTypes =
+                this.GetDeclaredConstraintTypes(inProgress);
 
             if (constraintTypes.IsEmpty)
             {
@@ -536,9 +535,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                return CalculateIsReferenceTypeFromConstraintTypes(
-                    ConstraintTypesNoUseSiteDiagnostics
-                );
+                return CalculateIsReferenceTypeFromConstraintTypes(ConstraintTypesNoUseSiteDiagnostics);
             }
         }
 

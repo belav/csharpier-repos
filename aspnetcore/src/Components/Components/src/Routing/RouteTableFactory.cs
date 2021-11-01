@@ -18,9 +18,8 @@ namespace Microsoft.AspNetCore.Components
     {
         private static readonly ConcurrentDictionary<Key, RouteTable> Cache =
             new ConcurrentDictionary<Key, RouteTable>();
-        public static readonly IComparer<RouteEntry> RoutePrecedence = Comparer<RouteEntry>.Create(
-            RouteComparison
-        );
+        public static readonly IComparer<RouteEntry> RoutePrecedence =
+            Comparer<RouteEntry>.Create(RouteComparison);
 
         public static RouteTable Create(IEnumerable<Assembly> assemblies)
         {

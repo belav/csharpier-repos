@@ -3974,9 +3974,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             Debug.Assert(ITypeSymbolHelpers.IsNullableType(valueType));
 
-            var method = (IMethodSymbol?)_compilation.CommonGetSpecialTypeMember(
-                nullableMember
-            )?.GetISymbol();
+            var method =
+                (IMethodSymbol?)_compilation.CommonGetSpecialTypeMember(nullableMember)?.GetISymbol();
 
             if (method != null)
             {
@@ -5780,9 +5779,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     isImplicit: true
                 );
 
-                var method = (IMethodSymbol?)_compilation.CommonGetWellKnownTypeMember(
-                    helper
-                )?.GetISymbol();
+                var method =
+                    (IMethodSymbol?)_compilation.CommonGetWellKnownTypeMember(helper)?.GetISymbol();
                 int parametersCount = WellKnownMembers.GetDescriptor(helper).ParametersCount;
 
                 if (method is null)
@@ -6139,12 +6137,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                     AppendNewBlock(notPositive);
 
-                    _forToLoopBinaryOperatorLeftOperand = OperationCloner.CloneOperation(
-                        _forToLoopBinaryOperatorLeftOperand
-                    );
-                    _forToLoopBinaryOperatorRightOperand = OperationCloner.CloneOperation(
-                        _forToLoopBinaryOperatorRightOperand
-                    );
+                    _forToLoopBinaryOperatorLeftOperand =
+                        OperationCloner.CloneOperation(_forToLoopBinaryOperatorLeftOperand);
+                    _forToLoopBinaryOperatorRightOperand =
+                        OperationCloner.CloneOperation(_forToLoopBinaryOperatorRightOperand);
 
                     VisitConditionalBranch(
                         userDefinedInfo.GreaterThanOrEqual,
@@ -9499,9 +9495,9 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             {
                 if (statement.Kind == OperationKind.LocalFunction)
                 {
-                    (localFunctionsBuilder ??= ArrayBuilder<IOperation>.GetInstance()).Add(
-                        statement
-                    );
+                    (
+                        localFunctionsBuilder ??= ArrayBuilder<IOperation>.GetInstance()
+                    ).Add(statement);
                 }
                 else
                 {

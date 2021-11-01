@@ -367,9 +367,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
 
             if (fieldInfo != null)
             {
-                var latestEquivalentEventHandlerId = FindLatestEventHandlerIdInChain(
-                    eventHandlerId
-                );
+                var latestEquivalentEventHandlerId =
+                    FindLatestEventHandlerIdInChain(eventHandlerId);
                 UpdateRenderTreeToMatchClientState(latestEquivalentEventHandlerId, fieldInfo);
             }
 

@@ -86,18 +86,16 @@ namespace Microsoft.Extensions.Logging.TraceSource
             {
                 if (HasDefaultListeners(traceSource))
                 {
-                    DiagnosticsTraceSource parentTraceSource = GetOrAddTraceSource(
-                        parentSourceName
-                    );
+                    DiagnosticsTraceSource parentTraceSource =
+                        GetOrAddTraceSource(parentSourceName);
                     traceSource.Listeners.Clear();
                     traceSource.Listeners.AddRange(parentTraceSource.Listeners);
                 }
 
                 if (HasDefaultSwitch(traceSource))
                 {
-                    DiagnosticsTraceSource parentTraceSource = GetOrAddTraceSource(
-                        parentSourceName
-                    );
+                    DiagnosticsTraceSource parentTraceSource =
+                        GetOrAddTraceSource(parentSourceName);
                     traceSource.Switch = parentTraceSource.Switch;
                 }
             }

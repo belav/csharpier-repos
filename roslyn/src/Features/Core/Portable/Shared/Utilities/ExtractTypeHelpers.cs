@@ -169,12 +169,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             // The directly referenced TypeParameters may have constraints that reference other
             // type parameters.
 
-            var allReferencedTypeParameters = new HashSet<ITypeParameterSymbol>(
-                directlyReferencedTypeParameters
-            );
-            var unanalyzedTypeParameters = new Queue<ITypeParameterSymbol>(
-                directlyReferencedTypeParameters
-            );
+            var allReferencedTypeParameters =
+                new HashSet<ITypeParameterSymbol>(directlyReferencedTypeParameters);
+            var unanalyzedTypeParameters =
+                new Queue<ITypeParameterSymbol>(directlyReferencedTypeParameters);
 
             while (!unanalyzedTypeParameters.IsEmpty())
             {

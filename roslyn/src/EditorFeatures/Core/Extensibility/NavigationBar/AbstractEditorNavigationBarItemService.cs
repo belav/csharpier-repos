@@ -115,9 +115,7 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
                 .ConfigureAwait(false);
             if (navigationPoint.HasValue)
             {
-                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
                 NavigateToVirtualTreePoint(
                     document.Project.Solution,
                     navigationPoint.Value,

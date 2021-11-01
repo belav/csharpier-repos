@@ -22,9 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             var conversion = Conversions.ClassifyConversionFromExpression(
                 source,
                 destination,
@@ -380,9 +379,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // if the destination is nullable, in which case we
                 // target the underlying type e.g. `S? x = new();`
                 // is actually identical to `S? x = new S();`.
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 var conversion = Conversions.ClassifyStandardConversion(
                     null,
                     expr.Type,
@@ -700,9 +698,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             TypeSymbol conversionParameterType =
                 conversion.BestUserDefinedConversionAnalysis.Operator.GetParameterType(0);
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
 
             if (
                 conversion.BestUserDefinedConversionAnalysis.Kind
@@ -1401,9 +1398,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var containingType = this.ContainingType;
             if (containingType is object)
             {
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 bool isAccessible = this.IsSymbolAccessibleConditional(
                     memberSymbol.GetTypeOrReturnType().Type,
                     containingType,
@@ -1525,9 +1521,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
 
             // If this is an extension method delegate, the caller should have verified the
             // receiver is compatible with the "this" parameter of the extension method.
@@ -1844,9 +1839,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return true;
             }
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             conversion = Conversions.GetMethodGroupDelegateConversion(
                 boundMethodGroup,
                 delegateType,

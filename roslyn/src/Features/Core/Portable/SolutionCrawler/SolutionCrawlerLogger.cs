@@ -42,9 +42,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         private const string ProcessProjectCancellation = nameof(ProcessProjectCancellation);
         private const string ActiveFileEnqueue = nameof(ActiveFileEnqueue);
         private const string ActiveFileProcessDocument = nameof(ActiveFileProcessDocument);
-        private const string ActiveFileProcessDocumentCancellation = nameof(
-            ActiveFileProcessDocumentCancellation
-        );
+        private const string ActiveFileProcessDocumentCancellation =
+            nameof(ActiveFileProcessDocumentCancellation);
 
         private const string Max = "Maximum";
         private const string Min = "Minimum";

@@ -277,9 +277,8 @@ namespace System.Collections.Immutable.Tests
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableQueue.Create<int>());
             ImmutableQueue<string> queue = ImmutableQueue.Create("One", "Two");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                queue
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(queue);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State

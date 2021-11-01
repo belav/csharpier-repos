@@ -85,9 +85,9 @@ namespace System.Reflection.Metadata.Ecma335
                 return ImmutableArray<CustomAttributeTypedArgument<TType>>.Empty;
             }
 
-            var arguments = ImmutableArray.CreateBuilder<CustomAttributeTypedArgument<TType>>(
-                count
-            );
+            var arguments = ImmutableArray.CreateBuilder<
+                CustomAttributeTypedArgument<TType>
+            >(count);
 
             for (int i = 0; i < count; i++)
             {
@@ -108,9 +108,9 @@ namespace System.Reflection.Metadata.Ecma335
                 return ImmutableArray<CustomAttributeNamedArgument<TType>>.Empty;
             }
 
-            var arguments = ImmutableArray.CreateBuilder<CustomAttributeNamedArgument<TType>>(
-                count
-            );
+            var arguments = ImmutableArray.CreateBuilder<
+                CustomAttributeNamedArgument<TType>
+            >(count);
             for (int i = 0; i < count; i++)
             {
                 CustomAttributeNamedArgumentKind kind =

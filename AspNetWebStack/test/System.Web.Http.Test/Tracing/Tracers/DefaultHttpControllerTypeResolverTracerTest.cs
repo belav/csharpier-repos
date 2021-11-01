@@ -275,9 +275,8 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             Predicate<Type> expectedPredicate = type => type != null;
-            DefaultHttpControllerTypeResolver resolver = new DefaultHttpControllerTypeResolver(
-                expectedPredicate
-            );
+            DefaultHttpControllerTypeResolver resolver =
+                new DefaultHttpControllerTypeResolver(expectedPredicate);
 
             TestTraceWriter traceWriter = new TestTraceWriter();
             DefaultHttpControllerTypeResolverTracer tracer =

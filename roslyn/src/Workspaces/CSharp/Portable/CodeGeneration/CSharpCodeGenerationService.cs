@@ -589,9 +589,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 throw new ArgumentException("attributeToRemove");
             }
 
-            var attributeSyntaxToRemove = attributeToRemove.ApplicationSyntaxReference.GetSyntax(
-                cancellationToken
-            );
+            var attributeSyntaxToRemove =
+                attributeToRemove.ApplicationSyntaxReference.GetSyntax(cancellationToken);
             return RemoveAttribute(
                 destination,
                 attributeSyntaxToRemove,

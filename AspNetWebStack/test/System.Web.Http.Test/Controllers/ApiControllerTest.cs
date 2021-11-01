@@ -91,9 +91,8 @@ namespace System.Web.Http
         {
             // Arrange
             var api = new UsersController();
-            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(
-                instance: api
-            );
+            HttpControllerContext controllerContext =
+                ContextUtil.CreateControllerContext(instance: api);
 
             HttpControllerDescriptor controllerDescriptor = new HttpControllerDescriptor(
                 controllerContext.Configuration,

@@ -39,9 +39,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         {
             var cancellationToken = originalFixAllContext.CancellationToken;
             var progressTracker = originalFixAllContext.GetProgressTracker();
-            progressTracker.Description = FixAllContextHelper.GetDefaultFixAllTitle(
-                originalFixAllContext
-            );
+            progressTracker.Description =
+                FixAllContextHelper.GetDefaultFixAllTitle(originalFixAllContext);
 
             // We have 2*P + 1 pieces of work.  Computing diagnostics and fixes/changes per context, and then one pass
             // applying fixes.
@@ -221,9 +220,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                             foreach (var codeAction in codeActions)
                             {
                                 var changedSolution = await codeAction
-                                    .GetChangedSolutionInternalAsync(
-                                        cancellationToken: cancellationToken
-                                    )
+                                    .GetChangedSolutionInternalAsync(cancellationToken: cancellationToken)
                                     .ConfigureAwait(false);
                                 if (changedSolution != null)
                                 {

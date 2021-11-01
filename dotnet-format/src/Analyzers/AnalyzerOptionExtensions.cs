@@ -83,9 +83,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return false;
             }
 
-            var analyzerConfigOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                tree
-            );
+            var analyzerConfigOptions =
+                analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(tree);
 
             // If user has explicitly configured default severity for the diagnostic category, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.category-security.severity = error'
@@ -211,9 +210,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 // If user has explicitly configured default severity for the diagnostic category, that should be respected.
                 // For example, 'dotnet_analyzer_diagnostic.category-security.severity = error'
-                var categoryBasedKey = GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(
-                    diagnosticCategory
-                );
+                var categoryBasedKey =
+                    GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(diagnosticCategory);
                 if (
                     analyzerConfigOptions.TryGetValue(categoryBasedKey, out value)
                     && TryParseSeverity(value, out severity)

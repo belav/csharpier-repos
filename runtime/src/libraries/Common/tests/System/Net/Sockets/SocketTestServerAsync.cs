@@ -147,9 +147,8 @@ namespace System.Net.Sockets.Tests
             if (acceptEventArg == null)
             {
                 acceptEventArg = new SocketAsyncEventArgs();
-                acceptEventArg.Completed += new EventHandler<SocketAsyncEventArgs>(
-                    AcceptEventArg_Completed
-                );
+                acceptEventArg.Completed +=
+                    new EventHandler<SocketAsyncEventArgs>(AcceptEventArg_Completed);
             }
             else
             {

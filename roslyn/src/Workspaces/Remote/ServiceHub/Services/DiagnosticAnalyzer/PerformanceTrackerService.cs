@@ -462,9 +462,7 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 // calculate normalized average and stddev and convert analyzerId string to index
                 var analyzerCount = analyzerIdIndex.Count;
                 var normalizedMap =
-                    GetPooledListAndSetCapacity<(double normalizedAverage, double normalizedStddev)>(
-                        analyzerCount
-                    );
+                    GetPooledListAndSetCapacity<(double normalizedAverage, double normalizedStddev)>(analyzerCount);
 
                 for (var index = 0; index < analyzerCount; index++)
                 {

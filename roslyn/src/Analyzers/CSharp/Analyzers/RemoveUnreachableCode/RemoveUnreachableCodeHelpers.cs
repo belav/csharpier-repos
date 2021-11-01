@@ -35,9 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             var sections = ArrayBuilder<ImmutableArray<StatementSyntax>>.GetInstance();
 
             var currentSection = ArrayBuilder<StatementSyntax>.GetInstance();
-            var firstUnreachableStatementIndex = siblingStatements.IndexOf(
-                firstUnreachableStatement
-            );
+            var firstUnreachableStatementIndex =
+                siblingStatements.IndexOf(firstUnreachableStatement);
 
             for (
                 int i = firstUnreachableStatementIndex + 1, n = siblingStatements.Count;

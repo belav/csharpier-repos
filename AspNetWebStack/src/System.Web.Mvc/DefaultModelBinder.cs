@@ -378,9 +378,8 @@ namespace System.Web.Mvc
                         if (exception is FormatException || exception is OverflowException)
                         {
                             string displayName = propertyMetadata.GetDisplayName();
-                            string errorMessageTemplate = GetValueInvalidResource(
-                                controllerContext
-                            );
+                            string errorMessageTemplate =
+                                GetValueInvalidResource(controllerContext);
                             string errorMessage = String.Format(
                                 CultureInfo.CurrentCulture,
                                 errorMessageTemplate,
@@ -666,9 +665,8 @@ namespace System.Web.Mvc
         )
         {
             string indexKey = CreateSubPropertyName(bindingContext.ModelName, "index");
-            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
-                indexKey
-            );
+            ValueProviderResult valueProviderResult =
+                bindingContext.ValueProvider.GetValue(indexKey);
 
             if (valueProviderResult != null)
             {
@@ -806,9 +804,8 @@ namespace System.Web.Mvc
 
                 if (!startedValid.ContainsKey(subPropertyName))
                 {
-                    startedValid[subPropertyName] = bindingContext.ModelState.IsValidField(
-                        subPropertyName
-                    );
+                    startedValid[subPropertyName] =
+                        bindingContext.ModelState.IsValidField(subPropertyName);
                 }
 
                 if (startedValid[subPropertyName])
@@ -1213,9 +1210,8 @@ namespace System.Web.Mvc
                 object newContents
             )
             {
-                MethodInfo targetMethod = _replaceCollectionMethod.MakeGenericMethod(
-                    collectionType
-                );
+                MethodInfo targetMethod =
+                    _replaceCollectionMethod.MakeGenericMethod(collectionType);
                 targetMethod.Invoke(null, new object[] { collection, newContents });
             }
 

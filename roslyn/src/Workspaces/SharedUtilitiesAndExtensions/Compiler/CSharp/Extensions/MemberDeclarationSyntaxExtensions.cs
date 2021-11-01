@@ -217,50 +217,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     case SyntaxKind.EnumDeclaration:
                         return ((EnumDeclarationSyntax)member).WithAttributeLists(attributeLists);
                     case SyntaxKind.EnumMemberDeclaration:
-                        return ((EnumMemberDeclarationSyntax)member).WithAttributeLists(
-                            attributeLists
-                        );
+                        return (
+                            (EnumMemberDeclarationSyntax)member
+                        ).WithAttributeLists(attributeLists);
                     case SyntaxKind.ClassDeclaration:
                     case SyntaxKind.RecordDeclaration:
                     case SyntaxKind.InterfaceDeclaration:
                     case SyntaxKind.StructDeclaration:
                         return ((TypeDeclarationSyntax)member).WithAttributeLists(attributeLists);
                     case SyntaxKind.DelegateDeclaration:
-                        return ((DelegateDeclarationSyntax)member).WithAttributeLists(
-                            attributeLists
-                        );
+                        return (
+                            (DelegateDeclarationSyntax)member
+                        ).WithAttributeLists(attributeLists);
                     case SyntaxKind.FieldDeclaration:
                         return ((FieldDeclarationSyntax)member).WithAttributeLists(attributeLists);
                     case SyntaxKind.EventFieldDeclaration:
-                        return ((EventFieldDeclarationSyntax)member).WithAttributeLists(
-                            attributeLists
-                        );
+                        return (
+                            (EventFieldDeclarationSyntax)member
+                        ).WithAttributeLists(attributeLists);
                     case SyntaxKind.ConstructorDeclaration:
-                        return ((ConstructorDeclarationSyntax)member).WithAttributeLists(
-                            attributeLists
-                        );
+                        return (
+                            (ConstructorDeclarationSyntax)member
+                        ).WithAttributeLists(attributeLists);
                     case SyntaxKind.DestructorDeclaration:
-                        return ((DestructorDeclarationSyntax)member).WithAttributeLists(
-                            attributeLists
-                        );
+                        return (
+                            (DestructorDeclarationSyntax)member
+                        ).WithAttributeLists(attributeLists);
                     case SyntaxKind.PropertyDeclaration:
-                        return ((PropertyDeclarationSyntax)member).WithAttributeLists(
-                            attributeLists
-                        );
+                        return (
+                            (PropertyDeclarationSyntax)member
+                        ).WithAttributeLists(attributeLists);
                     case SyntaxKind.EventDeclaration:
                         return ((EventDeclarationSyntax)member).WithAttributeLists(attributeLists);
                     case SyntaxKind.IndexerDeclaration:
-                        return ((IndexerDeclarationSyntax)member).WithAttributeLists(
-                            attributeLists
-                        );
+                        return (
+                            (IndexerDeclarationSyntax)member
+                        ).WithAttributeLists(attributeLists);
                     case SyntaxKind.OperatorDeclaration:
-                        return ((OperatorDeclarationSyntax)member).WithAttributeLists(
-                            attributeLists
-                        );
+                        return (
+                            (OperatorDeclarationSyntax)member
+                        ).WithAttributeLists(attributeLists);
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        return ((ConversionOperatorDeclarationSyntax)member).WithAttributeLists(
-                            attributeLists
-                        );
+                        return (
+                            (ConversionOperatorDeclarationSyntax)member
+                        ).WithAttributeLists(attributeLists);
                     case SyntaxKind.MethodDeclaration:
                         return ((MethodDeclarationSyntax)member).WithAttributeLists(attributeLists);
                     case SyntaxKind.IncompleteMember:
@@ -378,9 +378,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     case SyntaxKind.OperatorDeclaration:
                         return ((OperatorDeclarationSyntax)memberDeclaration).WithBody(body);
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        return ((ConversionOperatorDeclarationSyntax)memberDeclaration).WithBody(
-                            body
-                        );
+                        return (
+                            (ConversionOperatorDeclarationSyntax)memberDeclaration
+                        ).WithBody(body);
                     case SyntaxKind.ConstructorDeclaration:
                         return ((ConstructorDeclarationSyntax)memberDeclaration).WithBody(body);
                     case SyntaxKind.DestructorDeclaration:

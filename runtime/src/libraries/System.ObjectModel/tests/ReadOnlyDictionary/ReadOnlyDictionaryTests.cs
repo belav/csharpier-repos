@@ -42,12 +42,14 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
-                expectedArr
-            );
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
-                dummyExpectedDict
-            );
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<
+                int,
+                string
+            >(expectedArr);
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<
+                int,
+                string
+            >(dummyExpectedDict);
             IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
                 int,
                 string
@@ -90,12 +92,14 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
-                expectedArr
-            );
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
-                dummyExpectedDict
-            );
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<
+                int,
+                string
+            >(expectedArr);
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<
+                int,
+                string
+            >(dummyExpectedDict);
             IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
                 int,
                 string
@@ -118,12 +122,14 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
-                expectedArr
-            );
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
-                dummyExpectedDict
-            );
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<
+                int,
+                string
+            >(expectedArr);
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<
+                int,
+                string
+            >(dummyExpectedDict);
             IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
                 int,
                 string
@@ -145,12 +151,14 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
-                expectedArr
-            );
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
-                dummyExpectedDict
-            );
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<
+                int,
+                string
+            >(expectedArr);
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<
+                int,
+                string
+            >(dummyExpectedDict);
             IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
                 int,
                 string
@@ -172,12 +180,14 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
-                expectedArr
-            );
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
-                dummyExpectedDict
-            );
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<
+                int,
+                string
+            >(expectedArr);
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<
+                int,
+                string
+            >(dummyExpectedDict);
             IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
                 int,
                 string
@@ -195,9 +205,10 @@ namespace System.Collections.ObjectModel.Tests
             {
                 new KeyValuePair<int, string>(1, "one")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
-                expectedArr
-            );
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<
+                int,
+                string
+            >(expectedArr);
             IDictionary dictionary = new ReadOnlyDictionary<int, string>(dummyExpectedDict);
             Assert.Null(dictionary[2]);
         }
@@ -216,12 +227,14 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
-                expectedArr
-            );
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
-                dummyExpectedDict
-            );
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<
+                int,
+                string
+            >(expectedArr);
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<
+                int,
+                string
+            >(dummyExpectedDict);
             IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
                 int,
                 string
@@ -244,12 +257,14 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
-                expectedArr
-            );
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
-                dummyExpectedDict
-            );
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<
+                int,
+                string
+            >(expectedArr);
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<
+                int,
+                string
+            >(dummyExpectedDict);
             IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
                 int,
                 string
@@ -272,12 +287,14 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(4, "four"),
                 new KeyValuePair<int, string>(5, "five")
             };
-            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
-                expectedArr
-            );
-            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<int, string>(
-                dummyExpectedDict
-            );
+            DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<
+                int,
+                string
+            >(expectedArr);
+            ReadOnlyDictionary<int, string> dictionary = new ReadOnlyDictionary<
+                int,
+                string
+            >(dummyExpectedDict);
             IReadOnlyDictionary_T_Test<int, string> helper = new IReadOnlyDictionary_T_Test<
                 int,
                 string
@@ -304,9 +321,8 @@ namespace System.Collections.ObjectModel.Tests
                 new Dictionary<int, int> { { 1, 2 }, { 2, 4 }, { 3, 6 } }
             );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(dict);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                dict
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(dict);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State

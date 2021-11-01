@@ -27,9 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             {
                 var controllerType = controllerModel.ControllerType.AsType();
 
-                var viewDataProperties = ViewDataAttributePropertyProvider.GetViewDataProperties(
-                    controllerType
-                );
+                var viewDataProperties =
+                    ViewDataAttributePropertyProvider.GetViewDataProperties(controllerType);
                 if (viewDataProperties == null)
                 {
                     continue;

@@ -72,9 +72,17 @@ namespace BuildValidator
                 )
             };
             rootCommand.Handler = CommandHandler.Create(
-                new Func<string[], string[]?, string, string[]?, bool, bool, bool, string, int>(
-                    HandleCommand
-                )
+                new Func<
+                    string[],
+                    string[]?,
+                    string,
+                    string[]?,
+                    bool,
+                    bool,
+                    bool,
+                    string,
+                    int
+                >(HandleCommand)
             );
             return rootCommand.Invoke(args);
         }

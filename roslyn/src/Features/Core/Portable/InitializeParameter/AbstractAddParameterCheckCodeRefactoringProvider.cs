@@ -224,9 +224,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                     .ConfigureAwait(false);
 
                 var firstParameterNode = root.FindNode(parameterSpan) as TParameterSyntax;
-                var functionDeclaration = firstParameterNode.FirstAncestorOrSelf(
-                    _isFunctionDeclarationFunc
-                );
+                var functionDeclaration =
+                    firstParameterNode.FirstAncestorOrSelf(_isFunctionDeclarationFunc);
 
                 var generator = SyntaxGenerator.GetGenerator(document);
                 var parameterNodes = generator.GetParameters(functionDeclaration);

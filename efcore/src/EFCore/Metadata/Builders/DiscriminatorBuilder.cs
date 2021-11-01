@@ -51,9 +51,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         {
             if (configurationSource == ConfigurationSource.Explicit)
             {
-                ((IMutableEntityType)EntityTypeBuilder.Metadata).SetDiscriminatorMappingComplete(
-                    complete
-                );
+                (
+                    (IMutableEntityType)EntityTypeBuilder.Metadata
+                ).SetDiscriminatorMappingComplete(complete);
             }
             else
             {

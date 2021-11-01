@@ -1043,9 +1043,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (
                         currType
-                            .InterfacesAndTheirBaseInterfacesWithDefinitionUseSiteDiagnostics(
-                                ref useSiteInfo
-                            )
+                            .InterfacesAndTheirBaseInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
                             .ContainsKey(interfaceType)
                     )
                     {
@@ -1276,9 +1274,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 SymbolAndDiagnostics symbolAndDiagnostics =
-                    implementingType.FindImplementationForInterfaceMemberInNonInterfaceWithDiagnostics(
-                        interfaceAccessor
-                    );
+                    implementingType.FindImplementationForInterfaceMemberInNonInterfaceWithDiagnostics(interfaceAccessor);
 
                 if (symbolAndDiagnostics.Symbol is object)
                 {
@@ -1575,9 +1571,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         {
                             Debug.Assert(implementations.Count == 1);
                             bases =
-                                previousContainingType.InterfacesAndTheirBaseInterfacesWithDefinitionUseSiteDiagnostics(
-                                    ref useSiteInfo
-                                );
+                                previousContainingType.InterfacesAndTheirBaseInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
                             implementations[i] = (methodSet, bases);
                         }
 
@@ -1597,9 +1591,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (implementations.Count != 0)
                     {
                         MultiDictionary<NamedTypeSymbol, NamedTypeSymbol> bases =
-                            interfaceType.InterfacesAndTheirBaseInterfacesWithDefinitionUseSiteDiagnostics(
-                                ref useSiteInfo
-                            );
+                            interfaceType.InterfacesAndTheirBaseInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
 
                         for (int i = implementations.Count - 1; i >= 0; i--)
                         {
@@ -1677,9 +1669,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (!containingType.Equals(interfaceType, TypeCompareKind.ConsiderEverything))
                     {
-                        interfaceMember = interfaceMember.OriginalDefinition.SymbolAsMember(
-                            interfaceType
-                        );
+                        interfaceMember =
+                            interfaceMember.OriginalDefinition.SymbolAsMember(interfaceType);
                     }
 
                     return new MultiDictionary<Symbol, Symbol>.ValueSet(interfaceMember);

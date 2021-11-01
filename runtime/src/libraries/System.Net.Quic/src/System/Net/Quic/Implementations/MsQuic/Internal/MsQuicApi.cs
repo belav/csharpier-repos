@@ -169,9 +169,7 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                     )
                     {
                         MsQuicOpenDelegate msQuicOpen =
-                            Marshal.GetDelegateForFunctionPointer<MsQuicOpenDelegate>(
-                                msQuicOpenAddress
-                            );
+                            Marshal.GetDelegateForFunctionPointer<MsQuicOpenDelegate>(msQuicOpenAddress);
                         uint status = msQuicOpen(out NativeApi* vtable);
                         if (MsQuicStatusHelper.SuccessfulStatusCode(status))
                         {

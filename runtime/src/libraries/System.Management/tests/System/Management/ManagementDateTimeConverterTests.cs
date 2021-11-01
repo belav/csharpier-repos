@@ -30,9 +30,8 @@ namespace System.Management.Tests
             string dmtfFromDateTimeMinValue = ManagementDateTimeConverter.ToDmtfDateTime(
                 DateTime.MinValue
             );
-            DateTime convertedDate = ManagementDateTimeConverter.ToDateTime(
-                dmtfFromDateTimeMinValue
-            );
+            DateTime convertedDate =
+                ManagementDateTimeConverter.ToDateTime(dmtfFromDateTimeMinValue);
             Assert.Equal(DateTimeKind.Unspecified, convertedDate.Kind);
             Assert.Equal(DateTime.MinValue, convertedDate);
         }
@@ -48,9 +47,8 @@ namespace System.Management.Tests
             Assert.Equal(timeSpan, convertedTimeSpan);
 
             // Converting System.TimeSpan to DMTF time interval format
-            string convertedDmtfTimeInterval = ManagementDateTimeConverter.ToDmtfTimeInterval(
-                timeSpan
-            );
+            string convertedDmtfTimeInterval =
+                ManagementDateTimeConverter.ToDmtfTimeInterval(timeSpan);
             Assert.Equal(dmtfTimeInterval, convertedDmtfTimeInterval);
         }
     }

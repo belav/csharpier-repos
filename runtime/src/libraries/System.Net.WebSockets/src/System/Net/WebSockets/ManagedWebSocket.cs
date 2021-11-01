@@ -984,9 +984,8 @@ namespace System.Net.WebSockets
                             }
                         }
 
-                        string? headerErrorMessage = TryParseMessageHeaderFromReceiveBuffer(
-                            out header
-                        );
+                        string? headerErrorMessage =
+                            TryParseMessageHeaderFromReceiveBuffer(out header);
                         if (headerErrorMessage != null)
                         {
                             await CloseWithReceiveErrorAndThrowAsync(

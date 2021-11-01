@@ -231,9 +231,7 @@ namespace Microsoft.EntityFrameworkCore
                             () =>
                             {
                                 using var context = new NorthwindContext(
-                                    new DbContextOptionsBuilder().UseInternalServiceProvider(
-                                        serviceProvider
-                                    ).Options
+                                    new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider).Options
                                 );
                                 Assert.Equal(91, context.Customers.Count());
                             }

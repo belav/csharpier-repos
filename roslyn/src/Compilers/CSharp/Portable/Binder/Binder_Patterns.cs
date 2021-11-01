@@ -563,9 +563,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // If the expression does not have a constant value, an error will be reported in the caller
                 if (!hasErrors && expression.ConstantValue is object)
                 {
-                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                        diagnostics
-                    );
+                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                        GetNewCompoundUseSiteInfo(diagnostics);
                     if (expression.ConstantValue == ConstantValue.Null)
                     {
                         // Pointers are value types, but they can be assigned null, so they can be matched against null.
@@ -751,9 +750,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return true;
                 }
 
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 bool? matchPossible = ExpressionOfTypeMatchesPatternType(
                     Conversions,
                     inputType,
@@ -1001,9 +999,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // We should have the right binder in the chain for a script or interactive, so we use the field for the pattern.
                         Debug.Assert(designation.SyntaxTree.Options.Kind != SourceCodeKind.Regular);
-                        GlobalExpressionVariable expressionVariableField = LookupDeclaredField(
-                            singleVariableDesignation
-                        );
+                        GlobalExpressionVariable expressionVariableField =
+                            LookupDeclaredField(singleVariableDesignation);
                         expressionVariableField.SetTypeWithAnnotations(
                             declType,
                             BindingDiagnosticBag.Discarded
@@ -1557,9 +1554,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             bool hasBaseInterface(TypeSymbol type, NamedTypeSymbol possibleBaseInterface)
             {
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 var result =
                     Compilation.Conversions.ClassifyBuiltInConversion(
                         type,
@@ -2273,9 +2269,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 {
                     Debug.Assert(candidates.Count >= 2);
-                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                        diagnostics
-                    );
+                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                        GetNewCompoundUseSiteInfo(diagnostics);
                     TypeSymbol? bestSoFar = candidates[0];
                     // first pass: select a candidate for which no other has been shown to be an improvement.
                     for (int i = 1, n = candidates.Count; i < n; i++)

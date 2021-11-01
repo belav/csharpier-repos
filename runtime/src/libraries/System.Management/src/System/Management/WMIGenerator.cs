@@ -6098,9 +6098,7 @@ namespace System.Management
                             if (codeProvType != null)
                             {
                                 cp =
-                                    (System.CodeDom.Compiler.CodeDomProvider)Activator.CreateInstance(
-                                        codeProvType
-                                    );
+                                    (System.CodeDom.Compiler.CodeDomProvider)Activator.CreateInstance(codeProvType);
                                 bSucceeded = true;
                             }
                         }
@@ -6123,9 +6121,7 @@ namespace System.Management
                             if (codeProvType != null)
                             {
                                 cp =
-                                    (System.CodeDom.Compiler.CodeDomProvider)Activator.CreateInstance(
-                                        codeProvType
-                                    );
+                                    (System.CodeDom.Compiler.CodeDomProvider)Activator.CreateInstance(codeProvType);
                                 bSucceeded = true;
                             }
                         }

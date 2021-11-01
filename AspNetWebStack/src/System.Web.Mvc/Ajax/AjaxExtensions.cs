@@ -168,9 +168,8 @@ namespace System.Web.Mvc.Ajax
         )
         {
             RouteValueDictionary newValues = TypeHelper.ObjectToDictionary(routeValues);
-            RouteValueDictionary newAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(
-                htmlAttributes
-            );
+            RouteValueDictionary newAttributes =
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
             return ActionLink(
                 ajaxHelper,
                 linkText,
@@ -252,9 +251,8 @@ namespace System.Web.Mvc.Ajax
         )
         {
             RouteValueDictionary newValues = TypeHelper.ObjectToDictionary(routeValues);
-            RouteValueDictionary newAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(
-                htmlAttributes
-            );
+            RouteValueDictionary newAttributes =
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
             return ActionLink(
                 ajaxHelper,
                 linkText,
@@ -445,9 +443,8 @@ namespace System.Web.Mvc.Ajax
         )
         {
             RouteValueDictionary newValues = new RouteValueDictionary(routeValues);
-            RouteValueDictionary newAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(
-                htmlAttributes
-            );
+            RouteValueDictionary newAttributes =
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
             return BeginForm(
                 ajaxHelper,
                 actionName,
@@ -538,9 +535,8 @@ namespace System.Web.Mvc.Ajax
             object htmlAttributes
         )
         {
-            RouteValueDictionary newAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(
-                htmlAttributes
-            );
+            RouteValueDictionary newAttributes =
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
             return BeginRouteForm(
                 ajaxHelper,
                 routeName,

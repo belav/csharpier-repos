@@ -88,9 +88,8 @@ namespace System.Net.Http
                 }
                 else
                 {
-                    CancellationTokenRegistration ctr = _connection.RegisterCancellation(
-                        cancellationToken
-                    );
+                    CancellationTokenRegistration ctr =
+                        _connection.RegisterCancellation(cancellationToken);
                     try
                     {
                         bytesRead = await readTask.ConfigureAwait(false);
@@ -181,9 +180,8 @@ namespace System.Net.Http
             )
             {
                 Debug.Assert(_connection != null);
-                CancellationTokenRegistration ctr = _connection.RegisterCancellation(
-                    cancellationToken
-                );
+                CancellationTokenRegistration ctr =
+                    _connection.RegisterCancellation(cancellationToken);
                 try
                 {
                     await copyTask.ConfigureAwait(false);

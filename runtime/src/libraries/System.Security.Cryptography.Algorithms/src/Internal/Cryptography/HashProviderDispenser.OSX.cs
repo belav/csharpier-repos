@@ -46,9 +46,8 @@ namespace Internal.Cryptography
                 Span<byte> destination
             )
             {
-                Interop.AppleCrypto.PAL_HashAlgorithm algorithm = HashAlgorithmToPal(
-                    hashAlgorithmId
-                );
+                Interop.AppleCrypto.PAL_HashAlgorithm algorithm =
+                    HashAlgorithmToPal(hashAlgorithmId);
 
                 fixed (byte* pSource = source)
                 fixed (byte* pDestination = destination)

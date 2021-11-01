@@ -166,9 +166,8 @@ namespace System.Web.Http.WebHost
             // Arrange
             byte[] expectedCertificateBytes = Convert.FromBase64String(Base64Certificate);
             HttpContextBase webContext = CreateDummyWebContext();
-            HttpClientCertificate clientCertificate = CreateHttpClientCertificate(
-                expectedCertificateBytes
-            );
+            HttpClientCertificate clientCertificate =
+                CreateHttpClientCertificate(expectedCertificateBytes);
             HttpRequestBase webRequest = CreateStubWebRequest(clientCertificate);
 
             using (HttpRequestMessage request = CreateRequest())

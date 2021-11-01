@@ -801,9 +801,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             // Subquery case
             var subqueryTranslation =
-                _queryableMethodTranslatingExpressionVisitor.TranslateSubquery(
-                    methodCallExpression
-                );
+                _queryableMethodTranslatingExpressionVisitor.TranslateSubquery(methodCallExpression);
             if (subqueryTranslation != null)
             {
                 static bool IsAggregateResultWithCustomShaper(MethodInfo method)

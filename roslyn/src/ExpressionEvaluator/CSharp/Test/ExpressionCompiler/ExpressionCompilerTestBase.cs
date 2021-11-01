@@ -694,9 +694,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             var peCompilation = runtime.Modules
                 .SelectAsArray(m => m.MetadataBlock)
                 .ToCompilation(default(Guid), MakeAssemblyReferencesKind.AllAssemblies);
-            var peMethod = peCompilation.GlobalNamespace.GetMember<PEMethodSymbol>(
-                qualifiedMethodName
-            );
+            var peMethod =
+                peCompilation.GlobalNamespace.GetMember<PEMethodSymbol>(qualifiedMethodName);
             var peModule = (PEModuleSymbol)peMethod.ContainingModule;
 
             var symReader =

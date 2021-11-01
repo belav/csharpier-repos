@@ -317,9 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 var methodGroup = (BoundMethodGroup)expr;
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 var resolution = this.ResolveMethodGroup(
                     methodGroup,
                     analyzedArguments: null,
@@ -1514,9 +1513,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     var accessThroughType = this.GetAccessThroughType(receiver);
                     bool failedThroughTypeCheck;
-                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                        diagnostics
-                    );
+                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                        GetNewCompoundUseSiteInfo(diagnostics);
                     bool isAccessible = this.IsAccessible(
                         setMethod,
                         accessThroughType,
@@ -1600,9 +1598,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var accessThroughType = this.GetAccessThroughType(receiver);
                     bool failedThroughTypeCheck;
-                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                        diagnostics
-                    );
+                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                        GetNewCompoundUseSiteInfo(diagnostics);
                     bool isAccessible = this.IsAccessible(
                         getMethod,
                         accessThroughType,

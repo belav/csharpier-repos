@@ -491,9 +491,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     rsa.ImportParameters(exportableKey.ExportParameters(true));
                 }
                 using (
-                    X509Certificate2 certWithEphemeralKey = publicCertificate.CopyWithPrivateKey(
-                        rsa
-                    )
+                    X509Certificate2 certWithEphemeralKey =
+                        publicCertificate.CopyWithPrivateKey(rsa)
                 )
                 {
                     ContentInfo content = new ContentInfo(new byte[] { 1, 2, 3 });
@@ -525,9 +524,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     dsa.ImportParameters(exportableKey.ExportParameters(true));
                 }
                 using (
-                    X509Certificate2 certWithEphemeralKey = publicCertificate.CopyWithPrivateKey(
-                        dsa
-                    )
+                    X509Certificate2 certWithEphemeralKey =
+                        publicCertificate.CopyWithPrivateKey(dsa)
                 )
                 {
                     ContentInfo content = new ContentInfo(new byte[] { 1, 2, 3 });
@@ -562,9 +560,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                     ecdsa.ImportParameters(exportableKey.ExportParameters(true));
                 }
                 using (
-                    X509Certificate2 certWithEphemeralKey = publicCertificate.CopyWithPrivateKey(
-                        ecdsa
-                    )
+                    X509Certificate2 certWithEphemeralKey =
+                        publicCertificate.CopyWithPrivateKey(ecdsa)
                 )
                 {
                     ContentInfo content = new ContentInfo(new byte[] { 1, 2, 3 });

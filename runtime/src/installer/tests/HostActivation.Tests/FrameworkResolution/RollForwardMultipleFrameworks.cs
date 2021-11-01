@@ -1428,9 +1428,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             RunTest(
                     runtimeConfig =>
                         runtimeConfig.WithFramework(
-                            new RuntimeConfig.Framework(MiddleWare, "2.1.0").WithRollForward(
-                                appRollForward
-                            )
+                            new RuntimeConfig.Framework(
+                                MiddleWare,
+                                "2.1.0"
+                            ).WithRollForward(appRollForward)
                         ),
                     dotnetCustomizer =>
                         dotnetCustomizer
@@ -1496,9 +1497,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             RunTest(
                     runtimeConfig =>
                         runtimeConfig.WithFramework(
-                            new RuntimeConfig.Framework(HighWare, "7.3.1").WithRollForward(
-                                appRollForward
-                            )
+                            new RuntimeConfig.Framework(
+                                HighWare,
+                                "7.3.1"
+                            ).WithRollForward(appRollForward)
                         ),
                     dotnetCustomizer =>
                     {

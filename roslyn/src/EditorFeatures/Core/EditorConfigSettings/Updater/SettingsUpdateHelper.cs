@@ -234,9 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                     }
                     else
                     {
-                        var (fileName, splicedFileExtensions) = ParseHeaderParts(
-                            mostRecentHeaderText
-                        );
+                        var (fileName, splicedFileExtensions) =
+                            ParseHeaderParts(mostRecentHeaderText);
                         if (
                             (relativePath.IsEmpty() || new Regex(fileName).IsMatch(relativePath))
                             && HeaderMatchesLanguageRequirements(language, splicedFileExtensions)

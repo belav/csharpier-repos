@@ -244,9 +244,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                     _sb.Append("optionsBuilder");
 
-                    var useProviderCall = _providerConfigurationCodeGenerator.GenerateUseProvider(
-                        connectionString
-                    );
+                    var useProviderCall =
+                        _providerConfigurationCodeGenerator.GenerateUseProvider(connectionString);
 
                     _sb.Append(_code.Fragment(useProviderCall)).AppendLine(";");
                 }

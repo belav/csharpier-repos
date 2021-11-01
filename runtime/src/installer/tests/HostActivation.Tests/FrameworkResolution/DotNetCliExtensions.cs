@@ -80,9 +80,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             {
                 string runtimeConfigPath = Path.Combine(_path, _name + ".runtimeconfig.json");
                 _backup.Backup(runtimeConfigPath);
-                RuntimeConfig runtimeConfig = HostActivation.RuntimeConfig.FromFile(
-                    runtimeConfigPath
-                );
+                RuntimeConfig runtimeConfig =
+                    HostActivation.RuntimeConfig.FromFile(runtimeConfigPath);
                 runtimeConfigCustomizer(runtimeConfig);
                 runtimeConfig.Save();
 

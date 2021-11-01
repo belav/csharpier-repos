@@ -82,9 +82,8 @@ namespace Microsoft.CodeAnalysis.Options
                 () => optionProviders.SelectMany(p => p.Value.Options).ToImmutableHashSet()
             );
             _optionSerializerProviders = optionSerializers.ToImmutableArray();
-            _serializableOptionsByLanguage = CreateLazySerializableOptionsByLanguage(
-                optionProviders
-            );
+            _serializableOptionsByLanguage =
+                CreateLazySerializableOptionsByLanguage(optionProviders);
             _forceComputedLanguages = new HashSet<string>();
             _registeredWorkspaces = ImmutableArray<Workspace>.Empty;
 

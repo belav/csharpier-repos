@@ -230,9 +230,8 @@ namespace System.Net.Http
                         {
                             if (linkedRegistration.Equals(default))
                             {
-                                linkedRegistration = RegisterRequestBodyCancellation(
-                                    cancellationToken
-                                );
+                                linkedRegistration =
+                                    RegisterRequestBodyCancellation(cancellationToken);
                             }
 
                             await vt.ConfigureAwait(false);

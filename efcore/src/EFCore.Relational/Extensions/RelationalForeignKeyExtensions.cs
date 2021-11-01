@@ -86,9 +86,8 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             var propertyNames = foreignKey.Properties.GetColumnNames(storeObject);
-            var principalPropertyNames = foreignKey.PrincipalKey.Properties.GetColumnNames(
-                principalStoreObject
-            );
+            var principalPropertyNames =
+                foreignKey.PrincipalKey.Properties.GetColumnNames(principalStoreObject);
             if (propertyNames == null || principalPropertyNames == null)
             {
                 return null;
@@ -118,13 +117,10 @@ namespace Microsoft.EntityFrameworkCore
                             == otherForeignKey.PrincipalEntityType.GetSchema()
                     )
                     {
-                        var otherColumnNames = otherForeignKey.Properties.GetColumnNames(
-                            storeObject
-                        );
+                        var otherColumnNames =
+                            otherForeignKey.Properties.GetColumnNames(storeObject);
                         var otherPrincipalColumnNames =
-                            otherForeignKey.PrincipalKey.Properties.GetColumnNames(
-                                principalStoreObject
-                            );
+                            otherForeignKey.PrincipalKey.Properties.GetColumnNames(principalStoreObject);
                         if (
                             otherColumnNames != null
                             && otherPrincipalColumnNames != null
@@ -305,9 +301,9 @@ namespace Microsoft.EntityFrameworkCore
             this IMutableForeignKey foreignKey,
             in StoreObjectIdentifier storeObject
         ) =>
-            (IMutableForeignKey?)((IReadOnlyForeignKey)foreignKey).FindSharedObjectRootForeignKey(
-                storeObject
-            );
+            (IMutableForeignKey?)(
+                (IReadOnlyForeignKey)foreignKey
+            ).FindSharedObjectRootForeignKey(storeObject);
 
         /// <summary>
         ///     <para>
@@ -345,8 +341,8 @@ namespace Microsoft.EntityFrameworkCore
             this IForeignKey foreignKey,
             in StoreObjectIdentifier storeObject
         ) =>
-            (IForeignKey?)((IReadOnlyForeignKey)foreignKey).FindSharedObjectRootForeignKey(
-                storeObject
-            );
+            (IForeignKey?)(
+                (IReadOnlyForeignKey)foreignKey
+            ).FindSharedObjectRootForeignKey(storeObject);
     }
 }

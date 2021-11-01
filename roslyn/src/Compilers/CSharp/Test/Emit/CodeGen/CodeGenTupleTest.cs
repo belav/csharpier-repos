@@ -36270,9 +36270,8 @@ unsafe struct Z
                     (TupleErrorFieldSymbol)originalField.CorrespondingTupleField;
                 verifyIndexAndDefaultElement(originalDefaultField, i, isDefaultElement: true);
 
-                newDefaultField = (TupleErrorFieldSymbol)originalDefaultField.AsMember(
-                    nullableEnabledTuple
-                );
+                newDefaultField =
+                    (TupleErrorFieldSymbol)originalDefaultField.AsMember(nullableEnabledTuple);
 
                 verifyIndexAndDefaultElement(newDefaultField, i, isDefaultElement: true);
                 verifyDefaultFieldType(newDefaultField, i, nullabilityString);

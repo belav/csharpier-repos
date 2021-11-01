@@ -797,9 +797,8 @@ namespace Newtonsoft.Json.Tests.Converters
 
             string json2 = JsonConvert.SerializeObject(doc1, Formatting.Indented);
 
-            DateTimeOffsetContainer x2 = JsonConvert.DeserializeObject<DateTimeOffsetContainer>(
-                json2
-            );
+            DateTimeOffsetContainer x2 =
+                JsonConvert.DeserializeObject<DateTimeOffsetContainer>(json2);
 
             Assert.AreEqual(x.Date, x2.Date);
         }
@@ -2896,9 +2895,8 @@ namespace Newtonsoft.Json.Tests.Converters
             Newtonsoft.Json.JsonSerializerSettings settings =
                 new Newtonsoft.Json.JsonSerializerSettings();
             settings.Converters.Add(new Newtonsoft.Json.Converters.XmlNodeConverter());
-            Newtonsoft.Json.JsonSerializer serializer = Newtonsoft.Json.JsonSerializer.Create(
-                settings
-            );
+            Newtonsoft.Json.JsonSerializer serializer =
+                Newtonsoft.Json.JsonSerializer.Create(settings);
             using (
                 Newtonsoft.Json.JsonTextReader reader = new Newtonsoft.Json.JsonTextReader(
                     new System.IO.StreamReader(json)

@@ -490,9 +490,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var whenTrue = evaluationNode.Next;
                     var whenFalse = testNode.WhenFalse;
-                    bool canEliminateEvaluationNode = !this._dagNodeLabels.ContainsKey(
-                        evaluationNode
-                    );
+                    bool canEliminateEvaluationNode =
+                        !this._dagNodeLabels.ContainsKey(evaluationNode);
 
                     if (canEliminateEvaluationNode)
                         loweredNodes.Add(evaluationNode);

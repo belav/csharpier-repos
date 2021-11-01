@@ -39,9 +39,8 @@ namespace System.Net.Http
         [Fact]
         public void GetStream_ThrowsOnNoContentDisposition()
         {
-            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(
-                ValidPath
-            );
+            MultipartFormDataStreamProvider provider =
+                new MultipartFormDataStreamProvider(ValidPath);
             HttpContent content = new StringContent(String.Empty);
             HttpContentHeaders headers = FormattingUtilities.CreateEmptyContentHeaders();
 
@@ -66,9 +65,8 @@ namespace System.Net.Http
                 content.Add(new StringContent("Content 1"), "NoFile");
                 content.Add(new StringContent("Content 2"), "File", "Filename");
 
-                MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(
-                    tempPath
-                );
+                MultipartFormDataStreamProvider provider =
+                    new MultipartFormDataStreamProvider(tempPath);
                 stream0 = provider.GetStream(content, content.ElementAt(0).Headers);
                 stream1 = provider.GetStream(content, content.ElementAt(1).Headers);
 
@@ -115,9 +113,8 @@ namespace System.Net.Http
                 multipartContent.Add(new StringContent(content), formName);
             }
 
-            MultipartFormDataStreamProvider provider = new MultipartFormDataStreamProvider(
-                ValidPath
-            );
+            MultipartFormDataStreamProvider provider =
+                new MultipartFormDataStreamProvider(ValidPath);
             foreach (HttpContent content in multipartContent)
             {
                 provider.Contents.Add(content);

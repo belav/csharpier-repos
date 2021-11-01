@@ -13,9 +13,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 {
     internal unsafe partial class ResponseStreamAsyncResult : IAsyncResult, IDisposable
     {
-        private static readonly IOCompletionCallback IOCallback = new IOCompletionCallback(
-            Callback
-        );
+        private static readonly IOCompletionCallback IOCallback =
+            new IOCompletionCallback(Callback);
 
         private SafeNativeOverlapped? _overlapped;
         private HttpApiTypes.HTTP_DATA_CHUNK[]? _dataChunks;
@@ -37,9 +36,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             var cancellationRegistration = default(CancellationTokenRegistration);
             if (cancellationToken.CanBeCanceled)
             {
-                cancellationRegistration = _responseStream.RequestContext.RegisterForCancellation(
-                    cancellationToken
-                );
+                cancellationRegistration =
+                    _responseStream.RequestContext.RegisterForCancellation(cancellationToken);
             }
             _cancellationToken = cancellationToken;
             _cancellationRegistration = cancellationRegistration;
@@ -356,9 +354,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         )
         {
             var asyncResult =
-                (ResponseStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                    nativeOverlapped
-                )!;
+                (ResponseStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
             IOCompleted(asyncResult, errorCode, numBytes);
         }
 

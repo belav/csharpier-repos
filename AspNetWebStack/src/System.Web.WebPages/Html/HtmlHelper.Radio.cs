@@ -98,9 +98,8 @@ namespace System.Web.WebPages.Html
             if (UnobtrusiveJavaScriptEnabled)
             {
                 // Add validation attributes
-                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(
-                    name
-                );
+                var validationAttributes =
+                    _validationHelper.GetUnobtrusiveValidationAttributes(name);
                 builder.MergeAttributes(validationAttributes, replaceExisting: false);
             }
 

@@ -51,12 +51,10 @@ namespace System.Net.Http.Formatting
 
             if (returnValue == 0)
             {
-                ParsedMediaTypeHeaderValue parsedMediaType1 = new ParsedMediaTypeHeaderValue(
-                    mediaType1
-                );
-                ParsedMediaTypeHeaderValue parsedMediaType2 = new ParsedMediaTypeHeaderValue(
-                    mediaType2
-                );
+                ParsedMediaTypeHeaderValue parsedMediaType1 =
+                    new ParsedMediaTypeHeaderValue(mediaType1);
+                ParsedMediaTypeHeaderValue parsedMediaType2 =
+                    new ParsedMediaTypeHeaderValue(mediaType2);
 
                 if (!parsedMediaType1.TypesEqual(ref parsedMediaType2))
                 {

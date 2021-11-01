@@ -125,12 +125,10 @@ namespace Microsoft.CodeAnalysis.Rename
             {
                 // TODO: Detect naming conflicts ahead of time
                 var documentWithNewName = document.WithName(newDocumentName);
-                var originalSymbolName = WorkspacePathUtilities.GetTypeNameFromDocumentName(
-                    document
-                );
-                var newTypeName = WorkspacePathUtilities.GetTypeNameFromDocumentName(
-                    documentWithNewName
-                );
+                var originalSymbolName =
+                    WorkspacePathUtilities.GetTypeNameFromDocumentName(document);
+                var newTypeName =
+                    WorkspacePathUtilities.GetTypeNameFromDocumentName(documentWithNewName);
 
                 if (originalSymbolName is null || newTypeName is null)
                 {

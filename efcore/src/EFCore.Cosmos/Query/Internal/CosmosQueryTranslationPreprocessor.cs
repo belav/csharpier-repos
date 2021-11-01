@@ -38,9 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         /// </summary>
         public override Expression NormalizeQueryableMethod(Expression query)
         {
-            query = new CosmosQueryMetadataExtractingExpressionVisitor(
-                _queryCompilationContext
-            ).Visit(query);
+            query =
+                new CosmosQueryMetadataExtractingExpressionVisitor(_queryCompilationContext).Visit(query);
             query = base.NormalizeQueryableMethod(query);
 
             return query;

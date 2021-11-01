@@ -86,9 +86,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
         bool x = o is a or b and c;
     }
 }",
-                parameters: new TestParameters(
-                    options: RequireArithmeticBinaryParenthesesForClarity
-                )
+                parameters: new TestParameters(options: RequireArithmeticBinaryParenthesesForClarity)
             );
         }
 

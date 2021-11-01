@@ -283,9 +283,8 @@ namespace System.Web.Http.Services
 
             // Get the service from DI. If we're coming up hot, this might
             // mean we end up creating the service more than once.
-            IEnumerable<object> dependencyServices = _lastKnownDependencyResolver.GetServices(
-                serviceType
-            );
+            IEnumerable<object> dependencyServices =
+                _lastKnownDependencyResolver.GetServices(serviceType);
 
             if (!_cacheMulti.TryGetValue(serviceType, out result))
             {

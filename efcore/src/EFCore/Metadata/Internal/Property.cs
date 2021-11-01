@@ -170,9 +170,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 _isNullableConfigurationSource = null;
                 if (isChanging)
                 {
-                    DeclaringEntityType.Model.ConventionDispatcher.OnPropertyNullableChanged(
-                        Builder
-                    );
+                    DeclaringEntityType.Model.ConventionDispatcher.OnPropertyNullableChanged(Builder);
                 }
 
                 return nullable;
@@ -199,17 +197,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             }
 
-            _isNullableConfigurationSource = configurationSource.Max(
-                _isNullableConfigurationSource
-            );
+            _isNullableConfigurationSource =
+                configurationSource.Max(_isNullableConfigurationSource);
 
             _isNullable = nullable;
 
             if (isChanging)
             {
-                return DeclaringEntityType.Model.ConventionDispatcher.OnPropertyNullableChanged(
-                    Builder
-                );
+                return DeclaringEntityType.Model.ConventionDispatcher.OnPropertyNullableChanged(Builder);
             }
 
             return nullable;

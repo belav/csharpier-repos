@@ -4180,9 +4180,8 @@ namespace System.CodeDom.Compiler.Tests
             PerformActionWithOutput(
                 writer =>
                 {
-                    var parameters = new CodeParameterDeclarationExpressionCollection(
-                        parametersArray
-                    );
+                    var parameters =
+                        new CodeParameterDeclarationExpressionCollection(parametersArray);
                     generator.OutputParametersAction = (actualParameters, baseMethod) =>
                         baseMethod(actualParameters);
                     int generateParameterDeclarationExpressionCallCount = 0;

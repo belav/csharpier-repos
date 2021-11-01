@@ -198,9 +198,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""3""
 ]";
 
-            IImmutableQueue<string> l = JsonConvert.DeserializeObject<IImmutableQueue<string>>(
-                json
-            );
+            IImmutableQueue<string> l = JsonConvert.DeserializeObject<
+                IImmutableQueue<string>
+            >(json);
 
             Assert.AreEqual(3, l.Count());
             Assert.AreEqual("One", l.ElementAt(0));
@@ -256,9 +256,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""3""
 ]";
 
-            IImmutableStack<string> l = JsonConvert.DeserializeObject<IImmutableStack<string>>(
-                json
-            );
+            IImmutableStack<string> l = JsonConvert.DeserializeObject<
+                IImmutableStack<string>
+            >(json);
 
             Assert.AreEqual(3, l.Count());
             Assert.AreEqual("3", l.ElementAt(0));
@@ -294,9 +294,9 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""3""
 ]";
 
-            ImmutableHashSet<string> l = JsonConvert.DeserializeObject<ImmutableHashSet<string>>(
-                json
-            );
+            ImmutableHashSet<string> l = JsonConvert.DeserializeObject<
+                ImmutableHashSet<string>
+            >(json);
 
             Assert.AreEqual(3, l.Count());
             Assert.IsTrue(l.Contains("3"));

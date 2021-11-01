@@ -54,9 +54,8 @@ namespace System.CommandLine.Binding
             }
 
             var paramDesc = ctorDesc.ParameterDescriptors[parameter.Position];
-            ConstructorArgumentBindingSources[paramDesc] = new SpecificSymbolValueSource(
-                valueDescriptor
-            );
+            ConstructorArgumentBindingSources[paramDesc] =
+                new SpecificSymbolValueSource(valueDescriptor);
         }
 
         public void BindMemberFromValue(PropertyInfo property, IValueDescriptor valueDescriptor)
@@ -74,9 +73,8 @@ namespace System.CommandLine.Binding
                 );
             }
 
-            MemberBindingSources[propertyDescriptor] = new SpecificSymbolValueSource(
-                valueDescriptor
-            );
+            MemberBindingSources[propertyDescriptor] =
+                new SpecificSymbolValueSource(valueDescriptor);
         }
 
         public object? CreateInstance(BindingContext bindingContext)
@@ -342,9 +340,8 @@ namespace System.CommandLine.Binding
             if (valueDescriptor.ValueType != parentType) // Recursive models aren't allowed
             {
                 var binder = bindingContext.GetModelBinder(valueDescriptor);
-                var (success, newInstance, usedNonDefaults) = binder.CreateInstanceInternal(
-                    bindingContext
-                );
+                var (success, newInstance, usedNonDefaults) =
+                    binder.CreateInstanceInternal(bindingContext);
                 if (success)
                 {
                     return (

@@ -82,13 +82,10 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
             )
             {
                 var memberAccess = SyntaxFacts.GetExpressionOfInvocationExpression(current);
-                var name = (TSimpleNameSyntax)SyntaxFacts.GetNameOfMemberAccessExpression(
-                    memberAccess
-                );
+                var name =
+                    (TSimpleNameSyntax)SyntaxFacts.GetNameOfMemberAccessExpression(memberAccess);
                 var whereExpression =
-                    (TInvocationExpressionSyntax)SyntaxFacts.GetExpressionOfMemberAccessExpression(
-                        memberAccess
-                    )!;
+                    (TInvocationExpressionSyntax)SyntaxFacts.GetExpressionOfMemberAccessExpression(memberAccess)!;
                 var arguments = SyntaxFacts.GetArgumentsOfInvocationExpression(whereExpression);
                 var expression =
                     (TExpressionSyntax)SyntaxFacts.GetExpressionOfMemberAccessExpression(

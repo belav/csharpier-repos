@@ -75,9 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
                 public MockDiagnosticAnalyzer(
                     ImmutableArray<(string id, string category)> reportedDiagnosticIdsWithCategories
                 ) =>
-                    SupportedDiagnostics = CreateSupportedDiagnostics(
-                        reportedDiagnosticIdsWithCategories
-                    );
+                    SupportedDiagnostics =
+                        CreateSupportedDiagnostics(reportedDiagnosticIdsWithCategories);
 
                 public MockDiagnosticAnalyzer(string diagnosticId, string category)
                     : this(ImmutableArray.Create((diagnosticId, category))) { }

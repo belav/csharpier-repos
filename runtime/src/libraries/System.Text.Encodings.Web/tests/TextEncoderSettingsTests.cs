@@ -11,9 +11,8 @@ namespace System.Text.Encodings.Web.Tests
 {
     internal static class TextEncoderSettingsExtensions
     {
-        private static readonly Lazy<IntPtr> _lazyGetBitmapFnPtr = new Lazy<IntPtr>(
-            InitializeGetBitmapFnPtr
-        );
+        private static readonly Lazy<IntPtr> _lazyGetBitmapFnPtr =
+            new Lazy<IntPtr>(InitializeGetBitmapFnPtr);
 
         private static IntPtr InitializeGetBitmapFnPtr()
         {

@@ -504,9 +504,8 @@ public class C
                 MessageProvider.Instance.GetIdForErrorCode(420),
                 ReportDiagnostic.Suppress
             );
-            CSharpCompilationOptions option = TestOptions.ReleaseExe.WithSpecificDiagnosticOptions(
-                warnings
-            );
+            CSharpCompilationOptions option =
+                TestOptions.ReleaseExe.WithSpecificDiagnosticOptions(warnings);
             CreateCompilation(text, options: option).VerifyDiagnostics();
 
             option = TestOptions.ReleaseExe.WithGeneralDiagnosticOption(ReportDiagnostic.Error);

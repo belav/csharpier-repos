@@ -137,9 +137,8 @@ namespace System.Reflection
             }
             catch (Exception)
             {
-                assemblyFromResolveEvent = (RuntimeAssembly?)AssemblyLoadContext.DoAssemblyResolve(
-                    assemblyString
-                );
+                assemblyFromResolveEvent =
+                    (RuntimeAssembly?)AssemblyLoadContext.DoAssemblyResolve(assemblyString);
                 if (assemblyFromResolveEvent == null)
                     throw new FileLoadException(assemblyString);
                 return null;

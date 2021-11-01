@@ -182,9 +182,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             // Get all members that can be of interest and extract their MetadataTokens
             //
             Dictionary<LazyMemberInfo, MemberInfo[]> membersTable = BuildMembersTable(members!);
-            Dictionary<Lazy<ParameterInfo>, ParameterInfo>? parametersTable = BuildParametersTable(
-                parameters
-            );
+            Dictionary<Lazy<ParameterInfo>, ParameterInfo>? parametersTable =
+                BuildParametersTable(parameters);
 
             lock (_lock)
             {
@@ -706,9 +705,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 if (
                     !GenericServices.CanSpecialize(
                         specialization[i],
-                        (genericParameterConstraints![i] as Type[]).CreateTypeSpecializations(
-                            specialization
-                        ),
+                        (
+                            genericParameterConstraints![i] as Type[]
+                        ).CreateTypeSpecializations(specialization),
                         genericParameterAttributes![i]
                     )
                 )

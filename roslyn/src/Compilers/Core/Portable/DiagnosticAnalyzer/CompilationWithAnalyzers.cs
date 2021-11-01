@@ -1284,9 +1284,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                                         if (getPendingEventsOpt != null)
                                                         {
                                                             pendingEvents = getPendingEventsOpt();
-                                                            eventQueue = CreateEventsQueue(
-                                                                pendingEvents
-                                                            );
+                                                            eventQueue =
+                                                                CreateEventsQueue(pendingEvents);
                                                         }
 
                                                         linkedCancellationToken.ThrowIfCancellationRequested();
@@ -1306,9 +1305,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                                     }
                                                 }
                                                 catch (Exception e)
-                                                    when (FatalError.ReportAndPropagateUnlessCanceled(
-                                                            e
-                                                        )
+                                                    when (FatalError.ReportAndPropagateUnlessCanceled(e)
                                                     )
                                                 {
                                                     throw ExceptionUtilities.Unreachable;
@@ -1437,9 +1434,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         && !additionalFiles.IsEmpty
                     )
                     {
-                        compilationEvent = compilationStartedEvent.WithAdditionalFiles(
-                            additionalFiles
-                        );
+                        compilationEvent =
+                            compilationStartedEvent.WithAdditionalFiles(additionalFiles);
                     }
 
                     builder.Add(compilationEvent);
@@ -1924,9 +1920,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     );
                     if (effectiveDiagnostic != null)
                     {
-                        yield return suppressMessageState.ApplySourceSuppressions(
-                            effectiveDiagnostic
-                        );
+                        yield return suppressMessageState.ApplySourceSuppressions(effectiveDiagnostic);
                     }
                 }
             }

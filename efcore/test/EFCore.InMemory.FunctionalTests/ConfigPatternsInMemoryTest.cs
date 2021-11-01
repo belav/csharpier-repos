@@ -200,9 +200,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Throws<InvalidOperationException>(
                     () =>
                     {
-                        using var context = new ImplicitConfigButNoServicesBlogContext(
-                            serviceProvider
-                        );
+                        using var context =
+                            new ImplicitConfigButNoServicesBlogContext(serviceProvider);
                         context.Blogs.Add(new Blog { Name = "The Waffle Cart" });
                         context.SaveChanges();
                     }

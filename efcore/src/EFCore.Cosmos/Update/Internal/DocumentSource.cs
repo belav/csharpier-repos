@@ -331,9 +331,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
                             continue;
                         }
 
-                        var embeddedDocument = embeddedDocumentSource.GetCurrentDocument(
-                            embeddedEntry
-                        );
+                        var embeddedDocument =
+                            embeddedDocumentSource.GetCurrentDocument(embeddedEntry);
                         embeddedDocument =
                             embeddedDocument != null
                                 ? embeddedDocumentSource.UpdateDocument(

@@ -100,9 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (!hasReturnWithExpression)
                     {
-                        hasReturnWithExpression = SyntaxFacts.HasReturnWithExpression(
-                            topLevelStatement
-                        );
+                        hasReturnWithExpression =
+                            SyntaxFacts.HasReturnWithExpression(topLevelStatement);
                     }
                 }
                 else if (!hasGlobalMembers && member.Kind() != SyntaxKind.IncompleteMember)

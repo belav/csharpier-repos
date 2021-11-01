@@ -386,9 +386,8 @@ namespace System.CommandLine.Parsing
 
                             case Argument argument when argument.HasDefaultValue:
 
-                                var argumentResult = commandResult.GetOrCreateDefaultArgumentResult(
-                                    argument
-                                );
+                                var argumentResult =
+                                    commandResult.GetOrCreateDefaultArgumentResult(argument);
 
                                 commandResult.Children.Add(argumentResult);
                                 _rootCommandResult.AddToSymbolMap(argumentResult);

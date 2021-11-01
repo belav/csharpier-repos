@@ -469,9 +469,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_with_object_field(
             EntityState initialState
         ) =>
-            Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<ObjectWotty>(
-                initialState
-            );
+            Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<ObjectWotty>(initialState);
 
         private void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<TWotty>(
             EntityState initialState

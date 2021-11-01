@@ -199,9 +199,10 @@ namespace Microsoft.CodeAnalysis.Collections
             if (valueFactory is null)
                 throw new ArgumentNullException(nameof(valueFactory));
 
-            var map = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked.VolatileRead(
-                in location
-            );
+            var map = ImmutableSegmentedDictionary<
+                TKey,
+                TValue
+            >.PrivateInterlocked.VolatileRead(in location);
             if (map.IsDefault)
                 throw new ArgumentNullException(nameof(location));
 
@@ -224,9 +225,10 @@ namespace Microsoft.CodeAnalysis.Collections
             if (valueFactory is null)
                 throw new ArgumentNullException(nameof(valueFactory));
 
-            var map = ImmutableSegmentedDictionary<TKey, TValue>.PrivateInterlocked.VolatileRead(
-                in location
-            );
+            var map = ImmutableSegmentedDictionary<
+                TKey,
+                TValue
+            >.PrivateInterlocked.VolatileRead(in location);
             if (map.IsDefault)
                 throw new ArgumentNullException(nameof(location));
 

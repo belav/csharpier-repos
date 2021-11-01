@@ -129,9 +129,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         }
                         else
                         {
-                            return await GetGenerateIntoContainingNamespaceOperationsAsync(
-                                    namedType
-                                )
+                            return await GetGenerateIntoContainingNamespaceOperationsAsync(namedType)
                                 .ConfigureAwait(false);
                         }
                     }
@@ -264,9 +262,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     else
                     {
                         // False, Add Global to the Namespace
-                        namespaceToGenerateInto = AddGlobalDotToTheNamespace(
-                            namespaceToGenerateInto
-                        );
+                        namespaceToGenerateInto =
+                            AddGlobalDotToTheNamespace(namespaceToGenerateInto);
                     }
                 }
                 else

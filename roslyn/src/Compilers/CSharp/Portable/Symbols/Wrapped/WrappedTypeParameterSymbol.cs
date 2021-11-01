@@ -66,9 +66,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return _underlyingTypeParameter.IsReferenceTypeFromConstraintTypes
-                    || CalculateIsReferenceTypeFromConstraintTypes(
-                        ConstraintTypesNoUseSiteDiagnostics
-                    );
+                    || CalculateIsReferenceTypeFromConstraintTypes(ConstraintTypesNoUseSiteDiagnostics);
             }
         }
 

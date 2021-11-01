@@ -1346,9 +1346,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else if (ultimateReceiver.Kind == BoundKind.MethodGroup)
                 {
                     var methodGroup = (BoundMethodGroup)ultimateReceiver;
-                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                        diagnostics
-                    );
+                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                        GetNewCompoundUseSiteInfo(diagnostics);
                     var resolution = this.ResolveMethodGroup(
                         methodGroup,
                         analyzedArguments: null,

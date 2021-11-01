@@ -30,9 +30,8 @@ namespace Microsoft.CodeAnalysis
             var filePath = generatedSyntaxTree.FilePath;
 
             var textAndVersion = TextAndVersion.Create(generatedSourceText, VersionStamp.Create());
-            ValueSource<TextAndVersion> textSource = new ConstantValueSource<TextAndVersion>(
-                textAndVersion
-            );
+            ValueSource<TextAndVersion> textSource =
+                new ConstantValueSource<TextAndVersion>(textAndVersion);
 
             var root = generatedSyntaxTree.GetRoot(cancellationToken);
             Contract.ThrowIfNull(

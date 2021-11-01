@@ -222,9 +222,7 @@ namespace System.Formats.Cbor
                     if (
                         value <= (byte)CborAdditionalInfo.IndefiniteLength
                         && _isConformanceModeCheckEnabled
-                        && CborConformanceModeHelpers.RequireCanonicalSimpleValueEncodings(
-                            ConformanceMode
-                        )
+                        && CborConformanceModeHelpers.RequireCanonicalSimpleValueEncodings(ConformanceMode)
                     )
                     {
                         throw new CborContentException(

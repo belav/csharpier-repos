@@ -538,9 +538,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var emailInput = emailContainer.FindElement(By.TagName("input"));
             var confirmEmailContainer = appElement.FindElement(By.ClassName("confirm-email"));
             var confirmInput = confirmEmailContainer.FindElement(By.TagName("input"));
-            var confirmEmailValidationMessage = CreateValidationMessagesAccessor(
-                confirmEmailContainer
-            );
+            var confirmEmailValidationMessage =
+                CreateValidationMessagesAccessor(confirmEmailContainer);
             CreateValidationMessagesAccessor(emailContainer);
             var submitButton = appElement.FindElement(By.CssSelector("button[type=submit]"));
 

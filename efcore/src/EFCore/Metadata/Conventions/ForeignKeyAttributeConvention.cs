@@ -227,9 +227,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             fkProperty!
                         );
 
-                        var newBuilder = SplitNavigationsToSeparateRelationships(
-                            relationshipBuilder
-                        );
+                        var newBuilder =
+                            SplitNavigationsToSeparateRelationships(relationshipBuilder);
                         if (newBuilder is null)
                         {
                             context.StopProcessing();
@@ -285,9 +284,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                var existingProperties = foreignKey.DeclaringEntityType.FindProperties(
-                    fkPropertiesToSet
-                );
+                var existingProperties =
+                    foreignKey.DeclaringEntityType.FindProperties(fkPropertiesToSet);
                 if (existingProperties != null)
                 {
                     var conflictingFk = foreignKey.DeclaringEntityType

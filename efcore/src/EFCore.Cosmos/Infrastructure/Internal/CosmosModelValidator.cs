@@ -113,9 +113,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal
                 var partitionKeyPropertyName = entityType.GetPartitionKeyPropertyName();
                 if (partitionKeyPropertyName != null)
                 {
-                    var nextPartitionKeyProperty = entityType.FindProperty(
-                        partitionKeyPropertyName
-                    )!;
+                    var nextPartitionKeyProperty =
+                        entityType.FindProperty(partitionKeyPropertyName)!;
                     if (partitionKey == null)
                     {
                         if (firstEntityType != null)

@@ -294,9 +294,8 @@ namespace System.Text.Json.Tests
   ""Value1"": -1,
   ""Value2"": -2147483648
 }";
-            NegativeEnumClass negativeEnumClass = JsonSerializer.Deserialize<NegativeEnumClass>(
-                json
-            );
+            NegativeEnumClass negativeEnumClass =
+                JsonSerializer.Deserialize<NegativeEnumClass>(json);
             Assert.Equal(NegativeEnum.Negative, negativeEnumClass.Value1);
             Assert.Equal((NegativeEnum)int.MinValue, negativeEnumClass.Value2);
         }

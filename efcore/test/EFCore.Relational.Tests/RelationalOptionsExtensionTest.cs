@@ -21,9 +21,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Null(optionsExtension.Connection);
 
             var connection = new FakeDbConnection("A=B");
-            optionsExtension = (FakeRelationalOptionsExtension)optionsExtension.WithConnection(
-                connection
-            );
+            optionsExtension =
+                (FakeRelationalOptionsExtension)optionsExtension.WithConnection(connection);
 
             Assert.Same(connection, optionsExtension.Connection);
         }
@@ -36,9 +35,7 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Null(optionsExtension.ConnectionString);
 
             optionsExtension =
-                (FakeRelationalOptionsExtension)optionsExtension.WithConnectionString(
-                    ConnectionString
-                );
+                (FakeRelationalOptionsExtension)optionsExtension.WithConnectionString(ConnectionString);
 
             Assert.Equal(ConnectionString, optionsExtension.ConnectionString);
         }

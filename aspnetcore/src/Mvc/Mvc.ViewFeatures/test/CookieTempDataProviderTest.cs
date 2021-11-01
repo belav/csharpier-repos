@@ -83,9 +83,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             var tempDataProvider = GetProvider(dataProtector.Object);
 
             var expectedDataToUnprotect = Bytes;
-            var base64AndUrlEncodedDataInCookie = WebEncoders.Base64UrlEncode(
-                expectedDataToUnprotect
-            );
+            var base64AndUrlEncodedDataInCookie =
+                WebEncoders.Base64UrlEncode(expectedDataToUnprotect);
 
             var context = new DefaultHttpContext();
             context.Request.Headers[HeaderNames.Cookie] =
@@ -109,9 +108,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             // Arrange
             var expectedDataToUnprotect = Bytes;
-            var base64AndUrlEncodedDataInCookie = WebEncoders.Base64UrlEncode(
-                expectedDataToUnprotect
-            );
+            var base64AndUrlEncodedDataInCookie =
+                WebEncoders.Base64UrlEncode(expectedDataToUnprotect);
             var dataProtector = new PassThroughDataProtector();
             var tempDataProvider = GetProvider(dataProtector);
             var httpContext = new DefaultHttpContext();

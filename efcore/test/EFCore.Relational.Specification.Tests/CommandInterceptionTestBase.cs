@@ -359,9 +359,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, true)]
         public virtual async Task Intercept_non_query_to_suppress_execution(bool async, bool inject)
         {
-            var (context, interceptor) = CreateContext<SuppressingNonQueryCommandInterceptor>(
-                inject
-            );
+            var (context, interceptor) =
+                CreateContext<SuppressingNonQueryCommandInterceptor>(inject);
             using (context)
             {
                 using (context.Database.BeginTransaction())
@@ -629,9 +628,8 @@ namespace Microsoft.EntityFrameworkCore
             bool inject
         )
         {
-            var (context, interceptor) = CreateContext<QueryReplacingReaderCommandInterceptor>(
-                inject
-            );
+            var (context, interceptor) =
+                CreateContext<QueryReplacingReaderCommandInterceptor>(inject);
             using (context)
             {
                 using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
@@ -703,9 +701,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, true)]
         public virtual async Task Intercept_scalar_to_replace_execution(bool async, bool inject)
         {
-            var (context, interceptor) = CreateContext<QueryReplacingScalarCommandInterceptor>(
-                inject
-            );
+            var (context, interceptor) =
+                CreateContext<QueryReplacingScalarCommandInterceptor>(inject);
             using (context)
             {
                 const string sql = "SELECT 1";
@@ -875,9 +872,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, true)]
         public virtual async Task<string> Intercept_query_to_replace_result(bool async, bool inject)
         {
-            var (context, interceptor) = CreateContext<ResultReplacingReaderCommandInterceptor>(
-                inject
-            );
+            var (context, interceptor) =
+                CreateContext<ResultReplacingReaderCommandInterceptor>(inject);
             using (context)
             {
                 using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
@@ -1017,9 +1013,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, true)]
         public virtual async Task Intercept_scalar_to_replace_result(bool async, bool inject)
         {
-            var (context, interceptor) = CreateContext<ResultReplacingScalarCommandInterceptor>(
-                inject
-            );
+            var (context, interceptor) =
+                CreateContext<ResultReplacingScalarCommandInterceptor>(inject);
             using (context)
             {
                 const string sql = "SELECT 1";
@@ -1093,9 +1088,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, true)]
         public virtual async Task Intercept_non_query_to_replace_result(bool async, bool inject)
         {
-            var (context, interceptor) = CreateContext<ResultReplacingNonQueryCommandInterceptor>(
-                inject
-            );
+            var (context, interceptor) =
+                CreateContext<ResultReplacingNonQueryCommandInterceptor>(inject);
             using (context)
             {
                 using (context.Database.BeginTransaction())

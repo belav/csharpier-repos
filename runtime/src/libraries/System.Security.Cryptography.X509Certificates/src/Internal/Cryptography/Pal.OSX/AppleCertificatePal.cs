@@ -439,9 +439,8 @@ namespace Internal.Cryptography.Pal
             Debug.Assert(_identityHandle != null);
 
             using (
-                SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
-                    _identityHandle
-                )
+                SafeSecKeyRefHandle key =
+                    Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(_identityHandle)
             )
             {
                 return ExportPkcs8(key, password);
@@ -461,9 +460,8 @@ namespace Internal.Cryptography.Pal
                 )
             )
             {
-                ReadOnlySpan<byte> systemExport = Interop.CoreFoundation.CFDataDangerousGetSpan(
-                    data
-                );
+                ReadOnlySpan<byte> systemExport =
+                    Interop.CoreFoundation.CFDataDangerousGetSpan(data);
 
                 fixed (byte* ptr = systemExport)
                 {
@@ -499,9 +497,8 @@ namespace Internal.Cryptography.Pal
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
-                _identityHandle
-            );
+            SafeSecKeyRefHandle privateKey =
+                Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(_identityHandle);
             Debug.Assert(!publicKey.IsInvalid);
 
             return new RSAImplementation.RSASecurityTransforms(publicKey, privateKey);
@@ -514,9 +511,8 @@ namespace Internal.Cryptography.Pal
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
-                _identityHandle
-            );
+            SafeSecKeyRefHandle privateKey =
+                Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(_identityHandle);
 
             if (publicKey.IsInvalid)
             {
@@ -537,9 +533,8 @@ namespace Internal.Cryptography.Pal
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
-                _identityHandle
-            );
+            SafeSecKeyRefHandle privateKey =
+                Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(_identityHandle);
             Debug.Assert(!publicKey.IsInvalid);
 
             return new ECDsaImplementation.ECDsaSecurityTransforms(publicKey, privateKey);
@@ -552,9 +547,8 @@ namespace Internal.Cryptography.Pal
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
-                _identityHandle
-            );
+            SafeSecKeyRefHandle privateKey =
+                Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(_identityHandle);
             Debug.Assert(!publicKey.IsInvalid);
 
             return new ECDiffieHellmanImplementation.ECDiffieHellmanSecurityTransforms(

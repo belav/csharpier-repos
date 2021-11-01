@@ -100,9 +100,8 @@ namespace System.Collections.Tests
         public static void TestDebuggerAttributes(object obj)
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(obj);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                obj
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(obj);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State

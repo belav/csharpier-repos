@@ -51,9 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             _reporter.WriteVerbose(DesignStrings.FindingHostingServices);
 
-            var serviceProviderFactory = HostFactoryResolver.ResolveServiceProviderFactory(
-                _startupAssembly
-            );
+            var serviceProviderFactory =
+                HostFactoryResolver.ResolveServiceProviderFactory(_startupAssembly);
             if (serviceProviderFactory == null)
             {
                 _reporter.WriteVerbose(DesignStrings.NoCreateHostBuilder);

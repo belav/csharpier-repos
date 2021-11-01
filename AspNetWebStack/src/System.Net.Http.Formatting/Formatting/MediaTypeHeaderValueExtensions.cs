@@ -61,12 +61,10 @@ namespace System.Net.Http.Formatting
                 return false;
             }
 
-            ParsedMediaTypeHeaderValue parsedMediaType1 = new ParsedMediaTypeHeaderValue(
-                mediaType1
-            );
-            ParsedMediaTypeHeaderValue parsedMediaType2 = new ParsedMediaTypeHeaderValue(
-                mediaType2
-            );
+            ParsedMediaTypeHeaderValue parsedMediaType1 =
+                new ParsedMediaTypeHeaderValue(mediaType1);
+            ParsedMediaTypeHeaderValue parsedMediaType2 =
+                new ParsedMediaTypeHeaderValue(mediaType2);
             mediaType2Range = parsedMediaType2.IsAllMediaRange
                 ? MediaTypeHeaderValueRange.AllMediaRange
                 : parsedMediaType2.IsSubtypeMediaRange

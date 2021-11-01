@@ -77,9 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
             }
 
             // We're parented by something binary-like.
-            parentPrecedenceKind = CSharpPatternPrecedenceService.Instance.GetPrecedenceKind(
-                parentPattern
-            );
+            parentPrecedenceKind =
+                CSharpPatternPrecedenceService.Instance.GetPrecedenceKind(parentPattern);
 
             // Precedence is clarified any time we have expression with different precedence
             // (and the inner expression is not a primary expression).  in other words, this

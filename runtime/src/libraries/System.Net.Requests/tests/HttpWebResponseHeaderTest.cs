@@ -24,9 +24,8 @@ namespace System.Net.Tests
                 {
                     HttpWebRequest request = WebRequest.CreateHttp(url);
                     request.Method = HttpMethod.Get.Method;
-                    HttpContinueDelegate continueDelegate = new HttpContinueDelegate(
-                        HttpContinueMethod
-                    );
+                    HttpContinueDelegate continueDelegate =
+                        new HttpContinueDelegate(HttpContinueMethod);
                     request.ContinueDelegate = continueDelegate;
                     _ = request.GetResponseAsync();
                     await server.AcceptConnectionSendResponseAndCloseAsync(

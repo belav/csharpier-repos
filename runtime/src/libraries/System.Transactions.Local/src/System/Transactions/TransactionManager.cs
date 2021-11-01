@@ -301,9 +301,7 @@ namespace System.Transactions
                 etwLog.TransactionManagerRecoveryComplete(resourceManagerIdentifier);
             }
 
-            DistributedTransactionManager.ResourceManagerRecoveryComplete(
-                resourceManagerIdentifier
-            );
+            DistributedTransactionManager.ResourceManagerRecoveryComplete(resourceManagerIdentifier);
 
             if (etwLog.IsEnabled())
             {

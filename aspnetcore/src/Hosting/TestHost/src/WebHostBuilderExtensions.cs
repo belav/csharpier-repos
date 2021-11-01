@@ -107,9 +107,7 @@ namespace Microsoft.AspNetCore.TestHost
                 webHostBuilder.ConfigureServices(
                     s =>
                         s.AddSingleton<IStartupConfigureServicesFilter>(
-                            new ConfigureTestServicesStartupConfigureServicesFilter(
-                                servicesConfiguration
-                            )
+                            new ConfigureTestServicesStartupConfigureServicesFilter(servicesConfiguration)
                         )
                 );
 #pragma warning restore CS0612 // Type or member is obsolete
@@ -144,9 +142,7 @@ namespace Microsoft.AspNetCore.TestHost
             webHostBuilder.ConfigureServices(
                 s =>
                     s.AddSingleton<IStartupConfigureContainerFilter<TContainer>>(
-                        new ConfigureTestServicesStartupConfigureContainerFilter<TContainer>(
-                            servicesConfiguration
-                        )
+                        new ConfigureTestServicesStartupConfigureContainerFilter<TContainer>(servicesConfiguration)
                     )
             );
 #pragma warning restore CS0612 // Type or member is obsolete

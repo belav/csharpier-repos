@@ -226,12 +226,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateChangedAnalyzerConfigDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
-                                            newSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
+                                            oldSolution.GetRequiredAnalyzerConfigDocument(documentId),
+                                            newSolution.GetRequiredAnalyzerConfigDocument(documentId),
                                             zoomLevel,
                                             c
                                         )
@@ -249,9 +245,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateAddedAnalyzerConfigDocumentPreviewViewAsync(
-                                            newSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
+                                            newSolution.GetRequiredAnalyzerConfigDocument(documentId),
                                             zoomLevel,
                                             c
                                         )
@@ -269,9 +263,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                                 documentId,
                                 async c =>
                                     await CreateRemovedAnalyzerConfigDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
+                                            oldSolution.GetRequiredAnalyzerConfigDocument(documentId),
                                             zoomLevel,
                                             c
                                         )

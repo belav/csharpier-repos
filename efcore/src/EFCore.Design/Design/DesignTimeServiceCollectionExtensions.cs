@@ -42,9 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Design
                 reporter = new OperationReporter(handler: null);
             }
 
-            new EntityFrameworkRelationalDesignServicesBuilder(
-                services
-            ).TryAddProviderSpecificServices(
+            new EntityFrameworkRelationalDesignServicesBuilder(services).TryAddProviderSpecificServices(
                 services =>
                     services
                         .TryAddSingleton<
@@ -78,9 +76,7 @@ namespace Microsoft.EntityFrameworkCore.Design
                         .TryAddSingleton<IModelCodeGenerator, CSharpModelGenerator>()
                         .TryAddSingleton<IModelCodeGeneratorSelector, ModelCodeGeneratorSelector>()
                         .TryAddSingleton<INamedConnectionStringResolver>(
-                            new DesignTimeConnectionStringResolver(
-                                applicationServiceProviderAccessor
-                            )
+                            new DesignTimeConnectionStringResolver(applicationServiceProviderAccessor)
                         )
                         .TryAddSingleton<IPluralizer, HumanizerPluralizer>()
                         .TryAddSingleton<IReverseEngineerScaffolder, ReverseEngineerScaffolder>()

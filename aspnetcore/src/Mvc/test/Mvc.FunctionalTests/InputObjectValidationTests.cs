@@ -177,9 +177,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(StatusCodes.Status400BadRequest, (int)response.StatusCode);
 
             var responseContent = await response.Content.ReadAsStringAsync();
-            var responseObject = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(
-                responseContent
-            );
+            var responseObject = JsonConvert.DeserializeObject<
+                Dictionary<string, string[]>
+            >(responseContent);
             var errorKeyValuePair = Assert.Single(
                 responseObject,
                 keyValuePair => keyValuePair.Value.Length > 0
@@ -212,9 +212,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(expectedStatusCode, (int)response.StatusCode);
 
             var responseContent = await response.Content.ReadAsStringAsync();
-            var responseObject = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(
-                responseContent
-            );
+            var responseObject = JsonConvert.DeserializeObject<
+                Dictionary<string, string[]>
+            >(responseContent);
             var errorKeyValuePair = Assert.Single(
                 responseObject,
                 keyValuePair => keyValuePair.Value.Length > 0
@@ -369,9 +369,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
             var responseContent = await response.Content.ReadAsStringAsync();
-            var validationProblemDetails = JsonConvert.DeserializeObject<ValidationProblemDetails>(
-                responseContent
-            );
+            var validationProblemDetails =
+                JsonConvert.DeserializeObject<ValidationProblemDetails>(responseContent);
 
             Assert.Collection(
                 validationProblemDetails.Errors,
@@ -409,9 +408,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
             var responseContent = await response.Content.ReadAsStringAsync();
-            var validationProblemDetails = JsonConvert.DeserializeObject<ValidationProblemDetails>(
-                responseContent
-            );
+            var validationProblemDetails =
+                JsonConvert.DeserializeObject<ValidationProblemDetails>(responseContent);
 
             Assert.Collection(
                 validationProblemDetails.Errors,
@@ -453,9 +451,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
             var responseContent = await response.Content.ReadAsStringAsync();
-            var validationProblemDetails = JsonConvert.DeserializeObject<ValidationProblemDetails>(
-                responseContent
-            );
+            var validationProblemDetails =
+                JsonConvert.DeserializeObject<ValidationProblemDetails>(responseContent);
 
             Assert.Collection(
                 validationProblemDetails.Errors,

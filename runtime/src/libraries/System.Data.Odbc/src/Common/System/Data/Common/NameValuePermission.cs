@@ -233,9 +233,8 @@ namespace System.Data.Common
                                 string? valueInQuestion = parsetable[keyword];
 
                                 // keyword is restricted to certain values
-                                NameValuePermission? permitValue = permitKey.CheckKeyForValue(
-                                    valueInQuestion
-                                );
+                                NameValuePermission? permitValue =
+                                    permitKey.CheckKeyForValue(valueInQuestion);
                                 if (null != permitValue)
                                 {
                                     //value does match - continue the chain down that branch

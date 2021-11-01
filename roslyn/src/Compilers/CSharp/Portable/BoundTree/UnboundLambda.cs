@@ -1281,9 +1281,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     int parameterCount = invoke.ParameterCount;
                     if (parameterCount > 0)
                     {
-                        var typesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
-                            parameterCount
-                        );
+                        var typesBuilder =
+                            ArrayBuilder<TypeWithAnnotations>.GetInstance(parameterCount);
                         var refKindsBuilder = ArrayBuilder<RefKind>.GetInstance(parameterCount);
 
                         foreach (var p in invoke.Parameters)

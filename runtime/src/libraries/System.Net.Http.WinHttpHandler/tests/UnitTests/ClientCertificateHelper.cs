@@ -305,9 +305,7 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             get
             {
                 X509Certificate2Collection certs = new X509Certificate2Collection();
-                certs.Add(
-                    _cert_KeyUsageIncludesDigitalSignature_EKUIncludesClientAuth_NoPrivateKey
-                );
+                certs.Add(_cert_KeyUsageIncludesDigitalSignature_EKUIncludesClientAuth_NoPrivateKey);
                 certs.Add(_cert_KeyUsageMissingDigitalSignature_EKUIncludesClientAuth_PrivateKey);
                 certs.Add(_cert_KeyUsageIncludesDigitalSignature_EKUMissingClientAuth_PrivateKey);
 
@@ -320,9 +318,7 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             get
             {
                 X509Certificate2Collection certs = new X509Certificate2Collection();
-                certs.Add(
-                    _cert_KeyUsageIncludesDigitalSignature_EKUIncludesClientAuth_NoPrivateKey
-                );
+                certs.Add(_cert_KeyUsageIncludesDigitalSignature_EKUIncludesClientAuth_NoPrivateKey);
                 certs.Add(_cert_KeyUsageMissingDigitalSignature_EKUIncludesClientAuth_PrivateKey);
                 certs.Add(_cert_KeyUsageIncludesDigitalSignature_EKUIncludesClientAuth_PrivateKey);
                 certs.Add(_cert_KeyUsageIncludesDigitalSignature_EKUMissingClientAuth_PrivateKey);

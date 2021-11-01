@@ -104,9 +104,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 
             foreach (var linkedDocumentId in linkedDocumentIds)
             {
-                var linkedDocument = document.Project.Solution.GetRequiredDocument(
-                    linkedDocumentId
-                );
+                var linkedDocument =
+                    document.Project.Solution.GetRequiredDocument(linkedDocumentId);
                 var linkedToken = await FindTokenInLinkedDocumentAsync(
                         token,
                         linkedDocument,

@@ -159,9 +159,7 @@ namespace System.Net.Http.Functional.Tests
                             async connection =>
                             {
                                 Task serverTask =
-                                    connection.ReadRequestHeaderAndSendCustomResponseAsync(
-                                        responseHeaders
-                                    );
+                                    connection.ReadRequestHeaderAndSendCustomResponseAsync(responseHeaders);
 
                                 if (shouldSucceed)
                                 {

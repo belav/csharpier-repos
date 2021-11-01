@@ -30,9 +30,8 @@ namespace System.Reflection.TypeLoading.Ecma
 
             _handle = handle;
             _module = (EcmaModule)(declaringType.Module);
-            _neverAccessThisExceptThroughFieldDefinitionProperty = handle.GetFieldDefinition(
-                Reader
-            );
+            _neverAccessThisExceptThroughFieldDefinitionProperty =
+                handle.GetFieldDefinition(Reader);
         }
 
         internal sealed override RoModule GetRoModule() => _module;

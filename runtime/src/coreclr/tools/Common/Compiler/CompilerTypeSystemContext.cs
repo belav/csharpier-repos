@@ -249,9 +249,8 @@ namespace ILCompiler
                 {
                     if (useForBinding)
                     {
-                        ModuleData actualModuleData = _simpleNameHashtable.AddOrGetExisting(
-                            moduleData
-                        );
+                        ModuleData actualModuleData =
+                            _simpleNameHashtable.AddOrGetExisting(moduleData);
                         if (actualModuleData != moduleData)
                         {
                             if (actualModuleData.FilePath != filePath)

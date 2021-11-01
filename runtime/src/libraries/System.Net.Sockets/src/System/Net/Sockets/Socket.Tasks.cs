@@ -753,9 +753,8 @@ namespace System.Net.Sockets
             // it needs from the SAEA, then we can return it to the pool now. Otherwise, it'll be
             // responsible for returning it once it's gotten what it needs from it.
             bool responsibleForReturningToPool;
-            AsyncTaskMethodBuilder<Socket> builder = saea.GetCompletionResponsibility(
-                out responsibleForReturningToPool
-            );
+            AsyncTaskMethodBuilder<Socket> builder =
+                saea.GetCompletionResponsibility(out responsibleForReturningToPool);
             if (responsibleForReturningToPool)
             {
                 s.ReturnSocketAsyncEventArgs(saea);
@@ -788,9 +787,8 @@ namespace System.Net.Sockets
             // it needs from the SAEA, then we can return it to the pool now. Otherwise, it'll be
             // responsible for returning it once it's gotten what it needs from it.
             bool responsibleForReturningToPool;
-            AsyncTaskMethodBuilder<int> builder = saea.GetCompletionResponsibility(
-                out responsibleForReturningToPool
-            );
+            AsyncTaskMethodBuilder<int> builder =
+                saea.GetCompletionResponsibility(out responsibleForReturningToPool);
             if (responsibleForReturningToPool)
             {
                 s.ReturnSocketAsyncEventArgs(saea, isReceive);

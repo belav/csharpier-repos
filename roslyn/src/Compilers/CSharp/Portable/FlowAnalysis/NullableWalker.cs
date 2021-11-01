@@ -931,9 +931,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     default:
                                         break;
                                 }
-                                var memberSlot = getSlotForFieldOrPropertyOrEvent(
-                                    memberToInitialize
-                                );
+                                var memberSlot =
+                                    getSlotForFieldOrPropertyOrEvent(memberToInitialize);
                                 if (memberSlot > 0)
                                 {
                                     var type = memberToInitialize.GetTypeOrReturnType();
@@ -5011,15 +5010,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BinaryOperatorKind.LessThan:
                     case BinaryOperatorKind.GreaterThanOrEqual:
                     case BinaryOperatorKind.LessThanOrEqual:
-                        operandComparedToNonNull = SkipReferenceConversions(
-                            operandComparedToNonNull
-                        );
+                        operandComparedToNonNull =
+                            SkipReferenceConversions(operandComparedToNonNull);
                         splitAndLearnFromNonNullTest(operandComparedToNonNull, whenTrue: true);
                         return;
                     case BinaryOperatorKind.NotEqual:
-                        operandComparedToNonNull = SkipReferenceConversions(
-                            operandComparedToNonNull
-                        );
+                        operandComparedToNonNull =
+                            SkipReferenceConversions(operandComparedToNonNull);
                         splitAndLearnFromNonNullTest(operandComparedToNonNull, whenTrue: false);
                         return;
                 }
@@ -6065,9 +6062,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 WellKnownMember wellKnownMember
             )
             {
-                var wellKnownMethod = (MethodSymbol?)compilation.GetWellKnownTypeMember(
-                    wellKnownMember
-                );
+                var wellKnownMethod =
+                    (MethodSymbol?)compilation.GetWellKnownTypeMember(wellKnownMember);
                 if (wellKnownMethod is null || receiverType is null)
                 {
                     return false;
@@ -6091,9 +6087,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     baseType = baseType.BaseTypeNoUseSiteDiagnostics
                 )
                 {
-                    var implementationMethod = baseType.FindImplementationForInterfaceMember(
-                        constructedMethod
-                    );
+                    var implementationMethod =
+                        baseType.FindImplementationForInterfaceMember(constructedMethod);
                     if (implementationMethod is null)
                     {
                         // we know no base type will implement this interface member either
@@ -7216,9 +7211,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         );
                         if (!compareExchangeInfoOpt.IsDefault)
                         {
-                            var adjustedState = LearnFromCompareExchangeMethod(
-                                in compareExchangeInfoOpt
-                            );
+                            var adjustedState =
+                                LearnFromCompareExchangeMethod(in compareExchangeInfoOpt);
                             parameterWithState = TypeWithState.Create(
                                 parameterType.Type,
                                 adjustedState
@@ -7281,9 +7275,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         )
                         {
                             var varType =
-                                worstCaseParameterWithState.ToAnnotatedTypeWithAnnotations(
-                                    compilation
-                                );
+                                worstCaseParameterWithState.ToAnnotatedTypeWithAnnotations(compilation);
                             _variables.SetType(local.LocalSymbol, varType);
                             lValueType = varType;
                         }
@@ -7808,9 +7800,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var visitArgumentResult = argumentResults[i];
                 var lambdaState = visitArgumentResult.StateForLambda;
                 // Note: for `out` arguments, the argument result contains the declaration type (see `VisitArgumentEvaluate`)
-                var argumentResult = visitArgumentResult.RValueType.ToTypeWithAnnotations(
-                    compilation
-                );
+                var argumentResult =
+                    visitArgumentResult.RValueType.ToTypeWithAnnotations(compilation);
                 builder.Add(
                     getArgumentForMethodTypeInference(arguments[i], argumentResult, lambdaState)
                 );
@@ -8848,9 +8839,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     {
                         var group = conversionOperand as BoundMethodGroup;
-                        var (invokeSignature, parameters) = getDelegateOrFunctionPointerInfo(
-                            targetType
-                        );
+                        var (invokeSignature, parameters) =
+                            getDelegateOrFunctionPointerInfo(targetType);
                         var method = conversion.Method;
                         if (group != null)
                         {
@@ -11762,9 +11752,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         else if (iterationVariable is SourceLocalSymbol { IsVar: true })
                         {
                             // foreach (var variable in collection)
-                            destinationType = sourceState.ToAnnotatedTypeWithAnnotations(
-                                compilation
-                            );
+                            destinationType =
+                                sourceState.ToAnnotatedTypeWithAnnotations(compilation);
                             _variables.SetType(iterationVariable, destinationType);
                             resultForType = destinationType.ToTypeWithState();
                         }

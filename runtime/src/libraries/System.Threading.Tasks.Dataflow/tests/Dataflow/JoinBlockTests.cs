@@ -620,9 +620,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
                         var join3 = new JoinBlock<string, object>(gdbo);
                         var join4 = new JoinBlock<float, IntPtr>(gdbo);
-                        var join6 = new JoinBlock<Tuple<string, object>, Tuple<float, IntPtr>>(
-                            gdbo
-                        );
+                        var join6 = new JoinBlock<
+                            Tuple<string, object>,
+                            Tuple<float, IntPtr>
+                        >(gdbo);
 
                         var join7 = new JoinBlock<
                             Tuple<Tuple<int, string>, Tuple<double, short>>,

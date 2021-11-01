@@ -27,9 +27,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeW
         private readonly object _sync;
         private readonly PipeWriter _innerPipeWriter;
         private readonly MemoryPool<byte> _pool;
-        private readonly BufferSegmentStack _bufferSegmentPool = new BufferSegmentStack(
-            InitialSegmentPoolSize
-        );
+        private readonly BufferSegmentStack _bufferSegmentPool =
+            new BufferSegmentStack(InitialSegmentPoolSize);
 
         private BufferSegment? _head;
         private BufferSegment? _tail;

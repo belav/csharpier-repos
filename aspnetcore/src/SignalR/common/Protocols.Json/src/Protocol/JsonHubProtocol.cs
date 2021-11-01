@@ -23,45 +23,35 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
     public sealed class JsonHubProtocol : IHubProtocol
     {
         private const string ResultPropertyName = "result";
-        private static JsonEncodedText ResultPropertyNameBytes = JsonEncodedText.Encode(
-            ResultPropertyName
-        );
+        private static JsonEncodedText ResultPropertyNameBytes =
+            JsonEncodedText.Encode(ResultPropertyName);
         private const string ItemPropertyName = "item";
-        private static JsonEncodedText ItemPropertyNameBytes = JsonEncodedText.Encode(
-            ItemPropertyName
-        );
+        private static JsonEncodedText ItemPropertyNameBytes =
+            JsonEncodedText.Encode(ItemPropertyName);
         private const string InvocationIdPropertyName = "invocationId";
-        private static JsonEncodedText InvocationIdPropertyNameBytes = JsonEncodedText.Encode(
-            InvocationIdPropertyName
-        );
+        private static JsonEncodedText InvocationIdPropertyNameBytes =
+            JsonEncodedText.Encode(InvocationIdPropertyName);
         private const string StreamIdsPropertyName = "streamIds";
-        private static JsonEncodedText StreamIdsPropertyNameBytes = JsonEncodedText.Encode(
-            StreamIdsPropertyName
-        );
+        private static JsonEncodedText StreamIdsPropertyNameBytes =
+            JsonEncodedText.Encode(StreamIdsPropertyName);
         private const string TypePropertyName = "type";
-        private static JsonEncodedText TypePropertyNameBytes = JsonEncodedText.Encode(
-            TypePropertyName
-        );
+        private static JsonEncodedText TypePropertyNameBytes =
+            JsonEncodedText.Encode(TypePropertyName);
         private const string ErrorPropertyName = "error";
-        private static JsonEncodedText ErrorPropertyNameBytes = JsonEncodedText.Encode(
-            ErrorPropertyName
-        );
+        private static JsonEncodedText ErrorPropertyNameBytes =
+            JsonEncodedText.Encode(ErrorPropertyName);
         private const string AllowReconnectPropertyName = "allowReconnect";
-        private static JsonEncodedText AllowReconnectPropertyNameBytes = JsonEncodedText.Encode(
-            AllowReconnectPropertyName
-        );
+        private static JsonEncodedText AllowReconnectPropertyNameBytes =
+            JsonEncodedText.Encode(AllowReconnectPropertyName);
         private const string TargetPropertyName = "target";
-        private static JsonEncodedText TargetPropertyNameBytes = JsonEncodedText.Encode(
-            TargetPropertyName
-        );
+        private static JsonEncodedText TargetPropertyNameBytes =
+            JsonEncodedText.Encode(TargetPropertyName);
         private const string ArgumentsPropertyName = "arguments";
-        private static JsonEncodedText ArgumentsPropertyNameBytes = JsonEncodedText.Encode(
-            ArgumentsPropertyName
-        );
+        private static JsonEncodedText ArgumentsPropertyNameBytes =
+            JsonEncodedText.Encode(ArgumentsPropertyName);
         private const string HeadersPropertyName = "headers";
-        private static JsonEncodedText HeadersPropertyNameBytes = JsonEncodedText.Encode(
-            HeadersPropertyName
-        );
+        private static JsonEncodedText HeadersPropertyNameBytes =
+            JsonEncodedText.Encode(HeadersPropertyName);
 
         private static readonly string ProtocolName = "json";
         private static readonly int ProtocolVersion = 1;
@@ -327,9 +317,8 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                                     }
                                     catch (Exception ex)
                                     {
-                                        argumentBindingException = ExceptionDispatchInfo.Capture(
-                                            ex
-                                        );
+                                        argumentBindingException =
+                                            ExceptionDispatchInfo.Capture(ex);
 
                                         // Could be at any point in argument array JSON when an error is thrown
                                         // Read until the end of the argument JSON array

@@ -210,9 +210,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     Path.GetDirectoryName(filePath),
                     fileExtensionToWatch
                 );
-                _documentFileChangeContext = _workspace.FileChangeWatcher.CreateContext(
-                    projectDirectoryToWatch
-                );
+                _documentFileChangeContext =
+                    _workspace.FileChangeWatcher.CreateContext(projectDirectoryToWatch);
             }
             else
             {
@@ -572,9 +571,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _workspace.ApplyBatchChangeToWorkspace(
                     solution =>
                     {
-                        var solutionChanges = new SolutionChangeAccumulator(
-                            startingSolution: solution
-                        );
+                        var solutionChanges =
+                            new SolutionChangeAccumulator(startingSolution: solution);
 
                         _sourceFiles.UpdateSolutionForBatch(
                             solutionChanges,
@@ -644,9 +642,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                                     .MetadataReferences.Cast<PortableExecutableReference>()
                                     .Single(m => m.FilePath == path && m.Properties == properties);
 
-                                _workspace.FileWatchedReferenceFactory.StopWatchingReference(
-                                    metadataReference
-                                );
+                                _workspace.FileWatchedReferenceFactory.StopWatchingReference(metadataReference);
 
                                 solutionChanges.UpdateSolutionForProjectAction(
                                     Id,
@@ -1252,9 +1248,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                                         m => m.FilePath == fullPath && m.Properties == properties
                                     );
 
-                                _workspace.FileWatchedReferenceFactory.StopWatchingReference(
-                                    metadataReference
-                                );
+                                _workspace.FileWatchedReferenceFactory.StopWatchingReference(metadataReference);
                                 w.OnMetadataReferenceRemoved(Id, metadataReference);
                             }
                         }
@@ -1887,9 +1881,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                                         new SourceTextLoader(textContainer, filePath: null)
                                     );
                                     _documentRemoveAction(w, documentId);
-                                    _project._workspace.RemoveDocumentToDocumentsNotFromFiles(
-                                        documentId
-                                    );
+                                    _project._workspace.RemoveDocumentToDocumentsNotFromFiles(documentId);
                                 }
                             );
                         }
@@ -1990,9 +1982,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                                         );
 
                                     // Right now we're only supporting dynamic files as actual source files, so it's OK to call GetDocument here
-                                    var document = w.CurrentSolution.GetRequiredDocument(
-                                        documentId
-                                    );
+                                    var document =
+                                        w.CurrentSolution.GetRequiredDocument(documentId);
 
                                     var documentInfo = DocumentInfo.Create(
                                         document.Id,

@@ -30,9 +30,8 @@ namespace System.SpanTests
 
             fixed (char* expectedPtr = data.Span)
             {
-                ReadOnlySpan<char> actual = MemoryMarshal.CreateReadOnlySpanFromNullTerminated(
-                    expectedPtr
-                );
+                ReadOnlySpan<char> actual =
+                    MemoryMarshal.CreateReadOnlySpanFromNullTerminated(expectedPtr);
                 Assert.Equal(expectedLength, actual.Length);
                 fixed (char* actualPtr = &MemoryMarshal.GetReference(actual))
                 {
@@ -54,9 +53,8 @@ namespace System.SpanTests
 
             fixed (byte* expectedPtr = data.Span)
             {
-                ReadOnlySpan<byte> actual = MemoryMarshal.CreateReadOnlySpanFromNullTerminated(
-                    expectedPtr
-                );
+                ReadOnlySpan<byte> actual =
+                    MemoryMarshal.CreateReadOnlySpanFromNullTerminated(expectedPtr);
                 Assert.Equal(expectedLength, actual.Length);
                 fixed (byte* actualPtr = &MemoryMarshal.GetReference(actual))
                 {

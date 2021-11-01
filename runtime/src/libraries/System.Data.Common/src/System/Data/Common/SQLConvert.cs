@@ -536,51 +536,51 @@ namespace System.Data.Common
                                     case StorageType.Char:
                                         return ((IConvertible)(string)value).ToChar(formatProvider);
                                     case StorageType.SByte:
-                                        return ((IConvertible)(string)value).ToSByte(
-                                            formatProvider
-                                        );
+                                        return (
+                                            (IConvertible)(string)value
+                                        ).ToSByte(formatProvider);
                                     case StorageType.Byte:
                                         return ((IConvertible)(string)value).ToByte(formatProvider);
                                     case StorageType.Int16:
-                                        return ((IConvertible)(string)value).ToInt16(
-                                            formatProvider
-                                        );
+                                        return (
+                                            (IConvertible)(string)value
+                                        ).ToInt16(formatProvider);
                                     case StorageType.UInt16:
-                                        return ((IConvertible)(string)value).ToUInt16(
-                                            formatProvider
-                                        );
+                                        return (
+                                            (IConvertible)(string)value
+                                        ).ToUInt16(formatProvider);
                                     case StorageType.Int32:
-                                        return ((IConvertible)(string)value).ToInt32(
-                                            formatProvider
-                                        );
+                                        return (
+                                            (IConvertible)(string)value
+                                        ).ToInt32(formatProvider);
                                     case StorageType.UInt32:
-                                        return ((IConvertible)(string)value).ToUInt32(
-                                            formatProvider
-                                        );
+                                        return (
+                                            (IConvertible)(string)value
+                                        ).ToUInt32(formatProvider);
                                     case StorageType.Int64:
-                                        return ((IConvertible)(string)value).ToInt64(
-                                            formatProvider
-                                        );
+                                        return (
+                                            (IConvertible)(string)value
+                                        ).ToInt64(formatProvider);
                                     case StorageType.UInt64:
-                                        return ((IConvertible)(string)value).ToUInt64(
-                                            formatProvider
-                                        );
+                                        return (
+                                            (IConvertible)(string)value
+                                        ).ToUInt64(formatProvider);
                                     case StorageType.Single:
-                                        return ((IConvertible)(string)value).ToSingle(
-                                            formatProvider
-                                        );
+                                        return (
+                                            (IConvertible)(string)value
+                                        ).ToSingle(formatProvider);
                                     case StorageType.Double:
-                                        return ((IConvertible)(string)value).ToDouble(
-                                            formatProvider
-                                        );
+                                        return (
+                                            (IConvertible)(string)value
+                                        ).ToDouble(formatProvider);
                                     case StorageType.Decimal:
-                                        return ((IConvertible)(string)value).ToDecimal(
-                                            formatProvider
-                                        );
+                                        return (
+                                            (IConvertible)(string)value
+                                        ).ToDecimal(formatProvider);
                                     case StorageType.DateTime:
-                                        return ((IConvertible)(string)value).ToDateTime(
-                                            formatProvider
-                                        );
+                                        return (
+                                            (IConvertible)(string)value
+                                        ).ToDateTime(formatProvider);
                                     //return  XmlConvert.ToDateTime((string) value, XmlDateTimeSerializationMode.RoundtripKind);
                                     case StorageType.TimeSpan:
                                         return XmlConvert.ToTimeSpan((string)value);

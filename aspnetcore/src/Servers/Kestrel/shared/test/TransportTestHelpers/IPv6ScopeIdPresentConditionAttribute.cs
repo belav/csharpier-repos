@@ -11,9 +11,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 {
     public class IPv6ScopeIdPresentConditionAttribute : Attribute, ITestCondition
     {
-        private static readonly Lazy<bool> _ipv6ScopeIdPresent = new Lazy<bool>(
-            IPv6ScopeIdAddressPresent
-        );
+        private static readonly Lazy<bool> _ipv6ScopeIdPresent =
+            new Lazy<bool>(IPv6ScopeIdAddressPresent);
 
         public bool IsMet => _ipv6ScopeIdPresent.Value;
 

@@ -25,9 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CancellationToken cancellationToken = default
         )
         {
-            ConcurrentSet<AssemblySymbol>? usedAssemblies = GetCompleteSetOfUsedAssemblies(
-                cancellationToken
-            );
+            ConcurrentSet<AssemblySymbol>? usedAssemblies =
+                GetCompleteSetOfUsedAssemblies(cancellationToken);
 
             if (usedAssemblies is null)
             {
@@ -219,9 +218,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         // would be to attempt to emit and get the exact set of emitted references
                                         // in case of success. This might be too slow though.
                                         usedAssemblies =
-                                            sourceAssembly.DeclaringCompilation.GetCompleteSetOfUsedAssemblies(
-                                                cancellationToken
-                                            );
+                                            sourceAssembly.DeclaringCompilation.GetCompleteSetOfUsedAssemblies(cancellationToken);
                                         if (usedAssemblies is object)
                                         {
                                             foreach (AssemblySymbol dependency in usedAssemblies)
@@ -234,9 +231,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                                     case RetargetingAssemblySymbol retargetingAssembly:
                                         usedAssemblies =
-                                            retargetingAssembly.UnderlyingAssembly.DeclaringCompilation.GetCompleteSetOfUsedAssemblies(
-                                                cancellationToken
-                                            );
+                                            retargetingAssembly.UnderlyingAssembly.DeclaringCompilation.GetCompleteSetOfUsedAssemblies(cancellationToken);
                                         if (usedAssemblies is object)
                                         {
                                             foreach (
@@ -264,9 +259,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                                         Debug.Assert(
                                                             retargetingAssembly.Modules[
                                                                 0
-                                                            ].ReferencedAssemblySymbols.Contains(
-                                                                underlyingDependency
-                                                            )
+                                                            ].ReferencedAssemblySymbols.Contains(underlyingDependency)
                                                         );
                                                         dependency = underlyingDependency;
                                                     }

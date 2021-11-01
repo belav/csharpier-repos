@@ -82,9 +82,8 @@ namespace System.Net.WebSockets
 
                 // negotiate the websocket key return value
                 string? secWebSocketKey = request.Headers[HttpKnownHeaderNames.SecWebSocketKey];
-                string secWebSocketAccept = HttpWebSocket.GetSecWebSocketAcceptString(
-                    secWebSocketKey
-                );
+                string secWebSocketAccept =
+                    HttpWebSocket.GetSecWebSocketAcceptString(secWebSocketKey);
 
                 response.Headers.Add(HttpKnownHeaderNames.Connection, HttpKnownHeaderNames.Upgrade);
                 response.Headers.Add(HttpKnownHeaderNames.Upgrade, WebSocketUpgradeToken);

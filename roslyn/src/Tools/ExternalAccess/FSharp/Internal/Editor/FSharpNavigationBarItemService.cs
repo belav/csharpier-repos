@@ -75,9 +75,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
                 var navigationService =
                     workspace.Services.GetRequiredService<IFSharpDocumentNavigationService>();
 
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
                 if (
                     navigationService.CanNavigateToPosition(

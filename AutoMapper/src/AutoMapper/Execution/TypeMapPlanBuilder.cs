@@ -40,9 +40,9 @@ namespace AutoMapper.Execution
             var parameters = new[] { Source, _initialDestination, ContextParameter };
             var customExpression =
                 TypeConverter(parameters)
-                ?? (_typeMap.CustomMapFunction ?? _typeMap.CustomMapExpression)?.ReplaceParameters(
-                    parameters
-                );
+                ?? (
+                    _typeMap.CustomMapFunction ?? _typeMap.CustomMapExpression
+                )?.ReplaceParameters(parameters);
             if (customExpression != null)
             {
                 return Lambda(customExpression, parameters);
@@ -132,9 +132,7 @@ namespace AutoMapper.Execution
                     memberTypeMap.PreserveReferences = true;
                     Trace(typeMap, memberTypeMap);
                     foreach (
-                        var derivedTypeMap in configurationProvider.GetIncludedTypeMaps(
-                            memberTypeMap
-                        )
+                        var derivedTypeMap in configurationProvider.GetIncludedTypeMaps(memberTypeMap)
                     )
                     {
                         derivedTypeMap.PreserveReferences = true;
@@ -271,9 +269,7 @@ namespace AutoMapper.Execution
         {
             var destination =
                 (
-                    (MemberExpression)pathMap.DestinationExpression.ConvertReplaceParameters(
-                        _destination
-                    )
+                    (MemberExpression)pathMap.DestinationExpression.ConvertReplaceParameters(_destination)
                 ).Expression;
             var createInnerObjects = CreateInnerObjects(destination);
             var setFinalValue = CreatePropertyMapFunc(

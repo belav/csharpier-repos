@@ -1861,9 +1861,8 @@ class C
             Assert.Equal(ConversionKind.Identity, info.CurrentConversion.Kind);
 
             var memberModel = model.GetMemberModel(foreachSyntax);
-            BoundForEachStatement boundNode = (BoundForEachStatement)memberModel.GetUpperBoundNode(
-                foreachSyntax
-            );
+            BoundForEachStatement boundNode =
+                (BoundForEachStatement)memberModel.GetUpperBoundNode(foreachSyntax);
             ForEachEnumeratorInfo internalInfo = boundNode.EnumeratorInfoOpt;
             Assert.False(internalInfo.NeedsDisposal);
         }
@@ -2799,9 +2798,8 @@ public class C
                 .Single();
 
             var memberModel = model.GetMemberModel(foreachSyntax);
-            BoundForEachStatement boundNode = (BoundForEachStatement)memberModel.GetUpperBoundNode(
-                foreachSyntax
-            );
+            BoundForEachStatement boundNode =
+                (BoundForEachStatement)memberModel.GetUpperBoundNode(foreachSyntax);
             ForEachEnumeratorInfo internalInfo = boundNode.EnumeratorInfoOpt;
             Assert.True(internalInfo.NeedsDisposal);
 
@@ -3081,9 +3079,8 @@ class C
                 .Single();
 
             var memberModel = model.GetMemberModel(foreachSyntax);
-            BoundForEachStatement boundNode = (BoundForEachStatement)memberModel.GetUpperBoundNode(
-                foreachSyntax
-            );
+            BoundForEachStatement boundNode =
+                (BoundForEachStatement)memberModel.GetUpperBoundNode(foreachSyntax);
             ForEachEnumeratorInfo internalInfo = boundNode.EnumeratorInfoOpt;
             Assert.True(internalInfo.NeedsDisposal);
 

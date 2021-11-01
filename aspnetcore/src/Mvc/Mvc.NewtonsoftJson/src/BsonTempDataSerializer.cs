@@ -62,9 +62,9 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             using (var memoryStream = new MemoryStream(value))
             using (var reader = new BsonDataReader(memoryStream))
             {
-                tempDataDictionary = _jsonSerializer.Deserialize<Dictionary<string, object?>>(
-                    reader
-                );
+                tempDataDictionary = _jsonSerializer.Deserialize<
+                    Dictionary<string, object?>
+                >(reader);
                 if (tempDataDictionary == null)
                 {
                     return new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);

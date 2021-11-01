@@ -16,9 +16,8 @@ namespace System.Web.Mvc.Async.Test
             Type controllerType = typeof(string);
 
             // Act
-            ReflectedAsyncControllerDescriptor cd = new ReflectedAsyncControllerDescriptor(
-                controllerType
-            );
+            ReflectedAsyncControllerDescriptor cd =
+                new ReflectedAsyncControllerDescriptor(controllerType);
 
             // Assert
             Assert.Same(controllerType, cd.ControllerType);
@@ -44,9 +43,8 @@ namespace System.Web.Mvc.Async.Test
             Type controllerType = typeof(MyController);
             MethodInfo asyncMethodInfo = controllerType.GetMethod("FooAsync");
             MethodInfo completedMethodInfo = controllerType.GetMethod("FooCompleted");
-            ReflectedAsyncControllerDescriptor cd = new ReflectedAsyncControllerDescriptor(
-                controllerType
-            );
+            ReflectedAsyncControllerDescriptor cd =
+                new ReflectedAsyncControllerDescriptor(controllerType);
 
             // Act
             ActionDescriptor ad = cd.FindAction(new ControllerContext(), "NewName");
@@ -65,9 +63,8 @@ namespace System.Web.Mvc.Async.Test
         {
             // Arrange
             Type controllerType = typeof(MyController);
-            ReflectedAsyncControllerDescriptor cd = new ReflectedAsyncControllerDescriptor(
-                controllerType
-            );
+            ReflectedAsyncControllerDescriptor cd =
+                new ReflectedAsyncControllerDescriptor(controllerType);
 
             // Act
             ActionDescriptor ad = cd.FindAction(new ControllerContext(), "NonExistent");
@@ -81,9 +78,8 @@ namespace System.Web.Mvc.Async.Test
         {
             // Arrange
             Type controllerType = typeof(MyController);
-            ReflectedAsyncControllerDescriptor cd = new ReflectedAsyncControllerDescriptor(
-                controllerType
-            );
+            ReflectedAsyncControllerDescriptor cd =
+                new ReflectedAsyncControllerDescriptor(controllerType);
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
@@ -100,9 +96,8 @@ namespace System.Web.Mvc.Async.Test
         {
             // Arrange
             Type controllerType = typeof(MyController);
-            ReflectedAsyncControllerDescriptor cd = new ReflectedAsyncControllerDescriptor(
-                controllerType
-            );
+            ReflectedAsyncControllerDescriptor cd =
+                new ReflectedAsyncControllerDescriptor(controllerType);
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
@@ -119,9 +114,8 @@ namespace System.Web.Mvc.Async.Test
         {
             // Arrange
             Type controllerType = typeof(MyController);
-            ReflectedAsyncControllerDescriptor cd = new ReflectedAsyncControllerDescriptor(
-                controllerType
-            );
+            ReflectedAsyncControllerDescriptor cd =
+                new ReflectedAsyncControllerDescriptor(controllerType);
 
             // Act & assert
             Assert.ThrowsArgumentNull(
@@ -140,9 +134,8 @@ namespace System.Web.Mvc.Async.Test
 
             // Arrange
             Type controllerType = typeof(MyController);
-            ReflectedAsyncControllerDescriptor cd = new ReflectedAsyncControllerDescriptor(
-                controllerType
-            );
+            ReflectedAsyncControllerDescriptor cd =
+                new ReflectedAsyncControllerDescriptor(controllerType);
 
             // Act
             ActionDescriptor[] canonicalActions = cd.GetCanonicalActions();

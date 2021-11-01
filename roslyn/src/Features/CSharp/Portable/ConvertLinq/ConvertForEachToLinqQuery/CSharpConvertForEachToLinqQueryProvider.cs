@@ -93,9 +93,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                                     !(
                                         statement
                                             is LocalDeclarationStatementSyntax localDeclarationStatement
-                                        && TryProcessLocalDeclarationStatement(
-                                            localDeclarationStatement
-                                        )
+                                        && TryProcessLocalDeclarationStatement(localDeclarationStatement)
                                     )
                                 )
                                 {

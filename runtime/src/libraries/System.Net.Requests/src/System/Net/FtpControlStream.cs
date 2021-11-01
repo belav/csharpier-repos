@@ -72,15 +72,12 @@ namespace System.Net
             }
         }
 
-        private static readonly AsyncCallback s_acceptCallbackDelegate = new AsyncCallback(
-            AcceptCallback
-        );
-        private static readonly AsyncCallback s_connectCallbackDelegate = new AsyncCallback(
-            ConnectCallback
-        );
-        private static readonly AsyncCallback s_SSLHandshakeCallback = new AsyncCallback(
-            SSLHandshakeCallback
-        );
+        private static readonly AsyncCallback s_acceptCallbackDelegate =
+            new AsyncCallback(AcceptCallback);
+        private static readonly AsyncCallback s_connectCallbackDelegate =
+            new AsyncCallback(ConnectCallback);
+        private static readonly AsyncCallback s_SSLHandshakeCallback =
+            new AsyncCallback(SSLHandshakeCallback);
 
         internal FtpControlStream(TcpClient client) : base(client) { }
 

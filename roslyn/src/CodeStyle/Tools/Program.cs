@@ -207,16 +207,14 @@ namespace CodeStyleConfigFileGenerator
 
                                 case AnalysisMode.All:
                                     // Escalate all rules which can be enabled on build.
-                                    isEnabledInNonDefaultMode = !rule.CustomTags.Contains(
-                                        s_neverTag
-                                    );
+                                    isEnabledInNonDefaultMode =
+                                        !rule.CustomTags.Contains(s_neverTag);
                                     break;
 
                                 case AnalysisMode.Minimum:
                                     // Escalate all highly recommended rules.
-                                    isEnabledInNonDefaultMode = rule.CustomTags.Contains(
-                                        s_highlyRecommendedTag
-                                    );
+                                    isEnabledInNonDefaultMode =
+                                        rule.CustomTags.Contains(s_highlyRecommendedTag);
                                     break;
 
                                 case AnalysisMode.Recommended:

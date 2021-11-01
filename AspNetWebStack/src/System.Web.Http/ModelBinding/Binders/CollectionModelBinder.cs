@@ -22,13 +22,10 @@ namespace System.Web.Http.ModelBinding.Binders
                 bindingContext.ModelName,
                 "index"
             );
-            ValueProviderResult valueProviderResultIndex = bindingContext.ValueProvider.GetValue(
-                indexPropertyName
-            );
+            ValueProviderResult valueProviderResultIndex =
+                bindingContext.ValueProvider.GetValue(indexPropertyName);
             IEnumerable<string> indexNames =
-                CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(
-                    valueProviderResultIndex
-                );
+                CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(valueProviderResultIndex);
             return BindComplexCollectionFromIndexes(actionContext, bindingContext, indexNames);
         }
 

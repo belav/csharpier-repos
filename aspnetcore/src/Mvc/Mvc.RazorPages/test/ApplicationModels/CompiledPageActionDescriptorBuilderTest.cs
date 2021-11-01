@@ -256,9 +256,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             };
 
             // Act
-            var handlerDescriptors = CompiledPageActionDescriptorBuilder.CreateHandlerMethods(
-                pageApplicationModel
-            );
+            var handlerDescriptors =
+                CompiledPageActionDescriptorBuilder.CreateHandlerMethods(pageApplicationModel);
 
             // Assert
             Assert.Collection(
@@ -306,9 +305,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             };
 
             // Act
-            var handlerDescriptors = CompiledPageActionDescriptorBuilder.CreateHandlerMethods(
-                pageApplicationModel
-            );
+            var handlerDescriptors =
+                CompiledPageActionDescriptorBuilder.CreateHandlerMethods(pageApplicationModel);
 
             // Assert
             Assert.Collection(
@@ -355,9 +353,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             };
 
             // Act
-            var propertyDescriptors = CompiledPageActionDescriptorBuilder.CreateBoundProperties(
-                pageApplicationModel
-            );
+            var propertyDescriptors =
+                CompiledPageActionDescriptorBuilder.CreateBoundProperties(pageApplicationModel);
 
             // Assert
             Assert.Collection(
@@ -406,9 +403,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             };
 
             // Act
-            var propertyDescriptors = CompiledPageActionDescriptorBuilder.CreateBoundProperties(
-                pageApplicationModel
-            );
+            var propertyDescriptors =
+                CompiledPageActionDescriptorBuilder.CreateBoundProperties(pageApplicationModel);
 
             // Assert
             Assert.Collection(

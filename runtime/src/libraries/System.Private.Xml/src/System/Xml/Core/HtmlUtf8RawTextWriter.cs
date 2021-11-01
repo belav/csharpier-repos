@@ -310,9 +310,8 @@ namespace System.Xml
                 )
                 {
                     _currentAttributeProperties =
-                        (AttributeProperties)_attributePropertySearch.FindCaseInsensitiveString(
-                            localName
-                        ) & (AttributeProperties)_currentElementProperties;
+                        (AttributeProperties)_attributePropertySearch.FindCaseInsensitiveString(localName)
+                        & (AttributeProperties)_currentElementProperties;
 
                     if ((_currentAttributeProperties & AttributeProperties.BOOLEAN) != 0)
                     {

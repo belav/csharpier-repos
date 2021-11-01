@@ -93,9 +93,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 .ConfigureAwait(false);
             var generator = SyntaxGenerator.GetGenerator(document);
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
-            var expression = (TExpressionSyntax)syntaxFacts.GetExpressionOfExpressionStatement(
-                expressionStatement
-            );
+            var expression =
+                (TExpressionSyntax)syntaxFacts.GetExpressionOfExpressionStatement(expressionStatement);
 
             var nameToken = await GenerateUniqueNameAsync(document, expression, cancellationToken)
                 .ConfigureAwait(false);

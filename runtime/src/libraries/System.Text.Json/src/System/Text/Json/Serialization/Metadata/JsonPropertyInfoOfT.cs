@@ -462,9 +462,7 @@ namespace System.Text.Json.Serialization.Metadata
                             }
                             else if (!PropertyTypeCanBeNull)
                             {
-                                ThrowHelper.ThrowInvalidOperationException_DeserializeUnableToAssignNull(
-                                    DeclaredPropertyType
-                                );
+                                ThrowHelper.ThrowInvalidOperationException_DeserializeUnableToAssignNull(DeclaredPropertyType);
                             }
                         }
 

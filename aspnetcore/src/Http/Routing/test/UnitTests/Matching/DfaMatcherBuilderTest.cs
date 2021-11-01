@@ -543,18 +543,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = true;
-            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(
-                builder
-            );
+            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(builder);
         }
 
         [Fact]
         public void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_DefaultBehavior()
         {
             var builder = CreateDfaMatcherBuilder();
-            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(
-                builder
-            );
+            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(builder);
         }
 
         [Fact]
@@ -562,9 +558,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = false;
-            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_LegacyBehavior_Core(
-                builder
-            );
+            BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_LegacyBehavior_Core(builder);
         }
 
         private void BuildDfaTree_MultipleEndpoint_ParameterAndCatchAll_OnSameNode_Order2_CorrectBehavior_Core(
@@ -654,9 +648,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Arrange
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = true;
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(
-                builder
-            );
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(builder);
         }
 
         private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(
@@ -715,9 +707,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = true;
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(
-                builder
-            );
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(builder);
         }
 
         private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(
@@ -776,9 +766,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_DefaultBehavior()
         {
             var builder = CreateDfaMatcherBuilder();
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(
-                builder
-            );
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_CorrectBehavior_Core(builder);
         }
 
         // Regression test for https://github.com/dotnet/aspnetcore/issues/18677
@@ -787,9 +775,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = false;
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_Legacy30Behavior_Core(
-                builder
-            );
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_Legacy30Behavior_Core(builder);
         }
 
         private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order1_Legacy30Behavior_Core(
@@ -839,9 +825,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_DefaultBehavior()
         {
             var builder = CreateDfaMatcherBuilder();
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(
-                builder
-            );
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_CorrectBehavior_Core(builder);
         }
 
         // Regression test for https://github.com/dotnet/aspnetcore/issues/18677
@@ -850,9 +834,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var builder = CreateDfaMatcherBuilder();
             builder.UseCorrectCatchAllBehavior = false;
-            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_Legacy30Behavior_Core(
-                builder
-            );
+            BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_Legacy30Behavior_Core(builder);
         }
 
         private void BuildDfaTree_MultipleEndpoint_CatchAllWithHigherPrecedenceThanParameter_Order2_Legacy30Behavior_Core(
@@ -1845,9 +1827,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             if (requiredValues != null)
             {
                 var policyFactory = CreateParameterPolicyFactory();
-                var defaultRoutePatternTransformer = new DefaultRoutePatternTransformer(
-                    policyFactory
-                );
+                var defaultRoutePatternTransformer =
+                    new DefaultRoutePatternTransformer(policyFactory);
 
                 routePattern = defaultRoutePatternTransformer.SubstituteRequiredValues(
                     routePattern,

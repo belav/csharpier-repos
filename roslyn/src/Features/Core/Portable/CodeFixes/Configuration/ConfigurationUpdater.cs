@@ -405,9 +405,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                 var project = currentSolution.GetProject(projectId);
                 if (project?.FilePath?.StartsWith(analyzerConfigDirectory) == true)
                 {
-                    var addedAnalyzerConfigDocument = project.GetOrCreateAnalyzerConfigDocument(
-                        analyzerConfigPath
-                    );
+                    var addedAnalyzerConfigDocument =
+                        project.GetOrCreateAnalyzerConfigDocument(analyzerConfigPath);
                     if (addedAnalyzerConfigDocument != null)
                     {
                         analyzerConfigDocument ??= addedAnalyzerConfigDocument;

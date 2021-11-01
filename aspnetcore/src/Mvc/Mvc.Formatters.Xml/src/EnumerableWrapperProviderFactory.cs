@@ -67,9 +67,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                             context.IsSerialization
                         );
 
-                        var elementWrapperProvider = _wrapperProviderFactories.GetWrapperProvider(
-                            wrapperProviderContext
-                        );
+                        var elementWrapperProvider =
+                            _wrapperProviderFactories.GetWrapperProvider(wrapperProviderContext);
 
                         return new EnumerableWrapperProvider(enumerableOfT, elementWrapperProvider);
                     }

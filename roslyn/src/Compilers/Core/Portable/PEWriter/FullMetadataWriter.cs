@@ -442,9 +442,8 @@ namespace Microsoft.Cci
         {
             _typeDefs.Add(typeDef);
 
-            IEnumerable<IGenericTypeParameter> typeParameters = this.GetConsolidatedTypeParameters(
-                typeDef
-            );
+            IEnumerable<IGenericTypeParameter> typeParameters =
+                this.GetConsolidatedTypeParameters(typeDef);
             if (typeParameters != null)
             {
                 foreach (IGenericTypeParameter genericParameter in typeParameters)
@@ -454,9 +453,7 @@ namespace Microsoft.Cci
             }
 
             foreach (
-                MethodImplementation methodImplementation in typeDef.GetExplicitImplementationOverrides(
-                    Context
-                )
+                MethodImplementation methodImplementation in typeDef.GetExplicitImplementationOverrides(Context)
             )
             {
                 this.methodImplList.Add(methodImplementation);

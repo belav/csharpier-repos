@@ -2957,9 +2957,7 @@ End Class";
                 new[] { reference1, CSharpRef },
                 TestOptions.ReleaseExe
             );
-            CompileAndVerifyException<Microsoft.CSharp.RuntimeBinder.RuntimeBinderException>(
-                compilation2
-            ); // As in dev11.
+            CompileAndVerifyException<Microsoft.CSharp.RuntimeBinder.RuntimeBinderException>(compilation2); // As in dev11.
         }
 
         [WorkItem(846234, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/846234")]
@@ -3024,9 +3022,7 @@ End Class";
             );
             compilation2.VerifyEmitDiagnostics(); // Used to assert.
 
-            CompileAndVerifyException<Microsoft.CSharp.RuntimeBinder.RuntimeBinderException>(
-                compilation2
-            ); // As in dev11.
+            CompileAndVerifyException<Microsoft.CSharp.RuntimeBinder.RuntimeBinderException>(compilation2); // As in dev11.
         }
     }
 }

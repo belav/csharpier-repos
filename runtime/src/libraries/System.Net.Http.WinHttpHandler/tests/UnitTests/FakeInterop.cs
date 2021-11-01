@@ -662,9 +662,8 @@ internal static partial class Interop
         {
             if (option == Interop.WinHttp.WINHTTP_OPTION_PROXY)
             {
-                var proxyInfo = Marshal.PtrToStructure<Interop.WinHttp.WINHTTP_PROXY_INFO>(
-                    optionData
-                );
+                var proxyInfo =
+                    Marshal.PtrToStructure<Interop.WinHttp.WINHTTP_PROXY_INFO>(optionData);
                 var proxyInfoHistory = new APICallHistory.ProxyInfo();
                 proxyInfoHistory.AccessType = proxyInfo.AccessType;
                 proxyInfoHistory.Proxy = Marshal.PtrToStringUni(proxyInfo.Proxy);

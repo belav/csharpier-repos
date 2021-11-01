@@ -62,9 +62,8 @@ namespace System.Net.Tests
         )
         {
             HttpListenerContext context = await GetWebSocketContext(clientProtocols);
-            HttpListenerWebSocketContext socketContext = await context.AcceptWebSocketAsync(
-                serverProtocol
-            );
+            HttpListenerWebSocketContext socketContext =
+                await context.AcceptWebSocketAsync(serverProtocol);
             Assert.Equal(serverProtocol, socketContext.WebSocket.SubProtocol);
         }
 

@@ -7547,9 +7547,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 Expression.Quote(Expression.Lambda(body, parameter))
             );
 
-            var query = ((IAsyncQueryProvider)customerDbSet.Provider).CreateQuery<Customer>(
-                queryExpression
-            );
+            var query = (
+                (IAsyncQueryProvider)customerDbSet.Provider
+            ).CreateQuery<Customer>(queryExpression);
 
             var result = async ? (await query.ToListAsync()) : query.ToList();
 

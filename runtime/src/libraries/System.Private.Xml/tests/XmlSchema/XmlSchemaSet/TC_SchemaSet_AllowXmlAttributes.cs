@@ -65,9 +65,8 @@ namespace System.Xml.Tests
             settings.XmlResolver = new XmlUrlResolver();
 
             settings.Schemas = new XmlSchemaSet();
-            settings.Schemas.ValidationEventHandler += new ValidationEventHandler(
-                ValidationCallback
-            );
+            settings.Schemas.ValidationEventHandler +=
+                new ValidationEventHandler(ValidationCallback);
             settings.Schemas.Add(ss);
             settings.ValidationType = ValidationType.Schema;
             if (allowXml == true)

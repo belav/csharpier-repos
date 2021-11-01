@@ -419,9 +419,8 @@ namespace System.Diagnostics.Tracing
 
             recursionCheck.Add(dataType);
 
-            EventDataAttribute? eventAttrib = Statics.GetCustomAttribute<EventDataAttribute>(
-                dataType
-            );
+            EventDataAttribute? eventAttrib =
+                Statics.GetCustomAttribute<EventDataAttribute>(dataType);
             if (
                 eventAttrib != null
                 || Statics.GetCustomAttribute<CompilerGeneratedAttribute>(dataType) != null

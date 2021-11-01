@@ -59,9 +59,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 "ErrorMessage",
                 new string[] { "Member1", "Member2" }
             );
-            ValidationResultSubClass createdValidationResult = new ValidationResultSubClass(
-                validationResult
-            );
+            ValidationResultSubClass createdValidationResult =
+                new ValidationResultSubClass(validationResult);
             Assert.Equal(validationResult.ErrorMessage, createdValidationResult.ErrorMessage);
             Assert.Equal(validationResult.MemberNames, createdValidationResult.MemberNames);
         }

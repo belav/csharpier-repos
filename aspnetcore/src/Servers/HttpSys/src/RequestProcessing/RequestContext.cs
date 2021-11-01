@@ -59,9 +59,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
                         if (connectionDisconnectToken.CanBeCanceled)
                         {
-                            _requestAbortSource = CancellationTokenSource.CreateLinkedTokenSource(
-                                connectionDisconnectToken
-                            );
+                            _requestAbortSource =
+                                CancellationTokenSource.CreateLinkedTokenSource(connectionDisconnectToken);
                             _disconnectToken = _requestAbortSource.Token;
                         }
                         else

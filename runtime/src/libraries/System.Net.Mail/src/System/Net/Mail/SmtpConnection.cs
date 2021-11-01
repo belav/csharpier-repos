@@ -19,9 +19,8 @@ namespace System.Net.Mail
 {
     internal sealed partial class SmtpConnection
     {
-        private static readonly ContextCallback s_AuthenticateCallback = new ContextCallback(
-            AuthenticateCallback
-        );
+        private static readonly ContextCallback s_AuthenticateCallback =
+            new ContextCallback(AuthenticateCallback);
 
         private readonly BufferBuilder _bufferBuilder = new BufferBuilder();
         private bool _isConnected;
@@ -455,18 +454,14 @@ namespace System.Net.Mail
             private readonly SmtpConnection _connection;
             private int _currentModule = -1;
             private readonly int _port;
-            private static readonly AsyncCallback s_handshakeCallback = new AsyncCallback(
-                HandshakeCallback
-            );
-            private static readonly AsyncCallback s_sendEHelloCallback = new AsyncCallback(
-                SendEHelloCallback
-            );
-            private static readonly AsyncCallback s_sendHelloCallback = new AsyncCallback(
-                SendHelloCallback
-            );
-            private static readonly AsyncCallback s_authenticateCallback = new AsyncCallback(
-                AuthenticateCallback
-            );
+            private static readonly AsyncCallback s_handshakeCallback =
+                new AsyncCallback(HandshakeCallback);
+            private static readonly AsyncCallback s_sendEHelloCallback =
+                new AsyncCallback(SendEHelloCallback);
+            private static readonly AsyncCallback s_sendHelloCallback =
+                new AsyncCallback(SendHelloCallback);
+            private static readonly AsyncCallback s_authenticateCallback =
+                new AsyncCallback(AuthenticateCallback);
             private static readonly AsyncCallback s_authenticateContinueCallback =
                 new AsyncCallback(AuthenticateContinueCallback);
             private readonly string _host;
@@ -600,9 +595,8 @@ namespace System.Net.Mail
                     {
                         try
                         {
-                            LineInfo info = thisPtr._connection.Reader!.CurrentReader!.EndReadLine(
-                                result
-                            );
+                            LineInfo info =
+                                thisPtr._connection.Reader!.CurrentReader!.EndReadLine(result);
                             if (info.StatusCode != SmtpStatusCode.ServiceReady)
                             {
                                 thisPtr.InvokeCallback(
@@ -838,9 +832,9 @@ namespace System.Net.Mail
                         (ConnectAndHandshakeAsyncResult)result.AsyncState!;
                     try
                     {
-                        (thisPtr._connection._networkStream as TlsStream)!.EndAuthenticateAsClient(
-                            result
-                        );
+                        (
+                            thisPtr._connection._networkStream as TlsStream
+                        )!.EndAuthenticateAsClient(result);
                         thisPtr._connection._responseReader = new SmtpReplyReaderFactory(
                             thisPtr._connection._networkStream
                         );
@@ -994,9 +988,9 @@ namespace System.Net.Mail
                     LineInfo info = AuthCommand.EndSend(result);
                     if ((int)info.StatusCode == 235)
                     {
-                        _connection._authenticationModules[_currentModule].CloseContext(
-                            _connection
-                        );
+                        _connection._authenticationModules[
+                            _currentModule
+                        ].CloseContext(_connection);
                         _connection._isConnected = true;
                         InvokeCallback();
                         return false;

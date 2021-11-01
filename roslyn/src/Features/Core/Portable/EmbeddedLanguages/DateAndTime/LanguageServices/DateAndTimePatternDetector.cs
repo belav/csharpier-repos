@@ -118,9 +118,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             if (!syntaxFacts.IsInvocationExpression(invocationOrCreation))
                 return false;
 
-            var invokedExpression = syntaxFacts.GetExpressionOfInvocationExpression(
-                invocationOrCreation
-            );
+            var invokedExpression =
+                syntaxFacts.GetExpressionOfInvocationExpression(invocationOrCreation);
             var name = GetNameOfInvokedExpression(syntaxFacts, invokedExpression);
             if (
                 name != nameof(ToString)

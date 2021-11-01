@@ -271,9 +271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // If this accessor is overriding an accessor from metadata, it is possible that
                     // the name of the overridden accessor doesn't follow the C# add_X/remove_X pattern.
                     // We should copy the name so that the runtime will recognize this as an override.
-                    MethodSymbol overriddenAccessor = overriddenEvent.GetOwnOrInheritedAccessor(
-                        isAdder
-                    );
+                    MethodSymbol overriddenAccessor =
+                        overriddenEvent.GetOwnOrInheritedAccessor(isAdder);
                     return (object)overriddenAccessor == null ? null : overriddenAccessor.Name;
                 }
             }

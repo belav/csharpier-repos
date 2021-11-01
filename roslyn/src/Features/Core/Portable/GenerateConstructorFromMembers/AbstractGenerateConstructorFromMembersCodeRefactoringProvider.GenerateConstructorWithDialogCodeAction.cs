@@ -128,9 +128,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                         .GetSyntaxAsync(cancellationToken)
                         .ConfigureAwait(false);
                     var constructorTree = constructorSyntax.SyntaxTree;
-                    var constructorDocument = _document.Project.Solution.GetRequiredDocument(
-                        constructorTree
-                    );
+                    var constructorDocument =
+                        _document.Project.Solution.GetRequiredDocument(constructorTree);
                     return ImmutableArray.Create<CodeActionOperation>(
                         new DocumentNavigationOperation(
                             constructorDocument.Id,

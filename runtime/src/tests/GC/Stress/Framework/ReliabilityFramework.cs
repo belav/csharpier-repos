@@ -452,9 +452,8 @@ public class ReliabilityFramework
             _testsRanCount = 0;
             _curTestSet = testSet;
             if (timeValue != null)
-                _curTestSet.MaximumTime = ReliabilityConfig.ConvertTimeValueToTestRunTime(
-                    timeValue
-                );
+                _curTestSet.MaximumTime =
+                    ReliabilityConfig.ConvertTimeValueToTestRunTime(timeValue);
 
             _logger.ReportResults = _curTestSet.ReportResults;
 

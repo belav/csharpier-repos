@@ -104,9 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
             //     | pre_decrement_expression
             //     | await_expression
             //     ;
-            var isNullConditionalInvocationExpression = IsNullConditionalInvocationExpression(
-                expressionNode
-            );
+            var isNullConditionalInvocationExpression =
+                IsNullConditionalInvocationExpression(expressionNode);
 
             return expressionNode.IsKind(SyntaxKind.InvocationExpression)
                 || isNullConditionalInvocationExpression

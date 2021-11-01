@@ -27,9 +27,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             public const string Adornments = nameof(Adornments);
             public const string AsyncLazy = nameof(AsyncLazy);
             public const string AutomaticCompletion = nameof(AutomaticCompletion);
-            public const string AutomaticEndConstructCorrection = nameof(
-                AutomaticEndConstructCorrection
-            );
+            public const string AutomaticEndConstructCorrection =
+                nameof(AutomaticEndConstructCorrection);
             public const string BlockCommentEditing = nameof(BlockCommentEditing);
             public const string BraceHighlighting = nameof(BraceHighlighting);
             public const string BraceMatching = nameof(BraceMatching);
@@ -283,9 +282,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             public const string CommentSelection = nameof(CommentSelection);
             public const string CompleteStatement = nameof(CompleteStatement);
             public const string Completion = nameof(Completion);
-            public const string ConvertAutoPropertyToFullProperty = nameof(
-                ConvertAutoPropertyToFullProperty
-            );
+            public const string ConvertAutoPropertyToFullProperty =
+                nameof(ConvertAutoPropertyToFullProperty);
             public const string ConvertCast = nameof(ConvertCast);
             public const string ConvertTypeOfToNameOf = nameof(ConvertTypeOfToNameOf);
             public const string DebuggingBreakpoints = "Debugging.Breakpoints";
@@ -313,9 +311,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             public const string F1Help = nameof(F1Help);
             public const string FindReferences = nameof(FindReferences);
             public const string FixIncorrectTokens = nameof(FixIncorrectTokens);
-            public const string FixInterpolatedVerbatimString = nameof(
-                FixInterpolatedVerbatimString
-            );
+            public const string FixInterpolatedVerbatimString =
+                nameof(FixInterpolatedVerbatimString);
             public const string Formatting = nameof(Formatting);
             public const string GoToAdjacentMember = nameof(GoToAdjacentMember);
             public const string GoToBase = nameof(GoToBase);
@@ -337,9 +334,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             public const string NavigateTo = nameof(NavigateTo);
             public const string NavigationBar = nameof(NavigationBar);
             public const string NetCore = nameof(NetCore);
-            public const string NormalizeModifiersOrOperators = nameof(
-                NormalizeModifiersOrOperators
-            );
+            public const string NormalizeModifiersOrOperators =
+                nameof(NormalizeModifiersOrOperators);
             public const string ObjectBrowser = nameof(ObjectBrowser);
             public const string Options = nameof(Options);
             public const string Organizing = nameof(Organizing);
@@ -355,9 +351,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             public const string ReduceTokens = nameof(ReduceTokens);
             public const string ReferenceHighlighting = nameof(ReferenceHighlighting);
             public const string RemoteHost = nameof(RemoteHost);
-            public const string RemoveUnnecessaryLineContinuation = nameof(
-                RemoveUnnecessaryLineContinuation
-            );
+            public const string RemoveUnnecessaryLineContinuation =
+                nameof(RemoveUnnecessaryLineContinuation);
             public const string Rename = nameof(Rename);
             public const string RenameTracking = nameof(RenameTracking);
             public const string SignatureHelp = nameof(SignatureHelp);

@@ -39,9 +39,8 @@ namespace System.ComponentModel.Composition
                     {
                         try
                         {
-                            metadataViewFactory = MetadataViewGenerator.GetMetadataViewFactory(
-                                metadataViewType
-                            );
+                            metadataViewFactory =
+                                MetadataViewGenerator.GetMetadataViewFactory(metadataViewType);
                         }
                         catch (TypeLoadException ex)
                         {

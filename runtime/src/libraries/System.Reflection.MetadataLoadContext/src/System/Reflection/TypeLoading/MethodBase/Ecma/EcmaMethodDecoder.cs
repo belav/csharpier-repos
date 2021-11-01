@@ -17,9 +17,8 @@ namespace System.Reflection.TypeLoading.Ecma
         {
             _handle = handle;
             _module = module;
-            _neverAccessThisExceptThroughMethodDefinitionProperty = handle.GetMethodDefinition(
-                Reader
-            );
+            _neverAccessThisExceptThroughMethodDefinitionProperty =
+                handle.GetMethodDefinition(Reader);
         }
 
         public RoModule GetRoModule() => _module;

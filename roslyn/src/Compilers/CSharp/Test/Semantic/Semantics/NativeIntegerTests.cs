@@ -1065,9 +1065,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                 AssemblySymbol expectedAssembly
             )
             {
-                Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(
-                    field
-                );
+                Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(field);
                 Assert.Equal(expectedSymbol, field.ToTestDisplayString());
                 var type = (NamedTypeSymbol)field.Type;
                 Assert.True(type.IsNativeIntegerType);
@@ -1187,9 +1185,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                 AssemblySymbol expectedAssembly
             )
             {
-                Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(
-                    field
-                );
+                Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(field);
                 Assert.Equal(expectedSymbol, field.ToTestDisplayString());
                 var type = (NamedTypeSymbol)field.Type;
                 Assert.True(type.IsNativeIntegerType);
@@ -1308,9 +1304,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
                 AssemblySymbol expectedAssembly
             )
             {
-                Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(
-                    field
-                );
+                Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(field);
                 Assert.Equal(expectedSymbol, field.ToTestDisplayString());
                 var type = (NamedTypeSymbol)field.Type;
                 Assert.True(type.IsNativeIntegerType);
@@ -1383,9 +1377,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
 
             var f0 = comp.GetMember<FieldSymbol>("B.F0");
             Assert.NotEqual(f0B.Type.ContainingAssembly, f0.Type.ContainingAssembly);
-            Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(
-                f0
-            );
+            Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(f0);
 
             var f1 = comp.GetMember<FieldSymbol>("B.F1");
             verifyField(f1, "nint B.F1");
@@ -1403,9 +1395,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
 
             static void verifyField(FieldSymbol field, string expectedSymbol)
             {
-                Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(
-                    field
-                );
+                Assert.IsType<Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting.RetargetingFieldSymbol>(field);
                 Assert.Equal(expectedSymbol, field.ToTestDisplayString());
                 var type = (NamedTypeSymbol)field.Type;
                 Assert.True(type.IsNativeIntegerType);

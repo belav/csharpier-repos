@@ -204,9 +204,9 @@ namespace System.Web.Http.ExceptionHandling
             Assert.True(shouldLog);
             Assert.True(data.Contains(ExceptionLogger.LoggedByKey));
             object loggedBy = data[ExceptionLogger.LoggedByKey];
-            ICollection<object> loggedByCollection = Assert.IsAssignableFrom<ICollection<object>>(
-                loggedBy
-            );
+            ICollection<object> loggedByCollection = Assert.IsAssignableFrom<
+                ICollection<object>
+            >(loggedBy);
             Assert.Contains(product, loggedByCollection);
         }
 

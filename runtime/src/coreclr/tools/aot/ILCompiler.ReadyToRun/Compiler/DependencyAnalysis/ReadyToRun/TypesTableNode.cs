@@ -57,9 +57,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 int hashCode = 0;
                 for (;;)
                 {
-                    TypeDefinition defType = defTypeInfo.MetadataReader.GetTypeDefinition(
-                        defTypeHandle
-                    );
+                    TypeDefinition defType =
+                        defTypeInfo.MetadataReader.GetTypeDefinition(defTypeHandle);
                     string namespaceName = defTypeInfo.MetadataReader.GetString(defType.Namespace);
                     string typeName = defTypeInfo.MetadataReader.GetString(defType.Name);
                     hashCode ^= ReadyToRunHashCode.NameHashCode(namespaceName, typeName);
@@ -87,9 +86,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 int hashCode = 0;
                 for (;;)
                 {
-                    ExportedType expType = expTypeInfo.MetadataReader.GetExportedType(
-                        expTypeHandle
-                    );
+                    ExportedType expType =
+                        expTypeInfo.MetadataReader.GetExportedType(expTypeHandle);
                     string namespaceName = expTypeInfo.MetadataReader.GetString(expType.Namespace);
                     string typeName = expTypeInfo.MetadataReader.GetString(expType.Name);
                     hashCode ^= ReadyToRunHashCode.NameHashCode(namespaceName, typeName);

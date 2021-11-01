@@ -729,9 +729,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (assemblies[i].ContainsNoPiaLocalTypes)
                     {
-                        currentBindingResult.AssemblySymbol.SetNoPiaResolutionAssemblies(
-                            noPiaResolutionAssemblies
-                        );
+                        currentBindingResult.AssemblySymbol.SetNoPiaResolutionAssemblies(noPiaResolutionAssemblies);
                     }
 
                     // Setup linked referenced assemblies.

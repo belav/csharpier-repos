@@ -253,9 +253,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             protected override GenericTestReferenceCollectionBuilder<TEntity, TRelatedEntity> Wrap(
                 ReferenceCollectionBuilder<TEntity, TRelatedEntity> referenceCollectionBuilder
             ) =>
-                new GenericStringTestReferenceCollectionBuilder<TEntity, TRelatedEntity>(
-                    referenceCollectionBuilder
-                );
+                new GenericStringTestReferenceCollectionBuilder<
+                    TEntity,
+                    TRelatedEntity
+                >(referenceCollectionBuilder);
 
             public override TestReferenceCollectionBuilder<TEntity, TRelatedEntity> HasForeignKey(
                 Expression<Func<TRelatedEntity, object?>> foreignKeyExpression
@@ -294,9 +295,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             protected override GenericTestReferenceReferenceBuilder<TEntity, TRelatedEntity> Wrap(
                 ReferenceReferenceBuilder<TEntity, TRelatedEntity> referenceReferenceBuilder
             ) =>
-                new GenericStringTestReferenceReferenceBuilder<TEntity, TRelatedEntity>(
-                    referenceReferenceBuilder
-                );
+                new GenericStringTestReferenceReferenceBuilder<
+                    TEntity,
+                    TRelatedEntity
+                >(referenceReferenceBuilder);
 
             public override TestReferenceReferenceBuilder<
                 TEntity,
@@ -378,9 +380,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             > Wrap<TNewEntity, TNewRelatedEntity>(
                 OwnedNavigationBuilder<TNewEntity, TNewRelatedEntity> referenceOwnershipBuilder
             ) =>
-                new GenericStringTestOwnedNavigationBuilder<TNewEntity, TNewRelatedEntity>(
-                    referenceOwnershipBuilder
-                );
+                new GenericStringTestOwnedNavigationBuilder<
+                    TNewEntity,
+                    TNewRelatedEntity
+                >(referenceOwnershipBuilder);
 
             public override TestOwnershipBuilder<TEntity, TDependentEntity> WithOwner(
                 Expression<Func<TDependentEntity, TEntity?>>? referenceExpression

@@ -22,9 +22,8 @@ namespace System.Net
                     {
                         if (_requestQueueBoundHandle == null)
                         {
-                            _requestQueueBoundHandle = ThreadPoolBoundHandle.BindHandle(
-                                RequestQueueHandle
-                            );
+                            _requestQueueBoundHandle =
+                                ThreadPoolBoundHandle.BindHandle(RequestQueueHandle);
                             if (NetEventSource.Log.IsEnabled())
                                 NetEventSource.Info(
                                     $"ThreadPoolBoundHandle.BindHandle({RequestQueueHandle}) -> {_requestQueueBoundHandle}"

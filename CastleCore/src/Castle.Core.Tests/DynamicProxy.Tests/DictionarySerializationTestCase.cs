@@ -44,9 +44,9 @@ namespace Castle.DynamicProxy.Tests
             c.Name = DateTime.Now.ToString("yyyyMMddHHmmss");
             theInstances.Add(c, c.Name);
             Dictionary<ClassOverridingEqualsAndGetHashCode, string> theInstancesBis =
-                SerializeAndDeserialize<Dictionary<ClassOverridingEqualsAndGetHashCode, string>>(
-                    theInstances
-                );
+                SerializeAndDeserialize<
+                    Dictionary<ClassOverridingEqualsAndGetHashCode, string>
+                >(theInstances);
 
             Assert.IsNotNull(theInstancesBis);
             Assert.AreEqual(theInstances.Count, theInstancesBis.Count);
@@ -70,9 +70,9 @@ namespace Castle.DynamicProxy.Tests
 
 #pragma warning disable 219
             Dictionary<ClassOverridingEqualsAndGetHashCode, string> theInstancesBis =
-                SerializeAndDeserialize<Dictionary<ClassOverridingEqualsAndGetHashCode, string>>(
-                    theInstances
-                );
+                SerializeAndDeserialize<
+                    Dictionary<ClassOverridingEqualsAndGetHashCode, string>
+                >(theInstances);
 #pragma warning restore 219
         }
 
@@ -98,9 +98,9 @@ namespace Castle.DynamicProxy.Tests
 
 #pragma warning disable 219
             Dictionary<ClassOverridingEqualsAndGetHashCode, string> theInstancesBis =
-                SerializeAndDeserialize<Dictionary<ClassOverridingEqualsAndGetHashCode, string>>(
-                    theInstances
-                );
+                SerializeAndDeserialize<
+                    Dictionary<ClassOverridingEqualsAndGetHashCode, string>
+                >(theInstances);
 #pragma warning restore 219
         }
 

@@ -34,9 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             simplifiedTypeName = string.Empty;
 
             var typeAnnotation = new SyntaxAnnotation();
-            var syntaxRoot = documentWithFullyQualifiedTypeName.GetSyntaxRootSynchronously(
-                cancellationToken
-            );
+            var syntaxRoot =
+                documentWithFullyQualifiedTypeName.GetSyntaxRootSynchronously(cancellationToken);
             var nodeToReplace = syntaxRoot
                 .DescendantNodes()
                 .FirstOrDefault(n => n.Span == updatedTextSpan);
@@ -50,9 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
                 nodeToReplace,
                 nodeToReplace.WithAdditionalAnnotations(typeAnnotation, Simplifier.Annotation)
             );
-            var documentWithAnnotations = documentWithFullyQualifiedTypeName.WithSyntaxRoot(
-                updatedRoot
-            );
+            var documentWithAnnotations =
+                documentWithFullyQualifiedTypeName.WithSyntaxRoot(updatedRoot);
 
             var simplifiedDocument = Simplifier
                 .ReduceAsync(documentWithAnnotations, cancellationToken: cancellationToken)

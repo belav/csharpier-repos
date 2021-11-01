@@ -520,9 +520,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
                         // Let's look through directories to delete.
                         foreach (
-                            var directoryInfo in new DirectoryInfo(
-                                _rootTemporaryPath
-                            ).EnumerateDirectories()
+                            var directoryInfo in new DirectoryInfo(_rootTemporaryPath).EnumerateDirectories()
                         )
                         {
                             // Is there a mutex for this one?

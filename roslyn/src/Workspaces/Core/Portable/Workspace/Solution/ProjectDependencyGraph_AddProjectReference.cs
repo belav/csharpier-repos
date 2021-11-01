@@ -193,9 +193,8 @@ namespace Microsoft.CodeAnalysis
                     // and we'll remove any data from the cache.
                     if (newTransitiveReferences != null && existingTransitiveReferences != null)
                     {
-                        builder[projectIdToUpdate] = existingTransitiveReferences.Union(
-                            newTransitiveReferences
-                        );
+                        builder[projectIdToUpdate] =
+                            existingTransitiveReferences.Union(newTransitiveReferences);
                     }
                     else
                     {
@@ -262,9 +261,8 @@ namespace Microsoft.CodeAnalysis
                         && existingReverseTransitiveReferences != null
                     )
                     {
-                        builder[projectIdToUpdate] = existingReverseTransitiveReferences.Union(
-                            newReverseTranstiveReferences
-                        );
+                        builder[projectIdToUpdate] =
+                            existingReverseTransitiveReferences.Union(newReverseTranstiveReferences);
                     }
                     else
                     {

@@ -970,9 +970,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void DoNotPreserveReferenceWhenRefPropertyIsAbsent()
         {
             string json = @"{""Child"":{""$id"":""1""},""Sibling"":{""foo"":""1""}}";
-            ClassWithObjectProperty root = JsonSerializer.Deserialize<ClassWithObjectProperty>(
-                json
-            );
+            ClassWithObjectProperty root =
+                JsonSerializer.Deserialize<ClassWithObjectProperty>(json);
             Assert.IsType<JsonElement>(root.Sibling);
 
             // $ref with any escaped character shall not be treated as metadata, hence Sibling must be JsonElement.

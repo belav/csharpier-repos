@@ -31,9 +31,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
             var linkExternalLogin = await Client.SendAsync(_linkLoginForm, _linkLoginButton);
             var goToLinkExternalLogin = ResponseAssert.IsRedirect(linkExternalLogin);
             var externalLoginResponse = await Client.GetAsync(goToLinkExternalLogin);
-            var externalLoginDocument = await ResponseAssert.IsHtmlDocumentAsync(
-                externalLoginResponse
-            );
+            var externalLoginDocument =
+                await ResponseAssert.IsHtmlDocumentAsync(externalLoginResponse);
 
             // Redirected to manage page for external login with a remove button
             return new ManageExternalLogin(Client, externalLoginDocument, Context);

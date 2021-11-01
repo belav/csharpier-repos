@@ -480,9 +480,8 @@ class Program
                 (IAnonymousFunctionOperation)variableDeclarationGroupOperation.Declarations
                     .Single()
                     .Declarators.Single().Initializer.Value;
-            var lambdaOperation = (IAnonymousFunctionOperation)semanticModel.GetOperation(
-                lambdaSyntax
-            );
+            var lambdaOperation =
+                (IAnonymousFunctionOperation)semanticModel.GetOperation(lambdaSyntax);
 
             // Assert that both ways of getting to the lambda (requesting the lambda directly, and requesting via the lambda syntax)
             // return the same bound node.
@@ -574,9 +573,8 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 .Single();
             var lambdaSyntax =
                 (LambdaExpressionSyntax)variableDeclaration.Declaration.Variables.Single().Initializer.Value;
-            var lambdaOperation = (IAnonymousFunctionOperation)semanticModel.GetOperation(
-                lambdaSyntax
-            );
+            var lambdaOperation =
+                (IAnonymousFunctionOperation)semanticModel.GetOperation(lambdaSyntax);
 
             Assert.True(lambdaOperation.Symbol.IsStatic);
         }
@@ -955,9 +953,8 @@ struct C
             var graphD1 = graphM.GetAnonymousFunctionControlFlowGraph(lambdaD1);
             Assert.NotNull(graphD1);
             Assert.Same(graphM, graphD1.Parent);
-            var graphD1_FromExtension = graphM.GetAnonymousFunctionControlFlowGraphInScope(
-                lambdaD1
-            );
+            var graphD1_FromExtension =
+                graphM.GetAnonymousFunctionControlFlowGraphInScope(lambdaD1);
             Assert.Same(graphD1, graphD1_FromExtension);
 
             IFlowAnonymousFunctionOperation lambdaD2 = getLambda(graphD1);
@@ -1043,9 +1040,8 @@ struct C
             Assert.NotNull(graphD2);
             Assert.Same(graphM, graphD2.Parent);
 
-            var graphD1_FromExtension = graphM.GetAnonymousFunctionControlFlowGraphInScope(
-                lambdaD1
-            );
+            var graphD1_FromExtension =
+                graphM.GetAnonymousFunctionControlFlowGraphInScope(lambdaD1);
             Assert.Same(graphD1, graphD1_FromExtension);
 
             Assert.Throws<ArgumentOutOfRangeException>(

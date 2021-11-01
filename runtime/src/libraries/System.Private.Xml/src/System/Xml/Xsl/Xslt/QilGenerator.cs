@@ -2736,8 +2736,7 @@ namespace System.Xml.Xsl.Xslt
                     if (_xslVersion != XslVersion.ForwardsCompatible)
                     {
                         ReportErrorInXPath( /*[XT0300]*/
-                            e
-                        );
+                        e);
                     }
                     result = _f.Error(_f.String(e.Message));
                 }
@@ -2765,8 +2764,7 @@ namespace System.Xml.Xsl.Xslt
                 if (_xslVersion != XslVersion.ForwardsCompatible)
                 {
                     ReportErrorInXPath( /*[XTTE_101]*/
-                        e
-                    );
+                    e);
                 }
                 result = _f.Error(_f.String(e.Message));
             }
@@ -2795,8 +2793,7 @@ namespace System.Xml.Xsl.Xslt
                 if (_xslVersion != XslVersion.ForwardsCompatible)
                 {
                     ReportErrorInXPath( /*[XT0350][XT0360]*/
-                        e
-                    );
+                    e);
                 }
                 result = _f.Error(_f.String(e.Message));
                 pos = expr.Length;
@@ -2829,8 +2826,7 @@ namespace System.Xml.Xsl.Xslt
                 if (_xslVersion != XslVersion.ForwardsCompatible)
                 {
                     ReportErrorInXPath( /*[XT0340]*/
-                        e
-                    );
+                    e);
                 }
                 result = _f.Loop(_f.For(_ptrnBuilder.FixupNode), _f.Error(_f.String(e.Message)));
                 XPathPatternBuilder.SetPriority(result, 0.5);
@@ -2859,8 +2855,7 @@ namespace System.Xml.Xsl.Xslt
                 if (_xslVersion != XslVersion.ForwardsCompatible)
                 {
                     ReportErrorInXPath( /*[XT0340]*/
-                        e
-                    );
+                    e);
                 }
                 result = _f.Error(_f.String(e.Message));
             }
@@ -2897,8 +2892,7 @@ namespace System.Xml.Xsl.Xslt
                     if (_xslVersion != XslVersion.ForwardsCompatible)
                     {
                         ReportErrorInXPath( /*[XT0340]*/
-                            e
-                        );
+                        e);
                     }
                     result = _f.Error(_f.String(e.Message));
                 }
@@ -2941,8 +2935,7 @@ namespace System.Xml.Xsl.Xslt
                     if (_xslVersion != XslVersion.ForwardsCompatible)
                     {
                         ReportErrorInXPath( /*[XT0300]*/
-                            e
-                        );
+                        e);
                     }
                     result = _f.Error(_f.String(e.Message));
                 }

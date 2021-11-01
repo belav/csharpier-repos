@@ -76,11 +76,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 foreach (var orderDetail in orderDetails)
                 {
-                    orderDetail.Order = orderDetail.Order.Customer.CompanyName.StartsWith(
-                        tenantPrefix
-                    )
-                        ? orderDetail.Order
-                        : null;
+                    orderDetail.Order =
+                        orderDetail.Order.Customer.CompanyName.StartsWith(tenantPrefix)
+                            ? orderDetail.Order
+                            : null;
                     orderDetail.Product = orderDetail.Product.Discontinued
                         ? orderDetail.Product
                         : null;

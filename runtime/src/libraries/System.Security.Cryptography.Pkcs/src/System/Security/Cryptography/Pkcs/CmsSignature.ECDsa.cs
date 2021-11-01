@@ -202,7 +202,7 @@ namespace System.Security.Cryptography.Pkcs
 #if NETCOREAPP || NETSTANDARD2_1
                         dataHash.ToArray()
 #else
-                        dataHash
+                    dataHash
 #endif
                     )
                 );

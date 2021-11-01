@@ -290,16 +290,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         var secondTargetType = navigation.TargetEntityType;
                         var innerQueryable = new QueryRootExpression(secondTargetType);
                         var innerSource =
-                            (NavigationExpansionExpression)_navigationExpandingExpressionVisitor.Visit(
-                                innerQueryable
-                            );
+                            (NavigationExpansionExpression)_navigationExpandingExpressionVisitor.Visit(innerQueryable);
 
                         if (includeTree != null)
                         {
                             // Value known to be non-null
-                            UnwrapEntityReference(innerSource.PendingSelector)!.IncludePaths.Merge(
-                                includeTree
-                            );
+                            UnwrapEntityReference(
+                                innerSource.PendingSelector
+                            )!.IncludePaths.Merge(includeTree);
                         }
 
                         var sourceElementType = primaryExpansion.Type.GetSequenceType();
@@ -355,16 +353,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         var secondTargetType = navigation.TargetEntityType;
                         var innerQueryable = new QueryRootExpression(secondTargetType);
                         var innerSource =
-                            (NavigationExpansionExpression)_navigationExpandingExpressionVisitor.Visit(
-                                innerQueryable
-                            );
+                            (NavigationExpansionExpression)_navigationExpandingExpressionVisitor.Visit(innerQueryable);
 
                         if (includeTree != null)
                         {
                             // Value known to be non-null
-                            UnwrapEntityReference(innerSource.PendingSelector)!.IncludePaths.Merge(
-                                includeTree
-                            );
+                            UnwrapEntityReference(
+                                innerSource.PendingSelector
+                            )!.IncludePaths.Merge(includeTree);
                         }
 
                         var sourceElementType = primaryExpansion.Type.GetSequenceType();
@@ -450,9 +446,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 var innerQueryable = new QueryRootExpression(targetType);
                 var innerSource =
-                    (NavigationExpansionExpression)_navigationExpandingExpressionVisitor.Visit(
-                        innerQueryable
-                    );
+                    (NavigationExpansionExpression)_navigationExpandingExpressionVisitor.Visit(innerQueryable);
 
                 // We detect and copy over include for navigation being expanded automatically
                 var navigation = onDependent
@@ -1091,9 +1085,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         .Append(newResultSelector)
                                 );
 
-                                var transparentIdentifierParameter = Expression.Parameter(
-                                    resultType
-                                );
+                                var transparentIdentifierParameter =
+                                    Expression.Parameter(resultType);
                                 var transparentIdentifierInnerAccessor =
                                     Expression.MakeMemberAccess(
                                         transparentIdentifierParameter,
@@ -1246,9 +1239,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         _visitor,
                         navigationExpansionExpression
                     ).Expand(navigationExpansionExpression.PendingSelector, _applyIncludes);
-                    pendingSelector = _visitor._subqueryMemberPushdownExpressionVisitor.Visit(
-                        pendingSelector
-                    );
+                    pendingSelector =
+                        _visitor._subqueryMemberPushdownExpressionVisitor.Visit(pendingSelector);
                     pendingSelector = _visitor.Visit(pendingSelector);
                     pendingSelector = Visit(pendingSelector);
                     navigationExpansionExpression.ApplySelector(pendingSelector);

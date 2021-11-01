@@ -100,9 +100,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 {
                     lock (Gate)
                     {
-                        EntriesWhenGroupingByDefinition = EntriesWhenGroupingByDefinition.AddRange(
-                            entries
-                        );
+                        EntriesWhenGroupingByDefinition =
+                            EntriesWhenGroupingByDefinition.AddRange(entries);
                         EntriesWhenNotGroupingByDefinition =
                             EntriesWhenNotGroupingByDefinition.AddRange(entries);
                     }

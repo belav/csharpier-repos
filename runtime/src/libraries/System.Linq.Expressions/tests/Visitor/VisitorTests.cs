@@ -251,9 +251,8 @@ namespace System.Linq.Expressions.Tests
             {
                 Expression.Constant(value)
             }.AsReadOnly();
-            ReadOnlyCollection<Expression> visited = new ConstantRefreshingVisitor().Visit(
-                collection
-            );
+            ReadOnlyCollection<Expression> visited =
+                new ConstantRefreshingVisitor().Visit(collection);
             Assert.NotSame(collection, visited);
             Assert.NotSame(collection[0], visited[0]);
             Assert.Same(value, ((ConstantExpression)visited[0]).Value);
@@ -268,9 +267,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Empty(),
                 Expression.Constant(value)
             }.AsReadOnly();
-            ReadOnlyCollection<Expression> visited = new ConstantRefreshingVisitor().Visit(
-                collection
-            );
+            ReadOnlyCollection<Expression> visited =
+                new ConstantRefreshingVisitor().Visit(collection);
             Assert.NotSame(collection, visited);
             Assert.Same(collection[0], visited[0]);
             Assert.NotSame(collection[1], visited[1]);

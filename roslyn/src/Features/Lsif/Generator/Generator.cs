@@ -245,9 +245,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                     // since we show different contents for different constructed types there.
                     var symbolForLinkedResultSet =
                         (declaredSymbol ?? referencedSymbol)!.OriginalDefinition;
-                    var symbolForLinkedResultSetId = symbolResultsTracker.GetResultSetIdForSymbol(
-                        symbolForLinkedResultSet
-                    );
+                    var symbolForLinkedResultSetId =
+                        symbolResultsTracker.GetResultSetIdForSymbol(symbolForLinkedResultSet);
                     lsifJsonWriter.Write(
                         Edge.Create(
                             "next",

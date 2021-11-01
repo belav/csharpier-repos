@@ -60,9 +60,8 @@ namespace Internal.TypeSystem
 
         public override MethodDesc GetCanonMethodTarget(CanonicalFormKind kind)
         {
-            TypeDesc canonicalizedTypeOfTargetMethod = _rdType.CanonicalType.ConvertToCanonForm(
-                kind
-            );
+            TypeDesc canonicalizedTypeOfTargetMethod =
+                _rdType.CanonicalType.ConvertToCanonForm(kind);
             return Context.GetMethodForInstantiatedType(
                 _typicalMethodDef,
                 (InstantiatedType)canonicalizedTypeOfTargetMethod

@@ -1004,9 +1004,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 TRelatedEntity
             > HasForeignKey<TDependentEntity>(params string[] foreignKeyPropertyNames) =>
                 Wrap(
-                    ReferenceReferenceBuilder.HasForeignKey<TDependentEntity>(
-                        foreignKeyPropertyNames
-                    )
+                    ReferenceReferenceBuilder.HasForeignKey<TDependentEntity>(foreignKeyPropertyNames)
                 );
 
             public override TestReferenceReferenceBuilder<

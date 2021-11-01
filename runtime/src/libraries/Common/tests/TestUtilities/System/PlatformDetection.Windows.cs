@@ -152,9 +152,8 @@ namespace System
         public static bool IsWindowsSubsystemForLinux => m_isWindowsSubsystemForLinux.Value;
         public static bool IsNotWindowsSubsystemForLinux => !IsWindowsSubsystemForLinux;
 
-        private static Lazy<bool> m_isWindowsSubsystemForLinux = new Lazy<bool>(
-            GetIsWindowsSubsystemForLinux
-        );
+        private static Lazy<bool> m_isWindowsSubsystemForLinux =
+            new Lazy<bool>(GetIsWindowsSubsystemForLinux);
         private static bool GetIsWindowsSubsystemForLinux()
         {
             // https://github.com/Microsoft/BashOnWindows/issues/423#issuecomment-221627364

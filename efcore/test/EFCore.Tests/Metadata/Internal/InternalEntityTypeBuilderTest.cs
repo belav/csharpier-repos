@@ -3568,9 +3568,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 Assert.Equal(expectedAdded, findMember(addedEntityTypeBuilder));
                 Assert.Equal(
                     expectedIgnored,
-                    ignoredEntityTypeBuilder.Metadata.FindDeclaredIgnoredConfigurationSource(
-                        memberToIgnore
-                    ) == ignoreConfigurationSource
+                    ignoredEntityTypeBuilder.Metadata.FindDeclaredIgnoredConfigurationSource(memberToIgnore)
+                        == ignoreConfigurationSource
                 );
             }
         }

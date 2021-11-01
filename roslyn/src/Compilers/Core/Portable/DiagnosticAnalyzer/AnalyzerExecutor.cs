@@ -1409,9 +1409,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                                     if (filter is object)
                                     {
-                                        return cb.DescendantNodesAndSelf(
-                                                descendIntoChildren: filter
-                                            )
+                                        return cb.DescendantNodesAndSelf(descendIntoChildren: filter)
                                             .Where(filter);
                                     }
                                     else

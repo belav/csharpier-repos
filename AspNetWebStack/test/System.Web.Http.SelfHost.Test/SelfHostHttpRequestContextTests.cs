@@ -105,9 +105,8 @@ namespace System.Web.Http.SelfHost
                     request
                 );
 
-                request.Properties[HttpSelfHostServer.SecurityKey] = CreateSecurityProperty(
-                    expectedCertificate
-                );
+                request.Properties[HttpSelfHostServer.SecurityKey] =
+                    CreateSecurityProperty(expectedCertificate);
 
                 // Act
                 X509Certificate2 certificate = context.ClientCertificate;
@@ -846,9 +845,8 @@ namespace System.Web.Http.SelfHost
         private static SecurityMessageProperty CreateSecurityProperty(X509Certificate2 certificate)
         {
             AuthorizationContext authorizationContext = new X509AuthorizationContext(certificate);
-            ServiceSecurityContext securityContext = new ServiceSecurityContext(
-                authorizationContext
-            );
+            ServiceSecurityContext securityContext =
+                new ServiceSecurityContext(authorizationContext);
             SecurityMessageProperty securityProperty = new SecurityMessageProperty();
             securityProperty.ServiceSecurityContext = securityContext;
             return securityProperty;

@@ -448,9 +448,8 @@ namespace System.Management
                 if (nsPath.Length > 0)
                 {
                     this.scope = new ManagementScope(nsPath);
-                    this.scope.IdentifierChanged += new IdentifierChangedEventHandler(
-                        HandleIdentifierChange
-                    );
+                    this.scope.IdentifierChanged +=
+                        new IdentifierChangedEventHandler(HandleIdentifierChange);
                 }
             }
 
@@ -542,9 +541,8 @@ namespace System.Management
                 if (null != value)
                 {
                     if (null != scope)
-                        scope.IdentifierChanged -= new IdentifierChangedEventHandler(
-                            HandleIdentifierChange
-                        );
+                        scope.IdentifierChanged -=
+                            new IdentifierChangedEventHandler(HandleIdentifierChange);
 
                     scope = ManagementScope._Clone(
                         (ManagementScope)value,
@@ -617,9 +615,8 @@ namespace System.Management
                 )
                 {
                     if (null != path)
-                        path.IdentifierChanged -= new IdentifierChangedEventHandler(
-                            HandleIdentifierChange
-                        );
+                        path.IdentifierChanged -=
+                            new IdentifierChangedEventHandler(HandleIdentifierChange);
 
                     path = ManagementPath._Clone(
                         (ManagementPath)value,
@@ -678,9 +675,8 @@ namespace System.Management
                 if (null != value)
                 {
                     if (null != options)
-                        options.IdentifierChanged -= new IdentifierChangedEventHandler(
-                            HandleIdentifierChange
-                        );
+                        options.IdentifierChanged -=
+                            new IdentifierChangedEventHandler(HandleIdentifierChange);
 
                     options = ObjectGetOptions._Clone(
                         (ObjectGetOptions)value,
@@ -2688,9 +2684,8 @@ namespace System.Management
                 if (null == path)
                 {
                     path = new ManagementPath();
-                    path.IdentifierChanged += new IdentifierChangedEventHandler(
-                        HandleIdentifierChange
-                    );
+                    path.IdentifierChanged +=
+                        new IdentifierChangedEventHandler(HandleIdentifierChange);
                 }
 
                 //Have we already got this object
@@ -2716,9 +2711,8 @@ namespace System.Management
                     }
 
                     // Hook ourselves up to this scope for future change notifications
-                    scope.IdentifierChanged += new IdentifierChangedEventHandler(
-                        HandleIdentifierChange
-                    );
+                    scope.IdentifierChanged +=
+                        new IdentifierChangedEventHandler(HandleIdentifierChange);
                 }
                 else if ((null == scope.Path) || scope.Path.IsEmpty)
                 {
@@ -2755,9 +2749,8 @@ namespace System.Management
                         if (null == options)
                         {
                             options = new ObjectGetOptions();
-                            options.IdentifierChanged += new IdentifierChangedEventHandler(
-                                HandleIdentifierChange
-                            );
+                            options.IdentifierChanged +=
+                                new IdentifierChangedEventHandler(HandleIdentifierChange);
                         }
 
                         IWbemClassObjectFreeThreaded tempObj = null;
@@ -2815,9 +2808,8 @@ namespace System.Management
                                         (System.DBNull.Value != val)
                                             ? (new ManagementPath((string)val))
                                             : (new ManagementPath());
-                                    path.IdentifierChanged += new IdentifierChangedEventHandler(
-                                        HandleIdentifierChange
-                                    );
+                                    path.IdentifierChanged +=
+                                        new IdentifierChangedEventHandler(HandleIdentifierChange);
                                 }
                             }
 

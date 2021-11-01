@@ -116,9 +116,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             {
                 get
                 {
-                    return new ReadOnlyCollection<ITypeParameterSymbol>(
-                        _typeParametersInDeclaration
-                    );
+                    return new ReadOnlyCollection<ITypeParameterSymbol>(_typeParametersInDeclaration);
                 }
             }
 
@@ -126,9 +124,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             {
                 get
                 {
-                    return new ReadOnlyCollection<ITypeParameterSymbol>(
-                        _typeParametersInConstraintList
-                    );
+                    return new ReadOnlyCollection<ITypeParameterSymbol>(_typeParametersInConstraintList);
                 }
             }
 

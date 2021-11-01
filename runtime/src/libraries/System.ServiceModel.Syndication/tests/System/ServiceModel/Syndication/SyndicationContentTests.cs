@@ -130,9 +130,8 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData("content")]
         public void CreateHtmlContent_Invoke_ReturnsExpected(string content)
         {
-            TextSyndicationContent syndicationContent = SyndicationContent.CreateHtmlContent(
-                content
-            );
+            TextSyndicationContent syndicationContent =
+                SyndicationContent.CreateHtmlContent(content);
             Assert.Empty(syndicationContent.AttributeExtensions);
             Assert.Equal(content, syndicationContent.Text);
             Assert.Equal("html", syndicationContent.Type);
@@ -144,9 +143,8 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData("content")]
         public void CreatePlainContent_Invoke_ReturnsExpected(string content)
         {
-            TextSyndicationContent syndicationContent = SyndicationContent.CreatePlaintextContent(
-                content
-            );
+            TextSyndicationContent syndicationContent =
+                SyndicationContent.CreatePlaintextContent(content);
             Assert.Empty(syndicationContent.AttributeExtensions);
             Assert.Equal(content, syndicationContent.Text);
             Assert.Equal("text", syndicationContent.Type);
@@ -158,9 +156,8 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData("content")]
         public void CreateXhtmlContent_Invoke_ReturnsExpected(string content)
         {
-            TextSyndicationContent syndicationContent = SyndicationContent.CreateXhtmlContent(
-                content
-            );
+            TextSyndicationContent syndicationContent =
+                SyndicationContent.CreateXhtmlContent(content);
             Assert.Empty(syndicationContent.AttributeExtensions);
             Assert.Equal(content, syndicationContent.Text);
             Assert.Equal("xhtml", syndicationContent.Type);

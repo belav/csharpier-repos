@@ -39,9 +39,8 @@ namespace System.Web.Http.ExceptionHandling
                     expectedRequestContext,
                     expectedRequest
                 );
-                HttpActionContext expectedActionContext = CreateActionContext(
-                    expectedControllerContext
-                );
+                HttpActionContext expectedActionContext =
+                    CreateActionContext(expectedControllerContext);
                 ExceptionContextCatchBlock expectedCatchBlock = CreateCatchBlock();
 
                 // Act

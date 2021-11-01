@@ -212,9 +212,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 TEntity,
                 TRelatedEntity
             > Wrap(ReferenceReferenceBuilder referenceReferenceBuilder) =>
-                new NonGenericStringTestReferenceReferenceBuilder<TEntity, TRelatedEntity>(
-                    referenceReferenceBuilder
-                );
+                new NonGenericStringTestReferenceReferenceBuilder<
+                    TEntity,
+                    TRelatedEntity
+                >(referenceReferenceBuilder);
 
             public override TestReferenceReferenceBuilder<
                 TEntity,
@@ -286,9 +287,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             > Wrap<TNewEntity, TNewDependentEntity>(
                 OwnedNavigationBuilder ownedNavigationBuilder
             ) =>
-                new NonGenericStringTestOwnedNavigationBuilder<TNewEntity, TNewDependentEntity>(
-                    ownedNavigationBuilder
-                );
+                new NonGenericStringTestOwnedNavigationBuilder<
+                    TNewEntity,
+                    TNewDependentEntity
+                >(ownedNavigationBuilder);
 
             public override TestReferenceNavigationBuilder<
                 TDependentEntity,

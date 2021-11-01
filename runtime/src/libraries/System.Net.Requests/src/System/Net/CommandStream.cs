@@ -16,12 +16,10 @@ namespace System.Net
     /// </summary>
     internal class CommandStream : NetworkStreamWrapper
     {
-        private static readonly AsyncCallback s_writeCallbackDelegate = new AsyncCallback(
-            WriteCallback
-        );
-        private static readonly AsyncCallback s_readCallbackDelegate = new AsyncCallback(
-            ReadCallback
-        );
+        private static readonly AsyncCallback s_writeCallbackDelegate =
+            new AsyncCallback(WriteCallback);
+        private static readonly AsyncCallback s_readCallbackDelegate =
+            new AsyncCallback(ReadCallback);
 
         private bool _recoverableFailure;
 

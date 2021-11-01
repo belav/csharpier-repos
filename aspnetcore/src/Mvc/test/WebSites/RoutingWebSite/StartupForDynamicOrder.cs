@@ -23,9 +23,8 @@ namespace RoutingWebSite
         {
             public const string AttributeRouteDynamicRoute = nameof(AttributeRouteDynamicRoute);
             public const string MultipleDynamicRoute = nameof(MultipleDynamicRoute);
-            public const string ConventionalRouteDynamicRoute = nameof(
-                ConventionalRouteDynamicRoute
-            );
+            public const string ConventionalRouteDynamicRoute =
+                nameof(ConventionalRouteDynamicRoute);
             public const string DynamicControllerAndPages = nameof(DynamicControllerAndPages);
         }
 

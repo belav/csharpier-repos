@@ -117,9 +117,8 @@ namespace Internal.JitInterface
                     return;
                 }
 
-                SystemVStructRegisterPassingHelper helper = new SystemVStructRegisterPassingHelper(
-                    typeSize
-                );
+                SystemVStructRegisterPassingHelper helper =
+                    new SystemVStructRegisterPassingHelper(typeSize);
                 bool canPassInRegisters = ClassifyEightBytes(typeDesc, ref helper, 0);
                 if (canPassInRegisters)
                 {

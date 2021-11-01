@@ -49,33 +49,24 @@ namespace System.ComponentModel
         private static readonly object s_noValue = new object();
 
         private static readonly int s_bitDefaultValueQueried = InterlockedBitVector32.CreateMask();
-        private static readonly int s_bitGetQueried = InterlockedBitVector32.CreateMask(
-            s_bitDefaultValueQueried
-        );
-        private static readonly int s_bitSetQueried = InterlockedBitVector32.CreateMask(
-            s_bitGetQueried
-        );
-        private static readonly int s_bitShouldSerializeQueried = InterlockedBitVector32.CreateMask(
-            s_bitSetQueried
-        );
-        private static readonly int s_bitResetQueried = InterlockedBitVector32.CreateMask(
-            s_bitShouldSerializeQueried
-        );
-        private static readonly int s_bitChangedQueried = InterlockedBitVector32.CreateMask(
-            s_bitResetQueried
-        );
-        private static readonly int s_bitIPropChangedQueried = InterlockedBitVector32.CreateMask(
-            s_bitChangedQueried
-        );
-        private static readonly int s_bitReadOnlyChecked = InterlockedBitVector32.CreateMask(
-            s_bitIPropChangedQueried
-        );
-        private static readonly int s_bitAmbientValueQueried = InterlockedBitVector32.CreateMask(
-            s_bitReadOnlyChecked
-        );
-        private static readonly int s_bitSetOnDemand = InterlockedBitVector32.CreateMask(
-            s_bitAmbientValueQueried
-        );
+        private static readonly int s_bitGetQueried =
+            InterlockedBitVector32.CreateMask(s_bitDefaultValueQueried);
+        private static readonly int s_bitSetQueried =
+            InterlockedBitVector32.CreateMask(s_bitGetQueried);
+        private static readonly int s_bitShouldSerializeQueried =
+            InterlockedBitVector32.CreateMask(s_bitSetQueried);
+        private static readonly int s_bitResetQueried =
+            InterlockedBitVector32.CreateMask(s_bitShouldSerializeQueried);
+        private static readonly int s_bitChangedQueried =
+            InterlockedBitVector32.CreateMask(s_bitResetQueried);
+        private static readonly int s_bitIPropChangedQueried =
+            InterlockedBitVector32.CreateMask(s_bitChangedQueried);
+        private static readonly int s_bitReadOnlyChecked =
+            InterlockedBitVector32.CreateMask(s_bitIPropChangedQueried);
+        private static readonly int s_bitAmbientValueQueried =
+            InterlockedBitVector32.CreateMask(s_bitReadOnlyChecked);
+        private static readonly int s_bitSetOnDemand =
+            InterlockedBitVector32.CreateMask(s_bitAmbientValueQueried);
 
         private InterlockedBitVector32 _state; // Contains the state bits for this proeprty descriptor.
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
@@ -1001,9 +992,7 @@ namespace System.ComponentModel
                                     else
                                     {
                                         stAttrs =
-                                            ReflectTypeDescriptionProvider.ReflectGetAttributes(
-                                                specificType
-                                            );
+                                            ReflectTypeDescriptionProvider.ReflectGetAttributes(specificType);
                                     }
                                     if (stAttrs != null)
                                     {

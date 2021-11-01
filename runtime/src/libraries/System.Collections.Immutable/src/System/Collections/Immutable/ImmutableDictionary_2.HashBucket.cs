@@ -203,9 +203,8 @@ namespace System.Collections.Immutable
                             return this;
                         case KeyCollisionBehavior.ThrowIfValueDifferent:
 #if !NETSTANDARD1_0
-                            ref readonly var existingEntry = ref _additionalElements.ItemRef(
-                                keyCollisionIndex
-                            );
+                            ref readonly var existingEntry =
+                                ref _additionalElements.ItemRef(keyCollisionIndex);
 #else
                             var existingEntry = _additionalElements[keyCollisionIndex];
 #endif

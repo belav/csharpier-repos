@@ -60,9 +60,8 @@ namespace System.Web.Http.ModelBinding
         {
             HttpConfiguration config = parameter.Configuration;
             IModelBinder binder = GetModelBinder(config, parameter.ParameterType);
-            IEnumerable<ValueProviderFactory> valueProviderFactories = GetValueProviderFactories(
-                config
-            );
+            IEnumerable<ValueProviderFactory> valueProviderFactories =
+                GetValueProviderFactories(config);
 
             return new ModelBinderParameterBinding(parameter, binder, valueProviderFactories);
         }

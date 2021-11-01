@@ -28,9 +28,7 @@ namespace System.Net.Http.Functional.Tests
 
         private static bool EnableActivityPropagationEnvironmentVariableIsNotSetAndRemoteExecutorSupported =>
             string.IsNullOrEmpty(
-                Environment.GetEnvironmentVariable(
-                    EnableActivityPropagationEnvironmentVariableSettingName
-                )
+                Environment.GetEnvironmentVariable(EnableActivityPropagationEnvironmentVariableSettingName)
             ) && RemoteExecutor.IsSupported;
 
         public DiagnosticsTest(ITestOutputHelper output) : base(output) { }
@@ -218,9 +216,8 @@ namespace System.Net.Http.Functional.Tests
                                         {
                                             Task<List<string>> requestLines =
                                                 server.AcceptConnectionSendResponseAndCloseAsync();
-                                            Task<HttpResponseMessage> response = client.GetAsync(
-                                                url
-                                            );
+                                            Task<HttpResponseMessage> response =
+                                                client.GetAsync(url);
                                             await new Task[]
                                             {
                                                 response,
@@ -305,9 +302,8 @@ namespace System.Net.Http.Functional.Tests
                                             ? Configuration.Http.SecureRemoteEchoServer
                                             : Configuration.Http.RemoteEchoServer;
                                         var content = new ByteArrayContent(expectedData);
-                                        content.Headers.ContentMD5 = TestHelper.ComputeMD5Hash(
-                                            expectedData
-                                        );
+                                        content.Headers.ContentMD5 =
+                                            TestHelper.ComputeMD5Hash(expectedData);
                                         using (
                                             HttpResponseMessage response = await client.PostAsync(
                                                 remoteServer,
@@ -571,9 +567,8 @@ namespace System.Net.Http.Functional.Tests
                                         {
                                             Task<List<string>> requestLines =
                                                 server.AcceptConnectionSendResponseAndCloseAsync();
-                                            Task<HttpResponseMessage> response = client.GetAsync(
-                                                url
-                                            );
+                                            Task<HttpResponseMessage> response =
+                                                client.GetAsync(url);
                                             await new Task[]
                                             {
                                                 response,
@@ -711,9 +706,8 @@ namespace System.Net.Http.Functional.Tests
                                         {
                                             Task<List<string>> requestLines =
                                                 server.AcceptConnectionSendResponseAndCloseAsync();
-                                            Task<HttpResponseMessage> response = client.GetAsync(
-                                                url
-                                            );
+                                            Task<HttpResponseMessage> response =
+                                                client.GetAsync(url);
                                             await new Task[]
                                             {
                                                 response,
@@ -1229,9 +1223,8 @@ namespace System.Net.Http.Functional.Tests
                         {
                             diagnosticListenerObserver.Enable();
                             using (
-                                HttpClientHandler handler = CreateHttpClientHandler(
-                                    useVersionString
-                                )
+                                HttpClientHandler handler =
+                                    CreateHttpClientHandler(useVersionString)
                             )
                             using (HttpClient client = CreateHttpClient(handler, useVersionString))
                             {

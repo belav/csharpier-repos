@@ -250,9 +250,8 @@ namespace Internal.TypeSystem
             targetMethod = targetMethod.GetMethodDefinition();
             if (uninstantiatedType != objectType)
             {
-                targetMethod = uninstantiatedType.FindMethodOnTypeWithMatchingTypicalMethod(
-                    targetMethod
-                );
+                targetMethod =
+                    uninstantiatedType.FindMethodOnTypeWithMatchingTypicalMethod(targetMethod);
             }
 
             // Step 3, find unification group of target method
@@ -273,9 +272,8 @@ namespace Internal.TypeSystem
             // and instantiate as appropriate
             if (uninstantiatedType != objectType)
             {
-                resolutionTarget = objectType.FindMethodOnTypeWithMatchingTypicalMethod(
-                    resolutionTarget
-                );
+                resolutionTarget =
+                    objectType.FindMethodOnTypeWithMatchingTypicalMethod(resolutionTarget);
             }
             if (initialTargetMethod.HasInstantiation)
             {
@@ -490,9 +488,8 @@ namespace Internal.TypeSystem
             MethodDesc methodToVerify
         )
         {
-            MethodDesc slotDefiningMethodOfMethodToVerify = FindSlotDefiningMethodForVirtualMethod(
-                methodToVerify
-            );
+            MethodDesc slotDefiningMethodOfMethodToVerify =
+                FindSlotDefiningMethodForVirtualMethod(methodToVerify);
             return slotDefiningMethodOfMethodToVerify == slotDefiningMethod;
         }
 
@@ -561,9 +558,7 @@ namespace Internal.TypeSystem
             if (separatedMethods != null)
             {
                 foreach (
-                    MethodDesc seperatedMethod in MethodDescHashtable.Enumerator.Get(
-                        separatedMethods
-                    )
+                    MethodDesc seperatedMethod in MethodDescHashtable.Enumerator.Get(separatedMethods)
                 )
                 {
                     unificationGroup.RemoveFromGroup(seperatedMethod);
@@ -628,9 +623,7 @@ namespace Internal.TypeSystem
                             MethodDesc methodImplRequiredToRemainInEffect in addDeclGroup.MethodsRequiringSlotUnification
                         )
                         {
-                            unificationGroup.AddMethodRequiringSlotUnification(
-                                methodImplRequiredToRemainInEffect
-                            );
+                            unificationGroup.AddMethodRequiringSlotUnification(methodImplRequiredToRemainInEffect);
                         }
 
                         // Add all members from the decl's unification group except for ones that have been seperated by name/sig matches

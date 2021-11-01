@@ -571,9 +571,7 @@ namespace System.Text.Json.Serialization.Tests
             string json = JsonSerializer.Serialize(testObject);
 
             OuterClassHavingPropertiesDefinedAfterClassWithDictionary parsedObject =
-                JsonSerializer.Deserialize<OuterClassHavingPropertiesDefinedAfterClassWithDictionary>(
-                    json
-                );
+                JsonSerializer.Deserialize<OuterClassHavingPropertiesDefinedAfterClassWithDictionary>(json);
 
             Assert.Equal(3.14, parsedObject.MyDouble);
             Assert.Equal(10, parsedObject.MyInt);

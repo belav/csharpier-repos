@@ -1056,9 +1056,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var useSiteInfo =
                         attributeTypeViabilityUseSiteInfo.AccumulatesDependencies || !diagnose
-                            ? new CompoundUseSiteInfo<AssemblySymbol>(
-                                  attributeTypeViabilityUseSiteInfo
-                              )
+                            ? new CompoundUseSiteInfo<AssemblySymbol>(attributeTypeViabilityUseSiteInfo)
                             : CompoundUseSiteInfo<AssemblySymbol>.DiscardedDependencies;
                     Debug.Assert(!diagnose || useSiteInfo.AccumulatesDiagnostics);
 
@@ -1824,9 +1822,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             LookupMembersInInterfacesWithoutInheritance(
                 current,
-                typeParameter.AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(
-                    ref useSiteInfo
-                ),
+                typeParameter.AllEffectiveInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo),
                 name,
                 arity,
                 basesBeingResolved: null,
@@ -1849,9 +1845,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 !TypeSymbol.Equals(baseType, derivedType, TypeCompareKind.ConsiderEverything2)
             );
             for (
-                NamedTypeSymbol b = derivedType.BaseTypeWithDefinitionUseSiteDiagnostics(
-                    ref useSiteInfo
-                );
+                NamedTypeSymbol b =
+                    derivedType.BaseTypeWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
                 (object)b != null;
                 b = b.BaseTypeWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
             )
@@ -2185,9 +2180,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         return false;
                     }
-                    var keys = unwrappedSymbol.ContainingAssembly.GetInternalsVisibleToPublicKeys(
-                        assemblyName
-                    );
+                    var keys =
+                        unwrappedSymbol.ContainingAssembly.GetInternalsVisibleToPublicKeys(assemblyName);
                     if (!keys.Any())
                     {
                         return false;

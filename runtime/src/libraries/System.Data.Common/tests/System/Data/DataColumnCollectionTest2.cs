@@ -276,9 +276,8 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
 
-            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(
-                Columns_CollectionChanged
-            );
+            dt.Columns.CollectionChanged +=
+                new CollectionChangeEventHandler(Columns_CollectionChanged);
             _counter = 0;
             DataColumn c = dt.Columns.Add("tempCol");
 
@@ -291,9 +290,8 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
 
-            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(
-                Columns_CollectionChanged
-            );
+            dt.Columns.CollectionChanged +=
+                new CollectionChangeEventHandler(Columns_CollectionChanged);
             DataColumn c = dt.Columns.Add("tempCol");
             _counter = 0;
             dt.Columns.Remove("tempCol");
@@ -307,9 +305,8 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
 
-            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(
-                Columns_CollectionChanged
-            );
+            dt.Columns.CollectionChanged +=
+                new CollectionChangeEventHandler(Columns_CollectionChanged);
             dt.Columns.Add("tempCol");
             _counter = 0;
             dt.Columns[0].ColumnName = "tempCol2";
@@ -788,9 +785,8 @@ namespace System.Data.Tests
         public void RemoveAt_Integer()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
-            dt.Columns.CollectionChanged += new CollectionChangeEventHandler(
-                Columns_CollectionChanged1
-            );
+            dt.Columns.CollectionChanged +=
+                new CollectionChangeEventHandler(Columns_CollectionChanged1);
             int originalColumnCount = dt.Columns.Count;
             dt.Columns.RemoveAt(0);
             Assert.Equal(originalColumnCount - 1, dt.Columns.Count);

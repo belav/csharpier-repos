@@ -19,9 +19,8 @@ namespace System.Web.WebPages
         private const string ModuleRootSyntax = "@/";
         private const string ResourceVirtualPathRoot = "~/r.ashx/";
         private const string ResourceRoute = "r.ashx/{module}/{*path}";
-        private static readonly LazyAction _initApplicationPart = new LazyAction(
-            InitApplicationParts
-        );
+        private static readonly LazyAction _initApplicationPart =
+            new LazyAction(InitApplicationParts);
         private static ApplicationPartRegistry _partRegistry;
         private readonly Lazy<IDictionary<string, string>> _applicationPartResources;
         private readonly Lazy<string> _applicationPartName;

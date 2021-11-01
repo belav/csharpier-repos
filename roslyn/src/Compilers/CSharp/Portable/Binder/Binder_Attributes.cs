@@ -197,9 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics
                 );
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             ImmutableArray<int> argsToParamsOpt = default;
             bool expanded = false;
             MethodSymbol? attributeConstructor = null;
@@ -361,9 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             bool isConditionallyOmitted = IsAttributeConditionallyOmitted(
                 attributeType,
                 boundAttribute.SyntaxTree,
@@ -435,9 +433,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return false;
                 }
 
-                var baseType = attributeType.BaseTypeWithDefinitionUseSiteDiagnostics(
-                    ref useSiteInfo
-                );
+                var baseType =
+                    attributeType.BaseTypeWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
                 if ((object)baseType != null && baseType.IsConditional)
                 {
                     return IsAttributeConditionallyOmitted(baseType, syntaxTree, ref useSiteInfo);
@@ -680,9 +677,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var identifierName = namedArgument.NameEquals.Name;
             var name = identifierName.Identifier.ValueText;
             LookupResult result = LookupResult.GetInstance();
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             this.LookupMembersWithFallback(result, attributeType, name, 0, ref useSiteInfo);
             diagnostics.Add(identifierName, useSiteInfo);
             Symbol resultSymbol = this.ResultSymbol(
@@ -1110,9 +1106,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int line = syntax.SyntaxTree.GetDisplayLineNumber(syntax.Name.Span);
                 kind = TypedConstantKind.Primitive;
 
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 var conversion = Conversions.GetCallerLineNumberConversion(
                     parameterType,
                     ref useSiteInfo

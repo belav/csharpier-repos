@@ -1254,9 +1254,7 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (_defaultSDSddlForm != null)
                 {
                     defaultObjectSecurityDescriptor = new ActiveDirectorySecurity();
-                    defaultObjectSecurityDescriptor.SetSecurityDescriptorSddlForm(
-                        _defaultSDSddlForm
-                    );
+                    defaultObjectSecurityDescriptor.SetSecurityDescriptorSddlForm(_defaultSDSddlForm);
                 }
 
                 return defaultObjectSecurityDescriptor;
@@ -1778,9 +1776,7 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
 
                     foreach (
-                        string property in auxSchemaClass.GetPropertyValuesRecursively(
-                            propertyNames
-                        )
+                        string property in auxSchemaClass.GetPropertyValuesRecursively(propertyNames)
                     )
                     {
                         if (!values.Contains(property))
@@ -1803,9 +1799,7 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
 
                     foreach (
-                        string property in auxSchemaClass.GetPropertyValuesRecursively(
-                            propertyNames
-                        )
+                        string property in auxSchemaClass.GetPropertyValuesRecursively(propertyNames)
                     )
                     {
                         if (!values.Contains(property))

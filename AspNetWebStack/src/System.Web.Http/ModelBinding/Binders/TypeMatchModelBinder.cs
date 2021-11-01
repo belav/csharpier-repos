@@ -15,9 +15,8 @@ namespace System.Web.Http.ModelBinding.Binders
     {
         public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
         {
-            ValueProviderResult valueProviderResult = GetCompatibleValueProviderResult(
-                bindingContext
-            );
+            ValueProviderResult valueProviderResult =
+                GetCompatibleValueProviderResult(bindingContext);
             if (valueProviderResult == null)
             {
                 return false; // conversion would have failed

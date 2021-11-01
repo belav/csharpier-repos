@@ -85,18 +85,14 @@ namespace System.Reflection.Tests
             ParameterInfo piWithAttributes = miWithAttributes.GetParameters()[0];
 
             Attribute attribute =
-                CustomAttributeExtensions.GetCustomAttribute<MyAttribute_Single_P>(
-                    piWithAttributes
-                );
+                CustomAttributeExtensions.GetCustomAttribute<MyAttribute_Single_P>(piWithAttributes);
             Assert.NotNull(attribute);
 
             Assert.Throws<AmbiguousMatchException>(
                 () =>
                 {
                     attribute =
-                        CustomAttributeExtensions.GetCustomAttribute<MyAttribute_AllowMultiple_P>(
-                            piWithAttributes
-                        );
+                        CustomAttributeExtensions.GetCustomAttribute<MyAttribute_AllowMultiple_P>(piWithAttributes);
                 }
             );
         }
@@ -128,14 +124,12 @@ namespace System.Reflection.Tests
 
             IEnumerable<Attribute> attributes;
 
-            attributes = CustomAttributeExtensions.GetCustomAttributes<MyAttribute_Single_P>(
-                piWithAttributes
-            );
+            attributes =
+                CustomAttributeExtensions.GetCustomAttributes<MyAttribute_Single_P>(piWithAttributes);
             Assert.Equal(1, attributes.Count());
 
-            attributes = CustomAttributeExtensions.GetCustomAttributes<CLSCompliantAttribute>(
-                piWithAttributes
-            );
+            attributes =
+                CustomAttributeExtensions.GetCustomAttributes<CLSCompliantAttribute>(piWithAttributes);
             Assert.Equal(0, attributes.Count());
         }
 
@@ -351,9 +345,8 @@ namespace System.Reflection.Tests
                 .GetDeclaredMethod("methodWithoutAttribute");
             ParameterInfo piWithoutAttributes = miWithoutAttributes.GetParameters()[0];
 
-            IEnumerable<Attribute> attributes = CustomAttributeExtensions.GetCustomAttributes(
-                piWithoutAttributes
-            );
+            IEnumerable<Attribute> attributes =
+                CustomAttributeExtensions.GetCustomAttributes(piWithoutAttributes);
             Assert.Equal(0, attributes.Count());
 
             IEnumerable<CustomAttributeData> attributeData = piWithoutAttributes.CustomAttributes;

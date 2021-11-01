@@ -78,9 +78,7 @@ namespace System.Text.Json.Serialization.Converters
                 else
                 {
                     converterType =
-                        typeof(LargeObjectWithParameterizedConstructorConverter<>).MakeGenericType(
-                            typeToConvert
-                        );
+                        typeof(LargeObjectWithParameterizedConstructorConverter<>).MakeGenericType(typeToConvert);
                 }
             }
 
@@ -148,9 +146,7 @@ namespace System.Text.Json.Serialization.Converters
                 {
                     if (ctorWithAttribute != null)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute<JsonConstructorAttribute>(
-                            type
-                        );
+                        ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute<JsonConstructorAttribute>(type);
                     }
 
                     ctorWithAttribute = constructor;
@@ -171,9 +167,7 @@ namespace System.Text.Json.Serialization.Converters
                 {
                     if (dummyCtorWithAttribute != null)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute<JsonConstructorAttribute>(
-                            type
-                        );
+                        ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute<JsonConstructorAttribute>(type);
                     }
 
                     dummyCtorWithAttribute = constructor;

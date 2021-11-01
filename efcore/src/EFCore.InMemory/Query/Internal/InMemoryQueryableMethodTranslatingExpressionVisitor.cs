@@ -44,9 +44,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 queryCompilationContext,
                 this
             );
-            _weakEntityExpandingExpressionVisitor = new WeakEntityExpandingExpressionVisitor(
-                _expressionTranslator
-            );
+            _weakEntityExpandingExpressionVisitor =
+                new WeakEntityExpandingExpressionVisitor(_expressionTranslator);
             _projectionBindingExpressionVisitor = new InMemoryProjectionBindingExpressionVisitor(
                 this,
                 _expressionTranslator
@@ -68,9 +67,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 QueryCompilationContext,
                 parentVisitor
             );
-            _weakEntityExpandingExpressionVisitor = new WeakEntityExpandingExpressionVisitor(
-                _expressionTranslator
-            );
+            _weakEntityExpandingExpressionVisitor =
+                new WeakEntityExpandingExpressionVisitor(_expressionTranslator);
             _projectionBindingExpressionVisitor = new InMemoryProjectionBindingExpressionVisitor(
                 this,
                 _expressionTranslator
@@ -1103,9 +1101,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 );
 
                 var entityProjectionExpression =
-                    (EntityProjectionExpression)inMemoryQueryExpression.GetMappedProjection(
-                        projectionMember
-                    );
+                    (EntityProjectionExpression)inMemoryQueryExpression.GetMappedProjection(projectionMember);
                 inMemoryQueryExpression.ReplaceProjectionMapping(
                     new Dictionary<ProjectionMember, Expression>
                     {
@@ -1240,9 +1236,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             Check.NotNull(collectionSelector, nameof(collectionSelector));
             Check.NotNull(resultSelector, nameof(resultSelector));
 
-            var defaultIfEmpty = new DefaultIfEmptyFindingExpressionVisitor().IsOptional(
-                collectionSelector
-            );
+            var defaultIfEmpty =
+                new DefaultIfEmptyFindingExpressionVisitor().IsOptional(collectionSelector);
             var collectionSelectorBody = RemapLambdaBody(source, collectionSelector);
 
             if (Visit(collectionSelectorBody) is ShapedQueryExpression inner)

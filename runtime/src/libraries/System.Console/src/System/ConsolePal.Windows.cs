@@ -1057,9 +1057,8 @@ namespace System
             {
                 // Note this varies based on current screen resolution and
                 // current console font.  Do not cache this value.
-                Interop.Kernel32.COORD bounds = Interop.Kernel32.GetLargestConsoleWindowSize(
-                    OutputHandle
-                );
+                Interop.Kernel32.COORD bounds =
+                    Interop.Kernel32.GetLargestConsoleWindowSize(OutputHandle);
                 return bounds.X;
             }
         }
@@ -1070,9 +1069,8 @@ namespace System
             {
                 // Note this varies based on current screen resolution and
                 // current console font.  Do not cache this value.
-                Interop.Kernel32.COORD bounds = Interop.Kernel32.GetLargestConsoleWindowSize(
-                    OutputHandle
-                );
+                Interop.Kernel32.COORD bounds =
+                    Interop.Kernel32.GetLargestConsoleWindowSize(OutputHandle);
                 return bounds.Y;
             }
         }
@@ -1223,9 +1221,8 @@ namespace System
                 }
 
                 // Try to give a better error message here
-                Interop.Kernel32.COORD bounds = Interop.Kernel32.GetLargestConsoleWindowSize(
-                    OutputHandle
-                );
+                Interop.Kernel32.COORD bounds =
+                    Interop.Kernel32.GetLargestConsoleWindowSize(OutputHandle);
                 if (width > bounds.X)
                     throw new ArgumentOutOfRangeException(
                         nameof(width),

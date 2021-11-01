@@ -694,9 +694,8 @@ namespace System.Threading
         /// <summary>
         /// Private helper method to wake up waiters when a cancellationToken gets canceled.
         /// </summary>
-        private static readonly Action<object?> s_cancellationTokenCallback = new Action<object?>(
-            CancellationTokenCallback
-        );
+        private static readonly Action<object?> s_cancellationTokenCallback =
+            new Action<object?>(CancellationTokenCallback);
         private static void CancellationTokenCallback(object? obj)
         {
             Debug.Assert(obj is ManualResetEventSlim, "Expected a ManualResetEventSlim");

@@ -77,9 +77,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             );
 
             // Finally, assign a name to all the anonymous types.
-            var anonymousTypeToName = GenerateAnonymousTypeNames(
-                transitiveNormalAnonymousTypeReferences
-            );
+            var anonymousTypeToName =
+                GenerateAnonymousTypeNames(transitiveNormalAnonymousTypeReferences);
             anonymousTypeParts = AnonymousTypeDisplayInfo.ReplaceAnonymousTypes(
                 anonymousTypeParts,
                 anonymousTypeToName

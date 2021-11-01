@@ -242,9 +242,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 result = await TryCheckVariableTypeAsync(
                         document,
                         context,
-                        analyzeResult.GetVariablesToSplitOrMoveIntoMethodDefinition(
-                            cancellationToken
-                        ),
+                        analyzeResult.GetVariablesToSplitOrMoveIntoMethodDefinition(cancellationToken),
                         result.Item2,
                         cancellationToken
                     )
@@ -274,9 +272,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                             result = await TryCheckVariableTypeAsync(
                                     document,
                                     context,
-                                    analyzeResult.GetVariablesToSplitOrMoveOutToCallSite(
-                                        cancellationToken
-                                    ),
+                                    analyzeResult.GetVariablesToSplitOrMoveOutToCallSite(cancellationToken),
                                     result.Item2,
                                     cancellationToken
                                 )

@@ -213,9 +213,8 @@ namespace System.Security.Cryptography
             {
                 try
                 {
-                    AsnWriter pkcs8PrivateKey = EccKeyFormatHelper.WritePkcs8PrivateKey(
-                        ecParameters
-                    );
+                    AsnWriter pkcs8PrivateKey =
+                        EccKeyFormatHelper.WritePkcs8PrivateKey(ecParameters);
 
                     AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(
                         passwordBytes,
@@ -254,9 +253,8 @@ namespace System.Security.Cryptography
             {
                 try
                 {
-                    AsnWriter pkcs8PrivateKey = EccKeyFormatHelper.WritePkcs8PrivateKey(
-                        ecParameters
-                    );
+                    AsnWriter pkcs8PrivateKey =
+                        EccKeyFormatHelper.WritePkcs8PrivateKey(ecParameters);
 
                     AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(
                         password,

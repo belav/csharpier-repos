@@ -219,9 +219,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     var contentSpan = contentSpanOnPrimarySnapshot.Span.ToTextSpan();
 
                     // anything based on content is starting from 0
-                    var startPositionOnContentSpan = GetNonWhitespaceStartPositionOnContent(
-                        contentSpanOnPrimarySnapshot
-                    );
+                    var startPositionOnContentSpan =
+                        GetNonWhitespaceStartPositionOnContent(contentSpanOnPrimarySnapshot);
 
                     using var pooledObject = SharedPools
                         .Default<List<ClassifiedSpan>>()

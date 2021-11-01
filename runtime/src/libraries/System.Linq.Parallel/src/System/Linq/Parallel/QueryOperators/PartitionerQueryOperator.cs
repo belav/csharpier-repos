@@ -186,9 +186,8 @@ namespace System.Linq.Parallel
                 }
                 else
                 {
-                    IList<IEnumerator<TElement>> partitionerPartitions = _partitioner.GetPartitions(
-                        partitionCount
-                    );
+                    IList<IEnumerator<TElement>> partitionerPartitions =
+                        _partitioner.GetPartitions(partitionCount);
 
                     if (partitionerPartitions == null)
                     {

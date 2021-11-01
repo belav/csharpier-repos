@@ -203,9 +203,8 @@ namespace Microsoft.Diagnostics.JitTrace
                         membersFound = CtorMethodsThatMatch();
                         IEnumerable<RuntimeMethodHandle> CtorMethodsThatMatch()
                         {
-                            ConstructorInfo[] constructors = owningType.GetConstructors(
-                                bindingFlags
-                            );
+                            ConstructorInfo[] constructors =
+                                owningType.GetConstructors(bindingFlags);
                             foreach (ConstructorInfo ci in constructors)
                             {
                                 ConstructorInfo returnConstructorInfo = null;
@@ -289,9 +288,7 @@ namespace Microsoft.Diagnostics.JitTrace
                         foundAtLeastOneEntry = true;
                         try
                         {
-                            System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(
-                                memberHandle
-                            );
+                            System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(memberHandle);
                             successfulPrepares++;
                         }
                         catch

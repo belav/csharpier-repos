@@ -253,9 +253,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             PEModuleBuilder moduleBuilder
         )
         {
-            return UnderlyingNamedType.AdaptedNamedTypeSymbol.GetCustomAttributesToEmit(
-                moduleBuilder
-            );
+            return UnderlyingNamedType.AdaptedNamedTypeSymbol.GetCustomAttributesToEmit(moduleBuilder);
         }
 
         protected override CSharpAttributeData CreateTypeIdentifierAttribute(

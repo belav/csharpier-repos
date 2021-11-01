@@ -129,9 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                     foreach (var documentSpan in inlineRenameInfo.DefinitionLocations)
                     {
-                        var sourceText = documentSpan.Document.GetTextSynchronously(
-                            cancellationToken
-                        );
+                        var sourceText =
+                            documentSpan.Document.GetTextSynchronously(cancellationToken);
                         var textSnapshot = sourceText.FindCorrespondingEditorTextSnapshot();
 
                         if (textSnapshot != null)

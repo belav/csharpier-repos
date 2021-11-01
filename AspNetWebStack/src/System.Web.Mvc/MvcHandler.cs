@@ -213,9 +213,8 @@ namespace System.Web.Mvc
             HttpContext currentContext = HttpContext.Current;
             if (currentContext != null)
             {
-                bool? isRequestValidationEnabled = ValidationUtility.IsValidationEnabled(
-                    currentContext
-                );
+                bool? isRequestValidationEnabled =
+                    ValidationUtility.IsValidationEnabled(currentContext);
                 if (isRequestValidationEnabled == true)
                 {
                     ValidationUtility.EnableDynamicValidation(currentContext);

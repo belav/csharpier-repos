@@ -203,9 +203,8 @@ namespace System.Management
                         {
                             try
                             {
-                                InternalObjectPutEventArgs iargs = new InternalObjectPutEventArgs(
-                                    path
-                                );
+                                InternalObjectPutEventArgs iargs =
+                                    new InternalObjectPutEventArgs(path);
                                 InternalObjectPut(this, iargs);
                             }
                             catch { }

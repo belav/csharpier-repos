@@ -2013,9 +2013,10 @@ namespace System.Numerics
                 row4 = Sse.Multiply(C6, vTemp);
 
                 Unsafe.SkipInit(out result);
-                ref Vector128<float> vResult = ref Unsafe.As<Matrix4x4, Vector128<float>>(
-                    ref result
-                );
+                ref Vector128<float> vResult = ref Unsafe.As<
+                    Matrix4x4,
+                    Vector128<float>
+                >(ref result);
 
                 vResult = row1;
                 Unsafe.Add(ref vResult, 1) = row2;

@@ -555,9 +555,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             }
             else if (property.IsBindingRequired)
             {
-                var message = property.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
-                    fieldName
-                );
+                var message =
+                    property.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(fieldName);
                 bindingContext.ModelState.TryAddModelError(modelName, message);
             }
 
@@ -591,9 +590,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             if (!result.IsModelSet && parameter.IsBindingRequired)
             {
                 var message =
-                    parameter.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(
-                        fieldName
-                    );
+                    parameter.ModelBindingMessageProvider.MissingBindRequiredValueAccessor(fieldName);
                 bindingContext.ModelState.TryAddModelError(modelName, message);
             }
 

@@ -443,9 +443,13 @@ namespace Microsoft.Extensions.Logging.Test
                 case 5:
                     exception = Assert.Throws<ArgumentException>(
                         () =>
-                            LoggerMessage.DefineScope<string, string, string, string, string>(
-                                formatString
-                            )
+                            LoggerMessage.DefineScope<
+                                string,
+                                string,
+                                string,
+                                string,
+                                string
+                            >(formatString)
                     );
                     break;
                 case 6:

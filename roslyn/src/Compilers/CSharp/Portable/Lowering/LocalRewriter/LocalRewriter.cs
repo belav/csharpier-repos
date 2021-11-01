@@ -343,9 +343,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 if (
-                    _factory.CompilationState.Compilation.ShouldEmitNullableAttributes(
-                        localFunction
-                    )
+                    _factory.CompilationState.Compilation.ShouldEmitNullableAttributes(localFunction)
                 )
                 {
                     bool constraintsNeedNullableAttribute = typeParameters.Any(

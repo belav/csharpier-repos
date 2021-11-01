@@ -18,9 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             switch (forEachStatement.Kind())
             {
                 case SyntaxKind.ForEachStatement:
-                    return ((ForEachStatementSyntax)forEachStatement).Type.IsTypeInferred(
-                        semanticModel
-                    );
+                    return (
+                        (ForEachStatementSyntax)forEachStatement
+                    ).Type.IsTypeInferred(semanticModel);
                 case SyntaxKind.ForEachVariableStatement:
                     return (
                             ((ForEachVariableStatementSyntax)forEachStatement).Variable

@@ -203,9 +203,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                 var assemblyLoader = new InteractiveAssemblyLoader(metadataFileProvider);
                 var replServiceProviderType = Type.GetType(replServiceProviderTypeName);
-                var replServiceProvider = (ReplServiceProvider)Activator.CreateInstance(
-                    replServiceProviderType
-                );
+                var replServiceProvider =
+                    (ReplServiceProvider)Activator.CreateInstance(replServiceProviderType);
                 var globals = new InteractiveScriptGlobals(
                     Console.Out,
                     replServiceProvider.ObjectFormatter
@@ -709,9 +708,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                             // TODO: Workaround for https://github.com/dotnet/roslyn/issues/45346
                             var referencePathsWithoutRspDir = referencePaths.Remove(rspDirectory);
-                            var metadataResolver = state.MetadataReferenceResolver.WithSearchPaths(
-                                referencePathsWithoutRspDir
-                            );
+                            var metadataResolver =
+                                state.MetadataReferenceResolver.WithSearchPaths(referencePathsWithoutRspDir);
                             var rspMetadataResolver = state.MetadataReferenceResolver
                                 .WithSearchPaths(referencePaths)
                                 .WithBaseDirectory(rspDirectory);

@@ -533,14 +533,12 @@ namespace System.Text.Unicode.Tests
             // Arrange
 
             using (
-                BoundedMemory<char> boundedSource = BoundedMemory.AllocateFromExistingData(
-                    utf16Input
-                )
+                BoundedMemory<char> boundedSource =
+                    BoundedMemory.AllocateFromExistingData(utf16Input)
             )
             using (
-                BoundedMemory<byte> boundedDestination = BoundedMemory.Allocate<byte>(
-                    destinationSize
-                )
+                BoundedMemory<byte> boundedDestination =
+                    BoundedMemory.Allocate<byte>(destinationSize)
             )
             {
                 boundedSource.MakeReadonly();
@@ -1004,14 +1002,12 @@ namespace System.Text.Unicode.Tests
             // Arrange
 
             using (
-                BoundedMemory<byte> boundedSource = BoundedMemory.AllocateFromExistingData(
-                    utf8Input
-                )
+                BoundedMemory<byte> boundedSource =
+                    BoundedMemory.AllocateFromExistingData(utf8Input)
             )
             using (
-                BoundedMemory<char> boundedDestination = BoundedMemory.Allocate<char>(
-                    destinationSize
-                )
+                BoundedMemory<char> boundedDestination =
+                    BoundedMemory.Allocate<char>(destinationSize)
             )
             {
                 boundedSource.MakeReadonly();

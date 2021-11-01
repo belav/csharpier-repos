@@ -27,12 +27,10 @@ namespace System.Web.Http.Controllers
                 .ToList();
 
             FilterScope actionOverride = SelectLastOverrideScope<IActionFilter>(overrides);
-            FilterScope authorizationOverride = SelectLastOverrideScope<IAuthorizationFilter>(
-                overrides
-            );
-            FilterScope authenticationOverride = SelectLastOverrideScope<IAuthenticationFilter>(
-                overrides
-            );
+            FilterScope authorizationOverride =
+                SelectLastOverrideScope<IAuthorizationFilter>(overrides);
+            FilterScope authenticationOverride =
+                SelectLastOverrideScope<IAuthenticationFilter>(overrides);
             FilterScope exceptionOverride = SelectLastOverrideScope<IExceptionFilter>(overrides);
 
             _actionFilters = SelectAvailable<IActionFilter>(orderedCache, actionOverride);

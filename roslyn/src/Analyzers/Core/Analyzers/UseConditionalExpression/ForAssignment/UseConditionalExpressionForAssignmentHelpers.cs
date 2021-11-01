@@ -24,12 +24,10 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             trueStatement = ifOperation.WhenTrue;
             falseStatement = ifOperation.WhenFalse;
 
-            trueStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(
-                trueStatement
-            );
-            falseStatement = UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(
-                falseStatement
-            );
+            trueStatement =
+                UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(trueStatement);
+            falseStatement =
+                UseConditionalExpressionHelpers.UnwrapSingleStatementBlock(falseStatement);
 
             if (
                 !TryGetAssignmentOrThrow(trueStatement, out trueAssignment, out var trueThrow)

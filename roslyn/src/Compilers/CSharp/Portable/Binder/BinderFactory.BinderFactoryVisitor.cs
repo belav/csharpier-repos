@@ -1099,9 +1099,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                               compilation
                                                   .GetPreviousSubmissionImports()
                                                   .Concat(
-                                                      scriptClassBinder.GetImports(
-                                                          basesBeingResolved
-                                                      )
+                                                      scriptClassBinder.GetImports(basesBeingResolved)
                                                   )
                                       );
                         }

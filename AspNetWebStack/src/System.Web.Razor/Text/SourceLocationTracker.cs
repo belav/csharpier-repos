@@ -90,9 +90,7 @@ namespace System.Web.Razor.Text
             string newContent
         )
         {
-            return new SourceLocationTracker(lastPosition).UpdateLocation(
-                newContent
-            ).CurrentLocation;
+            return new SourceLocationTracker(lastPosition).UpdateLocation(newContent).CurrentLocation;
         }
     }
 }

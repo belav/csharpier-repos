@@ -4160,9 +4160,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 ignoreNonGoAwayFrames: false,
                 expectedLastStreamId: 0,
                 expectedErrorCode: expectedErrorCode,
-                expectedErrorMessage: CoreStrings.FormatHttp2ErrorSettingsParameterOutOfRange(
-                    parameter
-                )
+                expectedErrorMessage: CoreStrings.FormatHttp2ErrorSettingsParameterOutOfRange(parameter)
             );
         }
 

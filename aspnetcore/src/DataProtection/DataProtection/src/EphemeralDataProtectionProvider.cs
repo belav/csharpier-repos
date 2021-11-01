@@ -48,16 +48,14 @@ namespace Microsoft.AspNetCore.DataProtection
                 // Assertion for platform compat analyzer
                 Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
                 // Fastest implementation: AES-256-GCM [CNG]
-                keyringProvider = new EphemeralKeyRing<CngGcmAuthenticatedEncryptorConfiguration>(
-                    loggerFactory
-                );
+                keyringProvider =
+                    new EphemeralKeyRing<CngGcmAuthenticatedEncryptorConfiguration>(loggerFactory);
             }
             else
             {
                 // Slowest implementation: AES-256-CBC + HMACSHA256 [Managed]
-                keyringProvider = new EphemeralKeyRing<ManagedAuthenticatedEncryptorConfiguration>(
-                    loggerFactory
-                );
+                keyringProvider =
+                    new EphemeralKeyRing<ManagedAuthenticatedEncryptorConfiguration>(loggerFactory);
             }
 
             var logger = loggerFactory.CreateLogger<EphemeralDataProtectionProvider>();
@@ -118,9 +116,10 @@ namespace Microsoft.AspNetCore.DataProtection
 
                     var descriptor =
                         (CngGcmAuthenticatedEncryptorDescriptor)new T().CreateNewDescriptor();
-                    return new CngGcmAuthenticatedEncryptorFactory(
-                        loggerFactory
-                    ).CreateAuthenticatedEncryptorInstance(descriptor.MasterKey, cngConfiguration);
+                    return new CngGcmAuthenticatedEncryptorFactory(loggerFactory).CreateAuthenticatedEncryptorInstance(
+                        descriptor.MasterKey,
+                        cngConfiguration
+                    );
                 }
                 else if (
                     configuration is ManagedAuthenticatedEncryptorConfiguration managedConfiguration
@@ -128,9 +127,7 @@ namespace Microsoft.AspNetCore.DataProtection
                 {
                     var descriptor =
                         (ManagedAuthenticatedEncryptorDescriptor)new T().CreateNewDescriptor();
-                    return new ManagedAuthenticatedEncryptorFactory(
-                        loggerFactory
-                    ).CreateAuthenticatedEncryptorInstance(
+                    return new ManagedAuthenticatedEncryptorFactory(loggerFactory).CreateAuthenticatedEncryptorInstance(
                         descriptor.MasterKey,
                         managedConfiguration
                     );

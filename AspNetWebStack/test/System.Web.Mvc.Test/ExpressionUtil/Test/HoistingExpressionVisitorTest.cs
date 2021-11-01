@@ -16,9 +16,10 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Expression<Func<string, int>> expr = s => (2 * s.Length) + 1;
 
             // Act
-            Expression<Hoisted<string, int>> hoisted = HoistingExpressionVisitor<string, int>.Hoist(
-                expr
-            );
+            Expression<Hoisted<string, int>> hoisted = HoistingExpressionVisitor<
+                string,
+                int
+            >.Hoist(expr);
 
             // Assert
             // new expression should be (s, capturedConstants) => (int)(capturedConstants[0]) * s.Length + (int)(capturedConstants[1])

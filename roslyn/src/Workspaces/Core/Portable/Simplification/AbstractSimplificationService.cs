@@ -320,9 +320,7 @@ namespace Microsoft.CodeAnalysis.Simplification
                                     {
                                         var annotation = new SyntaxAnnotation();
                                         currentNodeOrToken =
-                                            currentNodeOrToken.WithAdditionalAnnotations(
-                                                annotation
-                                            );
+                                            currentNodeOrToken.WithAdditionalAnnotations(annotation);
 
                                         var replacedParent = isNode
                                             ? nodeOrToken.Parent.ReplaceNode(

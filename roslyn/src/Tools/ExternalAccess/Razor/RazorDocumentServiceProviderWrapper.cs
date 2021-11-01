@@ -48,9 +48,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                                 _innerDocumentServiceProvider.GetService<IRazorSpanMappingService>();
                             if (razorMappingService != null)
                             {
-                                _spanMappingService = new RazorSpanMappingServiceWrapper(
-                                    razorMappingService
-                                );
+                                _spanMappingService =
+                                    new RazorSpanMappingServiceWrapper(razorMappingService);
                             }
                             else
                             {
@@ -75,9 +74,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                                 _innerDocumentServiceProvider.GetService<IRazorDocumentExcerptService>();
                             if (excerptService != null)
                             {
-                                _excerptService = new RazorDocumentExcerptServiceWrapper(
-                                    excerptService
-                                );
+                                _excerptService =
+                                    new RazorDocumentExcerptServiceWrapper(excerptService);
                             }
                             else
                             {
@@ -104,9 +102,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                             if (documentPropertiesService != null)
                             {
                                 _documentPropertiesService =
-                                    new RazorDocumentPropertiesServiceWrapper(
-                                        documentPropertiesService
-                                    );
+                                    new RazorDocumentPropertiesServiceWrapper(documentPropertiesService);
                             }
                             else
                             {

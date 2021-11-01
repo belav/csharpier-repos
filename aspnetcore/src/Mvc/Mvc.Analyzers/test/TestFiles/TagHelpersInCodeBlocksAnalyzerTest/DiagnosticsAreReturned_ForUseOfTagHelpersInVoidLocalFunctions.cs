@@ -58,9 +58,7 @@ namespace AspNetCore
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_CacheTagHelper =
                     CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelper>();
-                __tagHelperExecutionContext.Add(
-                    __Microsoft_AspNetCore_Mvc_TagHelpers_CacheTagHelper
-                );
+                __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_CacheTagHelper);
                 BeginWriteTagHelperAttribute();
                 __tagHelperStringValueBuffer = EndWriteTagHelperAttribute();
                 __tagHelperExecutionContext.AddHtmlAttribute(

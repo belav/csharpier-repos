@@ -1559,9 +1559,8 @@ namespace System.Text.Json.Serialization.Tests
                 () => JsonSerializer.Deserialize<Type_AllowFloatConstants>(floatIsString)
             );
 
-            Type_AllowFloatConstants obj = JsonSerializer.Deserialize<Type_AllowFloatConstants>(
-                floatIsNan
-            );
+            Type_AllowFloatConstants obj =
+                JsonSerializer.Deserialize<Type_AllowFloatConstants>(floatIsNan);
             Assert.Equal(float.NaN, obj.Float);
             Assert.Equal(123, obj.Int);
 
@@ -1646,9 +1645,7 @@ namespace System.Text.Json.Serialization.Tests
             string jsonWithMyObjectProperty = @"{""MyObject"":{""Float"":""1""}}";
             Assert.Throws<JsonException>(
                 () =>
-                    JsonSerializer.Deserialize<ClassWith_ReadAsStringAttribute>(
-                        jsonWithMyObjectProperty
-                    )
+                    JsonSerializer.Deserialize<ClassWith_ReadAsStringAttribute>(jsonWithMyObjectProperty)
             );
         }
 
@@ -1848,9 +1845,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void TypeAttributeAppliesTo_CustomDictionaryElements_HonoredWhenProperty()
         {
             string json = @"{""Dictionary"":{""Key"":""1""}}";
-            ClassWithCustomDictionary obj = JsonSerializer.Deserialize<ClassWithCustomDictionary>(
-                json
-            );
+            ClassWithCustomDictionary obj =
+                JsonSerializer.Deserialize<ClassWithCustomDictionary>(json);
             Assert.Equal(json, JsonSerializer.Serialize(obj));
         }
 
@@ -1959,9 +1955,7 @@ namespace System.Text.Json.Serialization.Tests
             string json = @"";
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
                 () =>
-                    JsonSerializer.Deserialize<ClassWith_NumberHandlingOn_Property_WithCustomConverter>(
-                        json
-                    )
+                    JsonSerializer.Deserialize<ClassWith_NumberHandlingOn_Property_WithCustomConverter>(json)
             );
             string exAsStr = ex.ToString();
             Assert.Contains(typeof(ConverterForInt32).ToString(), exAsStr);
@@ -1997,9 +1991,7 @@ namespace System.Text.Json.Serialization.Tests
             string json = @"";
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
                 () =>
-                    JsonSerializer.Deserialize<ClassWith_NumberHandlingOn_Type_WithCustomConverter>(
-                        json
-                    )
+                    JsonSerializer.Deserialize<ClassWith_NumberHandlingOn_Type_WithCustomConverter>(json)
             );
             string exAsStr = ex.ToString();
             Assert.Contains(typeof(ConverterForMyType).ToString(), exAsStr);

@@ -390,9 +390,7 @@ namespace Microsoft.EntityFrameworkCore.Update
                         {
                             if (columnPropagator.ColumnModification != null)
                             {
-                                columnPropagator.ColumnModification.AddSharedColumnModification(
-                                    columnModification
-                                );
+                                columnPropagator.ColumnModification.AddSharedColumnModification(columnModification);
                                 continue;
                             }
 

@@ -285,9 +285,8 @@ namespace System.IO.Pipes.Tests
         public async Task OperationsOnDisconnectedServer()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
-            (NamedPipeServerStream server, NamedPipeClientStream client) = GetClientAndServer(
-                streams
-            );
+            (NamedPipeServerStream server, NamedPipeClientStream client) =
+                GetClientAndServer(streams);
 
             Assert.Throws<InvalidOperationException>(() => server.IsMessageComplete);
             Assert.Throws<InvalidOperationException>(() => server.WaitForConnection());
@@ -339,9 +338,8 @@ namespace System.IO.Pipes.Tests
         public virtual async Task OperationsOnDisconnectedClient()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
-            (NamedPipeServerStream server, NamedPipeClientStream client) = GetClientAndServer(
-                streams
-            );
+            (NamedPipeServerStream server, NamedPipeClientStream client) =
+                GetClientAndServer(streams);
 
             Assert.Throws<InvalidOperationException>(() => client.IsMessageComplete);
             Assert.Throws<InvalidOperationException>(() => client.Connect());
@@ -392,9 +390,8 @@ namespace System.IO.Pipes.Tests
         public async Task Windows_OperationsOnNamedServerWithDisposedClient()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
-            (NamedPipeServerStream server, NamedPipeClientStream client) = GetClientAndServer(
-                streams
-            );
+            (NamedPipeServerStream server, NamedPipeClientStream client) =
+                GetClientAndServer(streams);
 
             client.Dispose();
 
@@ -534,9 +531,8 @@ namespace System.IO.Pipes.Tests
         public async Task DisposedClientPipe_Throws_ObjectDisposedException()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
-            (NamedPipeServerStream server, NamedPipeClientStream client) = GetClientAndServer(
-                streams
-            );
+            (NamedPipeServerStream server, NamedPipeClientStream client) =
+                GetClientAndServer(streams);
             client.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => client.Connect());
@@ -571,9 +567,8 @@ namespace System.IO.Pipes.Tests
         public async Task Server_ReadWriteCancelledToken_Throws_OperationCanceledException()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
-            (NamedPipeServerStream server, NamedPipeClientStream client) = GetClientAndServer(
-                streams
-            );
+            (NamedPipeServerStream server, NamedPipeClientStream client) =
+                GetClientAndServer(streams);
 
             var buffer = new byte[4];
 
@@ -608,9 +603,8 @@ namespace System.IO.Pipes.Tests
         public async Task CancelTokenOff_Server_ReadWriteCancelledToken_Throws_OperationCanceledException()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
-            (NamedPipeServerStream server, NamedPipeClientStream client) = GetClientAndServer(
-                streams
-            );
+            (NamedPipeServerStream server, NamedPipeClientStream client) =
+                GetClientAndServer(streams);
 
             var buffer = new byte[4];
 
@@ -654,9 +648,8 @@ namespace System.IO.Pipes.Tests
         public async Task CancelTokenOn_Server_ReadWriteCancelledToken_Throws_OperationCanceledException()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
-            (NamedPipeServerStream server, NamedPipeClientStream client) = GetClientAndServer(
-                streams
-            );
+            (NamedPipeServerStream server, NamedPipeClientStream client) =
+                GetClientAndServer(streams);
 
             var buffer = new byte[4];
 
@@ -688,9 +681,8 @@ namespace System.IO.Pipes.Tests
         public async Task Client_ReadWriteCancelledToken_Throws_OperationCanceledException()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
-            (NamedPipeServerStream server, NamedPipeClientStream client) = GetClientAndServer(
-                streams
-            );
+            (NamedPipeServerStream server, NamedPipeClientStream client) =
+                GetClientAndServer(streams);
 
             var buffer = new byte[4];
 
@@ -724,9 +716,8 @@ namespace System.IO.Pipes.Tests
         public async Task CancelTokenOff_Client_ReadWriteCancelledToken_Throws_OperationCanceledException()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
-            (NamedPipeServerStream server, NamedPipeClientStream client) = GetClientAndServer(
-                streams
-            );
+            (NamedPipeServerStream server, NamedPipeClientStream client) =
+                GetClientAndServer(streams);
 
             var buffer = new byte[4];
 
@@ -770,9 +761,8 @@ namespace System.IO.Pipes.Tests
         public async Task CancelTokenOn_Client_ReadWriteCancelledToken_Throws_OperationCanceledException()
         {
             using StreamPair streams = await CreateConnectedStreamsAsync();
-            (NamedPipeServerStream server, NamedPipeClientStream client) = GetClientAndServer(
-                streams
-            );
+            (NamedPipeServerStream server, NamedPipeClientStream client) =
+                GetClientAndServer(streams);
 
             var buffer = new byte[4];
 

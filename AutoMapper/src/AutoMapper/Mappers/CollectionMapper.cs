@@ -67,9 +67,8 @@ namespace AutoMapper.Internal.Mappers
             )
             {
                 var destinationTypeArguments = destinationType.GenericTypeArguments;
-                var closedCollectionType = genericCollectionType.MakeGenericType(
-                    destinationTypeArguments
-                );
+                var closedCollectionType =
+                    genericCollectionType.MakeGenericType(destinationTypeArguments);
                 var dict = MapCollectionCore(Default(closedCollectionType));
                 var readOnlyClosedType = destinationType.IsInterface
                     ? genericReadOnlyCollectionType.MakeGenericType(destinationTypeArguments)
@@ -141,9 +140,8 @@ namespace AutoMapper.Internal.Mappers
                         }
                         else
                         {
-                            destinationCollectionType = typeof(ICollection<>).MakeGenericType(
-                                destinationElementType
-                            );
+                            destinationCollectionType =
+                                typeof(ICollection<>).MakeGenericType(destinationElementType);
                             destExpression = Convert(
                                 mustUseDestination ? destExpression : Null,
                                 destinationCollectionType

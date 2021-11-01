@@ -906,9 +906,9 @@ namespace System.Diagnostics
                                 }
 
                                 var subscription = newListener.Subscribe(
-                                    new CallbackObserver<KeyValuePair<string, object?>>(
-                                        OnEventWritten
-                                    ),
+                                    new CallbackObserver<
+                                        KeyValuePair<string, object?>
+                                    >(OnEventWritten),
                                     eventNameFilterPredicate
                                 );
                                 _liveSubscriptions = new Subscriptions(

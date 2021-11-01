@@ -87,9 +87,7 @@ namespace Castle.DynamicProxy.Tests
         {
             var interceptors = new SetReturnValueInterceptor(null);
             var proxy =
-                generator.CreateInterfaceProxyWithoutTarget<GenInterfaceWithMethodWithNestedGenericParameter>(
-                    interceptors
-                );
+                generator.CreateInterfaceProxyWithoutTarget<GenInterfaceWithMethodWithNestedGenericParameter>(interceptors);
             proxy.Foo<int>(null);
         }
 
@@ -98,9 +96,7 @@ namespace Castle.DynamicProxy.Tests
         {
             var interceptors = new SetReturnValueInterceptor(null);
             var proxy =
-                generator.CreateInterfaceProxyWithoutTarget<GenInterfaceWithMethodWithNestedGenericParameterByRef>(
-                    interceptors
-                );
+                generator.CreateInterfaceProxyWithoutTarget<GenInterfaceWithMethodWithNestedGenericParameterByRef>(interceptors);
             IEnumerable<IComparable<int>> param = null;
             proxy.Foo(ref param);
         }
@@ -110,9 +106,7 @@ namespace Castle.DynamicProxy.Tests
         {
             var interceptors = new SetReturnValueInterceptor(null);
             var proxy =
-                generator.CreateInterfaceProxyWithoutTarget<GenInterfaceWithMethodWithNestedGenericReturn>(
-                    interceptors
-                );
+                generator.CreateInterfaceProxyWithoutTarget<GenInterfaceWithMethodWithNestedGenericReturn>(interceptors);
             proxy.Foo<int>();
         }
 
@@ -320,9 +314,8 @@ namespace Castle.DynamicProxy.Tests
         public void MethodInfoClosedInNongenIfcGenMethodNoTarget()
         {
             var interceptor = new KeepDataInterceptor();
-            var proxy = generator.CreateInterfaceProxyWithoutTarget<OnlyGenMethodsInterface>(
-                interceptor
-            );
+            var proxy =
+                generator.CreateInterfaceProxyWithoutTarget<OnlyGenMethodsInterface>(interceptor);
 
             proxy.DoSomething(1);
             GenericTestUtility.CheckMethodInfoIsClosed(

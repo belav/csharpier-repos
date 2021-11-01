@@ -260,9 +260,10 @@ namespace System.Text
             );
 
             return GetByteCountWithFallback(
-                chars: new ReadOnlySpan<char>(pCharsOriginal, originalCharCount).Slice(
-                    charsConsumedSoFar
-                ),
+                chars: new ReadOnlySpan<char>(
+                    pCharsOriginal,
+                    originalCharCount
+                ).Slice(charsConsumedSoFar),
                 originalCharsLength: originalCharCount,
                 encoder: null
             );
@@ -623,9 +624,10 @@ namespace System.Text
             );
 
             return GetBytesWithFallback(
-                chars: new ReadOnlySpan<char>(pOriginalChars, originalCharCount).Slice(
-                    charsConsumedSoFar
-                ),
+                chars: new ReadOnlySpan<char>(
+                    pOriginalChars,
+                    originalCharCount
+                ).Slice(charsConsumedSoFar),
                 originalCharsLength: originalCharCount,
                 bytes: new Span<byte>(pOriginalBytes, originalByteCount).Slice(bytesWrittenSoFar),
                 originalBytesLength: originalByteCount,
@@ -676,9 +678,10 @@ namespace System.Text
                 pOriginalChars,
                 originalCharCount
             ).Slice(charsConsumedSoFar);
-            Span<byte> bytes = new Span<byte>(pOriginalBytes, originalByteCount).Slice(
-                bytesWrittenSoFar
-            );
+            Span<byte> bytes = new Span<byte>(
+                pOriginalBytes,
+                originalByteCount
+            ).Slice(bytesWrittenSoFar);
 
             bool drainFinishedSuccessfully = encoder.TryDrainLeftoverDataForGetBytes(
                 chars,
@@ -1047,9 +1050,10 @@ namespace System.Text
             );
 
             return GetCharCountWithFallback(
-                bytes: new ReadOnlySpan<byte>(pBytesOriginal, originalByteCount).Slice(
-                    bytesConsumedSoFar
-                ),
+                bytes: new ReadOnlySpan<byte>(
+                    pBytesOriginal,
+                    originalByteCount
+                ).Slice(bytesConsumedSoFar),
                 originalBytesLength: originalByteCount,
                 decoder: null
             );
@@ -1409,9 +1413,10 @@ namespace System.Text
             );
 
             return GetCharsWithFallback(
-                bytes: new ReadOnlySpan<byte>(pOriginalBytes, originalByteCount).Slice(
-                    bytesConsumedSoFar
-                ),
+                bytes: new ReadOnlySpan<byte>(
+                    pOriginalBytes,
+                    originalByteCount
+                ).Slice(bytesConsumedSoFar),
                 originalBytesLength: originalByteCount,
                 chars: new Span<char>(pOriginalChars, originalCharCount).Slice(charsWrittenSoFar),
                 originalCharsLength: originalCharCount,
@@ -1468,9 +1473,10 @@ namespace System.Text
                 pOriginalBytes,
                 originalByteCount
             ).Slice(bytesConsumedSoFar);
-            Span<char> chars = new Span<char>(pOriginalChars, originalCharCount).Slice(
-                charsWrittenSoFar
-            );
+            Span<char> chars = new Span<char>(
+                pOriginalChars,
+                originalCharCount
+            ).Slice(charsWrittenSoFar);
 
             int bytesConsumedJustNow;
             int charsWrittenJustNow;

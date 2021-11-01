@@ -203,18 +203,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                     ? OptimizationLevel.Debug
                     : OptimizationLevel.Release;
             }
-            csharpCompilationOptions = csharpCompilationOptions.WithOptimizationLevel(
-                optimizationLevel
-            );
+            csharpCompilationOptions =
+                csharpCompilationOptions.WithOptimizationLevel(optimizationLevel);
 
             if (dependencyContextOptions.WarningsAsErrors.HasValue)
             {
                 var reportDiagnostic = dependencyContextOptions.WarningsAsErrors.Value
                     ? ReportDiagnostic.Error
                     : ReportDiagnostic.Default;
-                csharpCompilationOptions = csharpCompilationOptions.WithGeneralDiagnosticOption(
-                    reportDiagnostic
-                );
+                csharpCompilationOptions =
+                    csharpCompilationOptions.WithGeneralDiagnosticOption(reportDiagnostic);
             }
 
             return csharpCompilationOptions;

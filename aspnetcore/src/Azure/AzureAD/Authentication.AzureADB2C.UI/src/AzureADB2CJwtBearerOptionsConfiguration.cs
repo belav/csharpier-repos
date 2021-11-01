@@ -36,9 +36,8 @@ namespace Microsoft.AspNetCore.Authentication
             }
 
             options.Audience = azureADB2COptions.ClientId;
-            options.Authority = AzureADB2COpenIdConnectOptionsConfiguration.BuildAuthority(
-                azureADB2COptions
-            );
+            options.Authority =
+                AzureADB2COpenIdConnectOptionsConfiguration.BuildAuthority(azureADB2COptions);
         }
 
         public void Configure(JwtBearerOptions options) { }

@@ -52,9 +52,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
                         .AddParts(parts);
 
                     var configuration = CompositionConfiguration.Create(catalog);
-                    var runtimeComposition = RuntimeComposition.CreateRuntimeComposition(
-                        configuration
-                    );
+                    var runtimeComposition =
+                        RuntimeComposition.CreateRuntimeComposition(configuration);
                     return runtimeComposition.CreateExportProviderFactory();
                 },
                 LazyThreadSafetyMode.ExecutionAndPublication

@@ -51,9 +51,8 @@ namespace System.Net.Http.Formatting
         [TestDataSet(typeof(HttpTestData), "AllFormatterCollections")]
         public void Constructor1_SetsProperties(IEnumerable<MediaTypeFormatter> formatterCollection)
         {
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
-                formatterCollection
-            );
+            MediaTypeFormatterCollection collection =
+                new MediaTypeFormatterCollection(formatterCollection);
             if (collection.OfType<XmlMediaTypeFormatter>().Any())
             {
                 Assert.NotNull(collection.XmlFormatter);
@@ -78,9 +77,8 @@ namespace System.Net.Http.Formatting
         {
             // force to array to get stable instances
             MediaTypeFormatter[] derivedFormatters = HttpTestData.DerivedFormatters.ToArray();
-            MediaTypeFormatterCollection collection = new MediaTypeFormatterCollection(
-                derivedFormatters
-            );
+            MediaTypeFormatterCollection collection =
+                new MediaTypeFormatterCollection(derivedFormatters);
             Assert.True(derivedFormatters.SequenceEqual(collection));
         }
 

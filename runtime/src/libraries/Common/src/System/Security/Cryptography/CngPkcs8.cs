@@ -128,9 +128,8 @@ namespace System.Security.Cryptography
             }
             catch (CryptographicException)
             {
-                AsnWriter? pkcs8ZeroPublicKey = RewritePkcs8ECPrivateKeyWithZeroPublicKey(
-                    pkcs8Source
-                );
+                AsnWriter? pkcs8ZeroPublicKey =
+                    RewritePkcs8ECPrivateKeyWithZeroPublicKey(pkcs8Source);
 
                 if (pkcs8ZeroPublicKey == null)
                 {

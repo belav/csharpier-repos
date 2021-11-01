@@ -514,9 +514,8 @@ class winx64structs
     {
         int retCode;
 
-        managed_struct1_struct5_delegate s1Del = new managed_struct1_struct5_delegate(
-            managed_struct1_struct5_test
-        );
+        managed_struct1_struct5_delegate s1Del =
+            new managed_struct1_struct5_delegate(managed_struct1_struct5_test);
 
         if ((retCode = mono_test_managed_Winx64_struct1_struct5_in(s1Del)) != 0)
             return 100 + retCode;
@@ -528,9 +527,8 @@ class winx64structs
     {
         int retCode;
 
-        mono_test_Winx64_struct1_ret_delegate s1Del = new mono_test_Winx64_struct1_ret_delegate(
-            mono_test_Winx64_struct1_ret_test
-        );
+        mono_test_Winx64_struct1_ret_delegate s1Del =
+            new mono_test_Winx64_struct1_ret_delegate(mono_test_Winx64_struct1_ret_test);
 
         if ((retCode = mono_test_Winx64_struct1_ret_managed(s1Del)) != 0)
             return 100 + retCode;
@@ -542,9 +540,8 @@ class winx64structs
     {
         int retCode;
 
-        mono_test_Winx64_struct5_ret_delegate s1Del = new mono_test_Winx64_struct5_ret_delegate(
-            mono_test_Winx64_struct5_ret_test
-        );
+        mono_test_Winx64_struct5_ret_delegate s1Del =
+            new mono_test_Winx64_struct5_ret_delegate(mono_test_Winx64_struct5_ret_test);
 
         if ((retCode = mono_test_Winx64_struct5_ret_managed(s1Del)) != 0)
             return 100 + retCode;

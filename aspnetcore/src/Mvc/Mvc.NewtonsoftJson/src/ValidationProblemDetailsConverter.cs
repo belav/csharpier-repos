@@ -26,9 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             JsonSerializer serializer
         )
         {
-            var annotatedProblemDetails = serializer.Deserialize<AnnotatedValidationProblemDetails>(
-                reader
-            );
+            var annotatedProblemDetails =
+                serializer.Deserialize<AnnotatedValidationProblemDetails>(reader);
             if (annotatedProblemDetails == null)
             {
                 return null;

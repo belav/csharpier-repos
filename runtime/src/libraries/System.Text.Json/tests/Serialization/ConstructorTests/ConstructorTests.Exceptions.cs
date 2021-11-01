@@ -202,9 +202,8 @@ namespace System.Text.Json.Serialization.Tests
             obj = await Serializer.DeserializeWrapper<ClassWithUnicodePropertyName>(GoodJson);
             Assert.Equal(1, obj.Property\u04671);
 
-            obj = await Serializer.DeserializeWrapper<ClassWithUnicodePropertyName>(
-                GoodJsonEscaped
-            );
+            obj =
+                await Serializer.DeserializeWrapper<ClassWithUnicodePropertyName>(GoodJsonEscaped);
             Assert.Equal(1, obj.Property\u04671);
 
             JsonException e;

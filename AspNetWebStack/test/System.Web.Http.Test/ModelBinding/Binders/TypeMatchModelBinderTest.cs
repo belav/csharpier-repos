@@ -68,9 +68,8 @@ namespace System.Web.Http.ModelBinding.Binders
             };
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
-                bindingContext
-            );
+            ValueProviderResult vpResult =
+                TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
 
             // Assert
             Assert.Null(vpResult); // Raw value is the wrong type
@@ -84,9 +83,8 @@ namespace System.Web.Http.ModelBinding.Binders
             bindingContext.ValueProvider = new SimpleHttpValueProvider { { "theModelName", 42 } };
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
-                bindingContext
-            );
+            ValueProviderResult vpResult =
+                TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
 
             // Assert
             Assert.NotNull(vpResult);
@@ -100,9 +98,8 @@ namespace System.Web.Http.ModelBinding.Binders
             bindingContext.ValueProvider = new SimpleHttpValueProvider();
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
-                bindingContext
-            );
+            ValueProviderResult vpResult =
+                TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
 
             // Assert
             Assert.Null(vpResult); // No key matched

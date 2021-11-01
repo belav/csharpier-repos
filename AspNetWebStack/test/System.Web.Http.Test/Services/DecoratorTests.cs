@@ -32,9 +32,8 @@ namespace System.Web.Http.Services
             // Arrange
             DummyAggregatedClass dummyInnerObject = new DummyAggregatedClass();
             DummyObjectWrapper dummyObjectWrapper = new DummyObjectWrapper(dummyInnerObject);
-            DummyDoubleLayerWrapper dummyDoubleLayerWrapper = new DummyDoubleLayerWrapper(
-                dummyObjectWrapper
-            );
+            DummyDoubleLayerWrapper dummyDoubleLayerWrapper =
+                new DummyDoubleLayerWrapper(dummyObjectWrapper);
             IBaseInterface dummyBase = dummyDoubleLayerWrapper as IBaseInterface;
 
             // Act

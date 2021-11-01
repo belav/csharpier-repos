@@ -723,9 +723,7 @@ public class Managed
 
                     Console.WriteLine("\tCalling MarshalStructAsParam_AsSeqByVal13...");
                     if (
-                        !MarshalStructAsParam_AsSeqByVal13(
-                            sourceIncludeOuterIntegerStructSequential
-                        )
+                        !MarshalStructAsParam_AsSeqByVal13(sourceIncludeOuterIntegerStructSequential)
                     )
                     {
                         Console.WriteLine(
@@ -850,9 +848,7 @@ public class Managed
                         "\tCalling MarshalStructAsParam_AsSeqByValSequentialAggregateSequentialWrapper..."
                     );
                     if (
-                        !MarshalStructAsParam_AsSeqByValSequentialAggregateSequentialWrapper(
-                            aggregateWrapper
-                        )
+                        !MarshalStructAsParam_AsSeqByValSequentialAggregateSequentialWrapper(aggregateWrapper)
                     )
                     {
                         Console.WriteLine(
@@ -1334,9 +1330,7 @@ public class Managed
 
                     Console.WriteLine("\tCalling MarshalStructAsParam_AsSeqByRef13...");
                     if (
-                        !MarshalStructAsParam_AsSeqByRef13(
-                            ref sourceIncludeOuterIntegerStructSequential
-                        )
+                        !MarshalStructAsParam_AsSeqByRef13(ref sourceIncludeOuterIntegerStructSequential)
                     )
                     {
                         Console.WriteLine(
@@ -1703,9 +1697,7 @@ public class Managed
 
                     Console.WriteLine("\tCalling MarshalStructAsParam_AsSeqByValIn13...");
                     if (
-                        !MarshalStructAsParam_AsSeqByValIn13(
-                            sourceIncludeOuterIntegerStructSequential
-                        )
+                        !MarshalStructAsParam_AsSeqByValIn13(sourceIncludeOuterIntegerStructSequential)
                     )
                     {
                         Console.WriteLine(
@@ -2073,9 +2065,7 @@ public class Managed
 
                     Console.WriteLine("\tCalling MarshalStructAsParam_AsSeqByRefIn13...");
                     if (
-                        !MarshalStructAsParam_AsSeqByRefIn13(
-                            ref sourceIncludeOuterIntegerStructSequential
-                        )
+                        !MarshalStructAsParam_AsSeqByRefIn13(ref sourceIncludeOuterIntegerStructSequential)
                     )
                     {
                         Console.WriteLine(
@@ -2454,9 +2444,7 @@ public class Managed
 
                     Console.WriteLine("\tCalling MarshalStructAsParam_AsSeqByValOut13...");
                     if (
-                        !MarshalStructAsParam_AsSeqByValOut13(
-                            sourceIncludeOuterIntegerStructSequential
-                        )
+                        !MarshalStructAsParam_AsSeqByValOut13(sourceIncludeOuterIntegerStructSequential)
                     )
                     {
                         Console.WriteLine(
@@ -2847,9 +2835,7 @@ public class Managed
 
                     Console.WriteLine("\tCalling MarshalStructAsParam_AsSeqByRefOut13...");
                     if (
-                        !MarshalStructAsParam_AsSeqByRefOut13(
-                            out sourceIncludeOuterIntegerStructSequential
-                        )
+                        !MarshalStructAsParam_AsSeqByRefOut13(out sourceIncludeOuterIntegerStructSequential)
                     )
                     {
                         Console.WriteLine(
@@ -3236,9 +3222,7 @@ public class Managed
 
                     Console.WriteLine("\tCalling MarshalStructAsParam_AsSeqByValInOut13...");
                     if (
-                        !MarshalStructAsParam_AsSeqByValInOut13(
-                            sourceIncludeOuterIntegerStructSequential
-                        )
+                        !MarshalStructAsParam_AsSeqByValInOut13(sourceIncludeOuterIntegerStructSequential)
                     )
                     {
                         Console.WriteLine(
@@ -3629,9 +3613,7 @@ public class Managed
 
                     Console.WriteLine("\tCalling MarshalStructAsParam_AsSeqByRefInOut13...");
                     if (
-                        !MarshalStructAsParam_AsSeqByRefInOut13(
-                            ref sourceIncludeOuterIntegerStructSequential
-                        )
+                        !MarshalStructAsParam_AsSeqByRefInOut13(ref sourceIncludeOuterIntegerStructSequential)
                     )
                     {
                         Console.WriteLine(

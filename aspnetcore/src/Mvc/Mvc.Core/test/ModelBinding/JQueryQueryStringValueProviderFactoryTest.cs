@@ -112,9 +112,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
 
             // Assert
             var valueProvider = Assert.Single(context.ValueProviders);
-            var jqueryQueryStringValueProvider = Assert.IsType<JQueryQueryStringValueProvider>(
-                valueProvider
-            );
+            var jqueryQueryStringValueProvider =
+                Assert.IsType<JQueryQueryStringValueProvider>(valueProvider);
             Assert.Equal(CultureInfo.InvariantCulture, jqueryQueryStringValueProvider.Culture);
         }
 

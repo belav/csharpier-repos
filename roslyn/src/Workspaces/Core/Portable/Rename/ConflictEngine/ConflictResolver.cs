@@ -180,9 +180,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         {
             var renameRewriterService =
                 document.GetRequiredLanguageService<IRenameRewriterLanguageService>();
-            var complexifiedTarget = renameRewriterService.GetExpansionTargetForLocation(
-                tokenOrNode
-            );
+            var complexifiedTarget =
+                renameRewriterService.GetExpansionTargetForLocation(tokenOrNode);
             return complexifiedTarget;
         }
 
@@ -442,9 +441,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     );
                     if (otherThingsNamedTheSame.Any(s => s.IsKind(SymbolKind.Namespace)))
                     {
-                        conflictingSymbolLocations = conflictingSymbolLocations.Concat(
-                            renamedSymbol
-                        );
+                        conflictingSymbolLocations =
+                            conflictingSymbolLocations.Concat(renamedSymbol);
                     }
 
                     AddConflictingSymbolLocations(

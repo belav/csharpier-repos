@@ -556,9 +556,8 @@ namespace System.Diagnostics.Tests
                                 delegate
                                 {
                                     // Create a set of DiagnosticListeners, which add themselves to the AllListeners list.
-                                    var listeners = new List<DiagnosticListener>(
-                                        numListenersPerThread
-                                    );
+                                    var listeners =
+                                        new List<DiagnosticListener>(numListenersPerThread);
                                     for (int j = 0; j < numListenersPerThread; j++)
                                     {
                                         var listener = new DiagnosticListener(

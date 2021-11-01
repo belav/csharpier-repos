@@ -408,9 +408,10 @@ namespace AutoMapper
         ) =>
             Types.IsGenericTypeDefinition
                 ? null
-                : new TypeMapPlanBuilder(configurationProvider, this).CreateMapperLambda(
-                      typeMapsPath
-                  );
+                : new TypeMapPlanBuilder(
+                      configurationProvider,
+                      this
+                  ).CreateMapperLambda(typeMapsPath);
         private PropertyMap GetPropertyMap(string name) => _propertyMaps?.GetOrDefault(name);
         private PropertyMap GetPropertyMap(PropertyMap propertyMap) =>
             GetPropertyMap(propertyMap.DestinationName);

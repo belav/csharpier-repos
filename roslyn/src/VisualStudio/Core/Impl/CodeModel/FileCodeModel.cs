@@ -223,9 +223,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             _codeElementTable.Remove(oldNodeKey);
 
-            var managedElement = ComAggregate.GetManagedObject<AbstractKeyedCodeElement>(
-                codeElement
-            );
+            var managedElement =
+                ComAggregate.GetManagedObject<AbstractKeyedCodeElement>(codeElement);
             if (!object.Equals(managedElement, keyedElement))
             {
                 throw new InvalidOperationException(
@@ -273,9 +272,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 {
                     if (codeElement != null)
                     {
-                        var element = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
-                            codeElement
-                        );
+                        var element =
+                            ComAggregate.TryGetManagedObject<AbstractCodeElement>(codeElement);
                         if (element.IsValidNode())
                         {
                             if (codeElement is T tcodeElement)
@@ -924,9 +922,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             foreach (var element in _codeElementTable.Values)
             {
-                var keyedElement = ComAggregate.TryGetManagedObject<AbstractKeyedCodeElement>(
-                    element
-                );
+                var keyedElement =
+                    ComAggregate.TryGetManagedObject<AbstractKeyedCodeElement>(element);
                 if (keyedElement == null)
                 {
                     continue;

@@ -166,9 +166,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                         // with then we can't merge these.
                         foreach (var additionalProjectId in _item.AdditionalMatchingProjects)
                         {
-                            var additionalProject = solution.GetRequiredProject(
-                                additionalProjectId
-                            );
+                            var additionalProject =
+                                solution.GetRequiredProject(additionalProjectId);
                             var (projectName, projectFlavor) =
                                 additionalProject.State.NameAndFlavor;
                             if (projectName == firstProjectName)

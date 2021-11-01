@@ -120,9 +120,8 @@ namespace Microsoft.CodeAnalysis
             CopyFile(fullPath, shadowCopyPath);
 
             string originalDirectory = Path.GetDirectoryName(fullPath);
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(
-                fileNameWithExtension
-            );
+            string fileNameWithoutExtension =
+                Path.GetFileNameWithoutExtension(fileNameWithExtension);
             string resourcesNameWithoutExtension = fileNameWithoutExtension + ".resources";
             string resourcesNameWithExtension = resourcesNameWithoutExtension + ".dll";
 

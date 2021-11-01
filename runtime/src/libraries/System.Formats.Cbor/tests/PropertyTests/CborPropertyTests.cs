@@ -103,9 +103,8 @@ namespace System.Formats.Cbor.Tests
         {
             bool convertIndefiniteLengthEncodings =
                 mode is CborConformanceMode.Canonical or CborConformanceMode.Ctap2Canonical;
-            var writer = new CborWriter(
-                convertIndefiniteLengthEncodings: convertIndefiniteLengthEncodings
-            );
+            var writer =
+                new CborWriter(convertIndefiniteLengthEncodings: convertIndefiniteLengthEncodings);
 
             writer.WriteStartIndefiniteLengthByteString();
             foreach (byte[] chunk in chunks)
@@ -131,9 +130,8 @@ namespace System.Formats.Cbor.Tests
         {
             bool convertIndefiniteLengthEncodings =
                 mode is CborConformanceMode.Canonical or CborConformanceMode.Ctap2Canonical;
-            var writer = new CborWriter(
-                convertIndefiniteLengthEncodings: convertIndefiniteLengthEncodings
-            );
+            var writer =
+                new CborWriter(convertIndefiniteLengthEncodings: convertIndefiniteLengthEncodings);
 
             writer.WriteStartIndefiniteLengthTextString();
             foreach (string chunk in chunks)

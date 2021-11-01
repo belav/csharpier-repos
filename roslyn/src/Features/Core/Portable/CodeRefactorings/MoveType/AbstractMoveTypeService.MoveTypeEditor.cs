@@ -66,10 +66,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 //    these imports only were needed for the moved type, and so they shouldn't stay in the original
                 //    file.
 
-                var documentWithMovedType = await AddNewDocumentWithSingleTypeDeclarationAsync(
-                        newDocumentId
-                    )
-                    .ConfigureAwait(false);
+                var documentWithMovedType =
+                    await AddNewDocumentWithSingleTypeDeclarationAsync(newDocumentId)
+                        .ConfigureAwait(false);
 
                 var solutionWithNewDocument = documentWithMovedType.Project.Solution;
 
@@ -80,10 +79,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
                 // update source document to add partial modifiers to type chain
                 // and/or remove type declaration from original source document.
-                var solutionWithBothDocumentsUpdated = await RemoveTypeFromSourceDocumentAsync(
-                        sourceDocument
-                    )
-                    .ConfigureAwait(false);
+                var solutionWithBothDocumentsUpdated =
+                    await RemoveTypeFromSourceDocumentAsync(sourceDocument).ConfigureAwait(false);
 
                 return await RemoveUnnecessaryImportsAsync(
                         solutionWithBothDocumentsUpdated,
@@ -388,9 +385,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             {
                 var syntaxFacts =
                     State.SemanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
-                var withoutBlankLines = syntaxFacts.GetNodeWithoutLeadingBlankLines(
-                    currentTypeNode
-                );
+                var withoutBlankLines =
+                    syntaxFacts.GetNodeWithoutLeadingBlankLines(currentTypeNode);
 
                 // Add an elastic marker so the formatter can add any blank lines it thinks are
                 // important to have (i.e. after a block of usings/imports).

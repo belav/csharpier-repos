@@ -61,9 +61,8 @@ namespace System.Web.Http.Services
             ServicesContainer services = mock.Object;
 
             // Act
-            IEnumerable<IExceptionLogger> exceptionLoggers = ServicesExtensions.GetExceptionLoggers(
-                services
-            );
+            IEnumerable<IExceptionLogger> exceptionLoggers =
+                ServicesExtensions.GetExceptionLoggers(services);
 
             // Assert
             mock.Verify(s => s.GetServices(typeof(IExceptionLogger)), Times.Once());

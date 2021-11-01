@@ -190,9 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 .ForProperty<Person>(nameof(Person.Service))
                 .BindingDetails(binding => binding.BindingSource = BindingSource.Services);
 
-            var testContext = ModelBindingTestHelper.GetTestContext(
-                metadataProvider: metadataProvider
-            );
+            var testContext =
+                ModelBindingTestHelper.GetTestContext(metadataProvider: metadataProvider);
             var modelState = testContext.ModelState;
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
                 testContext.HttpContext.RequestServices
@@ -233,9 +232,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 .ForType<ITypeActivatorCache>()
                 .BindingDetails(binding => binding.BindingSource = BindingSource.Services);
 
-            var testContext = ModelBindingTestHelper.GetTestContext(
-                metadataProvider: metadataProvider
-            );
+            var testContext =
+                ModelBindingTestHelper.GetTestContext(metadataProvider: metadataProvider);
             var modelState = testContext.ModelState;
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
                 testContext.HttpContext.RequestServices

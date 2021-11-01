@@ -28,9 +28,8 @@ namespace System.Data.Common
         private DataTableMappingCollection? _tableMappings;
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        internal readonly int _objectID =
+            System.Threading.Interlocked.Increment(ref s_objectTypeCount);
 
         [Conditional("DEBUG")]
         private void AssertReaderHandleFieldCount(DataReaderContainer readerHandler)

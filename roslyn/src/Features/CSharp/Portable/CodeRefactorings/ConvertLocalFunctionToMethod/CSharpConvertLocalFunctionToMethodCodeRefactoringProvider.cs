@@ -269,9 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                 else if (hasAdditionalArguments || hasAdditionalTypeArguments)
                 {
                     // Convert local function delegates to lambda if the signature no longer matches
-                    currentNode = currentNode.WithAdditionalAnnotations(
-                        s_delegateToReplaceAnnotation
-                    );
+                    currentNode =
+                        currentNode.WithAdditionalAnnotations(s_delegateToReplaceAnnotation);
                     anyDelegatesToReplace = true;
                 }
 

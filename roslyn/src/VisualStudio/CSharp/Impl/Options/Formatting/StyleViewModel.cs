@@ -2010,9 +2010,8 @@ class C2
         internal StyleViewModel(OptionStore optionStore, IServiceProvider serviceProvider)
             : base(optionStore, serviceProvider, LanguageNames.CSharp)
         {
-            var collectionView = (ListCollectionView)CollectionViewSource.GetDefaultView(
-                CodeStyleItems
-            );
+            var collectionView =
+                (ListCollectionView)CollectionViewSource.GetDefaultView(CodeStyleItems);
             collectionView.GroupDescriptions.Add(
                 new PropertyGroupDescription(nameof(AbstractCodeStyleOptionViewModel.GroupName))
             );

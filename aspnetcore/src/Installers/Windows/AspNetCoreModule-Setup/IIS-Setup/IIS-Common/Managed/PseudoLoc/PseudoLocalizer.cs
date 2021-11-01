@@ -194,9 +194,8 @@ namespace Microsoft.Web.Utility
                 TryEnableAssembly(Assembly.GetExecutingAssembly());
 
                 //set up pseudo-localization for anything that gets loaded later
-                AppDomain.CurrentDomain.AssemblyLoad += new AssemblyLoadEventHandler(
-                    OnCurrentDomainAssemblyLoad
-                );
+                AppDomain.CurrentDomain.AssemblyLoad +=
+                    new AssemblyLoadEventHandler(OnCurrentDomainAssemblyLoad);
             }
         }
 

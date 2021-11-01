@@ -161,9 +161,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             }
 
             var isRemovableAssignment =
-                AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.GetIsRemovableAssignmentDiagnostic(
-                    diagnostic
-                );
+                AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.GetIsRemovableAssignmentDiagnostic(diagnostic);
 
             string title;
             if (isRemovableAssignment)
@@ -264,9 +262,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             }
 
             var isRemovableAssignment =
-                AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.GetIsRemovableAssignmentDiagnostic(
-                    diagnostic
-                );
+                AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.GetIsRemovableAssignmentDiagnostic(diagnostic);
             return GetEquivalenceKey(preference, isRemovableAssignment);
         }
 
@@ -322,9 +318,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 );
                 Debug.Assert(
                     removeAssignments
-                        == AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.GetIsRemovableAssignmentDiagnostic(
-                            diagnostic
-                        )
+                        == AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.GetIsRemovableAssignmentDiagnostic(diagnostic)
                 );
             }
 #endif
@@ -538,9 +532,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 {
                     case UnusedValuePreference.DiscardVariable:
                         Debug.Assert(semanticModel.Language != LanguageNames.VisualBasic);
-                        var expression = syntaxFacts.GetExpressionOfExpressionStatement(
-                            expressionStatement
-                        );
+                        var expression =
+                            syntaxFacts.GetExpressionOfExpressionStatement(expressionStatement);
                         editor.ReplaceNode(
                             expression,
                             (node, generator) =>
@@ -564,16 +557,13 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                     case UnusedValuePreference.UnusedLocalVariable:
                         var name =
-                            nameGenerator.GenerateUniqueNameAtSpanStart(
-                                expressionStatement
-                            ).ValueText;
+                            nameGenerator.GenerateUniqueNameAtSpanStart(expressionStatement).ValueText;
                         editor.ReplaceNode(
                             expressionStatement,
                             (node, generator) =>
                             {
-                                var expression = syntaxFacts.GetExpressionOfExpressionStatement(
-                                    node
-                                );
+                                var expression =
+                                    syntaxFacts.GetExpressionOfExpressionStatement(node);
                                 // Add Simplifier annotation so that 'var'/explicit type is correctly added based on user options.
                                 var localDecl = editor.Generator
                                     .LocalDeclarationStatement(
@@ -776,9 +766,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     );
                     if (isUnusedLocalAssignment)
                     {
-                        declarationStatement = declarationStatement.WithAdditionalAnnotations(
-                            s_unusedLocalDeclarationAnnotation
-                        );
+                        declarationStatement =
+                            declarationStatement.WithAdditionalAnnotations(s_unusedLocalDeclarationAnnotation);
                     }
 
                     nodesToAdd.Add((declarationStatement, node));
@@ -835,9 +824,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         .OfType<TLocalDeclarationStatementSyntax>()
                 )
                 {
-                    var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
-                        localDeclarationStatement
-                    );
+                    var variables =
+                        syntaxFacts.GetVariablesOfLocalDeclarationStatement(localDeclarationStatement);
                     if (
                         variables.Count == 1
                         && syntaxFacts.GetInitializerOfVariableDeclarator(variables[0]) == null
@@ -853,9 +841,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     {
                         nodeReplacementMap.Add(
                             localDeclarationStatement,
-                            localDeclarationStatement.WithAdditionalAnnotations(
-                                s_existingLocalDeclarationWithoutInitializerAnnotation
-                            )
+                            localDeclarationStatement.WithAdditionalAnnotations(s_existingLocalDeclarationWithoutInitializerAnnotation)
                         );
                     }
                 }
@@ -905,9 +891,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         getInnermostNodeForTie: true
                     );
                     var isUnusedLocalAssignment =
-                        AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.GetIsUnusedLocalDiagnostic(
-                            diagnostic
-                        );
+                        AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.GetIsUnusedLocalDiagnostic(diagnostic);
                     yield return (node, isUnusedLocalAssignment);
                 }
             }
@@ -984,9 +968,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 Debug.Assert(localDeclarationStatement != null);
 
                 // We should remove the entire local declaration statement if all its variables are marked for removal.
-                variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
-                    localDeclarationStatement
-                );
+                variables =
+                    syntaxFacts.GetVariablesOfLocalDeclarationStatement(localDeclarationStatement);
                 foreach (var variable in variables)
                 {
                     if (!nodesToRemove.Contains(variable))

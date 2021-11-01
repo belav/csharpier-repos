@@ -533,9 +533,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             );
             Assert.NotEqual(context, GetMetadataContext(previous).EvaluationContext);
             Assert.True(
-                GetMetadataContext(
-                    previous
-                ).EvaluationContext.MethodContextReuseConstraints.Value.AreSatisfied(
+                GetMetadataContext(previous).EvaluationContext.MethodContextReuseConstraints.Value.AreSatisfied(
                     moduleVersionId,
                     methodToken,
                     methodVersion,
@@ -568,9 +566,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
             );
             Assert.NotEqual(context, GetMetadataContext(previous).EvaluationContext);
             Assert.False(
-                GetMetadataContext(
-                    previous
-                ).EvaluationContext.MethodContextReuseConstraints.Value.AreSatisfied(
+                GetMetadataContext(previous).EvaluationContext.MethodContextReuseConstraints.Value.AreSatisfied(
                     moduleVersionId,
                     methodToken,
                     methodVersion,

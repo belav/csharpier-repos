@@ -68,12 +68,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     parameterDefaultValues
                 );
 
-                var controllerFactory = _controllerFactoryProvider.CreateControllerFactory(
-                    actionDescriptor
-                );
-                var controllerReleaser = _controllerFactoryProvider.CreateAsyncControllerReleaser(
-                    actionDescriptor
-                );
+                var controllerFactory =
+                    _controllerFactoryProvider.CreateControllerFactory(actionDescriptor);
+                var controllerReleaser =
+                    _controllerFactoryProvider.CreateAsyncControllerReleaser(actionDescriptor);
                 var propertyBinderFactory = ControllerBinderDelegateProvider.CreateBinderDelegate(
                     _parameterBinder,
                     _modelBinderFactory,

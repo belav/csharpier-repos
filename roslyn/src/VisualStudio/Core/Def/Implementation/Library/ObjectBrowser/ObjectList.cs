@@ -629,9 +629,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 var project = this.LibraryManager.GetProject(projectListItem.ProjectId);
                 if (project != null)
                 {
-                    return this.LibraryManager.LibraryService.NavInfoFactory.CreateForProject(
-                        project
-                    );
+                    return this.LibraryManager.LibraryService.NavInfoFactory.CreateForProject(project);
                 }
             }
 

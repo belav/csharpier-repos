@@ -194,9 +194,8 @@ namespace Microsoft.CodeAnalysis
             DocumentId newActiveContextDocumentId
         )
         {
-            var ev = GetEventHandlers<DocumentActiveContextChangedEventArgs>(
-                DocumentActiveContextChangedName
-            );
+            var ev =
+                GetEventHandlers<DocumentActiveContextChangedEventArgs>(DocumentActiveContextChangedName);
             if (
                 ev.HasHandlers
                 && sourceTextContainer != null

@@ -449,9 +449,8 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var httpContext = GetHttpContext();
-            httpContext.Request.Headers[HeaderNames.IfModifiedSince] = HeaderUtilities.FormatDate(
-                ifModifiedSince
-            );
+            httpContext.Request.Headers[HeaderNames.IfModifiedSince] =
+                HeaderUtilities.FormatDate(ifModifiedSince);
             var actionContext = CreateActionContext(httpContext);
             // Represents 4/9/2018 11:24:22 AM +00:00
             // Ticks rounded down to seconds: 636588698620000000
@@ -492,9 +491,8 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var httpContext = GetHttpContext();
-            httpContext.Request.Headers[HeaderNames.IfUnmodifiedSince] = HeaderUtilities.FormatDate(
-                ifUnmodifiedSince
-            );
+            httpContext.Request.Headers[HeaderNames.IfUnmodifiedSince] =
+                HeaderUtilities.FormatDate(ifUnmodifiedSince);
             var actionContext = CreateActionContext(httpContext);
             // Represents 4/9/2018 11:24:22 AM +00:00
             // Ticks rounded down to seconds: 636588698620000000

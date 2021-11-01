@@ -49,9 +49,8 @@ namespace Microsoft.Web.Mvc
             Expression<Action<TController>> action
         ) where TController : Controller
         {
-            RouteValueDictionary routeValues = ExpressionHelper.GetRouteValuesFromExpression(
-                action
-            );
+            RouteValueDictionary routeValues =
+                ExpressionHelper.GetRouteValuesFromExpression(action);
             VirtualPathData vpd = routeCollection.GetVirtualPathForArea(context, routeValues);
             return (vpd == null) ? null : vpd.VirtualPath;
         }

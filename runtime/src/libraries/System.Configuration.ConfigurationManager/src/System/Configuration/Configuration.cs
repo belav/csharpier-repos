@@ -34,17 +34,15 @@ namespace System.Configuration
             _typeConfigHost = typeConfigHost;
             _hostInitConfigurationParams = hostInitConfigurationParams;
 
-            IInternalConfigHost configHost = (IInternalConfigHost)TypeUtil.CreateInstance(
-                typeConfigHost
-            );
+            IInternalConfigHost configHost =
+                (IInternalConfigHost)TypeUtil.CreateInstance(typeConfigHost);
 
             // Wrap the host with the UpdateConfigHost to support SaveAs.
             UpdateConfigHost updateConfigHost = new UpdateConfigHost(configHost);
 
             // Now wrap in ImplicitMachineConfigHost so we can stub in a simple machine.config if needed.
-            IInternalConfigHost implicitMachineConfigHost = new ImplicitMachineConfigHost(
-                updateConfigHost
-            );
+            IInternalConfigHost implicitMachineConfigHost =
+                new ImplicitMachineConfigHost(updateConfigHost);
 
             InternalConfigRoot configRoot = new InternalConfigRoot(this, updateConfigHost);
             ((IInternalConfigRoot)configRoot).Init(implicitMachineConfigHost, isDesignTime: true);
@@ -183,18 +181,16 @@ namespace System.Configuration
         // public methods
         public ConfigurationSection GetSection(string sectionName)
         {
-            ConfigurationSection section = (ConfigurationSection)_configRecord.GetSection(
-                sectionName
-            );
+            ConfigurationSection section =
+                (ConfigurationSection)_configRecord.GetSection(sectionName);
 
             return section;
         }
 
         public ConfigurationSectionGroup GetSectionGroup(string sectionGroupName)
         {
-            ConfigurationSectionGroup sectionGroup = _configRecord.GetSectionGroup(
-                sectionGroupName
-            );
+            ConfigurationSectionGroup sectionGroup =
+                _configRecord.GetSectionGroup(sectionGroupName);
 
             return sectionGroup;
         }

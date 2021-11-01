@@ -155,9 +155,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                                 this.AccumulatedTextChanges == null
                                     ? textChangeRange
                                     : this.AccumulatedTextChanges.Accumulate(
-                                          SpecializedCollections.SingletonEnumerable(
-                                              textChangeRange
-                                          )
+                                          SpecializedCollections.SingletonEnumerable(textChangeRange)
                                       );
                         }
                         break;
@@ -173,9 +171,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                             );
                         }
 
-                        this.AccumulatedTextChanges = this.AccumulatedTextChanges.Accumulate(
-                            textChangeRanges
-                        );
+                        this.AccumulatedTextChanges =
+                            this.AccumulatedTextChanges.Accumulate(textChangeRanges);
                         break;
                 }
             }
@@ -716,9 +713,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     Task.Run(
                             async () =>
                             {
-                                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                                    cancellationToken
-                                );
+                                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
                                 UpdateStateAndReportChanges(
                                     newTagTrees,
                                     bufferToChanges,

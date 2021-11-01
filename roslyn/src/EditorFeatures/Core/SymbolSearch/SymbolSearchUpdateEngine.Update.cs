@@ -142,10 +142,9 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                     await LogInfoAsync("Starting update", cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var delayUntilNextUpdate = await UpdateDatabaseInBackgroundWorkerAsync(
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false);
+                        var delayUntilNextUpdate =
+                            await UpdateDatabaseInBackgroundWorkerAsync(cancellationToken)
+                                .ConfigureAwait(false);
 
                         await LogInfoAsync(
                                 $"Waiting {delayUntilNextUpdate} until next update",

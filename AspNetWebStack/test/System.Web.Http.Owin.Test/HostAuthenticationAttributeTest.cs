@@ -150,17 +150,15 @@ namespace System.Web.Http.Owin
         {
             // Arrange
             string expectedAuthenticationType = "Ignore";
-            HostAuthenticationAttribute product = CreateProductUnderTest(
-                expectedAuthenticationType
-            );
+            HostAuthenticationAttribute product =
+                CreateProductUnderTest(expectedAuthenticationType);
 
             // Act
             IAuthenticationFilter innerFilter = product.InnerFilter;
 
             // Assert
-            HostAuthenticationFilter typedInnerFilter = Assert.IsType<HostAuthenticationFilter>(
-                innerFilter
-            );
+            HostAuthenticationFilter typedInnerFilter =
+                Assert.IsType<HostAuthenticationFilter>(innerFilter);
             Assert.Same(expectedAuthenticationType, typedInnerFilter.AuthenticationType);
         }
 
@@ -169,9 +167,8 @@ namespace System.Web.Http.Owin
         {
             // Arrange
             string expectedAuthenticationType = "Ignore";
-            HostAuthenticationAttribute product = CreateProductUnderTest(
-                expectedAuthenticationType
-            );
+            HostAuthenticationAttribute product =
+                CreateProductUnderTest(expectedAuthenticationType);
 
             // Act
             string authenticationType = product.AuthenticationType;

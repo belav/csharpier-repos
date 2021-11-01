@@ -194,9 +194,8 @@ namespace ILCompiler
 
                     foreach (FieldDefinitionHandle fieldDefHandle in typeDef.GetFields())
                     {
-                        FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(
-                            fieldDefHandle
-                        );
+                        FieldDefinition fieldDef =
+                            module.MetadataReader.GetFieldDefinition(fieldDefHandle);
                         if (
                             (
                                 fieldDef.Attributes
@@ -688,9 +687,8 @@ namespace ILCompiler
                 {
                     FieldDefinitionHandle fieldDefHandle =
                         ((EcmaField)field.GetTypicalFieldDefinition()).Handle;
-                    FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(
-                        fieldDefHandle
-                    );
+                    FieldDefinition fieldDef =
+                        module.MetadataReader.GetFieldDefinition(fieldDefHandle);
                     if (
                         (fieldDef.Attributes & (FieldAttributes.Static | FieldAttributes.Literal))
                         == FieldAttributes.Static

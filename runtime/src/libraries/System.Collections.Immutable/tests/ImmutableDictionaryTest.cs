@@ -406,9 +406,8 @@ namespace System.Collections.Immutable.Tests
                 .Create<string, int>()
                 .Add("One", 1)
                 .Add("Two", 2);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                dict
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(dict);
 
             object rootNode = DebuggerAttributes.GetFieldValue(
                 ImmutableDictionary.Create<string, string>(),

@@ -2482,13 +2482,9 @@ class Implementation : I
 
             var implementationType = global.GetMember<NamedTypeSymbol>("Implementation");
             var implementationProperty =
-                (PropertySymbol)implementationType.FindImplementationForInterfaceMember(
-                    interfaceProperty
-                );
+                (PropertySymbol)implementationType.FindImplementationForInterfaceMember(interfaceProperty);
             var implementationIndexer =
-                (PropertySymbol)implementationType.FindImplementationForInterfaceMember(
-                    interfaceIndexer
-                );
+                (PropertySymbol)implementationType.FindImplementationForInterfaceMember(interfaceIndexer);
 
             var int8Type = comp.GetSpecialType(SpecialType.System_SByte);
             var int16Type = comp.GetSpecialType(SpecialType.System_Int16);
@@ -2658,13 +2654,9 @@ class Implementation : I
 
             var implementationType = global.GetMember<NamedTypeSymbol>("Implementation");
             var implementationProperty =
-                (PropertySymbol)implementationType.FindImplementationForInterfaceMember(
-                    interfaceProperty
-                );
+                (PropertySymbol)implementationType.FindImplementationForInterfaceMember(interfaceProperty);
             var implementationIndexer =
-                (PropertySymbol)implementationType.FindImplementationForInterfaceMember(
-                    interfaceIndexer
-                );
+                (PropertySymbol)implementationType.FindImplementationForInterfaceMember(interfaceIndexer);
 
             var int8Type = comp.GetSpecialType(SpecialType.System_SByte);
             var int16Type = comp.GetSpecialType(SpecialType.System_Int16);

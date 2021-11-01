@@ -251,9 +251,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     )
                     .WithTriviaFrom(expressionNode);
 
-                var newToken = syntaxFacts.GetOperatorTokenOfBinaryExpression(
-                    newBinaryExpressionSyntax
-                );
+                var newToken =
+                    syntaxFacts.GetOperatorTokenOfBinaryExpression(newBinaryExpressionSyntax);
                 var newTokenWithTrivia = newToken.WithTriviaFrom(operatorToken);
                 return newBinaryExpressionSyntax.ReplaceToken(newToken, newTokenWithTrivia);
             }

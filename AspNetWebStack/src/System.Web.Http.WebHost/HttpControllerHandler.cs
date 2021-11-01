@@ -80,9 +80,10 @@ namespace System.Web.Http.WebHost
         private static readonly Func<
             HttpRequestMessage,
             X509Certificate2
-        > _retrieveClientCertificate = new Func<HttpRequestMessage, X509Certificate2>(
-            RetrieveClientCertificate
-        );
+        > _retrieveClientCertificate = new Func<
+            HttpRequestMessage,
+            X509Certificate2
+        >(RetrieveClientCertificate);
 
         private readonly IHttpRouteData _routeData;
         private readonly HttpMessageInvoker _server;

@@ -49,12 +49,10 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
             );
 
             var goToResetPasswordConfirmation = ResponseAssert.IsRedirect(resetPasswordResponse);
-            var resetPasswordConfirmationResponse = await Client.GetAsync(
-                goToResetPasswordConfirmation
-            );
-            var resetPasswordConfirmation = await ResponseAssert.IsHtmlDocumentAsync(
-                resetPasswordConfirmationResponse
-            );
+            var resetPasswordConfirmationResponse =
+                await Client.GetAsync(goToResetPasswordConfirmation);
+            var resetPasswordConfirmation =
+                await ResponseAssert.IsHtmlDocumentAsync(resetPasswordConfirmationResponse);
 
             return new ResetPasswordConfirmation(Client, resetPasswordConfirmation, Context);
         }

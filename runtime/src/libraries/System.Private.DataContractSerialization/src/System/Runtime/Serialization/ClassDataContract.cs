@@ -1790,9 +1790,7 @@ namespace System.Runtime.Serialization
                         Globals.ScanAllMembers,
                         new Type[]
                         {
-                            Globals.TypeOfKeyValuePair.MakeGenericType(
-                                _keyValuePairGenericArguments
-                            )
+                            Globals.TypeOfKeyValuePair.MakeGenericType(_keyValuePairGenericArguments)
                         }
                     );
                     _getKeyValuePairMethodInfo = type.GetMethod(

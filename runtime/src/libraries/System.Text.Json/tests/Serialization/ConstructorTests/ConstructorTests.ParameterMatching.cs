@@ -655,9 +655,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Seven is okay
             string json = JsonSerializer.Serialize(Tuple.Create(1, 2, 3, 4, 5, 6, 7));
-            var obj = await Serializer.DeserializeWrapper<Tuple<int, int, int, int, int, int, int>>(
-                json
-            );
+            var obj = await Serializer.DeserializeWrapper<
+                Tuple<int, int, int, int, int, int, int>
+            >(json);
             Assert.Equal(json, JsonSerializer.Serialize(obj));
 
             // More than seven arguments needs special casing and can be revisted.
@@ -665,9 +665,9 @@ namespace System.Text.Json.Serialization.Tests
             json = JsonSerializer.Serialize(Tuple.Create(1, 2, 3, 4, 5, 6, 7, 8));
             await Assert.ThrowsAsync<JsonException>(
                 () =>
-                    Serializer.DeserializeWrapper<Tuple<int, int, int, int, int, int, int, int>>(
-                        json
-                    )
+                    Serializer.DeserializeWrapper<
+                        Tuple<int, int, int, int, int, int, int, int>
+                    >(json)
             );
 
             // Invalid JSON representing a tuple with more than seven items yields an ArgumentException from the constructor.
@@ -678,9 +678,9 @@ namespace System.Text.Json.Serialization.Tests
                 @"{""Item1"":1,""Item2"":2,""Item3"":3,""Item4"":4,""Item5"":5,""Item6"":6,""Item7"":7,""Item1"":8}";
             await Assert.ThrowsAsync<ArgumentException>(
                 () =>
-                    Serializer.DeserializeWrapper<Tuple<int, int, int, int, int, int, int, int>>(
-                        invalidJson
-                    )
+                    Serializer.DeserializeWrapper<
+                        Tuple<int, int, int, int, int, int, int, int>
+                    >(invalidJson)
             );
         }
 
@@ -988,9 +988,8 @@ namespace System.Text.Json.Serialization.Tests
                 ""Id"":""63cf821d-fd47-4782-8345-576d9228a534""
                 }";
 
-            Parameterized_Person person = await Serializer.DeserializeWrapper<Parameterized_Person>(
-                json
-            );
+            Parameterized_Person person =
+                await Serializer.DeserializeWrapper<Parameterized_Person>(json);
             Assert.Equal("Jet", person.FirstName);
             Assert.Equal("Doe", person.LastName);
             Assert.Equal("63cf821d-fd47-4782-8345-576d9228a534", person.Id.ToString());

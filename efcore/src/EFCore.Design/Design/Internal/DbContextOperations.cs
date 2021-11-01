@@ -312,9 +312,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
         private Func<DbContext>? FindContextFactory(Type contextType)
         {
-            var factoryInterface = typeof(IDesignTimeDbContextFactory<>).MakeGenericType(
-                contextType
-            );
+            var factoryInterface =
+                typeof(IDesignTimeDbContextFactory<>).MakeGenericType(contextType);
             var factory = contextType.Assembly
                 .GetConstructibleTypes()
                 .FirstOrDefault(t => factoryInterface.IsAssignableFrom(t));

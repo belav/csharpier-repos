@@ -223,9 +223,7 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             {
                 Debug.Assert(syntaxFacts.IsElementAccessExpression(elementAccess));
                 var argumentList =
-                    (TElementBindingArgumentList)syntaxFacts.GetArgumentListOfElementAccessExpression(
-                        elementAccess
-                    )!;
+                    (TElementBindingArgumentList)syntaxFacts.GetArgumentListOfElementAccessExpression(elementAccess)!;
                 return whenPart.ReplaceNode(
                     elementAccess,
                     generator.ConditionalAccessExpression(

@@ -60,9 +60,8 @@ namespace System.Configuration.Internal
 
         public object GetSection(string section, string configPath)
         {
-            BaseConfigurationRecord configRecord = (BaseConfigurationRecord)GetUniqueConfigRecord(
-                configPath
-            );
+            BaseConfigurationRecord configRecord =
+                (BaseConfigurationRecord)GetUniqueConfigRecord(configPath);
             object result = configRecord.GetSection(section);
             return result;
         }
@@ -78,9 +77,8 @@ namespace System.Configuration.Internal
         // Get the nearest ancestor record (including self) which contains unique configuration information.
         public IInternalConfigRecord GetUniqueConfigRecord(string configPath)
         {
-            BaseConfigurationRecord configRecord = (BaseConfigurationRecord)GetConfigRecord(
-                configPath
-            );
+            BaseConfigurationRecord configRecord =
+                (BaseConfigurationRecord)GetConfigRecord(configPath);
             while (configRecord.IsEmpty)
             {
                 BaseConfigurationRecord parentConfigRecord = configRecord.Parent;

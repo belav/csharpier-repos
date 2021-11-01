@@ -451,9 +451,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     }
                 }
 
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
                 _windowFrameMessageToShow = windowFrameMessageToShow;
                 _windowFrameImageMonikerToShow = windowFrameImageMonikerToShow;

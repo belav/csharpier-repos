@@ -30,9 +30,9 @@ namespace Microsoft.EntityFrameworkCore
                 coreOptionsBuilder.Options.FindExtension<SqlServerNetTopologySuiteOptionsExtension>()
                 ?? new SqlServerNetTopologySuiteOptionsExtension();
 
-            ((IDbContextOptionsBuilderInfrastructure)coreOptionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)coreOptionsBuilder
+            ).AddOrUpdateExtension(extension);
 
             return optionsBuilder;
         }

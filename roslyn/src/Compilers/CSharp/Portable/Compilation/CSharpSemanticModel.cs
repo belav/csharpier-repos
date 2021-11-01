@@ -2653,9 +2653,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 type = local.LocalSymbol.Type;
                                 nullability =
-                                    local.LocalSymbol.TypeWithAnnotations.NullableAnnotation.ToNullabilityInfo(
-                                        type
-                                    );
+                                    local.LocalSymbol.TypeWithAnnotations.NullableAnnotation.ToNullabilityInfo(type);
                             }
                             break;
                         }
@@ -2715,9 +2713,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         (type, nullability) = getTypeAndNullability(tupleLiteralConversion.Operand);
                     }
 
-                    (convertedType, convertedNullability) = getTypeAndNullability(
-                        tupleLiteralConversion
-                    );
+                    (convertedType, convertedNullability) =
+                        getTypeAndNullability(tupleLiteralConversion);
                     conversion = tupleLiteralConversion.Conversion;
                 }
                 else if (highestBoundExprKind == BoundKind.FixedLocalCollectionInitializer)

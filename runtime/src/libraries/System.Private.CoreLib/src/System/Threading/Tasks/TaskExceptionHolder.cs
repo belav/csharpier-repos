@@ -65,9 +65,8 @@ namespace System.Threading.Tasks
                     SR.TaskExceptionHolder_UnhandledException,
                     m_faultExceptions
                 );
-                UnobservedTaskExceptionEventArgs ueea = new UnobservedTaskExceptionEventArgs(
-                    exceptionToThrow
-                );
+                UnobservedTaskExceptionEventArgs ueea =
+                    new UnobservedTaskExceptionEventArgs(exceptionToThrow);
                 TaskScheduler.PublishUnobservedTaskException(m_task, ueea);
             }
         }

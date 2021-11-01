@@ -160,9 +160,8 @@ namespace System.Web.Http.Tracing.Tracers
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                HttpAuthenticationContext authenticationContext = CreateAuthenticationContext(
-                    expectedRequest
-                );
+                HttpAuthenticationContext authenticationContext =
+                    CreateAuthenticationContext(expectedRequest);
 
                 // Act
                 await product.AuthenticateAsync(authenticationContext, cancellationToken);
@@ -200,9 +199,8 @@ namespace System.Web.Http.Tracing.Tracers
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                HttpAuthenticationContext authenticationContext = CreateAuthenticationContext(
-                    expectedRequest
-                );
+                HttpAuthenticationContext authenticationContext =
+                    CreateAuthenticationContext(expectedRequest);
 
                 // Act
                 await product.AuthenticateAsync(authenticationContext, cancellationToken);

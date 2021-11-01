@@ -26,9 +26,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var connection = new FakeRelationalConnection(
                 CreateOptions(
-                    (FakeRelationalOptionsExtension)new FakeRelationalOptionsExtension().WithConnection(
-                        dbConnection
-                    )
+                    (FakeRelationalOptionsExtension)new FakeRelationalOptionsExtension().WithConnection(dbConnection)
                 )
             );
 

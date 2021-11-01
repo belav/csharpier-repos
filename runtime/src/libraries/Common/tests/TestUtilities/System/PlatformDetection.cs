@@ -139,9 +139,8 @@ namespace System
                         nonZeroLowerBoundArraysSupported = true;
                     }
                     catch (PlatformNotSupportedException) { }
-                    s_lazyNonZeroLowerBoundArraySupported = Tuple.Create<bool>(
-                        nonZeroLowerBoundArraysSupported
-                    );
+                    s_lazyNonZeroLowerBoundArraySupported =
+                        Tuple.Create<bool>(nonZeroLowerBoundArraysSupported);
                 }
                 return s_lazyNonZeroLowerBoundArraySupported.Item1;
             }
@@ -196,9 +195,8 @@ namespace System
         public static bool SupportsTls12 => s_supportsTls12.Value;
         public static bool SupportsTls13 => s_supportsTls13.Value;
 
-        private static Lazy<bool> s_largeArrayIsNotSupported = new Lazy<bool>(
-            IsLargeArrayNotSupported
-        );
+        private static Lazy<bool> s_largeArrayIsNotSupported =
+            new Lazy<bool>(IsLargeArrayNotSupported);
 
         [MethodImpl(MethodImplOptions.NoOptimization)]
         private static bool IsLargeArrayNotSupported()

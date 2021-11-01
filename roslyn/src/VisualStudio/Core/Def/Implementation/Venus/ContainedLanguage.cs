@@ -153,9 +153,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             // Create our tagger
             var bufferTagAggregatorFactory =
                 ComponentModel.GetService<IBufferTagAggregatorFactoryService>();
-            _bufferTagAggregator = bufferTagAggregatorFactory.CreateTagAggregator<ITag>(
-                SubjectBuffer
-            );
+            _bufferTagAggregator =
+                bufferTagAggregatorFactory.CreateTagAggregator<ITag>(SubjectBuffer);
 
             DocumentId documentId;
 
@@ -167,9 +166,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                     sourceCodeKind: SourceCodeKind.Regular,
                     folders: default,
                     designTimeOnly: true,
-                    documentServiceProvider: new ContainedDocument.DocumentServiceProvider(
-                        DataBuffer
-                    )
+                    documentServiceProvider: new ContainedDocument.DocumentServiceProvider(DataBuffer)
                 );
             }
             else

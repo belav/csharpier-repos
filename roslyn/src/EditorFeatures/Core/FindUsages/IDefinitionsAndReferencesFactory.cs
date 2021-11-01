@@ -241,9 +241,8 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                 );
             }
 
-            var displayableProperties = AbstractReferenceFinder.GetAdditionalFindUsagesProperties(
-                definition
-            );
+            var displayableProperties =
+                AbstractReferenceFinder.GetAdditionalFindUsagesProperties(definition);
 
             return DefinitionItem.Create(
                 tags,

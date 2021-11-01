@@ -84,9 +84,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             _eventListenerTracker.EnsureEventListener(args.Workspace, this);
 
-            var ev = _eventMap.GetEventHandlers<EventHandler<DiagnosticsUpdatedArgs>>(
-                DiagnosticsUpdatedEventName
-            );
+            var ev = _eventMap.GetEventHandlers<
+                EventHandler<DiagnosticsUpdatedArgs>
+            >(DiagnosticsUpdatedEventName);
 
             _eventQueue.ScheduleTask(
                 DiagnosticsUpdatedEventName,
@@ -106,9 +106,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         private void RaiseDiagnosticsCleared(IDiagnosticUpdateSource source)
         {
-            var ev = _eventMap.GetEventHandlers<EventHandler<DiagnosticsUpdatedArgs>>(
-                DiagnosticsUpdatedEventName
-            );
+            var ev = _eventMap.GetEventHandlers<
+                EventHandler<DiagnosticsUpdatedArgs>
+            >(DiagnosticsUpdatedEventName);
 
             _eventQueue.ScheduleTask(
                 DiagnosticsUpdatedEventName,

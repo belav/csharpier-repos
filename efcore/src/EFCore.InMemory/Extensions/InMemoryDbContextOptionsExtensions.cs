@@ -136,9 +136,9 @@ namespace Microsoft.EntityFrameworkCore
 
             ConfigureWarnings(optionsBuilder);
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension);
 
             inMemoryOptionsAction?.Invoke(new InMemoryDbContextOptionsBuilder(optionsBuilder));
 
@@ -159,9 +159,9 @@ namespace Microsoft.EntityFrameworkCore
                 )
             );
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                coreOptionsExtension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(coreOptionsExtension);
         }
     }
 }

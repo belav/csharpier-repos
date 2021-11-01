@@ -123,9 +123,8 @@ namespace PInvokeTests
 
     class StructureTests
     {
-        private const string SimpleBlittableSeqLayoutClass_UpdateField = nameof(
-            SimpleBlittableSeqLayoutClass_UpdateField
-        );
+        private const string SimpleBlittableSeqLayoutClass_UpdateField =
+            nameof(SimpleBlittableSeqLayoutClass_UpdateField);
 
         [DllImport("LayoutClassNative")]
         private static extern bool SimpleSeqLayoutClassByRef(SeqClass p);

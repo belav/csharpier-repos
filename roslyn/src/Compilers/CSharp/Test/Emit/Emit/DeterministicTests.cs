@@ -512,9 +512,7 @@ using System.Runtime.CompilerServices;
             );
 
             var retargeting =
-                (RetargetingAssemblySymbol)withRetargeting.GetReferencedAssemblySymbol(
-                    forwardingReference
-                );
+                (RetargetingAssemblySymbol)withRetargeting.GetReferencedAssemblySymbol(forwardingReference);
             Assert.Equal(sortedFullNames, getNamesOfForwardedTypes(retargeting));
 
             foreach (var type in getForwardedTypes(retargeting))

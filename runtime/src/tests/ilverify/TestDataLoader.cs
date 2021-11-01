@@ -368,9 +368,9 @@ namespace ILVerification.Tests
         {
             base.Deserialize(info);
             var serializedExpectedErrors = info.GetValue<string>(nameof(ExpectedVerifierErrors));
-            ExpectedVerifierErrors = JsonConvert.DeserializeObject<List<VerifierError>>(
-                serializedExpectedErrors
-            );
+            ExpectedVerifierErrors = JsonConvert.DeserializeObject<
+                List<VerifierError>
+            >(serializedExpectedErrors);
         }
 
         public override string ToString()
@@ -412,9 +412,9 @@ namespace ILVerification.Tests
         {
             base.Deserialize(info);
             var serializedExpectedErrors = info.GetValue<string>(nameof(ExpectedVerifierErrors));
-            ExpectedVerifierErrors = JsonConvert.DeserializeObject<List<VerifierError>>(
-                serializedExpectedErrors
-            );
+            ExpectedVerifierErrors = JsonConvert.DeserializeObject<
+                List<VerifierError>
+            >(serializedExpectedErrors);
         }
 
         public override string ToString()

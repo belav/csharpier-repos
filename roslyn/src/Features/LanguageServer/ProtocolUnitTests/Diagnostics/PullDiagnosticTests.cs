@@ -259,9 +259,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
                 Methods.TextDocumentDidChangeName,
                 new DidChangeTextDocumentParams
                 {
-                    TextDocument = ProtocolConversions.DocumentToVersionedTextDocumentIdentifier(
-                        document
-                    ),
+                    TextDocument =
+                        ProtocolConversions.DocumentToVersionedTextDocumentIdentifier(document),
                     ContentChanges = new TextDocumentContentChangeEvent[]
                     {
                         new TextDocumentContentChangeEvent

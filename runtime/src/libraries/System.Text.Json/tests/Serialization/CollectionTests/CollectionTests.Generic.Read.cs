@@ -1299,9 +1299,7 @@ namespace System.Text.Json.Serialization.Tests
                     + @"""Dictionary"" : null"
                     + @"}";
                 SimpleTestStructWithNullableGenericStructCollectionWrappers obj =
-                    JsonSerializer.Deserialize<SimpleTestStructWithNullableGenericStructCollectionWrappers>(
-                        json
-                    );
+                    JsonSerializer.Deserialize<SimpleTestStructWithNullableGenericStructCollectionWrappers>(json);
                 Assert.False(obj.List.HasValue);
                 Assert.False(obj.Collection.HasValue);
                 Assert.False(obj.Set.HasValue);

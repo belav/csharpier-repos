@@ -532,9 +532,7 @@ namespace System.Text.Encodings.Web.Tests
 
         [Fact]
         public void GetIndexOfFirstCharacterToEncodeUtf16_SomeCharsNeedEscaping() =>
-            _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedSomeCharsNeedEscaping(
-                _allowedChar
-            );
+            _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedSomeCharsNeedEscaping(_allowedChar);
 
         protected void _RunGetIndexOfFirstCharacterToEncodeUtf16_BmpExtendedSomeCharsNeedEscaping(
             char bmpAllowedChar

@@ -2804,27 +2804,21 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name"
             };
-            invalidEntryPointMethodImplementationType3.ImplementationTypes.Add(
-                invalidTypeReference1
-            );
+            invalidEntryPointMethodImplementationType3.ImplementationTypes.Add(invalidTypeReference1);
             yield return new object[] { invalidEntryPointMethodImplementationType3 };
 
             var invalidEntryPointMethodImplementationType4 = new CodeEntryPointMethod
             {
                 Name = "name"
             };
-            invalidEntryPointMethodImplementationType4.ImplementationTypes.Add(
-                invalidTypeReference2
-            );
+            invalidEntryPointMethodImplementationType4.ImplementationTypes.Add(invalidTypeReference2);
             yield return new object[] { invalidEntryPointMethodImplementationType4 };
 
             var invalidEntryPointMethodImplementationType5 = new CodeEntryPointMethod
             {
                 Name = "name"
             };
-            invalidEntryPointMethodImplementationType5.ImplementationTypes.Add(
-                invalidTypeReference3
-            );
+            invalidEntryPointMethodImplementationType5.ImplementationTypes.Add(invalidTypeReference3);
             yield return new object[] { invalidEntryPointMethodImplementationType5 };
 
             var invalidEntryPointMethodStatement1 = new CodeEntryPointMethod { Name = "name" };
@@ -2861,54 +2855,42 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name"
             };
-            invalidEntryPointMethodTypeParameterAttribute1.TypeParameters.Add(
-                invalidTypeParameterAttribute1
-            );
+            invalidEntryPointMethodTypeParameterAttribute1.TypeParameters.Add(invalidTypeParameterAttribute1);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute1 };
 
             var invalidEntryPointMethodTypeParameterAttribute2 = new CodeEntryPointMethod
             {
                 Name = "name"
             };
-            invalidEntryPointMethodTypeParameterAttribute2.TypeParameters.Add(
-                invalidTypeParameterAttribute2
-            );
+            invalidEntryPointMethodTypeParameterAttribute2.TypeParameters.Add(invalidTypeParameterAttribute2);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute2 };
 
             var invalidEntryPointMethodTypeParameterAttribute3 = new CodeEntryPointMethod
             {
                 Name = "name"
             };
-            invalidEntryPointMethodTypeParameterAttribute3.TypeParameters.Add(
-                invalidTypeParameterAttribute3
-            );
+            invalidEntryPointMethodTypeParameterAttribute3.TypeParameters.Add(invalidTypeParameterAttribute3);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute3 };
 
             var invalidEntryPointMethodTypeParameterAttribute4 = new CodeEntryPointMethod
             {
                 Name = "name"
             };
-            invalidEntryPointMethodTypeParameterAttribute4.TypeParameters.Add(
-                invalidTypeParameterAttribute4
-            );
+            invalidEntryPointMethodTypeParameterAttribute4.TypeParameters.Add(invalidTypeParameterAttribute4);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute4 };
 
             var invalidEntryPointMethodTypeParameterAttribute5 = new CodeEntryPointMethod
             {
                 Name = "name"
             };
-            invalidEntryPointMethodTypeParameterAttribute5.TypeParameters.Add(
-                invalidTypeParameterAttribute5
-            );
+            invalidEntryPointMethodTypeParameterAttribute5.TypeParameters.Add(invalidTypeParameterAttribute5);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute5 };
 
             var invalidEntryPointMethodTypeParameterAttribute6 = new CodeEntryPointMethod
             {
                 Name = "name"
             };
-            invalidEntryPointMethodTypeParameterAttribute6.TypeParameters.Add(
-                invalidTypeParameterAttribute6
-            );
+            invalidEntryPointMethodTypeParameterAttribute6.TypeParameters.Add(invalidTypeParameterAttribute6);
             yield return new object[] { invalidEntryPointMethodTypeParameterAttribute6 };
 
             // CodeConstructor.
@@ -3099,39 +3081,27 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidConstructorTypeParameter4 };
 
             var invalidConstructorTypeParameterAttribute1 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute1.TypeParameters.Add(
-                invalidTypeParameterAttribute1
-            );
+            invalidConstructorTypeParameterAttribute1.TypeParameters.Add(invalidTypeParameterAttribute1);
             yield return new object[] { invalidConstructorTypeParameterAttribute1 };
 
             var invalidConstructorTypeParameterAttribute2 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute2.TypeParameters.Add(
-                invalidTypeParameterAttribute2
-            );
+            invalidConstructorTypeParameterAttribute2.TypeParameters.Add(invalidTypeParameterAttribute2);
             yield return new object[] { invalidConstructorTypeParameterAttribute2 };
 
             var invalidConstructorTypeParameterAttribute3 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute3.TypeParameters.Add(
-                invalidTypeParameterAttribute3
-            );
+            invalidConstructorTypeParameterAttribute3.TypeParameters.Add(invalidTypeParameterAttribute3);
             yield return new object[] { invalidConstructorTypeParameterAttribute3 };
 
             var invalidConstructorTypeParameterAttribute4 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute4.TypeParameters.Add(
-                invalidTypeParameterAttribute4
-            );
+            invalidConstructorTypeParameterAttribute4.TypeParameters.Add(invalidTypeParameterAttribute4);
             yield return new object[] { invalidConstructorTypeParameterAttribute4 };
 
             var invalidConstructorTypeParameterAttribute5 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute5.TypeParameters.Add(
-                invalidTypeParameterAttribute5
-            );
+            invalidConstructorTypeParameterAttribute5.TypeParameters.Add(invalidTypeParameterAttribute5);
             yield return new object[] { invalidConstructorTypeParameterAttribute5 };
 
             var invalidConstructorTypeParameterAttribute6 = new CodeConstructor { Name = "name" };
-            invalidConstructorTypeParameterAttribute6.TypeParameters.Add(
-                invalidTypeParameterAttribute6
-            );
+            invalidConstructorTypeParameterAttribute6.TypeParameters.Add(invalidTypeParameterAttribute6);
             yield return new object[] { invalidConstructorTypeParameterAttribute6 };
 
             var invalidConstructorBaseConstructorArg = new CodeConstructor { Name = "name" };
@@ -3208,27 +3178,21 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name"
             };
-            invalidTypeConstructorImplementationType3.ImplementationTypes.Add(
-                invalidTypeReference1
-            );
+            invalidTypeConstructorImplementationType3.ImplementationTypes.Add(invalidTypeReference1);
             yield return new object[] { invalidTypeConstructorImplementationType3 };
 
             var invalidTypeConstructorImplementationType4 = new CodeTypeConstructor
             {
                 Name = "name"
             };
-            invalidTypeConstructorImplementationType4.ImplementationTypes.Add(
-                invalidTypeReference2
-            );
+            invalidTypeConstructorImplementationType4.ImplementationTypes.Add(invalidTypeReference2);
             yield return new object[] { invalidTypeConstructorImplementationType4 };
 
             var invalidTypeConstructorImplementationType5 = new CodeTypeConstructor
             {
                 Name = "name"
             };
-            invalidTypeConstructorImplementationType5.ImplementationTypes.Add(
-                invalidTypeReference3
-            );
+            invalidTypeConstructorImplementationType5.ImplementationTypes.Add(invalidTypeReference3);
             yield return new object[] { invalidTypeConstructorImplementationType5 };
 
             var invalidTypeConstructorStatement1 = new CodeTypeConstructor { Name = "name" };
@@ -3265,54 +3229,42 @@ namespace System.CodeDom.Compiler.Tests
             {
                 Name = "name"
             };
-            invalidTypeConstructorTypeParameterAttribute1.TypeParameters.Add(
-                invalidTypeParameterAttribute1
-            );
+            invalidTypeConstructorTypeParameterAttribute1.TypeParameters.Add(invalidTypeParameterAttribute1);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute1 };
 
             var invalidTypeConstructorTypeParameterAttribute2 = new CodeTypeConstructor
             {
                 Name = "name"
             };
-            invalidTypeConstructorTypeParameterAttribute2.TypeParameters.Add(
-                invalidTypeParameterAttribute2
-            );
+            invalidTypeConstructorTypeParameterAttribute2.TypeParameters.Add(invalidTypeParameterAttribute2);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute2 };
 
             var invalidTypeConstructorTypeParameterAttribute3 = new CodeTypeConstructor
             {
                 Name = "name"
             };
-            invalidTypeConstructorTypeParameterAttribute3.TypeParameters.Add(
-                invalidTypeParameterAttribute3
-            );
+            invalidTypeConstructorTypeParameterAttribute3.TypeParameters.Add(invalidTypeParameterAttribute3);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute3 };
 
             var invalidTypeConstructorTypeParameterAttribute4 = new CodeTypeConstructor
             {
                 Name = "name"
             };
-            invalidTypeConstructorTypeParameterAttribute4.TypeParameters.Add(
-                invalidTypeParameterAttribute4
-            );
+            invalidTypeConstructorTypeParameterAttribute4.TypeParameters.Add(invalidTypeParameterAttribute4);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute4 };
 
             var invalidTypeConstructorTypeParameterAttribute5 = new CodeTypeConstructor
             {
                 Name = "name"
             };
-            invalidTypeConstructorTypeParameterAttribute5.TypeParameters.Add(
-                invalidTypeParameterAttribute5
-            );
+            invalidTypeConstructorTypeParameterAttribute5.TypeParameters.Add(invalidTypeParameterAttribute5);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute5 };
 
             var invalidTypeConstructorTypeParameterAttribute6 = new CodeTypeConstructor
             {
                 Name = "name"
             };
-            invalidTypeConstructorTypeParameterAttribute6.TypeParameters.Add(
-                invalidTypeParameterAttribute6
-            );
+            invalidTypeConstructorTypeParameterAttribute6.TypeParameters.Add(invalidTypeParameterAttribute6);
             yield return new object[] { invalidTypeConstructorTypeParameterAttribute6 };
 
             // CodeMemberProperty.
@@ -3788,39 +3740,27 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { invalidDelegateTypeParameter4 };
 
             var invalidDelegateTypeParameterAttribute1 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute1.TypeParameters.Add(
-                invalidTypeParameterAttribute1
-            );
+            invalidDelegateTypeParameterAttribute1.TypeParameters.Add(invalidTypeParameterAttribute1);
             yield return new object[] { invalidDelegateTypeParameterAttribute1 };
 
             var invalidDelegateTypeParameterAttribute2 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute2.TypeParameters.Add(
-                invalidTypeParameterAttribute2
-            );
+            invalidDelegateTypeParameterAttribute2.TypeParameters.Add(invalidTypeParameterAttribute2);
             yield return new object[] { invalidDelegateTypeParameterAttribute2 };
 
             var invalidDelegateTypeParameterAttribute3 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute3.TypeParameters.Add(
-                invalidTypeParameterAttribute3
-            );
+            invalidDelegateTypeParameterAttribute3.TypeParameters.Add(invalidTypeParameterAttribute3);
             yield return new object[] { invalidDelegateTypeParameterAttribute3 };
 
             var invalidDelegateTypeParameterAttribute4 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute4.TypeParameters.Add(
-                invalidTypeParameterAttribute4
-            );
+            invalidDelegateTypeParameterAttribute4.TypeParameters.Add(invalidTypeParameterAttribute4);
             yield return new object[] { invalidDelegateTypeParameterAttribute4 };
 
             var invalidDelegateTypeParameterAttribute5 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute5.TypeParameters.Add(
-                invalidTypeParameterAttribute5
-            );
+            invalidDelegateTypeParameterAttribute5.TypeParameters.Add(invalidTypeParameterAttribute5);
             yield return new object[] { invalidDelegateTypeParameterAttribute5 };
 
             var invalidDelegateTypeParameterAttribute6 = new CodeTypeDelegate("name");
-            invalidDelegateTypeParameterAttribute6.TypeParameters.Add(
-                invalidTypeParameterAttribute6
-            );
+            invalidDelegateTypeParameterAttribute6.TypeParameters.Add(invalidTypeParameterAttribute6);
             yield return new object[] { invalidDelegateTypeParameterAttribute6 };
 
             var invalidDelegateTypeParameterConstraint1 = new CodeTypeDelegate("name");

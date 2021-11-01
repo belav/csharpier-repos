@@ -1235,9 +1235,8 @@ namespace System.Web.Mvc.Async.Test
             Assert.Equal(checkBegin, beginExecuteCalled);
             Assert.False(endExecuteCalled);
 
-            ActionExecutedContext postContext = invoker.EndInvokeActionMethodWithFilters(
-                outerAsyncResult
-            );
+            ActionExecutedContext postContext =
+                invoker.EndInvokeActionMethodWithFilters(outerAsyncResult);
 
             Assert.NotNull(postContext);
             if (checkEnd)

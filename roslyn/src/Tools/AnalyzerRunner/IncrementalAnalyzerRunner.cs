@@ -113,9 +113,8 @@ namespace AnalyzerRunner
                     incrementalAnalyzerProviders
                         .Where(x => x.Metadata.Name == incrementalAnalyzerName)
                         .Single(provider => provider.Metadata.WorkspaceKinds is null).Value;
-                var incrementalAnalyzer = incrementalAnalyzerProvider.CreateIncrementalAnalyzer(
-                    _workspace
-                );
+                var incrementalAnalyzer =
+                    incrementalAnalyzerProvider.CreateIncrementalAnalyzer(_workspace);
                 solutionCrawlerRegistrationService
                     .GetTestAccessor()
                     .WaitUntilCompletion(_workspace, ImmutableArray.Create(incrementalAnalyzer));

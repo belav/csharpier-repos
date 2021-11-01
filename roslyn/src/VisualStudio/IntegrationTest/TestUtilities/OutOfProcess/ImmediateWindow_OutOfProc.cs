@@ -16,9 +16,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         public ImmediateWindow_OutOfProc(VisualStudioInstance visualStudioInstance)
             : base(visualStudioInstance)
         {
-            _immediateWindowInProc = CreateInProcComponent<ImmediateWindow_InProc>(
-                visualStudioInstance
-            );
+            _immediateWindowInProc =
+                CreateInProcComponent<ImmediateWindow_InProc>(visualStudioInstance);
         }
 
         public void ShowImmediateWindow(bool clearAll = false)

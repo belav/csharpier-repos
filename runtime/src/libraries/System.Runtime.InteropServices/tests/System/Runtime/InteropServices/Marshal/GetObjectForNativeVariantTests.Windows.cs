@@ -512,9 +512,10 @@ namespace System.Runtime.InteropServices.Tests
             int record = 10;
             var recordInfo = new RecordInfo { Guid = typeof(int).GUID };
             IntPtr pRecord = Marshal.AllocHGlobal(Marshal.SizeOf<int>());
-            IntPtr pRecordInfo = Marshal.GetComInterfaceForObject<RecordInfo, IRecordInfo>(
-                recordInfo
-            );
+            IntPtr pRecordInfo = Marshal.GetComInterfaceForObject<
+                RecordInfo,
+                IRecordInfo
+            >(recordInfo);
             try
             {
                 Marshal.StructureToPtr(record, pRecord, fDeleteOld: false);

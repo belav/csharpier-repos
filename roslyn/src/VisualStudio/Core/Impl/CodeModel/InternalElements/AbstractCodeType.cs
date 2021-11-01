@@ -62,9 +62,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var containingNamespaceOrType = GetNamespaceOrTypeNode();
 
                 return containingNamespaceOrType != null
-                  ? (object)FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(
-                        containingNamespaceOrType
-                    )
+                  ? (object)FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(containingNamespaceOrType)
                   : this.FileCodeModel;
             }
         }
@@ -181,9 +179,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         public void RemoveMember(object element)
         {
             // Is this an EnvDTE.CodeElement that we created? If so, try to get the underlying code element object.
-            var abstractCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
-                element
-            );
+            var abstractCodeElement =
+                ComAggregate.TryGetManagedObject<AbstractCodeElement>(element);
 
             if (abstractCodeElement == null)
             {

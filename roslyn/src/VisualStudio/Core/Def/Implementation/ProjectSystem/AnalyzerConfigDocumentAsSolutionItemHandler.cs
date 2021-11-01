@@ -86,9 +86,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             var analyzerConfigDocumentFilePath = e.NewSolution.GetAnalyzerConfigDocument(
                 e.DocumentId
             )?.FilePath;
-            var analyzerConfigDirectory = PathUtilities.GetDirectoryName(
-                analyzerConfigDocumentFilePath
-            );
+            var analyzerConfigDirectory =
+                PathUtilities.GetDirectoryName(analyzerConfigDocumentFilePath);
             var solutionDirectory = PathUtilities.GetDirectoryName(e.NewSolution.FilePath);
             if (
                 analyzerConfigDocumentFilePath == null

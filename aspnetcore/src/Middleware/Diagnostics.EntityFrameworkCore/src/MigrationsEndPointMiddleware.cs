@@ -136,9 +136,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore
                 )
             )
             {
-                var message = Strings.FormatMigrationsEndPointMiddleware_ContextNotRegistered(
-                    contextTypeName
-                );
+                var message =
+                    Strings.FormatMigrationsEndPointMiddleware_ContextNotRegistered(contextTypeName);
 
                 logger.ContextNotRegistered(contextTypeName);
 

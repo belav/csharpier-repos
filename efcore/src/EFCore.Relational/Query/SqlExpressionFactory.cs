@@ -1193,9 +1193,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     .Aggregate((l, r) => AndAlso(l, r));
             }
 
-            var allNonSharedNonPkProperties = entityType.GetNonPrincipalSharedNonPkProperties(
-                table
-            );
+            var allNonSharedNonPkProperties =
+                entityType.GetNonPrincipalSharedNonPkProperties(table);
             // We don't need condition for nullable property if there exist at least one required property which is non shared.
             if (
                 allNonSharedNonPkProperties.Count != 0

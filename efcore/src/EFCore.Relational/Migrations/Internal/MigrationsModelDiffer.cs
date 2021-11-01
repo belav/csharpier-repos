@@ -339,9 +339,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                     {
                         foreach (var cyclicAddForeignKeyOperation in cyclicAddForeignKeyOperations)
                         {
-                            var removed = createTableOperation.ForeignKeys.Remove(
-                                cyclicAddForeignKeyOperation
-                            );
+                            var removed =
+                                createTableOperation.ForeignKeys.Remove(cyclicAddForeignKeyOperation);
                             if (removed)
                             {
                                 constraintOperations.Add(cyclicAddForeignKeyOperation);
@@ -508,9 +507,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 if (sourceMigrationsAnnotationsForRemoved.Count > 0)
                 {
                     var alterDatabaseOperation = new AlterDatabaseOperation();
-                    alterDatabaseOperation.OldDatabase.AddAnnotations(
-                        sourceMigrationsAnnotationsForRemoved
-                    );
+                    alterDatabaseOperation.OldDatabase.AddAnnotations(sourceMigrationsAnnotationsForRemoved);
                     yield return alterDatabaseOperation;
                 }
 
@@ -1993,9 +1990,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             )
                             {
                                 if (
-                                    !sourceProperty.DeclaringEntityType.IsAssignableFrom(
-                                        sourceEntityType
-                                    )
+                                    !sourceProperty.DeclaringEntityType.IsAssignableFrom(sourceEntityType)
                                 )
                                 {
                                     continue;
@@ -2336,9 +2331,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
                                 if (!storeValuesChanged && convertedType != null)
                                 {
-                                    comparer = TypeMappingSource.FindMapping(
-                                        convertedType
-                                    )?.Comparer;
+                                    comparer =
+                                        TypeMappingSource.FindMapping(convertedType)?.Comparer;
 
                                     storeValuesChanged =
                                         !comparer?.Equals(
@@ -2428,9 +2422,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                                     .Where(
                                         fk =>
                                         {
-                                            var behavior = diffContext.FindTarget(
-                                                fk
-                                            )?.DeleteBehavior;
+                                            var behavior =
+                                                diffContext.FindTarget(fk)?.DeleteBehavior;
                                             return behavior != null
                                                 && behavior != DeleteBehavior.ClientNoAction;
                                         }
@@ -2517,9 +2510,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             }
 
             var model = updateAdapter.Model.GetRelationalModel();
-            var commandBatches = new CommandBatchPreparer(
-                CommandBatchPreparerDependencies
-            ).BatchCommands(entries, updateAdapter);
+            var commandBatches =
+                new CommandBatchPreparer(CommandBatchPreparerDependencies).BatchCommands(
+                    entries,
+                    updateAdapter
+                );
 
             foreach (var commandBatch in commandBatches)
             {

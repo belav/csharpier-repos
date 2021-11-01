@@ -111,9 +111,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(document));
             }
 
-            document.Items[typeof(ImportSyntaxTreesHolder)] = new ImportSyntaxTreesHolder(
-                syntaxTrees
-            );
+            document.Items[typeof(ImportSyntaxTreesHolder)] =
+                new ImportSyntaxTreesHolder(syntaxTrees);
         }
 
         public static DocumentIntermediateNode GetDocumentIntermediateNode(

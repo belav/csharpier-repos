@@ -537,9 +537,8 @@ namespace System.Web.Http.Controllers
                         // for: public Task<T> Action()
                         // constructs: return (Task<object>)Convert<T>(((Task<T>)instance).method((T0) param[0], ...))
                         Type taskValueType = TypeHelper.GetTaskInnerTypeOrNull(methodCall.Type);
-                        var compiledConversion = CompileGenericTaskConversionDelegate(
-                            taskValueType
-                        );
+                        var compiledConversion =
+                            CompileGenericTaskConversionDelegate(taskValueType);
 
                         return (instance, methodParameters) =>
                         {

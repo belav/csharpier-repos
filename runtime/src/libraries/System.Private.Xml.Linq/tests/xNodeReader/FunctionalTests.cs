@@ -3642,9 +3642,7 @@ namespace CoreXml.Test.XLinq
                         }
                     );
                     this.AddChild(
-                        new TestVariation(
-                            SubtreeReaderInsertedAttributesWontWorkWithReadContentAsBase64
-                        ) {
+                        new TestVariation(SubtreeReaderInsertedAttributesWontWorkWithReadContentAsBase64) {
                             Attribute = new VariationAttribute(
                                 "430329: SubtreeReader inserted attributes don't work with ReadContentAsBase64"
                             )
@@ -4201,9 +4199,7 @@ namespace CoreXml.Test.XLinq
                         }
                     );
                     this.AddChild(
-                        new TestVariation(
-                            ReadOuterXmlWhenNamespacesEqualsToFalseAndHasAnAttributeXmlns
-                        ) {
+                        new TestVariation(ReadOuterXmlWhenNamespacesEqualsToFalseAndHasAnAttributeXmlns) {
                             Attribute = new VariationAttribute(
                                 "Read OuterXml when Namespaces=false and has an attribute xmlns"
                             )
@@ -4469,9 +4465,7 @@ namespace CoreXml.Test.XLinq
                         }
                     );
                     this.AddChild(
-                        new TestVariation(
-                            SubtreeReaderCachesNodeTypeAndReportsNodeTypeOfAttributeOnSubsequentReads
-                        ) {
+                        new TestVariation(SubtreeReaderCachesNodeTypeAndReportsNodeTypeOfAttributeOnSubsequentReads) {
                             Attribute = new VariationAttribute(
                                 "Subtree Reader caches the NodeType and reports node type of Attribute on subsequent reads."
                             ) {

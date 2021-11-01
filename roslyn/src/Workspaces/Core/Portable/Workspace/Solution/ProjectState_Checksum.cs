@@ -132,10 +132,9 @@ namespace Microsoft.CodeAnalysis
                         .ConfigureAwait(false);
                     var additionalChecksums = await Task.WhenAll(additionalDocumentChecksumTasks)
                         .ConfigureAwait(false);
-                    var analyzerConfigDocumentChecksums = await Task.WhenAll(
-                            analyzerConfigDocumentChecksumTasks
-                        )
-                        .ConfigureAwait(false);
+                    var analyzerConfigDocumentChecksums =
+                        await Task.WhenAll(analyzerConfigDocumentChecksumTasks)
+                            .ConfigureAwait(false);
 
                     return new ProjectStateChecksums(
                         infoChecksum,
@@ -146,9 +145,7 @@ namespace Microsoft.CodeAnalysis
                         metadataReferenceChecksums,
                         analyzerReferenceChecksums,
                         new TextDocumentChecksumCollection(additionalChecksums),
-                        new AnalyzerConfigDocumentChecksumCollection(
-                            analyzerConfigDocumentChecksums
-                        )
+                        new AnalyzerConfigDocumentChecksumCollection(analyzerConfigDocumentChecksums)
                     );
                 }
             }

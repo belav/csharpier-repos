@@ -1422,9 +1422,8 @@ internal class Program
     {
         LocallyDefinedStructWithToString versionBubbleLocalStruct =
             new LocallyDefinedStructWithToString();
-        string returnedString = ObjectToStringOnGenericParamTestWorker(
-            ref versionBubbleLocalStruct
-        );
+        string returnedString =
+            ObjectToStringOnGenericParamTestWorker(ref versionBubbleLocalStruct);
         if (returnedString != "LocallyDefined")
             return false;
         if (versionBubbleLocalStruct.StoredValue == null)

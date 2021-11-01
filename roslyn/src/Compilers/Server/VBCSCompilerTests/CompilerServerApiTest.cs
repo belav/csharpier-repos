@@ -172,9 +172,8 @@ class Hello
                     var thread = new Thread(
                         _ =>
                         {
-                            wasServerMutexOpen = BuildServerConnection.WasServerMutexOpen(
-                                mutexName
-                            );
+                            wasServerMutexOpen =
+                                BuildServerConnection.WasServerMutexOpen(mutexName);
 
                             var client = new TestableClientConnection()
                             {

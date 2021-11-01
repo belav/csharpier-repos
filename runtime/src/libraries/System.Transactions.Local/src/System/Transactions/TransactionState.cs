@@ -2670,9 +2670,8 @@ namespace System.Transactions
                 options.Timeout = newTimeout;
 
                 // Create a new distributed transaction.
-                distributedTx = TransactionManager.DistributedTransactionManager.CreateTransaction(
-                    options
-                );
+                distributedTx =
+                    TransactionManager.DistributedTransactionManager.CreateTransaction(options);
                 distributedTx.SavedLtmPromotedTransaction = tx._outcomeSource;
 
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;

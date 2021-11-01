@@ -87,9 +87,8 @@ namespace Tracing.Tests.ReverseValidation
                         {
                             while (!mre.WaitOne(0))
                             {
-                                var ad1 = await ReverseServer.CreateServerAndReceiveAdvertisement(
-                                    serverName
-                                );
+                                var ad1 =
+                                    await ReverseServer.CreateServerAndReceiveAdvertisement(serverName);
                                 Logger.logger.Log(ad1.ToString());
                             }
                         }

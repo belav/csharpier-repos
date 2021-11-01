@@ -1695,9 +1695,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 );
 
                 var relationshipDiscoveryConvention = CreateRelationshipDiscoveryConvention();
-                conventions.EntityTypeBaseTypeChangedConventions.Add(
-                    relationshipDiscoveryConvention
-                );
+                conventions.EntityTypeBaseTypeChangedConventions.Add(relationshipDiscoveryConvention);
                 conventions.EntityTypeMemberIgnoredConventions.Add(relationshipDiscoveryConvention);
                 conventions.NavigationAddedConventions.Add(relationshipDiscoveryConvention);
                 conventions.NavigationRemovedConventions.Add(relationshipDiscoveryConvention);

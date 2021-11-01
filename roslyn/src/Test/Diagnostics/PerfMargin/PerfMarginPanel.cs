@@ -19,9 +19,8 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
     public class PerfMarginPanel : UserControl
     {
         private static readonly DataModel s_model = new DataModel();
-        private static readonly PerfEventActivityLogger s_logger = new PerfEventActivityLogger(
-            s_model
-        );
+        private static readonly PerfEventActivityLogger s_logger =
+            new PerfEventActivityLogger(s_model);
 
         private readonly ListView _mainListView;
         private readonly Grid _mainGrid;

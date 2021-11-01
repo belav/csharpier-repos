@@ -79,9 +79,7 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             _createServiceProvider = () =>
             {
                 return Services.BuildServiceProvider(
-                    validateScopes: WebAssemblyHostEnvironmentExtensions.IsDevelopment(
-                        hostEnvironment
-                    )
+                    validateScopes: WebAssemblyHostEnvironmentExtensions.IsDevelopment(hostEnvironment)
                 );
             };
         }

@@ -335,9 +335,8 @@ namespace System.IO
             internal void Start(CancellationToken cancellationToken)
             {
                 // Get the path to watch and verify we created the CFStringRef
-                SafeCreateHandle path = Interop.CoreFoundation.CFStringCreateWithCString(
-                    _fullDirectory
-                );
+                SafeCreateHandle path =
+                    Interop.CoreFoundation.CFStringCreateWithCString(_fullDirectory);
                 if (path.IsInvalid)
                 {
                     throw Interop.GetExceptionForIoErrno(

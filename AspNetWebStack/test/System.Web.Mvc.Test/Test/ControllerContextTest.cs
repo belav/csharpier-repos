@@ -107,9 +107,8 @@ namespace System.Web.Mvc.Test
             innerControllerContext.DisplayMode = displayMode;
 
             // Act
-            ControllerContext outerControllerContext = new SubclassedControllerContext(
-                innerControllerContext
-            );
+            ControllerContext outerControllerContext =
+                new SubclassedControllerContext(innerControllerContext);
 
             // Assert
             Assert.Equal(requestContext, outerControllerContext.RequestContext);

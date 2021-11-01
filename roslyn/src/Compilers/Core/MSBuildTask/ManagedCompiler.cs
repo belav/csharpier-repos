@@ -955,9 +955,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             commandLine.AppendSwitchIfNotNull("/win32icon:", Win32Icon);
             commandLine.AppendSwitchIfNotNull("/win32manifest:", Win32Manifest);
 
-            AddResponseFileCommandsForSwitchesSinceInitialReleaseThatAreNeededByTheHost(
-                commandLine
-            );
+            AddResponseFileCommandsForSwitchesSinceInitialReleaseThatAreNeededByTheHost(commandLine);
             AddAnalyzersToCommandLine(commandLine, Analyzers);
             AddAdditionalFilesToCommandLine(commandLine);
 
@@ -1198,9 +1196,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             if (compilerOptionsHostObject != null)
             {
                 var commandLineBuilder = new CommandLineBuilderExtension();
-                AddResponseFileCommandsForSwitchesSinceInitialReleaseThatAreNeededByTheHost(
-                    commandLineBuilder
-                );
+                AddResponseFileCommandsForSwitchesSinceInitialReleaseThatAreNeededByTheHost(commandLineBuilder);
                 param = "CompilerOptions";
                 CheckHostObjectSupport(
                     param,

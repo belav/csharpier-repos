@@ -89,9 +89,7 @@ namespace Roslyn.Test.Utilities
 
                             // xUnit creates its own synchronization context and wraps any existing context so that messages are
                             // still pumped as necessary. So we are safe setting it here, where we are not safe setting it in test.
-                            SynchronizationContext.SetSynchronizationContext(
-                                synchronizationContext
-                            );
+                            SynchronizationContext.SetSynchronizationContext(synchronizationContext);
 
                             threadStartedEvent.Set();
 

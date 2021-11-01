@@ -152,9 +152,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             else if (propertyFilterProviders.Length > 1)
             {
                 isBindingInfoPresent = true;
-                bindingInfo.PropertyFilterProvider = new CompositePropertyFilterProvider(
-                    propertyFilterProviders
-                );
+                bindingInfo.PropertyFilterProvider =
+                    new CompositePropertyFilterProvider(propertyFilterProviders);
             }
 
             // RequestPredicate

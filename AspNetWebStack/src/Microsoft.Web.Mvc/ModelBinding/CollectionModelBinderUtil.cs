@@ -162,9 +162,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
              * the model instance can be updated in-place.
              */
 
-            Type closedSupportedInterfaceType = supportedInterfaceType.MakeGenericType(
-                modelTypeArguments
-            );
+            Type closedSupportedInterfaceType =
+                supportedInterfaceType.MakeGenericType(modelTypeArguments);
             if (!closedSupportedInterfaceType.IsInstanceOfType(modelMetadata.Model))
             {
                 return null; // not instance of correct interface

@@ -371,9 +371,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         _semanticDocument.SemanticModel.Compilation.SerializableAttributeType();
                     if (serializableType != null)
                     {
-                        var attribute = CodeGenerationSymbolFactory.CreateAttributeData(
-                            serializableType
-                        );
+                        var attribute =
+                            CodeGenerationSymbolFactory.CreateAttributeData(serializableType);
                         return ImmutableArray.Create(attribute);
                     }
                 }

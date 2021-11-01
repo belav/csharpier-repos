@@ -122,13 +122,10 @@ namespace Microsoft.CodeAnalysis.Host
                             ),
                         this
                     );
-                    streamAccessor = new ReferenceCountedDisposable<MemoryMappedViewAccessor>(
-                        rawAccessor
-                    );
+                    streamAccessor =
+                        new ReferenceCountedDisposable<MemoryMappedViewAccessor>(rawAccessor);
                     _weakReadAccessor =
-                        new ReferenceCountedDisposable<MemoryMappedViewAccessor>.WeakReference(
-                            streamAccessor
-                        );
+                        new ReferenceCountedDisposable<MemoryMappedViewAccessor>.WeakReference(streamAccessor);
                 }
 
                 Debug.Assert(streamAccessor.Target.CanRead);

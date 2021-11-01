@@ -157,9 +157,8 @@ namespace TypeSystemTests
                 instantiatedType = _referenceTypeConstraintType.MakeInstantiatedType(_iNonGenType);
                 Assert.True(instantiatedType.CheckConstraints());
 
-                instantiatedType = _referenceTypeConstraintType.MakeInstantiatedType(
-                    _structArgWithDefaultCtorType
-                );
+                instantiatedType =
+                    _referenceTypeConstraintType.MakeInstantiatedType(_structArgWithDefaultCtorType);
                 Assert.False(instantiatedType.CheckConstraints());
 
                 instantiatedType = _referenceTypeConstraintType.MakeInstantiatedType(
@@ -170,29 +169,24 @@ namespace TypeSystemTests
 
             // DefaultConstructorConstraint
             {
-                instantiatedType = _defaultConstructorConstraintType.MakeInstantiatedType(
-                    _arg1Type
-                );
+                instantiatedType =
+                    _defaultConstructorConstraintType.MakeInstantiatedType(_arg1Type);
                 Assert.True(instantiatedType.CheckConstraints());
 
-                instantiatedType = _defaultConstructorConstraintType.MakeInstantiatedType(
-                    _classArgWithDefaultCtorType
-                );
+                instantiatedType =
+                    _defaultConstructorConstraintType.MakeInstantiatedType(_classArgWithDefaultCtorType);
                 Assert.True(instantiatedType.CheckConstraints());
 
-                instantiatedType = _defaultConstructorConstraintType.MakeInstantiatedType(
-                    _classArgWithPrivateDefaultCtorType
-                );
+                instantiatedType =
+                    _defaultConstructorConstraintType.MakeInstantiatedType(_classArgWithPrivateDefaultCtorType);
                 Assert.False(instantiatedType.CheckConstraints());
 
-                instantiatedType = _defaultConstructorConstraintType.MakeInstantiatedType(
-                    _abstractClassArgWithDefaultCtorType
-                );
+                instantiatedType =
+                    _defaultConstructorConstraintType.MakeInstantiatedType(_abstractClassArgWithDefaultCtorType);
                 Assert.False(instantiatedType.CheckConstraints());
 
-                instantiatedType = _defaultConstructorConstraintType.MakeInstantiatedType(
-                    _classArgWithoutDefaultCtorType
-                );
+                instantiatedType =
+                    _defaultConstructorConstraintType.MakeInstantiatedType(_classArgWithoutDefaultCtorType);
                 Assert.False(instantiatedType.CheckConstraints());
 
                 instantiatedType = _defaultConstructorConstraintType.MakeInstantiatedType(
@@ -200,28 +194,24 @@ namespace TypeSystemTests
                 );
                 Assert.True(instantiatedType.CheckConstraints());
 
-                instantiatedType = _defaultConstructorConstraintType.MakeInstantiatedType(
-                    _structArgWithDefaultCtorType
-                );
+                instantiatedType =
+                    _defaultConstructorConstraintType.MakeInstantiatedType(_structArgWithDefaultCtorType);
                 Assert.True(instantiatedType.CheckConstraints());
 
                 // Structs always have implicit default constructors
-                instantiatedType = _defaultConstructorConstraintType.MakeInstantiatedType(
-                    _structArgWithoutDefaultCtorType
-                );
+                instantiatedType =
+                    _defaultConstructorConstraintType.MakeInstantiatedType(_structArgWithoutDefaultCtorType);
                 Assert.True(instantiatedType.CheckConstraints());
             }
 
             // NotNullableValueTypeConstraint
             {
-                instantiatedType = _notNullableValueTypeConstraintType.MakeInstantiatedType(
-                    _arg1Type
-                );
+                instantiatedType =
+                    _notNullableValueTypeConstraintType.MakeInstantiatedType(_arg1Type);
                 Assert.False(instantiatedType.CheckConstraints());
 
-                instantiatedType = _notNullableValueTypeConstraintType.MakeInstantiatedType(
-                    _structArgWithDefaultCtorType
-                );
+                instantiatedType =
+                    _notNullableValueTypeConstraintType.MakeInstantiatedType(_structArgWithDefaultCtorType);
                 Assert.True(instantiatedType.CheckConstraints());
 
                 MetadataType nullable = (MetadataType)_context.GetWellKnownType(
@@ -231,9 +221,8 @@ namespace TypeSystemTests
                     _context.GetWellKnownType(WellKnownType.Int32)
                 );
 
-                instantiatedType = _notNullableValueTypeConstraintType.MakeInstantiatedType(
-                    nullableOfInt
-                );
+                instantiatedType =
+                    _notNullableValueTypeConstraintType.MakeInstantiatedType(nullableOfInt);
                 Assert.False(instantiatedType.CheckConstraints());
             }
 

@@ -244,9 +244,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type enumerableType
         )
         {
-            MethodInfo realMethod = collectionType.GetImmutableEnumerableCreateRangeMethod(
-                elementType
-            );
+            MethodInfo realMethod =
+                collectionType.GetImmutableEnumerableCreateRangeMethod(elementType);
 
             var dynamicMethod = new DynamicMethod(
                 realMethod.Name,

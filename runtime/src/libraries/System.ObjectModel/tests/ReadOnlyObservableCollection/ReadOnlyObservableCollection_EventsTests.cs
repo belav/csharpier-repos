@@ -120,9 +120,8 @@ namespace System.Collections.ObjectModel.Tests
         {
             Guid[] anArray = { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
             ObservableCollection<Guid> collection = new ObservableCollection<Guid>(anArray);
-            ReadOnlyObservableCollection<Guid> readonlyCol = new ReadOnlyObservableCollection<Guid>(
-                collection
-            );
+            ReadOnlyObservableCollection<Guid> readonlyCol =
+                new ReadOnlyObservableCollection<Guid>(collection);
             ((INotifyCollectionChanged)readonlyCol).CollectionChanged += (o, e) =>
             {
                 throw new ShouldNotBeInvokedException();
@@ -178,9 +177,8 @@ namespace System.Collections.ObjectModel.Tests
             ReadOnlyCollectionAndPropertyChangedTester helper =
                 new ReadOnlyCollectionAndPropertyChangedTester();
             string[] anArrayString = new string[] { "one", "two", "three", "four" };
-            ObservableCollection<string> collection = new ObservableCollection<string>(
-                anArrayString
-            );
+            ObservableCollection<string> collection =
+                new ObservableCollection<string>(anArrayString);
             ReadOnlyObservableCollection<string> readonlyCol =
                 new ReadOnlyObservableCollection<string>(collection);
             helper.MoveItemTest(readonlyCol, collection, 0, 2);
@@ -261,9 +259,8 @@ namespace System.Collections.ObjectModel.Tests
         public static void InsertTest()
         {
             string[] anArrayString = new string[] { "one", "two", "three", "four" };
-            ObservableCollection<string> collection = new ObservableCollection<string>(
-                anArrayString
-            );
+            ObservableCollection<string> collection =
+                new ObservableCollection<string>(anArrayString);
             ReadOnlyObservableCollection<string> readonlyCol =
                 new ReadOnlyObservableCollection<string>(collection);
             ReadOnlyCollectionAndPropertyChangedTester helper =
@@ -284,9 +281,8 @@ namespace System.Collections.ObjectModel.Tests
         {
             Guid[] anArray = { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
             ObservableCollection<Guid> collection = new ObservableCollection<Guid>(anArray);
-            ReadOnlyObservableCollection<Guid> readonlyCol = new ReadOnlyObservableCollection<Guid>(
-                collection
-            );
+            ReadOnlyObservableCollection<Guid> readonlyCol =
+                new ReadOnlyObservableCollection<Guid>(collection);
             ((INotifyCollectionChanged)readonlyCol).CollectionChanged += (o, e) =>
             {
                 throw new ShouldNotBeInvokedException();

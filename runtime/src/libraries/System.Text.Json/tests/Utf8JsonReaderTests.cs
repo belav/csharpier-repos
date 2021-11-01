@@ -742,9 +742,8 @@ namespace System.Text.Json.Tests
         [MemberData(nameof(TrySkipValues))]
         public static void TestTrySkipWithComments(string jsonString, JsonTokenType lastToken)
         {
-            List<JsonTokenType> expectedTokenTypesWithoutComments = JsonTestHelper.GetTokenTypes(
-                jsonString
-            );
+            List<JsonTokenType> expectedTokenTypesWithoutComments =
+                JsonTestHelper.GetTokenTypes(jsonString);
 
             jsonString = JsonTestHelper.InsertCommentsEverywhere(jsonString);
 

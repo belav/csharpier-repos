@@ -736,9 +736,8 @@ namespace System
             // ensures that when we later shift the numerator N bits to the left, we
             // will produce N bits of precision.
             uint fractionalNumeratorBits = BigInteger.CountSignificantBits(ref fractionalNumerator);
-            uint fractionalDenominatorBits = BigInteger.CountSignificantBits(
-                ref fractionalDenominator
-            );
+            uint fractionalDenominatorBits =
+                BigInteger.CountSignificantBits(ref fractionalDenominator);
 
             uint fractionalShift = 0;
 

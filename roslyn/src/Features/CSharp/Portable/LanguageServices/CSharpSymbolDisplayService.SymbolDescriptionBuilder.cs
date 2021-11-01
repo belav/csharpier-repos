@@ -158,10 +158,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
             {
                 EqualsValueClauseSyntax initializer = null;
 
-                var variableDeclarator = await GetFirstDeclarationAsync<VariableDeclaratorSyntax>(
-                        symbol
-                    )
-                    .ConfigureAwait(false);
+                var variableDeclarator =
+                    await GetFirstDeclarationAsync<VariableDeclaratorSyntax>(symbol)
+                        .ConfigureAwait(false);
                 if (variableDeclarator != null)
                 {
                     initializer = variableDeclarator.Initializer;

@@ -33,9 +33,8 @@ namespace ILCompiler
         ) : base(details, genericsMode)
         {
             _r2rFieldLayoutAlgorithm = new ReadyToRunMetadataFieldLayoutAlgorithm();
-            _systemObjectFieldLayoutAlgorithm = new SystemObjectFieldLayoutAlgorithm(
-                _r2rFieldLayoutAlgorithm
-            );
+            _systemObjectFieldLayoutAlgorithm =
+                new SystemObjectFieldLayoutAlgorithm(_r2rFieldLayoutAlgorithm);
 
             // Only the Arm64 JIT respects the OS rules for vector type abi currently
             _vectorFieldLayoutAlgorithm = new VectorFieldLayoutAlgorithm(

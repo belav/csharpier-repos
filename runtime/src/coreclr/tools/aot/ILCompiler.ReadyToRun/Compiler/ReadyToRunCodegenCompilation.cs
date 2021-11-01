@@ -344,9 +344,7 @@ namespace ILCompiler
             // Generate baseline support specification for InstructionSetSupport. This will prevent usage of the generated
             // code if the runtime environment doesn't support the specified instruction set
             string instructionSetSupportString =
-                ReadyToRunInstructionSetSupportSignature.ToInstructionSetSupportString(
-                    instructionSetSupport
-                );
+                ReadyToRunInstructionSetSupportSignature.ToInstructionSetSupportString(instructionSetSupport);
             ReadyToRunInstructionSetSupportSignature instructionSetSupportSig =
                 new ReadyToRunInstructionSetSupportSignature(instructionSetSupportString);
             _dependencyGraph.AddRoot(
@@ -590,9 +588,7 @@ namespace ILCompiler
                 // If there are multiple inexact compilation units in the layout of the type, then the exact offset
                 // of a derived given field is unknown as there may or may not be alignment inserted between a type and its base
                 if (
-                    CompilationModuleGroup.TypeLayoutCompilationUnits(
-                        type
-                    ).HasMultipleInexactCompilationUnits
+                    CompilationModuleGroup.TypeLayoutCompilationUnits(type).HasMultipleInexactCompilationUnits
                 )
                     return false;
 

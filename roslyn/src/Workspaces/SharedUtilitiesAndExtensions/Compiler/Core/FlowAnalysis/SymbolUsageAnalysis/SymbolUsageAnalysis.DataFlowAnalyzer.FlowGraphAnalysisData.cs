@@ -141,9 +141,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         CaptureId,
                         PooledHashSet<(ISymbol, IOperation)>
                     >.GetInstance();
-                    LValueFlowCapturesInGraph = LValueFlowCapturesProvider.CreateLValueFlowCaptures(
-                        controlFlowGraph
-                    );
+                    LValueFlowCapturesInGraph =
+                        LValueFlowCapturesProvider.CreateLValueFlowCaptures(controlFlowGraph);
                     Debug.Assert(
                         LValueFlowCapturesInGraph.Values.All(
                             kind =>
@@ -362,9 +361,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                                         );
                                     if (localFunctionGraph != null)
                                     {
-                                        AddDescendantOperationsInLambdaOrLocalFunctionGraph(
-                                            localFunctionGraph
-                                        );
+                                        AddDescendantOperationsInLambdaOrLocalFunctionGraph(localFunctionGraph);
                                     }
                                 }
                             }
@@ -385,9 +382,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                             {
                                 case IFlowAnonymousFunctionOperation flowAnonymousFunctionOperation:
                                     lambdaOrLocalFunctionCfgOpt =
-                                        TryGetAnonymousFunctionControlFlowGraphInScope(
-                                            flowAnonymousFunctionOperation
-                                        );
+                                        TryGetAnonymousFunctionControlFlowGraphInScope(flowAnonymousFunctionOperation);
                                     break;
 
                                 case ILocalFunctionOperation localFunctionOperation:
@@ -410,9 +405,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                                 lambdaOrLocalFunctionCfgOpt != null && operationsBuilder.Add(target)
                             )
                             {
-                                AddDescendantOperationsInLambdaOrLocalFunctionGraph(
-                                    lambdaOrLocalFunctionCfgOpt
-                                );
+                                AddDescendantOperationsInLambdaOrLocalFunctionGraph(lambdaOrLocalFunctionCfgOpt);
                             }
                         }
                     }
@@ -621,9 +614,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     {
                         if (parameter.RefKind == RefKind.Ref || parameter.RefKind == RefKind.Out)
                         {
-                            var currentWrites = CurrentBlockAnalysisData.GetCurrentWrites(
-                                parameter
-                            );
+                            var currentWrites =
+                                CurrentBlockAnalysisData.GetCurrentWrites(parameter);
                             foreach (var write in currentWrites)
                             {
                                 if (write != null)

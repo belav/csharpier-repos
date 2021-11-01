@@ -71,9 +71,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             {
                                 leftSql,
                                 Dependencies.SqlExpressionFactory.Add(
-                                    Dependencies.SqlExpressionFactory.ApplyDefaultTypeMapping(
-                                        rightSql
-                                    ),
+                                    Dependencies.SqlExpressionFactory.ApplyDefaultTypeMapping(rightSql),
                                     Dependencies.SqlExpressionFactory.Constant(1)
                                 ),
                                 Dependencies.SqlExpressionFactory.Constant(1)

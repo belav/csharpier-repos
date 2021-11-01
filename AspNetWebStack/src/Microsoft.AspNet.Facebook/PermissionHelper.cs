@@ -62,9 +62,8 @@ namespace Microsoft.AspNet.Facebook
             IEnumerable<string> previouslyRequestedMissingPermissions = missingPermissions.Where(
                 (permission) => previouslyRequestedPermissions.Contains(permission)
             );
-            IEnumerable<string> skippedPermissions = previouslyRequestedMissingPermissions.Except(
-                declinedPermissions
-            );
+            IEnumerable<string> skippedPermissions =
+                previouslyRequestedMissingPermissions.Except(declinedPermissions);
 
             return skippedPermissions;
         }
@@ -75,12 +74,10 @@ namespace Microsoft.AspNet.Facebook
         )
         {
             HttpRequestBase request = context.HttpContext.Request;
-            IEnumerable<string> existingRequestedPermissions = GetPreviouslyRequestedPermissions(
-                request
-            );
-            IEnumerable<string> combinedRequestedPermissions = existingRequestedPermissions.Concat(
-                requestedPermissions
-            );
+            IEnumerable<string> existingRequestedPermissions =
+                GetPreviouslyRequestedPermissions(request);
+            IEnumerable<string> combinedRequestedPermissions =
+                existingRequestedPermissions.Concat(requestedPermissions);
 
             // No need for duplicates
             combinedRequestedPermissions = combinedRequestedPermissions.Distinct(

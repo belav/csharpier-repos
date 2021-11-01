@@ -226,9 +226,10 @@ namespace System.Data.SqlTypes.Tests
             int localeID
         )
         {
-            SortedList<SqlString, SqlString> items = new SortedList<SqlString, SqlString>(
-                numberOfItems
-            );
+            SortedList<SqlString, SqlString> items = new SortedList<
+                SqlString,
+                SqlString
+            >(numberOfItems);
 
             //
             // Generate list of SqlString

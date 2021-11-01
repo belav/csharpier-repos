@@ -163,9 +163,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _workspace.ApplyChangeToWorkspace(
                     w =>
                     {
-                        var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                            moniker
-                        );
+                        var documentIds =
+                            _workspace.CurrentSolution.GetDocumentIdsWithFilePath(moniker);
                         if (documentIds.IsDefaultOrEmpty)
                         {
                             return;
@@ -345,9 +344,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 _workspace.ApplyChangeToWorkspace(
                     w =>
                     {
-                        var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                            moniker
-                        );
+                        var documentIds =
+                            _workspace.CurrentSolution.GetDocumentIdsWithFilePath(moniker);
                         if (documentIds.IsDefaultOrEmpty || documentIds.Length == 1)
                         {
                             return;
@@ -469,9 +467,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         {
                             if (_fileNamesToCheckForOpenDocuments == null)
                             {
-                                _fileNamesToCheckForOpenDocuments = new HashSet<string>(
-                                    newFileNames
-                                );
+                                _fileNamesToCheckForOpenDocuments =
+                                    new HashSet<string>(newFileNames);
                             }
                             else
                             {
@@ -547,9 +544,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                             )
                         )
                         {
-                            var hierarchy = _runningDocumentTableEventTracker.GetDocumentHierarchy(
-                                fileName
-                            );
+                            var hierarchy =
+                                _runningDocumentTableEventTracker.GetDocumentHierarchy(fileName);
                             TryOpeningDocumentsForMoniker(fileName, buffer, hierarchy);
                         }
                     }

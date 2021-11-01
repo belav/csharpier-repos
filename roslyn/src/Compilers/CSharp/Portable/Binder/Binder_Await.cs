@@ -554,9 +554,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics,
                 node
             );
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
 
             var conversion = this.Conversions.ClassifyImplicitConversionFromType(
                 awaiterType,

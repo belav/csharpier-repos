@@ -55,9 +55,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
         {
             _queriedSymbol = queriedDefinition;
             _queriedNode = queriedNode;
-            _aggregateCancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
-                cancellationToken
-            );
+            _aggregateCancellationTokenSource =
+                CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             _locations = new ConcurrentSet<Location>(LocationComparer.Instance);
 
             SearchCap = searchCap;

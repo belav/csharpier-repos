@@ -423,9 +423,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
                         )
                         {
                             var openDocument = workspace.CurrentSolution.GetDocument(documentId);
-                            var openRoot = openDocument.GetSyntaxRootSynchronously(
-                                cancellationToken
-                            );
+                            var openRoot =
+                                openDocument.GetSyntaxRootSynchronously(cancellationToken);
 
                             // NOTE: We need to resolve the syntax path again in case VB line commit kicked in
                             // due to the navigation.

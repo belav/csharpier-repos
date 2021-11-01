@@ -1042,9 +1042,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                     var infoCache = _owner._diagnosticService.AnalyzerInfoCache;
 
                     foreach (
-                        var analyzersPerReference in project.Solution.State.Analyzers.CreateDiagnosticAnalyzersPerReference(
-                            project
-                        )
+                        var analyzersPerReference in project.Solution.State.Analyzers.CreateDiagnosticAnalyzersPerReference(project)
                     )
                     {
                         foreach (var analyzer in analyzersPerReference.Value)

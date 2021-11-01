@@ -417,9 +417,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             result += Verify.Eval(NullableIntTypeWithNumbericConversionFromShortInAssignment);
             result += Verify.Eval(NullableUintTypeWithNumbericConversionFromUshortInAssignment);
             result += Verify.Eval(NullableLongTypeWithNumbericConversionFromIntInAssignment);
-            result += Verify.Eval(
-                NullableUlongTypeWithNullableNumbericConversionFromUintInAssignment
-            );
+            result +=
+                Verify.Eval(NullableUlongTypeWithNullableNumbericConversionFromUintInAssignment);
             return result;
         }
     }
@@ -808,15 +807,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             result += Verify.Eval(UserdefinedGenericStructWithIdentityConversionInAssignment);
             result += Verify.Eval(UserdefinedEnumWithIdentityConversionInAssignment);
             result += Verify.Eval(NullableUserdefinedStructWithIdentityConversionInAssignment);
-            result += Verify.Eval(
-                NullableUserdefinedStructWithNullableUserdefinedImplicitConversionInAssignment
-            );
-            result += Verify.Eval(
-                NullableUserdefinedGenericStructWithNullableIdentityConversionInAssignment
-            );
-            result += Verify.Eval(
-                NullableUserdefinedEnumWithNullableIdentityConversionInAssignment
-            );
+            result +=
+                Verify.Eval(NullableUserdefinedStructWithNullableUserdefinedImplicitConversionInAssignment);
+            result +=
+                Verify.Eval(NullableUserdefinedGenericStructWithNullableIdentityConversionInAssignment);
+            result +=
+                Verify.Eval(NullableUserdefinedEnumWithNullableIdentityConversionInAssignment);
             return result;
         }
     }
@@ -1006,12 +1002,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             result += Verify.Eval(ValueTypeWithBoxingConversionFromUserdefinedStructInAssignment);
             result += Verify.Eval(EnumWithBoxingConversionFromUserdefinedEnumInAssignment);
             result += Verify.Eval(ArrayWithReferenceConversionFromUserdefinedArrayInAssignment);
-            result += Verify.Eval(
-                DelegateWithReferenceConversionFromUserdefinedDelegateInAssignment
-            );
-            result += Verify.Eval(
-                ExceptionWithReferenceConversionFromUserdefinedExceptionInAssignment
-            );
+            result +=
+                Verify.Eval(DelegateWithReferenceConversionFromUserdefinedDelegateInAssignment);
+            result +=
+                Verify.Eval(ExceptionWithReferenceConversionFromUserdefinedExceptionInAssignment);
             return result;
         }
     }
@@ -3286,9 +3280,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             result += Verify.Eval(DynamicObjectInSecondOperandAndConditionIsTrue);
             result += Verify.Eval(DynamicObjectInThirdOperandAndConditionIsFalse);
             result += Verify.Eval(DynamicObjectInSecondOperandAndThirdIsNullableAndConditionIsTrue);
-            result += Verify.Eval(
-                DynamicObjectInThirdOperandAndSecondIsNullableAndConditionIsFalse
-            );
+            result +=
+                Verify.Eval(DynamicObjectInThirdOperandAndSecondIsNullableAndConditionIsFalse);
             return result;
         }
     }

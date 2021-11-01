@@ -1237,9 +1237,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithNewClassRestrictionArrayIndexTestHelper<object>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithNewClassRestrictionArrayIndexTestHelper<object>(useInterpreter);
         }
 
         [Theory]

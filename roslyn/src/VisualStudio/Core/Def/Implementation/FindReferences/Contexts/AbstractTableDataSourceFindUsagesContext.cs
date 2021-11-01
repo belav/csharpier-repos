@@ -106,9 +106,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
                 // Wrap the passed in CT with our own CTS that we can control cancellation over.  This way either our
                 // caller can cancel our work or we can cancel the work.
-                _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
-                    cancellationToken
-                );
+                _cancellationTokenSource =
+                    CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                 CancellationToken = _cancellationTokenSource.Token;
 
                 Presenter = presenter;

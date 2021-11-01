@@ -243,9 +243,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         Contract.ThrowIfFalse(
                             await dialog
                                 .GetTestAccessor()
-                                .AddToExistingFileRadioButton.SimulateClickAsync(
-                                    JoinableTaskFactory
-                                )
+                                .AddToExistingFileRadioButton.SimulateClickAsync(JoinableTaskFactory)
                         );
                         Contract.ThrowIfFalse(
                             await dialog

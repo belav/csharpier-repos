@@ -507,9 +507,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SpecialMember updateMethodId = isAddMethod
                 ? SpecialMember.System_Delegate__Combine
                 : SpecialMember.System_Delegate__Remove;
-            MethodSymbol updateMethod = (MethodSymbol)compilation.GetSpecialTypeMember(
-                updateMethodId
-            );
+            MethodSymbol updateMethod =
+                (MethodSymbol)compilation.GetSpecialTypeMember(updateMethodId);
 
             BoundStatement @return = new BoundReturnStatement(
                 syntax,

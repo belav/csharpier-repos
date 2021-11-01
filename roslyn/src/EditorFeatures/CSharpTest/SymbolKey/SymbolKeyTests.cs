@@ -247,15 +247,13 @@ class Program
                 if (random.Next() % 2 == 0)
                 {
                     bodyLocalProjectId = solution.GetOriginatingProjectId(bodyLocalSymbol);
-                    referenceAssemblyProjectId = solution.GetOriginatingProjectId(
-                        referenceAssemblySymbol
-                    );
+                    referenceAssemblyProjectId =
+                        solution.GetOriginatingProjectId(referenceAssemblySymbol);
                 }
                 else
                 {
-                    referenceAssemblyProjectId = solution.GetOriginatingProjectId(
-                        referenceAssemblySymbol
-                    );
+                    referenceAssemblyProjectId =
+                        solution.GetOriginatingProjectId(referenceAssemblySymbol);
                     bodyLocalProjectId = solution.GetOriginatingProjectId(bodyLocalSymbol);
                 }
 

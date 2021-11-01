@@ -22,9 +22,8 @@ namespace System.Net.Security.Tests
         {
             const string passedInMessage = "base was called";
 
-            InvalidCredentialException invalidCredentialException = new InvalidCredentialException(
-                passedInMessage
-            );
+            InvalidCredentialException invalidCredentialException =
+                new InvalidCredentialException(passedInMessage);
 
             Assert.Equal(passedInMessage, invalidCredentialException.Message);
         }

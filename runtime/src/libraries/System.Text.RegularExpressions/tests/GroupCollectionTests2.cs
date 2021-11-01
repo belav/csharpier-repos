@@ -179,9 +179,8 @@ namespace System.Text.RegularExpressions.Tests
         {
             GroupCollection col = CreateCollection();
             DebuggerAttributes.ValidateDebuggerDisplayReferences(col);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                col
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(col);
             PropertyInfo itemProperty = info.Properties.Single(
                 pr =>
                     pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State

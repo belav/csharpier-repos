@@ -173,9 +173,8 @@ namespace Microsoft.CodeAnalysis.Options
 
                 lock (_gate)
                 {
-                    _documentOptionsProviders = _documentOptionsProviders.Add(
-                        documentOptionsProvider
-                    );
+                    _documentOptionsProviders =
+                        _documentOptionsProviders.Add(documentOptionsProvider);
                 }
             }
 

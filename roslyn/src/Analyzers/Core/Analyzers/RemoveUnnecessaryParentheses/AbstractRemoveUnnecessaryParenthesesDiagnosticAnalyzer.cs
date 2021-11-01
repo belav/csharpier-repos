@@ -83,9 +83,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
                 case PrecedenceKind.Bitwise:
                 case PrecedenceKind.Coalesce:
                     var syntaxFacts = GetSyntaxFacts();
-                    var child = syntaxFacts.GetExpressionOfParenthesizedExpression(
-                        parenthesizedExpression
-                    );
+                    var child =
+                        syntaxFacts.GetExpressionOfParenthesizedExpression(parenthesizedExpression);
 
                     var parentKind = parenthesizedExpression.Parent?.RawKind;
                     var childKind = child.RawKind;

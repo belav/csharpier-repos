@@ -54,9 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
                     declaration?.Parent is LocalDeclarationStatementSyntax localDeclarationStatement
                 )
                 {
-                    var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
-                        localDeclarationStatement
-                    );
+                    var variables =
+                        syntaxFacts.GetVariablesOfLocalDeclarationStatement(localDeclarationStatement);
                     if (variables.Count == 1)
                     {
                         // -> `var a = b`;

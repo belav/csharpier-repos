@@ -187,9 +187,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             RegistrationBuilder convention =
                 ConfigureExportInterfaceConvention<ExportContractBClassDeclarationOverride>();
 
-            AssertHasDeclaredAttributesUnderConvention<ExportContractBClassDeclarationOverride>(
-                convention
-            );
+            AssertHasDeclaredAttributesUnderConvention<ExportContractBClassDeclarationOverride>(convention);
         }
 
         [ExportMetadata(MetadataKeys.MetadataKeyQ, MetadataValues.MetadataValueO)]
@@ -213,9 +211,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             RegistrationBuilder convention =
                 ConfigureExportInterfaceConvention<InheritedExportContractAClassDeclarationOverride>();
 
-            AssertHasDeclaredAttributesUnderConvention<InheritedExportContractAClassDeclarationOverride>(
-                convention
-            );
+            AssertHasDeclaredAttributesUnderConvention<InheritedExportContractAClassDeclarationOverride>(convention);
         }
 
         [InheritedExport(typeof(IContractA))]
@@ -251,9 +247,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             RegistrationBuilder convention =
                 ConfigureExportInterfaceConvention<CustomExportClassDeclarationOverride>();
 
-            AssertHasDeclaredAttributesUnderConvention<CustomExportClassDeclarationOverride>(
-                convention
-            );
+            AssertHasDeclaredAttributesUnderConvention<CustomExportClassDeclarationOverride>(convention);
         }
 
         [MetadataAttribute]
@@ -274,9 +268,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             RegistrationBuilder convention =
                 ConfigureExportInterfaceConvention<CustomMetadataClassDeclarationOverride>();
 
-            AssertHasDeclaredAttributesUnderConvention<CustomMetadataClassDeclarationOverride>(
-                convention
-            );
+            AssertHasDeclaredAttributesUnderConvention<CustomMetadataClassDeclarationOverride>(convention);
         }
 
         [
@@ -860,9 +852,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
             outerConvention
                 .ForType<ConventionTarget>()
                 .Export(eb => eb.AsContractName(ContractNames.ContractY));
-            TypeInfo outerType = outerConvention.MapType(
-                innerType /*.GetTypeInfo()*/
-            );
+            TypeInfo outerType =
+                outerConvention.MapType(innerType /*.GetTypeInfo()*/
+                );
 
             ExportAttribute export = outerType
                 .GetCustomAttributes(false)

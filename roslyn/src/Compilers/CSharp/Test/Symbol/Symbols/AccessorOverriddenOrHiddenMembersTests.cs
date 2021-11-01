@@ -1206,9 +1206,8 @@ using System;
                 Assert.Equal("Disposable", localD.Type.Name);
                 Assert.Equal(classDisposable, localD.Type);
 
-                var methodDispose = (IMethodSymbol)semanticModel.GetSymbolInfo(
-                    memberAccessSyntax
-                ).Symbol;
+                var methodDispose =
+                    (IMethodSymbol)semanticModel.GetSymbolInfo(memberAccessSyntax).Symbol;
                 Assert.Equal("Dispose", methodDispose.Name);
                 Assert.Equal(0, methodDispose.Arity);
                 Assert.Empty(methodDispose.Parameters);

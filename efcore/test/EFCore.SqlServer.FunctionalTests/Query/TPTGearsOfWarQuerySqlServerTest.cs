@@ -404,9 +404,7 @@ INNER JOIN [Cities] AS [c] ON [t0].[CityOfBirthName] = [c].[Name]"
             bool async
         )
         {
-            await base.Include_with_join_and_inheritance_with_orderby_before_and_after_include(
-                async
-            );
+            await base.Include_with_join_and_inheritance_with_orderby_before_and_after_include(async);
 
             AssertSql(
                 @"SELECT [t0].[Nickname], [t0].[SquadId], [t0].[AssignedCityName], [t0].[CityOfBirthName], [t0].[FullName], [t0].[HasSoulPatch], [t0].[LeaderNickname], [t0].[LeaderSquadId], [t0].[Rank], [t0].[Discriminator], [t].[Id], [t1].[Nickname], [t1].[SquadId], [t1].[AssignedCityName], [t1].[CityOfBirthName], [t1].[FullName], [t1].[HasSoulPatch], [t1].[LeaderNickname], [t1].[LeaderSquadId], [t1].[Rank], [t1].[Discriminator]
@@ -1422,9 +1420,7 @@ LEFT JOIN (
             bool async
         )
         {
-            await base.Select_null_propagation_works_for_multiple_navigations_with_composite_keys(
-                async
-            );
+            await base.Select_null_propagation_works_for_multiple_navigations_with_composite_keys(async);
 
             AssertSql(
                 @"SELECT CASE
@@ -2267,9 +2263,7 @@ INNER JOIN (
             bool async
         )
         {
-            await base.Join_with_order_by_on_inner_sequence_navigation_translated_to_subquery_composite_key(
-                async
-            );
+            await base.Join_with_order_by_on_inner_sequence_navigation_translated_to_subquery_composite_key(async);
 
             AssertSql(
                 @"SELECT [g].[FullName], [t1].[Note]
@@ -2395,9 +2389,7 @@ WHERE [c].[Location] = @__value_0"
             bool async
         )
         {
-            await base.Non_unicode_string_literals_in_contains_is_used_for_non_unicode_column(
-                async
-            );
+            await base.Non_unicode_string_literals_in_contains_is_used_for_non_unicode_column(async);
 
             AssertSql(
                 @"SELECT [c].[Name], [c].[Location], [c].[Nation]
@@ -2410,9 +2402,7 @@ WHERE [c].[Location] IN ('Unknown', 'Jacinto''s location', 'Ephyra''s location')
             bool async
         )
         {
-            await base.Non_unicode_string_literals_is_used_for_non_unicode_column_with_subquery(
-                async
-            );
+            await base.Non_unicode_string_literals_is_used_for_non_unicode_column_with_subquery(async);
 
             AssertSql(
                 @"SELECT [c].[Name], [c].[Location], [c].[Nation]
@@ -2429,9 +2419,7 @@ WHERE ([c].[Location] = 'Unknown') AND ((
             bool async
         )
         {
-            await base.Non_unicode_string_literals_is_used_for_non_unicode_column_in_subquery(
-                async
-            );
+            await base.Non_unicode_string_literals_is_used_for_non_unicode_column_in_subquery(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[SquadId], [g].[AssignedCityName], [g].[CityOfBirthName], [g].[FullName], [g].[HasSoulPatch], [g].[LeaderNickname], [g].[LeaderSquadId], [g].[Rank], CASE
@@ -2448,9 +2436,7 @@ WHERE ([g].[Nickname] = N'Marcus') AND ([c].[Location] = 'Jacinto''s location')"
             bool async
         )
         {
-            await base.Non_unicode_string_literals_is_used_for_non_unicode_column_with_contains(
-                async
-            );
+            await base.Non_unicode_string_literals_is_used_for_non_unicode_column_with_contains(async);
 
             AssertSql(
                 @"SELECT [c].[Name], [c].[Location], [c].[Nation]
@@ -2463,9 +2449,7 @@ WHERE [c].[Location] LIKE '%Jacinto%'"
             bool async
         )
         {
-            await base.Non_unicode_string_literals_is_used_for_non_unicode_column_with_concat(
-                async
-            );
+            await base.Non_unicode_string_literals_is_used_for_non_unicode_column_with_concat(async);
 
             AssertSql(
                 @"SELECT [c].[Name], [c].[Location], [c].[Nation]
@@ -2598,9 +2582,7 @@ ORDER BY [t3].[FullName0], [t3].[FullName]"
             bool async
         )
         {
-            await base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_inheritance_and_coalesce_result(
-                async
-            );
+            await base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_inheritance_and_coalesce_result(async);
 
             // Issue#16897
             AssertSql(
@@ -2627,9 +2609,7 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Nickname], [t].[SquadId], [w].[Id],
             bool async
         )
         {
-            await base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_conditional_result(
-                async
-            );
+            await base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_conditional_result(async);
 
             // Issue#16897
             AssertSql(
@@ -2649,9 +2629,7 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id], [w0].[Id]"
             bool async
         )
         {
-            await base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_complex_projection_result(
-                async
-            );
+            await base.Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_complex_projection_result(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[SquadId], [g].[AssignedCityName], [g].[CityOfBirthName], [g].[Discriminator], [g].[FullName], [g].[HasSoulPatch], [g].[LeaderNickname], [g].[LeaderSquadId], [g].[Rank], [t].[Nickname], [t].[SquadId], [t].[AssignedCityName], [t].[CityOfBirthName], [t].[Discriminator], [t].[FullName], [t].[HasSoulPatch], [t].[LeaderNickname], [t].[LeaderSquadId], [t].[Rank]
@@ -2784,9 +2762,7 @@ WHERE [t0].[HasSoulPatch] = CAST(0 AS bit)"
             bool async
         )
         {
-            await base.Optional_navigation_type_compensation_works_with_predicate_negated_complex1(
-                async
-            );
+            await base.Optional_navigation_type_compensation_works_with_predicate_negated_complex1(async);
 
             AssertSql(
                 @"SELECT [t].[Id], [t].[GearNickName], [t].[GearSquadId], [t].[IssueDate], [t].[Note]
@@ -2806,9 +2782,7 @@ END = CAST(0 AS bit)"
             bool async
         )
         {
-            await base.Optional_navigation_type_compensation_works_with_predicate_negated_complex2(
-                async
-            );
+            await base.Optional_navigation_type_compensation_works_with_predicate_negated_complex2(async);
 
             AssertSql(
                 @"SELECT [t].[Id], [t].[GearNickName], [t].[GearSquadId], [t].[IssueDate], [t].[Note]
@@ -2828,9 +2802,7 @@ END = CAST(0 AS bit)"
             bool async
         )
         {
-            await base.Optional_navigation_type_compensation_works_with_conditional_expression(
-                async
-            );
+            await base.Optional_navigation_type_compensation_works_with_conditional_expression(async);
 
             AssertSql(
                 @"SELECT [t].[Id], [t].[GearNickName], [t].[GearSquadId], [t].[IssueDate], [t].[Note]
@@ -2867,9 +2839,7 @@ WHERE ([t0].[HasSoulPatch] = CAST(1 AS bit)) OR ([t].[Note] LIKE N'%Cole%')"
             bool async
         )
         {
-            await base.Optional_navigation_type_compensation_works_with_binary_and_expression(
-                async
-            );
+            await base.Optional_navigation_type_compensation_works_with_binary_and_expression(async);
 
             AssertSql(
                 @"SELECT CASE
@@ -2905,9 +2875,7 @@ WHERE ([t].[Note] <> N'K.I.A.') OR [t].[Note] IS NULL"
             bool async
         )
         {
-            await base.Optional_navigation_type_compensation_works_with_projection_into_anonymous_type(
-                async
-            );
+            await base.Optional_navigation_type_compensation_works_with_projection_into_anonymous_type(async);
 
             AssertSql(
                 @"SELECT [t0].[SquadId]
@@ -3502,9 +3470,7 @@ WHERE [m].[Timeline] = '1902-01-02T10:00:00.1234567+01:30'"
             bool async
         )
         {
-            await base.Orderby_added_for_client_side_GroupJoin_composite_dependent_to_principal_LOJ_when_incomplete_key_is_used(
-                async
-            );
+            await base.Orderby_added_for_client_side_GroupJoin_composite_dependent_to_principal_LOJ_when_incomplete_key_is_used(async);
 
             AssertSql(
                 @"SELECT [t].[Id], [t].[GearNickName], [t].[GearSquadId], [t].[Note], [t0].[Nickname], [t0].[SquadId], [t0].[AssignedCityName], [t0].[CityOfBirthName], [t0].[Discriminator], [t0].[FullName], [t0].[HasSoulPatch], [t0].[LeaderNickname], [t0].[LeaderSquadId], [t0].[Rank]
@@ -3597,9 +3563,7 @@ WHERE [s].[Name] = N'Kilo'"
             bool async
         )
         {
-            await base.Any_with_optional_navigation_as_subquery_predicate_is_translated_to_sql(
-                async
-            );
+            await base.Any_with_optional_navigation_as_subquery_predicate_is_translated_to_sql(async);
 
             AssertSql(
                 @"SELECT [s].[Name]
@@ -3645,9 +3609,7 @@ WHERE [t].[Id] IN ('d2c26679-562b-44d1-ab96-23d1775e0926', '23cbcf9b-ce14-45cf-a
             bool async
         )
         {
-            await base.Unnecessary_include_doesnt_get_added_complex_when_projecting_EF_Property(
-                async
-            );
+            await base.Unnecessary_include_doesnt_get_added_complex_when_projecting_EF_Property(async);
 
             AssertSql(
                 @"SELECT [g].[FullName]
@@ -3661,9 +3623,7 @@ ORDER BY [g].[Rank]"
             bool async
         )
         {
-            await base.Multiple_order_bys_are_properly_lifted_from_subquery_created_by_include(
-                async
-            );
+            await base.Multiple_order_bys_are_properly_lifted_from_subquery_created_by_include(async);
 
             AssertSql(
                 @"SELECT [g].[FullName]
@@ -3677,9 +3637,7 @@ ORDER BY [g].[FullName]"
             bool async
         )
         {
-            await base.Order_by_is_properly_lifted_from_subquery_with_same_order_by_in_the_outer_query(
-                async
-            );
+            await base.Order_by_is_properly_lifted_from_subquery_with_same_order_by_in_the_outer_query(async);
 
             AssertSql(
                 @"SELECT [g].[FullName]
@@ -3729,9 +3687,7 @@ ORDER BY [g].[FullName]"
             bool async
         )
         {
-            await base.Subquery_containing_SelectMany_projecting_main_from_clause_gets_lifted(
-                async
-            );
+            await base.Subquery_containing_SelectMany_projecting_main_from_clause_gets_lifted(async);
 
             AssertSql(
                 @"SELECT [g].[FullName]
@@ -4139,9 +4095,7 @@ ORDER BY [f].[Name]"
             bool async
         )
         {
-            await base.Collection_navigation_access_on_derived_entity_using_cast_in_SelectMany(
-                async
-            );
+            await base.Collection_navigation_access_on_derived_entity_using_cast_in_SelectMany(async);
 
             AssertSql(
                 @"SELECT [f].[Name], [t].[Name] AS [LeaderName]
@@ -4864,9 +4818,7 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id]"
             bool async
         )
         {
-            await base.Correlated_collections_naked_navigation_with_ToList_followed_by_projecting_count(
-                async
-            );
+            await base.Correlated_collections_naked_navigation_with_ToList_followed_by_projecting_count(async);
 
             AssertSql(
                 @"SELECT (
@@ -5260,9 +5212,7 @@ ORDER BY [g].[HasSoulPatch] DESC, [t].[Note]"
             bool async
         )
         {
-            await base.Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery(
-                async
-            );
+            await base.Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery(async);
 
             AssertSql(
                 @"SELECT [g].[FullName], [g].[Nickname], [g].[SquadId], [t].[Id], [t0].[Nickname], [t0].[SquadId], [t1].[Id], [t1].[AmmunitionType], [t1].[IsAutomatic], [t1].[Name], [t1].[OwnerFullName], [t1].[SynergyWithId], [t1].[Nickname], [t1].[SquadId]
@@ -5294,9 +5244,7 @@ ORDER BY [g].[HasSoulPatch] DESC, [t].[Note], [g].[Nickname], [g].[SquadId], [t]
             bool async
         )
         {
-            await base.Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery_duplicated_orderings(
-                async
-            );
+            await base.Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery_duplicated_orderings(async);
 
             AssertSql(
                 @"SELECT [g].[FullName], [g].[Nickname], [g].[SquadId], [t].[Id], [t0].[Nickname], [t0].[SquadId], [t1].[Id], [t1].[AmmunitionType], [t1].[IsAutomatic], [t1].[Name], [t1].[OwnerFullName], [t1].[SynergyWithId], [t1].[Nickname], [t1].[SquadId]
@@ -5328,9 +5276,7 @@ ORDER BY [g].[HasSoulPatch] DESC, [t].[Note], [g].[Nickname], [g].[SquadId], [t]
             bool async
         )
         {
-            await base.Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery_complex_orderings(
-                async
-            );
+            await base.Multiple_orderby_with_navigation_expansion_on_one_of_the_order_bys_inside_subquery_complex_orderings(async);
 
             AssertSql(
                 @"SELECT [g].[FullName], [g].[Nickname], [g].[SquadId], [t].[Id], [t0].[Nickname], [t0].[SquadId], [t1].[Id], [t1].[AmmunitionType], [t1].[IsAutomatic], [t1].[Name], [t1].[OwnerFullName], [t1].[SynergyWithId], [t1].[Nickname], [t1].[SquadId]
@@ -5457,9 +5403,7 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t].[Nickname], [t].[SquadId]"
             bool async
         )
         {
-            await base.Correlated_collections_nested_inner_subquery_references_outer_qsre_one_level_up(
-                async
-            );
+            await base.Correlated_collections_nested_inner_subquery_references_outer_qsre_one_level_up(async);
 
             AssertSql(
                 @"SELECT [g].[FullName], [g].[Nickname], [g].[SquadId], [t0].[FullName], [t0].[Nickname], [t0].[SquadId], [t0].[Name], [t0].[Nickname0], [t0].[Id]
@@ -5484,9 +5428,7 @@ ORDER BY [g].[Nickname], [g].[SquadId], [t0].[Nickname], [t0].[SquadId], [t0].[I
             bool async
         )
         {
-            await base.Correlated_collections_nested_inner_subquery_references_outer_qsre_two_levels_up(
-                async
-            );
+            await base.Correlated_collections_nested_inner_subquery_references_outer_qsre_two_levels_up(async);
 
             AssertSql(
                 @"SELECT [g].[FullName], [g].[Nickname], [g].[SquadId], [t0].[FullName], [t0].[Nickname], [t0].[SquadId], [t0].[Name], [t0].[Nickname0], [t0].[Id]
@@ -5709,9 +5651,7 @@ ORDER BY [t].[Note], [t0].[Nickname] DESC, [t].[Id], [t0].[SquadId], [s].[Id], [
             bool async
         )
         {
-            await base.Correlated_collections_from_left_join_with_additional_elements_projected_of_that_join(
-                async
-            );
+            await base.Correlated_collections_from_left_join_with_additional_elements_projected_of_that_join(async);
 
             AssertSql(
                 @"SELECT [w].[Id], [t].[Nickname], [t].[SquadId], [s].[Id], [t0].[Rank], [t0].[Nickname], [t0].[SquadId], [t0].[Id], [t0].[AmmunitionType], [t0].[IsAutomatic], [t0].[Name], [t0].[OwnerFullName], [t0].[SynergyWithId]
@@ -5915,9 +5855,7 @@ ORDER BY [t].[FullName] DESC, [t].[Nickname], [t].[SquadId], [t0].[Name], [t0].[
             bool async
         )
         {
-            await base.Null_semantics_on_nullable_bool_from_inner_join_subquery_is_fully_applied(
-                async
-            );
+            await base.Null_semantics_on_nullable_bool_from_inner_join_subquery_is_fully_applied(async);
 
             AssertSql(
                 @"SELECT [t].[Id], [t].[CapitalName], [t].[Name], [t].[CommanderName], [t].[Eradicated], [t].[Discriminator]
@@ -5938,9 +5876,7 @@ WHERE ([t].[Eradicated] <> CAST(1 AS bit)) OR [t].[Eradicated] IS NULL"
             bool async
         )
         {
-            await base.Null_semantics_on_nullable_bool_from_left_join_subquery_is_fully_applied(
-                async
-            );
+            await base.Null_semantics_on_nullable_bool_from_left_join_subquery_is_fully_applied(async);
 
             AssertSql(
                 @"SELECT [t].[Id], [t].[CapitalName], [t].[Name], [t].[CommanderName], [t].[Eradicated], [t].[Discriminator]
@@ -6946,9 +6882,7 @@ ORDER BY [c].[Name], [t].[Nickname] DESC, [t].[SquadId]"
             bool async
         )
         {
-            await base.Correlated_collection_with_complex_order_by_funcletized_to_constant_bool(
-                async
-            );
+            await base.Correlated_collection_with_complex_order_by_funcletized_to_constant_bool(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[FullName]
@@ -7180,9 +7114,7 @@ ORDER BY [g].[Nickname]"
             bool async
         )
         {
-            await base.Group_by_entity_key_with_include_on_that_entity_with_key_in_result_selector(
-                async
-            );
+            await base.Group_by_entity_key_with_include_on_that_entity_with_key_in_result_selector(async);
 
             AssertSql("");
         }
@@ -7191,9 +7123,7 @@ ORDER BY [g].[Nickname]"
             bool async
         )
         {
-            await base.Group_by_entity_key_with_include_on_that_entity_with_key_in_result_selector_using_EF_Property(
-                async
-            );
+            await base.Group_by_entity_key_with_include_on_that_entity_with_key_in_result_selector_using_EF_Property(async);
 
             AssertSql("");
         }
@@ -7309,9 +7239,7 @@ ORDER BY [s].[Id], [t].[Nickname], [t].[SquadId], [t].[Id]"
             bool async
         )
         {
-            await base.OrderBy_same_expression_containing_IsNull_correctly_deduplicates_the_ordering(
-                async
-            );
+            await base.OrderBy_same_expression_containing_IsNull_correctly_deduplicates_the_ordering(async);
 
             AssertSql(
                 @"SELECT CASE
@@ -7422,9 +7350,7 @@ WHERE ([g].[FullName] <> N'Dom') AND (
             bool async
         )
         {
-            await base.Query_with_complex_let_containing_ordering_and_filter_projecting_firstOrDefault_element_of_let(
-                async
-            );
+            await base.Query_with_complex_let_containing_ordering_and_filter_projecting_firstOrDefault_element_of_let(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], (
@@ -7441,9 +7367,7 @@ WHERE [g].[Nickname] <> N'Dom'"
             bool async
         )
         {
-            await base.Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation(
-                async
-            );
+            await base.Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation(async);
 
             AssertSql(@"");
         }
@@ -7452,9 +7376,7 @@ WHERE [g].[Nickname] <> N'Dom'"
             bool async
         )
         {
-            await base.Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation_complex(
-                async
-            );
+            await base.Null_semantics_is_correctly_applied_for_function_comparisons_that_take_arguments_from_optional_navigation_complex(async);
 
             AssertSql(
                 @"SELECT [t].[Id], [t].[GearNickName], [t].[GearSquadId], [t].[IssueDate], [t].[Note]
@@ -7658,9 +7580,7 @@ ORDER BY (
             bool async
         )
         {
-            await base.Anonymous_projection_take_followed_by_projecting_single_element_from_collection_navigation(
-                async
-            );
+            await base.Anonymous_projection_take_followed_by_projecting_single_element_from_collection_navigation(async);
 
             AssertSql(@"");
         }
@@ -7835,9 +7755,7 @@ ORDER BY [t].[Id], [t0].[Nickname], [t0].[SquadId]"
             bool async
         )
         {
-            await base.SelectMany_Where_DefaultIfEmpty_with_navigation_in_the_collection_selector(
-                async
-            );
+            await base.SelectMany_Where_DefaultIfEmpty_with_navigation_in_the_collection_selector(async);
 
             AssertSql(
                 @"@__isAutomatic_0='True'
@@ -7878,9 +7796,7 @@ INNER JOIN (
             bool async
         )
         {
-            await base.Join_with_inner_being_a_subquery_projecting_anonymous_type_with_single_property(
-                async
-            );
+            await base.Join_with_inner_being_a_subquery_projecting_anonymous_type_with_single_property(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[SquadId], [g].[AssignedCityName], [g].[CityOfBirthName], [g].[FullName], [g].[HasSoulPatch], [g].[LeaderNickname], [g].[LeaderSquadId], [g].[Rank], CASE
@@ -8021,9 +7937,7 @@ INNER JOIN [LocustHordes] AS [l] ON [f].[Id] = [l].[Id]"
             bool async
         )
         {
-            await base.Acessing_reference_navigation_collection_composition_generates_single_query(
-                async
-            );
+            await base.Acessing_reference_navigation_collection_composition_generates_single_query(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[SquadId], [t].[Id], [t].[IsAutomatic], [t].[Name], [t].[Id0]
@@ -8127,9 +8041,7 @@ ORDER BY [t].[FullName]"
             bool async
         )
         {
-            await base.Query_reusing_parameter_with_inner_query_doesnt_declare_duplicate_parameter(
-                async
-            );
+            await base.Query_reusing_parameter_with_inner_query_doesnt_declare_duplicate_parameter(async);
 
             AssertSql(
                 @"@__squadId_0='1'
@@ -8166,9 +8078,7 @@ ORDER BY [t].[FullName]"
             bool async
         )
         {
-            await base.Query_reusing_parameter_with_inner_query_expression_doesnt_declare_duplicate_parameter(
-                async
-            );
+            await base.Query_reusing_parameter_with_inner_query_expression_doesnt_declare_duplicate_parameter(async);
 
             AssertSql(
                 @"@__gearId_0='1'
@@ -8316,9 +8226,7 @@ GROUP BY [t0].[HasSoulPatch], [s].[Name]"
             bool async
         )
         {
-            await base.Group_by_over_projection_with_multiple_properties_accessed_thru_navigation(
-                async
-            );
+            await base.Group_by_over_projection_with_multiple_properties_accessed_thru_navigation(async);
 
             AssertSql(
                 @"SELECT [c].[Name]
@@ -8463,9 +8371,7 @@ WHERE 0 = 1"
             bool async
         )
         {
-            await base.FirstOrDefault_navigation_access_entity_equality_in_where_predicate_apply_peneding_selector(
-                async
-            );
+            await base.FirstOrDefault_navigation_access_entity_equality_in_where_predicate_apply_peneding_selector(async);
 
             AssertSql(
                 @"SELECT [f].[Id], [f].[CapitalName], [f].[Name], [l].[CommanderName], [l].[Eradicated], CASE
@@ -8701,9 +8607,7 @@ WHERE DATALENGTH([s].[Banner5]) = 5"
             bool isAsync
         )
         {
-            await base.Conditional_expression_with_test_being_simplified_to_constant_simple(
-                isAsync
-            );
+            await base.Conditional_expression_with_test_being_simplified_to_constant_simple(isAsync);
 
             AssertSql(
                 @"@__prm_0='True'
@@ -8724,9 +8628,7 @@ END = CAST(1 AS bit)"
             bool isAsync
         )
         {
-            await base.Conditional_expression_with_test_being_simplified_to_constant_complex(
-                isAsync
-            );
+            await base.Conditional_expression_with_test_being_simplified_to_constant_complex(isAsync);
 
             AssertSql(
                 @"@__prm_0='True'
@@ -9072,9 +8974,7 @@ WHERE CHARINDEX(CAST([t].[ThreatLevelByte] AS varbinary(max)), [s].[Banner]) > 0
             bool async
         )
         {
-            await base.Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion(
-                async
-            );
+            await base.Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion(async);
 
             AssertSql(
                 @"SELECT [t].[Nickname], [t].[SquadId], [t].[AssignedCityName], [t].[CityOfBirthName], [t].[FullName], [t].[HasSoulPatch], [t].[LeaderNickname], [t].[LeaderSquadId], [t].[Rank], [t].[Discriminator]
@@ -9098,9 +8998,7 @@ CROSS APPLY (
             bool async
         )
         {
-            await base.Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion_negated(
-                async
-            );
+            await base.Subquery_projecting_non_nullable_scalar_contains_non_nullable_value_doesnt_need_null_expansion_negated(async);
 
             AssertSql(
                 @"SELECT [t].[Nickname], [t].[SquadId], [t].[AssignedCityName], [t].[CityOfBirthName], [t].[FullName], [t].[HasSoulPatch], [t].[LeaderNickname], [t].[LeaderSquadId], [t].[Rank], [t].[Discriminator]
@@ -9124,9 +9022,7 @@ CROSS APPLY (
             bool async
         )
         {
-            await base.Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion(
-                async
-            );
+            await base.Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion(async);
 
             AssertSql(
                 @"SELECT [t].[Nickname], [t].[SquadId], [t].[AssignedCityName], [t].[CityOfBirthName], [t].[FullName], [t].[HasSoulPatch], [t].[LeaderNickname], [t].[LeaderSquadId], [t].[Rank], [t].[Discriminator]
@@ -9150,9 +9046,7 @@ CROSS APPLY (
             bool async
         )
         {
-            await base.Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion_negated(
-                async
-            );
+            await base.Subquery_projecting_nullable_scalar_contains_nullable_value_needs_null_expansion_negated(async);
 
             AssertSql(
                 @"SELECT [t].[Nickname], [t].[SquadId], [t].[AssignedCityName], [t].[CityOfBirthName], [t].[FullName], [t].[HasSoulPatch], [t].[LeaderNickname], [t].[LeaderSquadId], [t].[Rank], [t].[Discriminator]
@@ -9176,9 +9070,7 @@ CROSS APPLY (
             bool async
         )
         {
-            await base.Enum_closure_typed_as_underlying_type_generates_correct_parameter_type(
-                async
-            );
+            await base.Enum_closure_typed_as_underlying_type_generates_correct_parameter_type(async);
 
             AssertSql(
                 @"@__prm_0='1' (Nullable = true)
@@ -9193,9 +9085,7 @@ WHERE @__prm_0 = [w].[AmmunitionType]"
             bool async
         )
         {
-            await base.Enum_flags_closure_typed_as_underlying_type_generates_correct_parameter_type(
-                async
-            );
+            await base.Enum_flags_closure_typed_as_underlying_type_generates_correct_parameter_type(async);
 
             AssertSql(
                 @"@__prm_0='133'
@@ -9213,9 +9103,7 @@ WHERE (@__prm_0 & [g].[Rank]) = [g].[Rank]"
             bool async
         )
         {
-            await base.Enum_flags_closure_typed_as_different_type_generates_correct_parameter_type(
-                async
-            );
+            await base.Enum_flags_closure_typed_as_different_type_generates_correct_parameter_type(async);
 
             AssertSql(
                 @"@__prm_0='5'
@@ -9233,9 +9121,7 @@ WHERE (@__prm_0 & CAST([g].[Rank] AS int)) = CAST([g].[Rank] AS int)"
             bool async
         )
         {
-            await base.Constant_enum_with_same_underlying_value_as_previously_parameterized_int(
-                async
-            );
+            await base.Constant_enum_with_same_underlying_value_as_previously_parameterized_int(async);
 
             AssertSql(
                 @"@__p_0='1'
@@ -9303,9 +9189,7 @@ FROM [Cities] AS [c]"
             bool async
         )
         {
-            await base.Groupby_anonymous_type_with_navigations_followed_up_by_anonymous_projection_and_orderby(
-                async
-            );
+            await base.Groupby_anonymous_type_with_navigations_followed_up_by_anonymous_projection_and_orderby(async);
 
             AssertSql(
                 @"SELECT [c].[Name], [c].[Location], COUNT(*) AS [Count]
@@ -9324,9 +9208,7 @@ ORDER BY [c].[Location]"
             bool async
         )
         {
-            await base.SelectMany_predicate_with_non_equality_comparison_converted_to_inner_join(
-                async
-            );
+            await base.SelectMany_predicate_with_non_equality_comparison_converted_to_inner_join(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[SquadId], [g].[AssignedCityName], [g].[CityOfBirthName], [g].[FullName], [g].[HasSoulPatch], [g].[LeaderNickname], [g].[LeaderSquadId], [g].[Rank], CASE
@@ -9343,9 +9225,7 @@ ORDER BY [g].[Nickname], [w].[Id]"
             bool async
         )
         {
-            await base.SelectMany_predicate_with_non_equality_comparison_DefaultIfEmpty_converted_to_left_join(
-                async
-            );
+            await base.SelectMany_predicate_with_non_equality_comparison_DefaultIfEmpty_converted_to_left_join(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[SquadId], [g].[AssignedCityName], [g].[CityOfBirthName], [g].[FullName], [g].[HasSoulPatch], [g].[LeaderNickname], [g].[LeaderSquadId], [g].[Rank], CASE
@@ -9362,9 +9242,7 @@ ORDER BY [g].[Nickname], [w].[Id]"
             bool async
         )
         {
-            await base.SelectMany_predicate_after_navigation_with_non_equality_comparison_DefaultIfEmpty_converted_to_left_join(
-                async
-            );
+            await base.SelectMany_predicate_after_navigation_with_non_equality_comparison_DefaultIfEmpty_converted_to_left_join(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[SquadId], [g].[AssignedCityName], [g].[CityOfBirthName], [g].[FullName], [g].[HasSoulPatch], [g].[LeaderNickname], [g].[LeaderSquadId], [g].[Rank], CASE
@@ -9385,9 +9263,7 @@ ORDER BY [g].[Nickname], [t].[Id]"
             bool async
         )
         {
-            await base.SelectMany_without_result_selector_and_non_equality_comparison_converted_to_join(
-                async
-            );
+            await base.SelectMany_without_result_selector_and_non_equality_comparison_converted_to_join(async);
 
             AssertSql(
                 @"SELECT [w].[Id], [w].[AmmunitionType], [w].[IsAutomatic], [w].[Name], [w].[OwnerFullName], [w].[SynergyWithId]
@@ -9400,9 +9276,7 @@ LEFT JOIN [Weapons] AS [w] ON ([g].[FullName] <> [w].[OwnerFullName]) OR [w].[Ow
             bool async
         )
         {
-            await base.Filtered_collection_projection_with_order_comparison_predicate_converted_to_join(
-                async
-            );
+            await base.Filtered_collection_projection_with_order_comparison_predicate_converted_to_join(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[SquadId], [w].[Id], [w].[AmmunitionType], [w].[IsAutomatic], [w].[Name], [w].[OwnerFullName], [w].[SynergyWithId]
@@ -9416,9 +9290,7 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id]"
             bool async
         )
         {
-            await base.Filtered_collection_projection_with_order_comparison_predicate_converted_to_join2(
-                async
-            );
+            await base.Filtered_collection_projection_with_order_comparison_predicate_converted_to_join2(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[SquadId], [w].[Id], [w].[AmmunitionType], [w].[IsAutomatic], [w].[Name], [w].[OwnerFullName], [w].[SynergyWithId]
@@ -9432,9 +9304,7 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id]"
             bool async
         )
         {
-            await base.Filtered_collection_projection_with_order_comparison_predicate_converted_to_join3(
-                async
-            );
+            await base.Filtered_collection_projection_with_order_comparison_predicate_converted_to_join3(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[SquadId], [w].[Id], [w].[AmmunitionType], [w].[IsAutomatic], [w].[Name], [w].[OwnerFullName], [w].[SynergyWithId]
@@ -9448,9 +9318,7 @@ ORDER BY [g].[Nickname], [g].[SquadId], [w].[Id]"
             bool async
         )
         {
-            await base.SelectMany_predicate_with_non_equality_comparison_with_Take_doesnt_convert_to_join(
-                async
-            );
+            await base.SelectMany_predicate_with_non_equality_comparison_with_Take_doesnt_convert_to_join(async);
 
             AssertSql(
                 @"SELECT [g].[Nickname], [g].[SquadId], [g].[AssignedCityName], [g].[CityOfBirthName], [g].[FullName], [g].[HasSoulPatch], [g].[LeaderNickname], [g].[LeaderSquadId], [g].[Rank], CASE
@@ -9487,9 +9355,7 @@ WHERE ([s].[Name] = N'Kilo') AND (COALESCE((
             bool async
         )
         {
-            await base.Correlated_collection_with_inner_collection_references_element_two_levels_up(
-                async
-            );
+            await base.Correlated_collection_with_inner_collection_references_element_two_levels_up(async);
 
             AssertSql(
                 @"SELECT [g].[FullName], [g].[Nickname], [g].[SquadId], [t].[ReportName], [t].[OfficerName], [t].[Nickname], [t].[SquadId]
@@ -9715,9 +9581,7 @@ END + 1) = 2"
             bool async
         )
         {
-            await base.Projecting_property_converted_to_nullable_with_addition_and_final_projection(
-                async
-            );
+            await base.Projecting_property_converted_to_nullable_with_addition_and_final_projection(async);
 
             AssertSql(
                 @"SELECT [t].[Note], CASE

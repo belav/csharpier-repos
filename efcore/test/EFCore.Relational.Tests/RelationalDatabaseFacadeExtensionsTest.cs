@@ -43,9 +43,9 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                dbConnection
-            );
+            (
+                (FakeRelationalConnection)context.GetService<IRelationalConnection>()
+            ).UseConnection(dbConnection);
 
             Assert.Same(dbConnection, context.Database.GetDbConnection());
         }
@@ -78,9 +78,9 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                dbConnection
-            );
+            (
+                (FakeRelationalConnection)context.GetService<IRelationalConnection>()
+            ).UseConnection(dbConnection);
 
             if (async)
             {
@@ -102,9 +102,9 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                dbConnection
-            );
+            (
+                (FakeRelationalConnection)context.GetService<IRelationalConnection>()
+            ).UseConnection(dbConnection);
 
             if (async)
             {
@@ -127,9 +127,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                dbConnection
-            );
+            (
+                (FakeRelationalConnection)context.GetService<IRelationalConnection>()
+            ).UseConnection(dbConnection);
 
             var transaction = async
                 ? await context.Database.BeginTransactionAsync(IsolationLevel.Chaos)
@@ -144,9 +144,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             var dbConnection = new FakeDbConnection("A=B");
             var context = RelationalTestHelpers.Instance.CreateContext();
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                dbConnection
-            );
+            (
+                (FakeRelationalConnection)context.GetService<IRelationalConnection>()
+            ).UseConnection(dbConnection);
             var transaction = new FakeDbTransaction(dbConnection, IsolationLevel.Chaos);
 
             Assert.Same(

@@ -480,9 +480,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             if (defaultValue == null)
             {
-                ((SelectExpression)source.QueryExpression).ApplyDefaultIfEmpty(
-                    _sqlExpressionFactory
-                );
+                (
+                    (SelectExpression)source.QueryExpression
+                ).ApplyDefaultIfEmpty(_sqlExpressionFactory);
                 return source.UpdateShaperExpression(MarkShaperNullable(source.ShaperExpression));
             }
 
@@ -1091,9 +1091,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 );
 
                 var entityProjectionExpression =
-                    (EntityProjectionExpression)selectExpression.GetMappedProjection(
-                        projectionMember
-                    );
+                    (EntityProjectionExpression)selectExpression.GetMappedProjection(projectionMember);
                 selectExpression.ReplaceProjectionMapping(
                     new Dictionary<ProjectionMember, Expression>
                     {

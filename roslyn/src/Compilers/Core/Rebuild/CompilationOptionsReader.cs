@@ -434,9 +434,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 var builder = ImmutableArray.CreateBuilder<MetadataReference>();
                 foreach (var metadataReferenceInfo in GetMetadataReferenceInfo())
                 {
-                    var metadataReference = resolver.ResolveMetadataReference(
-                        metadataReferenceInfo
-                    );
+                    var metadataReference =
+                        resolver.ResolveMetadataReference(metadataReferenceInfo);
                     if (
                         metadataReference.Properties.EmbedInteropTypes
                         != metadataReferenceInfo.EmbedInteropTypes

@@ -172,9 +172,8 @@ namespace System.Security.Principal
                         sizeof(KERB_S4U_LOGON) + upnBytes.Length
                     );
                     using (
-                        SafeLocalAllocHandle authenticationInfo = SafeLocalAllocHandle.LocalAlloc(
-                            authenticationInfoLength
-                        )
+                        SafeLocalAllocHandle authenticationInfo =
+                            SafeLocalAllocHandle.LocalAlloc(authenticationInfoLength)
                     )
                     {
                         KERB_S4U_LOGON* pKerbS4uLogin = (KERB_S4U_LOGON*)(
@@ -196,9 +195,8 @@ namespace System.Security.Principal
 
                         ushort sourceNameLength = checked((ushort)(sourceName.Length));
                         using (
-                            SafeLocalAllocHandle sourceNameBuffer = SafeLocalAllocHandle.LocalAlloc(
-                                sourceNameLength
-                            )
+                            SafeLocalAllocHandle sourceNameBuffer =
+                                SafeLocalAllocHandle.LocalAlloc(sourceNameLength)
                         )
                         {
                             Marshal.Copy(
@@ -1277,9 +1275,7 @@ namespace System.Security.Principal
                 for (int i = 0; i < count; ++i)
                 {
                     Interop.SID_AND_ATTRIBUTES group =
-                        (Interop.SID_AND_ATTRIBUTES)Marshal.PtrToStructure<Interop.SID_AND_ATTRIBUTES>(
-                            pSidAndAttributes
-                        );
+                        (Interop.SID_AND_ATTRIBUTES)Marshal.PtrToStructure<Interop.SID_AND_ATTRIBUTES>(pSidAndAttributes);
                     uint mask =
                         Interop.SecurityGroups.SE_GROUP_ENABLED
                         | Interop.SecurityGroups.SE_GROUP_LOGON_ID

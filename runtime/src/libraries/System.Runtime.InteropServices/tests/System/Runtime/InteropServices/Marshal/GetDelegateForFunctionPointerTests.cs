@@ -96,9 +96,8 @@ namespace System.Runtime.InteropServices.Tests
             Delegate d = targetMethod.CreateDelegate(typeof(NonGenericDelegate));
             IntPtr ptr = Marshal.GetFunctionPointerForDelegate(d);
 
-            Delegate functionDelegate = Marshal.GetDelegateForFunctionPointer<NonGenericDelegate>(
-                ptr
-            );
+            Delegate functionDelegate =
+                Marshal.GetDelegateForFunctionPointer<NonGenericDelegate>(ptr);
             GC.KeepAlive(d);
             VerifyDelegate(functionDelegate, targetMethod);
         }
@@ -113,9 +112,8 @@ namespace System.Runtime.InteropServices.Tests
             Delegate d = targetMethod.CreateDelegate(typeof(NonGenericDelegate));
             IntPtr ptr = Marshal.GetFunctionPointerForDelegate(d);
 
-            Delegate functionDelegate = Marshal.GetDelegateForFunctionPointer<MulticastDelegate>(
-                ptr
-            );
+            Delegate functionDelegate =
+                Marshal.GetDelegateForFunctionPointer<MulticastDelegate>(ptr);
             GC.KeepAlive(d);
             VerifyDelegate(functionDelegate, targetMethod);
         }

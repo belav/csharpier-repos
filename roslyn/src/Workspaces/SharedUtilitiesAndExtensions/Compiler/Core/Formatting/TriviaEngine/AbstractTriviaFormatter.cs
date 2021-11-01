@@ -640,9 +640,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             LineColumnRule rule
         )
         {
-            var lineColumnAfterExistingWhitespace = lineColumnAfterTrivia1.With(
-                existingWhitespaceBetween
-            );
+            var lineColumnAfterExistingWhitespace =
+                lineColumnAfterTrivia1.With(existingWhitespaceBetween);
 
             // next trivia is moved to next line or already on a new line, use indentation
             if (rule.Lines > 0 || lineColumnAfterExistingWhitespace.WhitespaceOnly)

@@ -195,9 +195,9 @@ namespace System.Net.Mime
         {
             get
             {
-                object? sizeValue = ((TrackingValidationObjectDictionary)Parameters).InternalGet(
-                    SizeKey
-                );
+                object? sizeValue = (
+                    (TrackingValidationObjectDictionary)Parameters
+                ).InternalGet(SizeKey);
                 return sizeValue == null ? -1 : (long)sizeValue;
             }
             set { ((TrackingValidationObjectDictionary)Parameters).InternalSet(SizeKey, value); }

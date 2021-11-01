@@ -438,9 +438,8 @@ namespace Microsoft.Extensions.Http
                 EnableCleanupTimer = true,
             };
 
-            var cleanupEntry = await SimulateClientUse_Factory_CleanupCycle_DisposesEligibleHandler(
-                factory
-            );
+            var cleanupEntry =
+                await SimulateClientUse_Factory_CleanupCycle_DisposesEligibleHandler(factory);
 
             // Being pretty conservative here because we want this test to be reliable,
             // and it depends on the GC and timing.

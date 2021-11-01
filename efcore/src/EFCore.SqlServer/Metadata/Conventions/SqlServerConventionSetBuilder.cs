@@ -78,9 +78,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 Dependencies,
                 RelationalDependencies
             );
-            conventionSet.EntityTypeAnnotationChangedConventions.Add(
-                sqlServerInMemoryTablesConvention
-            );
+            conventionSet.EntityTypeAnnotationChangedConventions.Add(sqlServerInMemoryTablesConvention);
             ReplaceConvention(
                 conventionSet.EntityTypeAnnotationChangedConventions,
                 (RelationalValueGenerationConvention)valueGenerationConvention
@@ -113,9 +111,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 (CascadeDeleteConvention)sqlServerOnDeleteConvention
             );
 
-            conventionSet.SkipNavigationForeignKeyChangedConventions.Add(
-                sqlServerOnDeleteConvention
-            );
+            conventionSet.SkipNavigationForeignKeyChangedConventions.Add(sqlServerOnDeleteConvention);
 
             conventionSet.IndexAddedConventions.Add(sqlServerInMemoryTablesConvention);
             conventionSet.IndexAddedConventions.Add(sqlServerIndexConvention);

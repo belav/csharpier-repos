@@ -225,9 +225,7 @@ namespace Newtonsoft.Json.Tests.Serialization
   ""Enumerable"": [ ""abc"", ""def"" ] 
 }";
             var enumerableClass =
-                JsonConvert.DeserializeObject<GenericIEnumerableWithImplicitConversion>(
-                    deserialized
-                );
+                JsonConvert.DeserializeObject<GenericIEnumerableWithImplicitConversion>(deserialized);
             var enumerableObject = enumerableClass.Enumerable.ToArray();
             Assert.AreEqual(2, enumerableObject.Length);
             Assert.AreEqual("abc", enumerableObject[0].Value);
@@ -963,9 +961,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             };
 
             var json = JsonConvert.SerializeObject(input);
-            var deserialized = JsonConvert.DeserializeObject<ResponseWithNewGenericProperty<int>>(
-                json
-            );
+            var deserialized = JsonConvert.DeserializeObject<
+                ResponseWithNewGenericProperty<int>
+            >(json);
 
             Assert.AreEqual(input.Data, deserialized.Data);
             Assert.AreEqual(input.Message, deserialized.Message);
@@ -2403,9 +2401,9 @@ keyword such as type of business.""
 
             Assert.AreEqual(@"{""-5"":6,""-2147483648"":2147483647}", json);
 
-            Dictionary<int, int> newValues = JsonConvert.DeserializeObject<Dictionary<int, int>>(
-                json
-            );
+            Dictionary<int, int> newValues = JsonConvert.DeserializeObject<
+                Dictionary<int, int>
+            >(json);
 
             CollectionAssert.AreEqual(values, newValues);
         }
@@ -2745,9 +2743,8 @@ keyword such as type of business.""
             string json = JsonConvert.SerializeObject(c1);
             Assert.AreEqual(@"[""Class"",""!Test!""]", json);
 
-            ConverterPrecedenceClass c2 = JsonConvert.DeserializeObject<ConverterPrecedenceClass>(
-                json
-            );
+            ConverterPrecedenceClass c2 =
+                JsonConvert.DeserializeObject<ConverterPrecedenceClass>(json);
 
             Assert.AreEqual("!Test!", c2.TestValue);
         }
@@ -3053,9 +3050,8 @@ keyword such as type of business.""
                 json
             );
 
-            UserNullable userNullablleDeserialized = JsonConvert.DeserializeObject<UserNullable>(
-                json
-            );
+            UserNullable userNullablleDeserialized =
+                JsonConvert.DeserializeObject<UserNullable>(json);
 
             Assert.AreEqual(
                 new Guid("AD6205E8-0DF4-465d-AEA6-8BA18E93A7E7"),
@@ -3955,9 +3951,8 @@ keyword such as type of business.""
         {
             string json = @"{""DateTimeField"":""""}";
 
-            NullableDateTimeTestClass c = JsonConvert.DeserializeObject<NullableDateTimeTestClass>(
-                json
-            );
+            NullableDateTimeTestClass c =
+                JsonConvert.DeserializeObject<NullableDateTimeTestClass>(json);
             Assert.AreEqual(null, c.DateTimeField);
         }
 #endif
@@ -3982,9 +3977,8 @@ keyword such as type of business.""
         {
             string json = @"{'SetOnlyProperty':[1,2,3,4,5]}";
 
-            SetOnlyPropertyClass2 setOnly = JsonConvert.DeserializeObject<SetOnlyPropertyClass2>(
-                json
-            );
+            SetOnlyPropertyClass2 setOnly =
+                JsonConvert.DeserializeObject<SetOnlyPropertyClass2>(json);
             JArray a = (JArray)setOnly.GetValue();
             Assert.AreEqual(5, a.Count);
             Assert.AreEqual(1, (int)a[0]);
@@ -4314,9 +4308,8 @@ Path '', line 1, position 1."
                 json
             );
 
-            ConstructorReadonlyFields c2 = JsonConvert.DeserializeObject<ConstructorReadonlyFields>(
-                json
-            );
+            ConstructorReadonlyFields c2 =
+                JsonConvert.DeserializeObject<ConstructorReadonlyFields>(json);
             Assert.AreEqual("String!", c2.A);
             Assert.AreEqual(int.MaxValue, c2.B);
         }
@@ -4967,9 +4960,8 @@ Path '', line 1, position 1."
                 json
             );
 
-            ISerializableTestObject o2 = JsonConvert.DeserializeObject<ISerializableTestObject>(
-                json
-            );
+            ISerializableTestObject o2 =
+                JsonConvert.DeserializeObject<ISerializableTestObject>(json);
             Assert.AreEqual("String!", o2._stringValue);
             Assert.AreEqual(int.MinValue, o2._intValue);
             Assert.AreEqual(dateTimeOffset, o2._dateTimeOffsetValue);
@@ -5048,9 +5040,8 @@ Path '', line 1, position 1."
                 json
             );
 
-            ISerializableTestObject o2 = JsonConvert.DeserializeObject<ISerializableTestObject>(
-                json
-            );
+            ISerializableTestObject o2 =
+                JsonConvert.DeserializeObject<ISerializableTestObject>(json);
             Assert.AreEqual("String!", o2._stringValue);
             Assert.AreEqual(int.MinValue, o2._intValue);
             Assert.AreEqual(dateTimeOffset, o2._dateTimeOffsetValue);
@@ -5424,9 +5415,8 @@ Path '', line 1, position 1."
 }";
             StringAssert.AreEqual(expected, json);
 
-            XmlNodeTestObject newTestObject = JsonConvert.DeserializeObject<XmlNodeTestObject>(
-                json
-            );
+            XmlNodeTestObject newTestObject =
+                JsonConvert.DeserializeObject<XmlNodeTestObject>(json);
             Assert.AreEqual(testObject.Document.InnerXml, newTestObject.Document.InnerXml);
         }
 #endif
@@ -5735,9 +5725,8 @@ Path '', line 1, position 1."
                 json
             );
 
-            StructWithAttribute newStruct = JsonConvert.DeserializeObject<StructWithAttribute>(
-                json
-            );
+            StructWithAttribute newStruct =
+                JsonConvert.DeserializeObject<StructWithAttribute>(json);
 
             Assert.AreEqual(int.MaxValue, newStruct.MyInt);
         }
@@ -5857,9 +5846,8 @@ Path '', line 1, position 1."
                 json
             );
 
-            IDictionary<string, object> newExpando = JsonConvert.DeserializeObject<ExpandoObject>(
-                json
-            );
+            IDictionary<string, object> newExpando =
+                JsonConvert.DeserializeObject<ExpandoObject>(json);
 
             CustomAssert.IsInstanceOfType(typeof(long), newExpando["Int"]);
             Assert.AreEqual((long)expando.Int, newExpando["Int"]);
@@ -5922,9 +5910,9 @@ Path '', line 1, position 1."
 
             JsonSerializer serializer = new JsonSerializer();
 
-            IDictionary<string, decimal> d = serializer.Deserialize<IDictionary<string, decimal>>(
-                reader
-            );
+            IDictionary<string, decimal> d = serializer.Deserialize<
+                IDictionary<string, decimal>
+            >(reader);
             Assert.AreEqual(123456789876543.21m, d["Value"]);
         }
 
@@ -6018,9 +6006,8 @@ Path '', line 1, position 1."
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            JTokenTestClass deserializedResponse = JsonConvert.DeserializeObject<JTokenTestClass>(
-                json
-            );
+            JTokenTestClass deserializedResponse =
+                JsonConvert.DeserializeObject<JTokenTestClass>(json);
 
             Assert.AreEqual("Success", deserializedResponse.Name);
             Assert.IsTrue(deserializedResponse.Data.DeepEquals(c.Data));
@@ -6127,9 +6114,8 @@ Path '', line 1, position 1."
   'Price': '4'
 }";
 
-            DeserializeStringConvert p = JsonConvert.DeserializeObject<DeserializeStringConvert>(
-                json
-            );
+            DeserializeStringConvert p =
+                JsonConvert.DeserializeObject<DeserializeStringConvert>(json);
             Assert.AreEqual(40, p.Age);
             Assert.AreEqual(44.4, p.Height);
             Assert.AreEqual(4m, p.Price);
@@ -6180,9 +6166,8 @@ Path '', line 1, position 1."
                              106800, 106800]  /* 2010-2011 */
                                 }";
 
-            CommentTestClass commentTestClass = JsonConvert.DeserializeObject<CommentTestClass>(
-                json
-            );
+            CommentTestClass commentTestClass =
+                JsonConvert.DeserializeObject<CommentTestClass>(json);
 
             Assert.AreEqual(true, commentTestClass.Indexed);
             Assert.AreEqual(1939, commentTestClass.StartYear);
@@ -6333,9 +6318,7 @@ Path '', line 1, position 1."
             );
 
             NonDefaultConstructorWithReadOnlyCollectionProperty c2 =
-                JsonConvert.DeserializeObject<NonDefaultConstructorWithReadOnlyCollectionProperty>(
-                    json
-                );
+                JsonConvert.DeserializeObject<NonDefaultConstructorWithReadOnlyCollectionProperty>(json);
             Assert.AreEqual(c1.Title, c2.Title);
             Assert.AreEqual(c1.Categories.Count, c2.Categories.Count);
             Assert.AreEqual("one", c2.Categories[0]);
@@ -6363,9 +6346,7 @@ Path '', line 1, position 1."
             );
 
             NonDefaultConstructorWithReadOnlyDictionaryProperty c2 =
-                JsonConvert.DeserializeObject<NonDefaultConstructorWithReadOnlyDictionaryProperty>(
-                    json
-                );
+                JsonConvert.DeserializeObject<NonDefaultConstructorWithReadOnlyDictionaryProperty>(json);
             Assert.AreEqual(c1.Title, c2.Title);
             Assert.AreEqual(c1.Categories.Count, c2.Categories.Count);
             Assert.AreEqual(1, c2.Categories["one"]);
@@ -6531,9 +6512,8 @@ Path '', line 1, position 1."
                 json
             );
 
-            UriGuidTimeSpanTestClass c2 = JsonConvert.DeserializeObject<UriGuidTimeSpanTestClass>(
-                json
-            );
+            UriGuidTimeSpanTestClass c2 =
+                JsonConvert.DeserializeObject<UriGuidTimeSpanTestClass>(json);
             Assert.AreEqual(c1.Guid, c2.Guid);
             Assert.AreEqual(c1.NullableGuid, c2.NullableGuid);
             Assert.AreEqual(c1.TimeSpan, c2.TimeSpan);
@@ -6565,9 +6545,8 @@ Path '', line 1, position 1."
                 json
             );
 
-            UriGuidTimeSpanTestClass c2 = JsonConvert.DeserializeObject<UriGuidTimeSpanTestClass>(
-                json
-            );
+            UriGuidTimeSpanTestClass c2 =
+                JsonConvert.DeserializeObject<UriGuidTimeSpanTestClass>(json);
             Assert.AreEqual(c1.Guid, c2.Guid);
             Assert.AreEqual(c1.NullableGuid, c2.NullableGuid);
             Assert.AreEqual(c1.TimeSpan, c2.TimeSpan);
@@ -7250,9 +7229,8 @@ Path '', line 1, position 1."
             person.Age = 25;
 
             var serializedPerson = JsonConvert.SerializeObject(person);
-            var roundtrippedPerson = JsonConvert.DeserializeObject<PersonWithPrivateConstructor>(
-                serializedPerson
-            );
+            var roundtrippedPerson =
+                JsonConvert.DeserializeObject<PersonWithPrivateConstructor>(serializedPerson);
 
             Assert.AreEqual(person.Name, roundtrippedPerson.Name);
         }
@@ -9385,9 +9363,8 @@ This is just junk, though.";
         {
             NullableLongTestClass instance = new NullableLongTestClass { Value = ulong.MaxValue };
             string output = JsonConvert.SerializeObject(instance);
-            NullableLongTestClass result = JsonConvert.DeserializeObject<NullableLongTestClass>(
-                output
-            );
+            NullableLongTestClass result =
+                JsonConvert.DeserializeObject<NullableLongTestClass>(output);
 
             Assert.AreEqual(ulong.MaxValue, result.Value);
         }
@@ -9477,9 +9454,7 @@ This is just junk, though.";
             var testJson = @"{ 'MyProperty' : '" + propertyValue + "' }";
 
             var testObject =
-                JsonConvert.DeserializeObject<ChildClassWithProtectedOverridePlusJsonProperty>(
-                    testJson
-                );
+                JsonConvert.DeserializeObject<ChildClassWithProtectedOverridePlusJsonProperty>(testJson);
 
             Assert.AreEqual(
                 propertyValue,

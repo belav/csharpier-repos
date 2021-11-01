@@ -68,10 +68,9 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     );
                 }
 
-                var constructedTypeToImplement = await GetConstructedTypeToImplementAsync(
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+                var constructedTypeToImplement =
+                    await GetConstructedTypeToImplementAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
                 if (constructedTypeToImplement is object)
                 {

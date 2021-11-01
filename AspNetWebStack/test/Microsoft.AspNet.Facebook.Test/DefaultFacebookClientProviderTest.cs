@@ -28,9 +28,8 @@ namespace Microsoft.AspNet.Facebook.Test
                 AppId = appId,
                 AppSecret = appSecret
             };
-            DefaultFacebookClientProvider clientProvider = new DefaultFacebookClientProvider(
-                config
-            );
+            DefaultFacebookClientProvider clientProvider =
+                new DefaultFacebookClientProvider(config);
             FacebookClient client = clientProvider.CreateClient();
 
             Assert.Equal(appId, client.AppId);

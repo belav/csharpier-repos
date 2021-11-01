@@ -73,17 +73,15 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
                                 {
                                     // If we need to preserve the next trivia too then, prepend
                                     // the two together.
-                                    currentUsings[nextIndex] = nextUsing.WithPrependedLeadingTrivia(
-                                        leadingTrivia
-                                    );
+                                    currentUsings[nextIndex] =
+                                        nextUsing.WithPrependedLeadingTrivia(leadingTrivia);
                                 }
                                 else
                                 {
                                     // Otherwise, replace the next trivia with this trivia that we
                                     // want to preserve.
-                                    currentUsings[nextIndex] = nextUsing.WithLeadingTrivia(
-                                        leadingTrivia
-                                    );
+                                    currentUsings[nextIndex] =
+                                        nextUsing.WithLeadingTrivia(leadingTrivia);
                                 }
                             }
                             else

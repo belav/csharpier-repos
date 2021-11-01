@@ -625,9 +625,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 .Append(
                     Code.Literal(
                         property.GetColumnType()
-                            ?? Dependencies.RelationalTypeMappingSource.GetMapping(
-                                property
-                            ).StoreType
+                            ?? Dependencies.RelationalTypeMappingSource.GetMapping(property).StoreType
                     )
                 )
                 .Append(")");

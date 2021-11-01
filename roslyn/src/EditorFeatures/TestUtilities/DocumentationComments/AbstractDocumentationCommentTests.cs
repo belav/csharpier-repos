@@ -143,9 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
                     var commandArgs = new OpenLineAboveCommandArgs(view, view.TextBuffer);
                     void nextHandler()
                     {
-                        var editorOperations = editorOperationsFactoryService.GetEditorOperations(
-                            view
-                        );
+                        var editorOperations =
+                            editorOperationsFactoryService.GetEditorOperations(view);
                         editorOperations.OpenLineAbove();
                     }
 
@@ -177,9 +176,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocumentationComments
                     var commandArgs = new OpenLineBelowCommandArgs(view, view.TextBuffer);
                     void nextHandler()
                     {
-                        var editorOperations = editorOperationsFactoryService.GetEditorOperations(
-                            view
-                        );
+                        var editorOperations =
+                            editorOperationsFactoryService.GetEditorOperations(view);
                         editorOperations.OpenLineBelow();
                     }
 

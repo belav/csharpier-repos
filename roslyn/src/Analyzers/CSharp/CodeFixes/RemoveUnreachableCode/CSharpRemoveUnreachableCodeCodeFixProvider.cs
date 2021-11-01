@@ -97,9 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
 
                 RemoveStatement(editor, firstUnreachableStatement);
 
-                var sections = RemoveUnreachableCodeHelpers.GetSubsequentUnreachableSections(
-                    firstUnreachableStatement
-                );
+                var sections =
+                    RemoveUnreachableCodeHelpers.GetSubsequentUnreachableSections(firstUnreachableStatement);
                 foreach (var section in sections)
                 {
                     foreach (var statement in section)

@@ -198,9 +198,8 @@ namespace Internal.Cryptography.Pal
 
             // While this returns true/false, at this stage we care more about the detailed error code.
             Interop.Crypto.X509VerifyCert(storeCtx);
-            Interop.Crypto.X509VerifyStatusCode statusCode = Interop.Crypto.X509StoreCtxGetError(
-                storeCtx
-            );
+            Interop.Crypto.X509VerifyStatusCode statusCode =
+                Interop.Crypto.X509StoreCtxGetError(storeCtx);
 
             if (IsCompleteChain(statusCode))
             {

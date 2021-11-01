@@ -881,9 +881,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var pageModel = new TestPageModel();
 
             // Act
-            var resultPermanent = pageModel.RedirectToRoutePermanentPreserveMethod(
-                routeValues: routeValues
-            );
+            var resultPermanent =
+                pageModel.RedirectToRoutePermanentPreserveMethod(routeValues: routeValues);
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(resultPermanent);
@@ -1003,9 +1002,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var routeName = "CustomRouteName";
 
             // Act
-            var resultPermanent = pageModel.RedirectToRoutePermanentPreserveMethod(
-                routeName: routeName
-            );
+            var resultPermanent =
+                pageModel.RedirectToRoutePermanentPreserveMethod(routeName: routeName);
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(resultPermanent);

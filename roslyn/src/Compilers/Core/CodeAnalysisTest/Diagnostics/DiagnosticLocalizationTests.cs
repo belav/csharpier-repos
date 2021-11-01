@@ -162,9 +162,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             );
 
             // Verify without culture
-            var defaultCultureLocalizedStringWithArguments = defaultCultureResourceSet.GetString(
-                nameOfResourceWithArguments
-            );
+            var defaultCultureLocalizedStringWithArguments =
+                defaultCultureResourceSet.GetString(nameOfResourceWithArguments);
             var expected = string.Format(defaultCultureLocalizedStringWithArguments, argument);
 
             if (EnsureEnglishUICulture.PreferredOrNull == null)
@@ -178,9 +177,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             );
 
             // Verify with loc culture
-            var arLocalizedStringWithArguments = arResourceSet.GetString(
-                nameOfResourceWithArguments
-            );
+            var arLocalizedStringWithArguments =
+                arResourceSet.GetString(nameOfResourceWithArguments);
             expected = string.Format(arLocalizedStringWithArguments, argument);
             Assert.Equal(expected, localizableResource.ToString(arCulture));
         }

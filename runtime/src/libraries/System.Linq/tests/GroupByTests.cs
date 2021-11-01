@@ -41,9 +41,10 @@ namespace System.Linq.Tests
             Assert.NotNull(elements);
             Assert.NotNull(keys);
 
-            Dictionary<TKey, List<TElement>> dict = new Dictionary<TKey, List<TElement>>(
-                keyComparer
-            );
+            Dictionary<TKey, List<TElement>> dict = new Dictionary<
+                TKey,
+                List<TElement>
+            >(keyComparer);
             List<TElement> groupingForNullKeys = new List<TElement>();
             using (IEnumerator<TElement> elEn = elements.GetEnumerator())
             using (IEnumerator<TKey> keyEn = keys.GetEnumerator())

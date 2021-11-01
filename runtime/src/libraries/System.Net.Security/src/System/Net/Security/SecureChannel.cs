@@ -768,9 +768,8 @@ namespace System.Net.Security
                     localCertificate.Equals(selectedCert),
                     "'selectedCert' does not match 'localCertificate'."
                 );
-                _sslAuthenticationOptions.CertificateContext = SslStreamCertificateContext.Create(
-                    selectedCert
-                );
+                _sslAuthenticationOptions.CertificateContext =
+                    SslStreamCertificateContext.Create(selectedCert);
             }
 
             //

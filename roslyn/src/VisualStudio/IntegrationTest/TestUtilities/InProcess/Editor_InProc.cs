@@ -1014,9 +1014,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     var view = GetActiveTextView();
                     var tagAggregatorFactory = GetComponentModel()
                         .GetService<IViewTagAggregatorFactoryService>();
-                    var tagAggregator = tagAggregatorFactory.CreateTagAggregator<ITextMarkerTag>(
-                        view
-                    );
+                    var tagAggregator =
+                        tagAggregatorFactory.CreateTagAggregator<ITextMarkerTag>(view);
                     var matchingTags = tagAggregator
                         .GetTags(new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length))
                         .Where(t => t.Tag.Type == tagId);

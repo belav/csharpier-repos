@@ -276,9 +276,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
             var invocationOrCreation = argumentList.Parent;
             if (syntaxFacts.IsInvocationExpression(invocationOrCreation))
             {
-                var invokedExpression = syntaxFacts.GetExpressionOfInvocationExpression(
-                    invocationOrCreation
-                );
+                var invokedExpression =
+                    syntaxFacts.GetExpressionOfInvocationExpression(invocationOrCreation);
                 var name = GetNameOfInvokedExpression(invokedExpression);
                 if (_methodNamesOfInterest.Contains(name))
                 {

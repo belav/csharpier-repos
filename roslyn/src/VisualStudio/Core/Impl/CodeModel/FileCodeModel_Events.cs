@@ -305,9 +305,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             if (codeModelEvent.Type == CodeModelEventType.Remove)
             {
-                var parentCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeMember>(
-                    parentElement
-                );
+                var parentCodeElement =
+                    ComAggregate.TryGetManagedObject<AbstractCodeMember>(parentElement);
                 if (parentCodeElement != null)
                 {
                     return (EnvDTE.CodeElement)CodeParameter.Create(
@@ -377,9 +376,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     );
                 case EnvDTE.FileCodeModel parentFileCodeModel:
                 {
-                    var fileCodeModel = ComAggregate.TryGetManagedObject<FileCodeModel>(
-                        parentElement
-                    );
+                    var fileCodeModel =
+                        ComAggregate.TryGetManagedObject<FileCodeModel>(parentElement);
                     parentNode = fileCodeModel.GetSyntaxRoot();
 
                     return GetAttributeElementForCodeModelEvent(
@@ -419,9 +417,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 if (parentObject is EnvDTE.CodeElement)
                 {
-                    var parentCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
-                        parentObject
-                    );
+                    var parentCodeElement =
+                        ComAggregate.TryGetManagedObject<AbstractCodeElement>(parentObject);
                     if (parentCodeElement != null)
                     {
                         return (EnvDTE.CodeElement)CodeAttribute.Create(
@@ -435,9 +432,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 }
                 else if (parentObject is EnvDTE.FileCodeModel)
                 {
-                    var parentFileCodeModel = ComAggregate.TryGetManagedObject<FileCodeModel>(
-                        parentObject
-                    );
+                    var parentFileCodeModel =
+                        ComAggregate.TryGetManagedObject<FileCodeModel>(parentObject);
                     if (parentFileCodeModel != null && parentFileCodeModel == this)
                     {
                         return (EnvDTE.CodeElement)CodeAttribute.Create(
@@ -511,9 +507,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             if (codeModelEvent.Type == CodeModelEventType.Remove)
             {
-                var parentCodeElement = ComAggregate.TryGetManagedObject<CodeAttribute>(
-                    parentElement
-                );
+                var parentCodeElement =
+                    ComAggregate.TryGetManagedObject<CodeAttribute>(parentElement);
                 if (parentCodeElement != null)
                 {
                     return (EnvDTE.CodeElement)CodeAttributeArgument.Create(

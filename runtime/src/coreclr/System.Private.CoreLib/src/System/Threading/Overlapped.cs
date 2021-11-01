@@ -65,9 +65,8 @@ namespace System.Threading
         {
             do
             {
-                OverlappedData overlapped = OverlappedData.GetOverlappedFromNative(
-                    pNativeOverlapped
-                );
+                OverlappedData overlapped =
+                    OverlappedData.GetOverlappedFromNative(pNativeOverlapped);
 
                 if (overlapped._callback is IOCompletionCallback iocb)
                 {
@@ -298,9 +297,8 @@ namespace System.Threading
             if (nativeOverlappedPtr == null)
                 throw new ArgumentNullException(nameof(nativeOverlappedPtr));
 
-            OverlappedData.GetOverlappedFromNative(
-                nativeOverlappedPtr
-            )._overlapped._overlappedData = null;
+            OverlappedData.GetOverlappedFromNative(nativeOverlappedPtr)._overlapped._overlappedData =
+                null;
             OverlappedData.FreeNativeOverlapped(nativeOverlappedPtr);
         }
 

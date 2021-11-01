@@ -173,9 +173,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 // TODO: https://github.com/dotnet/roslyn/issues/49938
                 // The committed solution may not contain all documents present in the PDB.
-                var documentIds = DebuggingSession.LastCommittedSolution.GetDocumentIdsWithFilePath(
-                    documentName
-                );
+                var documentIds =
+                    DebuggingSession.LastCommittedSolution.GetDocumentIdsWithFilePath(documentName);
                 var firstDocumentId = documentIds.FirstOrDefault(supportsEditAndContinue);
                 if (firstDocumentId == null)
                 {
@@ -525,9 +524,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             foreach (
-                var documentId in newSourceGeneratedDocumentStates.GetAddedStateIds(
-                    oldSourceGeneratedDocumentStates
-                )
+                var documentId in newSourceGeneratedDocumentStates.GetAddedStateIds(oldSourceGeneratedDocumentStates)
             )
             {
                 var newState = newSourceGeneratedDocumentStates.GetRequiredState(documentId);
@@ -958,9 +955,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 ignoreCase: false,
                 ignoreAssemblyKeys: true
             );
-            var mergedSyntaxMaps = new Dictionary<SymbolKey, Func<SyntaxNode, SyntaxNode?>>(
-                symbolKeyComparer
-            );
+            var mergedSyntaxMaps = new Dictionary<
+                SymbolKey,
+                Func<SyntaxNode, SyntaxNode?>
+            >(symbolKeyComparer);
 
             var editsByPartialType = edits
                 .Where(edit => edit.PartialType != null)

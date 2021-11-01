@@ -426,9 +426,7 @@ namespace System.Web.Mvc.Html
             // don't check to make sure that the object hasn't already been displayed
             object visitedObjectsKey = metadata.Model ?? metadata.RealModelType;
             if (
-                html.ViewDataContainer.ViewData.TemplateInfo.VisitedObjects.Contains(
-                    visitedObjectsKey
-                )
+                html.ViewDataContainer.ViewData.TemplateInfo.VisitedObjects.Contains(visitedObjectsKey)
             )
             {
                 // DDB #224750
@@ -442,9 +440,8 @@ namespace System.Web.Mvc.Html
                 TemplateInfo = new TemplateInfo
                 {
                     FormattedModelValue = formattedModelValue,
-                    HtmlFieldPrefix = html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
-                        htmlFieldName
-                    ),
+                    HtmlFieldPrefix =
+                        html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(htmlFieldName),
                     VisitedObjects = new HashSet<object>(
                         html.ViewContext.ViewData.TemplateInfo.VisitedObjects
                     ), // DDB #224750
@@ -454,9 +451,10 @@ namespace System.Web.Mvc.Html
             if (additionalViewData != null)
             {
                 foreach (
-                    KeyValuePair<string, object> kvp in TypeHelper.ObjectToDictionary(
-                        additionalViewData
-                    )
+                    KeyValuePair<
+                        string,
+                        object
+                    > kvp in TypeHelper.ObjectToDictionary(additionalViewData)
                 )
                 {
                     viewData[kvp.Key] = kvp.Value;

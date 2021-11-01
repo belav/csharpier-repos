@@ -116,9 +116,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (
                 inverseNavigationPropertyInfo == null
-                || !Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(
-                    inverseNavigationPropertyInfo
-                )!.IsAssignableFrom(entityType.ClrType)
+                || !Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(inverseNavigationPropertyInfo)!.IsAssignableFrom(
+                    entityType.ClrType
+                )
             )
             {
                 throw new InvalidOperationException(
@@ -206,9 +206,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 )
                 {
                     var existingSkipNavigationInverse = existingSkipNavigation.Inverse;
-                    var inverseSkipNavigation = targetEntityTypeBuilder.Metadata.FindSkipNavigation(
-                        inverseNavigationPropertyInfo
-                    );
+                    var inverseSkipNavigation =
+                        targetEntityTypeBuilder.Metadata.FindSkipNavigation(inverseNavigationPropertyInfo);
                     var existingInverse = inverseSkipNavigation?.Inverse;
                     var existingInverseType = existingInverse?.DeclaringEntityType;
                     if (
@@ -261,9 +260,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 }
                 else
                 {
-                    var existingInverse = targetEntityTypeBuilder.Metadata.FindNavigation(
-                        inverseNavigationPropertyInfo
-                    )?.Inverse;
+                    var existingInverse =
+                        targetEntityTypeBuilder.Metadata.FindNavigation(inverseNavigationPropertyInfo)?.Inverse;
                     var existingInverseType = existingInverse?.DeclaringEntityType;
                     if (
                         existingInverse != null
@@ -447,9 +445,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 return;
             }
 
-            var leastDerivedEntityTypes = modelBuilder.Metadata.FindLeastDerivedEntityTypes(
-                declaringType
-            );
+            var leastDerivedEntityTypes =
+                modelBuilder.Metadata.FindLeastDerivedEntityTypes(declaringType);
             foreach (var leastDerivedEntityType in leastDerivedEntityTypes)
             {
                 if (
@@ -527,9 +524,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 }
                 else
                 {
-                    var targetEntityType = entityTypeBuilder.Metadata.Model.FindEntityType(
-                        targetClrType
-                    );
+                    var targetEntityType =
+                        entityTypeBuilder.Metadata.Model.FindEntityType(targetClrType);
                     if (targetEntityType == null)
                     {
                         return;

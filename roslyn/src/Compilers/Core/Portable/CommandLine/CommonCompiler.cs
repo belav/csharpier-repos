@@ -264,9 +264,8 @@ namespace Microsoft.CodeAnalysis
             out MetadataReferenceResolver referenceDirectiveResolver
         )
         {
-            var commandLineReferenceResolver = GetCommandLineMetadataReferenceResolver(
-                touchedFiles
-            );
+            var commandLineReferenceResolver =
+                GetCommandLineMetadataReferenceResolver(touchedFiles);
 
             List<MetadataReference> resolved = new List<MetadataReference>();
             Arguments.ResolveMetadataReferences(
@@ -1339,9 +1338,8 @@ namespace Microsoft.CodeAnalysis
 
                 if (!analyzers.IsEmpty)
                 {
-                    analyzerCts = CancellationTokenSource.CreateLinkedTokenSource(
-                        cancellationToken
-                    );
+                    analyzerCts =
+                        CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                     analyzerExceptionDiagnostics = new DiagnosticBag();
 
                     // PERF: Avoid executing analyzers that report only Hidden and/or Info diagnostics, which don't appear in the build output.

@@ -546,9 +546,7 @@ namespace System.Threading.Tasks
                 }
                 finally
                 {
-                    System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(
-                        savedActivityId
-                    );
+                    System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(savedActivityId);
                 }
             };
         }
@@ -797,9 +795,7 @@ namespace System.Threading.Tasks
             {
                 if (log.IsEnabled() && log.TasksSetActivityIds && m_continuationId != 0)
                 {
-                    System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(
-                        savedActivityId
-                    );
+                    System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(savedActivityId);
                 }
             }
         }

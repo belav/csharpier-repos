@@ -444,9 +444,8 @@ namespace Internal.TypeSystem.Ecma
 
         private Object ResolveMethodSpecification(MethodSpecificationHandle handle)
         {
-            MethodSpecification methodSpecification = _metadataReader.GetMethodSpecification(
-                handle
-            );
+            MethodSpecification methodSpecification =
+                _metadataReader.GetMethodSpecification(handle);
 
             object resolvedMethod = GetObject(
                 methodSpecification.Method,

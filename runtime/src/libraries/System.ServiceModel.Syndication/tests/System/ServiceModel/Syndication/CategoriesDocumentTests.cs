@@ -95,9 +95,8 @@ namespace System.ServiceModel.Syndication.Tests
         [MemberData(nameof(Create_LinkToCategoriesDocument_TestData))]
         public void Create_LinkToCategoriesDocument_ReturnsExpected(Uri linkToCategoriesDocument)
         {
-            ReferencedCategoriesDocument document = CategoriesDocument.Create(
-                linkToCategoriesDocument
-            );
+            ReferencedCategoriesDocument document =
+                CategoriesDocument.Create(linkToCategoriesDocument);
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.ElementExtensions);

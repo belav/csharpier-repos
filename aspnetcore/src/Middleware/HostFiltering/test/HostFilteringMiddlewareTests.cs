@@ -321,9 +321,7 @@ namespace Microsoft.AspNetCore.HostFiltering
                                     services.AddSingleton<
                                         IOptionsChangeTokenSource<HostFilteringOptions>
                                     >(
-                                        new ConfigurationChangeTokenSource<HostFilteringOptions>(
-                                            config
-                                        )
+                                        new ConfigurationChangeTokenSource<HostFilteringOptions>(config)
                                     );
                                 }
                             )

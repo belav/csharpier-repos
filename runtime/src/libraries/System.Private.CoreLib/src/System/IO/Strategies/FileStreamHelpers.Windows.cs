@@ -665,9 +665,7 @@ namespace System.IO.Strategies
                             // desired address stored in the awaitable.  (This position may be 0, if either we're at the beginning or
                             // if the stream isn't seekable.)
                             readAwaitable._nativeOverlapped =
-                                handle.ThreadPoolBinding!.AllocateNativeOverlapped(
-                                    awaitableOverlapped
-                                );
+                                handle.ThreadPoolBinding!.AllocateNativeOverlapped(awaitableOverlapped);
                             if (canSeek)
                             {
                                 readAwaitable._nativeOverlapped->OffsetLow = unchecked(

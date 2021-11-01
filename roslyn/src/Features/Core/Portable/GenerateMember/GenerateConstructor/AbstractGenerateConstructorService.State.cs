@@ -178,9 +178,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 if (!TryInitializeDelegatedConstructor(cancellationToken))
                     InitializeNonDelegatedConstructor(cancellationToken);
 
-                IsContainedInUnsafeType = _service.ContainingTypesOrSelfHasUnsafeKeyword(
-                    TypeToGenerateIn
-                );
+                IsContainedInUnsafeType =
+                    _service.ContainingTypesOrSelfHasUnsafeKeyword(TypeToGenerateIn);
 
                 return true;
             }

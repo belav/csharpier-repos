@@ -467,9 +467,9 @@ namespace System.Configuration
                                             locationSectionRecord.SectionXmlInfo.ConfigKey;
 
                                         if (
-                                            !((IDictionary)indirectLocationInputs).Contains(
-                                                configKey
-                                            )
+                                            !(
+                                                (IDictionary)indirectLocationInputs
+                                            ).Contains(configKey)
                                         )
                                             indirectLocationInputs.Add(
                                                 configKey,
@@ -1678,9 +1678,8 @@ namespace System.Configuration
                             if (xmlUtil.Reader.Name == LocationTag)
                             {
                                 bool locationValid = false;
-                                string locationSubPathAttribute = xmlUtil.Reader.GetAttribute(
-                                    LocationPathAttribute
-                                );
+                                string locationSubPathAttribute =
+                                    xmlUtil.Reader.GetAttribute(LocationPathAttribute);
 
                                 try
                                 {
@@ -1814,9 +1813,8 @@ namespace System.Configuration
                         );
 
                     // Check for protectionProvider
-                    string protectionProviderAttribute = xmlUtil.Reader.GetAttribute(
-                        ProtectionProviderAttibute
-                    );
+                    string protectionProviderAttribute =
+                        xmlUtil.Reader.GetAttribute(ProtectionProviderAttibute);
                     if (protectionProviderAttribute != null)
                     {
                         if (xmlUtil.Reader.AttributeCount != 1)
@@ -3130,9 +3128,8 @@ namespace System.Configuration
                         {
                             // First do all the attributes reading without advancing the reader.
 
-                            string configSourceAttribute = xmlUtil.Reader.GetAttribute(
-                                ConfigSourceAttribute
-                            );
+                            string configSourceAttribute =
+                                xmlUtil.Reader.GetAttribute(ConfigSourceAttribute);
                             if (configSourceAttribute != null)
                             {
                                 try
@@ -3160,9 +3157,8 @@ namespace System.Configuration
                                 }
                             }
 
-                            string protectionProviderAttribute = xmlUtil.Reader.GetAttribute(
-                                ProtectionProviderAttibute
-                            );
+                            string protectionProviderAttribute =
+                                xmlUtil.Reader.GetAttribute(ProtectionProviderAttibute);
                             if (protectionProviderAttribute != null)
                             {
                                 try

@@ -609,9 +609,7 @@ namespace System.Text.Json.Serialization.Tests
                 string json = @"{" + @"""List"" : null," + @"""Dictionary"" : null" + @"}";
 
                 SimpleTestStructWithNullableStructCollectionWrappers obj =
-                    JsonSerializer.Deserialize<SimpleTestStructWithNullableStructCollectionWrappers>(
-                        json
-                    );
+                    JsonSerializer.Deserialize<SimpleTestStructWithNullableStructCollectionWrappers>(json);
                 Assert.False(obj.List.HasValue);
                 Assert.False(obj.Dictionary.HasValue);
             }

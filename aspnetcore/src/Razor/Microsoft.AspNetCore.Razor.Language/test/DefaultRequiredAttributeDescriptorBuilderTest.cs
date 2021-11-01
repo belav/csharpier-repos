@@ -16,9 +16,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 "TestTagHelper",
                 "Test"
             );
-            var tagMatchingRuleBuilder = new DefaultTagMatchingRuleDescriptorBuilder(
-                tagHelperBuilder
-            );
+            var tagMatchingRuleBuilder =
+                new DefaultTagMatchingRuleDescriptorBuilder(tagHelperBuilder);
             var builder = new DefaultRequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
 
             builder
@@ -41,9 +40,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 "TestTagHelper",
                 "Test"
             );
-            var tagMatchingRuleBuilder = new DefaultTagMatchingRuleDescriptorBuilder(
-                tagHelperBuilder
-            );
+            var tagMatchingRuleBuilder =
+                new DefaultTagMatchingRuleDescriptorBuilder(tagHelperBuilder);
             var builder = new DefaultRequiredAttributeDescriptorBuilder(tagMatchingRuleBuilder);
 
             builder

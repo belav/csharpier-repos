@@ -359,9 +359,8 @@ namespace System.Xml.Schema
                     correctType.Clone() as XmlSchemaSimpleType
                 )!;
                 tempNormalizedStringTypeV1Compat.SetDatatype(c_normalizedStringV1Compat);
-                tempNormalizedStringTypeV1Compat.ElementDecl = new SchemaElementDecl(
-                    c_normalizedStringV1Compat
-                );
+                tempNormalizedStringTypeV1Compat.ElementDecl =
+                    new SchemaElementDecl(c_normalizedStringV1Compat);
                 tempNormalizedStringTypeV1Compat.ElementDecl.SchemaType =
                     tempNormalizedStringTypeV1Compat;
                 s_normalizedStringTypeV1Compat = tempNormalizedStringTypeV1Compat;

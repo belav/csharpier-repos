@@ -83,9 +83,8 @@ namespace StaticTestGenerator
                 out Assembly testAssembly,
                 out TestDiscoverySink sink
             );
-            Dictionary<IXunitTestCase, List<TestCase>> testCaseData = ComputeTestMethodTestCases(
-                sink
-            );
+            Dictionary<IXunitTestCase, List<TestCase>> testCaseData =
+                ComputeTestMethodTestCases(sink);
 
             int numUnsupported = 0,
                 numCalls = 0;

@@ -985,9 +985,10 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<byte> result128 = Vector128<byte>.Zero;
 
-                ref Vector64<byte> result64 = ref Unsafe.As<Vector128<byte>, Vector64<byte>>(
-                    ref result128
-                );
+                ref Vector64<byte> result64 = ref Unsafe.As<
+                    Vector128<byte>,
+                    Vector64<byte>
+                >(ref result128);
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1019,9 +1020,10 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<double> result128 = Vector128<double>.Zero;
 
-                ref Vector64<double> result64 = ref Unsafe.As<Vector128<double>, Vector64<double>>(
-                    ref result128
-                );
+                ref Vector64<double> result64 = ref Unsafe.As<
+                    Vector128<double>,
+                    Vector64<double>
+                >(ref result128);
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1047,9 +1049,10 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<short> result128 = Vector128<short>.Zero;
 
-                ref Vector64<short> result64 = ref Unsafe.As<Vector128<short>, Vector64<short>>(
-                    ref result128
-                );
+                ref Vector64<short> result64 = ref Unsafe.As<
+                    Vector128<short>,
+                    Vector64<short>
+                >(ref result128);
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1076,9 +1079,10 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<int> result128 = Vector128<int>.Zero;
 
-                ref Vector64<int> result64 = ref Unsafe.As<Vector128<int>, Vector64<int>>(
-                    ref result128
-                );
+                ref Vector64<int> result64 = ref Unsafe.As<
+                    Vector128<int>,
+                    Vector64<int>
+                >(ref result128);
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1104,9 +1108,10 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<long> result128 = Vector128<long>.Zero;
 
-                ref Vector64<long> result64 = ref Unsafe.As<Vector128<long>, Vector64<long>>(
-                    ref result128
-                );
+                ref Vector64<long> result64 = ref Unsafe.As<
+                    Vector128<long>,
+                    Vector64<long>
+                >(ref result128);
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1133,9 +1138,10 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<sbyte> result128 = Vector128<sbyte>.Zero;
 
-                ref Vector64<sbyte> result64 = ref Unsafe.As<Vector128<sbyte>, Vector64<sbyte>>(
-                    ref result128
-                );
+                ref Vector64<sbyte> result64 = ref Unsafe.As<
+                    Vector128<sbyte>,
+                    Vector64<sbyte>
+                >(ref result128);
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1161,9 +1167,10 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<float> result128 = Vector128<float>.Zero;
 
-                ref Vector64<float> result64 = ref Unsafe.As<Vector128<float>, Vector64<float>>(
-                    ref result128
-                );
+                ref Vector64<float> result64 = ref Unsafe.As<
+                    Vector128<float>,
+                    Vector64<float>
+                >(ref result128);
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1196,9 +1203,10 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<ushort> result128 = Vector128<ushort>.Zero;
 
-                ref Vector64<ushort> result64 = ref Unsafe.As<Vector128<ushort>, Vector64<ushort>>(
-                    ref result128
-                );
+                ref Vector64<ushort> result64 = ref Unsafe.As<
+                    Vector128<ushort>,
+                    Vector64<ushort>
+                >(ref result128);
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1226,9 +1234,10 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<uint> result128 = Vector128<uint>.Zero;
 
-                ref Vector64<uint> result64 = ref Unsafe.As<Vector128<uint>, Vector64<uint>>(
-                    ref result128
-                );
+                ref Vector64<uint> result64 = ref Unsafe.As<
+                    Vector128<uint>,
+                    Vector64<uint>
+                >(ref result128);
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1255,9 +1264,10 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<ulong> result128 = Vector128<ulong>.Zero;
 
-                ref Vector64<ulong> result64 = ref Unsafe.As<Vector128<ulong>, Vector64<ulong>>(
-                    ref result128
-                );
+                ref Vector64<ulong> result64 = ref Unsafe.As<
+                    Vector128<ulong>,
+                    Vector64<ulong>
+                >(ref result128);
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 

@@ -1135,9 +1135,7 @@ namespace System.Net.Http.Functional.Tests
                         Task serverTask = server.AcceptConnectionAsync(
                             async connection =>
                             {
-                                await connection.ReadRequestHeaderAndSendCustomResponseAsync(
-                                    partialResponse
-                                );
+                                await connection.ReadRequestHeaderAndSendCustomResponseAsync(partialResponse);
                                 await tcs.Task;
                             }
                         );
@@ -1334,9 +1332,8 @@ namespace System.Net.Http.Functional.Tests
                     )
                     {
                         using (
-                            Stream responseStream = await response.Content.ReadAsStreamAsync(
-                                TestAsync
-                            )
+                            Stream responseStream =
+                                await response.Content.ReadAsStreamAsync(TestAsync)
                         )
                         {
                             Assert.Same(
@@ -1663,9 +1660,8 @@ namespace System.Net.Http.Functional.Tests
                             )
                         )
                         using (
-                            Stream responseStream = await response.Content.ReadAsStreamAsync(
-                                TestAsync
-                            )
+                            Stream responseStream =
+                                await response.Content.ReadAsStreamAsync(TestAsync)
                         )
                         {
                             // Boolean properties returning correct values

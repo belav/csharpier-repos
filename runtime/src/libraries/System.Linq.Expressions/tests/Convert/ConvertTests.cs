@@ -19178,9 +19178,8 @@ namespace System.Linq.Expressions.Tests
         public static void ImplicitHalfLiftedConversionOpOnTargetFromCSCompiler(bool useInterpreter)
         {
             Expression<Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?>> e = x => x;
-            Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?> f = e.Compile(
-                useInterpreter
-            );
+            Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?> f =
+                e.Compile(useInterpreter);
             Assert.NotNull(f(new HalfLiftedFromTargetOperator()));
             Assert.Null(f(new HalfLiftedFromTargetOperator { NullEquiv = true }));
             Assert.Null(f(null));
@@ -19195,9 +19194,8 @@ namespace System.Linq.Expressions.Tests
                     Expression.Convert(x, typeof(HalfLiftedToTargetOperator?)),
                     x
                 );
-            Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?> f = e.Compile(
-                useInterpreter
-            );
+            Func<HalfLiftedFromTargetOperator?, HalfLiftedToTargetOperator?> f =
+                e.Compile(useInterpreter);
             Assert.NotNull(f(new HalfLiftedFromTargetOperator()));
             Assert.Null(f(new HalfLiftedFromTargetOperator { NullEquiv = true }));
             Assert.Null(f(null));

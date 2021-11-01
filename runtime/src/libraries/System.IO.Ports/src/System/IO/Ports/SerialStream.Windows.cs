@@ -69,9 +69,8 @@ namespace System.IO.Ports
         private readonly byte[] _tempBuf; // used to avoid multiple array allocations in ReadByte()
 
         // called whenever any async i/o operation completes.
-        private static readonly unsafe IOCompletionCallback s_IOCallback = new IOCompletionCallback(
-            AsyncFSCallback
-        );
+        private static readonly unsafe IOCompletionCallback s_IOCallback =
+            new IOCompletionCallback(AsyncFSCallback);
 
         // ----- new get-set properties -----------------*
 
@@ -1828,9 +1827,7 @@ namespace System.IO.Ports
         {
             // Extract async the result from overlapped structure
             SerialStreamAsyncResult asyncResult =
-                (SerialStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                    pOverlapped
-                );
+                (SerialStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped);
 
             asyncResult._numBytes = (int)numBytes;
             asyncResult._errorCode = (int)errorCode;
@@ -1887,9 +1884,8 @@ namespace System.IO.Ports
                 callErrorEvents = new WaitCallback(CallErrorEvents);
                 callReceiveEvents = new WaitCallback(CallReceiveEvents);
                 callPinEvents = new WaitCallback(CallPinEvents);
-                freeNativeOverlappedCallback = new IOCompletionCallback(
-                    FreeNativeOverlappedCallback
-                );
+                freeNativeOverlappedCallback =
+                    new IOCompletionCallback(FreeNativeOverlappedCallback);
                 isAsync = stream._isAsync;
 #if DEBUG
                 portName = stream._portName;
@@ -2041,9 +2037,7 @@ namespace System.IO.Ports
             {
                 // Extract the async result from overlapped structure
                 SerialStreamAsyncResult asyncResult =
-                    (SerialStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                        pOverlapped
-                    );
+                    (SerialStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped);
 
                 if (Interlocked.Decrement(ref asyncResult._numBytes) == 0)
                     threadPoolBinding.FreeNativeOverlapped(pOverlapped);

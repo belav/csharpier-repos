@@ -730,13 +730,11 @@ namespace System.Data.Tests
 
             //Check table events
             // add event handlers
-            ds.Orders.OrdersRowChanging += new myTypedDataSet.OrdersRowChangeEventHandler(
-                T_Changing
-            );
+            ds.Orders.OrdersRowChanging +=
+                new myTypedDataSet.OrdersRowChangeEventHandler(T_Changing);
             ds.Orders.OrdersRowChanged += new myTypedDataSet.OrdersRowChangeEventHandler(T_Changed);
-            ds.Orders.OrdersRowDeleting += new myTypedDataSet.OrdersRowChangeEventHandler(
-                T_Deleting
-            );
+            ds.Orders.OrdersRowDeleting +=
+                new myTypedDataSet.OrdersRowChangeEventHandler(T_Deleting);
             ds.Orders.OrdersRowDeleted += new myTypedDataSet.OrdersRowChangeEventHandler(T_Deleted);
 
             //RowChange event order

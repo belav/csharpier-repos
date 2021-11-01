@@ -47,9 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var defaultErrorType = options.SuppressMapClientErrors
                 ? typeof(void)
                 : typeof(ProblemDetails);
-            var defaultErrorTypeAttribute = new ProducesErrorResponseTypeAttribute(
-                defaultErrorType
-            );
+            var defaultErrorTypeAttribute =
+                new ProducesErrorResponseTypeAttribute(defaultErrorType);
             ActionModelConventions.Add(
                 new ApiConventionApplicationModelConvention(defaultErrorTypeAttribute)
             );

@@ -366,9 +366,8 @@ namespace System.Collections.Immutable.Tests
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSortedSet.Create<int>());
             ImmutableSortedSet<string> set = ImmutableSortedSet.Create("1", "2", "3");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                set
-            );
+            DebuggerAttributeInfo info =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(set);
 
             object rootNode = DebuggerAttributes.GetFieldValue(
                 ImmutableSortedSet.Create<object>(),

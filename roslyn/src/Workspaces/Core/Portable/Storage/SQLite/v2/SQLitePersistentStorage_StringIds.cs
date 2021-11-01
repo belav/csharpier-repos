@@ -102,9 +102,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             var id = -1;
 
             using (
-                var resettableStatement = connection.GetResettableStatement(
-                    _insert_into_string_table_values_0
-                )
+                var resettableStatement =
+                    connection.GetResettableStatement(_insert_into_string_table_values_0)
             )
             {
                 var statement = resettableStatement.Statement;
@@ -134,9 +133,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         {
             try
             {
-                using var resettableStatement = connection.GetResettableStatement(
-                    _select_star_from_string_table_where_0_limit_one
-                );
+                using var resettableStatement =
+                    connection.GetResettableStatement(_select_star_from_string_table_where_0_limit_one);
                 var statement = resettableStatement.Statement;
 
                 // SQLite's binding indices are 1-based.

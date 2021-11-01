@@ -72,9 +72,8 @@ namespace System.Web.WebPages.Html
 
             if (UnobtrusiveJavaScriptEnabled)
             {
-                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(
-                    name
-                );
+                var validationAttributes =
+                    _validationHelper.GetUnobtrusiveValidationAttributes(name);
                 builder.MergeAttributes(validationAttributes, replaceExisting: false);
             }
 

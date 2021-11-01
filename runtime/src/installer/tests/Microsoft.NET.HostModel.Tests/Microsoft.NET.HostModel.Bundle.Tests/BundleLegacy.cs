@@ -49,9 +49,8 @@ namespace Microsoft.NET.HostModel.Tests
             string mnaVersion
         )
         {
-            var repoDirectories = new RepoDirectoriesProvider(
-                microsoftNETCoreAppVersion: mnaVersion
-            );
+            var repoDirectories =
+                new RepoDirectoriesProvider(microsoftNETCoreAppVersion: mnaVersion);
             var fixture = new TestProjectFixture(
                 "StandaloneApp3x",
                 repoDirectories,

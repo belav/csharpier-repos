@@ -82,9 +82,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (originalSuperType.IsInterface)
             {
                 foreach (
-                    NamedTypeSymbol current in subType.AllInterfacesWithDefinitionUseSiteDiagnostics(
-                        ref useSiteInfo
-                    )
+                    NamedTypeSymbol current in subType.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
                 )
                 {
                     if (ReferenceEquals(current.OriginalDefinition, originalSuperType))

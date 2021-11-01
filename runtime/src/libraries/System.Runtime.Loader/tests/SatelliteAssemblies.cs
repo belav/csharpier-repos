@@ -40,9 +40,7 @@ namespace System.Runtime.Loader.Tests
             var referencedClassLibNeutralIsSatellitePath = AssemblyPathHelper.GetAssemblyLocation(
                 typeof(ReferencedClassLibNeutralIsSatellite.Program).Assembly
             );
-            referencedClassLibNeutralIsSatellite.LoadFromAssemblyPath(
-                referencedClassLibNeutralIsSatellitePath
-            );
+            referencedClassLibNeutralIsSatellite.LoadFromAssemblyPath(referencedClassLibNeutralIsSatellitePath);
 
             new AssemblyLoadContext("Empty");
 
@@ -505,9 +503,8 @@ namespace System.Runtime.Loader.Tests
 
             AssemblyLoadContext assemblyLoadContext = contexts[alc];
 
-            Assembly satelliteAssembly = assemblyLoadContext.LoadFromAssemblyName(
-                satelliteAssemblyName
-            );
+            Assembly satelliteAssembly =
+                assemblyLoadContext.LoadFromAssemblyName(satelliteAssemblyName);
 
             Assert.NotNull(satelliteAssembly);
 

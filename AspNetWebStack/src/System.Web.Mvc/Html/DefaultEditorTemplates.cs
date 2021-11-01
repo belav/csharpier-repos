@@ -91,9 +91,8 @@ namespace System.Web.Mvc.Html
             {
                 typeInCollection = genericEnumerableType.GetGenericArguments()[0];
             }
-            bool typeInCollectionIsNullableValueType = TypeHelpers.IsNullableValueType(
-                typeInCollection
-            );
+            bool typeInCollectionIsNullableValueType =
+                TypeHelpers.IsNullableValueType(typeInCollection);
 
             string oldPrefix = viewData.TemplateInfo.HtmlFieldPrefix;
 
@@ -357,9 +356,8 @@ namespace System.Web.Mvc.Html
         internal static string PasswordTemplate(HtmlHelper html)
         {
             object value = null;
-            var usePasswordStrings = WebConfigurationManager.AppSettings.GetValues(
-                UsePasswordValue
-            );
+            var usePasswordStrings =
+                WebConfigurationManager.AppSettings.GetValues(UsePasswordValue);
             bool usePasswordValue;
             if (
                 usePasswordStrings != null

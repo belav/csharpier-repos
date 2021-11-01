@@ -102,12 +102,10 @@ namespace System.Net.Http.Functional.Tests
 
                         // Let server handle two requests.
                         const string ResponseContent = "abcdefghijklmnopqrstuvwxyz";
-                        Task serverTask1 = server.AcceptConnectionSendResponseAndCloseAsync(
-                            content: ResponseContent
-                        );
-                        Task serverTask2 = server.AcceptConnectionSendResponseAndCloseAsync(
-                            content: ResponseContent
-                        );
+                        Task serverTask1 =
+                            server.AcceptConnectionSendResponseAndCloseAsync(content: ResponseContent);
+                        Task serverTask2 =
+                            server.AcceptConnectionSendResponseAndCloseAsync(content: ResponseContent);
 
                         // Make first request and drop the response, not explicitly disposing of it.
                         void MakeAndDropRequest() =>

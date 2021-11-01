@@ -101,15 +101,15 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 bindingContext.ModelMetadata,
                 propertyMetadatas
             );
-            ExtensibleModelBindingContext dtoBindingContext = new ExtensibleModelBindingContext(
-                bindingContext
-            ) {
-                ModelMetadata = MetadataProvider.GetMetadataForType(
-                    () => originalDto,
-                    typeof(ComplexModelDto)
-                ),
-                ModelName = bindingContext.ModelName
-            };
+            ExtensibleModelBindingContext dtoBindingContext =
+                new ExtensibleModelBindingContext(bindingContext)
+                {
+                    ModelMetadata = MetadataProvider.GetMetadataForType(
+                        () => originalDto,
+                        typeof(ComplexModelDto)
+                    ),
+                    ModelName = bindingContext.ModelName
+                };
 
             IExtensibleModelBinder dtoBinder =
                 bindingContext.ModelBinderProviders.GetRequiredBinder(

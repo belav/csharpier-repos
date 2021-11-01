@@ -11,9 +11,8 @@ namespace System.Globalization.Tests
         public void Ctor_String()
         {
             string message = "this is a test string";
-            CultureNotFoundException cultureNotFoundException = new CultureNotFoundException(
-                message
-            );
+            CultureNotFoundException cultureNotFoundException =
+                new CultureNotFoundException(message);
 
             Assert.Equal(message, cultureNotFoundException.Message);
         }

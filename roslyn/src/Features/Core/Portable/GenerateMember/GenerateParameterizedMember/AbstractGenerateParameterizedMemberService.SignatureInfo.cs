@@ -191,14 +191,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 var availableTypeParameters = State.TypeToGenerateIn.GetAllTypeParameters();
 
                 var compilation = Document.SemanticModel.Compilation;
-                var allTypeParameters = availableMethodTypeParameters.Concat(
-                    availableTypeParameters
-                );
+                var allTypeParameters =
+                    availableMethodTypeParameters.Concat(availableTypeParameters);
                 var availableTypeParameterNames = allTypeParameters.Select(t => t.Name).ToSet();
 
-                var typeArgumentToTypeParameterMap = GetTypeArgumentToTypeParameterMap(
-                    cancellationToken
-                );
+                var typeArgumentToTypeParameterMap =
+                    GetTypeArgumentToTypeParameterMap(cancellationToken);
 
                 typeSymbol = typeSymbol.RemoveAnonymousTypes(compilation);
                 typeSymbol = await ReplaceTypeParametersBasedOnTypeConstraintsAsync(
@@ -222,9 +220,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             {
                 return _typeArgumentToTypeParameterMap
                     ?? (
-                        _typeArgumentToTypeParameterMap = CreateTypeArgumentToTypeParameterMap(
-                            cancellationToken
-                        )
+                        _typeArgumentToTypeParameterMap =
+                            CreateTypeArgumentToTypeParameterMap(cancellationToken)
                     );
             }
 

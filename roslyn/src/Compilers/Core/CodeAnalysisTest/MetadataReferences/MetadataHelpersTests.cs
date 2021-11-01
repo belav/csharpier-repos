@@ -326,9 +326,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             int[] expectedArrayRanks = null
         )
         {
-            MetadataHelpers.AssemblyQualifiedTypeName decodedName = MetadataHelpers.DecodeTypeName(
-                nameToDecode
-            );
+            MetadataHelpers.AssemblyQualifiedTypeName decodedName =
+                MetadataHelpers.DecodeTypeName(nameToDecode);
             VerifyDecodedTypeName(
                 decodedName,
                 expectedTopLevelType,

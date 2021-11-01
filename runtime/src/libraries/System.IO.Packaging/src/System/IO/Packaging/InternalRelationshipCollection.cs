@@ -311,9 +311,8 @@ namespace System.IO.Packaging
 
                                     int expectedAttributesCount = 3;
 
-                                    string? targetModeAttributeValue = reader.GetAttribute(
-                                        TargetModeAttributeName
-                                    );
+                                    string? targetModeAttributeValue =
+                                        reader.GetAttribute(TargetModeAttributeName);
                                     if (targetModeAttributeValue != null)
                                         expectedAttributesCount++;
 

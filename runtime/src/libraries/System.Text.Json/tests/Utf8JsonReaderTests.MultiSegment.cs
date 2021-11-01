@@ -887,9 +887,8 @@ namespace System.Text.Json.Tests
             JsonTokenType lastToken
         )
         {
-            List<JsonTokenType> expectedTokenTypesWithoutComments = JsonTestHelper.GetTokenTypes(
-                jsonString
-            );
+            List<JsonTokenType> expectedTokenTypesWithoutComments =
+                JsonTestHelper.GetTokenTypes(jsonString);
 
             jsonString = JsonTestHelper.InsertCommentsEverywhere(jsonString);
 

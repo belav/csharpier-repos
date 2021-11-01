@@ -180,9 +180,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 .ConfigureAwait(false);
             if (makeMultiLine)
             {
-                conditionalExpression = conditionalExpression.WithAdditionalAnnotations(
-                    SpecializedFormattingAnnotation
-                );
+                conditionalExpression =
+                    conditionalExpression.WithAdditionalAnnotations(SpecializedFormattingAnnotation);
             }
 
             return MakeRef(generatorInternal, isRef, conditionalExpression);

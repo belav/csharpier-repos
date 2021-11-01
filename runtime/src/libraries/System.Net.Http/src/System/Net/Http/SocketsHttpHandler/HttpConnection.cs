@@ -460,9 +460,8 @@ namespace System.Net.Http
             // Send the request.
             if (NetEventSource.Log.IsEnabled())
                 Trace($"Sending request: {request}");
-            CancellationTokenRegistration cancellationRegistration = RegisterCancellation(
-                cancellationToken
-            );
+            CancellationTokenRegistration cancellationRegistration =
+                RegisterCancellation(cancellationToken);
             try
             {
                 if (HttpTelemetry.Log.IsEnabled())
@@ -1213,9 +1212,8 @@ namespace System.Net.Http
                 {
                     try
                     {
-                        response.ReasonPhrase = HttpRuleParser.DefaultHttpEncoding.GetString(
-                            reasonBytes
-                        );
+                        response.ReasonPhrase =
+                            HttpRuleParser.DefaultHttpEncoding.GetString(reasonBytes);
                     }
                     catch (FormatException error)
                     {

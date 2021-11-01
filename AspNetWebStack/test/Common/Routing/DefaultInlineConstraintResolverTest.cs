@@ -114,9 +114,8 @@ namespace System.Web.Mvc.Routing
                 "length(5, 10)"
             );
 
-            LengthRouteConstraint lengthConstraint = Assert.IsType<LengthRouteConstraint>(
-                constraint
-            );
+            LengthRouteConstraint lengthConstraint =
+                Assert.IsType<LengthRouteConstraint>(constraint);
             Assert.Equal(5, lengthConstraint.MinLength);
             Assert.Equal(10, lengthConstraint.MaxLength);
         }

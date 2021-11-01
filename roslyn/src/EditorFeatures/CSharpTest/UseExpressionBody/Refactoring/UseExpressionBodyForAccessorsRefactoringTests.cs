@@ -154,9 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     int Goo => Bar();
 }",
-                parameters: new TestParameters(
-                    options: UseExpressionBodyForAccessors_BlockBodyForProperties
-                )
+                parameters: new TestParameters(options: UseExpressionBodyForAccessors_BlockBodyForProperties)
             );
         }
 
@@ -174,9 +172,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         }
     }
 }",
-                parameters: new TestParameters(
-                    options: UseExpressionBodyForAccessors_ExpressionBodyForProperties
-                )
+                parameters: new TestParameters(options: UseExpressionBodyForAccessors_ExpressionBodyForProperties)
             );
         }
 
@@ -198,9 +194,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     int Goo => Bar();
 }",
-                parameters: new TestParameters(
-                    options: UseExpressionBodyForAccessors_BlockBodyForProperties_DisabledDiagnostic
-                )
+                parameters: new TestParameters(options: UseExpressionBodyForAccessors_BlockBodyForProperties_DisabledDiagnostic)
             );
         }
 
@@ -222,9 +216,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     int Goo => Bar();
 }",
-                parameters: new TestParameters(
-                    options: UseExpressionBodyForAccessors_ExpressionBodyForProperties_DisabledDiagnostic
-                )
+                parameters: new TestParameters(options: UseExpressionBodyForAccessors_ExpressionBodyForProperties_DisabledDiagnostic)
             );
         }
 
@@ -249,9 +241,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         get => Bar();
     }
 }",
-                parameters: new TestParameters(
-                    options: UseBlockBodyForAccessors_ExpressionBodyForProperties
-                )
+                parameters: new TestParameters(options: UseBlockBodyForAccessors_ExpressionBodyForProperties)
             );
         }
 
@@ -273,9 +263,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     int Goo => [||]Bar();
 }",
-                parameters: new TestParameters(
-                    options: UseBlockBodyForAccessors_BlockBodyForProperties
-                )
+                parameters: new TestParameters(options: UseBlockBodyForAccessors_BlockBodyForProperties)
             );
         }
 
@@ -287,9 +275,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     int Goo { get => [||]Bar(); }
 }",
-                parameters: new TestParameters(
-                    options: UseBlockBodyForAccessors_ExpressionBodyForProperties
-                )
+                parameters: new TestParameters(options: UseBlockBodyForAccessors_ExpressionBodyForProperties)
             );
         }
 
@@ -305,9 +291,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     int Goo => Bar();
 }",
-                parameters: new TestParameters(
-                    options: UseBlockBodyForAccessors_BlockBodyForProperties_DisabledDiagnostic
-                )
+                parameters: new TestParameters(options: UseBlockBodyForAccessors_BlockBodyForProperties_DisabledDiagnostic)
             );
         }
 
@@ -323,9 +307,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     int Goo => Bar();
 }",
-                parameters: new TestParameters(
-                    options: UseBlockBodyForAccessors_ExpressionBodyForProperties_DisabledDiagnostic
-                )
+                parameters: new TestParameters(options: UseBlockBodyForAccessors_ExpressionBodyForProperties_DisabledDiagnostic)
             );
         }
 
@@ -341,9 +323,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     int Goo => Bar();
 }",
-                parameters: new TestParameters(
-                    options: UseBlockBodyForAccessors_BlockBodyForProperties
-                )
+                parameters: new TestParameters(options: UseBlockBodyForAccessors_BlockBodyForProperties)
             );
         }
 
@@ -359,9 +339,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     int Goo => Bar();
 }",
-                parameters: new TestParameters(
-                    options: UseExpressionBodyForAccessors_BlockBodyForProperties
-                )
+                parameters: new TestParameters(options: UseExpressionBodyForAccessors_BlockBodyForProperties)
             );
         }
 
@@ -384,9 +362,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         }
     }
 }",
-                parameters: new TestParameters(
-                    options: UseExpressionBodyForAccessors_ExpressionBodyForProperties
-                )
+                parameters: new TestParameters(options: UseExpressionBodyForAccessors_ExpressionBodyForProperties)
             );
         }
     }

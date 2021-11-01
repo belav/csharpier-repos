@@ -149,9 +149,9 @@ namespace ILCompiler.DependencyAnalysisFramework
                 // onto the mark stack.
                 stackPopRandomizer = new Random(seed);
             }
-            _markStack = new RandomInsertStack<DependencyNodeCore<DependencyContextType>>(
-                stackPopRandomizer
-            );
+            _markStack = new RandomInsertStack<
+                DependencyNodeCore<DependencyContextType>
+            >(stackPopRandomizer);
         }
 
         /// <summary>
@@ -249,9 +249,7 @@ namespace ILCompiler.DependencyAnalysisFramework
             if (node.HasConditionalStaticDependencies)
             {
                 foreach (
-                    DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry dependency in node.GetConditionalStaticDependencies(
-                        _dependencyContext
-                    )
+                    DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry dependency in node.GetConditionalStaticDependencies(_dependencyContext)
                 )
                 {
                     if (dependency.OtherReasonNode.Marked)

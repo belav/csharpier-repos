@@ -292,9 +292,8 @@ namespace WebApiHelpPageWebHost.UnitTest
 
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
-                sampleGeneratorObj
-            );
+            HelpPageSampleGenerator sampleGenerator =
+                Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
             Assert.Same(sampleObjects, sampleGenerator.SampleObjects);
         }
 
@@ -311,9 +310,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             );
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
-                sampleGeneratorObj
-            );
+            HelpPageSampleGenerator sampleGenerator =
+                Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
             Assert.NotEmpty(sampleGenerator.ActionSamples);
             var actionSample = sampleGenerator.ActionSamples.First();
             Assert.Equal("values", actionSample.Key.ControllerName);
@@ -340,9 +338,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             );
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
-                sampleGeneratorObj
-            );
+            HelpPageSampleGenerator sampleGenerator =
+                Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
             Assert.NotEmpty(sampleGenerator.ActionSamples);
             var actionSample = sampleGenerator.ActionSamples.First();
             Assert.Equal("values", actionSample.Key.ControllerName);
@@ -367,9 +364,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             );
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
-                sampleGeneratorObj
-            );
+            HelpPageSampleGenerator sampleGenerator =
+                Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
             Assert.NotEmpty(sampleGenerator.ActionSamples);
             var actionSample = sampleGenerator.ActionSamples.First();
             Assert.Equal("values", actionSample.Key.ControllerName);
@@ -396,9 +392,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             );
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
-                sampleGeneratorObj
-            );
+            HelpPageSampleGenerator sampleGenerator =
+                Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
             Assert.NotEmpty(sampleGenerator.ActionSamples);
             var actionSample = sampleGenerator.ActionSamples.First();
             Assert.Equal("values", actionSample.Key.ControllerName);
@@ -418,9 +413,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.SetSampleForType(sample, new MediaTypeHeaderValue("image/png"), typeof(string));
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
-                sampleGeneratorObj
-            );
+            HelpPageSampleGenerator sampleGenerator =
+                Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
             Assert.NotEmpty(sampleGenerator.ActionSamples);
             var actionSample = sampleGenerator.ActionSamples.First();
             Assert.Equal(String.Empty, actionSample.Key.ControllerName);
@@ -438,9 +432,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.SetActualRequestType(typeof(string), "c", "a");
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
-                sampleGeneratorObj
-            );
+            HelpPageSampleGenerator sampleGenerator =
+                Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
             Assert.NotEmpty(sampleGenerator.ActualHttpMessageTypes);
             var actualType = sampleGenerator.ActualHttpMessageTypes.First();
             Assert.Equal("c", actualType.Key.ControllerName);
@@ -459,9 +452,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.SetActualRequestType(typeof(string), "c", "a", "id");
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
-                sampleGeneratorObj
-            );
+            HelpPageSampleGenerator sampleGenerator =
+                Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
             Assert.NotEmpty(sampleGenerator.ActualHttpMessageTypes);
             var actualType = sampleGenerator.ActualHttpMessageTypes.First();
             Assert.Equal("c", actualType.Key.ControllerName);
@@ -480,9 +472,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.SetActualResponseType(typeof(int), "c", "a");
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
-                sampleGeneratorObj
-            );
+            HelpPageSampleGenerator sampleGenerator =
+                Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
             Assert.NotEmpty(sampleGenerator.ActualHttpMessageTypes);
             var actualType = sampleGenerator.ActualHttpMessageTypes.First();
             Assert.Equal("c", actualType.Key.ControllerName);
@@ -501,9 +492,8 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.SetActualResponseType(typeof(int), "c", "a", "id");
             object sampleGeneratorObj;
             config.Properties.TryGetValue(typeof(HelpPageSampleGenerator), out sampleGeneratorObj);
-            HelpPageSampleGenerator sampleGenerator = Assert.IsType<HelpPageSampleGenerator>(
-                sampleGeneratorObj
-            );
+            HelpPageSampleGenerator sampleGenerator =
+                Assert.IsType<HelpPageSampleGenerator>(sampleGeneratorObj);
             Assert.NotEmpty(sampleGenerator.ActualHttpMessageTypes);
             var actualType = sampleGenerator.ActualHttpMessageTypes.First();
             Assert.Equal("c", actualType.Key.ControllerName);

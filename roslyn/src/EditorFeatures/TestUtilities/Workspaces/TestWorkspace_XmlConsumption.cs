@@ -415,9 +415,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             }
 
             foreach (
-                var sourceGeneratedDocumentElement in projectElement.Elements(
-                    DocumentFromSourceGeneratorElementName
-                )
+                var sourceGeneratedDocumentElement in projectElement.Elements(DocumentFromSourceGeneratorElementName)
             )
             {
                 var name = GetFileName(workspace, sourceGeneratedDocumentElement, ref documentId);
@@ -523,9 +521,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         )
         {
             ParseOptions parseOptions;
-            var preprocessorSymbolsAttribute = projectElement.Attribute(
-                PreprocessorSymbolsAttributeName
-            );
+            var preprocessorSymbolsAttribute =
+                projectElement.Attribute(PreprocessorSymbolsAttributeName);
             if (preprocessorSymbolsAttribute != null)
             {
                 parseOptions = GetPreProcessorParseOptions(language, preprocessorSymbolsAttribute);
@@ -646,9 +643,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     )
                 )
                 {
-                    return ((VisualBasicParseOptions)parseOptions).WithLanguageVersion(
-                        languageVersion
-                    );
+                    return (
+                        (VisualBasicParseOptions)parseOptions
+                    ).WithLanguageVersion(languageVersion);
                 }
             }
 
@@ -659,9 +656,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         private static DocumentationMode? GetDocumentationMode(XElement projectElement)
         {
-            var documentationModeAttribute = projectElement.Attribute(
-                DocumentationModeAttributeName
-            );
+            var documentationModeAttribute =
+                projectElement.Attribute(DocumentationModeAttributeName);
             if (documentationModeAttribute != null)
             {
                 return (DocumentationMode)Enum.Parse(
@@ -788,9 +784,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     .Elements(GlobalImportElementName)
                     .Select(x => GlobalImport.Parse(x.Value))
                     .ToList();
-                var rootNamespaceAttribute = compilationOptionsElement.Attribute(
-                    RootNamespaceAttributeName
-                );
+                var rootNamespaceAttribute =
+                    compilationOptionsElement.Attribute(RootNamespaceAttributeName);
                 if (rootNamespaceAttribute != null)
                 {
                     rootNamespace = rootNamespaceAttribute.Value;
@@ -805,25 +800,22 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     );
                 }
 
-                var checkOverflowAttribute = compilationOptionsElement.Attribute(
-                    CheckOverflowAttributeName
-                );
+                var checkOverflowAttribute =
+                    compilationOptionsElement.Attribute(CheckOverflowAttributeName);
                 if (checkOverflowAttribute != null)
                 {
                     checkOverflow = (bool)checkOverflowAttribute;
                 }
 
-                var allowUnsafeAttribute = compilationOptionsElement.Attribute(
-                    AllowUnsafeAttributeName
-                );
+                var allowUnsafeAttribute =
+                    compilationOptionsElement.Attribute(AllowUnsafeAttributeName);
                 if (allowUnsafeAttribute != null)
                 {
                     allowUnsafe = (bool)allowUnsafeAttribute;
                 }
 
-                var reportDiagnosticAttribute = compilationOptionsElement.Attribute(
-                    ReportDiagnosticAttributeName
-                );
+                var reportDiagnosticAttribute =
+                    compilationOptionsElement.Attribute(ReportDiagnosticAttributeName);
                 if (reportDiagnosticAttribute != null)
                 {
                     reportDiagnostic = (ReportDiagnostic)Enum.Parse(
@@ -832,17 +824,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     );
                 }
 
-                var cryptoKeyFileAttribute = compilationOptionsElement.Attribute(
-                    CryptoKeyFileAttributeName
-                );
+                var cryptoKeyFileAttribute =
+                    compilationOptionsElement.Attribute(CryptoKeyFileAttributeName);
                 if (cryptoKeyFileAttribute != null)
                 {
                     cryptoKeyFile = (string)cryptoKeyFileAttribute;
                 }
 
-                var strongNameProviderAttribute = compilationOptionsElement.Attribute(
-                    StrongNameProviderAttributeName
-                );
+                var strongNameProviderAttribute =
+                    compilationOptionsElement.Attribute(StrongNameProviderAttributeName);
                 if (strongNameProviderAttribute != null)
                 {
                     var type = Type.GetType((string)strongNameProviderAttribute);
@@ -859,9 +849,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     }
                 }
 
-                var delaySignAttribute = compilationOptionsElement.Attribute(
-                    DelaySignAttributeName
-                );
+                var delaySignAttribute =
+                    compilationOptionsElement.Attribute(DelaySignAttributeName);
                 if (delaySignAttribute != null)
                 {
                     delaySign = (bool)delaySignAttribute;
@@ -876,9 +865,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     );
                 }
 
-                var outputTypeAttribute = compilationOptionsElement.Attribute(
-                    OutputTypeAttributeName
-                );
+                var outputTypeAttribute =
+                    compilationOptionsElement.Attribute(OutputTypeAttributeName);
                 if (
                     outputTypeAttribute != null
                     && outputTypeAttribute.Value == "WindowsRuntimeMetadata"
@@ -977,12 +965,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 // This is a linked file. Use the filePath and markup from the referenced document.
 
-                var originalAssemblyName = documentElement.Attribute(
-                    LinkAssemblyNameAttributeName
-                )?.Value;
-                var originalProjectName = documentElement.Attribute(
-                    LinkProjectNameAttributeName
-                )?.Value;
+                var originalAssemblyName =
+                    documentElement.Attribute(LinkAssemblyNameAttributeName)?.Value;
+                var originalProjectName =
+                    documentElement.Attribute(LinkProjectNameAttributeName)?.Value;
 
                 if (originalAssemblyName == null && originalProjectName == null)
                 {
@@ -1025,9 +1011,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     }
                 }
 
-                var originalDocumentPath = documentElement.Attribute(
-                    LinkFilePathAttributeName
-                )?.Value;
+                var originalDocumentPath =
+                    documentElement.Attribute(LinkFilePathAttributeName)?.Value;
 
                 if (originalDocumentPath == null)
                 {
@@ -1227,9 +1212,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     : default;
 
             var includeXmlDocComments = false;
-            var includeXmlDocCommentsAttribute = referencedSource.Attribute(
-                IncludeXmlDocCommentsAttributeName
-            );
+            var includeXmlDocCommentsAttribute =
+                referencedSource.Attribute(IncludeXmlDocCommentsAttributeName);
             if (
                 includeXmlDocCommentsAttribute != null
                 && ((bool?)includeXmlDocCommentsAttribute).HasValue
@@ -1319,18 +1303,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 // objects that are no longer in use. There are no public APIs available to directly dispose of these
                 // images, so we are relying on GC running finalizers to avoid OutOfMemoryException during tests.
                 var content = File.ReadAllBytes(reference.Value);
-                var peImage = ImmutableArrayExtensions.DangerousCreateFromUnderlyingArray(
-                    ref content
-                );
+                var peImage =
+                    ImmutableArrayExtensions.DangerousCreateFromUnderlyingArray(ref content);
                 references.Add(
                     MetadataReference.CreateFromImage(peImage, filePath: reference.Value)
                 );
             }
 
             foreach (
-                var metadataReferenceFromSource in element.Elements(
-                    MetadataReferenceFromSourceElementName
-                )
+                var metadataReferenceFromSource in element.Elements(MetadataReferenceFromSourceElementName)
             )
             {
                 references.Add(
@@ -1405,9 +1386,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 }
             }
 
-            var commonReferencesWithoutValueTupleAttribute = element.Attribute(
-                CommonReferencesWithoutValueTupleAttributeName
-            );
+            var commonReferencesWithoutValueTupleAttribute =
+                element.Attribute(CommonReferencesWithoutValueTupleAttributeName);
             if (
                 commonReferencesWithoutValueTupleAttribute != null
                 && ((bool?)commonReferencesWithoutValueTupleAttribute).HasValue

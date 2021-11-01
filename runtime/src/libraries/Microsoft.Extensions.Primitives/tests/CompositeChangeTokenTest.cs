@@ -24,9 +24,8 @@ namespace Microsoft.Extensions.Primitives
             var thirdCancellationToken = thirdCancellationTokenSource.Token;
 
             var firstCancellationChangeToken = new CancellationChangeToken(firstCancellationToken);
-            var secondCancellationChangeToken = new CancellationChangeToken(
-                secondCancellationToken
-            );
+            var secondCancellationChangeToken =
+                new CancellationChangeToken(secondCancellationToken);
             var thirdCancellationChangeToken = new CancellationChangeToken(thirdCancellationToken);
 
             var compositeChangeToken = new CompositeChangeToken(

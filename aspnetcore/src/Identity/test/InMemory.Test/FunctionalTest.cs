@@ -452,9 +452,7 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                                             {
                                                 var user = await userManager.FindByNameAsync("hao");
                                                 var result =
-                                                    await userManager.UpdateSecurityStampAsync(
-                                                        user
-                                                    );
+                                                    await userManager.UpdateSecurityStampAsync(user);
                                                 res.StatusCode = result.Succeeded ? 200 : 500;
                                             }
                                             else if (
@@ -481,9 +479,7 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                                             )
                                             {
                                                 var user = await userManager.FindByNameAsync("hao");
-                                                await signInManager.RememberTwoFactorClientAsync(
-                                                    user
-                                                );
+                                                await signInManager.RememberTwoFactorClientAsync(user);
                                                 res.StatusCode = 200;
                                             }
                                             else if (
@@ -493,9 +489,7 @@ namespace Microsoft.AspNetCore.Identity.InMemory
                                             {
                                                 var user = await userManager.FindByNameAsync("hao");
                                                 var result =
-                                                    await signInManager.IsTwoFactorClientRememberedAsync(
-                                                        user
-                                                    );
+                                                    await signInManager.IsTwoFactorClientRememberedAsync(user);
                                                 res.StatusCode = result ? 200 : 500;
                                             }
                                             else if (

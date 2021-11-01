@@ -68,9 +68,9 @@ namespace Microsoft.EntityFrameworkCore
             );
 
             var extension = new FakeDbContextOptionsExtension1();
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension);
 
             Assert.Same(
                 extension,
@@ -89,12 +89,12 @@ namespace Microsoft.EntityFrameworkCore
             var extension1 = new FakeDbContextOptionsExtension1();
             var extension2 = new FakeDbContextOptionsExtension2();
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension1
-            );
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension2
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension1);
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension2);
 
             Assert.Equal(2, optionsBuilder.Options.Extensions.Count());
             Assert.Contains(extension1, optionsBuilder.Options.Extensions);
@@ -118,12 +118,12 @@ namespace Microsoft.EntityFrameworkCore
             var extension1 = new FakeDbContextOptionsExtension1 { Something = "One " };
             var extension2 = new FakeDbContextOptionsExtension1 { Something = "Two " };
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension1
-            );
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension2
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension1);
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension2);
 
             Assert.Single(optionsBuilder.Options.Extensions);
             Assert.DoesNotContain(extension1, optionsBuilder.Options.Extensions);
@@ -144,9 +144,9 @@ namespace Microsoft.EntityFrameworkCore
 
             var extension = new FakeDbContextOptionsExtension2();
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension);
 
             Assert.True(optionsBuilder.IsConfigured);
             Assert.False(extension.AppliedServices);
@@ -160,9 +160,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.False(optionsBuilder.IsConfigured);
 
             var extension = new FakeDbContextOptionsExtension1();
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension);
 
             Assert.False(optionsBuilder.IsConfigured);
             Assert.False(extension.AppliedServices);
@@ -284,9 +284,7 @@ namespace Microsoft.EntityFrameworkCore
             var serviceProvider = new FakeServiceProvider();
 
             var optionsBuilder = GenericCheck(
-                new DbContextOptionsBuilder<UnkoolContext>().UseInternalServiceProvider(
-                    serviceProvider
-                )
+                new DbContextOptionsBuilder<UnkoolContext>().UseInternalServiceProvider(serviceProvider)
             );
 
             Assert.Same(

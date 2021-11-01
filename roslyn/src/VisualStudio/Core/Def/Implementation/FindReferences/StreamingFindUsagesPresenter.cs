@@ -29,13 +29,11 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         : ForegroundThreadAffinitizedObject,
           IStreamingFindUsagesPresenter
     {
-        public const string RoslynFindUsagesTableDataSourceIdentifier = nameof(
-            RoslynFindUsagesTableDataSourceIdentifier
-        );
+        public const string RoslynFindUsagesTableDataSourceIdentifier =
+            nameof(RoslynFindUsagesTableDataSourceIdentifier);
 
-        public const string RoslynFindUsagesTableDataSourceSourceTypeIdentifier = nameof(
-            RoslynFindUsagesTableDataSourceSourceTypeIdentifier
-        );
+        public const string RoslynFindUsagesTableDataSourceSourceTypeIdentifier =
+            nameof(RoslynFindUsagesTableDataSourceSourceTypeIdentifier);
 
         private readonly IServiceProvider _serviceProvider;
 

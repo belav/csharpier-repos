@@ -514,9 +514,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 public MockDiagnosticAnalyzer(
                     ImmutableArray<(string id, string category)> reportedDiagnosticIdsWithCategories
                 ) =>
-                    SupportedDiagnostics = CreateSupportedDiagnostics(
-                        reportedDiagnosticIdsWithCategories
-                    );
+                    SupportedDiagnostics =
+                        CreateSupportedDiagnostics(reportedDiagnosticIdsWithCategories);
 
                 public MockDiagnosticAnalyzer(string diagnosticId, string category)
                     : this(ImmutableArray.Create((diagnosticId, category))) { }
@@ -655,9 +654,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             const string id1 = "ID1";
             const string id2 = "ID2";
             var reportedDiagnosticIds = ImmutableArray.Create(id1, id2);
-            var diagnosticAnalyzer = new MockAnalyzerReference.MockDiagnosticAnalyzer(
-                reportedDiagnosticIds
-            );
+            var diagnosticAnalyzer =
+                new MockAnalyzerReference.MockDiagnosticAnalyzer(reportedDiagnosticIds);
 
             // Only NuGet code fix provider which fixes both reported diagnostic IDs.
             // Verify only NuGet fixer's code actions registered and they fix all IDs.
@@ -693,13 +691,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             // Verify both NuGet and Vsix fixer's code actions registered.
             await TestNuGetAndVsixCodeFixersCoreAsync(
                 nugetFixer: new NuGetCodeFixProvider(ImmutableArray.Create(id1)),
-                expectedDiagnosticIdsWithRegisteredCodeActionsByNuGetFixer: ImmutableArray.Create(
-                    id1
-                ),
+                expectedDiagnosticIdsWithRegisteredCodeActionsByNuGetFixer: ImmutableArray.Create(id1),
                 vsixFixer: new VsixCodeFixProvider(ImmutableArray.Create(id2)),
-                expectedDiagnosticIdsWithRegisteredCodeActionsByVsixFixer: ImmutableArray.Create(
-                    id2
-                ),
+                expectedDiagnosticIdsWithRegisteredCodeActionsByVsixFixer: ImmutableArray.Create(id2),
                 diagnosticAnalyzer
             );
 
@@ -708,13 +702,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             // there are no duplicates and NuGet ones are preferred for duplicates.
             await TestNuGetAndVsixCodeFixersCoreAsync(
                 nugetFixer: new NuGetCodeFixProvider(ImmutableArray.Create(id1)),
-                expectedDiagnosticIdsWithRegisteredCodeActionsByNuGetFixer: ImmutableArray.Create(
-                    id1
-                ),
+                expectedDiagnosticIdsWithRegisteredCodeActionsByNuGetFixer: ImmutableArray.Create(id1),
                 vsixFixer: new VsixCodeFixProvider(reportedDiagnosticIds),
-                expectedDiagnosticIdsWithRegisteredCodeActionsByVsixFixer: ImmutableArray.Create(
-                    id2
-                ),
+                expectedDiagnosticIdsWithRegisteredCodeActionsByVsixFixer: ImmutableArray.Create(id2),
                 diagnosticAnalyzer
             );
         }
@@ -737,9 +727,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             var actualDiagnosticIdsWithRegisteredCodeActionsByNuGetFixer =
                 nugetFixerRegisteredActions.SelectMany(a => a.Diagnostics).Select(d => d.Id);
             Assert.True(
-                actualDiagnosticIdsWithRegisteredCodeActionsByNuGetFixer.SetEquals(
-                    expectedDiagnosticIdsWithRegisteredCodeActionsByNuGetFixer
-                )
+                actualDiagnosticIdsWithRegisteredCodeActionsByNuGetFixer.SetEquals(expectedDiagnosticIdsWithRegisteredCodeActionsByNuGetFixer)
             );
 
             var vsixFixerRegisteredActions = fixes.Where(
@@ -749,9 +737,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 .SelectMany(a => a.Diagnostics)
                 .Select(d => d.Id);
             Assert.True(
-                actualDiagnosticIdsWithRegisteredCodeActionsByVsixFixer.SetEquals(
-                    expectedDiagnosticIdsWithRegisteredCodeActionsByVsixFixer
-                )
+                actualDiagnosticIdsWithRegisteredCodeActionsByVsixFixer.SetEquals(expectedDiagnosticIdsWithRegisteredCodeActionsByVsixFixer)
             );
         }
 

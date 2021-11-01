@@ -193,9 +193,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 Mock.Of<IServiceProvider>()
             );
 
-            var services = new ServiceCollection().AddSingleton<IInlineConstraintResolver>(
-                inlineConstraintResolver
-            );
+            var services =
+                new ServiceCollection().AddSingleton<IInlineConstraintResolver>(inlineConstraintResolver);
 
             services.AddRouting();
             services.AddOptions();

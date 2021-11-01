@@ -52,9 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
                 _vsServiceProvider = (IAsyncServiceProvider)vsServiceProvider;
                 _listenerProvider = listenerProvider;
                 _threadingContext = threadingContext;
-                _callbackDispatchers = new RemoteServiceCallbackDispatcherRegistry(
-                    callbackDispatchers
-                );
+                _callbackDispatchers =
+                    new RemoteServiceCallbackDispatcherRegistry(callbackDispatchers);
             }
 
             [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]

@@ -86,9 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     return true;
                 }
 
-                var partitionKeyProperty = _readItemExpression.EntityType.FindProperty(
-                    partitionKeyPropertyName
-                );
+                var partitionKeyProperty =
+                    _readItemExpression.EntityType.FindProperty(partitionKeyPropertyName);
 
                 if (TryGetParameterValue(partitionKeyProperty, out var value))
                 {

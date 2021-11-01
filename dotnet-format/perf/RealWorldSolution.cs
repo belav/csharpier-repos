@@ -33,9 +33,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
         [Benchmark(Description = "Formatting Solution")]
         public void FilesFormattedSolution()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
-                UnformattedSolutionFilePath
-            );
+            var (workspacePath, workspaceType) =
+                WorkspacePathHelper.GetWorkspaceInfo(UnformattedSolutionFilePath);
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,
@@ -60,9 +59,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
         [Benchmark(Description = "Formatting Folder", Baseline = true)]
         public void FilesFormattedFolder()
         {
-            var (workspacePath, workspaceType) = WorkspacePathHelper.GetWorkspaceInfo(
-                UnformattedFolderFilePath
-            );
+            var (workspacePath, workspaceType) =
+                WorkspacePathHelper.GetWorkspaceInfo(UnformattedFolderFilePath);
             var options = new FormatOptions(
                 workspacePath,
                 workspaceType,

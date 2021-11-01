@@ -70,15 +70,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 var currentHttpHeadersGenerated = File.ReadAllText(httpHeadersGeneratedPath);
                 var currentHttpProtocolGenerated = File.ReadAllText(httpProtocolGeneratedPath);
                 var currentHttpUtilitiesGenerated = File.ReadAllText(httpUtilitiesGeneratedPath);
-                var currentHttp2ConnectionGenerated = File.ReadAllText(
-                    http2ConnectionGeneratedPath
-                );
-                var currentTransportConnectionBaseGenerated = File.ReadAllText(
-                    transportMultiplexedConnectionGeneratedPath
-                );
-                var currentTransportConnectionGenerated = File.ReadAllText(
-                    transportConnectionGeneratedPath
-                );
+                var currentHttp2ConnectionGenerated =
+                    File.ReadAllText(http2ConnectionGeneratedPath);
+                var currentTransportConnectionBaseGenerated =
+                    File.ReadAllText(transportMultiplexedConnectionGeneratedPath);
+                var currentTransportConnectionGenerated =
+                    File.ReadAllText(transportConnectionGeneratedPath);
 
                 CodeGenerator.Program.Run(
                     testHttpHeadersGeneratedPath,
@@ -92,15 +89,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 var testHttpHeadersGenerated = File.ReadAllText(testHttpHeadersGeneratedPath);
                 var testHttpProtocolGenerated = File.ReadAllText(testHttpProtocolGeneratedPath);
                 var testHttpUtilitiesGenerated = File.ReadAllText(testHttpUtilitiesGeneratedPath);
-                var testHttp2ConnectionGenerated = File.ReadAllText(
-                    testHttp2ConnectionGeneratedPath
-                );
-                var testTransportMultiplxedConnectionGenerated = File.ReadAllText(
-                    testTransportMultiplexedConnectionGeneratedPath
-                );
-                var testTransportConnectionGenerated = File.ReadAllText(
-                    testTransportConnectionGeneratedPath
-                );
+                var testHttp2ConnectionGenerated =
+                    File.ReadAllText(testHttp2ConnectionGeneratedPath);
+                var testTransportMultiplxedConnectionGenerated =
+                    File.ReadAllText(testTransportMultiplexedConnectionGeneratedPath);
+                var testTransportConnectionGenerated =
+                    File.ReadAllText(testTransportConnectionGeneratedPath);
 
                 AssertFileContentEqual(
                     currentHttpHeadersGenerated,

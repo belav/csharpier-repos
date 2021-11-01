@@ -1221,9 +1221,7 @@ FROM [Products] AS [p]"
             bool async
         )
         {
-            await base.Where_negated_boolean_expression_compared_to_another_negated_boolean_expression(
-                async
-            );
+            await base.Where_negated_boolean_expression_compared_to_another_negated_boolean_expression(async);
 
             AssertSql(
                 @"SELECT [p].[ProductID], [p].[Discontinued], [p].[ProductName], [p].[SupplierID], [p].[UnitPrice], [p].[UnitsInStock]
@@ -2331,9 +2329,7 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR', N'ANTON')"
             bool async
         )
         {
-            await base.Multiple_OrElse_on_same_column_with_null_constant_comparison_converted_to_in(
-                async
-            );
+            await base.Multiple_OrElse_on_same_column_with_null_constant_comparison_converted_to_in(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
@@ -2346,9 +2342,7 @@ WHERE [c].[Region] IN (N'WA', N'OR', N'BC') OR [c].[Region] IS NULL"
             bool async
         )
         {
-            await base.Constant_array_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in(
-                async
-            );
+            await base.Constant_array_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
@@ -2361,9 +2355,7 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR', N'ANTON')"
             bool async
         )
         {
-            await base.Constant_array_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in_with_overlap(
-                async
-            );
+            await base.Constant_array_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in_with_overlap(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
@@ -2376,9 +2368,7 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR', N'ANTON')"
             bool async
         )
         {
-            await base.Constant_array_Contains_OrElse_another_Contains_gets_combined_to_one_in_with_overlap(
-                async
-            );
+            await base.Constant_array_Contains_OrElse_another_Contains_gets_combined_to_one_in_with_overlap(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
@@ -2391,9 +2381,7 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR', N'ANTON')"
             bool async
         )
         {
-            await base.Constant_array_Contains_AndAlso_another_Contains_gets_combined_to_one_in_with_overlap(
-                async
-            );
+            await base.Constant_array_Contains_AndAlso_another_Contains_gets_combined_to_one_in_with_overlap(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
@@ -2424,9 +2412,7 @@ WHERE (([c].[CustomerID] <> @__prm1_0) AND ([c].[CustomerID] <> @__prm2_1)) AND 
             bool async
         )
         {
-            await base.Array_of_parameters_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in(
-                async
-            );
+            await base.Array_of_parameters_Contains_OrElse_comparison_with_constant_gets_combined_to_one_in(async);
 
             // issue #21462
             AssertSql(
@@ -2440,9 +2426,7 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR') OR ([c].[CustomerID] = N'ANTON')"
             bool async
         )
         {
-            await base.Multiple_OrElse_on_same_column_with_null_parameter_comparison_converted_to_in(
-                async
-            );
+            await base.Multiple_OrElse_on_same_column_with_null_parameter_comparison_converted_to_in(async);
 
             // issue #21462
             AssertSql(
@@ -2469,9 +2453,7 @@ WHERE [c].[CustomerID] IN (N'ALFKI', N'ANATR') OR ([c].[CustomerID] = N'ANTON')"
             bool async
         )
         {
-            await base.Parameter_array_Contains_OrElse_comparison_with_parameter_with_overlap(
-                async
-            );
+            await base.Parameter_array_Contains_OrElse_comparison_with_parameter_with_overlap(async);
 
             AssertSql(
                 @"@__prm1_0='ANTON' (Size = 5) (DbType = StringFixedLength)

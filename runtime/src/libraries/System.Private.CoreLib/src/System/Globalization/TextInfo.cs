@@ -277,12 +277,8 @@ namespace System.Globalization
                             }
                             tempValue =
                                 (toUpper)
-                                    ? Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(
-                                          tempValue
-                                      )
-                                    : Utf16Utility.ConvertAllAsciiCharsInUInt32ToLowercase(
-                                          tempValue
-                                      );
+                                    ? Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(tempValue)
+                                    : Utf16Utility.ConvertAllAsciiCharsInUInt32ToLowercase(tempValue);
                             Unsafe.WriteUnaligned<uint>(pDestination + currIdx, tempValue);
 
                             tempValue = Unsafe.ReadUnaligned<uint>(pSource + currIdx + 2);
@@ -292,12 +288,8 @@ namespace System.Globalization
                             }
                             tempValue =
                                 (toUpper)
-                                    ? Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(
-                                          tempValue
-                                      )
-                                    : Utf16Utility.ConvertAllAsciiCharsInUInt32ToLowercase(
-                                          tempValue
-                                      );
+                                    ? Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(tempValue)
+                                    : Utf16Utility.ConvertAllAsciiCharsInUInt32ToLowercase(tempValue);
                             Unsafe.WriteUnaligned<uint>(pDestination + currIdx + 2, tempValue);
                             currIdx += 4;
                         } while (currIdx <= lastIndexWhereCanReadFourChars);

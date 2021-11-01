@@ -37,12 +37,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         protected override EventProcessor CreateEventProcessor()
         {
-            var suppressionStateEventProcessor = new SuppressionStateEventProcessor(
-                _suppressionStateService
-            );
-            return new AggregateDiagnosticTableControlEventProcessor(
-                additionalEventProcessors: suppressionStateEventProcessor
-            );
+            var suppressionStateEventProcessor =
+                new SuppressionStateEventProcessor(_suppressionStateService);
+            return new AggregateDiagnosticTableControlEventProcessor(additionalEventProcessors: suppressionStateEventProcessor);
         }
     }
 }

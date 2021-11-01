@@ -242,9 +242,8 @@ namespace System.Runtime.Serialization
                 {
                     if (_memberPrimitiveContract == PrimitiveDataContract.NullContract)
                     {
-                        _memberPrimitiveContract = PrimitiveDataContract.GetPrimitiveDataContract(
-                            MemberType
-                        );
+                        _memberPrimitiveContract =
+                            PrimitiveDataContract.GetPrimitiveDataContract(MemberType);
                     }
 
                     return _memberPrimitiveContract;

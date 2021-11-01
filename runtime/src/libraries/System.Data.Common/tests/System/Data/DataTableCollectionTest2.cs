@@ -145,9 +145,8 @@ namespace System.Data.Tests
         {
             _counter = 0;
             var ds = new DataSet();
-            ds.Tables.CollectionChanged += new CollectionChangeEventHandler(
-                Tables_CollectionChanged
-            );
+            ds.Tables.CollectionChanged +=
+                new CollectionChangeEventHandler(Tables_CollectionChanged);
             ds.Tables.Add();
             ds.Tables.Add();
             Assert.Equal(2, _counter);
@@ -167,9 +166,8 @@ namespace System.Data.Tests
         {
             _counter = 0;
             var ds = new DataSet();
-            ds.Tables.CollectionChanging += new CollectionChangeEventHandler(
-                Tables_CollectionChanging
-            );
+            ds.Tables.CollectionChanging +=
+                new CollectionChangeEventHandler(Tables_CollectionChanging);
             ds.Tables.Add();
             ds.Tables.Add();
             Assert.Equal(2, _counter);

@@ -162,9 +162,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     return result;
                 }
 
-                DebuggerDisplayAttribute debuggerDisplay = GetApplicableDebuggerDisplayAttribute(
-                    typeInfo
-                );
+                DebuggerDisplayAttribute debuggerDisplay =
+                    GetApplicableDebuggerDisplayAttribute(typeInfo);
                 if (debuggerDisplay != null)
                 {
                     debuggerDisplayName = debuggerDisplay.Name;

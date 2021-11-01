@@ -438,12 +438,10 @@ class C
 
                 // get expected attr symbol
                 NamespaceSymbol sysNS = Get_System_NamespaceSymbol(m);
-                NamespaceSymbol interopNS = Get_System_Runtime_InteropServices_NamespaceSymbol(
-                    sysNS
-                );
-                NamespaceSymbol compsrvNS = Get_System_Runtime_CompilerServices_NamespaceSymbol(
-                    sysNS
-                );
+                NamespaceSymbol interopNS =
+                    Get_System_Runtime_InteropServices_NamespaceSymbol(sysNS);
+                NamespaceSymbol compsrvNS =
+                    Get_System_Runtime_CompilerServices_NamespaceSymbol(sysNS);
 
                 var serSym = sysNS.GetTypeMember("SerializableAttribute");
                 var nosSym = sysNS.GetTypeMember("NonSerializedAttribute");
@@ -4337,9 +4335,8 @@ public class MainClass
             Func<bool, Action<ModuleSymbol>> attributeValidator = isFromSource =>
                 (ModuleSymbol m) =>
                 {
-                    NamespaceSymbol interopNS = Get_System_Runtime_InteropServices_NamespaceSymbol(
-                        m
-                    );
+                    NamespaceSymbol interopNS =
+                        Get_System_Runtime_InteropServices_NamespaceSymbol(m);
                     var guidType = interopNS.GetTypeMember("GuidAttribute");
                     var comImportType = interopNS.GetTypeMember("ComImportAttribute");
                     var coClassType = interopNS.GetTypeMember("CoClassAttribute");
@@ -4492,9 +4489,8 @@ public class MainClass
             Func<bool, Action<ModuleSymbol>> attributeValidator = isFromSource =>
                 (ModuleSymbol m) =>
                 {
-                    NamespaceSymbol interopNS = Get_System_Runtime_InteropServices_NamespaceSymbol(
-                        m
-                    );
+                    NamespaceSymbol interopNS =
+                        Get_System_Runtime_InteropServices_NamespaceSymbol(m);
                     var guidType = interopNS.GetTypeMember("GuidAttribute");
                     var comImportType = interopNS.GetTypeMember("ComImportAttribute");
                     var coClassType = interopNS.GetTypeMember("CoClassAttribute");

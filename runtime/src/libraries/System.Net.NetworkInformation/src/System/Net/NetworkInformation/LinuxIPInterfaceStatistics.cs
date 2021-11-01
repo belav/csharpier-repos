@@ -30,9 +30,8 @@ namespace System.Net.NetworkInformation
                 name,
                 NetworkFiles.TransmitQueueLengthFileName
             );
-            _transmitQueueLength = StringParsingHelpers.ParseRawIntFile(
-                transmitQueueLengthFilePath
-            );
+            _transmitQueueLength =
+                StringParsingHelpers.ParseRawIntFile(transmitQueueLengthFilePath);
         }
 
         public override long BytesReceived

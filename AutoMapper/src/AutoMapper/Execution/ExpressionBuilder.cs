@@ -176,9 +176,8 @@ namespace AutoMapper.Execution
                             return destinationParameter;
                         }
                         var destinationElementType = GetEnumerableElementType(destinationType);
-                        destinationCollectionType = typeof(ICollection<>).MakeGenericType(
-                            destinationElementType
-                        );
+                        destinationCollectionType =
+                            typeof(ICollection<>).MakeGenericType(destinationElementType);
                         collection = Convert(collection, destinationCollectionType);
                     }
                     clearMethod = destinationCollectionType.GetMethod("Clear");

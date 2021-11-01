@@ -453,9 +453,7 @@ namespace System.Net.Http.Functional.Tests
                             Assert.Equal(proxyServer.Uri, handler.Proxy.GetProxy(uri));
 
                             Task<HttpResponseMessage> clientTask = client.GetAsync(uri);
-                            await server.AcceptConnectionSendResponseAndCloseAsync(
-                                content: Content
-                            );
+                            await server.AcceptConnectionSendResponseAndCloseAsync(content: Content);
                             using (var response = await clientTask)
                             {
                                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -506,12 +504,8 @@ namespace System.Net.Http.Functional.Tests
                                             await server2.AcceptConnectionAsync(
                                                 async connection2 =>
                                                 {
-                                                    await connection1.HandleRequestAsync(
-                                                        content: Content
-                                                    );
-                                                    await connection2.HandleRequestAsync(
-                                                        content: Content
-                                                    );
+                                                    await connection1.HandleRequestAsync(content: Content);
+                                                    await connection2.HandleRequestAsync(content: Content);
                                                 }
                                             );
                                         }

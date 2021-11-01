@@ -270,9 +270,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     or <see langword="null" /> if they have not common parent.
         /// </returns>
         new IConventionEntityType? FindClosestCommonParent(IReadOnlyEntityType otherEntityType) =>
-            (IConventionEntityType?)((IReadOnlyEntityType)this).FindClosestCommonParent(
-                otherEntityType
-            );
+            (IConventionEntityType?)(
+                (IReadOnlyEntityType)this
+            ).FindClosestCommonParent(otherEntityType);
 
         /// <summary>
         ///     Gets the least derived type between the specified two.
@@ -721,9 +721,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="name"> The name of the navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
         new IConventionSkipNavigation? FindDeclaredSkipNavigation(string name) =>
-            (IConventionSkipNavigation?)((IReadOnlyEntityType)this).FindDeclaredSkipNavigation(
-                name
-            );
+            (IConventionSkipNavigation?)(
+                (IReadOnlyEntityType)this
+            ).FindDeclaredSkipNavigation(name);
 
         /// <summary>
         ///     <para>
@@ -1043,9 +1043,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         new IReadOnlyList<IConventionProperty>? FindProperties(
             IReadOnlyList<string> propertyNames
         ) =>
-            (IReadOnlyList<IConventionProperty>?)((IReadOnlyEntityType)this).FindProperties(
-                propertyNames
-            );
+            (IReadOnlyList<IConventionProperty>?)(
+                (IReadOnlyEntityType)this
+            ).FindProperties(propertyNames);
 
         /// <summary>
         ///     <para>

@@ -82,9 +82,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 cspParameters.Flags = CspProviderFlags.UseExistingKey;
 
                 using (
-                    RSACryptoServiceProvider stillPersistedKey = new RSACryptoServiceProvider(
-                        cspParameters
-                    )
+                    RSACryptoServiceProvider stillPersistedKey =
+                        new RSACryptoServiceProvider(cspParameters)
                 )
                 {
                     byte[] signature2 = stillPersistedKey.SignData(
@@ -191,9 +190,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 cspParameters.Flags = CspProviderFlags.UseExistingKey;
 
                 using (
-                    RSACryptoServiceProvider stillPersistedKey = new RSACryptoServiceProvider(
-                        cspParameters
-                    )
+                    RSACryptoServiceProvider stillPersistedKey =
+                        new RSACryptoServiceProvider(cspParameters)
                 )
                 {
                     byte[] signature2 = stillPersistedKey.SignData(

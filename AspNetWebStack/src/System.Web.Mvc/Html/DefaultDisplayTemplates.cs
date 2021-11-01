@@ -100,9 +100,8 @@ namespace System.Web.Mvc.Html
             {
                 typeInCollection = genericEnumerableType.GetGenericArguments()[0];
             }
-            bool typeInCollectionIsNullableValueType = TypeHelpers.IsNullableValueType(
-                typeInCollection
-            );
+            bool typeInCollectionIsNullableValueType =
+                TypeHelpers.IsNullableValueType(typeInCollection);
 
             string oldPrefix = html.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix;
 

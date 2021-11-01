@@ -33,9 +33,7 @@ namespace System.Drawing
 
                 using (
                     DeviceContext dc =
-                        _printPageEventArgs.PageSettings.PrinterSettings.CreateDeviceContext(
-                            hdevMode
-                        )
+                        _printPageEventArgs.PageSettings.PrinterSettings.CreateDeviceContext(hdevMode)
                 )
                 {
                     using (Graphics graphics = Graphics.FromHdcInternal(dc.Hdc))

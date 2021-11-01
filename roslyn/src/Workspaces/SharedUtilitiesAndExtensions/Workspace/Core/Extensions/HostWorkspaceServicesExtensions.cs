@@ -35,9 +35,7 @@ namespace Microsoft.CodeAnalysis.Host
 
 #if CODE_STYLE
             languageServices =
-                CodeStyleHostLanguageServices.GetRequiredMappedCodeStyleLanguageServices(
-                    languageServices
-                );
+                CodeStyleHostLanguageServices.GetRequiredMappedCodeStyleLanguageServices(languageServices);
 #endif
             return languageServices;
         }

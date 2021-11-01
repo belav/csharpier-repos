@@ -858,9 +858,8 @@ namespace System.Runtime.Serialization
                         }
                         else
                         {
-                            _itemContract = DataContract.GetDataContractFromGeneratedAssembly(
-                                ItemType
-                            );
+                            _itemContract =
+                                DataContract.GetDataContractFromGeneratedAssembly(ItemType);
                             if (_itemContract == null)
                             {
                                 _itemContract = DataContract.GetDataContract(ItemType);
@@ -1015,9 +1014,7 @@ namespace System.Runtime.Serialization
 
                             {
                                 var buildIncrementCollectionCountDelegate =
-                                    BuildIncrementCollectionCountDelegateMethod.MakeGenericMethod(
-                                        ItemType
-                                    );
+                                    BuildIncrementCollectionCountDelegateMethod.MakeGenericMethod(ItemType);
                                 _incrementCollectionCountDelegate =
                                     (IncrementCollectionCountDelegate)buildIncrementCollectionCountDelegate.Invoke(
                                         null,
@@ -1129,9 +1126,8 @@ namespace System.Runtime.Serialization
                 if (Kind == CollectionKind.GenericDictionary)
                 {
                     Type[] keyValueTypes = ItemType.GetGenericArguments();
-                    enumeratorType = Globals.TypeOfGenericDictionaryEnumerator.MakeGenericType(
-                        keyValueTypes
-                    );
+                    enumeratorType =
+                        Globals.TypeOfGenericDictionaryEnumerator.MakeGenericType(keyValueTypes);
                 }
                 else if (Kind == CollectionKind.Dictionary)
                 {

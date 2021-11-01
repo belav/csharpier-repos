@@ -49,9 +49,8 @@ namespace System.Runtime.Loader
                 );
 
                 IntPtr errorWriterPtr = Marshal.GetFunctionPointerForDelegate(errorWriter);
-                IntPtr previousErrorWriterPtr = Interop.HostPolicy.corehost_set_error_writer(
-                    errorWriterPtr
-                );
+                IntPtr previousErrorWriterPtr =
+                    Interop.HostPolicy.corehost_set_error_writer(errorWriterPtr);
 
                 try
                 {

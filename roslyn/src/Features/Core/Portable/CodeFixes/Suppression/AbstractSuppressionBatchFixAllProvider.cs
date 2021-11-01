@@ -60,9 +60,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             if (documentsAndDiagnosticsToFixMap?.Any() == true)
             {
                 var progressTracker = fixAllContext.GetProgressTracker();
-                progressTracker.Description = FixAllContextHelper.GetDefaultFixAllTitle(
-                    fixAllContext
-                );
+                progressTracker.Description =
+                    FixAllContextHelper.GetDefaultFixAllTitle(fixAllContext);
 
                 var fixAllState = fixAllContext.State;
                 FixAllLogger.LogDiagnosticsStats(

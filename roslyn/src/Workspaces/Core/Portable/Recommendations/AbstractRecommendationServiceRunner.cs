@@ -108,9 +108,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             }
 
             var invocationExpression = lambdaSyntax.Parent.Parent.Parent;
-            var arguments = syntaxFactsService.GetArgumentsOfInvocationExpression(
-                invocationExpression
-            );
+            var arguments =
+                syntaxFactsService.GetArgumentsOfInvocationExpression(invocationExpression);
             var argumentName = syntaxFactsService.GetNameForArgument(lambdaSyntax.Parent);
             var ordinalInInvocation = arguments.IndexOf(lambdaSyntax.Parent);
             var expressionOfInvocationExpression =
@@ -264,9 +263,7 @@ namespace Microsoft.CodeAnalysis.Recommendations
                     if (
                         expressionSymbol != null
                         && type is INamedTypeSymbol expressionSymbolNamedTypeCandidate
-                        && expressionSymbolNamedTypeCandidate.OriginalDefinition.Equals(
-                            expressionSymbol
-                        )
+                        && expressionSymbolNamedTypeCandidate.OriginalDefinition.Equals(expressionSymbol)
                     )
                     {
                         var allTypeArguments = type.GetAllTypeArguments();

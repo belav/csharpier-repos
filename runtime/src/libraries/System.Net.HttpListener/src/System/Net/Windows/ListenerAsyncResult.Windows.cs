@@ -8,9 +8,8 @@ namespace System.Net
 {
     internal sealed unsafe class ListenerAsyncResult : LazyAsyncResult
     {
-        private static readonly IOCompletionCallback s_ioCallback = new IOCompletionCallback(
-            WaitCallback
-        );
+        private static readonly IOCompletionCallback s_ioCallback =
+            new IOCompletionCallback(WaitCallback);
         private AsyncRequestContext? _requestContext;
 
         internal static IOCompletionCallback IOCallback => s_ioCallback;
@@ -142,9 +141,7 @@ namespace System.Net
         )
         {
             ListenerAsyncResult asyncResult =
-                (ListenerAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                    nativeOverlapped
-                )!;
+                (ListenerAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
             IOCompleted(asyncResult, errorCode, numBytes);
         }
 

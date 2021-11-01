@@ -1852,9 +1852,8 @@ namespace System.DirectoryServices.Protocols
 
                             while (referenceMessage != IntPtr.Zero)
                             {
-                                SearchResultReference reference = ConstructReference(
-                                    referenceMessage
-                                );
+                                SearchResultReference reference =
+                                    ConstructReference(referenceMessage);
                                 if (reference != null)
                                 {
                                     searchResultReferences.Add(reference);

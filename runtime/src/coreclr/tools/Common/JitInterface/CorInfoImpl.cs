@@ -470,9 +470,7 @@ namespace Internal.JitInterface
                 TargetArchitecture architecture =
                     _compilation.TypeSystemContext.Target.Architecture;
                 _actualInstructionSetSupported.ExpandInstructionSetByImplication(architecture);
-                _actualInstructionSetUnsupported.ExpandInstructionSetByReverseImplication(
-                    architecture
-                );
+                _actualInstructionSetUnsupported.ExpandInstructionSetByReverseImplication(architecture);
                 _actualInstructionSetUnsupported.Set64BitInstructionSetVariants(architecture);
 
                 InstructionSetSupport actualSupport = new InstructionSetSupport(
@@ -480,9 +478,8 @@ namespace Internal.JitInterface
                     _actualInstructionSetUnsupported,
                     architecture
                 );
-                var node = _compilation.SymbolNodeFactory.PerMethodInstructionSetSupportFixup(
-                    actualSupport
-                );
+                var node =
+                    _compilation.SymbolNodeFactory.PerMethodInstructionSetSupportFixup(actualSupport);
                 _methodCodeNode.Fixups.Add(node);
             }
 #else
@@ -783,9 +780,8 @@ namespace Internal.JitInterface
                     continue;
                 }
 
-                CorInfoCallConvExtension? callConvLocal = GetCallingConventionForCallConvType(
-                    defType
-                );
+                CorInfoCallConvExtension? callConvLocal =
+                    GetCallingConventionForCallConvType(defType);
 
                 if (callConvLocal.HasValue)
                 {
@@ -851,9 +847,8 @@ namespace Internal.JitInterface
                     continue;
                 }
 
-                CorInfoCallConvExtension? callConvLocal = GetCallingConventionForCallConvType(
-                    defType
-                );
+                CorInfoCallConvExtension? callConvLocal =
+                    GetCallingConventionForCallConvType(defType);
 
                 if (callConvLocal.HasValue)
                 {
@@ -1508,9 +1503,7 @@ namespace Internal.JitInterface
                             "System.Runtime.InteropServices",
                             "UnmanagedCallersOnlyAttribute"
                         ).Value;
-                    return GetUnmanagedCallingConventionFromAttribute(
-                        unmanagedCallersOnlyAttribute
-                    );
+                    return GetUnmanagedCallingConventionFromAttribute(unmanagedCallersOnlyAttribute);
                 }
             }
             return GetUnmanagedCallConv(methodDesc.Signature, out suppressGCTransition);

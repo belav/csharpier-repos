@@ -90,9 +90,7 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             CreateSqlGenerator().AppendInsertOperation(stringBuilder, command, 0);
 
-            AppendInsertOperation_appends_insert_and_select_and_where_if_store_generated_columns_exist_verification(
-                stringBuilder
-            );
+            AppendInsertOperation_appends_insert_and_select_and_where_if_store_generated_columns_exist_verification(stringBuilder);
         }
 
         protected virtual void AppendInsertOperation_appends_insert_and_select_and_where_if_store_generated_columns_exist_verification(
@@ -195,9 +193,7 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             CreateSqlGenerator().AppendInsertOperation(stringBuilder, command, 0);
 
-            AppendInsertOperation_appends_insert_and_select_store_generated_columns_but_no_identity_verification(
-                stringBuilder
-            );
+            AppendInsertOperation_appends_insert_and_select_store_generated_columns_but_no_identity_verification(stringBuilder);
         }
 
         protected virtual void AppendInsertOperation_appends_insert_and_select_store_generated_columns_but_no_identity_verification(
@@ -264,9 +260,7 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             CreateSqlGenerator().AppendInsertOperation(stringBuilder, command, 0);
 
-            AppendInsertOperation_appends_insert_and_select_for_only_identity_verification(
-                stringBuilder
-            );
+            AppendInsertOperation_appends_insert_and_select_for_only_identity_verification(stringBuilder);
         }
 
         protected virtual void AppendInsertOperation_appends_insert_and_select_for_only_identity_verification(
@@ -327,9 +321,7 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             CreateSqlGenerator().AppendInsertOperation(stringBuilder, command, 0);
 
-            AppendInsertOperation_appends_insert_and_select_for_all_store_generated_columns_verification(
-                stringBuilder
-            );
+            AppendInsertOperation_appends_insert_and_select_for_all_store_generated_columns_verification(stringBuilder);
         }
 
         protected virtual void AppendInsertOperation_appends_insert_and_select_for_all_store_generated_columns_verification(
@@ -382,9 +374,7 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             CreateSqlGenerator().AppendInsertOperation(stringBuilder, command, 0);
 
-            AppendInsertOperation_appends_insert_and_select_for_only_single_identity_columns_verification(
-                stringBuilder
-            );
+            AppendInsertOperation_appends_insert_and_select_for_only_single_identity_columns_verification(stringBuilder);
         }
 
         protected virtual void AppendInsertOperation_appends_insert_and_select_for_only_single_identity_columns_verification(
@@ -433,9 +423,7 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             CreateSqlGenerator().AppendUpdateOperation(stringBuilder, command, 0);
 
-            AppendUpdateOperation_appends_update_and_select_if_store_generated_columns_exist_verification(
-                stringBuilder
-            );
+            AppendUpdateOperation_appends_update_and_select_if_store_generated_columns_exist_verification(stringBuilder);
         }
 
         protected virtual void AppendUpdateOperation_appends_update_and_select_if_store_generated_columns_exist_verification(

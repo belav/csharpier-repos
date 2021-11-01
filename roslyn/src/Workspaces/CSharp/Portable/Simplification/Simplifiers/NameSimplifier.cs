@@ -203,9 +203,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                             }
                         }
 
-                        replacementNode = ((SimpleNameSyntax)replacementNode).WithIdentifier(
-                            identifierToken
-                        );
+                        replacementNode = (
+                            (SimpleNameSyntax)replacementNode
+                        ).WithIdentifier(identifierToken);
                         issueSpan = name.Span;
 
                         // In case the alias name is the same as the last name of the alias target, we only include
@@ -248,9 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                                     )
                                 )
                                 {
-                                    replacementNode = replacementNode.CopyAnnotationsTo(
-                                        replacementNodeWithoutAttributeSuffix
-                                    );
+                                    replacementNode =
+                                        replacementNode.CopyAnnotationsTo(replacementNodeWithoutAttributeSuffix);
                                     issueSpan = issueSpanWithoutAttributeSuffix;
                                 }
                             }

@@ -52,9 +52,8 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
                 where ss.Snapshot.TextBuffer == buffer
                 select ss.Span;
 
-            view.Properties[ProjectionSpanTaggerProvider.PropertyName] = new List<Span>(
-                spansFromBuffer
-            );
+            view.Properties[ProjectionSpanTaggerProvider.PropertyName] =
+                new List<Span>(spansFromBuffer);
             var host = TextEditorFactory.CreateTextViewHost(view, setFocus: true);
 
             var window = new Window { Content = host.HostControl, ShowActivated = true, };

@@ -356,9 +356,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var options = new LoggingOptions();
             options.Initialize(
-                new DbContextOptionsBuilder().EnableSensitiveDataLogging(
-                    sensitiveDataLoggingEnabled
-                ).Options
+                new DbContextOptionsBuilder().EnableSensitiveDataLogging(sensitiveDataLoggingEnabled).Options
             );
             return new DiagnosticsLogger<DbLoggerCategory.Model.Validation>(
                 LoggerFactory,
@@ -375,9 +373,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var options = new LoggingOptions();
             options.Initialize(
-                new DbContextOptionsBuilder().EnableSensitiveDataLogging(
-                    sensitiveDataLoggingEnabled
-                ).Options
+                new DbContextOptionsBuilder().EnableSensitiveDataLogging(sensitiveDataLoggingEnabled).Options
             );
             return new DiagnosticsLogger<DbLoggerCategory.Model>(
                 LoggerFactory,

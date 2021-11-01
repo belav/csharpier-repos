@@ -98,14 +98,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             var dialogAutomationElement = GetOpenDialogById(visualStudioHWnd, dialogAutomationName);
 
-            var comboBoxAutomationElement = dialogAutomationElement.FindDescendantByAutomationId(
-                comboBoxAutomationName
-            );
+            var comboBoxAutomationElement =
+                dialogAutomationElement.FindDescendantByAutomationId(comboBoxAutomationName);
             comboBoxAutomationElement.Expand();
 
-            var comboBoxItemAutomationElement = comboBoxAutomationElement.FindDescendantByName(
-                itemText
-            );
+            var comboBoxItemAutomationElement =
+                comboBoxAutomationElement.FindDescendantByName(itemText);
             comboBoxItemAutomationElement.Select();
 
             comboBoxAutomationElement.Collapse();
@@ -122,9 +120,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             var dialogAutomationElement = GetOpenDialogById(visualStudioHWnd, dialogAutomationName);
 
-            var radioButton = dialogAutomationElement.FindDescendantByAutomationId(
-                radioButtonAutomationName
-            );
+            var radioButton =
+                dialogAutomationElement.FindDescendantByAutomationId(radioButtonAutomationName);
             radioButton.Select();
         }
 
@@ -158,9 +155,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         {
             var dialogAutomationElement = GetOpenDialogById(visualStudioHWnd, dialogAutomationId);
 
-            var buttonAutomationElement = dialogAutomationElement.FindDescendantByAutomationId(
-                buttonAutomationId
-            );
+            var buttonAutomationElement =
+                dialogAutomationElement.FindDescendantByAutomationId(buttonAutomationId);
             buttonAutomationElement.Invoke();
         }
 

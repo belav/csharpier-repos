@@ -199,9 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (initializerExpressionOpt != null && !initializerExpressionOpt.HasErrors)
             {
                 // We may need to MakeArguments for collection initializer add method call if the method has a param array parameter.
-                var rewrittenInitializers = MakeObjectOrCollectionInitializersForExpressionTree(
-                    initializerExpressionOpt
-                );
+                var rewrittenInitializers =
+                    MakeObjectOrCollectionInitializersForExpressionTree(initializerExpressionOpt);
                 return UpdateInitializers(initializerExpressionOpt, rewrittenInitializers);
             }
 

@@ -156,9 +156,8 @@ namespace Legacy.Support
                 // Measure how big a packet we need to write to be sure to see blocking behaviour at a port
                 try
                 {
-                    s_flowControlCapabilities = SerialPortConnection.MeasureFlowControlCapabilities(
-                        portName1
-                    );
+                    s_flowControlCapabilities =
+                        SerialPortConnection.MeasureFlowControlCapabilities(portName1);
                 }
                 catch (Exception e)
                 {

@@ -66,9 +66,9 @@ namespace Microsoft.EntityFrameworkCore
 
             var extension = (SqlServerOptionsExtension)GetOrCreateExtension(optionsBuilder)
                 .WithConnectionString(connectionString);
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension);
 
             ConfigureWarnings(optionsBuilder);
 
@@ -100,9 +100,9 @@ namespace Microsoft.EntityFrameworkCore
 
             var extension = (SqlServerOptionsExtension)GetOrCreateExtension(optionsBuilder)
                 .WithConnection(connection);
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(extension);
 
             ConfigureWarnings(optionsBuilder);
 
@@ -198,9 +198,9 @@ namespace Microsoft.EntityFrameworkCore
                     )
                 );
 
-            ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
-                coreOptionsExtension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)optionsBuilder
+            ).AddOrUpdateExtension(coreOptionsExtension);
         }
     }
 }

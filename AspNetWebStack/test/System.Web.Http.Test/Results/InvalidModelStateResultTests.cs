@@ -318,9 +318,9 @@ namespace System.Web.Http.Results
                     Assert.NotNull(response);
                     Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
                     HttpContent content = response.Content;
-                    ObjectContent<HttpError> typedContent = Assert.IsType<ObjectContent<HttpError>>(
-                        content
-                    );
+                    ObjectContent<HttpError> typedContent = Assert.IsType<
+                        ObjectContent<HttpError>
+                    >(content);
                     HttpError error = (HttpError)typedContent.Value;
                     Assert.NotNull(error);
                     HttpError modelStateError = error.ModelState;
@@ -386,9 +386,9 @@ namespace System.Web.Http.Results
                     Assert.NotNull(response);
                     Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
                     HttpContent content = response.Content;
-                    ObjectContent<HttpError> typedContent = Assert.IsType<ObjectContent<HttpError>>(
-                        content
-                    );
+                    ObjectContent<HttpError> typedContent = Assert.IsType<
+                        ObjectContent<HttpError>
+                    >(content);
                     HttpError error = (HttpError)typedContent.Value;
                     Assert.NotNull(error);
                     HttpError modelStateError = error.ModelState;

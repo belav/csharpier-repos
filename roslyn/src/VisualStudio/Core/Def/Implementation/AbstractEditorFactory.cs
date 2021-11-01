@@ -139,9 +139,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     var loaderName = GetWinFormsLoaderName(vsHierarchy);
                     var designerService =
                         (IVSMDDesignerService)_oleServiceProvider.QueryService<SVSMDDesignerService>();
-                    var designerLoader = (IVSMDDesignerLoader)designerService.CreateDesignerLoader(
-                        loaderName
-                    );
+                    var designerLoader =
+                        (IVSMDDesignerLoader)designerService.CreateDesignerLoader(loaderName);
                     if (designerLoader is null)
                     {
                         goto case "Code";
@@ -177,9 +176,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                 case "Code":
 
-                    var codeWindow = editorAdaptersFactoryService.CreateVsCodeWindowAdapter(
-                        _oleServiceProvider
-                    );
+                    var codeWindow =
+                        editorAdaptersFactoryService.CreateVsCodeWindowAdapter(_oleServiceProvider);
                     codeWindow.SetBuffer((IVsTextLines)textBuffer);
 
                     codeWindow.GetEditorCaption(readOnlyStatus, out pbstrEditorCaption);

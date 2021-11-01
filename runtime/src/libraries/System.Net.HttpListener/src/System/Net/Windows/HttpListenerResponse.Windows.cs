@@ -567,9 +567,8 @@ namespace System.Net
                     {
                         headerName = Headers.GetKey(index) as string;
                         headerValue = (Headers.Get(index) as string)!;
-                        lookup = Interop.HttpApi.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(
-                            headerName
-                        );
+                        lookup =
+                            Interop.HttpApi.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(headerName);
                         if (
                             lookup == (int)HttpResponseHeader.SetCookie
                             || isWebSocketHandshake && lookup == (int)HttpResponseHeader.Connection

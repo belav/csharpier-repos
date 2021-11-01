@@ -23,13 +23,11 @@ namespace System.DirectoryServices
         private bool _disposed;
         private readonly DirectoryEntry _rootEntry; // clone of parent entry object
         private const string ADS_DIRSYNC_COOKIE = "fc8cb04d-311d-406c-8cb9-1ae8b843b418";
-        private readonly IntPtr _adsDirsynCookieName = Marshal.StringToCoTaskMemUni(
-            ADS_DIRSYNC_COOKIE
-        );
+        private readonly IntPtr _adsDirsynCookieName =
+            Marshal.StringToCoTaskMemUni(ADS_DIRSYNC_COOKIE);
         private const string ADS_VLV_RESPONSE = "fc8cb04d-311d-406c-8cb9-1ae8b843b419";
-        private readonly IntPtr _adsVLVResponseName = Marshal.StringToCoTaskMemUni(
-            ADS_VLV_RESPONSE
-        );
+        private readonly IntPtr _adsVLVResponseName =
+            Marshal.StringToCoTaskMemUni(ADS_VLV_RESPONSE);
         internal DirectorySearcher srch;
 
         internal SearchResultCollection(

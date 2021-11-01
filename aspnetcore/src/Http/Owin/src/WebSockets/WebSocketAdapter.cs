@@ -69,9 +69,8 @@ namespace Microsoft.AspNetCore.Owin
 
             _environment = new Dictionary<string, object>();
             _environment[OwinConstants.WebSocket.SendAsync] = new WebSocketSendAsync(SendAsync);
-            _environment[OwinConstants.WebSocket.ReceiveAsync] = new WebSocketReceiveAsync(
-                ReceiveAsync
-            );
+            _environment[OwinConstants.WebSocket.ReceiveAsync] =
+                new WebSocketReceiveAsync(ReceiveAsync);
             _environment[OwinConstants.WebSocket.CloseAsync] = new WebSocketCloseAsync(CloseAsync);
             _environment[OwinConstants.WebSocket.CallCancelled] = ct;
             _environment[OwinConstants.WebSocket.Version] = OwinConstants.WebSocket.VersionValue;

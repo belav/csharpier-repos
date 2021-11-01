@@ -564,9 +564,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         )
         {
             var attributeMetadataName = MetadataTypeName.FromFullName(description.FullName);
-            var userDefinedAttribute = _sourceAssembly.SourceModule.LookupTopLevelMetadataType(
-                ref attributeMetadataName
-            );
+            var userDefinedAttribute =
+                _sourceAssembly.SourceModule.LookupTopLevelMetadataType(ref attributeMetadataName);
             Debug.Assert(
                 (object)userDefinedAttribute.ContainingModule == _sourceAssembly.SourceModule
             );

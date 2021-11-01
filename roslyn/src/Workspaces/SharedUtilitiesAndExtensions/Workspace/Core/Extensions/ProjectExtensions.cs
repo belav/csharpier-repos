@@ -97,9 +97,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return null;
             }
 
-            var solutionOrProjectDirectoryPath = PathUtilities.GetDirectoryName(
-                solutionOrProjectFilePath
-            );
+            var solutionOrProjectDirectoryPath =
+                PathUtilities.GetDirectoryName(solutionOrProjectFilePath);
             // Suppression should be removed or addressed https://github.com/dotnet/roslyn/issues/41636
             return PathUtilities.CombineAbsoluteAndRelativePaths(
                 solutionOrProjectDirectoryPath!,
@@ -125,9 +124,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             string analyzerConfigPath
         )
         {
-            var existingAnalyzerConfigDocument = project.TryGetExistingAnalyzerConfigDocumentAtPath(
-                analyzerConfigPath
-            );
+            var existingAnalyzerConfigDocument =
+                project.TryGetExistingAnalyzerConfigDocumentAtPath(analyzerConfigPath);
             if (existingAnalyzerConfigDocument != null)
             {
                 return existingAnalyzerConfigDocument;

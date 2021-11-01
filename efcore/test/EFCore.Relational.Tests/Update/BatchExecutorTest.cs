@@ -79,9 +79,9 @@ namespace Microsoft.EntityFrameworkCore.Update
                 )
             );
 
-            ((FakeRelationalConnection)context.GetService<IRelationalConnection>()).UseConnection(
-                connection
-            );
+            (
+                (FakeRelationalConnection)context.GetService<IRelationalConnection>()
+            ).UseConnection(connection);
             return connection;
         }
 

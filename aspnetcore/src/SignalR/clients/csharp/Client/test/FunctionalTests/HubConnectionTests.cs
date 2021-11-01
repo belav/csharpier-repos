@@ -74,9 +74,7 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                     protocol.TransferFormat
                 )
             );
-            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(
-                delegateConnectionFactory
-            );
+            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 
             return hubConnectionBuilder.Build();
         }

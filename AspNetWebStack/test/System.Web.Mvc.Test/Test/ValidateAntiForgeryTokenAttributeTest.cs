@@ -37,9 +37,8 @@ namespace System.Web.Mvc.Test
             {
                 validateCalled = true;
             };
-            ValidateAntiForgeryTokenAttribute attribute = new ValidateAntiForgeryTokenAttribute(
-                validateMethod
-            );
+            ValidateAntiForgeryTokenAttribute attribute =
+                new ValidateAntiForgeryTokenAttribute(validateMethod);
 
             // Act
             attribute.OnAuthorization(authorizationContextMock.Object);

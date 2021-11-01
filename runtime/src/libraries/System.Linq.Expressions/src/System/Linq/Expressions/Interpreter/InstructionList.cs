@@ -538,9 +538,8 @@ namespace System.Linq.Expressions.Interpreter
                 Emit(
                     s_loadLocalFromClosure[index]
                         ?? (
-                            s_loadLocalFromClosure[index] = new LoadLocalFromClosureInstruction(
-                                index
-                            )
+                            s_loadLocalFromClosure[index] =
+                                new LoadLocalFromClosureInstruction(index)
                         )
                 );
             }
@@ -670,9 +669,8 @@ namespace System.Linq.Expressions.Interpreter
                 Emit(
                     s_assignLocalToClosure[index]
                         ?? (
-                            s_assignLocalToClosure[index] = new AssignLocalToClosureInstruction(
-                                index
-                            )
+                            s_assignLocalToClosure[index] =
+                                new AssignLocalToClosureInstruction(index)
                         )
                 );
             }
@@ -1083,9 +1081,9 @@ namespace System.Linq.Expressions.Interpreter
 
         internal void FixupBranch(int branchIndex, int offset)
         {
-            _instructions[branchIndex] = ((OffsetInstruction)_instructions[branchIndex]).Fixup(
-                offset
-            );
+            _instructions[branchIndex] = (
+                (OffsetInstruction)_instructions[branchIndex]
+            ).Fixup(offset);
         }
 
         private int EnsureLabelIndex(BranchLabel label)

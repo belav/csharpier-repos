@@ -314,9 +314,8 @@ namespace ILCompiler.DependencyAnalysis
             InstructionSetSupport instructionSetSupport
         )
         {
-            string key = ReadyToRunInstructionSetSupportSignature.ToInstructionSetSupportString(
-                instructionSetSupport
-            );
+            string key =
+                ReadyToRunInstructionSetSupportSignature.ToInstructionSetSupportString(instructionSetSupport);
             return _instructionSetSupportFixups.GetOrAdd(key);
         }
 

@@ -50,9 +50,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
         internal async Task<LoginWithRecoveryCode> ClickRecoveryCodeLinkAsync()
         {
             var goToLoginWithRecoveryCode = await Client.GetAsync(_loginWithRecoveryCodeLink.Href);
-            var loginWithRecoveryCode = await ResponseAssert.IsHtmlDocumentAsync(
-                goToLoginWithRecoveryCode
-            );
+            var loginWithRecoveryCode =
+                await ResponseAssert.IsHtmlDocumentAsync(goToLoginWithRecoveryCode);
 
             return new LoginWithRecoveryCode(Client, loginWithRecoveryCode, Context);
         }

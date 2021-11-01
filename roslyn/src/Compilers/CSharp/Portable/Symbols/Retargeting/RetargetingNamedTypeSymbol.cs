@@ -400,9 +400,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         {
             if (_lazyDeclaredInterfaces.IsDefault)
             {
-                var underlyingBaseInterfaces = _underlyingType.GetDeclaredInterfaces(
-                    basesBeingResolved
-                );
+                var underlyingBaseInterfaces =
+                    _underlyingType.GetDeclaredInterfaces(basesBeingResolved);
                 var result = this.RetargetingTranslator.Retarget(underlyingBaseInterfaces);
                 ImmutableInterlocked.InterlockedCompareExchange(
                     ref _lazyDeclaredInterfaces,

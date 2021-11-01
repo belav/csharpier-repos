@@ -517,9 +517,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string formattedTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
-                traceRecord
-            );
+            string formattedTrace = new SystemDiagnosticsTraceWriter()
+            {
+                IsVerbose = true
+            }.Format(traceRecord);
 
             // Assert
             AssertContainsExactly(
@@ -553,9 +554,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string formattedTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
-                traceRecord
-            );
+            string formattedTrace = new SystemDiagnosticsTraceWriter()
+            {
+                IsVerbose = true
+            }.Format(traceRecord);
 
             // Assert
             AssertContainsExactly(
@@ -588,9 +590,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
-                traceRecord
-            );
+            string actualTrace = new SystemDiagnosticsTraceWriter()
+            {
+                IsVerbose = true
+            }.Format(traceRecord);
 
             // Assert
             string timePrefix = "] ";
@@ -623,9 +626,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
-                traceRecord
-            );
+            string actualTrace = new SystemDiagnosticsTraceWriter()
+            {
+                IsVerbose = true
+            }.Format(traceRecord);
 
             // Assert
             string timePrefix = "] ";

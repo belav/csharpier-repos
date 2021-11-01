@@ -676,9 +676,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     int tupleCardinality = operand.Type.TupleElementTypesWithAnnotations.Length;
                     var underlyingConversions = tupleConversion.UnderlyingConversions;
                     Debug.Assert(underlyingConversions.Length == tupleCardinality);
-                    var argumentBuilder = ArrayBuilder<BoundExpression>.GetInstance(
-                        tupleCardinality
-                    );
+                    var argumentBuilder =
+                        ArrayBuilder<BoundExpression>.GetInstance(tupleCardinality);
                     for (int i = 0; i < tupleCardinality; i++)
                     {
                         argumentBuilder.Add(

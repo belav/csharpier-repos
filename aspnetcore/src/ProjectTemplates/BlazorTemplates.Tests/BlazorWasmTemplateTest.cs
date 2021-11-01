@@ -280,9 +280,8 @@ namespace Templates.Test
             Assert.True(serviceWorkerAssetsManifestVersionMatch.Success);
             var serviceWorkerAssetsManifestVersionJson =
                 serviceWorkerAssetsManifestVersionMatch.Groups[1].Captures[0].Value;
-            var serviceWorkerAssetsManifestVersion = JsonSerializer.Deserialize<string>(
-                serviceWorkerAssetsManifestVersionJson
-            );
+            var serviceWorkerAssetsManifestVersion =
+                JsonSerializer.Deserialize<string>(serviceWorkerAssetsManifestVersionJson);
             Assert.True(
                 serviceWorkerContents.Contains(
                     $"/* Manifest version: {serviceWorkerAssetsManifestVersion} */",

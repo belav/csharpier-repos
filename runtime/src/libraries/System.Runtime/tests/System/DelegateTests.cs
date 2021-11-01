@@ -250,9 +250,9 @@ namespace System.Tests
 
             Assert.Equal(
                 "True, test, c, 2, -1, -3, 4, -5, 6, -7, 8, 9.1, 11.12",
-                (string)(new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)).DynamicInvoke(
-                    parameters
-                )
+                (string)(
+                    new AllPrimitivesWithDefaultValues(AllPrimitivesMethod)
+                ).DynamicInvoke(parameters)
             );
         }
 

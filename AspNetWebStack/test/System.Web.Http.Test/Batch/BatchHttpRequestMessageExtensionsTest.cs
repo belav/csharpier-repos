@@ -51,9 +51,8 @@ namespace System.Web.Http.Batch
 
                 // Assert
                 HttpRequestContext context = subRequest.GetRequestContext();
-                BatchHttpRequestContext typedContext = Assert.IsType<BatchHttpRequestContext>(
-                    context
-                );
+                BatchHttpRequestContext typedContext =
+                    Assert.IsType<BatchHttpRequestContext>(context);
                 Assert.Same(expectedOriginalContext, typedContext.BatchContext);
             }
         }

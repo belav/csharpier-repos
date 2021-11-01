@@ -348,9 +348,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
                     existingParameters[insertionIndex],
                     includeLeadingNewLine: false
                 );
-                parameterDeclaration = parameterDeclaration.WithPrependedLeadingTrivia(
-                    leadingIndentation
-                );
+                parameterDeclaration =
+                    parameterDeclaration.WithPrependedLeadingTrivia(leadingIndentation);
 
                 editor.InsertParameter(declaration, insertionIndex, parameterDeclaration);
                 editor.ReplaceNode(

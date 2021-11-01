@@ -92,9 +92,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                         oid,
                         rawData
                     );
-                    AsnEncodedDataCollection values = new AsnEncodedDataCollection(
-                        pkcs9AttributeObject
-                    );
+                    AsnEncodedDataCollection values =
+                        new AsnEncodedDataCollection(pkcs9AttributeObject);
                     return new CryptographicAttributeObject(oid, values);
                 }
             }

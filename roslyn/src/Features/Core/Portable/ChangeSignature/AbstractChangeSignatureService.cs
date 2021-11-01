@@ -556,9 +556,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     }
                 );
 
-                var annotatedNodes = newRoot.GetAnnotatedNodes<SyntaxNode>(
-                    syntaxAnnotation: changeSignatureFormattingAnnotation
-                );
+                var annotatedNodes =
+                    newRoot.GetAnnotatedNodes<SyntaxNode>(syntaxAnnotation: changeSignatureFormattingAnnotation);
 
                 var formattedRoot = Formatter.Format(
                     newRoot,
@@ -1266,9 +1265,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 s => s.IsKind(SymbolKind.Property) || s.IsKind(SymbolKind.Field)
             );
 
-            var fullyOrderedSymbols = orderedLocalAndParameterSymbols.Concat(
-                orderedPropertiesAndFields
-            );
+            var fullyOrderedSymbols =
+                orderedLocalAndParameterSymbols.Concat(orderedPropertiesAndFields);
 
             foreach (var symbol in fullyOrderedSymbols)
             {
@@ -1325,9 +1323,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                 }
 
                 var updatedNodeList = ArrayBuilder<SyntaxNode>.GetInstance();
-                var structuredContent = syntaxFacts.GetContentFromDocumentationCommentTriviaSyntax(
-                    trivia
-                );
+                var structuredContent =
+                    syntaxFacts.GetContentFromDocumentationCommentTriviaSyntax(trivia);
                 for (var i = 0; i < structuredContent.Count; i++)
                 {
                     var content = structuredContent[i];

@@ -10,9 +10,8 @@ class C
 
     public static void Main()
     {
-        AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(
-            HandleException
-        );
+        AppDomain.CurrentDomain.UnhandledException +=
+            new UnhandledExceptionEventHandler(HandleException);
         var args = new object[] { C.Iterations * C.StepSize };
         typeof(C)
             .GetMethod("InvokeChain", BindingFlags.NonPublic | BindingFlags.Instance)

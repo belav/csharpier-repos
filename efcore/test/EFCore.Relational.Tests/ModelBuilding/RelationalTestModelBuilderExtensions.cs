@@ -176,9 +176,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         name,
                         b =>
                             buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
-                                    b
-                                )
+                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(b)
                             )
                     );
                     break;
@@ -212,9 +210,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                         schema,
                         b =>
                             buildAction(
-                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(
-                                    b
-                                )
+                                new RelationalModelBuilderTest.NonGenericTestTableBuilder<TEntity>(b)
                             )
                     );
                     break;

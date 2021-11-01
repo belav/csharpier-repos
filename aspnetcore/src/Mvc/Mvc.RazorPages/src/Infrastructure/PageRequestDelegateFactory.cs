@@ -89,9 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 var pageContext = new PageContext(actionContext)
                 {
                     ActionDescriptor = cacheEntry.ActionDescriptor,
-                    ValueProviderFactories = new CopyOnWriteList<IValueProviderFactory>(
-                        _valueProviderFactories
-                    ),
+                    ValueProviderFactories =
+                        new CopyOnWriteList<IValueProviderFactory>(_valueProviderFactories),
                     ViewData = cacheEntry.ViewDataFactory(
                         _modelMetadataProvider,
                         actionContext.ModelState

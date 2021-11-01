@@ -12,9 +12,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ExtensibleModelBindingContext bindingContext
         )
         {
-            ValueProviderResult valueProviderResult = GetCompatibleValueProviderResult(
-                bindingContext
-            );
+            ValueProviderResult valueProviderResult =
+                GetCompatibleValueProviderResult(bindingContext);
             if (valueProviderResult == null)
             {
                 return false; // conversion would have failed

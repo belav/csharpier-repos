@@ -51,9 +51,7 @@ namespace System.Buffers
         {
             if (size > _blockSize)
             {
-                MemoryPoolThrowHelper.ThrowArgumentOutOfRangeException_BufferRequestTooLarge(
-                    _blockSize
-                );
+                MemoryPoolThrowHelper.ThrowArgumentOutOfRangeException_BufferRequestTooLarge(_blockSize);
             }
 
             if (_isDisposed)

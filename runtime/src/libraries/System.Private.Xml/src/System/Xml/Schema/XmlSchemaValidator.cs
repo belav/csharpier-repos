@@ -2117,9 +2117,8 @@ namespace System.Xml.Schema
                 }
                 if (elementDeclXsi == null && xsiTypeName.Namespace == _nsXs)
                 {
-                    XmlSchemaType? schemaType = DatatypeImplementation.GetSimpleTypeFromXsdType(
-                        xsiTypeName
-                    );
+                    XmlSchemaType? schemaType =
+                        DatatypeImplementation.GetSimpleTypeFromXsdType(xsiTypeName);
                     if (schemaType == null)
                     { //try getting complexType - xs:anyType
                         schemaType = XmlSchemaType.GetBuiltInComplexType(xsiTypeName);

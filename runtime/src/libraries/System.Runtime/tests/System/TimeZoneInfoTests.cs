@@ -70,22 +70,17 @@ namespace System.Tests
         ); // in case DST is disabled on Local
         private static TimeZoneInfo s_GMTLondon = TimeZoneInfo.FindSystemTimeZoneById(s_strGMT);
         private static TimeZoneInfo s_nairobiTz = TimeZoneInfo.FindSystemTimeZoneById(s_strNairobi);
-        private static TimeZoneInfo s_amsterdamTz = TimeZoneInfo.FindSystemTimeZoneById(
-            s_strAmsterdam
-        );
-        private static TimeZoneInfo s_johannesburgTz = TimeZoneInfo.FindSystemTimeZoneById(
-            s_strJohannesburg
-        );
-        private static TimeZoneInfo s_casablancaTz = TimeZoneInfo.FindSystemTimeZoneById(
-            s_strCasablanca
-        );
-        private static TimeZoneInfo s_catamarcaTz = TimeZoneInfo.FindSystemTimeZoneById(
-            s_strCatamarca
-        );
+        private static TimeZoneInfo s_amsterdamTz =
+            TimeZoneInfo.FindSystemTimeZoneById(s_strAmsterdam);
+        private static TimeZoneInfo s_johannesburgTz =
+            TimeZoneInfo.FindSystemTimeZoneById(s_strJohannesburg);
+        private static TimeZoneInfo s_casablancaTz =
+            TimeZoneInfo.FindSystemTimeZoneById(s_strCasablanca);
+        private static TimeZoneInfo s_catamarcaTz =
+            TimeZoneInfo.FindSystemTimeZoneById(s_strCatamarca);
         private static TimeZoneInfo s_LisbonTz = TimeZoneInfo.FindSystemTimeZoneById(s_strLisbon);
-        private static TimeZoneInfo s_NewfoundlandTz = TimeZoneInfo.FindSystemTimeZoneById(
-            s_strNewfoundland
-        );
+        private static TimeZoneInfo s_NewfoundlandTz =
+            TimeZoneInfo.FindSystemTimeZoneById(s_strNewfoundland);
 
         private static bool s_localIsPST = TimeZoneInfo.Local.Id == s_strPacific;
         private static bool s_regLocalSupportsDST = s_regLocal.SupportsDaylightSavingTime;
@@ -4123,9 +4118,7 @@ namespace System.Tests
 
         [Theory]
         [MemberData(
-            nameof(
-                ConvertTime_DateTimeOffset_InvalidDestination_TimeZoneNotFoundException_MemberData
-            )
+            nameof(ConvertTime_DateTimeOffset_InvalidDestination_TimeZoneNotFoundException_MemberData)
         )]
         public static void ConvertTime_DateTimeOffset_InvalidDestination_TimeZoneNotFoundException(
             string destinationId

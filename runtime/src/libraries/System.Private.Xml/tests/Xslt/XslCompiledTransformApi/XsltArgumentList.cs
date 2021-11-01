@@ -12286,9 +12286,8 @@ namespace System.Xml.Tests
 
             //Check if the EventHandler Exists
             if (EventHandlerExists == "yes")
-                argList.XsltMessageEncountered += new XsltMessageEncounteredEventHandler(
-                    argList_XsltMessageEncountered
-                );
+                argList.XsltMessageEncountered +=
+                    new XsltMessageEncounteredEventHandler(argList_XsltMessageEncountered);
 
             EventRaised = false;
 

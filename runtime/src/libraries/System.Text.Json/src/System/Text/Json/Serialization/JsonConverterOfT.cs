@@ -184,9 +184,7 @@ namespace System.Text.Json.Serialization
                 {
                     if (!CanBeNull)
                     {
-                        ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(
-                            TypeToConvert
-                        );
+                        ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(TypeToConvert);
                     }
 
                     value = default;
@@ -277,9 +275,7 @@ namespace System.Text.Json.Serialization
                 {
                     if (!CanBeNull)
                     {
-                        ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(
-                            TypeToConvert
-                        );
+                        ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(TypeToConvert);
                     }
 
                     // For perf and converter simplicity, handle null here instead of forwarding to the converter.
@@ -301,9 +297,7 @@ namespace System.Text.Json.Serialization
                     {
                         if (!CanBeNull)
                         {
-                            ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(
-                                TypeToConvert
-                            );
+                            ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(TypeToConvert);
                         }
 
                         value = default;

@@ -70,9 +70,8 @@ namespace System.Web.Razor
                 () =>
                 {
                     string extension = Path.GetExtension(sourceFile);
-                    RazorCodeLanguage language = RazorCodeLanguage.GetLanguageByExtension(
-                        extension
-                    );
+                    RazorCodeLanguage language =
+                        RazorCodeLanguage.GetLanguageByExtension(extension);
                     CodeDomProvider provider = CodeDomProvider.CreateProvider(
                         language.LanguageName
                     );

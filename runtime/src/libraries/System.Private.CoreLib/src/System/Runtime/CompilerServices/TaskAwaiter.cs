@@ -295,9 +295,8 @@ namespace System.Runtime.CompilerServices
                 Task? currentTaskAtBegin = Task.InternalCurrent;
 
                 // If this task's continuation is another task, get it.
-                Task? continuationTask = AsyncMethodBuilderCore.TryGetContinuationTask(
-                    continuation
-                );
+                Task? continuationTask =
+                    AsyncMethodBuilderCore.TryGetContinuationTask(continuation);
                 log.TaskWaitBegin(
                     currentTaskAtBegin != null
                       ? currentTaskAtBegin.m_taskScheduler!.Id

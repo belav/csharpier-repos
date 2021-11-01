@@ -161,9 +161,9 @@ namespace System.DirectoryServices.AccountManagement
                         if (propertyMappingTableByWinNT[winNTAttributeLower] == null)
                             propertyMappingTableByWinNT[winNTAttributeLower] = new ArrayList();
 
-                        ((ArrayList)propertyMappingTableByWinNT[winNTAttributeLower]).Add(
-                            propertyEntry
-                        );
+                        (
+                            (ArrayList)propertyMappingTableByWinNT[winNTAttributeLower]
+                        ).Add(propertyEntry);
                     }
                 }
             }

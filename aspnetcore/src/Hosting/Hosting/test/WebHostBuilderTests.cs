@@ -1142,9 +1142,9 @@ namespace Microsoft.AspNetCore.Hosting
                 .ConfigureServices(
                     services =>
                     {
-                        services.AddSingleton<IServiceProviderFactory<IServiceCollection>>(
-                            containerFactory
-                        );
+                        services.AddSingleton<
+                            IServiceProviderFactory<IServiceCollection>
+                        >(containerFactory);
                     }
                 )
                 .Build();

@@ -1246,9 +1246,8 @@ namespace System
                     // try to load the string from the native resource DLL(s)
                     if (!string.IsNullOrEmpty(standardNameMuiResource))
                     {
-                        standardDisplayName = TryGetLocalizedNameByMuiNativeResource(
-                            standardNameMuiResource
-                        );
+                        standardDisplayName =
+                            TryGetLocalizedNameByMuiNativeResource(standardNameMuiResource);
                     }
 
                     // fallback to using the standard registry key

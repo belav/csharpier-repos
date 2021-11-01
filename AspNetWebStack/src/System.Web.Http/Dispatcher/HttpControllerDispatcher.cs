@@ -117,9 +117,8 @@ namespace System.Web.Http.Dispatcher
 
             try
             {
-                HttpControllerDescriptor controllerDescriptor = ControllerSelector.SelectController(
-                    request
-                );
+                HttpControllerDescriptor controllerDescriptor =
+                    ControllerSelector.SelectController(request);
                 if (controllerDescriptor == null)
                 {
                     return request.CreateErrorResponse(

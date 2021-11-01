@@ -108,9 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
                 if (declaratorToRemoveLocationOpt != null)
                 {
-                    declaratorToRemoveNodeOpt = declaratorToRemoveLocationOpt.FindNode(
-                        cancellationToken
-                    );
+                    declaratorToRemoveNodeOpt =
+                        declaratorToRemoveLocationOpt.FindNode(cancellationToken);
                     declaratorToRemoveTypeOpt = semanticModel
                         .GetDeclaredSymbol(declaratorToRemoveNodeOpt, cancellationToken)
                         .GetSymbolType();

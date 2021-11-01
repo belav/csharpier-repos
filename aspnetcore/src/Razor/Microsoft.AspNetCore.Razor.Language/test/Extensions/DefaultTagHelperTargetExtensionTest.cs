@@ -402,9 +402,7 @@ EndAddHtmlAttributeValues(__tagHelperExecutionContext);
             };
             var expectedLocation = new SourceSpan(100, 10);
             var expectedDiagnostic =
-                RazorDiagnosticFactory.CreateTagHelper_CodeBlocksNotSupportedInAttributes(
-                    expectedLocation
-                );
+                RazorDiagnosticFactory.CreateTagHelper_CodeBlocksNotSupportedInAttributes(expectedLocation);
 
             // Act
             extension.RenderTagHelperAttributeInline(

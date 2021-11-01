@@ -747,9 +747,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 if (functionMapping.ColumnMappings.Count != 0 || functionMappings.Count == 0)
                 {
                     functionMappings.Add(functionMapping);
-                    ((StoreFunction)functionMapping.StoreFunction).EntityTypeMappings.Add(
-                        functionMapping
-                    );
+                    (
+                        (StoreFunction)functionMapping.StoreFunction
+                    ).EntityTypeMappings.Add(functionMapping);
                 }
             }
 
@@ -798,9 +798,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
 
                 functionMappings.Add(functionMapping);
-                ((StoreFunction)functionMapping.StoreFunction).EntityTypeMappings.Add(
-                    functionMapping
-                );
+                (
+                    (StoreFunction)functionMapping.StoreFunction
+                ).EntityTypeMappings.Add(functionMapping);
             }
         }
 

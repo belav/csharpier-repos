@@ -142,9 +142,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                 if (_serviceProvider != null)
                 {
-                    coreOptionsExtension = coreOptionsExtension.WithApplicationServiceProvider(
-                        _serviceProvider
-                    );
+                    coreOptionsExtension =
+                        coreOptionsExtension.WithApplicationServiceProvider(_serviceProvider);
                 }
 
                 return (TExtension)(object)coreOptionsExtension;

@@ -54,9 +54,8 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test()
         {
             string json = "{'foo':'test!'}";
-            ItemWithJsonConstructor c = JsonConvert.DeserializeObject<ItemWithJsonConstructor>(
-                json
-            );
+            ItemWithJsonConstructor c =
+                JsonConvert.DeserializeObject<ItemWithJsonConstructor>(json);
 
             Assert.IsNull(c.ExtensionData);
         }

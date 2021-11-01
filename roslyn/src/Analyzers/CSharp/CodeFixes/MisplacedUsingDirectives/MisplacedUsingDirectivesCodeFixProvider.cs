@@ -239,22 +239,19 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
 
             // Remove usings and fix leading trivia for compilation unit.
             var compilationUnitWithoutUsings = compilationUnit.WithUsings(default);
-            var compilationUnitWithoutBlankLine = RemoveLeadingBlankLinesFromFirstMember(
-                compilationUnitWithoutUsings
-            );
+            var compilationUnitWithoutBlankLine =
+                RemoveLeadingBlankLinesFromFirstMember(compilationUnitWithoutUsings);
 
             // Fix the leading trivia for the namespace declaration.
             var namespaceDeclaration =
                 (NamespaceDeclarationSyntax)compilationUnitWithoutBlankLine.Members[0];
-            var namespaceDeclarationWithBlankLine = EnsureLeadingBlankLineBeforeFirstMember(
-                namespaceDeclaration
-            );
+            var namespaceDeclarationWithBlankLine =
+                EnsureLeadingBlankLineBeforeFirstMember(namespaceDeclaration);
 
             // Update the namespace declaration with the usings from the compilation unit.
             var newUsings = namespaceDeclarationWithBlankLine.Usings.InsertRange(0, usingsToAdd);
-            var namespaceDeclarationWithUsings = namespaceDeclarationWithBlankLine.WithUsings(
-                newUsings
-            );
+            var namespaceDeclarationWithUsings =
+                namespaceDeclarationWithBlankLine.WithUsings(newUsings);
 
             // Update the compilation unit with the new namespace declaration
             return compilationUnitWithoutBlankLine.ReplaceNode(
@@ -295,17 +292,14 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             );
 
             // Update the compilation unit with the usings from the namespace declaration.
-            var newUsings = compilationUnitWithReplacedNamespaces.Usings.AddRange(
-                deduplicatedUsings
-            );
-            var compilationUnitWithUsings = compilationUnitWithReplacedNamespaces.WithUsings(
-                newUsings
-            );
+            var newUsings =
+                compilationUnitWithReplacedNamespaces.Usings.AddRange(deduplicatedUsings);
+            var compilationUnitWithUsings =
+                compilationUnitWithReplacedNamespaces.WithUsings(newUsings);
 
             // Fix the leading trivia for the compilation unit.
-            var compilationUnitWithSeparatorLine = EnsureLeadingBlankLineBeforeFirstMember(
-                compilationUnitWithUsings
-            );
+            var compilationUnitWithSeparatorLine =
+                EnsureLeadingBlankLineBeforeFirstMember(compilationUnitWithUsings);
 
             if (!orphanedTrivia.Any())
             {
@@ -345,9 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             // Remove usings and fix leading trivia for namespace declaration.
             var namespaceDeclarationWithoutUsings =
                 namespaceDeclarationWithReplacedNamespaces.WithUsings(default);
-            var namespaceDeclarationWithoutBlankLine = RemoveLeadingBlankLinesFromFirstMember(
-                namespaceDeclarationWithoutUsings
-            );
+            var namespaceDeclarationWithoutBlankLine =
+                RemoveLeadingBlankLinesFromFirstMember(namespaceDeclarationWithoutUsings);
 
             return (namespaceDeclarationWithoutBlankLine, allUsings);
         }

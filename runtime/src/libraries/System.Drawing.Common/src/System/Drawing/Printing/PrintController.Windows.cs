@@ -171,9 +171,8 @@ namespace System.Drawing.Printing
         {
             PrintPageEventArgs? pageEvent = null;
             PageSettings documentPageSettings = (PageSettings)document.DefaultPageSettings.Clone();
-            QueryPageSettingsEventArgs queryEvent = new QueryPageSettingsEventArgs(
-                documentPageSettings
-            );
+            QueryPageSettingsEventArgs queryEvent =
+                new QueryPageSettingsEventArgs(documentPageSettings);
             while (true)
             {
                 queryEvent.PageSettingsChanged = false;

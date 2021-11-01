@@ -55,9 +55,8 @@ namespace System.Net.Http.Formatting
                 BufferSize = 512
             };
 
-            MockBufferedMediaTypeFormatter derivedFormatter = new MockBufferedMediaTypeFormatter(
-                formatter
-            );
+            MockBufferedMediaTypeFormatter derivedFormatter =
+                new MockBufferedMediaTypeFormatter(formatter);
 
             Assert.Equal(formatter.BufferSize, derivedFormatter.BufferSize);
         }

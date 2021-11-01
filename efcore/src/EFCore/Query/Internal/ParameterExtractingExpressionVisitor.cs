@@ -86,9 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         private Expression ExtractParameters(Expression expression, bool clearEvaluatedValues)
         {
             var oldEvaluatableExpressions = _evaluatableExpressions;
-            _evaluatableExpressions = _evaluatableExpressionFindingExpressionVisitor.Find(
-                expression
-            );
+            _evaluatableExpressions =
+                _evaluatableExpressionFindingExpressionVisitor.Find(expression);
 
             try
             {

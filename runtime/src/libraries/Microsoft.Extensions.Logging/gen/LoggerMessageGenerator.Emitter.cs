@@ -20,9 +20,8 @@ namespace Microsoft.Extensions.Logging.Generators
                 $"global::System.CodeDom.Compiler.GeneratedCodeAttribute("
                 + $"\"{typeof(Emitter).Assembly.GetName().Name}\", "
                 + $"\"{typeof(Emitter).Assembly.GetName().Version}\")";
-            private readonly StringBuilder _builder = new StringBuilder(
-                DefaultStringBuilderCapacity
-            );
+            private readonly StringBuilder _builder =
+                new StringBuilder(DefaultStringBuilderCapacity);
 
             public string Emit(
                 IReadOnlyList<LoggerClass> logClasses,

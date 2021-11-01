@@ -374,9 +374,7 @@ FROM ""Orders"" AS ""o"""
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(
-                                async
-                            )
+                            base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns_with_navigation(async)
                     )
                 ).Message
             );
@@ -389,9 +387,7 @@ FROM ""Orders"" AS ""o"""
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(
-                                async
-                            )
+                            base.Correlated_collection_with_distinct_without_default_identifiers_projecting_columns(async)
                     )
                 ).Message
             );

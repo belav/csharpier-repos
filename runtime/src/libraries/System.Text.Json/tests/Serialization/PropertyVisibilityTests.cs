@@ -359,9 +359,7 @@ namespace System.Text.Json.Serialization.Tests
             string json = @"{""MyString"":""NewValue""}";
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    JsonSerializer.Deserialize<ClassWithPropertyFieldNamingConflictWhichThrows>(
-                        json
-                    )
+                    JsonSerializer.Deserialize<ClassWithPropertyFieldNamingConflictWhichThrows>(json)
             );
         }
 
@@ -381,9 +379,7 @@ namespace System.Text.Json.Serialization.Tests
             string json = @"{""MyString"":""NewValue""}";
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    JsonSerializer.Deserialize<ClassInheritedWithPropertyNamingConflictWhichThrows>(
-                        json
-                    )
+                    JsonSerializer.Deserialize<ClassInheritedWithPropertyNamingConflictWhichThrows>(json)
             );
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -406,9 +402,7 @@ namespace System.Text.Json.Serialization.Tests
             string json = @"{""MyString"":""NewValue""}";
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    JsonSerializer.Deserialize<ClassInheritedWithPropertyFieldNamingConflictWhichThrows>(
-                        json
-                    )
+                    JsonSerializer.Deserialize<ClassInheritedWithPropertyFieldNamingConflictWhichThrows>(json)
             );
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -432,9 +426,7 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyNamingConflictWhichThrows>(
-                        json
-                    )
+                    JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyNamingConflictWhichThrows>(json)
             );
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -458,9 +450,7 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyFieldNamingConflictWhichThrows>(
-                        json
-                    )
+                    JsonSerializer.Deserialize<ClassTwiceInheritedWithPropertyFieldNamingConflictWhichThrows>(json)
             );
             // The output for Newtonsoft.Json is:
             // obj.ConflictingString = "NewValue"
@@ -1626,9 +1616,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             const string json = @"{""EnumValue"":""Case2""}";
 
-            ClassWithOverrideReversed obj = JsonSerializer.Deserialize<ClassWithOverrideReversed>(
-                json
-            );
+            ClassWithOverrideReversed obj =
+                JsonSerializer.Deserialize<ClassWithOverrideReversed>(json);
 
             Assert.Equal(MyEnum.Case2, obj.EnumValue);
             Assert.Equal("Case2", obj.EnumString);

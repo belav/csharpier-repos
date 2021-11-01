@@ -2954,9 +2954,8 @@ namespace System.Threading.Tasks.Dataflow
             /// <returns>The aggregate exception of all errors, or null if everything completed successfully.</returns>
             private AggregateException? GetCompletionError()
             {
-                Task? sourceCompletionTask = Common.GetPotentiallyNotSupportedCompletionTask(
-                    _source
-                );
+                Task? sourceCompletionTask =
+                    Common.GetPotentiallyNotSupportedCompletionTask(_source);
                 return sourceCompletionTask != null && sourceCompletionTask.IsFaulted
                   ? sourceCompletionTask.Exception
                   : null;
@@ -2972,9 +2971,8 @@ namespace System.Threading.Tasks.Dataflow
                     throw new ArgumentNullException(nameof(observer));
                 Common.ContractAssertMonitorStatus(_SubscriptionLock, held: false);
 
-                Task? sourceCompletionTask = Common.GetPotentiallyNotSupportedCompletionTask(
-                    _source
-                );
+                Task? sourceCompletionTask =
+                    Common.GetPotentiallyNotSupportedCompletionTask(_source);
 
                 // Synchronize all observers for this source.
                 Exception? error = null;
@@ -3247,9 +3245,8 @@ namespace System.Threading.Tasks.Dataflow
                         if (_tempSendAsyncTaskList != null && _tempSendAsyncTaskList.Count > 0)
                         {
                             // Consolidate all SendAsync tasks into one
-                            Task<bool[]> allSendAsyncTasksConsolidated = Task.WhenAll(
-                                _tempSendAsyncTaskList
-                            );
+                            Task<bool[]> allSendAsyncTasksConsolidated =
+                                Task.WhenAll(_tempSendAsyncTaskList);
 
                             // Clear the temp SendAsync task list
                             _tempSendAsyncTaskList.Clear();

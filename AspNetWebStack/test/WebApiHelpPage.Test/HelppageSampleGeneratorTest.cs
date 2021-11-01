@@ -39,9 +39,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "Values",
                 "Get"
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleRequests(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleRequests(apiDescription);
             Assert.Empty(samples);
         }
 
@@ -56,9 +55,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "Post",
                 "value"
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleRequests(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleRequests(apiDescription);
             Assert.NotEmpty(samples);
             foreach (var samplePair in samples)
             {
@@ -86,9 +84,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "options",
                 "request"
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleRequests(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleRequests(apiDescription);
             Assert.NotEmpty(samples);
             foreach (var samplePair in samples)
             {
@@ -114,9 +111,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "Patch",
                 "valuePair"
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleRequests(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleRequests(apiDescription);
             Assert.NotEmpty(samples);
             object result;
             samples.TryGetValue(new MediaTypeHeaderValue("application/json"), out result);
@@ -146,9 +142,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "Put",
                 "valuePairCollection"
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleRequests(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleRequests(apiDescription);
             Assert.NotEmpty(samples);
             object result;
             samples.TryGetValue(new MediaTypeHeaderValue("application/xml"), out result);
@@ -178,9 +173,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "Options",
                 "request"
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleRequests(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleRequests(apiDescription);
             Assert.NotEmpty(samples);
             object result;
             samples.TryGetValue(new MediaTypeHeaderValue("plain/text"), out result);
@@ -199,9 +193,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "Delete",
                 "id"
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleResponses(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleResponses(apiDescription);
             Assert.Empty(samples);
         }
 
@@ -216,9 +209,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "Get",
                 "id"
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleResponses(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleResponses(apiDescription);
             Assert.NotEmpty(samples);
             foreach (var samplePair in samples)
             {
@@ -246,9 +238,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "post",
                 "value"
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleResponses(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleResponses(apiDescription);
             Assert.NotEmpty(samples);
             foreach (var samplePair in samples)
             {
@@ -274,9 +265,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "Get",
                 new string[0]
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleResponses(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleResponses(apiDescription);
             Assert.NotEmpty(samples);
             object result;
             samples.TryGetValue(new MediaTypeHeaderValue("application/json"), out result);
@@ -306,9 +296,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "Get",
                 "id"
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleResponses(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleResponses(apiDescription);
             Assert.NotEmpty(samples);
             object result;
             samples.TryGetValue(new MediaTypeHeaderValue("application/xml"), out result);
@@ -338,9 +327,8 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "Post",
                 "value"
             );
-            IDictionary<MediaTypeHeaderValue, object> samples = sampleGenerator.GetSampleResponses(
-                apiDescription
-            );
+            IDictionary<MediaTypeHeaderValue, object> samples =
+                sampleGenerator.GetSampleResponses(apiDescription);
             Assert.NotEmpty(samples);
             object result;
             samples.TryGetValue(new MediaTypeHeaderValue("plain/text"), out result);

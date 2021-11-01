@@ -104,9 +104,8 @@ namespace System.Collections.Specialized.Tests
         [MemberData(nameof(Ctor_NameValueCollection_TestData))]
         public void Ctor_NameValueCollection(NameValueCollection nameValueCollection1)
         {
-            NameValueCollection nameValueCollection2 = new NameValueCollection(
-                nameValueCollection1
-            );
+            NameValueCollection nameValueCollection2 =
+                new NameValueCollection(nameValueCollection1);
 
             Assert.Equal(nameValueCollection1.Count, nameValueCollection2.Count);
             Assert.Equal(nameValueCollection1.Keys, nameValueCollection2.Keys);

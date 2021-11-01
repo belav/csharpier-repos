@@ -477,9 +477,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
 
             try
             {
-                var installedPackages = _packageInstallerServices.Value.GetInstalledPackages(
-                    dteProject
-                );
+                var installedPackages =
+                    _packageInstallerServices.Value.GetInstalledPackages(dteProject);
                 var metadata = installedPackages.FirstOrDefault(m => m.Id == packageName);
                 return metadata?.VersionString;
             }

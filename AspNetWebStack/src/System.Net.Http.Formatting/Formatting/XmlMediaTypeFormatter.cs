@@ -437,15 +437,13 @@ namespace System.Net.Http.Formatting
             bool isRemapped = false;
             if (UseXmlSerializer)
             {
-                isRemapped = MediaTypeFormatter.TryGetDelegatingTypeForIEnumerableGenericOrSame(
-                    ref type
-                );
+                isRemapped =
+                    MediaTypeFormatter.TryGetDelegatingTypeForIEnumerableGenericOrSame(ref type);
             }
             else
             {
-                isRemapped = MediaTypeFormatter.TryGetDelegatingTypeForIQueryableGenericOrSame(
-                    ref type
-                );
+                isRemapped =
+                    MediaTypeFormatter.TryGetDelegatingTypeForIQueryableGenericOrSame(ref type);
             }
 
             if (isRemapped && value != null)

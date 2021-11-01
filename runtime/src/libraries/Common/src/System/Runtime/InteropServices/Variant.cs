@@ -224,9 +224,8 @@ namespace System.Runtime.InteropServices
                     break;
 
                 case VarEnum.VT_UNKNOWN:
-                    *(IntPtr*)this._typeUnion._unionTypes._byref = Marshal.GetIUnknownForObject(
-                        value
-                    );
+                    *(IntPtr*)this._typeUnion._unionTypes._byref =
+                        Marshal.GetIUnknownForObject(value);
                     break;
 
                 case VarEnum.VT_DISPATCH:

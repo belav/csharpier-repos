@@ -391,9 +391,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             IClassificationFormatMap targetFormatMap
         )
         {
-            var classificationType = _classificationTypeRegistryService.GetClassificationType(
-                classificationTypeName
-            );
+            var classificationType =
+                _classificationTypeRegistryService.GetClassificationType(classificationTypeName);
             if (classificationType == null)
             {
                 return;

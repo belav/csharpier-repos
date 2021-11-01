@@ -59,9 +59,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             };
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
-                bindingContext
-            );
+            ValueProviderResult vpResult =
+                TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
 
             // Assert
             Assert.Null(vpResult); // Raw value is the wrong type
@@ -75,9 +74,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", 42 } };
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
-                bindingContext
-            );
+            ValueProviderResult vpResult =
+                TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
 
             // Assert
             Assert.NotNull(vpResult);
@@ -91,9 +89,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             bindingContext.ValueProvider = new SimpleValueProvider();
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
-                bindingContext
-            );
+            ValueProviderResult vpResult =
+                TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
 
             // Assert
             Assert.Null(vpResult); // No key matched

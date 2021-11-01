@@ -77,9 +77,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
             using var workspace = TestWorkspace.Create(workspaceXml);
             var spans =
                 (
-                    await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(
-                        workspace
-                    )
+                    await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(workspace)
                 ).Item2;
 
             Assert.Equal(1, spans.Count());
@@ -284,9 +282,7 @@ class Program
             );
 
             var spans =
-                await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(
-                    workspace
-                );
+                await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(workspace);
 
             Assert.Equal(1, spans.Item2.Count());
 
@@ -490,9 +486,7 @@ class Program
                 composition: SquiggleUtilities.CompositionWithSolutionCrawler
             );
             return (
-                await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(
-                    workspace
-                )
+                await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(workspace)
             ).Item2;
         }
 

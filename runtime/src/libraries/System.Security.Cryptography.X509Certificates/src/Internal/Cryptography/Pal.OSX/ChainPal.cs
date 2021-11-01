@@ -269,9 +269,8 @@ namespace Internal.Cryptography.Pal
             int ret;
 
             using (
-                SafeCFDateHandle cfEvaluationTime = Interop.CoreFoundation.CFDateCreate(
-                    verificationTime
-                )
+                SafeCFDateHandle cfEvaluationTime =
+                    Interop.CoreFoundation.CFDateCreate(verificationTime)
             )
             {
                 ret = Interop.AppleCrypto.AppleCryptoNative_X509ChainEvaluate(

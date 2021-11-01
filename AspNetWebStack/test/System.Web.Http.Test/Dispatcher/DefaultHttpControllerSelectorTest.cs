@@ -102,9 +102,8 @@ namespace System.Web.Http.Dispatcher
                 .Setup(c => c.GetControllerTypes(assemblyResolver.Object))
                 .Returns(new Collection<Type> { GetMockControllerType("Sample") })
                 .Verifiable();
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             HttpRequestMessage request = new HttpRequestMessage();
             IHttpRouteData routeData = GetRouteData();
@@ -142,9 +141,8 @@ namespace System.Web.Http.Dispatcher
             routeData.Values["controller"] = controllerTypeName;
             request.SetRouteData(routeData);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             // Act
             HttpControllerDescriptor descriptor = selector.SelectController(request);
@@ -175,9 +173,8 @@ namespace System.Web.Http.Dispatcher
             routeData.Values["controller"] = "Sample";
             request.SetRouteData(routeData);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             // Act
             HttpControllerDescriptor descriptor1 = selector.SelectController(request);
@@ -213,9 +210,8 @@ namespace System.Web.Http.Dispatcher
             routeData2.Values["controller"] = "SaMPle";
             request2.SetRouteData(routeData2);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             // Act
             HttpControllerDescriptor descriptor1 = selector.SelectController(request1);
@@ -242,9 +238,8 @@ namespace System.Web.Http.Dispatcher
             HttpRequestMessage request = new HttpRequestMessage();
             request.SetRouteData(GetRouteData());
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             // Act
             var ex = Assert.Throws<HttpResponseException>(() => selector.SelectController(request));
@@ -274,9 +269,8 @@ namespace System.Web.Http.Dispatcher
             );
             request.SetRouteData(routeData);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             // Act
             var selectedController = selector.SelectController(request);
@@ -314,9 +308,8 @@ namespace System.Web.Http.Dispatcher
             HttpRequestMessage request = new HttpRequestMessage();
             request.SetRouteData(routeData);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             string expectedMessage =
                 "Multiple controller types were found that match the URL. This can happen if attribute routes on multiple "
@@ -342,9 +335,8 @@ namespace System.Web.Http.Dispatcher
             HttpConfiguration configuration = new HttpConfiguration();
             HttpRequestMessage request = new HttpRequestMessage();
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             // Act
             var ex = Assert.Throws<HttpResponseException>(() => selector.SelectController(request));
@@ -384,9 +376,8 @@ namespace System.Web.Http.Dispatcher
             routeData.SetupGet(rd => rd.Route).Returns((IHttpRoute)null);
             request.SetRouteData(routeData.Object);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             // Act
             var controller = selector.SelectController(request);
@@ -425,9 +416,8 @@ namespace System.Web.Http.Dispatcher
             routeData.SetupGet(rd => rd.Route).Returns((IHttpRoute)null);
             request.SetRouteData(routeData.Object);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             // Act
             var ex = Assert.Throws<HttpResponseException>(() => selector.SelectController(request));
@@ -458,9 +448,8 @@ namespace System.Web.Http.Dispatcher
             request.SetRouteData(routeData1);
             request.SetConfiguration(configuration);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             // Act
             var ex = Assert.Throws<HttpResponseException>(() => selector.SelectController(request));
@@ -501,9 +490,8 @@ namespace System.Web.Http.Dispatcher
             request.SetRouteData(routeData1);
             request.SetConfiguration(configuration);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
-                configuration
-            );
+            DefaultHttpControllerSelector selector =
+                new DefaultHttpControllerSelector(configuration);
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(

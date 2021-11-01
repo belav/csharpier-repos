@@ -114,9 +114,7 @@ namespace Generic.Dictionary
                     : new Dictionary<DummyRefType, DummyRefType>(
                           (
                               customComparer =
-                                  (IEqualityComparer<DummyRefType>)Activator.CreateInstance(
-                                      comparerType
-                                  )
+                                  (IEqualityComparer<DummyRefType>)Activator.CreateInstance(comparerType)
                           )
                       );
 

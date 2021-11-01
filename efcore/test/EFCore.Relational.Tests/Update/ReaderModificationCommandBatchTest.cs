@@ -787,9 +787,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                 )
             );
 
-            var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
-                fakeDbConnection
-            );
+            var optionsExtension =
+                new FakeRelationalOptionsExtension().WithConnection(fakeDbConnection);
 
             var options = CreateOptions(optionsExtension);
 

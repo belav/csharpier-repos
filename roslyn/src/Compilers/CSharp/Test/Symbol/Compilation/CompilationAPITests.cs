@@ -2235,9 +2235,11 @@ class A
             Assert.Same(firstCompilation.ObjectType, secondCompilation.ObjectType);
 
             Assert.Null(
-                new CSharpScriptCompilationInfo(null, null, null).WithPreviousScriptCompilation(
-                    firstCompilation
-                ).ReturnTypeOpt
+                new CSharpScriptCompilationInfo(
+                    null,
+                    null,
+                    null
+                ).WithPreviousScriptCompilation(firstCompilation).ReturnTypeOpt
             );
         }
 

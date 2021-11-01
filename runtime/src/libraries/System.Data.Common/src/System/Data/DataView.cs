@@ -110,9 +110,8 @@ namespace System.Data
         private readonly DataViewListener _dvListener;
 
         private static int s_objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        private readonly int _objectID =
+            System.Threading.Interlocked.Increment(ref s_objectTypeCount);
 
         internal DataView(DataTable? table, bool locked)
         {

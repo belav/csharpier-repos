@@ -67,9 +67,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         formattedCommentLinesBuilder.Add(lineBuilder.ToString());
 
                         var rawParameterText = docComment.GetParameterText(parameterNames[i]);
-                        var formattedParameterText = docCommentFormattingService.Format(
-                            rawParameterText
-                        );
+                        var formattedParameterText =
+                            docCommentFormattingService.Format(rawParameterText);
                         if (!string.IsNullOrWhiteSpace(formattedParameterText))
                         {
                             formattedCommentLinesBuilder.AddRange(
@@ -100,9 +99,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         var rawTypeParameterText = docComment.GetTypeParameterText(
                             typeParameterNames[i]
                         );
-                        var formattedTypeParameterText = docCommentFormattingService.Format(
-                            rawTypeParameterText
-                        );
+                        var formattedTypeParameterText =
+                            docCommentFormattingService.Format(rawTypeParameterText);
                         if (!string.IsNullOrWhiteSpace(formattedTypeParameterText))
                         {
                             formattedCommentLinesBuilder.AddRange(

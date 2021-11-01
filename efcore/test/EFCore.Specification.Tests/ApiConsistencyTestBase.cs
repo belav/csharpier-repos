@@ -237,9 +237,7 @@ namespace Microsoft.EntityFrameworkCore
 
                 if (
                     conventionBuilderType != null
-                    && !typeof(IConventionAnnotatableBuilder).IsAssignableFrom(
-                        conventionBuilderType
-                    )
+                    && !typeof(IConventionAnnotatableBuilder).IsAssignableFrom(conventionBuilderType)
                 )
                 {
                     return $"{conventionBuilderType.Name} should derive from IConventionAnnotatableBuilder";

@@ -67,9 +67,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
 
                 DeclarationStatement = node;
 
-                var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
-                    DeclarationStatement
-                );
+                var variables =
+                    syntaxFacts.GetVariablesOfLocalDeclarationStatement(DeclarationStatement);
                 if (variables.Count != 1)
                 {
                     return false;
@@ -131,9 +130,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                     return false;
                 }
 
-                InnermostBlock = syntaxFacts.FindInnermostCommonExecutableBlock(
-                    referencingStatements
-                );
+                InnermostBlock =
+                    syntaxFacts.FindInnermostCommonExecutableBlock(referencingStatements);
                 if (InnermostBlock == null)
                 {
                     return false;
@@ -161,12 +159,10 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                     return false;
                 }
 
-                IndexOfDeclarationStatementInInnermostBlock = InnermostBlockStatements.IndexOf(
-                    DeclarationStatement
-                );
-                IndexOfFirstStatementAffectedInInnermostBlock = InnermostBlockStatements.IndexOf(
-                    FirstStatementAffectedInInnermostBlock
-                );
+                IndexOfDeclarationStatementInInnermostBlock =
+                    InnermostBlockStatements.IndexOf(DeclarationStatement);
+                IndexOfFirstStatementAffectedInInnermostBlock =
+                    InnermostBlockStatements.IndexOf(FirstStatementAffectedInInnermostBlock);
                 if (
                     IndexOfDeclarationStatementInInnermostBlock >= 0
                     && IndexOfDeclarationStatementInInnermostBlock

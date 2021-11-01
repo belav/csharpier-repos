@@ -65,9 +65,7 @@ namespace System.ComponentModel.Composition
             Assert.Throws<NotSupportedException>(
                 () =>
                 {
-                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataViewWithPropertySetter>(
-                        metadata
-                    );
+                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataViewWithPropertySetter>(metadata);
                 }
             );
         }
@@ -81,9 +79,7 @@ namespace System.ComponentModel.Composition
             Assert.Throws<NotSupportedException>(
                 () =>
                 {
-                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataViewWithMethod>(
-                        metadata
-                    );
+                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataViewWithMethod>(metadata);
                 }
             );
         }
@@ -97,9 +93,7 @@ namespace System.ComponentModel.Composition
             Assert.Throws<NotSupportedException>(
                 () =>
                 {
-                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataViewWithEvent>(
-                        metadata
-                    );
+                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataViewWithEvent>(metadata);
                 }
             );
         }
@@ -114,9 +108,7 @@ namespace System.ComponentModel.Composition
             Assert.Throws<NotSupportedException>(
                 () =>
                 {
-                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataViewWithIndexer>(
-                        metadata
-                    );
+                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataViewWithIndexer>(metadata);
                 }
             );
         }
@@ -144,9 +136,7 @@ namespace System.ComponentModel.Composition
             Assert.Throws<MemberAccessException>(
                 () =>
                 {
-                    MetadataViewProvider.GetMetadataView<AbstractClassWithConstructorMetadataView>(
-                        metadata
-                    );
+                    MetadataViewProvider.GetMetadataView<AbstractClassWithConstructorMetadataView>(metadata);
                 }
             );
         }
@@ -156,9 +146,9 @@ namespace System.ComponentModel.Composition
         {
             var metadata = new Dictionary<string, object>();
 
-            var result = MetadataViewProvider.GetMetadataView<IDictionary<string, object>>(
-                metadata
-            );
+            var result = MetadataViewProvider.GetMetadataView<
+                IDictionary<string, object>
+            >(metadata);
 
             Assert.Same(metadata, result);
         }
@@ -205,9 +195,7 @@ namespace System.ComponentModel.Composition
             Assert.Throws<CompositionContractMismatchException>(
                 () =>
                 {
-                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataView>(
-                        metadata
-                    );
+                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataView>(metadata);
                 }
             );
         }
@@ -221,9 +209,7 @@ namespace System.ComponentModel.Composition
             Assert.Throws<CompositionContractMismatchException>(
                 () =>
                 {
-                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataView2>(
-                        metadata
-                    );
+                    MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataView2>(metadata);
                 }
             );
         }
@@ -249,9 +235,8 @@ namespace System.ComponentModel.Composition
             metadata["Value"] = "value";
             metadata["Value2"] = "value2";
 
-            var view = MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataView3>(
-                metadata
-            );
+            var view =
+                MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataView3>(metadata);
             Assert.Equal("value", view.Value);
             Assert.Equal("value2", view.Value2);
         }
@@ -261,16 +246,14 @@ namespace System.ComponentModel.Composition
         {
             var metadata1 = new Dictionary<string, object>();
             metadata1["Value"] = "value1";
-            var view1 = MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataView>(
-                metadata1
-            );
+            var view1 =
+                MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataView>(metadata1);
             Assert.Equal("value1", view1.Value);
 
             var metadata2 = new Dictionary<string, object>();
             metadata2["Value"] = "value2";
-            var view2 = MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataView>(
-                metadata2
-            );
+            var view2 =
+                MetadataViewProvider.GetMetadataView<ITrans_MetadataTests_MetadataView>(metadata2);
             Assert.Equal("value2", view2.Value);
 
             Assert.Equal(view1.GetType(), view2.GetType());
@@ -314,9 +297,7 @@ namespace System.ComponentModel.Composition
                 new Dictionary<string, object>()
             );
             int result =
-                TransparentTestCase.GetMetadataView_IMetadataViewWithDefaultedIntInTranparentType(
-                    view
-                );
+                TransparentTestCase.GetMetadataView_IMetadataViewWithDefaultedIntInTranparentType(view);
             Assert.Equal(120, result);
         }
 
@@ -326,16 +307,14 @@ namespace System.ComponentModel.Composition
             Dictionary<string, object> metadata = new Dictionary<string, object>();
             metadata = new Dictionary<string, object>();
             metadata.Add("MyInt", 1.2);
-            var view1 = MetadataViewProvider.GetMetadataView<ITrans_MetadataViewWithDefaultedInt>(
-                metadata
-            );
+            var view1 =
+                MetadataViewProvider.GetMetadataView<ITrans_MetadataViewWithDefaultedInt>(metadata);
             Assert.Equal(120, view1.MyInt);
 
             metadata = new Dictionary<string, object>();
             metadata.Add("MyInt", "Hello, World");
-            var view2 = MetadataViewProvider.GetMetadataView<ITrans_MetadataViewWithDefaultedInt>(
-                metadata
-            );
+            var view2 =
+                MetadataViewProvider.GetMetadataView<ITrans_MetadataViewWithDefaultedInt>(metadata);
             Assert.Equal(120, view2.MyInt);
         }
 
@@ -346,9 +325,8 @@ namespace System.ComponentModel.Composition
             metadata = new Dictionary<string, object>();
             metadata.Add("String1", "One");
             metadata.Add("String2", "Two");
-            var view1 = MetadataViewProvider.GetMetadataView<IMetadataViewWithImplementation>(
-                metadata
-            );
+            var view1 =
+                MetadataViewProvider.GetMetadataView<IMetadataViewWithImplementation>(metadata);
             Assert.Equal("One", view1.String1);
             Assert.Equal("Two", view1.String2);
             Assert.Equal(typeof(MetadataViewWithImplementation), view1.GetType());
@@ -365,9 +343,7 @@ namespace System.ComponentModel.Composition
                     metadata.Add("String1", "One");
                     metadata.Add("String2", "Two");
                     var view1 =
-                        MetadataViewProvider.GetMetadataView<IMetadataViewWithImplementationNoInterface>(
-                            metadata
-                        );
+                        MetadataViewProvider.GetMetadataView<IMetadataViewWithImplementationNoInterface>(metadata);
                 }
             );
         }

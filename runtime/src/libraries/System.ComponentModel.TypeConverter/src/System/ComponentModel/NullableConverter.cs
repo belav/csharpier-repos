@@ -226,9 +226,8 @@ namespace System.ComponentModel
         {
             if (UnderlyingTypeConverter != null)
             {
-                StandardValuesCollection values = UnderlyingTypeConverter.GetStandardValues(
-                    context
-                );
+                StandardValuesCollection values =
+                    UnderlyingTypeConverter.GetStandardValues(context);
                 if (GetStandardValuesSupported(context) && values != null)
                 {
                     // Create a set of standard values around nullable instances.

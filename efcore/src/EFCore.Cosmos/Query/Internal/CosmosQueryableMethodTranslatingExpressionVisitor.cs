@@ -155,9 +155,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                     && entityTypePrimaryKeyProperties.SequenceEqual(queryProperties)
                                     && (
                                         partitionKeyProperty == null
-                                        || entityTypePrimaryKeyProperties.Contains(
-                                            partitionKeyProperty
-                                        )
+                                        || entityTypePrimaryKeyProperties.Contains(partitionKeyProperty)
                                     )
                                     && (
                                         idProperty.GetValueGeneratorFactory() != null
@@ -995,9 +993,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 );
 
                 var entityProjectionExpression =
-                    (EntityProjectionExpression)selectExpression.GetMappedProjection(
-                        projectionMember
-                    );
+                    (EntityProjectionExpression)selectExpression.GetMappedProjection(projectionMember);
                 selectExpression.ReplaceProjectionMapping(
                     new Dictionary<ProjectionMember, Expression>
                     {

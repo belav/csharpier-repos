@@ -516,9 +516,8 @@ namespace System.Net.Http.Functional.Tests
                         await LoopbackServer.CreateServerAsync(
                             async (redirectServer, redirectUrl) =>
                             {
-                                Task<HttpResponseMessage> getResponseTask = client.GetAsync(
-                                    origUrl
-                                );
+                                Task<HttpResponseMessage> getResponseTask =
+                                    client.GetAsync(origUrl);
 
                                 Task redirectTask =
                                     redirectServer.AcceptConnectionSendResponseAndCloseAsync();

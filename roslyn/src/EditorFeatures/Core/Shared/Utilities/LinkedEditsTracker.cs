@@ -82,9 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             var trackingSpansAfterEdit = GetActiveSpansForSnapshot(args.After)
                 .Select(ss => (Span)ss)
                 .ToList();
-            var normalizedTrackingSpansAfterEdit = new NormalizedSpanCollection(
-                trackingSpansAfterEdit
-            );
+            var normalizedTrackingSpansAfterEdit =
+                new NormalizedSpanCollection(trackingSpansAfterEdit);
 
             if (trackingSpansAfterEdit.Count != normalizedTrackingSpansAfterEdit.Count)
             {

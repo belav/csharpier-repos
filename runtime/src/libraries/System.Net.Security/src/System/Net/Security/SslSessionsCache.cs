@@ -207,9 +207,8 @@ namespace System.Net.Security
                     credentials = GetCachedCredential(key);
                     if (credentials == null || credentials.IsClosed || credentials.IsInvalid)
                     {
-                        SafeCredentialReference? cached = SafeCredentialReference.CreateReference(
-                            creds
-                        );
+                        SafeCredentialReference? cached =
+                            SafeCredentialReference.CreateReference(creds);
 
                         if (cached == null)
                         {

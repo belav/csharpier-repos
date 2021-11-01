@@ -245,9 +245,8 @@ namespace System.Xml.Serialization
                                 }
 
                                 // need to reflect and generate new serialization assembly
-                                XmlReflectionImporter importer = new XmlReflectionImporter(
-                                    defaultNamespace
-                                );
+                                XmlReflectionImporter importer =
+                                    new XmlReflectionImporter(defaultNamespace);
                                 _mapping = importer.ImportTypeMapping(type, null, defaultNamespace);
                                 _tempAssembly = GenerateTempAssembly(
                                     _mapping,

@@ -84,9 +84,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 DocumentNameWithoutExtension = Path.GetFileNameWithoutExtension(
                     SemanticDocument.Document.Name
                 );
-                IsDocumentNameAValidIdentifier = syntaxFacts.IsValidIdentifier(
-                    DocumentNameWithoutExtension
-                );
+                IsDocumentNameAValidIdentifier =
+                    syntaxFacts.IsValidIdentifier(DocumentNameWithoutExtension);
 
                 return true;
             }

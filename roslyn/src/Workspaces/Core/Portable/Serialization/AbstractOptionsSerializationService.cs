@@ -148,9 +148,9 @@ namespace Microsoft.CodeAnalysis.Serialization
 
             if (count > 0)
             {
-                specificDiagnosticOptionsList = new List<KeyValuePair<string, ReportDiagnostic>>(
-                    count
-                );
+                specificDiagnosticOptionsList = new List<
+                    KeyValuePair<string, ReportDiagnostic>
+                >(count);
 
                 for (var i = 0; i < count; i++)
                 {

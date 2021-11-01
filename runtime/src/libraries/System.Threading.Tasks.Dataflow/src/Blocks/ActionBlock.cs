@@ -230,9 +230,9 @@ namespace System.Threading.Tasks.Dataflow
                 task.ContinueWith(
                     (completed, state) =>
                     {
-                        ((ActionBlock<TInput>)state!).AsyncCompleteProcessMessageWithTask(
-                            completed
-                        );
+                        (
+                            (ActionBlock<TInput>)state!
+                        ).AsyncCompleteProcessMessageWithTask(completed);
                     },
                     this,
                     CancellationToken.None,

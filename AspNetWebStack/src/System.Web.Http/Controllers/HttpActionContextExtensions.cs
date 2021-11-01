@@ -110,15 +110,15 @@ namespace System.Web.Http.Controllers
                 throw Error.ArgumentNull("actionContext");
             }
 
-            ModelBindingContext propertyBindingContext = new ModelBindingContext(
-                parentBindingContext
-            ) {
-                ModelMetadata = metadataProvider.GetMetadataForType(null, typeof(TModel)),
-                ModelName = ModelBindingHelper.CreatePropertyModelName(
-                    parentBindingContext.ModelName,
-                    propertyName
-                )
-            };
+            ModelBindingContext propertyBindingContext =
+                new ModelBindingContext(parentBindingContext)
+                {
+                    ModelMetadata = metadataProvider.GetMetadataForType(null, typeof(TModel)),
+                    ModelName = ModelBindingHelper.CreatePropertyModelName(
+                        parentBindingContext.ModelName,
+                        propertyName
+                    )
+                };
 
             if (actionContext.Bind(propertyBindingContext))
             {

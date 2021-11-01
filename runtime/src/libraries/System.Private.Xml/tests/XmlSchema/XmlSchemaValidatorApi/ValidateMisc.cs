@@ -1138,9 +1138,8 @@ namespace System.Xml.Tests
 
                 doc.Load(reader);
 
-                ValidationEventHandler valEventHandler = new ValidationEventHandler(
-                    ValidationCallback
-                );
+                ValidationEventHandler valEventHandler =
+                    new ValidationEventHandler(ValidationCallback);
                 doc.Validate(valEventHandler);
                 Assert.Equal(0, warningCount);
                 Assert.Equal(0, errorCount);
@@ -1172,9 +1171,8 @@ namespace System.Xml.Tests
 
                 doc.Load(reader);
 
-                ValidationEventHandler valEventHandler = new ValidationEventHandler(
-                    ValidationCallback
-                );
+                ValidationEventHandler valEventHandler =
+                    new ValidationEventHandler(ValidationCallback);
                 doc.Validate(valEventHandler);
                 Assert.Equal(0, warningCount);
                 Assert.Equal(0, errorCount);

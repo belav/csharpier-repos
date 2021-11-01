@@ -389,9 +389,8 @@ namespace System.Net.Http.Functional.Tests
                     );
                     Assert.Equal("cookie1=value1", requestData1.GetSingleHeaderValue("Cookie"));
 
-                    HttpRequestData requestData2 = await server.HandleRequestAsync(
-                        content: s_simpleContent
-                    );
+                    HttpRequestData requestData2 =
+                        await server.HandleRequestAsync(content: s_simpleContent);
                     Assert.Equal("cookie2=value2", requestData2.GetSingleHeaderValue("Cookie"));
                 }
             );

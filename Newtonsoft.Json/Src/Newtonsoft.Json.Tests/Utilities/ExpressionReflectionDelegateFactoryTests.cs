@@ -55,9 +55,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .Single(c => c.GetParameters().Count() == 1);
 
             var creator =
-                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                    constructor
-                );
+                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Value" };
             InTestClass o = (InTestClass)creator(args);
@@ -73,9 +71,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .Single(c => c.GetParameters().Count() == 2);
 
             var creator =
-                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                    constructor
-                );
+                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Value", true };
             InTestClass o = (InTestClass)creator(args);
@@ -92,9 +88,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .Single(c => c.GetParameters().Count() == 1);
 
             var creator =
-                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                    constructor
-                );
+                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input" };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -110,9 +104,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .Single(c => c.GetParameters().Count() == 2);
 
             var creator =
-                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                    constructor
-                );
+                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input", null };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -128,9 +120,7 @@ namespace Newtonsoft.Json.Tests.Utilities
                 .Single(c => c.GetParameters().Count() == 3);
 
             var creator =
-                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(
-                    constructor
-                );
+                ExpressionReflectionDelegateFactory.Instance.CreateParameterizedConstructor(constructor);
 
             object[] args = new object[] { "Input", true, null };
             OutAndRefTestClass o = (OutAndRefTestClass)creator(args);
@@ -469,9 +459,7 @@ namespace Newtonsoft.Json.Tests.Utilities
             Assert.IsNotNull(castMethodInfo);
 
             MethodCall<object, object> call =
-                ExpressionReflectionDelegateFactory.Instance.CreateMethodCall<object>(
-                    castMethodInfo
-                );
+                ExpressionReflectionDelegateFactory.Instance.CreateMethodCall<object>(castMethodInfo);
 
             object result = call(null, "First!");
             Assert.IsNotNull(result);

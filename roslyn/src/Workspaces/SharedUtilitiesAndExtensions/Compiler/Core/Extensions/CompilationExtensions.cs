@@ -49,9 +49,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 {
                     foreach (var referencedAssembly in module.ReferencedAssemblySymbols)
                     {
-                        var currentType = referencedAssembly.GetTypeByMetadataName(
-                            fullyQualifiedMetadataName
-                        );
+                        var currentType =
+                            referencedAssembly.GetTypeByMetadataName(fullyQualifiedMetadataName);
                         if (currentType is null)
                             continue;
 

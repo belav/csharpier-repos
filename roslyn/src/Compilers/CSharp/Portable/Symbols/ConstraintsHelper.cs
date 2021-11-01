@@ -199,12 +199,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                                 // Use the calculated bounds from the constraint type parameter.
                                 constraintEffectiveBase =
-                                    constraintTypeParameter.GetEffectiveBaseClass(
-                                        constraintsInProgress
-                                    );
-                                constraintDeducedBase = constraintTypeParameter.GetDeducedBaseType(
-                                    constraintsInProgress
-                                );
+                                    constraintTypeParameter.GetEffectiveBaseClass(constraintsInProgress);
+                                constraintDeducedBase =
+                                    constraintTypeParameter.GetDeducedBaseType(constraintsInProgress);
                                 AddInterfaces(
                                     interfacesBuilder,
                                     constraintTypeParameter.GetInterfaces(constraintsInProgress)
@@ -1846,9 +1843,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // TypeBind::SatisfiesBound allows cases where one of the
                 // type parameter constraints satisfies the constraint.
                 foreach (
-                    var typeArgumentConstraint in typeParameter.ConstraintTypesWithDefinitionUseSiteDiagnostics(
-                        ref useSiteInfo
-                    )
+                    var typeArgumentConstraint in typeParameter.ConstraintTypesWithDefinitionUseSiteDiagnostics(ref useSiteInfo)
                 )
                 {
                     if (

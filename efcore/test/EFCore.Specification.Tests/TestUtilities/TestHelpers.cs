@@ -23,9 +23,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public DbContextOptions CreateOptions(IModel model, IServiceProvider serviceProvider = null)
         {
-            var optionsBuilder = new DbContextOptionsBuilder().UseInternalServiceProvider(
-                serviceProvider
-            );
+            var optionsBuilder =
+                new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider);
 
             UseProviderOptions(optionsBuilder.UseModel(model));
 
@@ -34,9 +33,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public DbContextOptions CreateOptions(IServiceProvider serviceProvider = null)
         {
-            var optionsBuilder = new DbContextOptionsBuilder().UseInternalServiceProvider(
-                serviceProvider
-            );
+            var optionsBuilder =
+                new DbContextOptionsBuilder().UseInternalServiceProvider(serviceProvider);
 
             UseProviderOptions(optionsBuilder);
 
@@ -83,9 +81,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             DbContextOptions options
         ) =>
             new(
-                new DbContextOptionsBuilder(options).UseInternalServiceProvider(
-                    serviceProvider
-                ).Options
+                new DbContextOptionsBuilder(options).UseInternalServiceProvider(serviceProvider).Options
             );
 
         public DbContext CreateContext(IServiceProvider serviceProvider) =>
@@ -169,9 +165,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 designTime,
                 skipValidation
                   ? null
-                  : new TestLogger<DbLoggerCategory.Model.Validation, TestLoggingDefinitions>(
-                        LoggingDefinitions
-                    )
+                  : new TestLogger<
+                        DbLoggerCategory.Model.Validation,
+                        TestLoggingDefinitions
+                    >(LoggingDefinitions)
             );
         }
 

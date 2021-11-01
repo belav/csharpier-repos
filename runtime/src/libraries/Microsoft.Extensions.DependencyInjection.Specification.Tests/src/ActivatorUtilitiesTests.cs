@@ -394,16 +394,13 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 var serviceProvider = CreateServiceProvider(serviceCollection);
 
                 var service =
-                    ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(
-                        serviceProvider
-                    );
+                    ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(serviceProvider);
                 Assert.NotNull(service);
                 Assert.Equal(1, service.InstanceId);
                 Assert.Equal(1, CreationCountFakeService.InstanceCount);
 
-                service = ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(
-                    serviceProvider
-                );
+                service =
+                    ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(serviceProvider);
                 Assert.NotNull(service);
                 Assert.Equal(2, service.InstanceId);
                 Assert.Equal(2, CreationCountFakeService.InstanceCount);
@@ -426,16 +423,13 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
                 // Act and Assert
                 var service =
-                    ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(
-                        serviceProvider
-                    );
+                    ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(serviceProvider);
                 Assert.NotNull(service);
                 Assert.Equal(1, service.InstanceId);
                 Assert.Equal(1, CreationCountFakeService.InstanceCount);
 
-                service = ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(
-                    serviceProvider
-                );
+                service =
+                    ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(serviceProvider);
                 Assert.NotNull(service);
                 Assert.Equal(1, service.InstanceId);
                 Assert.Equal(1, CreationCountFakeService.InstanceCount);
@@ -467,9 +461,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 Assert.Equal(1, service.InstanceId);
                 Assert.Equal(1, CreationCountFakeService.InstanceCount);
 
-                service = ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(
-                    serviceProvider
-                );
+                service =
+                    ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(serviceProvider);
                 Assert.NotNull(service);
                 Assert.Equal(2, service.InstanceId);
                 Assert.Equal(2, CreationCountFakeService.InstanceCount);

@@ -193,9 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             // This will throw if API shouldn't be supported or there is a problem with the argument.
-            var notUsed = OriginalDefinition.GetTypeInferredDuringReduction(
-                reducedFromTypeParameter
-            );
+            var notUsed =
+                OriginalDefinition.GetTypeInferredDuringReduction(reducedFromTypeParameter);
 
             Debug.Assert((object)notUsed == null && (object)OriginalDefinition.ReducedFrom != null);
             return this.TypeArgumentsWithAnnotations[reducedFromTypeParameter.Ordinal].Type;

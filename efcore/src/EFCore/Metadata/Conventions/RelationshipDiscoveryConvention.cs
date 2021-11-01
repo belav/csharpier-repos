@@ -318,9 +318,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     }
                     else
                     {
-                        var existingSkipNavigation = entityType.FindSkipNavigation(
-                            navigationPropertyName
-                        );
+                        var existingSkipNavigation =
+                            entityType.FindSkipNavigation(navigationPropertyName);
                         if (
                             existingSkipNavigation != null
                             && (
@@ -386,14 +385,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             var nextSelfRefCandidate =
                                 relationshipCandidate.InverseProperties.First();
                             if (
-                                !relationshipCandidate.NavigationProperties.Contains(
-                                    nextSelfRefCandidate
-                                )
+                                !relationshipCandidate.NavigationProperties.Contains(nextSelfRefCandidate)
                             )
                             {
-                                relationshipCandidate.NavigationProperties.Add(
-                                    nextSelfRefCandidate
-                                );
+                                relationshipCandidate.NavigationProperties.Add(nextSelfRefCandidate);
                             }
 
                             relationshipCandidate.InverseProperties.Remove(nextSelfRefCandidate);
@@ -442,14 +437,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                             var nextSelfRefCandidate =
                                 relationshipCandidate.InverseProperties.First();
                             if (
-                                !relationshipCandidate.NavigationProperties.Contains(
-                                    nextSelfRefCandidate
-                                )
+                                !relationshipCandidate.NavigationProperties.Contains(nextSelfRefCandidate)
                             )
                             {
-                                relationshipCandidate.NavigationProperties.Add(
-                                    nextSelfRefCandidate
-                                );
+                                relationshipCandidate.NavigationProperties.Add(nextSelfRefCandidate);
                             }
 
                             relationshipCandidate.InverseProperties.Remove(nextSelfRefCandidate);
@@ -984,9 +975,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         )
         {
             var navigationPropertyName = navigationProperty.GetSimpleMemberName();
-            var existingNavigation = declaringEntityType.FindDeclaredNavigation(
-                navigationPropertyName
-            );
+            var existingNavigation =
+                declaringEntityType.FindDeclaredNavigation(navigationPropertyName);
             if (existingNavigation != null)
             {
                 if (
@@ -1005,9 +995,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
             else
             {
-                var skipNavigation = declaringEntityType.FindDeclaredSkipNavigation(
-                    navigationPropertyName
-                );
+                var skipNavigation =
+                    declaringEntityType.FindDeclaredSkipNavigation(navigationPropertyName);
                 if (skipNavigation != null)
                 {
                     var inverse = skipNavigation.Inverse;

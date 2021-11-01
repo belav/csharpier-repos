@@ -218,9 +218,8 @@ namespace Internal.Cryptography.Pal
             {
                 Debug.Assert(_chainContext != null);
 
-                long timeInMsFromUnixEpoch = new DateTimeOffset(
-                    verificationTime
-                ).ToUnixTimeMilliseconds();
+                long timeInMsFromUnixEpoch =
+                    new DateTimeOffset(verificationTime).ToUnixTimeMilliseconds();
                 _isValid = Interop.AndroidCrypto.X509ChainBuild(
                     _chainContext,
                     timeInMsFromUnixEpoch
@@ -255,9 +254,8 @@ namespace Internal.Cryptography.Pal
                 if (res != 1)
                     throw new CryptographicException();
 
-                X509Certificate2[] certs = Interop.AndroidCrypto.X509ChainGetCertificates(
-                    _chainContext
-                );
+                X509Certificate2[] certs =
+                    Interop.AndroidCrypto.X509ChainGetCertificates(_chainContext);
                 List<X509ChainStatus> overallStatus = new List<X509ChainStatus>();
                 List<X509ChainStatus>[] statuses = new List<X509ChainStatus>[certs.Length];
 
@@ -266,9 +264,8 @@ namespace Internal.Cryptography.Pal
                 // beyond the first error
                 int firstNonRevocationErrorIndex = -1;
                 int firstRevocationErrorIndex = -1;
-                Dictionary<int, List<X509ChainStatus>> errorsByIndex = GetStatusByIndex(
-                    _chainContext
-                );
+                Dictionary<int, List<X509ChainStatus>> errorsByIndex =
+                    GetStatusByIndex(_chainContext);
                 foreach (int index in errorsByIndex.Keys)
                 {
                     List<X509ChainStatus> errors = errorsByIndex[index];

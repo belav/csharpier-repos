@@ -227,9 +227,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     var delta = Environment.TickCount - Tick;
                     CompletionProvidersLogger.LogTypeImportCompletionTicksDataPoint(delta);
                     CompletionProvidersLogger.LogTypeImportCompletionItemCountDataPoint(ItemsCount);
-                    CompletionProvidersLogger.LogTypeImportCompletionReferenceCountDataPoint(
-                        ReferenceCount
-                    );
+                    CompletionProvidersLogger.LogTypeImportCompletionReferenceCountDataPoint(ReferenceCount);
                 }
             }
         }

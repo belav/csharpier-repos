@@ -917,9 +917,8 @@ namespace System
 
         private static string GetTimeZoneDirectory()
         {
-            string? tzDirectory = Environment.GetEnvironmentVariable(
-                TimeZoneDirectoryEnvironmentVariable
-            );
+            string? tzDirectory =
+                Environment.GetEnvironmentVariable(TimeZoneDirectoryEnvironmentVariable);
 
             if (tzDirectory == null)
             {
@@ -1436,9 +1435,8 @@ namespace System
                     // having a daylightSavingsName means there is a DST rule
                     if (!daylightSavingsName.IsEmpty)
                     {
-                        TimeSpan? parsedDaylightSavings = TZif_ParseOffsetString(
-                            daylightSavingsOffset
-                        );
+                        TimeSpan? parsedDaylightSavings =
+                            TZif_ParseOffsetString(daylightSavingsOffset);
                         TimeSpan daylightSavingsTimeSpan;
                         if (!parsedDaylightSavings.HasValue)
                         {

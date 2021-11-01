@@ -1823,9 +1823,7 @@ namespace System.Xml.Xsl.Xslt
                                                                                                                                                     ? XslResultDocument()
                                                                                                                                                     :
 #endif
-                                                                                                                                                      /*default:*/LoadUnknownXsltInstruction(
-                                                                                                                                                          parentName
-                                                                                                                                                      )
+                                                                                                                                                      /*default:*/LoadUnknownXsltInstruction(parentName)
                                 );
                             }
                             else

@@ -56,9 +56,8 @@ namespace Microsoft.Extensions.Internal
             //         FSharpOption<TaskCreationOptions>.None,
             //         FSharpOption<CancellationToken>.None);
             // };
-            var startAsTaskClosedMethod = _fsharpAsyncStartAsTaskGenericMethod.MakeGenericMethod(
-                awaiterResultType
-            );
+            var startAsTaskClosedMethod =
+                _fsharpAsyncStartAsTaskGenericMethod.MakeGenericMethod(awaiterResultType);
             var coerceToAwaitableParam = Expression.Parameter(typeof(object));
             coerceToAwaitableExpression = Expression.Lambda(
                 Expression.Convert(

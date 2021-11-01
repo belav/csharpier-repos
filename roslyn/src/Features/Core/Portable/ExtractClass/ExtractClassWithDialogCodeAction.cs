@@ -294,9 +294,8 @@ namespace Microsoft.CodeAnalysis.ExtractClass
         )
         {
             var unformattedSolution = solution;
-            var remainingResults = new List<ExtractClassMemberAnalysisResult>(
-                memberAnalysisResults
-            );
+            var remainingResults =
+                new List<ExtractClassMemberAnalysisResult>(memberAnalysisResults);
 
             foreach (var documentId in symbolMapping.DocumentIdsToSymbolMap.Keys)
             {

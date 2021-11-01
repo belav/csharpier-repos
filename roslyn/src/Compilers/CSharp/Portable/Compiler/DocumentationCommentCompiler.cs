@@ -341,9 +341,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 {
                     // Report the error at a location in the tree that was parsing doc comments.
-                    Location location = GetLocationInTreeReportingDocumentationCommentDiagnostics(
-                        symbol
-                    );
+                    Location location =
+                        GetLocationInTreeReportingDocumentationCommentDiagnostics(symbol);
                     if (location != null)
                     {
                         _diagnostics.Add(ErrorCode.WRN_MissingXMLComment, location, symbol);
@@ -567,9 +566,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // It would be preferable to just parse the concatenated XML at the end of the loop (we wouldn't have
                 // to wrap it in a root element and we wouldn't have to reparse in the IncludeElementExpander), but
                 // then we wouldn't know whether or where to report a diagnostic.
-                XmlException e = XmlDocumentationCommentTextReader.ParseAndGetException(
-                    formattedXml
-                );
+                XmlException e =
+                    XmlDocumentationCommentTextReader.ParseAndGetException(formattedXml);
                 if (e != null)
                 {
                     haveParseError = true;
@@ -1190,9 +1188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = binder.GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                binder.GetNewCompoundUseSiteInfo(diagnostics);
             ImmutableArray<Symbol> referencedSymbols = binder.BindXmlNameAttribute(
                 syntax,
                 ref useSiteInfo

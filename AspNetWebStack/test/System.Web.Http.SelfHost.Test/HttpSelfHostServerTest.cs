@@ -260,9 +260,8 @@ namespace System.Web.Http.SelfHost
                 };
 
                 using (
-                    HttpSelfHostConfiguration expectedConfiguration = new HttpSelfHostConfiguration(
-                        baseUri
-                    )
+                    HttpSelfHostConfiguration expectedConfiguration =
+                        new HttpSelfHostConfiguration(baseUri)
                 )
                 {
                     expectedConfiguration.HostNameComparisonMode = HostNameComparisonMode.Exact;

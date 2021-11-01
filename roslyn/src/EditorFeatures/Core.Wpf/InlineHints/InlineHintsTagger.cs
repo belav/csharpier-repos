@@ -69,9 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             _buffer = buffer;
 
             _tagAggregator = tagAggregator;
-            _formatMap = taggerProvider.ClassificationFormatMapService.GetClassificationFormatMap(
-                textView
-            );
+            _formatMap =
+                taggerProvider.ClassificationFormatMapService.GetClassificationFormatMap(textView);
             _hintClassification =
                 taggerProvider.ClassificationTypeRegistryService.GetClassificationType(
                     InlineHintsTag.TagId

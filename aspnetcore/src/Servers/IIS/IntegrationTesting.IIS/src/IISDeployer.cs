@@ -86,9 +86,7 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                 DeploymentParameters.PublishApplicationBeforeDeployment = true;
                 // Move ASPNETCORE_DETAILEDERRORS to web config env variables
                 if (
-                    IISDeploymentParameters.EnvironmentVariables.ContainsKey(
-                        DetailedErrorsEnvironmentVariable
-                    )
+                    IISDeploymentParameters.EnvironmentVariables.ContainsKey(DetailedErrorsEnvironmentVariable)
                 )
                 {
                     IISDeploymentParameters.WebConfigBasedEnvironmentVariables[
@@ -97,9 +95,7 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                         DetailedErrorsEnvironmentVariable
                     ];
 
-                    IISDeploymentParameters.EnvironmentVariables.Remove(
-                        DetailedErrorsEnvironmentVariable
-                    );
+                    IISDeploymentParameters.EnvironmentVariables.Remove(DetailedErrorsEnvironmentVariable);
                 }
                 // Do not override settings set on parameters
                 if (

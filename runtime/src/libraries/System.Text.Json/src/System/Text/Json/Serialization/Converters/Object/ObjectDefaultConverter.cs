@@ -88,9 +88,7 @@ namespace System.Text.Json.Serialization.Converters
                 {
                     if (reader.TokenType != JsonTokenType.StartObject)
                     {
-                        ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(
-                            TypeToConvert
-                        );
+                        ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(TypeToConvert);
                     }
 
                     state.Current.ObjectState = StackFrameObjectState.StartToken;

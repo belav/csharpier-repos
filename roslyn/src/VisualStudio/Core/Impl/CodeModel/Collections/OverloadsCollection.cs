@@ -73,9 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                             var fileCodeModelObject = this.Workspace.GetFileCodeModel(document.Id);
                             if (fileCodeModelObject != null)
                             {
-                                var fileCodeModel = ComAggregate.GetManagedObject<FileCodeModel>(
-                                    fileCodeModelObject
-                                );
+                                var fileCodeModel =
+                                    ComAggregate.GetManagedObject<FileCodeModel>(fileCodeModelObject);
 
                                 var element = fileCodeModel.CodeElementFromPosition(
                                     location.SourceSpan.Start,

@@ -178,9 +178,7 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             foreach (var member in comparableType.GetMembers(nameof(IComparable<int>.CompareTo)))
             {
                 if (member is IMethodSymbol method)
-                    return (IMethodSymbol?)containingType.FindImplementationForInterfaceMember(
-                        method
-                    );
+                    return (IMethodSymbol?)containingType.FindImplementationForInterfaceMember(method);
             }
 
             return null;

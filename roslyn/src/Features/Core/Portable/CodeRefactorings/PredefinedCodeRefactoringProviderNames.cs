@@ -65,9 +65,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         public const string ReplacePropertyWithMethods = nameof(ReplacePropertyWithMethods);
         public const string ReplaceMethodWithProperty = nameof(ReplaceMethodWithProperty);
         public const string AddDebuggerDisplay = nameof(AddDebuggerDisplay);
-        public const string ConvertAutoPropertyToFullProperty = nameof(
-            ConvertAutoPropertyToFullProperty
-        );
+        public const string ConvertAutoPropertyToFullProperty =
+            nameof(ConvertAutoPropertyToFullProperty);
         public const string ReverseForStatement = nameof(ReverseForStatement);
         public const string ConvertLocalFunctionToMethod = nameof(ConvertLocalFunctionToMethod);
         public const string ConvertForEachToFor = nameof(ConvertForEachToFor);
@@ -81,22 +80,18 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         public const string UseNamedArguments = nameof(UseNamedArguments);
         public const string ConvertForToForEach = nameof(ConvertForToForEach);
         public const string ConvertIfToSwitch = nameof(ConvertIfToSwitch);
-        public const string ConvertBetweenRegularAndVerbatimString = nameof(
-            ConvertBetweenRegularAndVerbatimString
-        );
-        public const string ConvertBetweenRegularAndVerbatimInterpolatedString = nameof(
-            ConvertBetweenRegularAndVerbatimInterpolatedString
-        );
+        public const string ConvertBetweenRegularAndVerbatimString =
+            nameof(ConvertBetweenRegularAndVerbatimString);
+        public const string ConvertBetweenRegularAndVerbatimInterpolatedString =
+            nameof(ConvertBetweenRegularAndVerbatimInterpolatedString);
         public const string RenameTracking = nameof(RenameTracking);
         public const string UseExpressionBodyForLambda = nameof(UseExpressionBodyForLambda);
         public const string ImplementInterfaceExplicitly = nameof(ImplementInterfaceExplicitly);
         public const string ImplementInterfaceImplicitly = nameof(ImplementInterfaceImplicitly);
-        public const string ConvertPlaceholderToInterpolatedString = nameof(
-            ConvertPlaceholderToInterpolatedString
-        );
-        public const string ConvertConcatenationToInterpolatedString = nameof(
-            ConvertConcatenationToInterpolatedString
-        );
+        public const string ConvertPlaceholderToInterpolatedString =
+            nameof(ConvertPlaceholderToInterpolatedString);
+        public const string ConvertConcatenationToInterpolatedString =
+            nameof(ConvertConcatenationToInterpolatedString);
         public const string InvertMultiLineIf = nameof(InvertMultiLineIf);
     }
 }

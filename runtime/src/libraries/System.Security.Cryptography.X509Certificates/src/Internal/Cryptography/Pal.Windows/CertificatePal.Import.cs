@@ -243,9 +243,7 @@ namespace Internal.Cryptography.Pal
                             // If it was an ephemeral private key no action is required.
                             if (pEnumContext.HasPersistedPrivateKey)
                             {
-                                SafeCertContextHandleWithKeyContainerDeletion.DeleteKeyContainer(
-                                    pEnumContext
-                                );
+                                SafeCertContextHandleWithKeyContainerDeletion.DeleteKeyContainer(pEnumContext);
                             }
                         }
                         else

@@ -209,9 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // Is the operand implicitly convertible to bool?
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             TypeSymbol boolean = GetSpecialType(SpecialType.System_Boolean, diagnostics, node);
             Conversion conversion = this.Conversions.ClassifyImplicitConversionFromType(
                 type,

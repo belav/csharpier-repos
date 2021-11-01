@@ -288,9 +288,8 @@ namespace System.Web.WebPages.Html
             if (UnobtrusiveJavaScriptEnabled)
             {
                 // Add validation attributes
-                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(
-                    name
-                );
+                var validationAttributes =
+                    _validationHelper.GetUnobtrusiveValidationAttributes(name);
                 tagBuilder.MergeAttributes(validationAttributes, replaceExisting: false);
             }
 
@@ -486,9 +485,8 @@ namespace System.Web.WebPages.Html
             tagBuilder.GenerateId(name);
             if (UnobtrusiveJavaScriptEnabled)
             {
-                var validationAttributes = _validationHelper.GetUnobtrusiveValidationAttributes(
-                    name
-                );
+                var validationAttributes =
+                    _validationHelper.GetUnobtrusiveValidationAttributes(name);
                 tagBuilder.MergeAttributes(validationAttributes, replaceExisting: false);
             }
 

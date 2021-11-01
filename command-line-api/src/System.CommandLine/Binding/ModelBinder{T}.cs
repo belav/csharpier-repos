@@ -16,9 +16,8 @@ namespace System.CommandLine.Binding
         {
             var (propertyType, propertyName) = property.MemberTypeAndName();
             var propertyDescriptor = FindModelPropertyDescriptor(propertyType, propertyName);
-            MemberBindingSources[propertyDescriptor] = new SpecificSymbolValueSource(
-                valueDescriptor
-            );
+            MemberBindingSources[propertyDescriptor] =
+                new SpecificSymbolValueSource(valueDescriptor);
         }
 
         public void BindMemberFromValue<TValue>(

@@ -105,9 +105,8 @@ namespace ILVerify
         {
             if (_arrayOfTRuntimeInterfacesAlgorithm == null)
             {
-                _arrayOfTRuntimeInterfacesAlgorithm = new SimpleArrayOfTRuntimeInterfacesAlgorithm(
-                    SystemModule
-                );
+                _arrayOfTRuntimeInterfacesAlgorithm =
+                    new SimpleArrayOfTRuntimeInterfacesAlgorithm(SystemModule);
             }
             return _arrayOfTRuntimeInterfacesAlgorithm;
         }

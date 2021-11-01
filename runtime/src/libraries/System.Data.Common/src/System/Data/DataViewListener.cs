@@ -108,17 +108,15 @@ namespace System.Data
                 table.Columns.ColumnPropertyChanged += handlerCollection;
                 table.Columns.CollectionChanged += handlerCollection;
 
-                var handlerChildRelation = new CollectionChangeEventHandler(
-                    ChildRelationCollectionChanged
-                );
+                var handlerChildRelation =
+                    new CollectionChangeEventHandler(ChildRelationCollectionChanged);
                 (
                     (DataRelationCollection.DataTableRelationCollection)(table.ChildRelations)
                 ).RelationPropertyChanged += handlerChildRelation;
                 table.ChildRelations.CollectionChanged += handlerChildRelation;
 
-                var handlerParentRelation = new CollectionChangeEventHandler(
-                    ParentRelationCollectionChanged
-                );
+                var handlerParentRelation =
+                    new CollectionChangeEventHandler(ParentRelationCollectionChanged);
                 (
                     (DataRelationCollection.DataTableRelationCollection)(table.ParentRelations)
                 ).RelationPropertyChanged += handlerParentRelation;
@@ -135,9 +133,8 @@ namespace System.Data
 
             if (table != null)
             {
-                CollectionChangeEventHandler handlerCollection = new CollectionChangeEventHandler(
-                    ColumnCollectionChanged
-                );
+                CollectionChangeEventHandler handlerCollection =
+                    new CollectionChangeEventHandler(ColumnCollectionChanged);
                 table.Columns.ColumnPropertyChanged -= handlerCollection;
                 table.Columns.CollectionChanged -= handlerCollection;
 

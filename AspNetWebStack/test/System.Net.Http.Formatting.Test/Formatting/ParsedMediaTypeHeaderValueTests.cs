@@ -195,9 +195,8 @@ namespace System.Net.Http.Formatting
         public void IsSubTypeMediaRange_ReturnsTrueForSubTypeMediaRanges(string mediaType)
         {
             MediaTypeHeaderValue mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(mediaType);
-            ParsedMediaTypeHeaderValue parsedMediaType = new ParsedMediaTypeHeaderValue(
-                mediaTypeHeaderValue
-            );
+            ParsedMediaTypeHeaderValue parsedMediaType =
+                new ParsedMediaTypeHeaderValue(mediaTypeHeaderValue);
             Assert.True(parsedMediaType.IsSubtypeMediaRange);
         }
 
@@ -207,9 +206,8 @@ namespace System.Net.Http.Formatting
         public void IsSubTypeMediaRange_ReturnsFalseForNonSubTypeMediaRanges(string mediaType)
         {
             MediaTypeHeaderValue mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(mediaType);
-            ParsedMediaTypeHeaderValue parsedMediaType = new ParsedMediaTypeHeaderValue(
-                mediaTypeHeaderValue
-            );
+            ParsedMediaTypeHeaderValue parsedMediaType =
+                new ParsedMediaTypeHeaderValue(mediaTypeHeaderValue);
             Assert.False(parsedMediaType.IsSubtypeMediaRange);
         }
 
@@ -218,9 +216,8 @@ namespace System.Net.Http.Formatting
         public void IsAllMediaRange_ReturnsTrueForFullMediaTypeRanges(string mediaType)
         {
             MediaTypeHeaderValue mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(mediaType);
-            ParsedMediaTypeHeaderValue parsedMediaType = new ParsedMediaTypeHeaderValue(
-                mediaTypeHeaderValue
-            );
+            ParsedMediaTypeHeaderValue parsedMediaType =
+                new ParsedMediaTypeHeaderValue(mediaTypeHeaderValue);
             Assert.True(parsedMediaType.IsAllMediaRange);
         }
 
@@ -231,9 +228,8 @@ namespace System.Net.Http.Formatting
         public void IsAllMediaRange_ReturnsFalseForNonFullMediaTypeRanges(string mediaType)
         {
             MediaTypeHeaderValue mediaTypeHeaderValue = MediaTypeHeaderValue.Parse(mediaType);
-            ParsedMediaTypeHeaderValue parsedMediaType = new ParsedMediaTypeHeaderValue(
-                mediaTypeHeaderValue
-            );
+            ParsedMediaTypeHeaderValue parsedMediaType =
+                new ParsedMediaTypeHeaderValue(mediaTypeHeaderValue);
             Assert.False(parsedMediaType.IsAllMediaRange);
         }
     }

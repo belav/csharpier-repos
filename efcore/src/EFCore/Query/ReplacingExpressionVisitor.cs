@@ -42,9 +42,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             Check.NotNull(replacement, nameof(replacement));
             Check.NotNull(tree, nameof(tree));
 
-            return new ReplacingExpressionVisitor(new[] { original }, new[] { replacement }).Visit(
-                tree
-            );
+            return new ReplacingExpressionVisitor(
+                new[] { original },
+                new[] { replacement }
+            ).Visit(tree);
         }
 
         /// <summary>

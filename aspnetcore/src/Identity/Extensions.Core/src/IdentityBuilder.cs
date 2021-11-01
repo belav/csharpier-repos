@@ -147,9 +147,8 @@ namespace Microsoft.AspNetCore.Identity
             Services.Configure<IdentityOptions>(
                 options =>
                 {
-                    options.Tokens.ProviderMap[providerName] = new TokenProviderDescriptor(
-                        provider
-                    );
+                    options.Tokens.ProviderMap[providerName] =
+                        new TokenProviderDescriptor(provider);
                 }
             );
             Services.AddTransient(provider);

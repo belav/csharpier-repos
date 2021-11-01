@@ -68,9 +68,8 @@ namespace Profiler.Tests
 
             foreach (string key in Environment.GetEnvironmentVariables().Keys)
             {
-                process.StartInfo.EnvironmentVariables[key] = Environment.GetEnvironmentVariable(
-                    key
-                );
+                process.StartInfo.EnvironmentVariables[key] =
+                    Environment.GetEnvironmentVariable(key);
             }
 
             foreach (string key in envVars.Keys)

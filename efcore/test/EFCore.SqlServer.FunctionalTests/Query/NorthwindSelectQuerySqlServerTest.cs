@@ -467,9 +467,7 @@ ORDER BY [o].[OrderID]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(
-                async
-            );
+            await base.Select_non_matching_value_types_nullable_int_to_long_introduces_explicit_cast(async);
 
             AssertSql(
                 @"SELECT CAST([o].[EmployeeID] AS bigint)
@@ -483,9 +481,7 @@ ORDER BY [o].[OrderID]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(
-                async
-            );
+            await base.Select_non_matching_value_types_nullable_int_to_int_doesnt_introduce_explicit_cast(async);
 
             AssertSql(
                 @"SELECT [o].[EmployeeID]
@@ -499,9 +495,7 @@ ORDER BY [o].[OrderID]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(
-                async
-            );
+            await base.Select_non_matching_value_types_int_to_nullable_int_doesnt_introduce_explicit_cast(async);
 
             AssertSql(
                 @"SELECT [o].[OrderID]
@@ -515,9 +509,7 @@ ORDER BY [o].[OrderID]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(
-                async
-            );
+            await base.Select_non_matching_value_types_from_binary_expression_introduces_explicit_cast(async);
 
             AssertSql(
                 @"SELECT CAST(([o].[OrderID] + [o].[OrderID]) AS bigint)
@@ -531,9 +523,7 @@ ORDER BY [o].[OrderID]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(
-                async
-            );
+            await base.Select_non_matching_value_types_from_binary_expression_nested_introduces_top_level_explicit_cast(async);
 
             AssertSql(
                 @"SELECT CAST((CAST([o].[OrderID] AS bigint) + CAST([o].[OrderID] AS bigint)) AS smallint)
@@ -547,9 +537,7 @@ ORDER BY [o].[OrderID]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(
-                async
-            );
+            await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast1(async);
 
             AssertSql(
                 @"SELECT CAST(-[o].[OrderID] AS bigint)
@@ -563,9 +551,7 @@ ORDER BY [o].[OrderID]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(
-                async
-            );
+            await base.Select_non_matching_value_types_from_unary_expression_introduces_explicit_cast2(async);
 
             AssertSql(
                 @"SELECT -CAST([o].[OrderID] AS bigint)
@@ -593,9 +579,7 @@ ORDER BY [o].[OrderID]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_method_call_introduces_explicit_cast(
-                async
-            );
+            await base.Select_non_matching_value_types_from_method_call_introduces_explicit_cast(async);
 
             AssertSql(
                 @"SELECT CAST(ABS([o].[OrderID]) AS bigint)
@@ -609,9 +593,7 @@ ORDER BY [o].[OrderID]"
             bool async
         )
         {
-            await base.Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(
-                async
-            );
+            await base.Select_non_matching_value_types_from_anonymous_type_introduces_explicit_cast(async);
 
             AssertSql(
                 @"SELECT CAST([o].[OrderID] AS bigint) AS [LongOrder], CAST([o].[OrderID] AS smallint) AS [ShortOrder], [o].[OrderID] AS [Order]
@@ -690,9 +672,7 @@ WHERE [o].[OrderID] < 10300"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(
-                async
-            );
+            await base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault(async);
 
             AssertSql(
                 @"SELECT (
@@ -712,9 +692,7 @@ FROM [Customers] AS [c]"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(
-                async
-            );
+            await base.Project_single_element_from_collection_with_OrderBy_Skip_and_FirstOrDefault(async);
 
             AssertSql(
                 @"SELECT (
@@ -731,9 +709,7 @@ FROM [Customers] AS [c]"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(
-                async
-            );
+            await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault(async);
 
             AssertSql(
                 @"SELECT (
@@ -748,9 +724,7 @@ FROM [Customers] AS [c]"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(
-                async
-            );
+            await base.Project_single_element_from_collection_with_OrderBy_Distinct_and_FirstOrDefault_followed_by_projecting_length(async);
 
             AssertSql(
                 @"SELECT (
@@ -768,9 +742,7 @@ FROM [Customers] AS [c]"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(
-                async
-            );
+            await base.Project_single_element_from_collection_with_OrderBy_Take_and_SingleOrDefault(async);
 
             AssertSql(
                 @"SELECT (
@@ -791,9 +763,7 @@ WHERE [c].[CustomerID] = N'ALFKI'"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(
-                async
-            );
+            await base.Project_single_element_from_collection_with_OrderBy_Take_and_FirstOrDefault_with_parameter(async);
 
             AssertSql(
                 @"@__i_0='1'
@@ -815,9 +785,7 @@ FROM [Customers] AS [c]"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(
-                async
-            );
+            await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault(async);
 
             AssertSql(
                 @"SELECT (
@@ -837,9 +805,7 @@ FROM [Customers] AS [c]"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(
-                async
-            );
+            await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_followed_by_projection_of_length_property(async);
 
             AssertSql("");
         }
@@ -848,9 +814,7 @@ FROM [Customers] AS [c]"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(
-                async
-            );
+            await base.Project_single_element_from_collection_with_multiple_OrderBys_Take_and_FirstOrDefault_2(async);
 
             AssertSql(
                 @"SELECT (
@@ -870,9 +834,7 @@ FROM [Customers] AS [c]"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(
-                async
-            );
+            await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault(async);
 
             AssertSql(
                 @"SELECT COALESCE((
@@ -894,9 +856,7 @@ WHERE [o].[OrderID] < 10300"
             bool async
         )
         {
-            await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(
-                async
-            );
+            await base.Project_single_element_from_collection_with_OrderBy_over_navigation_Take_and_FirstOrDefault_2(async);
 
             AssertSql(
                 @"SELECT [t0].[OrderID], [t0].[ProductID], [t0].[Discount], [t0].[Quantity], [t0].[UnitPrice]
@@ -1268,9 +1228,7 @@ OUTER APPLY (
             bool async
         )
         {
-            await base.FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(
-                async
-            );
+            await base.FirstOrDefault_over_empty_collection_of_value_type_returns_correct_results(async);
 
             AssertSql(
                 @"SELECT [c].[CustomerID], COALESCE((
@@ -1345,9 +1303,7 @@ ORDER BY [c].[CustomerID], [t].[OrderID]"
             bool async
         )
         {
-            await base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(
-                async
-            );
+            await base.SelectMany_with_collection_being_correlated_subquery_which_references_inner_and_outer_entity(async);
 
             AssertSql(
                 @"SELECT [t].[OrderProperty], [t].[CustomerProperty]
@@ -1364,9 +1320,7 @@ CROSS APPLY (
             bool async
         )
         {
-            await base.SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(
-                async
-            );
+            await base.SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(async);
 
             AssertSql(@"");
         }
@@ -1388,9 +1342,7 @@ WHERE [c].[CustomerID] = N'ALFKI'"
             bool async
         )
         {
-            await base.Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(
-                async
-            );
+            await base.Select_chained_entity_navigation_doesnt_materialize_intermittent_entities(async);
 
             AssertSql(
                 @"SELECT [o].[OrderID], [c].[CustomerID], [o0].[OrderID], [o0].[CustomerID], [o0].[EmployeeID], [o0].[OrderDate]
@@ -1667,9 +1619,7 @@ LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]"
             bool async
         )
         {
-            await base.Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(
-                async
-            );
+            await base.Projecting_Length_of_a_string_property_after_FirstOrDefault_on_correlated_collection(async);
 
             AssertSql(
                 @"SELECT (
@@ -1747,9 +1697,7 @@ OFFSET @__p_0 ROWS"
             bool async
         )
         {
-            await base.Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(
-                async
-            );
+            await base.Projection_Distinct_projection_preserves_columns_used_for_distinct_in_subquery(async);
 
             AssertSql(
                 @"SELECT (COALESCE([t].[FirstLetter], N'') + N' ') + [t].[Foo] AS [Aggregate]
@@ -1855,9 +1803,7 @@ ORDER BY [t].[CustomerID], [t0].[OrderID]"
             bool async
         )
         {
-            await base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(
-                async
-            );
+            await base.Correlated_collection_after_distinct_with_complex_projection_containing_original_identifier(async);
 
             AssertSql(
                 @"SELECT [t].[OrderID], [t].[Complex], [t0].[Outer], [t0].[Inner], [t0].[OrderDate]
@@ -1878,9 +1824,7 @@ ORDER BY [t].[OrderID], [t0].[Inner]"
             bool async
         )
         {
-            await base.Correlated_collection_after_distinct_not_containing_original_identifier(
-                async
-            );
+            await base.Correlated_collection_after_distinct_not_containing_original_identifier(async);
 
             AssertSql(
                 @"SELECT [t].[OrderDate], [t].[CustomerID], [t0].[Outer1], [t0].[Outer2], [t0].[Inner], [t0].[OrderDate]
@@ -1901,9 +1845,7 @@ ORDER BY [t].[OrderDate], [t].[CustomerID], [t0].[Inner]"
             bool async
         )
         {
-            await base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
-                async
-            );
+            await base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(async);
 
             AssertSql(
                 @"SELECT [t].[OrderDate], [t].[CustomerID], [t].[Complex], [t0].[Outer1], [t0].[Outer2], [t0].[Outer3], [t0].[Inner], [t0].[OrderDate]
@@ -1924,9 +1866,7 @@ ORDER BY [t].[OrderDate], [t].[CustomerID], [t].[Complex], [t0].[Inner]"
             bool async
         )
         {
-            await base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(
-                async
-            );
+            await base.Correlated_collection_after_groupby_with_complex_projection_containing_original_identifier(async);
 
             AssertSql(
                 @"SELECT [t].[OrderID], [t].[c], [t0].[Outer], [t0].[Inner], [t0].[OrderDate]

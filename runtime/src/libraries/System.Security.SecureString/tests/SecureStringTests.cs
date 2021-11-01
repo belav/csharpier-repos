@@ -581,30 +581,22 @@ namespace System.Security.Tests
                                                     break;
                                                 case 8:
                                                     Marshal.ZeroFreeCoTaskMemAnsi(
-                                                        SecureStringMarshal.SecureStringToCoTaskMemAnsi(
-                                                            ss
-                                                        )
+                                                        SecureStringMarshal.SecureStringToCoTaskMemAnsi(ss)
                                                     );
                                                     break;
                                                 case 9:
                                                     Marshal.ZeroFreeCoTaskMemUnicode(
-                                                        SecureStringMarshal.SecureStringToCoTaskMemUnicode(
-                                                            ss
-                                                        )
+                                                        SecureStringMarshal.SecureStringToCoTaskMemUnicode(ss)
                                                     );
                                                     break;
                                                 case 10:
                                                     Marshal.ZeroFreeGlobalAllocAnsi(
-                                                        SecureStringMarshal.SecureStringToGlobalAllocAnsi(
-                                                            ss
-                                                        )
+                                                        SecureStringMarshal.SecureStringToGlobalAllocAnsi(ss)
                                                     );
                                                     break;
                                                 case 11:
                                                     Marshal.ZeroFreeGlobalAllocUnicode(
-                                                        SecureStringMarshal.SecureStringToGlobalAllocUnicode(
-                                                            ss
-                                                        )
+                                                        SecureStringMarshal.SecureStringToGlobalAllocUnicode(ss)
                                                     );
                                                     break;
                                             }

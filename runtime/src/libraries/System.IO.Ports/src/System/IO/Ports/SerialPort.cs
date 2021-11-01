@@ -627,12 +627,10 @@ namespace System.IO.Ports
 
             _internalSerialStream.SetBufferSizes(_readBufferSize, _writeBufferSize);
 
-            _internalSerialStream.ErrorReceived += new SerialErrorReceivedEventHandler(
-                CatchErrorEvents
-            );
-            _internalSerialStream.PinChanged += new SerialPinChangedEventHandler(
-                CatchPinChangedEvents
-            );
+            _internalSerialStream.ErrorReceived +=
+                new SerialErrorReceivedEventHandler(CatchErrorEvents);
+            _internalSerialStream.PinChanged +=
+                new SerialPinChangedEventHandler(CatchPinChangedEvents);
 
             if (_dataReceived != null)
             {

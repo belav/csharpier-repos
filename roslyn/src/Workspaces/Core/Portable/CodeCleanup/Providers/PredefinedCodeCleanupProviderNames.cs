@@ -11,9 +11,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup.Providers
         public const string AddMissingTokens = "AddMissingTokensCodeCleanupProvider";
         public const string NormalizeModifiersOrOperators =
             "NormalizeModifiersOrOperatorsCodeCleanupProvider";
-        public const string RemoveUnnecessaryLineContinuation = nameof(
-            RemoveUnnecessaryLineContinuation
-        );
+        public const string RemoveUnnecessaryLineContinuation =
+            nameof(RemoveUnnecessaryLineContinuation);
         public const string Format = "FormatCodeCleanupProvider";
         public const string FixIncorrectTokens = "FixIncorrectTokensCodeCleanupProvider";
         public const string ReduceTokens = "ReduceTokensCodeCleanupProvider";

@@ -227,9 +227,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                     .Framework(MiddleWare)
                                     .RuntimeConfig(
                                         runtimeConfig =>
-                                            runtimeConfig.GetFramework(
-                                                MicrosoftNETCoreApp
-                                            ).Version = "4.0.0"
+                                            runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
+                                                "4.0.0"
                                     )
                         )
                 )
@@ -266,9 +265,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                                     .Framework(MiddleWare)
                                     .RuntimeConfig(
                                         runtimeConfig =>
-                                            runtimeConfig.GetFramework(
-                                                MicrosoftNETCoreApp
-                                            ).Version = "5.0.0"
+                                            runtimeConfig.GetFramework(MicrosoftNETCoreApp).Version =
+                                                "5.0.0"
                                     )
                         )
                 )

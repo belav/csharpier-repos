@@ -884,9 +884,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 return null;
 
             Debug.Assert(syntaxFactsService.IsAwaitExpression(awaitExpression));
-            var innerExpression = syntaxFactsService.GetExpressionOfAwaitExpression(
-                awaitExpression
-            );
+            var innerExpression =
+                syntaxFactsService.GetExpressionOfAwaitExpression(awaitExpression);
 
             return semanticModel.GetTypeInfo(innerExpression).Type;
         }

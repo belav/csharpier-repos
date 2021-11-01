@@ -583,9 +583,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         var mergedAnalysisData = _currentAnalysisData.CreateBlockAnalysisData();
                         foreach (var target in targets)
                         {
-                            _currentAnalysisData.SetCurrentBlockAnalysisDataFrom(
-                                savedCurrentAnalysisData
-                            );
+                            _currentAnalysisData.SetCurrentBlockAnalysisDataFrom(savedCurrentAnalysisData);
                             AnalyzeDelegateInvocation(target);
                             mergedAnalysisData = BasicBlockAnalysisData.Merge(
                                 mergedAnalysisData,

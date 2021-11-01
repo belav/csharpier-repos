@@ -64,9 +64,7 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
                     try
                     {
                         protectionDescriptorRule =
-                            DpapiSecretSerializerHelper.GetRuleFromDpapiNGProtectedPayload(
-                                protectedSecret
-                            );
+                            DpapiSecretSerializerHelper.GetRuleFromDpapiNGProtectedPayload(protectedSecret);
                     }
                     catch
                     {

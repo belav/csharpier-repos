@@ -39,9 +39,8 @@ namespace Microsoft.CodeAnalysis
         {
             // Accumulate all the directives, in source code order
             var syntaxRoot = (SyntaxNodeOrToken)syntaxTree.GetRoot();
-            IList<TDirective> directives = syntaxRoot.GetDirectives<TDirective>(
-                filter: ShouldAddDirective
-            );
+            IList<TDirective> directives =
+                syntaxRoot.GetDirectives<TDirective>(filter: ShouldAddDirective);
             Debug.Assert(directives != null);
 
             // Create the entry map.

@@ -186,9 +186,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 // expression in its parent, we annotate it here to allow us to get back to
                 // it after replace.
                 var annotation = new SyntaxAnnotation();
-                var annotatedExpression = _newExpressionForReplace.WithAdditionalAnnotations(
-                    annotation
-                );
+                var annotatedExpression =
+                    _newExpressionForReplace.WithAdditionalAnnotations(annotation);
                 _lazySemanticRootOfReplacedExpression = GetSemanticRootOfReplacedExpression(
                     this.SemanticRootOfOriginalExpression,
                     annotatedExpression
@@ -1225,9 +1224,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             if (newReceiverType == null)
                 return false;
 
-            var implementationMember = newSymbolContainingType.FindImplementationForInterfaceMember(
-                symbol
-            );
+            var implementationMember =
+                newSymbolContainingType.FindImplementationForInterfaceMember(symbol);
             if (implementationMember == null)
                 return false;
 

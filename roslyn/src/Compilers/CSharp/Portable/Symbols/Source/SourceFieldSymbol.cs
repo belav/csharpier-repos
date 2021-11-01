@@ -345,9 +345,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                dependencies = ImmutableHashSet<SourceFieldSymbolWithSyntaxReference>.Empty.Union(
-                    builder
-                );
+                dependencies =
+                    ImmutableHashSet<SourceFieldSymbolWithSyntaxReference>.Empty.Union(builder);
             }
 
             diagnostics.Free();

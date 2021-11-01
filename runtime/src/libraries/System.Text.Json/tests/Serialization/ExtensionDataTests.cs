@@ -15,9 +15,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void ExtensionPropertyNotUsed()
         {
             string json = @"{""MyNestedClass"":" + SimpleTestClass.s_json + "}";
-            ClassWithExtensionProperty obj = JsonSerializer.Deserialize<ClassWithExtensionProperty>(
-                json
-            );
+            ClassWithExtensionProperty obj =
+                JsonSerializer.Deserialize<ClassWithExtensionProperty>(json);
             Assert.Null(obj.MyOverflow);
         }
 
@@ -187,9 +186,8 @@ namespace System.Text.Json.Serialization.Tests
 
             string json = @"{""MyIntMissing"":2}";
 
-            ClassWithExtensionProperty obj = JsonSerializer.Deserialize<ClassWithExtensionProperty>(
-                json
-            );
+            ClassWithExtensionProperty obj =
+                JsonSerializer.Deserialize<ClassWithExtensionProperty>(json);
             Assert.Equal(2, obj.MyOverflow["MyIntMissing"].GetInt32());
         }
 
@@ -238,9 +236,8 @@ namespace System.Text.Json.Serialization.Tests
 
             {
                 // Baseline camel-cased json + no casing option.
-                obj = JsonSerializer.Deserialize<ClassWithExtensionProperty>(
-                    jsonWithPropertyCamelCased
-                );
+                obj =
+                    JsonSerializer.Deserialize<ClassWithExtensionProperty>(jsonWithPropertyCamelCased);
                 Assert.Equal(1, obj.MyOverflow["myIntMissing"].GetInt32());
                 string json = JsonSerializer.Serialize(obj);
                 Assert.Contains(@"""myIntMissing"":1", json);
@@ -548,9 +545,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             typeof(ExtensionDataTests)
                 .GetMethod(
-                    nameof(
-                        ExtensionProperty_SupportsWritingToCustomSerializerWithExplicitConverterInternal
-                    ),
+                    nameof(ExtensionProperty_SupportsWritingToCustomSerializerWithExplicitConverterInternal),
                     BindingFlags.Static | BindingFlags.NonPublic
                 )
                 .MakeGenericMethod(attributedType, dictionaryType)
@@ -718,9 +713,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(@"{""Name"":""Name1"",""Name"":""Name2""}", json);
 
             // The overflow value comes last in the JSOn so it overwrites the original value.
-            obj = JsonSerializer.Deserialize<ClassWithExtensionPropertyAsObjectAndNameProperty>(
-                json
-            );
+            obj =
+                JsonSerializer.Deserialize<ClassWithExtensionPropertyAsObjectAndNameProperty>(json);
             Assert.Equal("Name2", obj.Name);
 
             // Since there was no overflow, this should be null.
@@ -1142,9 +1136,8 @@ namespace System.Text.Json.Serialization.Tests
             string jsonString =
                 "{\"\u6C49\u5B57\":\"abc\",\"Class\":{\"\u6F22\u5B57\":\"xyz\"},\"\u62DC\u6258\":{\"\u62DC\u6258\u62DC\u6258\":1}}";
 
-            ClassWithEscapedProperty input = JsonSerializer.Deserialize<ClassWithEscapedProperty>(
-                jsonString
-            );
+            ClassWithEscapedProperty input =
+                JsonSerializer.Deserialize<ClassWithEscapedProperty>(jsonString);
 
             Assert.Equal("abc", input.\u6C49\u5B57);
             Assert.Equal("xyz", input.Class.\u6F22\u5B57);

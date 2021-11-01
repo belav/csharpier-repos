@@ -513,9 +513,8 @@ namespace System.Runtime.Serialization.Json
                     {
                         isGenericDictionary = true;
                         keyValueTypes = collectionContract.ItemType.GetGenericArguments();
-                        enumeratorType = Globals.TypeOfGenericDictionaryEnumerator.MakeGenericType(
-                            keyValueTypes
-                        );
+                        enumeratorType =
+                            Globals.TypeOfGenericDictionaryEnumerator.MakeGenericType(keyValueTypes);
                     }
                     else if (collectionContract.Kind == CollectionKind.Dictionary)
                     {
@@ -625,9 +624,8 @@ namespace System.Runtime.Serialization.Json
                     if (canWriteSimpleDictionary)
                     {
                         Debug.Assert(keyValueTypes != null);
-                        Type genericDictionaryKeyValueType = Globals.TypeOfKeyValue.MakeGenericType(
-                            keyValueTypes
-                        );
+                        Type genericDictionaryKeyValueType =
+                            Globals.TypeOfKeyValue.MakeGenericType(keyValueTypes);
                         PropertyInfo genericDictionaryKeyProperty =
                             genericDictionaryKeyValueType.GetProperty(JsonGlobals.KeyString)!;
                         PropertyInfo genericDictionaryValueProperty =

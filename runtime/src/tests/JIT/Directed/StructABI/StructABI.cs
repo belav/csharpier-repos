@@ -1616,12 +1616,10 @@ public static partial class StructABI
     {
         bool ok = true;
         ByteFloatAndPointer expectedByteFloatAndPointer = ByteFloatAndPointer.Get();
-        ByteFloatAndPointer nativeByteFloatAndPointer = EchoByteFloatAndPointer(
-            expectedByteFloatAndPointer
-        );
-        ByteFloatAndPointer managedByteFloatAndPointer = EchoByteFloatAndPointerManaged(
-            expectedByteFloatAndPointer
-        );
+        ByteFloatAndPointer nativeByteFloatAndPointer =
+            EchoByteFloatAndPointer(expectedByteFloatAndPointer);
+        ByteFloatAndPointer managedByteFloatAndPointer =
+            EchoByteFloatAndPointerManaged(expectedByteFloatAndPointer);
 
         if (!expectedByteFloatAndPointer.Equals(nativeByteFloatAndPointer))
         {
@@ -1642,12 +1640,10 @@ public static partial class StructABI
     {
         bool ok = true;
         PointerFloatAndByte expectedPointerFloatAndByte = PointerFloatAndByte.Get();
-        PointerFloatAndByte nativePointerFloatAndByte = EchoPointerFloatAndByte(
-            expectedPointerFloatAndByte
-        );
-        PointerFloatAndByte managedPointerFloatAndByte = EchoPointerFloatAndByteManaged(
-            expectedPointerFloatAndByte
-        );
+        PointerFloatAndByte nativePointerFloatAndByte =
+            EchoPointerFloatAndByte(expectedPointerFloatAndByte);
+        PointerFloatAndByte managedPointerFloatAndByte =
+            EchoPointerFloatAndByteManaged(expectedPointerFloatAndByte);
 
         if (!expectedPointerFloatAndByte.Equals(nativePointerFloatAndByte))
         {
@@ -1668,12 +1664,10 @@ public static partial class StructABI
     {
         bool ok = true;
         ShortIntFloatIntPtr expectedShortIntFloatIntPtr = ShortIntFloatIntPtr.Get();
-        ShortIntFloatIntPtr nativeShortIntFloatIntPtr = EchoShortIntFloatIntPtr(
-            expectedShortIntFloatIntPtr
-        );
-        ShortIntFloatIntPtr managedShortIntFloatIntPtr = EchoShortIntFloatIntPtrManaged(
-            expectedShortIntFloatIntPtr
-        );
+        ShortIntFloatIntPtr nativeShortIntFloatIntPtr =
+            EchoShortIntFloatIntPtr(expectedShortIntFloatIntPtr);
+        ShortIntFloatIntPtr managedShortIntFloatIntPtr =
+            EchoShortIntFloatIntPtrManaged(expectedShortIntFloatIntPtr);
 
         if (!expectedShortIntFloatIntPtr.Equals(nativeShortIntFloatIntPtr))
         {

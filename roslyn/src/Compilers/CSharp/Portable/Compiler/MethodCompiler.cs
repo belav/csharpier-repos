@@ -280,9 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(diagnostics.DiagnosticBag != null);
 
-            var entryPointAndDiagnostics = compilation.GetEntryPointAndDiagnostics(
-                cancellationToken
-            );
+            var entryPointAndDiagnostics =
+                compilation.GetEntryPointAndDiagnostics(cancellationToken);
 
             Debug.Assert(!entryPointAndDiagnostics.Diagnostics.Diagnostics.IsDefault);
             diagnostics.AddRange(
@@ -1058,9 +1057,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var discardedDiagnostics = BindingDiagnosticBag.GetInstance(_diagnostics);
                 foreach (
-                    var synthesizedExplicitImpl in sourceTypeSymbol.GetSynthesizedExplicitImplementations(
-                        _cancellationToken
-                    )
+                    var synthesizedExplicitImpl in sourceTypeSymbol.GetSynthesizedExplicitImplementations(_cancellationToken)
                 )
                 {
                     Debug.Assert(synthesizedExplicitImpl.SynthesizesLoweredBoundBody);
@@ -2083,9 +2080,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (emitTestCoverageData)
                 {
                     Debug.Assert(debugDocumentProvider != null);
-                    dynamicAnalysisDataOpt = new DynamicAnalysisMethodBodyData(
-                        dynamicAnalysisSpans
-                    );
+                    dynamicAnalysisDataOpt =
+                        new DynamicAnalysisMethodBodyData(dynamicAnalysisSpans);
                 }
 
                 return new MethodBody(
@@ -2376,9 +2372,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var property = sourceMethod.AssociatedSymbol as SourcePropertySymbolBase;
                     if ((object)property != null && property.IsAutoPropertyWithGetAccessor)
                     {
-                        return MethodBodySynthesizer.ConstructAutoPropertyAccessorBody(
-                            sourceMethod
-                        );
+                        return MethodBodySynthesizer.ConstructAutoPropertyAccessorBody(sourceMethod);
                     }
 
                     return null;

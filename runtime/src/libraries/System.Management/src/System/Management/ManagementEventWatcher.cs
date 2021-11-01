@@ -223,17 +223,15 @@ namespace System.Management
                 this.query = (EventQuery)query.Clone();
             else
                 this.query = new EventQuery();
-            this.query.IdentifierChanged += new IdentifierChangedEventHandler(
-                HandleIdentifierChange
-            );
+            this.query.IdentifierChanged +=
+                new IdentifierChangedEventHandler(HandleIdentifierChange);
 
             if (null != options)
                 this.options = (EventWatcherOptions)options.Clone();
             else
                 this.options = new EventWatcherOptions();
-            this.options.IdentifierChanged += new IdentifierChangedEventHandler(
-                HandleIdentifierChange
-            );
+            this.options.IdentifierChanged +=
+                new IdentifierChangedEventHandler(HandleIdentifierChange);
 
             enumWbem = null;
             cachedCount = 0;
@@ -251,19 +249,16 @@ namespace System.Management
             Stop();
 
             if (null != scope)
-                scope.IdentifierChanged -= new IdentifierChangedEventHandler(
-                    HandleIdentifierChange
-                );
+                scope.IdentifierChanged -=
+                    new IdentifierChangedEventHandler(HandleIdentifierChange);
 
             if (null != options)
-                options.IdentifierChanged -= new IdentifierChangedEventHandler(
-                    HandleIdentifierChange
-                );
+                options.IdentifierChanged -=
+                    new IdentifierChangedEventHandler(HandleIdentifierChange);
 
             if (null != query)
-                query.IdentifierChanged -= new IdentifierChangedEventHandler(
-                    HandleIdentifierChange
-                );
+                query.IdentifierChanged -=
+                    new IdentifierChangedEventHandler(HandleIdentifierChange);
         }
 
         //
@@ -302,14 +297,12 @@ namespace System.Management
 
                     // Unregister ourselves from the previous scope object
                     if (null != oldScope)
-                        oldScope.IdentifierChanged -= new IdentifierChangedEventHandler(
-                            HandleIdentifierChange
-                        );
+                        oldScope.IdentifierChanged -=
+                            new IdentifierChangedEventHandler(HandleIdentifierChange);
 
                     //register for change events in this object
-                    scope.IdentifierChanged += new IdentifierChangedEventHandler(
-                        HandleIdentifierChange
-                    );
+                    scope.IdentifierChanged +=
+                        new IdentifierChangedEventHandler(HandleIdentifierChange);
                     //the scope property has changed so act like we fired the event
                     HandleIdentifierChange(this, null);
                 }
@@ -336,14 +329,12 @@ namespace System.Management
 
                     // Unregister ourselves from the previous query object
                     if (null != oldQuery)
-                        oldQuery.IdentifierChanged -= new IdentifierChangedEventHandler(
-                            HandleIdentifierChange
-                        );
+                        oldQuery.IdentifierChanged -=
+                            new IdentifierChangedEventHandler(HandleIdentifierChange);
 
                     //register for change events in this object
-                    query.IdentifierChanged += new IdentifierChangedEventHandler(
-                        HandleIdentifierChange
-                    );
+                    query.IdentifierChanged +=
+                        new IdentifierChangedEventHandler(HandleIdentifierChange);
                     //the query property has changed so act like we fired the event
                     HandleIdentifierChange(this, null);
                 }
@@ -370,15 +361,13 @@ namespace System.Management
 
                     // Unregister ourselves from the previous scope object
                     if (null != oldOptions)
-                        oldOptions.IdentifierChanged -= new IdentifierChangedEventHandler(
-                            HandleIdentifierChange
-                        );
+                        oldOptions.IdentifierChanged -=
+                            new IdentifierChangedEventHandler(HandleIdentifierChange);
 
                     cachedObjects = new IWbemClassObjectFreeThreaded[options.BlockSize];
                     //register for change events in this object
-                    options.IdentifierChanged += new IdentifierChangedEventHandler(
-                        HandleIdentifierChange
-                    );
+                    options.IdentifierChanged +=
+                        new IdentifierChangedEventHandler(HandleIdentifierChange);
                     //the options property has changed so act like we fired the event
                     HandleIdentifierChange(this, null);
                 }

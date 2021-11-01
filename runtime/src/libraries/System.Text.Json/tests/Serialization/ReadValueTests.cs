@@ -303,9 +303,8 @@ namespace System.Text.Json.Serialization.Tests
             reader.Read();
             Assert.Equal(JsonTokenType.StartObject, reader.TokenType);
 
-            SimpleTypeWithArray instance = JsonSerializer.Deserialize<SimpleTypeWithArray>(
-                ref reader
-            );
+            SimpleTypeWithArray instance =
+                JsonSerializer.Deserialize<SimpleTypeWithArray>(ref reader);
 
             Assert.Equal(JsonTokenType.EndObject, reader.TokenType);
             Assert.Equal(new int[] { 1, 2, 3 }, instance.Foo);
@@ -662,9 +661,7 @@ namespace System.Text.Json.Serialization.Tests
                     state: default
                 );
                 TestClassWithStringToPrimitiveDictionary testStruct =
-                    JsonSerializer.Deserialize<TestClassWithStringToPrimitiveDictionary>(
-                        ref reader
-                    );
+                    JsonSerializer.Deserialize<TestClassWithStringToPrimitiveDictionary>(ref reader);
                 testStruct.Verify();
 
                 reader = new Utf8JsonReader(

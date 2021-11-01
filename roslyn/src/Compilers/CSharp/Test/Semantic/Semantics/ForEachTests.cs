@@ -3953,9 +3953,8 @@ public static class Extensions
             var treeModel = (SyntaxTreeSemanticModel)comp.GetSemanticModel(tree);
             var memberModel = treeModel.GetMemberModel(syntaxNode);
 
-            BoundForEachStatement boundNode = (BoundForEachStatement)memberModel.GetUpperBoundNode(
-                syntaxNode
-            );
+            BoundForEachStatement boundNode =
+                (BoundForEachStatement)memberModel.GetUpperBoundNode(syntaxNode);
 
             // Make sure that the bound node info is exposed correctly in the API
             ForEachEnumeratorInfo enumeratorInfo = boundNode.EnumeratorInfoOpt;

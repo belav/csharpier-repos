@@ -37,9 +37,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         protected override Expression RewriteExpectedQueryExpression(
             Expression expectedQueryExpression
         ) =>
-            new ExpectedQueryRewritingVisitor(Fixture.GetShadowPropertyMappings()).Visit(
-                expectedQueryExpression
-            );
+            new ExpectedQueryRewritingVisitor(
+                Fixture.GetShadowPropertyMappings()
+            ).Visit(expectedQueryExpression);
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]

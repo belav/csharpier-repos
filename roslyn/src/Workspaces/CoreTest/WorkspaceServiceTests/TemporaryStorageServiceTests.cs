@@ -239,9 +239,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 var textFactory = Assert.IsType<TextFactoryService>(
                     workspace.Services.GetService<ITextFactoryService>()
                 );
-                var service = new TemporaryStorageServiceFactory.TemporaryStorageService(
-                    textFactory
-                );
+                var service =
+                    new TemporaryStorageServiceFactory.TemporaryStorageService(textFactory);
 
                 using var data = SerializableBytes.CreateWritableStream();
                 for (var i = 0; i < 1024 * 128; i++)

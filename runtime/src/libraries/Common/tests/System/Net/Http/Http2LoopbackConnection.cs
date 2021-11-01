@@ -936,10 +936,8 @@ namespace System.Net.Test.Common
 
         public override async Task<HttpRequestData> ReadRequestDataAsync(bool readBody = true)
         {
-            (int streamId, HttpRequestData requestData) = await ReadAndParseRequestHeaderAsync(
-                    readBody
-                )
-                .ConfigureAwait(false);
+            (int streamId, HttpRequestData requestData) =
+                await ReadAndParseRequestHeaderAsync(readBody).ConfigureAwait(false);
             _lastStreamId = streamId;
 
             return requestData;

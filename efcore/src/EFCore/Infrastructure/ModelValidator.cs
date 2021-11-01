@@ -299,9 +299,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                                     && (
                                         !entityType.IsInOwnershipPath(targetType)
                                         || (
-                                            entityType.FindOwnership()!.PrincipalEntityType.ClrType.Equals(
-                                                targetType
-                                            )
+                                            entityType.FindOwnership()!.PrincipalEntityType.ClrType.Equals(targetType)
                                             && targetSequenceType == null
                                         )
                                     )
@@ -1366,9 +1364,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     {
                         if (!identityMaps.TryGetValue(key, out identityMap))
                         {
-                            identityMap = ((IRuntimeKey)key).GetIdentityMapFactory()(
-                                sensitiveDataLogged
-                            );
+                            identityMap = (
+                                (IRuntimeKey)key
+                            ).GetIdentityMapFactory()(sensitiveDataLogged);
                             identityMaps[key] = identityMap;
                         }
                     }

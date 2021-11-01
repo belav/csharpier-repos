@@ -181,21 +181,18 @@ namespace System.Data.Common
                 {
                     if (_baseParameterNames[i] is string baseParameterName)
                     {
-                        _baseParameterNames[i] = _dbCommandBuilder.GetParameterName(
-                            baseParameterName
-                        );
+                        _baseParameterNames[i] =
+                            _dbCommandBuilder.GetParameterName(baseParameterName);
                     }
                     if (_originalParameterNames[i] is string originalParameterName)
                     {
-                        _originalParameterNames[i] = _dbCommandBuilder.GetParameterName(
-                            originalParameterName
-                        );
+                        _originalParameterNames[i] =
+                            _dbCommandBuilder.GetParameterName(originalParameterName);
                     }
                     if (_nullParameterNames[i] is string nullParameterName)
                     {
-                        _nullParameterNames[i] = _dbCommandBuilder.GetParameterName(
-                            nullParameterName
-                        );
+                        _nullParameterNames[i] =
+                            _dbCommandBuilder.GetParameterName(nullParameterName);
                     }
                 }
             }

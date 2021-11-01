@@ -176,9 +176,8 @@ namespace System.Globalization.Tests
                 'U',
                 'y'
             };
-            DateTimeFormatInfo dtfi = (DateTimeFormatInfo)new CultureInfo(
-                cultureName
-            ).DateTimeFormat.Clone();
+            DateTimeFormatInfo dtfi =
+                (DateTimeFormatInfo)new CultureInfo(cultureName).DateTimeFormat.Clone();
 
             var allPatterns = dtfi.GetAllDateTimePatterns();
             Dictionary<string, string> dic = new Dictionary<string, string>();

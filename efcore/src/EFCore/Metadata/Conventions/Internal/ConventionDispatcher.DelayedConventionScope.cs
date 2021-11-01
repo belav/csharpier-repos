@@ -728,9 +728,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             public IConventionForeignKeyBuilder RelationshipBuilder { get; }
 
             public override void Run(ConventionDispatcher dispatcher) =>
-                dispatcher._immediateConventionScope.OnForeignKeyUniquenessChanged(
-                    RelationshipBuilder
-                );
+                dispatcher._immediateConventionScope.OnForeignKeyUniquenessChanged(RelationshipBuilder);
         }
 
         private sealed class OnForeignKeyRequirednessChangedNode : ConventionNode
@@ -745,9 +743,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             public IConventionForeignKeyBuilder RelationshipBuilder { get; }
 
             public override void Run(ConventionDispatcher dispatcher) =>
-                dispatcher._immediateConventionScope.OnForeignKeyRequirednessChanged(
-                    RelationshipBuilder
-                );
+                dispatcher._immediateConventionScope.OnForeignKeyRequirednessChanged(RelationshipBuilder);
         }
 
         private sealed class OnForeignKeyDependentRequirednessChangedNode : ConventionNode
@@ -762,9 +758,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             public IConventionForeignKeyBuilder RelationshipBuilder { get; }
 
             public override void Run(ConventionDispatcher dispatcher) =>
-                dispatcher._immediateConventionScope.OnForeignKeyDependentRequirednessChanged(
-                    RelationshipBuilder
-                );
+                dispatcher._immediateConventionScope.OnForeignKeyDependentRequirednessChanged(RelationshipBuilder);
         }
 
         private sealed class OnForeignKeyOwnershipChangedNode : ConventionNode
@@ -779,9 +773,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             public IConventionForeignKeyBuilder RelationshipBuilder { get; }
 
             public override void Run(ConventionDispatcher dispatcher) =>
-                dispatcher._immediateConventionScope.OnForeignKeyOwnershipChanged(
-                    RelationshipBuilder
-                );
+                dispatcher._immediateConventionScope.OnForeignKeyOwnershipChanged(RelationshipBuilder);
         }
 
         private sealed class OnForeignKeyPrincipalEndChangedNode : ConventionNode
@@ -796,9 +788,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
             public IConventionForeignKeyBuilder RelationshipBuilder { get; }
 
             public override void Run(ConventionDispatcher dispatcher) =>
-                dispatcher._immediateConventionScope.OnForeignKeyPrincipalEndChanged(
-                    RelationshipBuilder
-                );
+                dispatcher._immediateConventionScope.OnForeignKeyPrincipalEndChanged(RelationshipBuilder);
         }
 
         private sealed class OnNavigationAddedNode : ConventionNode

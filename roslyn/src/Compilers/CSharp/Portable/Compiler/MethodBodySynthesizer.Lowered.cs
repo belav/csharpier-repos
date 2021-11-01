@@ -385,13 +385,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return F.Call(
                 F.StaticCall(
                     constructedEqualityComparer,
-                    system_Collections_Generic_EqualityComparer_T__get_Default.AsMember(
-                        constructedEqualityComparer
-                    )
+                    system_Collections_Generic_EqualityComparer_T__get_Default.AsMember(constructedEqualityComparer)
                 ),
-                system_Collections_Generic_EqualityComparer_T__GetHashCode.AsMember(
-                    constructedEqualityComparer
-                ),
+                system_Collections_Generic_EqualityComparer_T__GetHashCode.AsMember(constructedEqualityComparer),
                 valueToHash
             );
         }

@@ -44,9 +44,8 @@ namespace Microsoft.AspNetCore.Testing
 
         private static int GetMaxPathLength()
         {
-            var maxPathString = Environment.GetEnvironmentVariable(
-                MaxPathLengthEnvironmentVariableName
-            );
+            var maxPathString =
+                Environment.GetEnvironmentVariable(MaxPathLengthEnvironmentVariableName);
             var defaultMaxPath = 245;
             return string.IsNullOrEmpty(maxPathString)
               ? defaultMaxPath
@@ -399,9 +398,8 @@ namespace Microsoft.AspNetCore.Testing
                     _logs[assembly] = log;
 
                     // Try to clear previous logs, continue if it fails.
-                    var assemblyBaseDirectory = TestFileOutputContext.GetAssemblyBaseDirectory(
-                        assembly
-                    );
+                    var assemblyBaseDirectory =
+                        TestFileOutputContext.GetAssemblyBaseDirectory(assembly);
                     if (
                         !string.IsNullOrEmpty(assemblyBaseDirectory)
                         && !TestFileOutputContext.GetPreserveExistingLogsInOutput(assembly)

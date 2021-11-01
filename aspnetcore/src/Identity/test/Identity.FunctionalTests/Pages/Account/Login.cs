@@ -114,9 +114,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account
             var loggedInLocation = ResponseAssert.IsRedirect(loggedIn);
             Assert.StartsWith(LoginWith2fa.Path, loggedInLocation.ToString());
             var loginWithTwoFactorResponse = await Client.GetAsync(loggedInLocation);
-            var loginWithTwoFactor = await ResponseAssert.IsHtmlDocumentAsync(
-                loginWithTwoFactorResponse
-            );
+            var loginWithTwoFactor =
+                await ResponseAssert.IsHtmlDocumentAsync(loginWithTwoFactorResponse);
 
             return new LoginWith2fa(Client, loginWithTwoFactor, Context);
         }

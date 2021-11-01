@@ -52,9 +52,8 @@ namespace Tracing.Tests.ReverseValidation
         {
             bool fSuccess = true;
             string serverName = ReverseServer.MakeServerAddress();
-            Task<IpcAdvertise> advertiseTask = ReverseServer.CreateServerAndReceiveAdvertisement(
-                serverName
-            );
+            Task<IpcAdvertise> advertiseTask =
+                ReverseServer.CreateServerAndReceiveAdvertisement(serverName);
             Logger.logger.Log($"Server name is `{serverName}`");
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),

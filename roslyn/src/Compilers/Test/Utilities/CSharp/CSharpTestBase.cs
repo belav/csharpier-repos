@@ -614,9 +614,9 @@ namespace System.Runtime.CompilerServices
             NullableContextOptions nullableContextOptions
         )
         {
-            return (options ?? TestOptions.ReleaseDll).WithNullableContextOptions(
-                nullableContextOptions
-            );
+            return (
+                options ?? TestOptions.ReleaseDll
+            ).WithNullableContextOptions(nullableContextOptions);
         }
 
         internal CompilationVerifier CompileAndVerifyWithMscorlib40(
@@ -1586,9 +1586,8 @@ namespace System.Runtime.CompilerServices
             return createCompilationLambda();
         }
 
-        private static ImmutableArray<MetadataReference> s_scriptRefs = ImmutableArray.Create(
-            MscorlibRef_v4_0_30316_17626
-        );
+        private static ImmutableArray<MetadataReference> s_scriptRefs =
+            ImmutableArray.Create(MscorlibRef_v4_0_30316_17626);
 
         public static CSharpCompilation CreateSubmission(
             string code,
@@ -2355,9 +2354,8 @@ namespace System.Runtime.CompilerServices
             Action<IOperation, Compilation, SyntaxNode> additionalOperationTreeVerifier = null
         ) where TSyntaxNode : SyntaxNode
         {
-            var (actualOperation, syntaxNode) = GetOperationAndSyntaxForTest<TSyntaxNode>(
-                compilation
-            );
+            var (actualOperation, syntaxNode) =
+                GetOperationAndSyntaxForTest<TSyntaxNode>(compilation);
             var actualOperationTree = GetOperationTreeForTest(compilation, actualOperation);
             OperationTreeVerifier.Verify(expectedOperationTree, actualOperationTree);
             additionalOperationTreeVerifier?.Invoke(actualOperation, compilation, syntaxNode);

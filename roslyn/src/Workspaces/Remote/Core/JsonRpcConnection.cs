@@ -107,9 +107,7 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         private void UnexpectedExceptionThrown(Exception exception) =>
-            _services.GetService<IErrorReportingService>()?.ShowRemoteHostCrashedErrorInfo(
-                exception
-            );
+            _services.GetService<IErrorReportingService>()?.ShowRemoteHostCrashedErrorInfo(exception);
 
         public override async Task RunRemoteAsync(
             string targetName,

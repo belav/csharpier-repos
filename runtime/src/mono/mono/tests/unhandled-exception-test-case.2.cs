@@ -155,9 +155,8 @@ namespace UnhandledExceptionTest
                 AppDomain differentAppDomain = CreateDiffrentAppDomain();
                 if (configuration.HDA)
                 {
-                    differentAppDomain.UnhandledException += new UnhandledExceptionEventHandler(
-                        DifferentDomainUnhandledExceptionHandler
-                    );
+                    differentAppDomain.UnhandledException +=
+                        new UnhandledExceptionEventHandler(DifferentDomainUnhandledExceptionHandler);
                 }
                 DifferentDomainActor dda =
                     (DifferentDomainActor)differentAppDomain.CreateInstanceAndUnwrap(
@@ -201,9 +200,8 @@ namespace UnhandledExceptionTest
 
             if (configuration.HRA)
             {
-                AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(
-                    RootDomainUnhandledExceptionHandler
-                );
+                AppDomain.CurrentDomain.UnhandledException +=
+                    new UnhandledExceptionEventHandler(RootDomainUnhandledExceptionHandler);
             }
 
             if (configuration.DT)

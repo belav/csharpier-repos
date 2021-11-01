@@ -126,9 +126,8 @@ namespace Microsoft.CodeAnalysis.Remote
             // Very intentionally do our lookup with a special document key.  This doc key stores info independent of
             // project config.  So we can still lookup data regardless of things like if the project is in DEBUG or
             // RELEASE mode.
-            var documentKey = SemanticClassificationCacheUtilities.GetDocumentKeyForCaching(
-                document
-            );
+            var documentKey =
+                SemanticClassificationCacheUtilities.GetDocumentKeyForCaching(document);
 
             // Don't need to do anything if the information we've persisted matches the checksum of this doc.
             var checksum = await GetChecksumAsync(document, cancellationToken)

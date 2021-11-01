@@ -83,9 +83,8 @@ namespace System.Reflection.TypeLoading.Ecma
                             RoAssemblyName destinationAssemblyName = (
                                 (AssemblyReferenceHandle)resource.Implementation
                             ).ToRoAssemblyName(reader);
-                            result.ReferencedAssembly = Loader.ResolveAssembly(
-                                destinationAssemblyName
-                            );
+                            result.ReferencedAssembly =
+                                Loader.ResolveAssembly(destinationAssemblyName);
                         }
                     }
                 }

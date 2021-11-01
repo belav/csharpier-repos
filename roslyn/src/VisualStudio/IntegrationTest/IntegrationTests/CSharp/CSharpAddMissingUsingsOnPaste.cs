@@ -24,9 +24,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         public void VerifyDisabled()
         {
             var project =
-                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(
-                    ProjectName
-                );
+                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.AddFile(
                 project,
                 "Example.cs",
@@ -77,9 +75,7 @@ class Program
         public void VerifyDisabledWithNull()
         {
             var project =
-                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(
-                    ProjectName
-                );
+                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.AddFile(
                 project,
                 "Example.cs",
@@ -130,9 +126,7 @@ class Program
         public void VerifyAddImportsOnPaste()
         {
             var project =
-                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(
-                    ProjectName
-                );
+                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.AddFile(
                 project,
                 "Example.cs",

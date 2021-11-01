@@ -523,9 +523,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             RefKind refKind;
             var typeSyntax = GetTypeSyntax(syntax).SkipRef(out refKind);
             var type = binder.BindType(typeSyntax, diagnostics);
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = binder.GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                binder.GetNewCompoundUseSiteInfo(diagnostics);
 
             if (
                 GetExplicitInterfaceSpecifier() is null

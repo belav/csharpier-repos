@@ -980,9 +980,8 @@ namespace System.Xml
             }
 
             IDtdParser dtdParser = DtdParser.Create();
-            XmlTextReaderImpl.DtdParserProxy proxy = new XmlTextReaderImpl.DtdParserProxy(
-                _coreReaderImpl
-            );
+            XmlTextReaderImpl.DtdParserProxy proxy =
+                new XmlTextReaderImpl.DtdParserProxy(_coreReaderImpl);
             IDtdInfo dtdInfo = dtdParser.ParseFreeFloatingDtd(
                 _parserContext.BaseURI,
                 _parserContext.DocTypeName,

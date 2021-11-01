@@ -12,9 +12,8 @@ namespace System.Net.Security
         internal static ChannelBinding? Build(SafeDeleteContext securityContext)
         {
             using (
-                X509Certificate2? cert = CertificateValidationPal.GetRemoteCertificate(
-                    securityContext
-                )
+                X509Certificate2? cert =
+                    CertificateValidationPal.GetRemoteCertificate(securityContext)
             )
             {
                 if (cert == null)

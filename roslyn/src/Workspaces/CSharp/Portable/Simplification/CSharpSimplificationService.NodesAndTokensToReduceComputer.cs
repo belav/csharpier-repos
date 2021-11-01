@@ -38,9 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 Func<SyntaxNodeOrToken, bool> isNodeOrTokenOutsideSimplifySpans
             )
             {
-                var reduceNodeComputer = new NodesAndTokensToReduceComputer(
-                    isNodeOrTokenOutsideSimplifySpans
-                );
+                var reduceNodeComputer =
+                    new NodesAndTokensToReduceComputer(isNodeOrTokenOutsideSimplifySpans);
                 reduceNodeComputer.Visit(root);
                 return reduceNodeComputer._nodesAndTokensToReduce.ToImmutableArray();
             }

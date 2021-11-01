@@ -315,9 +315,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                 var solution = await applyFixAsync(progressTracker, cancellationToken)
                     .ConfigureAwait(true);
 
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
                 return workspace.TryApplyChanges(solution, progressTracker);
             }
@@ -438,9 +436,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             }
 
             var isFormatDocumentEnabled = enabledFixIds.IsFixIdEnabled(FormatDocumentFixId);
-            var isRemoveUnusedUsingsEnabled = enabledFixIds.IsFixIdEnabled(
-                RemoveUnusedImportsFixId
-            );
+            var isRemoveUnusedUsingsEnabled =
+                enabledFixIds.IsFixIdEnabled(RemoveUnusedImportsFixId);
             var isSortUsingsEnabled = enabledFixIds.IsFixIdEnabled(SortImportsFixId);
             var enabledDiagnostics = new EnabledDiagnosticOptions(
                 isFormatDocumentEnabled,

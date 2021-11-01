@@ -751,9 +751,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithClassAndNewRestrictionArrayLengthTestHelper<object>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithClassAndNewRestrictionArrayLengthTestHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -785,9 +783,7 @@ namespace System.Linq.Expressions.Tests
             bool useInterpreter
         )
         {
-            CheckExceptionGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<C>(
-                useInterpreter
-            );
+            CheckExceptionGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]

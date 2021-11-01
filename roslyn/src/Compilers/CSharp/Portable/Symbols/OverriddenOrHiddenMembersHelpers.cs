@@ -766,9 +766,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     // If this method is from source, we'll also consider methods that match
                                     // without regard to custom modifiers.  If there's more than one, we'll
                                     // choose the one with the fewest custom modifiers.
-                                    int methodCustomModifierCount = CustomModifierCount(
-                                        otherMember
-                                    );
+                                    int methodCustomModifierCount =
+                                        CustomModifierCount(otherMember);
                                     if (methodCustomModifierCount < minCustomModifierCount)
                                     {
                                         Debug.Assert(

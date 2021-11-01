@@ -85,9 +85,8 @@ namespace System.Web.Http.ApiExplorer
                 controllerMapping.Add(controllerDescriptor.ControllerName, controllerDescriptor);
             }
 
-            Mock<DefaultHttpControllerSelector> factory = new Mock<DefaultHttpControllerSelector>(
-                config
-            );
+            Mock<DefaultHttpControllerSelector> factory =
+                new Mock<DefaultHttpControllerSelector>(config);
             factory.Setup(f => f.GetControllerMapping()).Returns(controllerMapping);
             return factory.Object;
         }

@@ -33,9 +33,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     !_lazySharedStateProviderMap.TryGetValue(analysisSharedStateProvider, out value)
                 )
                 {
-                    value = new CompilationAnalysisValueProvider<TKey, TValue>(
-                        analysisSharedStateProvider
-                    );
+                    value = new CompilationAnalysisValueProvider<
+                        TKey,
+                        TValue
+                    >(analysisSharedStateProvider);
                     _lazySharedStateProviderMap[analysisSharedStateProvider] = value;
                 }
             }

@@ -38,9 +38,7 @@ namespace System.Web.WebPages.Test
                 testUserAgent
             );
             HttpContextBase context =
-                CookieBrowserOverrideStoreTest.CreateCookieContext(
-                    requestCookie: existingOverrideCookie
-                ).Object;
+                CookieBrowserOverrideStoreTest.CreateCookieContext(requestCookie: existingOverrideCookie).Object;
 
             // Act & Assert
             Assert.Equal(testUserAgent, context.GetOverriddenUserAgent());
@@ -198,9 +196,7 @@ namespace System.Web.WebPages.Test
                 mobileUserAgent
             );
             HttpContextBase context =
-                CookieBrowserOverrideStoreTest.CreateCookieContext(
-                    requestCookie: existingOverrideCookie
-                ).Object;
+                CookieBrowserOverrideStoreTest.CreateCookieContext(requestCookie: existingOverrideCookie).Object;
 
             // Act & Assert
             Assert.True(context.GetOverriddenBrowser(CreateBrowserThroughFactory).IsMobileDevice);
@@ -340,9 +336,7 @@ namespace System.Web.WebPages.Test
                 mobileUserAgent
             );
             HttpContextBase context =
-                CookieBrowserOverrideStoreTest.CreateCookieContext(
-                    requestCookie: existingOverrideCookie
-                ).Object;
+                CookieBrowserOverrideStoreTest.CreateCookieContext(requestCookie: existingOverrideCookie).Object;
             Mock.Get(context).Setup(c => c.Request.UserAgent).Returns(mobileUserAgent);
             Mock.Get(context)
                 .Setup(c => c.Request.Browser)

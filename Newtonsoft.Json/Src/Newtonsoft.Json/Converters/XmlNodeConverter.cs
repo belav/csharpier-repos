@@ -2128,9 +2128,8 @@ namespace Newtonsoft.Json.Converters
                                         case JsonTypeReflector.ValuePropertyName:
                                             // check that JsonNamespaceUri is in scope
                                             // if it isn't then add it to document and namespace manager
-                                            string jsonPrefix = manager.LookupPrefix(
-                                                JsonNamespaceUri
-                                            );
+                                            string jsonPrefix =
+                                                manager.LookupPrefix(JsonNamespaceUri);
                                             if (jsonPrefix == null)
                                             {
                                                 if (attributeNameValues == null)

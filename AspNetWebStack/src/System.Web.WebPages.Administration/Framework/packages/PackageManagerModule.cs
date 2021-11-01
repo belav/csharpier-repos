@@ -33,9 +33,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             }
         };
 
-        private static readonly PackageSourceFile _sourceFile = new PackageSourceFile(
-            PackageSourceFilePath
-        );
+        private static readonly PackageSourceFile _sourceFile =
+            new PackageSourceFile(PackageSourceFilePath);
         private static ISet<WebPackageSource> _packageSources;
 
         public static IEnumerable<WebPackageSource> PackageSources

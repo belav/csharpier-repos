@@ -16,12 +16,10 @@ namespace Microsoft.CodeAnalysis
     {
         private const int InitialStackSize = 8;
         private const int MaxSearchLength = 8;
-        private readonly Stack<SyntaxNodeOrToken> _oldNodes = new Stack<SyntaxNodeOrToken>(
-            InitialStackSize
-        );
-        private readonly Stack<SyntaxNodeOrToken> _newNodes = new Stack<SyntaxNodeOrToken>(
-            InitialStackSize
-        );
+        private readonly Stack<SyntaxNodeOrToken> _oldNodes =
+            new Stack<SyntaxNodeOrToken>(InitialStackSize);
+        private readonly Stack<SyntaxNodeOrToken> _newNodes =
+            new Stack<SyntaxNodeOrToken>(InitialStackSize);
         private readonly List<ChangeRecord> _changes = new List<ChangeRecord>();
         private readonly TextSpan _oldSpan;
         private readonly bool _computeNewText;

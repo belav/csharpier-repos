@@ -54,9 +54,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             extension = extension.WithNullabilityCheckEnabled(nullabilityCheckEnabled);
 
-            ((IDbContextOptionsBuilderInfrastructure)OptionsBuilder).AddOrUpdateExtension(
-                extension
-            );
+            (
+                (IDbContextOptionsBuilderInfrastructure)OptionsBuilder
+            ).AddOrUpdateExtension(extension);
 
             return this;
         }

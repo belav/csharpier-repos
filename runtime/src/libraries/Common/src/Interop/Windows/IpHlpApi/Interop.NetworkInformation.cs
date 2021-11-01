@@ -94,9 +94,8 @@ internal static partial class Interop
 
                 while (ptr != IntPtr.Zero)
                 {
-                    IpAdapterAddress addressStructure = Marshal.PtrToStructure<IpAdapterAddress>(
-                        ptr
-                    );
+                    IpAdapterAddress addressStructure =
+                        Marshal.PtrToStructure<IpAdapterAddress>(ptr);
                     IPAddress address = addressStructure.address.MarshalIPAddress();
                     addressList.InternalAdd(address);
 
@@ -114,9 +113,8 @@ internal static partial class Interop
 
                 while (ptr != IntPtr.Zero)
                 {
-                    IpAdapterAddress addressStructure = Marshal.PtrToStructure<IpAdapterAddress>(
-                        ptr
-                    );
+                    IpAdapterAddress addressStructure =
+                        Marshal.PtrToStructure<IpAdapterAddress>(ptr);
                     IPAddress address = addressStructure.address.MarshalIPAddress();
                     addressList.InternalAdd(
                         new SystemIPAddressInformation(address, addressStructure.flags)

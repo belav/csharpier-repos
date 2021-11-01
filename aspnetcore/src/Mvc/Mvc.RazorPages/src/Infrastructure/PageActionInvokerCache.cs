@@ -95,9 +95,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             );
 
             var pageFactory = _pageFactoryProvider.CreatePageFactory(compiledActionDescriptor);
-            var pageDisposer = _pageFactoryProvider.CreateAsyncPageDisposer(
-                compiledActionDescriptor
-            );
+            var pageDisposer =
+                _pageFactoryProvider.CreateAsyncPageDisposer(compiledActionDescriptor);
             var propertyBinder = PageBinderFactory.CreatePropertyBinder(
                 _parameterBinder,
                 _modelMetadataProvider,
@@ -110,9 +109,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             if (compiledActionDescriptor.ModelTypeInfo != compiledActionDescriptor.PageTypeInfo)
             {
                 modelFactory = _modelFactoryProvider.CreateModelFactory(compiledActionDescriptor);
-                modelReleaser = _modelFactoryProvider.CreateAsyncModelDisposer(
-                    compiledActionDescriptor
-                );
+                modelReleaser =
+                    _modelFactoryProvider.CreateAsyncModelDisposer(compiledActionDescriptor);
             }
 
             var viewStartFactories = GetViewStartFactories(compiledActionDescriptor);

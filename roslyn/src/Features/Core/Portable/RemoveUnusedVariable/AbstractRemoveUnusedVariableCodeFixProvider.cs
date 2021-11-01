@@ -119,9 +119,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
                             var referencedSymbolNode = root.FindNode(location.Location.SourceSpan);
                             if (referencedSymbolNode != null)
                             {
-                                var nodeToRemoveOrReplace = GetNodeToRemoveOrReplace(
-                                    referencedSymbolNode
-                                );
+                                var nodeToRemoveOrReplace =
+                                    GetNodeToRemoveOrReplace(referencedSymbolNode);
                                 if (nodeToRemoveOrReplace != null)
                                 {
                                     nodesToRemove.Add(nodeToRemoveOrReplace);

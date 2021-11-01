@@ -322,9 +322,8 @@ namespace JitBench
             // Get the list of processes of interest.
             try
             {
-                var processes = new SimpleTraceEventParser().GetProfileData(
-                    scenarioExecutionResult
-                );
+                var processes =
+                    new SimpleTraceEventParser().GetProfileData(scenarioExecutionResult);
 
                 // Extract the Pmc data for each one of the processes.
                 foreach (var process in processes)

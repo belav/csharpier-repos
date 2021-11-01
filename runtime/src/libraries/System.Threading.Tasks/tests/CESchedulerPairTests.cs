@@ -759,9 +759,7 @@ namespace System.Threading.Tasks.Tests
                                                                     .StartNew(
                                                                         () =>
                                                                         {
-                                                                            throw new InvalidOperationException(
-                                                                                errorString
-                                                                            );
+                                                                            throw new InvalidOperationException(errorString);
                                                                         },
                                                                         CancellationToken.None,
                                                                         TaskCreationOptions.AttachedToParent,

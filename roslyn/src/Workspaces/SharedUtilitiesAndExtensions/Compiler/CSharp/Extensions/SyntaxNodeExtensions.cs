@@ -980,9 +980,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         )
                 )
                 {
-                    var match = ((DirectiveTriviaSyntax)structure).GetMatchingDirective(
-                        cancellationToken
-                    );
+                    var match = (
+                        (DirectiveTriviaSyntax)structure
+                    ).GetMatchingDirective(cancellationToken);
                     if (match != null)
                     {
                         var matchSpan = match.Span;
@@ -1036,9 +1036,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             var currentGroup = new List<TSyntaxNode>();
             foreach (var node in nodes)
             {
-                var hasUnmatchedInteriorDirective = node.ContainsInterleavedDirective(
-                    cancellationToken
-                );
+                var hasUnmatchedInteriorDirective =
+                    node.ContainsInterleavedDirective(cancellationToken);
                 var hasLeadingDirective = node.GetLeadingTrivia()
                     .Any(t => SyntaxFacts.IsPreprocessorDirective(t.Kind()));
 

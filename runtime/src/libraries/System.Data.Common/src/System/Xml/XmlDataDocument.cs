@@ -269,12 +269,10 @@ namespace System.Xml
             if (_fDataRowCreatedSpecial)
                 UnBindSpecialListeners();
 
-            _dataSet.Tables.CollectionChanging += new CollectionChangeEventHandler(
-                OnDataSetTablesChanging
-            );
-            _dataSet.Relations.CollectionChanging += new CollectionChangeEventHandler(
-                OnDataSetRelationsChanging
-            );
+            _dataSet.Tables.CollectionChanging +=
+                new CollectionChangeEventHandler(OnDataSetTablesChanging);
+            _dataSet.Relations.CollectionChanging +=
+                new CollectionChangeEventHandler(OnDataSetRelationsChanging);
             _dataSet.DataRowCreated += new DataRowCreatedEventHandler(OnDataRowCreated);
             _dataSet.PropertyChanging += new PropertyChangedEventHandler(OnDataSetPropertyChanging);
 
@@ -318,9 +316,8 @@ namespace System.Xml
             t.RowDeleting += new DataRowChangeEventHandler(OnRowChanging);
             t.RowDeleted += new DataRowChangeEventHandler(OnRowChanged);
             t.PropertyChanging += new PropertyChangedEventHandler(OnTablePropertyChanging);
-            t.Columns.CollectionChanging += new CollectionChangeEventHandler(
-                OnTableColumnsChanging
-            );
+            t.Columns.CollectionChanging +=
+                new CollectionChangeEventHandler(OnTableColumnsChanging);
 
             foreach (DataColumn col in t.Columns)
             {

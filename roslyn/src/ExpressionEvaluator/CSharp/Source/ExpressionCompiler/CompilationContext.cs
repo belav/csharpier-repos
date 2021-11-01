@@ -1240,9 +1240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             if (declaredLocalsScopeDesignator != null)
             {
-                declaredLocals = actualRootBinder.GetDeclaredLocalsForScope(
-                    declaredLocalsScopeDesignator
-                );
+                declaredLocals =
+                    actualRootBinder.GetDeclaredLocalsForScope(declaredLocalsScopeDesignator);
             }
             else
             {
@@ -2150,9 +2149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     candidateSubstitutedSourceType.OriginalDefinition.TypeParameters;
 
                 // Type containing the original iterator, async, or lambda-containing method.
-                var substitutedSourceType = GetNonDisplayClassContainer(
-                    candidateSubstitutedSourceType
-                );
+                var substitutedSourceType =
+                    GetNonDisplayClassContainer(candidateSubstitutedSourceType);
 
                 foreach (
                     var candidateMethod in substitutedSourceType.GetMembers().OfType<MethodSymbol>()

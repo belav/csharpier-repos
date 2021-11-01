@@ -24,9 +24,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 
         private const string _headerNameString = "new-header";
 
-        private static readonly byte[] _headerNameBytes = Encoding.ASCII.GetBytes(
-            _headerNameString
-        );
+        private static readonly byte[] _headerNameBytes =
+            Encoding.ASCII.GetBytes(_headerNameString);
 
         private static readonly byte[] _headerName = new byte[] { (byte)_headerNameBytes.Length }
             .Concat(_headerNameBytes)
@@ -34,9 +33,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 
         private const string _headerValueString = "value";
 
-        private static readonly byte[] _headerValueBytes = Encoding.ASCII.GetBytes(
-            _headerValueString
-        );
+        private static readonly byte[] _headerValueBytes =
+            Encoding.ASCII.GetBytes(_headerValueString);
 
         private static readonly byte[] _headerValue = new byte[] { (byte)_headerValueBytes.Length }
             .Concat(_headerValueBytes)

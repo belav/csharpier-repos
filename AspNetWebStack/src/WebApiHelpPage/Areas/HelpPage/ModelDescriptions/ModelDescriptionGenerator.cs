@@ -219,9 +219,10 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
                         );
                     }
 
-                    Type keyValuePairType = typeof(KeyValuePair<, >).MakeGenericType(
-                        genericArguments
-                    );
+                    Type keyValuePairType = typeof(KeyValuePair<
+                        ,
+
+                    >).MakeGenericType(genericArguments);
                     if (keyValuePairType.IsAssignableFrom(modelType))
                     {
                         return GenerateKeyValuePairModelDescription(
@@ -425,9 +426,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.ModelDescriptions
 
                     if (DocumentationProvider != null)
                     {
-                        propertyModel.Documentation = DocumentationProvider.GetDocumentation(
-                            property
-                        );
+                        propertyModel.Documentation =
+                            DocumentationProvider.GetDocumentation(property);
                     }
 
                     GenerateAnnotations(property, propertyModel);

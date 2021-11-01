@@ -521,9 +521,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics
         )
         {
-            var definition = CoreResources.LogDistinctAfterOrderByWithoutRowLimitingOperatorWarning(
-                diagnostics
-            );
+            var definition =
+                CoreResources.LogDistinctAfterOrderByWithoutRowLimitingOperatorWarning(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -814,9 +813,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             INavigation navigation
         )
         {
-            var definition = CoreResources.LogPossibleUnintendedCollectionNavigationNullComparison(
-                diagnostics
-            );
+            var definition =
+                CoreResources.LogPossibleUnintendedCollectionNavigationNullComparison(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -2939,9 +2937,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         )
         {
             var definition =
-                CoreResources.LogConflictingForeignKeyAttributesOnNavigationAndProperty(
-                    diagnostics
-                );
+                CoreResources.LogConflictingForeignKeyAttributesOnNavigationAndProperty(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {
@@ -4822,9 +4818,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         )
         {
             var definition =
-                CoreResources.LogPossibleIncorrectRequiredNavigationWithQueryFilterInteraction(
-                    diagnostics
-                );
+                CoreResources.LogPossibleIncorrectRequiredNavigationWithQueryFilterInteraction(diagnostics);
 
             if (diagnostics.ShouldLog(definition))
             {

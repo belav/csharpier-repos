@@ -128,18 +128,16 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
                 );
                 if (fileExists(relatedAssemblyLocation))
                 {
-                    relatedAssembly = assemblyLoadContext.LoadFromAssemblyPath(
-                        relatedAssemblyLocation
-                    );
+                    relatedAssembly =
+                        assemblyLoadContext.LoadFromAssemblyPath(relatedAssemblyLocation);
                 }
                 else
                 {
                     try
                     {
                         var relatedAssemblyName = new AssemblyName(attribute.AssemblyFileName);
-                        relatedAssembly = assemblyLoadContext.LoadFromAssemblyName(
-                            relatedAssemblyName
-                        );
+                        relatedAssembly =
+                            assemblyLoadContext.LoadFromAssemblyName(relatedAssemblyName);
                     }
                     catch when (!throwOnError)
                     {

@@ -24,9 +24,10 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             IEqualityComparer<string> identifierComparer
         )
         {
-            _currentIdentifiersInScope = new Dictionary<string, List<SyntaxToken>>(
-                identifierComparer
-            );
+            _currentIdentifiersInScope = new Dictionary<
+                string,
+                List<SyntaxToken>
+            >(identifierComparer);
             _conflictingTokensToReport = new HashSet<SyntaxToken>();
             _tokenBeingRenamed = tokenBeingRenamed;
         }

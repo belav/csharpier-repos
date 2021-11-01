@@ -150,17 +150,14 @@ namespace Microsoft.CodeAnalysis.AddParameter
         {
             if (node is TInvocationExpressionSyntax invocationExpression)
             {
-                var expression = syntaxFacts.GetExpressionOfInvocationExpression(
-                    invocationExpression
-                );
+                var expression =
+                    syntaxFacts.GetExpressionOfInvocationExpression(invocationExpression);
                 var candidates = semanticModel
                     .GetMemberGroup(expression, cancellationToken)
                     .OfType<IMethodSymbol>()
                     .ToImmutableArray();
                 var arguments =
-                    (SeparatedSyntaxList<TArgumentSyntax>)syntaxFacts.GetArgumentsOfInvocationExpression(
-                        invocationExpression
-                    );
+                    (SeparatedSyntaxList<TArgumentSyntax>)syntaxFacts.GetArgumentsOfInvocationExpression(invocationExpression);
 
                 // In VB a constructor calls other constructor overloads via a Me.New(..) invocation.
                 // If the candidates are MethodKind.Constructor than these are the equivalent the a C# ConstructorInitializer.
@@ -218,9 +215,7 @@ namespace Microsoft.CodeAnalysis.AddParameter
                 }
 
                 var arguments =
-                    (SeparatedSyntaxList<TArgumentSyntax>)syntaxFacts.GetArgumentsOfObjectCreationExpression(
-                        objectCreation
-                    );
+                    (SeparatedSyntaxList<TArgumentSyntax>)syntaxFacts.GetArgumentsOfObjectCreationExpression(objectCreation);
                 var methodCandidates = type.InstanceConstructors;
 
                 return new RegisterFixData<TArgumentSyntax>(
@@ -471,21 +466,20 @@ namespace Microsoft.CodeAnalysis.AddParameter
                 var methodToUpdate = argumentInsertPositionData.MethodToUpdate;
                 var argumentToInsert = argumentInsertPositionData.ArgumentToInsert;
 
-                var cascadingFix = AddParameterService.Instance.HasCascadingDeclarations(
-                    methodToUpdate
-                )
-                    ? new Func<CancellationToken, Task<Solution>>(
-                          c =>
-                              FixAsync(
-                                  document,
-                                  methodToUpdate,
-                                  argumentToInsert,
-                                  arguments,
-                                  fixAllReferences: true,
-                                  c
-                              )
-                      )
-                    : null;
+                var cascadingFix =
+                    AddParameterService.Instance.HasCascadingDeclarations(methodToUpdate)
+                        ? new Func<CancellationToken, Task<Solution>>(
+                              c =>
+                                  FixAsync(
+                                      document,
+                                      methodToUpdate,
+                                      argumentToInsert,
+                                      arguments,
+                                      fixAllReferences: true,
+                                      c
+                                  )
+                          )
+                        : null;
 
                 var codeFixData = new CodeFixData(
                     methodToUpdate,
@@ -680,9 +674,8 @@ namespace Microsoft.CodeAnalysis.AddParameter
 
                     var argumentTypeInfo = semanticModel.GetTypeInfo(expressionOfArgument);
                     var isNullLiteral = syntaxFacts.IsNullLiteralExpression(expressionOfArgument);
-                    var isDefaultLiteral = syntaxFacts.IsDefaultLiteralExpression(
-                        expressionOfArgument
-                    );
+                    var isDefaultLiteral =
+                        syntaxFacts.IsDefaultLiteralExpression(expressionOfArgument);
 
                     if (argumentTypeInfo.Type == null && argumentTypeInfo.ConvertedType == null)
                     {

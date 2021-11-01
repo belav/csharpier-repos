@@ -234,9 +234,7 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
         );
         Assert.IsTrue(
             DoCallBack_MarshalByteArray_AsParam_AsByOut(
-                new DelByteArrByOutAsCdeclCaller(
-                    TestMethodForByteArray_AsReversePInvokeByOut_AsCdecl
-                )
+                new DelByteArrByOutAsCdeclCaller(TestMethodForByteArray_AsReversePInvokeByOut_AsCdecl)
             )
         );
         Console.WriteLine("\t\tMarshalByteArray_AsReversePInvokeByOut_AsCdecl Passed!");
@@ -246,9 +244,7 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
         );
         Assert.IsTrue(
             DoCallBack_MarshalSbyteArray_AsParam_AsByOut(
-                new DelSbyteArrByOutAsCdeclCaller(
-                    TestMethodForSbyteArray_AsReversePInvokeByOut_AsCdecl
-                )
+                new DelSbyteArrByOutAsCdeclCaller(TestMethodForSbyteArray_AsReversePInvokeByOut_AsCdecl)
             )
         );
         Console.WriteLine("\t\tMarshalSbyteArray_AsReversePInvokeByOut_AsCdecl Passed!");
@@ -258,9 +254,7 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
         );
         Assert.IsTrue(
             DoCallBack_MarshalShortArray_AsParam_AsByOut(
-                new DelShortArrByOutAsCdeclCaller(
-                    TestMethodForShortArray_AsReversePInvokeByOut_AsCdecl
-                )
+                new DelShortArrByOutAsCdeclCaller(TestMethodForShortArray_AsReversePInvokeByOut_AsCdecl)
             )
         );
         Console.WriteLine("\t\tMarshalShortArray_AsReversePInvokeByOut_AsCdecl Failed!");
@@ -270,9 +264,7 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
         );
         Assert.IsTrue(
             DoCallBack_MarshalShortArrayReturnNegativeSize_AsParam_AsByOut(
-                new DelShortArrByOutAsCdeclCaller(
-                    TestMethodForShortArrayReturnNegativeSize_AsReversePInvokeByOut_AsCdecl
-                )
+                new DelShortArrByOutAsCdeclCaller(TestMethodForShortArrayReturnNegativeSize_AsReversePInvokeByOut_AsCdecl)
             )
         );
         Console.WriteLine("\t\tMarshalShortArray_AsReversePInvokeByOut_AsCdecl Passed!");
@@ -282,9 +274,7 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
         );
         Assert.IsTrue(
             DoCallBack_MarshalUshortArray_AsParam_AsByOut(
-                new DelUshortArrByOutAsCdeclCaller(
-                    TestMethodForUshortArray_AsReversePInvokeByOut_AsCdecl
-                )
+                new DelUshortArrByOutAsCdeclCaller(TestMethodForUshortArray_AsReversePInvokeByOut_AsCdecl)
             )
         );
         Console.WriteLine("\t\tMarshalUshortArray_AsReversePInvokeByOut_AsCdecl Passed!");
@@ -292,9 +282,7 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
         Console.WriteLine("\tScenario 6 : Int32 ==> LONG, Array_Size = 10, Return_Array_Size = 20");
         Assert.IsTrue(
             DoCallBack_MarshalInt32Array_AsParam_AsByOut(
-                new DelInt32ArrByOutAsCdeclCaller(
-                    TestMethodForInt32Array_AsReversePInvokeByOut_AsCdecl
-                )
+                new DelInt32ArrByOutAsCdeclCaller(TestMethodForInt32Array_AsReversePInvokeByOut_AsCdecl)
             )
         );
         Console.WriteLine("\t\tMarshalInt32Array_AsReversePInvokeByOut_AsCdecl Passed!");
@@ -304,9 +292,7 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
         );
         Assert.IsTrue(
             DoCallBack_MarshalUint32Array_AsParam_AsByOut(
-                new DelUint32ArrByOutAsCdeclCaller(
-                    TestMethodForUint32Array_AsReversePInvokeByOut_AsCdecl
-                )
+                new DelUint32ArrByOutAsCdeclCaller(TestMethodForUint32Array_AsReversePInvokeByOut_AsCdecl)
             )
         );
         Console.WriteLine("\t\tMarshalUint32Array_AsReversePInvokeByOut_AsCdecl Passed!");
@@ -316,9 +302,7 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
         );
         Assert.IsTrue(
             DoCallBack_MarshalLongArray_AsParam_AsByOut(
-                new DelLongArrByOutAsCdeclCaller(
-                    TestMethodForLongArray_AsReversePInvokeByOut_AsCdecl
-                )
+                new DelLongArrByOutAsCdeclCaller(TestMethodForLongArray_AsReversePInvokeByOut_AsCdecl)
             )
         );
         Console.WriteLine("\t\tMarshalLongArray_AsReversePInvokeByOut_AsCdecl Passed!");
@@ -328,9 +312,7 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
         );
         Assert.IsTrue(
             DoCallBack_MarshalUlongArray_AsParam_AsByOut(
-                new DelUlongArrByOutAsCdeclCaller(
-                    TestMethodForUlongArray_AsReversePInvokeByOut_AsCdecl
-                )
+                new DelUlongArrByOutAsCdeclCaller(TestMethodForUlongArray_AsReversePInvokeByOut_AsCdecl)
             )
         );
         Console.WriteLine("\t\tMarshalUlongArray_AsReversePInvokeByOut_AsCdecl Passed!");
@@ -342,9 +324,7 @@ public class ReversePInvoke_MashalArrayByOut_AsManagedTest
             );
             Assert.IsTrue(
                 DoCallBack_MarshalStringArray_AsParam_AsByOut(
-                    new DelStringArrByOutAsCdeclCaller(
-                        TestMethodForStringArray_AsReversePInvokeByOut_AsCdecl
-                    )
+                    new DelStringArrByOutAsCdeclCaller(TestMethodForStringArray_AsReversePInvokeByOut_AsCdecl)
                 )
             );
             Console.WriteLine("\t\tMarshalStringArray_AsReversePInvokeByOut_AsCdecl Passed!");

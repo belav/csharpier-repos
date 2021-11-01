@@ -116,9 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 {
                     var newVariableDeclaratorsList =
                         new SeparatedSyntaxList<VariableDeclaratorSyntax>().Add(reusableSyntax);
-                    var newVariableDeclaration = variableDeclaration.WithVariables(
-                        newVariableDeclaratorsList
-                    );
+                    var newVariableDeclaration =
+                        variableDeclaration.WithVariables(newVariableDeclaratorsList);
                     if (variableDeclaration.Parent is FieldDeclarationSyntax fieldDecl)
                     {
                         return fieldDecl.WithDeclaration(newVariableDeclaration);

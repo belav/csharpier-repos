@@ -113,9 +113,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             string output = JsonConvert.SerializeObject(queue1);
             Assert.AreEqual(@"[1]", output);
 
-            ConcurrentQueue<int> queue2 = JsonConvert.DeserializeObject<ConcurrentQueue<int>>(
-                output
-            );
+            ConcurrentQueue<int> queue2 = JsonConvert.DeserializeObject<
+                ConcurrentQueue<int>
+            >(output);
             int i;
             Assert.IsTrue(queue2.TryDequeue(out i));
             Assert.AreEqual(1, i);
@@ -145,9 +145,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             string output = JsonConvert.SerializeObject(stack1);
             Assert.AreEqual(@"[1]", output);
 
-            ConcurrentStack<int> stack2 = JsonConvert.DeserializeObject<ConcurrentStack<int>>(
-                output
-            );
+            ConcurrentStack<int> stack2 = JsonConvert.DeserializeObject<
+                ConcurrentStack<int>
+            >(output);
             int i;
             Assert.IsTrue(stack2.TryPop(out i));
             Assert.AreEqual(1, i);
@@ -335,9 +335,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void CollectionJsonConstructorNonGeneric()
         {
             string json = @"[1,2,3]";
-            TestCollectionNonGeneric l = JsonConvert.DeserializeObject<TestCollectionNonGeneric>(
-                json
-            );
+            TestCollectionNonGeneric l =
+                JsonConvert.DeserializeObject<TestCollectionNonGeneric>(json);
 
             Assert.AreEqual(3, l.Count);
             Assert.AreEqual(1L, l[0]);
@@ -440,9 +439,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void DictionaryJsonConstructorNonGeneric()
         {
             string json = @"{'zero':0,'one':1,'two':2}";
-            TestDictionaryNonGeneric d = JsonConvert.DeserializeObject<TestDictionaryNonGeneric>(
-                json
-            );
+            TestDictionaryNonGeneric d =
+                JsonConvert.DeserializeObject<TestDictionaryNonGeneric>(json);
 
             Assert.AreEqual(3, d.Count);
             Assert.AreEqual(0L, d["zero"]);
@@ -627,9 +625,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             }"
             );
 
-            object[,] myOtherResult = JsonConvert.DeserializeObject<object[,]>(
-                myOtherArrayAsString
-            );
+            object[,] myOtherResult =
+                JsonConvert.DeserializeObject<object[,]>(myOtherArrayAsString);
             Assert.IsTrue(JToken.DeepEquals(o, (JToken)myOtherResult[0, 0]));
             Assert.AreEqual("foobar", myOtherResult[0, 1]);
 
@@ -907,9 +904,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             IDictionary<string, int> d = new Dictionary<string, int> { { "one", 1 }, { "two", 2 } };
 
-            CustomReadOnlyDictionary<string, int> dic = new CustomReadOnlyDictionary<string, int>(
-                d
-            );
+            CustomReadOnlyDictionary<string, int> dic = new CustomReadOnlyDictionary<
+                string,
+                int
+            >(d);
 
             string json = JsonConvert.SerializeObject(dic, Formatting.Indented);
             StringAssert.AreEqual(
@@ -1000,9 +998,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
 
-            GenericListTestClass newValue = JsonConvert.DeserializeObject<GenericListTestClass>(
-                json
-            );
+            GenericListTestClass newValue =
+                JsonConvert.DeserializeObject<GenericListTestClass>(json);
             Assert.AreEqual(2, newValue.GenericList.Count);
             Assert.AreEqual(typeof(List<string>), newValue.GenericList.GetType());
         }
@@ -1176,9 +1173,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json
             );
 
-            IDictionary<string, int?> v2 = JsonConvert.DeserializeObject<IDictionary<string, int?>>(
-                json
-            );
+            IDictionary<string, int?> v2 = JsonConvert.DeserializeObject<
+                IDictionary<string, int?>
+            >(json);
             Assert.AreEqual(3, v2.Count);
             Assert.AreEqual(1, v2["First"]);
             Assert.AreEqual(null, v2["Second"]);
@@ -1958,9 +1955,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json =
                 @"{""action"":""Router"",""method"":""Navigate"",""data"":[""dashboard"",null],""type"":""rpc"",""tid"":2}";
 
-            ObjectArrayPropertyTest o = JsonConvert.DeserializeObject<ObjectArrayPropertyTest>(
-                json
-            );
+            ObjectArrayPropertyTest o =
+                JsonConvert.DeserializeObject<ObjectArrayPropertyTest>(json);
 
             Assert.AreEqual("Router", o.Action);
             Assert.AreEqual("Navigate", o.Method);
@@ -1975,9 +1971,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             string json =
                 @"{""action"":""Router"",""method"":""Navigate"",""data"":[""dashboard"",[""id"", 1, ""teststring"", ""test""],{""one"":1}],""type"":""rpc"",""tid"":2}";
 
-            ObjectArrayPropertyTest o = JsonConvert.DeserializeObject<ObjectArrayPropertyTest>(
-                json
-            );
+            ObjectArrayPropertyTest o =
+                JsonConvert.DeserializeObject<ObjectArrayPropertyTest>(json);
 
             Assert.AreEqual("Router", o.Action);
             Assert.AreEqual("Navigate", o.Method);
@@ -2145,9 +2140,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             string jsonText = JsonConvert.SerializeObject(articles1);
 
-            ArticleCollection articles2 = JsonConvert.DeserializeObject<ArticleCollection>(
-                jsonText
-            );
+            ArticleCollection articles2 =
+                JsonConvert.DeserializeObject<ArticleCollection>(jsonText);
 
             Assert.AreEqual(articles1.Count, articles2.Count);
             Assert.AreEqual(articles1[0].Name, articles2[0].Name);
@@ -2162,9 +2156,9 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual("[0,1,2,3,4]", jsonText);
 
-            ReadOnlyCollection<int> r2 = JsonConvert.DeserializeObject<ReadOnlyCollection<int>>(
-                jsonText
-            );
+            ReadOnlyCollection<int> r2 = JsonConvert.DeserializeObject<
+                ReadOnlyCollection<int>
+            >(jsonText);
 
             CollectionAssert.AreEqual(r1, r2);
         }
@@ -2306,9 +2300,9 @@ namespace Newtonsoft.Json.Tests.Serialization
             ExceptionAssert.Throws<JsonSerializationException>(
                 () =>
                 {
-                    JsonConvert.DeserializeObject<ReadOnlyCollectionWithArrayArgument<double>>(
-                        json
-                    );
+                    JsonConvert.DeserializeObject<
+                        ReadOnlyCollectionWithArrayArgument<double>
+                    >(json);
                 },
                 "Unable to find a constructor to use for type Newtonsoft.Json.Tests.Serialization.ReadOnlyCollectionWithArrayArgument`1[System.Double]. Path '', line 1, position 1."
             );

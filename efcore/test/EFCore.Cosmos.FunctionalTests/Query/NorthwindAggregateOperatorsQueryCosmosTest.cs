@@ -1018,9 +1018,7 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            return base.Multiple_collection_navigation_with_FirstOrDefault_chained_projecting_scalar(
-                async
-            );
+            return base.Multiple_collection_navigation_with_FirstOrDefault_chained_projecting_scalar(async);
         }
 
         [ConditionalTheory(Skip = "Issue#17246")]
@@ -1432,9 +1430,7 @@ WHERE (c[""Discriminator""] = ""Order"")"
             bool async
         )
         {
-            await base.Average_with_non_matching_types_in_projection_doesnt_produce_second_explicit_cast(
-                async
-            );
+            await base.Average_with_non_matching_types_in_projection_doesnt_produce_second_explicit_cast(async);
 
             AssertSql(
                 @"SELECT c
@@ -1775,9 +1771,7 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            return base.Contains_over_scalar_with_null_should_rewrite_to_identity_equality_subquery(
-                async
-            );
+            return base.Contains_over_scalar_with_null_should_rewrite_to_identity_equality_subquery(async);
         }
 
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
@@ -1785,9 +1779,7 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            return base.Contains_over_nullable_scalar_with_null_in_subquery_translated_correctly(
-                async
-            );
+            return base.Contains_over_nullable_scalar_with_null_in_subquery_translated_correctly(async);
         }
 
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
@@ -1795,9 +1787,7 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            return base.Contains_over_non_nullable_scalar_with_null_in_subquery_simplifies_to_false(
-                async
-            );
+            return base.Contains_over_non_nullable_scalar_with_null_in_subquery_simplifies_to_false(async);
         }
 
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
@@ -1805,9 +1795,7 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            return base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery(
-                async
-            );
+            return base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery(async);
         }
 
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
@@ -1815,9 +1803,7 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            return base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_complex(
-                async
-            );
+            return base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_complex(async);
         }
 
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]
@@ -1825,9 +1811,7 @@ WHERE (c[""Discriminator""] = ""Customer"")"
             bool async
         )
         {
-            return base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_negated(
-                async
-            );
+            return base.Contains_over_entityType_with_null_should_rewrite_to_identity_equality_subquery_negated(async);
         }
 
         [ConditionalTheory(Skip = "Issue#17246 (Contains over subquery is not supported)")]

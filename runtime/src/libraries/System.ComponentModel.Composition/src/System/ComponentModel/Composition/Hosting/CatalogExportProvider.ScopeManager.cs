@@ -48,9 +48,7 @@ namespace System.ComponentModel.Composition.Hosting
                 foreach (CompositionScopeDefinition childCatalog in _scopeDefinition.Children)
                 {
                     foreach (
-                        var partDefinitionAndExportDefinition in childCatalog.GetExportsFromPublicSurface(
-                            queryImport
-                        )
+                        var partDefinitionAndExportDefinition in childCatalog.GetExportsFromPublicSurface(queryImport)
                     )
                     {
                         // We found a match in the child catalog. Now we need to check that it doesn't get rejected.
@@ -64,9 +62,8 @@ namespace System.ComponentModel.Composition.Hosting
                                 // We create a nested AtomicComposition() because the container will be Disposed and
                                 // the RevertActions need to operate before we Dispose the child container
                                 using (
-                                    var localAtomicComposition = new AtomicComposition(
-                                        atomicComposition
-                                    )
+                                    var localAtomicComposition =
+                                        new AtomicComposition(atomicComposition)
                                 )
                                 {
                                     isChildPartRejected =

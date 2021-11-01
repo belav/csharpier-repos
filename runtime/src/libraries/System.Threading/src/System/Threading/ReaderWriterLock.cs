@@ -53,9 +53,8 @@ namespace System.Threading
         {
             get
             {
-                ThreadLocalLockEntry? threadLocalLockEntry = ThreadLocalLockEntry.GetCurrent(
-                    _lockID
-                );
+                ThreadLocalLockEntry? threadLocalLockEntry =
+                    ThreadLocalLockEntry.GetCurrent(_lockID);
                 if (threadLocalLockEntry != null)
                 {
                     return threadLocalLockEntry._readerLevel > 0;
@@ -84,9 +83,8 @@ namespace System.Threading
                 throw GetInvalidTimeoutException(nameof(millisecondsTimeout));
             }
 
-            ThreadLocalLockEntry threadLocalLockEntry = ThreadLocalLockEntry.GetOrCreateCurrent(
-                _lockID
-            );
+            ThreadLocalLockEntry threadLocalLockEntry =
+                ThreadLocalLockEntry.GetOrCreateCurrent(_lockID);
 
             // Check for the fast path
             if (Interlocked.CompareExchange(ref _state, LockStates.Reader, 0) == 0)
@@ -853,9 +851,8 @@ namespace System.Threading
             {
                 Debug.Assert(_writerLevel > 0);
 
-                ThreadLocalLockEntry threadLocalLockEntry = ThreadLocalLockEntry.GetOrCreateCurrent(
-                    _lockID
-                );
+                ThreadLocalLockEntry threadLocalLockEntry =
+                    ThreadLocalLockEntry.GetOrCreateCurrent(_lockID);
 
                 // Downgrade to a reader
                 _writerID = InvalidThreadID;
@@ -1090,9 +1087,8 @@ namespace System.Threading
             else if ((flags & LockCookieFlags.OwnedReader) != 0)
             {
                 AcquireReaderLock(Timeout.Infinite);
-                ThreadLocalLockEntry? threadLocalLockEntry = ThreadLocalLockEntry.GetCurrent(
-                    _lockID
-                );
+                ThreadLocalLockEntry? threadLocalLockEntry =
+                    ThreadLocalLockEntry.GetCurrent(_lockID);
                 Debug.Assert(threadLocalLockEntry != null);
                 threadLocalLockEntry._readerLevel = lockCookie._readerLevel;
             }

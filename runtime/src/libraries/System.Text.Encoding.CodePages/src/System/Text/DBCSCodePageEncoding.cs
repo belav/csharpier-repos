@@ -572,9 +572,8 @@ namespace System.Text
             // For fallback we will need a fallback buffer
             EncoderFallbackBuffer? fallbackBuffer = null;
 
-            EncoderFallbackBufferHelper fallbackHelper = new EncoderFallbackBufferHelper(
-                fallbackBuffer
-            );
+            EncoderFallbackBufferHelper fallbackHelper =
+                new EncoderFallbackBufferHelper(fallbackBuffer);
 
             // We may have a left over character from last time, try and process it.
             if (charLeftOver > 0)
@@ -677,9 +676,8 @@ namespace System.Text
             byte* byteStart = bytes;
             byte* byteEnd = bytes + byteCount;
 
-            EncoderFallbackBufferHelper fallbackHelper = new EncoderFallbackBufferHelper(
-                fallbackBuffer
-            );
+            EncoderFallbackBufferHelper fallbackHelper =
+                new EncoderFallbackBufferHelper(fallbackBuffer);
 
             // Get any left over characters
             char charLeftOver = (char)0;
@@ -856,9 +854,8 @@ namespace System.Text
                 "[DBCSCodePageEncoding.GetCharCount]Expected empty fallback buffer at start"
             );
 
-            DecoderFallbackBufferHelper fallbackHelper = new DecoderFallbackBufferHelper(
-                fallbackBuffer
-            );
+            DecoderFallbackBufferHelper fallbackHelper =
+                new DecoderFallbackBufferHelper(fallbackBuffer);
 
             // If we have a left over byte, use it
             if (decoder != null && decoder.bLeftOver > 0)
@@ -1036,9 +1033,8 @@ namespace System.Text
                 "[DBCSCodePageEncoding.GetChars]Expected empty fallback buffer at start"
             );
 
-            DecoderFallbackBufferHelper fallbackHelper = new DecoderFallbackBufferHelper(
-                fallbackBuffer
-            );
+            DecoderFallbackBufferHelper fallbackHelper =
+                new DecoderFallbackBufferHelper(fallbackBuffer);
 
             // If we have a left over byte, use it
             if (decoder != null && decoder.bLeftOver > 0)

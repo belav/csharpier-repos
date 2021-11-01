@@ -86,9 +86,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             out TKey key
         ) =>
             HandleNullableValue(
-                ((Func<IUpdateEntry, TKey?>)_propertyAccessors.PreStoreGeneratedCurrentValueGetter)(
-                    entry
-                ),
+                (
+                    (Func<
+                        IUpdateEntry,
+                        TKey?
+                    >)_propertyAccessors.PreStoreGeneratedCurrentValueGetter
+                )(entry),
                 out key
             );
 

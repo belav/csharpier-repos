@@ -40,9 +40,8 @@ namespace Microsoft.Extensions.Logging.Generators
                 const string LoggerMessageAttribute =
                     "Microsoft.Extensions.Logging.LoggerMessageAttribute";
 
-                INamedTypeSymbol loggerMessageAttribute = _compilation.GetTypeByMetadataName(
-                    LoggerMessageAttribute
-                );
+                INamedTypeSymbol loggerMessageAttribute =
+                    _compilation.GetTypeByMetadataName(LoggerMessageAttribute);
                 if (loggerMessageAttribute == null)
                 {
                     // nothing to do if this type isn't available

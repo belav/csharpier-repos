@@ -128,9 +128,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                 return;
             }
 
-            var vsShell = IServiceProviderExtensions.GetService<SVsShell, IVsShell>(
-                _serviceProvider
-            );
+            var vsShell = IServiceProviderExtensions.GetService<
+                SVsShell,
+                IVsShell
+            >(_serviceProvider);
             var hr = vsShell.IsPackageInstalled(ReSharperPackageGuid, out var extensionEnabled);
             if (ErrorHandler.Failed(hr))
             {
@@ -369,9 +370,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                 cmds[0].cmdID = cmdId;
                 cmds[0].cmdf = 0;
 
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
                 var hr = _oleCommandTarget.QueryStatus(
                     ReSharperCommandGroup,
@@ -397,9 +396,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                     return;
                 }
 
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
                 _oleCommandTarget = IServiceProviderExtensions.GetService<
                     SUIHostCommandDispatcher,
@@ -414,9 +411,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
 
             if (_uiShell == null)
             {
-                _uiShell = IServiceProviderExtensions.GetService<SVsUIShell, IVsUIShell>(
-                    _serviceProvider
-                );
+                _uiShell = IServiceProviderExtensions.GetService<
+                    SVsUIShell,
+                    IVsUIShell
+                >(_serviceProvider);
             }
 
             ErrorHandler.ThrowOnFailure(

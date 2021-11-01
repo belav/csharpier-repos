@@ -209,9 +209,9 @@ namespace System.Web.Mvc.Test
             object newModel = binder.BindComplexModel(controllerContext, bindingContext);
 
             // Assert
-            var modelAsDictionary = Assert.IsAssignableFrom<IDictionary<string, CountryState>>(
-                newModel
-            );
+            var modelAsDictionary = Assert.IsAssignableFrom<
+                IDictionary<string, CountryState>
+            >(newModel);
             Assert.Equal(2, modelAsDictionary.Count);
             Assert.Equal("Canada", modelAsDictionary["CA"].Name);
             Assert.Equal("United States", modelAsDictionary["US"].Name);
@@ -257,9 +257,9 @@ namespace System.Web.Mvc.Test
             object newModel = binder.BindComplexModel(controllerContext, bindingContext);
 
             // Assert
-            var modelAsDictionary = Assert.IsAssignableFrom<IDictionary<string, CountryState>>(
-                newModel
-            );
+            var modelAsDictionary = Assert.IsAssignableFrom<
+                IDictionary<string, CountryState>
+            >(newModel);
             Assert.Equal(2, modelAsDictionary.Count);
             Assert.Equal("Canada", modelAsDictionary["CA"].Name);
             Assert.Equal("United States", modelAsDictionary["US"].Name);
@@ -305,9 +305,9 @@ namespace System.Web.Mvc.Test
             object newModel = binder.BindComplexModel(controllerContext, bindingContext);
 
             // Assert
-            var modelAsDictionary = Assert.IsAssignableFrom<IDictionary<string, CountryState>>(
-                newModel
-            );
+            var modelAsDictionary = Assert.IsAssignableFrom<
+                IDictionary<string, CountryState>
+            >(newModel);
             Assert.Equal(2, modelAsDictionary.Count);
             Assert.Equal("Canada", modelAsDictionary["CA"].Name);
             Assert.Equal("United States", modelAsDictionary["US"].Name);

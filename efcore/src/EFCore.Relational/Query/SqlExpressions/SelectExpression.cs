@@ -1503,9 +1503,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             _orderings.Clear();
             _tables.Clear();
             _tableReferences.Clear();
-            select1._projectionMapping = new Dictionary<ProjectionMember, Expression>(
-                _projectionMapping
-            );
+            select1._projectionMapping = new Dictionary<
+                ProjectionMember,
+                Expression
+            >(_projectionMapping);
             _projectionMapping.Clear();
 
             // Remap tableReferences in select1
@@ -3185,9 +3186,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
                 if (mapping.Value is EntityProjectionExpression entityProjection)
                 {
-                    _projectionMapping[mapping.Key] = LiftEntityProjectionFromSubquery(
-                        entityProjection
-                    );
+                    _projectionMapping[mapping.Key] =
+                        LiftEntityProjectionFromSubquery(entityProjection);
                 }
                 else
                 {
@@ -3349,12 +3349,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     {
                         var innerEntityProjection =
                             (EntityProjectionExpression)boundEntityShaperExpression.ValueBufferExpression;
-                        var newInnerEntityProjection = LiftEntityProjectionFromSubquery(
-                            innerEntityProjection
-                        );
-                        boundEntityShaperExpression = boundEntityShaperExpression.Update(
-                            newInnerEntityProjection
-                        );
+                        var newInnerEntityProjection =
+                            LiftEntityProjectionFromSubquery(innerEntityProjection);
+                        boundEntityShaperExpression =
+                            boundEntityShaperExpression.Update(newInnerEntityProjection);
                         newEntityProjection.AddNavigationBinding(
                             navigation,
                             boundEntityShaperExpression
@@ -3583,9 +3581,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             UnwrapJoinExpression(tableExpressionBase).Alias = uniqueAlias;
             tableReferenceExpression.Alias = uniqueAlias;
 
-            tableExpressionBase = (TableExpressionBase)new AliasUniquefier(_usedAliases).Visit(
-                tableExpressionBase
-            );
+            tableExpressionBase =
+                (TableExpressionBase)new AliasUniquefier(_usedAliases).Visit(tableExpressionBase);
             _tables.Add(tableExpressionBase);
             _tableReferences.Add(tableReferenceExpression);
         }
@@ -3719,9 +3716,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         newProjection != mapping.Value && newProjectionMapping == _projectionMapping
                     )
                     {
-                        newProjectionMapping = new Dictionary<ProjectionMember, Expression>(
-                            _projectionMapping
-                        );
+                        newProjectionMapping = new Dictionary<
+                            ProjectionMember,
+                            Expression
+                        >(_projectionMapping);
                         changed = true;
                     }
 

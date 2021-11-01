@@ -115,9 +115,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
             }
 
             // Note: it's acceptable if this fails to convert.  We just won't show the example in that case.
-            var virtualChars = _language.Info.VirtualCharService.TryConvertToVirtualChars(
-                stringToken
-            );
+            var virtualChars =
+                _language.Info.VirtualCharService.TryConvertToVirtualChars(stringToken);
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 

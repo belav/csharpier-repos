@@ -34,9 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             try
             {
-                projectAssets = JsonConvert.DeserializeObject<ProjectAssetsFile>(
-                    projectAssetsFileContents
-                );
+                projectAssets =
+                    JsonConvert.DeserializeObject<ProjectAssetsFile>(projectAssetsFileContents);
             }
             catch
             {

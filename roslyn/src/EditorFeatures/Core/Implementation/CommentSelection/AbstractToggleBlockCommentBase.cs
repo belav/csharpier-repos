@@ -348,12 +348,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
                 AddBlockComment(commentInfo, uncommentedSpan, textChanges);
             }
 
-            var startsWithCommentMarker = blockCommentSelection.StartsWithAnyBlockCommentMarker(
-                commentInfo
-            );
-            var endsWithCommentMarker = blockCommentSelection.EndsWithAnyBlockCommentMarker(
-                commentInfo
-            );
+            var startsWithCommentMarker =
+                blockCommentSelection.StartsWithAnyBlockCommentMarker(commentInfo);
+            var endsWithCommentMarker =
+                blockCommentSelection.EndsWithAnyBlockCommentMarker(commentInfo);
             // If the start is commented (and not a comment marker), close the current comment and open a new one.
             if (
                 blockCommentSelection.IsLocationCommented(selectedSpan.Start)

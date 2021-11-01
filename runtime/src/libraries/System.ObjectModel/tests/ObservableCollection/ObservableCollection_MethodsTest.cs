@@ -244,9 +244,8 @@ namespace System.Collections.ObjectModel.Tests
 
             CollectionAndPropertyChangedTester helper = new CollectionAndPropertyChangedTester();
             string[] anArrayString = new string[] { "one", "two", "three", "four" };
-            ObservableCollection<string> collection = new ObservableCollection<string>(
-                anArrayString
-            );
+            ObservableCollection<string> collection =
+                new ObservableCollection<string>(anArrayString);
             helper.MoveItemTest(collection, 0, 2);
             helper.MoveItemTest(collection, 3, 0);
             helper.MoveItemTest(collection, 1, 2);

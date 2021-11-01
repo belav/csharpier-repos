@@ -74,9 +74,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
             );
 
             Assert.True(result, "Expected non-empty dictionary to return true");
-            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(
-                combinedNamingStyles
-            );
+            var namingStylePreferences =
+                Assert.IsAssignableFrom<NamingStylePreferences>(combinedNamingStyles);
             Assert.Equal(
                 ReportDiagnostic.Error,
                 namingStylePreferences.Rules.NamingRules[0].EnforcementLevel
@@ -133,9 +132,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
             var secondNameAfterOrdering =
                 firstNameAfterOrdering == firstName ? secondName : firstName;
             Assert.True(result, "Expected non-empty dictionary to return true");
-            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(
-                combinedNamingStyles
-            );
+            var namingStylePreferences =
+                Assert.IsAssignableFrom<NamingStylePreferences>(combinedNamingStyles);
             Assert.Equal(
                 $"{firstNameAfterOrdering}_style",
                 namingStylePreferences.Rules.NamingRules[0].NamingStyle.Name
@@ -194,9 +192,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
             var secondNameAfterOrdering =
                 firstNameAfterOrdering == firstName ? secondName : firstName;
             Assert.True(result, "Expected non-empty dictionary to return true");
-            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(
-                combinedNamingStyles
-            );
+            var namingStylePreferences =
+                Assert.IsAssignableFrom<NamingStylePreferences>(combinedNamingStyles);
             Assert.Equal(
                 $"{firstNameAfterOrdering}_style",
                 namingStylePreferences.Rules.NamingRules[0].NamingStyle.Name
@@ -253,9 +250,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
             var secondNameAfterOrdering =
                 firstNameAfterOrdering == firstName ? secondName : firstName;
             Assert.True(result, "Expected non-empty dictionary to return true");
-            var namingStylePreferences = Assert.IsAssignableFrom<NamingStylePreferences>(
-                combinedNamingStyles
-            );
+            var namingStylePreferences =
+                Assert.IsAssignableFrom<NamingStylePreferences>(combinedNamingStyles);
             Assert.Equal(
                 $"{firstNameAfterOrdering}_style",
                 namingStylePreferences.Rules.NamingRules[0].NamingStyle.Name

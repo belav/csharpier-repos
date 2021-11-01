@@ -271,9 +271,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
             Checksum solutionChecksum
         )
         {
-            var solutionObjectFromSyncObject = await GetValueAsync<SolutionStateChecksums>(
-                solutionChecksum
-            );
+            var solutionObjectFromSyncObject =
+                await GetValueAsync<SolutionStateChecksums>(solutionChecksum);
             Assert.True(solution.State.TryGetStateChecksums(out var solutionObjectFromSolution));
 
             SolutionStateEqual(solutionObjectFromSolution, solutionObjectFromSyncObject);

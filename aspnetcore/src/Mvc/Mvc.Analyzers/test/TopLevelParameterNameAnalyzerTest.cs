@@ -20,9 +20,7 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         [Fact]
         public Task DiagnosticsAreReturned_ForControllerActionsWithParametersThatMatchProperties() =>
             RunTest(
-                nameof(
-                    DiagnosticsAreReturned_ForControllerActionsWithParametersThatMatchPropertiesModel
-                ),
+                nameof(DiagnosticsAreReturned_ForControllerActionsWithParametersThatMatchPropertiesModel),
                 "model"
             );
 
@@ -309,9 +307,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         [Fact]
         public async Task SpecifiesModelType_ReturnsFalse_IfModelBinderDoesNotSpecifyType()
         {
-            var testMethod = nameof(
-                SpecifiesModelType_ReturnsFalse_IfModelBinderDoesNotSpecifyType
-            );
+            var testMethod =
+                nameof(SpecifiesModelType_ReturnsFalse_IfModelBinderDoesNotSpecifyType);
             var testSource = MvcTestSource.Read(GetType().Name, "SpecifiesModelTypeTests");
             var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
                 GetType().Assembly,
@@ -337,9 +334,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         [Fact]
         public async Task SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromConstructor()
         {
-            var testMethod = nameof(
-                SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromConstructor
-            );
+            var testMethod =
+                nameof(SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromConstructor);
             var testSource = MvcTestSource.Read(GetType().Name, "SpecifiesModelTypeTests");
             var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
                 GetType().Assembly,
@@ -365,9 +361,8 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
         [Fact]
         public async Task SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromProperty()
         {
-            var testMethod = nameof(
-                SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromProperty
-            );
+            var testMethod =
+                nameof(SpecifiesModelType_ReturnsTrue_IfModelBinderSpecifiesTypeFromProperty);
             var testSource = MvcTestSource.Read(GetType().Name, "SpecifiesModelTypeTests");
             var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
                 GetType().Assembly,

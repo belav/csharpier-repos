@@ -239,9 +239,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
             previewWorkspace.EnableDiagnostic();
 
             var diagnosticsAndErrorsSpans =
-                await SquiggleUtilities.GetDiagnosticsAndErrorSpansAsync<DiagnosticsSquiggleTaggerProvider>(
-                    workspace
-                );
+                await SquiggleUtilities.GetDiagnosticsAndErrorSpansAsync<DiagnosticsSquiggleTaggerProvider>(workspace);
             const string AnalyzerCount = "Analyzer Count: ";
             Assert.Equal(AnalyzerCount + 1, AnalyzerCount + diagnosticsAndErrorsSpans.Item1.Length);
 

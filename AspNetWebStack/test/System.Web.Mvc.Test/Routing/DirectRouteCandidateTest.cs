@@ -29,9 +29,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             RouteData routeData = new RouteData();
             routeData.Values["action"] = "Action1";
@@ -71,9 +70,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             RouteData routeData = new RouteData();
             routeData.Values["action"] = "Action1";
@@ -121,9 +119,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             RouteData routeData = new RouteData();
             routeData.Values["action"] = "Action1";
@@ -167,9 +164,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -209,9 +205,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -252,9 +247,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -292,9 +286,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -333,9 +326,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -376,9 +368,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -419,9 +410,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -462,9 +452,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
@@ -507,9 +496,8 @@ namespace System.Web.Mvc.Routing.Test
         {
             // Arrange
             Type controllerType = typeof(TestController);
-            ReflectedControllerDescriptor controllerDescriptor = new ReflectedControllerDescriptor(
-                controllerType
-            );
+            ReflectedControllerDescriptor controllerDescriptor =
+                new ReflectedControllerDescriptor(controllerType);
 
             DirectRouteCandidate candidate1 = new DirectRouteCandidate()
             {

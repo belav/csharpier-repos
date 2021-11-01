@@ -39,9 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         public override Expression NormalizeQueryableMethod(Expression expression)
         {
-            expression = new RelationalQueryMetadataExtractingExpressionVisitor(
-                _relationalQueryCompilationContext
-            ).Visit(expression);
+            expression =
+                new RelationalQueryMetadataExtractingExpressionVisitor(_relationalQueryCompilationContext).Visit(expression);
             expression = base.NormalizeQueryableMethod(expression);
             expression = new TableValuedFunctionToQueryRootConvertingExpressionVisitor(
                 QueryCompilationContext.Model

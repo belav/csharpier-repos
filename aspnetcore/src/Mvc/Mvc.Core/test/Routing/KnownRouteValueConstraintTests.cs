@@ -28,9 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 "testAction"
             );
             actionDescriptor.RouteValues.Add("randomKey", "testRandom");
-            var descriptorCollectionProvider = CreateActionDescriptorCollectionProvider(
-                actionDescriptor
-            );
+            var descriptorCollectionProvider =
+                CreateActionDescriptorCollectionProvider(actionDescriptor);
 
             var services = new ServiceCollection();
             services.AddRouting();
@@ -112,9 +111,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 "testAction"
             );
             actionDescriptor.RouteValues.Add("randomKey", "testRandom");
-            var descriptorCollectionProvider = CreateActionDescriptorCollectionProvider(
-                actionDescriptor
-            );
+            var descriptorCollectionProvider =
+                CreateActionDescriptorCollectionProvider(actionDescriptor);
 
             var httpContext = GetHttpContext();
             var route = Mock.Of<IRouter>();
@@ -152,9 +150,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 "testAction"
             );
             actionDescriptor.RouteValues.Add("randomKey", "testRandom");
-            var descriptorCollectionProvider = CreateActionDescriptorCollectionProvider(
-                actionDescriptor
-            );
+            var descriptorCollectionProvider =
+                CreateActionDescriptorCollectionProvider(actionDescriptor);
 
             var httpContext = GetHttpContext();
             var route = Mock.Of<IRouter>();
@@ -185,9 +182,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 controller: null,
                 action: null
             );
-            var descriptorCollectionProvider = CreateActionDescriptorCollectionProvider(
-                actionDescriptor
-            );
+            var descriptorCollectionProvider =
+                CreateActionDescriptorCollectionProvider(actionDescriptor);
 
             var httpContext = GetHttpContext();
             var route = Mock.Of<IRouter>();

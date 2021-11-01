@@ -97,9 +97,7 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                     return new ValueTask<ConnectionContext>(connection);
                 }
             );
-            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(
-                delegateConnectionFactory
-            );
+            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 
             _hubConnection = hubConnectionBuilder.Build();
             _hubConnection.On(MethodName, arguments.Select(v => v.GetType()).ToArray(), OnInvoke);

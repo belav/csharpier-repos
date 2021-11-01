@@ -487,9 +487,9 @@ End Class";
                     var parameterSymbols = SpecializedCollections.EmptyList<AttributeData>();
                     return ImmutableArray.Create<IEventSymbol>(
                         new CodeGenerationEventSymbol(
-                            GetTypeSymbol(typeof(System.ComponentModel.INotifyPropertyChanged))(
-                                semanticModel
-                            ),
+                            GetTypeSymbol(
+                                typeof(System.ComponentModel.INotifyPropertyChanged)
+                            )(semanticModel),
                             attributes: default,
                             Accessibility.Public,
                             modifiers: default,

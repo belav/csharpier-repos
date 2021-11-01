@@ -246,9 +246,8 @@ namespace System.Web.Http
             if (exceptionFilters.Length > 0)
             {
                 IExceptionLogger exceptionLogger = ExceptionServices.GetLogger(controllerServices);
-                IExceptionHandler exceptionHandler = ExceptionServices.GetHandler(
-                    controllerServices
-                );
+                IExceptionHandler exceptionHandler =
+                    ExceptionServices.GetHandler(controllerServices);
                 result = new ExceptionFilterResult(
                     ActionContext,
                     exceptionFilters,

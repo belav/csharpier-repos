@@ -482,9 +482,8 @@ namespace System.Configuration
             try
             {
                 // Reset to parent value
-                ConfigurationSection parentConfigSection = FindImmediateParentSection(
-                    configSection
-                );
+                ConfigurationSection parentConfigSection =
+                    FindImmediateParentSection(configSection);
                 configSection.Reset(parentConfigSection);
 
                 // Consider it to be unmodified
@@ -1657,9 +1656,7 @@ namespace System.Configuration
                             }
                             if (
                                 (TargetFramework != null)
-                                && !configSection.ShouldSerializeSectionInTargetVersion(
-                                    TargetFramework
-                                )
+                                && !configSection.ShouldSerializeSectionInTargetVersion(TargetFramework)
                             )
                                 continue;
 
@@ -2981,9 +2978,7 @@ namespace System.Configuration
 
                                     // restore spaces to end element
                                     if (configSectionsEndElement == null)
-                                        utilWriter.AppendSpacesToLinePosition(
-                                            endElementLinePosition
-                                        );
+                                        utilWriter.AppendSpacesToLinePosition(endElementLinePosition);
                                 }
 
                                 // Copy the </configSections> element
@@ -3139,9 +3134,8 @@ namespace System.Configuration
 
                 foreach (string configKey in movedSectionNames)
                 {
-                    DeclarationUpdate sectionUpdate = declarationUpdates.GetDeclarationUpdate(
-                        configKey
-                    );
+                    DeclarationUpdate sectionUpdate =
+                        declarationUpdates.GetDeclarationUpdate(configKey);
                     Debug.Assert(
                         !IsImplicitSection(configKey),
                         "We should never write out an implicit section"
@@ -3186,9 +3180,8 @@ namespace System.Configuration
                     if (directive == SectionGroupTag)
                     {
                         // it's a group - get the updates for children
-                        declarationUpdatesChild = declarationUpdates.GetSectionUpdatesForGroup(
-                            name
-                        );
+                        declarationUpdatesChild =
+                            declarationUpdates.GetSectionUpdatesForGroup(name);
                         if (declarationUpdatesChild != null)
                         {
                             // get the group update
@@ -3467,9 +3460,8 @@ namespace System.Configuration
                     string elementName = reader.Name;
                     if (elementName == LocationTag)
                     {
-                        string locationSubPathAttribute = reader.GetAttribute(
-                            LocationPathAttribute
-                        );
+                        string locationSubPathAttribute =
+                            reader.GetAttribute(LocationPathAttribute);
                         locationSubPathAttribute = NormalizeLocationSubPath(
                             locationSubPathAttribute,
                             xmlUtil
@@ -3506,9 +3498,8 @@ namespace System.Configuration
                         if (elementLocationPathApplies)
                         {
                             // Retrieve overrideMode and InheritInChildApps
-                            string allowOverrideAttribute = reader.GetAttribute(
-                                LocationAllowOverrideAttribute
-                            );
+                            string allowOverrideAttribute =
+                                reader.GetAttribute(LocationAllowOverrideAttribute);
                             if (allowOverrideAttribute != null)
                             {
                                 overrideMode = OverrideModeSetting.CreateFromXmlReadValue(
@@ -3516,9 +3507,8 @@ namespace System.Configuration
                                 );
                             }
 
-                            string overrideModeAttribute = reader.GetAttribute(
-                                LocationOverrideModeAttribute
-                            );
+                            string overrideModeAttribute =
+                                reader.GetAttribute(LocationOverrideModeAttribute);
                             if (overrideModeAttribute != null)
                             {
                                 overrideMode = OverrideModeSetting.CreateFromXmlReadValue(
@@ -3534,9 +3524,8 @@ namespace System.Configuration
                                 );
                             }
 
-                            string inheritInChildAppsAttribute = reader.GetAttribute(
-                                LocationInheritInChildApplicationsAttribute
-                            );
+                            string inheritInChildAppsAttribute =
+                                reader.GetAttribute(LocationInheritInChildApplicationsAttribute);
                             if (inheritInChildAppsAttribute != null)
                                 inheritInChildApps = bool.Parse(inheritInChildAppsAttribute);
 

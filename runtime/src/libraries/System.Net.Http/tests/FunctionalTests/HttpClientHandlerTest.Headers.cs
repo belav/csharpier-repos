@@ -596,9 +596,8 @@ namespace System.Net.Http.Functional.Tests
                     List<string> seenHeaderNames = new List<string>();
 
                     using HttpClientHandler handler = CreateHttpClientHandler();
-                    var underlyingHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var underlyingHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
 
                     underlyingHandler.RequestHeaderEncodingSelector = (name, request) =>
                     {
@@ -663,9 +662,8 @@ namespace System.Net.Http.Functional.Tests
                     List<string> seenHeaderNames = new List<string>();
 
                     using HttpClientHandler handler = CreateHttpClientHandler();
-                    var underlyingHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var underlyingHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
 
                     underlyingHandler.ResponseHeaderEncodingSelector = (name, request) =>
                     {

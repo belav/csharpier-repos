@@ -706,9 +706,7 @@ namespace System.Data.OleDb
                 if (pChapteredRowset != IntPtr.Zero)
                 {
                     chapteredRowset =
-                        (System.Data.Common.UnsafeNativeMethods.IChapteredRowset)Marshal.GetObjectForIUnknown(
-                            pChapteredRowset
-                        );
+                        (System.Data.Common.UnsafeNativeMethods.IChapteredRowset)Marshal.GetObjectForIUnknown(pChapteredRowset);
                     hr = (OleDbHResult)chapteredRowset.ReleaseChapter(hchapter, out var refcount);
                     Marshal.ReleaseComObject(chapteredRowset);
                     Marshal.Release(pChapteredRowset);
@@ -733,9 +731,8 @@ namespace System.Data.OleDb
                 );
                 if (pTransaction != IntPtr.Zero)
                 {
-                    transactionLocal = (ITransactionLocal)Marshal.GetObjectForIUnknown(
-                        pTransaction
-                    );
+                    transactionLocal =
+                        (ITransactionLocal)Marshal.GetObjectForIUnknown(pTransaction);
                     hr = (OleDbHResult)transactionLocal.Abort(IntPtr.Zero, false, false);
                     Marshal.ReleaseComObject(transactionLocal);
                     Marshal.Release(pTransaction);
@@ -760,9 +757,8 @@ namespace System.Data.OleDb
                 );
                 if (pTransaction != IntPtr.Zero)
                 {
-                    transactionLocal = (ITransactionLocal)Marshal.GetObjectForIUnknown(
-                        pTransaction
-                    );
+                    transactionLocal =
+                        (ITransactionLocal)Marshal.GetObjectForIUnknown(pTransaction);
                     hr = (OleDbHResult)transactionLocal.Commit(
                         false,
                         (uint)XACTTC.XACTTC_SYNC_PHASETWO,

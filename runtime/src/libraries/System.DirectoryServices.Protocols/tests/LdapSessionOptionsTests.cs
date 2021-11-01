@@ -296,9 +296,8 @@ namespace System.DirectoryServices.Protocols.Tests
                 AssertExtensions.Throws<ArgumentException>(
                     "value",
                     () =>
-                        connection.SessionOptions.PingKeepAliveTimeout = TimeSpan.FromSeconds(
-                            seconds
-                        )
+                        connection.SessionOptions.PingKeepAliveTimeout =
+                            TimeSpan.FromSeconds(seconds)
                 );
             }
         }

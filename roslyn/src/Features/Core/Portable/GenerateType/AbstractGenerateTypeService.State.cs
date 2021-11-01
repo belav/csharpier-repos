@@ -397,9 +397,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
 
                         var sourceTreeToBeGeneratedIn =
                             symbol.Locations.First(loc => loc.IsInSource).SourceTree;
-                        var documentToBeGeneratedIn = document.Project.Solution.GetDocument(
-                            sourceTreeToBeGeneratedIn
-                        );
+                        var documentToBeGeneratedIn =
+                            document.Project.Solution.GetDocument(sourceTreeToBeGeneratedIn);
 
                         if (documentToBeGeneratedIn == null)
                         {

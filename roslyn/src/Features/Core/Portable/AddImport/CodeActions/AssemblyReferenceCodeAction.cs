@@ -43,9 +43,7 @@ namespace Microsoft.CodeAnalysis.AddImport
                 {
                     // If this is a preview, just return an ApplyChangesOperation for the updated document
                     var operation = new ApplyChangesOperation(newProject.Solution);
-                    return SpecializedCollections.SingletonEnumerable<CodeActionOperation>(
-                        operation
-                    );
+                    return SpecializedCollections.SingletonEnumerable<CodeActionOperation>(operation);
                 }
                 else
                 {
@@ -55,9 +53,7 @@ namespace Microsoft.CodeAnalysis.AddImport
                         FixData.AssemblyReferenceFullyQualifiedTypeName,
                         newProject
                     );
-                    return SpecializedCollections.SingletonEnumerable<CodeActionOperation>(
-                        operation
-                    );
+                    return SpecializedCollections.SingletonEnumerable<CodeActionOperation>(operation);
                 }
             }
 

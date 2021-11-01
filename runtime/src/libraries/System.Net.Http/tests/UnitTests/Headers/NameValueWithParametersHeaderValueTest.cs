@@ -311,9 +311,8 @@ namespace System.Net.Http.Tests
             NameValueWithParametersHeaderValue expectedResult
         )
         {
-            NameValueWithParametersHeaderValue result = NameValueWithParametersHeaderValue.Parse(
-                input
-            );
+            NameValueWithParametersHeaderValue result =
+                NameValueWithParametersHeaderValue.Parse(input);
             Assert.Equal(expectedResult, result);
         }
 

@@ -300,9 +300,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 {
                     if (kvp.Value is EntityProjectionExpression entityProjectionExpression)
                     {
-                        _projectionMapping[kvp.Key] = UpdateEntityProjection(
-                            entityProjectionExpression
-                        );
+                        _projectionMapping[kvp.Key] =
+                            UpdateEntityProjection(entityProjectionExpression);
                     }
                     else
                     {
@@ -369,19 +368,16 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                             .SelectMany(t => t.GetDeclaredNavigations())
                     )
                     {
-                        var boundEntityShaperExpression = entityProjection.BindNavigation(
-                            navigation
-                        );
+                        var boundEntityShaperExpression =
+                            entityProjection.BindNavigation(navigation);
                         if (boundEntityShaperExpression != null)
                         {
                             var innerEntityProjection =
                                 (EntityProjectionExpression)boundEntityShaperExpression.ValueBufferExpression;
-                            var newInnerEntityProjection = UpdateEntityProjection(
-                                innerEntityProjection
-                            );
-                            boundEntityShaperExpression = boundEntityShaperExpression.Update(
-                                newInnerEntityProjection
-                            );
+                            var newInnerEntityProjection =
+                                UpdateEntityProjection(innerEntityProjection);
+                            boundEntityShaperExpression =
+                                boundEntityShaperExpression.Update(newInnerEntityProjection);
                             result.AddNavigationBinding(navigation, boundEntityShaperExpression);
                         }
                     }

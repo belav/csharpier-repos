@@ -186,9 +186,7 @@ namespace Microsoft.CodeAnalysis.Storage
                 // Now increment the reference count and return to our caller.  The current ref
                 // count for this instance will be 2.  Until all the callers *and* us decrement
                 // the refcounts, this instance will not be actually disposed.
-                return PersistentStorageReferenceCountedDisposableWrapper.AddReferenceCountToAndCreateWrapper(
-                    _currentPersistentStorage
-                );
+                return PersistentStorageReferenceCountedDisposableWrapper.AddReferenceCountToAndCreateWrapper(_currentPersistentStorage);
             }
         }
 

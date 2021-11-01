@@ -322,9 +322,7 @@ namespace Microsoft.CodeAnalysis.Emit
                                                         Hash.Combine(
                                                             IncludePrivateMembers,
                                                             Hash.Combine(
-                                                                Hash.CombineValues(
-                                                                    InstrumentationKinds
-                                                                ),
+                                                                Hash.CombineValues(InstrumentationKinds),
                                                                 Hash.Combine(
                                                                     DefaultSourceFileEncoding,
                                                                     Hash.Combine(

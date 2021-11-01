@@ -945,9 +945,8 @@ namespace System.Configuration
                 )
             )
             {
-                ConfigurationProperty property = CreateConfigurationPropertyFromAttributes(
-                    propertyInformation
-                );
+                ConfigurationProperty property =
+                    CreateConfigurationPropertyFromAttributes(propertyInformation);
                 if (property != null)
                     properties.Add(property);
             }

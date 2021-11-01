@@ -23,9 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(
-                                async
-                            )
+                            base.Correlated_collection_after_groupby_with_complex_projection_not_containing_original_identifier(async)
                     )
                 ).Message;
 

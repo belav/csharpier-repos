@@ -1369,9 +1369,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             TEntity,
             TDependentEntity
         > HasChangeTrackingStrategy(ChangeTrackingStrategy changeTrackingStrategy) =>
-            (OwnedNavigationBuilder<TEntity, TDependentEntity>)base.HasChangeTrackingStrategy(
-                changeTrackingStrategy
-            );
+            (OwnedNavigationBuilder<
+                TEntity,
+                TDependentEntity
+            >)base.HasChangeTrackingStrategy(changeTrackingStrategy);
 
         /// <summary>
         ///     <para>
@@ -1393,9 +1394,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public new virtual OwnedNavigationBuilder<TEntity, TDependentEntity> UsePropertyAccessMode(
             PropertyAccessMode propertyAccessMode
         ) =>
-            (OwnedNavigationBuilder<TEntity, TDependentEntity>)base.UsePropertyAccessMode(
-                propertyAccessMode
-            );
+            (OwnedNavigationBuilder<
+                TEntity,
+                TDependentEntity
+            >)base.UsePropertyAccessMode(propertyAccessMode);
 
         /// <summary>
         ///     Adds seed data to this entity type. It is used to generate data motion migrations.

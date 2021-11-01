@@ -279,15 +279,12 @@ namespace System.Net.Mail
         private readonly SmtpConnection _connection;
         private readonly MailAddress _from;
         private readonly string? _deliveryNotify;
-        private static readonly AsyncCallback s_sendMailFromCompleted = new AsyncCallback(
-            SendMailFromCompleted
-        );
-        private static readonly AsyncCallback s_sendToCollectionCompleted = new AsyncCallback(
-            SendToCollectionCompleted
-        );
-        private static readonly AsyncCallback s_sendDataCompleted = new AsyncCallback(
-            SendDataCompleted
-        );
+        private static readonly AsyncCallback s_sendMailFromCompleted =
+            new AsyncCallback(SendMailFromCompleted);
+        private static readonly AsyncCallback s_sendToCollectionCompleted =
+            new AsyncCallback(SendToCollectionCompleted);
+        private static readonly AsyncCallback s_sendDataCompleted =
+            new AsyncCallback(SendDataCompleted);
         private readonly List<SmtpFailedRecipientException> _failedRecipientExceptions =
             new List<SmtpFailedRecipientException>();
         private Stream? _stream;

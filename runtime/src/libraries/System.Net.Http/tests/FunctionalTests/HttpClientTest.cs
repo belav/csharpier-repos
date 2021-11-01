@@ -1377,9 +1377,7 @@ namespace System.Net.Http.Functional.Tests
                     await server.AcceptConnectionAsync(
                         async connection =>
                         {
-                            await connection.ReadRequestHeaderAndSendResponseAsync(
-                                content: content
-                            );
+                            await connection.ReadRequestHeaderAndSendResponseAsync(content: content);
 
                             // To keep the connection open until the response is fully read.
                             mres.Wait();

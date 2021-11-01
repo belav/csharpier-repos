@@ -219,9 +219,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         )
         {
             ValidateHandle(methodSpecHandle, TableIndex.MethodSpec);
-            MethodSpecification methodSpec = _metadataReader.GetMethodSpecification(
-                methodSpecHandle
-            );
+            MethodSpecification methodSpec =
+                _metadataReader.GetMethodSpecification(methodSpecHandle);
             DisassemblingGenericContext genericContext = new DisassemblingGenericContext(
                 Array.Empty<string>(),
                 Array.Empty<string>()
@@ -312,9 +311,8 @@ namespace ILCompiler.Reflection.ReadyToRun
         )
         {
             ValidateHandle(methodDefinitionHandle, TableIndex.MethodDef);
-            MethodDefinition methodDef = _metadataReader.GetMethodDefinition(
-                methodDefinitionHandle
-            );
+            MethodDefinition methodDef =
+                _metadataReader.GetMethodDefinition(methodDefinitionHandle);
             DisassemblingGenericContext genericContext = new DisassemblingGenericContext(
                 Array.Empty<string>(),
                 Array.Empty<string>()
@@ -691,9 +689,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             if (moduleOverride)
             {
                 int moduleIndex = (int)ReadUInt();
-                IAssemblyMetadata refAsmEcmaReader = _contextReader.OpenReferenceAssembly(
-                    moduleIndex
-                );
+                IAssemblyMetadata refAsmEcmaReader =
+                    _contextReader.OpenReferenceAssembly(moduleIndex);
                 return refAsmEcmaReader.MetadataReader;
             }
 
@@ -983,9 +980,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                 case CorElementType.ELEMENT_TYPE_MODULE_ZAPSIG:
                 {
                     int moduleIndex = (int)ReadUInt();
-                    IAssemblyMetadata refAsmReader = _contextReader.OpenReferenceAssembly(
-                        moduleIndex
-                    );
+                    IAssemblyMetadata refAsmReader =
+                        _contextReader.OpenReferenceAssembly(moduleIndex);
                     var refAsmDecoder = new R2RSignatureDecoder<TType, TMethod, TGenericContext>(
                         _provider,
                         Context,

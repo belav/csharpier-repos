@@ -486,9 +486,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                     var firstStatement = bodyStatements[0];
                     if (syntaxFacts.IsLocalDeclarationStatement(firstStatement))
                     {
-                        var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
-                            firstStatement
-                        );
+                        var variables =
+                            syntaxFacts.GetVariablesOfLocalDeclarationStatement(firstStatement);
                         if (variables.Count == 1)
                         {
                             var firstVariable = (TVariableDeclaratorSyntax)variables[0];
@@ -496,9 +495,7 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                             {
                                 var firstVariableInitializer =
                                     syntaxFacts.GetValueOfEqualsValueClause(
-                                        syntaxFacts.GetInitializerOfVariableDeclarator(
-                                            firstVariable
-                                        )
+                                        syntaxFacts.GetInitializerOfVariableDeclarator(firstVariable)
                                     );
                                 if (
                                     syntaxFacts.AreEquivalent(
@@ -507,12 +504,10 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                                     )
                                 )
                                 {
-                                    var type = (TTypeNode)syntaxFacts.GetTypeOfVariableDeclarator(
-                                        firstVariable
-                                    )?.WithoutLeadingTrivia();
-                                    var identifier = syntaxFacts.GetIdentifierOfVariableDeclarator(
-                                        firstVariable
-                                    );
+                                    var type =
+                                        (TTypeNode)syntaxFacts.GetTypeOfVariableDeclarator(firstVariable)?.WithoutLeadingTrivia();
+                                    var identifier =
+                                        syntaxFacts.GetIdentifierOfVariableDeclarator(firstVariable);
                                     var statement = firstStatement;
                                     return (type, identifier, statement);
                                 }

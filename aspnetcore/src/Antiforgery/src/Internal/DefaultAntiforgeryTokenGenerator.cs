@@ -84,9 +84,8 @@ namespace Microsoft.AspNetCore.Antiforgery
             // populate AdditionalData
             if (_additionalDataProvider != null)
             {
-                requestToken.AdditionalData = _additionalDataProvider.GetAdditionalData(
-                    httpContext
-                );
+                requestToken.AdditionalData =
+                    _additionalDataProvider.GetAdditionalData(httpContext);
             }
 
             if (

@@ -508,9 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // If the expression is a lambda, anonymous method, or method group then it will
                     // have no compile-time type; give the same error as if the type was wrong.
-                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                        diagnostics
-                    );
+                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                        GetNewCompoundUseSiteInfo(diagnostics);
 
                     if (
                         (object)type == null
@@ -594,9 +593,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool hasError = false;
 
             var result = LookupResult.GetInstance();
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             var binder = this.LookupSymbolsWithFallback(
                 result,
                 node.Identifier.ValueText,
@@ -1035,9 +1033,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 || result == PatternLookupResult.NotAMethod
             )
             {
-                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                    diagnostics
-                );
+                CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                    GetNewCompoundUseSiteInfo(diagnostics);
                 if (this.IsAccessible(disposeMethod, ref useSiteInfo))
                 {
                     diagnostics.Add(
@@ -1549,9 +1546,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && !localDiagnostics.HasAnyResolvedErrors()
             )
             {
-                var constantValueDiagnostics = localSymbol.GetConstantValueDiagnostics(
-                    initializerOpt
-                );
+                var constantValueDiagnostics =
+                    localSymbol.GetConstantValueDiagnostics(initializerOpt);
                 diagnostics.AddRange(
                     constantValueDiagnostics,
                     allowMismatchInDependencyAccumulation: true
@@ -1898,9 +1894,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode initializerSyntax = initializer.Syntax;
 
             TypeSymbol pointerType = new PointerTypeSymbol(TypeWithAnnotations.Create(elementType));
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             Conversion elementConversion = this.Conversions.ClassifyConversionFromType(
                 pointerType,
                 declType,
@@ -2352,9 +2347,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var syntaxStatements = node.Statements;
             int nStatements = syntaxStatements.Count;
 
-            ArrayBuilder<BoundStatement> boundStatements = ArrayBuilder<BoundStatement>.GetInstance(
-                nStatements
-            );
+            ArrayBuilder<BoundStatement> boundStatements =
+                ArrayBuilder<BoundStatement>.GetInstance(nStatements);
 
             for (int i = 0; i < nStatements; i++)
             {
@@ -2421,9 +2415,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics = BindingDiagnosticBag.Discarded;
             }
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             var conversion = this.Conversions.ClassifyConversionFromExpression(
                 expression,
                 targetType,
@@ -2948,9 +2941,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // If target is a tuple or compatible type with the same number of elements,
                     // report errors for tuple arguments that failed to convert, which would be more useful.
                     if (
-                        targetType.TryGetElementTypesWithAnnotationsIfTupleType(
-                            out targetElementTypes
-                        )
+                        targetType.TryGetElementTypesWithAnnotationsIfTupleType(out targetElementTypes)
                         && targetElementTypes.Length == tuple.Arguments.Length
                     )
                     {
@@ -3301,9 +3292,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Is the operand implicitly convertible to bool?
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             var conversion = this.Conversions.ClassifyConversionFromExpression(
                 expr,
                 boolean,
@@ -3919,9 +3909,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Conversion conversion;
             bool badAsyncReturnAlreadyReported = false;
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
             if (IsInAsyncMethod())
             {
                 Debug.Assert(returnRefKind == RefKind.None);
@@ -4094,9 +4083,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else
                 {
-                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                        diagnostics
-                    );
+                    CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                        GetNewCompoundUseSiteInfo(diagnostics);
                     TypeSymbol effectiveType = type.EffectiveType(ref useSiteInfo);
                     if (!Compilation.IsExceptionType(effectiveType, ref useSiteInfo))
                     {

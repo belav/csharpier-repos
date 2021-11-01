@@ -34,9 +34,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             string[] typeParamNames = new string[] { "T", "U" };
-            GenericTypeParameterBuilder[] typeParameters = method.DefineGenericParameters(
-                typeParamNames
-            );
+            GenericTypeParameterBuilder[] typeParameters =
+                method.DefineGenericParameters(typeParamNames);
 
             Type returnType = typeParameters[1].AsType();
             method.SetReturnType(returnType);
@@ -55,9 +54,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             string[] typeParamNames = new string[] { "T", "U" };
-            GenericTypeParameterBuilder[] typeParameters = method.DefineGenericParameters(
-                typeParamNames
-            );
+            GenericTypeParameterBuilder[] typeParameters =
+                method.DefineGenericParameters(typeParamNames);
 
             Type returnType = typeof(void);
             method.SetReturnType(returnType);
@@ -94,9 +92,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             string[] typeParamNames = new string[] { "T", "U" };
-            GenericTypeParameterBuilder[] typeParameters = method.DefineGenericParameters(
-                typeParamNames
-            );
+            GenericTypeParameterBuilder[] typeParameters =
+                method.DefineGenericParameters(typeParamNames);
 
             Type returnType = typeof(void);
             method.SetReturnType(typeParameters[0].AsType());
@@ -116,9 +113,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             string[] typeParamNames = new string[] { "T", "U" };
-            GenericTypeParameterBuilder[] typeParameters = method.DefineGenericParameters(
-                typeParamNames
-            );
+            GenericTypeParameterBuilder[] typeParameters =
+                method.DefineGenericParameters(typeParamNames);
 
             Type returnType = typeParameters[1].AsType();
             method.SetReturnType(typeParameters[0].AsType());
@@ -140,9 +136,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             string[] typeParamNames = new string[] { "T", "U" };
-            GenericTypeParameterBuilder[] typeParameters = method.DefineGenericParameters(
-                typeParamNames
-            );
+            GenericTypeParameterBuilder[] typeParameters =
+                method.DefineGenericParameters(typeParamNames);
 
             Type returnType = typeParameters[0].AsType();
             method.SetReturnType(returnType);
@@ -163,9 +158,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             string[] typeParamNames = new string[] { "T", "U" };
-            GenericTypeParameterBuilder[] typeParameters = method.DefineGenericParameters(
-                typeParamNames
-            );
+            GenericTypeParameterBuilder[] typeParameters =
+                method.DefineGenericParameters(typeParamNames);
 
             Type returnType = typeParameters[0].AsType();
             type.CreateTypeInfo().AsType();

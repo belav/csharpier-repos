@@ -677,9 +677,13 @@ namespace Microsoft.EntityFrameworkCore
                 TUserToken,
                 TRoleClaim
             >(context);
-            using var roleStore = new RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>(
-                context
-            );
+            using var roleStore = new RoleStore<
+                TRole,
+                TContext,
+                TKey,
+                TUserRole,
+                TRoleClaim
+            >(context);
 
             await userStore.CreateAsync(user);
             await userStore.AddClaimsAsync(

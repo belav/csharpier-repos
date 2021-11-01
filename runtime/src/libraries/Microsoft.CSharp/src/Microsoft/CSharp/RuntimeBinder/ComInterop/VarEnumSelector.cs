@@ -287,9 +287,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         )
         {
             // Look for a unique type family that the argument can be converted to.
-            List<VarEnum> compatibleComTypes = GetConversionsToComPrimitiveTypeFamilies(
-                argumentType
-            );
+            List<VarEnum> compatibleComTypes =
+                GetConversionsToComPrimitiveTypeFamilies(argumentType);
             CheckForAmbiguousMatch(argumentType, compatibleComTypes);
             if (compatibleComTypes.Count == 1)
             {

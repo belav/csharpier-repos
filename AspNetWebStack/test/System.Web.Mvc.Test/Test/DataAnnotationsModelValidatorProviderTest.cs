@@ -606,9 +606,7 @@ namespace System.Web.Mvc.Test
                 {
                     return validator;
                 };
-                DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapterFactory(
-                    factory
-                );
+                DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapterFactory(factory);
 
                 // Act
                 var result = new DataAnnotationsModelValidatorProvider()

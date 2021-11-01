@@ -214,9 +214,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     ? DocumentationMode.Diagnose
                     : DocumentationMode.Parse;
             var parseOptions =
-                _commandLineArgumentsForCommandLine.ParseOptions.WithDocumentationMode(
-                    documentationMode
-                );
+                _commandLineArgumentsForCommandLine.ParseOptions.WithDocumentationMode(documentationMode);
 
             // We've computed what the base values should be; we now give an opportunity for any host-specific settings to be computed
             // before we apply them

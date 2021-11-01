@@ -357,9 +357,9 @@ namespace Microsoft.CodeAnalysis
         {
             return documentId != null
                 && this.ContainsProject(documentId.ProjectId)
-                && this.GetProjectState(documentId.ProjectId)!.AdditionalDocumentStates.Contains(
-                    documentId
-                );
+                && this.GetProjectState(
+                    documentId.ProjectId
+                )!.AdditionalDocumentStates.Contains(documentId);
         }
 
         /// <summary>
@@ -377,14 +377,14 @@ namespace Microsoft.CodeAnalysis
         }
 
         private DocumentState GetRequiredDocumentState(DocumentId documentId) =>
-            GetRequiredProjectState(documentId.ProjectId).DocumentStates.GetRequiredState(
-                documentId
-            );
+            GetRequiredProjectState(
+                documentId.ProjectId
+            ).DocumentStates.GetRequiredState(documentId);
 
         private TextDocumentState GetRequiredAdditionalDocumentState(DocumentId documentId) =>
-            GetRequiredProjectState(documentId.ProjectId).AdditionalDocumentStates.GetRequiredState(
-                documentId
-            );
+            GetRequiredProjectState(
+                documentId.ProjectId
+            ).AdditionalDocumentStates.GetRequiredState(documentId);
 
         private AnalyzerConfigDocumentState GetRequiredAnalyzerConfigDocumentState(
             DocumentId documentId
@@ -745,9 +745,7 @@ namespace Microsoft.CodeAnalysis
 
             return ForkProject(
                 newProject,
-                new CompilationAndGeneratorDriverTranslationAction.ProjectAssemblyNameAction(
-                    assemblyName
-                )
+                new CompilationAndGeneratorDriverTranslationAction.ProjectAssemblyNameAction(assemblyName)
             );
         }
 
@@ -875,9 +873,7 @@ namespace Microsoft.CodeAnalysis
 
             return ForkProject(
                 newProject,
-                new CompilationAndGeneratorDriverTranslationAction.ProjectCompilationOptionsAction(
-                    options
-                )
+                new CompilationAndGeneratorDriverTranslationAction.ProjectCompilationOptionsAction(options)
             );
         }
 
@@ -905,9 +901,7 @@ namespace Microsoft.CodeAnalysis
             {
                 return ForkProject(
                     newProject,
-                    new CompilationAndGeneratorDriverTranslationAction.ReplaceAllSyntaxTreesAction(
-                        newProject
-                    )
+                    new CompilationAndGeneratorDriverTranslationAction.ReplaceAllSyntaxTreesAction(newProject)
                 );
             }
         }
@@ -1084,9 +1078,7 @@ namespace Microsoft.CodeAnalysis
 
             return ForkProject(
                 newProject,
-                new CompilationAndGeneratorDriverTranslationAction.ReplaceAllSyntaxTreesAction(
-                    newProject
-                )
+                new CompilationAndGeneratorDriverTranslationAction.ReplaceAllSyntaxTreesAction(newProject)
             );
         }
 
@@ -1235,9 +1227,7 @@ namespace Microsoft.CodeAnalysis
                 (oldProject, documents) =>
                     (
                         oldProject.AddDocuments(documents),
-                        new CompilationAndGeneratorDriverTranslationAction.AddDocumentsAction(
-                            documents
-                        )
+                        new CompilationAndGeneratorDriverTranslationAction.AddDocumentsAction(documents)
                     )
             );
         }
@@ -1299,9 +1289,7 @@ namespace Microsoft.CodeAnalysis
                 newSolutionState = newSolutionState.ForkProject(
                     newProjectState,
                     compilationTranslationAction,
-                    newFilePathToDocumentIdsMap: CreateFilePathToDocumentIdsMapWithAddedDocuments(
-                        newDocumentStatesForProject
-                    )
+                    newFilePathToDocumentIdsMap: CreateFilePathToDocumentIdsMapWithAddedDocuments(newDocumentStatesForProject)
                 );
             }
 
@@ -1316,9 +1304,7 @@ namespace Microsoft.CodeAnalysis
                 (projectState, documents) =>
                     (
                         projectState.AddAdditionalDocuments(documents),
-                        new CompilationAndGeneratorDriverTranslationAction.AddAdditionalDocumentsAction(
-                            documents
-                        )
+                        new CompilationAndGeneratorDriverTranslationAction.AddAdditionalDocumentsAction(documents)
                     )
             );
         }
@@ -1374,9 +1360,7 @@ namespace Microsoft.CodeAnalysis
                 (projectState, documentIds, documentStates) =>
                     (
                         projectState.RemoveDocuments(documentIds),
-                        new CompilationAndGeneratorDriverTranslationAction.RemoveDocumentsAction(
-                            documentStates
-                        )
+                        new CompilationAndGeneratorDriverTranslationAction.RemoveDocumentsAction(documentStates)
                     )
             );
         }
@@ -1439,9 +1423,7 @@ namespace Microsoft.CodeAnalysis
                 newSolutionState = newSolutionState.ForkProject(
                     newProjectState,
                     compilationTranslationAction,
-                    newFilePathToDocumentIdsMap: CreateFilePathToDocumentIdsMapWithRemovedDocuments(
-                        removedDocumentStatesForProject
-                    )
+                    newFilePathToDocumentIdsMap: CreateFilePathToDocumentIdsMapWithRemovedDocuments(removedDocumentStatesForProject)
                 );
             }
 
@@ -1460,9 +1442,7 @@ namespace Microsoft.CodeAnalysis
                 (projectState, documentIds, documentStates) =>
                     (
                         projectState.RemoveAdditionalDocuments(documentIds),
-                        new CompilationAndGeneratorDriverTranslationAction.RemoveAdditionalDocumentsAction(
-                            documentStates
-                        )
+                        new CompilationAndGeneratorDriverTranslationAction.RemoveAdditionalDocumentsAction(documentStates)
                     )
             );
         }
@@ -1960,9 +1940,8 @@ namespace Microsoft.CodeAnalysis
                 // Compute the set of all projects that depend on 'projectId'. This information answers the same
                 // question as the previous check, but involves at most one transitive computation within the
                 // dependency graph.
-                dependencies ??= dependencyGraph.GetProjectsThatTransitivelyDependOnThisProject(
-                    changedProjectId
-                );
+                dependencies ??=
+                    dependencyGraph.GetProjectsThatTransitivelyDependOnThisProject(changedProjectId);
                 return !dependencies.Contains(id);
             }
         }
@@ -2078,9 +2057,7 @@ namespace Microsoft.CodeAnalysis
                     SolutionState? currentPartialSolution = null;
                     if (_latestSolutionWithPartialCompilation != null)
                     {
-                        _latestSolutionWithPartialCompilation.TryGetTarget(
-                            out currentPartialSolution
-                        );
+                        _latestSolutionWithPartialCompilation.TryGetTarget(out currentPartialSolution);
                     }
 
                     var reuseExistingPartialSolution =
@@ -2120,9 +2097,8 @@ namespace Microsoft.CodeAnalysis
                         dependencyGraph: CreateDependencyGraph(ProjectIds, newIdToProjectStateMap)
                     );
 
-                    _latestSolutionWithPartialCompilation = new WeakReference<SolutionState>(
-                        currentPartialSolution
-                    );
+                    _latestSolutionWithPartialCompilation =
+                        new WeakReference<SolutionState>(currentPartialSolution);
                     _timeOfLatestSolutionWithPartialCompilation = DateTime.UtcNow;
                     _documentIdOfLatestSolutionWithPartialCompilation = documentId;
 
@@ -2155,9 +2131,9 @@ namespace Microsoft.CodeAnalysis
                     continue;
                 }
 
-                var doc = GetProjectState(documentId.ProjectId)?.DocumentStates.GetState(
-                    documentId
-                );
+                var doc = GetProjectState(
+                    documentId.ProjectId
+                )?.DocumentStates.GetState(documentId);
                 if (doc != null)
                 {
                     if (!doc.TryGetText(out var existingText) || existingText != text)

@@ -8,9 +8,8 @@ public class App
 
     public static int Main()
     {
-        AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(
-            MyReflectionResolveEventHandler
-        );
+        AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve +=
+            new ResolveEventHandler(MyReflectionResolveEventHandler);
 
         int i = 0;
         handler_fired = false;

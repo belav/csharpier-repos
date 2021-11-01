@@ -41,9 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo(
-                diagnostics
-            );
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                GetNewCompoundUseSiteInfo(diagnostics);
 
             if (instanceArgument.Type.IsDynamic())
             {

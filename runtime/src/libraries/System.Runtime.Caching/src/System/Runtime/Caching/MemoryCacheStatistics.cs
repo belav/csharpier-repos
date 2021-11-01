@@ -290,9 +290,8 @@ namespace System.Runtime.Caching
             _timerLock = new object();
             InitializeConfiguration(config);
             _pollingInterval = _configPollingInterval;
-            _physicalMemoryMonitor = new PhysicalMemoryMonitor(
-                _configPhysicalMemoryLimitPercentage
-            );
+            _physicalMemoryMonitor =
+                new PhysicalMemoryMonitor(_configPhysicalMemoryLimitPercentage);
             InitDisposableMembers();
         }
 

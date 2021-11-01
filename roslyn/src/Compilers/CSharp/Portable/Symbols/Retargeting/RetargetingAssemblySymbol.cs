@@ -284,9 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             ConsList<AssemblySymbol> visitedAssemblies
         )
         {
-            NamedTypeSymbol underlying = _underlyingAssembly.TryLookupForwardedMetadataType(
-                ref emittedName
-            );
+            NamedTypeSymbol underlying =
+                _underlyingAssembly.TryLookupForwardedMetadataType(ref emittedName);
 
             if ((object)underlying == null)
             {

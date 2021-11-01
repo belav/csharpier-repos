@@ -25,9 +25,8 @@ namespace Internal.TypeSystem.Ecma
 
             foreach (var methodImplHandle in _typeDefinition.GetMethodImplementations())
             {
-                MethodImplementation methodImpl = metadataReader.GetMethodImplementation(
-                    methodImplHandle
-                );
+                MethodImplementation methodImpl =
+                    metadataReader.GetMethodImplementation(methodImplHandle);
 
                 EntityHandle methodDeclCheckHandle = methodImpl.MethodDeclaration;
                 HandleKind methodDeclHandleKind = methodDeclCheckHandle.Kind;
@@ -105,9 +104,8 @@ namespace Internal.TypeSystem.Ecma
 
             foreach (var methodImplHandle in _typeDefinition.GetMethodImplementations())
             {
-                MethodImplementation methodImpl = metadataReader.GetMethodImplementation(
-                    methodImplHandle
-                );
+                MethodImplementation methodImpl =
+                    metadataReader.GetMethodImplementation(methodImplHandle);
 
                 EntityHandle methodDeclCheckHandle = methodImpl.MethodDeclaration;
                 HandleKind methodDeclHandleKind = methodDeclCheckHandle.Kind;

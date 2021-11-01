@@ -54,9 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Include_multi_level_reference_then_include_collection_predicate(
-                                async
-                            )
+                            base.Include_multi_level_reference_then_include_collection_predicate(async)
                     )
                 ).Message
             );
@@ -85,9 +83,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Include_multiple_references_and_collection_multi_level_reverse(
-                                async
-                            )
+                            base.Include_multiple_references_and_collection_multi_level_reverse(async)
                     )
                 ).Message
             );
@@ -102,9 +98,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Include_multiple_references_then_include_collection_multi_level(
-                                async
-                            )
+                            base.Include_multiple_references_then_include_collection_multi_level(async)
                     )
                 ).Message
             );
@@ -119,9 +113,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Include_multiple_references_then_include_collection_multi_level_reverse(
-                                async
-                            )
+                            base.Include_multiple_references_then_include_collection_multi_level_reverse(async)
                     )
                 ).Message
             );
@@ -200,9 +192,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         () =>
-                            base.Include_references_then_include_collection_multi_level_predicate(
-                                async
-                            )
+                            base.Include_references_then_include_collection_multi_level_predicate(async)
                     )
                 ).Message
             );

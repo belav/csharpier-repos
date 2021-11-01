@@ -175,9 +175,7 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                 var progress = new StreamingProgressCollector();
 
                 var options =
-                    FindSymbols.FindReferencesSearchOptions.GetFeatureOptionsForStartingSymbol(
-                        symbol
-                    );
+                    FindSymbols.FindReferencesSearchOptions.GetFeatureOptionsForStartingSymbol(symbol);
                 await SymbolFinder
                     .FindReferencesAsync(
                         symbol,

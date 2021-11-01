@@ -810,9 +810,8 @@ namespace System.Data.OleDb
                         }
                         break;
                 }
-                System.Reflection.ConstructorInfo ctor = typeof(OleDbParameter).GetConstructor(
-                    ctorParams
-                )!;
+                System.Reflection.ConstructorInfo ctor =
+                    typeof(OleDbParameter).GetConstructor(ctorParams)!;
                 return new System.ComponentModel.Design.Serialization.InstanceDescriptor(
                     ctor,
                     ctorValues

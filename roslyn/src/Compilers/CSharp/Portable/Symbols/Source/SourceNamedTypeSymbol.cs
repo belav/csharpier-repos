@@ -412,9 +412,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     {
                         binder = binderFactory.GetBinder(typeParameterList.Parameters[0]);
 
-                        constraints = binder.GetDefaultTypeParameterConstraintClauses(
-                            typeParameterList
-                        );
+                        constraints =
+                            binder.GetDefaultTypeParameterConstraintClauses(typeParameterList);
                     }
                     else
                     {
@@ -529,9 +528,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (constraintClauses.Count == 0)
                     {
                         binder = binderFactory.GetBinder(typeParameterList.Parameters[0]);
-                        constraints = binder.GetDefaultTypeParameterConstraintClauses(
-                            typeParameterList
-                        );
+                        constraints =
+                            binder.GetDefaultTypeParameterConstraintClauses(typeParameterList);
                     }
                     else
                     {

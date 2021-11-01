@@ -669,9 +669,8 @@ class RPInvokeTest
             return false;
         }
 
-        result = nativeCall_RPInvoke_Vector3InComplexStruct(
-            callBack_RPInvoke_Vector3InComplexStruct
-        );
+        result =
+            nativeCall_RPInvoke_Vector3InComplexStruct(callBack_RPInvoke_Vector3InComplexStruct);
         if (!result)
         {
             Console.WriteLine("RPInvoke Vector3InComplexStruct test failed");

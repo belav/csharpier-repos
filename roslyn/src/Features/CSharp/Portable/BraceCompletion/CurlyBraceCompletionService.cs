@@ -142,9 +142,7 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                     openingPoint,
                     closingPoint,
                     shouldHonorAutoFormattingOnCloseBraceOption: false,
-                    braceFormattingIndentationRules: GetBraceIndentationFormattingRules(
-                        documentOptions
-                    ),
+                    braceFormattingIndentationRules: GetBraceIndentationFormattingRules(documentOptions),
                     documentOptions,
                     cancellationToken
                 )
@@ -419,9 +417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 var closeBraceToken = originalRoot.FindToken(closingBraceEndPoint - 1);
                 Debug.Assert(closeBraceToken.IsKind(SyntaxKind.CloseBraceToken));
 
-                var newCloseBraceToken = closeBraceToken.WithAdditionalAnnotations(
-                    s_closingBraceSyntaxAnnotation
-                );
+                var newCloseBraceToken =
+                    closeBraceToken.WithAdditionalAnnotations(s_closingBraceSyntaxAnnotation);
                 var root = originalRoot.ReplaceToken(closeBraceToken, newCloseBraceToken);
                 return document.WithSyntaxRoot(root);
             }

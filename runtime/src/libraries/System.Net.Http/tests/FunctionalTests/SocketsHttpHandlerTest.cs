@@ -481,9 +481,8 @@ namespace System.Net.Http.Functional.Tests
                         ValidateResponseHeaders(response1, totalSize, mode);
 
                         // Read part but not all of response
-                        Stream responseStream = await response1.Content.ReadAsStreamAsync(
-                            TestAsync
-                        );
+                        Stream responseStream =
+                            await response1.Content.ReadAsStreamAsync(TestAsync);
                         await ReadToByteCount(responseStream, readSize);
 
                         response1.Dispose();
@@ -1915,9 +1914,7 @@ namespace System.Net.Http.Functional.Tests
                         await server.AcceptConnectionAsync(
                             async connection1 =>
                             {
-                                await connection1.ReadRequestHeaderAndSendCustomResponseAsync(
-                                    responseBody
-                                );
+                                await connection1.ReadRequestHeaderAndSendCustomResponseAsync(responseBody);
                                 await request1;
 
                                 // Make second request and expect it to be served from a different connection.
@@ -1925,9 +1922,7 @@ namespace System.Net.Http.Functional.Tests
                                 await server.AcceptConnectionAsync(
                                     async connection2 =>
                                     {
-                                        await connection2.ReadRequestHeaderAndSendCustomResponseAsync(
-                                            responseBody
-                                        );
+                                        await connection2.ReadRequestHeaderAndSendCustomResponseAsync(responseBody);
                                         await request2;
                                     }
                                 );
@@ -2003,9 +1998,8 @@ namespace System.Net.Http.Functional.Tests
                 async (server, url) =>
                 {
                     HttpClientHandler handler = CreateHttpClientHandler(HttpVersion.Version20);
-                    SocketsHttpHandler s = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    SocketsHttpHandler s =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                     switch (timeoutPropertyName)
                     {
                         case "PooledConnectionLifetime":
@@ -3412,9 +3406,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClientHandler handler = CreateHttpClientHandler();
                     handler.ServerCertificateCustomValidationCallback =
                         TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var socketsHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                     socketsHandler.ConnectCallback = async (context, token) =>
                     {
                         Assert.Equal(uri.Host, context.DnsEndPoint.Host);
@@ -3463,9 +3456,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClientHandler handler = CreateHttpClientHandler();
                     handler.ServerCertificateCustomValidationCallback =
                         TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var socketsHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                     socketsHandler.ConnectCallback = async (context, token) =>
                     {
                         Socket s = new Socket(
@@ -3525,9 +3517,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClientHandler handler = CreateHttpClientHandler();
                     handler.ServerCertificateCustomValidationCallback =
                         TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var socketsHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                     socketsHandler.ConnectCallback = (context, token) =>
                         new ValueTask<Stream>(clientStream);
 
@@ -3795,9 +3786,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClientHandler handler = CreateHttpClientHandler();
                     handler.ServerCertificateCustomValidationCallback =
                         TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var socketsHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                     socketsHandler.PlaintextStreamFilter = async (context, token) =>
                     {
                         Assert.Equal(UseVersion, context.NegotiatedHttpVersion);
@@ -3840,9 +3830,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClientHandler handler = CreateHttpClientHandler();
                     handler.ServerCertificateCustomValidationCallback =
                         TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var socketsHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                     socketsHandler.PlaintextStreamFilter = (context, token) =>
                     {
                         Assert.Equal(UseVersion, context.NegotiatedHttpVersion);
@@ -3900,9 +3889,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClientHandler handler = CreateHttpClientHandler();
                     handler.ServerCertificateCustomValidationCallback =
                         TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var socketsHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                     socketsHandler.PlaintextStreamFilter = async (context, token) =>
                     {
                         await context.PlaintextStream.WriteAsync(RequestPrefix);
@@ -4009,9 +3997,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClientHandler handler = CreateHttpClientHandler();
                     handler.ServerCertificateCustomValidationCallback =
                         TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var socketsHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                     socketsHandler.PlaintextStreamFilter = (context, token) =>
                     {
                         throw e;
@@ -4052,9 +4039,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClientHandler handler = CreateHttpClientHandler();
                     handler.ServerCertificateCustomValidationCallback =
                         TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var socketsHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                     socketsHandler.PlaintextStreamFilter = (context, token) =>
                     {
                         return ValueTask.FromResult<Stream>(null);
@@ -4098,9 +4084,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClientHandler handler = CreateHttpClientHandler();
                     handler.ServerCertificateCustomValidationCallback =
                         TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var socketsHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                     socketsHandler.PlaintextStreamFilter = (context, token) =>
                     {
                         Assert.Equal(UseVersion, context.NegotiatedHttpVersion);
@@ -4167,9 +4152,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClientHandler handler = CreateHttpClientHandler();
                     handler.ServerCertificateCustomValidationCallback =
                         TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
+                    var socketsHandler =
+                        (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                     socketsHandler.PlaintextStreamFilter = (context, token) =>
                     {
                         Assert.Equal(HttpVersion.Version11, context.NegotiatedHttpVersion);

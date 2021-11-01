@@ -85,9 +85,8 @@ namespace Microsoft.Web.Mvc
             object htmlAttributes
         ) where TController : Controller
         {
-            RouteValueDictionary routingValues = ExpressionHelper.GetRouteValuesFromExpression(
-                action
-            );
+            RouteValueDictionary routingValues =
+                ExpressionHelper.GetRouteValuesFromExpression(action);
 
             return helper.RouteLink(
                 linkText,

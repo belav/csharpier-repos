@@ -101,9 +101,8 @@ namespace System.Security.Cryptography.Xml
                         }
                     }
 
-                    KeyInfoClause keyInfoClause = CryptoHelpers.CreateFromName<KeyInfoClause>(
-                        kicString
-                    );
+                    KeyInfoClause keyInfoClause =
+                        CryptoHelpers.CreateFromName<KeyInfoClause>(kicString);
                     // if we don't know what kind of KeyInfoClause we're looking at, use a generic KeyInfoNode:
                     if (keyInfoClause == null)
                         keyInfoClause = new KeyInfoNode();

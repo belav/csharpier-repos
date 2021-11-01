@@ -158,9 +158,7 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 // +1 to include project itself
                 var unitCount = documentAnalysisScope != null ? 1 : _project.DocumentIds.Count + 1;
                 _performanceTracker.AddSnapshot(
-                    analysisResult.AnalyzerTelemetryInfo.ToAnalyzerPerformanceInfo(
-                        _analyzerInfoCache
-                    ),
+                    analysisResult.AnalyzerTelemetryInfo.ToAnalyzerPerformanceInfo(_analyzerInfoCache),
                     unitCount
                 );
             }
@@ -365,9 +363,10 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                     cancellationToken
                 )
                 .ConfigureAwait(false);
-            var analyzerToIdMap = new BidirectionalMap<string, DiagnosticAnalyzer>(
-                analyzerMapBuilder
-            );
+            var analyzerToIdMap = new BidirectionalMap<
+                string,
+                DiagnosticAnalyzer
+            >(analyzerMapBuilder);
 
             return new CompilationWithAnalyzersCacheEntry(
                 compilationWithAnalyzers,

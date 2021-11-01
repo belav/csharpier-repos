@@ -90,9 +90,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 }
 
                 if (
-                    MultipleStatementsCodeGenerator.IsExtractMethodOnMultipleStatements(
-                        selectionResult
-                    )
+                    MultipleStatementsCodeGenerator.IsExtractMethodOnMultipleStatements(selectionResult)
                 )
                 {
                     return new MultipleStatementsCodeGenerator(
@@ -176,10 +174,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     firstStatementToRemove.Parent == lastStatementToRemove.Parent
                 );
 
-                var statementsToInsert = await CreateStatementsOrInitializerToInsertAtCallSiteAsync(
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
+                var statementsToInsert =
+                    await CreateStatementsOrInitializerToInsertAtCallSiteAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
                 var callSiteGenerator = new CallSiteContainerRewriter(
                     container,
@@ -211,9 +208,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 )
                 {
                     var statement =
-                        await GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(
-                                cancellationToken
-                            )
+                        await GetStatementOrInitializerContainingInvocationToExtractedMethodAsync(cancellationToken)
                             .ConfigureAwait(false);
                     return ImmutableArray.Create(statement);
                 }
@@ -223,9 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 var context = InsertionPoint.GetContext();
                 var postProcessor = new PostProcessor(semanticModel, context.SpanStart);
 
-                var statements = AddSplitOrMoveDeclarationOutStatementsToCallSite(
-                    cancellationToken
-                );
+                var statements =
+                    AddSplitOrMoveDeclarationOutStatementsToCallSite(cancellationToken);
                 statements = postProcessor.MergeDeclarationStatements(statements);
                 statements = AddAssignmentStatementToCallSite(statements, cancellationToken);
                 statements = await AddInvocationAtCallSiteAsync(statements, cancellationToken)
@@ -271,9 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 CancellationToken cancellationToken
             )
             {
-                var outmostVariable = GetOutermostVariableToMoveIntoMethodDefinition(
-                    cancellationToken
-                );
+                var outmostVariable =
+                    GetOutermostVariableToMoveIntoMethodDefinition(cancellationToken);
                 if (outmostVariable == null)
                 {
                     return null;
@@ -539,9 +532,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                     declarationStatement.Declaration.Type,
                                     SyntaxFactory.SeparatedList(list)
                                 ),
-                                declarationStatement.SemicolonToken.WithPrependedLeadingTrivia(
-                                    triviaList
-                                )
+                                declarationStatement.SemicolonToken.WithPrependedLeadingTrivia(triviaList)
                             )
                         );
                         triviaList.Clear();
@@ -868,10 +859,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     // here, we explicitly insert newline at the end of "{" of auto generated method decl so that anchor knows how to find out
                     // indentation of inserted statements (from users code) with user code style preserved
                     var root = newDocument.Root;
-                    var methodDefinition = root.GetAnnotatedNodes<SyntaxNode>(
-                            MethodDefinitionAnnotation
-                        )
-                        .First();
+                    var methodDefinition =
+                        root.GetAnnotatedNodes<SyntaxNode>(MethodDefinitionAnnotation).First();
 
 #pragma warning disable IDE0007 // Use implicit type (False positive: https://github.com/dotnet/roslyn/issues/44507)
                     SyntaxNode newMethodDefinition = methodDefinition switch

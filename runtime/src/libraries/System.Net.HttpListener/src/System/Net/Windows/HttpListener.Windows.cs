@@ -1219,9 +1219,8 @@ namespace System.Net
                                             httpContext.Request.ServiceName =
                                                 context.ClientSpecifiedSpn;
 
-                                            SafeDeleteContext securityContext = context.GetContext(
-                                                out statusCodeNew
-                                            )!;
+                                            SafeDeleteContext securityContext =
+                                                context.GetContext(out statusCodeNew)!;
                                             if (
                                                 statusCodeNew.ErrorCode
                                                 != SecurityStatusPalErrorCode.OK
@@ -2245,9 +2244,8 @@ namespace System.Net
 
         private sealed class DisconnectAsyncResult : IAsyncResult
         {
-            private static readonly IOCompletionCallback s_IOCallback = new IOCompletionCallback(
-                WaitCallback
-            );
+            private static readonly IOCompletionCallback s_IOCallback =
+                new IOCompletionCallback(WaitCallback);
 
             private readonly ulong _connectionId;
             private readonly HttpListenerSession _listenerSession;
@@ -2345,9 +2343,7 @@ namespace System.Net
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(null, "_connectionId:" + asyncResult._connectionId);
 
-                asyncResult._listenerSession.RequestQueueBoundHandle.FreeNativeOverlapped(
-                    nativeOverlapped
-                );
+                asyncResult._listenerSession.RequestQueueBoundHandle.FreeNativeOverlapped(nativeOverlapped);
                 if (Interlocked.Exchange(ref asyncResult._ownershipState, 2) == 0)
                 {
                     asyncResult.HandleDisconnect();
@@ -2367,9 +2363,7 @@ namespace System.Net
                     );
                 // take the DisconnectAsyncResult object from the state
                 DisconnectAsyncResult asyncResult =
-                    (DisconnectAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
-                        nativeOverlapped
-                    )!;
+                    (DisconnectAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
                 IOCompleted(asyncResult, errorCode, numBytes, nativeOverlapped);
             }
 

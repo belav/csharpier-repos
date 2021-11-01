@@ -952,9 +952,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         () => request.Create(cert, now, now.AddHours(3), serialNumber)
                     );
 
-                    X509SignatureGenerator ecdsaGenerator = X509SignatureGenerator.CreateForECDsa(
-                        ecdsa
-                    );
+                    X509SignatureGenerator ecdsaGenerator =
+                        X509SignatureGenerator.CreateForECDsa(ecdsa);
 
                     // Passes with the generator
                     using (

@@ -134,9 +134,7 @@ namespace System.Net
                     if (retrieveCollection)
                     {
                         remoteCertificateCollection =
-                            UnmanagedCertificateContext.GetRemoteCertificatesFromStoreContext(
-                                remoteContext
-                            );
+                            UnmanagedCertificateContext.GetRemoteCertificatesFromStoreContext(remoteContext);
                     }
 
                     remoteContext.Dispose();

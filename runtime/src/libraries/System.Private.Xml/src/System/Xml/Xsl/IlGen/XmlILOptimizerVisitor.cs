@@ -4881,9 +4881,7 @@ namespace System.Xml.Xsl.IlGen
                                                                     {
                                                                         // All conditions were true, so annotate Filter with the EqualityIndex pattern
                                                                         OptimizerPatterns patt =
-                                                                            OptimizerPatterns.Write(
-                                                                                local2
-                                                                            );
+                                                                            OptimizerPatterns.Write(local2);
                                                                         patt.AddPattern(
                                                                             OptimizerPatternName.EqualityIndex
                                                                         );
